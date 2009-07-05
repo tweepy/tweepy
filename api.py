@@ -1,13 +1,9 @@
 import urllib
 import urllib2
 
-try:
-  import json
-except ImportError:
-  import simplejson as json
-
 from misc import *
 from models import *
+from parsers import *
 
 """
 Twitter API Interface
@@ -34,7 +30,7 @@ class API(object):
     self._opener = self._build_opener(username, password)
 
   def public_timeline(self):
-    return self._fetch('statuses/public_timelinee.json')
+    return self._fetch('statuses/public_timelinee.json') 
 
   @require_auth
   def friends_timeline(self, since_id=None, max_id=None, count=None, page=None):
@@ -67,4 +63,4 @@ class API(object):
     try:
       return self._opener.open(req)
     except urllib2.HTTPError, e:
-      raise TweepError(json.loads(e.read())['error'])
+      raise TweepError(parse_error(e.read()))
