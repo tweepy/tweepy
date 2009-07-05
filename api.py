@@ -1,5 +1,6 @@
 import urllib
 import urllib2
+import base64
 
 from misc import TweepError, require_auth
 from models import Status, User
@@ -15,7 +16,6 @@ class API(object):
                 user_class=User, status_class=Status):
     self._Status = status_class
     self._User = user_class
-    self.username = username
     self.host = host
     if secure:
       self._schema = 'https'
@@ -23,26 +23,21 @@ class API(object):
       self._schema = 'http'
 
     # Setup headers
-    self._headers = {
-      'User-Agent': user_agent
-    }
-
-    self._opener = self._build_opener(username, password)
+    self._headers = {}
+    self._headers['User-Agent'] = user_agent
+    if username and password:
+      self._auth = True
+      self._headers['Authorization'] = \
+          'Basic ' + base64.encodestring('%s:%s' % (username, password))[:-1]
+    else:
+      self._auth = False
 
   def public_timeline(self):
     return parse_list(self._Status, self._fetch('statuses/public_timeline.json'))
 
   @require_auth
   def friends_timeline(self, since_id=None, max_id=None, count=None, page=None):
-    raise NotImplementedError
-
-  def _build_opener(self, username, password):
-    if username and password:
-      bauth = urllib2.HTTPBasicAuthHandler()
-      bauth.add_password(None, self.host, username, password)
-      return urllib2.build_opener(bauth)
-    else:
-      return urllib2.build_opener()
+    return self._fetch('statuses/friends_timeline.json')
 
   def _fetch(self, url, parameters=None, post_data=None):
     # Build the url
@@ -61,6 +56,6 @@ class API(object):
 
     # Send request
     try:
-      return self._opener.open(req).read()
+      return urllib2.urlopen(req).read()
     except urllib2.HTTPError, e:
       raise TweepError(parse_error(e.read()))

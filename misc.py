@@ -3,7 +3,7 @@ Only allow method to be called with authentication.
 """
 def require_auth(func):
   def wrapper(instance, *args, **kargs):
-    if instance.username and instance.password:
+    if instance._auth:
       func(instance, *args, **kargs)
     else:
       print 'require auth'
