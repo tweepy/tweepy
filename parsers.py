@@ -7,19 +7,23 @@ def parse_error(data):
 
   return json.loads(data)['error']
 
-def parse_item(type, data):
+def _parse_item(type, jsondata):
   t = type()
-  for k,v in json.loads(data).items():
-    setattr(t, k, v)
+  for k,v in jsondata.items():
+    if k == 'user':
+      setattr(t,k, _parse_item(type._User, v))
+    else:
+      setattr(t,k,v)
   return t
+
+def parse_item(type, data):
+  jsondata = json.loads(data)
+  return _parse_item(type, jsondata)
 
 def parse_list(type, data):
   types = []
 
   for obj in json.loads(data):
-    t = type()
-    for k,v in obj.items():
-      setattr(t, k, v)
-    types.append(t)
+    types.append(_parse_item(type, obj))
 
   return types

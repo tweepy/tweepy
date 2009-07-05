@@ -1,8 +1,8 @@
 import urllib
-import urllib2
+import httplib
 import base64
 
-from misc import TweepError, require_auth
+from misc import TweepError, require_auth, process_param
 from models import Status, User
 from parsers import *
 
@@ -16,11 +16,9 @@ class API(object):
                 user_class=User, status_class=Status):
     self._Status = status_class
     self._User = user_class
-    self.host = host
-    if secure:
-      self._schema = 'https'
-    else:
-      self._schema = 'http'
+    self._Status._User = self._User
+    self._parameters = None
+    self._post_data = None
 
     # Setup headers
     self._headers = {}
@@ -32,30 +30,37 @@ class API(object):
     else:
       self._auth = False
 
+    if secure:
+      self._http = httplib.HTTPSConnection(host)
+    else:
+      self._http = httplib.HTTPConnection(host)
+
   def public_timeline(self):
-    return parse_list(self._Status, self._fetch('statuses/public_timeline.json'))
+    return parse_list(self._Status, self._fetch('/statuses/public_timeline.json'))
 
   @require_auth
-  def friends_timeline(self, since_id=None, max_id=None, count=None, page=None):
-    return self._fetch('statuses/friends_timeline.json')
+  @process_param(['since_id'])
+  def friends_timeline(self, **kargs):
+    if self._parameters:
+      for k,v in self._parameters.items():
+        print k,v
+    #return parse_list(self._Status, self._fetch('/statuses/friends_timeline.json'))
 
-  def _fetch(self, url, parameters=None, post_data=None):
+  def _fetch(self, url, method='GET'):
     # Build the url
-    if parameters:
-      _url = '%s://%s/%s?%s' % (self._schema, self.host, urllib.urlencode(parameters))
+    if self._parameters:
+      _url = '%s?%s' % (url, urllib.urlencode(parameters))
     else:
-      _url = '%s://%s/%s' % (self._schema, self.host, url)
+      _url = url
 
     # Encode post data
     post = None
-    if post_data:
+    if self._post_data:
       post = urllib.encode(post_data)
 
-    # Build the request
-    req = urllib2.Request(_url, post, self._headers)
-
     # Send request
-    try:
-      return urllib2.urlopen(req).read()
-    except urllib2.HTTPError, e:
-      raise TweepError(parse_error(e.read()))
+    self._http.request(method, _url, body=post, headers=self._headers)
+    resp = self._http.getresponse()
+    if resp.status != 200:
+      raise TweepError(parse_error(resp.read()))
+    return resp.read()
