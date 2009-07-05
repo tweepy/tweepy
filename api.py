@@ -1,66 +1,27 @@
-import urllib
-import httplib
 import base64
 
-from misc import TweepError, require_auth, process_param
-from models import Status, User
+from binder import bind_api
 from parsers import *
 
-"""
-Twitter API Interface
-"""
+"""Twitter API"""
 class API(object):
 
-  def __init__(self, username=None, password=None, host='twitter.com',
-                user_agent='tweepy', secure=False,
-                user_class=User, status_class=Status):
-    self._Status = status_class
-    self._User = user_class
-    self._Status._User = self._User
-    self._parameters = None
-    self._post_data = None
-
-    # Setup headers
-    self._headers = {}
-    self._headers['User-Agent'] = user_agent
+  def __init__(self, username=None, password=None):
     if username and password:
-      self._auth = True
-      self._headers['Authorization'] = \
-          'Basic ' + base64.encodestring('%s:%s' % (username, password))[:-1]
-    else:
-      self._auth = False
+      self._b64up = base64.encode('%s:%s' % (username, password))
 
-    if secure:
-      self._http = httplib.HTTPSConnection(host)
-    else:
-      self._http = httplib.HTTPConnection(host)
+  """Twitter API endpoint bindings"""
 
-  def public_timeline(self):
-    return parse_list(self._Status, self._fetch('/statuses/public_timeline.json'))
+  """
+  Returns the 20 most recent statuses from non-protected users who have
+  set a custom icon. The public timeline is cached for 60 seconds
+  so requesting it more often than that is a waste of resources.
 
-  @require_auth
-  @process_param(['since_id'])
-  def friends_timeline(self, **kargs):
-    if self._parameters:
-      for k,v in self._parameters.items():
-        print k,v
-    #return parse_list(self._Status, self._fetch('/statuses/friends_timeline.json'))
-
-  def _fetch(self, url, method='GET'):
-    # Build the url
-    if self._parameters:
-      _url = '%s?%s' % (url, urllib.urlencode(parameters))
-    else:
-      _url = url
-
-    # Encode post data
-    post = None
-    if self._post_data:
-      post = urllib.encode(post_data)
-
-    # Send request
-    self._http.request(method, _url, body=post, headers=self._headers)
-    resp = self._http.getresponse()
-    if resp.status != 200:
-      raise TweepError(parse_error(resp.read()))
-    return resp.read()
+  Requires Authentication: false
+  API Rate limited: true
+  Response: list of statuses
+  """
+  public_timeline = bind_api(
+      path = '/statuses/public_timeline.json',
+      parser = parse_test,
+      allowed_param = []) 

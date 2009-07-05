@@ -7,6 +7,10 @@ def parse_error(data):
 
   return json.loads(data)['error']
 
+def parse_test(data):
+
+  return data
+
 def _parse_item(type, jsondata):
   t = type()
   for k,v in jsondata.items():
