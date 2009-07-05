@@ -1,8 +1,8 @@
 import urllib
 import urllib2
 
-from misc import *
-from models import *
+from misc import TweepError, require_auth
+from models import Status, User
 from parsers import *
 
 """
@@ -30,7 +30,7 @@ class API(object):
     self._opener = self._build_opener(username, password)
 
   def public_timeline(self):
-    return self._fetch('statuses/public_timelinee.json') 
+    return parse_list(self._Status, self._fetch('statuses/public_timeline.json'))
 
   @require_auth
   def friends_timeline(self, since_id=None, max_id=None, count=None, page=None):
@@ -61,6 +61,6 @@ class API(object):
 
     # Send request
     try:
-      return self._opener.open(req)
+      return self._opener.open(req).read()
     except urllib2.HTTPError, e:
       raise TweepError(parse_error(e.read()))
