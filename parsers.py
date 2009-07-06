@@ -1,3 +1,5 @@
+from datetime import datetime
+
 try:
   import json
 except ImportError:
@@ -6,6 +8,10 @@ except ImportError:
 def parse_error(data):
 
   return json.loads(data)['error']
+
+def _parse_datetime(str):
+
+  return datetime.strptime(str, '%a %b %d %H:%M:%S +0000 %Y')
 
 def _parse_user(obj, classes):
 
@@ -27,6 +33,8 @@ def _parse_status(obj, classes):
   for k,v in obj.items():
     if k == 'user':
       setattr(status, k, _parse_user(v, classes))
+    elif k == 'created_at':
+      setattr(status, k, _parse_datetime(v))
     else:
       setattr(status, k, v)
   return status
