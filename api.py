@@ -17,6 +17,9 @@ class API(object):
     self.secure = secure
     self.classes = classes
 
+    if username:
+      self.me = self.get_user(screen_name=username)
+
   """Get public timeline"""
   public_timeline = bind_api(
       path = '/statuses/public_timeline.json',
