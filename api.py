@@ -3,6 +3,7 @@ import base64
 from binder import bind_api
 from parsers import *
 from models import User, Status, DirectMessage, Friendship
+from error import TweepError
 
 """Twitter API"""
 class API(object):
@@ -186,11 +187,14 @@ class API(object):
   )
 
   """Verify credentials"""
-  verify_credentials = bind_api(
-      path = '/account/verify_credentials.json',
-      parser = parse_verify_credentials,
-      require_auth = True
-  )
+  def verify_credentials(self):
+    try:
+      return bind_api(
+          path = '/account/verify_credentials.json',
+          parser = parse_verify_credentials,
+          require_auth = True)(self)
+    except TweepError:
+      return False
 
   """Rate limit status"""
   rate_limit_status = bind_api(
@@ -253,5 +257,3 @@ class API(object):
       allowed_param = ['id'],
       require_auth = True
   )
-
-api = API('jitterapp', 'josh1987')
