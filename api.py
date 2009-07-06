@@ -48,4 +48,11 @@ class API(object):
       require_auth = True
   )
 
+  """Show status"""
+  get_status = bind_api(
+      path = '/statuses/show.json',
+      parser = parse_status,
+      allowed_param = ['id']
+  )
+
 api = API('jitterapp', 'josh1987')

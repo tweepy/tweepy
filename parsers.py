@@ -39,6 +39,10 @@ def _parse_status(obj, classes):
       setattr(status, k, v)
   return status
 
+def parse_status(data, classes):
+
+  return _parse_status(json.loads(data), classes)
+
 def parse_statuses(data, classes):
 
   statuses = []

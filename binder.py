@@ -6,18 +6,14 @@ from error import TweepError
 
 def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False):
 
-  def _call(api, **kargs):
+  def _call(api, *args, **kargs):
     # If require auth, throw exception if credentials not provided
     if require_auth and not api._b64up:
       raise TweepError('Authentication required!')
 
     # Filter out unallowed parameters
-    if len(kargs) == 0:
-      parameters = None
-    elif allowed_param:
+    if allowed_param:
       parameters = dict((k,v) for k,v in kargs.items() if k in allowed_param)
-    else:
-      parameters = kargs
 
     # Open connection
     if api.secure:
