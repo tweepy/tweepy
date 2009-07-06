@@ -55,4 +55,22 @@ class API(object):
       allowed_param = ['id']
   )
 
+  """Update status"""
+  update_status = bind_api(
+      path = '/statuses/update.json',
+      method = 'POST',
+      parser = parse_status,
+      allowed_param = ['status', 'in_reply_to_status_id'],
+      require_auth = True
+  )
+
+  """Destroy status"""
+  destroy_status = bind_api(
+      path = '/statuses/destroy.json',
+      method = 'DELETE',
+      parser = parse_status,
+      allowed_param = ['id'],
+      require_auth = True
+  )
+
 api = API('jitterapp', 'josh1987')

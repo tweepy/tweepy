@@ -45,6 +45,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False)
       raise TweepError(parse_error(resp.read()))
 
     # Pass returned body into parser and return parser output
-    return parser(resp.read(), api.classes)
+    out =  parser(resp.read(), api.classes)
+
+    # close connection and return data
+    conn.close()
+    return out
 
   return _call
