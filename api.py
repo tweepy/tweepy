@@ -31,3 +31,13 @@ class API(object):
       allowed_param = ['since_id', 'max_id', 'count', 'page'],
       require_auth = True
   )
+
+  """Get user timeline"""
+  user_timeline = bind_api(
+      path = '/statuses/user_timeline.json',
+      parser = parse_statuses,
+      allowed_param = ['id', 'user_id', 'screen_name', 'since_id',
+                        'max_id', 'count', 'page']
+  )
+
+api = API('jitterapp', 'josh1987')
