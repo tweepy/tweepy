@@ -104,3 +104,7 @@ def parse_friendship(data, api):
 def parse_bool(data, api):
 
   return json.loads(data)
+
+def parse_ids(data, api):
+
+  return json.loads(data)

@@ -171,4 +171,18 @@ class API(object):
                         'target_id', 'target_screen_name']
   )
 
+  """Get list of IDs of users the specified user is following"""
+  friends_ids = bind_api(
+      path = '/friends/ids.json',
+      parser = parse_ids,
+      allowed_param = ['id', 'user_id', 'screen_name', 'page']
+  )
+
+  """Get list of IDs of users following the specified user"""
+  followers_ids = bind_api(
+      path = '/followers/ids.json',
+      parser = parse_ids,
+      allowed_param = ['id', 'user_id', 'screen_name', 'page']
+  )
+
 api = API('jitterapp', 'josh1987')
