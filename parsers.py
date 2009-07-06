@@ -108,3 +108,11 @@ def parse_bool(data, api):
 def parse_ids(data, api):
 
   return json.loads(data)
+
+def parse_verify_credentials(data, api):
+
+  return True
+
+def parse_rate_limit(data, api):
+
+  return json.loads(data)

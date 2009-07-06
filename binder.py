@@ -14,6 +14,8 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False)
     # Filter out unallowed parameters
     if allowed_param:
       parameters = dict((k,v) for k,v in kargs.items() if k in allowed_param)
+    else:
+      parameters = None
 
     # Open connection
     if api.secure:

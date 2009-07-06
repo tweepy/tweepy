@@ -185,4 +185,48 @@ class API(object):
       allowed_param = ['id', 'user_id', 'screen_name', 'page']
   )
 
+  """Verify credentials"""
+  verify_credentials = bind_api(
+      path = '/account/verify_credentials.json',
+      parser = parse_verify_credentials,
+      require_auth = True
+  )
+
+  """Rate limit status"""
+  rate_limit_status = bind_api(
+      path = '/account/rate_limit_status.json',
+      parser = parse_rate_limit
+  )
+
+  """Update delivery device"""
+  set_delivery_device = bind_api(
+      path = '/account/update_delivery_device.json',
+      method = 'POST',
+      allowed_param = ['device'],
+      parser = parse_user,
+      require_auth = True
+  )
+
+  """Update profile colors"""
+  update_profile_colors = bind_api(
+      path = '/account/update_profile_colors.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['profile_background_color', 'profile_text_color',
+                        'profile_link_color', 'profile_sidebar_fill_color',
+                        'profile_sidebar_border_color'],
+      require_auth = True
+  )
+
+  # todo: add support for changing profile and background images
+
+  """Update profile"""
+  update_profile = bind_api(
+      path = '/account/update_profile.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['name', 'email', 'url', 'location', 'description'],
+      require_auth = True
+  )
+
 api = API('jitterapp', 'josh1987')
