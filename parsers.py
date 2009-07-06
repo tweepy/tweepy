@@ -17,8 +17,17 @@ def _parse_user(obj, classes):
 
   user = classes['user']()
   for k,v in obj.items():
-    setattr(user, k, v)
+    if k == 'created_at':
+      setattr(user, k, _parse_datetime(v))
+    elif k == 'status':
+      setattr(user, k, _parse_status(v, classes))
+    else:
+      setattr(user, k, v)
   return user
+
+def parse_user(data, classes):
+
+  return _parse_user(json.loads(data), classes)
 
 def parse_users(data, classes):
 

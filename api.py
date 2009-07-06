@@ -73,4 +73,26 @@ class API(object):
       require_auth = True
   )
 
+  """Show user"""
+  get_user = bind_api(
+      path = '/users/show.json',
+      parser = parse_user,
+      allowed_param = ['id', 'user_id', 'screen_name']
+  )
+
+  """Show friends"""
+  friends = bind_api(
+      path = '/statuses/friends.json',
+      parser = parse_users,
+      allowed_param = ['id', 'user_id', 'screen_name', 'page']
+  )
+
+  """Show followers"""
+  followers = bind_api(
+      path = '/statuses/followers.json',
+      parser = parse_users,
+      allowed_param = ['id', 'user_id', 'screen_name', 'page'],
+      require_auth = True
+  )
+
 api = API('jitterapp', 'josh1987')
