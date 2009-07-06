@@ -84,3 +84,23 @@ def parse_directmessages(data, api):
   for obj in json.loads(data):
     directmessages.append(_parse_dm(obj, api))
   return directmessages
+
+def parse_friendship(data, api):
+
+  relationship = json.loads(data)['relationship']
+
+  # parse source
+  source = api.classes['friendship']()
+  for k,v in relationship['source'].items():
+    setattr(source, k, v)
+
+  # parse target
+  target = api.classes['friendship']()
+  for k,v in relationship['target'].items():
+    setattr(target, k, v)
+
+  return source, target
+
+def parse_bool(data, api):
+
+  return json.loads(data)

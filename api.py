@@ -2,14 +2,14 @@ import base64
 
 from binder import bind_api
 from parsers import *
-from models import User, Status, DirectMessage
+from models import User, Status, DirectMessage, Friendship
 
 """Twitter API"""
 class API(object):
 
   def __init__(self, username=None, password=None, host='twitter.com', secure=False,
                 classes={'user': User, 'status': Status,
-                'direct_message': DirectMessage}):
+                'direct_message': DirectMessage, 'friendship': Friendship}):
     if username and password:
       self._b64up = base64.b64encode('%s:%s' % (username, password))
     else:
@@ -136,6 +136,39 @@ class API(object):
       parser = parse_dm,
       allowed_param = ['id'],
       require_auth = True
+  )
+
+  """Create friendship"""
+  create_friendship = bind_api(
+      path = '/friendships/create.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['id', 'user_id', 'screen_name', 'follow'],
+      require_auth = True
+  )
+
+  """Destroy friendship"""
+  destroy_friendship = bind_api(
+      path = '/friendships/destroy.json',
+      method = 'DELETE',
+      parser = parse_user,
+      allowed_param = ['id', 'user_id', 'screen_name'],
+      require_auth = True
+  )
+
+  """Check if friendship exists"""
+  exists_friendship = bind_api(
+      path = '/friendships/exists.json',
+      parser = parse_bool,
+      allowed_param = ['user_a', 'user_b']
+  )
+
+  """Show friendship details"""
+  show_friendship = bind_api(
+      path = '/friendships/show.json',
+      parser = parse_friendship,
+      allowed_param = ['source_id', 'source_screen_name',
+                        'target_id', 'target_screen_name']
   )
 
 api = API('jitterapp', 'josh1987')

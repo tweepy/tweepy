@@ -18,3 +18,7 @@ class DirectMessage(object):
 
   def destroy(self):
     return self._api.destroy_direct_message(id=self.id)
+
+class Friendship(object):
+
+  pass
