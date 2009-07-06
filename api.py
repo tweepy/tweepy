@@ -10,7 +10,7 @@ class API(object):
   def __init__(self, username=None, password=None, host='twitter.com', secure=False,
                 classes={'user': User, 'status': Status}):
     if username and password:
-      self._b64up = base64.encode('%s:%s' % (username, password))
+      self._b64up = base64.b64encode('%s:%s' % (username, password))
     else:
       self._b64up = None
     self.host = host

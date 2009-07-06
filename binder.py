@@ -1,4 +1,5 @@
 import httplib
+import urllib
 
 from parsers import parse_error
 from error import TweepError
