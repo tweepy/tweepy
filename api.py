@@ -40,4 +40,12 @@ class API(object):
                         'max_id', 'count', 'page']
   )
 
+  """Get mentions"""
+  mentions = bind_api(
+      path = '/statuses/mentions.json',
+      parser = parse_statuses,
+      allowed_param = ['since_id', 'max_id', 'count', 'page'],
+      require_auth = True
+  )
+
 api = API('jitterapp', 'josh1987')
