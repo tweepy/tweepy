@@ -60,3 +60,27 @@ def parse_statuses(data, api):
   for obj in json.loads(data):
     statuses.append(_parse_status(obj, api))
   return statuses
+
+def _parse_dm(obj, api):
+
+  dm = api.classes['direct_message']()
+  dm._api = api
+  for k,v in obj.items():
+    if k == 'sender':
+      setattr(dm, k, _parse_user(v, api))
+    elif k == 'created_at':
+      setattr(dm, k, _parse_datetime(v))
+    else:
+      setattr(dm, k, v)
+  return dm
+
+def parse_dm(data, api):
+
+  return _parse_dm(json.loads(data), api)
+
+def parse_directmessages(data, api):
+
+  directmessages = []
+  for obj in json.loads(data):
+    directmessages.append(_parse_dm(obj, api))
+  return directmessages
