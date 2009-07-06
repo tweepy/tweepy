@@ -229,4 +229,29 @@ class API(object):
       require_auth = True
   )
 
+  """Get favorites"""
+  favorites = bind_api(
+      path = '/favorites.json',
+      parser = parse_statuses,
+      allowed_param = ['id', 'page']
+  )
+
+  """Create favorite"""
+  create_favorite = bind_api(
+      path = '/favorites/create.json',
+      method = 'POST',
+      parser = parse_status,
+      allowed_param = ['id'],
+      require_auth = True
+  )
+
+  """Destroy favorite"""
+  destroy_favorite = bind_api(
+      path = '/favorites/destroy.json',
+      method = 'DELETE',
+      parser = parse_status,
+      allowed_param = ['id'],
+      require_auth = True
+  )
+
 api = API('jitterapp', 'josh1987')
