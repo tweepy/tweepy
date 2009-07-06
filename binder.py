@@ -1,8 +1,15 @@
-from parsers import parse_error
+import httplib
 
-def bind_api(path, parser, allowed_param=None, method='GET'):
+from parsers import parse_error
+from error import TweepError
+
+def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False):
 
   def _call(api, **kargs):
+    # If require auth, throw exception if credentials not provided
+    if require_auth and not api._b64up:
+      raise TweepError('Authentication required!')
+
     # Filter out unallowed parameters
     if len(kargs) == 0:
       parameters = None
@@ -27,8 +34,8 @@ def bind_api(path, parser, allowed_param=None, method='GET'):
     headers = {
       'User-Agent': 'tweepy'
     }
-    if api.username and api.b64pass:
-      headers['Authorization'] = 'Basic %s' % api.b64pass
+    if api._b64up:
+      headers['Authorization'] = 'Basic %s' % api._b64up
 
     # Build request
     conn.request(method, url, headers=headers)
@@ -41,6 +48,6 @@ def bind_api(path, parser, allowed_param=None, method='GET'):
       raise TweepError(parse_error(resp.read()))
 
     # Pass returned body into parser and return parser output
-    return parser(resp.read())
+    return parser(resp.read(), api.classes)
 
   return _call

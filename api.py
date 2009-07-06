@@ -2,26 +2,32 @@ import base64
 
 from binder import bind_api
 from parsers import *
+from models import User, Status
 
 """Twitter API"""
 class API(object):
 
-  def __init__(self, username=None, password=None):
+  def __init__(self, username=None, password=None, host='twitter.com', secure=False,
+                classes={'user': User, 'status': Status}):
     if username and password:
       self._b64up = base64.encode('%s:%s' % (username, password))
+    else:
+      self._b64up = None
+    self.host = host
+    self.secure = secure
+    self.classes = classes
 
-  """Twitter API endpoint bindings"""
-
-  """
-  Returns the 20 most recent statuses from non-protected users who have
-  set a custom icon. The public timeline is cached for 60 seconds
-  so requesting it more often than that is a waste of resources.
-
-  Requires Authentication: false
-  API Rate limited: true
-  Response: list of statuses
-  """
+  """Get public timeline"""
   public_timeline = bind_api(
       path = '/statuses/public_timeline.json',
-      parser = parse_test,
-      allowed_param = []) 
+      parser = parse_statuses,
+      allowed_param = []
+  )
+
+  """Get friends timeline"""
+  friends_timeline = bind_api(
+      path = '/statuses/friends_timeline.json',
+      parser = parse_statuses,
+      allowed_param = ['since_id', 'max_id', 'count', 'page'],
+      require_auth = True
+  )

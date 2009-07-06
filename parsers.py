@@ -7,27 +7,33 @@ def parse_error(data):
 
   return json.loads(data)['error']
 
-def parse_test(data):
+def _parse_user(obj, classes):
 
-  return data
+  user = classes['user']()
+  for k,v in obj.items():
+    setattr(user, k, v)
+  return user
 
-def _parse_item(type, jsondata):
-  t = type()
-  for k,v in jsondata.items():
-    if k == 'user':
-      setattr(t,k, _parse_item(type._User, v))
-    else:
-      setattr(t,k,v)
-  return t
+def parse_users(data, classes):
 
-def parse_item(type, data):
-  jsondata = json.loads(data)
-  return _parse_item(type, jsondata)
-
-def parse_list(type, data):
-  types = []
-
+  users = []
   for obj in json.loads(data):
-    types.append(_parse_item(type, obj))
+    users.append(_parse_user(obj, classes))
+  return users
 
-  return types
+def _parse_status(obj, classes):
+
+  status = classes['status']()
+  for k,v in obj.items():
+    if k == 'user':
+      setattr(status, k, _parse_user(v, classes))
+    else:
+      setattr(status, k, v)
+  return status
+
+def parse_statuses(data, classes):
+
+  statuses = []
+  for obj in json.loads(data):
+    statuses.append(_parse_status(obj, classes))
+  return statuses
