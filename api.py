@@ -16,9 +16,7 @@ class API(object):
     self.host = host
     self.secure = secure
     self.classes = classes
-
-    if username:
-      self.me = self.get_user(screen_name=username)
+    self.username = username
 
   """Get public timeline"""
   public_timeline = bind_api(
@@ -82,6 +80,13 @@ class API(object):
       parser = parse_user,
       allowed_param = ['id', 'user_id', 'screen_name']
   )
+
+  """Get authenticated user"""
+  def me(self):
+    if self.username:
+      return self.get_user(screen_name=self.username)
+    else:
+      return None
 
   """Show friends"""
   friends = bind_api(

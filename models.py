@@ -1,6 +1,7 @@
 class Status(object):
 
-  pass
+  def destroy(self):
+    return self._api.destroy_status(id=self.id)
 
 class User(object):
 
