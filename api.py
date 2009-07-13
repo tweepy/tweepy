@@ -12,12 +12,16 @@ class API(object):
                 classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship}):
     if username and password:
-      self._b64up = base64.b64encode('%s:%s' % (username, password))
+      self.set_credentials(username, password)
     else:
       self._b64up = None
     self.host = host
     self.secure = secure
     self.classes = classes
+    self.username = username
+
+  def set_credentials(username, password):
+    self._b64up = base64.b64encode('%s:%s' % (username, password))
     self.username = username
 
   """Get public timeline"""
