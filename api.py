@@ -20,7 +20,7 @@ class API(object):
     self.classes = classes
     self.username = username
 
-  def set_credentials(username, password):
+  def set_credentials(self, username, password):
     self._b64up = base64.b64encode('%s:%s' % (username, password))
     self.username = username
 
