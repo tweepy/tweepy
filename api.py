@@ -261,3 +261,22 @@ class API(object):
       allowed_param = ['id'],
       require_auth = True
   )
+
+  """Enable device notifications"""
+  enable_notifications = bind_api(
+      path = '/notifications/follow.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['id', 'user_id', 'screen_name'],
+      require_auth = True
+  )
+
+  """Disable device notifications"""
+  disable_notifications = bind_api(
+      path = '/notifications/leave.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['id', 'user_id', 'screen_name'],
+      require_auth = True
+  )
+
