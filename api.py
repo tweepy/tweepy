@@ -280,3 +280,34 @@ class API(object):
       require_auth = True
   )
 
+  """Create a block"""
+  create_block = bind_api(
+      path = '/blocks/create.json',
+      method = 'POST',
+      parser = parse_user,
+      allowed_param = ['id'],
+      require_auth = True
+  )
+
+  """Destroy a block"""
+  destroy_block = bind_api(
+      path = '/blocks/destroy.json',
+      method = 'DELETE',
+      parser = parse_user,
+      allowed_param = ['id'],
+      require_auth = True
+  )
+
+  """Check if block exists"""
+  def exists_block(self, **kargs):
+      try:
+        bind_api(
+            path = '/blocks/exists.json',
+            parser = parse_none,
+            allowed_param = ['id', 'user_id', 'screen_name'],
+            require_auth = True
+        )(self, **kargs)
+      except TweepError:
+        return False
+      return True
+

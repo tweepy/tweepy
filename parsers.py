@@ -116,3 +116,7 @@ def parse_verify_credentials(data, api):
 def parse_rate_limit(data, api):
 
   return json.loads(data)
+
+def parse_none(data, api):
+
+  return None
