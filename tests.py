@@ -5,8 +5,7 @@
 import unittest
 import random
 
-from api import API
-from models import *
+from tweepy import *
 
 """Unit tests"""
 
@@ -19,7 +18,6 @@ class TweepyAPITests(unittest.TestCase):
 
   def setUp(self):
     self.api = API(self.username, self.password)
-    self.update_status_id = None
 
   def testsetcredentials(self):
     testapi = API()
@@ -53,21 +51,20 @@ class TweepyAPITests(unittest.TestCase):
     self.assert_(isinstance(s,Status))
     self.assertEqual(s.user.id, 17)
 
-  def testupdatestatus(self):
+  def testupdateanddestroystatus(self):
+    # test update
     text = 'testing %i' % random.randint(0,1000)
-    update = self.api.update_status('status'=text)
+    update = self.api.update_status(status=text)
     self.assert_(isinstance(update,Status))
     self.assertEqual(update.text, text)
-    self.update_status_id = update.id
 
-  def testdestroystatus(self):
-    self.assert_(self.update_status_id)
-    deleted = self.api.destroy_status(id=self.update_status_id)
+    # test destroy
+    deleted = self.api.destroy_status(id=update.id)
     self.assert_(isinstance(deleted,Status))
-    self.assertEqual(deleted.id, self.update_status_id)
+    self.assertEqual(deleted.id, update.id)
 
-  def testshowuser(self):
-    u = self.api.show_user(screen_name='twitter')
+  def testgetuser(self):
+    u = self.api.get_user(screen_name='twitter')
     self.assert_(isinstance(u,User))
     self.assertEqual(u.screen_name, 'twitter')
 
