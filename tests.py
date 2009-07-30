@@ -13,17 +13,11 @@ from tweepy import *
 class TweepyAPITests(unittest.TestCase):
 
   # Must supply twitter account credentials for tests
-  username = 'jitterapp'
-  password = 'omega123'
+  username = ''
+  password = ''
 
   def setUp(self):
     self.api = API(self.username, self.password)
-
-  def testsetcredentials(self):
-    testapi = API()
-    testapi.set_credentials('test', 'donttellanyone')
-    self.assert_(testapi._b64up)
-    self.assertEqual(testapi.username, 'test')
 
   def testpublictimeline(self):
     s = self.api.public_timeline()
