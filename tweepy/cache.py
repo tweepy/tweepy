@@ -44,6 +44,16 @@ class MemoryCache(Cache):
     self._entries = {}
     self.lock = threading.Lock()
 
+  def __getstate__(self):
+    # pickle
+    return {'entries': self._entries, 'timeout': self.timeout}
+
+  def __setstate__(self, state):
+    # unpickle
+    self.lock = threading.Lock()
+    self._entries = state['entries']
+    self.timeout = state['timeout']
+
   def _is_expired(self, entry, timeout):
     return timeout > 0 and (time.time() - entry[0]) >= timeout
 
