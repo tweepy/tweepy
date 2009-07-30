@@ -22,11 +22,27 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     else:
       parameters = None
 
+    # Assemble headers
+    headers = {
+      'User-Agent': 'tweepy'
+    }
+
     # Build url with parameters
     if parameters:
       url = '%s?%s' % (path, urllib.urlencode(parameters))
     else:
       url = path
+
+    # get scheme and host
+    if api.secure:
+      scheme = 'https://'
+    else:
+      scheme = 'http://'
+    _host = host or api.host
+
+    # Apply authentication
+    if api.auth_handler:
+      api.auth_handler.apply_auth(scheme + _host + url, method, headers, parameters)
 
     # Check cache if caching enabled and method is GET
     if api.cache and method == 'GET':
@@ -37,23 +53,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         return cache_result
 
     # Open connection
-    if host:
-      _host = host
-    else:
-      _host = api.host
     if api.secure:
       conn = httplib.HTTPSConnection(_host)
     else:
       conn = httplib.HTTPConnection(_host)
-
-    # Assemble headers
-    headers = {
-      'User-Agent': 'tweepy'
-    }
-
-    # Apply authentication
-    if api.auth_handler:
-      api.auth_handler.apply_auth(headers)
 
     # Build request
     conn.request(method, url, headers=headers)
