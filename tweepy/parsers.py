@@ -21,6 +21,14 @@ def _parse_search_datetime(str):
 
   return datetime.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')
 
+def _parse_html_value(html):
+
+  return html[html.find('>')+1:html.rfind('<')]
+
+def _parse_a_href(atag):
+
+  return atag[atag.find('"')+1:atag.find('>')-1]
+
 def _parse_user(obj, api):
 
   user = api.classes['user']()
@@ -54,6 +62,9 @@ def _parse_status(obj, api):
       setattr(status, k, _parse_user(v, api))
     elif k == 'created_at':
       setattr(status, k, _parse_datetime(v))
+    elif k == 'source':
+      setattr(status, k, _parse_html_value(v))
+      setattr(status, 'source_url', _parse_a_href(v))
     else:
       setattr(status, k, v)
   return status
