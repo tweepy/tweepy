@@ -13,7 +13,7 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
   def _call(api, *args, **kargs):
     # If require auth, throw exception if credentials not provided
-    if require_auth and not api._b64up:
+    if not api.auth_handler:
       raise TweepError('Authentication required!')
 
     # Filter out unallowed parameters
@@ -50,8 +50,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     headers = {
       'User-Agent': 'tweepy'
     }
-    if api._b64up:
-      headers['Authorization'] = 'Basic %s' % api._b64up
+
+    # Apply authentication
+    if api.auth_handler:
+      api.auth_handler.apply_auth(headers)
 
     # Build request
     conn.request(method, url, headers=headers)
