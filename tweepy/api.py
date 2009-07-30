@@ -12,7 +12,8 @@ from error import TweepError
 """Twitter API"""
 class API(object):
 
-  def __init__(self, username=None, password=None, host='twitter.com', secure=False,
+  def __init__(self, username=None, password=None, host='twitter.com',
+                cache=None, secure=False,
                 classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship,
                 'saved_search': SavedSearch, 'search_result': SearchResult}):
@@ -21,6 +22,7 @@ class API(object):
     else:
       self._b64up = None
     self.host = host
+    self.cache = cache
     self.secure = secure
     self.classes = classes
     self.username = username

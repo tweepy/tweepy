@@ -21,6 +21,20 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     else:
       parameters = None
 
+    # Build url with parameters
+    if parameters:
+      url = '%s?%s' % (path, urllib.urlencode(parameters))
+    else:
+      url = path
+
+    # Check cache if caching enabled and method is GET
+    if api.cache and method == 'GET':
+      cache_result = api.cache.get(url)
+      if cache_result:
+        # if cache result found and not expired, return it
+        print 'hit!'
+        return cache_result
+
     # Open connection
     if host:
       _host = host
@@ -30,12 +44,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
       conn = httplib.HTTPSConnection(_host)
     else:
       conn = httplib.HTTPConnection(_host)
-
-    # Build url with parameters
-    if parameters:
-      url = '%s?%s' % (path, urllib.urlencode(parameters))
-    else:
-      url = path
 
     # Assemble headers
     headers = {
@@ -56,6 +64,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Pass returned body into parser and return parser output
     out =  parser(resp.read(), api)
+
+    # store result in cache
+    if api.cache and method == 'GET':
+      api.cache.store(url, out)
 
     # close connection and return data
     conn.close()
