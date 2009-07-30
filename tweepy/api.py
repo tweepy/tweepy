@@ -2,8 +2,6 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-import base64
-
 from binder import bind_api
 from parsers import *
 from models import User, Status, DirectMessage, Friendship, SavedSearch, SearchResult
@@ -12,24 +10,16 @@ from error import TweepError
 """Twitter API"""
 class API(object):
 
-  def __init__(self, username=None, password=None, host='twitter.com',
-                cache=None, secure=False,
-                classes={'user': User, 'status': Status,
+  def __init__(self, auth_handler=None, username=None, host='twitter.com', cache=None,
+                secure=False, classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship,
                 'saved_search': SavedSearch, 'search_result': SearchResult}):
-    if username and password:
-      self.set_credentials(username, password)
-    else:
-      self._b64up = None
+    self.auth_handler = auth_handler
+    self.username = username
     self.host = host
     self.cache = cache
     self.secure = secure
     self.classes = classes
-    self.username = username
-
-  def set_credentials(self, username, password):
-    self._b64up = base64.b64encode('%s:%s' % (username, password))
-    self.username = username
 
   """Get public timeline"""
   public_timeline = bind_api(

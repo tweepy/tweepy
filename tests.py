@@ -17,7 +17,7 @@ class TweepyAPITests(unittest.TestCase):
   password = ''
 
   def setUp(self):
-    self.api = API(self.username, self.password)
+    self.api = API(BasicAuthHandler(self.username, self.password), self.username)
 
   def testpublictimeline(self):
     s = self.api.public_timeline()
