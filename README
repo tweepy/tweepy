@@ -12,5 +12,7 @@ License: MIT
 Dependencies:
   Simplejson <http://undefined.org/python/#simplejson>
     **Included in python 2.6+
+  Python-OAuth <http://code.google.com/p/oauth>
+    **Bundled with this library
 Website:
   Git Repository: <http://gitorious.org/tweepy> OR <http://github.com/joshthecoder/tweepy>
