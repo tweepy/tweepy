@@ -1,3 +1,7 @@
+# Tweepy
+# Copyright 2009 Joshua Roesslein
+# See LICENSE
+
 import base64
 
 from binder import bind_api

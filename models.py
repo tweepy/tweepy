@@ -1,3 +1,7 @@
+# Tweepy
+# Copyright 2009 Joshua Roesslein
+# See LICENSE
+
 class Status(object):
 
   def destroy(self):

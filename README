@@ -1,10 +1,13 @@
-==========================
-Tweepy Twitter API Library
-==========================
+  ______                                   
+ /_  __/_      __ ___   ___   ____   __  __
+  / /  | | /| / // _ \ / _ \ / __ \ / / / /
+ / /   | |/ |/ //  __//  __// /_/ // /_/ / 
+/_/    |__/|__/ \___/ \___// .___/ \__, /  
+                          /_/     /____/ 
 
-A Twitter API library for Python!
+A Twitter library for Python!
 
-Author: Joshua Roesslein <jroesslein at gmail.com>
+Author: Joshua Roesslein
 License: MIT
 Dependencies:
   Simplejson <http://undefined.org/python/#simplejson>

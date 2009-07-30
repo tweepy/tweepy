@@ -1,3 +1,7 @@
+# Tweepy
+# Copyright 2009 Joshua Roesslein
+# See LICENSE
+
 from datetime import datetime
 
 try:
