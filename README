@@ -12,3 +12,5 @@ License: MIT
 Dependencies:
   Simplejson <http://undefined.org/python/#simplejson>
     **Included in python 2.6+
+Website:
+  Git Repository: <http://gitorious.org/tweepy> OR <http://github.com/joshthecoder/tweepy>
