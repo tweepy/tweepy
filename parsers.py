@@ -124,21 +124,13 @@ def parse_saved_searches(data, api):
     saved_searches.append(_parse_saved_search(obj, api))
   return saved_searches
 
-def parse_bool(data, api):
+def parse_json(data, api):
 
   return json.loads(data)
 
-def parse_ids(data, api):
-
-  return json.loads(data)
-
-def parse_verify_credentials(data, api):
+def parse_return_true(data, api):
 
   return True
-
-def parse_rate_limit(data, api):
-
-  return json.loads(data)
 
 def parse_none(data, api):
 

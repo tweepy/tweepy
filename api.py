@@ -165,7 +165,7 @@ class API(object):
   """Check if friendship exists"""
   exists_friendship = bind_api(
       path = '/friendships/exists.json',
-      parser = parse_bool,
+      parser = parse_json,
       allowed_param = ['user_a', 'user_b']
   )
 
@@ -180,14 +180,14 @@ class API(object):
   """Get list of IDs of users the specified user is following"""
   friends_ids = bind_api(
       path = '/friends/ids.json',
-      parser = parse_ids,
+      parser = parse_json,
       allowed_param = ['id', 'user_id', 'screen_name', 'page']
   )
 
   """Get list of IDs of users following the specified user"""
   followers_ids = bind_api(
       path = '/followers/ids.json',
-      parser = parse_ids,
+      parser = parse_json,
       allowed_param = ['id', 'user_id', 'screen_name', 'page']
   )
 
@@ -196,7 +196,7 @@ class API(object):
     try:
       return bind_api(
           path = '/account/verify_credentials.json',
-          parser = parse_verify_credentials,
+          parser = parse_return_true,
           require_auth = True)(self)
     except TweepError:
       return False
@@ -204,7 +204,7 @@ class API(object):
   """Rate limit status"""
   rate_limit_status = bind_api(
       path = '/account/rate_limit_status.json',
-      parser = parse_rate_limit
+      parser = parse_json
   )
 
   """Update delivery device"""
@@ -323,7 +323,7 @@ class API(object):
   """Get list of ids of users that are blocked"""
   blocks_ids = bind_api(
       path = '/blocks/blocking/ids.json',
-      parser = parse_ids,
+      parser = parse_json,
       require_auth = True
   )
 
@@ -359,5 +359,11 @@ class API(object):
         parser = parse_saved_search,
         allowed_param = ['id'],
         require_auth = True
+    )(self)
+
+  def test(self):
+    return bind_api(
+        path = '/help/test.json',
+        parser = parse_return_true
     )(self)
 
