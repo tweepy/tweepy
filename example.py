@@ -25,3 +25,13 @@ print 'Update: %s' % update.text
 # Get the timeline for the 'twitter' user.
 twitter_timeline = api.user_timeline(screen_name='twitter')
 
+# You can also setup up a cache.
+# Here we will use an in-memory cache with a timeout of 60 seconds.
+cached_api = tweepy.API(username, password, cache=tweepy.MemoryCache(timeout=60))
+
+# First request here will not be cached
+s = cached_api.get_status(id=123)
+
+# Now this request will be cached and won't require a trip to twitter's server.
+s_again = cached_api.get_status(id=123)
+

@@ -4,3 +4,4 @@ Stuff that needs to be done...
 - oauth support
 - search API
 - caching system
+    + in-memory cache done. now just need a file-based cache (pickle?)
