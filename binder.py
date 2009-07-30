@@ -8,7 +8,7 @@ import urllib
 from parsers import parse_error
 from error import TweepError
 
-def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False):
+def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False, host=None):
 
   def _call(api, *args, **kargs):
     # If require auth, throw exception if credentials not provided
@@ -22,10 +22,14 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False)
       parameters = None
 
     # Open connection
-    if api.secure:
-      conn = httplib.HTTPSConnection(api.host)
+    if host:
+      _host = host
     else:
-      conn = httplib.HTTPConnection(api.host)
+      _host = api.host
+    if api.secure:
+      conn = httplib.HTTPSConnection(_host)
+    else:
+      conn = httplib.HTTPConnection(_host)
 
     # Build url with parameters
     if parameters:

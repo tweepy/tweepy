@@ -17,6 +17,10 @@ def _parse_datetime(str):
 
   return datetime.strptime(str, '%a %b %d %H:%M:%S +0000 %Y')
 
+def _parse_search_datetime(str):
+
+  return datetime.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')
+
 def _parse_user(obj, api):
 
   user = api.classes['user']()
@@ -127,6 +131,24 @@ def parse_saved_searches(data, api):
   for obj in json.loads(data):
     saved_searches.append(_parse_saved_search(obj, api))
   return saved_searches
+
+def _parse_search_result(obj, api):
+
+  result = api.classes['search_result']()
+  for k,v in obj.items():
+    if k == 'created_at':
+      setattr(result, k, _parse_search_datetime(v))
+    else:
+      setattr(result, k, v)
+  return result
+
+def parse_search_results(data, api):
+
+  results = json.loads(data)['results']
+  result_objects = []
+  for obj in results:
+    result_objects.append(_parse_search_result(obj, api))
+  return result_objects
 
 def parse_json(data, api):
 

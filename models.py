@@ -30,3 +30,7 @@ class Friendship(object):
 class SavedSearch(object):
 
   pass
+
+class SearchResult(object):
+
+  pass

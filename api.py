@@ -6,7 +6,7 @@ import base64
 
 from binder import bind_api
 from parsers import *
-from models import User, Status, DirectMessage, Friendship, SavedSearch
+from models import User, Status, DirectMessage, Friendship, SavedSearch, SearchResult
 from error import TweepError
 
 """Twitter API"""
@@ -15,7 +15,7 @@ class API(object):
   def __init__(self, username=None, password=None, host='twitter.com', secure=False,
                 classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship,
-                'saved_search': SavedSearch}):
+                'saved_search': SavedSearch, 'search_result': SearchResult}):
     if username and password:
       self.set_credentials(username, password)
     else:
@@ -370,4 +370,14 @@ class API(object):
         path = '/help/test.json',
         parser = parse_return_true
     )(self)
+
+  """Search API"""
+
+  def search(self, *args, **kargs):
+    return bind_api(
+        host = 'search.' + self.host,
+        path = '/search.json',
+        parser = parse_search_results,
+        allowed_param = ['q', 'lang', 'rpp', 'page', 'since_id', 'geocode', 'show_user'],
+    )(self, *args, **kargs)
 
