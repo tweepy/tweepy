@@ -21,9 +21,10 @@ class Cache(object):
     """
     raise NotImplemented
 
-  def get(self, key):
+  def get(self, key, timeout=None):
     """Get cached entry if exists and not expired
         key: which entry to get
+        timeout: override timeout with this value [optional]
     """
     raise NotImplemented
 
@@ -43,14 +44,14 @@ class MemoryCache(Cache):
     self._entries = {}
     self.lock = threading.Lock()
 
-  def _is_expired(self, entry):
-    return (time.time() - entry[0]) >= self.timeout
+  def _is_expired(self, entry, timeout):
+    return timeout > 0 and (time.time() - entry[0]) >= timeout
 
   def store(self, key, value):
     with self.lock:
       self._entries[key] = (time.time(), value)
 
-  def get(self, key):
+  def get(self, key, timeout=None):
     with self.lock:
       # check to see if we have this key
       entry = self._entries.get(key)
@@ -58,8 +59,15 @@ class MemoryCache(Cache):
         # no hit, return nothing
         return None
 
+      # use provided timeout in arguments if provided
+      # otherwise use the one provided during init.
+      if timeout is None:
+        _timeout = self.timeout
+      else:
+        _timeout = timeout
+
       # make sure entry is not expired
-      if self._is_expired(entry):
+      if self._is_expired(entry, _timeout):
         # entry expired, delete and return nothing
         del self._entries[key]
         return None
@@ -70,7 +78,7 @@ class MemoryCache(Cache):
   def cleanup(self):
     with self.lock:
       for k,v in self._entries.items():
-        if self._is_expired(v):
+        if self._is_expired(v, self.timeout):
           del self._entries[k]
 
   def flush(self):

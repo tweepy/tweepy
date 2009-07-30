@@ -8,7 +8,8 @@ import urllib
 from parsers import parse_error
 from error import TweepError
 
-def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False, host=None):
+def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
+              timeout=None, host=None):
 
   def _call(api, *args, **kargs):
     # If require auth, throw exception if credentials not provided
@@ -29,10 +30,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Check cache if caching enabled and method is GET
     if api.cache and method == 'GET':
-      cache_result = api.cache.get(url)
+      cache_result = api.cache.get(url, timeout)
       if cache_result:
         # if cache result found and not expired, return it
-        print 'hit!'
+        print 'hit!!!!'
         return cache_result
 
     # Open connection
