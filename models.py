@@ -22,3 +22,7 @@ class DirectMessage(object):
 class Friendship(object):
 
   pass
+
+class SavedSearch(object):
+
+  pass

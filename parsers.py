@@ -101,6 +101,29 @@ def parse_friendship(data, api):
 
   return source, target
 
+def _parse_saved_search(obj, api):
+
+  ss = api.classes['saved_search']()
+  ss._api = api
+  for k,v in obj.items():
+    if k == 'created_at':
+      setattr(ss, k, _parse_datetime(v))
+    else:
+      setattr(ss, k, v)
+  return ss
+
+def parse_saved_search(data, api):
+
+  return _parse_saved_search(json.loads(data), api)
+
+def parse_saved_searches(data, api):
+
+  saved_searches = []
+  saved_search = api.classes['saved_search']()
+  for obj in json.loads(data):
+    saved_searches.append(_parse_saved_search(obj, api))
+  return saved_searches
+
 def parse_bool(data, api):
 
   return json.loads(data)

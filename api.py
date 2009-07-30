@@ -2,7 +2,7 @@ import base64
 
 from binder import bind_api
 from parsers import *
-from models import User, Status, DirectMessage, Friendship
+from models import User, Status, DirectMessage, Friendship, SavedSearch
 from error import TweepError
 
 """Twitter API"""
@@ -10,7 +10,8 @@ class API(object):
 
   def __init__(self, username=None, password=None, host='twitter.com', secure=False,
                 classes={'user': User, 'status': Status,
-                'direct_message': DirectMessage, 'friendship': Friendship}):
+                'direct_message': DirectMessage, 'friendship': Friendship,
+                'saved_search': SavedSearch}):
     if username and password:
       self.set_credentials(username, password)
     else:
@@ -300,16 +301,16 @@ class API(object):
 
   """Check if block exists"""
   def exists_block(self, **kargs):
-      try:
-        bind_api(
-            path = '/blocks/exists.json',
-            parser = parse_none,
-            allowed_param = ['id', 'user_id', 'screen_name'],
-            require_auth = True
-        )(self, **kargs)
-      except TweepError:
-        return False
-      return True
+    try:
+      bind_api(
+          path = '/blocks/exists.json',
+          parser = parse_none,
+          allowed_param = ['id', 'user_id', 'screen_name'],
+          require_auth = True
+    )(self, **kargs)
+    except TweepError:
+      return False
+    return True
 
   """Get list of users that are blocked"""
   blocks = bind_api(
@@ -319,9 +320,44 @@ class API(object):
       require_auth = True
   )
 
+  """Get list of ids of users that are blocked"""
   blocks_ids = bind_api(
       path = '/blocks/blocking/ids.json',
       parser = parse_ids,
       require_auth = True
   )
+
+  """Get list of saved searches"""
+  saved_searches = bind_api(
+      path = '/saved_searches.json',
+      parser = parse_saved_searches,
+      require_auth = True
+  )
+
+  """Get a single saved search by id"""
+  def get_saved_search(self, id):
+    return bind_api(
+        path = '/saved_searches/show/%s.json' % id,
+        parser = parse_saved_search,
+        require_auth = True
+    )(self)
+
+  """Create new saved search"""
+  create_saved_search = bind_api(
+      path = '/saved_searches/create.json',
+      method = 'POST',
+      parser = parse_saved_search,
+      allowed_param = ['query'],
+      require_auth = True
+  )
+
+  """Destroy a saved search"""
+  def destroy_saved_search(self, id):
+    return bind_api(
+        path = '/saved_searches/destroy/%s.json' % id,
+        method = 'DELETE',
+        parser = parse_saved_search,
+        allowed_param = ['id'],
+        require_auth = True
+    )(self)
 
