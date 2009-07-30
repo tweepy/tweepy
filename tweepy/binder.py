@@ -33,6 +33,7 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
       cache_result = api.cache.get(url, timeout)
       if cache_result:
         # if cache result found and not expired, return it
+        cache_result._api = api  # restore api reference to this api instance
         return cache_result
 
     # Open connection
