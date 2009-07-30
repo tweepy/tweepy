@@ -226,7 +226,7 @@ class API(object):
       require_auth = True
   )
 
-  # todo: add support for changing profile and background images
+  # TODO: add support for changing profile and background images
 
   """Update profile"""
   update_profile = bind_api(
@@ -310,4 +310,18 @@ class API(object):
       except TweepError:
         return False
       return True
+
+  """Get list of users that are blocked"""
+  blocks = bind_api(
+      path = '/blocks/blocking.json',
+      parser = parse_users,
+      allowed_param = ['page'],
+      require_auth = True
+  )
+
+  blocks_ids = bind_api(
+      path = '/blocks/blocking/ids.json',
+      parser = parse_ids,
+      require_auth = True
+  )
 
