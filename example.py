@@ -4,8 +4,8 @@ print 'An example of using the Tweepy library...'
 
 # Some twitter credentials.
 # Fill these in with your own login credentials.
-username = 'jitterapp'
-password = 'omega123'
+username = ''
+password = ''
 
 # Create an instance of the API object.
 api = tweepy.API(username, password)
