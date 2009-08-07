@@ -85,7 +85,7 @@ def _parse_dm(obj, api):
   dm = api.classes['direct_message']()
   dm._api = api
   for k,v in obj.items():
-    if k == 'sender':
+    if k == 'sender' or k == 'recipient':
       setattr(dm, k, _parse_user(v, api))
     elif k == 'created_at':
       setattr(dm, k, _parse_datetime(v))

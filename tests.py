@@ -25,8 +25,8 @@ class TweepyAPITests(unittest.TestCase):
     self.assert_(isinstance(s[0],Status))
 
   def testfriendstimeline(self):
-    s = self.api.friends_timeline(count=5)
-    self.assert_(len(s) == 5)
+    s = self.api.friends_timeline(count=1)
+    self.assert_(len(s) == 1)
     self.assert_(isinstance(s[0],Status))
 
   def testusertimeline(self):
@@ -66,6 +66,28 @@ class TweepyAPITests(unittest.TestCase):
     me = self.api.me()
     self.assert_(isinstance(me,User))
     self.assertEqual(me.screen_name, self.username)
+
+  def testfriends(self):
+    friends = self.api.friends()
+    self.assert_(len(friends) > 0)
+    self.assert_(isinstance(friends[0], User))
+
+  def testfollowers(self):
+    followers = self.api.followers()
+    self.assert_(len(followers) > 0)
+    self.assert_(isinstance(followers[0], User))
+
+  def testdirectmessages(self):
+    dms = self.api.direct_messages()
+    self.assert_(len(dms) > 0)
+    self.assert_(isinstance(dms[0], DirectMessage))
+
+  def testsenddirectmessage(self):
+    dm = self.api.send_direct_message(self.username, 'test message')
+    self.assert_(isinstance(dm, DirectMessage))
+    self.assertEqual(dm.text, 'test message')
+    self.assertEqual(dm.sender.screen_name, self.username)
+    self.assertEqual(dm.recipient.screen_name, self.username)
 
 if __name__ == '__main__':
   unittest.main()
