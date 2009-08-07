@@ -9,10 +9,10 @@ A Twitter library for Python! Also works with identi.ca/laconi.ca !
 
 Features:
   OAuth supported.
-  Unicode friendly.
   Up-to-date with twitter api.
   Actively under development.
   Supports most of the twitter api endpoints.
+  Python 3 support. (See py3k branch)
 
 Author: Joshua Roesslein
 License: MIT
@@ -23,4 +23,6 @@ Dependencies:
     **Bundled with this library
 Website:
   Git Repository: <http://gitorious.org/tweepy> OR <http://github.com/joshthecoder/tweepy>
-  Maillist: tweepy@googlegroups.com
+
+Mailinglist: tweepy@googlegroups.com  
+
