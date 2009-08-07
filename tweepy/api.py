@@ -11,12 +11,13 @@ from error import TweepError
 class API(object):
 
   def __init__(self, auth_handler=None, username=None, host='twitter.com', cache=None,
-                secure=False, classes={'user': User, 'status': Status,
+                secure=False, api_root='', classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship,
                 'saved_search': SavedSearch, 'search_result': SearchResult}):
     self.auth_handler = auth_handler
     self.username = username
     self.host = host
+    self.api_root = api_root
     self.cache = cache
     self.secure = secure
     self.classes = classes

@@ -13,7 +13,7 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
   def _call(api, *args, **kargs):
     # If require auth, throw exception if credentials not provided
-    if not api.auth_handler:
+    if require_auth and not api.auth_handler:
       raise TweepError('Authentication required!')
 
     # build parameter dict
@@ -38,9 +38,9 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Build url with parameters
     if parameters:
-      url = '%s?%s' % (path, urllib.urlencode(parameters))
+      url = '%s?%s' % (api.api_root + path, urllib.urlencode(parameters))
     else:
-      url = path
+      url = api.api_root + path
 
     # get scheme and host
     if api.secure:
