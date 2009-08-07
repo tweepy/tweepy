@@ -16,9 +16,18 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     if not api.auth_handler:
       raise TweepError('Authentication required!')
 
-    # Filter out unallowed parameters
+    # build parameter dict
     if allowed_param:
-      parameters = dict((k,v) for k,v in kargs.items() if k in allowed_param)
+      parameters = {}
+      for idx, arg in enumerate(args):
+        try:
+          parameters[allowed_param[idx]] = arg
+        except IndexError:
+          raise TweepError('Too many parameters supplied!')
+      for k, arg in kargs.items():
+        if k in parameters:
+          raise TweepError('Multiple values for parameter %s supplied!' % k)
+        parameters[k] = arg
     else:
       parameters = None
 
@@ -54,9 +63,9 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Open connection
     if api.secure:
-      conn = httplib.HTTPSConnection(_host)
+      conn = httplib.HTTPSConnection(_host, timeout=10)
     else:
-      conn = httplib.HTTPConnection(_host)
+      conn = httplib.HTTPConnection(_host, timeout=10)
 
     # Build request
     conn.request(method, url, headers=headers)
