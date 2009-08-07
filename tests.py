@@ -82,12 +82,38 @@ class TweepyAPITests(unittest.TestCase):
     self.assert_(len(dms) > 0)
     self.assert_(isinstance(dms[0], DirectMessage))
 
-  def testsenddirectmessage(self):
-    dm = self.api.send_direct_message(self.username, 'test message')
-    self.assert_(isinstance(dm, DirectMessage))
-    self.assertEqual(dm.text, 'test message')
-    self.assertEqual(dm.sender.screen_name, self.username)
-    self.assertEqual(dm.recipient.screen_name, self.username)
+  def testsendanddestroydirectmessage(self):
+    # send
+    sent_dm = self.api.send_direct_message(self.username, 'test message')
+    self.assert_(isinstance(sent_dm, DirectMessage))
+    self.assertEqual(sent_dm.text, 'test message')
+    self.assertEqual(sent_dm.sender.screen_name, self.username)
+    self.assertEqual(sent_dm.recipient.screen_name, self.username)
+
+    # destroy
+    destroyed_dm = self.api.destroy_direct_message(sent_dm.id)
+    self.assert_(isinstance(destroyed_dm, DirectMessage))
+    self.assertEqual(destroyed_dm.text, sent_dm.text)
+    self.assertEqual(destroyed_dm.id, sent_dm.id)
+    self.assertEqual(destroyed_dm.sender.screen_name, self.username)
+    self.assertEqual(destroyed_dm.recipient.screen_name, self.username)
+
+  def testcreatefriendship(self):
+    friend = self.api.create_friendship('twitter')
+    self.assert_(isinstance(friend, User))
+    self.assertEqual(friend.screen_name, 'twitter')
+    self.assertTrue(self.api.exists_friendship(self.username, 'twitter'))
+
+  def testdestroyfriendship(self):
+    enemy = self.api.destroy_friendship('twitter')
+    self.assert_(isinstance(enemy, User))
+    self.assertEqual(enemy.screen_name, 'twitter')
+    self.assertFalse(self.api.exists_friendship(self.username, 'twitter'))
+
+  def testshowfriendship(self):
+    source, target = self.api.show_friendship(target_screen_name='twtiter')
+    self.assert_(isinstance(source, Friendship))
+    self.assert_(isinstance(target, Friendship))
 
 if __name__ == '__main__':
   unittest.main()
