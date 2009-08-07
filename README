@@ -5,7 +5,14 @@
 /_/    |__/|__/ \___/ \___// .___/ \__, /  
                           /_/     /____/ 
 
-A Twitter library for Python!
+A Twitter library for Python! Also works with identi.ca/laconi.ca !
+
+Features:
+  OAuth supported.
+  Unicode friendly.
+  Up-to-date with twitter api.
+  Actively under development.
+  Supports most of the twitter api endpoints.
 
 Author: Joshua Roesslein
 License: MIT
@@ -16,3 +23,4 @@ Dependencies:
     **Bundled with this library
 Website:
   Git Repository: <http://gitorious.org/tweepy> OR <http://github.com/joshthecoder/tweepy>
+  Maillist: tweepy@googlegroups.com
