@@ -27,7 +27,7 @@ class Status(Model):
 
   @staticmethod
   def _validate(status):
-    Model.validate(status, [
+    Model._validate(status, [
       'created_at', 'id', 'text', 'source', 'truncated', 'in_reply_to_status_id',
       'in_reply_to_user_id', 'favorited', 'in_reply_to_screen_name'
     ])
@@ -43,7 +43,7 @@ class User(Model):
 
   @staticmethod
   def _validate(user):
-    Model.validate(user, [
+    Model._validate(user, [
       'id', 'name', 'screen_name', 'location', 'description', 'profile_image_url',
       'url', 'protected', 'followers_count', 'profile_background_color', 
       'profile_text_color', 'profile_sidebar_fill_color', 'profile_sidebar_border_color',
