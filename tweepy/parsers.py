@@ -9,6 +9,18 @@ try:
 except ImportError:
   import simplejson as json
 
+def parse_json(data, api):
+
+  return json.loads(data)
+
+def parse_return_true(data, api):
+
+  return True
+
+def parse_none(data, api):
+
+  return None
+
 def parse_error(data):
 
   return json.loads(data)['error']
@@ -161,14 +173,8 @@ def parse_search_results(data, api):
     result_objects.append(_parse_search_result(obj, api))
   return result_objects
 
-def parse_json(data, api):
+def parse_trend_results(data, api):
 
-  return json.loads(data)
+  return json.loads(data)['trends']
+  
 
-def parse_return_true(data, api):
-
-  return True
-
-def parse_none(data, api):
-
-  return None

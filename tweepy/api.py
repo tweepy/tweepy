@@ -374,3 +374,10 @@ class API(object):
         allowed_param = ['q', 'lang', 'rpp', 'page', 'since_id', 'geocode', 'show_user'],
     )(self, *args, **kargs)
 
+  def trends(self):
+    return bind_api(
+        host = 'search.' + self.host,
+        path = '/trends.json',
+        parser = parse_trend_results
+    )(self)
+
