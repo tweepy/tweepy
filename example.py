@@ -1,10 +1,14 @@
+from getpass import getpass
+
 import tweepy
 
 print 'An example of using the Tweepy library...'
 
 # We need an authentication handler to tell twitter who we are.
 # First let's make one using basic auth.
-basic_auth = tweepy.BasicAuthHandler('username', 'yourpass')
+username = raw_input('Username: ')
+password = getpass('Password: ')
+basic_auth = tweepy.BasicAuthHandler(username, password)
 
 # Now a handler for oauth.
 oauth_auth = tweepy.OAuthHandler('consumer_key', 'consumer_secrete')
