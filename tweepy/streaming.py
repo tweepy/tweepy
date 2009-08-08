@@ -22,7 +22,7 @@ class Stream(object):
   host = 'stream.twitter.com'
 
   def __init__(self, username, password, callback, timeout=2.0, retry_count = 3, 
-                retry_time = 5.0, snooze_time = 10.0, buffer_size=1500):
+                retry_time = 3.0, snooze_time = 10.0, buffer_size=1500):
     self.auth = BasicAuthHandler(username, password)
     self.running = False
     self.timeout = timeout
