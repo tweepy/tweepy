@@ -11,7 +11,8 @@ from error import TweepError
 class API(object):
 
   def __init__(self, auth_handler=None, username=None, host='twitter.com', cache=None,
-                secure=False, api_root='', classes={'user': User, 'status': Status,
+                secure=False, api_root='', validate=True,
+                classes={'user': User, 'status': Status,
                 'direct_message': DirectMessage, 'friendship': Friendship,
                 'saved_search': SavedSearch, 'search_result': SearchResult}):
     self.auth_handler = auth_handler
@@ -20,6 +21,7 @@ class API(object):
     self.api_root = api_root
     self.cache = cache
     self.secure = secure
+    self.validate = validate
     self.classes = classes
 
   """Get public timeline"""

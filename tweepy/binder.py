@@ -79,13 +79,24 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Pass returned body into parser and return parser output
     out =  parser(resp.read(), api)
+    conn.close()
+
+    # validate result
+    if api.validate:
+      # list of results
+      if isinstance(out, list) and len(out) > 0:
+        if hasattr(out[0], 'validate'):
+          for result in out:
+            result.validate()
+      # single result
+      else:
+        if hasattr(out, 'validate'):
+          out.validate()
 
     # store result in cache
     if api.cache and method == 'GET':
       api.cache.store(url, out)
 
-    # close connection and return data
-    conn.close()
     return out
 
   return _call
