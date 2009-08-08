@@ -15,6 +15,11 @@ You can then run the tutorial like such:
 
   python t1.py
 
+Tutorials:
+
+  1 -- Authentication
+  2 -- API
+
 
 Author: Joshua Roesslein
 """

@@ -1,5 +1,5 @@
 import tweepy
-from t1 import *
+from t1 import oauth_auth
 
 """ Tutorial 2 -- API
 
