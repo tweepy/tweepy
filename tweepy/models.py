@@ -23,6 +23,9 @@ class Model(object):
     if len(missing) > 0:
       raise TweepError('Missing required attribute(s) %s' % str(missing).strip('[]'))
 
+  def validate(self):
+    return
+
 class Status(Model):
 
   @staticmethod
