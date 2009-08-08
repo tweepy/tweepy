@@ -15,6 +15,9 @@ Features:
   Python 3 support. (See py3k branch)
   Streaming API
 
+Getting started:
+  Check out the tutorial folder to get started with Tweepy.
+
 Author: Joshua Roesslein
 License: MIT
 Dependencies:
