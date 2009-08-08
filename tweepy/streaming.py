@@ -85,6 +85,40 @@ class Stream(object):
       # TODO: we should probably also parse delete/track messages
       # and pass to a callback
 
+  def firehose(self, count=None, ):
+    if self.running:
+      raise TweepError('Stream object already connected!')
+    self.url = '/firehose.json?delimited=length'
+    if count:
+      self.url += '&count=%s' % count
+    self.running = True
+    Thread(target=self._run).start()
+
+  def gardenhose(self):
+    if self.running:
+      raise TweepError('Stream object already connected!')
+    self.url = '/gardenhose.json?delimited=length'
+    self.running = True
+    Thread(target=self._run).start()
+
+  def birddog(self, follow, count=None):
+    if self.running:
+      raise TweepError('Stream object already connected!')
+    self.url = '/birddog.json?delimited=length&follow=%s' % str(follow).strip('[]').replace(' ', '')
+    if count:
+      self.url += '&count=%s' % count
+    self.running = True
+    Thread(target=self._run).start()
+
+  def shadow(self, follow, count=None):
+    if self.running:
+      raise TweepError('Stream object already connected!')
+    self.url = '/shadow.json?delimited=length&follow=%s' % str(follow).strip('[]').replace(' ', '')
+    if count:
+      self.url += '&count=%s' % count
+    self.running = True
+    Thread(target=self._run).start()
+
   def spritzer(self):
     if self.running:
       raise TweepError('Stream object already connected!')
