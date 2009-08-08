@@ -19,11 +19,16 @@ except ImportError:
 
 class Stream(object):
 
-  def __init__(self, username, password, callback, host='stream.twitter.com', timeout=2.0, buffer_size=1500):
-    self.host = host
+  host = 'stream.twitter.com'
+
+  def __init__(self, username, password, callback, timeout=2.0, retry_count = 3, 
+                retry_time = 5.0, snooze_time = 10.0, buffer_size=1500):
     self.auth = BasicAuthHandler(username, password)
     self.running = False
     self.timeout = timeout
+    self.retry_count = retry_count
+    self.retry_time = retry_time
+    self.snooze_time = snooze_time
     self.buffer_size = buffer_size
     self.callback = callback
     self.api = API()
@@ -34,26 +39,37 @@ class Stream(object):
     self.auth.apply_auth(None, None, headers, None)
 
     # enter loop
+    error_counter = 0
+    conn = None
     while self.running:
+      if error_counter > self.retry_count:
+        # quit if error count greater than retry count
+        break
       try:
         conn = httplib.HTTPConnection(self.host, timeout=self.timeout)
         conn.request('POST', self.url, headers=headers)
         resp = conn.getresponse()
         if resp.status != 200:
-          # TODO: better handle failures
-          sleep(5.0)
-          continue
-        self._read_loop(resp)
+          error_counter += 1
+          sleep(self.retry_time)
+        else:
+          error_counter = 0
+          self._read_loop(resp)
       except timeout:
+        if self.running is False:
+          break
         conn.close()
-        continue
+        print 'snoozing...'
+        sleep(self.snooze_time)
+        print 'ok im awake!'
       except Exception:
         # any other exception is fatal, so kill loop
-        self.running = False
         break
 
     # cleanup
-    conn.close()
+    self.running = False
+    if conn:
+      conn.close()
 
   def _read_loop(self, resp):
     data = ''
