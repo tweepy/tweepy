@@ -3,9 +3,13 @@ from getpass import getpass
 
 import tweepy
 
-def callback(status):
-
-  print status.text   
+def callback(t, stream_object):
+  if t == 'status':
+    print stream_object.text   
+  elif t == 'delete':
+    print 'delete!!!  id = %s' % stream_object['id']
+  elif t == 'limit':
+    print 'limit!!! track=%s' % stream_object['track']
 
 # Prompt for login credentials and setup stream object
 username = raw_input('Twitter username: ')

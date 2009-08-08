@@ -59,9 +59,7 @@ class Stream(object):
         if self.running is False:
           break
         conn.close()
-        print 'snoozing...'
         sleep(self.snooze_time)
-        print 'ok im awake!'
       except Exception:
         # any other exception is fatal, so kill loop
         break
@@ -96,10 +94,11 @@ class Stream(object):
       # turn json data into status object
       if 'in_reply_to_status_id' in data:
         status = parse_status(data, self.api)
-        self.callback(status)
-
-      # TODO: we should probably also parse delete/track messages
-      # and pass to a callback
+        self.callback('status', status)
+      elif 'delete' in data:
+        self.callback('delete', json.loads(data)['delete']['status'])
+      elif 'limit' in data:
+        self.callback('limit', json.loads(data)['limit'])
 
   def firehose(self, count=None, ):
     if self.running:
