@@ -24,10 +24,10 @@ You must supply the handler both your consumer key and secret which
 twitter supplies you with at http://twitter.com/oauth_clients
 You may also supply a callback URL as an optional parameter.
 """
-consumer_key = ''
-consumer_secret = ''
+consumer_key = 'ZbzSsdQj7t68VYlqIFvdcA'
+consumer_secret = '4yDWgrBiRs2WIx3bfvF9UWCRmtQ2YKpKJKBahtZcU'
 oauth_auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-oauth_auth_callback = tweepy.OAuthHandler(consumer_key, consumer_secret
+oauth_auth_callback = tweepy.OAuthHandler(consumer_key, consumer_secret,
                                             'http://test.com/my/callback/url')
 
 """
@@ -52,6 +52,7 @@ Okay we are all set then with OAuth. If you want to store the access
 token for later use, here's how...
 """
 access_token_to_store = oauth_auth.access_token
+print 'Access token: %s' % access_token_to_store
 
 """
 And to re-create the OAuthHandler with that access token later on...
