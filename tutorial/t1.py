@@ -11,7 +11,7 @@ Authentication is handled by AuthHandler instances. You must either
 create a BasicAuthHandler or OAuthHandler which we will pass into our 
 api instance to let twitter know who we are.
 
-First let's try creating an basic auth handler.
+First let's try creating a basic auth handler.
 """
 username = raw_input('Twitter username: ')
 password = getpass('Twitter password: ')
@@ -45,7 +45,7 @@ we must wait for that and grab the verifier number from the request.
 For this example we will ask the user for the PIN.
 """
 verifier = raw_input('PIN: ').strip()
-oauth_auth.get_access_token()
+oauth_auth.get_access_token(verifier)
 
 """
 Okay we are all set then with OAuth. If you want to store the access
@@ -57,7 +57,7 @@ print 'Access token: %s' % access_token_to_store
 """
 And to re-create the OAuthHandler with that access token later on...
 """
-oauth_auth = tweepy.OAuthHandler('consumer_key', 'consumer_secret')
+oauth_auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 oauth_auth.access_token = access_token_from_storage
 
 """
