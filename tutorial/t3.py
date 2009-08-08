@@ -14,11 +14,11 @@ models are used...
 A nice feature of Tweepy is that you can extend or even provide
 your own implementations of these models. Tweepy simply just sets
 the attributes and returns back an instance of your model class.
-This makes it easy to intergrate your ORM into Tweepy.
+This makes it easy to integrate your ORM into Tweepy.
 """
 
 """
-First let's create our own implementaion of Status.
+First let's create our own implementation of Status.
 """
 class MyStatus(tweepy.Status):
 

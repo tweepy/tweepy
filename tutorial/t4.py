@@ -20,7 +20,7 @@ except tweepy.TweepError, e:
 
 """
 TweepError's can be casted to string format which will
-give details as to what wents wrong.
+give details as to what went wrong.
 The main reasons an exception will be raised include:
 
   -HTTP request to twitter failed
