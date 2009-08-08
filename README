@@ -13,7 +13,7 @@ Features:
   Actively under development.
   Supports most of the twitter api endpoints.
   Python 3 support. (See py3k branch)
-  Streaming API (coming soon! see streaming branch)
+  Streaming API
 
 Author: Joshua Roesslein
 License: MIT

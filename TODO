@@ -4,3 +4,5 @@ Stuff that needs to be done...
 - search API
 - caching system
     + in-memory cache done. now just need a file-based cache (pickle?)
+- needs docs, tutors, examples, etc
+- commandline client
