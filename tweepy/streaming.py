@@ -6,6 +6,8 @@ import httplib
 from threading import Thread
 
 from . auth import BasicAuthHandler
+from . parsers import parse_status
+from . api import API
 
 try:
   import json
@@ -22,6 +24,7 @@ class Stream(object):
     self.buffer_size = buffer_size
 
   def _run(self):
+    api = API()
     conn = httplib.HTTPConnection(self.host)
     headers = {}
     self.auth.apply_auth(None, None, headers, None)
@@ -47,8 +50,14 @@ class Stream(object):
 
       # read data
       data = resp.read(length)
-      jobject = json.loads(data)
-      self.callback(jobject)
+
+      # turn json data into status object
+      if 'in_reply_to_status_id' in data:
+        status = parse_status(data, api)
+        self.callback(status)
+
+      # TODO: we should probably also parse delete/track messages
+      # and pass to a callback
 
     conn.close()
     self.running = False

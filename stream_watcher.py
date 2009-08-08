@@ -1,14 +1,15 @@
 import time
+from getpass import getpass
 
 import tweepy
 
-def callback(stream_object):
+def callback(status):
 
-  if 'text' in stream_object:
-    print stream_object['text']
-    
+  print status.text   
 
-stream = tweepy.Stream('spritzer', 'tweebly', 'omega1987twitter')
+username = raw_input('Twitter username: ')
+password = getpass('Twitter password: ')
+stream = tweepy.Stream('spritzer', username, password)
 stream.connect(callback)
 
 while True:
