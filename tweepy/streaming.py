@@ -47,6 +47,10 @@ class Stream(object):
       except timeout:
         conn.close()
         continue
+      except Exception:
+        # any other exception is fatal, so kill loop
+        self.running = False
+        break
 
     # cleanup
     conn.close()
