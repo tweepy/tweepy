@@ -48,6 +48,7 @@ Let's query the authenticated user's friends timeline
 and print it to the console...
 """
 friends_timeline = auth_api.friends_timeline()
+print 'Friends timeline...'
 for status in friends_timeline:
   print status.text
   print 'from: %s' % status.user.screen_name

@@ -51,14 +51,14 @@ oauth_auth.get_access_token(verifier)
 Okay we are all set then with OAuth. If you want to store the access
 token for later use, here's how...
 """
-access_token_to_store = oauth_auth.access_token
-print 'Access token: %s' % access_token_to_store
+access_token_store = oauth_auth.access_token
+print 'Access token: %s' % access_token_store
 
 """
 And to re-create the OAuthHandler with that access token later on...
 """
 oauth_auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-oauth_auth.access_token = access_token_from_storage
+oauth_auth.access_token = access_token_store
 
 """
 Now let's plugin our newly created auth handler into an API instance
