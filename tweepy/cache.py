@@ -9,6 +9,8 @@ import hashlib
 import fcntl
 import cPickle as pickle
 
+from error import TweepError
+
 """Cache interface"""
 class Cache(object):
 
@@ -99,12 +101,19 @@ class MemoryCache(Cache):
 """File-based cache"""
 class FileCache(Cache):
 
+  # locks used to make cache thread-safe
+  cache_locks = {}
+
   def __init__(self, cache_dir, timeout=60):
     Cache.__init__(self, timeout)
     if os.path.exists(cache_dir) is False:
       os.mkdir(cache_dir)
     self.cache_dir = cache_dir
-    self.lock = threading.Lock()
+    if cache_dir in FileCache.cache_locks:
+      self.lock = FileCache.cache_locks[cache_dir]
+    else:
+      self.lock = threading.Lock()
+      FileCache.cache_locks[cache_dir] = self.lock
 
   def _get_path(self, key):
     md5 = hashlib.md5()
