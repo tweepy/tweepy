@@ -3,6 +3,7 @@ Stuff that needs to be done...
 - finish unit tests
 - search API
 - caching system
-    + in-memory cache done. now just need a file-based cache (pickle?)
+    - memcache? database?
+    + memory and file caches implemented
 - needs docs, tutors, examples, etc
 - commandline client
