@@ -4,7 +4,6 @@
 
 from binder import bind_api
 from parsers import *
-from models import User, Status, DirectMessage, Friendship, SavedSearch, SearchResult
 from error import TweepError
 
 """Twitter API"""
