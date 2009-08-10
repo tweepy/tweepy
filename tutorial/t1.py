@@ -1,4 +1,5 @@
 from getpass import getpass
+import cPickle as pickle
 import tweepy
 
 """ Tutorial 1 -- Authentication
@@ -51,14 +52,24 @@ oauth_auth.get_access_token(verifier)
 Okay we are all set then with OAuth. If you want to store the access
 token for later use, here's how...
 """
-access_token_store = oauth_auth.access_token
-print 'Access token: %s' % access_token_store
+access_token = oauth_auth.access_token
+print 'Access token: %s' % access_token
 
 """
-And to re-create the OAuthHandler with that access token later on...
+For later use we will keep the token pickled into a file.
 """
+token_file = open('oauth_token', 'wb')
+pickle.dump(access_token, token_file)
+token_file.close()
+
+"""
+And to reload the token...
+"""
+token_file = open('oauth_token', 'rb')
+oauth_token = pickle.load(token_file)
+token_file.close()
 oauth_auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-oauth_auth.access_token = access_token_store
+oauth_auth.access_token = access_token
 
 """
 Now let's plugin our newly created auth handler into an API instance
