@@ -2,6 +2,8 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
+from __future__ import with_statement
+
 import time
 import threading
 import os

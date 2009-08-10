@@ -67,9 +67,9 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
     # Open connection
     if api.secure:
-      conn = httplib.HTTPSConnection(_host, timeout=10)
+      conn = httplib.HTTPSConnection(_host)
     else:
-      conn = httplib.HTTPConnection(_host, timeout=10)
+      conn = httplib.HTTPConnection(_host)
 
     # Build request
     conn.request(method, url, headers=headers)

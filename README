@@ -22,6 +22,7 @@ Getting started:
 Author: Joshua Roesslein
 License: MIT
 Dependencies:
+  Python 2.5+
   Simplejson <http://undefined.org/python/#simplejson>
     **Included in python 2.6+
   Python-OAuth <http://code.google.com/p/oauth>
