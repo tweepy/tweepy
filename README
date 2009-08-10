@@ -19,6 +19,13 @@ Features:
 Getting started:
   Check out the tutorial folder to get started with Tweepy.
 
+Installing:  
+  You may use easy_install to quickly get tweepy installed on your system:
+      easy_install tweepy  (run as root)
+  You may also clone/download the source code and then execute:
+      python setup.py install (run as root)
+  If you wish you may also bundle the tweepy package with your application.
+
 Author: Joshua Roesslein
 License: MIT
 Dependencies:
