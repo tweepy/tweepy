@@ -10,8 +10,8 @@ By default caching is disabled in API instances.
 
 """
 Let's create a new API instance with caching enabled.
-Currently Tweepy just comes with an in-memory cache which
-we will use for this demo.
+Tweepy comes with both a memory and file based cache.
+In this example we will be using the memory cache.
 """
 cached_api = tweepy.API(cache=tweepy.MemoryCache(timeout=120))
 
