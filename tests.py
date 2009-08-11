@@ -13,8 +13,8 @@ from tweepy import *
 class TweepyAPITests(unittest.TestCase):
 
   # Must supply twitter account credentials for tests
-  username = 'tweebly'
-  password = 'omega1987twitter'
+  username = ''
+  password = ''
 
   def setUp(self):
     self.api = API(BasicAuthHandler(self.username, self.password), self.username)
