@@ -55,6 +55,9 @@ class OAuthHandler(AuthHandler):
     except Exception, e:
       raise TweepError(e)
 
+  def set_access_token(self, key, secret):
+    self.access_token = oauth.OAuthToken(key, secret)
+
   def get_authorization_url(self):
     """Get the authorization URL to redirect the user"""
     try:
