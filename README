@@ -14,7 +14,7 @@ Features:
   Supports most of the twitter api endpoints.
   Python 3 support. (See py3k branch)
   Streaming API
-  Cache system (memory and file based)
+  Cache system (memory, file, memcache client)
 
 Getting started:
   Check out the tutorial folder to get started with Tweepy.
