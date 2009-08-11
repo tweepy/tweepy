@@ -2,7 +2,7 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-from __future__ import with_statement
+from __future__ import with_statement  # need this for py2.5
 
 import time
 import threading
@@ -11,7 +11,7 @@ import hashlib
 import fcntl
 import cPickle as pickle
 
-from error import TweepError
+from . error import TweepError
 
 """Cache interface"""
 class Cache(object):

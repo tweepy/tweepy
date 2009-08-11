@@ -2,7 +2,7 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-from error import TweepError
+from . error import TweepError
 
 class Model(object):
 

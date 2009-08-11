@@ -2,9 +2,9 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-from binder import bind_api
-from parsers import *
-from error import TweepError
+from . binder import bind_api
+from . parsers import *
+from . error import TweepError
 
 """Twitter API"""
 class API(object):

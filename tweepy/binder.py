@@ -5,8 +5,8 @@
 import httplib
 import urllib
 
-from parsers import parse_error
-from error import TweepError
+from . parsers import parse_error
+from . error import TweepError
 
 def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
               timeout=None, host=None):

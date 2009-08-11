@@ -4,7 +4,7 @@
 
 from datetime import datetime
 
-from models import models
+from . models import models
 
 try:
   import json
