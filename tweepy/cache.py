@@ -11,6 +11,7 @@ import hashlib
 import fcntl
 import cPickle as pickle
 
+from . import memcache
 from . error import TweepError
 
 """Cache interface"""
@@ -27,22 +28,22 @@ class Cache(object):
         key: entry key
         value: data of entry
     """
-    raise NotImplemented
+    raise NotImplementedError
 
   def get(self, key, timeout=None):
     """Get cached entry if exists and not expired
         key: which entry to get
         timeout: override timeout with this value [optional]
     """
-    raise NotImplemented
+    raise NotImplementedError
 
   def cleanup(self):
     """Delete any expired entries in cache."""
-    raise NotImplemented
+    raise NotImplementedError
 
   def flush(self):
     """Delete all cached entries"""
-    raise NotImplemented
+    raise NotImplementedError
 
 """In-memory cache"""
 class MemoryCache(Cache):
@@ -192,4 +193,36 @@ class FileCache(Cache):
     for entry in os.listdir(self.cache_dir):
       if entry.endswith('.lock'): continue
       self._delete_file(os.path.join(self.cache_dir, entry))
+
+"""Memcache client"""
+class MemCache(Cache):
+
+  def __init__(self, servers, timeout=60):
+    Cache.__init__(self, timeout)
+    self.client = memcache.Client(servers)
+
+  def store(self, key, value):
+    self.client.set(key, (time.time(), value), time=self.timeout)
+
+  def get(self, key, timeout=None):
+    obj = self.client.get(key)
+    if obj is None:
+      return None
+    created_time, value = obj
+
+    # check if value is expired
+    _timeout = self.timeout if timeout is None else timeout
+    if _timeout > 0 and (time.time() - created_time) >= _timeout:
+      # expired! delete from cache
+      self.client.delete(key)
+      return None
+
+    return value
+
+  def cleanup(self):
+    # not implemented for this cache
+    return
+
+  def flush(self):
+    self.client.flush_all()
 
