@@ -105,6 +105,8 @@ class TweepyAuthTests(unittest.TestCase):
 
   def testoauth(self):
     auth = OAuthHandler(self.consumer_key, self.consumer_secret)   
+
+    # test getting access token
     auth_url = auth.get_authorization_url()
     self.assert_(auth_url.startswith('http://twitter.com/oauth/authorize?'))
     print 'Please authorize: ' + auth_url
@@ -113,8 +115,9 @@ class TweepyAuthTests(unittest.TestCase):
     access_token = auth.get_access_token(verifier)
     self.assert_(access_token is not None)
 
+    # build api object test using oauth
     api = API(auth)
-    self.assertTrue(api.verify_credentials())
+    api.update_status('test %i' % random.randint(0,1000))
 
 if __name__ == '__main__':
   unittest.main()
