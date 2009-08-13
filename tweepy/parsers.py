@@ -73,7 +73,7 @@ def _parse_status(obj, api):
   status._api = api
   for k,v in obj.items():
     if k == 'user':
-      setattr(status, k, _parse_user(v, api))
+      setattr(status, 'author', _parse_user(v, api))
     elif k == 'created_at':
       setattr(status, k, _parse_datetime(v))
     elif k == 'source':

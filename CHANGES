@@ -1,0 +1,6 @@
+All changes made to the library that might affect applications
+during upgrade will be listed here.
+
+1.0 -> 1.0.1
+------------
+Status.user --> Status.author
