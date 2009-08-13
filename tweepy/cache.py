@@ -234,11 +234,13 @@ class MemCache(Cache):
     return value
 
   def count(self):
-    # TODO: implement
-    raise NotImplementedError
+    count = 0
+    for sid, stats in self.client.get_stats():
+      count += int(stats.get('curr_items', 0))
+    return count
 
   def cleanup(self):
-    # not implemented for this cache
+    # not implemented for this cache since server handles it
     return
 
   def flush(self):

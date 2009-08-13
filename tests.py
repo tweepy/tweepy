@@ -134,11 +134,11 @@ class TweepyAuthTests(unittest.TestCase):
 class TweepyCacheTests(unittest.TestCase):
 
   timeout = 2.0
+  memcache_servers = ['127.0.0.1:11211']  # must be running for test to pass
 
-  def _run_tests(self):
+  def _run_tests(self, do_cleanup=True):
     # test store and get
     self.cache.store('testkey', 'testvalue')
-    self.assertEqual(self.cache.count(), 1, 'Count is wrong')
     self.assertEqual(self.cache.get('testkey'), 'testvalue', 'Stored value does not match retrieved value')
 
     # test timeout
@@ -146,14 +146,18 @@ class TweepyCacheTests(unittest.TestCase):
     self.assertEqual(self.cache.get('testkey'), None, 'Cache entry should have expired')
 
     # test cleanup
-    self.cache.store('testkey', 'testvalue')
-    sleep(self.timeout)
-    self.cache.cleanup()
-    self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
+    if do_cleanup:
+      self.cache.store('testkey', 'testvalue')
+      sleep(self.timeout)
+      self.cache.cleanup()
+      self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
+
+    # test count
+    for i in range(0,20):
+      self.cache.store('testkey%i' % i, 'testvalue')
+    self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
     # test flush
-    for i in range(0,10):
-      self.cache.store('testkey%i' % i, 'testvalue')
     self.cache.flush()
     self.assertEqual(self.cache.count(), 0, 'Cache failed to flush')
     
@@ -167,7 +171,10 @@ class TweepyCacheTests(unittest.TestCase):
     self._run_tests()
     self.cache.flush()
     os.rmdir('cache_test_dir')
-    
+
+  def testmemcache(self):
+    self.cache = MemCache(self.memcache_servers, self.timeout)
+    self._run_tests(do_cleanup=False)
 
 if __name__ == '__main__':
   unittest.main()

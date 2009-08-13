@@ -1,9 +1,11 @@
 Stuff that needs to be done...
 
 - finish unit tests
-- search API
+  - streaming tests
+  - api tests
 - caching system
-    - memcache? database?
-    + memory and file caches implemented
-- needs docs, tutors, examples, etc
+  - database based
+- reference docuements
+- tutorial
+  - streaming
 - commandline client
