@@ -52,6 +52,12 @@ def _parse_user(obj, api):
       setattr(user, k, _parse_datetime(v))
     elif k == 'status':
       setattr(user, k, _parse_status(v, api))
+    elif k == 'following':
+      # twitter sets this to null if it is false
+      if v is True:
+        setattr(user, k, True)
+      else:
+        setattr(user, k, False)
     else:
       setattr(user, k, v)
   return user

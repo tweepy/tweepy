@@ -68,6 +68,13 @@ class User(Model):
   def followers(self, **kargs):
     return self._api.followers(id=self.id, **kargs)
 
+  def follow(self):
+    self._api.create_friendship(user_id=self.id)
+    self.following = True
+  def unfollow(self):
+    self._api.destroy_friendship(user_id=self.id)
+    self.following = False
+
 class DirectMessage(Model):
 
   def destroy(self):
