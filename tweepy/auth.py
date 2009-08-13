@@ -45,9 +45,8 @@ class OAuthHandler(AuthHandler):
 
   def _get_request_token(self):
     try:
-      request = oauth.OAuthRequest.from_consumer_and_token(self._consumer, http_url = self.REQUEST_TOKEN_URL)
-      if self.callback:
-        request.set_parameter('oauth_callback', self.callback)
+      request = oauth.OAuthRequest.from_consumer_and_token(self._consumer,
+          http_url = self.REQUEST_TOKEN_URL, callback=self.callback)
       request.sign_request(self._sigmethod, self._consumer, None)
       resp = urlopen(Request(self.REQUEST_TOKEN_URL, headers=request.to_header()))
       return oauth.OAuthToken.from_string(resp.read())
@@ -77,8 +76,7 @@ class OAuthHandler(AuthHandler):
     try:
       # build request
       request = oauth.OAuthRequest.from_consumer_and_token(self._consumer,
-          token=self.request_token, http_url=self.ACCESS_TOKEN_URL)
-      request.set_parameter('oauth_verifier', str(verifier))
+          token=self.request_token, http_url=self.ACCESS_TOKEN_URL, verifier=str(verifier))
       request.sign_request(self._sigmethod, self._consumer, self.request_token)
 
       # send request
