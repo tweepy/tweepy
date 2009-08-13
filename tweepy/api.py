@@ -9,15 +9,18 @@ from . error import TweepError
 """Twitter API"""
 class API(object):
 
-  def __init__(self, auth_handler=None, username=None, host='twitter.com', cache=None,
+  def __init__(self, auth_handler=None, host='twitter.com', cache=None,
                 secure=False, api_root='', validate=True):
+    # you may access these freely
     self.auth_handler = auth_handler
-    self.username = username
     self.host = host
     self.api_root = api_root
     self.cache = cache
     self.secure = secure
     self.validate = validate
+
+    # not a good idea to touch these
+    self._username = None
 
   """Get public timeline"""
   public_timeline = bind_api(
@@ -84,10 +87,18 @@ class API(object):
 
   """Get authenticated user"""
   def me(self):
-    if self.username:
-      return self.get_user(screen_name=self.username)
-    else:
-      return None
+    # if username not fetched, go get it...
+    if self._username is None:
+      if self.auth_handler is None:
+        raise TweepError('Authentication required')
+
+      try:
+        user = bind_api(path='/account/verify_credentials.json', parser=parse_user)(self)
+      except TweepError, e:
+        raise TweepError('Failed to fetch username: %s' % e)
+      self._username = user.screen_name
+
+    return self.get_user(screen_name=self._username)
 
   """Show friends"""
   friends = bind_api(

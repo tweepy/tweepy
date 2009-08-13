@@ -7,6 +7,9 @@ during upgrade will be listed here.
 + User:
     + follow()
     + unfollow()
++ API:
+    + __init__() signature change; no longer accepts 'username' parameter
+      which is now autodetected.
 + Fixes
     + User.following is now set to False instead of None
       when user is not followed.

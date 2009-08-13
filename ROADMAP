@@ -9,5 +9,5 @@ The plan of attack for the next version of Tweepy.
 + rate limit governor
 + prepare for social graph changes mentioned on mailinglist
 + finish search api
-+ autodetect authenticated user's ID
++ autodetect authenticated user's ID [DONE]
 
