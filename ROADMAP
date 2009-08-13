@@ -1,0 +1,12 @@
+The plan of attack for the next version of Tweepy.
+
+1.0 -> 1.0.1
+============
++ command line client using tweepy
++ database-based cache
++ changing profile and background images
++ full coverage of current code in tests
++ rate limit governor
++ prepare for social graph changes mentioned on mailinglist
++ finish search api
+
