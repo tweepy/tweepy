@@ -7,17 +7,18 @@ import random
 
 from tweepy import *
 
+"""Configurations"""
+# Must supply twitter account credentials for tests
+username = ''
+password = ''
+
 """Unit tests"""
 
 # API tests
 class TweepyAPITests(unittest.TestCase):
 
-  # Must supply twitter account credentials for tests
-  username = ''
-  password = ''
-
   def setUp(self):
-    self.api = API(BasicAuthHandler(self.username, self.password), self.username)
+    self.api = API(BasicAuthHandler(username, password), username)
 
   def testpublictimeline(self):
     self.assertEqual(len(self.api.public_timeline()), 20)
@@ -33,7 +34,7 @@ class TweepyAPITests(unittest.TestCase):
   def testmentions(self):
     s = self.api.mentions()
     self.assert_(len(s) > 0)
-    self.assert_(s[0].text.find(self.username) >= 0)
+    self.assert_(s[0].text.find(username) >= 0)
 
   def testgetstatus(self):
     s = self.api.get_status(id=123)
@@ -55,7 +56,7 @@ class TweepyAPITests(unittest.TestCase):
 
   def testme(self):
     me = self.api.me()
-    self.assertEqual(me.screen_name, self.username)
+    self.assertEqual(me.screen_name, username)
 
   def testfriends(self):
     friends = self.api.friends()
@@ -71,27 +72,27 @@ class TweepyAPITests(unittest.TestCase):
 
   def testsendanddestroydirectmessage(self):
     # send
-    sent_dm = self.api.send_direct_message(self.username, 'test message')
+    sent_dm = self.api.send_direct_message(username, 'test message')
     self.assertEqual(sent_dm.text, 'test message')
-    self.assertEqual(sent_dm.sender.screen_name, self.username)
-    self.assertEqual(sent_dm.recipient.screen_name, self.username)
+    self.assertEqual(sent_dm.sender.screen_name, username)
+    self.assertEqual(sent_dm.recipient.screen_name, username)
 
     # destroy
     destroyed_dm = self.api.destroy_direct_message(sent_dm.id)
     self.assertEqual(destroyed_dm.text, sent_dm.text)
     self.assertEqual(destroyed_dm.id, sent_dm.id)
-    self.assertEqual(destroyed_dm.sender.screen_name, self.username)
-    self.assertEqual(destroyed_dm.recipient.screen_name, self.username)
+    self.assertEqual(destroyed_dm.sender.screen_name, username)
+    self.assertEqual(destroyed_dm.recipient.screen_name, username)
 
   def testcreatefriendship(self):
     friend = self.api.create_friendship('twitter')
     self.assertEqual(friend.screen_name, 'twitter')
-    self.assertTrue(self.api.exists_friendship(self.username, 'twitter'))
+    self.assertTrue(self.api.exists_friendship(username, 'twitter'))
 
   def testdestroyfriendship(self):
     enemy = self.api.destroy_friendship('twitter')
     self.assertEqual(enemy.screen_name, 'twitter')
-    self.assertFalse(self.api.exists_friendship(self.username, 'twitter'))
+    self.assertFalse(self.api.exists_friendship(username, 'twitter'))
 
   def testshowfriendship(self):
     source, target = self.api.show_friendship(target_screen_name='twtiter')
@@ -118,6 +119,13 @@ class TweepyAuthTests(unittest.TestCase):
     # build api object test using oauth
     api = API(auth)
     api.update_status('test %i' % random.randint(0,1000))
+
+  def testbasicauth(self):
+    auth = BasicAuthHandler(username, password)
+
+    # test accessing twitter API
+    api = API(auth)
+    api.update_status('test %i' % random.randint(1,1000))
 
 if __name__ == '__main__':
   unittest.main()
