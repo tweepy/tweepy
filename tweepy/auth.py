@@ -85,6 +85,4 @@ class OAuthHandler(AuthHandler):
       return self.access_token
     except Exception, e:
       raise TweepError(e)
-      
-
 

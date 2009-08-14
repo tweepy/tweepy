@@ -17,7 +17,7 @@ if len(sys.argv) != 3:
   print 'Usage: tweepyshell <username> <password>'
   exit(1)
 
-api = tweepy.API(tweepy.BasicAuthHandler(sys.argv[1], sys.argv[2]))
+api = tweepy.API.new(auth='basic', username=sys.argv[1], password=sys.argv[2])
 if api.verify_credentials() is False:
   print 'Invalid username and/or password!'
   exit(1)

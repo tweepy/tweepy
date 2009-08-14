@@ -5,6 +5,7 @@
 from . binder import bind_api
 from . parsers import *
 from . error import TweepError
+from . auth import BasicAuthHandler, OAuthHandler
 
 """Twitter API"""
 class API(object):
@@ -21,6 +22,15 @@ class API(object):
 
     # not a good idea to touch these
     self._username = None
+
+  @staticmethod
+  def new(auth='basic', *args, **kargs):
+    if auth == 'basic':
+      return API(BasicAuthHandler(*args, **kargs))
+    elif auth == 'oauth':
+      return API(OAuthHandler(*args, **kargs))
+    else:
+      raise TweepError('Invalid auth type')
 
   """Get public timeline"""
   public_timeline = bind_api(

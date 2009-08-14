@@ -10,6 +10,8 @@ during upgrade will be listed here.
 + API:
     + __init__() signature change; no longer accepts 'username' parameter
       which is now autodetected.
+    + added new() method. shortcut for setting up new API instances
+      example: API.new(auth='basic', username='testuser', password='testpass')
 + Fixes
     + User.following is now set to False instead of None
       when user is not followed.
