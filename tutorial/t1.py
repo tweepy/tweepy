@@ -78,6 +78,15 @@ so we can start playing with the Twitter API. :)
 api_via_basic = tweepy.API(basic_auth)
 api_via_oath = tweepy.API(oauth_auth)
 
+""" API.new() shortcut
+
+To make creating API instances a bit more easy you way use the
+static method API.new() to create new instances. Here is an example:
+"""
+new_basic_api = tweepy.API.new(auth='basic', username, password)
+new_oauth_api = tweepy.API.new(auth='oauth', consumer_key, consumer_secret)
+new_oauth.api.auth_handler  # here's how to access the auth handler to do the oauth flow
+
 """ The End
 
 That wraps up this first tutorial. You have learned how to setup
