@@ -13,7 +13,7 @@ Features:
   Actively under development.
   Supports most of the twitter api endpoints.
   Python 3 support. (See py3k branch)
-  Streaming API
+  Streaming API support.
   Cache system (memory, file, memcache client)
 
 Getting started:
@@ -26,6 +26,12 @@ Installing:
       python setup.py install (run as root)
   If you wish you may also bundle the tweepy package with your application.
 
+Souce code:
+  Gitorious: <http://gitorious.org/tweepy>
+  Github: <http://github.com/joshthecoder/tweepy>
+
+Mailinglist: tweepy@googlegroups.com  (questions/feature request/bug reports/anything else)
+
 Author: Joshua Roesslein
 License: MIT
 Dependencies:
@@ -36,9 +42,4 @@ Dependencies:
     **Bundled with this library
   python-memcached <http://www.tummy.com/Community/software/python-memcached/>
     **Bundled with this library
-
-Website:
-  Git Repository: <http://gitorious.org/tweepy> OR <http://github.com/joshthecoder/tweepy>
-
-Mailinglist: tweepy@googlegroups.com  
 
