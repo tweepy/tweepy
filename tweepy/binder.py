@@ -16,6 +16,13 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     if require_auth and not api.auth_handler:
       raise TweepError('Authentication required!')
 
+    # check for post_data parameter
+    if 'post_data' in kargs:
+      post_data = kargs['post_data']
+      del kargs['post_data']
+    else:
+      post_data = None
+
     # build parameter dict
     if allowed_param:
       parameters = {}
