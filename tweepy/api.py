@@ -2,6 +2,9 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
+import os
+import mimetypes
+
 from . binder import bind_api
 from . parsers import *
 from . error import TweepError
@@ -247,17 +250,17 @@ class API(object):
     bind_api(
         path = '/account/update_profile_image.json',
         method = 'POST',
-        parser = parse_user,
+        parser = parse_none,
         require_auth = True
     )(self, post_data = _pack_image(filename, 700))
 
   """Update profile background image"""
-  def update_profile_image(self, filename, *args, **kargs):
+  def update_profile_background_image(self, filename, *args, **kargs):
     bind_api(
         path = '/account/update_profile_background_image.json',
         method = 'POST',
-        parser = parse_user,
-        allowed_param = ['tile']
+        parser = parse_none,
+        allowed_param = ['tile'],
         require_auth = True
     )(self, post_data = _pack_image(filename, 800))
 
@@ -429,9 +432,9 @@ def _pack_image(filename, max_size):
   file_type = mimetypes.guess_type(filename)
   if file_type is None:
     raise TweepError('Could not determine file type')
-  if file_type is not 'image/gif' and file_type is not 'image/jpeg'
-      and file_type is not 'image/png':
-    raise TweepError('Invalid file type for image')
+  file_type = file_type[0]
+  if file_type != 'image/gif' and file_type != 'image/jpeg' and file_type != 'image/png':
+    raise TweepError('Invalid file type for image: %s' % file_type)
 
   # build the mulitpart-formdata body
   fp = open(filename, 'rb')
