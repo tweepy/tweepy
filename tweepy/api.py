@@ -247,22 +247,24 @@ class API(object):
 
   """Update profile image"""
   def update_profile_image(self, filename):
+    headers, post_data = _pack_image(filename, 700)
     bind_api(
         path = '/account/update_profile_image.json',
         method = 'POST',
         parser = parse_none,
         require_auth = True
-    )(self, post_data = _pack_image(filename, 700))
+    )(self, post_data=post_data, headers=headers)
 
   """Update profile background image"""
   def update_profile_background_image(self, filename, *args, **kargs):
+    headers, post_data = _pack_image(filename, 800)
     bind_api(
         path = '/account/update_profile_background_image.json',
         method = 'POST',
         parser = parse_none,
         allowed_param = ['tile'],
         require_auth = True
-    )(self, post_data = _pack_image(filename, 800))
+    )(self, post_data=post_data, headers=headers)
 
   """Update profile"""
   update_profile = bind_api(
@@ -438,7 +440,7 @@ def _pack_image(filename, max_size):
 
   # build the mulitpart-formdata body
   fp = open(filename, 'rb')
-  BOUNDARY = '--Tw3ePy'
+  BOUNDARY = 'Tw3ePy'
   body = []
   body.append('--' + BOUNDARY)
   body.append('Content-Disposition: form-data; name="image"; filename="%s"' % filename)
@@ -448,6 +450,13 @@ def _pack_image(filename, max_size):
   body.append('--' + BOUNDARY + '--')
   body.append('')
   fp.close()
+  body = '\r\n'.join(body)
 
-  return '\r\n'.join(body)
+  # build headers
+  headers = {
+    'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
+    'Content-Length': len(body)
+  }
+
+  return headers, body
 

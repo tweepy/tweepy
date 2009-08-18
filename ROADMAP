@@ -7,7 +7,6 @@ The plan of attack for the next version of Tweepy.
 + prepare for social graph changes mentioned on mailinglist
 + finish search api
 + autodetect authenticated user's ID [DONE]
-+ timeline paging
 
 Future...
 =========

@@ -23,6 +23,13 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     else:
       post_data = None
 
+    # check for headers
+    if 'headers' in kargs:
+      headers = dict(kargs['headers'])
+      del kargs['headers']
+    else:
+      headers = {}
+
     # build parameter dict
     if allowed_param:
       parameters = {}
@@ -41,11 +48,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
       if len(args) > 0 or len(kargs) > 0:
         raise TweepError('This method takes no parameters!')
       parameters = None
-
-    # Assemble headers
-    headers = {
-      'User-Agent': 'tweepy'
-    }
 
     # Build url with parameters
     if parameters:
@@ -79,7 +81,7 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
       conn = httplib.HTTPConnection(_host, timeout=10.0)
 
     # Build request
-    conn.request(method, url, headers=headers)
+    conn.request(method, url, headers=headers, body=post_data)
 
     # Get response
     resp = conn.getresponse()
