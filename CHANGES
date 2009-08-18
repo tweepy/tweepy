@@ -12,6 +12,7 @@ during upgrade will be listed here.
       which is now autodetected.
     + added new() method. shortcut for setting up new API instances
       example: API.new(auth='basic', username='testuser', password='testpass')
+    + update_profile_image() and update_profile_background_image() method added.
 + Fixes
     + User.following is now set to False instead of None
       when user is not followed.
