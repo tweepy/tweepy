@@ -85,6 +85,8 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     resp = conn.getresponse()
 
     # If an error was returned, throw an exception
+    if resp.status == 500:
+      raise TweepError('Twitter server error!')
     if resp.status != 200:
       raise TweepError(parse_error(resp.read()))
 
