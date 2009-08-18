@@ -30,8 +30,8 @@ class OAuthHandler(AuthHandler):
   AUTHORIZATION_URL = 'http://twitter.com/oauth/authorize'
   ACCESS_TOKEN_URL = 'http://twitter.com/oauth/access_token'
 
-  def __init__(self, consumer_key, consumer_secrete, callback=None):
-    self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secrete)
+  def __init__(self, consumer_key, consumer_secret, callback=None):
+    self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
     self._sigmethod = oauth.OAuthSignatureMethod_HMAC_SHA1()
     self.request_token = None
     self.access_token = None
