@@ -19,7 +19,7 @@ password = ''
 class TweepyAPITests(unittest.TestCase):
 
   def setUp(self):
-    self.api = API(BasicAuthHandler(username, password), username)
+    self.api = API(BasicAuthHandler(username, password))
 
   def testpublictimeline(self):
     self.assertEqual(len(self.api.public_timeline()), 20)
@@ -30,7 +30,7 @@ class TweepyAPITests(unittest.TestCase):
   def testusertimeline(self):
     s = self.api.user_timeline(screen_name='twitter')
     self.assert_(len(s) > 0)
-    self.assertEqual(s[0].user.screen_name, 'twitter')
+    self.assertEqual(s[0].author.screen_name, 'twitter')
 
   def testmentions(self):
     s = self.api.mentions()
@@ -39,7 +39,7 @@ class TweepyAPITests(unittest.TestCase):
 
   def testgetstatus(self):
     s = self.api.get_status(id=123)
-    self.assertEqual(s.user.id, 17)
+    self.assertEqual(s.author.id, 17)
 
   def testupdateanddestroystatus(self):
     # test update
