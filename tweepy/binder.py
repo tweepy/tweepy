@@ -75,10 +75,11 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         return cache_result
 
     # Open connection
+    # FIXME: add timeout
     if api.secure:
-      conn = httplib.HTTPSConnection(_host, timeout=10.0)
+      conn = httplib.HTTPSConnection(_host)
     else:
-      conn = httplib.HTTPConnection(_host, timeout=10.0)
+      conn = httplib.HTTPConnection(_host)
 
     # Build request
     conn.request(method, url, headers=headers, body=post_data)

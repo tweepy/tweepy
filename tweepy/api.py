@@ -6,9 +6,9 @@ import os
 import mimetypes
 
 from . binder import bind_api
-from . parsers import *
 from . error import TweepError
 from . auth import BasicAuthHandler, OAuthHandler
+from tweepy.parsers import *
 
 """Twitter API"""
 class API(object):
@@ -421,6 +421,8 @@ class API(object):
         parser = parse_trend_results
     )(self)
 
+
+""" Pack image file into multipart-formdata request"""
 def _pack_image(filename, max_size):
   """Pack image from file into multipart-formdata post body"""
   # image must be less than 700kb in size

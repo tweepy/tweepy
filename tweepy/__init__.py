@@ -7,10 +7,10 @@ Tweepy Twitter API library
 """
 __version__ = '1.0'
 
-from . models import *
+from . models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
 from . error import TweepError
 from . api import API
-from . cache import *
+from . cache import Cache, MemoryCache, FileCache, MemCache
 from . auth import BasicAuthHandler, OAuthHandler
 from . streaming import Stream
 
