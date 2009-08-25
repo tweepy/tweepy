@@ -3,7 +3,6 @@ The plan of attack for the next version of Tweepy.
 1.0 -> 1.0.1
 ============
 + changing profile and background images [DONE]
-+ prepare for social graph changes mentioned on mailinglist
 + finish search api
 + autodetect authenticated user's ID [DONE]
 
@@ -14,3 +13,4 @@ Future...
 + command line client example
 + retweet api [DONE BUT NEEDS TESTING]
 + async requests
++ prepare for social graph changes mentioned on mailinglist

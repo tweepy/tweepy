@@ -36,7 +36,7 @@ If you wish to use your own cache implementation just
 extend the Cache interface class (tweepy/cache.py).
 Then when you create your API instance pass it in.
 """
-my_api = tweepy.API(cache=MyCache())
+#my_api = tweepy.API(cache=MyCache())
 
 """ The End """
 
