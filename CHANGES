@@ -16,3 +16,4 @@ during upgrade will be listed here.
 + Fixes
     + User.following is now set to False instead of None
       when user is not followed.
+    + python 2.5 import syntax error fixed

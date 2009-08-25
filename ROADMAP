@@ -13,3 +13,4 @@ Future...
 + rate limit governor
 + command line client example
 + retweet api [DONE BUT NEEDS TESTING]
++ async requests

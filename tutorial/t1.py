@@ -83,9 +83,9 @@ api_via_oath = tweepy.API(oauth_auth)
 To make creating API instances a bit more easy you way use the
 static method API.new() to create new instances. Here is an example:
 """
-new_basic_api = tweepy.API.new(auth='basic', username, password)
-new_oauth_api = tweepy.API.new(auth='oauth', consumer_key, consumer_secret)
-new_oauth.api.auth_handler  # here's how to access the auth handler to do the oauth flow
+new_basic_api = tweepy.API.new('basic', username, password)
+new_oauth_api = tweepy.API.new('oauth', consumer_key, consumer_secret)
+new_oauth_api.auth_handler  # here's how to access the auth handler to do the oauth flow
 
 """ The End
 
