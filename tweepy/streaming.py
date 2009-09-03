@@ -119,12 +119,15 @@ class Stream(object):
       # turn json data into status object
       if 'in_reply_to_status_id' in data:
         status = parse_status(data, self.api)
-        self.listener.on_status(status)
+        if self.listener.on_status(status) == False:
+          self.running = False
       elif 'delete' in data:
         delete = json.loads(data)['delete']['status']
-        self.listener.on_delete(delete['id'], delete['user_id'])
+        if self.listener.on_delete(delete['id'], delete['user_id']) == False:
+          self.running = False
       elif 'limit' in data:
-        self.listener.on_limit(json.loads(data)['limit']['track'])
+        if self.listener.on_limit(json.loads(data)['limit']['track']) == False:
+          self.running = False
 
   def firehose(self, count=None, ):
     if self.running:
