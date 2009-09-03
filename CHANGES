@@ -13,7 +13,11 @@ during upgrade will be listed here.
     + added new() method. shortcut for setting up new API instances
       example: API.new(auth='basic', username='testuser', password='testpass')
     + update_profile_image() and update_profile_background_image() method added.
++ Streaming:
+    + Update to new streaming API methods
+    + New StreamListener class replacing callback function
 + Fixes
     + User.following is now set to False instead of None
       when user is not followed.
     + python 2.5 import syntax error fixed
+    + python 2.5 timeout support for streaming API
