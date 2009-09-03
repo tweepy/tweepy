@@ -37,6 +37,10 @@ class StreamListener(object):
     """Called when a non-200 status code is returned"""
     return False
 
+  def on_timeout(self):
+    """Called when stream connection times out"""
+    return 
+
 class Stream(object):
 
   host = 'stream.twitter.com'
@@ -80,7 +84,8 @@ class Stream(object):
           error_counter = 0
           self._read_loop(resp)
       except timeout:
-        print 'timeout!'
+        if self.listener.on_timeout() == False:
+          break
         if self.running is False:
           break
         conn.close()

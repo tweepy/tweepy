@@ -14,6 +14,9 @@ class StreamWatcherListener(tweepy.StreamListener):
     print 'An error has occured! Status code = %s' % status_code
     return True  # keep stream alive
 
+  def on_timeout(self):
+    print 'Snoozing Zzzzzz'
+
 # Prompt for login credentials and setup stream object
 username = raw_input('Twitter username: ')
 password = getpass('Twitter password: ')
