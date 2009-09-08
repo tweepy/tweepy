@@ -93,12 +93,12 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
     resp = conn.getresponse()
 
     # If an error was returned, throw an exception
-	if resp.status != 200:
-		try:
-			error_msg = parse_error(resp.read())
-		except Exception:
-			error_msg = "Unkown twitter error response received: status=%s" % resp.status
-		raise TweepError(error_msg)
+    if resp.status != 200:
+        try:
+            error_msg = parse_error(resp.read())
+        except Exception:
+            error_msg = "Unkown twitter error response received: status=%s" % resp.status
+        raise TweepError(error_msg)
 
     # Pass returned body into parser and return parser output
     out =  parser(resp.read(), api)
