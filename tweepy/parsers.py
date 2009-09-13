@@ -91,7 +91,9 @@ def _parse_status(obj, api):
     status._api = api
     for k, v in obj.items():
         if k == 'user':
-            setattr(status, 'author', _parse_user(v, api))
+            user = _parse_user(v, api)
+            setattr(status, 'author', user)
+            setattr(status, 'user', user)  # DEPRECIATED
         elif k == 'created_at':
             setattr(status, k, _parse_datetime(v))
         elif k == 'source':
@@ -203,9 +205,4 @@ def parse_search_results(data, api):
     for obj in results:
         result_objects.append(_parse_search_result(obj, api))
     return result_objects
-
-
-def parse_trend_results(data, api):
-
-    return json.loads(data)['trends']
 

@@ -3,7 +3,7 @@ The plan of attack for the next version of Tweepy.
 1.0 -> 1.0.1
 ============
 + changing profile and background images [DONE]
-+ finish search api
++ finish search api [DONE]
 + autodetect authenticated user's ID [DONE]
 + make oauth handler more web app friendly
 + address file locking portability issues in file cache

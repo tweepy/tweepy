@@ -425,8 +425,32 @@ class API(object):
         return bind_api(
             host = 'search.' + self.host,
             path = '/trends.json',
-            parser = parse_trend_results
+            parser = parse_json
         )(self)
+
+    def trends_current(self, *args, **kargs):
+        return bind_api(
+            host = 'search.' + self.host,
+            path = '/trends/current.json',
+            parser = parse_json,
+            allowed_param = ['exclude']
+        )(self, *args, **kargs)
+
+    def trends_daily(self, *args, **kargs):
+        return bind_api(
+            host = "search." + self.host,
+            path = '/trends/daily.json',
+            parser = parse_json,
+            allowed_param = ['date', 'exclude']
+        )(self, *args, **kargs)
+
+    def trends_weekly(self, *args, **kargs):
+        return bind_api(
+            host = "search." + self.host,
+            path = '/trends/weekly.json',
+            parser = parse_json,
+            allowed_param = ['date', 'exclude']
+        )(self, *args, **kargs)
 
     def _pack_image(filename, max_size):
         """Pack image from file into multipart-formdata post body"""

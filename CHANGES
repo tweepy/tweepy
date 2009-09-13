@@ -13,6 +13,8 @@ during upgrade will be listed here.
     + added new() method. shortcut for setting up new API instances
       example: API.new(auth='basic', username='testuser', password='testpass')
     + update_profile_image() and update_profile_background_image() method added.
+    + Added search API methods: 
+        trends, trends_current, trends_daily, and trends_weekly
 + Streaming:
     + Update to new streaming API methods
     + New StreamListener class replacing callback function
@@ -21,3 +23,5 @@ during upgrade will be listed here.
       when user is not followed.
     + python 2.5 import syntax error fixed
     + python 2.5 timeout support for streaming API
++ Changed indents from 2 to 4 spaces
+
