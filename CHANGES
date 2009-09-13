@@ -23,5 +23,6 @@ during upgrade will be listed here.
       when user is not followed.
     + python 2.5 import syntax error fixed
     + python 2.5 timeout support for streaming API
+    + win32 failed import of fcntl in cache.py
 + Changed indents from 2 to 4 spaces
 

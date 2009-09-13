@@ -11,6 +11,13 @@ import hashlib
 import fcntl
 import cPickle as pickle
 
+try:
+    import fcntl
+except ImportError:
+    # Probably on a windows system
+    # TODO: use win32file
+    pass
+
 from . import memcache
 
 
@@ -127,12 +134,29 @@ class FileCache(Cache):
             self.lock = threading.Lock()
             FileCache.cache_locks[cache_dir] = self.lock
 
+        if os.name == 'posix':
+            self._lock_file = self._lock_file_posix
+            self._unlock_file = self._unlock_file_posix
+        elif os.name == 'nt':
+            self._lock_file = self._lock_file_win32
+            self._unlock_file = self._unlock_file_win32
+        else:
+            print 'Warning! FileCache locking not supported on this system!'
+            self._lock_file = self._lock_file_dummy
+            self._unlock_file = self._unlock_file_dummy
+
     def _get_path(self, key):
         md5 = hashlib.md5()
         md5.update(key)
         return os.path.join(self.cache_dir, md5.hexdigest())
 
-    def _lock_file(self, path, exclusive=True):
+    def _lock_file_dummy(self, path, exclusive=True):
+        return None
+
+    def _unlock_file_dummy(self, lock):
+        return
+
+    def _lock_file_posix(self, path, exclusive=True):
         lock_path = path + '.lock'
         if exclusive is True:
             f_lock = open(lock_path, 'w')
@@ -144,6 +168,17 @@ class FileCache(Cache):
             f_lock.close()
             return None
         return f_lock
+
+    def _unlock_file_posix(self, lock):
+        lock.close()
+
+    def _lock_file_win32(self, path, exclusive=True):
+        # TODO: implement
+        return None
+
+    def _unlock_file_win32(self, lock):
+        # TODO: implement
+        return
 
     def _delete_file(self, path):
         os.remove(path)
@@ -161,7 +196,7 @@ class FileCache(Cache):
 
             # close and unlock file
             datafile.close()
-            f_lock.close()
+            self._unlock_file(f_lock)
 
     def get(self, key, timeout=None):
         return self._get(self._get_path(key), timeout)

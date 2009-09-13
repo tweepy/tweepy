@@ -5,8 +5,7 @@ The plan of attack for the next version of Tweepy.
 + changing profile and background images [DONE]
 + finish search api [DONE]
 + autodetect authenticated user's ID [DONE]
-+ make oauth handler more web app friendly
-+ address file locking portability issues in file cache
++ address file locking portability issues in file cache [DONE]
 
 Future...
 =========
@@ -17,3 +16,5 @@ Future...
 + async requests
 + prepare for social graph changes mentioned on mailinglist
 + twitterfall reply API integration?
++ implement win32 file locking for FileCache
+

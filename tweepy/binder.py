@@ -104,7 +104,11 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
             raise TweepError(error_msg)
 
         # Pass returned body into parser and return parser output
-        out = parser(resp.read(), api)
+        try:
+            out = parser(resp.read(), api)
+        except Exception:
+            raise TweepError("Failed to parse returned data")
+
         conn.close()
 
         # validate result

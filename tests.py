@@ -11,8 +11,8 @@ from tweepy import *
 
 """Configurations"""
 # Must supply twitter account credentials for tests
-username = 'tweebly'
-password = 'josh1987twitter'
+username = ''
+password = ''
 
 """Unit tests"""
 
