@@ -5,7 +5,7 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '1.0'
+__version__ = '1.0.1'
 
 from . models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
 from . error import TweepError
