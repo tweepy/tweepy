@@ -14,13 +14,13 @@ using the credentials provided.
 """
 
 if len(sys.argv) != 3:
-  print 'Usage: tweepyshell <username> <password>'
-  exit(1)
+    print 'Usage: tweepyshell <username> <password>'
+    exit(1)
 
 api = tweepy.API.new(auth='basic', username=sys.argv[1], password=sys.argv[2])
 if api.verify_credentials() is False:
-  print 'Invalid username and/or password!'
-  exit(1)
+    print 'Invalid username and/or password!'
+    exit(1)
 
 code.interact('<Tweepy shell>', local={'tweepy': tweepy, 'api': api})
 

@@ -16,3 +16,4 @@ from . streaming import Stream, StreamListener
 
 # Global, unauthenticated instance of API
 api = API()
+

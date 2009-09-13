@@ -14,9 +14,9 @@ When ever something goes wrong this exception will be raised.
 Here is an example:
 """
 try:
-  tweepy.api.update_status('this will fail since we are not authenticated!')
+    tweepy.api.update_status('this will fail since we are not authenticated!')
 except tweepy.TweepError, e:
-  print 'Failed to update! %s' % e
+    print 'Failed to update! %s' % e
 
 """
 TweepError's can be casted to string format which will

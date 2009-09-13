@@ -22,9 +22,9 @@ First let's create our own implementation of Status.
 """
 class MyStatus(tweepy.Status):
 
-  def length(self):
-    """Return length of status text"""
-    return len(self.text)
+    def length(self):
+        """Return length of status text"""
+        return len(self.text)
 
 """
 We must now register our implementation of Status with tweepy.
@@ -54,10 +54,10 @@ to make sure data is present which your application depends on.
 Here's a demo...
 """
 try:
-  u = tweepy.api.get_user('twitter')
+    u = tweepy.api.get_user('twitter')
 except TweepError, e:
-  # will be raised if user is invalid OR request failed
-  print 'Failed to get user: %s' % e
+    # will be raised if user is invalid OR request failed
+    print 'Failed to get user: %s' % e
 
 """
 To disable auto validation...
@@ -74,7 +74,7 @@ friends by using the User model friends() shortcut...
 u = tweepy.api.get_user('twitter')
 friends = u.friends()
 for friend in friends:
-  print friend.screen_name
+    print friend.screen_name
 
 """
 To learn about all shortcuts check out the reference documentation.

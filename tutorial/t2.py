@@ -21,8 +21,8 @@ Let's query the public timeline and print it to the console...
 public_timeline = no_auth_api.public_timeline()
 print 'Public timeline...'
 for status in public_timeline:
-  print status.text
-  print 'from: %s' % status.author.screen_name
+    print status.text
+    print 'from: %s' % status.author.screen_name
 
 """
 Tweepy provides a non-authenticated instance of the API for you already
@@ -50,8 +50,8 @@ and print it to the console...
 friends_timeline = auth_api.friends_timeline()
 print 'Friends timeline...'
 for status in friends_timeline:
-  print status.text
-  print 'from: %s' % status.author.screen_name
+    print status.text
+    print 'from: %s' % status.author.screen_name
 
 """ The End
 
