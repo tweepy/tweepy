@@ -39,6 +39,8 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         except IndexError:
           raise TweepError('Too many parameters supplied!')
       for k, arg in kargs.items():
+        if arg is None:
+          continue
         if k in parameters:
           raise TweepError('Multiple values for parameter %s supplied!' % k)
         if k not in allowed_param:
