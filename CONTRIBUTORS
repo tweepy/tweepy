@@ -1,3 +1,6 @@
 Thanks to the people listed here for their patches!
 
-Thomas Bohmbach, Jr  -- GAE fixes
+Thomas Bohmbach, Jr
+    - GAE fixes
+Mark Lango  
+    - Ignore key arguments with value of None
