@@ -7,9 +7,15 @@ from datetime import datetime
 from . models import models
 
 try:
-    import json
+    import json #Python >= 2.6
 except ImportError:
-    import simplejson as json
+    try:
+        import simplejson as json #Python < 2.6
+    except ImportError:
+        try:
+            from django.utils import simplejson as json #Google App Engine
+        except ImportError:
+            raise ImportError, "Can't load a json library"
 
 
 def parse_json(data, api):
