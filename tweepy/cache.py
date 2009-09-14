@@ -8,7 +8,6 @@ import time
 import threading
 import os
 import hashlib
-import fcntl
 import cPickle as pickle
 
 try:
