@@ -181,7 +181,8 @@ class FileCache(Cache):
 
     def _delete_file(self, path):
         os.remove(path)
-        os.remove(path + '.lock')
+        if os.path.exists(path + '.lock'):
+            os.remove(path + '.lock')
 
     def store(self, key, value):
         path = self._get_path(key)
@@ -207,9 +208,6 @@ class FileCache(Cache):
         while self.lock:
             # acquire lock and open
             f_lock = self._lock_file(path, False)
-            if f_lock is None:
-                # does not exist
-                return None
             datafile = open(path, 'rb')
 
             # read pickled object
@@ -224,7 +222,7 @@ class FileCache(Cache):
                 self._delete_file(path)
 
             # unlock and return result
-            f_lock.close()
+            self._unlock_file(f_lock)
             return value
 
     def count(self):
