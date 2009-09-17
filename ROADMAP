@@ -1,20 +1,8 @@
 The plan of attack for the next version of Tweepy.
 
-1.0 -> 1.0.1
+1.0.1 -> 1.0.2
 ============
-+ changing profile and background images [DONE]
-+ finish search api [DONE]
-+ autodetect authenticated user's ID [DONE]
-+ address file locking portability issues in file cache [DONE]
-
-Future...
-=========
-+ database-based cache ?
-+ rate limit governor
-+ command line client example
-+ retweet api [DONE BUT NEEDS TESTING]
-+ async requests
-+ prepare for social graph changes mentioned on mailinglist
-+ twitterfall reply API integration?
 + implement win32 file locking for FileCache
++ merge retweet API methods into master
++ implement retweet streaming API method
 
