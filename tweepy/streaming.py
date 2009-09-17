@@ -151,6 +151,13 @@ class Stream(object):
         self.running = True
         Thread(target=self._run).start()
 
+    def retweet(self):
+        if self.running:
+            raise TweepError('Stream object already connected!')
+        self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
+        self.running = True
+        Thread(target=self._run).start()
+
     def sample(self, count=None):
         if self.running:
             raise TweepError('Stream object already connected!')

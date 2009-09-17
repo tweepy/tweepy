@@ -4,5 +4,5 @@ The plan of attack for the next version of Tweepy.
 ============
 + implement win32 file locking for FileCache
 + add retweet API methods [DONE]
-+ add retweet streaming method
++ add retweet streaming method [DONE]
 
