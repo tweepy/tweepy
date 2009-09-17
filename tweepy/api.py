@@ -43,6 +43,14 @@ class API(object):
         allowed_param = []
     )
 
+    """Get home timeline"""
+    home_timeline = bind_api(
+        path = '/statuses/home_timeline.json',
+        parser = parse_statuses,
+        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        require_auth = True
+    )
+
     """Get friends timeline"""
     friends_timeline = bind_api(
         path = '/statuses/friends_timeline.json',
@@ -62,6 +70,30 @@ class API(object):
     """Get mentions"""
     mentions = bind_api(
         path = '/statuses/mentions.json',
+        parser = parse_statuses,
+        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        require_auth = True
+    )
+
+    """Get Retweets posted by user"""
+    retweeted_by_me = bind_api(
+        path = '/statuses/retweeted_by_me.json',
+        parser = parse_statuses,
+        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        require_auth = True
+    )
+
+    """Get Retweets posted by user's friends"""
+    retweeted_to_me = bind_api(
+        path = '/statuses/retweeted_to_me.json',
+        parser = parse_statuses,
+        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        require_auth = True
+    )
+
+    """Get Retweets of the user's tweets posted by others"""
+    retweets_of_me = bind_api(
+        path = '/statuses/retweets_of_me.json',
         parser = parse_statuses,
         allowed_param = ['since_id', 'max_id', 'count', 'page'],
         require_auth = True
@@ -87,6 +119,15 @@ class API(object):
     destroy_status = bind_api(
         path = '/statuses/destroy.json',
         method = 'DELETE',
+        parser = parse_status,
+        allowed_param = ['id'],
+        require_auth = True
+    )
+
+    """Retweet a tweet"""
+    retweet = bind_api(
+        path = '/statuses/retweet/id.json',
+        method = 'POST',
         parser = parse_status,
         allowed_param = ['id'],
         require_auth = True

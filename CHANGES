@@ -5,6 +5,7 @@ during upgrade will be listed here.
 =======================
 + Fixes
     + Google App Engine fixes (thanks Thomas Bohmbach, Jr)
++ Added Retweet API methods
 
 1.0 -> 1.0.1
 ============

@@ -3,6 +3,6 @@ The plan of attack for the next version of Tweepy.
 1.0.1 -> 1.0.2
 ============
 + implement win32 file locking for FileCache
-+ merge retweet API methods into master
-+ implement retweet streaming API method
++ add retweet API methods [DONE]
++ add retweet streaming method
 
