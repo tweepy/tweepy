@@ -7,6 +7,9 @@ during upgrade will be listed here.
     + Google App Engine fixes (thanks Thomas Bohmbach, Jr)
 + Added Retweet API methods
 + Added Retweet Streaming method
++ Added set_request_token() method to OAuthHandler
++ Examples
+    + Appengine demo (oauth)
 
 1.0 -> 1.0.1
 ============
