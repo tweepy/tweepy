@@ -58,6 +58,9 @@ class OAuthHandler(AuthHandler):
         except Exception, e:
             raise TweepError(e)
 
+    def set_request_token(self, key, secret):
+        self.request_token = oauth.OAuthToken(key, secret)
+
     def set_access_token(self, key, secret):
         self.access_token = oauth.OAuthToken(key, secret)
 
@@ -76,7 +79,7 @@ class OAuthHandler(AuthHandler):
         except Exception, e:
             raise TweepError(e)
 
-    def get_access_token(self, verifier):
+    def get_access_token(self, verifier=None):
         """
         After user has authorized the request token, get access token
         with user supplied verifier.
