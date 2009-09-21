@@ -7,7 +7,12 @@ during upgrade will be listed here.
     + Google App Engine fixes (thanks Thomas Bohmbach, Jr)
 + Added Retweet API methods
 + Added Retweet Streaming method
-+ Added set_request_token() method to OAuthHandler
++ OAuthHandler
+    + Added set_request_token() method
+    + Added support for "sign in with twitter".
+      get_authorization_url() now takes a boolean that when
+      true uses the "sign in with twitter" flow.
+      See http://apiwiki.twitter.com/Sign-in-with-Twitter
 + Examples
     + Appengine demo (oauth)
 

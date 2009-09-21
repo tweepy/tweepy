@@ -30,6 +30,7 @@ class OAuthHandler(AuthHandler):
 
     REQUEST_TOKEN_URL = 'http://twitter.com/oauth/request_token'
     AUTHORIZATION_URL = 'http://twitter.com/oauth/authorize'
+    AUTHENTICATE_URL = 'http://twitter.com/oauth/authenticate'
     ACCESS_TOKEN_URL = 'http://twitter.com/oauth/access_token'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
@@ -64,15 +65,19 @@ class OAuthHandler(AuthHandler):
     def set_access_token(self, key, secret):
         self.access_token = oauth.OAuthToken(key, secret)
 
-    def get_authorization_url(self):
+    def get_authorization_url(self, signin_with_twitter=False):
         """Get the authorization URL to redirect the user"""
         try:
             # get the request token
             self.request_token = self._get_request_token()
 
             # build auth request and return as url
+            if signin_with_twitter:
+                auth_url = self.AUTHENTICATE_URL
+            else:
+                auth_url = self.AUTHORIZATION_URL
             request = oauth.OAuthRequest.from_token_and_callback(
-                token=self.request_token, http_url=self.AUTHORIZATION_URL
+                token=self.request_token, http_url=auth_url
             )
 
             return request.to_url()
