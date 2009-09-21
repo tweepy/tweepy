@@ -133,6 +133,15 @@ class API(object):
         require_auth = True
     )
 
+    """Get the retweets of the specified tweet ID"""
+    def retweets(self, id, *args, **kargs):
+        return bind_api(
+            path = '/statuses/retweets/%s.json' % id,
+            parser = parse_retweets,
+            allowed_param = ['count'],
+            require_auth = True
+        )(self, *args, **kargs)
+
     """Show user"""
     get_user = bind_api(
         path = '/users/show.json',

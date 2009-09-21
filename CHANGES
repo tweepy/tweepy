@@ -5,8 +5,10 @@ during upgrade will be listed here.
 =======================
 + Fixes
     + Google App Engine fixes (thanks Thomas Bohmbach, Jr)
-+ Added Retweet API methods
-+ Added Retweet Streaming method
++ API
+    + Added Retweet API methods
+    + Added Retweet Streaming method
+    + New model: Retweet
 + OAuthHandler
     + Added set_request_token() method
     + Added support for "sign in with twitter".

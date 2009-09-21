@@ -212,3 +212,20 @@ def parse_search_results(data, api):
         result_objects.append(_parse_search_result(obj, api))
     return result_objects
 
+def _parse_retweet(obj, api):
+
+    retweet = models['retweet']()
+    for k,v in obj.items():
+        if k == 'retweeting_user':
+            setattr(retweet, k, _parse_user(v, api))
+        else:
+            setattr(retweet, k, v)
+    return retweet
+
+def parse_retweets(data, api):
+
+    retweets = []
+    for obj in json.loads(data):
+        retweets.append(_parse_retweet(obj, api))
+    return retweets
+

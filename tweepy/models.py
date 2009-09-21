@@ -109,6 +109,10 @@ class SearchResult(Model):
 
     pass
 
+class Retweet(Model):
+
+    pass
+
 # link up default model implementations.
 models = {
     'status': Status,
@@ -116,6 +120,7 @@ models = {
     'direct_message': DirectMessage,
     'friendship': Friendship,
     'saved_search': SavedSearch,
-    'search_result': SearchResult
+    'search_result': SearchResult,
+    'retweet': Retweet,
 }
 
