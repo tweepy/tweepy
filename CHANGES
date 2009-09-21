@@ -9,6 +9,7 @@ during upgrade will be listed here.
     + Added Retweet API methods
     + Added Retweet Streaming method
     + New model: Retweet
+    + Updated statuses parser to handle retweet_details
 + OAuthHandler
     + Added set_request_token() method
     + Added support for "sign in with twitter".

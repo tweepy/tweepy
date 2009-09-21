@@ -105,6 +105,8 @@ def _parse_status(obj, api):
         elif k == 'source':
             setattr(status, k, _parse_html_value(v))
             setattr(status, 'source_url', _parse_a_href(v))
+        elif k == 'retweet_details':
+            setattr(status, k, _parse_retweet(v, api))
         else:
             setattr(status, k, v)
     return status
