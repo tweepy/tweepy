@@ -13,6 +13,7 @@ during upgrade will be listed here.
     + Added new parameters for statuses/update; lat & long
     + friends_ids() & followers_ids() parameter changed page -> cursor
     + search() added "locale" parameter
+    + expose last httplib.HTTPResponse object received as API.last_response
 + OAuthHandler
     + Added set_request_token() method
     + Added support for "sign in with twitter".

@@ -106,6 +106,7 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
         # Get response
         resp = conn.getresponse()
+        api.last_response = resp
         api.logger.debug('Received response...')
         api.logger.debug('  headers: %s' % resp.getheaders())
         api.logger.debug('  status code: %s' % resp.status)
