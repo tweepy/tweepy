@@ -19,6 +19,10 @@ during upgrade will be listed here.
       get_authorization_url() now takes a boolean that when
       true uses the "sign in with twitter" flow.
       See http://apiwiki.twitter.com/Sign-in-with-Twitter
++ Logging
+    + Added TweepyLogger interface which allows applications
+      to collect log messages from Tweepy for debugging purposes.
+    + Dummy, console, and file loggers available
 + Examples
     + Appengine demo (oauth)
 + Documentation of each method in api.py

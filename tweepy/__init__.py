@@ -13,6 +13,7 @@ from . api import API
 from . cache import Cache, MemoryCache, FileCache, MemCache
 from . auth import BasicAuthHandler, OAuthHandler
 from . streaming import Stream, StreamListener
+from . logging import TweepyLogger, DummyLogger, ConsoleLogger, FileLogger
 
 # Global, unauthenticated instance of API
 api = API()
