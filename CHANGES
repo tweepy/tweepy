@@ -10,6 +10,9 @@ during upgrade will be listed here.
     + Added Retweet Streaming method
     + New model: Retweet
     + Updated statuses parser to handle retweet_details
+    + Added new parameters for statuses/update; lat & long
+    + friends_ids() & followers_ids() parameter changed page -> cursor
+    + search() added "locale" parameter
 + OAuthHandler
     + Added set_request_token() method
     + Added support for "sign in with twitter".
@@ -18,6 +21,7 @@ during upgrade will be listed here.
       See http://apiwiki.twitter.com/Sign-in-with-Twitter
 + Examples
     + Appengine demo (oauth)
++ Documentation of each method in api.py
 
 1.0 -> 1.0.1
 ============
