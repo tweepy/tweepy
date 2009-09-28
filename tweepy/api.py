@@ -315,7 +315,7 @@ class API(object):
         possible to request another user's friends list via the id,
         screen_name or user_id parameter.
 
-        Parameters: (id or user_id or screen_name), page
+        Parameters: (id or user_id or screen_name), page (deprecated), cursor
         Returns: list[Users]
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-statuses%C2%A0friends
@@ -323,7 +323,7 @@ class API(object):
     friends = bind_api(
         path = '/statuses/friends.json',
         parser = parse_users,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page']
+        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
 
     """ statuses/followers
@@ -334,7 +334,7 @@ class API(object):
         time as suspended users will be filtered out.)
         Use the page option to access earlier followers.
 
-        Parameters: (id or user_id or screen_name), page
+        Parameters: (id or user_id or screen_name), page (deprecated), cursor
         Returns: list[User]
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-statuses%C2%A0followers
@@ -342,7 +342,7 @@ class API(object):
     followers = bind_api(
         path = '/statuses/followers.json',
         parser = parse_users,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page'],
+        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor'],
         require_auth = True
     )
 

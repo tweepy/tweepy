@@ -1,6 +1,12 @@
 All changes made to the library that might affect applications
 during upgrade will be listed here.
 
+1.1 -> Future release
+=====================
++ API
+    + Added cursor parameter to API.friends and API.followers methods.
+      Note: page parameter is being deprecated by twitter on 10/26
+
 1.0.1 -> 1.1
 =======================
 + Fixes
