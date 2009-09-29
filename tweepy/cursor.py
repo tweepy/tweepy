@@ -2,6 +2,8 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
+from . error import TweepError
+
 class Cursor(object):
     """Pagination helper class"""
 
@@ -48,11 +50,29 @@ class BaseIterator(object):
 
 class CursorIterator(BaseIterator):
 
+    def __init__(self, method, args, kargs):
+        BaseIterator.__init__(self, method, args, kargs)
+        self.next_cursor = -1
+        self.prev_cursor = 0
+        self.count = 0
+
     def next(self):
-        return
+        if self.next_cursor == 0 or (self.limit and self.count == self.limit):
+            raise StopIteration
+        data, self.next_cursor, self.prev_cursor = self.method(
+                cursor=self.next_cursor, *self.args, **self.kargs
+        )
+        self.count += 1
+        return data
 
     def prev(self):
-        return
+        if self.prev_cursor == 0:
+            raise TweepError('Can not page back more, at first page')
+        data, self.next_cursor, self.prev_cursor = self.method(
+                cursor=self.prev_cursor, *self.args, **self.kargs
+        )
+        self.count -= 1
+        return data
 
 class PageIterator(BaseIterator):
 
