@@ -23,7 +23,9 @@ class Cursor(object):
 
     def items(self, limit=0):
         """Return iterator for items in each page"""
-        return ItemIterator(self.iterator)
+        i = ItemIterator(self.iterator)
+        i.limit = limit
+        return i
 
 class BaseIterator(object):
 
