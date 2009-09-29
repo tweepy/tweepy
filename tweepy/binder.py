@@ -150,5 +150,8 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
         return out
 
+    # Expose extra data in callable object
+    _call.allowed_param = allowed_param
+
     return _call
 

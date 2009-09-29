@@ -14,6 +14,7 @@ from . cache import Cache, MemoryCache, FileCache, MemCache
 from . auth import BasicAuthHandler, OAuthHandler
 from . streaming import Stream, StreamListener
 from . logging import TweepyLogger, DummyLogger, ConsoleLogger, FileLogger
+from . cursor import Cursor
 
 # Global, unauthenticated instance of API
 api = API()
