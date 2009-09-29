@@ -54,7 +54,7 @@ for status in cursor.items(limit=30):
 print ''
 
 """
-As you can see this is much simplier and all the
+As you can see this is much simpler and all the
 pagination is managed for us automatically.
 We pass into the Cursor constructor the API method
 we wish to paginate. Cursor then has two methods that returns
@@ -64,8 +64,8 @@ an iterator:
 
 If limit is not specified iteration will continue until twitter
 stops sending us pages (pagination limit reached or no more data).
-The limit for items() is the maxium number of items to iterate.
-For pages() limit is the maxium number of pages to iterate.
+The limit for items() is the maximum number of items to iterate.
+For pages() limit is the maximum number of pages to iterate.
 The page size varies for each API method, so read the wiki page
 for more details.
 
