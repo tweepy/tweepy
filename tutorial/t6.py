@@ -1,6 +1,6 @@
 import tweepy
 
-api = tweepy.API.new(username='iliketits', password='josh123')
+api = tweepy.API.new(username='', password='')
 
 """ Tutorial 6 -- Pagination
 
