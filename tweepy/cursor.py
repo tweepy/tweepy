@@ -23,13 +23,7 @@ class Cursor(object):
 
     def items(self, limit=0):
         """Return iterator for items in each page"""
-        items_yielded = 0
-        for page in self.iterator:
-            for item in page:
-                if limit > 0 and items_yielded == limit:
-                    raise StopIteration
-                items_yielded += 1
-                yield item
+        return ItemIterator(self.iterator)
 
 class BaseIterator(object):
 
@@ -88,8 +82,41 @@ class PageIterator(BaseIterator):
         return items
 
     def prev(self):
-        if (self.current_page == 0):
+        if (self.current_page == 1):
             raise TweepError('Can not page back more, at first page')
         self.current_page -= 1
         return self.method(page=self.current_page, *self.args, **self.kargs)
+
+class ItemIterator(BaseIterator):
+
+    def __init__(self, page_iterator):
+        self.page_iterator = page_iterator
+        self.limit = 0
+        self.current_page = None
+        self.page_index = -1
+        self.count = 0
+
+    def next(self):
+        if self.limit > 0 and self.count == self.limit:
+            raise StopIteration
+        if self.current_page is None or self.page_index == len(self.current_page) - 1:
+            # Reached end of current page, get the next page...
+            self.current_page = self.page_iterator.next()
+            self.page_index = -1
+        self.page_index += 1
+        self.count += 1
+        return self.current_page[self.page_index]
+
+    def prev(self):
+        if self.current_page is None:
+            raise TweepError('Can not go back more, at first page')
+        if self.page_index == 0:
+            # At the beginning of the current page, move to next...
+            self.current_page = self.page_iterator.prev()
+            self.page_index = len(self.current_page)
+            if self.page_index == 0:
+                raise TweepError('No more items')
+        self.page_index -= 1
+        self.count -= 1
+        return self.current_page[self.page_index]
 
