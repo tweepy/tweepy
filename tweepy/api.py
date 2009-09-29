@@ -496,13 +496,13 @@ class API(object):
         Parameters:
             id or user_id or screen_name (One of these is required)
             cursor
-        Returns: json object
+        Returns: list<int>
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-friends%C2%A0ids
     """
     friends_ids = bind_api(
         path = '/friends/ids.json',
-        parser = parse_json,
+        parser = parse_ids,
         allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 
@@ -514,13 +514,13 @@ class API(object):
         Parameters:
             id or user_id or screen_name (One of these is required)
             cursor
-        Returns: json object
+        Returns: list<int>
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-followers%C2%A0ids
     """
     followers_ids = bind_api(
         path = '/followers/ids.json',
-        parser = parse_json,
+        parser = parse_ids,
         allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 

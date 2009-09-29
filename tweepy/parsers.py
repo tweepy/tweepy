@@ -6,6 +6,10 @@ from datetime import datetime
 
 from . models import models
 
+def _parse_cursor(obj):
+
+    return obj['next_cursor'], obj['prev_cursor']
+
 def parse_json(obj, api):
 
     return obj
@@ -73,8 +77,13 @@ def parse_user(obj, api):
 
 def parse_users(obj, api):
 
+    if isinstance(obj, list) is False:
+        item_list = obj['users']
+    else:
+        item_list = obj
+
     users = []
-    for item in obj:
+    for item in item_list:
         users.append(_parse_user(item, api))
     return users
 
@@ -156,6 +165,13 @@ def parse_friendship(obj, api):
 
     return source, target
 
+
+def parse_ids(obj, api):
+
+    if isinstance(obj, list) is False:
+        return obj['ids']
+    else:
+        return obj
 
 def _parse_saved_search(obj, api):
 

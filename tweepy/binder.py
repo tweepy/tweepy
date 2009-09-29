@@ -137,9 +137,20 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         except Exception:
             raise TweepError("Failed to parse json response text")
 
+        # Parse cursor infomation
+        if isinstance(jobject, dict):
+            next_cursor = jobject.get('next_cursor')
+            prev_cursor = jobject.get('previous_cursor')
+        else:
+            next_cursor = None
+            prev_cursor = None
+
         # Pass json object into parser
         try:
-            out = parser(jobject, api)
+            if next_cursor is not None and prev_cursor is not None:
+                out = parser(jobject, api), next_cursor, prev_cursor
+            else:
+                out = parser(jobject, api)
         except Exception:
             raise TweepError("Failed to parse json object")
 

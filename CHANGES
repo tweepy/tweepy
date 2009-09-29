@@ -6,9 +6,16 @@ during upgrade will be listed here.
 + API
     + Added cursor parameter to API.friends and API.followers methods.
       Note: page parameter is being deprecated by twitter on 10/26
+    + Update parsing to handle cursor responses.
+        When using 'cursor' parameter, the API method will return
+        a tuple with this format: (data, next_cursor, prev_cursor)
+        Calls not using the 'cursor' parameter are not changed in the way they return.
+    + API.friends_ids and API.followers_ids now return a list of integers.
+      Parser updated to handle cursor responses. See above.
 + Cursor
     Added the Cursor object to help with pagination within the API.
     Please see the pagination tutorial for more details.
+    This is the recommended way for using the 'page' and 'cursor' parameters.
 
 1.0.1 -> 1.1
 =======================
