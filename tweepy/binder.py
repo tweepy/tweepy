@@ -8,6 +8,17 @@ import urllib
 from . parsers import parse_error
 from . error import TweepError
 
+try:
+    import json #Python >= 2.6
+except ImportError:
+    try:
+        import simplejson as json #Python < 2.6
+    except ImportError:
+        try:
+            from django.utils import simplejson as json #Google App Engine
+        except ImportError:
+            raise ImportError, "Can't load a json library"
+
 
 def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
               timeout=None, host=None):
@@ -120,12 +131,17 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
             api.logger.error('  Error: %s' % error_msg)
             raise TweepError(error_msg)
 
-        # Pass returned body into parser and return parser output
+        # Parse json respone body
         try:
-            out = parser(resp.read(), api)
+            jobject = json.loads(resp.read())
         except Exception:
-            api.logger.error("  parse error!")
-            raise TweepError("Failed to parse returned data")
+            raise TweepError("Failed to parse json response text")
+
+        # Pass json object into parser
+        try:
+            out = parser(jobject, api)
+        except Exception:
+            raise TweepError("Failed to parse json object")
 
         conn.close()
 

@@ -6,36 +6,24 @@ from datetime import datetime
 
 from . models import models
 
-try:
-    import json #Python >= 2.6
-except ImportError:
-    try:
-        import simplejson as json #Python < 2.6
-    except ImportError:
-        try:
-            from django.utils import simplejson as json #Google App Engine
-        except ImportError:
-            raise ImportError, "Can't load a json library"
+def parse_json(obj, api):
+
+    return obj
 
 
-def parse_json(data, api):
-
-    return json.loads(data)
-
-
-def parse_return_true(data, api):
+def parse_return_true(obj, api):
 
     return True
 
 
-def parse_none(data, api):
+def parse_none(obj, api):
 
     return None
 
 
-def parse_error(data):
+def parse_error(obj):
 
-    return json.loads(data)['error']
+    return obj['error']
 
 
 def _parse_datetime(str):
@@ -78,16 +66,16 @@ def _parse_user(obj, api):
     return user
 
 
-def parse_user(data, api):
+def parse_user(obj, api):
 
-    return _parse_user(json.loads(data), api)
+    return _parse_user(obj, api)
 
 
-def parse_users(data, api):
+def parse_users(obj, api):
 
     users = []
-    for obj in json.loads(data):
-        users.append(_parse_user(obj, api))
+    for item in obj:
+        users.append(_parse_user(item, api))
     return users
 
 
@@ -112,16 +100,16 @@ def _parse_status(obj, api):
     return status
 
 
-def parse_status(data, api):
+def parse_status(obj, api):
 
-    return _parse_status(json.loads(data), api)
+    return _parse_status(obj, api)
 
 
-def parse_statuses(data, api):
+def parse_statuses(obj, api):
 
     statuses = []
-    for obj in json.loads(data):
-        statuses.append(_parse_status(obj, api))
+    for item in obj:
+        statuses.append(_parse_status(item, api))
     return statuses
 
 
@@ -139,22 +127,22 @@ def _parse_dm(obj, api):
     return dm
 
 
-def parse_dm(data, api):
+def parse_dm(obj, api):
 
-    return _parse_dm(json.loads(data), api)
+    return _parse_dm(obj, api)
 
 
-def parse_directmessages(data, api):
+def parse_directmessages(obj, api):
 
     directmessages = []
-    for obj in json.loads(data):
-        directmessages.append(_parse_dm(obj, api))
+    for item in obj:
+        directmessages.append(_parse_dm(item, api))
     return directmessages
 
 
-def parse_friendship(data, api):
+def parse_friendship(obj, api):
 
-    relationship = json.loads(data)['relationship']
+    relationship = obj['relationship']
 
     # parse source
     source = models['friendship']()
@@ -181,17 +169,17 @@ def _parse_saved_search(obj, api):
     return ss
 
 
-def parse_saved_search(data, api):
+def parse_saved_search(obj, api):
 
-    return _parse_saved_search(json.loads(data), api)
+    return _parse_saved_search(obj, api)
 
 
-def parse_saved_searches(data, api):
+def parse_saved_searches(obj, api):
 
     saved_searches = []
     saved_search = models['saved_search']()
-    for obj in json.loads(data):
-        saved_searches.append(_parse_saved_search(obj, api))
+    for item in obj:
+        saved_searches.append(_parse_saved_search(item, api))
     return saved_searches
 
 
@@ -206,12 +194,12 @@ def _parse_search_result(obj, api):
     return result
 
 
-def parse_search_results(data, api):
+def parse_search_results(obj, api):
 
-    results = json.loads(data)['results']
+    results = obj['results']
     result_objects = []
-    for obj in results:
-        result_objects.append(_parse_search_result(obj, api))
+    for item in results:
+        result_objects.append(_parse_search_result(item, api))
     return result_objects
 
 def _parse_retweet(obj, api):
@@ -224,10 +212,10 @@ def _parse_retweet(obj, api):
             setattr(retweet, k, v)
     return retweet
 
-def parse_retweets(data, api):
+def parse_retweets(obj, api):
 
     retweets = []
-    for obj in json.loads(data):
-        retweets.append(_parse_retweet(obj, api))
+    for item in obj:
+        retweets.append(_parse_retweet(item, api))
     return retweets
 
