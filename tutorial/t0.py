@@ -19,7 +19,10 @@ Tutorials:
 
   1 -- Authentication
   2 -- API
-
+  3 -- Models
+  4 -- Errors
+  5 -- Cache
+  6 -- Pagination
 
 Author: Joshua Roesslein
 """
