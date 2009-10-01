@@ -47,7 +47,9 @@ def _parse_html_value(html):
 
 def _parse_a_href(atag):
 
-    return atag[atag.find('"')+1:atag.find('>')-1]
+    start = atag.find('"') + 1
+    end = atag.find('"', start)
+    return atag[start:end]
 
 
 def _parse_user(obj, api):
