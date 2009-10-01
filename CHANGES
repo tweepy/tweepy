@@ -12,6 +12,7 @@ during upgrade will be listed here.
         Calls not using the 'cursor' parameter are not changed in the way they return.
     + API.friends_ids and API.followers_ids now return a list of integers.
       Parser updated to handle cursor responses. See above.
+    + Fix Status.source_url parsing
 + Cursor
     Added the Cursor object to help with pagination within the API.
     Please see the pagination tutorial for more details.
