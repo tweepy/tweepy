@@ -131,7 +131,7 @@ class Stream(object):
 
             # turn json data into status object
             if 'in_reply_to_status_id' in data:
-                status = parse_status(data, self.api)
+                status = parse_status(json.loads(data), self.api)
                 if self.listener.on_status(status) == False:
                     self.running = False
             elif 'delete' in data:

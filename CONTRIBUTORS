@@ -4,3 +4,5 @@ Thomas Bohmbach, Jr
     - GAE fixes
 Mark Lango  
     - Ignore key arguments with value of None
+Pascal Jurgens
+    - Streaming API fix
