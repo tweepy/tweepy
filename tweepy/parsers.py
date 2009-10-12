@@ -43,6 +43,7 @@ def _parse_search_datetime(str):
 
 
 def unescape_html(text):
+    """Created by Fredrik Lundh (http://effbot.org/zone/re-sub.htm#unescape-html)"""
     def fixup(m):
         text = m.group(0)
         if text[:2] == "&#":

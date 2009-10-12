@@ -6,3 +6,5 @@ Mark Lango
     - Ignore key arguments with value of None
 Pascal Jurgens
     - Streaming API fix
+Fredrik Lundh
+    - html unescape (http://effbot.org/zone/re-sub.htm#unescape-html)
