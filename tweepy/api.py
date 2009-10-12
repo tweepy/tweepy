@@ -8,7 +8,6 @@ import mimetypes
 from . binder import bind_api
 from . error import TweepError
 from . auth import BasicAuthHandler, OAuthHandler
-from . logging import DummyLogger
 from tweepy.parsers import *
 
 
@@ -16,7 +15,7 @@ class API(object):
     """Twitter API"""
 
     def __init__(self, auth_handler=None, host='twitter.com', cache=None,
-            secure=False, api_root='', validate=True, logger=DummyLogger()):
+            secure=False, api_root='', validate=True):
         # you may access these freely
         self.auth_handler = auth_handler
         self.host = host
@@ -24,7 +23,6 @@ class API(object):
         self.cache = cache
         self.secure = secure
         self.validate = validate
-        self.logger = logger
 
         # not a good idea to touch these
         self._username = None

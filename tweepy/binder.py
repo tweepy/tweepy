@@ -29,16 +29,10 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         if require_auth and not api.auth_handler:
             raise TweepError('Authentication required!')
 
-        # Log some useful infomation
-        api.logger.debug('Starting request...')
-        api.logger.debug('  path: %s' % path)
-        api.logger.debug('  method: %s' % method)
-
         # check for post_data parameter
         if 'post_data' in kargs:
             post_data = kargs['post_data']
             del kargs['post_data']
-            api.logger.debug('  post data: %s' % post_data)
         else:
             post_data = None
 
@@ -60,7 +54,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
             del kargs['headers']
         else:
             headers = {}
-        api.logger.debug('  headers: %s' % headers)
 
         # build parameter dict
         if allowed_param:
@@ -82,7 +75,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
             if len(args) > 0 or len(kargs) > 0:
                 raise TweepError('This method takes no parameters!')
             parameters = None
-        api.logger.debug('  parameters: %s' % parameters)
 
         # Build url with parameters
         if parameters:
@@ -101,7 +93,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
                         result._api = api
                 else:
                     cache_result._api = api
-                api.logger.debug("Cache hit!")
                 return cache_result
 
         # get scheme and host
@@ -134,9 +125,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
             # Get response
             resp = conn.getresponse()
-            api.logger.debug('Received response...')
-            api.logger.debug('  headers: %s' % resp.getheaders())
-            api.logger.debug('  status code: %s' % resp.status)
 
             # If request was successful, quit the loop
             if resp.status == 200:
@@ -153,7 +141,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
                 error_msg = parse_error(resp.read())
             except Exception:
                 error_msg = "Twitter error response: status code = %s" % resp.status
-            api.logger.error('  Error: %s' % error_msg)
             raise TweepError(error_msg)
 
         # Parse json respone body
@@ -196,9 +183,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         # store result in cache
         if api.cache and method == 'GET':
             api.cache.store(url, out)
-            api.logger.debug("  caching result")
-
-        api.logger.debug('request done.')
 
         return out
 
