@@ -4,6 +4,7 @@
 
 import httplib
 import urllib
+import time
 
 from . parsers import parse_error
 from . error import TweepError
@@ -41,6 +42,18 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         else:
             post_data = None
 
+        # check for retry request parameters
+        if 'retry_count' in kargs:
+            retry_count = kargs['retry_count']
+            del kargs['retry_count']
+        else:
+            retry_count = 0
+        if 'retry_delay' in kargs:
+            retry_delay = kargs['retry_delay']
+            del kargs['retry_delay']
+        else:
+            retry_delay = 0
+
         # check for headers
         if 'headers' in kargs:
             headers = dict(kargs['headers'])
@@ -77,20 +90,6 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
         else:
             url = api.api_root + path
 
-        # get scheme and host
-        if api.secure:
-            scheme = 'https://'
-        else:
-            scheme = 'http://'
-        _host = host or api.host
-
-        # Apply authentication
-        if api.auth_handler:
-            api.auth_handler.apply_auth(
-                    scheme + _host + url,
-                    method, headers, parameters
-            )
-
         # Check cache if caching enabled and method is GET
         if api.cache and method == 'GET':
             cache_result = api.cache.get(url, timeout)
@@ -105,24 +104,50 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
                 api.logger.debug("Cache hit!")
                 return cache_result
 
-        # Open connection
-        # FIXME: add timeout
+        # get scheme and host
         if api.secure:
-            conn = httplib.HTTPSConnection(_host)
+            scheme = 'https://'
         else:
-            conn = httplib.HTTPConnection(_host)
+            scheme = 'http://'
+        _host = host or api.host
 
-        # Build request
-        conn.request(method, url, headers=headers, body=post_data)
+        # Continue attempting request until successful
+        # or maxium number of retries is reached.
+        retries_performed = 0
+        while retries_performed < retry_count + 1:
+            # Open connection
+            # FIXME: add timeout
+            if api.secure:
+                conn = httplib.HTTPSConnection(_host)
+            else:
+                conn = httplib.HTTPConnection(_host)
 
-        # Get response
-        resp = conn.getresponse()
-        api.last_response = resp
-        api.logger.debug('Received response...')
-        api.logger.debug('  headers: %s' % resp.getheaders())
-        api.logger.debug('  status code: %s' % resp.status)
+            # Apply authentication
+            if api.auth_handler:
+                api.auth_handler.apply_auth(
+                        scheme + _host + url,
+                        method, headers, parameters
+                )
+
+            # Build request
+            conn.request(method, url, headers=headers, body=post_data)
+
+            # Get response
+            resp = conn.getresponse()
+            api.logger.debug('Received response...')
+            api.logger.debug('  headers: %s' % resp.getheaders())
+            api.logger.debug('  status code: %s' % resp.status)
+
+            # If request was successful, quit the loop
+            if resp.status == 200:
+                break
+
+            # Sleep before retrying request again
+            time.sleep(retry_delay)
+            retries_performed += 1
 
         # If an error was returned, throw an exception
+        api.last_response = resp
         if resp.status != 200:
             try:
                 error_msg = parse_error(resp.read())
