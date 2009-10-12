@@ -26,10 +26,7 @@ Installing:
       python setup.py install (run as root)
   If you wish you may also bundle the tweepy package with your application.
 
-Souce code:
-  Gitorious: <http://gitorious.org/tweepy>
-  Github: <http://github.com/joshthecoder/tweepy>
-
+Souce code: http://github.com/joshthecoder/tweepy
 Bug tracker: http://github.com/joshthecoder/tweepy/issues 
 Mailing list: tweepy@googlegroups.com
 Chat: IRC freenode.net #tweepy
