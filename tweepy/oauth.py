@@ -316,9 +316,11 @@ class OAuthRequest(object):
 
         if token:
             parameters['oauth_token'] = token.key
-            parameters['oauth_callback'] = token.callback
+            if token.callback:
+                parameters['oauth_callback'] = token.callback
             # 1.0a support for verifier.
-            parameters['oauth_verifier'] = verifier
+            if verifier:
+                parameters['oauth_verifier'] = verifier
         elif callback:
             # 1.0a support for callback in the request token request.
             parameters['oauth_callback'] = callback
@@ -411,7 +413,10 @@ class OAuthServer(object):
         """
         version = self._get_version(oauth_request)
         consumer = self._get_consumer(oauth_request)
-        verifier = self._get_verifier(oauth_request)
+        try:
+            verifier = self._get_verifier(oauth_request)
+        except OAuthError:
+            verifier = None
         # Get the request token.
         token = self._get_token(oauth_request, 'request')
         self._check_signature(oauth_request, consumer, token)
