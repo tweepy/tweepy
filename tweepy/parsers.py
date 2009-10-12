@@ -2,6 +2,8 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
+import htmlentitydefs
+import re
 from datetime import datetime
 
 from . models import models
@@ -38,6 +40,28 @@ def _parse_datetime(str):
 def _parse_search_datetime(str):
 
     return datetime.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')
+
+
+def unescape_html(text):
+    def fixup(m):
+        text = m.group(0)
+        if text[:2] == "&#":
+            # character reference
+            try:
+                if text[:3] == "&#x":
+                    return unichr(int(text[3:-1], 16))
+                else:
+                    return unichr(int(text[2:-1]))
+            except ValueError:
+                pass
+        else:
+            # named entity
+            try:
+                text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
+            except KeyError:
+                pass
+        return text # leave as is
+    return re.sub("&#?\w+;", fixup, text)
 
 
 def _parse_html_value(html):
@@ -207,6 +231,8 @@ def _parse_search_result(obj, api):
     for k, v in obj.items():
         if k == 'created_at':
             setattr(result, k, _parse_search_datetime(v))
+        elif k == 'source':
+            setattr(result, k, _parse_html_value(unescape_html(v)))
         else:
             setattr(result, k, v)
     return result
