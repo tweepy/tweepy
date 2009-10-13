@@ -15,7 +15,8 @@ class API(object):
     """Twitter API"""
 
     def __init__(self, auth_handler=None, host='twitter.com', cache=None,
-            secure=False, api_root='', validate=True):
+            secure=False, api_root='', validate=True,
+            retry_count=0, retry_delay=0):
         # you may access these freely
         self.auth_handler = auth_handler
         self.host = host
@@ -23,6 +24,8 @@ class API(object):
         self.cache = cache
         self.secure = secure
         self.validate = validate
+        self.retry_count = retry_count
+        self.retry_delay = retry_delay
 
         # not a good idea to touch these
         self._username = None

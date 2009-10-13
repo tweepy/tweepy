@@ -33,8 +33,8 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         post_data = kargs.pop('post_data', None)
 
         # check for retry request parameters
-        retry_count = kargs.pop('retry_count', 0)
-        retry_delay = kargs.pop('retry_delay', 0)
+        retry_count = kargs.pop('retry_count', api.retry_count)
+        retry_delay = kargs.pop('retry_delay', api.retry_delay)
 
         # check for headers
         headers = kargs.pop('headers', {})
