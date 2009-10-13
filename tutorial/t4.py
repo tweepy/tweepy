@@ -32,5 +32,33 @@ The main reasons an exception will be raised include:
 Be sure to keep a look out for these exceptions and handle them properly.
 """
 
+"""
+If Twitter returns an error response you may wish to retry the request
+again. To help make this easier Tweepy allows you to configure it to do
+this for you automatically when such error codes are returned.
+
+Here is an example of performing a request and retrying if it fails.
+We will tell Tweepy to only attempt up to 5 retries and wait 5 seconds
+between each attempt.
+"""
+try:
+    tweepy.api.friends_timeline(retry_count=5, retry_delay=5)
+except tweepy.TweepError, e:
+    # If all 5 attempts fail a TweepError will be thrown
+    print 'Failed to get timeline: %s' % e
+
+"""
+By default Tweepy will only retry when a status code of 500, 502, or 503
+is returned by Twitter. All other codes result in an immediate TweepError.
+If we do not provide a retry_delay Tweepy by default does not wait between requests.
+
+Let's say we want to retry on status code responses of 400 only.
+Here is how we do that...
+"""
+try:
+    tweepy.api.user_timeline('twitter', retry_count=3, retry_delay=5, retry_errors=[400])
+except tweepy.TweepError, e:
+    print 'Failed to get timeline: %s' % e
+
 """ The End """
 

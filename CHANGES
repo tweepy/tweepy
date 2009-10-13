@@ -7,6 +7,7 @@ during upgrade will be listed here.
     + Added automatic request re-try feature
         Example: API.friends(retry_count=5, retry_delay=10)
                 Retry up to 5 times with a delay of 10 seconds between each attempt.
+        See tutorial/t4.py for more an example.
     + Added cursor parameter to API.friends and API.followers methods.
       Note: page parameter is being deprecated by twitter on 10/26
     + Update parsing to handle cursor responses.
