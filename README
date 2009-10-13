@@ -8,28 +8,31 @@
 A Twitter library for Python! Also works with identi.ca/laconi.ca !
 
 Features:
-  OAuth supported.
-  Up-to-date with twitter api.
-  Actively under development.
-  Supports most of the twitter api endpoints.
-  Python 3 support. (See py3k branch)
-  Streaming API support.
-  Cache system (memory, file, memcache client)
+  + OAuth support
+  + Up-to-date with Twitter API
+  + Actively under development
+  + Streaming API support
+  + Cache system (memory, file, memcache)
+  + Python 3 branch
 
 Getting started:
   Check out the tutorial folder to get started with Tweepy.
+  Also feel free to join us on the mailing list or chat root.
+
+Mailing list: http://groups.google.com/group/tweepy
+Chat: IRC freenode.net #tweepy
+      Web interface: http://webchat.freenode.net/?channels=tweepy
 
 Installing:  
-  You may use easy_install to quickly get tweepy installed on your system:
-      easy_install tweepy  (run as root)
-  You may also clone/download the source code and then execute:
-      python setup.py install (run as root)
-  If you wish you may also bundle the tweepy package with your application.
+  Using easy_install:
+    easy_install tweepy
+  You may also install from the repository:
+    git clone git://github.com/joshthecoder/tweepy.git
+    cd tweepy
+    python setup.py install
 
 Souce code: http://github.com/joshthecoder/tweepy
 Bug tracker: http://github.com/joshthecoder/tweepy/issues 
-Mailing list: tweepy@googlegroups.com
-Chat: IRC freenode.net #tweepy
 
 Author: Joshua Roesslein
 License: MIT

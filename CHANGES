@@ -21,6 +21,7 @@ during upgrade will be listed here.
     Added the Cursor object to help with pagination within the API.
     Please see the pagination tutorial for more details.
     This is the recommended way for using the 'page' and 'cursor' parameters.
++ Update OAuth bundled library.
 - Logging removed. Having our own mini-logging system just feels like overkill.
   Turns out it was not really needed that much. Simply just exposing the last
   HTTPResponse object should be good enough for most debugging.
