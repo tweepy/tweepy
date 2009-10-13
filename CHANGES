@@ -1,7 +1,7 @@
 All changes made to the library that might affect applications
 during upgrade will be listed here.
 
-1.1 -> Future release
+1.1 -> 1.2
 =====================
 + API
     + Added automatic request re-try feature
