@@ -35,6 +35,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         # check for retry request parameters
         retry_count = kargs.pop('retry_count', api.retry_count)
         retry_delay = kargs.pop('retry_delay', api.retry_delay)
+        retry_errors = kargs.pop('retry_errors', api.retry_errors)
 
         # check for headers
         headers = kargs.pop('headers', {})
@@ -110,8 +111,8 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             # Get response
             resp = conn.getresponse()
 
-            # If request was successful, quit the loop
-            if resp.status == 200:
+            # Exit request loop if non-retry error code
+            if resp.status not in retry_errors:
                 break
 
             # Sleep before retrying request again
