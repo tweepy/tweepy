@@ -29,31 +29,15 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         if require_auth and not api.auth_handler:
             raise TweepError('Authentication required!')
 
-        # check for post_data parameter
-        if 'post_data' in kargs:
-            post_data = kargs['post_data']
-            del kargs['post_data']
-        else:
-            post_data = None
+        # check for post data
+        post_data = kargs.pop('post_data', None)
 
         # check for retry request parameters
-        if 'retry_count' in kargs:
-            retry_count = kargs['retry_count']
-            del kargs['retry_count']
-        else:
-            retry_count = 0
-        if 'retry_delay' in kargs:
-            retry_delay = kargs['retry_delay']
-            del kargs['retry_delay']
-        else:
-            retry_delay = 0
+        retry_count = kargs.pop('retry_count', 0)
+        retry_delay = kargs.pop('retry_delay', 0)
 
         # check for headers
-        if 'headers' in kargs:
-            headers = dict(kargs['headers'])
-            del kargs['headers']
-        else:
-            headers = {}
+        headers = kargs.pop('headers', {})
 
         # build parameter dict
         if allowed_param:
