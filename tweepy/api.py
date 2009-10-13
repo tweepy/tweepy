@@ -946,6 +946,7 @@ class API(object):
             parser = parse_search_results,
             allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user'],
         )(self, *args, **kargs)
+    search.pagination_mode = 'page'
 
     """ trends
 

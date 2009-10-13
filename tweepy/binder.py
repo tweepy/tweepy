@@ -21,7 +21,7 @@ except ImportError:
             raise ImportError, "Can't load a json library"
 
 
-def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
+def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
               timeout=None, host=None):
 
     def _call(api, *args, **kargs):
@@ -186,8 +186,12 @@ def bind_api(path, parser, allowed_param=None, method='GET', require_auth=False,
 
         return out
 
-    # Expose extra data in callable object
-    _call.allowed_param = allowed_param
+
+    # Set pagination mode
+    if 'cursor' in allowed_param:
+        _call.pagination_mode = 'cursor'
+    elif 'page' in allowed_param:
+        _call.pagination_mode = 'page'
 
     return _call
 

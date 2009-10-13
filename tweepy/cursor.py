@@ -8,10 +8,11 @@ class Cursor(object):
     """Pagination helper class"""
 
     def __init__(self, method, *args, **kargs):
-        if 'cursor' in method.allowed_param:
-            self.iterator = CursorIterator(method, args, kargs)
-        elif 'page' in method.allowed_param:
-            self.iterator = PageIterator(method, args, kargs)
+        if hasattr(method, 'pagination_mode'):
+            if method.pagination_mode == 'cursor':
+                self.iterator = CursorIterator(method, args, kargs)
+            else:
+                self.iterator = PageIterator(method, args, kargs)
         else:
             raise TweepError('This method does not perform pagination')
 
