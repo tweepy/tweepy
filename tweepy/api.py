@@ -619,7 +619,7 @@ class API(object):
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-account%C2%A0update_profile_image
     """
     def update_profile_image(self, filename):
-        headers, post_data = _pack_image(filename, 700)
+        headers, post_data = API._pack_image(filename, 700)
         bind_api(
             path = '/account/update_profile_image.json',
             method = 'POST',
@@ -639,7 +639,7 @@ class API(object):
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-account%C2%A0update_profile_background_image
     """
     def update_profile_background_image(self, filename, *args, **kargs):
-        headers, post_data = _pack_image(filename, 800)
+        headers, post_data = API._pack_image(filename, 800)
         bind_api(
             path = '/account/update_profile_background_image.json',
             method = 'POST',
@@ -800,14 +800,14 @@ class API(object):
 
         http://apiwiki.twitter.com/Twitter+REST+API+Method%3A-blocks-exists
     """
-    def exists_block(self, **kargs):
+    def exists_block(self, *args, **kargs):
         try:
             bind_api(
                 path = '/blocks/exists.json',
                 parser = parse_none,
                 allowed_param = ['id', 'user_id', 'screen_name'],
                 require_auth = True
-            )(self, **kargs)
+            )(self, *args, **kargs)
         except TweepError:
             return False
 
@@ -1026,6 +1026,7 @@ class API(object):
 
     """ Internal use only """
 
+    @staticmethod
     def _pack_image(filename, max_size):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
