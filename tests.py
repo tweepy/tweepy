@@ -21,6 +21,8 @@ class TweepyAPITests(unittest.TestCase):
 
     def setUp(self):
         self.api = API(BasicAuthHandler(username, password))
+        self.api.retry_count = 2
+        self.api.retry_delay = 5
 
     def testpublictimeline(self):
         self.api.public_timeline()
@@ -159,6 +161,7 @@ class TweepyAPITests(unittest.TestCase):
         )
 
         for k,v in profile.items():
+            if k == 'email': continue
             self.assertEqual(getattr(updated, k), v)
 
     def testfavorites(self):
@@ -177,6 +180,7 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(self.api.exists_block('twitter'), True)
         self.api.destroy_block('twitter')
         self.assertEqual(self.api.exists_block('twitter'), False)
+        self.api.create_friendship('twitter') # restore
 
     def testblocks(self):
         self.api.blocks()
