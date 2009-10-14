@@ -122,7 +122,7 @@ class TweepyAPITests(unittest.TestCase):
 
     def testupdateprofilecolors(self):
         original = self.api.me()
-        updated = self.api.update_profile_colors('#fff', '#fff', '#fff', '#fff', '#fff')
+        updated = self.api.update_profile_colors('#000', '#000', '#000', '#000', '#000')
 
         # restore colors
         self.api.update_profile_colors(
@@ -133,11 +133,11 @@ class TweepyAPITests(unittest.TestCase):
             original.profile_sidebar_border_color
         )
 
-        self.assertEqual(updated.profile_background_color, '#fff')
-        self.assertEqual(updated.profile_text_color, '#fff')
-        self.assertEqual(updated.profile_link_color, '#fff')
-        self.assertEqual(updated.profile_sidebar_fill_color, '#fff')
-        self.assertEqual(updated.profile_sidebar_border_color, '#fff')
+        self.assertEqual(updated.profile_background_color, '#000')
+        self.assertEqual(updated.profile_text_color, '#000')
+        self.assertEqual(updated.profile_link_color, '#000')
+        self.assertEqual(updated.profile_sidebar_fill_color, '#000')
+        self.assertEqual(updated.profile_sidebar_border_color, '#000')
 
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
@@ -190,12 +190,12 @@ class TweepyAPITests(unittest.TestCase):
 
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
-        self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
         self.api.saved_searches()
+        self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
         self.api.destroy_saved_search(s.id)
 
     def testsearch(self):
-        self.api.search('test')
+        self.api.search('tweepy')
 
     def testtrends(self):
         self.api.trends()
