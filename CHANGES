@@ -18,6 +18,7 @@ during upgrade will be listed here.
       Parser updated to handle cursor responses. See above.
     + Fix Status.source_url parsing
     + Fix search result 'source' parsing to properly unescape html and extract source
+    + Added report_spam method
 
 + Cursor
     Added the Cursor object to help with pagination within the API.

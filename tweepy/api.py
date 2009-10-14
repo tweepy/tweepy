@@ -848,6 +848,24 @@ class API(object):
         require_auth = True
     )
 
+    """ report_spam
+
+        The user specified in the id is blocked by the authenticated user
+        and reported as a spammer.
+
+        Parameters: id or user_id or screen_name
+        Returns: User
+
+        http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-report_spam
+    """
+    report_spam = bind_api(
+        path = '/report_spam.json',
+        method = 'POST',
+        parser = parse_user,
+        allowed_param = ['id', 'user_id', 'screen_name'],
+        require_auth = True
+    )
+
     """ saved_searches
 
         Returns the authenticated user's saved search queries.
