@@ -18,11 +18,18 @@ during upgrade will be listed here.
       Parser updated to handle cursor responses. See above.
     + Fix Status.source_url parsing
     + Fix search result 'source' parsing to properly unescape html and extract source
+
 + Cursor
     Added the Cursor object to help with pagination within the API.
     Please see the pagination tutorial for more details (tutorial/t6).
     This is the recommended way for using the 'page' and 'cursor' parameters.
+
++ Models
+    + Status: added retweet, favorite and retweets methods
+      (NOTE: retweet API not live yet on twitter)
+
 + Update OAuth bundled library.
+
 - Logging removed. Having our own mini-logging system just feels like overkill.
   Turns out it was not really needed that much. Simply just exposing the last
   HTTPResponse object should be good enough for most debugging.

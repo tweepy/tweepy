@@ -46,7 +46,16 @@ class Status(Model):
         Status._validate(self)
 
     def destroy(self):
-        return self._api.destroy_status(id=self.id)
+        return self._api.destroy_status(self.id)
+
+    def retweet(self):
+        return self._api.retweet(self.id)
+
+    def retweets(self):
+        return self._api.retweets(self.id)
+
+    def favorite(self):
+        return self._api.create_favorite(self.id)
 
 
 class User(Model):
@@ -75,10 +84,10 @@ class User(Model):
         return self._api.mentions(**kargs)
 
     def friends(self, **kargs):
-        return self._api.friends(id=self.id, **kargs)
+        return self._api.friends(self.id, **kargs)
 
     def followers(self, **kargs):
-        return self._api.followers(id=self.id, **kargs)
+        return self._api.followers(self.id, **kargs)
 
     def follow(self):
         self._api.create_friendship(user_id=self.id)
