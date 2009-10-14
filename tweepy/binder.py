@@ -125,7 +125,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         api.last_response = resp
         if resp.status != 200:
             try:
-                error_msg = parse_error(resp.read())
+                error_msg = parse_error(json.loads(resp.read()))
             except Exception:
                 error_msg = "Twitter error response: status code = %s" % resp.status
             raise TweepError(error_msg)
