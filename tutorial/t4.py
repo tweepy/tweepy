@@ -48,9 +48,8 @@ except tweepy.TweepError, e:
     print 'Failed to get timeline: %s' % e
 
 """
-By default Tweepy will only retry when a status code of 500, 502, or 503
-is returned by Twitter. All other codes result in an immediate TweepError.
-If we do not provide a retry_delay Tweepy by default does not wait between requests.
+By default Tweepy will retry on any non-200 status code returned by twitter.
+The default retry_delay is zero, so if no delay is provided Tweepy will retry right away.
 
 Let's say we want to retry on status code responses of 400 only.
 Here is how we do that...
