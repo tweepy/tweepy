@@ -203,6 +203,40 @@ class TweepyAPITests(unittest.TestCase):
         self.api.trends_daily()
         self.api.trends_weekly()
 
+class TweepyCursorTests(unittest.TestCase):
+
+    def setUp(self):
+        self.api = API(BasicAuthHandler(username, password))
+        self.api.retry_count = 2
+        self.api.retry_delay = 5
+
+    def testpagecursoritems(self):
+        items = list(Cursor(self.api.user_timeline).items())
+        self.assert_(len(items) > 0)
+
+        items = list(Cursor(self.api.user_timeline, 'twitter').items(30))
+        self.assert_(len(items) == 30)
+
+    def testpagecursorpages(self):
+        pages = list(Cursor(self.api.user_timeline).pages())
+        self.assert_(len(pages) > 0)
+
+        pages = list(Cursor(self.api.user_timeline, 'twitter').pages(5))
+        self.assert_(len(pages) == 5)
+
+    def testcursorcursoritems(self):
+        items = list(Cursor(self.api.friends).items())
+        self.assert_(len(items) > 0)
+
+        items = list(Cursor(self.api.followers, 'twitter').items(30))
+        self.assert_(len(items) == 30)
+
+    def testcursorcursorpages(self):
+        pages = list(Cursor(self.api.friends).pages())
+        self.assert_(len(pages) > 0)
+
+        pages = list(Cursor(self.api.followers, 'twitter').pages(5))
+        self.assert_(len(pages) == 5)
 
 class TweepyAuthTests(unittest.TestCase):
 
