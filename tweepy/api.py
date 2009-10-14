@@ -16,7 +16,7 @@ class API(object):
 
     def __init__(self, auth_handler=None, host='twitter.com', cache=None,
             secure=False, api_root='', validate=True,
-            retry_count=0, retry_delay=0, retry_errors=[500,502,503]):
+            retry_count=0, retry_delay=0, retry_errors=None):
         # you may access these freely
         self.auth_handler = auth_handler
         self.host = host
@@ -692,13 +692,14 @@ class API(object):
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-favorites%C2%A0create
     """
-    create_favorite = bind_api(
-        path = '/favorites/create.json',
-        method = 'POST',
-        parser = parse_status,
-        allowed_param = ['id'],
-        require_auth = True
-    )
+    def create_favorite(self, id):
+        return bind_api(
+            path = '/favorites/create/%s.json' % id,
+            method = 'POST',
+            parser = parse_status,
+            allowed_param = ['id'],
+            require_auth = True
+        )(self, id)
 
     """ favorites/destroy
 
@@ -710,13 +711,14 @@ class API(object):
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-favorites%C2%A0destroy
     """
-    destroy_favorite = bind_api(
-        path = '/favorites/destroy.json',
-        method = 'DELETE',
-        parser = parse_status,
-        allowed_param = ['id'],
-        require_auth = True
-    )
+    def destroy_favorite(self, id):
+        return bind_api(
+            path = '/favorites/destroy/%s.json' % id,
+            method = 'DELETE',
+            parser = parse_status,
+            allowed_param = ['id'],
+            require_auth = True
+        )(self, id)
 
     """ notifications/follow
 

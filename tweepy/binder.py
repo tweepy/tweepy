@@ -112,8 +112,10 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             resp = conn.getresponse()
 
             # Exit request loop if non-retry error code
-            if resp.status not in retry_errors:
-                break
+            if retry_errors is None:
+                if resp.status == 200: break
+            else:
+                if resp.status not in retry_errors: break
 
             # Sleep before retrying request again
             time.sleep(retry_delay)
