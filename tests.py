@@ -23,24 +23,20 @@ class TweepyAPITests(unittest.TestCase):
         self.api = API(BasicAuthHandler(username, password))
 
     def testpublictimeline(self):
-        self.assertEqual(len(self.api.public_timeline()), 20)
+        self.api.public_timeline()
 
     def testfriendstimeline(self):
-        self.assert_(len(self.api.friends_timeline()) > 0)
+        self.api.friends_timeline()
 
     def testusertimeline(self):
-        s = self.api.user_timeline(screen_name='twitter')
-        self.assert_(len(s) > 0)
-        self.assertEqual(s[0].author.screen_name, 'twitter')
+        self.api.user_timeline()
+        self.api.user_timeline('twitter')
 
     def testmentions(self):
-        s = self.api.mentions()
-        self.assert_(len(s) > 0)
-        self.assert_(s[0].text.find(username) >= 0)
+        self.api.mentions()
 
     def testgetstatus(self):
         s = self.api.get_status(id=123)
-        self.assertEqual(s.author.id, 17)
 
     def testupdateanddestroystatus(self):
         # test update
@@ -53,7 +49,10 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(deleted.id, update.id)
 
     def testgetuser(self):
-        u = self.api.get_user(screen_name='twitter')
+        u = self.api.get_user('twitter')
+        self.assertEqual(u.screen_name, 'twitter')
+
+        u = self.api.get_user(783214)
         self.assertEqual(u.screen_name, 'twitter')
 
     def testme(self):
@@ -61,16 +60,16 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(me.screen_name, username)
 
     def testfriends(self):
-        friends = self.api.friends()
-        self.assert_(len(friends) > 0)
+        self.api.friends()
 
     def testfollowers(self):
-        followers = self.api.followers()
-        self.assert_(len(followers) > 0)
+        self.api.followers()
 
     def testdirectmessages(self):
-        dms = self.api.direct_messages()
-        self.assert_(len(dms) > 0)
+        self.api.direct_messages()
+
+    def testsentdirectmessages(self):
+        self.api.sent_direct_messages()
 
     def testsendanddestroydirectmessage(self):
         # send
@@ -86,20 +85,119 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(destroyed_dm.sender.screen_name, username)
         self.assertEqual(destroyed_dm.recipient.screen_name, username)
 
-    def testcreatefriendship(self):
-        friend = self.api.create_friendship('twitter')
-        self.assertEqual(friend.screen_name, 'twitter')
-        self.assertTrue(self.api.exists_friendship(username, 'twitter'))
-
-    def testdestroyfriendship(self):
+    def testcreatedestroyfriendship(self):
         enemy = self.api.destroy_friendship('twitter')
         self.assertEqual(enemy.screen_name, 'twitter')
         self.assertFalse(self.api.exists_friendship(username, 'twitter'))
+
+        friend = self.api.create_friendship('twitter')
+        self.assertEqual(friend.screen_name, 'twitter')
+        self.assertTrue(self.api.exists_friendship(username, 'twitter'))
 
     def testshowfriendship(self):
         source, target = self.api.show_friendship(target_screen_name='twtiter')
         self.assert_(isinstance(source, Friendship))
         self.assert_(isinstance(target, Friendship))
+
+    def testfriendsids(self):
+        self.api.friends_ids(username)
+
+    def testfollowersids(self):
+        self.api.followers_ids(username)
+
+    def testverifycredentials(self):
+        self.assertEqual(self.api.verify_credentials(), True)
+
+        api = API.new('basic', 'bad', 'password')
+        self.assertEqual(api.verify_credentials(), False)
+
+    def testratelimitstatus(self):
+        self.api.rate_limit_status()
+
+    def testsetdeliverydevice(self):
+        self.api.set_delivery_device('im')
+        self.api.set_delivery_device('none')
+
+    def testupdateprofilecolors(self):
+        original = self.api.me()
+        updated = self.api.update_profile_colors('#fff', '#fff', '#fff', '#fff', '#fff')
+
+        # restore colors
+        self.api.update_profile_colors(
+            original.profile_background_color,
+            original.profile_text_color,
+            original.profile_link_color,
+            original.profile_sidebar_fill_color,
+            original.profile_sidebar_border_color
+        )
+
+        self.assertEqual(updated.profile_background_color, '#fff')
+        self.assertEqual(updated.profile_text_color, '#fff')
+        self.assertEqual(updated.profile_link_color, '#fff')
+        self.assertEqual(updated.profile_sidebar_fill_color, '#fff')
+        self.assertEqual(updated.profile_sidebar_border_color, '#fff')
+
+    def testupateprofileimage(self):
+        self.api.update_profile_image('examples/profile.png')
+
+    def testupdateprofilebg(self):
+        self.api.update_profile_background_image('examples/bg.png')
+
+    def testupdateprofile(self):
+        original = self.api.me()
+        profile = {
+            'name': 'Tweepy test 123',
+            'email': 'test@example.com',
+            'url': 'http://www.example.com',
+            'location': 'pytopia',
+            'description': 'just testing things out'
+        }
+        updated = self.api.update_profile(**profile)
+        self.api.update_profile(
+            name = original.name, email = 'hi@example.com', url = original.url,
+            location = original.location, description = original.description
+        )
+
+        for k,v in profile.items():
+            self.assertEqual(getattr(updated, k), v)
+
+    def testfavorites(self):
+        self.api.favorites()
+
+    def testcreatedestroyfavorite(self):
+        self.api.create_favorite(4857050091)
+        self.api.destroy_favorite(4857050091)
+
+    def testenabledisablenotifications(self):
+        self.api.enable_notifications('twitter')
+        self.api.disable_notifications('twitter')
+
+    def testcreatedestroyblock(self):
+        self.api.create_block('twitter')
+        self.assertEqual(self.api.exists_block('twitter'), True)
+        self.api.destroy_block('twitter')
+        self.assertEqual(self.api.exists_block('twitter'), False)
+
+    def testblocks(self):
+        self.api.blocks()
+
+    def testblocksids(self):
+        self.api.blocks_ids()
+
+    def testsavedsearches(self):
+        s = self.api.create_saved_search('test')
+        self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
+        self.api.saved_searches()
+        self.api.destroy_saved_search(s.id)
+
+    def testsearch(self):
+        self.api.search('test')
+
+    def testtrends(self):
+        self.api.trends()
+        self.api.trends_current()
+        self.api.trends_daily()
+        self.api.trends_weekly()
 
 
 class TweepyAuthTests(unittest.TestCase):
