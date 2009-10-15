@@ -175,7 +175,6 @@ class Stream(object):
             self.url += '&follow=%s' % ','.join(follow)
         if track:
             self.url += '&track=%s' % ','.join(track)
-        print self.url
         self.running = True
         Thread(target=self._run).start()
 
