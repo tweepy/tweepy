@@ -29,6 +29,8 @@ during upgrade will be listed here.
     + Status: added retweet, favorite and retweets methods
       (NOTE: retweet API not live yet on twitter)
 
++ Python 2.4 support
+
 + Update OAuth bundled library.
 
 - Logging removed. Having our own mini-logging system just feels like overkill.

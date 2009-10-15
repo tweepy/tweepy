@@ -13,7 +13,7 @@ Features:
   + Actively under development
   + Streaming API support
   + Cache system (memory, file, memcache)
-  + Python 3 branch
+  + Python 3 branch (3.1)
 
 Getting started:
   Check out the tutorial folder to get started with Tweepy.
@@ -37,7 +37,7 @@ Bug tracker: http://github.com/joshthecoder/tweepy/issues
 Author: Joshua Roesslein
 License: MIT
 Dependencies:
-  Python 2.5+
+  Python 2.4 or newer
   Simplejson <http://undefined.org/python/#simplejson>
     **Included in python 2.6+
   Python-OAuth <http://code.google.com/p/oauth>
