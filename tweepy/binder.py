@@ -110,7 +110,10 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
                 )
 
             # Build request
-            conn.request(method, url, headers=headers, body=post_data)
+            try:
+                conn.request(method, url, headers=headers, body=post_data)
+            except Exception, e:
+                raise TweepError('Failed to send request: %s' % e)
 
             # Get response
             resp = conn.getresponse()
