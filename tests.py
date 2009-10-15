@@ -122,7 +122,7 @@ class TweepyAPITests(unittest.TestCase):
 
     def testupdateprofilecolors(self):
         original = self.api.me()
-        updated = self.api.update_profile_colors('#000', '#000', '#000', '#000', '#000')
+        updated = self.api.update_profile_colors('000', '000', '000', '000', '000')
 
         # restore colors
         self.api.update_profile_colors(
@@ -133,11 +133,11 @@ class TweepyAPITests(unittest.TestCase):
             original.profile_sidebar_border_color
         )
 
-        self.assertEqual(updated.profile_background_color, '#000')
-        self.assertEqual(updated.profile_text_color, '#000')
-        self.assertEqual(updated.profile_link_color, '#000')
-        self.assertEqual(updated.profile_sidebar_fill_color, '#000')
-        self.assertEqual(updated.profile_sidebar_border_color, '#000')
+        self.assertEqual(updated.profile_background_color, '000')
+        self.assertEqual(updated.profile_text_color, '000')
+        self.assertEqual(updated.profile_link_color, '000')
+        self.assertEqual(updated.profile_sidebar_fill_color, '000')
+        self.assertEqual(updated.profile_sidebar_border_color, '000')
 
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
