@@ -7,13 +7,13 @@ Tweepy Twitter API library
 """
 __version__ = '1.2'
 
-from . models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
-from . error import TweepError
-from . api import API
-from . cache import Cache, MemoryCache, FileCache, MemCache
-from . auth import BasicAuthHandler, OAuthHandler
-from . streaming import Stream, StreamListener
-from . cursor import Cursor
+from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
+from tweepy.error import TweepError
+from tweepy.api import API
+from tweepy.cache import Cache, MemoryCache, FileCache, MemCache
+from tweepy.auth import BasicAuthHandler, OAuthHandler
+from tweepy.streaming import Stream, StreamListener
+from tweepy.cursor import Cursor
 
 # Global, unauthenticated instance of API
 api = API()

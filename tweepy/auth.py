@@ -5,8 +5,8 @@
 from urllib2 import Request, urlopen
 import base64
 
-from . import oauth
-from . error import TweepError
+from tweepy import oauth
+from tweepy.error import TweepError
 
 
 class AuthHandler(object):

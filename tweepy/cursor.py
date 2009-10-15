@@ -2,7 +2,7 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-from . error import TweepError
+from tweepy.error import TweepError
 
 class Cursor(object):
     """Pagination helper class"""

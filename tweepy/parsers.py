@@ -6,7 +6,7 @@ import htmlentitydefs
 import re
 from datetime import datetime
 
-from . models import models
+from tweepy.models import models
 
 def _parse_cursor(obj):
 

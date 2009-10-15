@@ -17,7 +17,7 @@ except ImportError:
     # TODO: use win32file
     pass
 
-from . import memcache
+from tweepy import memcache
 
 
 class Cache(object):

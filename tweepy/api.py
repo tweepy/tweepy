@@ -5,9 +5,9 @@
 import os
 import mimetypes
 
-from . binder import bind_api
-from . error import TweepError
-from . auth import BasicAuthHandler, OAuthHandler
+from tweepy.binder import bind_api
+from tweepy.error import TweepError
+from tweepy.auth import BasicAuthHandler, OAuthHandler
 from tweepy.parsers import *
 
 
