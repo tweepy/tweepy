@@ -92,7 +92,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         _host = host or api.host
 
         # Continue attempting request until successful
-        # or maxium number of retries is reached.
+        # or maximum number of retries is reached.
         retries_performed = 0
         while retries_performed < retry_count + 1:
             # Open connection
@@ -140,8 +140,8 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         # Parse json respone body
         try:
             jobject = json.loads(resp.read())
-        except Exception:
-            raise TweepError("Failed to parse json response text")
+        except Exception, e:
+            raise TweepError("Failed to parse json: %s" % e)
 
         # Parse cursor infomation
         if isinstance(jobject, dict):
@@ -157,8 +157,8 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
                 out = parser(jobject, api), next_cursor, prev_cursor
             else:
                 out = parser(jobject, api)
-        except Exception:
-            raise TweepError("Failed to parse json object")
+        except Exception, e:
+            raise TweepError("Failed to parse response: %s" % e)
 
         conn.close()
 

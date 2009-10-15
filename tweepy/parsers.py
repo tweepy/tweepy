@@ -5,6 +5,7 @@
 import htmlentitydefs
 import re
 from datetime import datetime
+import time
 
 from tweepy.models import models
 
@@ -34,12 +35,14 @@ def parse_error(obj):
 
 def _parse_datetime(str):
 
-    return datetime.strptime(str, '%a %b %d %H:%M:%S +0000 %Y')
+    # We must parse datetime this way to work in python 2.4
+    return datetime(*(time.strptime(str, '%a %b %d %H:%M:%S +0000 %Y')[0:6]))
 
 
 def _parse_search_datetime(str):
 
-    return datetime.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')
+    # python 2.4
+    return datetime(*(time.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')[0:6]))
 
 
 def unescape_html(text):
