@@ -168,8 +168,8 @@ class TweepyAPITests(unittest.TestCase):
         self.api.favorites()
 
     def testcreatedestroyfavorite(self):
-        self.api.create_favorite(4857050091)
-        self.api.destroy_favorite(4857050091)
+        self.api.create_favorite(4901062372)
+        self.api.destroy_favorite(4901062372)
 
     def testenabledisablenotifications(self):
         self.api.enable_notifications('twitter')
@@ -257,14 +257,16 @@ class TweepyAuthTests(unittest.TestCase):
 
         # build api object test using oauth
         api = API(auth)
-        api.update_status('test %i' % random.randint(0, 1000))
+        s = api.update_status('test %i' % random.randint(0, 1000))
+        api.destroy_status(s.id)
 
     def testbasicauth(self):
         auth = BasicAuthHandler(username, password)
 
         # test accessing twitter API
         api = API(auth)
-        api.update_status('test %i' % random.randint(1, 1000))
+        s = api.update_status('test %i' % random.randint(1, 1000))
+        api.destroy_status(s.id)
 
 
 class TweepyCacheTests(unittest.TestCase):
