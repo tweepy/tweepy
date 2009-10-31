@@ -514,7 +514,7 @@ class OAuthServer(object):
         """Verify that timestamp is recentish."""
         timestamp = int(timestamp)
         now = int(time.time())
-        lapsed = now - timestamp
+        lapsed = abs(now - timestamp)
         if lapsed > self.timestamp_threshold:
             raise OAuthError('Expired timestamp: given %d and now %s has a '
                 'greater difference than threshold %d' %
