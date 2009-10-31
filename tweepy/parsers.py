@@ -267,3 +267,20 @@ def parse_retweets(obj, api):
         retweets.append(_parse_retweet(item, api))
     return retweets
 
+def parse_list(obj, api):
+
+    lst = models['list']()
+    for k,v in obj.items():
+        if k == 'user':
+            setattr(lst, k, _parse_user(v, api))
+        else:
+            setattr(lst, k, v)
+    return lst
+
+def parse_lists(obj, api):
+
+    lists = []
+    for item in obj:
+        lists.append(parse_list(item, api))
+    return lists
+
