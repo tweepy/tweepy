@@ -7,7 +7,6 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.auth import BasicAuthHandler, OAuthHandler
 from tweepy.parsers import *
 
 
@@ -27,18 +26,6 @@ class API(object):
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
-
-        # not a good idea to touch these
-        self._username = None
-
-    @staticmethod
-    def new(auth='basic', *args, **kargs):
-        if auth == 'basic':
-            return API(BasicAuthHandler(*args, **kargs))
-        elif auth == 'oauth':
-            return API(OAuthHandler(*args, **kargs))
-        else:
-            raise TweepError('Invalid auth type')
 
     """ statuses/public_timeline
 
@@ -289,22 +276,7 @@ class API(object):
         See: API.get_user()
     """
     def me(self):
-        # if username not fetched, go get it...
-        if self._username is None:
-            if self.auth_handler is None:
-                raise TweepError('Authentication required')
-
-            try:
-                user = bind_api(
-                    path = '/account/verify_credentials.json',
-                    parser = parse_user
-                )(self)
-            except TweepError, e:
-                raise TweepError('Failed to fetch username: %s' % e)
-
-            self._username = user.screen_name
-
-        return self.get_user(screen_name=self._username)
+        return self.get_user(screen_name=self.auth_handler.get_username())
 
     """ statuses/friends
 
@@ -542,7 +514,7 @@ class API(object):
         try:
             return bind_api(
                 path = '/account/verify_credentials.json',
-                parser = parse_return_true,
+                parser = parse_user,
                 require_auth = True
             )(self)
         except TweepError:
@@ -951,6 +923,38 @@ class API(object):
             )(self)
         except TweepError:
             return False
+
+    """ Create list
+
+        Creates a new list for the authenticated user.
+
+        Parameters: name (required), mode
+        Returns: List
+    """
+    def create_list(self, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists.json' % self.auth_handler.get_username(),
+            method = 'POST',
+            parser = parse_list,
+            allowed_param = ['name', 'mode'],
+            require_auth = True
+        )(self, *args, **kargs)
+
+    """ Update list
+
+        Updates the specified list.
+
+        Parameters: name (required), mode
+        Returns: List
+    """
+    def update_list(self, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists/%s.json' % (self.auth_handler.get_username, slug),
+            method = 'POST',
+            parser = parse_list,
+            allowed_param = ['name', 'mode'],
+            require_auth = True
+        )(self, *args, **kargs)
 
     """ search
 

@@ -7,22 +7,31 @@ import base64
 
 from tweepy import oauth
 from tweepy.error import TweepError
+from tweepy.api import API
 
 
 class AuthHandler(object):
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
-        raise NotImplemented
+        raise NotImplementedError
+
+    def get_username(self):
+        """Return the username of the authenticated user"""
+        raise NotImplementedError
 
 
 class BasicAuthHandler(AuthHandler):
 
     def __init__(self, username, password):
+        self.username = username
         self._b64up = base64.b64encode('%s:%s' % (username, password))
 
     def apply_auth(self, url, method, headers, parameters):
         headers['Authorization'] = 'Basic %s' % self._b64up
+
+    def get_username(self):
+        return self.username
 
 
 class OAuthHandler(AuthHandler):
@@ -39,6 +48,7 @@ class OAuthHandler(AuthHandler):
         self.request_token = None
         self.access_token = None
         self.callback = callback
+        self.username = None
 
     def apply_auth(self, url, method, headers, parameters):
         request = oauth.OAuthRequest.from_consumer_and_token(
@@ -104,4 +114,14 @@ class OAuthHandler(AuthHandler):
             return self.access_token
         except Exception, e:
             raise TweepError(e)
+
+    def get_username(self):
+        if self.username is None:
+            api = API(self)
+            user = api.verify_credentials()
+            if user:
+                self.username = user.screen_name
+            else:
+                raise TweepError("Unable to get username, invalid oauth token!")
+        return self.username
 

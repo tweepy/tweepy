@@ -122,6 +122,10 @@ class Retweet(Model):
 
     pass
 
+class List(Model):
+
+    pass
+
 # link up default model implementations.
 models = {
     'status': Status,
@@ -131,5 +135,6 @@ models = {
     'saved_search': SavedSearch,
     'search_result': SearchResult,
     'retweet': Retweet,
+    'list': List,
 }
 
