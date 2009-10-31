@@ -316,8 +316,7 @@ class API(object):
     followers = bind_api(
         path = '/statuses/followers.json',
         parser = parse_users,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor'],
-        require_auth = True
+        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
 
     """ direct_messages
