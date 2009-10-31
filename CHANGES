@@ -1,7 +1,13 @@
 All changes made to the library that might affect applications
 during upgrade will be listed here.
 
-1.1 -> 1.2
+1.2 -> 1.3 [Future]
+=====================
++ API.verify_credentials() now returns an User object if credentials
+    are valid. Otherwise false will be returned.
++ API.new() removed
+
+1.1 -> 1.2 [Current]
 =====================
 + API
     + Added automatic request re-try feature
