@@ -4,6 +4,7 @@ import sys
 
 import code
 import tweepy
+from tweepy import API, BasicAuthHandler
 
 """Launch an interactive shell ready for Tweepy usage
 
@@ -17,7 +18,7 @@ if len(sys.argv) != 3:
     print 'Usage: tweepyshell <username> <password>'
     exit(1)
 
-api = tweepy.API.new(auth='basic', username=sys.argv[1], password=sys.argv[2])
+api = API(BasicAuthHandler(username=sys.argv[1], password=sys.argv[2]))
 
 code.interact('<Tweepy shell>', local={'tweepy': tweepy, 'api': api})
 
