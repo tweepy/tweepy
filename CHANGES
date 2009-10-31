@@ -6,6 +6,7 @@ during upgrade will be listed here.
 + API.verify_credentials() now returns an User object if credentials
     are valid. Otherwise false will be returned.
 + API.new() removed
++ Removed model validation. Prone to breakage due to API changes.
 
 1.1 -> 1.2 [Current]
 =====================

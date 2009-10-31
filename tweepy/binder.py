@@ -162,18 +162,6 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
 
         conn.close()
 
-        # validate result
-        if api.validate:
-            # list of results
-            if isinstance(out, list) and len(out) > 0:
-                if hasattr(out[0], 'validate'):
-                    for result in out:
-                        result.validate()
-            # single result
-            else:
-                if hasattr(out, 'validate'):
-                    out.validate()
-
         # store result in cache
         if api.cache and method == 'GET':
             api.cache.store(url, out)
