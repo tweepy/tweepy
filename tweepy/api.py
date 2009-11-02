@@ -590,10 +590,10 @@ class API(object):
     """
     def update_profile_image(self, filename):
         headers, post_data = API._pack_image(filename, 700)
-        bind_api(
+        return bind_api(
             path = '/account/update_profile_image.json',
             method = 'POST',
-            parser = parse_none,
+            parser = parse_user,
             require_auth = True
         )(self, post_data=post_data, headers=headers)
 
@@ -613,7 +613,7 @@ class API(object):
         bind_api(
             path = '/account/update_profile_background_image.json',
             method = 'POST',
-            parser = parse_none,
+            parser = parse_user,
             allowed_param = ['tile'],
             require_auth = True
         )(self, post_data=post_data, headers=headers)
@@ -623,7 +623,7 @@ class API(object):
         Sets values that users are able to set under the "Account" tab of
         their settings page. Only the parameters specified will be updated.
 
-        Parameters: name, email, url, location, description
+        Parameters: name, url, location, description
         Returns: User
 
         http://apiwiki.twitter.com/Twitter-REST-API-Method%3A-account%C2%A0update_profile
@@ -632,7 +632,7 @@ class API(object):
         path = '/account/update_profile.json',
         method = 'POST',
         parser = parse_user,
-        allowed_param = ['name', 'email', 'url', 'location', 'description'],
+        allowed_param = ['name', 'url', 'location', 'description'],
         require_auth = True
     )
 
@@ -741,7 +741,7 @@ class API(object):
         path = '/blocks/create.json',
         method = 'POST',
         parser = parse_user,
-        allowed_param = ['id'],
+        allowed_param = ['id', 'user_id', 'screen_name'],
         require_auth = True
     )
 
@@ -759,7 +759,7 @@ class API(object):
         path = '/blocks/destroy.json',
         method = 'DELETE',
         parser = parse_user,
-        allowed_param = ['id'],
+        allowed_param = ['id', 'user_id', 'screen_name'],
         require_auth = True
     )
 

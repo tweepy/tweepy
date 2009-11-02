@@ -7,6 +7,8 @@ during upgrade will be listed here.
     are valid. Otherwise false will be returned.
 + API.new() removed
 + Removed model validation. Prone to breakage due to API changes.
++ Moved documentation out of api.py and into wiki.
++ Removed 'email' parameter from API.update_profile. No longer supported.
 
 1.1 -> 1.2 [Current]
 =====================
