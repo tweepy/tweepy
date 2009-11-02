@@ -5,7 +5,9 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '1.2'
+__version__ = '1.3'
+__author__ = 'Joshua Roesslein'
+__license__ = 'MIT'
 
 from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
 from tweepy.error import TweepError
