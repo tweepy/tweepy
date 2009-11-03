@@ -17,7 +17,7 @@ class API(object):
             secure=False, api_root='',
             retry_count=0, retry_delay=0, retry_errors=None):
         # you may access these freely
-        self.auth_handler = auth_handler
+        self.auth = auth_handler
         self.host = host
         self.api_root = api_root
         self.cache = cache
@@ -141,7 +141,7 @@ class API(object):
 
     """ Get the authenticated user """
     def me(self):
-        return self.get_user(screen_name=self.auth_handler.get_username())
+        return self.get_user(screen_name=self.auth.get_username())
 
     """ statuses/friends """
     friends = bind_api(
@@ -450,25 +450,126 @@ class API(object):
         except TweepError:
             return False
 
-    """ Create list """
     def create_list(self, *args, **kargs):
         return bind_api(
-            path = '/%s/lists.json' % self.auth_handler.get_username(),
+            path = '/%s/lists.json' % self.auth.get_username(),
             method = 'POST',
             parser = parse_list,
             allowed_param = ['name', 'mode'],
             require_auth = True
         )(self, *args, **kargs)
 
-    """ Update list  """
+    def destroy_list(self, slug):
+        return bind_api(
+            path = '/%s/lists/%s.json' % (self.auth.get_username(), slug),
+            method = 'DELETE',
+            parser = parse_list,
+            require_auth = True
+        )(self)
+
     def update_list(self, slug, *args, **kargs):
         return bind_api(
-            path = '/%s/lists/%s.json' % (self.auth_handler.get_username, slug),
+            path = '/%s/lists/%s.json' % (self.auth.get_username(), slug),
             method = 'POST',
             parser = parse_list,
             allowed_param = ['name', 'mode'],
             require_auth = True
         )(self, *args, **kargs)
+
+    def lists(self, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists.json' % self.auth.get_username(),
+            parser = parse_lists,
+            allowed_param = ['cursor'],
+            require_auth = True
+        )(self, *args, **kargs)
+
+    def lists_memberships(self, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists/memberships.json' % self.auth.get_username(),
+            parser = parse_lists,
+            allowed_param = ['cursor'],
+            require_auth = True
+        )(self, *args, **kargs)
+
+    def list_timeline(self, owner, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists/%s/statuses.json' % (owner, slug),
+            parser = parse_statuses,
+            allowed_param = ['page']
+        )(self, *args, **kargs)
+
+    def get_list(self, owner, slug):
+        return bind_api(
+            path = '/%s/lists/%s.json' % (owner, slug),
+            parser = parse_list
+        )(self)
+
+    def add_list_member(self, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
+            method = 'POST',
+            parser = parse_user,
+            allowed_param = ['id'],
+            require_auth = True
+        )(self, *args, **kargs)
+
+    def remove_list_member(self, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
+            method = 'DELETE',
+            parser = parse_user,
+            allowed_param = ['id'],
+            require_auth = True
+        )(self, *args, **kargs)
+
+    def list_members(self, owner, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/%s/members.json' % (owner, slug),
+            parser = parse_users,
+            allowed_param = ['cursor']
+        )(self, *args, **kargs)
+
+    def is_list_member(self, owner, slug, user_id):
+        try:
+            return bind_api(
+                path = '/%s/%s/members/%s.json' % (owner, slug, user_id),
+                parser = parse_user
+            )(self)
+        except TweepError:
+            return False
+
+    def subscribe_list(self, owner, slug):
+        return bind_api(
+            path = '/%s/%s/subscribers.json' % (owner, slug),
+            method = 'POST',
+            parser = parse_list,
+            require_auth = True
+        )(self)
+
+    def unsubscribe_list(self, owner, slug):
+        return bind_api(
+            path = '/%s/%s/subscribers.json' % (owner, slug),
+            method = 'DELETE',
+            parser = parse_list,
+            require_auth = True
+        )(self)
+
+    def list_subscribers(self, owner, slug, *args, **kargs):
+        return bind_api(
+            path = '/%s/%s/subscribers.json' % (owner, slug),
+            parser = parse_users,
+            allowed_param = ['cursor']
+        )(self, *args, **kargs)
+
+    def is_subscribed_list(self, owner, slug, user_id):
+        try:
+            return bind_api(
+                path = '/%s/%s/subscribers/%s.json' % (owner, slug, user_id),
+                parser = parse_user,
+            )(self)
+        except TweepError:
+            return False
 
     """ search """
 

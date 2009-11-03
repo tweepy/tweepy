@@ -280,7 +280,7 @@ def parse_list(obj, api):
 def parse_lists(obj, api):
 
     lists = []
-    for item in obj:
+    for item in obj['lists']:
         lists.append(parse_list(item, api))
     return lists
 

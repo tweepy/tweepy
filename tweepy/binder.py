@@ -26,7 +26,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
 
     def _call(api, *args, **kargs):
         # If require auth, throw exception if credentials not provided
-        if require_auth and not api.auth_handler:
+        if require_auth and not api.auth:
             raise TweepError('Authentication required!')
 
         # check for post data
@@ -103,8 +103,8 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
                 conn = httplib.HTTPConnection(_host)
 
             # Apply authentication
-            if api.auth_handler:
-                api.auth_handler.apply_auth(
+            if api.auth:
+                api.auth.apply_auth(
                         scheme + _host + url,
                         method, headers, parameters
                 )
@@ -153,7 +153,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
 
         # Pass json object into parser
         try:
-            if next_cursor is not None and prev_cursor is not None:
+            if parameters and 'cursor' in parameters:
                 out = parser(jobject, api), next_cursor, prev_cursor
             else:
                 out = parser(jobject, api)
