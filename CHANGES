@@ -11,6 +11,7 @@ during upgrade will be listed here.
 + Moved documentation out of api.py and into wiki.
 + Removed 'email' parameter from API.update_profile. No longer supported.
 + API.auth_handler -> API.auth
++ Moved memcache implementation to tweepy-more repository.
 
 1.1 -> 1.2 [Current]
 =====================

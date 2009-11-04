@@ -20,8 +20,6 @@ except ImportError:
     # TODO: use win32file
     pass
 
-from tweepy import memcache
-
 
 class Cache(object):
     """Cache interface"""
@@ -263,44 +261,4 @@ class FileCache(Cache):
             if entry.endswith('.lock'):
                 continue
             self._delete_file(os.path.join(self.cache_dir, entry))
-
-
-class MemCache(Cache):
-    """Memcache client"""
-
-    def __init__(self, servers, timeout=60):
-        Cache.__init__(self, timeout)
-        self.client = memcache.Client(servers)
-
-    def store(self, key, value):
-        self.client.set(key, (time.time(), value), time=self.timeout)
-
-    def get(self, key, timeout=None):
-        obj = self.client.get(key)
-        if obj is None:
-            return None
-        created_time, value = obj
-
-        # check if value is expired
-        if timeout is None:
-            timeout = self.timeout
-        if timeout > 0 and (time.time() - created_time) >= timeout:
-            # expired! delete from cache
-            self.client.delete(key)
-            return None
-
-        return value
-
-    def count(self):
-        count = 0
-        for sid, stats in self.client.get_stats():
-            count += int(stats.get('curr_items', 0))
-        return count
-
-    def cleanup(self):
-        # not implemented for this cache since server handles it
-        return
-
-    def flush(self):
-        self.client.flush_all()
 

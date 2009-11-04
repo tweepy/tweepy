@@ -12,7 +12,7 @@ Features:
   + Up-to-date with Twitter API
   + Actively under development
   + Streaming API support
-  + Cache system (memory, file, memcache)
+  + Cache system (memory, file)
   + Python 3 branch (3.1)
 
 Getting started:
@@ -36,6 +36,7 @@ Installing:
 Souce code: 
     Library: http://github.com/joshthecoder/tweepy
     Examples: http://github.com/joshthecoder/tweepy-examples
+    Extensions: http://github.com/joshthecoder/tweepy-more
 
 Author: Joshua Roesslein
 License: MIT
@@ -44,7 +45,5 @@ Dependencies:
   Simplejson <http://undefined.org/python/#simplejson>
     **Included in python 2.6+
   Python-OAuth <http://code.google.com/p/oauth>
-    **Bundled with this library
-  python-memcached <http://www.tummy.com/Community/software/python-memcached/>
     **Bundled with this library
 

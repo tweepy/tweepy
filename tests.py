@@ -312,9 +312,6 @@ class TweepyCacheTests(unittest.TestCase):
         self.cache.flush()
         os.rmdir('cache_test_dir')
 
-    def testmemcache(self):
-        self.cache = MemCache(self.memcache_servers, self.timeout)
-        self._run_tests(do_cleanup=False)
 
 if __name__ == '__main__':
 
