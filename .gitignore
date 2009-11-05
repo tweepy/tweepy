@@ -1,2 +1,5 @@
 *.pyc
 *.swp
+build/
+dist/
+tweepy.egg-info/
