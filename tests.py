@@ -108,9 +108,9 @@ class TweepyAPITests(unittest.TestCase):
         self.api.followers_ids(username)
 
     def testverifycredentials(self):
-        self.assertEqual(self.api.verify_credentials(), True)
+        self.assertNotEqual(self.api.verify_credentials(), False)
 
-        api = API.new('basic', 'bad', 'password')
+        api = API(BasicAuthHandler('bad', 'password'))
         self.assertEqual(api.verify_credentials(), False)
 
     def testratelimitstatus(self):
@@ -139,24 +139,25 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(updated.profile_sidebar_fill_color, '000')
         self.assertEqual(updated.profile_sidebar_border_color, '000')
 
+    """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
 
     def testupdateprofilebg(self):
         self.api.update_profile_background_image('examples/bg.png')
+    """
 
     def testupdateprofile(self):
         original = self.api.me()
         profile = {
             'name': 'Tweepy test 123',
-            'email': 'test@example.com',
             'url': 'http://www.example.com',
             'location': 'pytopia',
             'description': 'just testing things out'
         }
         updated = self.api.update_profile(**profile)
         self.api.update_profile(
-            name = original.name, email = 'hi@example.com', url = original.url,
+            name = original.name, url = original.url,
             location = original.location, description = original.description
         )
 
@@ -248,7 +249,7 @@ class TweepyAuthTests(unittest.TestCase):
 
         # test getting access token
         auth_url = auth.get_authorization_url()
-        self.assert_(auth_url.startswith('http://twitter.com/oauth/authorize?'))
+        self.assert_(auth_url.startswith('http://api.twitter.com/oauth/authorize?'))
         print 'Please authorize: ' + auth_url
         verifier = raw_input('PIN: ').strip()
         self.assert_(len(verifier) > 0)

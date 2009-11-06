@@ -13,13 +13,16 @@ from tweepy.parsers import *
 class API(object):
     """Twitter API"""
 
-    def __init__(self, auth_handler=None, host='twitter.com', cache=None,
-            secure=False, api_root='',
+    def __init__(self, auth_handler=None,
+            host='api.twitter.com', search_host='search.twitter.com',
+             cache=None, secure=False, api_root='/1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None):
         # you may access these freely
         self.auth = auth_handler
         self.host = host
+        self.search_host = search_host
         self.api_root = api_root
+        self.search_root = search_root
         self.cache = cache
         self.secure = secure
         self.retry_count = retry_count
@@ -572,53 +575,45 @@ class API(object):
             return False
 
     """ search """
-
-    def search(self, *args, **kargs):
-        return bind_api(
-            host = 'search.' + self.host,
-            path = '/search.json',
-            parser = parse_search_results,
-            allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user'],
-        )(self, *args, **kargs)
-    search.pagination_mode = 'page'
+    search = bind_api(
+        search_api = True,
+        path = '/search.json',
+        parser = parse_search_results,
+        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user']
+    )
 
     """ trends """
-    def trends(self):
-        return bind_api(
-            host = 'search.' + self.host,
-            path = '/trends.json',
-            parser = parse_json
-        )(self)
+    trends = bind_api(
+        search_api = True,
+        path = '/trends.json',
+        parser = parse_json
+    )
 
     """ trends/current """
-    def trends_current(self, *args, **kargs):
-        return bind_api(
-            host = 'search.' + self.host,
-            path = '/trends/current.json',
-            parser = parse_json,
-            allowed_param = ['exclude']
-        )(self, *args, **kargs)
+    trends_current = bind_api(
+        search_api = True,
+        path = '/trends/current.json',
+        parser = parse_json,
+        allowed_param = ['exclude']
+    )
 
     """ trends/daily """
-    def trends_daily(self, *args, **kargs):
-        return bind_api(
-            host = "search." + self.host,
-            path = '/trends/daily.json',
-            parser = parse_json,
-            allowed_param = ['date', 'exclude']
-        )(self, *args, **kargs)
+    trends_daily = bind_api(
+        search_api = True,
+        path = '/trends/daily.json',
+        parser = parse_json,
+        allowed_param = ['date', 'exclude']
+    )
 
     """ trends/weekly """
-    def trends_weekly(self, *args, **kargs):
-        return bind_api(
-            host = "search." + self.host,
-            path = '/trends/weekly.json',
-            parser = parse_json,
-            allowed_param = ['date', 'exclude']
-        )(self, *args, **kargs)
+    trends_weekly = bind_api(
+        search_api = True,
+        path = '/trends/weekly.json',
+        parser = parse_json,
+        allowed_param = ['date', 'exclude']
+    )
 
     """ Internal use only """
-
     @staticmethod
     def _pack_image(filename, max_size):
         """Pack image from file into multipart-formdata post body"""

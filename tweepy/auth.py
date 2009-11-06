@@ -37,10 +37,10 @@ class BasicAuthHandler(AuthHandler):
 class OAuthHandler(AuthHandler):
     """OAuth authentication handler"""
 
-    REQUEST_TOKEN_URL = 'http://twitter.com/oauth/request_token'
-    AUTHORIZATION_URL = 'http://twitter.com/oauth/authorize'
-    AUTHENTICATE_URL = 'http://twitter.com/oauth/authenticate'
-    ACCESS_TOKEN_URL = 'http://twitter.com/oauth/access_token'
+    REQUEST_TOKEN_URL = 'http://api.twitter.com/oauth/request_token'
+    AUTHORIZATION_URL = 'http://api.twitter.com/oauth/authorize'
+    AUTHENTICATE_URL = 'http://api.twitter.com/oauth/authenticate'
+    ACCESS_TOKEN_URL = 'http://api.twitter.com/oauth/access_token'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
         self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
