@@ -59,7 +59,7 @@ class User(Model):
 class DirectMessage(Model):
 
     def destroy(self):
-        return self._api.destroy_direct_message(id=self.id)
+        return self._api.destroy_direct_message(self.id)
 
 
 class Friendship(Model):
@@ -69,7 +69,8 @@ class Friendship(Model):
 
 class SavedSearch(Model):
 
-    pass
+    def destroy(self):
+        return self._api.destroy_saved_search(self.id)
 
 
 class SearchResult(Model):
@@ -78,11 +79,13 @@ class SearchResult(Model):
 
 class Retweet(Model):
 
-    pass
+    def destroy(self):
+        return self._api.destroy_status(self.id)
 
 class List(Model):
 
-    pass
+    def destroy(self):
+        return self._api.destroy_list(self.slug)
 
 # link up default model implementations.
 models = {
