@@ -80,7 +80,7 @@ def _parse_a_href(atag):
     return atag[start:end]
 
 
-def _parse_user(obj, api):
+def parse_user(obj, api):
 
     user = models['user']()
     user._api = api
@@ -88,7 +88,7 @@ def _parse_user(obj, api):
         if k == 'created_at':
             setattr(user, k, _parse_datetime(v))
         elif k == 'status':
-            setattr(user, k, _parse_status(v, api))
+            setattr(user, k, parse_status(v, api))
         elif k == 'following':
             # twitter sets this to null if it is false
             if v is True:
@@ -100,11 +100,6 @@ def _parse_user(obj, api):
     return user
 
 
-def parse_user(obj, api):
-
-    return _parse_user(obj, api)
-
-
 def parse_users(obj, api):
 
     if isinstance(obj, list) is False:
@@ -114,17 +109,17 @@ def parse_users(obj, api):
 
     users = []
     for item in item_list:
-        users.append(_parse_user(item, api))
+        users.append(parse_user(item, api))
     return users
 
 
-def _parse_status(obj, api):
+def parse_status(obj, api):
 
     status = models['status']()
     status._api = api
     for k, v in obj.items():
         if k == 'user':
-            user = _parse_user(v, api)
+            user = parse_user(v, api)
             setattr(status, 'author', user)
             setattr(status, 'user', user)  # DEPRECIATED
         elif k == 'created_at':
@@ -133,32 +128,27 @@ def _parse_status(obj, api):
             setattr(status, k, _parse_html_value(v))
             setattr(status, 'source_url', _parse_a_href(v))
         elif k == 'retweet_details':
-            setattr(status, k, _parse_retweet(v, api))
+            setattr(status, k, parse_retweet(v, api))
         else:
             setattr(status, k, v)
     return status
-
-
-def parse_status(obj, api):
-
-    return _parse_status(obj, api)
 
 
 def parse_statuses(obj, api):
 
     statuses = []
     for item in obj:
-        statuses.append(_parse_status(item, api))
+        statuses.append(parse_status(item, api))
     return statuses
 
 
-def _parse_dm(obj, api):
+def parse_dm(obj, api):
 
     dm = models['direct_message']()
     dm._api = api
     for k, v in obj.items():
         if k == 'sender' or k == 'recipient':
-            setattr(dm, k, _parse_user(v, api))
+            setattr(dm, k, parse_user(v, api))
         elif k == 'created_at':
             setattr(dm, k, _parse_datetime(v))
         else:
@@ -166,16 +156,11 @@ def _parse_dm(obj, api):
     return dm
 
 
-def parse_dm(obj, api):
-
-    return _parse_dm(obj, api)
-
-
 def parse_directmessages(obj, api):
 
     directmessages = []
     for item in obj:
-        directmessages.append(_parse_dm(item, api))
+        directmessages.append(parse_dm(item, api))
     return directmessages
 
 
@@ -203,7 +188,7 @@ def parse_ids(obj, api):
     else:
         return obj
 
-def _parse_saved_search(obj, api):
+def parse_saved_search(obj, api):
 
     ss = models['saved_search']()
     ss._api = api
@@ -215,21 +200,16 @@ def _parse_saved_search(obj, api):
     return ss
 
 
-def parse_saved_search(obj, api):
-
-    return _parse_saved_search(obj, api)
-
-
 def parse_saved_searches(obj, api):
 
     saved_searches = []
     saved_search = models['saved_search']()
     for item in obj:
-        saved_searches.append(_parse_saved_search(item, api))
+        saved_searches.append(parse_saved_search(item, api))
     return saved_searches
 
 
-def _parse_search_result(obj, api):
+def parse_search_result(obj, api):
 
     result = models['search_result']()
     for k, v in obj.items():
@@ -247,7 +227,7 @@ def parse_search_results(obj, api):
     results = obj['results']
     result_objects = []
     for item in results:
-        result_objects.append(_parse_search_result(item, api))
+        result_objects.append(parse_search_result(item, api))
     return result_objects
 
 def _parse_retweet(obj, api):
@@ -255,7 +235,7 @@ def _parse_retweet(obj, api):
     retweet = models['retweet']()
     for k,v in obj.items():
         if k == 'retweeting_user':
-            setattr(retweet, k, _parse_user(v, api))
+            setattr(retweet, k, parse_user(v, api))
         else:
             setattr(retweet, k, v)
     return retweet
@@ -264,7 +244,7 @@ def parse_retweets(obj, api):
 
     retweets = []
     for item in obj:
-        retweets.append(_parse_retweet(item, api))
+        retweets.append(parse_retweet(item, api))
     return retweets
 
 def parse_list(obj, api):
@@ -272,7 +252,7 @@ def parse_list(obj, api):
     lst = models['list']()
     for k,v in obj.items():
         if k == 'user':
-            setattr(lst, k, _parse_user(v, api))
+            setattr(lst, k, parse_user(v, api))
         else:
             setattr(lst, k, v)
     return lst
