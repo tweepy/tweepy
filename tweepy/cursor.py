@@ -59,6 +59,8 @@ class CursorIterator(BaseIterator):
         data, self.next_cursor, self.prev_cursor = self.method(
                 cursor=self.next_cursor, *self.args, **self.kargs
         )
+        if len(data) == 0:
+            raise StopIteration
         self.count += 1
         return data
 
