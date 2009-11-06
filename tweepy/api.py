@@ -130,7 +130,7 @@ class API(object):
     def retweets(self, id, *args, **kargs):
         return bind_api(
             path = '/statuses/retweets/%s.json' % id,
-            parser = parse_retweets,
+            parser = parse_statuses,
             allowed_param = ['count'],
             require_auth = True
         )(self, *args, **kargs)

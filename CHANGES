@@ -13,6 +13,7 @@ during upgrade will be listed here.
 + API.auth_handler -> API.auth
 + Moved memcache implementation to tweepy-more repository.
 + Tweepy now uses the versioned API and the new api.twitter.com subdomain
++ Updated retweet parsing for new payload format
 
 1.1 -> 1.2 [Current]
 =====================

@@ -127,8 +127,8 @@ def parse_status(obj, api):
         elif k == 'source':
             setattr(status, k, _parse_html_value(v))
             setattr(status, 'source_url', _parse_a_href(v))
-        elif k == 'retweet_details':
-            setattr(status, k, parse_retweet(v, api))
+        elif k == 'retweeted_status':
+            setattr(status, k, parse_status(v, api))
         else:
             setattr(status, k, v)
     return status
@@ -230,22 +230,6 @@ def parse_search_results(obj, api):
         result_objects.append(parse_search_result(item, api))
     return result_objects
 
-def _parse_retweet(obj, api):
-
-    retweet = models['retweet']()
-    for k,v in obj.items():
-        if k == 'retweeting_user':
-            setattr(retweet, k, parse_user(v, api))
-        else:
-            setattr(retweet, k, v)
-    return retweet
-
-def parse_retweets(obj, api):
-
-    retweets = []
-    for item in obj:
-        retweets.append(parse_retweet(item, api))
-    return retweets
 
 def parse_list(obj, api):
 
