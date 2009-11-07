@@ -27,13 +27,7 @@ Bug tracker: http://github.com/joshthecoder/tweepy/issues
 
 Need a programmer? Feel free to contact me directly at jroesslein at gmail.com
 
-Installing:  
-  Using easy_install:
-    easy_install tweepy
-  You may also install from the repository:
-    git clone git://github.com/joshthecoder/tweepy.git
-    cd tweepy
-    python setup.py install
+Installing: See INSTALL
 
 Souce code: 
     Library: http://github.com/joshthecoder/tweepy
