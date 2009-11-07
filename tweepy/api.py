@@ -495,11 +495,19 @@ class API(object):
             require_auth = True
         )(self, *args, **kargs)
 
+    def lists_subscriptions(self, *args, **kargs):
+        return bind_api(
+            path = '/%s/lists/subscriptions.json' % self.auth.get_username(),
+            parser = parse_lists,
+            allowed_param = ['cursor'],
+            require_auth = True
+        )(self, *args, **kargs)
+
     def list_timeline(self, owner, slug, *args, **kargs):
         return bind_api(
             path = '/%s/lists/%s/statuses.json' % (owner, slug),
             parser = parse_statuses,
-            allowed_param = ['page']
+            allowed_param = ['since_id', 'max_id', 'count', 'page']
         )(self, *args, **kargs)
 
     def get_list(self, owner, slug):
@@ -512,7 +520,7 @@ class API(object):
         return bind_api(
             path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
             method = 'POST',
-            parser = parse_user,
+            parser = parse_list,
             allowed_param = ['id'],
             require_auth = True
         )(self, *args, **kargs)

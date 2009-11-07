@@ -9,7 +9,7 @@ A Twitter library for Python! Also works with identi.ca/laconi.ca !
 
 Features:
   + OAuth support
-  + Up-to-date with Twitter API
+  + Covers the entire Twitter API
   + Actively under development
   + Streaming API support
   + Cache system (memory, file)
