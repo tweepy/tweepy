@@ -486,6 +486,7 @@ class API(object):
             allowed_param = ['cursor'],
             require_auth = True
         )(self, *args, **kargs)
+    lists.pagination_mode = 'cursor'
 
     def lists_memberships(self, *args, **kargs):
         return bind_api(
@@ -494,6 +495,7 @@ class API(object):
             allowed_param = ['cursor'],
             require_auth = True
         )(self, *args, **kargs)
+    lists_memberships.pagination_mode = 'cursor'
 
     def lists_subscriptions(self, *args, **kargs):
         return bind_api(
@@ -502,6 +504,7 @@ class API(object):
             allowed_param = ['cursor'],
             require_auth = True
         )(self, *args, **kargs)
+    lists_subscriptions.pagination_mode = 'cursor'
 
     def list_timeline(self, owner, slug, *args, **kargs):
         return bind_api(
@@ -509,6 +512,7 @@ class API(object):
             parser = parse_statuses,
             allowed_param = ['since_id', 'max_id', 'count', 'page']
         )(self, *args, **kargs)
+    list_timeline.pagination_mode = 'page'
 
     def get_list(self, owner, slug):
         return bind_api(
@@ -540,6 +544,7 @@ class API(object):
             parser = parse_users,
             allowed_param = ['cursor']
         )(self, *args, **kargs)
+    list_members.pagination_mode = 'cursor'
 
     def is_list_member(self, owner, slug, user_id):
         try:
@@ -572,12 +577,13 @@ class API(object):
             parser = parse_users,
             allowed_param = ['cursor']
         )(self, *args, **kargs)
+    list_subscribers.pagination_mode = 'cursor'
 
     def is_subscribed_list(self, owner, slug, user_id):
         try:
             return bind_api(
                 path = '/%s/%s/subscribers/%s.json' % (owner, slug, user_id),
-                parser = parse_user,
+                parser = parse_user
             )(self)
         except TweepError:
             return False
@@ -589,6 +595,7 @@ class API(object):
         parser = parse_search_results,
         allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user']
     )
+    search.pagination_mode = 'page'
 
     """ trends """
     trends = bind_api(
