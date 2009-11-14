@@ -1,7 +1,7 @@
 All changes made to the library that might affect applications
 during upgrade will be listed here.
 
-1.2 -> 1.3 [Future]
+1.2 -> 1.3
 =====================
 + Lists API methods added
 + API.verify_credentials() now returns an User object if credentials
@@ -15,7 +15,7 @@ during upgrade will be listed here.
 + Tweepy now uses the versioned API and the new api.twitter.com subdomain
 + Updated retweet parsing for new payload format
 
-1.1 -> 1.2 [Current]
+1.1 -> 1.2
 =====================
 + API
     + Added automatic request re-try feature

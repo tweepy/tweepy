@@ -189,6 +189,50 @@ class TweepyAPITests(unittest.TestCase):
     def testblocksids(self):
         self.api.blocks_ids()
 
+    def testcreateupdatedestroylist(self):
+        self.api.create_list('tweeps')
+        # XXX: right now twitter throws a 500 here, issue is being looked into by twitter.
+        #self.api.update_list('tweeps', mode='private')
+        self.api.destroy_list('tweeps')
+
+    def testlists(self):
+        self.api.lists()
+
+    def testlistsmemberships(self):
+        self.api.lists_memberships()
+
+    def testlistssubscriptions(self):
+        self.api.lists_subscriptions()
+
+    def testlisttimeline(self):
+        self.api.list_timeline('noradio', 'tall-people')
+
+    def testgetlist(self):
+        self.api.get_list('noradio', 'tall-people')
+
+    def testaddremovelistmember(self):
+        uid = self.api.get_user('twitter').id
+        self.api.add_list_member('test', uid)
+        self.api.remove_list_member('test', uid)
+
+    def testlistmembers(self):
+        self.api.list_members('noradio', 'tall-people')
+
+    def testislistmember(self):
+        uid = self.api.get_user('noradio').id
+        self.api.is_list_member('noradio', 'tall-people', uid)
+
+    def testsubscribeunsubscribelist(self):
+        self.api.subscribe_list('noradio', 'tall-people')
+        self.api.unsubscribe_list('noradio', 'tall-people')
+
+    def testlistsubscribers(self):
+        self.api.list_subscribers('noradio', 'tall-people')
+
+    def testissubscribedlist(self):
+        uid = self.api.get_user('noradio').id
+        self.api.is_subscribed_list('noradio', 'tall-people', uid)
+
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
         self.api.saved_searches()
