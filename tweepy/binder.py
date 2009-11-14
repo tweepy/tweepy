@@ -66,7 +66,11 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             parameters = None
 
         # Build url with parameters
-        api_root = api.api_root if search_api is False else api.search_root
+        if search_api is False:
+            api_root = api.api_root
+        else:
+            api_root = api.search_root
+
         if parameters:
             url = '%s?%s' % (api_root + path, urllib.urlencode(parameters))
         else:
@@ -90,7 +94,10 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             scheme = 'https://'
         else:
             scheme = 'http://'
-        host = api.host if search_api is False else api.search_host
+        if search_api is False:
+            host = api.host
+        else:
+            host = api.search_host
 
         # Continue attempting request until successful
         # or maximum number of retries is reached.
