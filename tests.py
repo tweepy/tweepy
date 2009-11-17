@@ -57,6 +57,9 @@ class TweepyAPITests(unittest.TestCase):
         u = self.api.get_user(783214)
         self.assertEqual(u.screen_name, 'twitter')
 
+    def testsearchusers(self):
+        self.api.search_users('twitter')
+
     def testme(self):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)

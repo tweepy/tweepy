@@ -146,6 +146,14 @@ class API(object):
     def me(self):
         return self.get_user(screen_name=self.auth.get_username())
 
+    """ users/search """
+    search_users = bind_api(
+        path = '/users/search.json',
+        parser = parse_users,
+        require_auth = True,
+        allowed_param = ['q', 'per_page', 'page']
+    )
+
     """ statuses/friends """
     friends = bind_api(
         path = '/statuses/friends.json',
