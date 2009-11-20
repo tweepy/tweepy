@@ -6,6 +6,7 @@ import httplib
 from socket import timeout
 from threading import Thread
 from time import sleep
+import urllib
 
 from tweepy.auth import BasicAuthHandler
 from tweepy.parsers import parse_status
@@ -64,11 +65,12 @@ class Stream(object):
         self.buffer_size = buffer_size
         self.listener = listener
         self.api = API()
+        self.headers = {}
+        self.body = None
 
     def _run(self):
         # setup
-        headers = {}
-        self.auth.apply_auth(None, None, headers, None)
+        self.auth.apply_auth(None, None, self.headers, None)
 
         # enter loop
         error_counter = 0
@@ -81,7 +83,7 @@ class Stream(object):
                 conn = httplib.HTTPConnection(self.host)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
-                conn.request('POST', self.url, headers=headers)
+                conn.request('POST', self.url, self.body, headers=self.headers)
                 resp = conn.getresponse()
                 if resp.status != 200:
                     if self.listener.on_error(resp.status) is False:
@@ -168,13 +170,16 @@ class Stream(object):
         Thread(target=self._run).start()
 
     def filter(self, follow=None, track=None):
+        params = {}
+        self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            self.url += '&follow=%s' % ','.join(follow)
+            params['follow'] = ','.join(map(str, follow))
         if track:
-            self.url += '&track=%s' % ','.join(track)
+            params['track'] = ','.join(map(str, track))
+        self.body = urllib.urlencode(params)
         self.running = True
         Thread(target=self._run).start()
 
