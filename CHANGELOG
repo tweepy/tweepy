@@ -4,6 +4,14 @@ during upgrade will be listed here.
 1.3 -> 1.4 [Future release]
 ===========================
 + Added people search API method. API.search_users()
++ Streaming API
+    - Moved parameters into POST body to prevent "head too big" errors.
+    - Stream can be run either asynchronously (threaded) or synchronously (blocks main thread).
+      By default Stream will run in sync. mode. To change this pass into the stream
+      method 'async=True'. Example:
+          s = Stream('test', 'password', MyListener())
+          s.sample(async=True)  # threaded mode
+          s.filter(track=['pizza']) # synch./blocking mode
 
 1.2 -> 1.3 [Current release]
 =====================

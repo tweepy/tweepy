@@ -144,32 +144,36 @@ class Stream(object):
                 if self.listener.on_limit(json.loads(data)['limit']['track']) == False:
                     self.running = False
 
-    def firehose(self, count=None):
+    def _start(self, async):
+        self.running = True
+        if async:
+            Thread(target=self._run).start()
+        else:
+            self._run()
+
+    def firehose(self, count=None, async=False):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/firehose.json?delimited=length' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
-        self.running = True
-        Thread(target=self._run).start()
+        self._start(async)
 
-    def retweet(self):
+    def retweet(self, async=False):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
-        self.running = True
-        Thread(target=self._run).start()
+        self._start(async)
 
-    def sample(self, count=None):
+    def sample(self, count=None, async=False):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
-        self.running = True
-        Thread(target=self._run).start()
+        self._start(async)
 
-    def filter(self, follow=None, track=None):
+    def filter(self, follow=None, track=None, async=False):
         params = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -180,8 +184,7 @@ class Stream(object):
         if track:
             params['track'] = ','.join(map(str, track))
         self.body = urllib.urlencode(params)
-        self.running = True
-        Thread(target=self._run).start()
+        self._start(async)
 
     def disconnect(self):
         if self.running is False:
