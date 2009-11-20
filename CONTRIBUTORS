@@ -4,7 +4,7 @@ Thomas Bohmbach, Jr
     - GAE fixes
 Mark Lango  
     - Ignore key arguments with value of None
-Pascal Jurgens
-    - Streaming API fix
+Pascal Jürgens
+    - Streaming API fixes
 Fredrik Lundh
     - html unescape (http://effbot.org/zone/re-sub.htm#unescape-html)
