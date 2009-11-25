@@ -125,8 +125,11 @@ def parse_status(obj, api):
         elif k == 'created_at':
             setattr(status, k, _parse_datetime(v))
         elif k == 'source':
-            setattr(status, k, _parse_html_value(v))
-            setattr(status, 'source_url', _parse_a_href(v))
+            if '<' in v:
+                setattr(status, k, _parse_html_value(v))
+                setattr(status, 'source_url', _parse_a_href(v))
+            else:
+                setattr(status, k, v)
         elif k == 'retweeted_status':
             setattr(status, k, parse_status(v, api))
         else:
