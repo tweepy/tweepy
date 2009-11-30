@@ -29,8 +29,8 @@ STREAM_VERSION = 1
 
 class StreamListener(object):
 
-    def __init__(self):
-        self.api = API()
+    def __init__(self, api=None):
+        self.api = api or API()
 
     def on_data(self, data):
         """Called when raw data is received from connection.
