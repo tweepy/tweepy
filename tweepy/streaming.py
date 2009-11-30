@@ -29,6 +29,28 @@ STREAM_VERSION = 1
 
 class StreamListener(object):
 
+    def __init__(self):
+        self.api = API()
+
+    def on_data(self, data):
+        """Called when raw data is received from connection.
+
+        Override this method if you wish to manually handle
+        the stream data. Return False to stop stream and close connection.
+        """
+
+        if 'in_reply_to_status_id' in data:
+            status = parse_status(json.loads(data), self.api)
+            if self.on_status(status) is False:
+                return False
+        elif 'delete' in data:
+            delete = json.loads(data)['delete']['status']
+            if self.on_delete(delete['id'], delete['user_id']) is False:
+                return False
+        elif 'limit' in data:
+            if self.on_limit(json.loads(data)['limit']['track']) is False:
+                return False
+
     def on_status(self, status):
         """Called when a new status arrives"""
         return
@@ -128,21 +150,10 @@ class Stream(object):
             else:
                 continue
 
-            # read data
+            # read data and pass into listener
             data = resp.read(length)
-
-            # turn json data into status object
-            if 'in_reply_to_status_id' in data:
-                status = parse_status(json.loads(data), self.api)
-                if self.listener.on_status(status) == False:
-                    self.running = False
-            elif 'delete' in data:
-                delete = json.loads(data)['delete']['status']
-                if self.listener.on_delete(delete['id'], delete['user_id']) == False:
-                    self.running = False
-            elif 'limit' in data:
-                if self.listener.on_limit(json.loads(data)['limit']['track']) == False:
-                    self.running = False
+            if self.listener.on_data(data) is False:
+                self.running = False
 
     def _start(self, async):
         self.running = True

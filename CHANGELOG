@@ -12,6 +12,8 @@ during upgrade will be listed here.
           s = Stream('test', 'password', MyListener())
           s.sample(async=True)  # threaded mode
           s.filter(track=['pizza']) # synch./blocking mode
+    - Listener now has a "on_data" method which can be overridden to manually handle the
+        raw stream data.
 
 1.2 -> 1.3 [Current release]
 =====================
