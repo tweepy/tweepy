@@ -5,6 +5,7 @@ import sys
 import code
 import tweepy
 from tweepy import API, BasicAuthHandler
+from getpass import getpass
 
 """Launch an interactive shell ready for Tweepy usage
 
@@ -14,11 +15,18 @@ It imports tweepy and creates an authenticated API instance (api)
 using the credentials provided.
 """
 
-if len(sys.argv) != 3:
-    print 'Usage: tweepyshell <username> <password>'
+username = None
+password = None
+
+if len(sys.argv) == 2:
+    username, password = sys.argv[1], getpass()
+elif len(sys.argv) == 3:
+    username, password = sys.argv[1], sys.argv[2]
+else:
+    print 'Usage: tweepyshell <username> [password]'
     exit(1)
 
-api = API(BasicAuthHandler(username=sys.argv[1], password=sys.argv[2]))
+api = API(BasicAuthHandler(username=username, password=password))
 
 code.interact('<Tweepy shell>', local={'tweepy': tweepy, 'api': api})
 

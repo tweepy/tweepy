@@ -8,3 +8,5 @@ Pascal Jürgens
     - Streaming API fixes
 Fredrik Lundh
     - html unescape (http://effbot.org/zone/re-sub.htm#unescape-html)
+Kumar Appaiah
+    - tweepyshell patch
