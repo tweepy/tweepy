@@ -15,19 +15,12 @@ Features:
   + Cache system (memory, file)
   + Python 3 support -- See py3k branch
 
-Getting started:
-  Be sure to check the wiki for references, samples, and tutorials.
-  Also feel free to join us on the mailing list or chat room.
-
+Documentation: http://joshthecoder.github.com/tweepy/docs/index.html
 Mailing list: http://groups.google.com/group/tweepy
 Chat: IRC freenode.net #tweepy
       Web interface: http://webchat.freenode.net/?channels=tweepy
 Wiki: http://code.google.com/p/tweepy/w
 Bug tracker: http://github.com/joshthecoder/tweepy/issues
-
-Need a programmer? Feel free to contact me directly at jroesslein at gmail.com
-
-Installing: See INSTALL
 
 Souce code: 
     Library: http://github.com/joshthecoder/tweepy
