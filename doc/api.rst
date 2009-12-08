@@ -1,5 +1,7 @@
 .. _api_reference:
 
+.. include:: _parameters.rst
+
 API Reference
 =============
 
@@ -9,11 +11,21 @@ This page contains some basic documentation for the Tweepy module.
 :mod:`tweepy.api` --- Twitter API wrapper
 =========================================
 
-.. class:: API([auth_handler], [host], [search_host], [cache], [secure], [api_root], [search_root], [retry_count], [retry_delay], [retry_errors])
+.. class:: API([auth_handler=None], [host='api.twitter.com'], [search_host='search.twitter.com'], [cache=None], [secure=False], [api_root='/1'], [search_root=''], [retry_count=0], [retry_delay=0], [retry_errors=None])
 
    This class provides a wrapper for the API as provided by
    Twitter. The functions provided in this class are listed below.
 
+   :param auth_handler: authentication handler to be used
+   :param host: general API host
+   :param search_host: search API host
+   :param cache: cache backend to use
+   :param secure: if True use https
+   :param api_root: general API path root
+   :param search_root: search API path root
+   :param retry_count: default number of retries to attempt when error occurs
+   :param retry_delay: number of seconds to wait between retries
+   :param retry_errors: which HTTP status codes to retry
 
 Timeline methods
 ----------------
@@ -24,9 +36,7 @@ Timeline methods
    set a custom user icon. The public timeline is cached for 60 seconds
    so requesting it more often than that is a waste of resources.
 
-   Parameters: None
-
-   Returns: list of :class:`Status` objects
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.home_timeline([since_id], [max_id], [count], [page])
@@ -35,9 +45,11 @@ Timeline methods
    authenticating user and that user's friends. This is the equivalent of
    /timeline/home on the Web.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.friends_timeline([since_id], [max_id], [count], [page])
@@ -45,7 +57,12 @@ Timeline methods
    Returns the 20 most recent statuses posted by the authenticating user
    and that user's friends.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
+   
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
    Returns: list of :class:`Status` objects
 
@@ -53,12 +70,17 @@ Timeline methods
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], [count], [page])
 
    Returns the 20 most recent statuses posted from the authenticating
-   user. It's also possible to request another user's timeline via the id
+   user or the user specified. It's also possible to request another user's timeline via the id
    parameter.
 
-   Parameters: *id* or *user_id* or *screen_name*, *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param id: |uid|
+   :param user_id: |user_id|
+   :param screen_name: |screen_name|
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.mentions([since_id], [max_id], [count], [page])
@@ -66,18 +88,22 @@ Timeline methods
    Returns the 20 most recent mentions (status containing @username) for
    the authenticating user.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.retweeted_by_me([since_id], [max_id], [count], [page])
 
    Returns the 20 most recent retweets posted by the authenticating user.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.retweeted_to_me([since_id], [max_id], [count], [page])
@@ -85,19 +111,23 @@ Timeline methods
    Returns the 20 most recent retweets posted by the authenticating
    user's friends.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
-   Returns: list of :class:`Status` objects
 
-
-.. method:: API.retweets_of_me
+.. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
 
    Returns the 20 most recent tweets of the authenticated user that have
    been retweeted by others.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 Status methods
@@ -105,11 +135,10 @@ Status methods
 
 .. method:: API.get_status(id)
 
-Returns a single status specified by the ID parameter.
+   Returns a single status specified by the ID parameter.
 
-Parameters: *id* (Required)
-
-Returns: :class:`Status` object
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 .. method:: API.update_status(status, [in_reply_to_status_id], [lat], [long])
