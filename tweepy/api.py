@@ -36,7 +36,7 @@ class API(object):
         allowed_param = []
     )
 
-    """ statuses/home_timeline [Coming soon] """
+    """ statuses/home_timeline """
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
         parser = parse_statuses,
@@ -68,7 +68,7 @@ class API(object):
         require_auth = True
     )
 
-    """ statuses/retweeted_by_me [Coming soon] """
+    """ statuses/retweeted_by_me """
     retweeted_by_me = bind_api(
         path = '/statuses/retweeted_by_me.json',
         parser = parse_statuses,
@@ -99,7 +99,7 @@ class API(object):
         allowed_param = ['id']
     )
 
-    """ statuses/update [Geolocation parameters coming soon] """
+    """ statuses/update """
     update_status = bind_api(
         path = '/statuses/update.json',
         method = 'POST',
@@ -117,16 +117,16 @@ class API(object):
         require_auth = True
     )
 
-    """ statuses/retweet [Coming soon] """
-    retweet = bind_api(
-        path = '/statuses/retweet/id.json',
-        method = 'POST',
-        parser = parse_status,
-        allowed_param = ['id'],
-        require_auth = True
-    )
+    """ statuses/retweet """
+    def retweet(self, id, *args, **kargs):
+        return bind_api(
+            path = '/statuses/retweet/%s.json' % id,
+            method = 'POST',
+            parser = parse_status,
+            require_auth = True
+        )(self, *args, **kargs)
 
-    """ statuses/retweets [Coming soon] """
+    """ statuses/retweets """
     def retweets(self, id, *args, **kargs):
         return bind_api(
             path = '/statuses/retweets/%s.json' % id,
