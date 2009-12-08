@@ -3,9 +3,10 @@
 import sys
 
 import code
+from getpass import getpass
+from optparse import OptionParser
 import tweepy
 from tweepy import API, BasicAuthHandler
-from getpass import getpass
 
 """Launch an interactive shell ready for Tweepy usage
 
@@ -15,18 +16,22 @@ It imports tweepy and creates an authenticated API instance (api)
 using the credentials provided.
 """
 
-username = None
-password = None
+opt = OptionParser(usage='tweepyshell [options] <username> <password>')
+opt.add_option('-d', '--debug',
+        action='store_true',
+        dest='debug',
+        help='enable debug mode')
+options, args = opt.parse_args()
 
-if len(sys.argv) == 2:
-    username, password = sys.argv[1], getpass()
-elif len(sys.argv) == 3:
-    username, password = sys.argv[1], sys.argv[2]
+if len(args) == 1:
+    auth = BasicAuthHandler(sys.argv[1], getpass())
+elif len(args) == 2:
+    auth = BasicAuthHandler(sys.argv[1], sys.argv[2])
 else:
-    print 'Usage: tweepyshell <username> [password]'
-    exit(1)
+    auth = None
 
-api = API(BasicAuthHandler(username=username, password=password))
+if options.debug:
+    tweepy.debug()
 
-code.interact('<Tweepy shell>', local={'tweepy': tweepy, 'api': api})
+code.interact('<Tweepy shell>', local={'tweepy': tweepy, 'api': API(auth)})
 

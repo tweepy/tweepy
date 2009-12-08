@@ -17,9 +17,11 @@ during upgrade will be listed here.
 + tweepyshell
     - allow using getpass for more secure password collection
       new usage: tweepyshell <username> [password] <-- optional now
+    - enable debug mode with '-d' flag
 + API
 	- retweet() method now works correctly
     - Added local trends method: trends_available() and trends_location()
++ tweepy.debug() enables httplib debug mode
 
 1.2 -> 1.3 [Current release]
 =====================
