@@ -5,6 +5,7 @@
 import httplib
 import urllib
 import time
+import re
 
 from tweepy.parsers import parse_error
 from tweepy.error import TweepError
@@ -19,6 +20,8 @@ except ImportError:
             from django.utils import simplejson as json  # Google App Engine
         except ImportError:
             raise ImportError, "Can't load a json library"
+
+re_path_template = re.compile('{\w+}')
 
 
 def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
@@ -46,6 +49,9 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             for idx, arg in enumerate(args):
                 if isinstance(arg, unicode):
                     arg = arg.encode('utf-8')
+                elif not isinstance(arg, str):
+                    arg = str(arg)
+
                 try:
                     parameters[allowed_param[idx]] = arg
                 except IndexError:
@@ -57,22 +63,37 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
                 if k not in allowed_param:
                     raise TweepError('Invalid parameter %s supplied!' % k)
+
                 if isinstance(arg, unicode):
                     arg = arg.encode('utf-8')
+                elif not isinstance(arg, str):
+                    arg = str(arg)
                 parameters[k] = arg
         else:
             if len(args) > 0 or len(kargs) > 0:
                 raise TweepError('This method takes no parameters!')
             parameters = None
 
-        # Build url with parameters
+        # Pick correct URL root to use
         if search_api is False:
             api_root = api.api_root
         else:
             api_root = api.search_root
 
+        # Build the request URL
         if parameters:
-            url = '%s?%s' % (api_root + path, urllib.urlencode(parameters))
+            # Replace any template variables in path
+            tpath = str(path)
+            for template in re_path_template.findall(path):
+                name = template.strip('{}')
+                try:
+                    value = urllib.quote(parameters[name])
+                    tpath = path.replace(template, value)
+                except KeyError:
+                    raise TweepError('Invalid path key: %s' % name)
+                del parameters[name]
+
+            url = '%s?%s' % (api_root + tpath, urllib.urlencode(parameters))
         else:
             url = api_root + path
 
