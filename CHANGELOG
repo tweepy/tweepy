@@ -22,6 +22,7 @@ during upgrade will be listed here.
 	- retweet() method now works correctly
     - Added local trends method: trends_available() and trends_location()
 + tweepy.debug() enables httplib debug mode
++ New Sphinx documentation (Thanks Kumar!) in doc/
 
 1.2 -> 1.3 [Current release]
 =====================
