@@ -13,7 +13,7 @@ Features:
   + Actively under development
   + Streaming API support
   + Cache system (memory, file)
-  + Python 3 support (3.1) -- See py3k branch
+  + Python 3 support -- See py3k branch
 
 Getting started:
   Be sure to check the wiki for references, samples, and tutorials.
