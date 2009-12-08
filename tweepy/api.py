@@ -118,22 +118,21 @@ class API(object):
     )
 
     """ statuses/retweet """
-    def retweet(self, id, *args, **kargs):
-        return bind_api(
-            path = '/statuses/retweet/%s.json' % id,
-            method = 'POST',
-            parser = parse_status,
-            require_auth = True
-        )(self, *args, **kargs)
+    retweet = bind_api(
+        path = '/statuses/retweet/{id}.json',
+        method = 'POST',
+        parser = parse_status,
+        allowed_param = ['id'],
+        require_auth = True
+    )
 
     """ statuses/retweets """
-    def retweets(self, id, *args, **kargs):
-        return bind_api(
-            path = '/statuses/retweets/%s.json' % id,
-            parser = parse_statuses,
-            allowed_param = ['count'],
-            require_auth = True
-        )(self, *args, **kargs)
+    retweets = bind_api(
+        path = '/statuses/retweets/{id}.json',
+        parser = parse_statuses,
+        allowed_param = ['id', 'count'],
+        require_auth = True
+    )
 
     """ users/show """
     get_user = bind_api(
@@ -324,24 +323,22 @@ class API(object):
     )
 
     """ favorites/create """
-    def create_favorite(self, id):
-        return bind_api(
-            path = '/favorites/create/%s.json' % id,
-            method = 'POST',
-            parser = parse_status,
-            allowed_param = ['id'],
-            require_auth = True
-        )(self, id)
+    create_favorite = bind_api(
+        path = '/favorites/create/{id}.json',
+        method = 'POST',
+        parser = parse_status,
+        allowed_param = ['id'],
+        require_auth = True
+    )
 
     """ favorites/destroy """
-    def destroy_favorite(self, id):
-        return bind_api(
-            path = '/favorites/destroy/%s.json' % id,
-            method = 'DELETE',
-            parser = parse_status,
-            allowed_param = ['id'],
-            require_auth = True
-        )(self, id)
+    destroy_favorite = bind_api(
+        path = '/favorites/destroy/{id}.json',
+        method = 'DELETE',
+        parser = parse_status,
+        allowed_param = ['id'],
+        require_auth = True
+    )
 
     """ notifications/follow """
     enable_notifications = bind_api(
@@ -390,7 +387,6 @@ class API(object):
             )(self, *args, **kargs)
         except TweepError:
             return False
-
         return True
 
     """ blocks/blocking """
@@ -425,12 +421,12 @@ class API(object):
     )
 
     """ saved_searches/show """
-    def get_saved_search(self, id):
-        return bind_api(
-            path = '/saved_searches/show/%s.json' % id,
-            parser = parse_saved_search,
-            require_auth = True
-        )(self)
+    get_saved_search = bind_api(
+        path = '/saved_searches/show/{id}.json',
+        parser = parse_saved_search,
+        allowed_param = ['id'],
+        require_auth = True
+    )
 
     """ saved_searches/create """
     create_saved_search = bind_api(
@@ -442,14 +438,13 @@ class API(object):
     )
 
     """ saved_searches/destroy """
-    def destroy_saved_search(self, id):
-        return bind_api(
-            path = '/saved_searches/destroy/%s.json' % id,
-            method = 'DELETE',
-            parser = parse_saved_search,
-            allowed_param = ['id'],
-            require_auth = True
-        )(self)
+    destroy_saved_search = bind_api(
+        path = '/saved_searches/destroy/{id}.json',
+        method = 'DELETE',
+        parser = parse_saved_search,
+        allowed_param = ['id'],
+        require_auth = True
+    )
 
     """ help/test """
     def test(self):
@@ -514,19 +509,17 @@ class API(object):
         )(self, *args, **kargs)
     lists_subscriptions.pagination_mode = 'cursor'
 
-    def list_timeline(self, owner, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists/%s/statuses.json' % (owner, slug),
-            parser = parse_statuses,
-            allowed_param = ['since_id', 'max_id', 'count', 'page']
-        )(self, *args, **kargs)
-    list_timeline.pagination_mode = 'page'
+    list_timeline = bind_api(
+        path = '/{owner}/lists/{slug}/statuses.json',
+        parser = parse_statuses,
+        allowed_param = ['owner', 'slug', 'since_id', 'max_id', 'count', 'page']
+    )
 
-    def get_list(self, owner, slug):
-        return bind_api(
-            path = '/%s/lists/%s.json' % (owner, slug),
-            parser = parse_list
-        )(self)
+    get_list = bind_api(
+        path = '/{owner}/lists/{slug}.json',
+        parser = parse_list,
+        allowed_param = ['owner', 'slug']
+    )
 
     def add_list_member(self, slug, *args, **kargs):
         return bind_api(
@@ -546,13 +539,11 @@ class API(object):
             require_auth = True
         )(self, *args, **kargs)
 
-    def list_members(self, owner, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/%s/members.json' % (owner, slug),
-            parser = parse_users,
-            allowed_param = ['cursor']
-        )(self, *args, **kargs)
-    list_members.pagination_mode = 'cursor'
+    list_members = bind_api(
+        path = '/{owner}/{slug}/members.json',
+        parser = parse_users,
+        allowed_param = ['owner', 'slug', 'cursor']
+    )
 
     def is_list_member(self, owner, slug, user_id):
         try:
@@ -563,29 +554,27 @@ class API(object):
         except TweepError:
             return False
 
-    def subscribe_list(self, owner, slug):
-        return bind_api(
-            path = '/%s/%s/subscribers.json' % (owner, slug),
-            method = 'POST',
-            parser = parse_list,
-            require_auth = True
-        )(self)
+    subscribe_list = bind_api(
+        path = '/{owner}/{slug}/subscribers.json',
+        method = 'POST',
+        parser = parse_list,
+        allowed_param = ['owner', 'slug'],
+        require_auth = True
+    )
 
-    def unsubscribe_list(self, owner, slug):
-        return bind_api(
-            path = '/%s/%s/subscribers.json' % (owner, slug),
-            method = 'DELETE',
-            parser = parse_list,
-            require_auth = True
-        )(self)
+    unsubscribe_list = bind_api(
+        path = '/{owner}/{slug}/subscribers.json',
+        method = 'DELETE',
+        parser = parse_list,
+        allowed_param = ['owner', 'slug'],
+        require_auth = True
+    )
 
-    def list_subscribers(self, owner, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/%s/subscribers.json' % (owner, slug),
-            parser = parse_users,
-            allowed_param = ['cursor']
-        )(self, *args, **kargs)
-    list_subscribers.pagination_mode = 'cursor'
+    list_subscribers = bind_api(
+        path = '/{owner}/{slug}/subscribers.json',
+        parser = parse_users,
+        allowed_param = ['owner', 'slug', 'cursor']
+    )
 
     def is_subscribed_list(self, owner, slug, user_id):
         try:
@@ -604,11 +593,11 @@ class API(object):
     )
 
     """ trends/location [coming soon] """
-    def trends_location(self, woeid, *args, **kargs):
-        return bind_api(
-            path = '/trends/%s.json' % woeid,
-            parser = parse_json,
-        )(self, *args, **kargs)
+    trends_location = bind_api(
+        path = '/trends/{woeid}.json',
+        parser = parse_json,
+        allowed_param = ['woeid']
+    )
 
     """ search """
     search = bind_api(
