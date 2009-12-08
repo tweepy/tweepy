@@ -596,6 +596,20 @@ class API(object):
         except TweepError:
             return False
 
+    """ trends/available [coming soon] """
+    trends_available = bind_api(
+        path = '/trends/available.json',
+        parser = parse_json,
+        allowed_param = ['lat', 'long']
+    )
+
+    """ trends/location [coming soon] """
+    def trends_location(self, woeid, *args, **kargs):
+        return bind_api(
+            path = '/trends/%s.json' % woeid,
+            parser = parse_json,
+        )(self, *args, **kargs)
+
     """ search """
     search = bind_api(
         search_api = True,
