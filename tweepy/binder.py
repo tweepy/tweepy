@@ -84,11 +84,11 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         if parameters:
             # Replace any template variables in path
             tpath = str(path)
-            for template in re_path_template.findall(path):
+            for template in re_path_template.findall(tpath):
                 name = template.strip('{}')
                 try:
                     value = urllib.quote(parameters[name])
-                    tpath = path.replace(template, value)
+                    tpath = tpath.replace(template, value)
                 except KeyError:
                     raise TweepError('Invalid path key: %s' % name)
                 del parameters[name]
