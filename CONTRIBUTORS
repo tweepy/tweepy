@@ -10,5 +10,6 @@ Fredrik Lundh
     - html unescape (http://effbot.org/zone/re-sub.htm#unescape-html)
 Kumar Appaiah
     - tweepyshell patch
+	- sphinx documentation
 Ferenc Szalai
 	- Fix API.retweet()
