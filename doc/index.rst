@@ -14,6 +14,7 @@ Contents:
    getting_started.rst
    auth_tutorial.rst
    code_snippet.rst
+   cursor_tutorial.rst
    api.rst
 
 Indices and tables
