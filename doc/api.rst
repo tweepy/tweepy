@@ -26,7 +26,7 @@ Timeline methods
 
    Parameters: None
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.home_timeline([since_id], [max_id], [count], [page])
@@ -37,7 +37,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.friends_timeline([since_id], [max_id], [count], [page])
@@ -47,7 +47,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], [count], [page])
@@ -58,7 +58,7 @@ Timeline methods
 
    Parameters: *id* or *user_id* or *screen_name*, *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.mentions([since_id], [max_id], [count], [page])
@@ -68,7 +68,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.retweeted_by_me([since_id], [max_id], [count], [page])
@@ -77,7 +77,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.retweeted_to_me([since_id], [max_id], [count], [page])
@@ -87,7 +87,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.retweets_of_me
@@ -97,7 +97,7 @@ Timeline methods
 
    Parameters: *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 Status methods
@@ -109,7 +109,7 @@ Returns a single status specified by the ID parameter.
 
 Parameters: *id* (Required)
 
-Returns: class:`Status` object
+Returns: :class:`Status` object
 
 
 .. method:: API.update_status(status, [in_reply_to_status_id], [lat], [long])
@@ -119,7 +119,7 @@ Returns: class:`Status` object
 
    Parameters: *status* (Required), *in_reply_to_status_id*, *lat*, *long*
 
-   Returns: class:`Status` object
+   Returns: :class:`Status` object
 
 
 .. method:: API.destroy_status(id)
@@ -129,7 +129,7 @@ Returns: class:`Status` object
 
    Parameters: *id* (Required)
 
-   Returns: class:`Status` object
+   Returns: :class:`Status` object
 
 
 .. method:: API.retweet(id)
@@ -138,7 +138,7 @@ Returns: class:`Status` object
 
    Parameters: *id* (Required)
 
-   Returns: class:`Status` object
+   Returns: :class:`Status` object
 
 
 .. method:: API.retweets(id)
@@ -147,7 +147,7 @@ Returns: class:`Status` object
 
    Parameters: *id* (Required), count
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 User methods
@@ -159,7 +159,7 @@ User methods
 
    Parameters: *id* OR screen_name OR id (One of these is Required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.me()
@@ -176,7 +176,7 @@ User methods
 
    Parameters: *id* OR *screen_name* OR *user_id*, *cursor*
 
-   Returns: list of class:`User` objects
+   Returns: list of :class:`User` objects
 
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
@@ -200,7 +200,7 @@ User methods
 
    Parameters: *q* (Required. The query.), *per_page*, *page*
 
-   Returns: list of class:`User` objects
+   Returns: list of :class:`User` objects
 
 
 Direct Message Methods
@@ -231,7 +231,7 @@ Direct Message Methods
 
    Parameters: *user* (Required), *text* (Required)
 
-   Returns: class:`DirectMessage` object
+   Returns: :class:`DirectMessage` object
 
 
 .. method:: API.destroy_direct_message(id)
@@ -241,7 +241,7 @@ Direct Message Methods
 
    Parameters: *id* (Required)
 
-   Returns: class:`DirectMessage` object
+   Returns: :class:`DirectMessage` object
 
 
 Friendship Methods
@@ -315,7 +315,7 @@ Account Methods
 
    Parameters: None
 
-   Returns: class:`User` object if credentials are valid, otherwise False
+   Returns: :class:`User` object if credentials are valid, otherwise False
 
 
 .. method:: API.rate_limit_status()
@@ -329,7 +329,7 @@ Account Methods
 
    Parameters: None
 
-   Returns: class:`JSON` object
+   Returns: :class:`JSON` object
 
 
 .. method:: API.set_delivery_device(device)
@@ -339,7 +339,7 @@ Account Methods
 
    Parameters: *device* (Required. Valid values: sms OR none)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.update_profile_colors([profile_background_color], [profile_text_color], [profile_link_color], [profile_sidebar_fill_color], [profile_sidebar_border_color])
@@ -349,7 +349,7 @@ Account Methods
 
    Parameters: *profile_background_color*, *profile_text_color*, *profile_link_color*, *profile_sidebar_fill_color*, *profile_sidebar_border_color*
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.update_profile_image(filename)
@@ -359,7 +359,7 @@ Account Methods
 
    Parameters: filename (Path to image file. Required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.update_profile_background_image(filename)
@@ -369,7 +369,7 @@ Account Methods
 
    Parameters: filename (Path to image file. Required), tile
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.update_profile([name], [url], [location], [description])
@@ -379,7 +379,7 @@ Account Methods
 
    Parameters: *name*, *url*, *location*, *description*
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 Favorite Methods
@@ -392,7 +392,7 @@ Favorite Methods
 
    Parameters: *id*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.create_favorite(id)
@@ -402,7 +402,7 @@ Favorite Methods
 
    Parameters: *id* (Required)
 
-   Returns: class:`Status` object
+   Returns: :class:`Status` object
 
 
 .. method:: API.destroy_favorite(id)
@@ -412,7 +412,7 @@ Favorite Methods
 
    Parameters: *id* (Required)
 
-   Returns: class:`Status` object
+   Returns: :class:`Status` object
 
 
 Notification Methods
@@ -424,7 +424,7 @@ Notification Methods
 
    Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.disable_notifications(id/screen_name/user_id)
@@ -434,7 +434,7 @@ Notification Methods
 
    Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 Block Methods
@@ -447,7 +447,7 @@ Block Methods
 
    Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.destroy_block(id/screen_name/user_id)
@@ -457,7 +457,7 @@ Block Methods
 
    Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 .. method:: API.exists_block(id/screen_name/user_id)
@@ -476,7 +476,7 @@ Block Methods
 
    Parameters: page
 
-   Returns: list of class:`User` objects
+   Returns: list of :class:`User` objects
 
 
 .. method:: API.blocks_ids
@@ -499,7 +499,7 @@ Spam Reporting Methods
 
    Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
 
-   Returns: class:`User` object
+   Returns: :class:`User` object
 
 
 Saved Searches Methods
@@ -511,7 +511,7 @@ Saved Searches Methods
 
    Parameters: None
 
-   Returns: list of class:`SavedSearch` objects
+   Returns: list of :class:`SavedSearch` objects
 
 
 .. method:: API.get_saved_search(id)
@@ -521,7 +521,7 @@ Saved Searches Methods
 
    Parameters: *id* (Required)
 
-   Returns: class:`SavedSearch` object
+   Returns: :class:`SavedSearch` object
 
 
 .. method:: API.create_saved_search(query)
@@ -530,7 +530,7 @@ Saved Searches Methods
 
    Parameters: *query* (Required)
 
-   Returns: class:`SavedSearch` object
+   Returns: :class:`SavedSearch` object
 
 
 .. method:: API.destroy_saved_search(id)
@@ -540,7 +540,7 @@ Saved Searches Methods
 
    Parameters: *id* (Required)
 
-   Returns: class:`SavedSearch` object
+   Returns: :class:`SavedSearch` object
 
 
 Help Methods
@@ -562,7 +562,7 @@ Help Methods
 
    Parameters: q (Required. The search query string.), lang, locale, rpp, page, since_id, geocode, show_user
 
-   Returns: list of class:`SearchResult` objects
+   Returns: list of :class:`SearchResult` objects
 
 
 .. method:: API.trends()
@@ -573,7 +573,7 @@ Help Methods
 
    Parameters: None
 
-   Returns: class:`JSON` object
+   Returns: :class:`JSON` object
 
 
 .. method:: API.trends_current([exclude])
@@ -584,7 +584,7 @@ Help Methods
 
    Parameters: *exclude*
 
-   Returns: class:`JSON` object
+   Returns: :class:`JSON` object
 
 
 .. method:: API.trends_daily([date], [exclude])
@@ -593,7 +593,7 @@ Help Methods
 
    Parameters: *date*, *exclude*
 
-   Returns: class:`JSON` object
+   Returns: :class:`JSON` object
 
 
 .. method:: API.trends_weekly([date], [exclude])
@@ -602,7 +602,7 @@ Help Methods
 
    Parameters: *date*, *exclude*
 
-   Returns: class:`JSON` object
+   Returns: :class:`JSON` object
 
 
 List Methods
@@ -615,7 +615,7 @@ List Methods
 
    Parameters: *name* (Required), *mode* (public/private default: public)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.destroy_list(slug)
@@ -624,7 +624,7 @@ List Methods
 
    Parameters: *slug* (Required. May also be the list ID.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.update_list(slug, [name], [mode])
@@ -634,7 +634,7 @@ List Methods
 
    Parameters: *slug* (Required. May also be the list ID.), *name*, *mode* (public/private)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.lists([cursor])
@@ -645,7 +645,7 @@ List Methods
 
    Parameters: *cursor*
 
-   Returns: list of class:`List` objects
+   Returns: list of :class:`List` objects
 
 
 .. method:: API.lists_memberships([cursor])
@@ -654,7 +654,7 @@ List Methods
 
    Parameters: *cursor*
 
-   Returns: list of class:`List` objects
+   Returns: list of :class:`List` objects
 
 
 .. method:: API.lists_subscriptions([cursor])
@@ -663,7 +663,7 @@ List Methods
 
    Parameters: *cursor*
 
-   Returns: list of class:`List` objects
+   Returns: list of :class:`List` objects
 
 
 .. method:: API.list_timeline(owner, slug, [since_id], [max_id], [count], [page])
@@ -672,7 +672,7 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be the list ID.), *since_id*, *max_id*, *count*, *page*
 
-   Returns: list of class:`Status` objects
+   Returns: list of :class:`Status` objects
 
 
 .. method:: API.get_list(owner, slug)
@@ -682,7 +682,7 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be the list ID.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.add_list_member*slug, id)
@@ -692,7 +692,7 @@ List Methods
 
    Parameters: *slug* (Required. May also be the list ID.), *id* (Required. ID of user to add.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.remove_list_member(slug, id)
@@ -702,7 +702,7 @@ List Methods
 
    Parameters: *slug* (Required. May also be the list ID.), *id* (Required. ID of user to remove.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.list_members(owner, slug, cursor)
@@ -711,16 +711,16 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *cursor*
 
-   Returns: list of class:`User` objects
+   Returns: list of :class:`User` objects
 
 
 .. method:: API.is_list_member(owner, slug, id)
 
    Check if a user is a member of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. class:`User` to check if subscribed to the list.)
+   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. :class:`User` to check if subscribed to the list.)
 
-   Returns: class:`User` object if user is a member of list, otherwise False.
+   Returns: :class:`User` object if user is a member of list, otherwise False.
 
 
 .. method:: API.subscribe_list(owner, slug)
@@ -729,7 +729,7 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be list ID.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.unsubscribe_list(owner, slug)
@@ -738,7 +738,7 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be list ID.)
 
-   Returns: class:`List` object
+   Returns: :class:`List` object
 
 
 .. method:: API.list_subscribers(owner, slug, [cursor])
@@ -747,14 +747,14 @@ List Methods
 
    Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *cursor*
 
-   Returns: list of class:`User` objects
+   Returns: list of :class:`User` objects
 
 
 .. method:: API.is_subscribed_list(owner, slug, id)
 
    Check if the specified user is a subscriber of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. class:`User` to check if subscribed to the list.)
+   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. :class:`User` to check if subscribed to the list.)
 
-   Returns: class:`User` object if user is subscribed to the list, otherwise False.
+   Returns: :class:`User` object if user is subscribed to the list, otherwise False.
 
