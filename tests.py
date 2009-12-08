@@ -27,6 +27,9 @@ class TweepyAPITests(unittest.TestCase):
     def testpublictimeline(self):
         self.api.public_timeline()
 
+    def testhometimeline(self):
+        self.api.home_timeline()
+
     def testfriendstimeline(self):
         self.api.friends_timeline()
 
@@ -36,6 +39,22 @@ class TweepyAPITests(unittest.TestCase):
 
     def testmentions(self):
         self.api.mentions()
+
+    def testretweetedbyme(self):
+        self.api.retweeted_by_me()
+
+    def testretweetedtome(self):
+        self.api.retweeted_to_me()
+
+    def testretweetsofme(self):
+        self.api.retweets_of_me()
+
+    def testretweet(self):
+        s = self.api.retweet(123)
+        s.destroy()
+
+    def testretweets(self):
+        self.api.retweets(123)
 
     def testgetstatus(self):
         s = self.api.get_status(id=123)
