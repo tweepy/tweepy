@@ -188,7 +188,7 @@ class API(object):
         path = '/direct_messages/new.json',
         method = 'POST',
         parser = parse_dm,
-        allowed_param = ['user', 'text'],
+        allowed_param = ['user', 'screen_name', 'user_id', 'text'],
         require_auth = True
     )
 

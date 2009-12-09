@@ -21,6 +21,7 @@ during upgrade will be listed here.
 + API
 	- retweet() method now works correctly
     - Added local trends method: trends_available() and trends_location()
+	- send_direct_message() now accepts either a user/screen_name/user_id for recipient of DM
 + tweepy.debug() enables httplib debug mode
 + New Sphinx documentation (Thanks Kumar!) in doc/
 
