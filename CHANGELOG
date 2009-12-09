@@ -24,6 +24,7 @@ during upgrade will be listed here.
 	- send_direct_message() now accepts either a user/screen_name/user_id for recipient of DM
 + tweepy.debug() enables httplib debug mode
 + New Sphinx documentation (Thanks Kumar!) in doc/
++ Fix User.timeline() to return correct timeline
 
 1.2 -> 1.3 [Current release]
 =====================

@@ -36,16 +36,16 @@ class Status(Model):
 class User(Model):
 
     def timeline(self, **kargs):
-        return self._api.user_timeline(**kargs)
+        return self._api.user_timeline(user_id=self.id, **kargs)
 
     def mentions(self, **kargs):
         return self._api.mentions(**kargs)
 
     def friends(self, **kargs):
-        return self._api.friends(self.id, **kargs)
+        return self._api.friends(user_id=self.id, **kargs)
 
     def followers(self, **kargs):
-        return self._api.followers(self.id, **kargs)
+        return self._api.followers(user_idself.id, **kargs)
 
     def follow(self):
         self._api.create_friendship(user_id=self.id)
