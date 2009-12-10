@@ -104,7 +104,7 @@ class API(object):
         path = '/statuses/update.json',
         method = 'POST',
         parser = parse_status,
-        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long'],
+        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source'],
         require_auth = True
     )
 
