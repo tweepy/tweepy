@@ -38,9 +38,6 @@ class User(Model):
     def timeline(self, **kargs):
         return self._api.user_timeline(user_id=self.id, **kargs)
 
-    def mentions(self, **kargs):
-        return self._api.mentions(**kargs)
-
     def friends(self, **kargs):
         return self._api.friends(user_id=self.id, **kargs)
 
