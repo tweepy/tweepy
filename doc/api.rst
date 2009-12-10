@@ -141,14 +141,17 @@ Status methods
    :rtype: :class:`Status` object
 
 
-.. method:: API.update_status(status, [in_reply_to_status_id], [lat], [long])
+.. method:: API.update_status(status, [in_reply_to_status_id], [lat], [long], [source])
 
    Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
-   Parameters: *status* (Required), *in_reply_to_status_id*, *lat*, *long*
-
-   Returns: :class:`Status` object
+   :param status: The text of your status update.
+   :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param lat: The location's latitude that this tweet refers to.
+   :param long: The location's longitude that this tweet refers to.
+   :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
+   :rtype: :class:`Status` object
 
 
 .. method:: API.destroy_status(id)
@@ -156,56 +159,56 @@ Status methods
    Destroy the status specified by the id parameter. The authenticated
    user must be the author of the status to destroy.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`Status` object
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 .. method:: API.retweet(id)
 
    Retweets a tweet. Requires the id of the tweet you are retweeting.
 
-   Parameters: *id* (Required)
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
-   Returns: :class:`Status` object
 
-
-.. method:: API.retweets(id)
+.. method:: API.retweets(id[,count])
 
    Returns up to 100 of the first retweets of the given tweet.
 
-   Parameters: *id* (Required), count
-
-   Returns: list of :class:`Status` objects
+   :param id: |sid|
+   :param count: Specifies the number of retweets to retrieve.
+   :rtype: list of :class:`Status` objects
 
 
 User methods
 ------------
 
-.. method:: API.get_user(id)
+.. method:: API.get_user(id/user_id/screen_name)
 
    Returns information about the specified user.
 
-   Parameters: *id* OR screen_name OR id (One of these is Required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param user_id: |user_id|
+   :param screen_name: |screen_name|
+   :rtype: :class:`User` object
 
 
 .. method:: API.me()
 
    Returns the authenticated user's information.
 
-   Parameters: None
+   :rtype: :class:`User` object
 
-   Returns: User object
 
-.. method::API.friends([id/screen_name/user_id], [cursor])
+.. method::API.friends([id/user_id/screen_name], [cursor])
 
-   Returns an user's friends ordered in which they were added 100 at a time. If no user is specified by id/screen name, it defaults to the authenticated user.
+   Returns an user's friends ordered in which they were added 100 at a time. If no user is specified it defaults to the authenticated user.
 
-   Parameters: *id* OR *screen_name* OR *user_id*, *cursor*
-
-   Returns: list of :class:`User` objects
+   :param id: |uid|
+   :param user_id: |user_id|
+   :param screen_name: |screen_name|
+   :param cursor: |cursor|
+   :rtype: list of :class:`User` objects
 
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
@@ -214,10 +217,11 @@ User methods
    time. If no user is specified by id/screen name, it defaults to the
    authenticated user.
 
-   Parameters: *id* OR *screen_name* OR *user_id*, *cursor*
-
-   Returns: list of User objects
-
+   :param id: |uid|
+   :param user_id: |user_id|
+   :param screen_name: |screen_name|
+   :param cursor: |cursor|
+   :rtype: list of :class:`User` objects
 
 .. method:: API.search_users(q, [per_page], [page])
 
@@ -227,9 +231,10 @@ User methods
    Search). It is only possible to retrieve the first 1000 matches from
    this API.
 
-   Parameters: *q* (Required. The query.), *per_page*, *page*
-
-   Returns: list of :class:`User` objects
+   :param q: The query to run against people search.
+   :param per_page: Specifies the number of statuses to retrieve. May not be greater than 20.
+   :param page: |page|
+   :rtype: list of :class:`User` objects
 
 
 Direct Message Methods
@@ -239,28 +244,33 @@ Direct Message Methods
 
    Returns direct messages sent to the authenticating user.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of DirectMessage objects
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`DirectMessage` objects
 
 
 .. method:: API.sent_direct_messages([since_id], [max_id], [count], [page])
 
    Returns direct messages sent by the authenticating user.
 
-   Parameters: *since_id*, *max_id*, *count*, *page*
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`DirectMessage` objects
 
-   Returns: list of DirectMessage objects
 
-
-.. method:: API.send_direct_message(user, text)
+.. method:: API.send_direct_message(user/screen_name/user_id, text)
 
    Sends a new direct message to the specified user from the
    authenticating user.
 
-   Parameters: *user* (Required), *text* (Required)
-
-   Returns: :class:`DirectMessage` object
+   :param user: The ID or screen name of the recipient user.
+   :param screen_name: screen name of the recipient user
+   :param user_id: user id of the recipient user
+   :rtype: :class:`DirectMessage` object
 
 
 .. method:: API.destroy_direct_message(id)
@@ -268,30 +278,32 @@ Direct Message Methods
    Destroy a direct message. Authenticating user must be the recipient of
    the direct message.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`DirectMessage` object
+   :param id: The ID of the direct message to destroy.
+   :rtype: :class:`DirectMessage` object
 
 
 Friendship Methods
 ------------------
 
-.. method:: API.create_friendship(id/screen_name/user_id)
+.. method:: API.create_friendship(id/screen_name/user_id[,follow])
 
    Create a new friendship with the specified user (aka follow).
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: User object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param follow: Enable notifications for the target user in addition to becoming friends.
+   :rtype: :class:`User` object
 
 
 .. method:: API.destroy_friendship(id/screen_name/user_id)
 
    Destroy a friendship with the specified user (aka unfollow).
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: User object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 .. method:: API.exists_friendship(user_a, user_b)
@@ -299,30 +311,32 @@ Friendship Methods
    Checks if a friendship exists between two users. Will return True if
    user_a follows user_b, otherwise False.
 
-   Parameters: *user_a* (Required), *user_b* (Required)
+   :param user_a: The ID or screen_name of the subject user.
+   :param user_b: The ID or screen_name of the user to test for following.
+   :rtype: True/False
 
-   Returns: True/False
 
-
-.. method:: API.show_friendship(id/screen_name/user_id, target_id/target_screen_name)
+.. method:: API.show_friendship(source_id/source_screen_name, target_id/target_screen_name)
 
    Returns detailed information about the relationship between two users.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is
-   required), *target_id* OR *target_screen_name* (One of these is
-   required)
+   :param source_id: The user_id of the subject user.
+   :param source_screen_name: The screen_name of the subject user.
+   :param target_id: The user_id of the target user.
+   :param target_screen_name: The screen_name of the target user.
+   :rtype: :class:`Friendship` object
 
-   Returns: Friendship object
 
-
-.. method:: API.friends_ids(id/screen_name/user_id)
+.. method:: API.friends_ids(id/screen_name/user_id[,cursor])
 
    Returns an array containing the IDs of users being followed by the
    specified user.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: list of Integers
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param cursor: |cursor|
+   :rtype: list of Integers
 
 
 .. method:: API.followers_ids(id/screen_name/user_id)
@@ -330,9 +344,11 @@ Friendship Methods
    Returns an array containing the IDs of users following the specified
    user.
 
-   Parameters: *id* OR screen_name OR user_id (One of these is required)
-
-   Returns: list of Integers
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param cursor: |cursor|
+   :rtype: list of Integers
 
 
 Account Methods
@@ -342,9 +358,7 @@ Account Methods
 
    Verify the supplied user credentials are valid.
 
-   Parameters: None
-
-   Returns: :class:`User` object if credentials are valid, otherwise False
+   :rtype: :class:`User` object if credentials are valid, otherwise False
 
 
 .. method:: API.rate_limit_status()
@@ -356,9 +370,7 @@ Account Methods
    status for the authenticating user is returned. Otherwise, the rate
    limit status for the requester's IP address is returned.
 
-   Parameters: None
-
-   Returns: :class:`JSON` object
+   :rtype: :class:`JSON` object
 
 
 .. method:: API.set_delivery_device(device)
@@ -366,9 +378,8 @@ Account Methods
    Sets which device Twitter delivers updates to for the authenticating
    user. Sending "none" as the device parameter will disable SMS updates.
 
-   Parameters: *device* (Required. Valid values: sms OR none)
-
-   Returns: :class:`User` object
+   :param device: Must be one of: sms, none
+   :rtype: :class:`User` object
 
 
 .. method:: API.update_profile_colors([profile_background_color], [profile_text_color], [profile_link_color], [profile_sidebar_fill_color], [profile_sidebar_border_color])
@@ -376,9 +387,12 @@ Account Methods
    Sets one or more hex values that control the color scheme of the
    authenticating user's profile page on twitter.com.
 
-   Parameters: *profile_background_color*, *profile_text_color*, *profile_link_color*, *profile_sidebar_fill_color*, *profile_sidebar_border_color*
-
-   Returns: :class:`User` object
+   :param profile_background_color:
+   :param profile_text_color:
+   :param profile_link_color:
+   :param profile_sidebar_fill_color:
+   :param profile_sidebar_border_color:
+   :rtype: :class:`User` object
 
 
 .. method:: API.update_profile_image(filename)
@@ -386,9 +400,8 @@ Account Methods
    Update the authenticating user's profile image. Valid formats: GIF,
    JPG, or PNG
 
-   Parameters: filename (Path to image file. Required)
-
-   Returns: :class:`User` object
+   :param filename: local path to image file to upload. Not a remote URL!
+   :rtype: :class:`User` object
 
 
 .. method:: API.update_profile_background_image(filename)
@@ -396,9 +409,8 @@ Account Methods
    Update authenticating user's background image. Valid formats: GIF,
    JPG, or PNG
 
-   Parameters: filename (Path to image file. Required), tile
-
-   Returns: :class:`User` object
+   :param filename: local path to image file to upload. Not a remote URL!
+   :rtype: :class:`User` object
 
 
 .. method:: API.update_profile([name], [url], [location], [description])
@@ -406,9 +418,11 @@ Account Methods
    Sets values that users are able to set under the "Account" tab of
    their settings page.
 
-   Parameters: *name*, *url*, *location*, *description*
-
-   Returns: :class:`User` object
+   :param name: Maximum of 20 characters
+   :param url: Maximum of 100 characters. Will be prepended with "http://" if not present
+   :param location: Maximum of 30 characters
+   :param description: Maximum of 160 characters
+   :rtype: :class:`User` object
 
 
 Favorite Methods
@@ -419,9 +433,9 @@ Favorite Methods
    Returns the favorite statuses for the authenticating user or user
    specified by the ID parameter.
 
-   Parameters: *id*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param id: The ID or screen name of the user to request favorites
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.create_favorite(id)
@@ -429,9 +443,8 @@ Favorite Methods
    Favorites the status specified in the ID parameter as the
    authenticating user.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`Status` object
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 .. method:: API.destroy_favorite(id)
@@ -439,9 +452,8 @@ Favorite Methods
    Un-favorites the status specified in the ID parameter as the
    authenticating user.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`Status` object
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 Notification Methods
@@ -451,9 +463,10 @@ Notification Methods
 
    Enables device notifications for updates from the specified user.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 .. method:: API.disable_notifications(id/screen_name/user_id)
@@ -461,9 +474,10 @@ Notification Methods
    Disables notifications for updates from the specified user to the
    authenticating user.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 Block Methods
@@ -474,9 +488,10 @@ Block Methods
    Blocks the user specified in the ID parameter as the authenticating
    user. Destroys a friendship to the blocked user if it exists.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 .. method:: API.destroy_block(id/screen_name/user_id)
@@ -484,18 +499,20 @@ Block Methods
    Un-blocks the user specified in the ID parameter for the
    authenticating user.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 .. method:: API.exists_block(id/screen_name/user_id)
 
    Checks if the authenticated user is blocking the specified user.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: True/False
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: True/False
 
 
 .. method:: API.blocks([page])
@@ -503,19 +520,16 @@ Block Methods
    Returns an array of user objects that the authenticating user is
    blocking.
 
-   Parameters: page
+   :param page: |page|
+   :rtype: list of :class:`User` objects
 
-   Returns: list of :class:`User` objects
 
-
-.. method:: API.blocks_ids
+.. method:: API.blocks_ids()
 
    Returns an array of numeric user ids the authenticating user is
    blocking.
 
-   Parameters: None
-
-   Returns: list of Integers
+   :rtype: list of Integers
 
 
 Spam Reporting Methods
@@ -526,21 +540,20 @@ Spam Reporting Methods
    The user specified in the id is blocked by the authenticated user and
    reported as a spammer.
 
-   Parameters: *id* OR *screen_name* OR *user_id* (One of these is required)
-
-   Returns: :class:`User` object
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
 
 
 Saved Searches Methods
 ----------------------
 
-.. method:: API.saved_searches
+.. method:: API.saved_searches()
 
    Returns the authenticated user's saved search queries.
 
-   Parameters: None
-
-   Returns: list of :class:`SavedSearch` objects
+   :rtype: list of :class:`SavedSearch` objects
 
 
 .. method:: API.get_saved_search(id)
@@ -548,18 +561,16 @@ Saved Searches Methods
    Retrieve the data for a saved search owned by the authenticating user
    specified by the given id.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`SavedSearch` object
+   :param id: The id of the saved search to be retrieved.
+   :rtype: :class:`SavedSearch` object
 
 
 .. method:: API.create_saved_search(query)
 
    Creates a saved search for the authenticated user.
 
-   Parameters: *query* (Required)
-
-   Returns: :class:`SavedSearch` object
+   :param query: The query of the search the user would like to save.
+   :rtype: :class:`SavedSearch` object
 
 
 .. method:: API.destroy_saved_search(id)
@@ -567,9 +578,8 @@ Saved Searches Methods
    Destroys a saved search for the authenticated user. The search
    specified by id must be owned by the authenticating user.
 
-   Parameters: *id* (Required)
-
-   Returns: :class:`SavedSearch` object
+   :param id: The id of the saved search to be deleted.
+   :rtype: :class:`SavedSearch` object
 
 
 Help Methods
@@ -580,18 +590,21 @@ Help Methods
    Invokes the test method in the Twitter API. Return True if successful,
    otherwise False.
 
-   Parameters: None
-
-   Returns: True/False
+   :rtype: True/False
 
 
-.. method:: API.search()
+.. method:: API.search(q[,lang],[locale],[rpp],[page],[since_id],[geocode],[show_user])
 
    Returns tweets that match a specified query.
 
-   Parameters: q (Required. The search query string.), lang, locale, rpp, page, since_id, geocode, show_user
-
-   Returns: list of :class:`SearchResult` objects
+   :param q: the search query string
+   :param lang: Restricts tweets to the given language, given by an ISO 639-1 code.
+   :param locale: Specify the language of the query you are sending. This is intended for language-specific clients and the default should work in the majority of cases.
+   :param rpp: The number of tweets to return per page, up to a max of 100.
+   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on rpp * page.
+   :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
+   :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
+   :rtype: list of :class:`SearchResult` objects
 
 
 .. method:: API.trends()
@@ -600,9 +613,7 @@ Help Methods
    response includes the time of the request, the name of each trend, and
    the url to the Twitter Search results page for that topic.
 
-   Parameters: None
-
-   Returns: :class:`JSON` object
+   :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_current([exclude])
@@ -611,59 +622,60 @@ Help Methods
    includes the time of the request, the name of each trending topic, and
    query used on Twitter Search results page for that topic.
 
-   Parameters: *exclude*
-
-   Returns: :class:`JSON` object
+   :param exclude: |exclude|
+   :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_daily([date], [exclude])
 
    Returns the top 20 trending topics for each hour in a given day.
 
-   Parameters: *date*, *exclude*
-
-   Returns: :class:`JSON` object
+   :param date: |date|
+   :param exclude: |exclude|
+   :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_weekly([date], [exclude])
 
    Returns the top 30 trending topics for each day in a given week.
 
-   Parameters: *date*, *exclude*
-
-   Returns: :class:`JSON` object
+   :param date: |date|
+   :param exclude: |exclude|
+   :rtype: :class:`JSON` object
 
 
 List Methods
 ------------
 
-.. method:: API.create_list(name, [mode])
+.. method:: API.create_list(name, [mode], [description])
 
    Creates a new list for the authenticated user. Accounts are limited to
    20 lists.
 
-   Parameters: *name* (Required), *mode* (public/private default: public)
-
-   Returns: :class:`List` object
+   :param name: The name of the new list.
+   :param mode: |list_mode|
+   :param description: The description of the list you are creating.
+   :rtype: :class:`List` object
 
 
 .. method:: API.destroy_list(slug)
 
    Deletes the specified list. Must be owned by the authenticated user.
 
-   Parameters: *slug* (Required. May also be the list ID.)
+   :param slug: |slug|
+   :rtype: :class:`List` object
 
-   Returns: :class:`List` object
 
-
-.. method:: API.update_list(slug, [name], [mode])
+.. method:: API.update_list(slug, [name], [mode], [description])
 
    Updates the specified list. Note: this current throws a 500. Twitter
    is looking into the issue.
 
-   Parameters: *slug* (Required. May also be the list ID.), *name*, *mode* (public/private)
-
-   Returns: :class:`List` object
+   :param slug: |slug|
+   :param name: What you'd like to change the lists name to.
+   :param mode: |list_mode|
+   :param description: What you'd like to change the list description to.
+   :rtype: :class:`List` object
 
 
 .. method:: API.lists([cursor])
@@ -672,36 +684,37 @@ List Methods
    if the authenticated users is the same as the user who's lists are
    being returned.
 
-   Parameters: *cursor*
-
-   Returns: list of :class:`List` objects
+   :param cursor: |cursor|
+   :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_memberships([cursor])
 
    List the lists the specified user has been added to.
 
-   Parameters: *cursor*
-
-   Returns: list of :class:`List` objects
+   :param cursor: |cursor|
+   :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_subscriptions([cursor])
 
    List the lists the specified user follows.
 
-   Parameters: *cursor*
-
-   Returns: list of :class:`List` objects
+   :param cursor: |cursor|
+   :rtype: list of :class:`List` objects
 
 
 .. method:: API.list_timeline(owner, slug, [since_id], [max_id], [count], [page])
 
    Show tweet timeline for members of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be the list ID.), *since_id*, *max_id*, *count*, *page*
-
-   Returns: list of :class:`Status` objects
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :param page: |page|
+   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.get_list(owner, slug)
@@ -709,19 +722,19 @@ List Methods
    Show the specified list. Private lists will only be shown if the
    authenticated user owns the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be the list ID.)
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :rtype: :class:`List` object
 
-   Returns: :class:`List` object
 
-
-.. method:: API.add_list_member*slug, id)
+.. method:: API.add_list_member(slug, id)
 
    Add a member to a list. The authenticated user must own the list to be
    able to add members to it. Lists are limited to having 500 members.
 
-   Parameters: *slug* (Required. May also be the list ID.), *id* (Required. ID of user to add.)
-
-   Returns: :class:`List` object
+   :param slug: |slug|
+   :param id: the ID of the user to add as a member
+   :rtype: :class:`List` object
 
 
 .. method:: API.remove_list_member(slug, id)
@@ -729,61 +742,86 @@ List Methods
    Removes the specified member from the list. The authenticated user
    must be the list's owner to remove members from the list.
 
-   Parameters: *slug* (Required. May also be the list ID.), *id* (Required. ID of user to remove.)
-
-   Returns: :class:`List` object
+   :param slug: |slug|
+   :param id: the ID of the user to remove as a member
+   :rtype: :class:`List` object
 
 
 .. method:: API.list_members(owner, slug, cursor)
 
    Returns the members of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *cursor*
-
-   Returns: list of :class:`User` objects
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :param cursor: |cursor|
+   :rtype: list of :class:`User` objects
 
 
 .. method:: API.is_list_member(owner, slug, id)
 
    Check if a user is a member of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. :class:`User` to check if subscribed to the list.)
-
-   Returns: :class:`User` object if user is a member of list, otherwise False.
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :param id: the ID of the user to check
+   :rtype: :class:`User` object if user is a member of list, otherwise False.
 
 
 .. method:: API.subscribe_list(owner, slug)
 
    Make the authenticated user follow the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.)
-
-   Returns: :class:`List` object
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :rtype: :class:`List` object
 
 
 .. method:: API.unsubscribe_list(owner, slug)
 
    Unsubscribes the authenticated user form the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.)
-
-   Returns: :class:`List` object
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :rtype: :class:`List` object
 
 
 .. method:: API.list_subscribers(owner, slug, [cursor])
 
    Returns the subscribers of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *cursor*
-
-   Returns: list of :class:`User` objects
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :param cursor: |cursor|
+   :rtype: list of :class:`User` objects
 
 
 .. method:: API.is_subscribed_list(owner, slug, id)
 
    Check if the specified user is a subscriber of the specified list.
 
-   Parameters: *owner* (Required.), *slug* (Required. May also be list ID.), *id* (Required. :class:`User` to check if subscribed to the list.)
+   :param owner: |list_owner|
+   :param slug: |slug|
+   :param id: the ID of the user to check
+   :rtype: :class:`User` object if user is subscribed to the list, otherwise False.
 
-   Returns: :class:`User` object if user is subscribed to the list, otherwise False.
+
+Local Trends Methods
+--------------------
+
+.. method:: API.trends_available([lat], [long])
+
+   Returns the locations that Twitter has trending topic information for. The response is an array of "locations" that encode the location's WOEID (a Yahoo! Where On Earth ID) and some other human-readable information such as a canonical name and country the location belongs in. [Coming soon]
+
+   :param lat: If passed in conjunction with long, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest.
+   :param long: See lat.
+   :rtype: :class:`JSON` object
+
+
+.. method:: API.trends_location(woeid)
+
+   Returns the top 10 trending topics for a specific location Twitter has trending topic information for. The response is an array of "trend" objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Search, and the direct URL that can be issued against Search. This information is cached for five minutes, and therefore users are discouraged from querying these endpoints faster than once every five minutes.  Global trends information is also available from this API by using a WOEID of 1.
+
+   :param woeid:     * The WOEID of the location to be querying for.
+   :rtype: :class:`JSON` object
+
 
