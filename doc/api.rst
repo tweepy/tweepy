@@ -1,6 +1,6 @@
 .. _api_reference:
 
-.. include:: _parameters.rst
+.. include:: parameters.rst
 
 API Reference
 =============
