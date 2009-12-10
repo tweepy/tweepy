@@ -41,7 +41,7 @@ API
 The API class provides access to the entire twitter RESTful API
 methods. Each method can accept various parameters and return
 responses. For more infomation about these methods please refer to
-:ref:`api_reference`. 
+:ref:`API Reference <api_reference>`.
 
 Models
 ======
