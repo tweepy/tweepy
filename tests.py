@@ -97,7 +97,7 @@ class TweepyAPITests(unittest.TestCase):
 
     def testsendanddestroydirectmessage(self):
         # send
-        sent_dm = self.api.send_direct_message(username, 'test message')
+        sent_dm = self.api.send_direct_message(username, text='test message')
         self.assertEqual(sent_dm.text, 'test message')
         self.assertEqual(sent_dm.sender.screen_name, username)
         self.assertEqual(sent_dm.recipient.screen_name, username)
