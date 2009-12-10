@@ -22,6 +22,8 @@ during upgrade will be listed here.
 	- retweet() method now works correctly
     - Added local trends method: trends_available() and trends_location()
 	- send_direct_message() now accepts either a user/screen_name/user_id for recipient of DM
+    - update_status() added 'source' parameter for Identi.ca
+    - create_list() and update_list() added 'description' parameter
 + tweepy.debug() enables httplib debug mode
 + New Sphinx documentation (Thanks Kumar!) in doc/
 + Fix User.timeline() to return correct timeline

@@ -461,7 +461,7 @@ class API(object):
             path = '/%s/lists.json' % self.auth.get_username(),
             method = 'POST',
             parser = parse_list,
-            allowed_param = ['name', 'mode'],
+            allowed_param = ['name', 'mode', 'description'],
             require_auth = True
         )(self, *args, **kargs)
 
@@ -478,7 +478,7 @@ class API(object):
             path = '/%s/lists/%s.json' % (self.auth.get_username(), slug),
             method = 'POST',
             parser = parse_list,
-            allowed_param = ['name', 'mode'],
+            allowed_param = ['name', 'mode', 'description'],
             require_auth = True
         )(self, *args, **kargs)
 
