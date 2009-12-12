@@ -109,6 +109,7 @@ def parse_users(obj, api):
 
     users = []
     for item in item_list:
+        if item is None: break  # sometimes an empty list with a null in it
         users.append(parse_user(item, api))
     return users
 
@@ -237,6 +238,7 @@ def parse_search_results(obj, api):
 def parse_list(obj, api):
 
     lst = models['list']()
+    lst._api = api
     for k,v in obj.items():
         if k == 'user':
             setattr(lst, k, parse_user(v, api))
