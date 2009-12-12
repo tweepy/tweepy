@@ -534,7 +534,7 @@ class API(object):
         return bind_api(
             path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
             method = 'DELETE',
-            parser = parse_user,
+            parser = parse_list,
             allowed_param = ['id'],
             require_auth = True
         )(self, *args, **kargs)
