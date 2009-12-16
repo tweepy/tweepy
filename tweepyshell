@@ -24,9 +24,9 @@ opt.add_option('-d', '--debug',
 options, args = opt.parse_args()
 
 if len(args) == 1:
-    auth = BasicAuthHandler(sys.argv[1], getpass())
+    auth = BasicAuthHandler(args[0], getpass())
 elif len(args) == 2:
-    auth = BasicAuthHandler(sys.argv[1], sys.argv[2])
+    auth = BasicAuthHandler(args[0], args[1])
 else:
     auth = None
 
