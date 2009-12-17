@@ -5,6 +5,11 @@ during upgrade will be listed here.
 ===========================
 + Models
     - Added some new helper methods to List model
+    - User model
+        - Added lists_memberships, lists_subscriptions, and lists helpers
++ API
+    - lists(), lists_memberships(), and lists_subscriptions() now
+        take an "user" parameter for specifying which user to query.
 
 1.3 -> 1.4 [current]
 ===========================

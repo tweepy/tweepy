@@ -482,32 +482,26 @@ class API(object):
             require_auth = True
         )(self, *args, **kargs)
 
-    def lists(self, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists.json' % self.auth.get_username(),
-            parser = parse_lists,
-            allowed_param = ['cursor'],
-            require_auth = True
-        )(self, *args, **kargs)
-    lists.pagination_mode = 'cursor'
+    lists = bind_api(
+        path = '/{user}/lists.json',
+        parser = parse_lists,
+        allowed_param = ['user', 'cursor'],
+        require_auth = True
+    )
 
-    def lists_memberships(self, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists/memberships.json' % self.auth.get_username(),
-            parser = parse_lists,
-            allowed_param = ['cursor'],
-            require_auth = True
-        )(self, *args, **kargs)
-    lists_memberships.pagination_mode = 'cursor'
+    lists_memberships = bind_api(
+        path = '/{user}/lists/memberships.json',
+        parser = parse_lists,
+        allowed_param = ['user', 'cursor'],
+        require_auth = True
+    )
 
-    def lists_subscriptions(self, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists/subscriptions.json' % self.auth.get_username(),
-            parser = parse_lists,
-            allowed_param = ['cursor'],
-            require_auth = True
-        )(self, *args, **kargs)
-    lists_subscriptions.pagination_mode = 'cursor'
+    lists_subscriptions = bind_api(
+        path = '/{user}/lists/subscriptions.json',
+        parser = parse_lists,
+        allowed_param = ['user', 'cursor'],
+        require_auth = True
+    )
 
     list_timeline = bind_api(
         path = '/{owner}/lists/{slug}/statuses.json',
