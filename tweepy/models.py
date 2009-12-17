@@ -52,17 +52,17 @@ class User(Model):
         self._api.destroy_friendship(user_id=self.id)
         self.following = False
 
-    def lists_memberships(self):
-        return self._api.lists_memberships(user=self.screen_name)
+    def lists_memberships(self, *args, **kargs):
+        return self._api.lists_memberships(user=self.screen_name, *args, **kargs)
 
-    def lists_subscriptions(self):
-        return self._api.lists_subscriptions(user=self.screen_name)
+    def lists_subscriptions(self, *args, **kargs):
+        return self._api.lists_subscriptions(user=self.screen_name, *args, **kargs)
 
-    def lists(self):
-        return self._api.lists(user=self.screen_name)
+    def lists(self, *args, **kargs):
+        return self._api.lists(user=self.screen_name, *args, **kargs)
 
-    def followers_ids(self):
-        return self._api.followers_ids(user_id=self.id)
+    def followers_ids(self, *args, **kargs):
+        return self._api.followers_ids(user_id=self.id, *args, **kargs)
 
 
 class DirectMessage(Model):
