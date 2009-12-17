@@ -13,3 +13,5 @@ Kumar Appaiah
 	- sphinx documentation
 Ferenc Szalai
 	- Fix API.retweet()
+Bas Westerbaan
+    - Fixes to API and User model
