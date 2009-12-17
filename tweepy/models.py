@@ -56,10 +56,10 @@ class User(Model):
         return self._api.lists_memberships(user=self.screen_name)
 
     def lists_subscriptions(self):
-	    return self._api.lists_subscriptions(user=self.screen_name)
+        return self._api.lists_subscriptions(user=self.screen_name)
 
     def lists(self):
-	    return self._api.lists(user=self.screen_name)
+        return self._api.lists(user=self.screen_name)
 
 
 class DirectMessage(Model):
