@@ -61,6 +61,9 @@ class User(Model):
     def lists(self):
         return self._api.lists(user=self.screen_name)
 
+    def followers_ids(self):
+        return self._api.followers_ids(user_id=self.id)
+
 
 class DirectMessage(Model):
 
