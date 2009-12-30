@@ -19,13 +19,12 @@ Documentation: http://joshthecoder.github.com/tweepy/docs/index.html
 Mailing list: http://groups.google.com/group/tweepy
 Chat: IRC freenode.net #tweepy
       Web interface: http://webchat.freenode.net/?channels=tweepy
-Wiki: http://code.google.com/p/tweepy/w
+Wiki: http://wiki.github.com/joshthecoder/tweepy
 Bug tracker: http://github.com/joshthecoder/tweepy/issues
 
 Souce code: 
     Library: http://github.com/joshthecoder/tweepy
     Examples: http://github.com/joshthecoder/tweepy-examples
-    Extensions: http://github.com/joshthecoder/tweepy-more
 
 Author: Joshua Roesslein
 License: MIT
