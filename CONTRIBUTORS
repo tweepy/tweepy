@@ -13,5 +13,6 @@ Kumar Appaiah
 	- sphinx documentation
 Ferenc Szalai
 	- Fix API.retweet()
+    - Add secure option to OAuthHandler
 Bas Westerbaan
     - Fixes to API and User model

@@ -37,18 +37,25 @@ class BasicAuthHandler(AuthHandler):
 class OAuthHandler(AuthHandler):
     """OAuth authentication handler"""
 
-    REQUEST_TOKEN_URL = 'http://api.twitter.com/oauth/request_token'
-    AUTHORIZATION_URL = 'http://api.twitter.com/oauth/authorize'
-    AUTHENTICATE_URL = 'http://api.twitter.com/oauth/authenticate'
-    ACCESS_TOKEN_URL = 'http://api.twitter.com/oauth/access_token'
+    OAUTH_HOST = 'api.twitter.com'
+    OAUTH_ROOT = '/oauth/'
 
-    def __init__(self, consumer_key, consumer_secret, callback=None):
+    def __init__(self, consumer_key, consumer_secret, callback=None, secure=False):
         self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
         self._sigmethod = oauth.OAuthSignatureMethod_HMAC_SHA1()
         self.request_token = None
         self.access_token = None
         self.callback = callback
         self.username = None
+        self.secure = secure
+
+    def _get_oauth_url(self, endpoint):
+        if self.secure:
+            prefix = 'https://'
+        else:
+            prefix = 'http://'
+
+        return prefix + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self, url, method, headers, parameters):
         request = oauth.OAuthRequest.from_consumer_and_token(
@@ -60,11 +67,12 @@ class OAuthHandler(AuthHandler):
 
     def _get_request_token(self):
         try:
+            url = self._get_oauth_url('request_token')
             request = oauth.OAuthRequest.from_consumer_and_token(
-                self._consumer, http_url=self.REQUEST_TOKEN_URL, callback=self.callback
+                self._consumer, http_url=url, callback=self.callback
             )
             request.sign_request(self._sigmethod, self._consumer, None)
-            resp = urlopen(Request(self.REQUEST_TOKEN_URL, headers=request.to_header()))
+            resp = urlopen(Request(url, headers=request.to_header()))
             return oauth.OAuthToken.from_string(resp.read())
         except Exception, e:
             raise TweepError(e)
@@ -83,11 +91,11 @@ class OAuthHandler(AuthHandler):
 
             # build auth request and return as url
             if signin_with_twitter:
-                auth_url = self.AUTHENTICATE_URL
+                url = self._get_oauth_url('authenticate')
             else:
-                auth_url = self.AUTHORIZATION_URL
+                url = self._get_oauth_url('authorize')
             request = oauth.OAuthRequest.from_token_and_callback(
-                token=self.request_token, http_url=auth_url
+                token=self.request_token, http_url=url
             )
 
             return request.to_url()
@@ -100,16 +108,18 @@ class OAuthHandler(AuthHandler):
         with user supplied verifier.
         """
         try:
+            url = self._get_oauth_url('access_token')
+
             # build request
             request = oauth.OAuthRequest.from_consumer_and_token(
                 self._consumer,
-                token=self.request_token, http_url=self.ACCESS_TOKEN_URL,
+                token=self.request_token, http_url=url,
                 verifier=str(verifier)
             )
             request.sign_request(self._sigmethod, self._consumer, self.request_token)
 
             # send request
-            resp = urlopen(Request(self.ACCESS_TOKEN_URL, headers=request.to_header()))
+            resp = urlopen(Request(url, headers=request.to_header()))
             self.access_token = oauth.OAuthToken.from_string(resp.read())
             return self.access_token
         except Exception, e:
