@@ -126,15 +126,20 @@ class List(Model):
     def is_subscribed(self, id):
         return self._api.is_subscribed_list(self.user.screen_name, self.slug, id)
 
-# link up default model implementations.
-models = {
-    'status': Status,
-    'user': User,
-    'direct_message': DirectMessage,
-    'friendship': Friendship,
-    'saved_search': SavedSearch,
-    'search_result': SearchResult,
-    'retweet': Retweet,
-    'list': List,
-}
+
+class ModelFactory(object):
+    """
+    Used by parsers for creating instances
+    of models. You may subclass this factory
+    to add your own extended models.
+    """
+
+    status = Status
+    user = User
+    direct_message = DirectMessage
+    friendship = Friendship
+    saved_search = SavedSearch
+    search_result = SearchResult
+    retweet = Retweet
+    list = List
 

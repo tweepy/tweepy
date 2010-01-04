@@ -9,7 +9,7 @@ __version__ = '1.4'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
-from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, models
+from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResult, ModelFactory
 from tweepy.error import TweepError
 from tweepy.api import API
 from tweepy.cache import Cache, MemoryCache, FileCache

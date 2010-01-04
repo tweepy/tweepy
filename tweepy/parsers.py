@@ -7,7 +7,6 @@ import re
 from datetime import datetime
 import time
 
-from tweepy.models import models
 
 def _parse_cursor(obj):
 
@@ -82,7 +81,7 @@ def _parse_a_href(atag):
 
 def parse_user(obj, api):
 
-    user = models['user']()
+    user = api.model_factory.user()
     user._api = api
     for k, v in obj.items():
         if k == 'created_at':
@@ -116,7 +115,7 @@ def parse_users(obj, api):
 
 def parse_status(obj, api):
 
-    status = models['status']()
+    status = api.model_factory.status()
     status._api = api
     for k, v in obj.items():
         if k == 'user':
@@ -148,7 +147,7 @@ def parse_statuses(obj, api):
 
 def parse_dm(obj, api):
 
-    dm = models['direct_message']()
+    dm = api.model_factory.direct_message()
     dm._api = api
     for k, v in obj.items():
         if k == 'sender' or k == 'recipient':
@@ -173,12 +172,12 @@ def parse_friendship(obj, api):
     relationship = obj['relationship']
 
     # parse source
-    source = models['friendship']()
+    source = api.model_factory.friendship()
     for k, v in relationship['source'].items():
         setattr(source, k, v)
 
     # parse target
-    target = models['friendship']()
+    target = api.model_factory.friendship()
     for k, v in relationship['target'].items():
         setattr(target, k, v)
 
@@ -194,7 +193,7 @@ def parse_ids(obj, api):
 
 def parse_saved_search(obj, api):
 
-    ss = models['saved_search']()
+    ss = api.model_factory.saved_search()
     ss._api = api
     for k, v in obj.items():
         if k == 'created_at':
@@ -207,7 +206,7 @@ def parse_saved_search(obj, api):
 def parse_saved_searches(obj, api):
 
     saved_searches = []
-    saved_search = models['saved_search']()
+    saved_search = api.model_factory.saved_search()
     for item in obj:
         saved_searches.append(parse_saved_search(item, api))
     return saved_searches
@@ -215,7 +214,7 @@ def parse_saved_searches(obj, api):
 
 def parse_search_result(obj, api):
 
-    result = models['search_result']()
+    result = api.model_factory.search_result()
     for k, v in obj.items():
         if k == 'created_at':
             setattr(result, k, _parse_search_datetime(v))
@@ -237,7 +236,7 @@ def parse_search_results(obj, api):
 
 def parse_list(obj, api):
 
-    lst = models['list']()
+    lst = api.model_factory.list()
     lst._api = api
     for k,v in obj.items():
         if k == 'user':

@@ -8,6 +8,8 @@ during upgrade will be listed here.
     - User model
         - Added lists_memberships, lists_subscriptions, and lists helpers
         - Added followers_ids helper
+    - Added ModelFactory to replace 'models' dict in tweepy.models.
+        Extend this factory to plugin customized models then pass into API().
 + API
     - lists(), lists_memberships(), and lists_subscriptions() now
         take an "user" parameter for specifying which user to query.
