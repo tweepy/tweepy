@@ -11,7 +11,7 @@ This page contains some basic documentation for the Tweepy module.
 :mod:`tweepy.api` --- Twitter API wrapper
 =========================================
 
-.. class:: API([auth_handler=None], [host='api.twitter.com'], [search_host='search.twitter.com'], [cache=None], [secure=False], [api_root='/1'], [search_root=''], [retry_count=0], [retry_delay=0], [retry_errors=None])
+.. class:: API([auth_handler=None], [host='api.twitter.com'], [search_host='search.twitter.com'], [cache=None], [secure=False], [api_root='/1'], [search_root=''], [retry_count=0], [retry_delay=0], [retry_errors=None], [model_factory])
 
    This class provides a wrapper for the API as provided by
    Twitter. The functions provided in this class are listed below.
@@ -26,6 +26,7 @@ This page contains some basic documentation for the Tweepy module.
    :param retry_count: default number of retries to attempt when error occurs
    :param retry_delay: number of seconds to wait between retries
    :param retry_errors: which HTTP status codes to retry
+   :param model_factory: used for creating new model instances
 
 Timeline methods
 ----------------
