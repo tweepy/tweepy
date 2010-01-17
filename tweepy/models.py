@@ -42,7 +42,7 @@ class User(Model):
         return self._api.friends(user_id=self.id, **kargs)
 
     def followers(self, **kargs):
-        return self._api.followers(user_idself.id, **kargs)
+        return self._api.followers(user_id=self.id, **kargs)
 
     def follow(self):
         self._api.create_friendship(user_id=self.id)
