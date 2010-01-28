@@ -44,35 +44,28 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
         headers = kargs.pop('headers', {})
 
         # build parameter dict
-        if allowed_param:
-            parameters = {}
-            for idx, arg in enumerate(args):
-                if isinstance(arg, unicode):
-                    arg = arg.encode('utf-8')
-                elif not isinstance(arg, str):
-                    arg = str(arg)
+        parameters = {}
+        for idx, arg in enumerate(args):
+            if isinstance(arg, unicode):
+                arg = arg.encode('utf-8')
+            elif not isinstance(arg, str):
+                arg = str(arg)
 
-                try:
-                    parameters[allowed_param[idx]] = arg
-                except IndexError:
-                    raise TweepError('Too many parameters supplied!')
-            for k, arg in kargs.items():
-                if arg is None:
-                    continue
-                if k in parameters:
-                    raise TweepError('Multiple values for parameter %s supplied!' % k)
-                if k not in allowed_param:
-                    raise TweepError('Invalid parameter %s supplied!' % k)
+            try:
+                parameters[allowed_param[idx]] = arg
+            except IndexError:
+                raise TweepError('Too many parameters supplied!')
+        for k, arg in kargs.items():
+            if arg is None:
+                continue
+            if k in parameters:
+                raise TweepError('Multiple values for parameter %s supplied!' % k)
 
-                if isinstance(arg, unicode):
-                    arg = arg.encode('utf-8')
-                elif not isinstance(arg, str):
-                    arg = str(arg)
-                parameters[k] = arg
-        else:
-            if len(args) > 0 or len(kargs) > 0:
-                raise TweepError('This method takes no parameters!')
-            parameters = None
+            if isinstance(arg, unicode):
+                arg = arg.encode('utf-8')
+            elif not isinstance(arg, str):
+                arg = str(arg)
+            parameters[k] = arg
 
         # Pick correct URL root to use
         if search_api is False:
@@ -81,7 +74,7 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
             api_root = api.search_root
 
         # Build the request URL
-        if parameters:
+        if len(parameters):
             # Replace any template variables in path
             tpath = str(path)
             for template in re_path_template.findall(tpath):

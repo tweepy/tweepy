@@ -1,6 +1,13 @@
 All changes made to the library that might affect applications
 during upgrade will be listed here.
 
+
+1.5 -> 1.6
+===========================
++ API methods now allow for kargs that are not listed in the 
+  allowed_params list. This way Tweepy can support future parameters
+  twitter adds without having the patch the library.
+
 1.4 -> 1.5
 ===========================
 + Models
