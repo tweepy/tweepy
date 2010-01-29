@@ -8,6 +8,10 @@ from datetime import datetime
 import time
 
 
+class ResultSet(list):
+    """A list like object that holds results from a Twitter API query."""
+
+
 def _parse_cursor(obj):
 
     return obj['next_cursor'], obj['prev_cursor']
@@ -106,7 +110,7 @@ def parse_users(obj, api):
     else:
         item_list = obj
 
-    users = []
+    users = ResultSet()
     for item in item_list:
         if item is None: break  # sometimes an empty list with a null in it
         users.append(parse_user(item, api))
@@ -139,7 +143,7 @@ def parse_status(obj, api):
 
 def parse_statuses(obj, api):
 
-    statuses = []
+    statuses = ResultSet()
     for item in obj:
         statuses.append(parse_status(item, api))
     return statuses
@@ -161,7 +165,7 @@ def parse_dm(obj, api):
 
 def parse_directmessages(obj, api):
 
-    directmessages = []
+    directmessages = ResultSet()
     for item in obj:
         directmessages.append(parse_dm(item, api))
     return directmessages
@@ -205,7 +209,7 @@ def parse_saved_search(obj, api):
 
 def parse_saved_searches(obj, api):
 
-    saved_searches = []
+    saved_searches = ResultSet()
     saved_search = api.model_factory.saved_search()
     for item in obj:
         saved_searches.append(parse_saved_search(item, api))
@@ -228,7 +232,7 @@ def parse_search_result(obj, api):
 def parse_search_results(obj, api):
 
     results = obj['results']
-    result_objects = []
+    result_objects = ResultSet()
     for item in results:
         result_objects.append(parse_search_result(item, api))
     return result_objects
@@ -247,7 +251,7 @@ def parse_list(obj, api):
 
 def parse_lists(obj, api):
 
-    lists = []
+    lists = ResultSet()
     for item in obj['lists']:
         lists.append(parse_list(item, api))
     return lists
