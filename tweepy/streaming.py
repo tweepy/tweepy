@@ -9,7 +9,7 @@ from time import sleep
 import urllib
 
 from tweepy.auth import BasicAuthHandler
-from tweepy.parsers import parse_status
+from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
 
@@ -40,7 +40,7 @@ class StreamListener(object):
         """
 
         if 'in_reply_to_status_id' in data:
-            status = parse_status(json.loads(data), self.api)
+            status = Status.parse(self.api, json.loads(data))
             if self.on_status(status) is False:
                 return False
         elif 'delete' in data:

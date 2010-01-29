@@ -7,25 +7,13 @@ import urllib
 import time
 import re
 
-from tweepy.parsers import parse_error
 from tweepy.error import TweepError
-
-try:
-    import simplejson as json
-except ImportError:
-    try:
-        import json  # Python 2.6+
-    except ImportError:
-        try:
-            from django.utils import simplejson as json  # Google App Engine
-        except ImportError:
-            raise ImportError, "Can't load a json library"
 
 re_path_template = re.compile('{\w+}')
 
 
-def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
-              timeout=None, search_api = False):
+def bind_api(path, payload_type=None, payload_list=False, allowed_param=[], method='GET',
+                require_auth=False, timeout=None, search_api = False):
 
     def _call(api, *args, **kargs):
         # If require auth, throw exception if credentials not provided
@@ -159,36 +147,16 @@ def bind_api(path, parser, allowed_param=[], method='GET', require_auth=False,
                 error_msg = "Twitter error response: status code = %s" % resp.status
             raise TweepError(error_msg)
 
-        # Parse json respone body
-        try:
-            jobject = json.loads(resp.read())
-        except Exception, e:
-            raise TweepError("Failed to parse json: %s" % e)
-
-        # Parse cursor infomation
-        if isinstance(jobject, dict):
-            next_cursor = jobject.get('next_cursor')
-            prev_cursor = jobject.get('previous_cursor')
-        else:
-            next_cursor = None
-            prev_cursor = None
-
-        # Pass json object into parser
-        try:
-            if parameters and 'cursor' in parameters:
-                out = parser(jobject, api), next_cursor, prev_cursor
-            else:
-                out = parser(jobject, api)
-        except Exception, e:
-            raise TweepError("Failed to parse response: %s" % e)
+        # Parse the response payload
+        result = api.parser.parse(api, payload_type, payload_list, resp.read())
 
         conn.close()
 
         # store result in cache
-        if api.cache and method == 'GET':
-            api.cache.store(url, out)
+        if api.cache and method == 'GET' and result:
+            api.cache.store(url, result)
 
-        return out
+        return result
 
 
     # Set pagination mode

@@ -2,265 +2,39 @@
 # Copyright 2009 Joshua Roesslein
 # See LICENSE
 
-import htmlentitydefs
-import re
-from datetime import datetime
-import time
+from tweepy.models import ModelFactory
+from tweepy.utils import import_simplejson
 
 
-class ResultSet(list):
-    """A list like object that holds results from a Twitter API query."""
+class Parser(object):
+
+    payload_format = 'json'
+
+    def parse(self, api, payload_type, payload_list, payload):
+        """Parse the response payload and return the result."""
+        raise NotImplementedError
 
 
-def _parse_cursor(obj):
+class ModelParser(Parser):
 
-    return obj['next_cursor'], obj['prev_cursor']
+    def __init__(self, model_factory=None):
+        self.model_factory = model_factory or ModelFactory
+        self.json_lib = import_simplejson()
 
-def parse_json(obj, api):
+    def parse(self, api, payload_type, payload_list, payload):
+        try:
+            if payload_type is None: return
+            model = getattr(self.model_factory, payload_type)
+        except AttributeError:
+            raise TweepError('No model for this payload type: %s' % method.payload_type)
 
-    return obj
+        try:
+            json = self.json_lib.loads(payload)
+        except Exception, e:
+            raise TweepError('Failed to parse JSON: %s' % e)
 
-
-def parse_return_true(obj, api):
-
-    return True
-
-
-def parse_none(obj, api):
-
-    return None
-
-
-def parse_error(obj):
-
-    return obj['error']
-
-
-def _parse_datetime(str):
-
-    # We must parse datetime this way to work in python 2.4
-    return datetime(*(time.strptime(str, '%a %b %d %H:%M:%S +0000 %Y')[0:6]))
-
-
-def _parse_search_datetime(str):
-
-    # python 2.4
-    return datetime(*(time.strptime(str, '%a, %d %b %Y %H:%M:%S +0000')[0:6]))
-
-
-def unescape_html(text):
-    """Created by Fredrik Lundh (http://effbot.org/zone/re-sub.htm#unescape-html)"""
-    def fixup(m):
-        text = m.group(0)
-        if text[:2] == "&#":
-            # character reference
-            try:
-                if text[:3] == "&#x":
-                    return unichr(int(text[3:-1], 16))
-                else:
-                    return unichr(int(text[2:-1]))
-            except ValueError:
-                pass
+        if payload_list:
+            return model.parse_list(api, json)
         else:
-            # named entity
-            try:
-                text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
-            except KeyError:
-                pass
-        return text # leave as is
-    return re.sub("&#?\w+;", fixup, text)
-
-
-def _parse_html_value(html):
-
-    return html[html.find('>')+1:html.rfind('<')]
-
-
-def _parse_a_href(atag):
-
-    start = atag.find('"') + 1
-    end = atag.find('"', start)
-    return atag[start:end]
-
-
-def parse_user(obj, api):
-
-    user = api.model_factory.user()
-    user._api = api
-    for k, v in obj.items():
-        if k == 'created_at':
-            setattr(user, k, _parse_datetime(v))
-        elif k == 'status':
-            setattr(user, k, parse_status(v, api))
-        elif k == 'following':
-            # twitter sets this to null if it is false
-            if v is True:
-                setattr(user, k, True)
-            else:
-                setattr(user, k, False)
-        else:
-            setattr(user, k, v)
-    return user
-
-
-def parse_users(obj, api):
-
-    if isinstance(obj, list) is False:
-        item_list = obj['users']
-    else:
-        item_list = obj
-
-    users = ResultSet()
-    for item in item_list:
-        if item is None: break  # sometimes an empty list with a null in it
-        users.append(parse_user(item, api))
-    return users
-
-
-def parse_status(obj, api):
-
-    status = api.model_factory.status()
-    status._api = api
-    for k, v in obj.items():
-        if k == 'user':
-            user = parse_user(v, api)
-            setattr(status, 'author', user)
-            setattr(status, 'user', user)  # DEPRECIATED
-        elif k == 'created_at':
-            setattr(status, k, _parse_datetime(v))
-        elif k == 'source':
-            if '<' in v:
-                setattr(status, k, _parse_html_value(v))
-                setattr(status, 'source_url', _parse_a_href(v))
-            else:
-                setattr(status, k, v)
-        elif k == 'retweeted_status':
-            setattr(status, k, parse_status(v, api))
-        else:
-            setattr(status, k, v)
-    return status
-
-
-def parse_statuses(obj, api):
-
-    statuses = ResultSet()
-    for item in obj:
-        statuses.append(parse_status(item, api))
-    return statuses
-
-
-def parse_dm(obj, api):
-
-    dm = api.model_factory.direct_message()
-    dm._api = api
-    for k, v in obj.items():
-        if k == 'sender' or k == 'recipient':
-            setattr(dm, k, parse_user(v, api))
-        elif k == 'created_at':
-            setattr(dm, k, _parse_datetime(v))
-        else:
-            setattr(dm, k, v)
-    return dm
-
-
-def parse_directmessages(obj, api):
-
-    directmessages = ResultSet()
-    for item in obj:
-        directmessages.append(parse_dm(item, api))
-    return directmessages
-
-
-def parse_friendship(obj, api):
-
-    relationship = obj['relationship']
-
-    # parse source
-    source = api.model_factory.friendship()
-    for k, v in relationship['source'].items():
-        setattr(source, k, v)
-
-    # parse target
-    target = api.model_factory.friendship()
-    for k, v in relationship['target'].items():
-        setattr(target, k, v)
-
-    return source, target
-
-
-def parse_ids(obj, api):
-
-    if isinstance(obj, list) is False:
-        return obj['ids']
-    else:
-        return obj
-
-def parse_saved_search(obj, api):
-
-    ss = api.model_factory.saved_search()
-    ss._api = api
-    for k, v in obj.items():
-        if k == 'created_at':
-            setattr(ss, k, _parse_datetime(v))
-        else:
-            setattr(ss, k, v)
-    return ss
-
-
-def parse_saved_searches(obj, api):
-
-    saved_searches = ResultSet()
-    saved_search = api.model_factory.saved_search()
-    for item in obj:
-        saved_searches.append(parse_saved_search(item, api))
-    return saved_searches
-
-
-def parse_search_result(obj, api):
-
-    result = api.model_factory.search_result()
-    for k, v in obj.items():
-        if k == 'created_at':
-            setattr(result, k, _parse_search_datetime(v))
-        elif k == 'source':
-            setattr(result, k, _parse_html_value(unescape_html(v)))
-        else:
-            setattr(result, k, v)
-    return result
-
-
-def parse_search_results(obj, api):
-
-    results = ResultSet()
-    results.max_id = obj.get('max_id')
-    results.since_id = obj.get('since_id')
-    results.refresh_url = obj.get('refresh_url')
-    results.next_page = obj.get('next_page')
-    results.results_per_page = obj.get('results_per_page')
-    results.page = obj.get('page')
-    results.completed_in = obj.get('completed_in')
-    results.query = obj.get('query')
-
-    for item in obj['results']:
-        results.append(parse_search_result(item, api))
-    return results
-
-
-def parse_list(obj, api):
-
-    lst = api.model_factory.list()
-    lst._api = api
-    for k,v in obj.items():
-        if k == 'user':
-            setattr(lst, k, parse_user(v, api))
-        else:
-            setattr(lst, k, v)
-    return lst
-
-def parse_lists(obj, api):
-
-    lists = ResultSet()
-    for item in obj['lists']:
-        lists.append(parse_list(item, api))
-    return lists
+            return model.parse(api, json)
 
