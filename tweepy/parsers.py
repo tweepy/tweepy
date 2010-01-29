@@ -231,11 +231,19 @@ def parse_search_result(obj, api):
 
 def parse_search_results(obj, api):
 
-    results = obj['results']
-    result_objects = ResultSet()
-    for item in results:
-        result_objects.append(parse_search_result(item, api))
-    return result_objects
+    results = ResultSet()
+    results.max_id = obj.get('max_id')
+    results.since_id = obj.get('since_id')
+    results.refresh_url = obj.get('refresh_url')
+    results.next_page = obj.get('next_page')
+    results.results_per_page = obj.get('results_per_page')
+    results.page = obj.get('page')
+    results.completed_in = obj.get('completed_in')
+    results.query = obj.get('query')
+
+    for item in obj['results']:
+        results.append(parse_search_result(item, api))
+    return results
 
 
 def parse_list(obj, api):
