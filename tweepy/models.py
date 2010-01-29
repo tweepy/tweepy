@@ -223,12 +223,6 @@ class SearchResult(Model):
         return results
 
 
-class Retweet(Model):
-    #TODO: remove me
-
-    def destroy(self):
-        return self._api.destroy_status(self.id)
-
 class List(Model):
 
     @classmethod
@@ -312,7 +306,6 @@ class ModelFactory(object):
     friendship = Friendship
     saved_search = SavedSearch
     search_result = SearchResult
-    retweet = Retweet
     list = List
 
     json = JSONModel
