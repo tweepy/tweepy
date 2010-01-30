@@ -8,18 +8,40 @@ from tweepy.utils import import_simplejson
 
 class Parser(object):
 
-    payload_format = 'json'
-
     def parse(self, api, payload_type, payload_list, payload):
-        """Parse the response payload and return the result."""
+        """
+        Parse the response payload and return the result.
+        Returns a tuple that contains the result data and the cursors
+        (or None if not present).
+        """
         raise NotImplementedError
 
 
-class ModelParser(Parser):
+class JSONParser(Parser):
+
+    payload_format = 'json'
+
+    def __init__(self):
+        self.json_lib = import_simplejson()
+
+    def parse(self, api, payload_type, payload_list, payload):
+        try:
+            json = self.json_lib.loads(payload)
+        except Exception, e:
+            raise TweepError('Failed to parse JSON payload: %s' % e)
+
+        if payload_list and isinstance(json, dict):
+            cursors = json['previous_cursor'], json['next_cursor']
+            return json, cursors
+        else:
+            return json
+
+
+class ModelParser(JSONParser):
 
     def __init__(self, model_factory=None):
+        JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
-        self.json_lib = import_simplejson()
 
     def parse(self, api, payload_type, payload_list, payload):
         try:
@@ -28,13 +50,19 @@ class ModelParser(Parser):
         except AttributeError:
             raise TweepError('No model for this payload type: %s' % method.payload_type)
 
-        try:
-            json = self.json_lib.loads(payload)
-        except Exception, e:
-            raise TweepError('Failed to parse JSON: %s' % e)
+        json = JSONParser.parse(self, api, payload_type, payload_list, payload)
+        if isinstance(json, tuple):
+            json, cursors = json
+        else:
+            cursors = None
 
         if payload_list:
-            return model.parse_list(api, json)
+            result = model.parse_list(api, json)
         else:
-            return model.parse(api, json)
+            result = model.parse(api, json)
+
+        if cursors:
+            return result, cursors
+        else:
+            return result
 
