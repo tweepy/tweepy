@@ -18,12 +18,8 @@ class Model(object):
 
     def __getstate__(self):
         # pickle
-        pickle = {}
-        for k, v in self.__dict__.items():
-            if k == '_api':
-                # do not pickle the api reference
-                continue
-            pickle[k] = v
+        pickle = dict(self.__dict__)
+        del pickle['_api']  # do not pickle the API reference
         return pickle
 
     @classmethod
