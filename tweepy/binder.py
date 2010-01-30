@@ -163,7 +163,7 @@ def bind_api(**config):
                 raise TweepError(error_msg)
 
             # Parse the response payload
-            result = self.api.parser.parse(self.api, self.payload_type, self.payload_list, resp.read())
+            result = self.api.parser.parse(self, resp.read())
 
             conn.close()
 
