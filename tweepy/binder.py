@@ -92,10 +92,11 @@ def bind_api(**config):
                 else:
                     try:
                         value = urllib.quote(self.parameters[name])
-                        self.path = self.path.replace(variable, value)
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
                     del self.parameters[name]
+
+                self.path = self.path.replace(variable, value)
 
         def execute(self):
             # Build the request URL
