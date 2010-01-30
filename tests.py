@@ -227,10 +227,10 @@ class TweepyAPITests(unittest.TestCase):
         self.api.lists_subscriptions()
 
     def testlisttimeline(self):
-        self.api.list_timeline('noradio', 'tall-people')
+        self.api.list_timeline('applepie', 'stars')
 
     def testgetlist(self):
-        self.api.get_list('noradio', 'tall-people')
+        self.api.get_list('applepie', 'stars')
 
     def testaddremovelistmember(self):
         uid = self.api.get_user('twitter').id
@@ -238,22 +238,22 @@ class TweepyAPITests(unittest.TestCase):
         self.api.remove_list_member('test', uid)
 
     def testlistmembers(self):
-        self.api.list_members('noradio', 'tall-people')
+        self.api.list_members('applepie', 'stars')
 
     def testislistmember(self):
-        uid = self.api.get_user('noradio').id
-        self.api.is_list_member('noradio', 'tall-people', uid)
+        uid = self.api.get_user('applepie').id
+        self.api.is_list_member('applepie', 'stars', uid)
 
     def testsubscribeunsubscribelist(self):
-        self.api.subscribe_list('noradio', 'tall-people')
-        self.api.unsubscribe_list('noradio', 'tall-people')
+        self.api.subscribe_list('applepie', 'stars')
+        self.api.unsubscribe_list('applepie', 'stars')
 
     def testlistsubscribers(self):
-        self.api.list_subscribers('noradio', 'tall-people')
+        self.api.list_subscribers('applepie', 'stars')
 
     def testissubscribedlist(self):
-        uid = self.api.get_user('noradio').id
-        self.api.is_subscribed_list('noradio', 'tall-people', uid)
+        uid = self.api.get_user('applepie').id
+        self.api.is_subscribed_list('applepie', 'stars', uid)
 
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
@@ -269,7 +269,7 @@ class TweepyAPITests(unittest.TestCase):
         self.api.trends_current()
         self.api.trends_daily()
         self.api.trends_weekly()
-
+    """
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
