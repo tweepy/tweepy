@@ -156,8 +156,7 @@ def bind_api(**config):
             self.api.last_response = resp
             if resp.status != 200:
                 try:
-                    #TODO: parse error message
-                    raise Exception
+                    error_msg = self.api.parser.parse_error(self, resp.read())
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
                 raise TweepError(error_msg)

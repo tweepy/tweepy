@@ -16,6 +16,14 @@ class Parser(object):
         """
         raise NotImplementedError
 
+    def parse_error(self, payload):
+        """
+        Parse the error message from payload.
+        If unable to parse the message, throw an exception
+        and default error message will be used.
+        """
+        raise NotImplementedError
+
 
 class JSONParser(Parser):
 
@@ -35,6 +43,9 @@ class JSONParser(Parser):
             return json, cursors
         else:
             return json
+
+    def parse_error(self, payload):
+        return self.json_lib.loads(payload)['error']
 
 
 class ModelParser(JSONParser):
