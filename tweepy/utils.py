@@ -1,6 +1,6 @@
 # Tweepy
 # Copyright 2010 Joshua Roesslein
-# See LICENSE
+# See LICENSE for details.
 
 from datetime import datetime
 import time

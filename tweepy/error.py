@@ -1,6 +1,6 @@
 # Tweepy
-# Copyright 2009 Joshua Roesslein
-# See LICENSE
+# Copyright 2009-2010 Joshua Roesslein
+# See LICENSE for details.
 
 class TweepError(Exception):
     """Tweepy exception"""

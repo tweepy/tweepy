@@ -1,6 +1,6 @@
 # Tweepy
-# Copyright 2009 Joshua Roesslein
-# See LICENSE
+# Copyright 2009-2010 Joshua Roesslein
+# See LICENSE for details.
 
 from tweepy.error import TweepError
 from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \

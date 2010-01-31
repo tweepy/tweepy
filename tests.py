@@ -1,7 +1,3 @@
-# Tweepy
-# Copyright 2009 Joshua Roesslein
-# See LICENSE
-
 import unittest
 import random
 from time import sleep
