@@ -22,7 +22,6 @@ def bind_api(**config):
         allowed_param = config.get('allowed_param', [])
         method = config.get('method', 'GET')
         require_auth = config.get('require_auth', False)
-        timeout = config.get('timeout', None)
         search_api = config.get('search_api', False)
 
         def __init__(self, api, args, kargs):
@@ -107,7 +106,7 @@ def bind_api(**config):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.api.cache and self.method == 'GET':
-                cache_result = self.api.cache.get(url, self.timeout)
+                cache_result = self.api.cache.get(url)
                 # if cache result found and not expired, return it
                 if cache_result:
                     # must restore api reference
