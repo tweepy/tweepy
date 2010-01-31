@@ -13,16 +13,8 @@ from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
 
-try:
-    import simplejson as json
-except ImportError:
-    try:
-        import json  # Python 2.6+
-    except ImportError:
-        try:
-            from django.utils import simplejson as json  # Google App Engine
-        except ImportError:
-            raise ImportError, "Can't load a json library"
+from tweepy.utils import import_simplejson
+json = import_simplejson()
 
 STREAM_VERSION = 1
 
