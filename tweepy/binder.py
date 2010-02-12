@@ -8,6 +8,7 @@ import time
 import re
 
 from tweepy.error import TweepError
+from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile('{\w+}')
 
