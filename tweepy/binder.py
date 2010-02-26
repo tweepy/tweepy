@@ -139,7 +139,7 @@ def bind_api(**config):
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
                 except Exception, e:
-                    raise TweepError('Failed to send request: %s' % e)
+                    raise TweepError('Failed to send request: %s' % e, resp)
 
                 # Exit request loop if non-retry error code
                 if self.retry_errors:
@@ -158,7 +158,7 @@ def bind_api(**config):
                     error_msg = self.api.parser.parse_error(self, resp.read())
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
-                raise TweepError(error_msg)
+                raise TweepError(error_msg, resp)
 
             # Parse the response payload
             result = self.api.parser.parse(self, resp.read())
