@@ -55,7 +55,7 @@ class Status(Model):
                 else:
                     setattr(status, k, v)
             elif k == 'retweeted_status':
-                setattr(status, k, User.parse(api, v))
+                setattr(status, k, Status.parse(api, v))
             else:
                 setattr(status, k, v)
         return status
