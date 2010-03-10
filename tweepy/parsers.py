@@ -45,7 +45,8 @@ class JSONParser(Parser):
             return json
 
     def parse_error(self, payload):
-        return self.json_lib.loads(payload)['error']
+        error = self.json_lib.loads(payload)
+        return error['error'] if error.has_key('error') else error['errors']
 
 
 class ModelParser(JSONParser):
