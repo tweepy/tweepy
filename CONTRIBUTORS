@@ -1,18 +1,10 @@
-Thanks to the people listed here for their patches!
+Thanks to the people listed here for their contributions!
 
 Thomas Bohmbach, Jr
-    - GAE fixes
 Mark Lango  
-    - Ignore key arguments with value of None
 Pascal Jürgens
-    - Streaming API fixes
 Fredrik Lundh
-    - html unescape (http://effbot.org/zone/re-sub.htm#unescape-html)
 Kumar Appaiah
-    - tweepyshell patch
-	- sphinx documentation
 Ferenc Szalai
-	- Fix API.retweet()
-    - Add secure option to OAuthHandler
 Bas Westerbaan
-    - Fixes to API and User model
+Ivo Wetzel
