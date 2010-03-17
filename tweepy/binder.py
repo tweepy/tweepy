@@ -139,7 +139,7 @@ def bind_api(**config):
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
                 except Exception, e:
-                    raise TweepError('Failed to send request: %s' % e, resp)
+                    raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
                 if self.retry_errors:
