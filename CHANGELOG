@@ -1,12 +1,13 @@
-All changes made to the library that might affect applications
-during upgrade will be listed here.
+This file will no longer be maintained. To get a listing of all changes between versions
+instead use Github compare views. Their URL's work like this:
 
+    http://github.com/joshthecoder/tweepy/compare/prev...next
 
-1.5 -> 1.6
-===========================
-+ API methods now allow for kargs that are not listed in the 
-  allowed_params list. This way Tweepy can support future parameters
-  twitter adds without having the patch the library.
+prev and next can be a tag, branch, or a commit SHA1.
+Example to view changes between versions 1.5 -> 1.6:
+
+    http://github.com/joshthecoder/tweepy/compare/1.5...1.6
+
 
 1.4 -> 1.5
 ===========================
