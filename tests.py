@@ -265,7 +265,8 @@ class TweepyAPITests(unittest.TestCase):
         self.api.trends_current()
         self.api.trends_daily()
         self.api.trends_weekly()
-    """
+
+"""
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
@@ -373,7 +374,7 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
-
+"""
 
 if __name__ == '__main__':
 
