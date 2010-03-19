@@ -37,7 +37,7 @@ shellbanner = '<Tweepy shell>'
 
 try:
     import IPython
-    ipshell = IPython.Shell.IPShell(user_ns = local_ns)
+    ipshell = IPython.Shell.IPShell([''], user_ns = local_ns)
     ipshell.mainloop(sys_exit=1, banner = shellbanner)
 except ImportError:
     import code
