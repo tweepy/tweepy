@@ -92,3 +92,7 @@ def import_simplejson():
 
     return json
 
+def list_to_csv(item_list):
+    if item_list:
+        return ','.join([str(i) for i in item_list])
+

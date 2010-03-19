@@ -8,6 +8,7 @@ import mimetypes
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser
+from tweepy.utils import list_to_csv
 
 
 class API(object):
@@ -140,6 +141,17 @@ class API(object):
         path = '/users/show.json',
         payload_type = 'user',
         allowed_param = ['id', 'user_id', 'screen_name']
+    )
+
+    """ Perform bulk look up of users from user ID or screenname """
+    def lookup_users(self, user_ids=None, screen_names=None):
+        return self._lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
+
+    _lookup_users = bind_api(
+        path = '/users/lookup.json',
+        payload_type = 'user', payload_list = True,
+        allowed_param = ['user_id', 'screen_name'],
+        require_auth = True
     )
 
     """ Get the authenticated user """
