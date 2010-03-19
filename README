@@ -8,12 +8,11 @@
 A Twitter library for Python! Also works with identi.ca/laconi.ca !
 
 Features:
-  + OAuth support
+  + OAuth support (including xAuth)
   + Covers the entire Twitter API
   + Actively under development
   + Streaming API support
   + Cache system (memory, file)
-  + Python 3 support -- See py3k branch
 
 Documentation: http://joshthecoder.github.com/tweepy/docs/index.html
 Mailing list: http://groups.google.com/group/tweepy
