@@ -81,18 +81,20 @@ def bind_api(**config):
 
                 self.parameters[k] = convert_to_utf8_str(arg)
 
+            # Set 'user' paramter to the authenticated user's name
+            # if no 'user' parameter value provided
+            if(self.api.auth and 'user' not in self.parameters):
+                self.parameters['user'] = self.api.auth.get_username()
+
         def build_path(self):
             for variable in re_path_template.findall(self.path):
                 name = variable.strip('{}')
 
-                if name == 'user' and self.api.auth:
-                    value = self.api.auth.get_username()
-                else:
-                    try:
-                        value = urllib.quote(self.parameters[name])
-                    except KeyError:
-                        raise TweepError('No parameter value found for path variable: %s' % name)
-                    del self.parameters[name]
+                try:
+                    value = urllib.quote(self.parameters[name])
+                except KeyError:
+                    raise TweepError('No parameter value found for path variable: %s' % name)
+                del self.parameters[name]
 
                 self.path = self.path.replace(variable, value)
 
