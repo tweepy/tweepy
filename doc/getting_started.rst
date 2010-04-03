@@ -10,7 +10,7 @@ Introduction
 
 If you are new to Tweepy, this is the place to begin. The goal of this
 tutorial is to get you set-up and rolling with Tweepy. We won't go
-into too much details here, just some important basics.
+into too much detail here, just some important basics.
 
 Hello Tweepy
 ============
@@ -40,7 +40,7 @@ API
 
 The API class provides access to the entire twitter RESTful API
 methods. Each method can accept various parameters and return
-responses. For more infomation about these methods please refer to
+responses. For more information about these methods please refer to
 :ref:`API Reference <api_reference>`.
 
 Models

@@ -13,7 +13,7 @@ We use pagination a lot in Twitter API development. Iterating through
 timelines, user lists, direct messages, etc. In order to perform
 pagination we must supply a page/cursor parameter with each of our
 requests. The problem here is this requires a lot of boiler plate code
-just to mange the pagination loop. To help mage pagination easier and
+just to manage the pagination loop. To help make pagination easier and
 require less code Tweepy has the Cursor object.
 
 Old way vs Cursor way
