@@ -122,7 +122,7 @@ class API(object):
         path = '/statuses/update.json',
         method = 'POST',
         payload_type = 'status',
-        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source'],
+        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
         require_auth = True
     )
 
@@ -659,6 +659,27 @@ class API(object):
         path = '/trends/weekly.json',
         payload_type = 'json',
         allowed_param = ['date', 'exclude']
+    )
+
+    """ geo/reverse_geocode """
+    reverse_geocode = bind_api(
+        path = '/geo/reverse_geocode.json',
+        payload_type = 'json',
+        allowed_param = ['lat', 'long', 'accuracy', 'granularity', 'max_results']
+    )
+
+    """ geo/nearby_places """
+    nearby_places = bind_api(
+        path = '/geo/nearby_places.json',
+        payload_type = 'json',
+        allowed_param = ['lat', 'long', 'ip', 'accuracy', 'granularity', 'max_results']
+    )
+
+    """ geo/id """
+    geo_id = bind_api(
+        path = '/geo/id/{id}.json',
+        payload_type = 'json',
+        allowed_param = ['id']
     )
 
     """ Internal use only """

@@ -266,6 +266,11 @@ class TweepyAPITests(unittest.TestCase):
         self.api.trends_daily()
         self.api.trends_weekly()
 
+    def testgeoapis(self):
+        self.api.geo_id(id='c3f37afa9efcf94b') # Austin, TX, USA
+        self.api.nearby_places(lat=30.267370168467806, long=-97.74261474609375) # Austin, TX, USA
+        self.api.reverse_geocode(lat=30.267370168467806, long=-97.74261474609375) # Austin, TX, USA
+
 """
 class TweepyCursorTests(unittest.TestCase):
 
