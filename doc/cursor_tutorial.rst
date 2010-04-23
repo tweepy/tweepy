@@ -85,7 +85,7 @@ What if you only want n items or pages returned? You pass into the items() or pa
 .. code-block :: python
 
    # Only iterate through the first 200 statuses
-   for status in Cursor(api.user_timeline).limit(200):
+   for status in Cursor(api.user_timeline).items(200):
        process_status(status)
    
    # Only iterate through the first 3 pages
