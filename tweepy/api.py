@@ -632,14 +632,12 @@ class API(object):
 
     """ trends """
     trends = bind_api(
-        search_api = True,
         path = '/trends.json',
         payload_type = 'json'
     )
 
     """ trends/current """
     trends_current = bind_api(
-        search_api = True,
         path = '/trends/current.json',
         payload_type = 'json',
         allowed_param = ['exclude']
@@ -647,7 +645,6 @@ class API(object):
 
     """ trends/daily """
     trends_daily = bind_api(
-        search_api = True,
         path = '/trends/daily.json',
         payload_type = 'json',
         allowed_param = ['date', 'exclude']
@@ -655,7 +652,6 @@ class API(object):
 
     """ trends/weekly """
     trends_weekly = bind_api(
-        search_api = True,
         path = '/trends/weekly.json',
         payload_type = 'json',
         allowed_param = ['date', 'exclude']
