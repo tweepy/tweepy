@@ -706,7 +706,7 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [count], [page])
+.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [per_page], [page])
 
    Show tweet timeline for members of the specified list.
 
@@ -714,7 +714,7 @@ List Methods
    :param slug: |slug|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param count: |count|
+   :param per_page: Number of results per a page
    :param page: |page|
    :rtype: list of :class:`Status` objects
 
