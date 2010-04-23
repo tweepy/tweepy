@@ -270,6 +270,20 @@ class API(object):
         allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 
+    """ friendships/incoming """
+    friendships_incoming = bind_api(
+        path = '/friendships/incoming.json',
+        payload_type = 'ids',
+        allowed_param = ['cursor']
+    )
+
+    """ friendships/outgoing"""
+    friendships_outgoing = bind_api(
+        path = '/friendships/outgoing.json',
+        payload_type = 'ids',
+        allowed_param = ['cursor']
+    )
+
     """ followers/ids """
     followers_ids = bind_api(
         path = '/followers/ids.json',
