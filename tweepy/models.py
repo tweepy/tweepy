@@ -19,7 +19,10 @@ class Model(object):
     def __getstate__(self):
         # pickle
         pickle = dict(self.__dict__)
-        del pickle['_api']  # do not pickle the API reference
+        try:
+            del pickle['_api']  # do not pickle the API reference
+        except KeyError:
+            pass
         return pickle
 
     @classmethod
