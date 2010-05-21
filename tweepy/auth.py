@@ -37,7 +37,7 @@ class BasicAuthHandler(AuthHandler):
 class OAuthHandler(AuthHandler):
     """OAuth authentication handler"""
 
-    OAUTH_HOST = 'twitter.com'
+    OAUTH_HOST = 'api.twitter.com'
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None, secure=False):
