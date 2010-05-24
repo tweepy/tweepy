@@ -640,7 +640,7 @@ class API(object):
         search_api = True,
         path = '/search.json',
         payload_type = 'search_result', payload_list = True,
-        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user']
+        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type']
     )
     search.pagination_mode = 'page'
 
