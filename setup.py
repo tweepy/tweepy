@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name="tweepy",
-      version="1.6",
+      version="1.7",
       description="Twitter library for python",
       license="MIT",
       author="Joshua Roesslein",
