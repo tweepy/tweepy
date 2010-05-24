@@ -271,7 +271,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.nearby_places(lat=30.267370168467806, long=-97.74261474609375) # Austin, TX, USA
         self.api.reverse_geocode(lat=30.267370168467806, long=-97.74261474609375) # Austin, TX, USA
 
-"""
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
@@ -379,7 +378,6 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
-"""
 
 if __name__ == '__main__':
 
