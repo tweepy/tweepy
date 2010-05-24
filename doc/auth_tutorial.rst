@@ -104,7 +104,7 @@ URL request. Here is a pseudo example of storing the request token in
 a session::
 
    session.set('request_token', (auth.request_token.key,
-   auth.request_token.secret)
+   auth.request_token.secret))
 
 So now we can redirect the user to the URL returned to us earlier from
 the get_authorization_url() method.
