@@ -180,7 +180,7 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False):
+    def filter(self, follow=None, track=None, async=False, locations=None):
         params = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -190,6 +190,9 @@ class Stream(object):
             params['follow'] = ','.join(map(str, follow))
         if track:
             params['track'] = ','.join(map(str, track))
+        if locations and len(locations) > 0:
+            assert len(locations) % 4 == 0
+            params['locations'] = ','.join(map(str, locations))
         self.body = urllib.urlencode(params)
         self._start(async)
 
