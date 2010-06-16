@@ -67,6 +67,8 @@ def bind_api(**config):
         def build_parameters(self, args, kargs):
             self.parameters = {}
             for idx, arg in enumerate(args):
+                if arg is None:
+                    continue
 
                 try:
                     self.parameters[self.allowed_param[idx]] = convert_to_utf8_str(arg)
