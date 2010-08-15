@@ -192,7 +192,7 @@ class Stream(object):
             params['track'] = ','.join(map(str, track))
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
-            params['locations'] = ','.join(map(str, locations))
+            params['locations'] = ','.join(['%.2f' % l for l in locations])
         self.body = urllib.urlencode(params)
         self._start(async)
 
