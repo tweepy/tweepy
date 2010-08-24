@@ -35,7 +35,8 @@ class Model(object):
         """Parse a list of JSON objects into a result set of model instances."""
         results = ResultSet()
         for obj in json_list:
-            results.append(cls.parse(api, obj))
+            if obj:
+                results.append(cls.parse(api, obj))
         return results
 
 
