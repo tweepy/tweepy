@@ -262,3 +262,39 @@ class FileCache(Cache):
                 continue
             self._delete_file(os.path.join(self.cache_dir, entry))
 
+class MemCacheCache(Cache):
+    """Cache interface"""
+
+    def __init__(self, client, timeout=60):
+        """Initialize the cache
+            client: The memcache client
+            timeout: number of seconds to keep a cached entry
+        """
+        self.client = client
+        self.timeout = timeout
+
+    def store(self, key, value):
+        """Add new record to cache
+            key: entry key
+            value: data of entry
+        """
+        self.client.set(key, value, time=self.timeout)
+
+    def get(self, key, timeout=None):
+        """Get cached entry if exists and not expired
+            key: which entry to get
+            timeout: override timeout with this value [optional]. DOES NOT WORK HERE
+        """
+        return self.client.get(key, key)
+
+    def count(self):
+        """Get count of entries currently stored in cache. RETURN 0"""
+        return 0
+
+    def cleanup(self):
+        """Delete any expired entries in cache. NO-OP"""
+        pass
+
+    def flush(self):
+        """Delete all cached entries. NO-OP"""
+        pass
