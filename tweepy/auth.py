@@ -20,6 +20,13 @@ class AuthHandler(object):
         """Return the username of the authenticated user"""
         raise NotImplementedError
 
+    def cache_key(self):
+        """
+            Allows per user cache if you're caching private data.
+            By default returns get_username()
+        """
+        return self.get_username()
+
 
 class BasicAuthHandler(AuthHandler):
 
@@ -160,4 +167,9 @@ class OAuthHandler(AuthHandler):
             else:
                 raise TweepError("Unable to get username, invalid oauth token!")
         return self.username
+
+    def cache_key(self):
+        if not self.access_token:
+            raise TweepError("Cache is per user, you need an access token")
+        return self.access_token.key
 

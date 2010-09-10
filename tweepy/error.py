@@ -12,3 +12,7 @@ class TweepError(Exception):
     def __str__(self):
         return self.reason
 
+class CachedRateLimit(TweepError):
+    """Still in rate limit exception"""
+    def __init__(self, reason):
+        super(CachedRateLimit, self).__init__(reason)

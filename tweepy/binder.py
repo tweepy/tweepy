@@ -7,7 +7,7 @@ import urllib
 import time
 import re
 
-from tweepy.error import TweepError
+from tweepy.error import TweepError, CachedRateLimit
 from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile('{\w+}')
@@ -99,11 +99,27 @@ def bind_api(**config):
 
                 self.path = self.path.replace(variable, value)
 
+        def _ratelimit_key(self):
+            key = 'tweepy.errorcache:'
+            if self.api.auth:
+                key +=  str(self.api.auth.cache_key())
+            else:
+                key += 'unauthenticated'
+            return key
+
         def execute(self):
             # Build the request URL
             url = self.api_root + self.path
             if len(self.parameters):
                 url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+
+            # check error cache. For now RateLimiting
+            # TODO exponential back off 
+            # TODO negative caching for 404, need to introduce the request params (too much ?)
+            if self.api.errorCache is not None:
+                res = self.api.errorCache.get(self._ratelimit_key())
+                if res:
+                    raise CachedRateLimit('you\'re rate limited')
 
             # Query the cache if one is available
             # and this request uses a GET method.
@@ -161,6 +177,9 @@ def bind_api(**config):
                     error_msg = self.api.parser.parse_error(resp.read())
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
+                if resp.status == 400 and self.api.errorCache is not None:
+                    self.api.errorCache.set(self._ratelimit_key(), 3600, time=3600)
+
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
