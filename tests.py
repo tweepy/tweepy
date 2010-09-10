@@ -4,6 +4,7 @@ from time import sleep
 import os
 
 from tweepy import *
+import tweepy.error
 
 """Configurations"""
 # Must supply twitter account credentials for tests
@@ -378,6 +379,115 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
+
+from pymock import *
+from py._plugin.pytest_monkeypatch import MonkeyPatch
+import httplib
+class TestTweepyErrorCache(PyMockTestCase):
+
+    def setUp(self):
+        super(TestTweepyErrorCache, self).setUp()
+        self.monkey = MonkeyPatch()
+
+    def tearDown(self):
+        super(TestTweepyErrorCache, self).tearDown()
+        self.monkey.undo()
+
+    def test_ratelimit_key(self):
+        #APIMethod is hidden => makes it difficult to test, or I don't know enough about python, please educate (gilles.devaux@gmail.com)
+        #I'm duplicating the RateLimit test to test auth and noauth case of _ratelimit_key
+        pass
+
+    class HTTPResponse(object):
+        status = 400
+        def read(self):
+            return {'error':'errror'}
+
+    class HTTPConnection(httplib.HTTPConnection):
+        def request(self, method, url, headers=None, body=None):
+            pass
+        def getresponse(self):
+            return TestTweepyErrorCache.HTTPResponse()
+
+    def test_RateLimited(self):
+
+        #monkey http connection -> stubs
+        self.monkey.setattr(httplib, 'HTTPConnection', TestTweepyErrorCache.HTTPConnection)
+
+        #errorCache mock
+        errorCacheMock = mock()
+
+        #first call, get nothing
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:unauthenticated'), None)
+        #second call cache
+        errorCacheMock.set('tweepy.errorcache:unauthenticated', 3600, time=3600)
+        #third call, second request, get something
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:unauthenticated'), 3600)
+
+        self.replay()
+
+        api = API(errorCache=errorCacheMock)
+        #first call
+        self.assertRaises(tweepy.error.TweepError, api.user_timeline, 'test')
+        #second
+        self.assertRaises(tweepy.error.CachedRateLimit, api.user_timeline, 'test')
+
+        self.verify()
+
+    def test_RateLimited_OAuth(self):
+
+        #monkey http connection -> stubs
+        self.monkey.setattr(httplib, 'HTTPConnection', TestTweepyErrorCache.HTTPConnection)
+
+        #errorCache mock
+        errorCacheMock = mock()
+
+        #first call, get nothing
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:at'), None)
+        #second call cache
+        errorCacheMock.set('tweepy.errorcache:at', 3600, time=3600)
+        #third call, second request, get something
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:at'), 3600)
+
+        self.replay()
+
+        auth = OAuthHandler('ck', 'cks')
+        auth.set_access_token('at', 'ats')
+        api = API(auth_handler=auth, errorCache=errorCacheMock)
+        #first call
+        self.assertRaises(tweepy.error.TweepError, api.user_timeline, 'test')
+        #second
+        self.assertRaises(tweepy.error.CachedRateLimit, api.user_timeline, 'test')
+
+        self.verify()
+
+    def test_RateLimited_BasicAuth(self):
+
+        #monkey http connection -> stubs
+        self.monkey.setattr(httplib, 'HTTPConnection', TestTweepyErrorCache.HTTPConnection)
+
+        #errorCache mock
+        errorCacheMock = mock()
+
+        #first call, get nothing
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:username'), None)
+        #second call cache
+        errorCacheMock.set('tweepy.errorcache:username', 3600, time=3600)
+        #third call, second request, get something
+        self.expectAndReturn(errorCacheMock.get('tweepy.errorcache:username'), 3600)
+
+        self.replay()
+
+        auth = BasicAuthHandler('username', 'password')
+        api = API(auth_handler=auth, errorCache=errorCacheMock)
+        #first call
+        self.assertRaises(tweepy.error.TweepError, api.user_timeline, 'test')
+        #second
+        self.assertRaises(tweepy.error.CachedRateLimit, api.user_timeline, 'test')
+
+        self.verify()
+        
+
 
 if __name__ == '__main__':
 
