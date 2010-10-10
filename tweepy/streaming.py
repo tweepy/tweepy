@@ -99,7 +99,10 @@ class Stream(object):
                 # quit if error count greater than retry count
                 break
             try:
-                conn = httplib.HTTPConnection(self.host)
+                if self.scheme == "http":
+                    conn = httplib.HTTPConnection(self.host)
+                else:
+                    conn = httplib.HTTPSConnection(self.host)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
                 conn.request('POST', self.url, self.body, headers=self.headers)
