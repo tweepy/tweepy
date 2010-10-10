@@ -68,9 +68,9 @@ class Stream(object):
 
     host = 'stream.twitter.com'
 
-    def __init__(self, username, password, listener, timeout=5.0, retry_count = None,
+    def __init__(self, auth, listener, timeout=5.0, retry_count = None,
                     retry_time = 10.0, snooze_time = 5.0, buffer_size=1500, headers=None):
-        self.auth = BasicAuthHandler(username, password)
+        self.auth = auth
         self.running = False
         self.timeout = timeout
         self.retry_count = retry_count
