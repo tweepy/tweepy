@@ -68,28 +68,27 @@ class Stream(object):
 
     host = 'stream.twitter.com'
 
-    def __init__(self, auth, listener, timeout=5.0, retry_count = None,
-                    retry_time = 10.0, snooze_time = 5.0, buffer_size=1500,
-                    headers=None, secure=False):
+    def __init__(self, auth, listener, **options):
         self.auth = auth
-        self.running = False
-        self.timeout = timeout
-        self.retry_count = retry_count
-        self.retry_time = retry_time
-        self.snooze_time = snooze_time
-        self.buffer_size = buffer_size
         self.listener = listener
+        self.running = False
+        self.timeout = options.get("timeout") or 5.0
+        self.retry_count = options.get("retry_count")
+        self.retry_time = options.get("retry_time") or 10.0
+        self.snooze_time = options.get("snooze_time") or 5.0
+        self.buffer_size = options.get("buffer_size") or 1500
+        if options.get("secure"):
+            self.scheme = "https"
+        else:
+            self.scheme = "http"
+
         self.api = API()
         self.headers = headers or {}
-        if secure:
-            self.scheme = "https://"
-        else:
-            self.scheme = "http://"
         self.body = None
 
     def _run(self):
         # setup
-        url = "%s%s%s" % (self.scheme, self.host, self.url)
+        url = "%s://%s%s" % (self.scheme, self.host, self.url)
         self.auth.apply_auth(url, 'GET', self.headers, None)
 
         # enter loop
