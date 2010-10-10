@@ -8,7 +8,6 @@ from threading import Thread
 from time import sleep
 import urllib
 
-from tweepy.auth import BasicAuthHandler
 from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -87,11 +86,11 @@ class Stream(object):
         self.body = None
 
     def _run(self):
-        # setup
+        # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
         self.auth.apply_auth(url, 'GET', self.headers, None)
 
-        # enter loop
+        # Connect and process the stream
         error_counter = 0
         conn = None
         exception = None
