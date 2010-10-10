@@ -9,6 +9,8 @@ from tweepy import *
 # Must supply twitter account credentials for tests
 username = ''
 password = ''
+consumer_key = ''
+consumer_secret = ''
 
 """Unit tests"""
 
@@ -307,9 +309,6 @@ class TweepyCursorTests(unittest.TestCase):
         self.assert_(len(pages) == 5)
 
 class TweepyAuthTests(unittest.TestCase):
-
-    consumer_key = 'ZbzSsdQj7t68VYlqIFvdcA'
-    consumer_secret = '4yDWgrBiRs2WIx3bfvF9UWCRmtQ2YKpKJKBahtZcU'
 
     def testoauth(self):
         auth = OAuthHandler(self.consumer_key, self.consumer_secret)
