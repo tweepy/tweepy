@@ -54,7 +54,7 @@ to using it:
 
 Tweepy tries to make OAuth as painless as possible for you. To begin
 the process we need to register our client application with
-Twitter. You can do that here. Create a new application and once you
+Twitter. Create a new application and once you
 are done you should have your consumer token and secret. Keep these
 two handy, you'll need them.
 
