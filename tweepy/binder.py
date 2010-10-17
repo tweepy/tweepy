@@ -9,6 +9,7 @@ import re
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
+from tweepy.models import Model
 
 re_path_template = re.compile('{\w+}')
 
@@ -114,9 +115,11 @@ def bind_api(**config):
                     # must restore api reference
                     if isinstance(cache_result, list):
                         for result in cache_result:
-                            result._api = self.api
+                            if isinstance(result, Model):
+                                result._api = self.api
                     else:
-                        cache_result._api = self.api
+                        if isinstance(cache_result, Model):
+                            cache_result._api = self.api
                     return cache_result
 
             # Continue attempting request until successful
