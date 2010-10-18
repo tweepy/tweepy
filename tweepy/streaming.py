@@ -82,7 +82,7 @@ class Stream(object):
             self.scheme = "http"
 
         self.api = API()
-        self.headers = headers or {}
+        self.headers = options.get("headers") or {}
         self.body = None
 
     def _run(self):
