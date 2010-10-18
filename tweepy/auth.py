@@ -2,7 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from urllib2 import Request, urlopen
+from urllib2 import Request, urlopen, HTTPError
 import base64
 
 from tweepy import oauth
@@ -100,7 +100,11 @@ class OAuthHandler(AuthHandler):
 
             return request.to_url()
         except Exception, e:
-            raise TweepError(e)
+            if isinstance(e, HTTPError):
+                code = e.code
+            else:
+                code = None
+            raise TweepError(e, code=code)
 
     def get_access_token(self, verifier=None):
         """
@@ -123,7 +127,11 @@ class OAuthHandler(AuthHandler):
             self.access_token = oauth.OAuthToken.from_string(resp.read())
             return self.access_token
         except Exception, e:
-            raise TweepError(e)
+            if isinstance(e, HTTPError):
+                code = e.code
+            else:
+                code = None
+            raise TweepError(e, code=code)
 
     def get_xauth_access_token(self, username, password):
         """
@@ -149,7 +157,11 @@ class OAuthHandler(AuthHandler):
             self.access_token = oauth.OAuthToken.from_string(resp.read())
             return self.access_token
         except Exception, e:
-            raise TweepError(e)
+            if isinstance(e, HTTPError):
+                code = e.code
+            else:
+                code = None
+            raise TweepError(e, code=code)
 
     def get_username(self):
         if self.username is None:
