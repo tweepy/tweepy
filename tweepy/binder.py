@@ -7,7 +7,7 @@ import urllib
 import time
 import re
 
-from urllib2 import Request, urlopen
+from urllib2 import Request, HTTPError, urlopen
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -141,7 +141,12 @@ def bind_api(**config):
                     req = Request(url=self.scheme + self.host + url, headers=self.headers, data=self.post_data)
                     req.get_method = lambda: self.method
                     resp = urlopen(req)
-                    resp.status = resp.getcode()
+                    resp.status = hasattr(resp, 'getcode') and resp.getcode() or 200
+                except URLError, e:
+                    if hasattr(e, 'reason'):
+                        resp.status = e.reason
+                    if hasattr(e, 'code'):
+                        resp.status = e.code
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
