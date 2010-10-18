@@ -7,6 +7,8 @@ import urllib
 import time
 import re
 
+from urllib2 import Request, urlopen
+
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
@@ -127,13 +129,6 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
-                # Open connection
-                # FIXME: add timeout
-                if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
-                else:
-                    conn = httplib.HTTPConnection(self.host)
-
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
@@ -142,9 +137,12 @@ def bind_api(**config):
                     )
 
                 # Execute request
+                # FIXME: add timeout
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
-                    resp = conn.getresponse()
+                    req = Request(url=self.scheme + self.host + url, headers=self.headers, data=self.post_data)
+                    req.get_method = lambda: self.method
+                    resp = urlopen(req)
+                    resp.status = resp.getcode()
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
@@ -169,8 +167,6 @@ def bind_api(**config):
 
             # Parse the response payload
             result = self.api.parser.parse(self, resp.read())
-
-            conn.close()
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
