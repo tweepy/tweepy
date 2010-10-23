@@ -1,7 +1,21 @@
+"""
+Tweepy Unit Tests
+
+To run the tests, copy the variables from the "Configurations" section into
+testconf.py and configure them using your test twitter account.
+
+To find your consumer tokens for your app, visit:
+   http://dev.twitter.com/apps
+
+Once username, password, consumer_key and consumer_secret have been specified
+running the tests will walk you through getting an OAuth access token.  Place
+this in your testconf.py module and you should be good to go.
+"""
 import unittest
 import random
 from time import sleep
 import os
+import sys
 
 from tweepy import *
 
@@ -11,14 +25,17 @@ username = ''
 password = ''
 consumer_key = ''
 consumer_secret = ''
+access_token_key = ''
+access_token_secret = ''
+
 
 """Unit tests"""
-
-
 class TweepyAPITests(unittest.TestCase):
 
     def setUp(self):
-        self.api = API(BasicAuthHandler(username, password))
+        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token_key, access_token_secret)
+        self.api = API(auth)
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
@@ -136,9 +153,10 @@ class TweepyAPITests(unittest.TestCase):
     def testratelimitstatus(self):
         self.api.rate_limit_status()
 
-    def testsetdeliverydevice(self):
-        self.api.set_delivery_device('im')
-        self.api.set_delivery_device('none')
+    # Deprecated (responds with code: 68)
+    # def testsetdeliverydevice(self):
+    #     self.api.set_delivery_device('im')
+    #     self.api.set_delivery_device('none')
 
     def testupdateprofilecolors(self):
         original = self.api.me()
@@ -211,8 +229,7 @@ class TweepyAPITests(unittest.TestCase):
 
     def testcreateupdatedestroylist(self):
         self.api.create_list('tweeps')
-        # XXX: right now twitter throws a 500 here, issue is being looked into by twitter.
-        #self.api.update_list('tweeps', mode='private')
+        self.api.update_list('tweeps', mode='private')
         self.api.destroy_list('tweeps')
 
     def testlists(self):
@@ -276,7 +293,9 @@ class TweepyAPITests(unittest.TestCase):
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = API(BasicAuthHandler(username, password))
+        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token_key, access_token_secret)
+        self.api = API(auth)
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
@@ -311,7 +330,7 @@ class TweepyCursorTests(unittest.TestCase):
 class TweepyAuthTests(unittest.TestCase):
 
     def testoauth(self):
-        auth = OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth = OAuthHandler(consumer_key, consumer_secret)
 
         # test getting access token
         auth_url = auth.get_authorization_url()
@@ -326,13 +345,13 @@ class TweepyAuthTests(unittest.TestCase):
         s = api.update_status('test %i' % random.randint(0, 1000))
         api.destroy_status(s.id)
 
-    def testbasicauth(self):
-        auth = BasicAuthHandler(username, password)
-
-        # test accessing twitter API
-        api = API(auth)
-        s = api.update_status('test %i' % random.randint(1, 1000))
-        api.destroy_status(s.id)
+    # Basic Auth is no longer supported
+    # def testbasicauth(self):
+    #     auth = BasicAuthHandler(username, password)
+    #     # test accessing twitter API
+    #     api = API(auth)
+    #     s = api.update_status('test %i' % random.randint(1, 1000))
+    #     api.destroy_status(s.id)
 
 
 class TweepyCacheTests(unittest.TestCase):
@@ -378,7 +397,42 @@ class TweepyCacheTests(unittest.TestCase):
         self.cache.flush()
         os.rmdir('cache_test_dir')
 
+def get_access_token():
+    if not (consumer_key or consumer_secret):
+        print 'You need to supply your consumer key & secret.'
+        return
+
+    auth = OAuthHandler(consumer_key, consumer_secret)
+
+    # test getting access token
+    auth_url = auth.get_authorization_url()
+    print 'Please authorize by browsing to this URL: ' + auth_url
+    verifier = raw_input('Enter the provided PIN: ').strip()
+
+    if len(verifier) == 0:
+        print 'No PIN entered, aborting.'
+        return
+
+    access_token = auth.get_access_token(verifier)
+    if not access_token:
+        print 'No access token could be retrieved, aborting.'
+        return
+
+    print 'Access token retrieved, use the following keys in testconf.py:'
+    print 'access_token_key = \'%s\'' % access_token.key
+    print 'access_token_secret = \'%s\'' % access_token.secret
+
 if __name__ == '__main__':
+    try:
+        from testconf import *
+    except ImportError:
+        pass
 
-    unittest.main()
+    if not (username and password and consumer_key and consumer_secret):
+        print 'You need to configure the tests, please see module docs.'
 
+    elif not (access_token_key and access_token_secret):
+        get_access_token()
+
+    else:
+        unittest.main()
