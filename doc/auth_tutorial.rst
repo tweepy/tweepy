@@ -19,6 +19,9 @@ provided:
 Basic Authentication
 ====================
 
+Twitter has disabled basic authentication on August 16th 2010 - use OAuth 
+authentication instead.
+
 Basic authentication uses the user's Twitter username and password for
 authenticating with the API. You must query the user for these two
 pieces of information before we can authenticate.
