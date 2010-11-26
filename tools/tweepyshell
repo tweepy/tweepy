@@ -2,8 +2,10 @@
 
 from getpass import getpass
 from optparse import OptionParser
+from ConfigParser import SafeConfigParser
 import tweepy
 from tweepy import API, BasicAuthHandler
+from tweepy.error import TweepError
 
 """Launch an interactive shell ready for Tweepy usage
 
@@ -14,24 +16,64 @@ using the credentials provided.
 """
 
 opt = OptionParser(usage='tweepyshell [options] <username> <password>')
+opt.add_option('-b', '--basic', 
+               action='store_true',
+               dest='basic', 
+               help='use basic auth')
+opt.add_option('-c', '--config', 
+               action='store',
+               dest='config', type='string',
+               default='oauth.cfg',
+               help='oauth config file')
 opt.add_option('-d', '--debug',
-        action='store_true',
-        dest='debug',
-        help='enable debug mode')
+               action='store_true',
+               dest='debug',
+               help='enable debug mode')
+        
 options, args = opt.parse_args()
 
-if len(args) == 1:
-    auth = BasicAuthHandler(args[0], getpass())
-elif len(args) == 2:
-    auth = BasicAuthHandler(args[0], args[1])
+if options.basic:
+    if len(args) == 1:
+        auth = BasicAuthHandler(args[0], getpass())
+    elif len(args) == 2:
+        auth = BasicAuthHandler(args[0], args[1])
+    else:
+        auth = None
 else:
-    auth = None
+    parser = SafeConfigParser()
+    parser.read(options.config)
+    auth = tweepy.OAuthHandler(parser.get('application', 'consumer_key'),
+                               parser.get('application', 'consumer_secret'),
+                               'oob') # oob for forced out of band auth
+    if parser.has_section(args[0]):
+        auth.set_access_token(parser.get(args[0], 'token_key'),
+                              parser.get(args[0], 'token_secret'))
+    else:
+        print 'Copy the following URL into your browser, allow access and ' \
+              'enter PIN here'
+        print auth.get_authorization_url()
+        verifier = raw_input('Enter PIN code: ')
+        try:
+            auth.get_access_token(verifier)
+            sectionname = auth.get_username()
+            parser.add_section(sectionname)
+            parser.set(sectionname, 'token_key', auth.access_token.key)
+            parser.set(sectionname, 'token_secret', auth.access_token.secret)
+            cfgfile = open(options.config, 'wb')
+            parser.write(cfgfile)
+            cfgfile.close()
+        except TweepError:
+            auth = None
+            print 'authorization not successful'
 
 if options.debug:
     tweepy.debug()
 
 local_ns = {'tweepy': tweepy, 'api': API(auth)}
-shellbanner = '<Tweepy shell>'
+if auth:
+    shellbanner = '<Tweepy shell - %s>' % auth.get_username()
+else:
+    shellbanner = '<Tweepy shell - unauthorized>'
 
 try:
     import IPython
