@@ -47,7 +47,8 @@ class Status(Model):
         status = cls(api)
         for k, v in json.items():
             if k == 'user':
-                user = User.parse(api, v)
+                user_model = getattr(api.parser.model_factory, 'user')
+                user = user_model.parse(api, v)
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
             elif k == 'created_at':
