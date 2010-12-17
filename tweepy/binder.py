@@ -6,6 +6,8 @@ import httplib
 import urllib
 import time
 import re
+import StringIO
+import gzip
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -38,6 +40,7 @@ def bind_api(**config):
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
+            self.headers['Accept-encoding'] = 'gzip'
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
@@ -165,10 +168,16 @@ def bind_api(**config):
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
                 raise TweepError(error_msg, resp)
-
+            
+            # decompress data
+            if resp.getheader('content-encoding') == 'gzip':
+                compressed = StringIO.StringIO(resp.read())
+                uncompressed = gzip.GzipFile(fileobj=compressed).read()
+            else:
+                uncompressed = resp.read()
+            
             # Parse the response payload
-            result = self.api.parser.parse(self, resp.read())
-
+            result = self.api.parser.parse(self, uncompressed)
             conn.close()
 
             # Store result into cache if one is available.
