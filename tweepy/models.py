@@ -61,6 +61,8 @@ class Status(Model):
                     setattr(status, 'source_url', None)
             elif k == 'retweeted_status':
                 setattr(status, k, Status.parse(api, v))
+            elif k=='text':
+                setattr(status, k, unescape_html(v))
             else:
                 setattr(status, k, v)
         return status
