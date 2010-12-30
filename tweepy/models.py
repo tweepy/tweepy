@@ -276,6 +276,20 @@ class List(Model):
     def is_subscribed(self, id):
         return self._api.is_subscribed_list(self.user.screen_name, self.slug, id)
 
+class Relation(Model):
+    @classmethod
+    def parse(cls, api, json):
+        result = cls(api)
+        for k,v in json.items():
+            print k, v
+            if k == 'value':
+                setattr(result, k, Status.parse(api, v))
+            elif k == 'results':
+                setattr(result, k, Relation.parse_list(api, v))
+            else:
+                setattr(result, k, v)
+        return result
+
 
 class JSONModel(Model):
 
@@ -308,6 +322,7 @@ class ModelFactory(object):
     saved_search = SavedSearch
     search_result = SearchResult
     list = List
+    relation = Relation
 
     json = JSONModel
     ids = IDModel
