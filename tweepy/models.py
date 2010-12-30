@@ -281,8 +281,7 @@ class Relation(Model):
     def parse(cls, api, json):
         result = cls(api)
         for k,v in json.items():
-            print k, v
-            if k == 'value':
+            if k == 'value' and json['kind'] in ['Tweet', 'LookedupStatus']:
                 setattr(result, k, Status.parse(api, v))
             elif k == 'results':
                 setattr(result, k, Relation.parse_list(api, v))
