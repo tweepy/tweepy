@@ -298,8 +298,10 @@ class API(object):
                 payload_type = 'user',
                 require_auth = True
             )(self)
-        except TweepError:
-            return False
+        except TweepError, e:
+            if e.response and e.response.status == 401:
+                return False
+            raise
 
     """ account/rate_limit_status """
     rate_limit_status = bind_api(

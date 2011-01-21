@@ -83,12 +83,13 @@ class Stream(object):
 
         self.api = API()
         self.headers = options.get("headers") or {}
+        self.parameters = None
         self.body = None
 
     def _run(self):
         # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
-        self.auth.apply_auth(url, 'GET', self.headers, None)
+        self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
 
         # Connect and process the stream
         error_counter = 0
@@ -166,6 +167,7 @@ class Stream(object):
             self._run()
 
     def firehose(self, count=None, async=False):
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/firehose.json?delimited=length' % STREAM_VERSION
@@ -174,12 +176,14 @@ class Stream(object):
         self._start(async)
 
     def retweet(self, async=False):
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
         self._start(async)
 
     def sample(self, count=None, async=False):
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
@@ -187,20 +191,23 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False, locations=None):
-        params = {}
+    def filter(self, follow=None, track=None, async=False, locations=None, count = None):
+        self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            params['follow'] = ','.join(map(str, follow))
+            self.parameters['follow'] = ','.join(map(str, follow))
         if track:
-            params['track'] = ','.join(map(str, track))
+            self.parameters['track'] = ','.join(map(str, track))
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
-            params['locations'] = ','.join(['%.2f' % l for l in locations])
-        self.body = urllib.urlencode(params)
+            self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
+	if count:
+		self.parameters['count'] = count
+        self.body = urllib.urlencode(self.parameters)
+        self.parameters['delimited'] = 'length'
         self._start(async)
 
     def disconnect(self):
