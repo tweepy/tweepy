@@ -6,6 +6,8 @@ import httplib
 import urllib
 import time
 import re
+from StringIO import StringIO
+import gzip
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -140,6 +142,10 @@ def bind_api(**config):
                             self.method, self.headers, self.parameters
                     )
 
+                # Request compression if configured
+                if self.api.compression:
+                    self.headers['Accept-encoding'] = 'gzip'
+
                 # Execute request
                 try:
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
@@ -167,7 +173,14 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            result = self.api.parser.parse(self, resp.read())
+            body = resp.read()
+            if resp.getheader('Content-Encoding', '') == 'gzip':
+                try:
+                    zipper = gzip.GzipFile(fileobj=StringIO(body))
+                    body = zipper.read()
+                except Exception, e:
+                    raise TweepError('Failed to decompress data: %s' % e)
+            result = self.api.parser.parse(self, body)
 
             conn.close()
 
