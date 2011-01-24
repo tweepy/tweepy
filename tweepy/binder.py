@@ -106,7 +106,9 @@ def bind_api(**config):
             # Build the request URL
             url = self.api_root + self.path
             if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+                # OK, seems that twitter doesn't consider '.' as a valid char
+                # So, we replace all the dot into %2E
+                url = '%s?%s' % (url, urllib.urlencode(self.parameters).replace('.','%2E'))
 
             # Query the cache if one is available
             # and this request uses a GET method.
