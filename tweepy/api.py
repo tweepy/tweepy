@@ -77,6 +77,14 @@ class API(object):
         allowed_param = ['id', 'count', 'page'],
         require_auth = True
     )
+	
+    """/related_results/show/:id.format"""
+    related_results = bind_api(
+        path = '/related_results/show/{id}.json',
+        payload_type = 'relation', payload_list = True,
+        allowed_param = ['id'],
+        require_auth = False
+	)
 
     """/statuses/:id/retweeted_by/ids.format"""
     retweeted_by_ids = bind_api(
