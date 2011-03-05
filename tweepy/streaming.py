@@ -71,7 +71,7 @@ class Stream(object):
         self.auth = auth
         self.listener = listener
         self.running = False
-        self.timeout = options.get("timeout", 5.0)
+        self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
         self.retry_time = options.get("retry_time", 10.0)
         self.snooze_time = options.get("snooze_time",  5.0)
