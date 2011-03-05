@@ -204,8 +204,8 @@ class Stream(object):
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
-	if count:
-		self.parameters['count'] = count
+        if count:
+            self.parameters['count'] = count
         self.body = urllib.urlencode(self.parameters)
         self.parameters['delimited'] = 'length'
         self._start(async)
