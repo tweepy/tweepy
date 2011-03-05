@@ -71,11 +71,11 @@ class Stream(object):
         self.auth = auth
         self.listener = listener
         self.running = False
-        self.timeout = options.get("timeout") or 5.0
+        self.timeout = options.get("timeout", 5.0)
         self.retry_count = options.get("retry_count")
-        self.retry_time = options.get("retry_time") or 10.0
-        self.snooze_time = options.get("snooze_time") or 5.0
-        self.buffer_size = options.get("buffer_size") or 1500
+        self.retry_time = options.get("retry_time", 10.0)
+        self.snooze_time = options.get("snooze_time",  5.0)
+        self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure"):
             self.scheme = "https"
         else:
@@ -96,7 +96,7 @@ class Stream(object):
         conn = None
         exception = None
         while self.running:
-            if self.retry_count and error_counter > self.retry_count:
+            if self.retry_count is not None and error_counter > self.retry_count:
                 # quit if error count greater than retry count
                 break
             try:
