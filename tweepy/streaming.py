@@ -89,7 +89,6 @@ class Stream(object):
     def _run(self):
         # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
-        self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
 
         # Connect and process the stream
         error_counter = 0
@@ -104,6 +103,7 @@ class Stream(object):
                     conn = httplib.HTTPConnection(self.host)
                 else:
                     conn = httplib.HTTPSConnection(self.host)
+                self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
                 conn.request('POST', self.url, self.body, headers=self.headers)
