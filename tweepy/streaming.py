@@ -136,26 +136,20 @@ class Stream(object):
             raise exception
 
     def _read_loop(self, resp):
-        data = ''
-        while self.running:
+          while self.running:
             if resp.isclosed():
                 break
 
             # read length
-            length = ''
+            data = ''
             while True:
                 c = resp.read(1)
                 if c == '\n':
                     break
-                length += c
-            length = length.strip()
-            if length.isdigit():
-                length = int(length)
-            else:
-                continue
+                data += c
+            data = data.strip()
 
             # read data and pass into listener
-            data = resp.read(length)
             if self.listener.on_data(data) is False:
                 self.running = False
 
