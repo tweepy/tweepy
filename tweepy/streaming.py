@@ -159,6 +159,14 @@ class Stream(object):
             Thread(target=self._run).start()
         else:
             self._run()
+    def userstream(self, count=None, async=False, secure=True):
+        if self.running:
+            raise TweepError('Stream object already connected!')
+        self.url = '/2/user.json'
+        self.host='userstream.twitter.com'
+        if count:
+            self.url += '&count=%s' % count
+        self._start(async)
 
     def firehose(self, count=None, async=False):
         self.parameters = {'delimited': 'length'}
