@@ -140,19 +140,22 @@ class Stream(object):
         while self.running:
             if resp.isclosed():
                 break
-
-            # read length
-            length = ''
-            while True:
-                c = resp.read(1)
-                if c == '\n':
-                    break
-                length += c
-            length = length.strip()
-            if length.isdigit():
-                length = int(length)
-            else:
-                continue
+            
+            try:
+                # read length
+                length = ''
+                while True:
+                    c = resp.read(1)
+                    if c == '\n':
+                        break
+                    length += c
+                length = length.strip()
+                if length.isdigit():
+                    length = int(length)
+                else:
+                    continue
+            except httplib.IncompleteRead:
+                break
 
             # read data and pass into listener
             data = resp.read(length)
