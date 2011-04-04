@@ -154,13 +154,14 @@ class Stream(object):
                     length = int(length)
                 else:
                     continue
+                
+                # read data and pass into listener
+                data = resp.read(length)
+                if self.listener.on_data(data) is False:
+                    self.running = False
+                
             except httplib.IncompleteRead:
                 break
-
-            # read data and pass into listener
-            data = resp.read(length)
-            if self.listener.on_data(data) is False:
-                self.running = False
 
     def _start(self, async):
         self.running = True
