@@ -159,6 +159,7 @@ class Stream(object):
             Thread(target=self._run).start()
         else:
             self._run()
+
     def userstream(self, count=None, async=False, secure=True):
         if self.running:
             raise TweepError('Stream object already connected!')
