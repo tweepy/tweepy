@@ -5,32 +5,22 @@
 /_/    |__/|__/ \___/ \___// .___/ \__, /  
                           /_/     /____/ 
 
-A Twitter library for Python! Also works with identi.ca/laconi.ca !
+A Python library for accessing the Twitter API.
 
-Features:
-  + OAuth support (including xAuth)
-  + Covers the entire Twitter API
-  + Actively under development
-  + Streaming API support
-  + Cache system (memory, file)
+Requires Python 2.5 or later. Python 3 not yet supported.
 
-Documentation: http://joshthecoder.github.com/tweepy/docs/index.html
+Documentation: http://tweepy.readthedocs.org/
+Source Code: http://github.com/joshthecoder/tweepy
 Mailing list: http://groups.google.com/group/tweepy
-Chat: IRC freenode.net #tweepy
-      Web interface: http://webchat.freenode.net/?channels=tweepy
-Wiki: http://wiki.github.com/joshthecoder/tweepy
-Bug tracker: http://github.com/joshthecoder/tweepy/issues
+IRC:
+  Server: freenode.net
+  Channel: #tweepy
 
-Souce code: 
-    Library: http://github.com/joshthecoder/tweepy
-    Examples: http://github.com/joshthecoder/tweepy-examples
-
-Author: Joshua Roesslein
-License: MIT
-Dependencies:
-  Python 2.4 or newer
-  Simplejson <http://undefined.org/python/#simplejson>
-    **Included in python 2.6+
-  Python-OAuth <http://code.google.com/p/oauth>
-    **Bundled with this library
+Contributing
+------------
+If you have a Github account please fork the repository,
+create a topic branch, and commit your changes.
+Then submit a pull request from that branch.
+I would also accept patches via the mailing list, but pull requests
+on Github is the preferred method.
 
