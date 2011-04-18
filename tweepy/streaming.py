@@ -133,7 +133,7 @@ class Stream(object):
             conn.close()
 
         if exception:
-            raise exception
+            raise
 
     def _read_loop(self, resp):
           while self.running:
