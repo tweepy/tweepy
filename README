@@ -7,20 +7,16 @@
 
 A Python library for accessing the Twitter API.
 
-Requires Python 2.5 or later. Python 3 not yet supported.
+Requires Python 2.5 or later. Sorry no Python 3 support yet.
 
-Documentation: http://tweepy.readthedocs.org/
-Source Code: http://github.com/joshthecoder/tweepy
-Mailing list: http://groups.google.com/group/tweepy
-IRC:
-  Server: freenode.net
-  Channel: #tweepy
+Website: http://tweepy.github.com/
+Git Repository: http://github.com/tweepy/tweepy.git
+Google Groups: http://groups.google.com/group/tweepy
+IRC Channel: freenode.net #tweepy
 
-Contributing
-------------
-If you have a Github account please fork the repository,
-create a topic branch, and commit your changes.
-Then submit a pull request from that branch.
-I would also accept patches via the mailing list, but pull requests
-on Github is the preferred method.
+How to contribute a patch:
+  1. Fork Tweepy on github.com
+  2. Create a new branch
+  3. Commit changes to this branch
+  4. Send a pull request
 
