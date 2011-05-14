@@ -6,6 +6,7 @@ import httplib
 import urllib
 import time
 import re
+import sys
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -37,6 +38,7 @@ def bind_api(**config):
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
+            self.timeout = kargs.pop('timeout', api.timeout)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
@@ -125,13 +127,19 @@ def bind_api(**config):
             # Continue attempting request until successful
             # or maximum number of retries is reached.
             retries_performed = 0
+
+            connection_args = {'host': self.host}
+            # Python 2.6+ httplib has support for timeout via the API
+            if self.timeout is not None and sys.hexversion >= 0x02060000:
+                connection_args['timeout'] = self.timeout
+
             while retries_performed < self.retry_count + 1:
                 # Open connection
-                # FIXME: add timeout
+                print connection_args
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
+                    conn = httplib.HTTPSConnection(**connection_args)
                 else:
-                    conn = httplib.HTTPConnection(self.host)
+                    conn = httplib.HTTPConnection(**connection_args)
 
                 # Apply authentication
                 if self.api.auth:
@@ -143,6 +151,10 @@ def bind_api(**config):
                 # Execute request
                 try:
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
+                    # Python <= 2.5 httplib doesn't support timeout via the api
+                    # so we have to set it manually on the socket
+                    if self.timeout is not None and sys.hexversion < 0x02060000:
+                        conn.sock.settimeout(self.timeout)
                     resp = conn.getresponse()
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
