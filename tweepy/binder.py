@@ -7,6 +7,7 @@ import urllib
 import time
 import re
 import sys
+import socket
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -38,6 +39,7 @@ def bind_api(**config):
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
+            self.retry_timeout = kargs.pop('retry_timeout', api.retry_timeout)
             self.timeout = kargs.pop('timeout', api.timeout)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
@@ -135,7 +137,6 @@ def bind_api(**config):
 
             while retries_performed < self.retry_count + 1:
                 # Open connection
-                print connection_args
                 if self.api.secure:
                     conn = httplib.HTTPSConnection(**connection_args)
                 else:
@@ -156,6 +157,13 @@ def bind_api(**config):
                     if self.timeout is not None and sys.hexversion < 0x02060000:
                         conn.sock.settimeout(self.timeout)
                     resp = conn.getresponse()
+                except socket.timeout, e:
+                    # Retry on timeout if we've been asked to
+                    if self.retry_timeout and retries_performed < self.retry_count:
+                        time.sleep(self.retry_delay)
+                        retries_performed += 1
+                        continue
+                    raise TweepError('Failed to send request: %s' % e)
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
@@ -179,7 +187,10 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            result = self.api.parser.parse(self, resp.read())
+            try:
+                result = self.api.parser.parse(self, resp.read())
+            except socket.timeout, e:
+                raise TweepError('Failed to read response: %s' % e)
 
             conn.close()
 
