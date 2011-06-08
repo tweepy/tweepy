@@ -160,12 +160,12 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(updated.profile_sidebar_border_color, '000')
 
     """
-    def testupateprofileimage(self):
-        self.api.update_profile_image('examples/profile.png')
+def testupateprofileimage(self):
+self.api.update_profile_image('examples/profile.png')
 
-    def testupdateprofilebg(self):
-        self.api.update_profile_background_image('examples/bg.png')
-    """
+def testupdateprofilebg(self):
+self.api.update_profile_background_image('examples/bg.png')
+"""
 
     def testupdateprofile(self):
         original = self.api.me()
@@ -339,8 +339,11 @@ class TweepyCacheTests(unittest.TestCase):
 
     timeout = 2.0
     memcache_servers = ['127.0.0.1:11211']  # must be running for test to pass
+    
 
     def _run_tests(self, do_cleanup=True):
+        
+        print self, type(self)
         # test store and get
         self.cache.store('testkey', 'testvalue')
         self.assertEqual(self.cache.get('testkey'), 'testvalue',
@@ -377,6 +380,12 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
+        
+    def testrediscache(self):
+        import redis
+        client = redis.Redis() # localhost server
+        self.cache = RedisCache(client, self.timeout)
+        self._run_tests()
 
 if __name__ == '__main__':
 
