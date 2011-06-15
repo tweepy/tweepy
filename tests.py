@@ -379,6 +379,5 @@ class TweepyCacheTests(unittest.TestCase):
         os.rmdir('cache_test_dir')
 
 if __name__ == '__main__':
-
     unittest.main()
 

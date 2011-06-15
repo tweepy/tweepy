@@ -25,6 +25,7 @@ def bind_api(**config):
         method = config.get('method', 'GET')
         require_auth = config.get('require_auth', False)
         search_api = config.get('search_api', False)
+        use_cache = config.get('use_cache', True)
 
         def __init__(self, api, args, kargs):
             # If authentication is required and no credentials
@@ -108,7 +109,7 @@ def bind_api(**config):
 
             # Query the cache if one is available
             # and this request uses a GET method.
-            if self.api.cache and self.method == 'GET':
+            if self.use_cache and self.api.cache and self.method == 'GET':
                 cache_result = self.api.cache.get(url)
                 # if cache result found and not expired, return it
                 if cache_result:
@@ -172,7 +173,7 @@ def bind_api(**config):
             conn.close()
 
             # Store result into cache if one is available.
-            if self.api.cache and self.method == 'GET' and result:
+            if self.use_cache and self.api.cache and self.method == 'GET' and result:
                 self.api.cache.store(url, result)
 
             return result
