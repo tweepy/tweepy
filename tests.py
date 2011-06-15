@@ -388,6 +388,5 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
 
 if __name__ == '__main__':
-
     unittest.main()
 

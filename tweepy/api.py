@@ -323,7 +323,8 @@ class API(object):
     """ account/rate_limit_status """
     rate_limit_status = bind_api(
         path = '/account/rate_limit_status.json',
-        payload_type = 'json'
+        payload_type = 'json',
+        use_cache = False
     )
 
     """ account/update_delivery_device """
