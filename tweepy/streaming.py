@@ -8,6 +8,7 @@ from threading import Thread
 from time import sleep
 import urllib
 
+from tweepy.auth import BasicAuthHandler
 from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -67,43 +68,33 @@ class Stream(object):
 
     host = 'stream.twitter.com'
 
-    def __init__(self, auth, listener, **options):
-        self.auth = auth
-        self.listener = listener
+    def __init__(self, username, password, listener, timeout=5.0, retry_count = None,
+                    retry_time = 10.0, snooze_time = 5.0, buffer_size=1500, headers=None):
+        self.auth = BasicAuthHandler(username, password)
         self.running = False
-        self.timeout = options.get("timeout", 300.0)
-        self.retry_count = options.get("retry_count")
-        self.retry_time = options.get("retry_time", 10.0)
-        self.snooze_time = options.get("snooze_time",  5.0)
-        self.buffer_size = options.get("buffer_size",  1500)
-        if options.get("secure"):
-            self.scheme = "https"
-        else:
-            self.scheme = "http"
-
+        self.timeout = timeout
+        self.retry_count = retry_count
+        self.retry_time = retry_time
+        self.snooze_time = snooze_time
+        self.buffer_size = buffer_size
+        self.listener = listener
         self.api = API()
-        self.headers = options.get("headers") or {}
-        self.parameters = None
+        self.headers = headers or {}
         self.body = None
 
     def _run(self):
-        # Authenticate
-        url = "%s://%s%s" % (self.scheme, self.host, self.url)
+        # setup
+        self.auth.apply_auth(None, None, self.headers, None)
 
-        # Connect and process the stream
+        # enter loop
         error_counter = 0
         conn = None
-        exception = None
         while self.running:
-            if self.retry_count is not None and error_counter > self.retry_count:
+            if self.retry_count and error_counter > self.retry_count:
                 # quit if error count greater than retry count
                 break
             try:
-                if self.scheme == "http":
-                    conn = httplib.HTTPConnection(self.host)
-                else:
-                    conn = httplib.HTTPSConnection(self.host)
-                self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
+                conn = httplib.HTTPConnection(self.host)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
                 conn.request('POST', self.url, self.body, headers=self.headers)
@@ -123,7 +114,7 @@ class Stream(object):
                     break
                 conn.close()
                 sleep(self.snooze_time)
-            except Exception, exception:
+            except Exception:
                 # any other exception is fatal, so kill loop
                 break
 
@@ -132,24 +123,27 @@ class Stream(object):
         if conn:
             conn.close()
 
-        if exception:
-            raise
-
     def _read_loop(self, resp):
-          while self.running:
+        data = ''
+        while self.running:
             if resp.isclosed():
                 break
 
             # read length
-            data = ''
+            length = ''
             while True:
                 c = resp.read(1)
                 if c == '\n':
                     break
-                data += c
-            data = data.strip()
+                length += c
+            length = length.strip()
+            if length.isdigit():
+                length = int(length)
+            else:
+                continue
 
             # read data and pass into listener
+            data = resp.read(length)
             if self.listener.on_data(data) is False:
                 self.running = False
 
@@ -160,17 +154,7 @@ class Stream(object):
         else:
             self._run()
 
-    def userstream(self, count=None, async=False, secure=True):
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/2/user.json'
-        self.host='userstream.twitter.com'
-        if count:
-            self.url += '&count=%s' % count
-        self._start(async)
-
     def firehose(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/firehose.json?delimited=length' % STREAM_VERSION
@@ -179,14 +163,12 @@ class Stream(object):
         self._start(async)
 
     def retweet(self, async=False):
-        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
         self._start(async)
 
     def sample(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
@@ -194,23 +176,19 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False, locations=None, count = None):
-        self.parameters = {}
+    def filter(self, follow=None, track=None, locations=None, async=False):
+        params = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            self.parameters['follow'] = ','.join(map(str, follow))
+            params['follow'] = ','.join(map(str, follow))
         if track:
-            self.parameters['track'] = ','.join(map(str, track))
-        if locations and len(locations) > 0:
-            assert len(locations) % 4 == 0
-            self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
-        if count:
-            self.parameters['count'] = count
-        self.body = urllib.urlencode(self.parameters)
-        self.parameters['delimited'] = 'length'
+            params['track'] = ','.join(map(str, track))
+        if locations:
+            params['locations'] = ','.join(map(str, locations))
+        self.body = urllib.urlencode(params)
         self._start(async)
 
     def disconnect(self):
