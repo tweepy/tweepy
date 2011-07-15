@@ -212,6 +212,14 @@ class API(object):
         require_auth = True
     )
 
+    """ direct_messages/show """
+    get_direct_message = bind_api(
+        path = '/direct_messages/show/{id}.json',
+        payload_type = 'direct_message',
+        allowed_param = ['id'],
+        require_auth = True
+    )
+
     """ direct_messages/sent """
     sent_direct_messages = bind_api(
         path = '/direct_messages/sent.json',
