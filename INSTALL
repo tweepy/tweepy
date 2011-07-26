@@ -5,7 +5,7 @@ easy_install tweepy
 
 setuptools - from Git repository
 --------------------------------
-> git clone git://github.com/joshthecoder/tweepy.git
+> git clone git://github.com/tweepy/tweepy.git
 > cd tweepy
 > python setup.py install (run as admin/root)
 
