@@ -12,6 +12,7 @@ Requires Python 2.5 or later. Sorry no Python 3 support yet.
 Website: http://tweepy.github.com/
 Git Repository: http://github.com/tweepy/tweepy.git
 Google Groups: http://groups.google.com/group/tweepy
+Documentation: http://packages.python.org/tweepy/html/
 IRC Channel: freenode.net #tweepy
 
 How to contribute a patch:
