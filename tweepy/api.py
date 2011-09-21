@@ -18,8 +18,10 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=False, api_root='/1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None):
+            parser=None,proxy_host=None,proxy_port=80):
         self.auth = auth_handler
+        if auth_handler:
+			auth_handler.api = self
         self.host = host
         self.search_host = search_host
         self.api_root = api_root
@@ -29,6 +31,8 @@ class API(object):
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
+        self.proxy_port = proxy_port
+        self.proxy_host = proxy_host
         self.parser = parser or ModelParser()
 
     """ statuses/public_timeline """

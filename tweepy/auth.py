@@ -48,6 +48,7 @@ class OAuthHandler(AuthHandler):
         self.callback = callback
         self.username = None
         self.secure = secure
+        self.api = None
 
     def _get_oauth_url(self, endpoint, secure=False):
         if self.secure or secure:
@@ -138,9 +139,9 @@ class OAuthHandler(AuthHandler):
                 oauth_consumer=self._consumer,
                 http_method='POST', http_url=url,
                 parameters = {
-		            'x_auth_mode': 'client_auth',
-		            'x_auth_username': username,
-		            'x_auth_password': password
+                    'x_auth_mode': 'client_auth',
+                    'x_auth_username': username,
+                    'x_auth_password': password
                 }
             )
             request.sign_request(self._sigmethod, self._consumer, None)
@@ -153,7 +154,10 @@ class OAuthHandler(AuthHandler):
 
     def get_username(self):
         if self.username is None:
-            api = API(self)
+            if self.api:
+                 api = self.api
+            else:
+                api = API(self)
             user = api.verify_credentials()
             if user:
                 self.username = user.screen_name
