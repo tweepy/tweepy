@@ -7,7 +7,7 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser
+from tweepy.parsers import ModelParser, RawParser
 from tweepy.utils import list_to_csv
 
 
@@ -77,7 +77,7 @@ class API(object):
         allowed_param = ['id', 'count', 'page'],
         require_auth = True
     )
-	
+
     """/related_results/show/:id.format"""
     related_results = bind_api(
         path = '/related_results/show/{id}.json',
