@@ -293,11 +293,11 @@ class MemCacheCache(Cache):
 
     def count(self):
         """Get count of entries currently stored in cache. RETURN 0"""
-        return 0
+        raise NotImplementedError
 
     def cleanup(self):
         """Delete any expired entries in cache. NO-OP"""
-        pass
+        raise NotImplementedError
 
     def flush(self):
         """Delete all cached entries. NO-OP"""
