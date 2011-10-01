@@ -116,9 +116,13 @@ class User(Model):
 
     def friends(self, **kargs):
         return self._api.friends(user_id=self.id, **kargs)
+    
+    friends.pagination_mode = 'cursor'
 
     def followers(self, **kargs):
         return self._api.followers(user_id=self.id, **kargs)
+    
+    followers.pagination_mode = 'cursor'
 
     def follow(self):
         self._api.create_friendship(user_id=self.id)
@@ -136,9 +140,15 @@ class User(Model):
 
     def lists(self, *args, **kargs):
         return self._api.lists(user=self.screen_name, *args, **kargs)
+    
+    lists.pagination_mode = 'cursor'
 
     def followers_ids(self, *args, **kargs):
         return self._api.followers_ids(user_id=self.id, *args, **kargs)
+    
+    followers_ids.pagination_mode = 'cursor'
+    
+    
 
 
 class DirectMessage(Model):
