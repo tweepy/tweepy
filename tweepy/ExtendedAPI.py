@@ -7,7 +7,7 @@ Created on Jun 28, 2011
 from tweepy.api import API
 from tweepy.binder import bind_api
 from tweepy.cache import MemoryCache
-from tweepy.utils import make_chunks
+from tweepy.utils import make_chunks, list_to_csv
 
 from itertools import chain
 
@@ -17,36 +17,6 @@ from itertools import chain
 class ExtendedAPI(API):
     
     LOOKUP_MAX_PER_REQUEST = 100
-    
-    class Decorators(object):
-        
-        @classmethod
-        def yield_users_from_cache(cls, wrapped):
-            '''Removes the users that were in the cache and lets the decorated function just 
-            look for the missing objects'''
-            def wrapper(self, user_ids=[], screen_names=[]):                
-                user_ids = set(user_ids)
-                screen_names = set(screen_names)
-                # Trivia question: What is faster union or chain? How about if you iterate over the result two times?
-                users = user_ids.union(screen_names)
-                # get_multiple returns the users in the same order as asked with None for users not found
-                cache_results = self.cache.get_multiple(*users)
-                missing = set()
-                # Iterate over the cache results, yielding the users in the cache
-                # and adding to a missing set the users that weren't
-                for user, cache_result in zip(users, cache_results):
-                    if cache_result:
-                        yield cache_result
-                    else:
-                        missing.add(user)
-                        
-                missing_user_ids = missing.intersection(user_ids)
-                missing_screen_names = missing.intersection(screen_names)
-                # Yield the missing users
-                for user in wrapped(self, missing_user_ids, missing_screen_names):
-                    yield user
-            return wrapper    
-    
     
     def __init__(self, *args, **kwargs):
         super(ExtendedAPI, self).__init__(*args, **kwargs)
@@ -64,11 +34,10 @@ class ExtendedAPI(API):
         use_cache = False
     )
     
-    def _lookup_users(self, *args, **kwargs):
+    def _lookup_users(self, user_ids=[], screen_names=[]):
         '''A wrapper around __uncached_lookup_users to store the returned Users
         in the cache'''
-        users = self.__uncached_lookup_users(*args, **kwargs)
-        #TODO: ADD CSV
+        users = self.__uncached_lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
         self.cache.store_users(*users)
         return users
 
@@ -86,6 +55,36 @@ class ExtendedAPI(API):
         user = self.__uncached_get_user(*args, **kwargs)
         self.cache.store_users(user)
         return user
+        
+    class Decorators(object):
+        
+        @classmethod
+        def yield_users_from_cache(cls, wrapped):
+            '''Removes the users that were in the cache and lets the decorated function just 
+            look for the missing objects'''
+            def wrapper(self, user_ids=[], screen_names=[]):                
+                user_ids = set(user_ids)
+                screen_names = set(screen_names)
+                # Trivia question: What is faster union or chain? How about if you iterate over the result two times?
+                users = user_ids.union(screen_names)
+                
+                cache_results = self.cache.get_multiple(*users)
+                
+                missing = set()
+                # Iterate over the cache results, yielding the users in the cache
+                # and adding to a missing set the users that weren't
+                for user, cache_result in zip(users, cache_results):
+                    if cache_result:
+                        yield cache_result
+                    else:
+                        missing.add(user)
+                        
+                missing_user_ids = missing.intersection(user_ids)
+                missing_screen_names = missing.intersection(screen_names)
+                # Yield the missing users
+                for user in wrapped(self, missing_user_ids, missing_screen_names):
+                    yield user
+            return wrapper
         
     def lookup_users(self, user_ids=[], screen_names=[]):
         '''An extension to lookup_users to work with authenticated and unauthenticated api instances.
@@ -113,7 +112,7 @@ class ExtendedAPI(API):
             
         user_ids_chunks = make_chunks(user_ids, self.LOOKUP_MAX_PER_REQUEST)
         screen_names_chunks = make_chunks(screen_names, self.LOOKUP_MAX_PER_REQUEST)
-                    
+                
         for chunk in user_ids_chunks:
             for result in self._lookup_users(user_ids = chunk):
                 yield result
@@ -127,9 +126,6 @@ class ExtendedAPI(API):
         '''This function is intended to work in a similar fashion to lookup_users for unauthenticated apis.
         Since users/lookup call won't work with unauth apis we use users/show instead and yield the results 
         as they come'''
-        
         for user in chain(user_ids, screen_names):
             yield self._get_user(user)
-            
-    
             
