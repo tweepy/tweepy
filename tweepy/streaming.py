@@ -7,6 +7,8 @@ from socket import timeout
 from threading import Thread
 from time import sleep
 import urllib
+import ssl
+
 
 from tweepy.models import Status
 from tweepy.api import API
@@ -58,6 +60,10 @@ class StreamListener(object):
         """Called when a non-200 status code is returned"""
         return False
 
+    def on_exception(self, exception):
+        """Called when an unhandled exception occurs."""
+        return
+
     def on_timeout(self):
         """Called when stream connection times out"""
         return
@@ -73,8 +79,10 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        self.retry_time = options.get("retry_time", 10.0)
-        self.snooze_time = options.get("snooze_time",  5.0)
+        self.retry_time_start = options.get("retry_time", 10.0)
+        self.retry_time_cap = options.get("retry_time_cap", 240.0)
+        self.snooze_time_start = options.get("snooze_time",  0.25)
+        self.snooze_time_cap = options.get("snooze_time_cap",  16)
         self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure", True):
             self.scheme = "https"
@@ -85,7 +93,9 @@ class Stream(object):
         self.headers = options.get("headers") or {}
         self.parameters = None
         self.body = None
-
+        self.retry_time = self.retry_time_start
+        self.snooze_time = self.snooze_time_start
+        
     def _run(self):
         # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
@@ -113,18 +123,24 @@ class Stream(object):
                         break
                     error_counter += 1
                     sleep(self.retry_time)
+                    self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
                 else:
                     error_counter = 0
+                    self.retry_time = self.retry_time_start
+                    self.snooze_time = self.snooze_time_start
                     self._read_loop(resp)
-            except timeout:
+            except (timeout, ssl.SSLError):
                 if self.listener.on_timeout() == False:
                     break
                 if self.running is False:
                     break
                 conn.close()
                 sleep(self.snooze_time)
+                self.snooze_time += min(self.snooze_time+0.25, self.snooze_time_cap)
             except Exception, exception:
-                # any other exception is fatal, so kill loop
+                # any other exception is fatal, so kill loop. But call
+                # a handler first so that the exception can be logged.
+                self.listener.on_exception(exception)
                 break
 
         # cleanup
@@ -134,7 +150,7 @@ class Stream(object):
 
         if exception:
             raise
-
+ 
     def _read_loop(self, resp):
           while self.running:
             if resp.isclosed():
