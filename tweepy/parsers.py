@@ -26,6 +26,18 @@ class Parser(object):
         raise NotImplementedError
 
 
+class RawParser(Parser):
+
+    def __init__(self):
+        pass
+
+    def parse(self, method, payload):
+        return payload
+
+    def parse_error(self, payload):
+        return payload
+
+
 class JSONParser(Parser):
 
     payload_format = 'json'
