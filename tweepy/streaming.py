@@ -136,7 +136,7 @@ class Stream(object):
                     break
                 conn.close()
                 sleep(self.snooze_time)
-                self.snooze_time += min(self.snooze_time+0.25, self.snooze_time_cap)
+                self.snooze_time = min(self.snooze_time+0.25, self.snooze_time_cap)
             except Exception, exception:
                 # any other exception is fatal, so kill loop. But call
                 # a handler first so that the exception can be logged.
