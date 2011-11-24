@@ -157,14 +157,18 @@ class Stream(object):
                 break
 
             # read length
-            data = ''
+            data = []
             while True:
                 c = resp.read(1)
-                if c == '\n':
+                if c == '\r':
                     break
-                data += c
-            data = data.strip()
+                data.append(c)
+            data = "".join(data).strip()
 
+            # ignore keep-alives
+            if not data:
+                continue
+            
             # read data and pass into listener
             if self.listener.on_data(data) is False:
                 self.running = False
@@ -177,6 +181,7 @@ class Stream(object):
             self._run()
 
     def userstream(self, count=None, async=False, secure=True):
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/2/user.json'
@@ -186,26 +191,26 @@ class Stream(object):
         self._start(async)
 
     def firehose(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/firehose.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/firehose.json' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
         self._start(async)
 
     def retweet(self, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
     def sample(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/sample.json' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
         self._start(async)
@@ -215,7 +220,7 @@ class Stream(object):
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/filter.json' % STREAM_VERSION
         if follow:
             self.parameters['follow'] = ','.join(map(str, follow))
         if track:
@@ -226,7 +231,6 @@ class Stream(object):
         if count:
             self.parameters['count'] = count
         self.body = urllib.urlencode(self.parameters)
-        self.parameters['delimited'] = 'length'
         self._start(async)
 
     def disconnect(self):
