@@ -129,7 +129,12 @@ class Stream(object):
                     self.retry_time = self.retry_time_start
                     self.snooze_time = self.snooze_time_start
                     self._read_loop(resp)
-            except (timeout, ssl.SSLError):
+            except (timeout, ssl.SSLError), exc:
+                # If it's not time out treat it like any other exception
+                if isinstance(exc, SSLError) and not (exc.args and 'timed out' in exc.args[0]):
+                    exception = exc
+                    break
+
                 if self.listener.on_timeout() == False:
                     break
                 if self.running is False:
@@ -138,9 +143,7 @@ class Stream(object):
                 sleep(self.snooze_time)
                 self.snooze_time = min(self.snooze_time+0.25, self.snooze_time_cap)
             except Exception, exception:
-                # any other exception is fatal, so kill loop. But call
-                # a handler first so that the exception can be logged.
-                self.listener.on_exception(exception)
+                # any other exception is fatal, so kill loop.
                 break
 
         # cleanup
@@ -149,6 +152,8 @@ class Stream(object):
             conn.close()
 
         if exception:
+            # call a handler first so that the exception can be logged.
+            self.listener.on_exception(exception)
             raise
  
     def _read_loop(self, resp):
