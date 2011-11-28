@@ -698,6 +698,7 @@ class API(object):
     )
 
     """ geo/nearby_places """
+    # listed as deprecated on twitter's API documents
     nearby_places = bind_api(
         path = '/geo/nearby_places.json',
         payload_type = 'json',
@@ -709,6 +710,13 @@ class API(object):
         path = '/geo/id/{id}.json',
         payload_type = 'json',
         allowed_param = ['id']
+    )
+
+    """ geo/search """
+    geo_search = bind_api(
+        path = '/geo/search.json',
+        payload_type = 'json',
+        allowed_param = ['lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within']
     )
 
     """ Internal use only """
