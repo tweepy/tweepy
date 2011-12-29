@@ -142,7 +142,8 @@ class Stream(object):
 
             # read length
             data = ''
-            while True:
+            # loop while server is giving an OK status
+            while resp.status >= 200 and resp.status < 300:
                 c = resp.read(1)
                 if c == '\n':
                     break
