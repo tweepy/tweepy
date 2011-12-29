@@ -7,6 +7,8 @@ from socket import timeout
 from threading import Thread
 from time import sleep
 import urllib
+import ssl
+
 
 from tweepy.models import Status
 from tweepy.api import API
@@ -58,6 +60,10 @@ class StreamListener(object):
         """Called when a non-200 status code is returned"""
         return False
 
+    def on_exception(self, exception):
+        """Called when an unhandled exception occurs."""
+        return
+
     def on_timeout(self):
         """Called when stream connection times out"""
         return
@@ -73,8 +79,10 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        self.retry_time = options.get("retry_time", 10.0)
-        self.snooze_time = options.get("snooze_time",  5.0)
+        self.retry_time_start = options.get("retry_time", 10.0)
+        self.retry_time_cap = options.get("retry_time_cap", 240.0)
+        self.snooze_time_start = options.get("snooze_time",  0.25)
+        self.snooze_time_cap = options.get("snooze_time_cap",  16)
         self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure", True):
             self.scheme = "https"
@@ -85,7 +93,9 @@ class Stream(object):
         self.headers = options.get("headers") or {}
         self.parameters = None
         self.body = None
-
+        self.retry_time = self.retry_time_start
+        self.snooze_time = self.snooze_time_start
+        
     def _run(self):
         # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
@@ -113,18 +123,27 @@ class Stream(object):
                         break
                     error_counter += 1
                     sleep(self.retry_time)
+                    self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
                 else:
                     error_counter = 0
+                    self.retry_time = self.retry_time_start
+                    self.snooze_time = self.snooze_time_start
                     self._read_loop(resp)
-            except timeout:
+            except (timeout, ssl.SSLError), exc:
+                # If it's not time out treat it like any other exception
+                if isinstance(exc, SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
+                    exception = exc
+                    break
+
                 if self.listener.on_timeout() == False:
                     break
                 if self.running is False:
                     break
                 conn.close()
                 sleep(self.snooze_time)
+                self.snooze_time = min(self.snooze_time+0.25, self.snooze_time_cap)
             except Exception, exception:
-                # any other exception is fatal, so kill loop
+                # any other exception is fatal, so kill loop.
                 break
 
         # cleanup
@@ -133,22 +152,28 @@ class Stream(object):
             conn.close()
 
         if exception:
+            # call a handler first so that the exception can be logged.
+            self.listener.on_exception(exception)
             raise
-
+ 
     def _read_loop(self, resp):
           while self.running:
             if resp.isclosed():
                 break
 
             # read length
-            data = ''
+            data = []
             while True:
                 c = resp.read(1)
-                if c == '\n':
+                if c == '\r':
                     break
-                data += c
-            data = data.strip()
+                data.append(c)
+            data = "".join(data).strip()
 
+            # ignore keep-alives
+            if not data:
+                continue
+            
             # read data and pass into listener
             if self.listener.on_data(data) is False:
                 self.running = False
@@ -161,6 +186,7 @@ class Stream(object):
             self._run()
 
     def userstream(self, count=None, async=False, secure=True):
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/2/user.json'
@@ -170,26 +196,26 @@ class Stream(object):
         self._start(async)
 
     def firehose(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/firehose.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/firehose.json' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
         self._start(async)
 
     def retweet(self, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/retweet.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
     def sample(self, count=None, async=False):
-        self.parameters = {'delimited': 'length'}
+        self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/sample.json' % STREAM_VERSION
         if count:
             self.url += '&count=%s' % count
         self._start(async)
@@ -199,7 +225,7 @@ class Stream(object):
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
+        self.url = '/%i/statuses/filter.json' % STREAM_VERSION
         if follow:
             self.parameters['follow'] = ','.join(map(str, follow))
         if track:
@@ -210,7 +236,6 @@ class Stream(object):
         if count:
             self.parameters['count'] = count
         self.body = urllib.urlencode(self.parameters)
-        self.parameters['delimited'] = 'length'
         self._start(async)
 
     def disconnect(self):
