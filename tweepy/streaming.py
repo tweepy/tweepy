@@ -144,7 +144,7 @@ class Stream(object):
             data = ''
             while True:
                 c = resp.read(1)
-                if c == '\n':
+                if not c or c == '\n':
                     break
                 data += c
             data = data.strip()
