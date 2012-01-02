@@ -183,7 +183,7 @@ class OAuthRequest(object):
     def get_parameter(self, parameter):
         try:
             return self.parameters[parameter]
-        except:
+        except KeyError:
             raise OAuthError('Parameter not found: %s' % parameter)
 
     def _get_timestamp_nonce(self):
@@ -224,7 +224,7 @@ class OAuthRequest(object):
         try:
             # Exclude the signature if it exists.
             del params['oauth_signature']
-        except:
+        except KeyError:
             pass
         # Escape key values before sorting.
         key_values = [(escape(_utf8_str(k)), escape(_utf8_str(v))) \
@@ -278,7 +278,7 @@ class OAuthRequest(object):
                     # Get the parameters from the header.
                     header_params = OAuthRequest._split_header(auth_header)
                     parameters.update(header_params)
-                except:
+                except Exception:
                     raise OAuthError('Unable to parse OAuth parameters from '
                         'Authorization header.')
 
@@ -450,7 +450,7 @@ class OAuthServer(object):
         """Verify the correct version request for this server."""
         try:
             version = oauth_request.get_parameter('oauth_version')
-        except:
+        except Exception:
             version = VERSION
         if version and version != self.version:
             raise OAuthError('OAuth version %s not supported.' % str(version))
@@ -461,12 +461,12 @@ class OAuthServer(object):
         try:
             signature_method = oauth_request.get_parameter(
                 'oauth_signature_method')
-        except:
+        except Exception:
             signature_method = SIGNATURE_METHOD
         try:
             # Get the signature method object.
             signature_method = self.signature_methods[signature_method]
-        except:
+        except KeyError:
             signature_method_names = ', '.join(self.signature_methods.keys())
             raise OAuthError('Signature method %s not supported try one of the '
                 'following: %s' % (signature_method, signature_method_names))
@@ -498,7 +498,7 @@ class OAuthServer(object):
         signature_method = self._get_signature_method(oauth_request)
         try:
             signature = oauth_request.get_parameter('oauth_signature')
-        except:
+        except Exception:
             raise OAuthError('Missing signature.')
         # Validate the signature.
         valid_sig = signature_method.check_signature(oauth_request, consumer,
@@ -629,7 +629,7 @@ class OAuthSignatureMethod_HMAC_SHA1(OAuthSignatureMethod):
         try:
             import hashlib # 2.5
             hashed = hmac.new(key, raw, hashlib.sha1)
-        except:
+        except ImportError:
             import sha # Deprecated
             hashed = hmac.new(key, raw, sha)
 
