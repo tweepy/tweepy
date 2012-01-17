@@ -68,6 +68,21 @@ class TweepyStreamTests(unittest.TestCase):
         self.assertEquals(self.listener.status_count,
                           self.listener.status_stop_count)
 
+    def test_track_encoding(self):
+        s = Stream(None, None)
+        s._start = lambda async: None
+        s.filter(track=[u'Caf\xe9'])
+
+        # Should be UTF-8 encoded
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.parameters['track'])
+
+    def test_follow_encoding(self):
+        s = Stream(None, None)
+        s._start = lambda async: None
+        s.filter(follow=[u'Caf\xe9'])
+
+        # Should be UTF-8 encoded
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.parameters['follow'])
 
 class TweepyStreamBackoffTests(unittest.TestCase):
     def setUp(self):
