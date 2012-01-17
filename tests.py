@@ -378,6 +378,26 @@ class TweepyCacheTests(unittest.TestCase):
         self.cache.flush()
         os.rmdir('cache_test_dir')
 
+
+class TweepyStreamingTests(unittest.TestCase):
+
+    def testtrackencoding(self):
+        s = Stream(None, None)
+        s._start = lambda async: None
+        s.filter(track=[u'Caf\xe9'])
+
+        # Should be UTF-8 encoded
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.parameters['track'])
+
+    def testfollowencoding(self):
+        s = Stream(None, None)
+        s._start = lambda async: None
+        s.filter(follow=[u'Caf\xe9'])
+
+        # Should be UTF-8 encoded
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.parameters['follow'])
+
+
 if __name__ == '__main__':
     unittest.main()
 
