@@ -88,6 +88,11 @@ class Stream(object):
 
     def _run(self):
         # Authenticate
+        if self.secure:
+            self.scheme = "https"
+        else:
+            self.scheme = "http"
+
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
 
         # Connect and process the stream
@@ -107,6 +112,7 @@ class Stream(object):
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
                 conn.request('POST', self.url, self.body, headers=self.headers)
+
                 resp = conn.getresponse()
                 if resp.status != 200:
                     if self.listener.on_error(resp.status) is False:
@@ -142,7 +148,8 @@ class Stream(object):
 
             # read length
             data = ''
-            while True:
+            # loop while server is giving an OK status
+            while resp.status >= 200 and resp.status < 300:
                 c = resp.read(1)
                 if c == '\n':
                     break
@@ -167,6 +174,7 @@ class Stream(object):
         self.host='userstream.twitter.com'
         if count:
             self.url += '&count=%s' % count
+        self.secure = secure
         self._start(async)
 
     def firehose(self, count=None, async=False):
