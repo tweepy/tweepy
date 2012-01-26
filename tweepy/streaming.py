@@ -142,19 +142,21 @@ class Stream(object):
             raise
 
     def _read_loop(self, resp):
-        data = ''
-        fp=resp.fp
-        while self.running:
+          while self.running:
             if resp.isclosed():
                 break
 
             # read length
-            length = fp.readline().strip()
-            length = int(length,16)
+            data = ''
+            # loop while server is giving an OK status
+            while resp.status >= 200 and resp.status < 300:
+                c = resp.read(1)
+                if c == '\n':
+                    break
+                data += c
+            data = data.strip()
 
             # read data and pass into listener
-            data = resp._safe_read(length+2)
-            assert len(data)==length+2
             if self.listener.on_data(data) is False:
                 self.running = False
 
