@@ -7,7 +7,7 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser
+from tweepy.parsers import ModelParser, RawParser
 from tweepy.utils import list_to_csv
 
 
@@ -77,7 +77,7 @@ class API(object):
         allowed_param = ['id', 'count', 'page'],
         require_auth = True
     )
-	
+
     """/related_results/show/:id.format"""
     related_results = bind_api(
         path = '/related_results/show/{id}.json',
@@ -323,7 +323,8 @@ class API(object):
     """ account/rate_limit_status """
     rate_limit_status = bind_api(
         path = '/account/rate_limit_status.json',
-        payload_type = 'json'
+        payload_type = 'json',
+        use_cache = False
     )
 
     """ account/update_delivery_device """
@@ -697,6 +698,7 @@ class API(object):
     )
 
     """ geo/nearby_places """
+    # listed as deprecated on twitter's API documents
     nearby_places = bind_api(
         path = '/geo/nearby_places.json',
         payload_type = 'json',
@@ -708,6 +710,13 @@ class API(object):
         path = '/geo/id/{id}.json',
         payload_type = 'json',
         allowed_param = ['id']
+    )
+
+    """ geo/search """
+    geo_search = bind_api(
+        path = '/geo/search.json',
+        payload_type = 'json',
+        allowed_param = ['lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within']
     )
 
     """ Internal use only """
@@ -746,7 +755,7 @@ class API(object):
         # build headers
         headers = {
             'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
-            'Content-Length': len(body)
+            'Content-Length': str(len(body))
         }
 
         return headers, body
