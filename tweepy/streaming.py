@@ -157,6 +157,8 @@ class Stream(object):
                 # buffer
                 buf += c
 
+        if resp.isclosed():
+            self.on_closed(resp)
 
     def _start(self, async):
         self.running = True
@@ -164,6 +166,10 @@ class Stream(object):
             Thread(target=self._run).start()
         else:
             self._run()
+
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
 
     def userstream(self, count=None, async=False, secure=True):
         if self.running:
