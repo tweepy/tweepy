@@ -201,14 +201,18 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            self.parameters['follow'] = ','.join(map(str, follow))
+            self.parameters['follow'] = ','.join(map(unicode, follow))
         if track:
-            self.parameters['track'] = ','.join(map(str, track))
+            self.parameters['track'] = ','.join(map(unicode, track))
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
         if count:
             self.parameters['count'] = count
+        
+        # Change the dictionary to utf-8
+        self.parameters = dict([k, v.encode('utf-8')] for k, v in self.parameters.items())
+        
         self.body = urllib.urlencode(self.parameters)
         self.parameters['delimited'] = 'length'
         self._start(async)
