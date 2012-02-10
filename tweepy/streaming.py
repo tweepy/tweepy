@@ -116,7 +116,7 @@ class Stream(object):
                     if self.listener.on_error(resp.status) is False:
                         break
                     error_counter += 1
-                    sleep(self.retry_time)
+                    sleep(self.retry_time*error_counter)
                 else:
                     error_counter = 0
                     self._read_loop(resp)
@@ -132,7 +132,7 @@ class Stream(object):
                 self.listener.on_exception(exception)
                 error_counter += 1
                 conn.close()
-                sleep(self.retry_time)
+                sleep(self.retry_time*error_counter)
 
         # cleanup
         self.running = False
