@@ -78,6 +78,7 @@ class Stream(object):
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
         self.retry_time = options.get("retry_time", 10.0)
+        self.max_retry_time = options.get("max_retry_time", 180.0)
         self.snooze_time = options.get("snooze_time",  5.0)
         self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure", True):
@@ -116,7 +117,7 @@ class Stream(object):
                     if self.listener.on_error(resp.status) is False:
                         break
                     error_counter += 1
-                    sleep(self.retry_time*error_counter)
+                    sleep(min(self.retry_time*error_counter, self.max_retry_time))
                 else:
                     error_counter = 0
                     self._read_loop(resp)
@@ -132,7 +133,7 @@ class Stream(object):
                 self.listener.on_exception(exception)
                 error_counter += 1
                 conn.close()
-                sleep(self.retry_time*error_counter)
+                sleep(min(self.retry_time*error_counter, self.max_retry_time))
 
         # cleanup
         self.running = False
