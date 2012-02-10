@@ -11,13 +11,14 @@ import locale
 
 def parse_datetime(string):
     # Set locale for date parsing
+    previous_locale = locale.getlocale(locale.LC_TIME)
     locale.setlocale(locale.LC_TIME, 'C')
 
     # We must parse datetime this way to work in python 2.4
     date = datetime(*(time.strptime(string, '%a %b %d %H:%M:%S +0000 %Y')[0:6]))
 
     # Reset locale back to the default setting
-    locale.setlocale(locale.LC_TIME, '')
+    locale.setlocale(locale.LC_TIME, previous_locale)
     return date
 
 
