@@ -131,6 +131,7 @@ class Stream(object):
                 # any other exception is fatal, so kill loop
                 self.listener.on_exception(exception)
                 error_counter += 1
+                conn.close()
                 sleep(self.retry_time)
 
         # cleanup
