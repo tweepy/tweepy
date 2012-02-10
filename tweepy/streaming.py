@@ -76,6 +76,8 @@ class Stream(object):
         self.retry_time = options.get("retry_time", 10.0)
         self.snooze_time = options.get("snooze_time",  5.0)
         self.buffer_size = options.get("buffer_size",  1500)
+        self.encoding = options.get('encoding', 'utf-8')
+        
         if options.get("secure"):
             self.scheme = "https"
         else:
@@ -210,8 +212,8 @@ class Stream(object):
         if count:
             self.parameters['count'] = count
         
-        # Change the dictionary to utf-8
-        self.parameters = dict([k, v.encode('utf-8')] for k, v in self.parameters.items())
+        # Change the dictionary to the given encoding
+        self.parameters = dict([k, v.encode(self.encoding)] for k, v in self.parameters.items())
         
         self.body = urllib.urlencode(self.parameters)
         self.parameters['delimited'] = 'length'
