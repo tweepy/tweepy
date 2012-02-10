@@ -58,6 +58,10 @@ class StreamListener(object):
         """Called when a non-200 status code is returned"""
         return False
 
+    def on_exception(self, exception):
+        """Called when an exception in the main loop is raised"""
+        raise exception
+
     def on_timeout(self):
         """Called when stream connection times out"""
         return
@@ -125,7 +129,9 @@ class Stream(object):
                 sleep(self.snooze_time)
             except Exception, exception:
                 # any other exception is fatal, so kill loop
-                break
+                self.listener.on_exception(exception)
+                error_counter += 1
+                sleep(self.retry_time)
 
         # cleanup
         self.running = False
