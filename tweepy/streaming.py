@@ -202,10 +202,10 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            encoded_follow = [s.encode(encoding) for s in follow]
+            encoded_follow = [unicode(s).encode(encoding) for s in follow]
             self.parameters['follow'] = ','.join(encoded_follow)                        
         if track:
-            encoded_track = [s.encode(encoding) for s in track]
+            encoded_track = [unicode(s).encode(encoding) for s in track]
             self.parameters['track'] = ','.join(encoded_track)            
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
