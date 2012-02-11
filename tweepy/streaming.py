@@ -76,9 +76,7 @@ class Stream(object):
         self.retry_time = options.get("retry_time", 10.0)
         self.snooze_time = options.get("snooze_time",  5.0)
         self.buffer_size = options.get("buffer_size",  1500)
-        self.encoding = options.get('encoding', 'utf-8')
-        
-        if options.get("secure"):
+        if options.get("secure", True):
             self.scheme = "https"
         else:
             self.scheme = "http"
@@ -196,25 +194,23 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False, locations=None, count = None):
+    def filter(self, follow=None, track=None, async=False, locations=None, count = None, encoding='utf8'):
         self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            self.parameters['follow'] = ','.join(map(unicode, follow))
+            encoded_follow = [s.encode(encoding) for s in follow]
+            self.parameters['follow'] = ','.join(encoded_follow)                        
         if track:
-            self.parameters['track'] = ','.join(map(unicode, track))
+            encoded_track = [s.encode(encoding) for s in track]
+            self.parameters['track'] = ','.join(encoded_track)            
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
         if count:
             self.parameters['count'] = count
-        
-        # Change the dictionary to the given encoding
-        self.parameters = dict([k, v.encode(self.encoding)] for k, v in self.parameters.items())
-        
         self.body = urllib.urlencode(self.parameters)
         self.parameters['delimited'] = 'length'
         self._start(async)
