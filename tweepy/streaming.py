@@ -144,7 +144,8 @@ class Stream(object):
             data = ''
             while True:
                 c = resp.read(1)
-                if c == '\n':
+                # See issue #135 at https://github.com/tweepy/tweepy/pull/135
+                if not c or c == '\n':
                     break
                 data += c
             data = data.strip()
