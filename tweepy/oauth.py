@@ -227,7 +227,7 @@ class OAuthRequest(object):
         except:
             pass
         # Escape key values before sorting.
-        key_values = [(escape(_utf8_str(k)), escape(_utf8_str(v))) \
+        key_values = [(urllib.quote(_utf8_str(k)), urllib.quote(_utf8_str(v))) \
             for k,v in params.items()]
         # Sort lexicographically, first after key, then after value.
         key_values.sort()
