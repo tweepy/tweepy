@@ -121,7 +121,8 @@ class Stream(object):
                     sleep(self.retry_time)
                 else:
                     error_counter = 0
-                    if self.use_gzip:
+                    encoding = resp.getheader('content-encoding', '')
+                    if encoding.strip().lower() == 'gzip':
                         self._read_gzip_loop(resp)
                     else:
                         self._read_loop(resp)
