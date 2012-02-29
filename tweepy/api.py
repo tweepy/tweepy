@@ -175,7 +175,6 @@ class API(object):
         path = '/users/lookup.json',
         payload_type = 'user', payload_list = True,
         allowed_param = ['user_id', 'screen_name'],
-        require_auth = True
     )
 
     """ Get the authenticated user """
