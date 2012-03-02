@@ -58,6 +58,10 @@ class StreamListener(object):
         """Called when a non-200 status code is returned"""
         return False
 
+    def on_exception(self, exception):
+        """Called when an exception in the main loop is raised"""
+        raise exception
+
     def on_timeout(self):
         """Called when stream connection times out"""
         return
@@ -73,7 +77,8 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        self.retry_time = options.get("retry_time", 10.0)
+        self.retry_time = options.get("retry_time", 20.0)
+        self.max_retry_time = options.get("max_retry_time", 240.0)
         self.snooze_time = options.get("snooze_time",  5.0)
         self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure", True):
@@ -112,7 +117,11 @@ class Stream(object):
                     if self.listener.on_error(resp.status) is False:
                         break
                     error_counter += 1
-                    sleep(self.retry_time)
+                    if status_code==420: # wait longer
+                        sleep(min(self.retry_time, self.max_retry_time*2))
+                    else:
+                        sleep(min(self.retry_time, self.max_retry_time))
+                    self.retry_time = self.retry_time*2
                 else:
                     error_counter = 0
                     self._read_loop(resp)
@@ -125,7 +134,11 @@ class Stream(object):
                 sleep(self.snooze_time)
             except Exception, exception:
                 # any other exception is fatal, so kill loop
-                break
+                self.listener.on_exception(exception)
+                error_counter += 1
+                conn.close()
+                sleep(min(self.retry_time, self.max_retry_time))
+                self.retry_time = self.retry_time*2
 
         # cleanup
         self.running = False
@@ -144,7 +157,7 @@ class Stream(object):
             data = ''
             while True:
                 c = resp.read(1)
-                if c == '\n':
+                if not c or c == '\n':
                     break
                 data += c
             data = data.strip()
