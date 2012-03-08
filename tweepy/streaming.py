@@ -135,23 +135,30 @@ class Stream(object):
         if exception:
             raise
 
-    def _read_loop(self, resp):
-          while self.running:
-            if resp.isclosed():
-                break
-
-            # read length
-            data = ''
-            while True:
-                c = resp.read(1)
-                if c == '\n':
-                    break
-                data += c
-            data = data.strip()
-
-            # read data and pass into listener
-            if self.listener.on_data(data) is False:
+    def _data(self, data):
+        for d in [dt for dt in data.split('\n') if dt]:
+            if self.listener.on_data(d) is False:
                 self.running = False
+
+    def _read_loop(self, resp):
+        buf = ''
+        while self.running and not resp.isclosed():
+            c = resp.read(self.buffer_size)
+            idx = c.rfind('\n')
+            if idx > -1:
+                # There is an index. Store the tail part for later,
+                # and process the head part as messages. We use idx + 1
+                # as we dont' actually want to store the newline.
+                data = buf + c[:idx]
+                buf = c[idx + 1:]
+                self._data(data)
+            else:
+                # No newline found, so we add this to our accumulated
+                # buffer
+                buf += c
+
+        if resp.isclosed():
+            self.on_closed(resp)
 
     def _start(self, async):
         self.running = True
@@ -159,6 +166,10 @@ class Stream(object):
             Thread(target=self._run).start()
         else:
             self._run()
+
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
 
     def userstream(self, count=None, async=False, secure=True):
         if self.running:
