@@ -128,7 +128,7 @@ def bind_api(**config):
             # Continue attempting request until successful
             # or maximum number of retries is reached.
             retries_performed = 0
-            while retries_performed < self.retry_count + 1:
+            while True:
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
@@ -142,35 +142,31 @@ def bind_api(**config):
                     req = Request(url=self.scheme + self.host + url, headers=self.headers, data=self.post_data)
                     req.get_method = lambda: self.method
                     resp = urlopen(req)
-                    resp.status = hasattr(resp, 'getcode') and resp.getcode() or 200
-                except URLError, e:
-                    if hasattr(e, 'reason'):
-                        resp.status = e.reason
-                    if hasattr(e, 'code'):
-                        resp.status = e.code
+                    break
+
+                except HTTPError, e:
+                    # continue request loop if retry error code
+                    retry = retries_performed < self.retry_count
+                    if self.retry_errors:
+                        if e.code not in self.retry_errors: retry = False
+                    if retry:
+                        retries_performed += 1
+                        time.sleep(self.retry_delay)
+                        continue
+
+                    # Retry failed. throw an exception
+                    try:
+                        error_msg = self.api.parser.parse_error(e.read())
+                    except Exception:
+                        error_msg = "Twitter error response: status code = %s" % e.code
+                    raise TweepError(error_msg)
+
                 except Exception, e:
+                    # any other exception is fatal
                     raise TweepError('Failed to send request: %s' % e)
 
-                # Exit request loop if non-retry error code
-                if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
-                else:
-                    if resp.status == 200: break
-
-                # Sleep before retrying request again
-                time.sleep(self.retry_delay)
-                retries_performed += 1
-
-            # If an error was returned, throw an exception
-            self.api.last_response = resp
-            if resp.status != 200:
-                try:
-                    error_msg = self.api.parser.parse_error(resp.read())
-                except Exception:
-                    error_msg = "Twitter error response: status code = %s" % resp.status
-                raise TweepError(error_msg, resp)
-
             # Parse the response payload
+            self.api.last_response = resp
             result = self.api.parser.parse(self, resp.read())
 
             # Store result into cache if one is available.
