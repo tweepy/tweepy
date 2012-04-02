@@ -289,7 +289,7 @@ class MemCacheCache(Cache):
             key: which entry to get
             timeout: override timeout with this value [optional]. DOES NOT WORK HERE
         """
-        return self.client.get(key, key)
+        return self.client.get(key)
 
     def count(self):
         """Get count of entries currently stored in cache. RETURN 0"""
