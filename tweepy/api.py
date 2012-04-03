@@ -62,6 +62,14 @@ class API(object):
                           'max_id', 'count', 'page', 'include_rts']
     )
 
+    """ statuses/oembed """
+    oembed = bind_api(
+        path = '/statuses/oembed.json',
+        payload_type = 'oembed', payload_list = False,
+        allowed_param = ['id', 'url', 'maxwidth', 'hide_media',
+                         'hide_thread', 'omit_script', 'align', 'lang']
+    )
+
     """ statuses/mentions """
     mentions = bind_api(
         path = '/statuses/mentions.json',

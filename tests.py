@@ -35,6 +35,10 @@ class TweepyAPITests(unittest.TestCase):
         self.api.user_timeline()
         self.api.user_timeline('twitter')
 
+    def testoembed(self):
+        # Use sample tweet id from Twitter API Oembed docs.
+        self.api.oembed(id=99530515043983360)
+
     def testmentions(self):
         self.api.mentions()
 

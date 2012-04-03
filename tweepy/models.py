@@ -178,6 +178,16 @@ class Friendship(Model):
         return source, target
 
 
+class Oembed(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        oembed = cls(api)
+        for k, v in json.items():
+          setattr(oembed, k, v)
+        return oembed
+
+
 class SavedSearch(Model):
 
     @classmethod
@@ -319,6 +329,7 @@ class ModelFactory(object):
     user = User
     direct_message = DirectMessage
     friendship = Friendship
+    oembed = Oembed
     saved_search = SavedSearch
     search_result = SearchResult
     list = List
