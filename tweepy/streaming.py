@@ -2,11 +2,13 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+import sys
 import httplib
 from socket import timeout
 from threading import Thread
 from time import sleep
 import urllib
+import urllib2
 
 from tweepy.models import Status
 from tweepy.api import API
@@ -94,71 +96,69 @@ class Stream(object):
         error_counter = 0
         conn = None
         exception = None
+        resp = None
         while self.running:
             if self.retry_count is not None and error_counter > self.retry_count:
                 # quit if error count greater than retry count
                 break
             try:
-                if self.scheme == "http":
-                    conn = httplib.HTTPConnection(self.host)
+                if self.body:
+                    method = 'POST'
                 else:
-                    conn = httplib.HTTPSConnection(self.host)
-                self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
-                conn.connect()
-                conn.sock.settimeout(self.timeout)
-                conn.request('POST', self.url, self.body, headers=self.headers)
-                resp = conn.getresponse()
-                if resp.status != 200:
-                    if self.listener.on_error(resp.status) is False:
+                    method = 'GET'
+                self.auth.apply_auth(url, method, self.headers, self.parameters)
+                req = urllib2.Request(url, data = self.body, headers = self.headers)
+                
+                if sys.version_info >= (2, 6, 0):
+                    resp = urllib2.urlopen(req, timeout = self.timeout)
+                else:
+                    resp = urllib2.urlopen(req)
+                error_counter = 0
+                self._read_loop(resp)
+                
+            except urllib2.HTTPError, e:
+                if self.listener.on_error(e.code) is False:
+                    break
+                error_counter += 1
+                if error_counter > self.retry_count:
+                    self.running = False
+                    raise e
+                sleep(self.retry_time)
+            except urllib2.URLError, e:
+                if isinstance(e.reason, timeout):
+                    if self.listener.on_timeout() is False:
                         break
-                    error_counter += 1
-                    sleep(self.retry_time)
+                    sleep(self.snooze_time)
                 else:
-                    error_counter = 0
-                    self._read_loop(resp)
-            except timeout:
-                if self.listener.on_timeout() == False:
                     break
-                if self.running is False:
-                    break
-                conn.close()
-                sleep(self.snooze_time)
             except Exception, exception:
                 # any other exception is fatal, so kill loop
                 break
+            finally:
+                if resp:
+                    resp.close()
+                resp = None
 
         # cleanup
         self.running = False
-        if conn:
-            conn.close()
 
         if exception:
-            raise
-
-    def _data(self, data):
-        for d in [dt for dt in data.split('\n') if dt]:
-            if self.listener.on_data(d) is False:
-                self.running = False
+            raise exception
 
     def _read_loop(self, resp):
-        buf = ''
-        while self.running and not resp.isclosed():
-            c = resp.read(self.buffer_size)
-            idx = c.rfind('\n')
-            if idx > -1:
-                # There is an index. Store the tail part for later,
-                # and process the head part as messages. We use idx + 1
-                # as we dont' actually want to store the newline.
-                data = buf + c[:idx]
-                buf = c[idx + 1:]
-                self._data(data)
-            else:
-                # No newline found, so we add this to our accumulated
-                # buffer
-                buf += c
+        while self.running:
+            # read length
+            data = ''
+            while True:
+                c = resp.read(1)
+                if c == '\n':
+                    break
+                data += c
+            data = data.strip()
 
-        if resp.isclosed():
-            self.on_closed(resp)
+            # read data and pass into listener
+            if self.listener.on_data(data) is False:
+                self.running = False
 
     def _start(self, async):
         self.running = True
@@ -166,10 +166,6 @@ class Stream(object):
             Thread(target=self._run).start()
         else:
             self._run()
-
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass
 
     def userstream(self, count=None, async=False, secure=True):
         if self.running:
@@ -228,4 +224,3 @@ class Stream(object):
         if self.running is False:
             return
         self.running = False
-

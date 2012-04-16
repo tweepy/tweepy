@@ -42,7 +42,7 @@ class API(object):
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -50,7 +50,7 @@ class API(object):
     friends_timeline = bind_api(
         path = '/statuses/friends_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -58,15 +58,14 @@ class API(object):
     user_timeline = bind_api(
         path = '/statuses/user_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'since_id',
-                          'max_id', 'count', 'page', 'include_rts']
+        allowed_param = ['id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'page', 'include_rts', 'trim_user', 'include_entities']
     )
 
     """ statuses/mentions """
     mentions = bind_api(
         path = '/statuses/mentions.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -74,7 +73,7 @@ class API(object):
     retweeted_by = bind_api(
         path = '/statuses/{id}/retweeted_by.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'count', 'page'],
+        allowed_param = ['id', 'count', 'page', 'include_entities'],
         require_auth = True
     )
 
@@ -98,7 +97,7 @@ class API(object):
     retweeted_by_me = bind_api(
         path = '/statuses/retweeted_by_me.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -106,7 +105,7 @@ class API(object):
     retweeted_to_me = bind_api(
         path = '/statuses/retweeted_to_me.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -114,7 +113,7 @@ class API(object):
     retweets_of_me = bind_api(
         path = '/statuses/retweets_of_me.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -156,7 +155,7 @@ class API(object):
     retweets = bind_api(
         path = '/statuses/retweets/{id}.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'count'],
+        allowed_param = ['id', 'count', 'trim_user', 'include_entities'],
         require_auth = True
     )
 
@@ -380,7 +379,7 @@ class API(object):
     favorites = bind_api(
         path = '/favorites.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'page']
+        allowed_param = ['id', 'page', 'include_entities']
     )
 
     """ favorites/create """
@@ -566,7 +565,7 @@ class API(object):
     list_timeline = bind_api(
         path = '/{owner}/lists/{slug}/statuses.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['owner', 'slug', 'since_id', 'max_id', 'per_page', 'page']
+        allowed_param = ['owner', 'slug', 'since_id', 'max_id', 'per_page', 'page', 'include_entities']
     )
 
     get_list = bind_api(
