@@ -7,6 +7,7 @@ from socket import timeout
 from threading import Thread
 from time import sleep
 import urllib
+from string import digits
 
 from tweepy.models import Status
 from tweepy.api import API
@@ -141,21 +142,28 @@ class Stream(object):
                 self.running = False
 
     def _read_loop(self, resp):
-        buf = ''
+
         while self.running and not resp.isclosed():
-            c = resp.read(self.buffer_size)
-            idx = c.rfind('\n')
-            if idx > -1:
-                # There is an index. Store the tail part for later,
-                # and process the head part as messages. We use idx + 1
-                # as we dont' actually want to store the newline.
-                data = buf + c[:idx]
-                buf = c[idx + 1:]
-                self._data(data)
-            else:
-                # No newline found, so we add this to our accumulated
-                # buffer
-                buf += c
+
+            # Note: keep-alive newlines might be inserted before each length value.
+            # read until we get a digit...
+            c = ''
+            while c not in digits:
+                c = resp.read(1)
+            delimited_string = c
+
+            # read rest of delimiter length..
+            while 1:
+                d = resp.read(1)
+                if d in digits:
+                    delimited_string += d
+                else:
+                    break
+
+            # read the next twitter status object
+            if delimited_string.isdigit():
+                next_status_obj = resp.read( int(delimited_string) )
+                self._data(next_status_obj)
 
         if resp.isclosed():
             self.on_closed(resp)
