@@ -6,13 +6,12 @@ import httplib
 from socket import timeout
 from threading import Thread
 from time import sleep
-import urllib
 
 from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
 
-from tweepy.utils import import_simplejson
+from tweepy.utils import import_simplejson, urlencode_noplus
 json = import_simplejson()
 
 STREAM_VERSION = 1
@@ -220,7 +219,7 @@ class Stream(object):
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
         if count:
             self.parameters['count'] = count
-        self.body = urllib.urlencode(self.parameters)
+        self.body = urlencode_noplus(self.parameters)
         self.parameters['delimited'] = 'length'
         self._start(async)
 
