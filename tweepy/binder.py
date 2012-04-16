@@ -63,7 +63,7 @@ def bind_api(**config):
             # Manually set Host header to fix an issue in python 2.5
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
-            # See Issue http://github.com/joshthecoder/tweepy/issues/#issue/12
+            # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
 
         def build_parameters(self, args, kargs):
