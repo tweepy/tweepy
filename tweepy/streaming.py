@@ -153,8 +153,10 @@ class Stream(object):
             delimited_string = c
 
             # read rest of delimiter length..
+            d = ''
             while d != '\n' and self.running and not resp.isclosed():
-                delimited_string += resp.read(1)                
+                d = resp.read(1)
+                delimited_string += d
 
             # read the next twitter status object
             if delimited_string.isdigit():
