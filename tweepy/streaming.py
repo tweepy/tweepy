@@ -140,21 +140,26 @@ class Stream(object):
                 self.running = False
 
     def _read_loop(self, resp):
-        buf = ''
+
         while self.running and not resp.isclosed():
-            c = resp.read(self.buffer_size)
-            idx = c.rfind('\n')
-            if idx > -1:
-                # There is an index. Store the tail part for later,
-                # and process the head part as messages. We use idx + 1
-                # as we dont' actually want to store the newline.
-                data = buf + c[:idx]
-                buf = c[idx + 1:]
-                self._data(data)
-            else:
-                # No newline found, so we add this to our accumulated
-                # buffer
-                buf += c
+
+            # Note: keep-alive newlines might be inserted before each length value.
+            # read until we get a digit...
+            c = '\n'
+            while c == '\n' and self.running and not resp.isclosed():
+                c = resp.read(1)
+            delimited_string = c
+
+            # read rest of delimiter length..
+            d = ''
+            while d != '\n' and self.running and not resp.isclosed():
+                d = resp.read(1)
+                delimited_string += d
+
+            # read the next twitter status object
+            if delimited_string.isdigit():
+                next_status_obj = resp.read( int(delimited_string) )
+                self._data(next_status_obj)
 
         if resp.isclosed():
             self.on_closed(resp)
