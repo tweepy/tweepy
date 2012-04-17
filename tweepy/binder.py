@@ -130,9 +130,17 @@ def bind_api(**config):
                 # Open connection
                 # FIXME: add timeout
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = httplib.HTTPSConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = httplib.HTTPSConnection(self.host)
                 else:
-                    conn = httplib.HTTPConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = httplib.HTTPConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = httplib.HTTPConnection(self.host)
 
                 # Apply authentication
                 if self.api.auth:
@@ -143,7 +151,16 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
+                    _url = url
+                    if self.api.proxy_host:
+                        _url = self.scheme + self.host + url
+                    if self.method == "POST":
+                        if self.post_data:
+                            self.headers["Content-Length"] = len(self.post_data)
+                        else:
+                            self.headers["Content-Length"] = "0"
+                    
+                    conn.request(self.method, _url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)

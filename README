@@ -8,7 +8,10 @@
 A Python library for accessing the Twitter API.
 
 Requires Python 2.5 or later. Sorry no Python 3 support yet.
-
+#
+# Added Proxy support dhananjaysathe@gmail.com
+#
+#
 Website: http://tweepy.github.com/
 Git Repository: http://github.com/tweepy/tweepy.git
 Google Groups: http://groups.google.com/group/tweepy
