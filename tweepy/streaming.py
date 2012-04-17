@@ -147,18 +147,14 @@ class Stream(object):
 
             # Note: keep-alive newlines might be inserted before each length value.
             # read until we get a digit...
-            c = ''
-            while c not in digits:
+            c = '\n'
+            while c == '\n' and self.running and not resp.isclosed():
                 c = resp.read(1)
             delimited_string = c
 
             # read rest of delimiter length..
-            while 1:
-                d = resp.read(1)
-                if d in digits:
-                    delimited_string += d
-                else:
-                    break
+            while d != '\n' and self.running and not resp.isclosed():
+                delimited_string += resp.read(1)                
 
             # read the next twitter status object
             if delimited_string.isdigit():
