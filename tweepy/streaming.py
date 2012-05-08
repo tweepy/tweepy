@@ -156,6 +156,9 @@ class Stream(object):
                 d = resp.read(1)
                 delimited_string += d
 
+            # the EOL is "\r\n", so we need to strip the "\r", too
+            delimited_string = delimited_string.rstrip()
+
             # read the next twitter status object
             if delimited_string.isdigit():
                 next_status_obj = resp.read( int(delimited_string) )
@@ -176,9 +179,10 @@ class Stream(object):
         pass
 
     def userstream(self, count=None, async=False, secure=True):
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/2/user.json'
+        self.url = '/2/user.json?delimited=length'
         self.host='userstream.twitter.com'
         if count:
             self.url += '&count=%s' % count
