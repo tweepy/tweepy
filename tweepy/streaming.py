@@ -157,9 +157,12 @@ class Stream(object):
                 delimited_string += d
 
             # read the next twitter status object
-            if delimited_string.isdigit():
-                next_status_obj = resp.read( int(delimited_string) )
+            try:
+                int_to_read = int(delimited_string)
+                next_status_obj = resp.read( int_to_read )
                 self._data(next_status_obj)
+            except ValueError:
+                pass
 
         if resp.isclosed():
             self.on_closed(resp)
