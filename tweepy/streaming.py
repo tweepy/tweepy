@@ -156,6 +156,9 @@ class Stream(object):
                 d = resp.read(1)
                 delimited_string += d
 
+            # remove trailing \r\n
+            delimited_string = delimited_string[:-2]
+
             # read the next twitter status object
             if delimited_string.isdigit():
                 next_status_obj = resp.read( int(delimited_string) )
