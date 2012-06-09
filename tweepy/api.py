@@ -145,7 +145,7 @@ class API(object):
             'headers': headers,
             'post_data': post_data,
         })
-        bind_api(
+        return bind_api(
             path = '/statuses/update_with_media.json',
             method = 'POST',
             payload_type = 'status',
