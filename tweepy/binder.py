@@ -26,7 +26,7 @@ def bind_api(**config):
         require_auth = config.get('require_auth', False)
         search_api = config.get('search_api', False)
         use_cache = config.get('use_cache', True)
-
+        with_media = config.get('with_media', False)
         def __init__(self, api, args, kargs):
             # If authentication is required and no credentials
             # are provided, throw an error.
@@ -57,6 +57,8 @@ def bind_api(**config):
 
             if self.search_api:
                 self.host = api.search_host
+            elif self.with_media:
+                self.host = api.upload_host
             else:
                 self.host = api.host
 

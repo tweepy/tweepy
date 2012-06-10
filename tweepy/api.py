@@ -18,7 +18,7 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=False, api_root='/1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None):
+            parser=None,upload_host='upload.twitter.com'):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -30,6 +30,7 @@ class API(object):
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
+        self.upload_host = upload_host
 
     """ statuses/public_timeline """
     public_timeline = bind_api(
@@ -133,6 +134,18 @@ class API(object):
         allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
         require_auth = True
     )
+    
+    """ /statuses/update_with_media """
+    def update_status_with_media(self, status, img):
+        headers, post_data = API._pack_file(img,field_name="media[]")
+        return bind_api(
+            path = '/statuses/update_with_media.json',
+            method = 'POST',
+            payload_type = 'status',
+            allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
+            require_auth = True,
+            with_media=True
+        )(self, post_data=post_data, headers=headers,  status=status)
 
     """ statuses/destroy """
     destroy_status = bind_api(
@@ -718,6 +731,27 @@ class API(object):
         allowed_param = ['lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within']
     )
 
+    @staticmethod
+    def _pack_file(fp,filename="file.jpg",content_type='image/jpeg',field_name='image'):
+        BOUNDARY = 'Tw3ePy'
+        body = []
+        body.append('--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (field_name,filename))
+        body.append('Content-Type: %s' % content_type)
+        body.append('')
+        body.append(fp.read())
+        body.append('--' + BOUNDARY + '--')
+        body.append('')
+        
+        body = '\r\n'.join(body)
+
+        # build headers
+        headers = {
+            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
+            'Content-Length': len(body)
+        }
+
+        return headers, body
     """ Internal use only """
     @staticmethod
     def _pack_image(filename, max_size):
@@ -739,23 +773,6 @@ class API(object):
 
         # build the mulitpart-formdata body
         fp = open(filename, 'rb')
-        BOUNDARY = 'Tw3ePy'
-        body = []
-        body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="image"; filename="%s"' % filename)
-        body.append('Content-Type: %s' % file_type)
-        body.append('')
-        body.append(fp.read())
-        body.append('--' + BOUNDARY + '--')
-        body.append('')
+        result = API._pack_file(fp,filename,file_type)
         fp.close()
-        body = '\r\n'.join(body)
-
-        # build headers
-        headers = {
-            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
-            'Content-Length': str(len(body))
-        }
-
-        return headers, body
-
+        return result
