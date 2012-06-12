@@ -149,7 +149,6 @@ class Stream(object):
             while c == '\n' and self.running and not resp.isclosed():
                 c = resp.read(1)
             delimited_string = c
-                if not c or c == '\n':
 
             # read rest of delimiter length..
             d = ''
@@ -158,7 +157,7 @@ class Stream(object):
                 delimited_string += d
 
             # read the next twitter status object
-            if delimited_string.isdigit():
+            if delimited_string.strip().isdigit():
                 next_status_obj = resp.read( int(delimited_string) )
                 self._data(next_status_obj)
 

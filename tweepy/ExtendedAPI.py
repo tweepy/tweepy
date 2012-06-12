@@ -9,7 +9,7 @@ from tweepy.binder import bind_api
 from tweepy.cache import MemoryCache
 from tweepy.utils import make_chunks, list_to_csv
 
-from itertools import chain
+from itertools import chain, izip
 
 # NOTE: This is a test to see how a higher level API will behave
 # Not the best way to do it, a major rewrite of API and Binder will make something similar 
@@ -73,7 +73,7 @@ class ExtendedAPI(API):
                 missing = set()
                 # Iterate over the cache results, yielding the users in the cache
                 # and adding to a missing set the users that weren't
-                for user, cache_result in zip(users, cache_results):
+                for user, cache_result in izip(users, cache_results):
                     if cache_result:
                         yield cache_result
                     else:
@@ -128,4 +128,3 @@ class ExtendedAPI(API):
         as they come'''
         for user in chain(user_ids, screen_names):
             yield self._get_user(user)
-            

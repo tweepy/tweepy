@@ -5,7 +5,8 @@ Created on Jun 30, 2011
 '''
     
 from tweepy.cache import Cache
-import time  
+import time
+import itertools
 try:
     import cPickle as pickle
 except ImportError:
@@ -73,36 +74,45 @@ class RedisCache(Cache):
         '''Given an iterable of keys, returns the corresponding elements in the cache'''
         
         timeout = kwargs.get('timeout', self.timeout)
+        chunk_size = kwargs.get('chunk_size', 500)
         
-        # Get the values in one go
-        pipe = self.client.pipeline()
-        for key in keys:
-            key = self.add_prefix(key)
-            pipe.get(key)
-        unpickled_values = pipe.execute()        
+        # Divide into evenly sized chunks, this is to start returning values without
+        # the need to wait for all the results in a big query
+        it = iter(keys)
+        chunk = list(itertools.islice(it, chunk_size))
         
-        # Iterate over the keys, if we find expired keys
-        results = []
         expired_keys = []
         
-        for key, u_value in zip(keys, unpickled_values):
-            # If we receive none, it wasn't on the cache
-            if not u_value:
-                results.append(None)
-            else:  
-                value = pickle.loads(u_value)              
-                if self._is_expired(value, timeout):
-                    expired_keys.append(key)
-                    results.append(None)
-                else:
-                    # 0 is timeout, 1 is object
-                    results.append(value[1])
-                    
+        while chunk:
+            # Get the values in one go
+            pipe = self.client.pipeline()
+            for key in chunk:
+                key = self.add_prefix(key)
+                pipe.get(key)
+            
+            unpickled_values = pipe.execute()        
+            
+            # Iterate over the keys and find expired keys        
+            for key, u_value in zip(chunk, unpickled_values):
+                # If we receive none, it wasn't on the cache
+                if not u_value:
+                    yield None
+                else:  
+                    value = pickle.loads(u_value)              
+                    if self._is_expired(value, timeout):
+                        expired_keys.append(key)
+                        yield None
+                    else:
+                        # 0 is timeout, 1 is object
+                        yield value[1]
+            
+            chunk = list(itertools.islice(it, chunk_size))
+
+        # Remove all the found expired keys
         self.delete_entries(expired_keys)
-        return results
 
     def get(self, key):
-        return self.get_multiple(key)[0]
+        return list(self.get_multiple(key))[0]
 
     def count(self):
         '''If we didn't have the set here we wouldn't be able to retrieve this as a number and would have to
