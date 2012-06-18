@@ -2,14 +2,17 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
+try: #python3
+    from http.client import HTTPSConnection,HTTPConnection
+except:
+    from httplib import HTTPSConnection,HTTPConnection
 from socket import timeout
 from threading import Thread
 from time import sleep
 
-from tweepy.models import Status
-from tweepy.api import API
-from tweepy.error import TweepError
+from .models import Status
+from .api import API
+from .error import TweepError
 
 from tweepy.utils import import_simplejson, urlencode_noplus
 json = import_simplejson()
@@ -99,13 +102,29 @@ class Stream(object):
                 break
             try:
                 if self.scheme == "http":
-                    conn = httplib.HTTPConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = HTTPConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = HTTPConnection(self.host)
                 else:
-                    conn = httplib.HTTPSConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = HTTPSConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = HTTPSConnection(self.host)
                 self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
-                conn.request('POST', self.url, self.body, headers=self.headers)
+                _url = self.url
+                if self.api.proxy_host:
+                    _url = self.scheme + self.host + url
+                if self.method == "POST":
+                    if self.post_data:
+                        self.headers["Content-Length"] = len(self.post_data)
+                    else:
+                        self.headers["Content-Length"] = "0"
+                conn.request('POST', _url, self.body, headers=self.headers)
                 resp = conn.getresponse()
                 if resp.status != 200:
                     if self.listener.on_error(resp.status) is False:
@@ -122,7 +141,7 @@ class Stream(object):
                     break
                 conn.close()
                 sleep(self.snooze_time)
-            except Exception, exception:
+            except Exception as exception:
                 # any other exception is fatal, so kill loop
                 break
 

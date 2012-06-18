@@ -2,14 +2,20 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
-import urllib
+try: #python3
+    from http.client import HTTPSConnection,HTTPConnection
+    from urllib.parse import quote,urlencode
+except:
+    from httplib import HTTPSConnection,HTTPConnection
+    from urllib import quote,urlencode
 import time
 import re
+import sys
+PY_MAJOR_VERSION = sys.version_info.major
 
-from tweepy.error import TweepError
-from tweepy.utils import convert_to_utf8_str
-from tweepy.models import Model
+from .error import TweepError
+from .utils import convert_to_utf8_str
+from .models import Model
 
 re_path_template = re.compile('{\w+}')
 
@@ -94,7 +100,7 @@ def bind_api(**config):
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.parameters[name])
+                        value = quote(self.parameters[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
                     del self.parameters[name]
@@ -105,7 +111,7 @@ def bind_api(**config):
             # Build the request URL
             url = self.api_root + self.path
             if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+                url = '%s?%s' % (url, urlencode(self.parameters))
 
             # Query the cache if one is available
             # and this request uses a GET method.
@@ -130,9 +136,17 @@ def bind_api(**config):
                 # Open connection
                 # FIXME: add timeout
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = HTTPSConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = HTTPSConnection(self.host)
                 else:
-                    conn = httplib.HTTPConnection(self.host)
+                    if self.api.proxy_host:
+                        conn = HTTPConnection(
+                               self.api.proxy_host, self.api.proxy_port)
+                    else:
+                        conn = HTTPConnection(self.host)
 
                 # Apply authentication
                 if self.api.auth:
@@ -140,12 +154,27 @@ def bind_api(**config):
                             self.scheme + self.host + url,
                             self.method, self.headers, self.parameters
                     )
+                #MAJOR HACK FOR PYTHON 3
+                #FIXME: Find a better way.
+
+                if PY_MAJOR_VERSION == 3 :
+                    head_auth = self.headers['Authorization'].split(',')
+
+
 
                 # Execute request
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
+                    _url = url
+                    if self.api.proxy_host:
+                        _url = self.scheme + self.host + url
+                    if self.method == "POST":
+                        if self.post_data:
+                            self.headers["Content-Length"] = len(self.post_data)
+                        else:
+                            self.headers["Content-Length"] = "0"
+                    conn.request(self.method, _url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
@@ -168,7 +197,7 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            result = self.api.parser.parse(self, resp.read())
+            result = self.api.parser.parse(self, resp)
 
             conn.close()
 

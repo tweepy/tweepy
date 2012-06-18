@@ -2,9 +2,12 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.models import ModelFactory
-from tweepy.utils import import_simplejson
-from tweepy.error import TweepError
+from .models import ModelFactory
+from .utils import import_simplejson
+from .error import TweepError
+
+import sys
+PY_MAJOR_VERSION = sys.version_info.major
 
 
 class Parser(object):
@@ -47,11 +50,21 @@ class JSONParser(Parser):
 
     def parse(self, method, payload):
         try:
-            json = self.json_lib.loads(payload)
-        except Exception, e:
+            if PY_MAJOR_VERSION == 2 :
+                payload = payload.read()
+                json = self.json_lib.loads(payload)
+            else :
+                encoding = payload.headers.get_content_charset()
+                body = payload.readall().decode(encoding)
+                json = self.json_lib.loads(body)
+
+        except Exception as e:
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
-        needsCursors = method.parameters.has_key('cursor')
+        if PY_MAJOR_VERSION == 2 :
+            needsCursors = method.parameters.has_key('cursor')
+        else :
+            needsCursors = 'cursor' in method.parameters
         if needsCursors and isinstance(json, dict) and 'previous_cursor' in json and 'next_cursor' in json:
             cursors = json['previous_cursor'], json['next_cursor']
             return json, cursors
@@ -60,10 +73,16 @@ class JSONParser(Parser):
 
     def parse_error(self, payload):
         error = self.json_lib.loads(payload)
-        if error.has_key('error'):
-            return error['error']
-        else:
-            return error['errors']
+        if PY_MAJOR_VERSION == 2 :
+            if error.has_key('error'):
+                return error['error']
+            else:
+                return error['errors']
+        else :
+            if 'error' in error:
+                return error['error']
+            else:
+                return error['errors']
 
 
 class ModelParser(JSONParser):
