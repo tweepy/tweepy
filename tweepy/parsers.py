@@ -2,9 +2,9 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from .models import ModelFactory
-from .utils import import_simplejson
-from .error import TweepError
+from tweepy.models import ModelFactory
+from tweepy.utils import import_simplejson
+from tweepy.error import TweepError
 
 import sys
 PY_MAJOR_VERSION = sys.version_info.major

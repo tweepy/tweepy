@@ -10,10 +10,10 @@ from socket import timeout
 from threading import Thread
 from time import sleep
 
-from . import __version__
-from .models import Status
-from .api import API
-from .error import TweepError
+from tweepy import __version__
+from tweepy.models import Status
+from tweepy.api import API
+from tweepy.error import TweepError
 import zlib
 
 from tweepy.utils import import_simplejson, urlencode_noplus

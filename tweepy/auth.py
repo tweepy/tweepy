@@ -9,9 +9,9 @@ except:
 
 import base64
 
-from . import oauth
-from .error import TweepError
-from .api import API
+from tweepy import oauth
+from tweepy.error import TweepError
+from tweepy.api import API
 import sys
 PY_MAJOR_VERSION = sys.version_info.major
 
