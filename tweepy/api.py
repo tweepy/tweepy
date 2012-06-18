@@ -9,6 +9,9 @@ from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 from tweepy.utils import list_to_csv
+import sys
+PY_MAJOR_VERSION = sys.version_info.major
+
 
 
 class API(object):
@@ -753,17 +756,30 @@ class API(object):
 
         # build the mulitpart-formdata body
         fp = open(filename, 'rb')
-        BOUNDARY = b'Tw3ePy'
-        body = []
-        body.append(b'--' + BOUNDARY)
-        body.append(('Content-Disposition: form-data; name="image"; filename="%s"' % filename).encode())
-        body.append(('Content-Type: %s' % file_type).encode())
-        body.append(b'')
-        body.append(fp.read())
-        body.append(b'--' + BOUNDARY + b'--')
-        body.append(b'')
-        fp.close()
-        body = b'\r\n'.join(body)
+        if PY_MAJOR_VERSION ==2 :
+            BOUNDARY = 'Tw3ePy'
+            body = []
+            body.append('--' + BOUNDARY)
+            body.append(('Content-Disposition: form-data; name="image"; filename="%s"' % filename))
+            body.append(('Content-Type: %s' % file_type))
+            body.append('')
+            body.append(fp.read())
+            body.append('--' + BOUNDARY + '--')
+            body.append('')
+            fp.close()
+            body = '\r\n'.join(body)
+        else :     
+            BOUNDARY = b'Tw3ePy'
+            body = []
+            body.append(b'--' + BOUNDARY)
+            body.append(('Content-Disposition: form-data; name="image"; filename="%s"' % filename).encode())
+            body.append(('Content-Type: %s' % file_type).encode())
+            body.append(b'')
+            body.append(fp.read())
+            body.append(b'--' + BOUNDARY + b'--')
+            body.append(b'')
+            fp.close()
+            body = b'\r\n'.join(body)
 
         # build headers
         headers = {
