@@ -9,6 +9,9 @@ from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 from tweepy.utils import list_to_csv
+import sys
+PY_MAJOR_VERSION = sys.version_info.major
+
 
 
 class API(object):
@@ -18,8 +21,10 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=False, api_root='/1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None):
+            parser=None, proxy_host=None, proxy_port=80):
         self.auth = auth_handler
+        if auth_handler:
+            auth_handler.api = self
         self.host = host
         self.search_host = search_host
         self.api_root = api_root
@@ -29,6 +34,8 @@ class API(object):
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
+        self.proxy_port = proxy_port
+        self.proxy_host = proxy_host
         self.parser = parser or ModelParser()
 
     """ statuses/public_timeline """
@@ -84,7 +91,7 @@ class API(object):
         payload_type = 'relation', payload_list = True,
         allowed_param = ['id'],
         require_auth = False
-	)
+    )
 
     """/statuses/:id/retweeted_by/ids.format"""
     retweeted_by_ids = bind_api(
@@ -165,6 +172,16 @@ class API(object):
         path = '/users/show.json',
         payload_type = 'user',
         allowed_param = ['id', 'user_id', 'screen_name']
+    )
+
+    """ Perform bulk look up of friendships from user ID or screenname """
+    def lookup_friendships(self, user_ids=None, screen_names=None):
+       return self._lookup_friendships(list_to_csv(user_ids), list_to_csv(screen_names))
+    _lookup_friendships = bind_api(
+        path = '/friendships/lookup.json',
+        payload_type = 'relationship', payload_list = True,
+        allowed_param = ['user_id', 'screen_name'],
+        require_auth = True
     )
 
     """ Perform bulk look up of users from user ID or screenname """
@@ -314,7 +331,7 @@ class API(object):
                 payload_type = 'user',
                 require_auth = True
             )(self)
-        except TweepError, e:
+        except TweepError as e:
             if e.response and e.response.status == 401:
                 return False
             raise
@@ -726,7 +743,7 @@ class API(object):
         try:
             if os.path.getsize(filename) > (max_size * 1024):
                 raise TweepError('File is too big, must be less than 700kb.')
-        except os.error, e:
+        except os.error as e:
             raise TweepError('Unable to access file')
 
         # image must be gif, jpeg, or png
@@ -739,17 +756,30 @@ class API(object):
 
         # build the mulitpart-formdata body
         fp = open(filename, 'rb')
-        BOUNDARY = 'Tw3ePy'
-        body = []
-        body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="image"; filename="%s"' % filename)
-        body.append('Content-Type: %s' % file_type)
-        body.append('')
-        body.append(fp.read())
-        body.append('--' + BOUNDARY + '--')
-        body.append('')
-        fp.close()
-        body = '\r\n'.join(body)
+        if PY_MAJOR_VERSION ==2 :
+            BOUNDARY = 'Tw3ePy'
+            body = []
+            body.append('--' + BOUNDARY)
+            body.append(('Content-Disposition: form-data; name="image"; filename="%s"' % filename))
+            body.append(('Content-Type: %s' % file_type))
+            body.append('')
+            body.append(fp.read())
+            body.append('--' + BOUNDARY + '--')
+            body.append('')
+            fp.close()
+            body = '\r\n'.join(body)
+        else :     
+            BOUNDARY = b'Tw3ePy'
+            body = []
+            body.append(b'--' + BOUNDARY)
+            body.append(('Content-Disposition: form-data; name="image"; filename="%s"' % filename).encode())
+            body.append(('Content-Type: %s' % file_type).encode())
+            body.append(b'')
+            body.append(fp.read())
+            body.append(b'--' + BOUNDARY + b'--')
+            body.append(b'')
+            fp.close()
+            body = b'\r\n'.join(body)
 
         # build headers
         headers = {

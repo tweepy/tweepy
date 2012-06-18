@@ -2,12 +2,18 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from urllib2 import Request, urlopen
+try:
+    from urllib.request import Request, urlopen
+except:
+    from urllib2 import Request, urlopen
+
 import base64
 
 from tweepy import oauth
 from tweepy.error import TweepError
 from tweepy.api import API
+import sys
+PY_MAJOR_VERSION = sys.version_info.major
 
 
 class AuthHandler(object):
@@ -25,10 +31,16 @@ class BasicAuthHandler(AuthHandler):
 
     def __init__(self, username, password):
         self.username = username
-        self._b64up = base64.b64encode('%s:%s' % (username, password))
+        if PY_MAJOR_VERSION == 2 :
+            self._b64up = base64.b64encode('%s:%s' % (username, password))
+        else :
+            self._b64up = base64.b64encode(bytes('%s:%s' % (username, password), 'ascii'))
 
     def apply_auth(self, url, method, headers, parameters):
-        headers['Authorization'] = 'Basic %s' % self._b64up
+        if PY_MAJOR_VERSION == 2 :
+            headers['Authorization'] = 'Basic %s' % self._b64up
+        else:
+            headers['Authorization'] = 'Basic %s' % self._b64up.decode()
 
     def get_username(self):
         return self.username
@@ -73,8 +85,12 @@ class OAuthHandler(AuthHandler):
             )
             request.sign_request(self._sigmethod, self._consumer, None)
             resp = urlopen(Request(url, headers=request.to_header()))
-            return oauth.OAuthToken.from_string(resp.read())
-        except Exception, e:
+            if PY_MAJOR_VERSION == 2 :
+                return oauth.OAuthToken.from_string(resp.read())
+            else :
+                return oauth.OAuthToken.from_string(resp.read().decode())
+            
+        except Exception as e:
             raise TweepError(e)
 
     def set_request_token(self, key, secret):
@@ -99,7 +115,7 @@ class OAuthHandler(AuthHandler):
             )
 
             return request.to_url()
-        except Exception, e:
+        except Exception as e:
             raise TweepError(e)
 
     def get_access_token(self, verifier=None):
@@ -120,9 +136,12 @@ class OAuthHandler(AuthHandler):
 
             # send request
             resp = urlopen(Request(url, headers=request.to_header()))
-            self.access_token = oauth.OAuthToken.from_string(resp.read())
+            if PY_MAJOR_VERSION == 2 :
+                self.access_token = oauth.OAuthToken.from_string(resp.read())
+            else: 
+                self.access_token = oauth.OAuthToken.from_string(resp.read().decode())            
             return self.access_token
-        except Exception, e:
+        except Exception as e:
             raise TweepError(e)
 
     def get_xauth_access_token(self, username, password):
@@ -138,9 +157,9 @@ class OAuthHandler(AuthHandler):
                 oauth_consumer=self._consumer,
                 http_method='POST', http_url=url,
                 parameters = {
-		            'x_auth_mode': 'client_auth',
-		            'x_auth_username': username,
-		            'x_auth_password': password
+                    'x_auth_mode': 'client_auth',
+                    'x_auth_username': username,
+                    'x_auth_password': password
                 }
             )
             request.sign_request(self._sigmethod, self._consumer, None)
@@ -148,7 +167,7 @@ class OAuthHandler(AuthHandler):
             resp = urlopen(Request(url, data=request.to_postdata()))
             self.access_token = oauth.OAuthToken.from_string(resp.read())
             return self.access_token
-        except Exception, e:
+        except Exception as e:
             raise TweepError(e)
 
     def get_username(self):
