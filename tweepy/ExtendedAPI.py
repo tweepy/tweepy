@@ -10,7 +10,7 @@ from tweepy.cache import MemoryCache
 from tweepy.utils import make_chunks, list_to_csv
 
 from itertools import chain, izip
-from tweepy.tweepy.error import TweepError
+from error import TweepError
 
 # NOTE: This is a test to see how a higher level API will behave
 # Not the best way to do it, a major rewrite of API and Binder will make something similar 
