@@ -10,6 +10,7 @@ from tweepy.cache import MemoryCache
 from tweepy.utils import make_chunks, list_to_csv
 
 from itertools import chain, izip
+from tweepy.tweepy.error import TweepError
 
 # NOTE: This is a test to see how a higher level API will behave
 # Not the best way to do it, a major rewrite of API and Binder will make something similar 
@@ -37,13 +38,16 @@ class ExtendedAPI(API):
     def _lookup_users(self, user_ids=[], screen_names=[]):
         '''A wrapper around __uncached_lookup_users to store the returned Users
         in the cache'''
+        try:
+            users = self.__uncached_lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
+            self.cache.store_users(*users)
+            return users
+        except TweepError, e:
+            # We looked for a user that does not exist
+            if 'page does not exist' in reason:
+                return []
+            raise
         
-        assert (len(user_ids) + len(screen_names) > 0), "WAKA WAKA"
-        
-        users = self.__uncached_lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
-        self.cache.store_users(*users)
-        return users
-
     # This is exactly the same call with cache disabled.
     # Were going to provide higher level cache (by user instead of by call)    
     """ users/show """
