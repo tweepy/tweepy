@@ -37,6 +37,9 @@ class ExtendedAPI(API):
     def _lookup_users(self, user_ids=[], screen_names=[]):
         '''A wrapper around __uncached_lookup_users to store the returned Users
         in the cache'''
+        
+        assert (len(user_ids) + len(screen_names) > 0), "WAKA WAKA"
+        
         users = self.__uncached_lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
         self.cache.store_users(*users)
         return users

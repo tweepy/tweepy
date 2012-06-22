@@ -51,18 +51,19 @@ class APIClientFactory(object):
         '''
         # TODO: Use other kinds of cache
         # TODO: Create an example cache configuration
+        # TODO: Detect the kind of python redis client ?
         
         try:
             from django.conf import settings
             from django.core.cache import cache
-            
+                        
             return APIClientFactory(
                       settings.TWITTER.get('consumer_key'),
                       settings.TWITTER.get('consumer_secret'),
                       settings.TWITTER.get('secure'),
                       settings.TWITTER.get('access_token_key'),
-                      settings.TWITTER.get('access_token_secret'),
-                      cache = tweepy.RedisCache(client=cache._client, timeout = cache_time))
+                      settings.TWITTER.get('access_token_secret'),  
+                      cache = tweepy.RedisCache(client=cache._client.api, timeout = cache_time))
 
             
         except ImportError:
