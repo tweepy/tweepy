@@ -44,7 +44,7 @@ class ExtendedAPI(API):
             return users
         except TweepError, e:
             # We looked for a user that does not exist
-            if 'page does not exist' in reason:
+            if 'page does not exist' in e.reason:
                 return []
             raise
         
