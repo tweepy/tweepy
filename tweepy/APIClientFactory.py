@@ -39,7 +39,7 @@ class APIClientFactory(object):
     
     
     @staticmethod
-    def factory_for_django(use_cache = True, cache_time = 3600 * 24 * 7 * 4):
+    def factory_for_django(use_cache = True, cache_time = 60 * 5):
         '''Helper function for django users. Create a client factory where the configuration
         is extracted from the settings.py file of a django project.
         
