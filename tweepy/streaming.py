@@ -155,6 +155,7 @@ class Stream(object):
             while d != '\n' and self.running and not resp.isclosed():
                 d = resp.read(1)
                 delimited_string += d
+            delimited_string = delimited_string.strip()
 
             # read the next twitter status object
             if delimited_string.isdigit():
