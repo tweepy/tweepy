@@ -6,7 +6,7 @@ class TweepError(Exception):
     """Tweepy exception"""
 
     def __init__(self, reason, response=None):
-        self.reason = unicode(reason)
+        self.reason = unicode(reason, 'utf8')
         self.response = response
 
     def __str__(self):
