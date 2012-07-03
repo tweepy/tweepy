@@ -17,16 +17,18 @@ class APIClientFactory(object):
         self.secure = secure
         self.access_token_key = access_token_key
         self.access_token_secret = access_token_secret
+        # Set the authentication
         self.auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret, self.secure)
         self.auth.set_access_token(access_token_key, access_token_secret)
+        # Set the cache
         self.cache = cache or tweepy.cache.MemoryCache()
     
     
-    def get_api(self):
+    def get_api(self, **kwargs):
         '''Returns the normal api. With this you can get followers, tweets, friends and a whole bunch
         of other data from twitter'''
-        return tweepy.ExtendedAPI(self.auth, cache = self.cache)
-    
+        kwargs['auth_handler'] = self.auth
+        return tweepy.ExtendedAPI(**kwargs)
     
     def get_streaming_api(self, listener, **kwargs):
         '''Returns a tweepy streaming api. This can monitor a stream of tweets with some given options.
