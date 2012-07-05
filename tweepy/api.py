@@ -7,7 +7,7 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser, RawParser
+from tweepy.parsers import ModelParser
 from tweepy.utils import list_to_csv
 
 
@@ -727,7 +727,7 @@ class API(object):
         try:
             if os.path.getsize(filename) > (max_size * 1024):
                 raise TweepError('File is too big, must be less than 700kb.')
-        except os.error, e:
+        except os.error:
             raise TweepError('Unable to access file')
 
         # image must be gif, jpeg, or png
