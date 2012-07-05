@@ -130,6 +130,14 @@ class TweepyAPITests(unittest.TestCase):
     def testverifycredentials(self):
         self.assertNotEqual(self.api.verify_credentials(), False)
 
+        # make sure that `me.status.entities` is not an empty dict
+        me = self.api.verify_credentials(include_entities=True)
+        self.assertTrue(me.status.entities)
+
+        # `status` shouldn't be included
+        me = self.api.verify_credentials(skip_status=True)
+        self.assertFalse(hasattr(me, 'status'))
+
         api = API(BasicAuthHandler('bad', 'password'))
         self.assertEqual(api.verify_credentials(), False)
 

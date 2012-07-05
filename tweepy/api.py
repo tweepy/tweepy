@@ -307,13 +307,14 @@ class API(object):
     )
 
     """ account/verify_credentials """
-    def verify_credentials(self):
+    def verify_credentials(self, **kargs):
         try:
             return bind_api(
                 path = '/account/verify_credentials.json',
                 payload_type = 'user',
-                require_auth = True
-            )(self)
+                require_auth = True,
+                allowed_param = ['include_entities', 'skip_status'],
+            )(self, **kargs)
         except TweepError, e:
             if e.response and e.response.status == 401:
                 return False
