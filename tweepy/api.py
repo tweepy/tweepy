@@ -70,6 +70,14 @@ class API(object):
         require_auth = True
     )
 
+    """/statuses/retweeted_by_user.format"""
+    retweeted_by_user = bind_api(
+        path = '/statuses/retweeted_by_user.json',
+        payload_type = 'status', payload_list = True,
+        allowed_param = ['screen_name', 'id', 'count', 'since_id',
+                            'max_id', 'page', 'include_entities']
+    )
+
     """/statuses/:id/retweeted_by.format"""
     retweeted_by = bind_api(
         path = '/statuses/{id}/retweeted_by.json',
