@@ -40,6 +40,7 @@ def bind_api(**config):
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
+            self.use_cache = kargs.pop('use_cache', self.use_cache)
 
             # Pick correct URL root to use
             if self.search_api:
@@ -180,7 +181,6 @@ def bind_api(**config):
 
 
     def _call(api, *args, **kargs):
-
         method = APIMethod(api, args, kargs)
         return method.execute()
 

@@ -209,16 +209,18 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False, locations=None, count = None):
+    def filter(self, follow=None, track=None, async=False, locations=None, count = None, encoding='utf8'):
         self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/filter.json?delimited=length' % STREAM_VERSION
         if follow:
-            self.parameters['follow'] = ','.join(map(str, follow))
+            encoded_follow = [unicode(s).encode(encoding) for s in follow]
+            self.parameters['follow'] = ','.join(encoded_follow)                        
         if track:
-            self.parameters['track'] = ','.join(map(str, track))
+            encoded_track = [unicode(s).encode(encoding) for s in track]
+            self.parameters['track'] = ','.join(encoded_track)            
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
