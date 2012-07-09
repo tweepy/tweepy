@@ -2,6 +2,7 @@ import unittest
 import random
 from time import sleep
 import os
+import threading
 
 from tweepy import *
 
@@ -383,6 +384,42 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
+
+
+class SampleListener(StreamListener):
+    def __init__(self, api=None):
+        super(SampleListener, self).__init__(api)
+        self.count = 0
+
+    def on_status(self, status):
+        self.count += 1
+
+class TweepyStreamingTests(unittest.TestCase):
+
+    def setUp(self):
+        self.twauth = BasicAuthHandler(username, password)
+
+    # test Stream.sample by setting up a listener in a thread and listen
+    # for no more than ten seconds. if the status count > 0, then it's a
+    # success. i'm not entirely happy with this test -- specifically it
+    # doesn't differentiate between failures due to bugs in the code and
+    # network errors.
+    def testStreamSample(self):
+        listener = SampleListener()
+        stream = Stream(self.twauth, listener)
+        t = threading.Thread(target = stream.sample)
+        t.start()
+        for i in range(0,10):
+            sleep(1)
+            if listener.count > 0:
+                break
+
+        stream.running = False
+        print listener.count
+
+        self.assertGreater(listener.count, 0,
+            "Sample did not get any messages after ten seconds.")
+
 
 if __name__ == '__main__':
     unittest.main()
