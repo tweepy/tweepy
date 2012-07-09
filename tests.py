@@ -9,8 +9,10 @@ from tweepy import *
 # Must supply twitter account credentials for tests
 username = ''
 password = ''
-consumer_key = ''
-consumer_secret = ''
+oauth_consumer_key = ''
+oauth_consumer_secret = ''
+oauth_token=''
+oauth_token_secret=''
 
 """Unit tests"""
 
@@ -18,7 +20,9 @@ consumer_secret = ''
 class TweepyAPITests(unittest.TestCase):
 
     def setUp(self):
-        self.api = API(BasicAuthHandler(username, password))
+        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth.set_access_token(oauth_token, oauth_token_secret)
+        self.api = API(auth)
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
@@ -276,7 +280,9 @@ class TweepyAPITests(unittest.TestCase):
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = API(BasicAuthHandler(username, password))
+        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth.set_access_token(oauth_token, oauth_token_secret)
+        self.api = API(auth)
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
@@ -311,7 +317,7 @@ class TweepyCursorTests(unittest.TestCase):
 class TweepyAuthTests(unittest.TestCase):
 
     def testoauth(self):
-        auth = OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
 
         # test getting access token
         auth_url = auth.get_authorization_url()
