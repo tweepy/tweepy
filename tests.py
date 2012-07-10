@@ -42,7 +42,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.retweeted_by_me()
 
     def testretweetedbyuser(self):
-        self.api.retweeted_by_user()
         self.api.retweeted_by_user('twitter')
 
     def testretweetedtome(self):
