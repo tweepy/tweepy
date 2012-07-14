@@ -168,7 +168,6 @@ class Stream(object):
             if count:
                 counter += 1
                 if counter == count:
-                    self.on_closed(resp)
                     break
         if resp.isclosed():
             self.on_closed(resp)
