@@ -26,9 +26,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
-    def testpublictimeline(self):
-        self.api.public_timeline()
-
     def testhometimeline(self):
         self.api.home_timeline()
 
