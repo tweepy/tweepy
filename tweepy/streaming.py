@@ -115,11 +115,10 @@ class Stream(object):
                     sleep(self.retry_time)
                 else:
                     error_counter = 0
-                    if count:
-                        counter = self._read_loop(resp, count=count, counter=counter)
-                        if counter == count:
-                            self.on_closed(resp)
-                            break
+                    counter = self._read_loop(resp, count=count, counter=counter)
+                    if count and counter == count:
+                        self.on_closed(resp)
+                        break
             except timeout:
                 if self.listener.on_timeout() == False:
                     break
