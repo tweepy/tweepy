@@ -31,13 +31,6 @@ class API(object):
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
 
-    """ statuses/public_timeline """
-    public_timeline = bind_api(
-        path = '/statuses/public_timeline.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = []
-    )
-
     """ statuses/home_timeline """
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
