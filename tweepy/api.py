@@ -382,7 +382,7 @@ class API(object):
     favorites = bind_api(
         path = '/favorites.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'page']
+        allowed_param = ['id', 'max_id', 'page']
     )
 
     """ favorites/create """
