@@ -7,7 +7,7 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser, RawParser
+from tweepy.parsers import ModelParser
 from tweepy.utils import list_to_csv
 
 
@@ -308,13 +308,14 @@ class API(object):
     )
 
     """ account/verify_credentials """
-    def verify_credentials(self):
+    def verify_credentials(self, **kargs):
         try:
             return bind_api(
                 path = '/account/verify_credentials.json',
                 payload_type = 'user',
-                require_auth = True
-            )(self)
+                require_auth = True,
+                allowed_param = ['include_entities', 'skip_status'],
+            )(self, **kargs)
         except TweepError, e:
             if e.response and e.response.status == 401:
                 return False
@@ -727,7 +728,7 @@ class API(object):
         try:
             if os.path.getsize(filename) > (max_size * 1024):
                 raise TweepError('File is too big, must be less than 700kb.')
-        except os.error, e:
+        except os.error:
             raise TweepError('Unable to access file')
 
         # image must be gif, jpeg, or png
