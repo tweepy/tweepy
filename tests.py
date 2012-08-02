@@ -3,7 +3,8 @@ import random
 from time import sleep
 import os
 
-from tweepy import *
+from tweepy import (API, BasicAuthHandler, OAuthHandler, Friendship, Cursor,
+                    MemoryCache, FileCache)
 
 """Configurations"""
 # Must supply twitter account credentials for tests
@@ -59,7 +60,7 @@ class TweepyAPITests(unittest.TestCase):
         self.api.retweets(123)
 
     def testgetstatus(self):
-        s = self.api.get_status(id=123)
+        self.api.get_status(id=123)
 
     def testupdateanddestroystatus(self):
         # test update
@@ -133,6 +134,14 @@ class TweepyAPITests(unittest.TestCase):
 
     def testverifycredentials(self):
         self.assertNotEqual(self.api.verify_credentials(), False)
+
+        # make sure that `me.status.entities` is not an empty dict
+        me = self.api.verify_credentials(include_entities=True)
+        self.assertTrue(me.status.entities)
+
+        # `status` shouldn't be included
+        me = self.api.verify_credentials(skip_status=True)
+        self.assertFalse(hasattr(me, 'status'))
 
         api = API(BasicAuthHandler('bad', 'password'))
         self.assertEqual(api.verify_credentials(), False)
@@ -386,4 +395,3 @@ class TweepyCacheTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

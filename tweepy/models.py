@@ -233,6 +233,8 @@ class List(Model):
         for k,v in json.items():
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
+            elif k == 'created_at':
+                setattr(lst, k, parse_datetime(v))
             else:
                 setattr(lst, k, v)
         return lst
