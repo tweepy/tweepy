@@ -37,6 +37,7 @@ def bind_api(**config):
             self.post_data = kargs.pop('post_data', None)
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
+            self.timeout = kargs.pop('timeout', api.timeout)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
@@ -130,9 +131,9 @@ def bind_api(**config):
                 # Open connection
                 # FIXME: add timeout
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
+                    conn = httplib.HTTPSConnection(self.host, timeout=self.timeout)
                 else:
-                    conn = httplib.HTTPConnection(self.host)
+                    conn = httplib.HTTPConnection(self.host, timeout=self.timeout)
 
                 # Apply authentication
                 if self.api.auth:
