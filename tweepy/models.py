@@ -292,6 +292,17 @@ class Relation(Model):
                 setattr(result, k, v)
         return result
 
+class Relationship(Model):
+    @classmethod
+    def parse(cls, api, json):
+        result = cls(api)
+        for k,v in json.items():
+            if k == 'connections':
+            	setattr(result, 'is_following', 'following' in v)
+                setattr(result, 'is_followed_by', 'followed_by' in v)
+            else:
+                setattr(result, k, v)
+        return result
 
 class JSONModel(Model):
 
@@ -325,6 +336,7 @@ class ModelFactory(object):
     search_result = SearchResult
     list = List
     relation = Relation
+    relationship = Relationship
 
     json = JSONModel
     ids = IDModel
