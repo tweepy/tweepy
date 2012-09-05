@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 #from distutils.core import setup
 from setuptools import setup, find_packages
+from tweepy import __version__
 
 setup(name="tweepy",
-      version="1.9",
+      version=__version__,
       description="Twitter library for python",
       license="MIT",
       author="Joshua Roesslein",
