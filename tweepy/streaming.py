@@ -135,7 +135,7 @@ class Stream(object):
             raise
 
     def _data(self, data):
-        if self.listener.on_data(d) is False:
+        if self.listener.on_data(data) is False:
             self.running = False
 
     def _read_loop(self, resp):
