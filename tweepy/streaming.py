@@ -131,7 +131,7 @@ class Stream(object):
                     self._read_loop(resp)
             except (timeout, ssl.SSLError), exc:
                 # If it's not time out treat it like any other exception
-                if isinstance(exc, SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
+                if isinstance(exc, ssl.SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
                     exception = exc
                     break
 
