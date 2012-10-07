@@ -149,10 +149,6 @@ class TweepyAPITests(unittest.TestCase):
     def testratelimitstatus(self):
         self.api.rate_limit_status()
 
-    def testsetdeliverydevice(self):
-        self.api.set_delivery_device('im')
-        self.api.set_delivery_device('none')
-
     def testupdateprofilecolors(self):
         original = self.api.me()
         updated = self.api.update_profile_colors('000', '000', '000', '000', '000')

@@ -341,15 +341,6 @@ class API(object):
         use_cache = False
     )
 
-    """ account/update_delivery_device """
-    set_delivery_device = bind_api(
-        path = '/account/update_delivery_device.json',
-        method = 'POST',
-        allowed_param = ['device'],
-        payload_type = 'user',
-        require_auth = True
-    )
-
     """ account/update_profile_colors """
     update_profile_colors = bind_api(
         path = '/account/update_profile_colors.json',
