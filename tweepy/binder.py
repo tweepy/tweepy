@@ -134,6 +134,9 @@ def bind_api(**config):
                 else:
                     conn = httplib.HTTPConnection(self.host)
 
+                if not self.post_data:
+                    self.headers['Content-Length'] = 0
+
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
