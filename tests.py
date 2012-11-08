@@ -272,7 +272,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.search('tweepy')
 
     def testtrends(self):
-        self.api.trends_current()
         self.api.trends_daily()
         self.api.trends_weekly()
 

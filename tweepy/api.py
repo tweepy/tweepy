@@ -677,13 +677,6 @@ class API(object):
     )
     search.pagination_mode = 'page'
 
-    """ trends/current """
-    trends_current = bind_api(
-        path = '/trends/current.json',
-        payload_type = 'json',
-        allowed_param = ['exclude']
-    )
-
     """ trends/daily """
     trends_daily = bind_api(
         path = '/trends/daily.json',
