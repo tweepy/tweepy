@@ -1,6 +1,5 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
 script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests
 env:
@@ -9,10 +8,4 @@ env:
   CONSUMER_SECRET="SpKzSXf16fEQ3AZtiRy8PkGOOgTSmL3Cdmh7o0D8"
   ACCESS_KEY="82301637-v1wF1jWd7oa2ZFsIDUNlPKSpTdJ6f8dIMz1Zwmy58"
   ACCESS_SECRET="21oUZmKWYuv7PZTcj13UFpPlmh7HD6glR8yayrOgg8"
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.net#tweepy"
-    on_success: change
-    on_failure: always
 

@@ -14,6 +14,8 @@ oauth_consumer_secret = os.environ.get('CONSUMER_SECRET', '')
 oauth_token = os.environ.get('ACCESS_KEY', '')
 oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
 
+test_tweet_id = '266367358078169089'
+
 """Unit tests"""
 
 
@@ -52,14 +54,14 @@ class TweepyAPITests(unittest.TestCase):
         self.api.retweets_of_me()
 
     def testretweet(self):
-        s = self.api.retweet(123)
+        s = self.api.retweet(test_tweet_id)
         s.destroy()
 
     def testretweets(self):
-        self.api.retweets(123)
+        self.api.retweets(test_tweet_id)
 
     def testgetstatus(self):
-        self.api.get_status(id=123)
+        self.api.get_status(id=test_tweet_id)
 
     def testupdateanddestroystatus(self):
         # test update
