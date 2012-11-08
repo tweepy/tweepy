@@ -8,12 +8,11 @@ from tweepy import (API, BasicAuthHandler, OAuthHandler, Friendship, Cursor,
 
 """Configurations"""
 # Must supply twitter account credentials for tests
-username = ''
-password = ''
-oauth_consumer_key = ''
-oauth_consumer_secret = ''
-oauth_token=''
-oauth_token_secret=''
+username = os.environ.get('TWITTER_USERNAME', '')
+oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')
+oauth_consumer_secret = os.environ.get('CONSUMER_SECRET', '')
+oauth_token = os.environ.get('ACCESS_KEY', '')
+oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
 
 """Unit tests"""
 
@@ -115,11 +114,9 @@ class TweepyAPITests(unittest.TestCase):
     def testcreatedestroyfriendship(self):
         enemy = self.api.destroy_friendship('twitter')
         self.assertEqual(enemy.screen_name, 'twitter')
-        self.assertFalse(self.api.exists_friendship(username, 'twitter'))
 
         friend = self.api.create_friendship('twitter')
         self.assertEqual(friend.screen_name, 'twitter')
-        self.assertTrue(self.api.exists_friendship(username, 'twitter'))
 
     def testshowfriendship(self):
         source, target = self.api.show_friendship(target_screen_name='twtiter')
@@ -143,15 +140,14 @@ class TweepyAPITests(unittest.TestCase):
         me = self.api.verify_credentials(skip_status=True)
         self.assertFalse(hasattr(me, 'status'))
 
-        api = API(BasicAuthHandler('bad', 'password'))
-        self.assertEqual(api.verify_credentials(), False)
-
     def testratelimitstatus(self):
         self.api.rate_limit_status()
 
+    """ TODO(josh): Remove once this deprecated API is gone.
     def testsetdeliverydevice(self):
         self.api.set_delivery_device('im')
         self.api.set_delivery_device('none')
+    """
 
     def testupdateprofilecolors(self):
         original = self.api.me()
@@ -276,7 +272,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.search('tweepy')
 
     def testtrends(self):
-        self.api.trends()
         self.api.trends_current()
         self.api.trends_daily()
         self.api.trends_weekly()
@@ -339,14 +334,6 @@ class TweepyAuthTests(unittest.TestCase):
         # build api object test using oauth
         api = API(auth)
         s = api.update_status('test %i' % random.randint(0, 1000))
-        api.destroy_status(s.id)
-
-    def testbasicauth(self):
-        auth = BasicAuthHandler(username, password)
-
-        # test accessing twitter API
-        api = API(auth)
-        s = api.update_status('test %i' % random.randint(1, 1000))
         api.destroy_status(s.id)
 
 
