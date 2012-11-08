@@ -1,6 +1,6 @@
 Tweepy [![Build Status](https://travis-ci.org/tweepy/tweepy.png)](https://travis-ci.org/tweepy/tweepy)
 ======
-A Python library for accessing the Twitter API.
+*Twitter for Python!*
 
 Installation
 ------------

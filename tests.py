@@ -115,6 +115,10 @@ class TweepyAPITests(unittest.TestCase):
         enemy = self.api.destroy_friendship('twitter')
         self.assertEqual(enemy.screen_name, 'twitter')
 
+        # Wait 5 seconds to allow Twitter time
+        # to process the friendship destroy request.
+        sleep(5)
+
         friend = self.api.create_friendship('twitter')
         self.assertEqual(friend.screen_name, 'twitter')
 
