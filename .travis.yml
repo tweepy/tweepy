@@ -1,7 +1,7 @@
 language: python
 python:
   - "2.7"
-script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests
+script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests tests:TweepyErrorTests
 env:
   TWITTER_USERNAME="tweepytest"
   CONSUMER_KEY="cjgm143dG9adHpiB4BsoQ"
