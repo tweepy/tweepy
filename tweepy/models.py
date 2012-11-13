@@ -63,7 +63,10 @@ class Status(Model):
             elif k == 'retweeted_status':
                 setattr(status, k, Status.parse(api, v))
             elif k == 'place':
-                setattr(status, k, Place.parse(api, v))
+                if v is not None:
+                    setattr(status, k, Place.parse(api, v))
+                else:
+                    setattr(status, k, None)
             else:
                 setattr(status, k, v)
         return status
@@ -328,8 +331,9 @@ class BoundingBox(Model):
     @classmethod
     def parse(cls, api, json):
         result = cls(api)
-        for k, v in json.items():
-            setattr(result, k, v)
+        if json is not None:
+            for k, v in json.items():
+                setattr(result, k, v)
         return result
 
     def origin(self):
