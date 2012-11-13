@@ -338,19 +338,23 @@ class BoundingBox(Model):
 
     def origin(self):
         """
-        Return longitude, latitude of northwest corner of bounding box, as
-        tuple.  This assumes that bounding box is always a rectangle, which
+        Return longitude, latitude of southwest (bottom, left) corner of 
+        bounding box, as a tuple.  
+        
+        This assumes that bounding box is always a rectangle, which
         appears to be the case at present.
         """
         return tuple(self.coordinates[0][0])
 
     def corner(self):
         """
-        Return longitude, latitude of southeast corner of bounding box, as
-        tuple.  This assumes that bounding box is always a rectangle, which
+        Return longitude, latitude of northeast (top, right) corner of
+        bounding box, as a tuple.  
+        
+        This assumes that bounding box is always a rectangle, which
         appears to be the case at present.
         """
-        return tuple(self.coordinates[0][1])
+        return tuple(self.coordinates[0][2])
 
 
 class Place(Model):
