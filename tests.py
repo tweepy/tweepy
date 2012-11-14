@@ -18,6 +18,18 @@ test_tweet_id = '266367358078169089'
 
 """Unit tests"""
 
+class TweepyErrorTests(unittest.TestCase):
+
+    def testpickle(self):
+        """Verify exceptions can be pickled and unpickled."""
+        import pickle
+        from tweepy.error import TweepError
+
+        e = TweepError('no reason', {'status': 200})
+        e2 = pickle.loads(pickle.dumps(e))
+
+        self.assertEqual(e.reason, e2.reason)
+        self.assertEqual(e.response, e2.response)
 
 class TweepyAPITests(unittest.TestCase):
 
