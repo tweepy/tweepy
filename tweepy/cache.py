@@ -3,6 +3,7 @@
 # See LICENSE for details.
 
 import time
+import datetime
 import threading
 import os
 
@@ -381,3 +382,43 @@ class RedisCache(Cache):
         keys = self.client.smembers(self.keys_container)
         for key in keys:
             self.delete_entry(key)
+
+
+class MongodbCache(Cache):
+    """A simple pickle-based MongoDB cache sytem."""
+
+    def __init__(self, db, timeout=3600, collection='tweepy_cache'):
+        """Should receive a "database" cursor from pymongo."""
+        Cache.__init__(self, timeout)
+        self.timeout = timeout
+        self.col = db[collection]
+        self.col.create_index('created', expireAfterSeconds=timeout)
+
+    def store(self, key, value):
+        from bson.binary import Binary
+
+        now = datetime.datetime.utcnow()
+        blob = Binary(pickle.dumps(value))
+
+        self.col.insert({'created': now, '_id': key, 'value': blob})
+
+    def get(self, key, timeout=None):
+        if timeout:
+            raise NotImplementedError
+        obj = self.col.find_one({'_id': key})
+        if obj:
+            return pickle.loads(obj['value'])
+
+    def count(self):
+        return self.col.find({}).count()
+
+    def delete_entry(self, key):
+        return self.col.remove({'_id': key})
+
+    def cleanup(self):
+        """MongoDB will automatically clear expired keys."""
+        pass
+
+    def flush(self):
+        self.col.drop()
+        self.col.create_index('created', expireAfterSeconds=self.timeout)
