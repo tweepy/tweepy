@@ -702,7 +702,7 @@ class API(object):
     """ geo/reverse_geocode """
     reverse_geocode = bind_api(
         path = '/geo/reverse_geocode.json',
-        payload_type = 'json',
+        payload_type = 'place', payload_list = True,
         allowed_param = ['lat', 'long', 'accuracy', 'granularity', 'max_results']
     )
 
@@ -710,22 +710,29 @@ class API(object):
     # listed as deprecated on twitter's API documents
     nearby_places = bind_api(
         path = '/geo/nearby_places.json',
-        payload_type = 'json',
+        payload_type = 'place', payload_list = True,
         allowed_param = ['lat', 'long', 'ip', 'accuracy', 'granularity', 'max_results']
     )
 
     """ geo/id """
     geo_id = bind_api(
         path = '/geo/id/{id}.json',
-        payload_type = 'json',
+        payload_type = 'place',
         allowed_param = ['id']
     )
 
     """ geo/search """
     geo_search = bind_api(
         path = '/geo/search.json',
-        payload_type = 'json',
+        payload_type = 'place', payload_list = True,
         allowed_param = ['lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within']
+    )
+
+    """ geo/similar_places """
+    geo_similar_places = bind_api(
+        path = '/geo/similar_places.json',
+        payload_type = 'place', payload_list = True,
+        allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
 
     """ Internal use only """
