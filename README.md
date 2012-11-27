@@ -22,6 +22,7 @@ Documentation
 -------------
   - [Website (Work in-progress)](http://tweepy.github.com/)
   - [Twitter Developers](http://dev.twitter.com/)
+  - [Python Package Documentation](http://packages.python.org/tweepy/html/index.html)
 
 Community
 ---------
