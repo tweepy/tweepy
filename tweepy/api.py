@@ -198,6 +198,30 @@ class API(object):
         allowed_param = ['q', 'per_page', 'page']
     )
 
+    """ users/suggestions/:slug """
+    suggested_users = bind_api(
+        path = '/users/suggestions/{slug}.json',
+        payload_type = 'user', payload_list = True,
+        require_auth = True,
+        allowed_param = ['slug', 'lang']
+    )
+
+    """ users/suggestions """
+    suggested_categories = bind_api(
+        path = '/users/suggestions.json',
+        payload_type = 'category', payload_list = True,
+        allowed_param = ['lang'],
+        require_auth = True
+    )
+
+    """ users/suggestions/:slug/members """
+    suggested_users_tweets = bind_api(
+        path = '/users/suggestions/{slug}/members.json',
+        payload_type = 'status', payload_list = True,
+        allowed_param = ['slug'],
+        require_auth = True
+    )
+
     """ statuses/friends """
     friends = bind_api(
         path = '/statuses/friends.json',
