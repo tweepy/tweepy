@@ -95,6 +95,19 @@ class TweepyAPITests(unittest.TestCase):
     def testsearchusers(self):
         self.api.search_users('twitter')
 
+    def testsuggestedcategories(self):
+        self.api.suggested_categories()
+
+    def testsuggestedusers(self):
+        categories = self.api.suggested_categories()
+        if len(categories) != 0:
+            self.api.suggested_users(categories[0].slug)
+
+    def testsuggesteduserstweets(self):
+        categories = self.api.suggested_categories()
+        if len(categories) != 0:
+            self.api.suggested_users_tweets(categories[0].slug)
+
     def testme(self):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)

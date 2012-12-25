@@ -183,6 +183,16 @@ class Friendship(Model):
         return source, target
 
 
+class Category(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        category = cls(api)
+        for k, v in json.items():
+            setattr(category, k, v)
+        return category
+
+
 class SavedSearch(Model):
 
     @classmethod
@@ -338,9 +348,9 @@ class BoundingBox(Model):
 
     def origin(self):
         """
-        Return longitude, latitude of southwest (bottom, left) corner of 
-        bounding box, as a tuple.  
-        
+        Return longitude, latitude of southwest (bottom, left) corner of
+        bounding box, as a tuple.
+
         This assumes that bounding box is always a rectangle, which
         appears to be the case at present.
         """
@@ -349,8 +359,8 @@ class BoundingBox(Model):
     def corner(self):
         """
         Return longitude, latitude of northeast (top, right) corner of
-        bounding box, as a tuple.  
-        
+        bounding box, as a tuple.
+
         This assumes that bounding box is always a rectangle, which
         appears to be the case at present.
         """
@@ -403,6 +413,7 @@ class ModelFactory(object):
     friendship = Friendship
     saved_search = SavedSearch
     search_result = SearchResult
+    category = Category
     list = List
     relation = Relation
     relationship = Relationship
