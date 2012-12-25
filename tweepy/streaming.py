@@ -85,7 +85,7 @@ class Stream(object):
         self.parameters = None
         self.body = None
 
-    def _run(self):
+    def _run(self, count=None):
         # Authenticate
         url = "%s://%s%s" % (self.scheme, self.host, self.url)
 
@@ -93,6 +93,7 @@ class Stream(object):
         error_counter = 0
         conn = None
         exception = None
+        counter = 0
         while self.running:
             if self.retry_count is not None and error_counter > self.retry_count:
                 # quit if error count greater than retry count
@@ -114,7 +115,10 @@ class Stream(object):
                     sleep(self.retry_time)
                 else:
                     error_counter = 0
-                    self._read_loop(resp)
+                    counter = self._read_loop(resp, count=count, counter=counter)
+                    if count and counter == count:
+                        self.on_closed(resp)
+                        break
             except timeout:
                 if self.listener.on_timeout() == False:
                     break
@@ -138,8 +142,7 @@ class Stream(object):
         if self.listener.on_data(data) is False:
             self.running = False
 
-    def _read_loop(self, resp):
-
+    def _read_loop(self, resp, count=None, counter=None):
         while self.running and not resp.isclosed():
 
             # Note: keep-alive newlines might be inserted before each length value.
@@ -160,15 +163,21 @@ class Stream(object):
                 next_status_obj = resp.read( int(delimited_string) )
                 self._data(next_status_obj)
 
+            if count:
+                counter += 1
+                if counter == count:
+                    break
         if resp.isclosed():
             self.on_closed(resp)
 
-    def _start(self, async):
+        return counter
+
+    def _start(self, async, count=None):
         self.running = True
         if async:
             Thread(target=self._run).start()
         else:
-            self._run()
+            self._run(count=count)
 
     def on_closed(self, resp):
         """ Called when the response has been closed by Twitter """
@@ -203,9 +212,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%i/statuses/sample.json?delimited=length' % STREAM_VERSION
-        if count:
-            self.url += '&count=%s' % count
-        self._start(async)
+        self._start(async, count=count)
 
     def filter(self, follow=None, track=None, async=False, locations=None, 
         count = None, stall_warnings=False):
