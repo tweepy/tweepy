@@ -29,24 +29,49 @@ class StreamListener(object):
         the stream data. Return False to stop stream and close connection.
         """
 
-        if 'in_reply_to_status_id' in data:
+        if '{"delete"' in data:
+            try:
+                delete = json.loads(data)['delete']['status']
+                if self.on_delete(delete['id'], delete['user_id']) is False:
+                    return False
+            except:
+                delete = json.loads(data)['delete']['direct_message']
+                if self.on_direct_message_delete(delete['id'], delete['user_id']) is False:
+                    return False
+        elif '{"direct_message"' in data:
+            message = DirectMessage.parse(self.api, json.loads(data)['direct_message'])
+            if self.on_direct_message(message) is False:
+                return False
+        elif '{"target"' in data:
+            event = json.loads(data)
+            if self.on_event(event) is False:
+                return False
+        elif '{"limit"' in data:
+            if self.on_limit(json.loads(data)['limit']['track']) is False:
+                return False
+        elif '"in_reply_to_user_id_str"' in data:
             status = Status.parse(self.api, json.loads(data))
             if self.on_status(status) is False:
-                return False
-        elif 'delete' in data:
-            delete = json.loads(data)['delete']['status']
-            if self.on_delete(delete['id'], delete['user_id']) is False:
-                return False
-        elif 'limit' in data:
-            if self.on_limit(json.loads(data)['limit']['track']) is False:
                 return False
 
     def on_status(self, status):
         """Called when a new status arrives"""
         return
+    
+    def on_direct_message(self, message):
+        """Called when a new direct message arrives"""
+        return
+    
+    def on_event(self, event):
+       """Called when a new event arrives"""
+       return
 
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
+        return
+
+    def on_direct_message_delete(self, message_id, user_id):
+        """Called when a delete notice arrives for a direct message"""
         return
 
     def on_limit(self, track):
