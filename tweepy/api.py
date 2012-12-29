@@ -149,7 +149,7 @@ class API(object):
             path = '/statuses/update_with_media.json',
             method = 'POST',
             payload_type = 'status',
-            allowed_param = ['status', 'possibly_sentsitive', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
+            allowed_param = ['status', 'possibly_sensitive', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
             require_auth = True,
             upload_api = True,
             secure = True
