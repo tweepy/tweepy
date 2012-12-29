@@ -16,14 +16,18 @@ class API(object):
 
     def __init__(self, auth_handler=None,
             host='api.twitter.com', search_host='search.twitter.com',
-             cache=None, secure=False, api_root='/1', search_root='',
+            upload_host='upload.twitter.com',
+            cache=None, secure=False,
+            api_root='/1', search_root='', upload_root='/1',
             retry_count=0, retry_delay=0, retry_errors=None,
             parser=None):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
+        self.upload_host = upload_host
         self.api_root = api_root
         self.search_root = search_root
+        self.upload_root = upload_root
         self.cache = cache
         self.secure = secure
         self.retry_count = retry_count
@@ -142,6 +146,23 @@ class API(object):
         allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
         require_auth = True
     )
+
+    """ status/update_with_media """
+    def update_status_with_media(self, filename, *args, **kargs):
+        headers, post_data = API._pack_image(filename, 3072, name='media[]')
+        kargs.update({
+            'headers': headers,
+            'post_data': post_data,
+        })
+        return bind_api(
+            path = '/statuses/update_with_media.json',
+            method = 'POST',
+            payload_type = 'status',
+            allowed_param = ['status', 'possibly_sensitive', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
+            require_auth = True,
+            upload_api = True,
+            secure = True
+        )(self, *args, **kargs)
 
     """ statuses/destroy """
     destroy_status = bind_api(
@@ -761,7 +782,7 @@ class API(object):
 
     """ Internal use only """
     @staticmethod
-    def _pack_image(filename, max_size):
+    def _pack_image(filename, max_size, name='image'):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
         try:
@@ -783,7 +804,7 @@ class API(object):
         BOUNDARY = 'Tw3ePy'
         body = []
         body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="image"; filename="%s"' % filename)
+        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (name, filename))
         body.append('Content-Type: %s' % file_type)
         body.append('')
         body.append(fp.read())
@@ -799,4 +820,3 @@ class API(object):
         }
 
         return headers, body
-
