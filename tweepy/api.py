@@ -18,7 +18,7 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=False, api_root='/1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None):
+            parser=None, proxy=None):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -35,7 +35,7 @@ class API(object):
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'entities'],
         require_auth = True
     )
 
@@ -43,7 +43,7 @@ class API(object):
     friends_timeline = bind_api(
         path = '/statuses/friends_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'entities'],
         require_auth = True
     )
 
