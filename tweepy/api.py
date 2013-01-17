@@ -759,6 +759,13 @@ class API(object):
         allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
 
+    """help/configuration"""
+    configuration = bind_api(
+        path = '/help/configuration.json',
+        payload_type = 'json',
+        require_auth = True,
+    )
+
     """ Internal use only """
     @staticmethod
     def _pack_image(filename, max_size):
