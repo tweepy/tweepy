@@ -484,21 +484,9 @@ class API(object):
         require_auth = True
     )
 
-    """ blocks/exists """
-    def exists_block(self, *args, **kargs):
-        try:
-            bind_api(
-                path = '/blocks/exists.json',
-                allowed_param = ['id', 'user_id', 'screen_name'],
-                require_auth = True
-            )(self, *args, **kargs)
-        except TweepError:
-            return False
-        return True
-
     """ blocks/blocking """
     blocks = bind_api(
-        path = '/blocks/blocking.json',
+        path = '/blocks/list.json',
         payload_type = 'user', payload_list = True,
         allowed_param = ['page'],
         require_auth = True
@@ -506,7 +494,7 @@ class API(object):
 
     """ blocks/blocking/ids """
     blocks_ids = bind_api(
-        path = '/blocks/blocking/ids.json',
+        path = '/blocks/ids.json',
         payload_type = 'json',
         require_auth = True
     )

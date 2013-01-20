@@ -238,9 +238,7 @@ class TweepyAPITests(unittest.TestCase):
 
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
-        self.assertEqual(self.api.exists_block('twitter'), True)
         self.api.destroy_block('twitter')
-        self.assertEqual(self.api.exists_block('twitter'), False)
         self.api.create_friendship('twitter') # restore
 
     def testblocks(self):
