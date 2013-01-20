@@ -432,7 +432,7 @@ class API(object):
 
     """ favorites/create """
     create_favorite = bind_api(
-        path = '/favorites/create/{id}.json',
+        path = '/favorites/create.json',
         method = 'POST',
         payload_type = 'status',
         allowed_param = ['id'],
@@ -441,8 +441,8 @@ class API(object):
 
     """ favorites/destroy """
     destroy_favorite = bind_api(
-        path = '/favorites/destroy/{id}.json',
-        method = 'DELETE',
+        path = '/favorites/destroy.json',
+        method = 'POST',
         payload_type = 'status',
         allowed_param = ['id'],
         require_auth = True
