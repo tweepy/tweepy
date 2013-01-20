@@ -39,14 +39,6 @@ class API(object):
         require_auth = True
     )
 
-    """ statuses/friends_timeline """
-    friends_timeline = bind_api(
-        path = '/statuses/friends_timeline.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
-        require_auth = True
-    )
-
     """ statuses/user_timeline """
     user_timeline = bind_api(
         path = '/statuses/user_timeline.json',

@@ -43,9 +43,6 @@ class TweepyAPITests(unittest.TestCase):
     def testhometimeline(self):
         self.api.home_timeline()
 
-    def testfriendstimeline(self):
-        self.api.friends_timeline()
-
     def testusertimeline(self):
         self.api.user_timeline()
         self.api.user_timeline('twitter')
