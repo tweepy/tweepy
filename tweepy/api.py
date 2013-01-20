@@ -216,14 +216,14 @@ class API(object):
 
     """ statuses/friends """
     friends = bind_api(
-        path = '/statuses/friends.json',
+        path = '/friends/list.json',
         payload_type = 'user', payload_list = True,
         allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
 
     """ statuses/followers """
     followers = bind_api(
-        path = '/statuses/followers.json',
+        path = '/followers/list.json',
         payload_type = 'user', payload_list = True,
         allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
@@ -417,9 +417,9 @@ class API(object):
 
     """ favorites """
     favorites = bind_api(
-        path = '/favorites.json',
+        path = '/favorites/list.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'max_id', 'page']
+        allowed_param = ['screen_name', 'user_id', 'max_id', 'count', 'since_id', 'max_id']
     )
 
     """ favorites/create """
