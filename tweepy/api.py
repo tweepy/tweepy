@@ -448,24 +448,6 @@ class API(object):
         require_auth = True
     )
 
-    """ notifications/follow """
-    enable_notifications = bind_api(
-        path = '/notifications/follow.json',
-        method = 'POST',
-        payload_type = 'user',
-        allowed_param = ['id', 'user_id', 'screen_name'],
-        require_auth = True
-    )
-
-    """ notifications/leave """
-    disable_notifications = bind_api(
-        path = '/notifications/leave.json',
-        method = 'POST',
-        payload_type = 'user',
-        allowed_param = ['id', 'user_id', 'screen_name'],
-        require_auth = True
-    )
-
     """ blocks/create """
     create_block = bind_api(
         path = '/blocks/create.json',

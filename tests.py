@@ -232,10 +232,6 @@ class TweepyAPITests(unittest.TestCase):
         self.api.create_favorite(4901062372)
         self.api.destroy_favorite(4901062372)
 
-    def testenabledisablenotifications(self):
-        self.api.enable_notifications('twitter')
-        self.api.disable_notifications('twitter')
-
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
