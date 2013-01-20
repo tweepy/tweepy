@@ -244,10 +244,14 @@ class TweepyAPITests(unittest.TestCase):
         self.api.blocks_ids()
 
     def testcreateupdatedestroylist(self):
-        self.api.create_list('tweeps')
-        # XXX: right now twitter throws a 500 here, issue is being looked into by twitter.
-        #self.api.update_list('tweeps', mode='private')
-        self.api.destroy_list('tweeps')
+        params = {
+            'owner_screen_name': username,
+            'slug': 'tweeps'
+        }
+        self.api.create_list(name=params['slug'], **params)
+        l = self.api.update_list(description='updated!', **params)
+        self.assertEqual(l.description, 'updated!')
+        self.api.destroy_list(**params)
 
     def testlists(self):
         self.api.lists()

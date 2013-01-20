@@ -533,31 +533,29 @@ class API(object):
             return False
         return True
 
-    def create_list(self, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists.json' % self.auth.get_username(),
-            method = 'POST',
-            payload_type = 'list',
-            allowed_param = ['name', 'mode', 'description'],
-            require_auth = True
-        )(self, *args, **kargs)
+    create_list = bind_api(
+        path = '/lists/create.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['name', 'mode', 'description'],
+        require_auth = True
+    )
 
-    def destroy_list(self, slug):
-        return bind_api(
-            path = '/%s/lists/%s.json' % (self.auth.get_username(), slug),
-            method = 'DELETE',
-            payload_type = 'list',
-            require_auth = True
-        )(self)
+    destroy_list = bind_api(
+        path = '/lists/destroy.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['owner_screen_name', 'owner_id', 'list_id', 'slug'],
+        require_auth = True
+    )
 
-    def update_list(self, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/lists/%s.json' % (self.auth.get_username(), slug),
-            method = 'POST',
-            payload_type = 'list',
-            allowed_param = ['name', 'mode', 'description'],
-            require_auth = True
-        )(self, *args, **kargs)
+    update_list = bind_api(
+        path = '/lists/update.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['list_id', 'slug', 'name', 'mode', 'description', 'owner_screen_name', 'owner_id'],
+        require_auth = True
+    )
 
     lists = bind_api(
         path = '/{user}/lists.json',
