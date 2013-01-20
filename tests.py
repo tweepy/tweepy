@@ -320,8 +320,6 @@ class TweepyAPITests(unittest.TestCase):
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='c3f37afa9efcf94b').full_name, 'Austin, TX')
         self.assertTrue(place_name_in_list('Austin, TX',
-            self.api.nearby_places(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
-        self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
 class TweepyCursorTests(unittest.TestCase):

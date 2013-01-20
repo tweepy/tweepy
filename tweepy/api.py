@@ -688,14 +688,6 @@ class API(object):
         allowed_param = ['lat', 'long', 'accuracy', 'granularity', 'max_results']
     )
 
-    """ geo/nearby_places """
-    # listed as deprecated on twitter's API documents
-    nearby_places = bind_api(
-        path = '/geo/nearby_places.json',
-        payload_type = 'place', payload_list = True,
-        allowed_param = ['lat', 'long', 'ip', 'accuracy', 'granularity', 'max_results']
-    )
-
     """ geo/id """
     geo_id = bind_api(
         path = '/geo/id/{id}.json',
