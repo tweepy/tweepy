@@ -622,23 +622,21 @@ class API(object):
         allowed_param = ['owner', 'slug']
     )
 
-    def add_list_member(self, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
-            method = 'POST',
-            payload_type = 'list',
-            allowed_param = ['id'],
-            require_auth = True
-        )(self, *args, **kargs)
+    add_list_member = bind_api(
+        path = '/lists/members/create.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+        require_auth = True
+    )
 
-    def remove_list_member(self, slug, *args, **kargs):
-        return bind_api(
-            path = '/%s/%s/members.json' % (self.auth.get_username(), slug),
-            method = 'DELETE',
-            payload_type = 'list',
-            allowed_param = ['id'],
-            require_auth = True
-        )(self, *args, **kargs)
+    remove_list_member = bind_api(
+        path = '/lists/members/destroy.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+        require_auth = True
+    )
 
     list_members = bind_api(
         path = '/{owner}/{slug}/members.json',
