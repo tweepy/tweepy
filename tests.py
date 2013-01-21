@@ -3,6 +3,8 @@ import random
 from time import sleep
 import os
 
+from nose import SkipTest
+
 from tweepy import (API, BasicAuthHandler, OAuthHandler, Friendship, Cursor,
                     MemoryCache, FileCache)
 
@@ -47,24 +49,15 @@ class TweepyAPITests(unittest.TestCase):
         self.api.user_timeline()
         self.api.user_timeline('twitter')
 
-    def testmentions(self):
-        self.api.mentions()
-
-    def testretweetedbyme(self):
-        self.api.retweeted_by_me()
-
-    def testretweetedbyuser(self):
-        self.api.retweeted_by_user('twitter')
-
-    def testretweetedtome(self):
-        self.api.retweeted_to_me()
+    def testmentionstimeline(self):
+        self.api.mentions_timeline()
 
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
     def testretweet(self):
-        s = self.api.retweet(test_tweet_id)
-        s.destroy()
+        # TODO(josh): Need a way to get random tweets to retweet.
+        raise SkipTest()
 
     def testretweets(self):
         self.api.retweets(test_tweet_id)
@@ -108,12 +101,6 @@ class TweepyAPITests(unittest.TestCase):
     def testme(self):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)
-
-    def testfriends(self):
-        self.api.friends()
-
-    def testfollowers(self):
-        self.api.followers()
 
     def testdirectmessages(self):
         self.api.direct_messages()
@@ -245,13 +232,13 @@ class TweepyAPITests(unittest.TestCase):
             'owner_screen_name': username,
             'slug': 'tweeps'
         }
-        self.api.create_list(name=params['slug'], **params)
-        l = self.api.update_list(description='updated!', **params)
+        l = self.api.create_list(name=params['slug'], **params)
+        l = self.api.update_list(list_id=l.id, description='updated!')
         self.assertEqual(l.description, 'updated!')
-        self.api.destroy_list(**params)
+        self.api.destroy_list(list_id=l.id)
 
-    def testlists(self):
-        self.api.lists()
+    def testlistsall(self):
+        self.api.lists_all()
 
     def testlistsmemberships(self):
         self.api.lists_memberships()
@@ -263,7 +250,7 @@ class TweepyAPITests(unittest.TestCase):
         self.api.list_timeline('applepie', 'stars')
 
     def testgetlist(self):
-        self.api.get_list('applepie', 'stars')
+        self.api.get_list(owner_screen_name='applepie', slug='stars')
 
     def testaddremovelistmember(self):
         params = {
@@ -281,20 +268,22 @@ class TweepyAPITests(unittest.TestCase):
     def testlistmembers(self):
         self.api.list_members('applepie', 'stars')
 
-    def testislistmember(self):
-        uid = self.api.get_user('applepie').id
-        self.api.is_list_member('applepie', 'stars', uid)
+    def testshowlistmember(self):
+        self.assertTrue(self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
 
     def testsubscribeunsubscribelist(self):
-        self.api.subscribe_list('applepie', 'stars')
-        self.api.unsubscribe_list('applepie', 'stars')
+        params = {
+            'owner_screen_name': 'applepie',
+            'slug': 'stars'
+        }
+        self.api.subscribe_list(**params)
+        self.api.unsubscribe_list(**params)
 
     def testlistsubscribers(self):
         self.api.list_subscribers('applepie', 'stars')
 
-    def testissubscribedlist(self):
-        uid = self.api.get_user('applepie').id
-        self.api.is_subscribed_list('applepie', 'stars', uid)
+    def testshowlistsubscriber(self):
+        self.assertTrue(self.api.show_list_subscriber('applepie', 'stars', username))
 
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
@@ -304,10 +293,6 @@ class TweepyAPITests(unittest.TestCase):
 
     def testsearch(self):
         self.api.search('tweepy')
-
-    def testtrends(self):
-        self.api.trends_daily()
-        self.api.trends_weekly()
 
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
