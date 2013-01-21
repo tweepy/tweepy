@@ -155,10 +155,6 @@ def bind_api(**config):
                 else:
                     if resp.status == 200: break
 
-                # Sleep before retrying request again
-                time.sleep(self.retry_delay)
-                retries_performed += 1
-
                 # If an error was returned, throw an exception
                 self.api.last_response = resp
                 if resp.status != 200:
@@ -169,7 +165,17 @@ def bind_api(**config):
                     raise TweepError(error_msg, resp)
 
                 # Parse the response payload
-                result = self.api.parser.parse(self, resp.read())
+                try:
+                    result = self.api.parser.parse(self, resp.read())
+                    # If parse(resp.read()) worked, exit the while loop.
+                    break
+                except:
+                    # If parse(resp.read()) didn't work, retry.
+                    pass
+
+                # Sleep before retrying request again
+                time.sleep(self.retry_delay)
+                retries_performed += 1
 
             conn.close()
 
