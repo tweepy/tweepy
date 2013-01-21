@@ -149,21 +149,6 @@ def bind_api(**config):
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
-                # Exit request loop if non-retry error code
-                if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
-                else:
-                    if resp.status == 200: break
-
-                # If an error was returned, throw an exception
-                self.api.last_response = resp
-                if resp.status != 200:
-                    try:
-                        error_msg = self.api.parser.parse_error(resp.read())
-                    except Exception:
-                        error_msg = "Twitter error response: status code = %s" % resp.status
-                    raise TweepError(error_msg, resp)
-
                 # Parse the response payload
                 try:
                     result = self.api.parser.parse(self, resp.read())
@@ -173,9 +158,24 @@ def bind_api(**config):
                     # If parse(resp.read()) didn't work, retry.
                     result = None
 
+                # Exit request loop if non-retry error code
+                if self.retry_errors:
+                    if resp.status not in self.retry_errors: break
+                else:
+                    if resp.status == 200: break
+
                 # Sleep before retrying request again
                 time.sleep(self.retry_delay)
                 retries_performed += 1
+
+            # If an error was returned, throw an exception
+            self.api.last_response = resp
+            if resp.status != 200:
+                try:
+                    error_msg = self.api.parser.parse_error(resp.read())
+                except Exception:
+                    error_msg = "Twitter error response: status code = %s" % resp.status
+                raise TweepError(error_msg, resp)
 
             conn.close()
 
