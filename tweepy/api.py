@@ -55,14 +55,6 @@ class API(object):
         require_auth = True
     )
 
-    """/statuses/retweeted_by_user.format"""
-    retweeted_by_user = bind_api(
-        path = '/statuses/retweeted_by_user.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['screen_name', 'id', 'count', 'since_id',
-                            'max_id', 'page', 'include_entities']
-    )
-
     """/statuses/:id/retweeted_by.format"""
     retweeted_by = bind_api(
         path = '/statuses/{id}/retweeted_by.json',
@@ -77,7 +69,7 @@ class API(object):
         payload_type = 'relation', payload_list = True,
         allowed_param = ['id'],
         require_auth = False
-	)
+    )
 
     """/statuses/:id/retweeted_by/ids.format"""
     retweeted_by_ids = bind_api(
@@ -85,30 +77,6 @@ class API(object):
         payload_type = 'ids',
         allowed_param = ['id', 'count', 'page'],
         require_auth = True
-    )
-
-    """ statuses/retweeted_by_me """
-    retweeted_by_me = bind_api(
-        path = '/statuses/retweeted_by_me.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
-        require_auth = True
-    )
-
-    """ statuses/retweeted_to_me """
-    retweeted_to_me = bind_api(
-        path = '/statuses/retweeted_to_me.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
-        require_auth = True
-    )
-
-    """ statuses/retweeted_by_user """
-    retweeted_by_user = bind_api(
-        path = '/statuses/retweeted_by_user.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['screen_name', 'id', 'since_id', 'max_id', 'count', 'page', 'trim_user', 'include_entities'],
-        require_auth = False
     )
 
     """ statuses/retweets_of_me """
@@ -212,20 +180,6 @@ class API(object):
         payload_type = 'status', payload_list = True,
         allowed_param = ['slug'],
         require_auth = True
-    )
-
-    """ statuses/friends """
-    friends = bind_api(
-        path = '/friends/list.json',
-        payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
-    )
-
-    """ statuses/followers """
-    followers = bind_api(
-        path = '/followers/list.json',
-        payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
 
     """ direct_messages """
