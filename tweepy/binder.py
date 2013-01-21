@@ -171,7 +171,7 @@ def bind_api(**config):
                     break
                 except:
                     # If parse(resp.read()) didn't work, retry.
-                    pass
+                    result = None
 
                 # Sleep before retrying request again
                 time.sleep(self.retry_delay)
