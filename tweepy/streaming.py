@@ -4,7 +4,10 @@
 
 import httplib
 from socket import timeout
-from ssl import SSLError
+try:
+    from ssl import SSLError
+except ImportError:
+    class SSLError: pass
 from threading import Thread
 from time import sleep
 
@@ -116,7 +119,7 @@ class Stream(object):
                 else:
                     error_counter = 0
                     self._read_loop(resp)
-            except (timeout, SSLError) as e:
+            except (timeout, SSLError), e:
                 if isinstance(e, SSLError) and 'operation timed out' not in e.message:
                     raise # re-raise if not actually a timeout 
                 if self.listener.on_timeout() is False:
