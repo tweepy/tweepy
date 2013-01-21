@@ -48,10 +48,10 @@ class API(object):
     )
 
     """ statuses/mentions """
-    mentions = bind_api(
-        path = '/statuses/mentions.json',
+    mentions_timeline = bind_api(
+        path = '/statuses/mentions_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count'],
         require_auth = True
     )
 
