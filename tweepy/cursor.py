@@ -52,6 +52,9 @@ class CursorIterator(BaseIterator):
         self.next_cursor = -1
         self.prev_cursor = 0
         self.count = 0
+        # If a cursor is provided, start from that point
+        if kargs.get('cursor'):
+            self.next_cursor = self.prev_cursor = kargs.pop('cursor')
 
     def next(self):
         if self.next_cursor == 0 or (self.limit and self.count == self.limit):
@@ -68,9 +71,10 @@ class CursorIterator(BaseIterator):
     def prev(self):
         if self.prev_cursor == 0:
             raise TweepError('Can not page back more, at first page')
-        data, self.next_cursor, self.prev_cursor = self.method(
+        data, cursors = self.method(
                 cursor=self.prev_cursor, *self.args, **self.kargs
         )
+        self.prev_cursor, self.next_cursor = cursors
         self.count -= 1
         return data
 

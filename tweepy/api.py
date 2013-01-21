@@ -17,7 +17,7 @@ class API(object):
     def __init__(self, auth_handler=None,
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=False, api_root='/1', search_root='',
-            retry_count=0, retry_delay=0, retry_errors=None,
+            retry_count=0, retry_delay=0, timeout=30, retry_errors=None,
             parser=None):
         self.auth = auth_handler
         self.host = host
@@ -28,6 +28,7 @@ class API(object):
         self.secure = secure
         self.retry_count = retry_count
         self.retry_delay = retry_delay
+        self.timeout = timeout
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
 
