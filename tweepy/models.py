@@ -183,6 +183,20 @@ class Friendship(Model):
         return source, target
 
 
+class StatusActivity(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        summary = json
+
+        # parse source
+        activity = cls(api)
+        for k, v in summary.items():
+            setattr(activity, k, v)
+
+        return activity
+
+
 class Category(Model):
 
     @classmethod
@@ -408,6 +422,7 @@ class ModelFactory(object):
     """
 
     status = Status
+    statusactivity = StatusActivity
     user = User
     direct_message = DirectMessage
     friendship = Friendship

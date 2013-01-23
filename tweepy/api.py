@@ -134,6 +134,14 @@ class API(object):
         allowed_param = ['id']
     )
 
+    """ statuses/activity/summary """
+    get_status_activity = bind_api(
+        api_root = '/i',
+        path = '/statuses/{id}/activity/summary.json',
+        payload_type = 'statusactivity',
+        allowed_param = ['id']
+    )
+
     """ statuses/update """
     update_status = bind_api(
         path = '/statuses/update.json',
