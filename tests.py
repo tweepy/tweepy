@@ -5,7 +5,7 @@ import os
 
 from nose import SkipTest
 
-from tweepy import (API, BasicAuthHandler, OAuthHandler, Friendship, Cursor,
+from tweepy import (API, OAuthHandler, Friendship, Cursor,
                     MemoryCache, FileCache)
 
 """Configurations"""
@@ -177,11 +177,11 @@ class TweepyAPITests(unittest.TestCase):
             original.profile_sidebar_border_color
         )
 
-        self.assertEqual(updated.profile_background_color, '000')
-        self.assertEqual(updated.profile_text_color, '000')
-        self.assertEqual(updated.profile_link_color, '000')
-        self.assertEqual(updated.profile_sidebar_fill_color, '000')
-        self.assertEqual(updated.profile_sidebar_border_color, '000')
+        self.assertEqual(updated.profile_background_color, '000000')
+        self.assertEqual(updated.profile_text_color, '000000')
+        self.assertEqual(updated.profile_link_color, '000000')
+        self.assertEqual(updated.profile_sidebar_fill_color, '000000')
+        self.assertEqual(updated.profile_sidebar_border_color, '000000')
 
     """
     def testupateprofileimage(self):
@@ -331,17 +331,17 @@ class TweepyCursorTests(unittest.TestCase):
         self.assert_(len(pages) == 5)
 
     def testcursorcursoritems(self):
-        items = list(Cursor(self.api.friends).items())
+        items = list(Cursor(self.api.friends_ids).items())
         self.assert_(len(items) > 0)
 
-        items = list(Cursor(self.api.followers, 'twitter').items(30))
+        items = list(Cursor(self.api.followers_ids, 'twitter').items(30))
         self.assert_(len(items) == 30)
 
     def testcursorcursorpages(self):
-        pages = list(Cursor(self.api.friends).pages())
+        pages = list(Cursor(self.api.friends_ids).pages())
         self.assert_(len(pages) > 0)
 
-        pages = list(Cursor(self.api.followers, 'twitter').pages(5))
+        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
         self.assert_(len(pages) == 5)
 
 class TweepyAuthTests(unittest.TestCase):
