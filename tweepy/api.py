@@ -105,8 +105,8 @@ class API(object):
 
     """ statuses/destroy """
     destroy_status = bind_api(
-        path = '/statuses/destroy.json',
-        method = 'DELETE',
+        path = '/statuses/destroy/{id}.json',
+        method = 'POST',
         payload_type = 'status',
         allowed_param = ['id'],
         require_auth = True
