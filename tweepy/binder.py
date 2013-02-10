@@ -4,6 +4,7 @@
 
 import httplib
 import urllib
+import urllib2
 import time
 import re
 
@@ -129,10 +130,11 @@ def bind_api(**config):
             while retries_performed < self.retry_count + 1:
                 # Open connection
                 # FIXME: add timeout
-                if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
-                else:
-                    conn = httplib.HTTPConnection(self.host)
+                if not self.api.proxy:
+                    if self.api.secure:
+                        conn = httplib.HTTPSConnection(self.host)
+                    else:
+                        conn = httplib.HTTPConnection(self.host)
 
                 # Apply authentication
                 if self.api.auth:
@@ -143,8 +145,18 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
-                    resp = conn.getresponse()
+                    if not self.api.proxy:
+                        conn.request(self.method, url, headers=self.headers, body=self.post_data)
+                        resp = conn.getresponse()
+                    else:
+                        opener = urllib2.build_opener(
+                            urllib2.HTTPHandler(),
+                            urllib2.HTTPSHandler(),
+                            urllib2.ProxyHandler({'https': 'http://'+self.api.proxy, 'http': 'http://'+self.api.proxy}))
+                        murl = self.scheme + self.host + url
+                        resp = opener.open(urllib2.Request(murl, self.post_data, headers=self.headers));
+                        resp.status = resp.getcode()
+
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
@@ -170,7 +182,8 @@ def bind_api(**config):
             # Parse the response payload
             result = self.api.parser.parse(self, resp.read())
 
-            conn.close()
+            if not self.api.proxy:
+                conn.close()
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
