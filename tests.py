@@ -3,7 +3,9 @@ import random
 from time import sleep
 import os
 
-from tweepy import (API, BasicAuthHandler, OAuthHandler, Friendship, Cursor,
+from nose import SkipTest
+
+from tweepy import (API, OAuthHandler, Friendship, Cursor,
                     MemoryCache, FileCache)
 
 """Configurations"""
@@ -43,31 +45,19 @@ class TweepyAPITests(unittest.TestCase):
     def testhometimeline(self):
         self.api.home_timeline()
 
-    def testfriendstimeline(self):
-        self.api.friends_timeline()
-
     def testusertimeline(self):
         self.api.user_timeline()
         self.api.user_timeline('twitter')
 
-    def testmentions(self):
-        self.api.mentions()
-
-    def testretweetedbyme(self):
-        self.api.retweeted_by_me()
-
-    def testretweetedbyuser(self):
-        self.api.retweeted_by_user('twitter')
-
-    def testretweetedtome(self):
-        self.api.retweeted_to_me()
+    def testmentionstimeline(self):
+        self.api.mentions_timeline()
 
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
     def testretweet(self):
-        s = self.api.retweet(test_tweet_id)
-        s.destroy()
+        # TODO(josh): Need a way to get random tweets to retweet.
+        raise SkipTest()
 
     def testretweets(self):
         self.api.retweets(test_tweet_id)
@@ -111,12 +101,6 @@ class TweepyAPITests(unittest.TestCase):
     def testme(self):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)
-
-    def testfriends(self):
-        self.api.friends()
-
-    def testfollowers(self):
-        self.api.followers()
 
     def testdirectmessages(self):
         self.api.direct_messages()
@@ -193,11 +177,11 @@ class TweepyAPITests(unittest.TestCase):
             original.profile_sidebar_border_color
         )
 
-        self.assertEqual(updated.profile_background_color, '000')
-        self.assertEqual(updated.profile_text_color, '000')
-        self.assertEqual(updated.profile_link_color, '000')
-        self.assertEqual(updated.profile_sidebar_fill_color, '000')
-        self.assertEqual(updated.profile_sidebar_border_color, '000')
+        self.assertEqual(updated.profile_background_color, '000000')
+        self.assertEqual(updated.profile_text_color, '000000')
+        self.assertEqual(updated.profile_link_color, '000000')
+        self.assertEqual(updated.profile_sidebar_fill_color, '000000')
+        self.assertEqual(updated.profile_sidebar_border_color, '000000')
 
     """
     def testupateprofileimage(self):
@@ -232,15 +216,9 @@ class TweepyAPITests(unittest.TestCase):
         self.api.create_favorite(4901062372)
         self.api.destroy_favorite(4901062372)
 
-    def testenabledisablenotifications(self):
-        self.api.enable_notifications('twitter')
-        self.api.disable_notifications('twitter')
-
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
-        self.assertEqual(self.api.exists_block('twitter'), True)
         self.api.destroy_block('twitter')
-        self.assertEqual(self.api.exists_block('twitter'), False)
         self.api.create_friendship('twitter') # restore
 
     def testblocks(self):
@@ -250,13 +228,17 @@ class TweepyAPITests(unittest.TestCase):
         self.api.blocks_ids()
 
     def testcreateupdatedestroylist(self):
-        self.api.create_list('tweeps')
-        # XXX: right now twitter throws a 500 here, issue is being looked into by twitter.
-        #self.api.update_list('tweeps', mode='private')
-        self.api.destroy_list('tweeps')
+        params = {
+            'owner_screen_name': username,
+            'slug': 'tweeps'
+        }
+        l = self.api.create_list(name=params['slug'], **params)
+        l = self.api.update_list(list_id=l.id, description='updated!')
+        self.assertEqual(l.description, 'updated!')
+        self.api.destroy_list(list_id=l.id)
 
-    def testlists(self):
-        self.api.lists()
+    def testlistsall(self):
+        self.api.lists_all()
 
     def testlistsmemberships(self):
         self.api.lists_memberships()
@@ -268,30 +250,40 @@ class TweepyAPITests(unittest.TestCase):
         self.api.list_timeline('applepie', 'stars')
 
     def testgetlist(self):
-        self.api.get_list('applepie', 'stars')
+        self.api.get_list(owner_screen_name='applepie', slug='stars')
 
     def testaddremovelistmember(self):
-        uid = self.api.get_user('twitter').id
-        self.api.add_list_member('test', uid)
-        self.api.remove_list_member('test', uid)
+        params = {
+            'slug': 'test',
+            'owner_screen_name': username,
+            'screen_name': 'twitter'
+        }
+
+        def assert_list(l):
+            self.assertEqual(l.name, params['slug'])
+
+        assert_list(self.api.add_list_member(**params))
+        assert_list(self.api.remove_list_member(**params))
 
     def testlistmembers(self):
         self.api.list_members('applepie', 'stars')
 
-    def testislistmember(self):
-        uid = self.api.get_user('applepie').id
-        self.api.is_list_member('applepie', 'stars', uid)
+    def testshowlistmember(self):
+        self.assertTrue(self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
 
     def testsubscribeunsubscribelist(self):
-        self.api.subscribe_list('applepie', 'stars')
-        self.api.unsubscribe_list('applepie', 'stars')
+        params = {
+            'owner_screen_name': 'applepie',
+            'slug': 'stars'
+        }
+        self.api.subscribe_list(**params)
+        self.api.unsubscribe_list(**params)
 
     def testlistsubscribers(self):
         self.api.list_subscribers('applepie', 'stars')
 
-    def testissubscribedlist(self):
-        uid = self.api.get_user('applepie').id
-        self.api.is_subscribed_list('applepie', 'stars', uid)
+    def testshowlistsubscriber(self):
+        self.assertTrue(self.api.show_list_subscriber('applepie', 'stars', username))
 
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
@@ -301,10 +293,6 @@ class TweepyAPITests(unittest.TestCase):
 
     def testsearch(self):
         self.api.search('tweepy')
-
-    def testtrends(self):
-        self.api.trends_daily()
-        self.api.trends_weekly()
 
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
@@ -316,8 +304,6 @@ class TweepyAPITests(unittest.TestCase):
         self.assertEqual(twitter_hq[0].id, '3bdf30ed8b201f31')
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='c3f37afa9efcf94b').full_name, 'Austin, TX')
-        self.assertTrue(place_name_in_list('Austin, TX',
-            self.api.nearby_places(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
@@ -345,17 +331,17 @@ class TweepyCursorTests(unittest.TestCase):
         self.assert_(len(pages) == 5)
 
     def testcursorcursoritems(self):
-        items = list(Cursor(self.api.friends).items())
+        items = list(Cursor(self.api.friends_ids).items())
         self.assert_(len(items) > 0)
 
-        items = list(Cursor(self.api.followers, 'twitter').items(30))
+        items = list(Cursor(self.api.followers_ids, 'twitter').items(30))
         self.assert_(len(items) == 30)
 
     def testcursorcursorpages(self):
-        pages = list(Cursor(self.api.friends).pages())
+        pages = list(Cursor(self.api.friends_ids).pages())
         self.assert_(len(pages) > 0)
 
-        pages = list(Cursor(self.api.followers, 'twitter').pages(5))
+        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
         self.assert_(len(pages) == 5)
 
 class TweepyAuthTests(unittest.TestCase):

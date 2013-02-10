@@ -257,7 +257,9 @@ class List(Model):
     @classmethod
     def parse_list(cls, api, json_list, result_set=None):
         results = ResultSet()
-        for obj in json_list['lists']:
+        if isinstance(json_list, dict):
+            json_list = json_list['lists']
+        for obj in json_list:
             results.append(cls.parse(api, obj))
         return results
 
