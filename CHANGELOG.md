@@ -1,5 +1,7 @@
 Version 2.0
 -----------
+  _Dedicated in memory of Aaron Swartz_
+
   - Twitter API 1.1 support.
   - Basic Authentication deprecated.
   - friends_timeline() removed.
