@@ -140,7 +140,7 @@ class User(Model):
         return self._api.lists_subscriptions(user=self.screen_name, *args, **kargs)
 
     def lists(self, *args, **kargs):
-        return self._api.lists(user=self.screen_name, *args, **kargs)
+        return self._api.lists_all(user=self.screen_name, *args, **kargs)
 
     def followers_ids(self, *args, **kargs):
         return self._api.followers_ids(user_id=self.id, *args, **kargs)
