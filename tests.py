@@ -42,6 +42,12 @@ class TweepyAPITests(unittest.TestCase):
         self.api.retry_count = 2
         self.api.retry_delay = 5
 
+    # TODO: Actually have some sort of better assertion
+    def testgetoembed(self):
+        data = self.api.get_oembed(test_tweet_id)
+        self.assertEqual(data['author_name'], "Twitter")
+
+
     def testhometimeline(self):
         self.api.home_timeline()
 
