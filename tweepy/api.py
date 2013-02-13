@@ -138,7 +138,7 @@ class API(object):
 
     ''' statuses/oembed '''
     get_oembed = bind_api(
-        path = '1.1/statuses/oembed.json',
+        path = '/statuses/oembed.json',
         payload_type = 'json',
         allowed_param = ['id', 'url', 'maxwidth', 'hide_media', 'omit_script', 'align', 'related', 'lang']
     )

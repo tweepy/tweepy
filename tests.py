@@ -45,9 +45,7 @@ class TweepyAPITests(unittest.TestCase):
     # TODO: Actually have some sort of better assertion
     def testgetoembed(self):
         print "testgetoembed"
-        json_str = self.api.get_oembed(test_tweet_id)
-        data = json.loads(json_str)
-
+        data = self.api.get_oembed(test_tweet_id)
         self.assertEqual(data['author_name'], "Twitter")
 
 
