@@ -4,7 +4,7 @@
 
 from tweepy.error import TweepError
 from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
-        parse_search_datetime, unescape_html
+        unescape_html
 
 
 class ResultSet(list):
@@ -216,7 +216,7 @@ class SearchResult(Model):
         result = cls()
         for k, v in json.items():
             if k == 'created_at':
-                setattr(result, k, parse_search_datetime(v))
+                setattr(result, k, parse_datetime(v))
             elif k == 'source':
                 setattr(result, k, parse_html_value(unescape_html(v)))
             else:
@@ -235,7 +235,7 @@ class SearchResult(Model):
         results.completed_in = json_list.get('completed_in')
         results.query = json_list.get('query')
 
-        for obj in json_list['results']:
+        for obj in json_list['statuses']:
             results.append(cls.parse(api, obj))
         return results
 

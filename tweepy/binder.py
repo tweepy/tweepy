@@ -42,10 +42,7 @@ def bind_api(**config):
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
-            if self.search_api:
-                self.api_root = api.search_root
-            else:
-                self.api_root = api.api_root
+            self.api_root = api.api_root
 
             # Perform any path variable substitution
             self.build_path()

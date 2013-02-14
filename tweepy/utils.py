@@ -34,18 +34,6 @@ def parse_a_href(atag):
     return atag[start:end]
 
 
-def parse_search_datetime(string):
-    # Set locale for date parsing
-    locale.setlocale(locale.LC_TIME, 'C')
-
-    # We must parse datetime this way to work in python 2.4
-    date = datetime(*(time.strptime(string, '%a, %d %b %Y %H:%M:%S +0000')[0:6]))
-
-    # Reset locale back to the default setting
-    locale.setlocale(locale.LC_TIME, '')
-    return date
-
-
 def unescape_html(text):
     """Created by Fredrik Lundh (http://effbot.org/zone/re-sub.htm#unescape-html)"""
     def fixup(m):
