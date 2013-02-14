@@ -284,6 +284,13 @@ class API(object):
         allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 
+    """ friends/list """
+    friends = bind_api(
+        path = '/friends/list.json',
+        payload_type = 'user', payload_list = True,
+        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
+    )
+
     """ friendships/incoming """
     friendships_incoming = bind_api(
         path = '/friendships/incoming.json',
@@ -303,6 +310,13 @@ class API(object):
         path = '/followers/ids.json',
         payload_type = 'ids',
         allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
+    )
+
+    """ followers/list """
+    followers = bind_api(
+        path = '/followers/list.json',
+        payload_type = 'user', payload_list = True,
+        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
     )
 
     """ account/verify_credentials """
