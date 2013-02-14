@@ -298,7 +298,15 @@ class TweepyAPITests(unittest.TestCase):
         self.api.destroy_saved_search(s.id)
 
     def testsearch(self):
-        self.api.search('tweepy')
+        count = 5
+        q = 'tweepy'
+        s = self.api.search(q=q, count=count)
+        self.assertEqual(len(s), count)
+        self.assertIsNotNone(getattr(s, 'search_metadata'))
+        self.assertEqual(s.search_metadata.count, count)
+        self.assertEqual(s.search_metadata.query, q)
+        # TODO: Test paging?
+        # TODO: Test other search_metadata attributes?
 
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
