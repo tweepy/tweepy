@@ -11,6 +11,8 @@ class Cursor(object):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, args, kargs)
+            elif method.pagination_mode == 'search':
+                self.iterator = SearchResultsIterator(method, args, kargs)
             else:
                 self.iterator = PageIterator(method, args, kargs)
         else:
@@ -126,3 +128,37 @@ class ItemIterator(BaseIterator):
         self.count -= 1
         return self.current_page[self.page_index]
 
+
+class SearchResultsIterator(PageIterator):
+    def __init__(self, method, args, kargs):
+        PageIterator.__init__(self, method, args, kargs)
+        self.last_metadata = None
+
+    def next(self):
+        self.current_page += 1
+        if self.current_page > 1:
+            import urlparse
+            try:
+                u = self.last_metadata.next_results
+            except AttributeError as e:
+                # No last_metadata or no last_metadata.next_results, so we can't continue.
+                raise StopIteration
+            # Strip leading ? from URL.  It's always there as far as we know.
+            u = u[1:]
+            args = urlparse.parse_qs(u)
+            self.kargs['max_id'] = args['max_id'][0]
+
+        items = self.method(*self.args, **self.kargs)
+        if len(items) == 0 or (self.limit > 0 and self.current_page > self.limit):
+            raise StopIteration
+        try:
+            # Stash last result's search_metadata for next page access.
+            self.last_metadata = items.search_metadata
+        except AttributeError:
+            # Can't stash, so next iteration will stop.
+            self.last_metadata = None
+
+        return items
+
+    def prev(self):
+        raise TweepError('search does not support reverse pagination.')

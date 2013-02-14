@@ -358,6 +358,13 @@ class TweepyCursorTests(unittest.TestCase):
         pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
         self.assert_(len(pages) == 5)
 
+    def testcursorsearch(self):
+        items = list(Cursor(self.api.search, q='twitter').items(30))
+        self.assert_(len(items) == 30)
+
+        pages = list(Cursor(self.api.search, q='twitter').pages(5))
+        self.assert_(len(pages) == 5)
+
 class TweepyAuthTests(unittest.TestCase):
 
     def testoauth(self):
