@@ -39,7 +39,7 @@ class Model(object):
                 results.append(cls.parse(api, obj))
         return results
 
-    def model__repr__(self):
+    def __repr__(self):
         state = ['%s=%s' % (k, repr(v)) for (k,v) in vars(self).items()]
         return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
 
