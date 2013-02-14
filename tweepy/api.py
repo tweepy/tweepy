@@ -267,7 +267,7 @@ class API(object):
 
     """ Perform bulk look up of friendships from user ID or screenname """
     def lookup_friendships(self, user_ids=None, screen_names=None):
-	    return self._lookup_friendships(list_to_csv(user_ids), list_to_csv(screen_names))
+        return self._lookup_friendships(list_to_csv(user_ids), list_to_csv(screen_names))
 
     _lookup_friendships = bind_api(
         path = '/friendships/lookup.json',
