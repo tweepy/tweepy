@@ -52,10 +52,7 @@ def bind_api(**config):
             else:
                 self.scheme = 'http://'
 
-            if self.search_api:
-                self.host = api.search_host
-            else:
-                self.host = api.host
+            self.host = api.host
 
             # Manually set Host header to fix an issue in python 2.5
             # or older where Host is set including the 443 port.
