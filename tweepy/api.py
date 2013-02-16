@@ -18,9 +18,9 @@ class RateLimitInfo(object):
         self.from_headers(headers)
 
     def from_headers(self, d):
-        self.reset = int(d.get('x-rate-limit-reset', sys.maxint))
-        self.remaining = int(d.get('x-rate-limit-remaining', sys.maxint))
-        self.limit = int(d.get('x-rate-limit-limit', sys.maxint))
+        self.reset = int(d.get('x-rate-limit-reset', 0))
+        self.remaining = int(d.get('x-rate-limit-remaining', 0))
+        self.limit = int(d.get('x-rate-limit-limit', 0))
 
     def seconds_till_reset(self, current_time=None):
         current_time = current_time or time.time()
@@ -51,6 +51,7 @@ class API(object):
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
         self.api_limits = RateLimitInfo()
+        self.last_headers = {}
 
     """ statuses/home_timeline """
     home_timeline = bind_api(
