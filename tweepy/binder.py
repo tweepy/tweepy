@@ -159,7 +159,8 @@ def bind_api(**config):
                 retries_performed += 1
 
             # If an error was returned, throw an exception
-            self.api.last_response = resp
+            self.api.update_last_response(resp)
+
             if resp.status != 200:
                 try:
                     error_msg = self.api.parser.parse_error(resp.read())

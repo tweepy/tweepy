@@ -3,12 +3,32 @@
 # See LICENSE for details.
 
 import os
+import time
+import sys
 import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser
 from tweepy.utils import list_to_csv
+
+
+class RateLimitInfo(object):
+    def __init__(self, headers={}):
+        self.from_headers(headers)
+
+    def from_headers(self, d):
+        self.reset = int(d.get('x-rate-limit-reset', sys.maxint))
+        self.remaining = int(d.get('x-rate-limit-remaining', sys.maxint))
+        self.limit = int(d.get('x-rate-limit-limit', sys.maxint))
+
+    def seconds_till_reset(self, current_time=None):
+        current_time = current_time or time.time()
+        return self.reset - current_time
+
+    def __repr__(self):
+        state = ['%s=%s' % (k, repr(v)) for (k,v) in vars(self).items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
 
 
 class API(object):
@@ -30,6 +50,7 @@ class API(object):
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
+        self.api_limits = RateLimitInfo()
 
     """ statuses/home_timeline """
     home_timeline = bind_api(
@@ -668,6 +689,12 @@ class API(object):
         payload_type = 'place', payload_list = True,
         allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
+
+    def update_last_response(self, response):
+        self.last_response = response
+        # Update API limit info if headers are present.
+        self.last_headers = dict(response.getheaders())
+        self.api_limits.from_headers(self.last_headers)
 
     """ Internal use only """
     @staticmethod
