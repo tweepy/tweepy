@@ -141,7 +141,7 @@ class SearchResultsIterator(PageIterator):
     """
     def __init__(self, method, args, kargs):
         PageIterator.__init__(self, method, args, kargs)
-        self.lastpage_oldest_id = 0
+        self.oldest_id = 0
 
     def next(self):
         self.current_page += 1
