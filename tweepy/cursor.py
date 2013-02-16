@@ -145,11 +145,15 @@ class SearchResultsIterator(PageIterator):
 
     def next(self):
         self.current_page += 1
+
+        if (self.limit > 0 and self.current_page > self.limit):
+            raise StopIteration
+
         if self.current_page > 1:
             self.kargs['max_id'] = self.oldest_id
 
         items = self.method(*self.args, **self.kargs)
-        if len(items) == 0 or (self.limit > 0 and self.current_page > self.limit):
+        if len(items) == 0:
             raise StopIteration
         # Stash last result's oldest id for next page access
         self.oldest_id = items[-1].id -1
