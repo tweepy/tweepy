@@ -130,34 +130,29 @@ class ItemIterator(BaseIterator):
 
 
 class SearchResultsIterator(PageIterator):
+    """ Paginate through search results.
+
+        GET Search results do not explicitly support pagination.
+        See: https://dev.twitter.com/issues/513
+
+        We'll use a simplistic forward paging scheme, by storing the oldest id
+        returned from the last search and using that in the max_id on the next
+        page request.
+    """
     def __init__(self, method, args, kargs):
         PageIterator.__init__(self, method, args, kargs)
-        self.last_metadata = None
+        self.lastpage_oldest_id = 0
 
     def next(self):
         self.current_page += 1
         if self.current_page > 1:
-            import urlparse
-            try:
-                u = self.last_metadata.next_results
-            except AttributeError as e:
-                # No last_metadata or no last_metadata.next_results, so we can't continue.
-                raise StopIteration
-            # Strip leading ? from URL.  It's always there as far as we know.
-            u = u[1:]
-            args = urlparse.parse_qs(u)
-            self.kargs['max_id'] = args['max_id'][0]
+            self.kargs['max_id'] = self.oldest_id
 
         items = self.method(*self.args, **self.kargs)
         if len(items) == 0 or (self.limit > 0 and self.current_page > self.limit):
             raise StopIteration
-        try:
-            # Stash last result's search_metadata for next page access.
-            self.last_metadata = items.search_metadata
-        except AttributeError:
-            # Can't stash, so next iteration will stop.
-            self.last_metadata = None
-
+        # Stash last result's oldest id for next page access
+        self.oldest_id = items[-1].id -1
         return items
 
     def prev(self):
