@@ -150,6 +150,12 @@ class TweepyAPITests(unittest.TestCase):
     def testfollowersids(self):
         self.api.followers_ids(username)
 
+    def testfriends(self):
+        self.api.friends(username)
+
+    def testfollowers(self):
+        self.api.followers(username)
+
     def testverifycredentials(self):
         self.assertNotEqual(self.api.verify_credentials(), False)
 
