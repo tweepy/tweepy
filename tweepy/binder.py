@@ -191,5 +191,7 @@ def bind_api(**config):
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
 
+    _call.introspect = APIMethod
+
     return _call
 
