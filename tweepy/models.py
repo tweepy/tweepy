@@ -60,7 +60,7 @@ class Status(Model):
                 else:
                     setattr(status, k, v)
                     setattr(status, 'source_url', None)
-            elif k == 'retweeted_status':
+            elif k == 'retweeted' and type(v) == dict:
                 setattr(status, k, Status.parse(api, v))
             elif k == 'place':
                 if v is not None:
@@ -235,8 +235,8 @@ class SearchResult(Model):
         results.completed_in = json_list.get('completed_in')
         results.query = json_list.get('query')
 
-        for obj in json_list['results']:
-            results.append(cls.parse(api, obj))
+        for obj in json_list['statuses']:
+            results.append(Status.parse(api, obj))
         return results
 
 
