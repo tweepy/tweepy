@@ -576,6 +576,22 @@ class API(object):
         require_auth = True
     )
 
+    add_list_members = bind_api(
+        path = '/lists/members/create_all.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+        require_auth = True
+    )
+
+    remove_list_members = bind_api(
+        path = '/lists/members/destroy_all.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+        require_auth = True
+    )
+
     list_members = bind_api(
         path = '/lists/members.json',
         payload_type = 'user', payload_list = True,
