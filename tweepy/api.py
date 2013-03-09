@@ -24,7 +24,9 @@ class RateLimitInfo(object):
 
     def seconds_till_reset(self, current_time=None):
         current_time = current_time or time.time()
-        return self.reset - current_time
+        if self.reset:
+            return self.reset - current_time
+        return 0
 
     def __repr__(self):
         state = ['%s=%s' % (k, repr(v)) for (k,v) in vars(self).items()]
