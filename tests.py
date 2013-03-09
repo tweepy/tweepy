@@ -277,6 +277,19 @@ class TweepyAPITests(unittest.TestCase):
         assert_list(self.api.add_list_member(**params))
         assert_list(self.api.remove_list_member(**params))
 
+    def testaddremovelistmembers(self):
+        params = {
+            'slug': 'test',
+            'owner_screen_name': username,
+            'screen_name': 'twitterapi,twittermobile'
+        }
+
+        def assert_list(l):
+            self.assertEqual(l.name, params['slug'])
+
+        assert_list(self.api.add_list_members(**params))
+        assert_list(self.api.remove_list_members(**params))
+
     def testlistmembers(self):
         self.api.list_members('applepie', 'stars')
 
