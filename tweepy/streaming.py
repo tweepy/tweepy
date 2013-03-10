@@ -166,7 +166,9 @@ class Stream(object):
     def _start(self, async):
         self.running = True
         if async:
-            Thread(target=self._run).start()
+            thread = Thread(target=self._run)
+            thread.setDaemon(True)
+            thread.start()
         else:
             self._run()
 
@@ -207,7 +209,7 @@ class Stream(object):
             self.url += '&count=%s' % count
         self._start(async)
 
-    def filter(self, follow=None, track=None, async=False, locations=None, 
+    def filter(self, follow=None, track=None, async=False, locations=None,
         count = None, stall_warnings=False):
         self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
