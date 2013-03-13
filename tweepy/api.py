@@ -574,6 +574,38 @@ class API(object):
         require_auth = True
     )
 
+    """ Perform bulk add of list members from user ID or screenname """
+    def add_list_members(self, screen_names=None, user_ids=None, slug=None,
+                         list_id=None, owner_id=None, owner_screen_name=None):
+        return self._add_list_members(list_to_csv(screen_names),
+                                      list_to_csv(user_ids),
+                                      slug, list_id, owner_id,
+                                      owner_screen_name)
+
+    _add_list_members = bind_api(
+        path = '/lists/members/create_all.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'],
+        require_auth = True
+    )
+
+    """ Perform bulk remove of list members from user ID or screenname """
+    def remove_list_members(self, screen_names=None, user_ids=None, slug=None,
+                         list_id=None, owner_id=None, owner_screen_name=None):
+        return self._remove_list_members(list_to_csv(screen_names),
+                                      list_to_csv(user_ids),
+                                      slug, list_id, owner_id,
+                                      owner_screen_name)
+
+    _remove_list_members = bind_api(
+        path = '/lists/members/destroy_all.json',
+        method = 'POST',
+        payload_type = 'list',
+        allowed_param = ['screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'],
+        require_auth = True
+    )
+
     list_members = bind_api(
         path = '/lists/members.json',
         payload_type = 'user', payload_list = True,
