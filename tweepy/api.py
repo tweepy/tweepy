@@ -451,10 +451,10 @@ class API(object):
 
     """ report_spam """
     report_spam = bind_api(
-        path = '/report_spam.json',
+        path = '/users/report_spam.json',
         method = 'POST',
         payload_type = 'user',
-        allowed_param = ['id', 'user_id', 'screen_name'],
+        allowed_param = ['user_id', 'screen_name'],
         require_auth = True
     )
 
