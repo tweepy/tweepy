@@ -683,6 +683,14 @@ class API(object):
         allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
 
+    """ unofficial/summary """
+    summary = bind_api(
+        path = '/statuses/{id}/activity/summary.json',
+        payload_type = 'json',
+        allowed_param = ['id'],
+        require_auth = True
+    )
+
     """ Internal use only """
     @staticmethod
     def _pack_image(filename, max_size):
