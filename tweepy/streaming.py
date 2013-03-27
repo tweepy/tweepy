@@ -208,7 +208,7 @@ class Stream(object):
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None, 
-        count = None, stall_warnings=False):
+        count = None, stall_warnings=False, languages=None):
         self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -225,6 +225,8 @@ class Stream(object):
             self.parameters['count'] = count
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings
+        if languages:
+            self.parameters['language'] = ','.join(map(str, languages))
         self.body = urlencode_noplus(self.parameters)
         self.parameters['delimited'] = 'length'
         self._start(async)
