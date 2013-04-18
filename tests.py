@@ -304,7 +304,15 @@ class TweepyAPITests(unittest.TestCase):
         self.api.destroy_saved_search(s.id)
 
     def testsearch(self):
-        self.api.search('tweepy')
+        count = 5
+        q = 'tweepy'
+        s = self.api.search(q=q, count=count)
+        self.assertEqual(len(s), count)
+        self.assertIsNotNone(getattr(s, 'search_metadata'))
+        self.assertEqual(s.search_metadata.count, count)
+        self.assertEqual(s.search_metadata.query, q)
+        # TODO: Test paging?
+        # TODO: Test other search_metadata attributes?
 
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
@@ -354,6 +362,13 @@ class TweepyCursorTests(unittest.TestCase):
         self.assert_(len(pages) > 0)
 
         pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
+        self.assert_(len(pages) == 5)
+
+    def testcursorsearch(self):
+        items = list(Cursor(self.api.search, q='twitter').items(30))
+        self.assert_(len(items) == 30)
+
+        pages = list(Cursor(self.api.search, q='twitter').pages(5))
         self.assert_(len(pages) == 5)
 
 class TweepyAuthTests(unittest.TestCase):

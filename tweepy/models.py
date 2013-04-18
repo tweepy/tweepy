@@ -4,7 +4,7 @@
 
 from tweepy.error import TweepError
 from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
-        parse_search_datetime, unescape_html
+        unescape_html
 
 
 class ResultSet(list):
@@ -209,33 +209,25 @@ class SavedSearch(Model):
         return self._api.destroy_saved_search(self.id)
 
 
-class SearchResult(Model):
+class SearchResult(Status):
+    """ Search results in V1.1 are now the same as any other status
+        data structure.  Therefore we'll just derive from Status class.
 
-    @classmethod
-    def parse(cls, api, json):
-        result = cls()
-        for k, v in json.items():
-            if k == 'created_at':
-                setattr(result, k, parse_search_datetime(v))
-            elif k == 'source':
-                setattr(result, k, parse_html_value(unescape_html(v)))
-            else:
-                setattr(result, k, v)
-        return result
+        No need to define a special parse() method.
+    """
 
     @classmethod
     def parse_list(cls, api, json_list, result_set=None):
         results = ResultSet()
-        results.max_id = json_list.get('max_id')
-        results.since_id = json_list.get('since_id')
-        results.refresh_url = json_list.get('refresh_url')
-        results.next_page = json_list.get('next_page')
-        results.results_per_page = json_list.get('results_per_page')
-        results.page = json_list.get('page')
-        results.completed_in = json_list.get('completed_in')
-        results.query = json_list.get('query')
+        search_metadata = json_list.get('search_metadata')
+        if search_metadata:
+            # Convert smd dict to object with properties.  Use Model class
+            # for convenience but this could be any generic object.
+            t = Model()
+            t.__dict__.update(search_metadata)
+            results.search_metadata = t
 
-        for obj in json_list['results']:
+        for obj in json_list['statuses']:
             results.append(cls.parse(api, obj))
         return results
 

@@ -42,10 +42,7 @@ def bind_api(**config):
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
-            if self.search_api:
-                self.api_root = api.search_root
-            else:
-                self.api_root = api.api_root
+            self.api_root = api.api_root
 
             # Perform any path variable substitution
             self.build_path()
@@ -55,10 +52,7 @@ def bind_api(**config):
             else:
                 self.scheme = 'http://'
 
-            if self.search_api:
-                self.host = api.search_host
-            else:
-                self.host = api.host
+            self.host = api.host
 
             # Manually set Host header to fix an issue in python 2.5
             # or older where Host is set including the 443 port.

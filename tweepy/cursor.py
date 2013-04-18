@@ -11,6 +11,8 @@ class Cursor(object):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, args, kargs)
+            elif method.pagination_mode == 'search':
+                self.iterator = SearchResultsIterator(method, args, kargs)
             else:
                 self.iterator = PageIterator(method, args, kargs)
         else:
@@ -126,3 +128,36 @@ class ItemIterator(BaseIterator):
         self.count -= 1
         return self.current_page[self.page_index]
 
+
+class SearchResultsIterator(PageIterator):
+    """ Paginate through search results.
+
+        GET Search results do not explicitly support pagination.
+        See: https://dev.twitter.com/issues/513
+
+        We'll use a simplistic forward paging scheme, by storing the oldest id
+        returned from the last search and using that in the max_id on the next
+        page request.
+    """
+    def __init__(self, method, args, kargs):
+        PageIterator.__init__(self, method, args, kargs)
+        self.oldest_id = 0
+
+    def next(self):
+        self.current_page += 1
+
+        if (self.limit > 0 and self.current_page > self.limit):
+            raise StopIteration
+
+        if self.current_page > 1:
+            self.kargs['max_id'] = self.oldest_id
+
+        items = self.method(*self.args, **self.kargs)
+        if len(items) == 0:
+            raise StopIteration
+        # Stash last result's oldest id for next page access
+        self.oldest_id = items[-1].id -1
+        return items
+
+    def prev(self):
+        raise TweepError('search does not support reverse pagination.')

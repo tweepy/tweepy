@@ -15,13 +15,12 @@ class API(object):
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
-            host='api.twitter.com', search_host='search.twitter.com',
+            host='api.twitter.com',
              cache=None, secure=True, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
             parser=None):
         self.auth = auth_handler
         self.host = host
-        self.search_host = search_host
         self.api_root = api_root
         self.search_root = search_root
         self.cache = cache
@@ -634,12 +633,12 @@ class API(object):
 
     """ search """
     search = bind_api(
-        search_api = True,
-        path = '/search.json',
+        path = '/search/tweets.json',
         payload_type = 'search_result', payload_list = True,
-        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type']
+        allowed_param = ['count', 'cursor', 'geocode', 'include_entities', 'lang', 'locale', 'max_id', 'q', 'result_type', 'show_user', 'since', 'since_id', 'until'],
+        require_auth = True
     )
-    search.pagination_mode = 'page'
+    search.pagination_mode = 'search'
 
     """ trends/daily """
     trends_daily = bind_api(
