@@ -21,11 +21,24 @@ def parse_datetime(string):
     locale.setlocale(locale.LC_TIME, '')
     return date
 
+from HTMLParser import HTMLParser
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+#def parse_html_value(html):
+#    return html[html.find('>')+1:html.rfind('<')]
 
 def parse_html_value(html):
-
-    return html[html.find('>')+1:html.rfind('<')]
-
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 def parse_a_href(atag):
 

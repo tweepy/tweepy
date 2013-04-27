@@ -6,13 +6,19 @@ import httplib
 import urllib
 import time
 import re
+import sys
+import warnings
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
 
 re_path_template = re.compile('{\w+}')
+path_category_pattern = re.compile('/([^/]+)/')
+path_without_ext_pattern = re.compile('(.*)\.\w{1,4}')
 
+# TODO: get rid of 'page' params altogether if possible after switching to max_id pagination.
+deprecated_params = {'rpp': 'count'}
 
 def bind_api(**config):
 
@@ -38,6 +44,15 @@ def bind_api(**config):
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
+            self.monitor_rate_limit = kargs.pop('monitor_rate_limit', api.monitor_rate_limit)
+            self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
+            if self.monitor_rate_limit:
+                self._path_category = path_category_pattern.findall(self.path)[0]
+                if self._path_category == 'application':
+                    self.monitor_rate_limit = False
+                self._path_without_ext = path_without_ext_pattern.findall(self.path)[0]
+                self._remaining_calls = [sys.maxint]*len(self.api.auths)
+                self._reset_times = [sys.maxint]*len(self.api.auths)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
@@ -80,6 +95,11 @@ def bind_api(**config):
             for k, arg in kargs.items():
                 if arg is None:
                     continue
+                if k in deprecated_params:
+                    warnings.warn('The use of parameter %s is deprecated' % k, DeprecationWarning)
+                    if deprecated_params[k] is None:
+                        continue
+                    k = deprecated_params[k]
                 if k in self.parameters:
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
 
@@ -100,6 +120,30 @@ def bind_api(**config):
                     del self.parameters[name]
 
                 self.path = self.path.replace(variable, value)
+
+        @property
+        def remaining_calls(self):
+            """
+            Returns the number of remaining calls using the current api authentication.
+            """
+            result = self.api.rate_limit_status()['resources'][self._path_category][self._path_without_ext]['remaining']
+            if self.monitor_rate_limit:
+                self._remaining_calls[self.api.auth_idx] = result
+            return result
+
+        def switch_auth(self):
+            """ Switch authentication from the current one which is depleted """
+            if max(self._remaining_calls) > 0:
+                self.api.auth_idx = max(enumerate(self._remaining_calls), key=lambda x:x[1])[0]
+            else:
+                if not self.wait_on_rate_limit:
+                    raise TweepError('API calls depleted.')
+                next_idx = min(enumerate(self._reset_times), key=lambda x:x[1])[0]
+                sleep_time = self._reset_times[next_idx] - int(time.time())
+                if sleep_time > 0:
+                    time.sleep(sleep_time + 5)
+                self.api.auth_idx = next_idx
+            self.build_path()
 
         def execute(self):
             # Build the request URL
@@ -148,14 +192,30 @@ def bind_api(**config):
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
+                if self.monitor_rate_limit:
+                    rem_calls = resp.getheader('x-rate-limit-remaining')
+                    rem_calls = int(rem_calls) if rem_calls is not None else self._remaining_calls[self.api.auth_idx]-1 
+                    self._remaining_calls[self.api.auth_idx] = rem_calls
+                    reset_time = resp.getheader('x-rate-limit-reset')
+                    if reset_time is not None:
+                        self._reset_times[self.api.auth_idx] = int(reset_time) 
+                    if rem_calls == 0:
+                        self.switch_auth()
+                        if resp.status == 429: # if ran out of calls before switching retry last call
+                            continue
+
+                retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
-                if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
-                else:
-                    if resp.status == 200: break
+                if resp.status == 200:
+                    break
+                elif resp.status == 420 and self.wait_on_rate_limit:
+                    if 'retry-after' in resp.msg:
+                        retry_delay = float(resp.msg['retry-after'])
+                elif self.retry_errors and resp.status not in self.retry_errors:
+                    break
 
                 # Sleep before retrying request again
-                time.sleep(self.retry_delay)
+                time.sleep(retry_delay)
                 retries_performed += 1
 
             # If an error was returned, throw an exception
@@ -188,6 +248,8 @@ def bind_api(**config):
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
         _call.pagination_mode = 'cursor'
+    elif 'max_id' in APIMethod.allowed_param:
+        _call.pagination_mode = 'max_id'
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
 

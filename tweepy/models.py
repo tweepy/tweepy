@@ -2,9 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.error import TweepError
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
-        parse_search_datetime, unescape_html
+from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
 
 
 class ResultSet(list):
@@ -209,34 +207,13 @@ class SavedSearch(Model):
         return self._api.destroy_saved_search(self.id)
 
 
-class SearchResult(Model):
+class SearchResult(Status):
 
     @classmethod
-    def parse(cls, api, json):
-        result = cls()
-        for k, v in json.items():
-            if k == 'created_at':
-                setattr(result, k, parse_search_datetime(v))
-            elif k == 'source':
-                setattr(result, k, parse_html_value(unescape_html(v)))
-            else:
-                setattr(result, k, v)
-        return result
-
-    @classmethod
-    def parse_list(cls, api, json_list, result_set=None):
-        results = ResultSet()
-        results.max_id = json_list.get('max_id')
-        results.since_id = json_list.get('since_id')
-        results.refresh_url = json_list.get('refresh_url')
-        results.next_page = json_list.get('next_page')
-        results.results_per_page = json_list.get('results_per_page')
-        results.page = json_list.get('page')
-        results.completed_in = json_list.get('completed_in')
-        results.query = json_list.get('query')
-
-        for obj in json_list['results']:
-            results.append(cls.parse(api, obj))
+    def parse_list(cls, api, json_list, result_set=None):        
+        results = super(SearchResult, cls).parse_list(api, json_list['statuses'])
+        for k,v in json_list['search_metadata'].iteritems():
+            setattr(results, k, v)
         return results
 
 
