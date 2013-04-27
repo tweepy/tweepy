@@ -150,7 +150,7 @@ class MaxIdIterator(BaseIterator):
         if len(items) < 1: 
             raise StopIteration
         
-        self.kargs['max_id'] = min([t.id for t in items])-1
+        self.kargs['max_id'] = min([t['id'] if 'id' in t else t.id for t in items])-1
         self._page_count += 1
         return items
     
