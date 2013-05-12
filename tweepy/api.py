@@ -249,11 +249,12 @@ class API(object):
         require_auth = True
     )
 
-    """ friendships/exists """
+    """ friendships/lookup """
     exists_friendship = bind_api(
-        path = '/friendships/exists.json',
+        path = '/friendships/lookup.json',
         payload_type = 'json',
-        allowed_param = ['user_a', 'user_b']
+        allowed_param = ['user_id', 'screen_name'],
+        require_auth = True
     )
 
     """ friendships/show """
