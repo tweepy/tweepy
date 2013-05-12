@@ -7,6 +7,13 @@ import urllib
 import time
 import re
 
+try:
+    import tornado.httpclient
+    import tornado.httputil
+    allow_async = True
+except ImportError:
+    allow_async = False
+
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
@@ -39,6 +46,7 @@ def bind_api(**config):
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
+            self.callback = kargs.pop('callback', None)  
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
@@ -100,13 +108,8 @@ def bind_api(**config):
                     del self.parameters[name]
 
                 self.path = self.path.replace(variable, value)
-
-        def execute(self):
-            # Build the request URL
-            url = self.api_root + self.path
-            if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
-
+        
+        def get_cache(self, url):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
@@ -122,6 +125,17 @@ def bind_api(**config):
                         if isinstance(cache_result, Model):
                             cache_result._api = self.api
                     return cache_result
+            return None
+
+        def execute(self):
+            # Build the request URL
+            url = self.api_root + self.path
+            if len(self.parameters):
+                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+
+            cache = self.get_cache(url)
+            if cache:
+                return cache
 
             # Continue attempting request until successful
             # or maximum number of retries is reached.
@@ -177,12 +191,53 @@ def bind_api(**config):
                 self.api.cache.store(url, result)
 
             return result
+        
+        def execute_async(self):
+            # Build the request URL
+            url = self.api_root + self.path
+            if len(self.parameters):
+                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+                
+            cache = self.get_cache(url)
+            if cache:
+                self.callback(cache)
+            
+            # Apply authentication
+            if self.api.auth:
+                self.api.auth.apply_auth(
+                        self.scheme + self.host + url,
+                        self.method, self.headers, self.parameters
+                )
+            url = self.scheme + self.host + url
+            
+            req = tornado.httpclient.HTTPRequest(url=url, headers=self.headers)
+            
+            conn = tornado.httpclient.AsyncHTTPClient()
+            conn.fetch(req, callback=self._on_response)
+        
+        def _on_response(self, response):
+            # If an error was returned, throw an exception
+            self.api.last_response = response
+            if response.code != 200:
+                try:
+                    error_msg = self.api.parser.parse_error(response.body)
+                except Exception:
+                    error_msg = "Twitter error response: status code = %s" % response.code
+                raise TweepError(error_msg, response)
 
+            # Parse the response payload
+            self.callback(self.api.parser.parse(self, response.body))
 
     def _call(api, *args, **kargs):
-
+        do_async = 'callback' in kargs
         method = APIMethod(api, args, kargs)
-        return method.execute()
+
+        if do_async:
+            if not allow_async:
+                raise TweepError("Asynchronous call not allowed (tornado not found)")
+            return method.execute_async()
+        else: 
+            return method.execute()
 
 
     # Set pagination mode
