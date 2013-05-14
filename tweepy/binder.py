@@ -128,11 +128,10 @@ def bind_api(**config):
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
                 # Open connection
-                # FIXME: add timeout
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host)
+                    conn = httplib.HTTPSConnection(self.host,timeout=self.api.timeout)
                 else:
-                    conn = httplib.HTTPConnection(self.host)
+                    conn = httplib.HTTPConnection(self.host,timeout=self.api.timeout)
 
                 # Apply authentication
                 if self.api.auth:
