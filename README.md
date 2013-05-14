@@ -15,7 +15,7 @@ Github and install it manually:
     git clone https://github.com/tweepy/tweepy.git
     python setup.py install
 
-**Note** only Python 2.5 to 2.7 is supported at
+**Note** only Python 2.6 and 2.7 is supported at
 the moment. The Python 3 family is not yet supported.
 
 Documentation
