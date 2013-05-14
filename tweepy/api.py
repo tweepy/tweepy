@@ -17,7 +17,7 @@ class API(object):
     def __init__(self, auth_handler=None,
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=True, api_root='/1.1', search_root='',
-            retry_count=0, retry_delay=0, retry_errors=None,
+            retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None):
         self.auth = auth_handler
         self.host = host
@@ -29,6 +29,7 @@ class API(object):
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
+        self.timeout = timeout
         self.parser = parser or ModelParser()
 
     """ statuses/home_timeline """
