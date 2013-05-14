@@ -249,14 +249,6 @@ class API(object):
         require_auth = True
     )
 
-    """ friendships/lookup """
-    exists_friendship = bind_api(
-        path = '/friendships/lookup.json',
-        payload_type = 'json',
-        allowed_param = ['user_id', 'screen_name'],
-        require_auth = True
-    )
-
     """ friendships/show """
     show_friendship = bind_api(
         path = '/friendships/show.json',
@@ -264,7 +256,6 @@ class API(object):
         allowed_param = ['source_id', 'source_screen_name',
                           'target_id', 'target_screen_name']
     )
-
 
     """ Perform bulk look up of friendships from user ID or screenname """
     def lookup_friendships(self, user_ids=None, screen_names=None):
