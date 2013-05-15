@@ -624,6 +624,7 @@ class OAuthSignatureMethod_HMAC_SHA1(OAuthSignatureMethod):
         """Builds the base signature string."""
         key, raw = self.build_signature_base_string(oauth_request, consumer,
             token)
+        key = str(key)
 
         # HMAC object.
         try:

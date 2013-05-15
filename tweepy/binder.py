@@ -7,9 +7,9 @@ import urllib
 import time
 import re
 
-from tweepy.error import TweepError
-from tweepy.utils import convert_to_utf8_str
-from tweepy.models import Model
+from .error import TweepError
+from .utils import convert_to_utf8_str
+from .models import Model
 
 re_path_template = re.compile('{\w+}')
 
@@ -167,7 +167,8 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            result = self.api.parser.parse(self, resp.read())
+            x = resp.read()
+            result = self.api.parser.parse(self, x)
 
             conn.close()
 
@@ -189,6 +190,8 @@ def bind_api(**config):
         _call.pagination_mode = 'cursor'
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
+
+    _call.introspect = APIMethod
 
     return _call
 

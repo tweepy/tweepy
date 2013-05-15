@@ -5,10 +5,10 @@
 import os
 import mimetypes
 
-from tweepy.binder import bind_api
-from tweepy.error import TweepError
-from tweepy.parsers import ModelParser
-from tweepy.utils import list_to_csv
+from .binder import bind_api
+from .error import TweepError
+from .parsers import ModelParser
+from .utils import list_to_csv
 
 
 class API(object):
@@ -36,7 +36,8 @@ class API(object):
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'exclude_replies', 'contributor_details',
+                         'include_entities'],
         require_auth = True
     )
 
@@ -44,8 +45,8 @@ class API(object):
     user_timeline = bind_api(
         path = '/statuses/user_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'since_id',
-                          'max_id', 'count', 'page', 'include_rts']
+        allowed_param = ['id', 'user_id', 'screen_name', 'since_id', 'exclude_replies',
+                          'max_id', 'count', 'include_rts', 'contributor_details', 'trim_user']
     )
 
     """ statuses/mentions """
@@ -84,7 +85,7 @@ class API(object):
     retweets_of_me = bind_api(
         path = '/statuses/retweets_of_me.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'trim_user', 'include_entities', 'include_user_entities'],
         require_auth = True
     )
 
@@ -194,7 +195,7 @@ class API(object):
     direct_messages = bind_api(
         path = '/direct_messages.json',
         payload_type = 'direct_message', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'include_entities', 'skip_status'],
         require_auth = True
     )
 
@@ -210,7 +211,7 @@ class API(object):
     sent_direct_messages = bind_api(
         path = '/direct_messages/sent.json',
         payload_type = 'direct_message', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count', 'page', 'include_entities'],
         require_auth = True
     )
 
@@ -281,7 +282,7 @@ class API(object):
     friends = bind_api(
         path = '/friends/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor', 'skip_status', 'include_user_entities']
     )
 
     """ friendships/incoming """
@@ -309,7 +310,7 @@ class API(object):
     followers = bind_api(
         path = '/followers/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor', 'skip_status', 'include_user_entities']
     )
 
     """ account/verify_credentials """
@@ -431,7 +432,7 @@ class API(object):
     blocks = bind_api(
         path = '/blocks/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['page'],
+        allowed_param = ['cursor', 'skip_status', 'include_entities'],
         require_auth = True
     )
 
@@ -542,7 +543,8 @@ class API(object):
     list_timeline = bind_api(
         path = '/lists/statuses.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id', 'max_id', 'count']
+        allowed_param = ['owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id', 'max_id', 'count',
+                         'include_rts', 'include_entities']
     )
 
     get_list = bind_api(
@@ -627,12 +629,11 @@ class API(object):
 
     """ search """
     search = bind_api(
-        search_api = True,
-        path = '/search.json',
+        path = '/search/tweets.json',
         payload_type = 'search_result', payload_list = True,
-        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type']
+        allowed_param = ['q', 'lang', 'locale', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type',
+                         'count', 'include_entities', 'callback']
     )
-    search.pagination_mode = 'page'
 
     """ trends/daily """
     trends_daily = bind_api(
