@@ -319,6 +319,31 @@ class TweepyAPITests(unittest.TestCase):
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
+    def testapilastheaders(self):
+        self.api.search('tweepy')
+        expected_keys = (
+            'content-length',
+            'content-type',
+            'date',
+            'status')
+        for key in expected_keys:
+            self.assertTrue(key in self.api.last_headers,
+                'Expected response header "%s" not found in %s.' % (key, self.api.last_headers))
+
+    def testapilimits(self):
+        # Test
+        # s = self.api.search('tweepy')
+        self.testusertimeline()
+        #print self.api.last_headers
+        expected_keys = (
+            'x-rate-limit-limit',
+            'x-rate-limit-reset',
+            'x-rate-limit-remaining')
+        for key in expected_keys:
+            self.assertTrue(key in self.api.last_headers,
+                'Expected response header "%s" not found in %s.' % (key, self.api.last_headers))
+
+
 class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
