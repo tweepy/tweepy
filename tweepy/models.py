@@ -2,10 +2,8 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.error import TweepError
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
-        parse_search_datetime, unescape_html
-
+from tweepy.utils import import_simplejson, parse_datetime, parse_html_value, \
+        parse_a_href, parse_search_datetime, unescape_html
 
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
@@ -15,6 +13,8 @@ class Model(object):
 
     def __init__(self, api=None):
         self._api = api
+        self.json_lib = import_simplejson()
+        self.payload = ''
 
     def __getstate__(self):
         # pickle
@@ -28,7 +28,11 @@ class Model(object):
     @classmethod
     def parse(cls, api, json):
         """Parse a JSON object into a model instance."""
-        raise NotImplementedError
+        if hasattr(cls, '_parse'):
+            cls.payload = cls.json_lib.dumps(json)
+            cls._parse(api, json)
+        else:
+            raise NotImplementedError
 
     @classmethod
     def parse_list(cls, api, json_list):
@@ -42,8 +46,7 @@ class Model(object):
 
 class Status(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         status = cls(api)
         for k, v in json.items():
             if k == 'user':
@@ -86,8 +89,7 @@ class Status(Model):
 
 class User(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         user = cls(api)
         for k, v in json.items():
             if k == 'created_at':
@@ -148,8 +150,7 @@ class User(Model):
 
 class DirectMessage(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         dm = cls(api)
         for k, v in json.items():
             if k == 'sender' or k == 'recipient':
@@ -166,8 +167,7 @@ class DirectMessage(Model):
 
 class Friendship(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         relationship = json['relationship']
 
         # parse source
@@ -185,8 +185,7 @@ class Friendship(Model):
 
 class Category(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         category = cls(api)
         for k, v in json.items():
             setattr(category, k, v)
@@ -195,8 +194,7 @@ class Category(Model):
 
 class SavedSearch(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         ss = cls(api)
         for k, v in json.items():
             if k == 'created_at':
@@ -211,8 +209,7 @@ class SavedSearch(Model):
 
 class SearchResult(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         result = cls()
         for k, v in json.items():
             if k == 'created_at':
@@ -242,8 +239,7 @@ class SearchResult(Model):
 
 class List(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         lst = List(api)
         for k,v in json.items():
             if k == 'user':
@@ -297,8 +293,7 @@ class List(Model):
         return self._api.is_subscribed_list(self.user.screen_name, self.slug, id)
 
 class Relation(Model):
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         result = cls(api)
         for k,v in json.items():
             if k == 'value' and json['kind'] in ['Tweet', 'LookedupStatus']:
@@ -310,8 +305,7 @@ class Relation(Model):
         return result
 
 class Relationship(Model):
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         result = cls(api)
         for k,v in json.items():
             if k == 'connections':
@@ -323,15 +317,13 @@ class Relationship(Model):
 
 class JSONModel(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         return json
 
 
 class IDModel(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         if isinstance(json, list):
             return json
         else:
@@ -340,8 +332,7 @@ class IDModel(Model):
 
 class BoundingBox(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         result = cls(api)
         if json is not None:
             for k, v in json.items():
@@ -371,8 +362,7 @@ class BoundingBox(Model):
 
 class Place(Model):
 
-    @classmethod
-    def parse(cls, api, json):
+    def _parse(cls, api, json):
         place = cls(api)
         for k, v in json.items():
             if k == 'bounding_box':
