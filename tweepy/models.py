@@ -402,6 +402,25 @@ class Place(Model):
             results.append(cls.parse(api, obj))
         return results
 
+class Activity(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        act = cls(api)
+        for k,v in json.items():
+            if k == 'sources':
+                users = User.parse_list(api, v)
+                setattr(act, k, users)
+            elif k == 'targets':
+                if json['action'] in ('favorite', 'retweet'):
+                    targets = Status.parse_list(api, v)
+                else:
+                    targets = User.parse_list(api, v)
+                setattr(act, k, targets)
+            else:
+                setattr(act, k, v)
+        return act
+
 class ModelFactory(object):
     """
     Used by parsers for creating instances
@@ -419,6 +438,7 @@ class ModelFactory(object):
     list = List
     relation = Relation
     relationship = Relationship
+    activity = Activity
 
     json = JSONModel
     ids = IDModel

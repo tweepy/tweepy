@@ -676,6 +676,14 @@ class API(object):
         allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
 
+    """ activity """
+    activity = bind_api(
+        path = '/activity/by_friends.json',
+        payload_type = 'activity', payload_list = True,
+        allowed_param = ['include_entities', 'max_id'],
+        require_auth = True
+    )
+
     """ Internal use only """
     @staticmethod
     def _pack_image(filename, max_size):
