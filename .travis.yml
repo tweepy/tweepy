@@ -1,11 +1,24 @@
+---
+script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests tests:TweepyErrorTests
 language: python
+env:
+  global:
+    - TWITTER_USERNAME="tweepytest"
+    - secure: |-
+        MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
+        EM+cnKavRLHTbKpoHPIzzhKx9DQLrxtYy+s3Rw9AeGo8K3LA7mcn4T4eCH7s
+        RGaEkEqH4wTbe01zsmBJ9n9pALmtFgDk9WeDlpAY9wc5cAPgrZ4=
+    - secure: |-
+        f4nCh413cDJF3llGsUdaSz8Rw8WaEDzsSAqa7rK8IcozvS6+S82nm8A/xKYg
+        i6A6uC081XWa6JqQ9hyTxHam3OWGAYrytELrEUfkX4ZYMM8lmQYCmnhrN9r/
+        FaX1haT4lRfm9r0zAYZileLVmcTg8LSZzpRowA/DH9ZO8QD76b4=
+    - secure: |-
+        YxZerqEAifcNS3qTbWyr2MAxDl1hMGv2p87nmw+AHP62LoTGEhHtulQdadjG
+        CNdhLzyIY+GgRotWVu39OfVPRKyfMBFrpPdUY7tKSZ/O8Ct9792mrSvCOpOV
+        Li/TYytFtrNQiB7yjcoaub1RabffBcLbu5YzbWN4gPrukQV03Jc=
+    - secure: |-
+        nKkytraqLGUm33K1GpwkjOyxACDHYw4GMvOGyDwVTX7VNwqxbkUojB7qXYoQ
+        JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
+        aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
 python:
   - "2.7"
-script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests tests:TweepyErrorTests
-env:
-  TWITTER_USERNAME="tweepytest"
-  CONSUMER_KEY="cjgm143dG9adHpiB4BsoQ"
-  CONSUMER_SECRET="SpKzSXf16fEQ3AZtiRy8PkGOOgTSmL3Cdmh7o0D8"
-  ACCESS_KEY="82301637-v1wF1jWd7oa2ZFsIDUNlPKSpTdJ6f8dIMz1Zwmy58"
-  ACCESS_SECRET="21oUZmKWYuv7PZTcj13UFpPlmh7HD6glR8yayrOgg8"
-
