@@ -81,6 +81,36 @@ class TweepyAPITests(unittest.TestCase):
         deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
+    def testupdateanddestroystatuswithmedia(self):
+        # test update
+        text = 'testing %i' % random.randint(0, 1000)
+        filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures/test_image.jpg')
+        update = self.api.update_status_with_media(filename, status=text)
+        self.assertTrue(update.text.startswith(text))
+
+        # test destroy
+        deleted = self.api.destroy_status(id=update.id)
+        self.assertEqual(deleted.id, update.id)
+
+    def testupdateanddestroystatuswithmediadjango(self):
+        try:
+            # support for Django File objects
+            from django.core.files import File
+
+            # test update
+            text = 'testing %i' % random.randint(0, 1000)
+            filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures/test_image.jpg')
+            with open(filename, 'rb') as fd:
+                django_file = File(fd)
+                update = self.api.update_status_with_media(django_file, status=text)
+                self.assertTrue(update.text.startswith(text))
+
+            # test destroy
+            deleted = self.api.destroy_status(id=update.id)
+            self.assertEqual(deleted.id, update.id)
+        except ImportError:
+            raise SkipTest()
+
     def testgetuser(self):
         u = self.api.get_user('twitter')
         self.assertEqual(u.screen_name, 'twitter')
