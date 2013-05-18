@@ -207,7 +207,6 @@ class TweepyAPITests(unittest.TestCase):
         original = self.api.me()
         profile = {
             'name': 'Tweepy test 123',
-            'url': 'http://www.example.com',
             'location': 'pytopia',
             'description': 'just testing things out'
         }
