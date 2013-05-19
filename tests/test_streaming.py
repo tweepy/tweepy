@@ -20,6 +20,10 @@ class MockStreamListener(StreamListener):
         if self.connect_cb:
             self.connect_cb()
 
+    def on_timeout(self):
+        self.test_case.fail('timeout')
+        return False
+
     def on_status(self, status):
         self.status_count += 1
         self.test_case.assertIsInstance(status, Status)
@@ -30,7 +34,7 @@ class TweepyStreamTests(unittest.TestCase):
     def setUp(self):
         self.auth = create_auth()
         self.listener = MockStreamListener(self)
-        self.stream = Stream(self.auth, self.listener)
+        self.stream = Stream(self.auth, self.listener, timeout=3.0)
 
     def tearDown(self):
         self.stream.disconnect()
@@ -48,6 +52,13 @@ class TweepyStreamTests(unittest.TestCase):
     def test_sample(self):
         self.listener.status_stop_count = 10
         self.stream.sample()
+        self.assertEquals(self.listener.status_count,
+                          self.listener.status_stop_count)
+
+    def test_filter_track(self):
+        self.listener.status_stop_count = 5
+        phrases = ['twitter']
+        self.stream.filter(track=phrases)
         self.assertEquals(self.listener.status_count,
                           self.listener.status_stop_count)
 
