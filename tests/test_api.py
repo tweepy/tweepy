@@ -8,13 +8,7 @@ from nose import SkipTest
 from tweepy import (API, OAuthHandler, Friendship, Cursor,
                     MemoryCache, FileCache)
 
-"""Configurations"""
-# Must supply twitter account credentials for tests
-username = os.environ.get('TWITTER_USERNAME', '')
-oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')
-oauth_consumer_secret = os.environ.get('CONSUMER_SECRET', '')
-oauth_token = os.environ.get('ACCESS_KEY', '')
-oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
+from config import *
 
 test_tweet_id = '266367358078169089'
 
@@ -354,25 +348,6 @@ class TweepyCursorTests(unittest.TestCase):
 
         pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
         self.assert_(len(pages) == 5)
-
-class TweepyAuthTests(unittest.TestCase):
-
-    def testoauth(self):
-        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
-
-        # test getting access token
-        auth_url = auth.get_authorization_url()
-        print 'Please authorize: ' + auth_url
-        verifier = raw_input('PIN: ').strip()
-        self.assert_(len(verifier) > 0)
-        access_token = auth.get_access_token(verifier)
-        self.assert_(access_token is not None)
-
-        # build api object test using oauth
-        api = API(auth)
-        s = api.update_status('test %i' % random.randint(0, 1000))
-        api.destroy_status(s.id)
-
 
 class TweepyCacheTests(unittest.TestCase):
 

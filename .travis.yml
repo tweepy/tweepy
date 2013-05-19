@@ -1,5 +1,5 @@
 ---
-script: nosetests -v tests:TweepyAPITests tests:TweepyCursorTests tests:TweepyCacheTests tests:TweepyErrorTests
+script: nosetests -v tests.test_api
 language: python
 env:
   global:
