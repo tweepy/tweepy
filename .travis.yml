@@ -1,5 +1,5 @@
 ---
-script: nosetests -v tests.test_api
+script: nosetests -v tests.test_api tests.test_streaming
 language: python
 env:
   global:
