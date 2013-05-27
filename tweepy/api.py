@@ -17,8 +17,8 @@ class API(object):
     def __init__(self, auth_handler=None,
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=True, api_root='/1.1', search_root='',
-            retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None, is_cached_result=False):
+            retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
+            parser=None, compression=False, is_cached_result=False):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -26,9 +26,11 @@ class API(object):
         self.search_root = search_root
         self.cache = cache
         self.secure = secure
+        self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
+        self.timeout = timeout
         self.parser = parser or ModelParser()
         self.is_cached_result = is_cached_result
 
@@ -260,7 +262,7 @@ class API(object):
 
     """ Perform bulk look up of friendships from user ID or screenname """
     def lookup_friendships(self, user_ids=None, screen_names=None):
-	    return self._lookup_friendships(list_to_csv(user_ids), list_to_csv(screen_names))
+        return self._lookup_friendships(list_to_csv(user_ids), list_to_csv(screen_names))
 
     _lookup_friendships = bind_api(
         path = '/friendships/lookup.json',

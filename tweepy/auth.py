@@ -138,9 +138,9 @@ class OAuthHandler(AuthHandler):
                 oauth_consumer=self._consumer,
                 http_method='POST', http_url=url,
                 parameters = {
-		            'x_auth_mode': 'client_auth',
-		            'x_auth_username': username,
-		            'x_auth_password': password
+                    'x_auth_mode': 'client_auth',
+                    'x_auth_username': username,
+                    'x_auth_password': password
                 }
             )
             request.sign_request(self._sigmethod, self._consumer, None)

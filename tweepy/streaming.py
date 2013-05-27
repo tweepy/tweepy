@@ -22,6 +22,15 @@ class StreamListener(object):
     def __init__(self, api=None):
         self.api = api or API()
 
+    def on_connect(self):
+        """Called once connected to streaming server.
+
+        This will be invoked once a successful response
+        is received from the server. Allows the listener
+        to perform some work prior to entering the read loop.
+        """
+        pass
+
     def on_data(self, data):
         """Called when raw data is received from connection.
 
@@ -114,6 +123,7 @@ class Stream(object):
                     sleep(self.retry_time)
                 else:
                     error_counter = 0
+                    self.listener.on_connect()
                     self._read_loop(resp)
             except timeout:
                 if self.listener.on_timeout() == False:
