@@ -403,35 +403,35 @@ class NotifyIfCachedResultTests(unittest.TestCase):
         self.api.retry_delay = 5
 
         if not os.path.exists('cache_test_dir'):
-			os.mkdir('cache_test_dir')
+            os.mkdir('cache_test_dir')
 
         self.api.cache = FileCache('cache_test_dir')
         self.api.cache.flush()
 
     def testhometimeline_cache(self):
-		
-		# no calls made, shouldnt be cached
-		self.assertEqual(self.api.is_cached_result, False)
+        
+        # no calls made, shouldnt be cached
+        self.assertEqual(self.api.is_cached_result, False)
 
-		# shouldnt be cached because we just set the cache
-		self.api.home_timeline()
-		self.assertEqual(self.api.is_cached_result, False)
+        # shouldnt be cached because we just set the cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, False)
 
-		# Now should read from cache
-		self.api.home_timeline()
-		self.assertEqual(self.api.is_cached_result, True)
+        # Now should read from cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, True)
 
-		# Now shouldnt read from cache, new api method call
-		self.api.user_timeline('twitter')
-		self.assertEqual(self.api.is_cached_result, False)
+        # Now shouldnt read from cache, new api method call
+        self.api.user_timeline('twitter')
+        self.assertEqual(self.api.is_cached_result, False)
 
-		# Now should read from cache, just made api method call
-		self.api.user_timeline('twitter')
-		self.assertEqual(self.api.is_cached_result, True)
+        # Now should read from cache, just made api method call
+        self.api.user_timeline('twitter')
+        self.assertEqual(self.api.is_cached_result, True)
 
-		# Should still read from cache
-		self.api.home_timeline()
-		self.assertEqual(self.api.is_cached_result, True)
+        # Should still read from cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, True)
 
 
 
