@@ -393,7 +393,7 @@ class TweepyCacheTests(unittest.TestCase):
         os.rmdir('cache_test_dir')
 
 
-class TweepyAPICacheNotifyTests(unittest.TestCase):
+class NotifyIfCachedResultTests(unittest.TestCase):
 
     def setUp(self):
         auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
