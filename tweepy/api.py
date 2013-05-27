@@ -18,7 +18,7 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=True, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None,
-            parser=None):
+            parser=None, is_cached_result=False):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -30,6 +30,7 @@ class API(object):
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
         self.parser = parser or ModelParser()
+        self.is_cached_result = is_cached_result
 
     """ statuses/home_timeline """
     home_timeline = bind_api(
