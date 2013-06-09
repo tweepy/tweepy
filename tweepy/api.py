@@ -376,6 +376,17 @@ class API(object):
             require_auth = True
         )(self, post_data=post_data, headers=headers)
 
+    """ account/update_profile_banner """
+    def update_profile_banner(self, filename, *args, **kargs):
+        headers, post_data = API._pack_image(filename, 700, form_field="banner")
+        bind_api(
+            path = '/account/update_profile_banner.json',
+            method = 'POST',
+            allowed_param = ['width', 'height', 'offset_left', 'offset_right'],
+            require_auth = True
+        )(self, post_data=post_data, headers=headers)
+
+
     """ account/update_profile """
     update_profile = bind_api(
         path = '/account/update_profile.json',
