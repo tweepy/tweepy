@@ -165,7 +165,7 @@ def bind_api(**config):
 
             # If an error was returned, throw an exception
             self.api.last_response = resp
-            if resp.status != 200:
+            if resp.status not in [200, 201, 202]:
                 try:
                     error_msg = self.api.parser.parse_error(resp.read())
                 except Exception:
