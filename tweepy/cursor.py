@@ -93,7 +93,6 @@ class IdIterator(BaseIterator):
         data = self.method(max_id = max_id, *self.args, **self.kargs)
         self.max_id = data.max_id
         self.since_id = data.since_id
-        print 'next!'
         return data
 
     def prev(self):
