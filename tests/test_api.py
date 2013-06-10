@@ -312,43 +312,6 @@ class TweepyAPITests(unittest.TestCase):
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
-class TweepyCursorTests(unittest.TestCase):
-
-    def setUp(self):
-        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
-        auth.set_access_token(oauth_token, oauth_token_secret)
-        self.api = API(auth)
-        self.api.retry_count = 2
-        self.api.retry_delay = 5
-
-    def testpagecursoritems(self):
-        items = list(Cursor(self.api.user_timeline).items())
-        self.assert_(len(items) > 0)
-
-        items = list(Cursor(self.api.user_timeline, 'twitter').items(30))
-        self.assert_(len(items) == 30)
-
-    def testpagecursorpages(self):
-        pages = list(Cursor(self.api.user_timeline).pages())
-        self.assert_(len(pages) > 0)
-
-        pages = list(Cursor(self.api.user_timeline, 'twitter').pages(5))
-        self.assert_(len(pages) == 5)
-
-    def testcursorcursoritems(self):
-        items = list(Cursor(self.api.friends_ids).items())
-        self.assert_(len(items) > 0)
-
-        items = list(Cursor(self.api.followers_ids, 'twitter').items(30))
-        self.assert_(len(items) == 30)
-
-    def testcursorcursorpages(self):
-        pages = list(Cursor(self.api.friends_ids).pages())
-        self.assert_(len(pages) > 0)
-
-        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
-        self.assert_(len(pages) == 5)
-
 class TweepyCacheTests(unittest.TestCase):
 
     timeout = 2.0
