@@ -91,6 +91,8 @@ class IdIterator(BaseIterator):
         # to avoid requesting duplicate items.
         max_id = self.since_id - 1 if self.max_id else None
         data = self.method(max_id = max_id, *self.args, **self.kargs)
+        if len(data) == 0:
+            raise StopIteration
         self.max_id = data.max_id
         self.since_id = data.since_id
         return data
@@ -99,6 +101,8 @@ class IdIterator(BaseIterator):
         """Fetch a set of items with IDs greater than current set."""
         since_id = self.max_id
         data = self.method(since_id = since_id, *self.args, **self.kargs)
+        if len(data) == 0:
+            raise StopIteration
         self.max_id = data.max_id
         self.since_id = data.since_id
         return data

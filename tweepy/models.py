@@ -16,11 +16,17 @@ class ResultSet(list):
 
     @property
     def max_id(self):
-        return self._max_id or max(self.ids())
+        if self._max_id:
+            return self._max_id
+        ids = self.ids()
+        return max(ids) if ids else None
 
     @property
     def since_id(self):
-        return self._since_id or min(self.ids())
+        if self._since_id:
+            return self._since_id
+        ids = self.ids()
+        return min(ids) if ids else None
 
     def ids(self):
         return [item.id for item in self if hasattr(item, 'id')]
