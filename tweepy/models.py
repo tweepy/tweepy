@@ -245,9 +245,8 @@ class SearchResult(Model):
 
     @classmethod
     def parse_list(cls, api, json_list, result_set=None):
-        results = ResultSet()
-        results.max_id = json_list.get('max_id')
-        results.since_id = json_list.get('since_id')
+        results = ResultSet(json_list.get('max_id',
+                            json_list.get('since_id')))
         results.refresh_url = json_list.get('refresh_url')
         results.next_page = json_list.get('next_page')
         results.results_per_page = json_list.get('results_per_page')
