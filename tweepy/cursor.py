@@ -11,8 +11,12 @@ class Cursor(object):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, args, kargs)
-            else:
+            elif method.pagination_mode == 'id':
+                self.iterator = IdIterator(method, args, kargs)
+            elif method.pagination_mode == 'page':
                 self.iterator = PageIterator(method, args, kargs)
+            else:
+                raise TweepError('Invalid pagination mode.')
         else:
             raise TweepError('This method does not perform pagination')
 
@@ -72,6 +76,35 @@ class CursorIterator(BaseIterator):
                 cursor=self.prev_cursor, *self.args, **self.kargs
         )
         self.count -= 1
+        return data
+
+class IdIterator(BaseIterator):
+
+    def __init__(self, method, args, kargs):
+        BaseIterator.__init__(self, method, args, kargs)
+        self.max_id = kargs.get('max_id')
+        self.since_id = kargs.get('since_id')
+
+    def next(self):
+        """Fetch a set of items with IDs less than current set."""
+        # max_id is inclusive so decrement by one
+        # to avoid requesting duplicate items.
+        max_id = self.since_id - 1 if self.max_id else None
+        data = self.method(max_id = max_id, *self.args, **self.kargs)
+        if len(data) == 0:
+            raise StopIteration
+        self.max_id = data.max_id
+        self.since_id = data.since_id
+        return data
+
+    def prev(self):
+        """Fetch a set of items with IDs greater than current set."""
+        since_id = self.max_id
+        data = self.method(since_id = since_id, *self.args, **self.kargs)
+        if len(data) == 0:
+            raise StopIteration
+        self.max_id = data.max_id
+        self.since_id = data.since_id
         return data
 
 class PageIterator(BaseIterator):

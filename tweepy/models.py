@@ -9,7 +9,27 @@ from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
 
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
+    def __init__(self, max_id=None, since_id=None):
+        super(ResultSet, self).__init__()
+        self._max_id = max_id
+        self._since_id = since_id
 
+    @property
+    def max_id(self):
+        if self._max_id:
+            return self._max_id
+        ids = self.ids()
+        return max(ids) if ids else None
+
+    @property
+    def since_id(self):
+        if self._since_id:
+            return self._since_id
+        ids = self.ids()
+        return min(ids) if ids else None
+
+    def ids(self):
+        return [item.id for item in self if hasattr(item, 'id')]
 
 class Model(object):
 
