@@ -229,33 +229,18 @@ class SavedSearch(Model):
         return self._api.destroy_saved_search(self.id)
 
 
-class SearchResult(Model):
+class SearchResults(ResultSet):
 
     @classmethod
     def parse(cls, api, json):
-        result = cls()
-        for k, v in json.items():
-            if k == 'created_at':
-                setattr(result, k, parse_search_datetime(v))
-            elif k == 'source':
-                setattr(result, k, parse_html_value(unescape_html(v)))
-            else:
-                setattr(result, k, v)
-        return result
+        metadata = json['search_metadata']
+        results = SearchResults(metadata.get('max_id'), metadata.get('since_id'))
+        results.refresh_url = metadata.get('refresh_url')
+        results.completed_in = metadata.get('completed_in')
+        results.query = metadata.get('query')
 
-    @classmethod
-    def parse_list(cls, api, json_list, result_set=None):
-        results = ResultSet(json_list.get('max_id',
-                            json_list.get('since_id')))
-        results.refresh_url = json_list.get('refresh_url')
-        results.next_page = json_list.get('next_page')
-        results.results_per_page = json_list.get('results_per_page')
-        results.page = json_list.get('page')
-        results.completed_in = json_list.get('completed_in')
-        results.query = json_list.get('query')
-
-        for obj in json_list['results']:
-            results.append(cls.parse(api, obj))
+        for status in json['statuses']:
+            results.append(Status.parse(api, status))
         return results
 
 
@@ -433,7 +418,7 @@ class ModelFactory(object):
     direct_message = DirectMessage
     friendship = Friendship
     saved_search = SavedSearch
-    search_result = SearchResult
+    search_results = SearchResults
     category = Category
     list = List
     relation = Relation
