@@ -98,6 +98,5 @@ def list_to_csv(item_list):
         return ','.join([str(i) for i in item_list])
 
 def urlencode_noplus(query):
-    return '&'.join(['%s=%s' % (quote(str(k)), quote(str(v))) \
+    return '&'.join(['%s=%s' % (quote(str(k), ''), quote(str(v), '')) \
         for k, v in query.iteritems()])
-
