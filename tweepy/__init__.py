@@ -21,7 +21,9 @@ from tweepy.cursor import Cursor
 api = API()
 
 def debug(enable=True, level=1):
-
-    import httplib
-    httplib.HTTPConnection.debuglevel = level
+    try:
+        from http.client import HTTPConnection
+    except ImportError:  # Python < 3
+        from httplib import HTTPConnection
+    HTTPConnection.debuglevel = level
 

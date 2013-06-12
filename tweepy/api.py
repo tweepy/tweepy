@@ -322,7 +322,7 @@ class API(object):
                 require_auth = True,
                 allowed_param = ['include_entities', 'skip_status'],
             )(self, **kargs)
-        except TweepError, e:
+        except TweepError as e:
             if e.response and e.response.status == 401:
                 return False
             raise

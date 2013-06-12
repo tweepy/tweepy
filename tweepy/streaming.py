@@ -2,10 +2,13 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
 from socket import timeout
 from threading import Thread
 from time import sleep
+try:
+    from http.client import HTTPConnection, HTTPSConnection
+except ImportError:  # Python < 3
+    from httplib import HTTPConnection, HTTPSConnection
 
 from tweepy.models import Status
 from tweepy.api import API
@@ -108,9 +111,9 @@ class Stream(object):
                 break
             try:
                 if self.scheme == "http":
-                    conn = httplib.HTTPConnection(self.host)
+                    conn = HTTPConnection(self.host)
                 else:
-                    conn = httplib.HTTPSConnection(self.host)
+                    conn = HTTPSConnection(self.host)
                 self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
@@ -132,7 +135,7 @@ class Stream(object):
                     break
                 conn.close()
                 sleep(self.snooze_time)
-            except Exception, exception:
+            except Exception as exception:
                 # any other exception is fatal, so kill loop
                 break
 

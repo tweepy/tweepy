@@ -4,10 +4,20 @@
 
 from datetime import datetime
 import time
-import htmlentitydefs
 import re
 import locale
-from urllib import quote
+try:
+    from html.entities import name2codepoint
+    from urllib.parse import quote
+except ImportError:  # Python < 3
+    from htmlentitydefs import name2codepoint
+    from urllib import quote
+import sys
+if sys.version_info > (3, ):
+    text_type, binary_type = str, bytes
+else:
+    text_type, binary_type = unicode, str
+string_types = (text_type, binary_type)
 
 
 def parse_datetime(string):
@@ -62,7 +72,7 @@ def unescape_html(text):
         else:
             # named entity
             try:
-                text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
+                text = unichr(name2codepoint[text[1:-1]])
             except KeyError:
                 pass
         return text # leave as is
@@ -71,10 +81,10 @@ def unescape_html(text):
 
 def convert_to_utf8_str(arg):
     # written by Michael Norton (http://docondev.blogspot.com/)
-    if isinstance(arg, unicode):
-        arg = arg.encode('utf-8')
-    elif not isinstance(arg, str):
+    if not isinstance(arg, string_types):
         arg = str(arg)
+    if isinstance(arg, text_type):
+        arg = arg.encode('utf-8')
     return arg
 
 
@@ -89,7 +99,7 @@ def import_simplejson():
             try:
                 from django.utils import simplejson as json  # Google App Engine
             except ImportError:
-                raise ImportError, "Can't load a json library"
+                raise ImportError("Can't load a json library")
 
     return json
 
