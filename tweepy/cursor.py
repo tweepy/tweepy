@@ -87,9 +87,7 @@ class IdIterator(BaseIterator):
 
     def next(self):
         """Fetch a set of items with IDs less than current set."""
-        # max_id is inclusive so decrement by one
-        # to avoid requesting duplicate items.
-        max_id = self.since_id - 1 if self.max_id else None
+        max_id = self.since_id if self.max_id else None
         data = self.method(max_id = max_id, *self.args, **self.kargs)
         if len(data) == 0:
             raise StopIteration
