@@ -8,8 +8,6 @@ class TweepyCursorTests(unittest.TestCase):
 
     def setUp(self):
         self.api = API(create_auth())
-        self.api.retry_count = 2
-        self.api.retry_delay = 5
 
     def testidcursoritems(self):
         items = list(Cursor(self.api.user_timeline).items(25))
@@ -20,16 +18,16 @@ class TweepyCursorTests(unittest.TestCase):
         self.assertEqual(len(pages), 5)
 
     def testcursorcursoritems(self):
-        items = list(Cursor(self.api.friends_ids).items())
-        self.assert_(len(items) > 0)
+        items = list(Cursor(self.api.friends_ids).items(10))
+        self.assertEqual(len(items), 10)
 
-        items = list(Cursor(self.api.followers_ids, 'twitter').items(30))
-        self.assert_(len(items) == 30)
+        items = list(Cursor(self.api.followers_ids, 'twitter').items(10))
+        self.assertEqual(len(items), 10)
 
     def testcursorcursorpages(self):
-        pages = list(Cursor(self.api.friends_ids).pages())
-        self.assert_(len(pages) > 0)
+        pages = list(Cursor(self.api.friends_ids).pages(1))
+        self.assert_(len(pages) == 1)
 
-        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(5))
-        self.assert_(len(pages) == 5)
+        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(1))
+        self.assert_(len(pages) == 1)
 
