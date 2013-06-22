@@ -15,15 +15,17 @@ class API(object):
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
-            host='api.twitter.com', search_host='search.twitter.com',
-             cache=None, secure=True, api_root='/1.1', search_root='',
+            host='api.twitter.com', search_host='search.twitter.com', upload_host='upload.twitter.com',
+            cache=None, secure=True, api_root='/1.1', search_root='', upload_root='/1.1',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None, compression=False):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
+        self.upload_host = upload_host
         self.api_root = api_root
         self.search_root = search_root
+        self.upload_root = upload_root
         self.cache = cache
         self.secure = secure
         self.compression = compression
@@ -104,6 +106,22 @@ class API(object):
         allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
         require_auth = True
     )
+
+    """ status/update_with_media """
+    def status_update_with_media(self, filename, *args, **kargs):
+        """
+        " https://dev.twitter.com/docs/api/1.1/post/statuses/update_with_media
+        """
+        headers, post_data = API._pack_media(filename, 3072)
+        bind_api(
+            path = '/statuses/update_with_media.json',
+            method = 'POST',
+            payload_type = 'status',
+            allowed_param = ['status'],
+            require_auth = True,
+            upload_api = True,
+            secure = True
+        )(self, post_data=post_data, headers=headers, status=kargs.get('status', ''))
 
     """ statuses/destroy """
     destroy_status = bind_api(
@@ -712,6 +730,49 @@ class API(object):
         headers = {
             'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
             'Content-Length': str(len(body))
+        }
+
+        return headers, body
+    
+    @staticmethod
+    def _pack_media(filename, max_size):
+        """
+        " Pack media from file into multipart-formdata post body
+        " :photo_size_limit
+        " https://dev.twitter.com/docs/api/1.1/get/help/configuration
+        """
+        try:
+            if os.path.getsize(filename) > (max_size * 1024):
+                raise TweepError('File is too big, must be less than %dkb.' % max_size)
+        except os.error, e:
+            raise TweepError('Unable to access file')
+
+        # image must be gif, jpeg, or png
+        file_type = mimetypes.guess_type(filename)
+        if file_type is None:
+            raise TweepError('Could not determine file type')
+        file_type = file_type[0]
+        if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
+            raise TweepError('Invalid file type for image: %s' % file_type)
+
+        # build the mulitpart-formdata body
+        fp = open(filename, 'rb')
+        BOUNDARY = 'Tw3ePy'
+        body = []
+        body.append('--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="media[]"; filename="%s"' % filename)
+        body.append('Content-Type: %s' % file_type)
+        body.append('')
+        body.append(fp.read())
+        body.append('--' + BOUNDARY + '--')
+        body.append('')
+        fp.close()
+        body = '\r\n'.join(body)
+
+        # build headers
+        headers = {
+            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
+            'Content-Length': len(body)
         }
 
         return headers, body
