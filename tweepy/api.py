@@ -15,7 +15,7 @@ class API(object):
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
-            host='api.twitter.com', search_host='search.twitter.com', upload_host='upload.twitter.com',
+            host='api.twitter.com', search_host='search.twitter.com', upload_host='api.twitter.com',
             cache=None, secure=True, api_root='/1.1', search_root='', upload_root='/1.1',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None, compression=False):
