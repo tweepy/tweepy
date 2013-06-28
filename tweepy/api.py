@@ -729,7 +729,7 @@ class API(object):
 
 
     @staticmethod
-    def _pack_photo(file, status):
+    def _pack_photo(photo, status):
         """Takes photo as a bytestring"""
         BOUNDARY = 'Tw3ePy'
         body = []
