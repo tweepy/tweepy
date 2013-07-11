@@ -2,7 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
+import requests
 import urllib
 import time
 import re
@@ -28,6 +28,7 @@ def bind_api(**config):
         require_auth = config.get('require_auth', False)
         search_api = config.get('search_api', False)
         use_cache = config.get('use_cache', True)
+        session = requests.Session()
 
         def __init__(self, api, args, kargs):
             # If authentication is required and no credentials
@@ -43,7 +44,7 @@ def bind_api(**config):
             self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
             self.wait_on_rate_limit_notify = kargs.pop('wait_on_rate_limit_notify', api.wait_on_rate_limit_notify)
             self.parser = kargs.pop('parser', api.parser)
-            self.headers = kargs.pop('headers', {})
+            self.session.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
@@ -69,42 +70,43 @@ def bind_api(**config):
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
-            self.headers['Host'] = self.host
+
+            self.session.headers['Host'] = self.host
             # Monitoring rate limits
             self._remaining_calls = None
             self._reset_time = None
 
         def build_parameters(self, args, kargs):
-            self.parameters = {}
+            self.session.params = {}
             for idx, arg in enumerate(args):
                 if arg is None:
                     continue
                 try:
-                    self.parameters[self.allowed_param[idx]] = convert_to_utf8_str(arg)
+                    self.session.params[self.allowed_param[idx]] = convert_to_utf8_str(arg)
                 except IndexError:
                     raise TweepError('Too many parameters supplied!')
 
             for k, arg in kargs.items():
                 if arg is None:
                     continue
-                if k in self.parameters:
+                if k in self.session.params:
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
 
-                self.parameters[k] = convert_to_utf8_str(arg)
+                self.session.params[k] = convert_to_utf8_str(arg)
 
         def build_path(self):
             for variable in re_path_template.findall(self.path):
                 name = variable.strip('{}')
 
-                if name == 'user' and 'user' not in self.parameters and self.api.auth:
+                if name == 'user' and 'user' not in self.session.params and self.api.auth:
                     # No 'user' parameter provided, fetch it from Auth instead.
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.parameters[name])
+                        value = urllib.quote(self.session.params[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
-                    del self.parameters[name]
+                    del self.session.params[name]
 
                 self.path = self.path.replace(variable, value)
 
@@ -113,8 +115,7 @@ def bind_api(**config):
 
             # Build the request URL
             url = self.api_root + self.path
-            if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+            full_url = self.scheme + self.host + url
 
             # Query the cache if one is available
             # and this request uses a GET method.
@@ -146,28 +147,21 @@ def bind_api(**config):
                             print "Max retries reached. Sleeping for: " + str(sleep_time)
                         time.sleep(sleep_time + 5) # sleep for few extra sec
 
-                # Open connection
-                if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
-                else:
-                    conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
-
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
-                            self.method, self.headers, self.parameters
+                            full_url,
+                            self.method, self.session.headers, self.session.params
                     )
 
                 # Request compression if configured
                 if self.api.compression:
-                    self.headers['Accept-encoding'] = 'gzip'
+                    self.session.headers['Accept-encoding'] = 'gzip'
 
                 # Execute request
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
-                    resp = conn.getresponse()
-                except Exception as e:
+                    resp = self.session.request(self.method, full_url, data=self.post_data, timeout=self.api.timeout)
+                except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
                 rem_calls = resp.getheader('x-rate-limit-remaining')
                 if rem_calls is not None:
@@ -181,12 +175,12 @@ def bind_api(**config):
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
-                if resp.status == 200:
+                if resp.status_code == 200:
                     break
-                elif (resp.status == 429 or resp.status == 420) and self.wait_on_rate_limit:
-                    if 'retry-after' in resp.msg:
-                        retry_delay = float(resp.msg['retry-after'])
-                elif self.retry_errors and resp.status not in self.retry_errors:
+                elif (resp.status_code == 429 or resp.status_code == 420) and self.wait_on_rate_limit:
+                    if 'retry-after' in resp.headers:
+                        retry_delay = float(resp.headers['retry-after'])
+                elif self.retry_errors and resp.status_code not in self.retry_errors:
                     break
 
                 # Sleep before retrying request again
@@ -197,14 +191,14 @@ def bind_api(**config):
             self.api.last_response = resp
             if resp.status and not 200 <= resp.status < 300:
                 try:
-                    error_msg = self.parser.parse_error(resp.read())
+                    error_msg = self.parser.parse_error(resp.text)
                 except Exception:
-                    error_msg = "Twitter error response: status code = %s" % resp.status
+                    error_msg = "Twitter error response: status code = %s" % resp.status_code
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            body = resp.read()
-            if resp.getheader('Content-Encoding', '') == 'gzip':
+            body = resp.text
+            if resp.headers.get('Content-Encoding', '') == 'gzip':
                 try:
                     zipper = gzip.GzipFile(fileobj=StringIO(body))
                     body = zipper.read()
@@ -212,8 +206,6 @@ def bind_api(**config):
                     raise TweepError('Failed to decompress data: %s' % e)
             
             result = self.parser.parse(self, body)
-
-            conn.close()
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
