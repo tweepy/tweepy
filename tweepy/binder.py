@@ -2,7 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
+import requests
 import urllib
 import time
 import re
@@ -28,6 +28,7 @@ def bind_api(**config):
         require_auth = config.get('require_auth', False)
         search_api = config.get('search_api', False)
         use_cache = config.get('use_cache', True)
+        session = requests.Session()
 
         def __init__(self, api, args, kargs):
             # If authentication is required and no credentials
@@ -40,7 +41,7 @@ def bind_api(**config):
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
-            self.headers = kargs.pop('headers', {})
+            self.session.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
             # Pick correct URL root to use
@@ -66,40 +67,40 @@ def bind_api(**config):
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
-            self.headers['Host'] = self.host
+            self.session.headers['Host'] = self.host
 
         def build_parameters(self, args, kargs):
-            self.parameters = {}
+            self.session.params = {}
             for idx, arg in enumerate(args):
                 if arg is None:
                     continue
 
                 try:
-                    self.parameters[self.allowed_param[idx]] = convert_to_utf8_str(arg)
+                    self.session.params[self.allowed_param[idx]] = convert_to_utf8_str(arg)
                 except IndexError:
                     raise TweepError('Too many parameters supplied!')
 
             for k, arg in kargs.items():
                 if arg is None:
                     continue
-                if k in self.parameters:
+                if k in self.session.params:
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
 
-                self.parameters[k] = convert_to_utf8_str(arg)
+                self.session.params[k] = convert_to_utf8_str(arg)
 
         def build_path(self):
             for variable in re_path_template.findall(self.path):
                 name = variable.strip('{}')
 
-                if name == 'user' and 'user' not in self.parameters and self.api.auth:
+                if name == 'user' and 'user' not in self.session.params and self.api.auth:
                     # No 'user' parameter provided, fetch it from Auth instead.
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.parameters[name])
+                        value = urllib.quote(self.session.params[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
-                    del self.parameters[name]
+                    del self.session.params[name]
 
                 self.path = self.path.replace(variable, value)
 
@@ -108,8 +109,7 @@ def bind_api(**config):
 
             # Build the request URL
             url = self.api_root + self.path
-            if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+            full_url = self.scheme + self.host + url
 
             # Query the cache if one is available
             # and this request uses a GET method.
@@ -132,35 +132,28 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
-                # Open connection
-                if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
-                else:
-                    conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
-
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
-                            self.method, self.headers, self.parameters
+                            full_url,
+                            self.method, self.session.headers, self.session.params
                     )
 
                 # Request compression if configured
                 if self.api.compression:
-                    self.headers['Accept-encoding'] = 'gzip'
+                    self.session.headers['Accept-encoding'] = 'gzip'
 
                 # Execute request
                 try:
-                    conn.request(self.method, url, headers=self.headers, body=self.post_data)
-                    resp = conn.getresponse()
+                    resp = self.session.request(self.method, full_url, data=self.post_data, timeout=self.api.timeout)
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
                 if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
+                    if resp.status_code not in self.retry_errors: break
                 else:
-                    if resp.status == 200: break
+                    if resp.status_code == 200: break
 
                 # Sleep before retrying request again
                 time.sleep(self.retry_delay)
@@ -170,22 +163,20 @@ def bind_api(**config):
             self.api.last_response = resp
             if resp.status and not 200 <= resp.status < 300:
                 try:
-                    error_msg = self.api.parser.parse_error(resp.read())
+                    error_msg = self.api.parser.parse_error(resp.text)
                 except Exception:
-                    error_msg = "Twitter error response: status code = %s" % resp.status
+                    error_msg = "Twitter error response: status code = %s" % resp.status_code
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            body = resp.read()
-            if resp.getheader('Content-Encoding', '') == 'gzip':
+            body = resp.text
+            if resp.headers.get('Content-Encoding', '') == 'gzip':
                 try:
                     zipper = gzip.GzipFile(fileobj=StringIO(body))
                     body = zipper.read()
                 except Exception, e:
                     raise TweepError('Failed to decompress data: %s' % e)
             result = self.api.parser.parse(self, body)
-
-            conn.close()
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
