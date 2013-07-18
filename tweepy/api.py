@@ -376,6 +376,17 @@ class API(object):
             require_auth = True
         )(self, post_data=post_data, headers=headers)
 
+    """ statuses/update_with_media """
+    def update_with_media(self, file, status):
+        headers, post_data = API._pack_photo(file, status)
+        return bind_api(
+            path = '/statuses/update_with_media.json',
+            method = 'POST',
+            payload_type = 'status',
+            allowed_param = ['status'],
+            require_auth = True
+        )(self, post_data=post_data, headers=headers)
+
     """ account/update_profile """
     update_profile = bind_api(
         path = '/account/update_profile.json',
@@ -716,3 +727,29 @@ class API(object):
 
         return headers, body
 
+
+    @staticmethod
+    def _pack_photo(photo, status):
+        """Takes photo as a bytestring"""
+        BOUNDARY = 'Tw3ePy'
+        body = []
+        body.append('--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="status"')
+        body.append('')
+        body.append(status.encode('utf-8'))
+        body.append('--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="media[]"; filename="media.png"')
+        body.append('Content-Type: application/octet-stream')
+        body.append('')
+        body.append(photo)
+        body.append('--' + BOUNDARY + '--')
+        body.append('')
+        body = '\r\n'.join(body)
+
+        # build headers
+        headers = {
+            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
+            'Content-Length': str(len(body))
+        }
+
+        return headers, body
