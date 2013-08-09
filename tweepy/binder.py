@@ -18,6 +18,24 @@ re_path_template = re.compile('{\w+}')
 
 def bind_api(**config):
 
+    class RateLimitInfo(object):
+
+        def __init__(self, headers={}):
+            self.from_headers(headers)
+
+        def from_headers(self, d):
+            self.reset = int(d.get('x-rate-limit-reset', 0))
+            self.remaining = int(d.get('x-rate-limit-remaining', 0))
+            self.limit = int(d.get('x-rate-limit-limit', 0))
+
+        def seconds_till_reset(self, current_time=None):
+            current_time = current_time or time.time()
+            return self.reset - current_time
+
+        def __repr__(self):
+            state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
+            return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
+
     class APIMethod(object):
 
         path = config['path']
@@ -42,6 +60,7 @@ def bind_api(**config):
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
+            self.api_limits = RateLimitInfo()
 
             # Pick correct URL root to use
             if self.search_api:
@@ -180,6 +199,8 @@ def bind_api(**config):
                     body = zipper.read()
                 except Exception, e:
                     raise TweepError('Failed to decompress data: %s' % e)
+
+            self.api_limits.from_headers(resp.getheaders())
             result = self.api.parser.parse(self, body)
 
             conn.close()

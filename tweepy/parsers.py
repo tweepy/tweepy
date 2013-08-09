@@ -8,7 +8,6 @@ from tweepy.error import TweepError
 
 
 class Parser(object):
-
     def parse(self, method, payload):
         """
         Parse the response payload and return the result.
@@ -27,7 +26,6 @@ class Parser(object):
 
 
 class RawParser(Parser):
-
     def __init__(self):
         pass
 
@@ -39,7 +37,6 @@ class RawParser(Parser):
 
 
 class JSONParser(Parser):
-
     payload_format = 'json'
 
     def __init__(self):
@@ -67,14 +64,14 @@ class JSONParser(Parser):
 
 
 class ModelParser(JSONParser):
-
     def __init__(self, model_factory=None):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
     def parse(self, method, payload):
         try:
-            if method.payload_type is None: return
+            if method.payload_type is None:
+                return
             model = getattr(self.model_factory, method.payload_type)
         except AttributeError:
             raise TweepError('No model for this payload type: %s' % method.payload_type)
