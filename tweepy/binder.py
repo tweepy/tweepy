@@ -60,7 +60,6 @@ def bind_api(**config):
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
-            self.api_limits = RateLimitInfo()
 
             # Pick correct URL root to use
             if self.search_api:
@@ -86,6 +85,12 @@ def bind_api(**config):
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
+
+        def headers_to_dict(self, headers):
+            d = {}
+            for k, v in headers:
+                d[k] = v
+            return d
 
         def build_parameters(self, args, kargs):
             self.parameters = {}
@@ -157,8 +162,8 @@ def bind_api(**config):
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
-                            self.method, self.headers, self.parameters
+                        self.scheme + self.host + url,
+                        self.method, self.headers, self.parameters
                     )
 
                 # Request compression if configured
@@ -200,7 +205,7 @@ def bind_api(**config):
                 except Exception, e:
                     raise TweepError('Failed to decompress data: %s' % e)
 
-            self.api_limits.from_headers(resp.getheaders())
+            api_limits.from_headers(self.headers_to_dict(resp.getheaders()))
             result = self.api.parser.parse(self, body)
 
             conn.close()
@@ -211,18 +216,17 @@ def bind_api(**config):
 
             return result
 
-
     def _call(api, *args, **kargs):
-
         method = APIMethod(api, args, kargs)
         return method.execute()
 
+    api_limits = RateLimitInfo()
+    _call.api_limits = api_limits
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
         _call.pagination_mode = 'cursor'
-    elif 'max_id' in APIMethod.allowed_param and \
-         'since_id' in APIMethod.allowed_param:
+    elif 'max_id' in APIMethod.allowed_param and 'since_id' in APIMethod.allowed_param:
         _call.pagination_mode = 'id'
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
