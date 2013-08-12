@@ -4,6 +4,7 @@
 
 from tweepy.error import TweepError
 
+
 class Cursor(object):
     """Pagination helper class"""
 
@@ -32,8 +33,8 @@ class Cursor(object):
         i.limit = limit
         return i
 
-class BaseIterator(object):
 
+class BaseIterator(object):
     def __init__(self, method, args, kargs):
         self.method = method
         self.args = args
@@ -49,8 +50,8 @@ class BaseIterator(object):
     def __iter__(self):
         return self
 
-class CursorIterator(BaseIterator):
 
+class CursorIterator(BaseIterator):
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
         self.next_cursor = -1
@@ -61,7 +62,7 @@ class CursorIterator(BaseIterator):
         if self.next_cursor == 0 or (self.limit and self.count == self.limit):
             raise StopIteration
         data, cursors = self.method(
-                cursor=self.next_cursor, *self.args, **self.kargs
+            cursor=self.next_cursor, *self.args, **self.kargs
         )
         self.prev_cursor, self.next_cursor = cursors
         if len(data) == 0:
@@ -73,13 +74,13 @@ class CursorIterator(BaseIterator):
         if self.prev_cursor == 0:
             raise TweepError('Can not page back more, at first page')
         data, self.next_cursor, self.prev_cursor = self.method(
-                cursor=self.prev_cursor, *self.args, **self.kargs
+            cursor=self.prev_cursor, *self.args, **self.kargs
         )
         self.count -= 1
         return data
 
-class IdIterator(BaseIterator):
 
+class IdIterator(BaseIterator):
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
         self.max_id = kargs.get('max_id')
@@ -93,11 +94,11 @@ class IdIterator(BaseIterator):
 
         # max_id is inclusive so decrement by one
         # to avoid requesting duplicate items.
-        max_id = self.since_id - 1 if self.max_id else None
-        data = self.method(max_id = max_id, *self.args, **self.kargs)
+        max_id = self.max_id - 1 if self.max_id else None
+        data = self.method(max_id=max_id, *self.args, **self.kargs)
         if len(data) == 0:
             raise StopIteration
-        self.max_id = data.max_id
+        self.max_id = min([t.id for t in data])
         self.since_id = data.since_id
         self.count += 1
         return data
@@ -108,7 +109,7 @@ class IdIterator(BaseIterator):
             raise StopIteration
 
         since_id = self.max_id
-        data = self.method(since_id = since_id, *self.args, **self.kargs)
+        data = self.method(since_id=since_id, *self.args, **self.kargs)
         if len(data) == 0:
             raise StopIteration
         self.max_id = data.max_id
@@ -116,8 +117,8 @@ class IdIterator(BaseIterator):
         self.count += 1
         return data
 
-class PageIterator(BaseIterator):
 
+class PageIterator(BaseIterator):
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
         self.current_page = 0
@@ -135,8 +136,8 @@ class PageIterator(BaseIterator):
         self.current_page -= 1
         return self.method(page=self.current_page, *self.args, **self.kargs)
 
-class ItemIterator(BaseIterator):
 
+class ItemIterator(BaseIterator):
     def __init__(self, page_iterator):
         self.page_iterator = page_iterator
         self.limit = 0
