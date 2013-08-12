@@ -3,3 +3,4 @@
 build/
 dist/
 tweepy.egg-info/
+.idea

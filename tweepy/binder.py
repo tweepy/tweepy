@@ -18,6 +18,24 @@ re_path_template = re.compile('{\w+}')
 
 def bind_api(**config):
 
+    class RateLimitInfo(object):
+
+        def __init__(self, headers={}):
+            self.from_headers(headers)
+
+        def from_headers(self, d):
+            self.reset = int(d.get('x-rate-limit-reset', 0))
+            self.remaining = int(d.get('x-rate-limit-remaining', 0))
+            self.limit = int(d.get('x-rate-limit-limit', 0))
+
+        def seconds_till_reset(self, current_time=None):
+            current_time = current_time or time.time()
+            return self.reset - current_time
+
+        def __repr__(self):
+            state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
+            return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
+
     class APIMethod(object):
 
         path = config['path']
@@ -67,6 +85,12 @@ def bind_api(**config):
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
+
+        def headers_to_dict(self, headers):
+            d = {}
+            for k, v in headers:
+                d[k] = v
+            return d
 
         def build_parameters(self, args, kargs):
             self.parameters = {}
@@ -138,8 +162,8 @@ def bind_api(**config):
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
-                            self.method, self.headers, self.parameters
+                        self.scheme + self.host + url,
+                        self.method, self.headers, self.parameters
                     )
 
                 # Request compression if configured
@@ -180,6 +204,8 @@ def bind_api(**config):
                     body = zipper.read()
                 except Exception, e:
                     raise TweepError('Failed to decompress data: %s' % e)
+
+            api_limits.from_headers(self.headers_to_dict(resp.getheaders()))
             result = self.api.parser.parse(self, body)
 
             conn.close()
@@ -190,18 +216,17 @@ def bind_api(**config):
 
             return result
 
-
     def _call(api, *args, **kargs):
-
         method = APIMethod(api, args, kargs)
         return method.execute()
 
+    api_limits = RateLimitInfo()
+    _call.api_limits = api_limits
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
         _call.pagination_mode = 'cursor'
-    elif 'max_id' in APIMethod.allowed_param and \
-         'since_id' in APIMethod.allowed_param:
+    elif 'max_id' in APIMethod.allowed_param and 'since_id' in APIMethod.allowed_param:
         _call.pagination_mode = 'id'
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
