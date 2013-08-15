@@ -268,6 +268,7 @@ class TweepyAPITests(unittest.TestCase):
             self.assertEqual(l.name, params['slug'])
 
         assert_list(self.api.add_list_member(**params))
+        sleep(3)
         assert_list(self.api.remove_list_member(**params))
 
     def testlistmembers(self):
