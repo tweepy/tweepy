@@ -289,7 +289,7 @@ class TweepyAPITests(unittest.TestCase):
         self.api.list_subscribers('applepie', 'stars')
 
     def testshowlistsubscriber(self):
-        self.assertTrue(self.api.show_list_subscriber('twitter', 'team', username))
+        self.assertTrue(self.api.show_list_subscriber('tweepytest', 'test', 'applepie'))
 
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
