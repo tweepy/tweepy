@@ -9,6 +9,9 @@ from tweepy import (API, OAuthHandler, Friendship, Cursor,
                     MemoryCache, FileCache)
 
 from config import *
+from httreplay import start_replay, stop_replay
+from httreplay.utils import filter_headers_key
+import os
 
 test_tweet_id = '266367358078169089'
 
@@ -30,11 +33,16 @@ class TweepyErrorTests(unittest.TestCase):
 class TweepyAPITests(unittest.TestCase):
 
     def setUp(self):
+        if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'false':
+            start_replay('records/test.json', headers_key=filter_headers_key(['Authorization']))
         auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
         auth.set_access_token(oauth_token, oauth_token_secret)
         self.api = API(auth)
         self.api.retry_count = 2
         self.api.retry_delay = 5
+
+    def tearDown(self):
+        stop_replay()
 
     # TODO: Actually have some sort of better assertion
     def testgetoembed(self):
