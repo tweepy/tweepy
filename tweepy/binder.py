@@ -149,10 +149,7 @@ def bind_api(**config):
 
                 # Apply authentication
                 if self.api.auth:
-                    self.api.auth.apply_auth(
-                            full_url,
-                            self.method, self.session.headers, self.session.params
-                    )
+                    auth = self.api.auth.apply_auth()
 
                 # Request compression if configured
                 if self.api.compression:
@@ -160,7 +157,9 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    resp = self.session.request(self.method, full_url, data=self.post_data, timeout=self.api.timeout)
+                    resp = self.session.request(self.method, full_url,
+                            data=self.post_data, timeout=self.api.timeout,
+                            auth=auth)
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
                 rem_calls = resp.getheader('x-rate-limit-remaining')
