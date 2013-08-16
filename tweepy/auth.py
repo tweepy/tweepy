@@ -5,6 +5,7 @@ from tweepy.error import TweepError
 from tweepy.api import API
 import requests
 from requests_oauthlib import OAuth1Session, OAuth1
+from urlparse import parse_qs
 
 class AuthHandler(object):
 
@@ -95,13 +96,14 @@ class OAuthHandler(AuthHandler):
         """
         try:
             url = self._get_oauth_url('access_token', secure=True)
-            request = oauth.OAuthRequest.from_consumer_and_token(oauth_consumer=self._consumer, http_method='POST', http_url=url, parameters={'x_auth_mode': 'client_auth',
-             'x_auth_username': username,
-             'x_auth_password': password})
-            request.sign_request(self._sigmethod, self._consumer, None)
-            resp = urlopen(Request(url, data=request.to_postdata()))
-            self.access_token = oauth.OAuthToken.from_string(resp.read())
-            return self.access_token
+            oauth = OAuth1(self.consumer_key, client_secret=self.consumer_secret)
+            r = requests.post(url=url, auth=oauth, headers={'x_auth_mode':
+                'client_auth', 'x_auth_username': username, 'x_auth_password':
+                password})
+
+            print r.content
+            credentials = parse_qs(r.content)
+            return (credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0])
         except Exception as e:
             raise TweepError(e)
 
