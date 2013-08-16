@@ -150,8 +150,9 @@ class Stream(object):
                 # quit if error count greater than retry count
                 break
             try:
-                self.auth.apply_auth(url, 'POST', self.session.headers, self.session.params)
-                resp = self.session.request('POST', url, data=self.body, timeout=self.timeout, stream=True)
+                auth = self.auth.apply_auth()
+                resp = self.session.request('POST', url, data=self.body,
+                        timeout=self.timeout, stream=True, auth=auth)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
