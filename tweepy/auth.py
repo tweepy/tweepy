@@ -52,10 +52,6 @@ class OAuthHandler(AuthHandler):
         try:
             url = self._get_oauth_url('request_token')
             return self.oauth.fetch_request_token(url)
-            request = oauth.OAuthRequest.from_consumer_and_token(self._consumer, http_url=url, callback=self.callback)
-            request.sign_request(self._sigmethod, self._consumer, None)
-            resp = urlopen(Request(url, headers=request.to_header()))
-            return oauth.OAuthToken.from_string(resp.read())
         except Exception as e:
             raise TweepError(e)
 
@@ -72,9 +68,6 @@ class OAuthHandler(AuthHandler):
                 url = self._get_oauth_url('authorize')
             self.request_token = self._get_request_token()
             return self.oauth.authorization_url(url)
-            token = oauth.fetch_request_token(url)
-            request = oauth.OAuthRequest.from_token_and_callback(token=self.request_token, http_url=url)
-            return request.to_url()
         except Exception as e:
             raise TweepError(e)
 
@@ -90,11 +83,6 @@ class OAuthHandler(AuthHandler):
             self.access_token = resp['oauth_token']
             self.access_token_secret = resp['oauth_token_secret']
             return (self.access_token, self.access_token_secret)
-            request = oauth.OAuthRequest.from_consumer_and_token(self._consumer, token=self.request_token, http_url=url, verifier=str(verifier))
-            request.sign_request(self._sigmethod, self._consumer, self.request_token)
-            resp = urlopen(Request(url, headers=request.to_header()))
-            self.access_token = oauth.OAuthToken.from_string(resp.read())
-            return self.access_token
         except Exception as e:
             raise TweepError(e)
 
