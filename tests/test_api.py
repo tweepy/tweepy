@@ -300,6 +300,14 @@ class TweepyAPITests(unittest.TestCase):
     def testsearch(self):
         self.api.search('tweepy')
 
+    def testcontributers(self):
+        c = self.api.contributers(screen_name='')
+        self.assertEqual(c, ['something'])
+
+    def testcontributees(self):
+        c = self.api.contributees(screen_name='')
+        self.assertEqual(c, ['something'])
+
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
             """Return True if a given place_name is in place_list."""

@@ -138,6 +138,18 @@ class API(object):
         allowed_param = ['id', 'user_id', 'screen_name']
     )
 
+    contributers = bind_api(
+        path = '/users/contributors.json',
+        payload_type = 'user', payload_list = True,
+        allowed_param = ['user_id', 'screen_name', 'include_entities', 'skip_status']
+    )
+
+    contributees = bind_api(
+        path = '/users/contributees.json',
+        payload_type = 'user', payload_list = True,
+        allowed_param = ['user_id', 'screen_name', 'include_entities', 'skip_status']
+    )
+
     ''' statuses/oembed '''
     get_oembed = bind_api(
         path = '/statuses/oembed.json',
