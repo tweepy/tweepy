@@ -77,6 +77,12 @@ class TweepyAPITests(TweepyTestCase):
         u = self.api.get_user(783214)
         self.assertEqual(u.screen_name, 'twitter')
 
+    def testlookupusers(self):
+        def check(users):
+            self.assertEqual(len(users), 2)
+        check(self.api.lookup_users(user_ids=[6844292, 6253282]))
+        check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
+
     def testsearchusers(self):
         self.api.search_users('twitter')
 
