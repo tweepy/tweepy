@@ -8,19 +8,11 @@ import htmlentitydefs
 import re
 import locale
 from urllib import quote
+from email.utils import parsedate
 
 
 def parse_datetime(string):
-    # Set locale for date parsing
-    locale.setlocale(locale.LC_TIME, 'C')
-
-    # We must parse datetime this way to work in python 2.4
-    date = datetime(*(time.strptime(string, '%a %b %d %H:%M:%S +0000 %Y')[0:6]))
-
-    # Reset locale back to the default setting
-    locale.setlocale(locale.LC_TIME, '')
-    return date
-
+    return datetime(*(parsedate(string)[:6]))
 
 def parse_html_value(html):
 
