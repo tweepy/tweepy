@@ -1,4 +1,4 @@
-Tweepy [![Build Status](https://travis-ci.org/tweepy/tweepy.png)](https://travis-ci.org/tweepy/tweepy)
+Tweepy [![Build Status](https://travis-ci.org/tweepy/tweepy.png)](https://travis-ci.org/tweepy/tweepy) [![Coverage Status](https://coveralls.io/repos/tweepy/tweepy/badge.png?branch=master)](https://coveralls.io/r/tweepy/tweepy?branch=master)
 ======
 *Twitter for Python!*
 
