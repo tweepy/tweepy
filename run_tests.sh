@@ -3,5 +3,5 @@
 if [[ $TRAVIS_SECURE_ENV_VARS == "false" ]]; then
   USE_REPLAY=1 nosetests -v tests.test_api tests.test_utils
 else
-  nosetests -v --with-coverage --cover-package=tweepy tests.test_api tests.test_streaming tests.test_cursors tests.test_utils
+  nosetests -v --with-coverage tests.test_api tests.test_streaming tests.test_cursors tests.test_utils
 fi

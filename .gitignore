@@ -4,3 +4,5 @@ build/
 dist/
 tweepy.egg-info/
 .env/
+.coverage
+htmlcov/
