@@ -54,6 +54,9 @@ class TweepyAPITests(TweepyTestCase):
     def testretweets(self):
         self.api.retweets(test_tweet_id)
 
+    def testretweeters(self):
+        self.api.retweeters(test_tweet_id)
+
     def testgetstatus(self):
         self.api.get_status(id=test_tweet_id)
 
