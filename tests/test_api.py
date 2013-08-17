@@ -5,12 +5,11 @@ import os
 
 from nose import SkipTest
 
-from tweepy import (API, OAuthHandler, Friendship, Cursor,
-                    MemoryCache, FileCache)
-
-from config import *
+from tweepy import Friendship, MemoryCache, FileCache
+from config import TweepyTestCase, username, use_replay
 
 test_tweet_id = '266367358078169089'
+tweet_text = 'testing 1000'
 
 """Unit tests"""
 
@@ -27,14 +26,7 @@ class TweepyErrorTests(unittest.TestCase):
         self.assertEqual(e.reason, e2.reason)
         self.assertEqual(e.response, e2.response)
 
-class TweepyAPITests(unittest.TestCase):
-
-    def setUp(self):
-        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
-        auth.set_access_token(oauth_token, oauth_token_secret)
-        self.api = API(auth)
-        self.api.retry_count = 2
-        self.api.retry_delay = 5
+class TweepyAPITests(TweepyTestCase):
 
     # TODO: Actually have some sort of better assertion
     def testgetoembed(self):
@@ -62,12 +54,15 @@ class TweepyAPITests(unittest.TestCase):
     def testretweets(self):
         self.api.retweets(test_tweet_id)
 
+    def testretweeters(self):
+        self.api.retweeters(test_tweet_id)
+
     def testgetstatus(self):
         self.api.get_status(id=test_tweet_id)
 
     def testupdateanddestroystatus(self):
         # test update
-        text = 'testing %i' % random.randint(0, 1000)
+        text = tweet_text if use_replay else 'testing %i' % random.randint(0, 1000)
         update = self.api.update_status(status=text)
         self.assertEqual(update.text, text)
 
@@ -81,6 +76,12 @@ class TweepyAPITests(unittest.TestCase):
 
         u = self.api.get_user(783214)
         self.assertEqual(u.screen_name, 'twitter')
+
+    def testlookupusers(self):
+        def check(users):
+            self.assertEqual(len(users), 2)
+        check(self.api.lookup_users(user_ids=[6844292, 6253282]))
+        check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
 
     def testsearchusers(self):
         self.api.search_users('twitter')

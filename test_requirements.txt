@@ -1,0 +1,2 @@
+httreplay==0.1.4
+coveralls==0.2
