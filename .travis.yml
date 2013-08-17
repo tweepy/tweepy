@@ -25,3 +25,4 @@ env:
         JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
         aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
 
+after_success: 'coveralls'
