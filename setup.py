@@ -10,6 +10,6 @@ setup(name="tweepy",
       author="Joshua Roesslein",
       author_email="tweepy@googlegroups.com",
       url="http://github.com/tweepy/tweepy",
-      packages = find_packages(),
-      keywords= "twitter library",
-      zip_safe = True)
+      packages=find_packages(exclude=['tests']),
+      keywords="twitter library",
+      zip_safe=True)

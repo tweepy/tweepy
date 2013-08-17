@@ -111,12 +111,12 @@ class Stream(object):
                 break
             try:
                 if self.scheme == "http":
-                    conn = HTTPConnection(self.host)
+                    conn = httplib.HTTPConnection(self.host, timeout=self.timeout)
                 else:
-                    conn = HTTPSConnection(self.host)
+                    conn = httplib.HTTPSConnection(self.host, timeout=self.timeout)
+
                 self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
                 conn.connect()
-                conn.sock.settimeout(self.timeout)
                 conn.request('POST', self.url, self.body, headers=self.headers)
                 resp = conn.getresponse()
                 if resp.status != 200:

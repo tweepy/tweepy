@@ -6,11 +6,10 @@ from datetime import datetime
 import time
 import re
 import locale
+
 try:
-    from html.entities import name2codepoint
     from urllib.parse import quote
 except ImportError:  # Python < 3
-    from htmlentitydefs import name2codepoint
     from urllib import quote
 import sys
 if sys.version_info > (3, ):
@@ -19,17 +18,10 @@ else:
     text_type, binary_type = unicode, str
 string_types = (text_type, binary_type)
 
+from email.utils import parsedate
 
 def parse_datetime(string):
-    # Set locale for date parsing
-    locale.setlocale(locale.LC_TIME, 'C')
-
-    # We must parse datetime this way to work in python 2.4
-    date = datetime(*(time.strptime(string, '%a %b %d %H:%M:%S +0000 %Y')[0:6]))
-
-    # Reset locale back to the default setting
-    locale.setlocale(locale.LC_TIME, '')
-    return date
+    return datetime(*(parsedate(string)[:6]))
 
 
 def parse_html_value(html):
@@ -42,41 +34,6 @@ def parse_a_href(atag):
     start = atag.find('"') + 1
     end = atag.find('"', start)
     return atag[start:end]
-
-
-def parse_search_datetime(string):
-    # Set locale for date parsing
-    locale.setlocale(locale.LC_TIME, 'C')
-
-    # We must parse datetime this way to work in python 2.4
-    date = datetime(*(time.strptime(string, '%a, %d %b %Y %H:%M:%S +0000')[0:6]))
-
-    # Reset locale back to the default setting
-    locale.setlocale(locale.LC_TIME, '')
-    return date
-
-
-def unescape_html(text):
-    """Created by Fredrik Lundh (http://effbot.org/zone/re-sub.htm#unescape-html)"""
-    def fixup(m):
-        text = m.group(0)
-        if text[:2] == "&#":
-            # character reference
-            try:
-                if text[:3] == "&#x":
-                    return unichr(int(text[3:-1], 16))
-                else:
-                    return unichr(int(text[2:-1]))
-            except ValueError:
-                pass
-        else:
-            # named entity
-            try:
-                text = unichr(name2codepoint[text[1:-1]])
-            except KeyError:
-                pass
-        return text # leave as is
-    return re.sub("&#?\w+;", fixup, text)
 
 
 def convert_to_utf8_str(arg):
