@@ -2,12 +2,17 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import httplib
-import urllib
 import time
 import re
-from StringIO import StringIO
 import gzip
+try:
+    from http.client import HTTPConnection, HTTPSConnection
+    from io import BytesIO
+    from urllib.parse import quote, urlencode
+except ImportError:  # Python < 3
+    from httplib import HTTPConnection, HTTPSConnection
+    from StringIO import StringIO as BytesIO
+    from urllib import quote, urlencode
 
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
@@ -96,7 +101,7 @@ def bind_api(**config):
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.parameters[name])
+                        value = quote(self.parameters[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
                     del self.parameters[name]
@@ -107,7 +112,7 @@ def bind_api(**config):
             # Build the request URL
             url = self.api_root + self.path
             if len(self.parameters):
-                url = '%s?%s' % (url, urllib.urlencode(self.parameters))
+                url = '%s?%s' % (url, urlencode(self.parameters))
 
             # Query the cache if one is available
             # and this request uses a GET method.
@@ -131,9 +136,9 @@ def bind_api(**config):
             while retries_performed < self.retry_count + 1:
                 # Open connection
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
+                    conn = HTTPSConnection(self.host, timeout=self.api.timeout)
                 else:
-                    conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
+                    conn = HTTPConnection(self.host, timeout=self.api.timeout)
 
                 # Apply authentication
                 if self.api.auth:
@@ -150,7 +155,7 @@ def bind_api(**config):
                 try:
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
@@ -173,12 +178,12 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            body = resp.read()
+            body = resp.read().decode()
             if resp.getheader('Content-Encoding', '') == 'gzip':
                 try:
-                    zipper = gzip.GzipFile(fileobj=StringIO(body))
+                    zipper = gzip.GzipFile(fileobj=BytesIO(body))
                     body = zipper.read()
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to decompress data: %s' % e)
             result = self.api.parser.parse(self, body)
 

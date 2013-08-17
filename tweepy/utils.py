@@ -4,12 +4,21 @@
 
 from datetime import datetime
 import time
-import htmlentitydefs
 import re
 import locale
-from urllib import quote
-from email.utils import parsedate
 
+try:
+    from urllib.parse import quote
+except ImportError:  # Python < 3
+    from urllib import quote
+import sys
+if sys.version_info > (3, ):
+    text_type, binary_type = str, bytes
+else:
+    text_type, binary_type = unicode, str
+string_types = (text_type, binary_type)
+
+from email.utils import parsedate
 
 def parse_datetime(string):
     return datetime(*(parsedate(string)[:6]))
@@ -29,10 +38,10 @@ def parse_a_href(atag):
 
 def convert_to_utf8_str(arg):
     # written by Michael Norton (http://docondev.blogspot.com/)
-    if isinstance(arg, unicode):
-        arg = arg.encode('utf-8')
-    elif not isinstance(arg, str):
+    if not isinstance(arg, string_types):
         arg = str(arg)
+    if isinstance(arg, text_type):
+        arg = arg.encode('utf-8')
     return arg
 
 
@@ -47,7 +56,7 @@ def import_simplejson():
             try:
                 from django.utils import simplejson as json  # Google App Engine
             except ImportError:
-                raise ImportError, "Can't load a json library"
+                raise ImportError("Can't load a json library")
 
     return json
 
