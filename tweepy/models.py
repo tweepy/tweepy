@@ -3,13 +3,32 @@
 # See LICENSE for details.
 
 from tweepy.error import TweepError
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href, \
-        parse_search_datetime, unescape_html
+from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
 
 
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
+    def __init__(self, max_id=None, since_id=None):
+        super(ResultSet, self).__init__()
+        self._max_id = max_id
+        self._since_id = since_id
 
+    @property
+    def max_id(self):
+        if self._max_id:
+            return self._max_id
+        ids = self.ids()
+        return max(ids) if ids else None
+
+    @property
+    def since_id(self):
+        if self._since_id:
+            return self._since_id
+        ids = self.ids()
+        return min(ids) if ids else None
+
+    def ids(self):
+        return [item.id for item in self if hasattr(item, 'id')]
 
 class Model(object):
 
@@ -209,34 +228,18 @@ class SavedSearch(Model):
         return self._api.destroy_saved_search(self.id)
 
 
-class SearchResult(Model):
+class SearchResults(ResultSet):
 
     @classmethod
     def parse(cls, api, json):
-        result = cls()
-        for k, v in json.items():
-            if k == 'created_at':
-                setattr(result, k, parse_search_datetime(v))
-            elif k == 'source':
-                setattr(result, k, parse_html_value(unescape_html(v)))
-            else:
-                setattr(result, k, v)
-        return result
+        metadata = json['search_metadata']
+        results = SearchResults(metadata.get('max_id'), metadata.get('since_id'))
+        results.refresh_url = metadata.get('refresh_url')
+        results.completed_in = metadata.get('completed_in')
+        results.query = metadata.get('query')
 
-    @classmethod
-    def parse_list(cls, api, json_list, result_set=None):
-        results = ResultSet()
-        results.max_id = json_list.get('max_id')
-        results.since_id = json_list.get('since_id')
-        results.refresh_url = json_list.get('refresh_url')
-        results.next_page = json_list.get('next_page')
-        results.results_per_page = json_list.get('results_per_page')
-        results.page = json_list.get('page')
-        results.completed_in = json_list.get('completed_in')
-        results.query = json_list.get('query')
-
-        for obj in json_list['results']:
-            results.append(cls.parse(api, obj))
+        for status in json['statuses']:
+            results.append(Status.parse(api, status))
         return results
 
 
@@ -414,7 +417,7 @@ class ModelFactory(object):
     direct_message = DirectMessage
     friendship = Friendship
     saved_search = SavedSearch
-    search_result = SearchResult
+    search_results = SearchResults
     category = Category
     list = List
     relation = Relation

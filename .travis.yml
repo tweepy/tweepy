@@ -1,6 +1,10 @@
 ---
-script: nosetests -v tests.test_api tests.test_streaming
 language: python
+python:
+  - "2.7"
+install:
+  - pip install -r test_requirements.txt
+script: ./run_tests.sh
 env:
   global:
     - TWITTER_USERNAME="tweepytest"
@@ -20,8 +24,5 @@ env:
         nKkytraqLGUm33K1GpwkjOyxACDHYw4GMvOGyDwVTX7VNwqxbkUojB7qXYoQ
         JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
         aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
-python:
-  - "2.7"
-branches:
-  only:
-    - master
+
+after_success: 'coveralls'

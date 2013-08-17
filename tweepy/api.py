@@ -37,7 +37,7 @@ class API(object):
     home_timeline = bind_api(
         path = '/statuses/home_timeline.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count'],
         require_auth = True
     )
 
@@ -46,7 +46,7 @@ class API(object):
         path = '/statuses/user_timeline.json',
         payload_type = 'status', payload_list = True,
         allowed_param = ['id', 'user_id', 'screen_name', 'since_id',
-                          'max_id', 'count', 'page', 'include_rts']
+                          'max_id', 'count', 'include_rts']
     )
 
     """ statuses/mentions """
@@ -54,14 +54,6 @@ class API(object):
         path = '/statuses/mentions_timeline.json',
         payload_type = 'status', payload_list = True,
         allowed_param = ['since_id', 'max_id', 'count'],
-        require_auth = True
-    )
-
-    """/statuses/:id/retweeted_by.format"""
-    retweeted_by = bind_api(
-        path = '/statuses/{id}/retweeted_by.json',
-        payload_type = 'status', payload_list = True,
-        allowed_param = ['id', 'count', 'page'],
         require_auth = True
     )
 
@@ -73,19 +65,11 @@ class API(object):
         require_auth = False
     )
 
-    """/statuses/:id/retweeted_by/ids.format"""
-    retweeted_by_ids = bind_api(
-        path = '/statuses/{id}/retweeted_by/ids.json',
-        payload_type = 'ids',
-        allowed_param = ['id', 'count', 'page'],
-        require_auth = True
-    )
-
     """ statuses/retweets_of_me """
     retweets_of_me = bind_api(
         path = '/statuses/retweets_of_me.json',
         payload_type = 'status', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count'],
         require_auth = True
     )
 
@@ -129,6 +113,12 @@ class API(object):
         payload_type = 'status', payload_list = True,
         allowed_param = ['id', 'count'],
         require_auth = True
+    )
+
+    retweeters = bind_api(
+        path = '/statuses/retweeters/ids.json',
+        payload_type = 'ids',
+        allowed_param = ['id', 'cursor', 'stringify_ids']
     )
 
     """ users/show """
@@ -195,7 +185,7 @@ class API(object):
     direct_messages = bind_api(
         path = '/direct_messages.json',
         payload_type = 'direct_message', payload_list = True,
-        allowed_param = ['since_id', 'max_id', 'count', 'page'],
+        allowed_param = ['since_id', 'max_id', 'count'],
         require_auth = True
     )
 
@@ -282,7 +272,7 @@ class API(object):
     friends = bind_api(
         path = '/friends/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 
     """ friendships/incoming """
@@ -310,7 +300,7 @@ class API(object):
     followers = bind_api(
         path = '/followers/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'page', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
     )
 
     """ account/verify_credentials """
@@ -443,7 +433,7 @@ class API(object):
     blocks = bind_api(
         path = '/blocks/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['page'],
+        allowed_param = ['cursor'],
         require_auth = True
     )
 
@@ -639,12 +629,10 @@ class API(object):
 
     """ search """
     search = bind_api(
-        search_api = True,
-        path = '/search.json',
-        payload_type = 'search_result', payload_list = True,
-        allowed_param = ['q', 'lang', 'locale', 'rpp', 'page', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type']
+        path = '/search/tweets.json',
+        payload_type = 'search_results',
+        allowed_param = ['q', 'lang', 'locale', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type']
     )
-    search.pagination_mode = 'page'
 
     """ trends/daily """
     trends_daily = bind_api(
