@@ -2,7 +2,6 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-import logging
 import httplib
 from socket import timeout
 from threading import Thread
@@ -80,22 +79,10 @@ class StreamListener(object):
     def on_disconnect(self, notice):
         """Called when twitter sends a disconnect notice
 
-        All disconnect codes are listed here:
+        Disconnect codes are listed here:
         https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
         """
-        if notice['code'] in (
-            2, # duplicate stream
-            3, # control request, shut down by control stream
-            5, # shut down by this client
-            6, # token revoked, auth will fail next time
-            7, # admin logout, connected elsewhere
-            9, # max message limit
-            ):
-            logging.info("Disconnect notice code %s received, disconnecting", notice['code'])
-            return False
-        else: # reconnect
-            logging.info("Disconnect notice code %s received, reconnecting", notice['code'])
-            return
+        return
 
 
 class Stream(object):
