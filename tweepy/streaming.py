@@ -2,6 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+import logging
 import httplib
 from socket import timeout
 from threading import Thread
@@ -31,24 +32,30 @@ class StreamListener(object):
         """
         pass
 
-    def on_data(self, data):
+    def on_data(self, raw_data):
         """Called when raw data is received from connection.
 
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
+        data = json.loads(raw_data)
 
         if 'in_reply_to_status_id' in data:
-            status = Status.parse(self.api, json.loads(data))
+            status = Status.parse(self.api, data)
             if self.on_status(status) is False:
                 return False
         elif 'delete' in data:
-            delete = json.loads(data)['delete']['status']
+            delete = data['delete']['status']
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
         elif 'limit' in data:
-            if self.on_limit(json.loads(data)['limit']['track']) is False:
+            if self.on_limit(data['limit']['track']) is False:
                 return False
+        elif 'disconnect' in data:
+            if self.on_disconnect(data['disconnect']) is False:
+                return False
+        else:
+            logging.error("Unknown message type: " + str(raw_data))
 
     def on_status(self, status):
         """Called when a new status arrives"""
@@ -69,6 +76,26 @@ class StreamListener(object):
     def on_timeout(self):
         """Called when stream connection times out"""
         return
+
+    def on_disconnect(self, notice):
+        """Called when twitter sends a disconnect notice
+
+        All disconnect codes are listed here:
+        https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
+        """
+        if notice['code'] in (
+            2, # duplicate stream
+            3, # control request, shut down by control stream
+            5, # shut down by this client
+            6, # token revoked, auth will fail next time
+            7, # admin logout, connected elsewhere
+            9, # max message limit
+            ):
+            logging.info("Disconnect notice code %s received, disconnecting", notice['code'])
+            return False
+        else: # reconnect
+            logging.info("Disconnect notice code %s received, reconnecting", notice['code'])
+            return
 
 
 class Stream(object):
