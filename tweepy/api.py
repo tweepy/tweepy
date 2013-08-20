@@ -486,16 +486,6 @@ class API(object):
         require_auth = True
     )
 
-    """ help/test """
-    def test(self):
-        try:
-            bind_api(
-                path = '/help/test.json',
-            )(self)
-        except TweepError:
-            return False
-        return True
-
     create_list = bind_api(
         path = '/lists/create.json',
         method = 'POST',
