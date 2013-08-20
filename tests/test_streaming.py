@@ -45,14 +45,22 @@ class TweepyStreamTests(unittest.TestCase):
     def tearDown(self):
         self.stream.disconnect()
 
+    def on_connect():
+        API(self.auth).update_status(mock_tweet())
+
+
     def test_userstream(self):
         # Generate random tweet which should show up in the stream.
-        def on_connect():
-            API(self.auth).update_status(mock_tweet())
-
-        self.listener.connect_cb = on_connect
+        
+        self.listener.connect_cb = self.on_connect
         self.listener.status_stop_count = 1
         self.stream.userstream()
+        self.assertEqual(self.listener.status_count, 1)
+    
+    def test_sitestream(self):
+        self.listener.connect_cb = self.on_connect
+        self.listener.status_stop_count = 1
+        self.sitestream(follow=[self.auth.get_username()])
         self.assertEqual(self.listener.status_count, 1)
 
     def test_sample(self):
