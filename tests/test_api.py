@@ -135,7 +135,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(friend.screen_name, 'twitter')
 
     def testshowfriendship(self):
-        source, target = self.api.show_friendship(target_screen_name='twtiter')
+        source, target = self.api.show_friendship(target_screen_name='twitter')
         self.assert_(isinstance(source, Friendship))
         self.assert_(isinstance(target, Friendship))
 
