@@ -198,6 +198,9 @@ class TweepyAPITests(TweepyTestCase):
         self.api.update_profile_background_image('examples/bg.png')
     """
 
+    def testupdateprofilebannerimage(self):
+        self.api.update_profile_banner('examples/banner.png')
+
     def testupdateprofile(self):
         original = self.api.me()
         profile = {
