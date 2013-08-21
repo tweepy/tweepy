@@ -1,3 +1,22 @@
+Version 2.2
+-----------
+  - Added update_profile_banner endpoint.
+  - Don't treat HTTP status codes in 200 range as errors.
+  - Tests no longer packaged into egg releases.
+  - Improve test stability and enable CI testing on pull requests.
+  - Removed Basic Auth.
+  - Use built-in timeout feature of httplib to fix appengine.
+  - Added retweeters() endpoint.
+  - Removed deprecated retweeted_by and retweeted_by_ids.
+  - Improved datetime parsing. Should be more thread safe.
+  - Enable coverage reporting. Upload reports to Coveralls.
+    - https://coveralls.io/r/tweepy/tweepy
+  - Removed deprecated test() endpoint.
+  - New stream listeners callback on_disconnect(). Called whenever
+"disconnect" messages arrive from Twitter before connection is killed.
+    - https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
+  - [Compare View](https://github.com/tweepy/tweepy/compare/2.1...2.2)
+
 Version 2.1
 -----------
   - Added get_oembed().
@@ -10,8 +29,7 @@ Version 2.1
   - Added on_connect() callback to StreamListener.
   - Switched API search() to v1.1 endpoint. Some breaking changes.
   - Drop "page" based cursors and use "ID" based ones instead.
-  - [Compare
-    2.0...master](https://github.com/tweepy/tweepy/compare/2.0...master)
+  - [Compare View](https://github.com/tweepy/tweepy/compare/2.0...2.1)
 
 Version 2.0
 -----------
