@@ -23,8 +23,10 @@ class TweepyTestCase(TestCase):
         self.api.retry_delay = 5
 
         if use_replay:
+            def filter_body(data): return ''
             start_replay('tests/record.json',
-                         headers_key=filter_headers_key(['Authorization']))
+                         headers_key=filter_headers_key(['Authorization']),
+                         body_key=filter_body)
 
     def tearDown(self):
         if use_replay:
