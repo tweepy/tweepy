@@ -366,6 +366,17 @@ class API(object):
             require_auth = True
         )(self, post_data=post_data, headers=headers)
 
+    """ account/update_profile_banner """
+    def update_profile_banner(self, filename, *args, **kargs):
+        headers, post_data = API._pack_image(filename, 700, form_field="banner")
+        bind_api(
+            path = '/account/update_profile_banner.json',
+            method = 'POST',
+            allowed_param = ['width', 'height', 'offset_left', 'offset_right'],
+            require_auth = True
+        )(self, post_data=post_data, headers=headers)
+
+
     """ account/update_profile """
     update_profile = bind_api(
         path = '/account/update_profile.json',
@@ -657,7 +668,7 @@ class API(object):
 
     """ Internal use only """
     @staticmethod
-    def _pack_image(filename, max_size):
+    def _pack_image(filename, max_size, form_field="image"):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
         try:
@@ -679,7 +690,7 @@ class API(object):
         BOUNDARY = 'Tw3ePy'
         body = []
         body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="image"; filename="%s"' % filename)
+        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (form_field, filename))
         body.append('Content-Type: %s' % file_type)
         body.append('')
         body.append(fp.read())
