@@ -66,7 +66,7 @@ class Status(Model):
         status = cls(api)
         for k, v in json.items():
             if k == 'user':
-                user_model = getattr(api.parser.model_factory, 'user')
+                user_model = getattr(api.parser.model_factory, 'user') if api else User
                 user = user_model.parse(api, v)
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
