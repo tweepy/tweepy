@@ -1,2 +1,3 @@
 httreplay==0.1.4
 coveralls==0.2
+mock==1.0.1
