@@ -102,7 +102,7 @@ class API(object):
         allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
         require_auth = True
     )
-    
+
     """ status/update_with_media """
     def update_status_with_media(self, filename, *args, **kargs):
         headers, post_data = API._pack_media(filename, 3072)
@@ -514,6 +514,14 @@ class API(object):
         except TweepError:
             return False
         return True
+
+    configuration = bind_api(
+        path = '/help/configuration.json',
+        method = 'GET',
+        payload_type = 'json',
+        require_auth = True
+    )
+
 
     create_list = bind_api(
         path = '/lists/create.json',
