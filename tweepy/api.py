@@ -662,8 +662,16 @@ class API(object):
     """ geo/similar_places """
     geo_similar_places = bind_api(
         path = '/geo/similar_places.json',
-        payload_type = 'place', payload_list = True,
+        payload_type = 'json',
         allowed_param = ['lat', 'long', 'name', 'contained_within']
+    )
+
+    """ geo/place """
+    geo_place = bind_api(
+        path = '/geo/place.json',
+        method = 'POST',
+        payload_type = 'place',
+        allowed_param = ['lat', 'long', 'name', 'contained_within', 'token']
     )
 
     """ Internal use only """
