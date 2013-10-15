@@ -61,6 +61,8 @@ def bind_api(**config):
                 self.host = api.search_host
             else:
                 self.host = api.host
+            self.proxy_host = api.proxy_host
+            self.proxy_port = api.proxy_port
 
             # Manually set Host header to fix an issue in python 2.5
             # or older where Host is set including the 443 port.
@@ -131,9 +133,21 @@ def bind_api(**config):
             while retries_performed < self.retry_count + 1:
                 # Open connection
                 if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
+                    if self.proxy_host:
+                        if self.proxy_port:
+                            conn = httplib.HTTPSConnection(self.proxy_host, self.proxy_port, timeout=self.api.timeout)
+                        else:
+                            conn = httplib.HTTPSConnection(self.proxy_host, timeout=self.api.timeout)
+                    else:
+                        conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
                 else:
-                    conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
+                    if self.proxy_host:
+                        if self.proxy_port:
+                            conn = httplib.HTTPConnection(self.proxy_host, self.proxy_port, timeout=self.api.timeout)
+                        else:
+                            conn = httplib.HTTPConnection(self.proxy_host, timeout=self.api.timeout)
+                    else:
+                        conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
 
                 # Apply authentication
                 if self.api.auth:
