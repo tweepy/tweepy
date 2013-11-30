@@ -48,6 +48,14 @@ class StreamListener(object):
             delete = data['delete']['status']
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
+        elif 'event' in data:
+            status = Status.parse(self.api, data)
+            if self.on_event(status) is False:
+                return False
+        elif 'direct_message' in data:
+            status = Status.parse(self.api, data)
+            if self.on_direct_message(status) is False:
+                return False
         elif 'limit' in data:
             if self.on_limit(data['limit']['track']) is False:
                 return False
@@ -63,6 +71,14 @@ class StreamListener(object):
 
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
+        return
+
+    def on_event(self, status):
+        """Called when a new event arrives"""
+        return
+
+    def on_direct_message(self, status):
+        """Called when a new direct message arrives"""
         return
 
     def on_limit(self, track):
