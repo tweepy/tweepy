@@ -317,6 +317,15 @@ class TweepyAPITests(TweepyTestCase):
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
+    def testsupportedlanguages(self):
+        languages = self.api.supported_languages()
+        expected_dict = {
+            "name": "English",
+            "code": "en",
+            "status": "production"
+        }
+        self.assertTrue(expected_dict in languages)
+
 class TweepyCacheTests(unittest.TestCase):
 
     timeout = 2.0
