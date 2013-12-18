@@ -1,4 +1,4 @@
-import unittest
+import unittest2 as unittest
 
 from tweepy.models import ResultSet
 

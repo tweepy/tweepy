@@ -1,5 +1,5 @@
 from time import sleep
-import unittest
+import unittest2 as unittest
 
 from tweepy.api import API
 from tweepy.models import Status
