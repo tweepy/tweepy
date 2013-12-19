@@ -39,7 +39,15 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
-        data = json.loads(raw_data)
+        
+        try:
+            data = json.loads(raw_data)
+            if type(data) is not dict:
+                logging.error("Unknown response type: " + str(raw_data))
+                return
+        except ValueError:
+            logging.error("Unknown response format (not JSON): " + str(raw_data))        
+            return
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
@@ -216,7 +224,7 @@ class Stream(object):
                 delimited_string += d
 
             # read the next twitter status object
-            if delimited_string.strip().isdigit():
+            if delimited_string.strip().isdigit() and self.running and not resp.isclosed():
                 next_status_obj = resp.read( int(delimited_string) )
                 self._data(next_status_obj)
 
