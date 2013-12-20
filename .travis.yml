@@ -6,6 +6,9 @@ python:
 install:
   - pip install -r test_requirements.txt
 script: ./run_tests.sh
+matrix:
+  allow_failures:
+    - python: "2.6"
 env:
   global:
     - TWITTER_USERNAME="tweepytest"
