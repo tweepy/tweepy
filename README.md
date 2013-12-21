@@ -1,6 +1,6 @@
 Tweepy: Twitter for Python!
 ======
-[![Build Status](https://travis-ci.org/tweepy/tweepy.png)](https://travis-ci.org/tweepy/tweepy)
+[![Build Status](https://travis-ci.org/tweepy/tweepy.png?branch=master)](https://travis-ci.org/tweepy/tweepy)
 [![Downloads](https://pypip.in/d/tweepy/badge.png)](https://crate.io/packages/tweepy) [![Downloads](https://pypip.in/v/tweepy/badge.png)](https://crate.io/packages/tweepy)
 [![Coverage Status](https://coveralls.io/repos/tweepy/tweepy/badge.png?branch=master)](https://coveralls.io/r/tweepy/tweepy?branch=master)
 
