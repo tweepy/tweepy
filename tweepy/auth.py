@@ -28,6 +28,12 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None, secure=False):
+        if type(consumer_key) == unicode:
+            consumer_key = bytes(consumer_key)
+
+        if type(consumer_secret) == unicode:
+            consumer_secret = bytes(consumer_secret)
+
         self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
         self._sigmethod = oauth.OAuthSignatureMethod_HMAC_SHA1()
         self.request_token = None
