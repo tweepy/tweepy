@@ -117,10 +117,12 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        self.retry_time_start = options.get("retry_time", 10.0)
-        self.retry_time_cap = options.get("retry_time_cap", 240.0)
-        self.snooze_time_start = options.get("snooze_time",  0.25)
-        self.snooze_time_cap = options.get("snooze_time_cap",  16)
+        # values according to https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
+        self.retry_time_start = options.get("retry_time", 5.0)
+        self.retry_420_start = options.get("retry_420", 60.0)
+        self.retry_time_cap = options.get("retry_time_cap", 320.0)
+        self.snooze_time_step = options.get("snooze_time", 0.25)
+        self.snooze_time_cap = options.get("snooze_time_cap", 16)
         self.buffer_size = options.get("buffer_size",  1500)
         if options.get("secure", True):
             self.scheme = "https"
@@ -132,7 +134,7 @@ class Stream(object):
         self.parameters = None
         self.body = None
         self.retry_time = self.retry_time_start
-        self.snooze_time = self.snooze_time_start
+        self.snooze_time = self.snooze_time_step
 
     def _run(self):
         # Authenticate
@@ -159,12 +161,14 @@ class Stream(object):
                     if self.listener.on_error(resp.status) is False:
                         break
                     error_counter += 1
+                    if resp.status == 420:
+                        self.retry_time = max(self.retry_420_start, self.retry_time)
                     sleep(self.retry_time)
                     self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
                 else:
                     error_counter = 0
                     self.retry_time = self.retry_time_start
-                    self.snooze_time = self.snooze_time_start
+                    self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
                     self._read_loop(resp)
             except (timeout, ssl.SSLError), exc:
@@ -179,7 +183,8 @@ class Stream(object):
                     break
                 conn.close()
                 sleep(self.snooze_time)
-                self.snooze_time = min(self.snooze_time+0.25, self.snooze_time_cap)
+                self.snooze_time = min(self.snooze_time + self.snooze_time_step,
+                                       self.snooze_time_cap)
             except Exception, exception:
                 # any other exception is fatal, so kill loop
                 break
