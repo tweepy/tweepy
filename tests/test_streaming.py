@@ -62,3 +62,16 @@ class TweepyStreamTests(unittest.TestCase):
         self.assertEquals(self.listener.status_count,
                           self.listener.status_stop_count)
 
+    def test_on_data(self):        
+        test_wrong_data = [
+            '{"disc', # this is actual data read from twitter
+            '600',    # this is actual data read from twitter
+            '41\n',   # this is actual data read from twitter
+            'obviously non-json',
+            '"json but not dict"',
+			'{"json dict":"but not a twitter message"}'
+        ]        
+        for raw_data in test_wrong_data: 
+            # should log errors but not raise / not return False
+            self.assertEquals(self.listener.on_data(raw_data), None)
+            self.assertEquals(self.listener.status_count, 0)
