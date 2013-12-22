@@ -70,6 +70,10 @@ class TweepyAPITests(TweepyTestCase):
         deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
+    def testupdatestatuswithmedia(self):
+        update = self.api.update_with_media('examples/banner.png', status=tweet_text)
+        self.assertEqual(update.text, tweet_text)
+
     def testgetuser(self):
         u = self.api.get_user('twitter')
         self.assertEqual(u.screen_name, 'twitter')
