@@ -72,7 +72,7 @@ class TweepyAPITests(TweepyTestCase):
 
     def testupdatestatuswithmedia(self):
         update = self.api.update_with_media('examples/banner.png', status=tweet_text)
-        self.assertEqual(update.text, tweet_text)
+        self.assertIn(tweet_text + ' http://t.co', update.text)
 
     def testgetuser(self):
         u = self.api.get_user('twitter')
