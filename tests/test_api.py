@@ -369,5 +369,48 @@ class TweepyCacheTests(unittest.TestCase):
         self.cache.flush()
         os.rmdir('cache_test_dir')
 
+
+class NotifyIfCachedResultTests(unittest.TestCase):
+
+    def setUp(self):
+        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth.set_access_token(oauth_token, oauth_token_secret)
+        self.api = API(auth)
+        self.api.retry_count = 2
+        self.api.retry_delay = 5
+
+        if not os.path.exists('cache_test_dir'):
+            os.mkdir('cache_test_dir')
+
+        self.api.cache = FileCache('cache_test_dir')
+        self.api.cache.flush()
+
+    def testhometimeline_cache(self):
+        
+        # no calls made, shouldnt be cached
+        self.assertEqual(self.api.is_cached_result, False)
+
+        # shouldnt be cached because we just set the cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, False)
+
+        # Now should read from cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, True)
+
+        # Now shouldnt read from cache, new api method call
+        self.api.user_timeline('twitter')
+        self.assertEqual(self.api.is_cached_result, False)
+
+        # Now should read from cache, just made api method call
+        self.api.user_timeline('twitter')
+        self.assertEqual(self.api.is_cached_result, True)
+
+        # Should still read from cache
+        self.api.home_timeline()
+        self.assertEqual(self.api.is_cached_result, True)
+
+
+
 if __name__ == '__main__':
     unittest.main()

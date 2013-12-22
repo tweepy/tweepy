@@ -123,6 +123,10 @@ def bind_api(**config):
                     else:
                         if isinstance(cache_result, Model):
                             cache_result._api = self.api
+
+                    # Log use of a cached result
+                    self.api.is_cached_result = True
+
                     return cache_result
 
             # Continue attempting request until successful
@@ -187,6 +191,9 @@ def bind_api(**config):
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
                 self.api.cache.store(url, result)
+
+            # Log that a cached result was not used
+            self.api.is_cached_result = False
 
             return result
 
