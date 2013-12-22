@@ -326,6 +326,13 @@ class TweepyAPITests(TweepyTestCase):
         }
         self.assertTrue(expected_dict in languages)
 
+    def testcachedresult(self):
+        self.api.cache = MemoryCache()
+        self.api.home_timeline()
+        self.assertFalse(self.api.cached_result)
+        self.api.home_timeline()
+        self.assertTrue(self.api.cached_result)
+
 class TweepyCacheTests(unittest.TestCase):
 
     timeout = 2.0
