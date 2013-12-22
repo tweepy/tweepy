@@ -89,6 +89,22 @@ class API(object):
         require_auth = True
     )
 
+    """ statuses/update_with_media """
+    def update_with_media(self, filename, *args, **kwargs):
+        headers, post_data = API._pack_image(filename, 3072, form_field='media[]')
+        kwargs.update({'headers': headers, 'post_data': post_data})
+
+        return bind_api(
+            path='/statuses/update_with_media.json',
+            method = 'POST',
+            payload_type='status',
+            allowed_param = [
+                'status', 'possibly_sensitive', 'in_reply_to_status_id', 'lat', 'long',
+                'place_id', 'display_coordinates'
+            ],
+            require_auth=True
+        )(self, *args, **kwargs)
+
     """ statuses/destroy """
     destroy_status = bind_api(
         path = '/statuses/destroy/{id}.json',
