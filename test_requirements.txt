@@ -2,5 +2,5 @@ httreplay==0.1.4
 coveralls==0.2
 unittest2==0.5.1
 mock==1.0.1
-requests==1.2.3
+requests==2.1
 requests_oauth==0.4.1

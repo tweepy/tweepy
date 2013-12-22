@@ -1,2 +1,2 @@
-requests==1.2.3
+requests==2.1
 requests_oauth==0.4.1
