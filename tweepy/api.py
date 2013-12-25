@@ -637,7 +637,7 @@ class API(object):
     search = bind_api(
         path = '/search/tweets.json',
         payload_type = 'search_results',
-        allowed_param = ['q', 'lang', 'locale', 'since_id', 'geocode', 'show_user', 'max_id', 'since', 'until', 'result_type', 'count']
+        allowed_param = ['q', 'lang', 'locale', 'since_id', 'geocode', 'max_id', 'since', 'until', 'result_type', 'count', 'include_entities', 'from', 'to', 'source']
     )
 
     """ trends/daily """

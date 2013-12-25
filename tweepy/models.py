@@ -237,6 +237,8 @@ class SearchResults(ResultSet):
         results.refresh_url = metadata.get('refresh_url')
         results.completed_in = metadata.get('completed_in')
         results.query = metadata.get('query')
+        results.count = metadata.get('count')
+        results.next_results = metadata.get('next_results')
 
         for status in json['statuses']:
             results.append(Status.parse(api, status))
