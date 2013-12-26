@@ -726,8 +726,11 @@ class API(object):
     def _pack_image(filename, max_size):
         """Pack image from file into multipart-formdata post body"""
         # support image from web
-        if filename.startswith('http://'):
-            fp = urllib.urlopen(filename)
+        if not os.path.exists(filename):
+            try:
+                fp = urllib.urlopen(filename)
+            except IOError:
+                raise TweepError('Unable to access file')
             file_type = fp.headers.get('Content-Type')
             if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
                 raise TweepError('Invalid file type for image: %s' % file_type)
