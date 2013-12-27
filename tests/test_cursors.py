@@ -31,3 +31,8 @@ class TweepyCursorTests(unittest.TestCase):
         pages = list(Cursor(self.api.followers_ids, 'twitter').pages(1))
         self.assert_(len(pages) == 1)
 
+    def testcursorsetstartcursor(self):
+        c = Cursor(self.api.friends_ids, cursor=123456)
+        self.assertEqual(c.iterator.next_cursor, 123456)
+        self.assertFalse('cursor' in c.iterator.kargs)
+

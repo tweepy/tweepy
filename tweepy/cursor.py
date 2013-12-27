@@ -53,8 +53,9 @@ class CursorIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
-        self.next_cursor = -1
-        self.prev_cursor = 0
+        start_cursor = kargs.pop('cursor', None)
+        self.next_cursor = start_cursor or -1
+        self.prev_cursor = start_cursor or 0
         self.count = 0
 
     def next(self):
