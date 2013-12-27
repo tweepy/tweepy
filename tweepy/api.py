@@ -687,12 +687,13 @@ class API(object):
         path = '/help/languages.json',
         payload_type = 'json',
         require_auth = True
+    )
 
-    """help/configuration"""
+    """ help/configuration """
     configuration = bind_api(
         path = '/help/configuration.json',
         payload_type = 'json',
-        require_auth = True,
+        require_auth = True
     )
 
     """ Internal use only """
