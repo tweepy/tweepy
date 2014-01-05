@@ -28,6 +28,7 @@ def bind_api(**config):
         require_auth = config.get('require_auth', False)
         search_api = config.get('search_api', False)
         use_cache = config.get('use_cache', True)
+        api_root_config = config.get('api_root', None)
 
         def __init__(self, api, args, kargs):
             # If authentication is required and no credentials
@@ -46,6 +47,8 @@ def bind_api(**config):
             # Pick correct URL root to use
             if self.search_api:
                 self.api_root = api.search_root
+            if self.api_root_config:
+                self.api_root = self.api_root_config
             else:
                 self.api_root = api.api_root
 
