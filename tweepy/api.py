@@ -316,7 +316,7 @@ class API(object):
     followers = bind_api(
         path = '/followers/list.json',
         payload_type = 'user', payload_list = True,
-        allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor','count']
     )
 
     """ account/verify_credentials """
