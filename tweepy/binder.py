@@ -52,8 +52,6 @@ def bind_api(**config):
             # Perform any path variable substitution
             self.build_path()
 
-            self.scheme = 'https://'
-
             if self.search_api:
                 self.host = api.search_host
             else:
@@ -135,8 +133,8 @@ def bind_api(**config):
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
-                            self.method, self.headers, self.parameters
+                        "https://" + self.host + url,
+                        self.method, self.headers, self.parameters
                     )
 
                 # Request compression if configured
@@ -152,9 +150,11 @@ def bind_api(**config):
 
                 # Exit request loop if non-retry error code
                 if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
+                    if resp.status not in self.retry_errors:
+                        break
                 else:
-                    if resp.status == 200: break
+                    if resp.status == 200:
+                        break
 
                 # Sleep before retrying request again
                 time.sleep(self.retry_delay)
@@ -187,12 +187,10 @@ def bind_api(**config):
 
             return result
 
-
     def _call(api, *args, **kargs):
 
         method = APIMethod(api, args, kargs)
         return method.execute()
-
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
@@ -204,4 +202,3 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
-
