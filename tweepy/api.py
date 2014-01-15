@@ -19,13 +19,13 @@ class API(object):
              cache=None, secure=True, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None, compression=False):
+
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
         self.api_root = api_root
         self.search_root = search_root
         self.cache = cache
-        self.secure = secure
         self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay
