@@ -3,7 +3,6 @@
 # See LICENSE for details.
 
 from urllib2 import Request, urlopen
-import base64
 
 from tweepy import oauth
 from tweepy.error import TweepError
@@ -40,15 +39,9 @@ class OAuthHandler(AuthHandler):
         self.access_token = None
         self.callback = callback
         self.username = None
-        self.secure = secure
 
-    def _get_oauth_url(self, endpoint, secure=False):
-        if self.secure or secure:
-            prefix = 'https://'
-        else:
-            prefix = 'http://'
-
-        return prefix + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
+    def _get_oauth_url(self, endpoint):
+        return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self, url, method, headers, parameters):
         request = oauth.OAuthRequest.from_consumer_and_token(
@@ -126,11 +119,11 @@ class OAuthHandler(AuthHandler):
         and request activation of xAuth for it.
         """
         try:
-            url = self._get_oauth_url('access_token', secure=True) # must use HTTPS
+            url = self._get_oauth_url('access_token')
             request = oauth.OAuthRequest.from_consumer_and_token(
                 oauth_consumer=self._consumer,
                 http_method='POST', http_url=url,
-                parameters = {
+                parameters={
                     'x_auth_mode': 'client_auth',
                     'x_auth_username': username,
                     'x_auth_password': password
@@ -153,4 +146,3 @@ class OAuthHandler(AuthHandler):
             else:
                 raise TweepError("Unable to get username, invalid oauth token!")
         return self.username
-

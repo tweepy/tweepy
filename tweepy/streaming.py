@@ -124,10 +124,7 @@ class Stream(object):
         self.snooze_time_step = options.get("snooze_time", 0.25)
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
         self.buffer_size = options.get("buffer_size",  1500)
-        if options.get("secure", True):
-            self.scheme = "https"
-        else:
-            self.scheme = "http"
+        self.scheme = "https"
 
         self.api = API()
         self.headers = options.get("headers") or {}
