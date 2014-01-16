@@ -27,7 +27,7 @@ class OAuthHandler(AuthHandler):
     OAUTH_HOST = 'api.twitter.com'
     OAUTH_ROOT = '/oauth/'
 
-    def __init__(self, consumer_key, consumer_secret, callback=None, secure=False):
+    def __init__(self, consumer_key, consumer_secret, callback=None, secure=True):
         if type(consumer_key) == unicode:
             consumer_key = bytes(consumer_key)
 
@@ -42,7 +42,7 @@ class OAuthHandler(AuthHandler):
         self.username = None
         self.secure = secure
 
-    def _get_oauth_url(self, endpoint, secure=False):
+    def _get_oauth_url(self, endpoint, secure=True):
         if self.secure or secure:
             prefix = 'https://'
         else:
