@@ -31,3 +31,13 @@ env:
         aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
 
 after_success: 'if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi'
+
+deploy:
+  provider: pypi
+  user: ""
+  password: ""
+  on:
+    tags: true
+    branch: master
+    python: 2.7
+    repo: "tweepy/tweepy"
