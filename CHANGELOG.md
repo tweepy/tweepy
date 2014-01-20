@@ -16,6 +16,17 @@ Version 2.2
 "disconnect" messages arrive from Twitter before connection is killed.
     - https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
   - [Compare View](https://github.com/tweepy/tweepy/compare/2.1...2.2)
+  - Use HTTPS by default.
+  - Support setting the starting cursor postion (ex: Ex:
+    Cursor(api.friends_ids, cursor=123456))
+  - Added API.cached_result instance flag that is "True" when cached result is returned.
+  - New Streaming client callbacks
+    - on_event(status): called when new events arrive
+    - on_direct_message(status): called when a new direct message
+      arrives.
+  - Improvements to streaming client re-connection behavior /
+    configuration.
+(https://github.com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)
 
 Version 2.1
 -----------
