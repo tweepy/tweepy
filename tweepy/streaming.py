@@ -239,12 +239,26 @@ class Stream(object):
         """ Called when the response has been closed by Twitter """
         pass
 
-    def userstream(self, count=None, async=False, secure=True):
+    def userstream(self, stall_warnings=False, _with=None, replies=None,
+            track=None, locations=None, async=False, encoding='utf8'):
         self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/user.json?delimited=length' % STREAM_VERSION
         self.host='userstream.twitter.com'
+        if stall_warnings:
+            self.parameters['stall_warnings'] = stall_warnings
+        if _with:
+            self.parameters['with'] = _with
+        if replies:
+            self.parameters['replies'] = replies
+        if locations and len(locations) > 0:
+            assert len(locations) % 4 == 0
+            self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
+        if track:
+            encoded_track = [s.encode(encoding) for s in track]
+            self.parameters['track'] = ','.join(encoded_track)
+        self.body = urlencode_noplus(self.parameters)
         self._start(async)
 
     def firehose(self, count=None, async=False):
