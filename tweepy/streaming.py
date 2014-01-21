@@ -243,7 +243,7 @@ class Stream(object):
         self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/2/user.json?delimited=length'
+        self.url = '/%s/user.json?delimited=length' % STREAM_VERSION
         self.host='userstream.twitter.com'
         self._start(async)
 
