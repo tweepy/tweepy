@@ -123,11 +123,7 @@ class Stream(object):
         self.retry_time_cap = options.get("retry_time_cap", 320.0)
         self.snooze_time_step = options.get("snooze_time", 0.25)
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
-        self.buffer_size = options.get("buffer_size",  1500)
-        if options.get("secure", True):
-            self.scheme = "https"
-        else:
-            self.scheme = "http"
+        self.buffer_size = options.get("buffer_size",  1500)        
 
         self.api = API()
         self.headers = options.get("headers") or {}
@@ -138,7 +134,7 @@ class Stream(object):
 
     def _run(self):
         # Authenticate
-        url = "%s://%s%s" % (self.scheme, self.host, self.url)
+        url = "https://%s%s" % ( self.host, self.url)
 
         # Connect and process the stream
         error_counter = 0
@@ -149,10 +145,8 @@ class Stream(object):
                 # quit if error count greater than retry count
                 break
             try:
-                if self.scheme == "http":
-                    conn = httplib.HTTPConnection(self.host, timeout=self.timeout)
-                else:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.timeout)
+                
+                conn = httplib.HTTPSConnection(self.host, timeout=self.timeout)
                 self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
                 conn.connect()
                 conn.request('POST', self.url, self.body, headers=self.headers)
