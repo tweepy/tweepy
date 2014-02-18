@@ -11,14 +11,6 @@ Introduction
 Here are some code snippets to help you out with using Tweepy. Feel
 free to contribute your own snippets or improve the ones here!
 
-BasicAuth
-=========
-
-.. code-block :: python
-
-   auth = tweepy.BasicAuthHandler("username", "password")
-   api = tweepy.API(auth)
-
 OAuth
 =====
 
