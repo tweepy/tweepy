@@ -8,52 +8,11 @@ Authentication Tutorial
 Introduction
 ============
 
-Tweepy supports both basic and oauth authentication. Authentication is
-handled by tweepy.AuthHandler classes with two implementations
-provided:
-
-* OAuthHandler
-
-* BasicAuthHandler 
-
-Basic Authentication
-====================
-
-Twitter has disabled basic authentication on August 16th 2010 - use OAuth 
-authentication instead.
-
-Basic authentication uses the user's Twitter username and password for
-authenticating with the API. You must query the user for these two
-pieces of information before we can authenticate.
-
-Now first we must create an instance of the BasicAuthHandler and pass
-into it the username and password::
-
-   auth = tweepy.BasicAuthHandler(username, password)
-
-Next we need to create our API instance which will be used for
-executing requests to the Twitter API::
-
-   api = tweepy.API(auth)
-
-We are now ready to make API calls that are authenticated! Here is a
-quick example posting a new tweet to the authenticated user's account::
-
-   api.update_status('hello from tweepy!')
+Tweepy supports oauth authentication. Authentication is
+handled by the tweepy.AuthHandler class.
 
 OAuth Authentication
 ====================
-
-OAuth is a bit trickier than basic auth, but there are some advantages
-to using it:
-
-* You can set a 'from myappname' which will appear in tweets
-  posted
-
-* More secure since you don't need the user's password
-
-* Your app does not break if the user changes their password in
-  the future
 
 Tweepy tries to make OAuth as painless as possible for you. To begin
 the process we need to register our client application with
