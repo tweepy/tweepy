@@ -31,15 +31,6 @@ This page contains some basic documentation for the Tweepy module.
 Timeline methods
 ----------------
 
-.. method:: API.public_timeline()
-
-   Returns the 20 most recent statuses from non-protected users who have
-   set a custom user icon. The public timeline is cached for 60 seconds
-   so requesting it more often than that is a waste of resources.
-
-   :rtype: list of :class:`Status` objects
-
-
 .. method:: API.home_timeline([since_id], [max_id], [count], [page])
 
    Returns the 20 most recent statuses, including retweets, posted by the
