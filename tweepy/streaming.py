@@ -301,7 +301,7 @@ class Stream(object):
             self.parameters['track'] = ','.join(encoded_track)
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
-            self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
+            self.parameters['locations'] = ','.join(['%.4f' % l for l in locations])
         if count:
             self.parameters['count'] = count
         if stall_warnings:
