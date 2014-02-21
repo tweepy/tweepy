@@ -4,7 +4,6 @@
 
 from datetime import datetime
 import time
-import htmlentitydefs
 import re
 import locale
 from urllib import quote
