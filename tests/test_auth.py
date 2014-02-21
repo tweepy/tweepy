@@ -10,7 +10,7 @@ class TweepyAuthTests(unittest.TestCase):
 
         # test getting access token
         auth_url = auth.get_authorization_url()
-        print 'Please authorize: ' + auth_url
+        print('Please authorize: ' + auth_url)
         verifier = raw_input('PIN: ').strip()
         self.assert_(len(verifier) > 0)
         access_token = auth.get_access_token(verifier)

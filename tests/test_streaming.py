@@ -27,7 +27,7 @@ class MockStreamListener(StreamListener):
         return False
 
     def on_error(self, code):
-        print "response: %s" % code
+        print("response: %s" % code)
         return True
 
     def on_status(self, status):
