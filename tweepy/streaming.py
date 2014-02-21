@@ -171,7 +171,7 @@ class Stream(object):
                     self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
                     self._read_loop(resp)
-            except (timeout, ssl.SSLError), exc:
+            except (timeout, ssl.SSLError) as exc:
                 # If it's not time out treat it like any other exception
                 if isinstance(exc, ssl.SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
                     exception = exc
@@ -185,7 +185,7 @@ class Stream(object):
                 sleep(self.snooze_time)
                 self.snooze_time = min(self.snooze_time + self.snooze_time_step,
                                        self.snooze_time_cap)
-            except Exception, exception:
+            except Exception as exception:
                 # any other exception is fatal, so kill loop
                 break
 

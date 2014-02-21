@@ -153,7 +153,7 @@ def bind_api(**config):
                 try:
                     conn.request(self.method, url, headers=self.headers, body=self.post_data)
                     resp = conn.getresponse()
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
 
                 # Exit request loop if non-retry error code
@@ -181,7 +181,7 @@ def bind_api(**config):
                 try:
                     zipper = gzip.GzipFile(fileobj=StringIO(body))
                     body = zipper.read()
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to decompress data: %s' % e)
             result = self.api.parser.parse(self, body)
 
