@@ -167,12 +167,12 @@ class Stream(object):
                     self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
                     self._read_loop(resp)
-            except (timeout, ssl.SSLError) as exc:
+            except (Timeout, ssl.SSLError) as exc:
+                # This is still necessary, as a SSLError can actually be thrown when using Requests
                 # If it's not time out treat it like any other exception
                 if isinstance(exc, ssl.SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
                     exception = exc
                     break
-
                 if self.listener.on_timeout() == False:
                     break
                 if self.running is False:
