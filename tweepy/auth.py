@@ -35,10 +35,10 @@ class OAuthHandler(AuthHandler):
         if type(consumer_secret) == unicode:
             consumer_secret = bytes(consumer_secret)
 
-        self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
-        self._sigmethod = oauth.OAuthSignatureMethod_HMAC_SHA1()
-        self.request_token = None
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
         self.access_token = None
+        self.access_token_secret = None
         self.callback = callback
         self.username = None
         self.secure = secure
