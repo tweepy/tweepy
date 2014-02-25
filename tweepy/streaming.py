@@ -189,6 +189,8 @@ class Stream(object):
         if resp:
             resp.close()
 
+        self.session = requests.Session()
+
         if exception:
             # call a handler first so that the exception can be logged.
             self.listener.on_exception(exception)
