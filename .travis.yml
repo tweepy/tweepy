@@ -30,4 +30,4 @@ env:
         JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
         aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
 
-after_success: 'if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi'
+after_success: 'if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; python upload_record.py; fi'
