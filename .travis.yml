@@ -1,33 +1,40 @@
----
 language: python
 python:
-  - "2.6"
-  - "2.7"
+- '2.6'
+- '2.7'
 install:
-  - pip install -r test_requirements.txt
+- pip install -r test_requirements.txt
 script: ./run_tests.sh
 matrix:
   fast_finish: true
   allow_failures:
-    - python: "2.6"
+  - python: '2.6'
 env:
   global:
-    - TWITTER_USERNAME="tweepytest"
-    - secure: |-
-        MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
-        EM+cnKavRLHTbKpoHPIzzhKx9DQLrxtYy+s3Rw9AeGo8K3LA7mcn4T4eCH7s
-        RGaEkEqH4wTbe01zsmBJ9n9pALmtFgDk9WeDlpAY9wc5cAPgrZ4=
-    - secure: |-
-        f4nCh413cDJF3llGsUdaSz8Rw8WaEDzsSAqa7rK8IcozvS6+S82nm8A/xKYg
-        i6A6uC081XWa6JqQ9hyTxHam3OWGAYrytELrEUfkX4ZYMM8lmQYCmnhrN9r/
-        FaX1haT4lRfm9r0zAYZileLVmcTg8LSZzpRowA/DH9ZO8QD76b4=
-    - secure: |-
-        YxZerqEAifcNS3qTbWyr2MAxDl1hMGv2p87nmw+AHP62LoTGEhHtulQdadjG
-        CNdhLzyIY+GgRotWVu39OfVPRKyfMBFrpPdUY7tKSZ/O8Ct9792mrSvCOpOV
-        Li/TYytFtrNQiB7yjcoaub1RabffBcLbu5YzbWN4gPrukQV03Jc=
-    - secure: |-
-        nKkytraqLGUm33K1GpwkjOyxACDHYw4GMvOGyDwVTX7VNwqxbkUojB7qXYoQ
-        JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
-        aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
-
-after_success: 'if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi'
+  - TWITTER_USERNAME="tweepytest"
+  - secure: |-
+      MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
+      EM+cnKavRLHTbKpoHPIzzhKx9DQLrxtYy+s3Rw9AeGo8K3LA7mcn4T4eCH7s
+      RGaEkEqH4wTbe01zsmBJ9n9pALmtFgDk9WeDlpAY9wc5cAPgrZ4=
+  - secure: |-
+      f4nCh413cDJF3llGsUdaSz8Rw8WaEDzsSAqa7rK8IcozvS6+S82nm8A/xKYg
+      i6A6uC081XWa6JqQ9hyTxHam3OWGAYrytELrEUfkX4ZYMM8lmQYCmnhrN9r/
+      FaX1haT4lRfm9r0zAYZileLVmcTg8LSZzpRowA/DH9ZO8QD76b4=
+  - secure: |-
+      YxZerqEAifcNS3qTbWyr2MAxDl1hMGv2p87nmw+AHP62LoTGEhHtulQdadjG
+      CNdhLzyIY+GgRotWVu39OfVPRKyfMBFrpPdUY7tKSZ/O8Ct9792mrSvCOpOV
+      Li/TYytFtrNQiB7yjcoaub1RabffBcLbu5YzbWN4gPrukQV03Jc=
+  - secure: |-
+      nKkytraqLGUm33K1GpwkjOyxACDHYw4GMvOGyDwVTX7VNwqxbkUojB7qXYoQ
+      JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
+      aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI=
+after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
+deploy:
+  provider: pypi
+  user: jroesslein
+  password:
+    secure: agApkjsKOSkFI6DiNydyW26r8ASFsTsFK/RHsV1F7CqoERoeAaRAehYy9EGW2Jn2aJzNlagDByfh5xNfClXuRh0GoEfOyjj5AmBm4hMrzc3bwsH+IPU3OQhQtS3aFGNmIkaz2Bz+Dcl5zTmV914N3mqcoGpyMtxyn1Hwc0Xgn6Q=
+  distributions: "sdist bdist"
+  on:
+    tags: true
+    repo: tweepy/tweepy
