@@ -170,7 +170,7 @@ class API(object):
         path = '/users/search.json',
         payload_type = 'user', payload_list = True,
         require_auth = True,
-        allowed_param = ['q', 'per_page', 'page']
+        allowed_param = ['q', 'count', 'page']
     )
 
     """ users/suggestions/:slug """
