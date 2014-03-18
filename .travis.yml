@@ -38,4 +38,5 @@ deploy:
   distributions: sdist bdist
   on:
     tags: true
+    branch: production
     repo: tweepy/tweepy
