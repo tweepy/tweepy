@@ -577,10 +577,10 @@ class API(object):
     )
 
     """ Perform bulk add of list members from user ID or screenname """
-    def add_list_members(self, screen_names=None, user_ids=None, slug=None,
+    def add_list_members(self, screen_name=None, user_id=None, slug=None,
                          list_id=None, owner_id=None, owner_screen_name=None):
-        return self._add_list_members(list_to_csv(screen_names),
-                                      list_to_csv(user_ids),
+        return self._add_list_members(list_to_csv(screen_name),
+                                      list_to_csv(user_id),
                                       slug, list_id, owner_id,
                                       owner_screen_name)
 
@@ -593,10 +593,10 @@ class API(object):
     )
 
     """ Perform bulk remove of list members from user ID or screenname """
-    def remove_list_members(self, screen_names=None, user_ids=None, slug=None,
+    def remove_list_members(self, screen_name=None, user_id=None, slug=None,
                          list_id=None, owner_id=None, owner_screen_name=None):
-        return self._remove_list_members(list_to_csv(screen_names),
-                                      list_to_csv(user_ids),
+        return self._remove_list_members(list_to_csv(screen_name),
+                                      list_to_csv(user_id),
                                       slug, list_id, owner_id,
                                       owner_screen_name)
 

@@ -284,7 +284,7 @@ class TweepyAPITests(TweepyTestCase):
         params = {
             'slug': 'test',
             'owner_screen_name': username,
-            'screen_names': ['twitterapi', 'twittermobile']
+            'screen_name': ['twitterapi', 'twittermobile']
         }
 
         def assert_list(l):
