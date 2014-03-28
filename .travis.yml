@@ -29,7 +29,8 @@ env:
 
       aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI='
   - secure: TPQSFGqdl6khXqQqTZ6euROoAmFRnONAlPXD6npvTIIN+fNfnz8lvZtOEWHo2jRPLoU3FyVUhYvTynj6B2hJinulP+RKOMbQ65HCZVHrsitwl1n1QZB5HegQDOYc5q6VTTYn/r8r5tGy35U0O80y1zycTLqSJiXlkdqsSq564pI=
-after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
+after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; python
+  upload_record.py; fi
 deploy:
   provider: pypi
   user: jroesslein
