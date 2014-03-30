@@ -27,7 +27,7 @@ class OAuthHandler(AuthHandler):
     OAUTH_HOST = 'api.twitter.com'
     OAUTH_ROOT = '/oauth/'
 
-    def __init__(self, consumer_key, consumer_secret, callback=None, secure=True):
+    def __init__(self, consumer_key, consumer_secret, callback=None):
         if type(consumer_key) == unicode:
             consumer_key = bytes(consumer_key)
 
@@ -39,16 +39,10 @@ class OAuthHandler(AuthHandler):
         self.request_token = None
         self.access_token = None
         self.callback = callback
-        self.username = None
-        self.secure = secure
+        self.username = None        
 
-    def _get_oauth_url(self, endpoint, secure=True):
-        if self.secure or secure:
-            prefix = 'https://'
-        else:
-            prefix = 'http://'
-
-        return prefix + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
+    def _get_oauth_url(self, endpoint):                
+        return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self, url, method, headers, parameters):
         request = oauth.OAuthRequest.from_consumer_and_token(
@@ -126,7 +120,7 @@ class OAuthHandler(AuthHandler):
         and request activation of xAuth for it.
         """
         try:
-            url = self._get_oauth_url('access_token', secure=True) # must use HTTPS
+            url = self._get_oauth_url('access_token') # must use HTTPS
             request = oauth.OAuthRequest.from_consumer_and_token(
                 oauth_consumer=self._consumer,
                 http_method='POST', http_url=url,

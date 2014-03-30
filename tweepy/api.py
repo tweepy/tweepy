@@ -25,7 +25,7 @@ class API(object):
         self.api_root = api_root
         self.search_root = search_root
         self.cache = cache
-        self.secure = secure
+        self.secure = True
         self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay

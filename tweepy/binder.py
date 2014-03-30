@@ -50,13 +50,8 @@ def bind_api(**config):
                 self.api_root = api.api_root
 
             # Perform any path variable substitution
-            self.build_path()
-
-            if api.secure:
-                self.scheme = 'https://'
-            else:
-                self.scheme = 'http://'
-
+            self.build_path()                    
+            
             if self.search_api:
                 self.host = api.search_host
             else:
@@ -132,16 +127,13 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
-                # Open connection
-                if self.api.secure:
-                    conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
-                else:
-                    conn = httplib.HTTPConnection(self.host, timeout=self.api.timeout)
-
+                # Open connection            
+                conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
+                
                 # Apply authentication
                 if self.api.auth:
                     self.api.auth.apply_auth(
-                            self.scheme + self.host + url,
+                            'https://' + self.host + url,
                             self.method, self.headers, self.parameters
                     )
 
