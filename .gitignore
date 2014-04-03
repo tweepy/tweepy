@@ -1,5 +1,6 @@
 *.pyc
 *.swp
+allLeeds.json
 build/
 dist/
 tweepy.egg-info/

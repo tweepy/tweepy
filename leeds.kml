@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+      <Style id="unlockStyle">
+         <LineStyle>
+            <width>2</width>
+            <color>ff0000ff</color>
+         </LineStyle>
+         <PolyStyle>
+            <fill>0</fill>
+            <outline>1</outline>
+         </PolyStyle>
+      </Style>
+	     <Folder xmlns="">
+         <name>Leeds Landing</name>
+         <open>0</open>
+         <Placemark id="7110097">
+            <name>Bounding Box for Leeds Landing</name>
+            <description>
+        
+        &lt;ul&gt;
+        &lt;li&gt;&lt;b&gt;Name:&lt;/b&gt; Leeds Landing&lt;/li&gt;
+        
+        &lt;li&gt;&lt;b&gt;Feature type:&lt;/b&gt; Populated Place&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;Unlock Feature code:&lt;/b&gt; GN.P.PPL&lt;/li&gt;
+        
+        
+                
+        &lt;li&gt;&lt;b&gt;Country:&lt;/b&gt; United States&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;Country code:&lt;/b&gt; US&lt;/li&gt;
+        
+                
+        
+        &lt;li&gt;&lt;b&gt;Custodian:&lt;/b&gt; GeoNames&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;Gazetteer:&lt;/b&gt; GeoNames&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;Source id:&lt;/b&gt; 4360499&lt;/li&gt;        
+        &lt;/ul&gt;
+        
+        &lt;a href="http://unlock.edina.ac.uk/ws/footprintLookup?format=kml&amp;identifier=7110097"&gt;Footprint geometry (Feature id: 7110097)&lt;/a&gt;
+        
+        </description>
+            <styleUrl>#unlockStyle</styleUrl>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-76.1688349,38.8153938,0 -76.1688349,38.8153938,0 -76.1688349,38.8153938,0 -76.1688349,38.8153938,0 -76.1688349,38.8153938,0</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+         </Placemark>
+	     </Folder>
+  </Document>
+</kml>
