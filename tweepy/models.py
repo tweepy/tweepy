@@ -68,6 +68,7 @@ class Status(Model):
     @classmethod
     def parse(cls, api, json):
         status = cls(api)
+        setattr(status, '_json', json)
         for k, v in json.items():
             if k == 'user':
                 user_model = getattr(api.parser.model_factory, 'user') if api else User
@@ -112,6 +113,7 @@ class User(Model):
     @classmethod
     def parse(cls, api, json):
         user = cls(api)
+        setattr(user, '_json', json)
         for k, v in json.items():
             if k == 'created_at':
                 setattr(user, k, parse_datetime(v))
