@@ -223,7 +223,8 @@ class Stream(object):
             # read the next twitter status object
             if delimited_string.strip().isdigit():
                 next_status_obj = resp.read( int(delimited_string) )
-                self._data(next_status_obj)
+                if self.running:
+                    self._data(next_status_obj)
 
         if resp.isclosed():
             self.on_closed(resp)
