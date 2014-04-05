@@ -72,7 +72,7 @@ python streaming-leeds.py
 ```
 
 To see this in action, take a look at the stream of Tweets illustrated
-in the video below.
+in [this video](http://youtu.be/fqrVFReL7dY).
 
 <iframe width="420" height="315" src="//www.youtube.com/embed/fqrVFReL7dY" frameborder="0" allowfullscreen></iframe>
 
