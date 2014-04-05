@@ -8,3 +8,5 @@ tweepy.egg-info/
 .coverage
 htmlcov/
 .Rproj.user
+.RData
+.Rhistory
