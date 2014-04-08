@@ -55,6 +55,16 @@ class TweepyStreamTests(unittest.TestCase):
         self.stream.userstream()
         self.assertEqual(self.listener.status_count, 1)
 
+    def test_userstream_with_params(self):
+        # Generate random tweet which should show up in the stream.
+        def on_connect():
+            API(self.auth).update_status(mock_tweet())
+
+        self.listener.connect_cb = on_connect
+        self.listener.status_stop_count = 1
+        self.stream.userstream(_with='user', replies='all', stall_warnings=True)
+        self.assertEqual(self.listener.status_count, 1)
+
     def test_sample(self):
         self.listener.status_stop_count = 10
         self.stream.sample()
