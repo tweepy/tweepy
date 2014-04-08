@@ -242,7 +242,7 @@ class Stream(object):
 
     def userstream(self, stall_warnings=False, _with=None, replies=None,
             track=None, locations=None, async=False, encoding='utf8'):
-        self.parameters = {}
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/user.json?delimited=length' % STREAM_VERSION
@@ -263,7 +263,7 @@ class Stream(object):
         self._start(async)
 
     def firehose(self, count=None, async=False):
-        self.parameters = {}
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/firehose.json?delimited=length' % STREAM_VERSION
@@ -272,14 +272,14 @@ class Stream(object):
         self._start(async)
 
     def retweet(self, async=False):
-        self.parameters = {}
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/retweet.json?delimited=length' % STREAM_VERSION
         self._start(async)
 
     def sample(self, async=False):
-        self.parameters = {}
+        self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
@@ -306,6 +306,7 @@ class Stream(object):
         if languages:
             self.parameters['language'] = ','.join(map(str, languages))
         self.body = urlencode_noplus(self.parameters)
+        self.parameters['delimited'] = 'length'
         self._start(async)
 
     def disconnect(self):
