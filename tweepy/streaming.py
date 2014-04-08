@@ -245,7 +245,7 @@ class Stream(object):
         self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/user.json?delimited=length' % STREAM_VERSION
+        self.url = '/%s/user.json' % STREAM_VERSION
         self.host='userstream.twitter.com'
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings
@@ -259,7 +259,9 @@ class Stream(object):
         if track:
             encoded_track = [s.encode(encoding) for s in track]
             self.parameters['track'] = ','.join(encoded_track)
+
         self.body = urlencode_noplus(self.parameters)
+        self.url = self.url + '?' + self.body
         self._start(async)
 
     def firehose(self, count=None, async=False):
