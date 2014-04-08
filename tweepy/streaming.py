@@ -278,17 +278,15 @@ class Stream(object):
         self.url = '/%s/statuses/retweet.json?delimited=length' % STREAM_VERSION
         self._start(async)
 
-    def sample(self, count=None, async=False):
+    def sample(self, async=False):
         self.parameters = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
-        if count:
-            self.url += '&count=%s' % count
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
-               count=None, stall_warnings=False, languages=None, encoding='utf8'):
+               stall_warnings=False, languages=None, encoding='utf8'):
         self.parameters = {}
         self.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -303,8 +301,6 @@ class Stream(object):
         if locations and len(locations) > 0:
             assert len(locations) % 4 == 0
             self.parameters['locations'] = ','.join(['%.4f' % l for l in locations])
-        if count:
-            self.parameters['count'] = count
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings
         if languages:
