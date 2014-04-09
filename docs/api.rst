@@ -578,14 +578,6 @@ Saved Searches Methods
 Help Methods
 ------------
 
-.. method:: API.test()
-
-   Invokes the test method in the Twitter API. Return True if successful,
-   otherwise False.
-
-   :rtype: True/False
-
-
 .. method:: API.search(q[,lang],[locale],[rpp],[page],[since_id],[geocode],[show_user])
 
    Returns tweets that match a specified query.
