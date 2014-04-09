@@ -18,21 +18,19 @@ Hello Tweepy
 .. code-block :: python
 
    import tweepy
+
+   auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+   auth.set_access_token(access_token, access_token_secret)
+
+   api = tweepy.API(auth)
    
-   public_tweets = tweepy.api.public_timeline()
+   public_tweets = api.home_timeline()
    for tweet in public_tweets:
        print tweet.text
 
-This example will download the public timeline tweets and print each
-one of their texts to the console. tweepy.api in the above code
-snippet is an unauthenticated instance of the tweepy API class. The
-API class contains all the methods for access the Twitter API. By
-unauthenticated means there is no user associated with this
-instance. So you may only do unauthenticated API calls with this
-instance. For example the following would fail::
-
-   tweepy.api.update_status('will not work!')
-
+This example will download your home timeline tweets and print each
+one of their texts to the console. Twitter requires all requests to
+use OAuth for authentication.
 The :ref:`auth_tutorial` goes into more details about authentication.
 
 API
