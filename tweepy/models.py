@@ -239,7 +239,7 @@ class SearchResults(ResultSet):
     @classmethod
     def parse(cls, api, json):
         metadata = json['search_metadata']
-        results = SearchResults(metadata.get('max_id'), metadata.get('since_id'))
+        results = SearchResults()
         results.refresh_url = metadata.get('refresh_url')
         results.completed_in = metadata.get('completed_in')
         results.query = metadata.get('query')
