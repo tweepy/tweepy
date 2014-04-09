@@ -83,8 +83,16 @@ class IdIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
-        self.max_id = kargs.get('max_id')
-        self.since_id = kargs.get('since_id')
+
+        # remove these parameters from the kargs and save them separately if they were specified
+        self.max_id = long(kargs.pop('max_id')) if kargs.has_key('max_id') else None
+        self.since_id = long(kargs.pop('since_id')) if kargs.has_key('since_id') else None
+
+        # set the first max_id - the top of the tweet stack
+        self.next_max_id = self.max_id if self.max_id else None
+        self.prev_since_id = None
+        self.prev_max_ids = []
+
         self.count = 0
 
     def next(self):
@@ -92,15 +100,18 @@ class IdIterator(BaseIterator):
         if self.limit and self.limit == self.count:
             raise StopIteration
 
-        # max_id is inclusive so decrement by one
-        # to avoid requesting duplicate items.
-        max_id = self.since_id - 1 if self.max_id else None
-        data = self.method(max_id = max_id, *self.args, **self.kargs)
+        data = self.method(max_id = self.next_max_id, since_id = self.since_id, *self.args, **self.kargs)
+
+        # reached the end / since_id
         if len(data) == 0:
             raise StopIteration
-        self.max_id = data.max_id
-        self.since_id = data.since_id
+
+        self.prev_since_id = data.max_id
+        self.prev_max_ids.append(self.next_max_id)
+        # max_id is inclusive so decrement the since_id by one to avoid requesting duplicate items.
+        self.next_max_id = data.since_id - 1
         self.count += 1
+
         return data
 
     def prev(self):
@@ -108,14 +119,31 @@ class IdIterator(BaseIterator):
         if self.limit and self.limit == self.count:
             raise StopIteration
 
-        since_id = self.max_id
-        data = self.method(since_id = since_id, *self.args, **self.kargs)
+        # reached since_id
+        if self.max_id and self.prev_since_id >= self.max_id:
+            raise StopIteration
+
+        # get previous page's max_id
+        prev_max_id = None
+        if len(self.prev_max_ids) >= 2:
+            self.prev_max_ids.pop()
+            prev_max_id = self.prev_max_ids[-1]
+        elif len(self.prev_max_ids) == 1:
+            prev_max_id = self.prev_max_ids[0]
+
+        data = self.method(since_id = self.prev_since_id, max_id = prev_max_id, *self.args, **self.kargs)
+
+        # reached the end
         if len(data) == 0:
             raise StopIteration
-        self.max_id = data.max_id
-        self.since_id = data.since_id
+
+        # set next/previous ID's
+        self.next_max_id = data.since_id - 1
+        self.prev_since_id = data.max_id
         self.count += 1
+
         return data
+
 
 class PageIterator(BaseIterator):
 
