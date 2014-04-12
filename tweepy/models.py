@@ -18,14 +18,16 @@ class ResultSet(list):
         if self._max_id:
             return self._max_id
         ids = self.ids()
-        return max(ids) if ids else None
+        # Max_id is always set to the *smallest* id, minus one, in the set
+        return (min(ids) - 1) if ids else None
 
     @property
     def since_id(self):
         if self._since_id:
             return self._since_id
         ids = self.ids()
-        return min(ids) if ids else None
+        # Since_id is always set to the *greatest* id in the set
+        return max(ids) if ids else None 
 
     def ids(self):
         return [item.id for item in self if hasattr(item, 'id')]
