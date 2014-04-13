@@ -133,10 +133,13 @@ class PageIterator(BaseIterator):
         self.current_page = 0
 
     def next(self):
-        self.current_page += 1
-        items = self.method(page=self.current_page, *self.args, **self.kargs)
-        if len(items) == 0 or (self.limit > 0 and self.current_page > self.limit):
+        if self.limit > 0 and self.current_page > self.limit:
             raise StopIteration
+
+        items = self.method(page=self.current_page, *self.args, **self.kargs)
+        if len(items) == 0:
+            raise StopIteration
+        self.current_page += 1
         return items
 
     def prev(self):
