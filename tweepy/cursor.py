@@ -56,10 +56,10 @@ class CursorIterator(BaseIterator):
         start_cursor = kargs.pop('cursor', None)
         self.next_cursor = start_cursor or -1
         self.prev_cursor = start_cursor or 0
-        self.count = 0
+        self.num_tweets = 0
 
     def next(self):
-        if self.next_cursor == 0 or (self.limit and self.count == self.limit):
+        if self.next_cursor == 0 or (self.limit and self.num_tweets == self.limit):
             raise StopIteration
         data, cursors = self.method(
                 cursor=self.next_cursor, *self.args, **self.kargs
@@ -67,7 +67,7 @@ class CursorIterator(BaseIterator):
         self.prev_cursor, self.next_cursor = cursors
         if len(data) == 0:
             raise StopIteration
-        self.count += 1
+        self.num_tweets += 1
         return data
 
     def prev(self):
@@ -76,7 +76,7 @@ class CursorIterator(BaseIterator):
         data, self.next_cursor, self.prev_cursor = self.method(
                 cursor=self.prev_cursor, *self.args, **self.kargs
         )
-        self.count -= 1
+        self.num_tweets -= 1
         return data
 
 class IdIterator(BaseIterator):
@@ -90,7 +90,7 @@ class IdIterator(BaseIterator):
 
     def next(self):
         """Fetch a set of items with IDs less than current set."""
-        if self.limit and self.limit == self.count:
+        if self.limit and self.limit == self.num_tweets:
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
@@ -112,7 +112,7 @@ class IdIterator(BaseIterator):
 
     def prev(self):
         """Fetch a set of items with IDs greater than current set."""
-        if self.limit and self.limit == self.count:
+        if self.limit and self.limit == self.num_tweets:
             raise StopIteration
 
         self.index -= 1
@@ -155,17 +155,17 @@ class ItemIterator(BaseIterator):
         self.limit = 0
         self.current_page = None
         self.page_index = -1
-        self.count = 0
+        self.num_tweets = 0
 
     def next(self):
-        if self.limit > 0 and self.count == self.limit:
+        if self.limit > 0 and self.num_tweets == self.limit:
             raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
             self.current_page = self.page_iterator.next()
             self.page_index = -1
         self.page_index += 1
-        self.count += 1
+        self.num_tweets += 1
         return self.current_page[self.page_index]
 
     def prev(self):
@@ -178,6 +178,6 @@ class ItemIterator(BaseIterator):
             if self.page_index == 0:
                 raise TweepError('No more items')
         self.page_index -= 1
-        self.count -= 1
+        self.num_tweets -= 1
         return self.current_page[self.page_index]
 
