@@ -246,3 +246,22 @@ class Stream(object):
             return
         self.running = False
 
+    def follow(self, follow, async=False):
+        print 'Calling follow for: {0}'.format(follow)
+        if self.running:
+            raise TweepError('Stream object already connected!')
+
+        self.scheme = "https"
+        self.parameters = {}
+        self.headers['Content-type'] = "application/x-www-form-urlencoded"
+        self.host = 'sitestream.twitter.com'
+        self.url = '/%s/site.json?delimited=length' % STREAM_VERSION
+        
+        if follow:
+            self.parameters['follow'] = ','.join(map(str, follow))
+
+        self.body = urlencode_noplus(self.parameters)
+        self.parameters['delimited'] = 'length'
+        self._start(async)
+
+

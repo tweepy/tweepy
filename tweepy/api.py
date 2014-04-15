@@ -675,6 +675,33 @@ class API(object):
         allowed_param = ['lat', 'long', 'name', 'contained_within']
     )
 
+    """ site stream info """
+    stream_info = bind_api(
+        path = '{stream_id}/info.json',
+        payload_type = 'json',
+        require_auth = True,
+        allowed_param = ['stream_id']
+    )
+
+    """ site stream add user """
+    add_users = bind_api(
+        path = '{stream_id}/add_user.json',
+        payload_type = None,
+        require_auth = True,
+        method = 'POST',
+        allowed_param = ['stream_id','user_id']
+    )
+
+    """ site stream remove user """
+    remove_users = bind_api(
+        path = '{stream_id}/remove_user.json',
+        payload_type = None,
+        require_auth = True,
+        method = 'POST',
+        allowed_param = ['stream_id','user_id']
+    )
+
+
     """ Internal use only """
     @staticmethod
     def _pack_image(filename, max_size):
