@@ -18,7 +18,8 @@ class API(object):
             host='api.twitter.com', search_host='search.twitter.com',
              cache=None, secure=True, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-            parser=None, compression=False, wait_on_rate_limit=False):
+            parser=None, compression=False, wait_on_rate_limit=False,
+            wait_on_rate_limit_notify=False):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -32,6 +33,7 @@ class API(object):
         self.retry_errors = retry_errors
         self.timeout = timeout
         self.wait_on_rate_limit = wait_on_rate_limit
+        self.wait_on_rate_limit_notify = wait_on_rate_limit_notify
         self.parser = parser or ModelParser()
 
     """ statuses/home_timeline """
@@ -738,4 +740,3 @@ class API(object):
         }
 
         return headers, body
-
