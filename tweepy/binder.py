@@ -41,6 +41,7 @@ def bind_api(**config):
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
+            self.wait_on_rate_limit_notify = kargs.pop('wait_on_rate_limit_notify', api.wait_on_rate_limit_notify)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
@@ -68,7 +69,7 @@ def bind_api(**config):
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
-            
+
             # Monitoring rate limits
             self._remaining_calls = None
             self._reset_time = None
@@ -142,8 +143,10 @@ def bind_api(**config):
                    self._remaining_calls is not None and self._remaining_calls < 1:
                     sleep_time = self._reset_time - int(time.time())
                     if sleep_time > 0:
-                        time.sleep(sleep_time + 5) # sleep for few extra sec 
-                    
+                        if self.wait_on_rate_limit_notify:
+                          print "Max retries reached. Sleeping for: " + str(sleep_time)
+                        time.sleep(sleep_time + 5) # sleep for few extra sec
+
                 # Open connection
                 if self.api.secure:
                     conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
@@ -167,15 +170,15 @@ def bind_api(**config):
                     resp = conn.getresponse()
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
-                
+
                 rem_calls = resp.getheader('x-rate-limit-remaining')
                 if rem_calls is not None:
-                    self._remaining_calls = int(rem_calls) 
+                    self._remaining_calls = int(rem_calls)
                 elif isinstance(self._remaining_calls, int):
                     self._remaining_calls -= 1
                 reset_time = resp.getheader('x-rate-limit-reset')
                 if reset_time is not None:
-                    self._reset_time = int(reset_time) 
+                    self._reset_time = int(reset_time)
                 if self.wait_on_rate_limit and self._remaining_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
                     continue
 
@@ -187,7 +190,7 @@ def bind_api(**config):
                     if 'retry-after' in resp.msg:
                         retry_delay = float(resp.msg['retry-after'])
                 elif self.retry_errors and resp.status not in self.retry_errors:
-                    break 
+                    break
 
                 # Sleep before retrying request again
                 time.sleep(retry_delay)
@@ -236,4 +239,3 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
-
