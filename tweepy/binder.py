@@ -176,7 +176,7 @@ def bind_api(**config):
                 reset_time = resp.getheader('x-rate-limit-reset')
                 if reset_time is not None:
                     self._reset_time = int(reset_time) 
-                if self.wait_on_rate_limit and rem_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
+                if self.wait_on_rate_limit and self._remaining_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
                     continue
 
                 retry_delay = self.retry_delay
