@@ -168,17 +168,16 @@ def bind_api(**config):
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
                 
-                if self.wait_on_rate_limit:
-                    rem_calls = resp.getheader('x-rate-limit-remaining')
-                    if rem_calls is not None:
-                        self._remaining_calls = int(rem_calls) 
-                    elif isinstance(self._remaining_calls, int):
-                        self._remaining_calls -= 1
-                    reset_time = resp.getheader('x-rate-limit-reset')
-                    if reset_time is not None:
-                        self._reset_time = int(reset_time) 
-                    if rem_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
-                        continue
+                rem_calls = resp.getheader('x-rate-limit-remaining')
+                if rem_calls is not None:
+                    self._remaining_calls = int(rem_calls) 
+                elif isinstance(self._remaining_calls, int):
+                    self._remaining_calls -= 1
+                reset_time = resp.getheader('x-rate-limit-reset')
+                if reset_time is not None:
+                    self._reset_time = int(reset_time) 
+                if self.wait_on_rate_limit and rem_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
+                    continue
 
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
