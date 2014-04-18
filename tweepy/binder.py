@@ -41,6 +41,7 @@ def bind_api(**config):
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
+            self.parser = kargs.pop('parser', api.parser)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
@@ -195,7 +196,7 @@ def bind_api(**config):
             self.api.last_response = resp
             if resp.status and not 200 <= resp.status < 300:
                 try:
-                    error_msg = self.api.parser.parse_error(resp.read())
+                    error_msg = self.parser.parse_error(resp.read())
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
                 raise TweepError(error_msg, resp)
@@ -208,7 +209,8 @@ def bind_api(**config):
                     body = zipper.read()
                 except Exception as e:
                     raise TweepError('Failed to decompress data: %s' % e)
-            result = self.api.parser.parse(self, body)
+            
+            result = self.parser.parse(self, body)
 
             conn.close()
 
@@ -218,10 +220,13 @@ def bind_api(**config):
 
             return result
 
-    def _call(api, *args, **kargs):
+    def _call(api, create=False, *args, **kargs):
 
         method = APIMethod(api, args, kargs)
-        return method.execute()
+        if create:
+            return method
+        else:
+            return method.execute()
 
 
     # Set pagination mode

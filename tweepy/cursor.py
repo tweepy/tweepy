@@ -3,6 +3,7 @@
 # See LICENSE for details.
 
 from tweepy.error import TweepError
+from tweepy.parsers import ModelParser, RawParser
 
 class Cursor(object):
     """Pagination helper class"""
@@ -86,6 +87,7 @@ class IdIterator(BaseIterator):
         self.max_id = kargs.get('max_id')
         self.num_tweets = 0
         self.results = []
+        self.model_results = []
         self.index = 0
 
     def next(self):
@@ -94,21 +96,35 @@ class IdIterator(BaseIterator):
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
-            data = self.method(max_id=self.max_id, *self.args, **self.kargs)
+            data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kargs)
+
+            old_parser = self.method.__self__.parser
+            # Hack for models which expect ModelParser to be set
+            self.method.__self__.parser = ModelParser()
+
+            # This is a special invocation that returns the underlying
+            # APIMethod class
+            model = ModelParser().parse(self.method(create=True), data)
+            self.method.__self__.parser = old_parser
+
+            result = self.method.__self__.parser.parse(self.method(create=True), data)
+            
             if len(self.results) != 0:
                 self.index += 1
-            self.results.append(data)
+            self.results.append(result)
+            self.model_results.append(model)
         else:
             self.index += 1
-            data = self.results[self.index]
+            result = self.results[self.index]
+            model = self.model_results[self.index]
             
-        if len(data) == 0:
+        if len(result) == 0:
             raise StopIteration
         # TODO: Make this not dependant on the parser making max_id and
         # since_id available
-        self.max_id = data.max_id 
+        self.max_id = model.max_id 
         self.num_tweets += 1
-        return data
+        return result
 
     def prev(self):
         """Fetch a set of items with IDs greater than current set."""
@@ -122,7 +138,7 @@ class IdIterator(BaseIterator):
             raise StopIteration
 
         data = self.results[self.index]
-        self.max_id = data.max_id
+        self.max_id = self.model_results[self.index].max_id
         self.num_tweets += 1
         return data
 
