@@ -68,7 +68,6 @@ def bind_api(**config):
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
-
             # Monitoring rate limits
             self._remaining_calls = None
             self._reset_time = None
@@ -78,7 +77,6 @@ def bind_api(**config):
             for idx, arg in enumerate(args):
                 if arg is None:
                     continue
-
                 try:
                     self.parameters[self.allowed_param[idx]] = convert_to_utf8_str(arg)
                 except IndexError:
@@ -169,7 +167,6 @@ def bind_api(**config):
                     resp = conn.getresponse()
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
-
                 rem_calls = resp.getheader('x-rate-limit-remaining')
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)
@@ -180,7 +177,6 @@ def bind_api(**config):
                     self._reset_time = int(reset_time)
                 if self.wait_on_rate_limit and self._remaining_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
                     continue
-
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
                 if resp.status == 200:
