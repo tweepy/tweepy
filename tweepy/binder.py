@@ -221,14 +221,13 @@ def bind_api(**config):
 
             return result
 
-    def _call(api, create=False, *args, **kargs):
+    def _call(api, *args, **kargs):
 
         method = APIMethod(api, args, kargs)
-        if create:
+        if kargs.get('create'):
             return method
         else:
             return method.execute()
-
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
