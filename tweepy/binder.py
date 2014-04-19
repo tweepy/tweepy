@@ -41,6 +41,7 @@ def bind_api(**config):
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
             self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
+            self.wait_on_rate_limit_notify = kargs.pop('wait_on_rate_limit_notify', api.wait_on_rate_limit_notify)
             self.parser = kargs.pop('parser', api.parser)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
