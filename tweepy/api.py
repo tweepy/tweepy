@@ -94,7 +94,8 @@ class API(object):
 
     """ statuses/update_with_media """
     def update_with_media(self, filename, *args, **kwargs):
-        headers, post_data = API._pack_image(filename, 3072, form_field='media[]')
+        f = kwargs.pop('file', None)
+        headers, post_data = API._pack_image(filename, 3072, form_field='media[]', f=f)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
@@ -366,8 +367,8 @@ class API(object):
     )
 
     """ account/update_profile_image """
-    def update_profile_image(self, filename):
-        headers, post_data = API._pack_image(filename, 700)
+    def update_profile_image(self, filename, file=None):
+        headers, post_data = API._pack_image(filename, 700, f=file)
         return bind_api(
             path = '/account/update_profile_image.json',
             method = 'POST',
@@ -377,7 +378,8 @@ class API(object):
 
     """ account/update_profile_background_image """
     def update_profile_background_image(self, filename, *args, **kargs):
-        headers, post_data = API._pack_image(filename, 800)
+        f = kargs.pop('file', None)
+        headers, post_data = API._pack_image(filename, 800, f=f)
         bind_api(
             path = '/account/update_profile_background_image.json',
             method = 'POST',
@@ -388,7 +390,8 @@ class API(object):
 
     """ account/update_profile_banner """
     def update_profile_banner(self, filename, *args, **kargs):
-        headers, post_data = API._pack_image(filename, 700, form_field="banner")
+        f = kargs.pop('file', None)
+        headers, post_data = API._pack_image(filename, 700, form_field="banner", f=f)
         bind_api(
             path = '/account/update_profile_banner.json',
             method = 'POST',
@@ -702,14 +705,24 @@ class API(object):
 
     """ Internal use only """
     @staticmethod
-    def _pack_image(filename, max_size, form_field="image"):
+    def _pack_image(filename, max_size, form_field="image", f=None):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
-        try:
-            if os.path.getsize(filename) > (max_size * 1024):
+        if f == None:
+            try:
+                if os.path.getsize(filename) > (max_size * 1024):
+                    raise TweepError('File is too big, must be less than 700kb.')
+            except os.error:
+                raise TweepError('Unable to access file')
+
+            # build the mulitpart-formdata body
+            fp = open(filename, 'rb')
+        else:
+            f.seek(0, 2) # Seek to end of file
+            if f.tell() > (max_size * 1024):
                 raise TweepError('File is too big, must be less than 700kb.')
-        except os.error:
-            raise TweepError('Unable to access file')
+            f.seek(0) # Reset to beginning of file
+            fp = f
 
         # image must be gif, jpeg, or png
         file_type = mimetypes.guess_type(filename)
@@ -719,8 +732,8 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        # build the mulitpart-formdata body
-        fp = open(filename, 'rb')
+
+
         BOUNDARY = 'Tw3ePy'
         body = []
         body.append('--' + BOUNDARY)
