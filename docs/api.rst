@@ -143,7 +143,7 @@ Status methods
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
-   :param id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
    :rtype: :class:`Status` object
 
 
