@@ -117,8 +117,7 @@ class OAuthHandler(AuthHandler):
 
 
 class OAuth2Bearer(AuthBase):
-    def __init__(self, url, bearer_token):
-        self.url = url
+    def __init__(self, bearer_token):
         self.bearer_token = bearer_token
     def __call__(self, request):
         request.headers['Authorization'] = 'Bearer ' + self.bearer_token
@@ -131,11 +130,12 @@ class AppAuthHandler(AuthHandler):
     OAUTH_HOST = 'api.twitter.com'
     OAUTH_ROOT = '/oauth2/'
 
-    def __init__(self, consumer_key, consumer_secret, callback=None):
-        self.callback = callback
+    def __init__(self, consumer_key, consumer_secret):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
         self._bearer_token = ''
 
-        resp = requests.post(self.url, auth=(self.consumer_key, self.consumer_secret),
+        resp = requests.post(self._get_oauth_url('token'), auth=(self.consumer_key, self.consumer_secret),
                 data={'grant_type': 'client_credentials'})
         data = resp.json()
         if data.get('token_type') != 'bearer':
@@ -143,7 +143,7 @@ class AppAuthHandler(AuthHandler):
                     instead' % data.get('token_type'))
 
 
-        self._bearer_token = json_response['access_token']
+        self._bearer_token = data['access_token']
 
 
     def _get_oauth_url(self, endpoint):
@@ -151,4 +151,4 @@ class AppAuthHandler(AuthHandler):
 
 
     def apply_auth(self):
-        return OAuth2Bearer(self._get_oauth_url('token'), self._bearer_token)
+        return OAuth2Bearer(self._bearer_token)
