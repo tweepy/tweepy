@@ -124,10 +124,6 @@ class Stream(object):
         self.snooze_time_step = options.get("snooze_time", 0.25)
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
         self.buffer_size = options.get("buffer_size",  1500)
-        if options.get("secure", True):
-            self.scheme = "https"
-        else:
-            self.scheme = "http"
 
         self.api = API()
         self.session = requests.Session()
@@ -139,7 +135,7 @@ class Stream(object):
 
     def _run(self):
         # Authenticate
-        url = "%s://%s%s" % (self.scheme, self.host, self.url)
+        url = "https://%s%s" % (self.host, self.url)
 
         # Connect and process the stream
         error_counter = 0

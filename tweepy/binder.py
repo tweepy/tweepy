@@ -56,11 +56,6 @@ def bind_api(**config):
             # Perform any path variable substitution
             self.build_path()
 
-            if api.secure:
-                self.scheme = 'https://'
-            else:
-                self.scheme = 'http://'
-
             if self.search_api:
                 self.host = api.search_host
             else:
@@ -115,7 +110,7 @@ def bind_api(**config):
 
             # Build the request URL
             url = self.api_root + self.path
-            full_url = self.scheme + self.host + url
+            full_url = 'https://' + self.host + url
 
             # Query the cache if one is available
             # and this request uses a GET method.

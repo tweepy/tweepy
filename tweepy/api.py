@@ -16,7 +16,7 @@ class API(object):
 
     def __init__(self, auth_handler=None,
             host='api.twitter.com', search_host='search.twitter.com',
-             cache=None, secure=True, api_root='/1.1', search_root='',
+             cache=None, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None, compression=False, wait_on_rate_limit=False,
             wait_on_rate_limit_notify=False):
@@ -26,7 +26,6 @@ class API(object):
         self.api_root = api_root
         self.search_root = search_root
         self.cache = cache
-        self.secure = secure
         self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay
