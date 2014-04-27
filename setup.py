@@ -15,6 +15,6 @@ setup(name="tweepy",
       author_email="tweepy@googlegroups.com",
       url="http://github.com/tweepy/tweepy",
       packages=find_packages(exclude=['tests']),
-      intall_requires=reqs,
+      install_requires=reqs,
       keywords="twitter library",
       zip_safe=True)
