@@ -40,6 +40,9 @@ def bind_api(**config):
             self.retry_count = kargs.pop('retry_count', api.retry_count)
             self.retry_delay = kargs.pop('retry_delay', api.retry_delay)
             self.retry_errors = kargs.pop('retry_errors', api.retry_errors)
+            self.wait_on_rate_limit = kargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
+            self.wait_on_rate_limit_notify = kargs.pop('wait_on_rate_limit_notify', api.wait_on_rate_limit_notify)
+            self.parser = kargs.pop('parser', api.parser)
             self.headers = kargs.pop('headers', {})
             self.build_parameters(args, kargs)
 
@@ -67,13 +70,15 @@ def bind_api(**config):
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
             self.headers['Host'] = self.host
+            # Monitoring rate limits
+            self._remaining_calls = None
+            self._reset_time = None
 
         def build_parameters(self, args, kargs):
             self.parameters = {}
             for idx, arg in enumerate(args):
                 if arg is None:
                     continue
-
                 try:
                     self.parameters[self.allowed_param[idx]] = convert_to_utf8_str(arg)
                 except IndexError:
@@ -132,6 +137,15 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
+                # handle running out of api calls
+                if self.wait_on_rate_limit and self._reset_time is not None and \
+                   self._remaining_calls is not None and self._remaining_calls < 1:
+                    sleep_time = self._reset_time - int(time.time())
+                    if sleep_time > 0:
+                        if self.wait_on_rate_limit_notify:
+                            print "Max retries reached. Sleeping for: " + str(sleep_time)
+                        time.sleep(sleep_time + 5) # sleep for few extra sec
+
                 # Open connection
                 if self.api.secure:
                     conn = httplib.HTTPSConnection(self.host, timeout=self.api.timeout)
@@ -155,22 +169,35 @@ def bind_api(**config):
                     resp = conn.getresponse()
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
-
+                rem_calls = resp.getheader('x-rate-limit-remaining')
+                if rem_calls is not None:
+                    self._remaining_calls = int(rem_calls)
+                elif isinstance(self._remaining_calls, int):
+                    self._remaining_calls -= 1
+                reset_time = resp.getheader('x-rate-limit-reset')
+                if reset_time is not None:
+                    self._reset_time = int(reset_time)
+                if self.wait_on_rate_limit and self._remaining_calls == 0 and (resp.status == 429 or resp.status == 420): # if ran out of calls before waiting switching retry last call
+                    continue
+                retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
-                if self.retry_errors:
-                    if resp.status not in self.retry_errors: break
-                else:
-                    if resp.status == 200: break
+                if resp.status == 200:
+                    break
+                elif (resp.status == 429 or resp.status == 420) and self.wait_on_rate_limit:
+                    if 'retry-after' in resp.msg:
+                        retry_delay = float(resp.msg['retry-after'])
+                elif self.retry_errors and resp.status not in self.retry_errors:
+                    break
 
                 # Sleep before retrying request again
-                time.sleep(self.retry_delay)
+                time.sleep(retry_delay)
                 retries_performed += 1
 
             # If an error was returned, throw an exception
             self.api.last_response = resp
             if resp.status and not 200 <= resp.status < 300:
                 try:
-                    error_msg = self.api.parser.parse_error(resp.read())
+                    error_msg = self.parser.parse_error(resp.read())
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status
                 raise TweepError(error_msg, resp)
@@ -183,7 +210,8 @@ def bind_api(**config):
                     body = zipper.read()
                 except Exception as e:
                     raise TweepError('Failed to decompress data: %s' % e)
-            result = self.api.parser.parse(self, body)
+            
+            result = self.parser.parse(self, body)
 
             conn.close()
 
@@ -193,12 +221,13 @@ def bind_api(**config):
 
             return result
 
-
     def _call(api, *args, **kargs):
 
         method = APIMethod(api, args, kargs)
-        return method.execute()
-
+        if kargs.get('create'):
+            return method
+        else:
+            return method.execute()
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
@@ -210,4 +239,3 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
-

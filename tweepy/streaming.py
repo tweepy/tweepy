@@ -254,7 +254,9 @@ class Stream(object):
         if replies:
             self.parameters['replies'] = replies
         if locations and len(locations) > 0:
-            assert len(locations) % 4 == 0
+            if len(locations) % 4 != 0:
+                raise TweepError("Wrong number of locations points, "
+                                 "it has to be a multiple of 4")
             self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
             encoded_track = [s.encode(encoding) for s in track]
@@ -301,7 +303,9 @@ class Stream(object):
             encoded_track = [s.encode(encoding) for s in track]
             self.parameters['track'] = ','.join(encoded_track)
         if locations and len(locations) > 0:
-            assert len(locations) % 4 == 0
+            if len(locations) % 4 != 0:
+                raise TweepError("Wrong number of locations points, "
+                                 "it has to be a multiple of 4")
             self.parameters['locations'] = ','.join(['%.4f' % l for l in locations])
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings

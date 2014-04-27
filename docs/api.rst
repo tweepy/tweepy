@@ -143,7 +143,23 @@ Status methods
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
-   :param id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :rtype: :class:`Status` object
+
+
+.. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [lat], [long], [source], [place_id], [file])
+
+   Update the authenticated user's status. Statuses that are duplicates
+   or too long will be silently ignored.
+
+   :param filename: The filename of the image to upload. This will automatically be opened unless `file` is specified
+   :param status: The text of your status update.
+   :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param lat: The location's latitude that this tweet refers to.
+   :param long: The location's longitude that this tweet refers to.
+   :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
+   :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :param file: A file object, which will be used instead of opening `filename`. `filename` is still required, for MIME type detection and to use as a form field in the POST data
    :rtype: :class:`Status` object
 
 

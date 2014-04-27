@@ -3,7 +3,9 @@
 # See LICENSE for details.
 
 from urllib2 import Request, urlopen
+import urllib
 import base64
+import json
 
 from tweepy import oauth
 from tweepy.error import TweepError
@@ -154,3 +156,39 @@ class OAuthHandler(AuthHandler):
                 raise TweepError("Unable to get username, invalid oauth token!")
         return self.username
 
+
+class AppAuthHandler(AuthHandler):
+    """Application-only authentication handler"""
+
+    OAUTH_HOST = 'api.twitter.com'
+    OAUTH_ROOT = '/oauth2/'
+
+    def __init__(self, consumer_key, consumer_secret, callback=None, secure=True):
+        self.callback = callback
+        self.secure = secure
+
+        token_credential = urllib.quote(consumer_key) + ':' + urllib.quote(consumer_secret)
+        credential = base64.b64encode(token_credential)
+
+        value = {'grant_type': 'client_credentials'}
+        data = urllib.urlencode(value)
+        req = Request(self._get_oauth_url('token'))
+        req.add_header('Authorization', 'Basic ' + credential)
+        req.add_header('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+
+        response = urlopen(req, data)
+        json_response = json.loads(response.read())
+        self._access_token = json_response['access_token']
+
+
+    def _get_oauth_url(self, endpoint, secure=True):
+        if self.secure or secure:
+            prefix = 'https://'
+        else:
+            prefix = 'http://'
+
+        return prefix + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
+
+
+    def apply_auth(self, url, method, headers, parameters):
+        headers['Authorization'] = 'Bearer ' + self._access_token
