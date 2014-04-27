@@ -1,10 +1,8 @@
-#Embedded file name: /home/aaron/repos/tweepy/tweepy/auth.py
 from urllib2 import Request, urlopen
 import urllib
 import base64
 import json
 
-from tweepy import oauth
 from tweepy.error import TweepError
 from tweepy.api import API
 import requests
