@@ -28,6 +28,6 @@ Documentation
 
 Community
 ---------
-  - [Google Group/Mailing list](http://groups.google.com/group/tweepy)
+  - [Discussion Forum](http://discuss.tweepy.org)
   - IRC Chat (Freenode.net #tweepy)
 
