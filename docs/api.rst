@@ -11,7 +11,7 @@ This page contains some basic documentation for the Tweepy module.
 :mod:`tweepy.api` --- Twitter API wrapper
 =========================================
 
-.. class:: API([auth_handler=None], [host='api.twitter.com'], [search_host='search.twitter.com'], [cache=None], [api_root='/1'], [search_root=''], [retry_count=0], [retry_delay=0], [retry_errors=None], [model_factory])
+.. class:: API([auth_handler=None], [host='api.twitter.com'], [search_host='search.twitter.com'], [cache=None], [api_root='/1'], [search_root=''], [retry_count=0], [retry_delay=0], [retry_errors=None], [timeout=60], [parser=ModelParser], [compression=False], [wait_on_rate_limit=False], [wait_on_rate_limit_notify=False], [proxy=None])
 
    This class provides a wrapper for the API as provided by
    Twitter. The functions provided in this class are listed below.
