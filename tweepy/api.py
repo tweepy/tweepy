@@ -19,7 +19,7 @@ class API(object):
              cache=None, api_root='/1.1', search_root='',
             retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
             parser=None, compression=False, wait_on_rate_limit=False,
-            wait_on_rate_limit_notify=False):
+            wait_on_rate_limit_notify=False, proxy=None):
         self.auth = auth_handler
         self.host = host
         self.search_host = search_host
@@ -34,6 +34,9 @@ class API(object):
         self.wait_on_rate_limit = wait_on_rate_limit
         self.wait_on_rate_limit_notify = wait_on_rate_limit_notify
         self.parser = parser or ModelParser()
+        self.proxy = {}
+        if proxy:
+            self.proxy['https'] = proxy
 
     """ statuses/home_timeline """
     home_timeline = bind_api(
