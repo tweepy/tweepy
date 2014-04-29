@@ -25,7 +25,12 @@ This page contains some basic documentation for the Tweepy module.
    :param retry_count: default number of retries to attempt when error occurs
    :param retry_delay: number of seconds to wait between retries
    :param retry_errors: which HTTP status codes to retry
-   :param model_factory: used for creating new model instances
+   :param timeout: The maximum amount of time to wait for a response from Twitter
+   :param parser: The object to use for parsing the response from Twitter
+   :param compression: Whether or not to use GZIP compression for requests
+   :param wait_on_rate_limit: Whether or not to automatically wait for rate limits to replenish
+   :param wait_on_rate_limit_notify: Whether or not to print a notification when Tweepy is waiting for rate limits to replenish
+   :param proxy: The full url to an HTTPS proxy to use for connecting to Twitter.
 
 Timeline methods
 ----------------
