@@ -46,6 +46,17 @@ class API(object):
         require_auth = True
     )
 
+    def statuses_lookup(self, id, include_entities=None, trim_user=None, map=None):
+        return self._statuses_lookup(list_to_csv(id), include_entities,
+                trim_user, map)
+
+    _statuses_lookup = bind_api(
+        path = '/statuses/lookup.json',
+        payload_type = 'status', payload_list = True,
+        allowed_param = ['id', 'include_entities', 'trim_user', 'map'],
+        require_auth = True
+    )
+
     """ statuses/user_timeline """
     user_timeline = bind_api(
         path = '/statuses/user_timeline.json',
