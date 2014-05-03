@@ -14,8 +14,8 @@ tweet_text = 'testing 1000'
 
 """Unit tests"""
 
-
 class TweepyErrorTests(unittest.TestCase):
+
     def testpickle(self):
         """Verify exceptions can be pickled and unpickled."""
         import pickle
@@ -27,8 +27,8 @@ class TweepyErrorTests(unittest.TestCase):
         self.assertEqual(e.reason, e2.reason)
         self.assertEqual(e.response, e2.response)
 
-
 class TweepyAPITests(TweepyTestCase):
+
     # TODO: Actually have some sort of better assertion
     def testgetoembed(self):
         data = self.api.get_oembed(test_tweet_id)
@@ -84,7 +84,6 @@ class TweepyAPITests(TweepyTestCase):
     def testlookupusers(self):
         def check(users):
             self.assertEqual(len(users), 2)
-
         check(self.api.lookup_users(user_ids=[6844292, 6253282]))
         check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
 
@@ -215,11 +214,11 @@ class TweepyAPITests(TweepyTestCase):
         }
         updated = self.api.update_profile(**profile)
         self.api.update_profile(
-            name=original.name, url=original.url,
-            location=original.location, description=original.description
+            name = original.name, url = original.url,
+            location = original.location, description = original.description
         )
 
-        for k, v in profile.items():
+        for k,v in profile.items():
             if k == 'email': continue
             self.assertEqual(getattr(updated, k), v)
 
@@ -233,7 +232,7 @@ class TweepyAPITests(TweepyTestCase):
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
-        self.api.create_friendship('twitter')  # restore
+        self.api.create_friendship('twitter') # restore
 
     def testblocks(self):
         self.api.blocks()
@@ -284,8 +283,7 @@ class TweepyAPITests(TweepyTestCase):
         self.api.list_members('applepie', 'stars')
 
     def testshowlistmember(self):
-        self.assertTrue(
-            self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
+        self.assertTrue(self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
 
     def testsubscribeunsubscribelist(self):
         params = {
@@ -315,17 +313,16 @@ class TweepyAPITests(TweepyTestCase):
             """Return True if a given place_name is in place_list."""
             return any([x.full_name.lower() == place_name.lower() for x in place_list])
 
-        twitter_hq = self.api.geo_similar_places(lat=37, long=-122, name='Twitter HQ')
+        twitter_hq = self.api.geo_similar_places(lat=37, long= -122, name='Twitter HQ')
         # Assumes that twitter_hq is first Place returned...
         self.assertEqual(twitter_hq[0].id, '3bdf30ed8b201f31')
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='c3f37afa9efcf94b').full_name, 'Austin, TX')
         self.assertTrue(place_name_in_list('Austin, TX',
-                                           self.api.reverse_geocode(lat=30.267370168467806,
-                                                                    long=-97.74261474609375)))  # Austin, TX, USA
-
+            self.api.reverse_geocode(lat=30.267370168467806, long= -97.74261474609375))) # Austin, TX, USA
 
 class TweepyCacheTests(unittest.TestCase):
+
     timeout = 2.0
     memcache_servers = ['127.0.0.1:11211']  # must be running for test to pass
 
@@ -333,12 +330,12 @@ class TweepyCacheTests(unittest.TestCase):
         # test store and get
         self.cache.store('testkey', 'testvalue')
         self.assertEqual(self.cache.get('testkey'), 'testvalue',
-                         'Stored value does not match retrieved value')
+            'Stored value does not match retrieved value')
 
         # test timeout
         sleep(self.timeout)
         self.assertEqual(self.cache.get('testkey'), None,
-                         'Cache entry should have expired')
+            'Cache entry should have expired')
 
         # test cleanup
         if do_cleanup:
@@ -366,7 +363,6 @@ class TweepyCacheTests(unittest.TestCase):
         self._run_tests()
         self.cache.flush()
         os.rmdir('cache_test_dir')
-
 
 if __name__ == '__main__':
     unittest.main()
