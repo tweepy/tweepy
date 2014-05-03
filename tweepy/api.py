@@ -7,7 +7,7 @@ import mimetypes
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser
+from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
@@ -37,6 +37,17 @@ class API(object):
         self.proxy = {}
         if proxy:
             self.proxy['https'] = proxy
+
+        # Attempt to explain more clearly the parser argument requirements
+        # https://github.com/tweepy/tweepy/issues/421
+        #
+        parser_type = Parser
+        if not isinstance(self.parser, parser_type):
+            raise TypeError(
+                '"parser" argument has to be an instance of "{}". It is currently a {}.'.format(
+                    parser_type.__name__, type(self.parser)
+                )
+            )
 
     """ statuses/home_timeline """
     home_timeline = bind_api(
