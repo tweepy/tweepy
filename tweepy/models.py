@@ -97,6 +97,18 @@ class Status(Model):
                 setattr(status, k, v)
         return status
 
+    @classmethod
+    def parse_list(cls, api, json_list):
+        if isinstance(json_list, list):
+            item_list = json_list
+        else:
+            item_list = json_list['statuses']
+
+        results = ResultSet()
+        for obj in item_list:
+            results.append(cls.parse(api, obj))
+        return results
+
     def destroy(self):
         return self._api.destroy_status(self.id)
 
