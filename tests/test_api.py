@@ -5,7 +5,8 @@ import os
 
 from nose import SkipTest
 
-from tweepy import Friendship, MemoryCache, FileCache
+from tweepy import Friendship, MemoryCache, FileCache, API
+from tweepy.parsers import Parser
 from config import TweepyTestCase, username, use_replay
 
 test_tweet_id = '266367358078169089'
@@ -33,6 +34,9 @@ class TweepyAPITests(TweepyTestCase):
         data = self.api.get_oembed(test_tweet_id)
         self.assertEqual(data['author_name'], "Twitter")
 
+    def testparserargumenthastobeaparserinstance(self):
+        """ Testing the issue https://github.com/tweepy/tweepy/issues/421"""
+        self.assertRaises(TypeError, API, self.auth, parser=Parser)
 
     def testhometimeline(self):
         self.api.home_timeline()
