@@ -337,7 +337,7 @@ class API(object):
     followers_ids = bind_api(
         path = '/followers/ids.json',
         payload_type = 'ids',
-        allowed_param = ['id', 'user_id', 'screen_name', 'cursor']
+        allowed_param = ['id', 'user_id', 'screen_name', 'cursor', 'count']
     )
 
     """ followers/list """
