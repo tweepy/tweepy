@@ -240,28 +240,25 @@ class Stream(object):
 
     def userstream(self, stall_warnings=False, _with=None, replies=None,
             track=None, locations=None, async=False, encoding='utf8'):
-        self.parameters = {'delimited': 'length'}
+        self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/user.json' % STREAM_VERSION
         self.host='userstream.twitter.com'
         if stall_warnings:
-            self.parameters['stall_warnings'] = stall_warnings
+            self.session.params['stall_warnings'] = stall_warnings
         if _with:
-            self.parameters['with'] = _with
+            self.session.params['with'] = _with
         if replies:
-            self.parameters['replies'] = replies
+            self.session.params['replies'] = replies
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.parameters['locations'] = ','.join(['%.2f' % l for l in locations])
+            self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
             encoded_track = [s.encode(encoding) for s in track]
-            self.parameters['track'] = ','.join(encoded_track)
-
-        self.body = urlencode_noplus(self.parameters)
-        self.url = self.url + '?' + self.body
+            self.session.params['track'] = ','.join(encoded_track)
 
         self._start(async)
 
