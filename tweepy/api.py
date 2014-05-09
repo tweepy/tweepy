@@ -107,6 +107,16 @@ class API(object):
         allowed_param = ['id']
     )
 
+    """ perform batch status message Statuses/lookup """
+    def lookup_statuses(self, ids=None):
+        return self._lookup_statuses(list_to_csv(ids))
+
+    _lookup_statuses = bind_api(
+        path = '/statuses/lookup.json',
+        payload_type = 'status', payload_list = True,
+        allowed_param = ['id'],
+    )
+
     """ statuses/update """
     update_status = bind_api(
         path = '/statuses/update.json',
