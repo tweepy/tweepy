@@ -153,7 +153,7 @@ class Stream(object):
                     if self.listener.on_error(resp.status_code) is False:
                         break
                     error_counter += 1
-                    if resp.status == 420:
+                    if resp.status_code == 420:
                         self.retry_time = max(self.retry_420_start, self.retry_time)
                     sleep(self.retry_time)
                     self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
