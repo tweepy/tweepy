@@ -58,20 +58,6 @@ Timeline methods
    :param map: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
    :rtype: list of :class:`Status` objects
 
-.. method:: API.friends_timeline([since_id], [max_id], [count], [page])
-
-   Returns the 20 most recent statuses posted by the authenticating user
-   and that user's friends.
-
-   
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
-
-   Returns: list of :class:`Status` objects
-
 
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], [count], [page])
 
@@ -82,41 +68,6 @@ Timeline methods
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
-
-
-.. method:: API.mentions([since_id], [max_id], [count], [page])
-
-   Returns the 20 most recent mentions (status containing @username) for
-   the authenticating user.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
-
-
-.. method:: API.retweeted_by_me([since_id], [max_id], [count], [page])
-
-   Returns the 20 most recent retweets posted by the authenticating user.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
-
-
-.. method:: API.retweeted_to_me([since_id], [max_id], [count], [page])
-
-   Returns the 20 most recent retweets posted by the authenticating
-   user's friends.
-
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param count: |count|
@@ -479,30 +430,6 @@ Favorite Methods
    :rtype: :class:`Status` object
 
 
-Notification Methods
---------------------
-
-.. method:: API.enable_notifications(id/screen_name/user_id)
-
-   Enables device notifications for updates from the specified user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
-
-
-.. method:: API.disable_notifications(id/screen_name/user_id)
-
-   Disables notifications for updates from the specified user to the
-   authenticating user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
-
-
 Block Methods
 -------------
 
@@ -526,16 +453,6 @@ Block Methods
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :rtype: :class:`User` object
-
-
-.. method:: API.exists_block(id/screen_name/user_id)
-
-   Checks if the authenticated user is blocking the specified user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: True/False
 
 
 .. method:: API.blocks([page])
@@ -831,13 +748,6 @@ Local Trends Methods
    :param long: See lat.
    :rtype: :class:`JSON` object
 
-
-.. method:: API.trends_location(woeid)
-
-   Returns the top 10 trending topics for a specific location Twitter has trending topic information for. The response is an array of "trend" objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Search, and the direct URL that can be issued against Search. This information is cached for five minutes, and therefore users are discouraged from querying these endpoints faster than once every five minutes.  Global trends information is also available from this API by using a WOEID of 1.
-
-   :param woeid:     * The WOEID of the location to be querying for.
-   :rtype: :class:`JSON` object
 
 Geo Methods
 -----------
