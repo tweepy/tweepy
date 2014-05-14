@@ -191,15 +191,7 @@ def bind_api(**config):
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload
-            body = resp.text
-            if resp.headers.get('Content-Encoding', '') == 'gzip':
-                try:
-                    zipper = gzip.GzipFile(fileobj=StringIO(body))
-                    body = zipper.read()
-                except Exception as e:
-                    raise TweepError('Failed to decompress data: %s' % e)
-            
-            result = self.parser.parse(self, body)
+            result = self.parser.parse(self, resp.text)
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
