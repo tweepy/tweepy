@@ -39,7 +39,7 @@ As you can see we must manage the "page" parameter manually in our
 pagination loop. Now here is the version of the code using Cursor
 object::
 
-   for status in Cursor(api.user_timeline).items():
+   for status in tweepy.Cursor(api.user_timeline).items():
        # process status here
        process_status(status)
 
@@ -60,7 +60,7 @@ Since we pass Cursor the callable, we can not pass the parameters
 directly into the method. Instead we pass the parameters into the
 Cursor constructor method::
 
-   Cursor(api.user_timeline, id="twitter")
+   tweepy.Cursor(api.user_timeline, id="twitter")
 
 Now Cursor will pass the parameter into the method for us when ever it
 makes a request.
@@ -72,7 +72,7 @@ So far we have just demonstrated pagination iterating per an
 item. What if instead you want to process per a page of results? You
 would use the pages() method::
 
-   for page in Cursor(api.user_timeline).pages():
+   for page in tweepy.Cursor(api.user_timeline).pages():
        # page is a list of statuses
        process_page(page)
 
@@ -85,9 +85,9 @@ What if you only want n items or pages returned? You pass into the items() or pa
 .. code-block :: python
 
    # Only iterate through the first 200 statuses
-   for status in Cursor(api.user_timeline).items(200):
+   for status in tweepy.Cursor(api.user_timeline).items(200):
        process_status(status)
    
    # Only iterate through the first 3 pages
-   for page in Cursor(api.user_timeline).pages(3):
+   for page in tweepy.Cursor(api.user_timeline).pages(3):
        process_page(page)
