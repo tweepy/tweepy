@@ -2,7 +2,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 import configparser # for reading the configuration file
-import os.path
+import os
 import sys
 
 consumer_key=""
@@ -31,7 +31,16 @@ class FileWriterListener(StreamListener):
     """
 
     def on_data(self, data):
-        print "READING TWEETS"
+
+        # DATA IS A STRING, NEEDS TO BE CONVERTED INTO A PYTHON DICTIONARY BEFORE BEING INTERROGATED
+
+        # 1 - use json library to create a json object
+
+        # 2 - get the id (e.g. data['id'] )
+
+        # 3 - write to a file (with filename of tweet id)
+
+        print "read tweet"
         return True
 
     def on_error(self, status):
