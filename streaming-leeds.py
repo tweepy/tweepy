@@ -1,16 +1,15 @@
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+import configparser # for reading the configuration file
+import os.path
+import sys
 
-# Go to http://dev.twitter.com and create an app.
-# The consumer key and secret will be generated for you after
 consumer_key=""
 consumer_secret=""
-
-# After the step above, you will be redirected to your app's page.
-# Create an access token under the the "Your access token" section
 access_token=""
 access_token_secret=""
+
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets are the received from the stream.
@@ -24,8 +23,45 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print status
 
+
+
+class FileWriterListener(StreamListener):
+    """
+    A listener handles tweets are the received from the stream, writing them to a file
+    """
+
+    def on_data(self, data):
+        print "READING TWEETS"
+        return True
+
+    def on_error(self, status):
+        print status
+
+
+
+
 if __name__ == '__main__':
-    l = StdOutListener()
+    # Read the twitter authentication stuff from the configuration file (see README for details).
+    try:
+        if not os.path.isfile('credentials.ini'):
+            print "Error, there is no credentials.ini file. See the README for details."
+            sys.exit()
+
+        config = configparser.ConfigParser()
+        config.read('credentials.ini')
+
+        consumer_key=str(config['CREDENTIALS']['consumer_key'])
+        consumer_secret=str(config['CREDENTIALS']['consumer_secret'])
+        access_token=str(config['CREDENTIALS']['access_token'])
+        access_token_secret=str(config['CREDENTIALS']['access_token_secret'])
+
+
+    except:
+        print "Error reading credentials from credentials.ini"
+
+
+    #l = StdOutListener()
+    l = FileWriterListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
