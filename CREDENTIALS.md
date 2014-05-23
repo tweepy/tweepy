@@ -14,3 +14,6 @@ access_token = <access token>
 access_token_secret = <access token secret>
 
 XXXX details about how to get these to follow...
+
+
+XXXX Also instructions need to add configparser 

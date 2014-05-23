@@ -4,6 +4,7 @@ from tweepy import Stream
 import configparser # for reading the configuration file
 import os
 import sys
+import json # For converting string into json object
 
 consumer_key=""
 consumer_secret=""
@@ -30,17 +31,29 @@ class FileWriterListener(StreamListener):
     A listener handles tweets are the received from the stream, writing them to a file
     """
 
-    def on_data(self, data):
+    def on_data(self, raw_data):
 
-        # DATA IS A STRING, NEEDS TO BE CONVERTED INTO A PYTHON DICTIONARY BEFORE BEING INTERROGATED
+        # Call the parent (StreamReader) function which does some error checking, returning False if
+        # this isn't a tweet
+        #if super(StreamListener, self).on_data(raw_data) == False:
+        #    print "This doesn't look like a tweet"
+        #    return False
 
-        # 1 - use json library to create a json object
+        # 1 - use json library to create a json object from the raw data (a string)
+
+        data = json.loads(raw_data)
 
         # 2 - get the id (e.g. data['id'] )
 
-        # 3 - write to a file (with filename of tweet id)
+        tweetid = str(data['id'])
+        print "read tweet",tweetid
 
-        print "read tweet"
+        # 3 - write to a file (with filename of tweet id)
+        with open('data/'+tweetid,'w') as f:
+            f.write(str(data))
+
+
+
         return True
 
     def on_error(self, status):
