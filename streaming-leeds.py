@@ -39,7 +39,8 @@ class FileWriterListener(StreamListener):
         #    print "This doesn't look like a tweet"
         #    return False
 
-        # 1 - use json library to create a json object from the raw data (a string)
+        # 1 - use json library to create a python dictionary object from the raw data (a 
+        # json-formatter string). This can be then be interrogated to find info. about the tweet.
 
         data = json.loads(raw_data)
 
@@ -49,10 +50,15 @@ class FileWriterListener(StreamListener):
         print "read tweet",tweetid
 
         # 3 - write to a file (with filename of tweet id)
-        with open('data/'+tweetid,'w') as f:
-            f.write(str(data))
+        f = open('data/'+tweetid,'w')
+        try:
+            f.write(raw_data) # Note we write the raw data - this is correctly formatted json
+        finally:
+            f.close()
 
-
+        #P.S. this is a nicer way to write to files using 'with' syntax:
+        #with open('data/'+tweetid,'w') as f:
+        #    f.write(str(data))
 
         return True
 
