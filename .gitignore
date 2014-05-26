@@ -1,6 +1,7 @@
 *.pyc
 *.swp
 *.json
+*.html
 build/
 dist/
 tweepy.egg-info/
