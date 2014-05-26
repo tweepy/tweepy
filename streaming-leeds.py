@@ -6,11 +6,11 @@ import os
 import sys
 import json # For converting string into json object
 
-consumer_key="UDSAVzq7Jn0mpUn12rGWiw"
-consumer_secret="BLj5stYAMdY09Tk3iTEYQjcNXNreQcA3z9EQbqmQU"
-access_token="80250475-0KagN1PxplwmR1ZDg15t71Jr7D8rVouuxq2j32J1n"
-access_token_secret="kkQxyLuDj4ezFlg0H5UpcBh3sEwUJiowk5AvpJbMUC2bb"
-
+# add your details
+consumer_key=""
+consumer_secret=""
+access_token=""
+access_token_secret=""
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets are the received from the stream.
@@ -23,8 +23,6 @@ class StdOutListener(StreamListener):
 
     def on_error(self, status):
         print status
-
-
 
 class FileWriterListener(StreamListener):
     """
@@ -65,9 +63,6 @@ class FileWriterListener(StreamListener):
     def on_error(self, status):
         print status
 
-
-
-
 if __name__ == '__main__':
     # Read the twitter authentication stuff from the configuration file (see README for details).
     try:
@@ -83,10 +78,8 @@ if __name__ == '__main__':
         access_token=str(config['CREDENTIALS']['access_token'])
         access_token_secret=str(config['CREDENTIALS']['access_token_secret'])
 
-
     except:
         print "Error reading credentials from credentials.ini"
-
 
     #l = StdOutListener()
     l = FileWriterListener()
