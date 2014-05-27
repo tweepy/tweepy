@@ -10,5 +10,5 @@ tweepy.egg-info/
 htmlcov/
 .Rproj.user
 .RData
-.Rhistory
+*.Rhistory
 credentials.ini

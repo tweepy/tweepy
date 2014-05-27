@@ -45,6 +45,9 @@ coordinates data:
 text <- sapply(ts, function(x) x$text )
 text <- unlist(text)[-1]
 text[1:3]
+text <- iconv(text, from="ASCII", "UTF-8")
+text <- strtrim(text, 5)
+
 tdf <- data.frame(text = text) # create R data.frame
 tdf <- cbind(tdf, coords)
 tdf
@@ -57,3 +60,18 @@ data:
 plot(tdf$V1, tdf$V2, col="red")
 text(tdf$V1, tdf$V2, labels=tdf$text)
 ```
+
+```{r}
+findOffendingCharacter <- function(x, maxStringLength=256){  
+  print(x)
+  for (c in 1:maxStringLength){
+    offendingChar <- substr(x,c,c)
+    print(offendingChar) #uncomment if you want the indiv characters printed
+    #the next character is the offending multibyte Character
+  }    
+}
+
+findOffendingCharacter(text)
+
+```
+
