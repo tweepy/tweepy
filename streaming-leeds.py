@@ -66,12 +66,12 @@ class FileWriterListener(StreamListener):
 if __name__ == '__main__':
     # Read the twitter authentication stuff from the configuration file (see README for details).
     try:
-        if not os.path.isfile('~/Desktop/credentials.ini'):
+        if not os.path.isfile('./credentials.ini'):
             print "Error, there is no credentials.ini file. See the README for details."
             sys.exit()
 
         config = configparser.ConfigParser()
-        config.read('~/Desktop/credentials.ini')
+        config.read('./credentials.ini')
 
         consumer_key=str(config['CREDENTIALS']['consumer_key'])
         consumer_secret=str(config['CREDENTIALS']['consumer_secret'])
