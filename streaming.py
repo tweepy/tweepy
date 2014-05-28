@@ -93,9 +93,6 @@ if __name__ == '__main__':
     parser.add_argument('-c', nargs=1, dest='cred', type=str, required=False, \
             help='specify location of credentials file', default=credentials_file)
     args = parser.parse_args()
-    print args
-    print args.cred
-    print args.locs
 
     if not os.path.isfile(args.cred):
         print "Error",args.cred,"doesn't look like a file. See the README for details."
