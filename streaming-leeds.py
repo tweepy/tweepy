@@ -5,12 +5,17 @@ import configparser # for reading the configuration file
 import os
 import sys
 import json # For converting string into json object
+import argparse # For parsing command-line arguments
 
 # add your details
 consumer_key=""
 consumer_secret=""
 access_token=""
 access_token_secret=""
+
+# Global variables
+
+credentials_file = "./credentials.ini" # Assume in local directory
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets are the received from the stream.
@@ -32,7 +37,7 @@ class FileWriterListener(StreamListener):
     def on_data(self, raw_data):
 
         # Call the parent (StreamReader) function which does some error checking, returning False if
-        # this isn't a tweet
+        # this isn't a tweet.
         # if super(StreamListener, self).on_data(raw_data) == False:
         #    print "This doesn't look like a tweet"
         #    return False
@@ -63,15 +68,47 @@ class FileWriterListener(StreamListener):
     def on_error(self, status):
         print status
 
+
+
+def check_locations(locs):
+    """Checks that the locations input from the command line look OK. Exit if not."""
+    # argparse will have turned the arguments into a 4-item list
+    if locs[0] > locs[2]:
+        print "Error with locations ({locs}), min x ({minx}) is greater than max x ({maxx})".format( \
+                locs=locs, minx=locs[0], maxx=locs[2])
+        sys.exit(1)
+    if locs[1] > locs[3]:
+        print "Error with locations ({locs}), min y ({miny}) is greater than max y ({maxy})".format( \
+                locs=locs, miny=locs[1], maxy=locs[3])
+        sys.exit(1)
+
+
 if __name__ == '__main__':
+
+    # Parse command-line options
+    parser = argparse.ArgumentParser()
+#    (description='Usage %prog -l <locations> [-c <credentials_file]')
+    parser.add_argument('-l', nargs=4, dest='locs', type=float, required=True, \
+            help='specify min/max coordinates of bounding box (minx miny maxx maxy)')
+    parser.add_argument('-c', nargs=1, dest='cred', type=str, required=False, \
+            help='specify location of credentials file', default=credentials_file)
+    args = parser.parse_args()
+    print args
+    print args.cred
+    print args.locs
+
+    if not os.path.isfile(args.cred):
+        print "Error",args.cred,"doesn't look like a file. See the README for details."
+        sys.exit(1)
+    credentials_file = args.cred
+
+    locations = args.locs
+    check_locations(locations)
+
     # Read the twitter authentication stuff from the configuration file (see README for details).
     try:
-        if not os.path.isfile('./credentials.ini'):
-            print "Error, there is no credentials.ini file. See the README for details."
-            sys.exit()
-
         config = configparser.ConfigParser()
-        config.read('./credentials.ini')
+        config.read(credentials_file)
 
         consumer_key=str(config['CREDENTIALS']['consumer_key'])
         consumer_secret=str(config['CREDENTIALS']['consumer_secret'])
@@ -79,7 +116,9 @@ if __name__ == '__main__':
         access_token_secret=str(config['CREDENTIALS']['access_token_secret'])
 
     except:
-        print "Error reading credentials from credentials.ini"
+        print "Error reading credentials from", credentials_file
+
+    print "Starting listener on locations:",locations
 
     #l = StdOutListener()
     l = FileWriterListener()
@@ -87,4 +126,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(locations=[-2.17,53.52,-1.20,53.96])
+    stream.filter(locations=locations)
