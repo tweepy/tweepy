@@ -112,7 +112,7 @@ class API(object):
         path = '/statuses/update.json',
         method = 'POST',
         payload_type = 'status',
-        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id'],
+        allowed_param = ['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
         require_auth = True
     )
 
