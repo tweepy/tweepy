@@ -16,32 +16,23 @@ from tweepy.models import Model
 re_path_template = re.compile('{\w+}')
 
 
-def bind_api(api,
-             path,
-             use_cache=True,
-             search_api=False,
-             require_auth=False,
-             method='GET',
-             allowed_param=None,
-             payload_list=False,
-             payload_type=None):
-    # common practice to avoid the bug when a list is in arguments.
-    allowed_param = allowed_param or []
+def bind_api(**config):
 
     class APIMethod(object):
 
-        path = path
-        payload_type = payload_type
-        payload_list = payload_list
-        allowed_param = allowed_param
-        method = method
-        require_auth = require_auth
-        search_api = search_api
-        use_cache = use_cache
+        api = config['api']
+        path = config['path']
+        payload_type = config.get('payload_type', None)
+        payload_list = config.get('payload_list', False)
+        allowed_param = config.get('allowed_param', [])
+        method = config.get('method', 'GET')
+        require_auth = config.get('require_auth', False)
+        search_api = config.get('search_api', False)
+        use_cache = config.get('use_cache', True)
         session = requests.Session()
-        api = api
 
         def __init__(self, args, kwargs):
+            api = self.api
             # If authentication is required and no credentials
             # are provided, throw an error.
             if self.require_auth and not api.auth:
