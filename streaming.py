@@ -6,6 +6,8 @@ import os
 import sys
 import json # For converting string into json object
 import argparse # For parsing command-line arguments
+import time # For adding a timestamp to files
+import gzip # For compressing files
 
 # add your details
 consumer_key=""
@@ -13,9 +15,10 @@ consumer_secret=""
 access_token=""
 access_token_secret=""
 
-# Global variables
 
+# Global variables
 credentials_file = "./credentials.ini" # Assume in local directory
+TWEETS_PER_FILE = 1000000 # Number of tweets to store before creating a new file
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets are the received from the stream.
@@ -34,7 +37,39 @@ class FileWriterListener(StreamListener):
     A listener handles tweets are the received from the stream, writing them to a file
     """
 
+    def __init__(self):
+        self.json_filename = ""  # Name of the file that tweets are being written to
+        self.csv_filename = ""   # (will be tXX where XX is the timestamp in seconds)
+        self.counter = 0 # Count the number of tweets
+
     def on_data(self, raw_data):
+
+        # See if a new file needs to be created for these tweets
+        if self.counter % TWEETS_PER_FILE == 0:
+
+            old_filename = self.json_filename
+
+            tm = str(int(time.time() * 1000) ) # Append timestamp to files
+            self.json_filename = "data/t"+tm+".json"
+            self.csv_filename = "data/t"+tm+".csv"
+
+            print "Writing to files:", self.json_filename, self.csv_filename
+
+            # Compress the old filename (only to json, not csv) (and not when the script starts)
+            if self.counter > 0:
+                print "Compressing json file and creating new one (counter={c})".format(c=self.counter)
+                # ('with' is just a fancy way of openning and closing files)
+                #with open( old_filename, 'rb'), gzip.open(old_filename+".gz", 'wb') as ( old_file, zipfile) :
+                #    zipfile.writelines(oldfile)
+                oldfile = open( old_filename, 'rb')
+                zipfile = gzip.open(old_filename+".gz", 'wb')
+                zipfile.writelines(oldfile)
+                oldfile.close()
+                zipfile.close()
+                os.remove(old_filename)
+
+
+
 
         # Call the parent (StreamReader) function which does some error checking, returning False if
         # this isn't a tweet.
@@ -53,20 +88,24 @@ class FileWriterListener(StreamListener):
         print "read tweet",tweetid
 
         # 3 - write to a file (with filename of tweet id)
-        f = open('data/tweets.json','a')
+        f = open(self.json_filename,'a')
         try:
             f.write(raw_data) # 
         finally:
             f.close()
 
+        # 4 - TODO extract ueful info and write to a csv file
+
         # P.S. this is a nicer way to write to files using 'with' syntax:
         #with open('data/'+tweetid,'w') as f:
         #    f.write(str(data))
 
+        self.counter += 1
+
         return True
 
     def on_error(self, status):
-        print status
+        print "ERROR: ", str(status)
 
 
 
@@ -122,5 +161,8 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
-    stream = Stream(auth, l)
-    stream.filter(locations=locations)
+    try: 
+        stream = Stream(auth, l)
+        stream.filter(locations=locations)
+    finally:
+        stream.disconnect()
