@@ -84,7 +84,7 @@ class IdIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
-        self.max_id = kargs.get('max_id')
+        self.max_id = kargs.pop('max_id', None)
         self.num_tweets = 0
         self.results = []
         self.model_results = []
