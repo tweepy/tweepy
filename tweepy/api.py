@@ -1232,7 +1232,7 @@ class API(object):
 
         if isinstance(filename, unicode):
             filename = filename.encode("utf-8")
-        filename = urllib.quote(filename)
+        filename = filename.encode("utf-8")
 
         BOUNDARY = 'Tw3ePy'
         body = []
