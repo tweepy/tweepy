@@ -4,6 +4,7 @@
 
 import os
 import mimetypes
+import urllib
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
@@ -788,6 +789,9 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
+        if isinstance(filename, unicode):
+          filename = filename.encode("utf-8")
+        filename = urllib.quote(filename)
 
 
         BOUNDARY = 'Tw3ePy'
