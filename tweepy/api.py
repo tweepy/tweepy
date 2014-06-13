@@ -1231,9 +1231,8 @@ class API(object):
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, unicode):
-          filename = filename.encode("utf-8")
+            filename = filename.encode("utf-8")
         filename = urllib.quote(filename)
-
 
         BOUNDARY = 'Tw3ePy'
         body = []
