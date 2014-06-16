@@ -84,21 +84,32 @@ class FileWriterListener(StreamListener):
 
         # 2 - get the id (e.g. data['id'] )
 
-        tweetid = str(data['id'])
-        print "read tweet",tweetid
-
-        # 3 - write to a file (with filename of tweet id)
-        f = open(self.json_filename,'a')
         try:
-            f.write(raw_data) # 
-        finally:
-            f.close()
+            tweetid = str(data['id'])
+            print "read tweet",tweetid
+            # 3 - write to a file (with filename of tweet id)
+            f = open(self.json_filename,'a')
+            try:
+                f.write(raw_data) # 
+            finally:
+                f.close()
 
-        # 4 - TODO extract ueful info and write to a csv file
+            # 4 - TODO extract ueful info and write to a csv file
 
-        # P.S. this is a nicer way to write to files using 'with' syntax:
-        #with open('data/'+tweetid,'w') as f:
-        #    f.write(str(data))
+            # P.S. this is a nicer way to write to files using 'with' syntax:
+            #with open('data/'+tweetid,'w') as f:
+            #    f.write(str(data))
+
+        except KeyError as e:
+            print "Caught error receiving tweet: ", str(e) # Show what the error was
+            print "Looks like we have received something that isn't a tweet. Will write it to a different file." 
+
+            # Call the file 'error<time>.json'
+            f = open("error"+str(int(time.time() * 1000) )+".json",'w')
+            try:
+                f.write(raw_data) # 
+            finally:
+                f.close()
 
         self.counter += 1
 
