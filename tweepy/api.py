@@ -195,7 +195,7 @@ class API(object):
                 'place_id', 'display_coordinates'
             ],
             require_auth=True
-        )(self, *args, **kwargs)
+        )(*args, **kwargs)
 
     @property
     def destroy_status(self):
@@ -553,7 +553,7 @@ class API(object):
                 payload_type='user',
                 require_auth=True,
                 allowed_param=['include_entities', 'skip_status'],
-            )(self, **kargs)
+            )(**kargs)
         except TweepError as e:
             if e.response and e.response.status == 401:
                 return False
