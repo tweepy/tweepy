@@ -1,14 +1,24 @@
 #!/usr/bin/env python
 #from distutils.core import setup
+import re
 from setuptools import setup, find_packages
-from tweepy import __version__
 from pip.req import parse_requirements
+
+VERSIONFILE = "tweepy/__init__.py"
+ver_file = open(VERSIONFILE, "rt").read()
+VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+mo = re.search(VSRE, ver_file, re.M)
+
+if mo:
+    version = mo.group(1)
+else:
+    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
 install_reqs = parse_requirements('requirements.txt')
 reqs = [str(req.req) for req in install_reqs]
 
 setup(name="tweepy",
-      version=__version__,
+      version=version,
       description="Twitter library for python",
       license="MIT",
       author="Joshua Roesslein",
