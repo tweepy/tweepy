@@ -622,7 +622,7 @@ class API(object):
             path='/account/update_profile_background_image.json',
             method='POST',
             payload_type='user',
-            allowed_param=['tile'],
+            allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
             require_auth=True
         )(self, post_data=post_data, headers=headers)
 
