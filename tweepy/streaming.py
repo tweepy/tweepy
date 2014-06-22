@@ -313,6 +313,22 @@ class Stream(object):
         self.host = 'stream.twitter.com'
         self._start(async)
 
+    def sitestream(self, follow, stall_warnings=False, with_='user', replies=False, async=False):
+        self.parameters = {}
+        if self.running:
+            raise TweepError('Stream object already connected!')
+        self.url = '/%s/site.json' % STREAM_VERSION
+        self.parameters['follow'] = ','.join(map(str, follow))
+        self.parameters['delimited'] = 'length'
+        if stall_warnings:
+            self.parameters['stall_warnings'] = stall_warnings
+        if with_:
+            self.parameters['with'] = with_
+        if replies:
+            self.parameters['replies'] = replies
+        self.body = urlencode_noplus(self.parameters)
+        self._start(async)
+
     def disconnect(self):
         if self.running is False:
             return
