@@ -231,7 +231,8 @@ class Stream(object):
     def _start(self, async):
         self.running = True
         if async:
-            Thread(target=self._run).start()
+            self._thread = Thread(target=self._run)
+            self._thread.start()
         else:
             self._run()
 
