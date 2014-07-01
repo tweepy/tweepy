@@ -281,7 +281,6 @@ class Stream(object):
         self._start(async)
 
     def sample(self, async=False):
-        self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
