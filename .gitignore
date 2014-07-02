@@ -4,6 +4,7 @@
 *.html
 build/
 dist/
+data/
 tweepy.egg-info/
 .env/
 .coverage
