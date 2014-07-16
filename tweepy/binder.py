@@ -140,7 +140,7 @@ def bind_api(**config):
                     sleep_time = self._reset_time - int(time.time())
                     if sleep_time > 0:
                         if self.wait_on_rate_limit_notify:
-                            print "Max retries reached. Sleeping for: " + str(sleep_time)
+                            print "Rate limit reached. Sleeping for: " + str(sleep_time)
                         time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # Apply authentication
