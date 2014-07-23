@@ -3,7 +3,7 @@ library(rjson)
 tweets <- fromJSON(sprintf("[%s]", paste(readLines("data/tweets-large1.json"),collapse=",")))
 coords <- sapply(tweets, function(x) x$coordinates$coordinates )
 nuls <- sapply(coords, function(x) is.null(x)) # identify out the problematic NULL values
-coords[nuls] <- lapply(coords[nuls], function(x) x <- c(0, 0))
+coords[nuls] <- lapply(coords[nuls], function(x) x <- c(0, 0)) # convert to zeros to keep with unlist
 coords <- matrix(unlist(coords, recursive = T), ncol = 2, byrow = T)
 text <- sapply(tweets, function(x) x$text )
 created <- strptime(sapply(tweets, function(x) x$created_at)
