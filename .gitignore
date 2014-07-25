@@ -12,4 +12,5 @@ htmlcov/
 .Rproj.user
 .RData
 *.Rhistory
+*orig
 credentials.ini
