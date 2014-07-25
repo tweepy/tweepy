@@ -2,10 +2,11 @@
 
 # Unzip the files saved by tweepy (see https://github.com/Robinlovelace/tweepy)
 # Save to "unzipped" (e.g. with gunzip), load these files
-
+library(microbenchmark)
 library(rjson) # library used to load .json files
 files <- list.files(path = "data/unzipped/", full.names=T)
 # i <- files[1] # uncomment to load 1
+start_time <- Sys.time()
 for(i in files){
 # tweets <- fromJSON(sprintf("[%s]", paste(readLines(i, n=1000), collapse=","))) # test subset
 tweets <- fromJSON(sprintf("[%s]", paste(readLines(i), collapse=","))) # full dataset
@@ -40,3 +41,5 @@ sel <- grepl("new house|#newhouse|old house|#oldhouse|new home|#newhome|old home
 t_out$filenum <- which(files == i)
 write.csv(t_out[sel, ], file = paste0("data/output",which(files == i),".csv"))
 }
+end_time <- Sys.time()
+(time_taken <- end_time - start_time) 
