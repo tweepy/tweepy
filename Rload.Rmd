@@ -12,7 +12,7 @@ Let's try opening up some twitter data.
 
 ```{r}
 library(rjson)
-tweet <- fromJSON(file = "data/tweets.json") # loads 1st tweet, but no more
+tweet <- fromJSON(file = "tweet-converter/output.json") # loads 1st tweet, but no more
 names(tweet) # show the list names - what data has been loaded
 tweet$text # the text
 ```
@@ -20,7 +20,7 @@ tweet$text # the text
 To load more than one tweet in R using this library, the code gets more complex:
 
 ```{r}
-ts <- fromJSON(sprintf("[%s]", paste(readLines("data/tweets.json"),collapse=",")))
+ts <- fromJSON(sprintf("[%s]", paste(readLines("data/t1404902603295.json"),collapse=",")), unexpected.escape = "keep")
 ts[[2]]$text
 ts[[1]]$coordinates$coordinates # the coordinates
 ```
@@ -44,13 +44,13 @@ coordinates data:
 ```{r}
 text <- sapply(ts, function(x) x$text )
 text <- unlist(text)[-1]
-text[1:3]
+text[1:25]
 text <- iconv(text, from="ASCII", "UTF-8")
 text <- strtrim(text, 5)
 
 tdf <- data.frame(text = text) # create R data.frame
 tdf <- cbind(tdf, coords)
-tdf
+head(tdf)
 ```
 
 Let's plot the data (in a very rudimentary form) to prove we have 'geotagged'
