@@ -4,10 +4,11 @@
 # Save to "unzipped" (e.g. with gunzip), load these files
 
 library(rjson) # library used to load .json files
-files <- list.files(path = "testload/", full.names=T)
+files <- list.files(path = "data/unzipped/", full.names=T)
 # i <- files[1] # uncomment to load 1
 for(i in files){
-tweets <- fromJSON(sprintf("[%s]", paste(readLines(i, n=10), collapse=",")))
+# tweets <- fromJSON(sprintf("[%s]", paste(readLines(i, n=1000), collapse=","))) # test subset
+tweets <- fromJSON(sprintf("[%s]", paste(readLines(i), collapse=","))) # full dataset
 coords <- sapply(tweets, function(x) x$coordinates$coordinates )
 nuls <- sapply(coords, function(x) is.null(x)) # identify out the problematic NULL values
 coords[nuls] <- lapply(coords[nuls], function(x) x <- c(0, 0)) # convert to zeros to keep with unlist
@@ -32,9 +33,10 @@ t_out <- data.frame(text, lat = coords[,2], lon = coords[,1], created,
   language, n_followers, user_created, n_tweets, n_followers, n_following,
   user_location)
 
-# sel <- grepl("new house|new flat|moving house|move house|moving home|move home|#newhouse|#newflat|#movinghouse|#movehouse|#movinghome|#movehome", t_out$text, ignore.case = T )
-sel <- grepl("a", t_out$text, ignore.case = T )
+# sel <- grepl("new house|new flat|moving house|move house|moving home|move home|#newhouse|#newflat|#movinghouse|#movehouse|#movinghome|#movehome", t_out$text, ignore.case = T ) # original selection
+# sel <- grepl("a", t_out$text, ignore.case = T ) # test selection - replace "a" with anything
+sel <- grepl("new house|#newhouse|old house|#oldhouse|new home|#newhome|old home|#oldhome|new flat|#newflat|old flat|#oldflat|moving house|#movinghouse|move house|#movehouse|moving home|#movinghome|move home|#movehome|packing to move|packing up everything|unpacking everything|removals van|#packingtomove|#packingupeverything|#unpackingeverything|#removalsvan|bought a house|house bought|moved house|house sold|#boughtahouse|#housebought|#movedhouse|#housesold|first rent|#firstrent|new gaff|new housing|new accommodation|new crib|new bungalow|new apartment|new semi detached|new semi-detached|new detached|new cottage|new digs|new dwelling|new residence|new pad|new homes|new home's|new houses|new house's|#newgaff|#newhousing|#newaccommodation|#newcrib|#newbungalow|#newapartment|#newsemidetached|#newdetached|#newcottage|#newdigs|#newdwelling|#newresidence|#newpad|#newhomes|#newhouses|old gaff|old housing|old accommodation|old crib|old bungalow|old apartment|old semi detached|old semi-detached|old detached|old cottage|old digs|old dwelling|old residence|old pad|old homes|old home's|old houses|old house's|#oldgaff|#oldhousing|#oldaccommodation|#oldcrib|#oldbungalow|#oldapartment|#oldsemidetached|#olddetached|#oldcottage|#olddigs|#olddwelling|#oldresidence|#oldpad|#oldhomes|#oldhouses", t_out$text, ignore.case = T)
 
 t_out$filenum <- which(files == i)
-write.csv(t_out[sel, ], file = paste0("output",which(files == i),".csv"))
+write.csv(t_out[sel, ], file = paste0("data/output",which(files == i),".csv"))
 }
