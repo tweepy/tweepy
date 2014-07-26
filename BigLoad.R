@@ -1,10 +1,23 @@
 # BigLoad.R - for loading large amounts of twitter data into R
 
 # Unzip the files saved by tweepy (see https://github.com/Robinlovelace/tweepy)
+# If the files are too large, they may need splitting up:
+getwd()
+x <- list.files(path = "data/unzipped/", full.names = T, pattern = "json$")
+i <- x[1]
+start_time <- Sys.time()
+for(i in x){
+  mess <- paste0("split -l 10000 ", i, " split-", i)
+  system(mess)
+  print(x[i])
+}
+(split_time <- Sys.time() - start_time)
+system("mkdir data/chunked") # copy chunked pieces into one directory
+
+
 # Save to "unzipped" (e.g. with gunzip), load these files
-library(microbenchmark)
 library(rjson) # library used to load .json files
-files <- list.files(path = "data/unzipped/", full.names=T)
+files <- list.files(path = "data/chunked/", full.names=T)
 # i <- files[1] # uncomment to load 1
 start_time <- Sys.time()
 for(i in files){
@@ -40,6 +53,7 @@ sel <- grepl("new house|#newhouse|old house|#oldhouse|new home|#newhome|old home
 
 t_out$filenum <- which(files == i)
 write.csv(t_out[sel, ], file = paste0("data/output",which(files == i),".csv"))
+print(paste0(which(files == i) / length(files) * 100, "% done"))
 }
 end_time <- Sys.time()
 (time_taken <- end_time - start_time) 
