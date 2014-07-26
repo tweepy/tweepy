@@ -58,7 +58,7 @@ ogrListLayers("pennine.gpx")
 pw <- readOGR("pennine.gpx", layer = "tracks")
 pw <- spTransform(pw, CRS("+init=epsg:27700")) # transform CRS to OSGB
 library(rgeos)
-pwBuf <- gBuffer(pw, width = 15000) # create 15 km buffer
+pwBuf <- gBuffer(pw, width = 5000) # create buffer
 plot(pwBuf) # plot to test dimensions make sense
 pwBuf <- spTransform(pwBuf, CRS("+init=epsg:4326"))
 proj4string(geoT) <- CRS("+init=epsg:4326")

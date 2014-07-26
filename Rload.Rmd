@@ -75,3 +75,25 @@ findOffendingCharacter(text)
 
 ```
 
+## Loading 'Big' Twitter datasets
+
+If you have many Tweets (upwards of a few Gb), you need to
+take this into account when loading them
+
+### Splitting large files with `split`
+
+### Adding robustness to your loop
+
+Sometimes `for` loops will fail due to a single error, e.g.:
+
+```{}
+[1] "28.4262048192771% done"
+Error in fromJSON(sprintf("[%s]", paste(readLines(i), collapse = ","))) : 
+  incomplete list - missing :
+In addition: Warning message:
+In readLines(i) :
+  incomplete final line found on 'data/chunked//t1403301271285.jsondh'
+```
+
+It is far preferable to continue
+
