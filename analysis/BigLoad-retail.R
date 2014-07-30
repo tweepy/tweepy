@@ -2,7 +2,8 @@
 
 # source("analysis/geosel.R")
 library(rgdal)
-pw <- readOGR("/home/georl/Dropbox/NARSC Submission/data", "study-area")
+pw <- readOGR("~/Dropbox/NARSC Submission/", "study-area")
+pw <- spTransform(pw, CRS("+init=epsg:27700")) # transform CRS to OSGB
 library(rgeos)
 geosel <- spTransform(pw, CRS("+init=epsg:4326"))
 
