@@ -2,8 +2,7 @@
 
 # source("analysis/geosel.R")
 library(rgdal)
-pw <- readOGR("data/", "study-area")
-pw <- spTransform(pw, CRS("+init=epsg:27700")) # transform CRS to OSGB
+pw <- readOGR("/home/georl/Dropbox/NARSC Submission/data", "study-area")
 library(rgeos)
 geosel <- spTransform(pw, CRS("+init=epsg:4326"))
 
@@ -19,7 +18,7 @@ for(i in files){
   tryCatch({
     tweets <- fromJSON(sprintf("[%s]", paste(readLines(i), collapse=","))) # full dataset
   }, error=function(e){paste0("Error ", which(i == files))})
-  
+
 coords <- sapply(tweets, function(x) x$coordinates$coordinates )
 nuls <- sapply(coords, function(x) is.null(x)) # identify out the problematic NULL values
 coords[nuls] <- lapply(coords[nuls], function(x) x <- c(0, 0)) # convert to zeros to keep with unlist
@@ -34,11 +33,16 @@ n_tweets <- sapply(tweets, function(x) x$user$statuses_count)
 n_followers <- sapply(tweets, function(x) x$user$followers_count)
 n_following <- sapply(tweets, function(x) x$user$friends_count)
 user_location <- sapply(tweets, function(x) x$user$location)
+
+tweets[[1]]$coordinates$coordinates
+tweets[[1]]$geo$coordinates
+tweets[[1]]$geo$type
 user_description <- sapply(tweets, function(x) x$user$description)
 user_id <- sapply(tweets, function(x) x$user$id)
 user_idstr <- sapply(tweets, function(x) x$user$id_str)
 user_name <- sapply(tweets, function(x) x$user$name)
 user_screen_name <- sapply(tweets, function(x) x$user$screen_name)
+
 
 t_out <- data.frame(text, lat = coords[,2], lon = coords[,1], created,
   language, n_followers, user_created, n_tweets, n_followers, n_following,
