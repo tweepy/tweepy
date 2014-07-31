@@ -1,8 +1,16 @@
 *.pyc
 *.swp
+*.json
+*.html
 build/
 dist/
+data/
 tweepy.egg-info/
 .env/
 .coverage
 htmlcov/
+.Rproj.user
+.RData*
+.Rhistory
+*orig
+credentials.ini

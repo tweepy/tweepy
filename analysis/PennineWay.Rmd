@@ -1,0 +1,95 @@
+---
+title: "Pennine way tweets"
+output: html_document
+---
+
+# Loading the data
+
+The data was loaded from an sql database originally created by Kirk Harland:
+
+```{r}
+# geoT <- SpatialPointsDataFrame(coords= matrix(c(db$Lon, db$Lat), ncol=2), data=db)
+load("../tweet_store/.RData")
+```
+
+# Analysis of the full dataset
+
+The full twitter dataset contains 2.8 million tweets collected between September 2011 and April 2012.
+The bounding box of the tweets encapsulates Leeds and Bradford, with the highest density of tweets
+focussed on Leeds city centre. A range of variables were collected, but the subsequent
+analysis will focus on `Text`, the written content of each tweet. This is shown below:
+
+
+```{r}
+names(geoT) # the variables available for analysis
+nrow(geoT) / 1000000 # million tweets
+range(geoT$Time)
+summary(nchar(geoT$Text))
+geoT[ which.max(nchar(geoT$Text)), ]
+
+# plotting the spatial distribution of the tweets
+library(ggmap)
+ggmap(get_map(bbox(geoT))) + geom_point(data = geoT@data[sample(1:nrow(geoT), size = nrow(geoT) / 10), ],
+                                        aes(x = Lon, y = Lat), alpha = 0.1)
+```
+
+# Subsetting 'Pennine Way'
+
+Below we see tweets related to the Pennine Way
+
+```{r}
+length(grep("pennine way", geoT$Text, ignore.case = T))
+head(geoT$Text[grep("pennine way", geoT$Text, ignore.case = T)])
+
+length(grep("pennine", geoT$Text, ignore.case = T))
+head(geoT$Text[grep("pennine", geoT$Text, ignore.case = T)])
+pTweets <- geoT[ grep("pennine", geoT$Text, ignore.case = T) , ]
+```
+
+# Buffer around Pennine way
+
+The coodinates of the Pennine Way can be downloaded directly from
+the internet, from [hiking.waymarkedtrails.org/en/](http://hiking.waymarkedtrails.org/en/):
+
+```{r}
+download.file(url = "http://hiking.waymarkedtrails.org/en/routebrowser/63872/gpx", "pennine.gpx")
+library(rgdal)
+ogrListLayers("pennine.gpx")
+pw <- readOGR("pennine.gpx", layer = "tracks")
+pw <- spTransform(pw, CRS("+init=epsg:27700")) # transform CRS to OSGB
+library(rgeos)
+pwBuf <- gBuffer(pw, width = 5000) # create buffer
+plot(pwBuf) # plot to test dimensions make sense
+pwBuf <- spTransform(pwBuf, CRS("+init=epsg:4326"))
+proj4string(geoT) <- CRS("+init=epsg:4326")
+PennineTweets <- geoT[pwBuf, ]
+nrow(PennineTweets)
+plot(pwBuf)
+points(PennineTweets)
+```
+
+Unfortunately, the buffer for the Pennine Way only just intersects with the edge of the
+twitter dataset - resulting in just over 50,000 tweets. All of these are over 10 km away,
+so they cannot be classed as Pennine Tweets.
+
+# Downloading the 'Pennine Tweets'
+
+The Twitter dataset we've looked at is unlikely to be of much use as it
+does not actually intersect with the Pennine Way. However, the method for
+extracting 'Pennine Tweets' has been demonstrated and some example tweets
+have been filtered from the original dataset of 2.8 million tweets.
+
+These were saved to my Dropbox file with the following command:
+
+```{r}
+write.csv(pTweets, "~/Dropbox/Public/tmp/ptweets.csv")
+```
+
+The data can be downloaded from [here](https://dl.dropboxusercontent.com/u/15008199/tmp/ptweets.csv).
+
+# Further work
+
+There is an ongoing project to download all geographic tweets nationwide,
+which can be found on the [tweepy](https://github.com/Robinlovelace/tweepy) repository.
+This may provide better Twitter data on the Pennine trail but hopes should not be high:
+ramblers, except for [RamblersGB](https://twitter.com/RamblersGB) are not known for their tweeting ways!

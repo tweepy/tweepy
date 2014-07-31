@@ -1,5 +1,0 @@
-httreplay==0.1.4
-coveralls==0.2
-unittest2==0.5.1
-mock==1.0.1
-boto==2.27
