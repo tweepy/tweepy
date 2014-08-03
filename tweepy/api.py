@@ -407,7 +407,7 @@ class API(object):
         return bind_api(
             api=self,
             path='/direct_messages/destroy.json',
-            method='DELETE',
+            method='POST',
             payload_type='direct_message',
             allowed_param=['id'],
             require_auth=True
@@ -435,7 +435,7 @@ class API(object):
         return bind_api(
             api=self,
             path='/friendships/destroy.json',
-            method='DELETE',
+            method='POST',
             payload_type='user',
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True
@@ -714,7 +714,7 @@ class API(object):
         return bind_api(
             api=self,
             path='/blocks/destroy.json',
-            method='DELETE',
+            method='POST',
             payload_type='user',
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True
