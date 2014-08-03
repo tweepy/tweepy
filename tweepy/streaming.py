@@ -2,12 +2,14 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import print_function
+
 import logging
 import requests
 from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
-from HTMLParser import HTMLParser
+from six.moves.html_parser import HTMLParser
 import ssl
 
 from tweepy.models import Status

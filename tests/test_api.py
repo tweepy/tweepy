@@ -1,4 +1,4 @@
-import unittest2 as unittest
+import unittest
 import random
 from time import sleep
 import os
@@ -7,7 +7,7 @@ from nose import SkipTest
 
 from tweepy import Friendship, MemoryCache, FileCache, API
 from tweepy.parsers import Parser
-from config import TweepyTestCase, username, use_replay
+from .config import TweepyTestCase, username, use_replay
 
 test_tweet_id = '266367358078169089'
 tweet_text = 'testing 1000'

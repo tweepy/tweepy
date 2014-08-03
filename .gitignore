@@ -6,3 +6,6 @@ tweepy.egg-info/
 .env/
 .coverage
 htmlcov/
+.idea/
+tests/record.json
+.tox

@@ -1,6 +1,5 @@
 import os
-import sys
-from unittest2 import TestCase
+from unittest import TestCase
 
 from httreplay import start_replay, stop_replay
 from httreplay.utils import filter_headers_key

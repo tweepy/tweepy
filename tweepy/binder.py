@@ -2,6 +2,8 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import print_function
+
 import urllib
 import time
 import re
@@ -140,7 +142,7 @@ def bind_api(**config):
                     sleep_time = self._reset_time - int(time.time())
                     if sleep_time > 0:
                         if self.wait_on_rate_limit_notify:
-                            print "Rate limit reached. Sleeping for: " + str(sleep_time)
+                            print("Rate limit reached. Sleeping for: " + str(sleep_time))
                         time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # Apply authentication
@@ -156,7 +158,7 @@ def bind_api(**config):
                     resp = self.session.request(self.method, full_url,
                                                 data=self.post_data, timeout=self.api.timeout,
                                                 auth=auth, proxies=self.api.proxy)
-                except Exception, e:
+                except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:

@@ -1,5 +1,5 @@
 from time import sleep
-import unittest2 as unittest
+import unittest
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler

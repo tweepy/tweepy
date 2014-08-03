@@ -1,4 +1,4 @@
-import unittest2 as unittest
+import unittest
 
 from config import *
 from tweepy import API, OAuthHandler

@@ -1,14 +1,11 @@
-from urllib2 import Request, urlopen
-import urllib
-import base64
-import json
+from __future__ import print_function
 
 from tweepy.error import TweepError
 from tweepy.api import API
 import requests
 from requests_oauthlib import OAuth1Session, OAuth1
 from requests.auth import AuthBase
-from urlparse import parse_qs
+from six.moves.urllib.parse import parse_qs
 
 class AuthHandler(object):
 
@@ -99,7 +96,7 @@ class OAuthHandler(AuthHandler):
                 'client_auth', 'x_auth_username': username, 'x_auth_password':
                 password})
 
-            print r.content
+            print(r.content)
             credentials = parse_qs(r.content)
             return (credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0])
         except Exception as e:
