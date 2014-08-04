@@ -1,0 +1,144 @@
+# Tweepy
+# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2014 Alexandru Stanciu (@ducu)
+# See LICENSE for details.
+
+from tweepy.api import API
+from tweepy.auth import OAuthHandler
+from tweepy.error import TweepError
+
+from tweepy.utils import clean_path
+
+
+class RateLimitHandler(OAuthHandler):
+    """
+    OAuth authentication handler
+    containing a pool of access tokens that are used selectively
+    based on requested resource and current rate limits. The
+    access token with most remaining requests per window for the
+    specified resource is being selected and used when applying 
+    the authentication, before the actual request is performed.
+    This pattern ensures the usage of available access tokens in
+    a round robin fashion, exploiting to maximum the rate limits.
+    """
+
+    tokens = {}
+    # The pool of access tokens looks like this:
+    # tokens = {
+    #   access_token_key: {
+    #     u'secret': access_token_secret,
+    #     u'resources' : {
+    #       resource: { u'limit': limit, 
+    #         u'remaining': remaining, u'reset': reset }
+    #     }
+    #   }
+    # }
+    
+    def _get_rate_limit_status(self, key, secret):
+        """
+        Get rate limit status for specified access token key.
+        """
+        auth = OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth.set_access_token(key, secret)
+        api = API(auth)
+        return api.rate_limit_status()
+
+    def _load_rate_limit_status(self, key, rate_limit_status):
+        """
+        Load resources rate limits into token pool structure.
+        """
+        self.tokens[key]['resources'] = dict(
+            [(clean_path(r), rd[r]) \
+            for c, rd in rate_limit_status['resources'].iteritems() \
+            for r in rd.keys()]
+        )
+
+
+    def add_access_token(self, key, secret):
+        """
+        Add the access token key and secret to the pool, 
+        and call the API to load its resources rate limits.
+        Invalid or expired token error may be raised.
+        """
+        assert key not in self.tokens
+        rls = self._get_rate_limit_status(key, secret) # may raise
+
+        self.tokens[key] = {u'secret': secret, u'resources': {}}
+        self._load_rate_limit_status(key, rls)
+
+    def select_access_token(self, resource):
+        """
+        Cycle through available tokens to 
+        find the one with most remaining calls per specified
+        resource, or with the closest reset time. And call
+        `set_access_token` to prepare for upcoming request.
+
+        Make sure you `clean_path` the resource upfront.
+        Call this right before requesting specified resource.
+        """
+        assert len(self.tokens) # at least one token
+
+        # TEMPORARY
+        import random
+        key = random.choice(self.tokens.keys())
+
+        # key, remaining = max(
+        #     [(k, sr['resources'].
+        #     get(resource, {'remaining': None})['remaining']) \
+        #     for k, sr in self.tokens.iteritems()],
+        #     key=lambda t: t[1]
+        # ) # most remaining calls per resource
+
+        # if remaining == 0: key, reset = min(
+        #     [(k, sr['resources'].
+        #     get(resource, {'reset': None})['reset']) \
+        #     for k, sr in self.tokens.iteritems()],
+        #     key=lambda t: t[1]
+        # ) # closest reset time per resource
+
+        # maxremaining = remaining # just to verify later
+        
+        limits = self.tokens[key]['resources'].get(resource)
+        limit, remaining, reset = limits and \
+            (limits['limit'], limits['remaining'], limits['reset']) \
+            or (None, None, None) # unknown resource
+        # assert remaining is None or remaining == maxremaining
+
+        print key.split('-')[0], resource, remaining, reset
+
+        self.set_access_token(key, self.tokens[key]['secret'])
+        return key, limit, remaining, reset
+
+    def update_rate_limits(self, key, 
+        resource, limit=None, remaining=None, reset=None):
+        """
+        After performing a request for specified resource
+        by using specified access token key, the rate limits
+        have to be updated with the specific values from the
+        X-Rate-Limit response headers.
+
+        Visit https://dev.twitter.com/docs/rate-limiting/1.1
+        """
+        assert key in self.tokens
+        assert limit or remaining or reset
+        limits = self.tokens[key]['resources'].get(resource)
+        if not limits:
+            limits = {u'limit': 0, u'remaining': 0, u'reset': 0}
+            self.tokens[key]['resources'][unicode(resource)] = limits
+        if limit is not None:
+            limits['limit'] = limit
+        if remaining is not None:
+            limits['remaining'] = remaining
+        if reset is not None:
+            limits['reset'] = reset
+
+    def refresh_rate_limits(self):
+        """
+        Reload rate limits for due access tokens.
+        """
+        # if remaining == 0: # rate limit reached
+        #     secret = self.tokens[key]['secret'])
+        #     rls = self._get_rate_limit_status(key, secret)
+        #     self._load_rate_limit_status(key, rls)
+        pass
+
