@@ -57,3 +57,14 @@ def list_to_csv(item_list):
 def urlencode_noplus(query):
     return '&'.join(['%s=%s' % (quote(str(k), ''), quote(str(v), '')) \
         for k, v in query.iteritems()])
+
+
+def clean_path(path):
+    """
+    Clean both the API method path as well as the
+    rate_limit_status resource path in order to have exact match.
+    E.g.: "/geo/id/{id}.json" -> "/geo/id" <- "/geo/id/:place_id"
+    """
+    return u'/'.join([t for t in path.rstrip('.json').split('/') \
+        if not (t and t[0] in ('{', ':'))])
+
