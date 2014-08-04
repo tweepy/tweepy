@@ -33,6 +33,14 @@ class RateLimitHandler(OAuthHandler):
     #     }
     #   }
     # }
+
+    nolimits = {u'limit': None, u'remaining': None, u'reset': None}
+
+    def _parse_limits(self, limits):
+        return limits and (limits.get('limit'), 
+            limits.get('remaining'), limits.get('reset')) or \
+            (None, None, None) # no limits
+
     
     def _get_rate_limit_status(self, key, secret):
         """
@@ -77,32 +85,26 @@ class RateLimitHandler(OAuthHandler):
         Call this right before requesting specified resource.
         """
         assert len(self.tokens) # at least one token
+        key = self.access_token or self.tokens.keys()[0] # current
 
-        # TEMPORARY
-        import random
-        key = random.choice(self.tokens.keys())
-
-        # key, remaining = max(
-        #     [(k, sr['resources'].
-        #     get(resource, {'remaining': None})['remaining']) \
-        #     for k, sr in self.tokens.iteritems()],
-        #     key=lambda t: t[1]
-        # ) # most remaining calls per resource
-
-        # if remaining == 0: key, reset = min(
-        #     [(k, sr['resources'].
-        #     get(resource, {'reset': None})['reset']) \
-        #     for k, sr in self.tokens.iteritems()],
-        #     key=lambda t: t[1]
-        # ) # closest reset time per resource
-
-        # maxremaining = remaining # just to verify later
-        
         limits = self.tokens[key]['resources'].get(resource)
-        limit, remaining, reset = limits and \
-            (limits['limit'], limits['remaining'], limits['reset']) \
-            or (None, None, None) # unknown resource
-        # assert remaining is None or remaining == maxremaining
+        limit, remaining, reset = self._parse_limits(limits)
+
+        if remaining == 0:
+            key, limits = max(
+                [(k, sr['resources'].get(resource, self.nolimits)) \
+                for k, sr in self.tokens.iteritems()],
+                key=lambda t: t[1]['remaining']
+            ) # most remaining calls per resource
+            limit, remaining, reset = self._parse_limits(limits)
+
+        if remaining == 0: 
+            key, limits = min(
+                [(k, sr['resources'].get(resource, self.nolimits)) \
+                for k, sr in self.tokens.iteritems()],
+                key=lambda t: t[1]['reset']
+            ) # closest reset time per resource
+            limit, remaining, reset = self._parse_limits(limits)
 
         print key.split('-')[0], resource, remaining, reset
 
@@ -126,19 +128,17 @@ class RateLimitHandler(OAuthHandler):
             limits = {u'limit': 0, u'remaining': 0, u'reset': 0}
             self.tokens[key]['resources'][unicode(resource)] = limits
         if limit is not None:
-            limits['limit'] = limit
+            limits['limit'] = int(limit)
         if remaining is not None:
-            limits['remaining'] = remaining
+            limits['remaining'] = int(remaining)
         if reset is not None:
-            limits['reset'] = reset
+            limits['reset'] = int(reset)
 
-    def refresh_rate_limits(self):
+    def refresh_rate_limits(self, key):
         """
         Reload rate limits for due access tokens.
         """
-        # if remaining == 0: # rate limit reached
-        #     secret = self.tokens[key]['secret'])
-        #     rls = self._get_rate_limit_status(key, secret)
-        #     self._load_rate_limit_status(key, rls)
-        pass
+        secret = self.tokens[key]['secret']
+        rls = self._get_rate_limit_status(key, secret)
+        self._load_rate_limit_status(key, rls)
 
