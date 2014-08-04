@@ -9,7 +9,7 @@ import re
 import requests
 
 from tweepy.error import TweepError
-from tweepy.utils import convert_to_utf8_str
+from tweepy.utils import convert_to_utf8_str, clean_path
 from tweepy.models import Model
 
 
@@ -30,6 +30,7 @@ def bind_api(**config):
         search_api = config.get('search_api', False)
         use_cache = config.get('use_cache', True)
         session = requests.Session()
+        resource = method == 'GET' and clean_path(path) or None
 
         def __init__(self, args, kwargs):
             api = self.api
@@ -134,6 +135,13 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
+                # If auth is RateLimitHandler, select the access token
+                if hasattr(self.api.auth, 'tokens'): # safe bet
+                    key, limit, remaining, reset = \
+                        self.api.auth.select_access_token(self.resource)
+                    assert key == self.api.auth.access_token
+                    self._reset_time = reset
+                    self._remaining_calls = remaining
                 # handle running out of api calls
                 if self.wait_on_rate_limit and self._reset_time is not None and \
                                 self._remaining_calls is not None and self._remaining_calls < 1:
@@ -166,6 +174,12 @@ def bind_api(**config):
                 reset_time = resp.headers.get('x-rate-limit-reset')
                 if reset_time is not None:
                     self._reset_time = int(reset_time)
+                # If auth is RateLimitHandler, update rate limits
+                if hasattr(self.api.auth, 'tokens'):
+                    self.api.auth.update_rate_limits(
+                        self.api.auth.access_token, self.resource,
+                        remaining=self._remaining_calls, reset=self._reset_time
+                    )
                 if self.wait_on_rate_limit and self._remaining_calls == 0 and (
                         resp.status_code == 429 or resp.status_code == 420):  # if ran out of calls before waiting switching retry last call
                     continue
