@@ -610,6 +610,7 @@ class API(object):
             path='/account/update_profile_image.json',
             method='POST',
             payload_type='user',
+            allowed_param=['include_entities', 'skip_status'],
             require_auth=True
         )(self, post_data=post_data, headers=headers)
 
