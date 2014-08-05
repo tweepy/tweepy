@@ -78,9 +78,11 @@ class RateLimitHandler(OAuthHandler):
 
     def select_access_token(self, resource):
         """
-        Cycle through available tokens to 
-        find the one with most remaining calls per specified
-        resource, or with the oldest reset time. And call
+        When the current token runs out of remaining calls, 
+        cycle through all available tokens to find either
+        the one with most remaining calls per specified
+        resource, or if all of them ran out of calls, find
+        the one with the first reset time. And call
         `set_access_token` to prepare for upcoming request.
 
         Make sure you `clean_path` the resource upfront.
@@ -105,14 +107,14 @@ class RateLimitHandler(OAuthHandler):
                 [(k, sr['resources'].get(resource, self.nolimits)) \
                 for k, sr in self.tokens.iteritems()],
                 key=lambda t: t[1]['reset']
-            ) # oldest reset time per resource
+            ) # first reset time per resource
             limit, remaining, reset = self._parse_limits(limits)
 
         if remaining == 0:
             reset += 5 # few more sec
-            
-        print key.split('-')[0], \
-            resource, remaining, reset - int(time.time())
+
+        # print key.split('-')[0], \
+        #     resource, remaining, reset - int(time.time())
 
         self.set_access_token(key, self.tokens[key]['secret'])
         return key, limit, remaining, reset
@@ -125,7 +127,7 @@ class RateLimitHandler(OAuthHandler):
         have to be updated with the specific values from the
         X-Rate-Limit response headers.
 
-        Visit https://dev.twitter.com/docs/rate-limiting/1.1
+        See https://dev.twitter.com/docs/rate-limiting/1.1
         """
         assert key in self.tokens
         assert limit or remaining or reset
