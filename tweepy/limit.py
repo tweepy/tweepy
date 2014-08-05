@@ -3,6 +3,8 @@
 # Copyright 2014 Alexandru Stanciu (@ducu)
 # See LICENSE for details.
 
+import time
+
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
 from tweepy.error import TweepError
@@ -78,7 +80,7 @@ class RateLimitHandler(OAuthHandler):
         """
         Cycle through available tokens to 
         find the one with most remaining calls per specified
-        resource, or with the closest reset time. And call
+        resource, or with the oldest reset time. And call
         `set_access_token` to prepare for upcoming request.
 
         Make sure you `clean_path` the resource upfront.
@@ -103,10 +105,14 @@ class RateLimitHandler(OAuthHandler):
                 [(k, sr['resources'].get(resource, self.nolimits)) \
                 for k, sr in self.tokens.iteritems()],
                 key=lambda t: t[1]['reset']
-            ) # closest reset time per resource
+            ) # oldest reset time per resource
             limit, remaining, reset = self._parse_limits(limits)
 
-        print key.split('-')[0], resource, remaining, reset
+        if remaining == 0:
+            reset += 5 # few more sec
+            
+        print key.split('-')[0], \
+            resource, remaining, reset - int(time.time())
 
         self.set_access_token(key, self.tokens[key]['secret'])
         return key, limit, remaining, reset
