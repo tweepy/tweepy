@@ -139,7 +139,7 @@ def bind_api(**config):
                 if hasattr(self.api.auth, 'tokens'): # safe bet
                     key, limit, remaining, reset = \
                         self.api.auth.select_access_token(self.resource)
-                    assert key == self.api.auth.access_token
+                    self.api.auth.set_access_token(key)
                     self._reset_time = reset
                     self._remaining_calls = remaining
                 # handle running out of api calls

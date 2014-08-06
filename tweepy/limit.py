@@ -3,7 +3,7 @@
 # Copyright 2014 Alexandru Stanciu (@ducu)
 # See LICENSE for details.
 
-import time
+# import time
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
@@ -82,11 +82,9 @@ class RateLimitHandler(OAuthHandler):
         cycle through all available tokens to find either
         the one with most remaining calls per specified
         resource, or if all of them ran out of calls, find
-        the one with the first reset time. And call
+        the one with the first reset time. Don't forget to
         `set_access_token` to prepare for upcoming request.
-
         Make sure you `clean_path` the resource upfront.
-        Call this right before requesting specified resource.
         """
         assert len(self.tokens) # at least one token
         key = self.access_token or self.tokens.keys()[0] # current
@@ -113,11 +111,15 @@ class RateLimitHandler(OAuthHandler):
         if remaining == 0:
             reset += 5 # few more sec
 
-        # print key.split('-')[0], \
-        #     resource, remaining, reset - int(time.time())
-
-        self.set_access_token(key, self.tokens[key]['secret'])
         return key, limit, remaining, reset
+
+    def set_access_token(self, key):
+        """
+        Overload without the `secret`.
+        """
+        assert key in self.tokens
+        self.access_token = key
+        self.access_token_secret = self.tokens[key]['secret']
 
     def update_rate_limits(self, key, 
         resource, limit=None, remaining=None, reset=None):
@@ -130,7 +132,6 @@ class RateLimitHandler(OAuthHandler):
         See https://dev.twitter.com/docs/rate-limiting/1.1
         """
         assert key in self.tokens
-        assert limit or remaining or reset
         limits = self.tokens[key]['resources'].get(resource)
         if not limits:
             limits = {u'limit': 0, u'remaining': 0, u'reset': 0}
@@ -142,11 +143,11 @@ class RateLimitHandler(OAuthHandler):
         if reset is not None:
             limits['reset'] = int(reset)
 
-    def refresh_rate_limits(self, key):
-        """
-        Reload rate limits for due access tokens.
-        """
-        secret = self.tokens[key]['secret']
-        rls = self._get_rate_limit_status(key, secret)
-        self._load_rate_limit_status(key, rls)
+    # def refresh_rate_limits(self, key):
+        # """
+        # Reload rate limits for due access tokens.
+        # """
+        # secret = self.tokens[key]['secret']
+        # rls = self._get_rate_limit_status(key, secret)
+        # self._load_rate_limit_status(key, rls)
 
