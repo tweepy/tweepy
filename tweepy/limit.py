@@ -134,7 +134,7 @@ class RateLimitHandler(OAuthHandler):
         assert key in self.tokens
         limits = self.tokens[key]['resources'].get(resource)
         if not limits:
-            limits = {u'limit': 0, u'remaining': 0, u'reset': 0}
+            limits = {u'limit': None, u'remaining': None, u'reset': None}
             self.tokens[key]['resources'][unicode(resource)] = limits
         if limit is not None:
             limits['limit'] = int(limit)
