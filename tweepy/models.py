@@ -248,8 +248,10 @@ class SearchResults(ResultSet):
         results.count = metadata.get('count')
         results.next_results = metadata.get('next_results')
 
+        status_model = getattr(api.parser.model_factory, 'status') if api else Status
+
         for status in json['statuses']:
-            results.append(Status.parse(api, status))
+            results.append(status_model.parse(api, status))
         return results
 
 
