@@ -14,8 +14,8 @@ oauth_token = os.environ.get('ACCESS_KEY', '')
 oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
 use_replay = os.environ.get('USE_REPLAY', False)
 
-class TweepyTestCase(TestCase):
 
+class TweepyTestCase(TestCase):
     def setUp(self):
         self.auth = create_auth()
         self.api = API(self.auth)

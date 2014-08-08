@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+import six
+
 from tweepy.error import TweepError
 from tweepy.api import API
 import requests
@@ -24,11 +26,11 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == unicode:
-            consumer_key = bytes(consumer_key)
+        if type(consumer_key) == six.text_type:
+            consumer_key = consumer_key.encode('ascii')
 
-        if type(consumer_secret) == unicode:
-            consumer_secret = bytes(consumer_secret)
+        if type(consumer_secret) == six.text_type:
+            consumer_secret = consumer_secret.encode('ascii')
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -42,7 +44,11 @@ class OAuthHandler(AuthHandler):
         return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self):
-        return OAuth1(self.consumer_key, client_secret=self.consumer_secret, resource_owner_key=self.access_token, resource_owner_secret=self.access_token_secret)
+        return OAuth1(self.consumer_key,
+                      client_secret=self.consumer_secret,
+                      resource_owner_key=self.access_token,
+                      resource_owner_secret=self.access_token_secret,
+                      decoding=None)
 
     def _get_request_token(self):
         try:
@@ -65,6 +71,7 @@ class OAuthHandler(AuthHandler):
             self.request_token = self._get_request_token()
             return self.oauth.authorization_url(url)
         except Exception as e:
+            raise
             raise TweepError(e)
 
     def get_access_token(self, verifier = None):

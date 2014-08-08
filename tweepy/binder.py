@@ -4,10 +4,10 @@
 
 from __future__ import print_function
 
-import urllib
 import time
 import re
 
+from six.moves.urllib.parse import quote
 import requests
 
 from tweepy.error import TweepError
@@ -68,7 +68,6 @@ def bind_api(**config):
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
-
             self.session.headers['Host'] = self.host
             # Monitoring rate limits
             self._remaining_calls = None
@@ -101,7 +100,7 @@ def bind_api(**config):
                     value = self.api.auth.get_username()
                 else:
                     try:
-                        value = urllib.quote(self.session.params[name])
+                        value = quote(self.session.params[name])
                     except KeyError:
                         raise TweepError('No parameter value found for path variable: %s' % name)
                     del self.session.params[name]
@@ -152,6 +151,8 @@ def bind_api(**config):
                 # Request compression if configured
                 if self.api.compression:
                     self.session.headers['Accept-encoding'] = 'gzip'
+
+
 
                 # Execute request
                 try:

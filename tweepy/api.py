@@ -6,7 +6,8 @@ from __future__ import print_function
 
 import os
 import mimetypes
-import urllib
+
+import six
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
@@ -1233,21 +1234,20 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, unicode):
+        if isinstance(filename, six.text_type):
             filename = filename.encode("utf-8")
-        filename = filename.encode("utf-8")
 
-        BOUNDARY = 'Tw3ePy'
+        BOUNDARY = b'Tw3ePy'
         body = []
-        body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (form_field, filename))
-        body.append('Content-Type: %s' % file_type)
-        body.append('')
+        body.append(b'--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="{}"; filename="{}"'.format(form_field, filename).encode('utf-8'))
+        body.append('Content-Type: {}'.format(file_type).encode('utf-8'))
+        body.append(b'')
         body.append(fp.read())
-        body.append('--' + BOUNDARY + '--')
-        body.append('')
+        body.append(b'--' + BOUNDARY + b'--')
+        body.append(b'')
         fp.close()
-        body = '\r\n'.join(body)
+        body = b'\r\n'.join(body)
 
         # build headers
         headers = {
