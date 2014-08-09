@@ -68,8 +68,9 @@ class API(object):
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{}". It is currently a {}.'.format(
-                    parser_type.__name__, type(self.parser)
+                '"parser" argument has to be an instance of "{required}". It is currently a {actual}.'.format(
+                    required=parser_type.__name__,
+                    actual=type(self.parser)
                 )
             )
 
@@ -1240,8 +1241,8 @@ class API(object):
         BOUNDARY = b'Tw3ePy'
         body = []
         body.append(b'--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="{}"; filename="{}"'.format(form_field, filename).encode('utf-8'))
-        body.append('Content-Type: {}'.format(file_type).encode('utf-8'))
+        body.append('Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(form_field, filename).encode('utf-8'))
+        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
         body.append(b'')
         body.append(fp.read())
         body.append(b'--' + BOUNDARY + b'--')
