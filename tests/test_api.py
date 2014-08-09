@@ -323,7 +323,6 @@ class TweepyAPITests(TweepyTestCase):
         self.api.saved_searches()
         self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
         self.api.destroy_saved_search(s.id)
-        self.fail("I wanted this to fail")
 
     def testsearch(self):
         self.api.search('tweepy')
