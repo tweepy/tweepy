@@ -1,8 +1,13 @@
 from __future__ import absolute_import
-import unittest
 
 from .config import *
 from tweepy import API, OAuthHandler
+
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
 
 class TweepyAuthTests(unittest.TestCase):
 

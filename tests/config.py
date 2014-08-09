@@ -1,11 +1,16 @@
 import os
-from unittest import TestCase
 
 from httreplay import start_replay, stop_replay
 from httreplay.utils import filter_headers_key
 
 from tweepy.auth import OAuthHandler
 from tweepy.api import API
+
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
 
 username = os.environ.get('TWITTER_USERNAME', 'tweepytest')
 oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')
@@ -15,7 +20,7 @@ oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
 use_replay = os.environ.get('USE_REPLAY', False)
 
 
-class TweepyTestCase(TestCase):
+class TweepyTestCase(unittest.TestCase):
     def setUp(self):
         self.auth = create_auth()
         self.api = API(self.auth)

@@ -1,4 +1,8 @@
-from unittest import TestCase
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
 
 from tweepy.utils import *
 
@@ -8,10 +12,10 @@ import string
 def mock_tweet():
     """Generate some random tweet text."""
     count = random.randint(70, 140)
-    return ''.join([random.choice(string.letters) for i in xrange(count)])
+    return ''.join([random.choice(string.letters) for _ in range(count)])
 
 
-class TweepyUtilsTests(TestCase):
+class TweepyUtilsTests(unittest.TestCase):
 
     def testparse_datetime(self):
         result = parse_datetime("Wed Aug 27 13:08:45 +0000 2008")

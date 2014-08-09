@@ -1,4 +1,4 @@
-import unittest
+from .config import TweepyTestCase
 
 from tweepy.models import ResultSet
 
@@ -10,7 +10,7 @@ class IdItem(object):
 
 ids_fixture = [1, 10, 8, 50, 2, 100, 5]
 
-class TweepyResultSetTests(unittest.TestCase):
+class TweepyResultSetTests(TweepyTestCase):
     def setUp(self):
         self.results = ResultSet()
         for i in ids_fixture:

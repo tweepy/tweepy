@@ -4,7 +4,12 @@ import os
 from tweepy import API, Cursor
 from tweepy.error import TweepError
 
-from config import create_auth
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
+from .config import create_auth
 
 testratelimit = 'TEST_RATE_LIMIT' in os.environ
 
@@ -24,7 +29,7 @@ class TweepyRateLimitTests(unittest.TestCase):
         for user_id in test_user_ids:
             try:
                 self.api.user_timeline(user_id=user_id, count=1, include_rts=True)
-            except TweepError, e:
+            except TweepError as e:
                 # continue if we're not autherized to access the user's timeline or she doesn't exist anymore
                 if e.response is not None and e.response.status in set([401, 404]): 
                     continue
