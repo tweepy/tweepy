@@ -58,6 +58,9 @@ class StreamListener(object):
             status = Status.parse(self.api, data)
             if self.on_direct_message(status) is False:
                 return False
+        elif 'friends' in data:
+            if self.on_friends(data['friends']) is False:
+                return False
         elif 'limit' in data:
             if self.on_limit(data['limit']['track']) is False:
                 return False
@@ -85,6 +88,13 @@ class StreamListener(object):
 
     def on_direct_message(self, status):
         """Called when a new direct message arrives"""
+        return
+
+    def on_friends(self, friends):
+        """Called when a friends list arrives.
+
+        friends is a list that contains user_id
+        """
         return
 
     def on_limit(self, track):
