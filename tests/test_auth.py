@@ -21,3 +21,9 @@ class TweepyAuthTests(unittest.TestCase):
         s = api.update_status('test %i' % random.randint(0, 1000))
         api.destroy_status(s.id)
 
+    def testaccesstype(self):
+        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth_url = auth.get_authorization_url(access_type='read')
+        print('Please open: ' + auth_url)
+        answer = raw_input('Did Twitter only request read permissions? (y/n) ')
+        self.assertEqual('y', answer.lower())
