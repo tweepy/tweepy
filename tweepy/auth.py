@@ -2,6 +2,7 @@ from urllib2 import Request, urlopen
 import urllib
 import base64
 import json
+import logging
 
 from tweepy.error import TweepError
 from tweepy.api import API
@@ -65,6 +66,11 @@ class OAuthHandler(AuthHandler):
         try:
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
+                if access_type:
+                    logging.warning(
+                        "Warning! Due to a Twitter API bug, signin_with_twitter "
+                        "and access_type don't always play nice together. Details: "
+                        "https://dev.twitter.com/discussions/21281")
             else:
                 url = self._get_oauth_url('authorize')
             self.request_token = self._get_request_token(access_type=access_type)
