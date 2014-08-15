@@ -10,6 +10,8 @@ import re
 from six.moves.urllib.parse import quote
 import requests
 
+import logging
+
 from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
@@ -17,6 +19,7 @@ from tweepy.models import Model
 
 re_path_template = re.compile('{\w+}')
 
+log = logging.getLogger('tweepy.binder')
 
 def bind_api(**config):
 
@@ -91,6 +94,8 @@ def bind_api(**config):
 
                 self.session.params[k] = convert_to_utf8_str(arg)
 
+            log.info("PARAMS: %r", self.session.params)
+
         def build_path(self):
             for variable in re_path_template.findall(self.path):
                 name = variable.strip('{}')
@@ -151,8 +156,6 @@ def bind_api(**config):
                 # Request compression if configured
                 if self.api.compression:
                     self.session.headers['Accept-encoding'] = 'gzip'
-
-
 
                 # Execute request
                 try:

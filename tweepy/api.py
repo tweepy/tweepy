@@ -629,7 +629,7 @@ class API(object):
             payload_type='user',
             allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
             require_auth=True
-        )(self, post_data=post_data, headers=headers)
+        )(post_data=post_data, headers=headers)
 
     def update_profile_banner(self, filename, **kargs):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/account/update_profile_banner """
@@ -641,7 +641,7 @@ class API(object):
             method='POST',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True
-        )(self, post_data=post_data, headers=headers)
+        )(post_data=post_data, headers=headers)
 
     @property
     def update_profile(self):
