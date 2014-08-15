@@ -1,13 +1,17 @@
 from time import sleep
-import unittest2 as unittest
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
 from tweepy.models import Status
 from tweepy.streaming import Stream, StreamListener
 
-from config import create_auth
-from test_utils import mock_tweet
+from .config import create_auth
+from .test_utils import mock_tweet
 from mock import MagicMock, patch
 
 class MockStreamListener(StreamListener):

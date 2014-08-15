@@ -1,7 +1,6 @@
-from urllib2 import Request, urlopen
-import urllib
-import base64
-import json
+from __future__ import print_function
+
+import six
 import logging
 
 from tweepy.error import TweepError
@@ -9,7 +8,7 @@ from tweepy.api import API
 import requests
 from requests_oauthlib import OAuth1Session, OAuth1
 from requests.auth import AuthBase
-from urlparse import parse_qs
+from six.moves.urllib.parse import parse_qs
 
 class AuthHandler(object):
 
@@ -28,11 +27,11 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == unicode:
-            consumer_key = bytes(consumer_key)
+        if type(consumer_key) == six.text_type:
+            consumer_key = consumer_key.encode('ascii')
 
-        if type(consumer_secret) == unicode:
-            consumer_secret = bytes(consumer_secret)
+        if type(consumer_secret) == six.text_type:
+            consumer_secret = consumer_secret.encode('ascii')
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -46,7 +45,11 @@ class OAuthHandler(AuthHandler):
         return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self):
-        return OAuth1(self.consumer_key, client_secret=self.consumer_secret, resource_owner_key=self.access_token, resource_owner_secret=self.access_token_secret)
+        return OAuth1(self.consumer_key,
+                      client_secret=self.consumer_secret,
+                      resource_owner_key=self.access_token,
+                      resource_owner_secret=self.access_token_secret,
+                      decoding=None)
 
     def _get_request_token(self, access_type = None):
         try:
@@ -76,6 +79,7 @@ class OAuthHandler(AuthHandler):
             self.request_token = self._get_request_token(access_type=access_type)
             return self.oauth.authorization_url(url)
         except Exception as e:
+            raise
             raise TweepError(e)
 
     def get_access_token(self, verifier = None):
@@ -107,7 +111,7 @@ class OAuthHandler(AuthHandler):
                 'client_auth', 'x_auth_username': username, 'x_auth_password':
                 password})
 
-            print r.content
+            print(r.content)
             credentials = parse_qs(r.content)
             return (credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0])
         except Exception as e:

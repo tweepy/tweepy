@@ -1,8 +1,9 @@
-*.pyc
-*.swp
-build/
-dist/
-tweepy.egg-info/
-.env/
+env.sh
 .coverage
-htmlcov/
+.idea
+.pdbrc
+.tox
+build
+dist
+cassettes
+*.egg-info

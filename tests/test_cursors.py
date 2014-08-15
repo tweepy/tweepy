@@ -1,8 +1,11 @@
-import unittest2 as unittest
-
 from tweepy import API, Cursor
 
-from config import create_auth
+from .config import create_auth
+import six
+if six.PY3:
+    import unittest
+else:
+    import unittest2 as unittest
 
 class TweepyCursorTests(unittest.TestCase):
 
