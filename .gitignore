@@ -1,1 +1,9 @@
 env.sh
+.coverage
+.idea
+.pdbrc
+.tox
+build
+dist
+cassettes
+*.egg-info
