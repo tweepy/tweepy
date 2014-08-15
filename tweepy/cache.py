@@ -163,7 +163,7 @@ class FileCache(Cache):
 
     def _get_path(self, key):
         md5 = hashlib.md5()
-        md5.update(key)
+        md5.update(key.encode('utf-8'))
         return os.path.join(self.cache_dir, md5.hexdigest())
 
     def _lock_file_dummy(self, path, exclusive=True):
