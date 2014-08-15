@@ -1,5 +1,6 @@
 import unittest
 import random
+import shutil
 from time import sleep
 import os
 
@@ -396,10 +397,14 @@ class TweepyCacheTests(unittest.TestCase):
 
     def testfilecache(self):
         os.mkdir('cache_test_dir')
-        self.cache = FileCache('cache_test_dir', self.timeout)
-        self._run_tests()
-        self.cache.flush()
-        os.rmdir('cache_test_dir')
+        try:
+            self.cache = FileCache('cache_test_dir', self.timeout)
+            self._run_tests()
+            self.cache.flush()
+        finally:
+            if os.path.exists('cache_test_dir'):
+                shutil.rmtree('cache_test_dir')
+
 
 if __name__ == '__main__':
     unittest.main()
