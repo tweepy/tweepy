@@ -1,8 +1,5 @@
 import os
 
-#from httreplay import start_replay, stop_replay
-#from httreplay.utils import filter_headers_key
-
 import vcr
 
 from tweepy.auth import OAuthHandler
