@@ -1,9 +1,14 @@
+from __future__ import absolute_import, print_function
+
 from time import sleep
+
 import six
 if six.PY3:
     import unittest
+    from unittest.case import skip
 else:
     import unittest2 as unittest
+    from unittest2.case import skip
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
@@ -41,6 +46,7 @@ class MockStreamListener(StreamListener):
         if self.status_stop_count == self.status_count:
             return False
 
+
 class TweepyStreamTests(unittest.TestCase):
     def setUp(self):
         self.auth = create_auth()
@@ -53,7 +59,6 @@ class TweepyStreamTests(unittest.TestCase):
     def on_connect(self):
         API(self.auth).update_status(mock_tweet())
 
-
     def test_userstream(self):
         # Generate random tweet which should show up in the stream.
         
@@ -61,11 +66,12 @@ class TweepyStreamTests(unittest.TestCase):
         self.listener.status_stop_count = 1
         self.stream.userstream()
         self.assertEqual(self.listener.status_count, 1)
-    
+
+    @skip("Sitestream only available to whitelisted accounts.")
     def test_sitestream(self):
         self.listener.connect_cb = self.on_connect
         self.listener.status_stop_count = 1
-        self.sitestream(follow=[self.auth.get_username()])
+        self.stream.sitestream(follow=[self.auth.get_username()])
         self.assertEqual(self.listener.status_count, 1)
 
     def test_userstream_with_params(self):
