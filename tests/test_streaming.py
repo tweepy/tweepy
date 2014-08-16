@@ -20,6 +20,12 @@ from .test_utils import mock_tweet
 from mock import MagicMock, patch
 
 
+if six.PY3:
+    getresponse_location = 'http.client.HTTPConnection.getresponse'
+else:
+    getresponse_location = 'httplib.HTTPConnection.getresponse'
+
+
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
         super(MockStreamListener, self).__init__()
@@ -140,7 +146,8 @@ class TweepyStreamBackoffTests(unittest.TestCase):
 
     mock_resp = MagicMock()
     mock_resp.return_value.status = 420
-    @patch('httplib.HTTPConnection.getresponse', mock_resp)
+
+    @patch(getresponse_location, mock_resp)
     def test_420(self):
         self.stream = Stream(self.auth, self.listener, timeout=3.0, retry_count=0,
                              retry_time=1.0, retry_420=1.5, retry_time_cap=20.0)
