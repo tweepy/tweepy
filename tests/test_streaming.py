@@ -14,6 +14,7 @@ from .config import create_auth
 from .test_utils import mock_tweet
 from mock import MagicMock, patch
 
+
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
         super(MockStreamListener, self).__init__()
@@ -49,7 +50,7 @@ class TweepyStreamTests(unittest.TestCase):
     def tearDown(self):
         self.stream.disconnect()
 
-    def on_connect():
+    def on_connect(self):
         API(self.auth).update_status(mock_tweet())
 
 
