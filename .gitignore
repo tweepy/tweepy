@@ -1,9 +1,13 @@
+*.pyc
+*.swp
 env.sh
 .coverage
+.env
 .idea
 .pdbrc
 .tox
 build
 dist
 cassettes
-*.egg-info
+htmlcov
+tweepy.egg-info
