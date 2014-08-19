@@ -54,7 +54,7 @@ the following code returns to us an User model::
    # Get the User object for twitter...
    user = tweepy.api.get_user('twitter')
 
-Models contains the data and some helper methods which we can then
+Models contain the data and some helper methods which we can then
 use::
 
    print user.screen_name
