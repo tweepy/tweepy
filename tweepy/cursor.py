@@ -96,18 +96,11 @@ class IdIterator(BaseIterator):
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
+            method = self.method(create=True)
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kargs)
 
-            old_parser = self.method.__self__.parser
-            # Hack for models which expect ModelParser to be set
-            self.method.__self__.parser = ModelParser()
-
-            # This is a special invocation that returns the underlying
-            # APIMethod class
-            model = ModelParser().parse(self.method(create=True), data)
-            self.method.__self__.parser = old_parser
-
-            result = self.method.__self__.parser.parse(self.method(create=True), data)
+            result = method.parser.parse(method, data)
+            model = ModelParser().parse(method, data)
             
             if len(self.results) != 0:
                 self.index += 1
