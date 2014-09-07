@@ -1,3 +1,12 @@
+Version 2.4
+-----------
+  - Multiple access tokens with RateLimitHandler (https://github.com/svven/tweepy/blob/master/tweepy/limit.py)
+  - Various fixes: IdIterator, response status code, API DELETE methods.
+
+Version 2.3
+-----------
+  TODO
+
 Version 2.2
 -----------
   - Added update_profile_banner endpoint.
