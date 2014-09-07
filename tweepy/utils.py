@@ -2,11 +2,11 @@
 # Copyright 2010 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import print_function
+
 from datetime import datetime
-import time
-import re
-import locale
-from urllib import quote
+import six
+from six.moves.urllib.parse import quote
 from email.utils import parsedate
 
 
@@ -28,12 +28,11 @@ def parse_a_href(atag):
 
 def convert_to_utf8_str(arg):
     # written by Michael Norton (http://docondev.blogspot.com/)
-    if isinstance(arg, unicode):
+    if isinstance(arg, six.text_type):
         arg = arg.encode('utf-8')
-    elif not isinstance(arg, str):
-        arg = str(arg)
+    elif not isinstance(arg, bytes):
+        arg = six.text_type(arg).encode('utf-8')
     return arg
-
 
 
 def import_simplejson():
@@ -55,5 +54,5 @@ def list_to_csv(item_list):
         return ','.join([str(i) for i in item_list])
 
 def urlencode_noplus(query):
-    return '&'.join(['%s=%s' % (quote(str(k), ''), quote(str(v), '')) \
-        for k, v in query.iteritems()])
+    return '&'.join(['%s=%s' % (quote(str(k), ''), quote(str(v), ''))
+        for k, v in query.items()])
