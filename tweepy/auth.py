@@ -2,6 +2,7 @@ from urllib2 import Request, urlopen
 import urllib
 import base64
 import json
+import logging
 
 from tweepy.error import TweepError
 from tweepy.api import API
@@ -47,9 +48,11 @@ class OAuthHandler(AuthHandler):
     def apply_auth(self):
         return OAuth1(self.consumer_key, client_secret=self.consumer_secret, resource_owner_key=self.access_token, resource_owner_secret=self.access_token_secret)
 
-    def _get_request_token(self):
+    def _get_request_token(self, access_type = None):
         try:
             url = self._get_oauth_url('request_token')
+            if access_type:
+                url += '?x_auth_access_type=%s' % access_type
             return self.oauth.fetch_request_token(url)
         except Exception as e:
             raise TweepError(e)
@@ -58,14 +61,19 @@ class OAuthHandler(AuthHandler):
         self.access_token = key
         self.access_token_secret = secret
 
-    def get_authorization_url(self, signin_with_twitter = False):
+    def get_authorization_url(self, signin_with_twitter = False, access_type = None):
         """Get the authorization URL to redirect the user"""
         try:
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
+                if access_type:
+                    logging.warning(
+                        "Warning! Due to a Twitter API bug, signin_with_twitter "
+                        "and access_type don't always play nice together. Details: "
+                        "https://dev.twitter.com/discussions/21281")
             else:
                 url = self._get_oauth_url('authorize')
-            self.request_token = self._get_request_token()
+            self.request_token = self._get_request_token(access_type=access_type)
             return self.oauth.authorization_url(url)
         except Exception as e:
             raise TweepError(e)

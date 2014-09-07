@@ -58,6 +58,9 @@ class StreamListener(object):
             status = Status.parse(self.api, data)
             if self.on_direct_message(status) is False:
                 return False
+        elif 'friends' in data:
+            if self.on_friends(data['friends']) is False:
+                return False
         elif 'limit' in data:
             if self.on_limit(data['limit']['track']) is False:
                 return False
@@ -85,6 +88,13 @@ class StreamListener(object):
 
     def on_direct_message(self, status):
         """Called when a new direct message arrives"""
+        return
+
+    def on_friends(self, friends):
+        """Called when a friends list arrives.
+
+        friends is a list that contains user_id
+        """
         return
 
     def on_limit(self, track):
@@ -280,10 +290,13 @@ class Stream(object):
         self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
-    def sample(self, async=False):
+    def sample(self, async=False, language=None):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
+        if language:
+            self.url += '&language=%s' % language
+            self.parameters['language'] = language
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
