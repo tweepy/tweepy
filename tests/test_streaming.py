@@ -96,7 +96,6 @@ class TweepyStreamTests(unittest.TestCase):
         self.assertEquals(self.listener.status_count,
                           self.listener.status_stop_count)
 
-    #@tape.use_cassette('test_filter_track.json')
     def test_filter_track(self):
         self.listener.status_stop_count = 5
         phrases = ['twitter']
