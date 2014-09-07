@@ -12,7 +12,7 @@ import string
 def mock_tweet():
     """Generate some random tweet text."""
     count = random.randint(70, 140)
-    return ''.join([random.choice(string.letters) for _ in range(count)])
+    return ''.join([random.choice(string.ascii_letters) for _ in range(count)])
 
 
 class TweepyUtilsTests(unittest.TestCase):
