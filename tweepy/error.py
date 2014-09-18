@@ -2,6 +2,7 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+
 class TweepError(Exception):
     """Tweepy exception"""
 
@@ -12,4 +13,3 @@ class TweepError(Exception):
 
     def __str__(self):
         return self.reason
-
