@@ -2,7 +2,6 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.error import TweepError
 from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
 
 
@@ -27,10 +26,11 @@ class ResultSet(list):
             return self._since_id
         ids = self.ids()
         # Since_id is always set to the *greatest* id in the set
-        return max(ids) if ids else None 
+        return max(ids) if ids else None
 
     def ids(self):
         return [item.id for item in self if hasattr(item, 'id')]
+
 
 class Model(object):
 
@@ -53,7 +53,10 @@ class Model(object):
 
     @classmethod
     def parse_list(cls, api, json_list):
-        """Parse a list of JSON objects into a result set of model instances."""
+        """
+            Parse a list of JSON objects into
+            a result set of model instances.
+        """
         results = ResultSet()
         for obj in json_list:
             if obj:
@@ -61,7 +64,7 @@ class Model(object):
         return results
 
     def __repr__(self):
-        state = ['%s=%s' % (k, repr(v)) for (k,v) in vars(self).items()]
+        state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
         return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
 
 
@@ -161,16 +164,24 @@ class User(Model):
         self.following = False
 
     def lists_memberships(self, *args, **kargs):
-        return self._api.lists_memberships(user=self.screen_name, *args, **kargs)
+        return self._api.lists_memberships(user=self.screen_name,
+                                           *args,
+                                           **kargs)
 
     def lists_subscriptions(self, *args, **kargs):
-        return self._api.lists_subscriptions(user=self.screen_name, *args, **kargs)
+        return self._api.lists_subscriptions(user=self.screen_name,
+                                             *args,
+                                             **kargs)
 
     def lists(self, *args, **kargs):
-        return self._api.lists_all(user=self.screen_name, *args, **kargs)
+        return self._api.lists_all(user=self.screen_name,
+                                   *args,
+                                   **kargs)
 
     def followers_ids(self, *args, **kargs):
-        return self._api.followers_ids(user_id=self.id, *args, **kargs)
+        return self._api.followers_ids(user_id=self.id,
+                                       *args,
+                                       **kargs)
 
 
 class DirectMessage(Model):
@@ -260,7 +271,7 @@ class List(Model):
     @classmethod
     def parse(cls, api, json):
         lst = List(api)
-        for k,v in json.items():
+        for k, v in json.items():
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
             elif k == 'created_at':
@@ -285,7 +296,9 @@ class List(Model):
         return self._api.destroy_list(self.slug)
 
     def timeline(self, **kargs):
-        return self._api.list_timeline(self.user.screen_name, self.slug, **kargs)
+        return self._api.list_timeline(self.user.screen_name,
+                                       self.slug,
+                                       **kargs)
 
     def add_member(self, id):
         return self._api.add_list_member(self.slug, id)
@@ -294,10 +307,14 @@ class List(Model):
         return self._api.remove_list_member(self.slug, id)
 
     def members(self, **kargs):
-        return self._api.list_members(self.user.screen_name, self.slug, **kargs)
+        return self._api.list_members(self.user.screen_name,
+                                      self.slug,
+                                      **kargs)
 
     def is_member(self, id):
-        return self._api.is_list_member(self.user.screen_name, self.slug, id)
+        return self._api.is_list_member(self.user.screen_name,
+                                        self.slug,
+                                        id)
 
     def subscribe(self):
         return self._api.subscribe_list(self.user.screen_name, self.slug)
@@ -306,16 +323,21 @@ class List(Model):
         return self._api.unsubscribe_list(self.user.screen_name, self.slug)
 
     def subscribers(self, **kargs):
-        return self._api.list_subscribers(self.user.screen_name, self.slug, **kargs)
+        return self._api.list_subscribers(self.user.screen_name,
+                                          self.slug,
+                                          **kargs)
 
     def is_subscribed(self, id):
-        return self._api.is_subscribed_list(self.user.screen_name, self.slug, id)
+        return self._api.is_subscribed_list(self.user.screen_name,
+                                            self.slug,
+                                            id)
+
 
 class Relation(Model):
     @classmethod
     def parse(cls, api, json):
         result = cls(api)
-        for k,v in json.items():
+        for k, v in json.items():
             if k == 'value' and json['kind'] in ['Tweet', 'LookedupStatus']:
                 setattr(result, k, Status.parse(api, v))
             elif k == 'results':
@@ -324,17 +346,19 @@ class Relation(Model):
                 setattr(result, k, v)
         return result
 
+
 class Relationship(Model):
     @classmethod
     def parse(cls, api, json):
         result = cls(api)
-        for k,v in json.items():
+        for k, v in json.items():
             if k == 'connections':
                 setattr(result, 'is_following', 'following' in v)
                 setattr(result, 'is_followed_by', 'followed_by' in v)
             else:
                 setattr(result, k, v)
         return result
+
 
 class JSONModel(Model):
 
@@ -417,6 +441,7 @@ class Place(Model):
             results.append(cls.parse(api, obj))
         return results
 
+
 class ModelFactory(object):
     """
     Used by parsers for creating instances
@@ -439,4 +464,3 @@ class ModelFactory(object):
     ids = IDModel
     place = Place
     bounding_box = BoundingBox
-

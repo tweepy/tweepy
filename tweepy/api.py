@@ -4,7 +4,6 @@
 
 import os
 import mimetypes
-import urllib
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
@@ -65,9 +64,9 @@ class API(object):
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{}". It is currently a {}.'.format(
-                    parser_type.__name__, type(self.parser)
-                )
+                '"parser" argument has to be an instance of "{}".'
+                ' It is currently a {}.'.format(parser_type.__name__,
+                                                type(self.parser))
             )
 
     @property
@@ -83,7 +82,8 @@ class API(object):
             require_auth=True
         )
 
-    def statuses_lookup(self, id_, include_entities=None, trim_user=None, map_=None):
+    def statuses_lookup(self, id_, include_entities=None,
+                        trim_user=None, map_=None):
         return self._statuses_lookup(list_to_csv(id_), include_entities,
                                      trim_user, map_)
 
@@ -164,7 +164,6 @@ class API(object):
             allowed_param=['id']
         )
 
-
     @property
     def update_status(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/statuses/update
@@ -240,7 +239,7 @@ class API(object):
 
     @property
     def retweeters(self):
-        """ 
+        """
             :allowed_param:'id', 'cursor', 'stringify_ids
         """
         return bind_api(
@@ -589,7 +588,9 @@ class API(object):
     @property
     def update_profile_colors(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/account/update_profile_colors
-            :allowed_param:'profile_background_color', 'profile_text_color', 'profile_link_color', 'profile_sidebar_fill_color', 'profile_sidebar_border_color'],
+            :allowed_param:'profile_background_color', 'profile_text_color',
+             'profile_link_color', 'profile_sidebar_fill_color',
+             'profile_sidebar_border_color'],
         """
         return bind_api(
             api=self,
@@ -893,13 +894,16 @@ class API(object):
     @property
     def list_timeline(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/lists/statuses
-            :allowed_param:'owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id', 'max_id', 'count', 'include_rts
+            :allowed_param:'owner_screen_name', 'slug', 'owner_id', 'list_id',
+             'since_id', 'max_id', 'count', 'include_rts
         """
         return bind_api(
             api=self,
             path='/lists/statuses.json',
             payload_type='status', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id', 'max_id', 'count', 'include_rts']
+            allowed_param=['owner_screen_name', 'slug', 'owner_id',
+                           'list_id', 'since_id', 'max_id', 'count',
+                           'include_rts']
         )
 
     @property
@@ -917,28 +921,32 @@ class API(object):
     @property
     def add_list_member(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/create
-            :allowed_param:'screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'
+            :allowed_param:'screen_name', 'user_id', 'owner_screen_name',
+             'owner_id', 'slug', 'list_id'
         """
         return bind_api(
             api=self,
             path='/lists/members/create.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+            allowed_param=['screen_name', 'user_id', 'owner_screen_name',
+                           'owner_id', 'slug', 'list_id'],
             require_auth=True
         )
 
     @property
     def remove_list_member(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/destroy
-            :allowed_param:'screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'
+            :allowed_param:'screen_name', 'user_id', 'owner_screen_name',
+             'owner_id', 'slug', 'list_id'
         """
         return bind_api(
             api=self,
             path='/lists/members/destroy.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'owner_screen_name', 'owner_id', 'slug', 'list_id'],
+            allowed_param=['screen_name', 'user_id', 'owner_screen_name',
+                           'owner_id', 'slug', 'list_id'],
             require_auth=True
         )
 
@@ -953,17 +961,18 @@ class API(object):
     @property
     def _add_list_members(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/create_all
-            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'
+            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id',
+            'owner_id', 'owner_screen_name'
         """
         return bind_api(
             api=self,
             path='/lists/members/create_all.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'],
+            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id',
+                           'owner_id', 'owner_screen_name'],
             require_auth=True
         )
-
 
     def remove_list_members(self, screen_name=None, user_id=None, slug=None,
                             list_id=None, owner_id=None, owner_screen_name=None):
@@ -976,91 +985,105 @@ class API(object):
     @property
     def _remove_list_members(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/destroy_all
-            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'
+            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id',
+            'owner_id', 'owner_screen_name'
         """
         return bind_api(
             api=self,
             path='/lists/members/destroy_all.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id', 'owner_id', 'owner_screen_name'],
+            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id',
+                           'owner_id', 'owner_screen_name'],
             require_auth=True
         )
 
     @property
     def list_members(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/lists/members
-            :allowed_param:'owner_screen_name', 'slug', 'list_id', 'owner_id', 'cursor
+            :allowed_param:'owner_screen_name', 'slug', 'list_id',
+             'owner_id', 'cursor
         """
         return bind_api(
             api=self,
             path='/lists/members.json',
             payload_type='user', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id', 'cursor']
+            allowed_param=['owner_screen_name', 'slug', 'list_id',
+                           'owner_id', 'cursor']
         )
 
     @property
     def show_list_member(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/lists/members/show
-            :allowed_param:'list_id', 'slug', 'user_id', 'screen_name', 'owner_screen_name', 'owner_id
+            :allowed_param:'list_id', 'slug', 'user_id', 'screen_name',
+             'owner_screen_name', 'owner_id
         """
         return bind_api(
             api=self,
             path='/lists/members/show.json',
             payload_type='user',
-            allowed_param=['list_id', 'slug', 'user_id', 'screen_name', 'owner_screen_name', 'owner_id']
+            allowed_param=['list_id', 'slug', 'user_id', 'screen_name',
+                           'owner_screen_name', 'owner_id']
         )
 
     @property
     def subscribe_list(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/subscribers/create
-            :allowed_param:'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            :allowed_param:'owner_screen_name', 'slug', 'owner_id',
+            'list_id'
         """
         return bind_api(
             api=self,
             path='/lists/subscribers/create.json',
             method='POST',
             payload_type='list',
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
+            allowed_param=['owner_screen_name', 'slug', 'owner_id',
+                           'list_id'],
             require_auth=True
         )
 
     @property
     def unsubscribe_list(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/subscribers/destroy
-            :allowed_param:'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            :allowed_param:'owner_screen_name', 'slug', 'owner_id',
+            'list_id'
         """
         return bind_api(
             api=self,
             path='/lists/subscribers/destroy.json',
             method='POST',
             payload_type='list',
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
+            allowed_param=['owner_screen_name', 'slug', 'owner_id',
+                           'list_id'],
             require_auth=True
         )
 
     @property
     def list_subscribers(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/lists/subscribers
-            :allowed_param:'owner_screen_name', 'slug', 'owner_id', 'list_id', 'cursor
+            :allowed_param:'owner_screen_name', 'slug', 'owner_id',
+             'list_id', 'cursor
         """
         return bind_api(
             api=self,
             path='/lists/subscribers.json',
             payload_type='user', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id', 'cursor']
+            allowed_param=['owner_screen_name', 'slug', 'owner_id',
+                           'list_id', 'cursor']
         )
 
     @property
     def show_list_subscriber(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/lists/subscribers/show
-            :allowed_param:'owner_screen_name', 'slug', 'screen_name', 'owner_id', 'list_id', 'user_id
+            :allowed_param:'owner_screen_name', 'slug', 'screen_name',
+             'owner_id', 'list_id', 'user_id
         """
         return bind_api(
             api=self,
             path='/lists/subscribers/show.json',
             payload_type='user',
-            allowed_param=['owner_screen_name', 'slug', 'screen_name', 'owner_id', 'list_id', 'user_id']
+            allowed_param=['owner_screen_name', 'slug', 'screen_name',
+                           'owner_id', 'list_id', 'user_id']
         )
 
     @property
@@ -1099,14 +1122,18 @@ class API(object):
     @property
     def search(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/search
-            :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode', 'max_id', 'since', 'until', 'result_type', 'count', 'include_entities', 'from', 'to', 'source']
+            :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode',
+             'max_id', 'since', 'until', 'result_type', 'count',
+              'include_entities', 'from', 'to', 'source']
         """
         return bind_api(
             api=self,
             path='/search/tweets.json',
             payload_type='search_results',
-            allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode', 'max_id', 'since', 'until', 'result_type',
-                           'count', 'include_entities', 'from', 'to', 'source']
+            allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
+                           'max_id', 'since', 'until', 'result_type',
+                           'count', 'include_entities', 'from',
+                           'to', 'source']
         )
 
     @property
@@ -1142,7 +1169,8 @@ class API(object):
             api=self,
             path='/geo/reverse_geocode.json',
             payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'accuracy', 'granularity', 'max_results']
+            allowed_param=['lat', 'long', 'accuracy', 'granularity',
+                           'max_results']
         )
 
     @property
@@ -1160,13 +1188,15 @@ class API(object):
     @property
     def geo_search(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/get/geo/search
-            :allowed_param:'lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within
+            :allowed_param:'lat', 'long', 'query', 'ip', 'granularity',
+             'accuracy', 'max_results', 'contained_within
         """
         return bind_api(
             api=self,
             path='/geo/search.json',
             payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'query', 'ip', 'granularity', 'accuracy', 'max_results', 'contained_within']
+            allowed_param=['lat', 'long', 'query', 'ip', 'granularity',
+                           'accuracy', 'max_results', 'contained_within']
         )
 
     @property
@@ -1235,14 +1265,14 @@ class API(object):
             filename = filename.encode("utf-8")
         filename = filename.encode("utf-8")
 
-        BOUNDARY = 'Tw3ePy'
-        body = []
-        body.append('--' + BOUNDARY)
+        boundary = 'Tw3ePy'
+        body = list()
+        body.append('--' + boundary)
         body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (form_field, filename))
         body.append('Content-Type: %s' % file_type)
         body.append('')
         body.append(fp.read())
-        body.append('--' + BOUNDARY + '--')
+        body.append('--' + boundary + '--')
         body.append('')
         fp.close()
         body = '\r\n'.join(body)
