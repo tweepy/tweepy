@@ -9,7 +9,7 @@ from urlparse import parse_qs
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
-"https://dev.twitter.com/discussions/21281"""
+https://dev.twitter.com/discussions/21281"""
 
 
 class AuthHandler(object):
@@ -144,7 +144,7 @@ class OAuth2Bearer(AuthBase):
     def __call__(self, request):
         request.headers['Authorization'] = 'Bearer ' + self.bearer_token
         return request
-    
+
 
 class AppAuthHandler(AuthHandler):
     """Application-only authentication handler"""
