@@ -15,6 +15,7 @@ You may also use Git to clone the repository from
 Github and install it manually:
 
     git clone https://github.com/tweepy/tweepy.git
+    cd tweepy
     python setup.py install
 
 **Note** only Python 2.6 and 2.7 are supported at
