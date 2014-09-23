@@ -12,7 +12,6 @@ and access_type don't always play nice together. Details
 https://dev.twitter.com/discussions/21281"""
 
 
-
 class AuthHandler(object):
 
     def apply_auth(self, url, method, headers, parameters):
