@@ -128,7 +128,8 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        # values according to https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
+        # values according to
+        # https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
         self.retry_time_start = options.get("retry_time", 5.0)
         self.retry_420_start = options.get("retry_420", 60.0)
         self.retry_time_cap = options.get("retry_time_cap", 320.0)
@@ -153,21 +154,28 @@ class Stream(object):
         resp = None
         exception = None
         while self.running:
-            if self.retry_count is not None and error_counter > self.retry_count:
-                # quit if error count greater than retry count
-                break
+            if self.retry_count is not None:
+                if error_counter > self.retry_count:
+                    # quit if error count greater than retry count
+                    break
             try:
                 auth = self.auth.apply_auth()
-                resp = self.session.request('POST', url, data=self.body,
-                        timeout=self.timeout, stream=True, auth=auth)
+                resp = self.session.request('POST',
+                                            url,
+                                            data=self.body,
+                                            timeout=self.timeout,
+                                            stream=True,
+                                            auth=auth)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
                     error_counter += 1
                     if resp.status_code == 420:
-                        self.retry_time = max(self.retry_420_start, self.retry_time)
+                        self.retry_time = max(self.retry_420_start,
+                                              self.retry_time)
                     sleep(self.retry_time)
-                    self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
+                    self.retry_time = min(self.retry_time * 2,
+                                          self.retry_time_cap)
                 else:
                     error_counter = 0
                     self.retry_time = self.retry_time_start
@@ -175,12 +183,14 @@ class Stream(object):
                     self.listener.on_connect()
                     self._read_loop(resp)
             except (Timeout, ssl.SSLError) as exc:
-                # This is still necessary, as a SSLError can actually be thrown when using Requests
+                # This is still necessary, as a SSLError can actually be
+                # thrown when using Requests
                 # If it's not time out treat it like any other exception
-                if isinstance(exc, ssl.SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
-                    exception = exc
-                    break
-                if self.listener.on_timeout() == False:
+                if isinstance(exc, ssl.SSLError):
+                    if not (exc.args and 'timed out' in str(exc.args[0])):
+                        exception = exc
+                        break
+                if self.listener.on_timeout() is False:
                     break
                 if self.running is False:
                     break
@@ -211,7 +221,8 @@ class Stream(object):
 
         while self.running:
 
-            # Note: keep-alive newlines might be inserted before each length value.
+            # Note: keep-alive newlines might be inserted
+            # before each length value.
             # read until we get a digit...
             c = '\n'
             for c in resp.iter_content():
@@ -231,7 +242,7 @@ class Stream(object):
 
             # read the next twitter status object
             if delimited_string.strip().isdigit():
-                next_status_obj = resp.raw.read( int(delimited_string) )
+                next_status_obj = resp.raw.read(int(delimited_string))
                 if self.running:
                     self._data(next_status_obj)
 
@@ -250,13 +261,19 @@ class Stream(object):
         """ Called when the response has been closed by Twitter """
         pass
 
-    def userstream(self, stall_warnings=False, _with=None, replies=None,
-            track=None, locations=None, async=False, encoding='utf8'):
+    def userstream(self,
+                   stall_warnings=False,
+                   _with=None,
+                   replies=None,
+                   track=None,
+                   locations=None,
+                   async=False,
+                   encoding='utf8'):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/user.json' % STREAM_VERSION
-        self.host='userstream.twitter.com'
+        self.host = 'userstream.twitter.com'
         if stall_warnings:
             self.session.params['stall_warnings'] = stall_warnings
         if _with:
@@ -326,7 +343,8 @@ class Stream(object):
         self.host = 'stream.twitter.com'
         self._start(async)
 
-    def sitestream(self, follow, stall_warnings=False, with_='user', replies=False, async=False):
+    def sitestream(self, follow, stall_warnings=False,
+                   with_='user', replies=False, async=False):
         self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
@@ -346,4 +364,3 @@ class Stream(object):
         if self.running is False:
             return
         self.running = False
-
