@@ -275,20 +275,29 @@ class API(object):
             allowed_param=['id', 'url', 'maxwidth', 'hide_media', 'omit_script', 'align', 'related', 'lang']
         )
 
-    def lookup_users(self, user_ids=None, screen_names=None):
+    def lookup_users(self, user_ids=None, screen_names=None, include_entities=None):
         """ Perform bulk look up of users from user ID or screenname """
-        return self._lookup_users(list_to_csv(user_ids), list_to_csv(screen_names))
+        post_data = {}
+        if include_entities is not None:
+            include_entities = 'true' if include_entities else 'false'
+            post_data['include_entities'] = include_entities
+        if user_ids:
+            post_data['user_id'] = list_to_csv(user_ids)
+        if screen_names:
+            post_data['screen_name'] = list_to_csv(screen_names)
+
+        return self._lookup_users(post_data=post_data)
 
     @property
     def _lookup_users(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/users/lookup
-            allowed_param='user_id', 'screen_name'
+            allowed_param='user_id', 'screen_name', 'include_entities'
         """
         return bind_api(
             api=self,
             path='/users/lookup.json',
             payload_type='user', payload_list=True,
-            allowed_param=['user_id', 'screen_name'],
+            method='POST',
         )
 
     def me(self):
