@@ -12,6 +12,7 @@ from tweepy.error import TweepError
 from tweepy.utils import convert_to_utf8_str, clean_path
 from tweepy.models import Model
 
+from decorators import retry
 
 re_path_template = re.compile('{\w+}')
 
@@ -107,6 +108,7 @@ def bind_api(**config):
 
                 self.path = self.path.replace(variable, value)
 
+        @retry(TweepError, tries=3, delay=5)
         def execute(self):
             self.api.cached_result = False
 
@@ -144,7 +146,7 @@ def bind_api(**config):
                     self._remaining_calls = remaining
                 # handle running out of api calls
                 if self.wait_on_rate_limit and self._reset_time is not None and \
-                                self._remaining_calls is not None and self._remaining_calls < 1:
+                                self._remaining_calls is not None and self._remaining_calls == 0:
                     sleep_time = self._reset_time - int(time.time())
                     if sleep_time > 0:
                         if self.wait_on_rate_limit_notify:
@@ -166,6 +168,10 @@ def bind_api(**config):
                                                 auth=auth, proxies=self.api.proxy)
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
+
+                if resp.status_code != 200:
+                    print "Status %d: %s" % (resp.status_code, full_url)
+
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)

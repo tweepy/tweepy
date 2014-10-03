@@ -111,6 +111,8 @@ class RateLimitHandler(OAuthHandler):
         if remaining == 0:
             reset += 5 # few more sec
 
+        print key.split('-')[0], resource, limit, remaining, reset
+
         return key, limit, remaining, reset
 
     def set_access_token(self, key):
