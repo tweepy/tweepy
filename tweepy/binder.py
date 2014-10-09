@@ -178,7 +178,7 @@ def bind_api(**config):
                     self._reset_time = int(reset_time)
                 if self.wait_on_rate_limit and self._remaining_calls == 0 and (
                         # if ran out of calls before waiting switching retry last call
-                        resp.status == 429 or resp.status == 420):
+                        resp.status_code == 429 or resp.status_code == 420):
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
