@@ -112,6 +112,20 @@ class Status(Model):
     def favorite(self):
         return self._api.create_favorite(self.id)
 
+    def __eq__(self, other):
+        if isinstance(other, Status):
+            return self.id == other.id
+
+        return NotImplemented
+
+    def __ne__(self, other):
+        result = self == other
+
+        if result is NotImplemented:
+            return result
+
+        return not result
+
 
 class User(Model):
 
