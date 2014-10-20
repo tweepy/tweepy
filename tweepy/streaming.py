@@ -137,6 +137,8 @@ class Stream(object):
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
         self.buffer_size = options.get("buffer_size",  1500)
 
+        self.verify = options.get("verify", True)
+
         self.api = API()
         self.session = requests.Session()
         self.session.headers = options.get("headers") or {}
@@ -165,7 +167,8 @@ class Stream(object):
                                             data=self.body,
                                             timeout=self.timeout,
                                             stream=True,
-                                            auth=auth)
+                                            auth=auth,
+                                            verify=self.verify)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
