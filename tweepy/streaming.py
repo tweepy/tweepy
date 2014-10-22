@@ -84,6 +84,7 @@ class Stream(object):
         self.retry_time = options.get("retry_time", 10.0)
         self.snooze_time = options.get("snooze_time",  5.0)
         self.buffer_size = options.get("buffer_size",  1500)
+        self.method = 'POST'
         if options.get("secure", True):
             self.scheme = "https"
         else:
@@ -111,10 +112,10 @@ class Stream(object):
                     conn = httplib.HTTPConnection(self.host)
                 else:
                     conn = httplib.HTTPSConnection(self.host)
-                self.auth.apply_auth(url, 'POST', self.headers, self.parameters)
+                self.auth.apply_auth(url, self.method, self.headers, self.parameters)
                 conn.connect()
                 conn.sock.settimeout(self.timeout)
-                conn.request('POST', self.url, self.body, headers=self.headers)
+                conn.request(self.method, self.url, self.body, headers=self.headers)
                 resp = conn.getresponse()
                 if resp.status != 200:
                     if self.listener.on_error(resp.status) is False:
@@ -210,6 +211,7 @@ class Stream(object):
 
     def sample(self, count=None, async=False):
         self.parameters = {'delimited': 'length'}
+        self.method = 'GET'
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
