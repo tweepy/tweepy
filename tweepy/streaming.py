@@ -120,6 +120,47 @@ class StreamListener(object):
         return
 
 
+class ReadBuffer(object):
+    """Buffer data from the response in a smarter way than httplib/requests can.
+
+    Tweets are roughly in the 2-12kb range, averaging around 3kb.
+    Requests/urllib3/httplib/socket all use socket.read, which blocks
+    until enough data is returned. On some systems (eg google appengine), socket
+    reads are quite slow. To combat this latency we can read big chunks,
+    but the blocking part means we won't get results until enough tweets
+    have arrived. That may not be a big deal for high throughput systems.
+    For low throughput systems we don't want to sacrafice latency, so we
+    use small chunks so it can read the length and the tweet in 2 read calls.
+    """
+
+    def __init__(self, stream, chunk_size):
+        self._stream = stream
+        self._buffer = ""
+        self._chunk_size = chunk_size
+
+    def read_len(self, length):
+        while True:
+            if len(self._buffer) >= length:
+                return self._pop(length)
+            read_len = max(self._chunk_size, length - len(self._buffer))
+            self._buffer += self._stream.read(read_len)
+
+    def read_line(self, sep='\n'):
+        start = 0
+        while True:
+            loc = self._buffer.find(sep, start)
+            if loc >= 0:
+                return self._pop(loc + len(sep))
+            else:
+                start = len(self._buffer)
+            self._buffer += self._stream.read(self._chunk_size)
+
+    def _pop(self, length):
+        r = self._buffer[:length]
+        self._buffer = self._buffer[length:]
+        return r
+
+
 class Stream(object):
 
     host = 'stream.twitter.com'
@@ -226,47 +267,7 @@ class Stream(object):
             self.running = False
 
     def _read_loop(self, resp):
-        class ReadBuffer(object):
-            """Buffer data from the response in a smarter way than httplib/requests can.
-
-            Tweets are roughly in the 2-12kb range, averaging around 3kb.
-            Requests/urllib3/httplib/socket all use socket.read, which blocks
-            until enough data is returned. On some systems (eg google appengine), socket
-            reads are quite slow. To combat this latency we can read big chunks,
-            but the blocking part means we won't get results until enough tweets
-            have arrived. That may not be a big deal for high throughput systems.
-            For low throughput systems we don't want to sacrafice latency, so we
-            use small chunks so it can read the length and the tweet in 2 read calls.
-            """
-
-            def __init__(self, resp, chunk_size):
-                self._resp = resp
-                self._buffer = ""
-                self._chunk_size = chunk_size
-
-            def read_len(self, length):
-                while True:
-                    if len(self._buffer) >= length:
-                        return self._pop(length)
-                    read_len = max(self._chunk_size, length - len(self._buffer))
-                    self._buffer += self._resp.raw.read(read_len)
-
-            def read_line(self, sep='\n'):
-                start = 0
-                while True:
-                    loc = self._buffer.find(sep, start)
-                    if loc >= 0:
-                        return self._pop(loc + len(sep))
-                    else:
-                        start = len(self._buffer)
-                    self._buffer += self._resp.raw.read(self._chunk_size)
-
-            def _pop(self, length):
-                r = self._buffer[:length]
-                self._buffer = self._buffer[length:]
-                return r
-
-        buf = ReadBuffer(resp, self.chunk_size)
+        buf = ReadBuffer(resp.raw, self.chunk_size)
 
         while self.running:
             length = 0
