@@ -7,7 +7,6 @@ import requests
 from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
-from HTMLParser import HTMLParser
 import ssl
 
 from tweepy.models import Status
@@ -40,7 +39,7 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
-        data = json.loads(HTMLParser().unescape(raw_data))
+        data = json.loads(raw_data)
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
