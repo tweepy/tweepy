@@ -2,7 +2,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 
-# Go to http://dev.twitter.com and create an app.
+# Go to http://apps.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
 consumer_key=""
 consumer_secret=""
