@@ -2,12 +2,13 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+# Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
+
 import logging
 import requests
 from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
-from HTMLParser import HTMLParser
 import ssl
 
 from tweepy.models import Status
@@ -40,7 +41,7 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
-        data = json.loads(HTMLParser().unescape(raw_data))
+        data = json.loads(raw_data)
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
@@ -118,6 +119,47 @@ class StreamListener(object):
         return
 
 
+class ReadBuffer(object):
+    """Buffer data from the response in a smarter way than httplib/requests can.
+
+    Tweets are roughly in the 2-12kb range, averaging around 3kb.
+    Requests/urllib3/httplib/socket all use socket.read, which blocks
+    until enough data is returned. On some systems (eg google appengine), socket
+    reads are quite slow. To combat this latency we can read big chunks,
+    but the blocking part means we won't get results until enough tweets
+    have arrived. That may not be a big deal for high throughput systems.
+    For low throughput systems we don't want to sacrafice latency, so we
+    use small chunks so it can read the length and the tweet in 2 read calls.
+    """
+
+    def __init__(self, stream, chunk_size):
+        self._stream = stream
+        self._buffer = ""
+        self._chunk_size = chunk_size
+
+    def read_len(self, length):
+        while True:
+            if len(self._buffer) >= length:
+                return self._pop(length)
+            read_len = max(self._chunk_size, length - len(self._buffer))
+            self._buffer += self._stream.read(read_len)
+
+    def read_line(self, sep='\n'):
+        start = 0
+        while True:
+            loc = self._buffer.find(sep, start)
+            if loc >= 0:
+                return self._pop(loc + len(sep))
+            else:
+                start = len(self._buffer)
+            self._buffer += self._stream.read(self._chunk_size)
+
+    def _pop(self, length):
+        r = self._buffer[:length]
+        self._buffer = self._buffer[length:]
+        return r
+
+
 class Stream(object):
 
     host = 'stream.twitter.com'
@@ -128,13 +170,20 @@ class Stream(object):
         self.running = False
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        # values according to https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
+        # values according to
+        # https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
         self.retry_time_start = options.get("retry_time", 5.0)
         self.retry_420_start = options.get("retry_420", 60.0)
         self.retry_time_cap = options.get("retry_time_cap", 320.0)
         self.snooze_time_step = options.get("snooze_time", 0.25)
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
-        self.buffer_size = options.get("buffer_size",  1500)
+
+        # The default socket.read size. Default to less than half the size of
+        # a tweet so that it reads tweets with the minimal latency of 2 reads
+        # per tweet. Values higher than ~1kb will increase latency by waiting
+        # for more data to arrive but may also increase throughput by doing
+        # fewer socket read calls.
+        self.chunk_size = options.get("chunk_size",  512)
 
         self.api = API()
         self.session = requests.Session()
@@ -153,21 +202,28 @@ class Stream(object):
         resp = None
         exception = None
         while self.running:
-            if self.retry_count is not None and error_counter > self.retry_count:
-                # quit if error count greater than retry count
-                break
+            if self.retry_count is not None:
+                if error_counter > self.retry_count:
+                    # quit if error count greater than retry count
+                    break
             try:
                 auth = self.auth.apply_auth()
-                resp = self.session.request('POST', url, data=self.body,
-                        timeout=self.timeout, stream=True, auth=auth)
+                resp = self.session.request('POST',
+                                            url,
+                                            data=self.body,
+                                            timeout=self.timeout,
+                                            stream=True,
+                                            auth=auth)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
                     error_counter += 1
                     if resp.status_code == 420:
-                        self.retry_time = max(self.retry_420_start, self.retry_time)
+                        self.retry_time = max(self.retry_420_start,
+                                              self.retry_time)
                     sleep(self.retry_time)
-                    self.retry_time = min(self.retry_time * 2, self.retry_time_cap)
+                    self.retry_time = min(self.retry_time * 2,
+                                          self.retry_time_cap)
                 else:
                     error_counter = 0
                     self.retry_time = self.retry_time_start
@@ -175,12 +231,14 @@ class Stream(object):
                     self.listener.on_connect()
                     self._read_loop(resp)
             except (Timeout, ssl.SSLError) as exc:
-                # This is still necessary, as a SSLError can actually be thrown when using Requests
+                # This is still necessary, as a SSLError can actually be
+                # thrown when using Requests
                 # If it's not time out treat it like any other exception
-                if isinstance(exc, ssl.SSLError) and not (exc.args and 'timed out' in str(exc.args[0])):
-                    exception = exc
-                    break
-                if self.listener.on_timeout() == False:
+                if isinstance(exc, ssl.SSLError):
+                    if not (exc.args and 'timed out' in str(exc.args[0])):
+                        exception = exc
+                        break
+                if self.listener.on_timeout() is False:
                     break
                 if self.running is False:
                     break
@@ -208,32 +266,23 @@ class Stream(object):
             self.running = False
 
     def _read_loop(self, resp):
+        buf = ReadBuffer(resp.raw, self.chunk_size)
 
         while self.running:
+            length = 0
+            while True:
+                line = buf.read_line().strip()
+                if not line:
+                    pass  # keep-alive new lines are expected
+                elif line.isdigit():
+                    length = int(line)
+                    break
+                else:
+                    raise TweepError('Expecting length, unexpected value found')
 
-            # Note: keep-alive newlines might be inserted before each length value.
-            # read until we get a digit...
-            c = '\n'
-            for c in resp.iter_content():
-                if c == '\n':
-                    continue
-                break
-
-            delimited_string = c
-
-            # read rest of delimiter length..
-            d = ''
-            for d in resp.iter_content():
-                if d != '\n':
-                    delimited_string += d
-                    continue
-                break
-
-            # read the next twitter status object
-            if delimited_string.strip().isdigit():
-                next_status_obj = resp.raw.read( int(delimited_string) )
-                if self.running:
-                    self._data(next_status_obj)
+            next_status_obj = buf.read_len(length)
+            if self.running:
+                self._data(next_status_obj)
 
         if resp.raw._fp.isclosed():
             self.on_closed(resp)
@@ -250,13 +299,19 @@ class Stream(object):
         """ Called when the response has been closed by Twitter """
         pass
 
-    def userstream(self, stall_warnings=False, _with=None, replies=None,
-            track=None, locations=None, async=False, encoding='utf8'):
+    def userstream(self,
+                   stall_warnings=False,
+                   _with=None,
+                   replies=None,
+                   track=None,
+                   locations=None,
+                   async=False,
+                   encoding='utf8'):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/user.json' % STREAM_VERSION
-        self.host='userstream.twitter.com'
+        self.host = 'userstream.twitter.com'
         if stall_warnings:
             self.session.params['stall_warnings'] = stall_warnings
         if _with:
@@ -290,13 +345,13 @@ class Stream(object):
         self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
-    def sample(self, async=False, language=None):
+    def sample(self, async=False, languages=None):
+        self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/sample.json?delimited=length' % STREAM_VERSION
-        if language:
-            self.url += '&language=%s' % language
-            self.parameters['language'] = language
+        self.url = '/%s/statuses/sample.json' % STREAM_VERSION
+        if languages:
+            self.session.params['language'] = ','.join(map(str, languages))
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
@@ -326,7 +381,8 @@ class Stream(object):
         self.host = 'stream.twitter.com'
         self._start(async)
 
-    def sitestream(self, follow, stall_warnings=False, with_='user', replies=False, async=False):
+    def sitestream(self, follow, stall_warnings=False,
+                   with_='user', replies=False, async=False):
         self.parameters = {}
         if self.running:
             raise TweepError('Stream object already connected!')
@@ -346,4 +402,3 @@ class Stream(object):
         if self.running is False:
             return
         self.running = False
-

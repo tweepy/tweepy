@@ -1,10 +1,11 @@
+from StringIO import StringIO
 from time import sleep
 import unittest2 as unittest
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
 from tweepy.models import Status
-from tweepy.streaming import Stream, StreamListener
+from tweepy.streaming import Stream, StreamListener, ReadBuffer
 
 from config import create_auth
 from test_utils import mock_tweet
@@ -101,6 +102,21 @@ class TweepyStreamTests(unittest.TestCase):
 
         # Should be UTF-8 encoded
         self.assertEqual(u'Caf\xe9'.encode('utf8'), s.session.params['follow'])
+
+
+class TweepyStreamReadBuffer(unittest.TestCase):
+
+    stream = """11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n"""
+
+    def test_read_tweet(self):
+        for length in [1, 2, 5, 10, 20, 50]:
+            buf = ReadBuffer(StringIO(self.stream), length)
+            self.assertEqual('11\n', buf.read_line())
+            self.assertEqual('{id:12345}\n', buf.read_len(11))
+            self.assertEqual('\n', buf.read_line())
+            self.assertEqual('24\n', buf.read_line())
+            self.assertEqual('{id:23456, test:"blah"}\n', buf.read_len(24))
+
 
 class TweepyStreamBackoffTests(unittest.TestCase):
     def setUp(self):

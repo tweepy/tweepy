@@ -41,11 +41,16 @@ def bind_api(**config):
                 raise TweepError('Authentication required!')
 
             self.post_data = kwargs.pop('post_data', None)
-            self.retry_count = kwargs.pop('retry_count', api.retry_count)
-            self.retry_delay = kwargs.pop('retry_delay', api.retry_delay)
-            self.retry_errors = kwargs.pop('retry_errors', api.retry_errors)
-            self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit', api.wait_on_rate_limit)
-            self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify', api.wait_on_rate_limit_notify)
+            self.retry_count = kwargs.pop('retry_count',
+                                          api.retry_count)
+            self.retry_delay = kwargs.pop('retry_delay',
+                                          api.retry_delay)
+            self.retry_errors = kwargs.pop('retry_errors',
+                                           api.retry_errors)
+            self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
+                                                 api.wait_on_rate_limit)
+            self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
+                                                        api.wait_on_rate_limit_notify)
             self.parser = kwargs.pop('parser', api.parser)
             self.session.headers = kwargs.pop('headers', {})
             self.build_parameters(args, kwargs)
@@ -145,13 +150,15 @@ def bind_api(**config):
                     self._reset_time = reset
                     self._remaining_calls = remaining
                 # handle running out of api calls
-                if self.wait_on_rate_limit and self._reset_time is not None and \
-                                self._remaining_calls is not None and self._remaining_calls == 0:
-                    sleep_time = self._reset_time - int(time.time())
-                    if sleep_time > 0:
-                        if self.wait_on_rate_limit_notify:
-                            print "Rate limit reached. Sleeping for: " + str(sleep_time)
-                        time.sleep(sleep_time + 5)  # sleep for few extra sec
+                if self.wait_on_rate_limit:
+                    if self._reset_time is not None:
+                        if self._remaining_calls is not None:
+                            if self._remaining_calls == 0:
+                                sleep_time = self._reset_time - int(time.time())
+                                if sleep_time > 0:
+                                    if self.wait_on_rate_limit_notify:
+                                        print "Rate limit reached. Sleeping for: " + str(sleep_time)
+                                    time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # Apply authentication
                 if self.api.auth:
@@ -163,9 +170,12 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    resp = self.session.request(self.method, full_url,
-                                                data=self.post_data, timeout=self.api.timeout,
-                                                auth=auth, proxies=self.api.proxy)
+                    resp = self.session.request(self.method,
+                                                full_url,
+                                                data=self.post_data,
+                                                timeout=self.api.timeout,
+                                                auth=auth,
+                                                proxies=self.api.proxy)
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
@@ -231,9 +241,9 @@ def bind_api(**config):
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
         _call.pagination_mode = 'cursor'
-    elif 'max_id' in APIMethod.allowed_param and \
-                    'since_id' in APIMethod.allowed_param:
-        _call.pagination_mode = 'id'
+    elif 'max_id' in APIMethod.allowed_param:
+        if 'since_id' in APIMethod.allowed_param:
+            _call.pagination_mode = 'id'
     elif 'page' in APIMethod.allowed_param:
         _call.pagination_mode = 'page'
 
