@@ -68,6 +68,9 @@ class StreamListener(object):
         elif 'disconnect' in data:
             if self.on_disconnect(data['disconnect']) is False:
                 return False
+        elif 'warning' in data:
+            if self.on_warning(data['warning']) is False:
+                return False
         else:
             logging.error("Unknown message type: " + str(raw_data))
 
@@ -99,7 +102,7 @@ class StreamListener(object):
         return
 
     def on_limit(self, track):
-        """Called when a limitation notice arrvies"""
+        """Called when a limitation notice arrives"""
         return
 
     def on_error(self, status_code):
@@ -116,6 +119,10 @@ class StreamListener(object):
         Disconnect codes are listed here:
         https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
         """
+        return
+    
+    def on_warning(self, notice):
+        """Called when a disconnection warning message arrives"""
         return
 
 
