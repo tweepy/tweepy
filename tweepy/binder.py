@@ -113,7 +113,7 @@ def bind_api(**config):
 
                 self.path = self.path.replace(variable, value)
 
-        @retry(TweepError, tries=3, delay=5)
+        # @retry(TweepError, tries=3, delay=5)
         def execute(self):
             self.api.cached_result = False
 
@@ -197,7 +197,8 @@ def bind_api(**config):
                         remaining=self._remaining_calls, reset=self._reset_time
                     )
                 if self.wait_on_rate_limit and self._remaining_calls == 0 and (
-                        resp.status_code == 429 or resp.status_code == 420):  # if ran out of calls before waiting switching retry last call
+                        resp.status_code == 429 or resp.status_code == 420):
+                    # if ran out of calls before waiting switching retry last call
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code

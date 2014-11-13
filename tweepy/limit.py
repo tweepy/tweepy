@@ -35,6 +35,7 @@ class RateLimitHandler(OAuthHandler):
     #     }
     #   }
     # }
+    fixed_access_token = None # e.g. for home_timeline
 
     nolimits = {u'limit': None, u'remaining': None, u'reset': None}
 
@@ -87,25 +88,32 @@ class RateLimitHandler(OAuthHandler):
         Make sure you `clean_path` the resource upfront.
         """
         assert len(self.tokens) # at least one token
-        key = self.access_token or self.tokens.keys()[0] # current
 
-        limits = self.tokens[key]['resources'].get(resource)
-        limit, remaining, reset = self._parse_limits(limits)
+        if not self.fixed_access_token: # autoselect
+            key = self.access_token or self.tokens.keys()[0] # current
 
-        if remaining == 0:
-            key, limits = max(
-                [(k, sr['resources'].get(resource, self.nolimits)) \
-                for k, sr in self.tokens.iteritems()],
-                key=lambda t: t[1]['remaining']
-            ) # most remaining calls per resource
+            limits = self.tokens[key]['resources'].get(resource)
             limit, remaining, reset = self._parse_limits(limits)
 
-        if remaining == 0: 
-            key, limits = min(
-                [(k, sr['resources'].get(resource, self.nolimits)) \
-                for k, sr in self.tokens.iteritems()],
-                key=lambda t: t[1]['reset']
-            ) # first reset time per resource
+            if remaining == 0:
+                key, limits = max(
+                    [(k, sr['resources'].get(resource, self.nolimits)) \
+                    for k, sr in self.tokens.iteritems()],
+                    key=lambda t: t[1]['remaining']
+                ) # most remaining calls per resource
+                limit, remaining, reset = self._parse_limits(limits)
+
+            if remaining == 0:
+                key, limits = min(
+                    [(k, sr['resources'].get(resource, self.nolimits)) \
+                    for k, sr in self.tokens.iteritems()],
+                    key=lambda t: t[1]['reset']
+                ) # first reset time per resource
+                limit, remaining, reset = self._parse_limits(limits)
+        else: # fixed_access_token
+            key = self.fixed_access_token
+
+            limits = self.tokens[key]['resources'].get(resource)
             limit, remaining, reset = self._parse_limits(limits)
 
         if remaining == 0:
