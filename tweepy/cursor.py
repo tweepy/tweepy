@@ -5,7 +5,6 @@
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 
-
 class Cursor(object):
     """Pagination helper class"""
 
@@ -34,7 +33,6 @@ class Cursor(object):
         i.limit = limit
         return i
 
-
 class BaseIterator(object):
 
     def __init__(self, method, args, kargs):
@@ -52,7 +50,6 @@ class BaseIterator(object):
     def __iter__(self):
         return self
 
-
 class CursorIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
@@ -65,9 +62,9 @@ class CursorIterator(BaseIterator):
     def next(self):
         if self.next_cursor == 0 or (self.limit and self.num_tweets == self.limit):
             raise StopIteration
-        data, cursors = self.method(cursor=self.next_cursor,
-                                    *self.args,
-                                    **self.kargs)
+        data, cursors = self.method(
+                cursor=self.next_cursor, *self.args, **self.kargs
+        )
         self.prev_cursor, self.next_cursor = cursors
         if len(data) == 0:
             raise StopIteration
@@ -77,12 +74,11 @@ class CursorIterator(BaseIterator):
     def prev(self):
         if self.prev_cursor == 0:
             raise TweepError('Can not page back more, at first page')
-        data, self.next_cursor, self.prev_cursor = self.method(cursor=self.prev_cursor,
-                                                               *self.args,
-                                                               **self.kargs)
+        data, self.next_cursor, self.prev_cursor = self.method(
+                cursor=self.prev_cursor, *self.args, **self.kargs
+        )
         self.num_tweets -= 1
         return data
-
 
 class IdIterator(BaseIterator):
 
@@ -100,20 +96,12 @@ class IdIterator(BaseIterator):
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
+            method = self.method(create=True)
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kargs)
 
-            old_parser = self.method.__self__.parser
-            # Hack for models which expect ModelParser to be set
-            self.method.__self__.parser = ModelParser()
-
-            # This is a special invocation that returns the underlying
-            # APIMethod class
-            model = ModelParser().parse(self.method(create=True), data)
-            self.method.__self__.parser = old_parser
-
-            result = self.method.__self__.parser.parse(self.method(create=True),
-                                                       data)
-
+            result = method.parser.parse(method, data)
+            model = ModelParser().parse(method, data)
+            
             if len(self.results) != 0:
                 self.index += 1
             self.results.append(result)
@@ -122,12 +110,12 @@ class IdIterator(BaseIterator):
             self.index += 1
             result = self.results[self.index]
             model = self.model_results[self.index]
-
+            
         if len(result) == 0:
             raise StopIteration
         # TODO: Make this not dependant on the parser making max_id and
         # since_id available
-        self.max_id = model.max_id
+        self.max_id = model.max_id 
         self.num_tweets += 1
         return result
 
@@ -147,7 +135,6 @@ class IdIterator(BaseIterator):
         self.num_tweets += 1
         return data
 
-
 class PageIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
@@ -155,9 +142,8 @@ class PageIterator(BaseIterator):
         self.current_page = 0
 
     def next(self):
-        if self.limit > 0:
-            if self.current_page > self.limit:
-                raise StopIteration
+        if self.limit > 0 and self.current_page > self.limit:
+            raise StopIteration
 
         items = self.method(page=self.current_page, *self.args, **self.kargs)
         if len(items) == 0:
@@ -166,11 +152,10 @@ class PageIterator(BaseIterator):
         return items
 
     def prev(self):
-        if self.current_page == 1:
+        if (self.current_page == 1):
             raise TweepError('Can not page back more, at first page')
         self.current_page -= 1
         return self.method(page=self.current_page, *self.args, **self.kargs)
-
 
 class ItemIterator(BaseIterator):
 
@@ -182,9 +167,8 @@ class ItemIterator(BaseIterator):
         self.num_tweets = 0
 
     def next(self):
-        if self.limit > 0:
-            if self.num_tweets == self.limit:
-                raise StopIteration
+        if self.limit > 0 and self.num_tweets == self.limit:
+            raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
             self.current_page = self.page_iterator.next()
@@ -205,3 +189,4 @@ class ItemIterator(BaseIterator):
         self.page_index -= 1
         self.num_tweets -= 1
         return self.current_page[self.page_index]
+

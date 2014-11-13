@@ -1,33 +1,51 @@
-Tweepy: Twitter for Python!
-======
-[![Build Status](https://travis-ci.org/tweepy/tweepy.png?branch=master)](https://travis-ci.org/tweepy/tweepy)
-[![Downloads](https://pypip.in/d/tweepy/badge.png)](https://crate.io/packages/tweepy) [![Downloads](https://pypip.in/v/tweepy/badge.png)](https://crate.io/packages/tweepy)
-[![Coverage Status](https://coveralls.io/repos/tweepy/tweepy/badge.png?branch=master)](https://coveralls.io/r/tweepy/tweepy?branch=master)
+Tweepy with multiple access tokens
+==================================
+
+This is a fork of the well-known Tweepy library (https://github.com/tweepy/tweepy).
+
+Changes
+-------
+
+* **Multiple access tokens with `RateLimitHandler`** (https://github.com/svven/tweepy/blob/master/tweepy/limit.py)
+
+> RateLimitHandler class inherits from OAuthHandler, and introduces add_access_token that can be used as follows:
+
+> ```python
+> from tweepy import RateLimitHandler
+> from config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKENS
+> 
+> def get_api():
+> 	auth = RateLimitHandler(CONSUMER_KEY, CONSUMER_SECRET)
+> 	for key, secret in ACCESS_TOKENS:
+> 		try:
+> 			auth.add_access_token(key, secret)
+> 		except Exception, e:
+> 			print key, e
+> 	print 'Token pool size: %d' % len(auth.tokens)
+> 	api = API(auth, 
+> 		wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+> 	return api
+> 
+> api = get_api()
+> ```
+
+> Provided access tokens are used selectively based on requested resource (https://dev.twitter.com/docs/rate-limiting/1.1/limits) and current rate limits. The access token with most remaining requests per window for the specified resource is being selected and used when applying the authentication, before the actual request is performed. This pattern ensures the usage of available access tokens in a round robin fashion, exploiting to maximum the rate limits.
+> 
+> Here's a good use case for it: https://github.com/ducu/twitter-most-followed#requirements
+
+* **Various fixes**: IdIterator, response status code, API DELETE methods.
 
 Installation
 ------------
-The easiest way to install the latest version
-is by using pip/easy_install to pull it from PyPI:
 
-    pip install tweepy
+    pip install git+https://github.com/svven/tweepy.git#egg=tweepy
 
-You may also use Git to clone the repository from
-Github and install it manually:
+Pull Request
+------------
 
-    git clone https://github.com/tweepy/tweepy.git
-    cd tweepy
-    python setup.py install
+If you think this functionality is a good addition to Tweepy, please consider the pull request I created.
 
-**Note** only Python 2.6 and 2.7 are supported at
-the moment. The Python 3 family is not yet supported.
+* https://github.com/tweepy/tweepy/pull/484
+* http://discuss.tweepy.org/t/ratelimithandler-pull-request/87
 
-Documentation
--------------
-  - [Website (Work in-progress)](http://tweepy.github.com/)
-  - [Twitter Developers](http://dev.twitter.com/)
-
-Community
----------
-  - [Discussion Forum](http://discuss.tweepy.org)
-  - IRC Chat (Freenode.net #tweepy)
-
+Cheers, [@ducu](http://twitter.com/ducu)
