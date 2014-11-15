@@ -1,39 +1,43 @@
-from tweepy import API, Cursor
+from tweepy import Cursor
 
 from .config import create_auth
+from .config import TweepyTestCase, username, use_replay, tape
+
 import six
 if six.PY3:
     import unittest
 else:
     import unittest2 as unittest
 
-class TweepyCursorTests(unittest.TestCase):
 
-    def setUp(self):
-        self.api = API(create_auth())
-
+class TweepyCursorTests(TweepyTestCase):
+    @tape.use_cassette('testidcursoritems.json')
     def testidcursoritems(self):
         items = list(Cursor(self.api.user_timeline).items(25))
         self.assertEqual(len(items), 25)
 
+    @tape.use_cassette('testidcursorpages.json')
     def testidcursorpages(self):
         pages = list(Cursor(self.api.user_timeline).pages(5))
         self.assertEqual(len(pages), 5)
 
+    @tape.use_cassette('testcursorcursoritems.json')
     def testcursorcursoritems(self):
         items = list(Cursor(self.api.friends_ids).items(10))
         self.assertEqual(len(items), 10)
 
-        items = list(Cursor(self.api.followers_ids, 'twitter').items(10))
+        items = list(Cursor(self.api.followers_ids, username).items(10))
         self.assertEqual(len(items), 10)
 
+    @tape.use_cassette('testcursorcursorpages.json')
     def testcursorcursorpages(self):
         pages = list(Cursor(self.api.friends_ids).pages(1))
         self.assert_(len(pages) == 1)
 
-        pages = list(Cursor(self.api.followers_ids, 'twitter').pages(1))
+        pages = list(Cursor(self.api.followers_ids, username).pages(1))
         self.assert_(len(pages) == 1)
 
+    @tape.use_cassette('testcursorsetstartcursor.json')
     def testcursorsetstartcursor(self):
         c = Cursor(self.api.friends_ids, cursor=123456)
         self.assertEqual(c.iterator.next_cursor, 123456)
