@@ -4,11 +4,16 @@
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
+from __future__ import absolute_import, print_function
+
 import logging
 import requests
 from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
+
+import six
+
 import ssl
 
 from tweepy.models import Status
@@ -252,7 +257,8 @@ class Stream(object):
                 sleep(self.snooze_time)
                 self.snooze_time = min(self.snooze_time + self.snooze_time_step,
                                        self.snooze_time_cap)
-            except Exception as exception:
+            except Exception as exc:
+                exception = exc
                 # any other exception is fatal, so kill loop
                 break
 
@@ -266,7 +272,7 @@ class Stream(object):
         if exception:
             # call a handler first so that the exception can be logged.
             self.listener.on_exception(exception)
-            raise
+            raise exception
 
     def _data(self, data):
         if self.listener.on_data(data) is False:
@@ -290,6 +296,32 @@ class Stream(object):
             next_status_obj = buf.read_len(length)
             if self.running:
                 self._data(next_status_obj)
+
+            # # Note: keep-alive newlines might be inserted before each length value.
+            # # read until we get a digit...
+            # c = b'\n'
+            # for c in resp.iter_content(decode_unicode=True):
+            #     if c == b'\n':
+            #         continue
+            #     break
+            #
+            # delimited_string = c
+            #
+            # # read rest of delimiter length..
+            # d = b''
+            # for d in resp.iter_content(decode_unicode=True):
+            #     if d != b'\n':
+            #         delimited_string += d
+            #         continue
+            #     break
+            #
+            # # read the next twitter status object
+            # if delimited_string.decode('utf-8').strip().isdigit():
+            #     status_id = int(delimited_string)
+            #     next_status_obj = resp.raw.read(status_id)
+            #     if self.running:
+            #         self._data(next_status_obj.decode('utf-8'))
+
 
         if resp.raw._fp.isclosed():
             self.on_closed(resp)
@@ -331,8 +363,7 @@ class Stream(object):
                                  "it has to be a multiple of 4")
             self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
-            encoded_track = [s.encode(encoding) for s in track]
-            self.session.params['track'] = ','.join(encoded_track)
+            self.session.params['track'] = u','.join(track).encode(encoding)
 
         self._start(async)
 
@@ -369,20 +400,18 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            encoded_follow = [s.encode(encoding) for s in follow]
-            self.session.params['follow'] = ','.join(encoded_follow)
+            self.session.params['follow'] = u','.join(follow).encode(encoding)
         if track:
-            encoded_track = [s.encode(encoding) for s in track]
-            self.session.params['track'] = ','.join(encoded_track)
+            self.session.params['track'] = u','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.session.params['locations'] = ','.join(['%.4f' % l for l in locations])
+            self.session.params['locations'] = u','.join(['%.4f' % l for l in locations])
         if stall_warnings:
             self.session.params['stall_warnings'] = stall_warnings
         if languages:
-            self.session.params['language'] = ','.join(map(str, languages))
+            self.session.params['language'] = u','.join(map(str, languages))
         self.body = urlencode_noplus(self.session.params)
         self.session.params['delimited'] = 'length'
         self.host = 'stream.twitter.com'
@@ -394,7 +423,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.parameters['follow'] = ','.join(map(str, follow))
+        self.parameters['follow'] = u','.join(map(six.text_type, follow))
         self.parameters['delimited'] = 'length'
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings

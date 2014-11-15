@@ -2,6 +2,8 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import print_function
+
 from tweepy.models import ModelFactory
 from tweepy.utils import import_simplejson
 from tweepy.error import TweepError
@@ -51,7 +53,7 @@ class JSONParser(Parser):
         except Exception as e:
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
-        needs_cursors = method.session.params.has_key('cursor')
+        needs_cursors = 'cursor' in method.session.params
         if needs_cursors and isinstance(json, dict):
             if 'previous_cursor' in json:
                 if 'next_cursor' in json:
