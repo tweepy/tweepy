@@ -1,15 +1,30 @@
-from StringIO import StringIO
-from time import sleep
-import unittest2 as unittest
+from __future__ import absolute_import, print_function
+
+from .config import tape
+
+import six
+if six.PY3:
+    import unittest
+    from unittest.case import skip
+else:
+    import unittest2 as unittest
+    from unittest2.case import skip
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
 from tweepy.models import Status
 from tweepy.streaming import Stream, StreamListener, ReadBuffer
 
-from config import create_auth
-from test_utils import mock_tweet
+from .config import create_auth
+from .test_utils import mock_tweet
 from mock import MagicMock, patch
+
+
+if six.PY3:
+    getresponse_location = 'http.client.HTTPConnection.getresponse'
+else:
+    getresponse_location = 'httplib.HTTPConnection.getresponse'
+
 
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
@@ -37,6 +52,7 @@ class MockStreamListener(StreamListener):
         if self.status_stop_count == self.status_count:
             return False
 
+
 class TweepyStreamTests(unittest.TestCase):
     def setUp(self):
         self.auth = create_auth()
@@ -46,22 +62,22 @@ class TweepyStreamTests(unittest.TestCase):
     def tearDown(self):
         self.stream.disconnect()
 
-    def on_connect():
+    def on_connect(self):
         API(self.auth).update_status(mock_tweet())
-
 
     def test_userstream(self):
         # Generate random tweet which should show up in the stream.
-        
+
         self.listener.connect_cb = self.on_connect
         self.listener.status_stop_count = 1
         self.stream.userstream()
         self.assertEqual(self.listener.status_count, 1)
-    
+
+    @skip("Sitestream only available to whitelisted accounts.")
     def test_sitestream(self):
         self.listener.connect_cb = self.on_connect
         self.listener.status_stop_count = 1
-        self.sitestream(follow=[self.auth.get_username()])
+        self.stream.sitestream(follow=[self.auth.get_username()])
         self.assertEqual(self.listener.status_count, 1)
 
     def test_userstream_with_params(self):
@@ -110,7 +126,7 @@ class TweepyStreamReadBuffer(unittest.TestCase):
 
     def test_read_tweet(self):
         for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(StringIO(self.stream), length)
+            buf = ReadBuffer(six.StringIO(self.stream), length)
             self.assertEqual('11\n', buf.read_line())
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
@@ -145,7 +161,8 @@ class TweepyStreamBackoffTests(unittest.TestCase):
 
     mock_resp = MagicMock()
     mock_resp.return_value.status = 420
-    @patch('httplib.HTTPConnection.getresponse', mock_resp)
+
+    @patch(getresponse_location, mock_resp)
     def test_420(self):
         self.stream = Stream(self.auth, self.listener, timeout=3.0, retry_count=0,
                              retry_time=1.0, retry_420=1.5, retry_time_cap=20.0)

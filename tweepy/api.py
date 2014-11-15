@@ -2,8 +2,12 @@
 # Copyright 2009-2010 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import print_function
+
 import os
 import mimetypes
+
+import six
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
@@ -64,9 +68,11 @@ class API(object):
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{}".'
-                ' It is currently a {}.'.format(parser_type.__name__,
-                                                type(self.parser))
+                '"parser" argument has to be an instance of "{required}".'
+                ' It is currently a {actual}.'.format(
+                    required=parser_type.__name__,
+                    actual=type(self.parser)
+                )
             )
 
     @property
@@ -643,7 +649,7 @@ class API(object):
             payload_type='user',
             allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
             require_auth=True
-        )(self, post_data=post_data, headers=headers)
+        )(post_data=post_data, headers=headers)
 
     def update_profile_banner(self, filename, **kargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile_banner
@@ -657,7 +663,7 @@ class API(object):
             method='POST',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True
-        )(self, post_data=post_data, headers=headers)
+        )(post_data=post_data, headers=headers)
 
     @property
     def update_profile(self):
@@ -1283,21 +1289,22 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, unicode):
+        if isinstance(filename, six.text_type):
             filename = filename.encode("utf-8")
-        filename = filename.encode("utf-8")
 
-        boundary = 'Tw3ePy'
+        BOUNDARY = b'Tw3ePy'
         body = list()
-        body.append('--' + boundary)
-        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (form_field, filename))
-        body.append('Content-Type: %s' % file_type)
-        body.append('')
+        body.append(b'--' + BOUNDARY)
+        body.append('Content-Disposition: form-data; name="{0}";'
+                    ' filename="{1}"'.format(form_field, filename)
+                    .encode('utf-8'))
+        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+        body.append(b'')
         body.append(fp.read())
-        body.append('--' + boundary + '--')
-        body.append('')
+        body.append(b'--' + BOUNDARY + b'--')
+        body.append(b'')
         fp.close()
-        body = '\r\n'.join(body)
+        body = b'\r\n'.join(body)
 
         # build headers
         headers = {
