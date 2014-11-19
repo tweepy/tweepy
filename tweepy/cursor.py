@@ -46,7 +46,7 @@ class BaseIterator(object):
         self.limit = 0
 
     def __next__(self):
-        self.next()
+        return self.next()
 
     def next(self):
         raise NotImplementedError
