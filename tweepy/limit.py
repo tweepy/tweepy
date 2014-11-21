@@ -24,20 +24,25 @@ class RateLimitHandler(OAuthHandler):
     a round robin fashion, exploiting to maximum the rate limits.
     """
 
-    tokens = {}
-    # The pool of access tokens looks like this:
-    # tokens = {
-    #   access_token_key: {
-    #     u'secret': access_token_secret,
-    #     u'resources' : {
-    #       resource: { u'limit': limit, 
-    #         u'remaining': remaining, u'reset': reset }
-    #     }
-    #   }
-    # }
-    fixed_access_token = None # e.g. for home_timeline
-
     nolimits = {u'limit': None, u'remaining': None, u'reset': None}
+
+    def __init__(self, consumer_key, consumer_secret):
+        """
+        Initialize tokens.
+        The pool of access tokens looks like this:
+        tokens = {
+          access_token_key: {
+            u'secret': access_token_secret,
+            u'resources' : {
+              resource: { u'limit': limit, 
+                u'remaining': remaining, u'reset': reset }
+            }
+          }
+        }
+        """
+        super(RateLimitHandler, self).__init__(consumer_key, consumer_secret)
+        self.tokens = {}
+        self.fixed_access_token = None # e.g. for home_timeline
 
     def _parse_limits(self, limits):
         return limits and (limits.get('limit'), 

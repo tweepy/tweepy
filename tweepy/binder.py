@@ -180,7 +180,7 @@ def bind_api(**config):
                     raise TweepError('Failed to send request: %s' % e)
 
                 if resp.status_code != 200:
-                    print "Status %d: %s" % (resp.status_code, full_url)
+                    print "Status %d: %s" % (resp.status_code, resp.headers)
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:
@@ -196,10 +196,10 @@ def bind_api(**config):
                         self.api.auth.access_token, self.resource,
                         remaining=self._remaining_calls, reset=self._reset_time
                     )
-                if self.wait_on_rate_limit and self._remaining_calls == 0 and (
-                        resp.status_code == 429 or resp.status_code == 420):
-                    # if ran out of calls before waiting switching retry last call
-                    continue
+                # if self.wait_on_rate_limit and self._remaining_calls == 0 and (
+                #         resp.status_code == 429 or resp.status_code == 420):
+                #     # if ran out of calls before waiting switching retry last call
+                #     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
                 if resp.status_code == 200:
