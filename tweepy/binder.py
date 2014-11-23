@@ -150,15 +150,20 @@ def bind_api(**config):
                     self._reset_time = reset
                     self._remaining_calls = remaining
                 # handle running out of api calls
-                if self.wait_on_rate_limit:
-                    if self._reset_time is not None:
-                        if self._remaining_calls is not None:
-                            if self._remaining_calls == 0:
-                                sleep_time = self._reset_time - int(time.time())
-                                if sleep_time > 0:
-                                    if self.wait_on_rate_limit_notify:
-                                        print "Rate limit reached. Sleeping for: " + str(sleep_time)
-                                    time.sleep(sleep_time + 5)  # sleep for few extra sec
+                if self._reset_time is not None and \
+                    self._remaining_calls is not None and self._remaining_calls == 0:
+                    sleep_time = self._reset_time - int(time.time())
+                    if self.wait_on_rate_limit:
+                        if sleep_time > 0:
+                            if self.wait_on_rate_limit_notify:
+                                print 'Rate limit reached. Sleeping for: ' + str(sleep_time)
+                            time.sleep(sleep_time + 5)  # sleep for few extra sec
+                    else: # prevent rate limit
+                        error_msg = 'Rate limit reached, try again after %ss.' % sleep_time
+                        resp = request.Response(status_code=420) # mock
+                        resp.reason = 'Enhance Your Calm'
+                        resp.status_code = 420
+                        raise TweepError(error_msg, resp)
 
                 # Apply authentication
                 if self.api.auth:
@@ -179,9 +184,6 @@ def bind_api(**config):
                 except Exception, e:
                     raise TweepError('Failed to send request: %s' % e)
 
-                if resp.status_code != 200:
-                    print "Status %d: %s" % (resp.status_code, resp.headers)
-
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)
@@ -196,10 +198,6 @@ def bind_api(**config):
                         self.api.auth.access_token, self.resource,
                         remaining=self._remaining_calls, reset=self._reset_time
                     )
-                # if self.wait_on_rate_limit and self._remaining_calls == 0 and (
-                #         resp.status_code == 429 or resp.status_code == 420):
-                #     # if ran out of calls before waiting switching retry last call
-                #     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
                 if resp.status_code == 200:
@@ -220,7 +218,7 @@ def bind_api(**config):
                 try:
                     error_msg = self.parser.parse_error(resp.text)
                 except Exception:
-                    error_msg = "Twitter error response: status code = %s" % resp.status_code
+                    error_msg = 'Twitter error response: status code = %s' % resp.status_code
                 raise TweepError(error_msg, resp)
 
             # Parse the response payload

@@ -23,25 +23,24 @@ class RateLimitHandler(OAuthHandler):
     This pattern ensures the usage of available access tokens in
     a round robin fashion, exploiting to maximum the rate limits.
     """
-
+    # tokens = {} # static
     nolimits = {u'limit': None, u'remaining': None, u'reset': None}
 
     def __init__(self, consumer_key, consumer_secret):
-        """
-        Initialize tokens.
-        The pool of access tokens looks like this:
-        tokens = {
-          access_token_key: {
-            u'secret': access_token_secret,
-            u'resources' : {
-              resource: { u'limit': limit, 
-                u'remaining': remaining, u'reset': reset }
-            }
-          }
-        }
-        """
+        "Init tokens for current instance."
         super(RateLimitHandler, self).__init__(consumer_key, consumer_secret)
-        self.tokens = {}
+        
+        self.tokens = {} # instance
+        # The pool of access tokens looks like this:
+        # tokens = {
+        #   access_token_key: {
+        #     u'secret': access_token_secret,
+        #     u'resources' : {
+        #       resource: { u'limit': limit, 
+        #         u'remaining': remaining, u'reset': reset }
+        #     }
+        #   }
+        # }
         self.fixed_access_token = None # e.g. for home_timeline
 
     def _parse_limits(self, limits):
@@ -122,7 +121,7 @@ class RateLimitHandler(OAuthHandler):
             limit, remaining, reset = self._parse_limits(limits)
 
         if remaining == 0:
-            reset += 5 # few more sec
+            self.refresh_rate_limits(key) # double check
 
         print key.split('-')[0], resource, limit, remaining, reset
 
@@ -158,11 +157,11 @@ class RateLimitHandler(OAuthHandler):
         if reset is not None:
             limits['reset'] = int(reset)
 
-    # def refresh_rate_limits(self, key):
-        # """
-        # Reload rate limits for due access tokens.
-        # """
-        # secret = self.tokens[key]['secret']
-        # rls = self._get_rate_limit_status(key, secret)
-        # self._load_rate_limit_status(key, rls)
+    def refresh_rate_limits(self, key):
+        """
+        Reload rate limits for specified token key.
+        """
+        secret = self.tokens[key]['secret']
+        rls = self._get_rate_limit_status(key, secret)
+        self._load_rate_limit_status(key, rls)
 
