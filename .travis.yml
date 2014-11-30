@@ -37,6 +37,5 @@ deploy:
     secure: agApkjsKOSkFI6DiNydyW26r8ASFsTsFK/RHsV1F7CqoERoeAaRAehYy9EGW2Jn2aJzNlagDByfh5xNfClXuRh0GoEfOyjj5AmBm4hMrzc3bwsH+IPU3OQhQtS3aFGNmIkaz2Bz+Dcl5zTmV914N3mqcoGpyMtxyn1Hwc0Xgn6Q=
   distributions: sdist bdist
   on:
-    tags: true
-    branch: production
     repo: tweepy/tweepy
+    branch: release
