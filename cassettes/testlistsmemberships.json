@@ -1,0 +1,89 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/lists/memberships.json"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ], 
+                    "content-length": [
+                        "96"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-transaction": [
+                        "e67ab86579c43af0"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "9691e60cbc207800b997dd1874db5b33"
+                    ], 
+                    "set-cookie": [
+                        "lang=en", 
+                        "guest_id=v1%3A141738008453774829; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:24 UTC"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:24 GMT"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417380984"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:24 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "15"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\",\"lists\":[]}"
+                }
+            }
+        }
+    ]
+}

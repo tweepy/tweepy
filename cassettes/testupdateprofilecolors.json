@@ -1,0 +1,371 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/account/verify_credentials.json"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "12"
+                    ], 
+                    "content-length": [
+                        "2848"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-transaction": [
+                        "95a214c1958d2a75"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "f8d3b13cd063df852258eebb2777d8f1"
+                    ], 
+                    "set-cookie": [
+                        "lang=en", 
+                        "guest_id=v1%3A141738012824579974; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:42:08 UTC"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:42:08 GMT"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417380989"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:42:08 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "15"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"id\":82301637,\"id_str\":\"82301637\",\"name\":\"Tweepy test 123\",\"screen_name\":\"tweepytest\",\"location\":\"pytopia\",\"profile_location\":null,\"description\":\"A test account for testing stuff.\",\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"expanded_url\":\"http:\\/\\/foo.com\",\"display_url\":\"foo.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":10,\"friends_count\":11,\"listed_count\":0,\"created_at\":\"Wed Oct 14 07:28:20 +0000 2009\",\"favourites_count\":1,\"utc_offset\":-21600,\"time_zone\":\"Central Time (US & Canada)\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":539,\"lang\":\"en\",\"status\":{\"created_at\":\"Sun Nov 30 19:24:54 +0000 2014\",\"id\":539138015181160448,\"id_str\":\"539138015181160448\",\"text\":\"testing 1000 http:\\/\\/t.co\\/AYksz2oIC5\",\"source\":\"\\u003ca href=\\\"http:\\/\\/tweepy.github.com\\/\\\" rel=\\\"nofollow\\\"\\u003eTweepyTravis\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":0,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[],\"media\":[{\"id\":539138015076290560,\"id_str\":\"539138015076290560\",\"indices\":[13,35],\"media_url\":\"http:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"media_url_https\":\"https:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"url\":\"http:\\/\\/t.co\\/AYksz2oIC5\",\"display_url\":\"pic.twitter.com\\/AYksz2oIC5\",\"expanded_url\":\"http:\\/\\/twitter.com\\/tweepytest\\/status\\/539138015181160448\\/photo\\/1\",\"type\":\"photo\",\"sizes\":{\"thumb\":{\"w\":150,\"h\":150,\"resize\":\"crop\"},\"small\":{\"w\":340,\"h\":170,\"resize\":\"fit\"},\"large\":{\"w\":1024,\"h\":512,\"resize\":\"fit\"},\"medium\":{\"w\":600,\"h\":300,\"resize\":\"fit\"}}}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"FFFFFF\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/82301637\\/1417380122\",\"profile_link_color\":\"0000FF\",\"profile_sidebar_border_color\":\"87BC44\",\"profile_sidebar_fill_color\":\"E0FF92\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false}"
+                }
+            }
+        }, 
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/users/show.json?screen_name=tweepytest"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "175"
+                    ], 
+                    "content-length": [
+                        "2899"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-transaction": [
+                        "b94037a5e5fcfda8"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "439d7e4e3e9b5bd48119cf5d5f232bc6"
+                    ], 
+                    "set-cookie": [
+                        "lang=en", 
+                        "guest_id=v1%3A141738012863838395; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:42:08 UTC"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:42:08 GMT"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417380980"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:42:08 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "180"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"id\":82301637,\"id_str\":\"82301637\",\"name\":\"Tweepy test 123\",\"screen_name\":\"tweepytest\",\"location\":\"pytopia\",\"profile_location\":null,\"description\":\"A test account for testing stuff.\",\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"expanded_url\":\"http:\\/\\/foo.com\",\"display_url\":\"foo.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":10,\"friends_count\":11,\"listed_count\":0,\"created_at\":\"Wed Oct 14 07:28:20 +0000 2009\",\"favourites_count\":1,\"utc_offset\":-21600,\"time_zone\":\"Central Time (US & Canada)\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":539,\"lang\":\"en\",\"status\":{\"created_at\":\"Sun Nov 30 19:24:54 +0000 2014\",\"id\":539138015181160448,\"id_str\":\"539138015181160448\",\"text\":\"testing 1000 http:\\/\\/t.co\\/AYksz2oIC5\",\"source\":\"\\u003ca href=\\\"http:\\/\\/tweepy.github.com\\/\\\" rel=\\\"nofollow\\\"\\u003eTweepyTravis\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":0,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[],\"media\":[{\"id\":539138015076290560,\"id_str\":\"539138015076290560\",\"indices\":[13,35],\"media_url\":\"http:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"media_url_https\":\"https:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"url\":\"http:\\/\\/t.co\\/AYksz2oIC5\",\"display_url\":\"pic.twitter.com\\/AYksz2oIC5\",\"expanded_url\":\"http:\\/\\/twitter.com\\/tweepytest\\/status\\/539138015181160448\\/photo\\/1\",\"type\":\"photo\",\"sizes\":{\"thumb\":{\"w\":150,\"h\":150,\"resize\":\"crop\"},\"small\":{\"w\":340,\"h\":170,\"resize\":\"fit\"},\"large\":{\"w\":1024,\"h\":512,\"resize\":\"fit\"},\"medium\":{\"w\":600,\"h\":300,\"resize\":\"fit\"}}}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"FFFFFF\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/82301637\\/1417380122\",\"profile_link_color\":\"0000FF\",\"profile_sidebar_border_color\":\"87BC44\",\"profile_sidebar_fill_color\":\"E0FF92\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"suspended\":false,\"needs_phone_verification\":false}"
+                }
+            }
+        }, 
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ], 
+                    "Content-Length": [
+                        "0"
+                    ]
+                }, 
+                "method": "POST", 
+                "uri": "https://api.twitter.com:443/1.1/account/update_profile_colors.json?profile_link_color=000&profile_text_color=000&profile_sidebar_border_color=000&profile_sidebar_fill_color=000&profile_background_color=000"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "content-length": [
+                        "2808"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "2f6d5357b5ccc0a08b7abf0900258faa"
+                    ], 
+                    "x-runtime": [
+                        "0.27056"
+                    ], 
+                    "etag": [
+                        "\"7750f7414abdffd980100622dd408b90\""
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:42:09 GMT", 
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure", 
+                        "_twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCMdpcAJKAToHaWQiJWNmNmNlZDlmZWIxZmVk%250AZDFhMjljZjFkYmEwNGEwMGIy--20496b8e01c3bb8bd9370f8f665d5bdfcebbe11a; domain=.twitter.com; path=/; secure; HttpOnly", 
+                        "guest_id=v1%3A141738012898841383; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:42:09 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:42:09 GMT"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:42:09 UTC"
+                    ], 
+                    "x-transaction": [
+                        "e191a70c593c095a"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "x-mid": [
+                        "0e64b40237868b07d833d191f18c0b3d6a480b96"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"profile_sidebar_border_color\":\"000000\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"indices\":[0,22],\"display_url\":\"foo.com\",\"expanded_url\":\"http:\\/\\/foo.com\"}]},\"description\":{\"urls\":[]}},\"name\":\"Tweepy test 123\",\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"listed_count\":0,\"verified\":false,\"profile_background_tile\":false,\"location\":\"pytopia\",\"id\":82301637,\"profile_sidebar_fill_color\":\"000000\",\"status\":{\"entities\":{\"urls\":[],\"hashtags\":[],\"user_mentions\":[],\"media\":[{\"source_status_id\":null,\"url\":\"http:\\/\\/t.co\\/AYksz2oIC5\",\"id_str\":\"539138015076290560\",\"id\":539138015076290560,\"indices\":[13,35],\"type\":\"photo\",\"display_url\":\"pic.twitter.com\\/AYksz2oIC5\",\"media_url\":\"http:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"expanded_url\":\"http:\\/\\/twitter.com\\/tweepytest\\/status\\/539138015181160448\\/photo\\/1\",\"media_url_https\":\"https:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"sizes\":{\"thumb\":{\"h\":150,\"w\":150,\"resize\":\"crop\"},\"large\":{\"h\":512,\"w\":1024,\"resize\":\"fit\"},\"small\":{\"h\":170,\"w\":340,\"resize\":\"fit\"},\"medium\":{\"h\":300,\"w\":600,\"resize\":\"fit\"}}}]},\"retweet_count\":0,\"in_reply_to_status_id\":null,\"place\":null,\"in_reply_to_screen_name\":null,\"contributors\":null,\"retweeted\":false,\"source\":\"\\u003Ca href=\\\"http:\\/\\/tweepy.github.com\\/\\\" rel=\\\"nofollow\\\"\\u003ETweepyTravis\\u003C\\/a\\u003E\",\"possibly_sensitive_editable\":true,\"created_at\":\"Sun Nov 30 19:24:54 +0000 2014\",\"in_reply_to_status_id_str\":null,\"id_str\":\"539138015181160448\",\"coordinates\":null,\"geo\":null,\"id\":539138015181160448,\"truncated\":false,\"possibly_sensitive\":false,\"in_reply_to_user_id_str\":null,\"in_reply_to_user_id\":null,\"favorited\":false,\"text\":\"testing 1000 http:\\/\\/t.co\\/AYksz2oIC5\"},\"time_zone\":\"Central Time (US & Canada)\",\"created_at\":\"Wed Oct 14 07:28:20 +0000 2009\",\"lang\":\"en\",\"id_str\":\"82301637\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/82301637\\/1417380122\",\"statuses_count\":539,\"is_translator\":false,\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"contributors_enabled\":false,\"profile_background_color\":\"000000\",\"screen_name\":\"tweepytest\",\"utc_offset\":-21600,\"favourites_count\":1,\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"followers_count\":10,\"profile_link_color\":\"000000\",\"notifications\":false,\"following\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"protected\":false,\"default_profile_image\":false,\"description\":\"A test account for testing stuff.\",\"profile_use_background_image\":false,\"profile_text_color\":\"000000\",\"friends_count\":11,\"default_profile\":false,\"geo_enabled\":true}"
+                }
+            }
+        }, 
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ], 
+                    "Content-Length": [
+                        "0"
+                    ]
+                }, 
+                "method": "POST", 
+                "uri": "https://api.twitter.com:443/1.1/account/update_profile_colors.json?profile_link_color=0000FF&profile_text_color=000000&profile_sidebar_border_color=87BC44&profile_sidebar_fill_color=E0FF92&profile_background_color=FFFFFF"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "content-length": [
+                        "2808"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "62390f980647ed27b5cbbfaecb979dc6"
+                    ], 
+                    "x-runtime": [
+                        "0.27387"
+                    ], 
+                    "etag": [
+                        "\"dc0e0674075ef0c93bafd6c000af0c51\""
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:42:10 GMT", 
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure", 
+                        "_twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCANtcAJKAToHaWQiJWExOTdmMzllYmY1ODBj%250AYzM0ZjZlYWRhZGQwZTM0NmM1--8c1e73df6c90e40fd9c9b04ef86645f0d52fc610; domain=.twitter.com; path=/; secure; HttpOnly", 
+                        "guest_id=v1%3A141738012979301718; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:42:10 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:42:10 GMT"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:42:10 UTC"
+                    ], 
+                    "x-transaction": [
+                        "ffd0686d8a09e83b"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "x-mid": [
+                        "711d4952f46f8d1a71f2b5fd72bec1a70994eb91"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"profile_sidebar_border_color\":\"87BC44\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"indices\":[0,22],\"display_url\":\"foo.com\",\"expanded_url\":\"http:\\/\\/foo.com\"}]},\"description\":{\"urls\":[]}},\"name\":\"Tweepy test 123\",\"url\":\"http:\\/\\/t.co\\/3L9bWVrV0b\",\"is_translator\":false,\"listed_count\":0,\"verified\":false,\"profile_background_tile\":false,\"location\":\"pytopia\",\"id\":82301637,\"profile_sidebar_fill_color\":\"E0FF92\",\"status\":{\"possibly_sensitive\":false,\"entities\":{\"urls\":[],\"hashtags\":[],\"user_mentions\":[],\"media\":[{\"source_status_id\":null,\"url\":\"http:\\/\\/t.co\\/AYksz2oIC5\",\"id_str\":\"539138015076290560\",\"id\":539138015076290560,\"indices\":[13,35],\"type\":\"photo\",\"display_url\":\"pic.twitter.com\\/AYksz2oIC5\",\"media_url\":\"http:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"expanded_url\":\"http:\\/\\/twitter.com\\/tweepytest\\/status\\/539138015181160448\\/photo\\/1\",\"media_url_https\":\"https:\\/\\/pbs.twimg.com\\/media\\/B3tnKxGIEAAkMeT.png\",\"sizes\":{\"thumb\":{\"h\":150,\"w\":150,\"resize\":\"crop\"},\"large\":{\"h\":512,\"w\":1024,\"resize\":\"fit\"},\"small\":{\"h\":170,\"w\":340,\"resize\":\"fit\"},\"medium\":{\"h\":300,\"w\":600,\"resize\":\"fit\"}}}]},\"retweet_count\":0,\"in_reply_to_status_id\":null,\"place\":null,\"in_reply_to_screen_name\":null,\"possibly_sensitive_editable\":true,\"contributors\":null,\"retweeted\":false,\"source\":\"\\u003Ca href=\\\"http:\\/\\/tweepy.github.com\\/\\\" rel=\\\"nofollow\\\"\\u003ETweepyTravis\\u003C\\/a\\u003E\",\"in_reply_to_status_id_str\":null,\"created_at\":\"Sun Nov 30 19:24:54 +0000 2014\",\"id_str\":\"539138015181160448\",\"coordinates\":null,\"geo\":null,\"id\":539138015181160448,\"in_reply_to_user_id_str\":null,\"truncated\":false,\"in_reply_to_user_id\":null,\"favorited\":false,\"text\":\"testing 1000 http:\\/\\/t.co\\/AYksz2oIC5\"},\"time_zone\":\"Central Time (US & Canada)\",\"created_at\":\"Wed Oct 14 07:28:20 +0000 2009\",\"lang\":\"en\",\"id_str\":\"82301637\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/82301637\\/1417380122\",\"statuses_count\":539,\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"contributors_enabled\":false,\"profile_background_color\":\"FFFFFF\",\"screen_name\":\"tweepytest\",\"utc_offset\":-21600,\"favourites_count\":1,\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/394345638\\/test.jpg\",\"followers_count\":10,\"profile_link_color\":\"0000FF\",\"notifications\":false,\"following\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1733327710\\/test_normal.jpg\",\"protected\":false,\"default_profile_image\":false,\"description\":\"A test account for testing stuff.\",\"profile_use_background_image\":false,\"profile_text_color\":\"000000\",\"friends_count\":11,\"default_profile\":false,\"geo_enabled\":true}"
+                }
+            }
+        }
+    ]
+}

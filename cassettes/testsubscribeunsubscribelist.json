@@ -1,0 +1,203 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ], 
+                    "Content-Length": [
+                        "0"
+                    ]
+                }, 
+                "method": "POST", 
+                "uri": "https://api.twitter.com:443/1.1/lists/subscribers/create.json?slug=stars&owner_screen_name=applepie"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "content-length": [
+                        "1710"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "2f1d1d460a84bf5ee1cb293536ac93cb"
+                    ], 
+                    "x-runtime": [
+                        "0.15077"
+                    ], 
+                    "etag": [
+                        "\"b967f11c286ebbc8d026203babd1b50e\""
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:41:43 GMT", 
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure", 
+                        "_twitter_sess=BAh7CDoPY3JlYXRlZF9hdGwrCNkEcAJKAToHaWQiJThiY2NlNmUwMDNlZWJk%250AZTBkZTMxNWRhMmYwMDFmOGVkOgxjc3JmX2lkIiU4MmM3NGNiOTFjYzM2M2Iw%250ANDdmMGMxNWQ3MDA5OGFmMA%253D%253D--69847a15e3fe0e84c8cf801b1c8c7bafbcd2b2a9; domain=.twitter.com; path=/; secure; HttpOnly", 
+                        "guest_id=v1%3A141738010322271650; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:43 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:43 GMT"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:43 UTC"
+                    ], 
+                    "x-transaction": [
+                        "ff1e09cfa1efd0e7"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "x-mid": [
+                        "233ce717473d9d4325c7b29519fcfe89770d6abc"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"full_name\":\"@applepie\\/lists\\/stars\",\"user\":{\"listed_count\":26,\"profile_sidebar_border_color\":\"000000\",\"entities\":{\"description\":{\"urls\":[]}},\"name\":\"Josh Roesslein\",\"url\":null,\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"verified\":false,\"profile_background_tile\":false,\"location\":\"San Francisco Bay Area\",\"is_translator\":false,\"statuses_count\":7649,\"id\":9302282,\"profile_sidebar_fill_color\":\"000000\",\"time_zone\":\"Pacific Time (US & Canada)\",\"created_at\":\"Mon Oct 08 03:00:34 +0000 2007\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"lang\":\"en\",\"id_str\":\"9302282\",\"contributors_enabled\":false,\"favourites_count\":8,\"profile_background_color\":\"000000\",\"screen_name\":\"applepie\",\"utc_offset\":-28800,\"follow_request_sent\":false,\"default_profile_image\":false,\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"followers_count\":485,\"profile_link_color\":\"000000\",\"notifications\":false,\"following\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"protected\":false,\"description\":\"pro\\u00b7gram\\u00b7mer (n) An organism capable of converting caffeine into code.\",\"friends_count\":307,\"default_profile\":false,\"profile_use_background_image\":true,\"profile_text_color\":\"000000\",\"geo_enabled\":true},\"uri\":\"\\/applepie\\/lists\\/stars\",\"subscriber_count\":7,\"created_at\":\"Fri Oct 16 00:25:42 +0000 2009\",\"id_str\":\"8078\",\"id\":8078,\"following\":true,\"mode\":\"public\",\"slug\":\"stars\",\"member_count\":55,\"description\":\"\",\"name\":\"stars\"}"
+                }
+            }
+        }, 
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ], 
+                    "Content-Length": [
+                        "0"
+                    ]
+                }, 
+                "method": "POST", 
+                "uri": "https://api.twitter.com:443/1.1/lists/subscribers/destroy.json?slug=stars&owner_screen_name=applepie"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "content-length": [
+                        "1711"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "6cf3a2e6673ec50c8c94a626d8dbfbb2"
+                    ], 
+                    "x-runtime": [
+                        "0.15055"
+                    ], 
+                    "etag": [
+                        "\"ecae72fe4f75db81eedadc9e7daa4f8e\""
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:41:44 GMT", 
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure", 
+                        "_twitter_sess=BAh7CDoPY3JlYXRlZF9hdGwrCNkIcAJKAToHaWQiJTRlOThlZjFhYTQ0MGQ2%250AZGQ3ZDI1YWFmYTVhYzczMjVjOgxjc3JmX2lkIiVjMWQ2ZDkxOGE1ZDBmOGYw%250ANGYyNjYyNjU2MzUzMmE4Yw%253D%253D--8101016b866581d3d72e1e392732b88322b552dc; domain=.twitter.com; path=/; secure; HttpOnly", 
+                        "guest_id=v1%3A141738010422466261; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:44 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:44 GMT"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:44 UTC"
+                    ], 
+                    "x-transaction": [
+                        "dd12918f807abf2d"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "x-mid": [
+                        "15f4b8e3962eb9a533e3e8bee780648641ff4be1"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"full_name\":\"@applepie\\/lists\\/stars\",\"user\":{\"profile_sidebar_border_color\":\"000000\",\"entities\":{\"description\":{\"urls\":[]}},\"name\":\"Josh Roesslein\",\"url\":null,\"listed_count\":26,\"verified\":false,\"profile_background_tile\":false,\"location\":\"San Francisco Bay Area\",\"id\":9302282,\"profile_sidebar_fill_color\":\"000000\",\"is_translator\":false,\"time_zone\":\"Pacific Time (US & Canada)\",\"created_at\":\"Mon Oct 08 03:00:34 +0000 2007\",\"lang\":\"en\",\"id_str\":\"9302282\",\"statuses_count\":7649,\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"contributors_enabled\":false,\"profile_background_color\":\"000000\",\"screen_name\":\"applepie\",\"utc_offset\":-28800,\"favourites_count\":8,\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"followers_count\":485,\"profile_link_color\":\"000000\",\"notifications\":false,\"following\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"protected\":false,\"default_profile_image\":false,\"description\":\"pro\\u00b7gram\\u00b7mer (n) An organism capable of converting caffeine into code.\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"profile_use_background_image\":true,\"profile_text_color\":\"000000\",\"friends_count\":307,\"default_profile\":false,\"geo_enabled\":true},\"uri\":\"\\/applepie\\/lists\\/stars\",\"subscriber_count\":7,\"created_at\":\"Fri Oct 16 00:25:42 +0000 2009\",\"id_str\":\"8078\",\"id\":8078,\"following\":false,\"mode\":\"public\",\"slug\":\"stars\",\"member_count\":55,\"description\":\"\",\"name\":\"stars\"}"
+                }
+            }
+        }
+    ]
+}

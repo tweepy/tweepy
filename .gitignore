@@ -8,6 +8,5 @@ env.sh
 .tox
 build
 dist
-cassettes
 htmlcov
 tweepy.egg-info

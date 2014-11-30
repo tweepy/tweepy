@@ -1,0 +1,110 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/lists/subscribers/show.json?owner_screen_name=tweepytest&screen_name=applepie&slug=test"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "content-length": [
+                        "2105"
+                    ], 
+                    "vary": [
+                        "Accept-Encoding"
+                    ], 
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417381001"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "9a612e8ad71c670db65473e205bba7a7"
+                    ], 
+                    "x-runtime": [
+                        "0.57702"
+                    ], 
+                    "etag": [
+                        "\"2154180a966af2cce511af59161e93df\""
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:41:42 GMT", 
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "lang=en; path=/", 
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure", 
+                        "_twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCLIAcAJKAToHaWQiJTU4MmQ1YTQ2MWUxNWZm%250AMzBiMmQyZDNjYzk4ZjY5ZDY2--b7c469f0340f51311d2f3210323092dedf509bd3; domain=.twitter.com; path=/; secure; HttpOnly", 
+                        "guest_id=v1%3A141738010172705086; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:42 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:42 GMT"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:42 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "15"
+                    ], 
+                    "x-transaction": [
+                        "92d3f627558d8e8b"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "x-mid": [
+                        "16e524a405a5c33bd856f79103015c50de038e70"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"favourites_count\":8,\"profile_sidebar_border_color\":\"000000\",\"entities\":{\"description\":{\"urls\":[]}},\"is_translator\":false,\"name\":\"Josh Roesslein\",\"url\":null,\"default_profile_image\":false,\"verified\":false,\"profile_background_tile\":false,\"location\":\"San Francisco Bay Area\",\"id\":9302282,\"profile_sidebar_fill_color\":\"000000\",\"status\":{\"entities\":{\"urls\":[],\"hashtags\":[],\"user_mentions\":[]},\"retweet_count\":0,\"in_reply_to_status_id\":null,\"place\":null,\"in_reply_to_screen_name\":null,\"contributors\":null,\"retweeted\":false,\"source\":\"\\u003Ca href=\\\"http:\\/\\/twitter.com\\/download\\/android\\\" rel=\\\"nofollow\\\"\\u003ETwitter for Android\\u003C\\/a\\u003E\",\"created_at\":\"Tue Nov 25 22:08:13 +0000 2014\",\"id_str\":\"537367178241409025\",\"coordinates\":null,\"geo\":null,\"id\":537367178241409025,\"in_reply_to_status_id_str\":null,\"truncated\":false,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"favorited\":false,\"text\":\"Two dots just got a dollar from me to get more moves. Sneaky in app purchases.\"},\"time_zone\":\"Pacific Time (US & Canada)\",\"created_at\":\"Mon Oct 08 03:00:34 +0000 2007\",\"lang\":\"en\",\"id_str\":\"9302282\",\"friends_count\":307,\"default_profile\":false,\"contributors_enabled\":false,\"profile_background_color\":\"000000\",\"screen_name\":\"applepie\",\"utc_offset\":-28800,\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"listed_count\":26,\"followers_count\":485,\"profile_link_color\":\"000000\",\"notifications\":false,\"following\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"protected\":false,\"description\":\"pro\\u00b7gram\\u00b7mer (n) An organism capable of converting caffeine into code.\",\"profile_use_background_image\":true,\"statuses_count\":7649,\"profile_text_color\":\"000000\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"geo_enabled\":true}"
+                }
+            }
+        }
+    ]
+}
