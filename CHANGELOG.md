@@ -1,3 +1,10 @@
+Version 3.1
+-----------
+  - Allow specifying your own ssl certificates for streaming client.
+  - Distribute Python Wheels instead of dumb binaries.
+  - Fix cursor invocation, passing args to underlying method. (https://github.com/tweepy/tweepy/issues/515)
+  - Upgrade to Request 2.4.3
+
 Version 3.0
 -----------
   - Added multiple list members operation api methods (add_list_members, remove_list_members).
