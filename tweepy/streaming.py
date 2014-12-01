@@ -197,6 +197,8 @@ class Stream(object):
         # fewer socket read calls.
         self.chunk_size = options.get("chunk_size",  512)
 
+        self.verify = options.get("verify", True)
+
         self.api = API()
         self.session = requests.Session()
         self.session.headers = options.get("headers") or {}
@@ -225,7 +227,8 @@ class Stream(object):
                                             data=self.body,
                                             timeout=self.timeout,
                                             stream=True,
-                                            auth=auth)
+                                            auth=auth,
+                                            verify=self.verify)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
