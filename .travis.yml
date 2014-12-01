@@ -33,11 +33,13 @@ env:
 
 install:
   - pip install -r test_requirements.txt -r requirements.txt
+  - pip install coveralls
 
 script:
   - nosetests -v --with-coverage -c tests/travis-tests.cfg
 
-after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
+after_success:
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
 
 deploy:
   provider: pypi
