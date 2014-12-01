@@ -1,6 +1,7 @@
 language: python
 python:
 - '2.7'
+- '3.4'
 install:
   - pip install -r test_requirements.txt -r requirements.txt
 script: ./run_tests.sh
