@@ -1164,30 +1164,6 @@ class API(object):
         )
 
     @property
-    def trends_daily(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/trends/daily
-            :allowed_param:'date', 'exclude'
-        """
-        return bind_api(
-            api=self,
-            path='/trends/daily.json',
-            payload_type='json',
-            allowed_param=['date', 'exclude']
-        )
-
-    @property
-    def trends_weekly(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/trends/weekly
-            :allowed_param:'date', 'exclude'
-        """
-        return bind_api(
-            api=self,
-            path='/trends/weekly.json',
-            payload_type='json',
-            allowed_param=['date', 'exclude']
-        )
-
-    @property
     def reverse_geocode(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/geo/reverse_geocode
             :allowed_param:'lat', 'long', 'accuracy', 'granularity', 'max_results'

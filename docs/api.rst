@@ -540,43 +540,6 @@ Help Methods
    :rtype: list of :class:`SearchResult` objects
 
 
-.. method:: API.trends()
-
-   Returns the top ten topics that are currently trending on Twitter. The
-   response includes the time of the request, the name of each trend, and
-   the url to the Twitter Search results page for that topic.
-
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_current([exclude])
-
-   Returns the current top 10 trending topics on Twitter. The response
-   includes the time of the request, the name of each trending topic, and
-   query used on Twitter Search results page for that topic.
-
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_daily([date], [exclude])
-
-   Returns the top 20 trending topics for each hour in a given day.
-
-   :param date: |date|
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_weekly([date], [exclude])
-
-   Returns the top 30 trending topics for each day in a given week.
-
-   :param date: |date|
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
 List Methods
 ------------
 
