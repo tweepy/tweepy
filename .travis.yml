@@ -35,7 +35,7 @@ install:
   - pip install -r test_requirements.txt -r requirements.txt
 
 script:
-  - nosetests -v --with-coverage tests.test_api tests.test_utils
+  - nosetests -v --with-coverage -c tests/travis-tests.cfg
 
 after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
 
