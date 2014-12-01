@@ -1,14 +1,14 @@
 language: python
+
 python:
 - '2.7'
 - '3.4'
-install:
-  - pip install -r test_requirements.txt -r requirements.txt
-script: ./run_tests.sh
+
 env:
   global:
   - TWITTER_USERNAME="tweepytest"
   - AWS_BUCKET="tweepy"
+  - USE_REPLAY=1
   - secure: ! 'MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
 
       EM+cnKavRLHTbKpoHPIzzhKx9DQLrxtYy+s3Rw9AeGo8K3LA7mcn4T4eCH7s
@@ -30,7 +30,15 @@ env:
 
       aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI='
   - secure: TPQSFGqdl6khXqQqTZ6euROoAmFRnONAlPXD6npvTIIN+fNfnz8lvZtOEWHo2jRPLoU3FyVUhYvTynj6B2hJinulP+RKOMbQ65HCZVHrsitwl1n1QZB5HegQDOYc5q6VTTYn/r8r5tGy35U0O80y1zycTLqSJiXlkdqsSq564pI=
+
+install:
+  - pip install -r test_requirements.txt -r requirements.txt
+
+script:
+  - nosetests -v --with-coverage tests.test_api tests.test_utils
+
 after_success: if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
+
 deploy:
   provider: pypi
   user: jroesslein
