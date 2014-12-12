@@ -1148,7 +1148,7 @@ class API(object):
 
     @property
     def search(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/search
+        """ :reference: https://dev.twitter.com/rest/reference/get/search/tweets
             :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode',
              'max_id', 'since', 'until', 'result_type', 'count',
               'include_entities', 'from', 'to', 'source']
