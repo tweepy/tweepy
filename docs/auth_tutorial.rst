@@ -65,8 +65,7 @@ request token in the session since we will need it inside the callback
 URL request. Here is a pseudo example of storing the request token in
 a session::
 
-   session.set('request_token', (auth.request_token.key,
-   auth.request_token.secret))
+   session.set('request_token', auth.request_token)
 
 So now we can redirect the user to the URL returned to us earlier from
 the get_authorization_url() method.
@@ -94,7 +93,7 @@ treasure box. To fetch this token we do the following::
    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
    token = session.get('request_token')
    session.delete('request_token')
-   auth.set_request_token(token[0], token[1])
+   auth.request_token = token
    
    try:
        auth.get_access_token(verifier)
@@ -108,8 +107,8 @@ revokes our application access. To store the access token depends on
 your application. Basically you need to store 2 string values: key and
 secret::
 
-   auth.access_token.key
-   auth.access_token.secret
+   auth.access_token
+   auth.access_token_secret
 
 You can throw these into a database, file, or where ever you store
 your data. To re-build an OAuthHandler from this stored access token
