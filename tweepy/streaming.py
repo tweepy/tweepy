@@ -416,7 +416,7 @@ class Stream(object):
         if languages:
             self.session.params['language'] = u','.join(map(str, languages))
         self.body = urlencode_noplus(self.session.params)
-        self.session.params['delimited'] = 'length'
+        self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
         self._start(async)
 
