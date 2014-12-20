@@ -366,7 +366,7 @@ class Stream(object):
                                  "it has to be a multiple of 4")
             self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
-            self.session.params['track'] = u','.join(track).encode(encoding)
+            self.session.params['track'] = ','.join(track).encode(encoding)
 
         self._start(async)
 
@@ -403,18 +403,18 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            self.session.params['follow'] = u','.join(follow).encode(encoding)
+            self.session.params['follow'] = ','.join(follow).encode(encoding)
         if track:
-            self.session.params['track'] = u','.join(track).encode(encoding)
+            self.session.params['track'] = ','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.session.params['locations'] = u','.join(['%.4f' % l for l in locations])
+            self.session.params['locations'] = ','.join(['%.4f' % l for l in locations])
         if stall_warnings:
             self.session.params['stall_warnings'] = stall_warnings
         if languages:
-            self.session.params['language'] = u','.join(map(str, languages))
+            self.session.params['language'] = ','.join(map(str, languages))
         self.body = urlencode_noplus(self.session.params)
         self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
@@ -426,7 +426,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.parameters['follow'] = u','.join(map(six.text_type, follow))
+        self.parameters['follow'] = ','.join(map(six.text_type, follow))
         self.parameters['delimited'] = 'length'
         if stall_warnings:
             self.parameters['stall_warnings'] = stall_warnings
