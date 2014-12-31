@@ -1,5 +1,6 @@
 .. _streaming_how_to:
 .. _Twitter Streaming API Documentation: https://dev.twitter.com/streaming/overview
+.. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
 
 *********************
 Streaming With Tweepy
@@ -79,5 +80,32 @@ the word *python*. The **track** parameter is an array of search terms to stream
   myStream.filter(track=['python'])
 
 
+A Few More Pointers
+===================
 
+Async Streaming
+---------------
+Streams not terminate unless the connection is closed, blocking the thread. 
+Tweepy offers a convenient **async** parameter on **filter** so the stream will run on a new
+thread. For example ::
 
+  myStream.filter(track=['python'], async=True)
+
+Handling Errors
+---------------
+When using Twitter's streaming API one must be careful of the dangers of 
+rate limiting. If clients exceed a limited number of attempts to connect to the streaming API 
+in a window of time, they will receive error 420.  The amount of time a client has to wait after receiving error 420
+will increase exponentially each time they make a failed attempt. 
+
+Tweepy's **Stream Listener** usefully passes error messages to an **on_error** stub. We can use **on_error** to 
+catch 420 errors and disconnect our stream.::
+
+  class MyStreamListener(tweepy.StreamListener):
+  
+  def on_error(self, status_code):
+          if status_code == 420:
+              #returning False in on_data disconnects the stream
+              return False
+
+For more information on error codes from the twitter api see `Twitter Response Codes Documentation`_.
