@@ -1,0 +1,215 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/lists/members/show.json?slug=stars&screen_name=NathanFillion&owner_screen_name=applepie",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380999"
+                    ],
+                    "content-length": [
+                        "2371"
+                    ],
+                    "etag": [
+                        "\"2692f7bc3179def5a16a1c77a80f293c\""
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:40 GMT"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "vary": [
+                        "Accept-Encoding"
+                    ],
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:40 UTC"
+                    ],
+                    "x-transaction": [
+                        "617049fdc735b7e1"
+                    ],
+                    "x-connection-hash": [
+                        "b92bdf8fd1eb7a1d54e7b178c8705f77"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 08:41:40 GMT",
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
+                        "lang=en; path=/",
+                        "lang=en; path=/",
+                        "lang=en; path=/",
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure",
+                        "_twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCOH5bwJKAToHaWQiJWI3MzMzOWQ3OGY3Y2M1%250ANWYxYjA2MzBkODVlY2RhNGMy--1b15272bda7a5510645ca0c36a9a0433ed7874b5; domain=.twitter.com; path=/; secure; HttpOnly",
+                        "guest_id=v1%3A141738009989488162; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:40 UTC"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-runtime": [
+                        "0.58547"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-mid": [
+                        "f20ce2bf947429c81ee752f59af9901134ab5c0b"
+                    ]
+                },
+                "body": {
+                    "string": "{\"profile_sidebar_border_color\":\"eeeeee\",\"entities\":{\"description\":{\"urls\":[]}},\"name\":\"Nathan Fillion\",\"url\":null,\"listed_count\":37307,\"verified\":true,\"profile_background_tile\":true,\"location\":\"Los Angeles\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/504693293389586433\\/XYr9Dmzt_normal.jpeg\",\"id\":31353077,\"profile_sidebar_fill_color\":\"efefef\",\"status\":{\"in_reply_to_status_id_str\":null,\"entities\":{\"urls\":[],\"hashtags\":[],\"user_mentions\":[{\"screen_name\":\"NathanFillion\",\"id_str\":\"31353077\",\"id\":31353077,\"indices\":[1,15],\"name\":\"Nathan Fillion\"},{\"screen_name\":\"blackfrogeatery\",\"id_str\":\"415921905\",\"id\":415921905,\"indices\":[75,91],\"name\":\"Black Frog\"}]},\"retweet_count\":113,\"in_reply_to_status_id\":null,\"place\":null,\"in_reply_to_screen_name\":null,\"in_reply_to_user_id_str\":null,\"contributors\":null,\"retweeted\":false,\"source\":\"\\u003Ca href=\\\"http:\\/\\/tapbots.com\\/tweetbot\\\" rel=\\\"nofollow\\\"\\u003ETweetbot for i\\u039fS\\u003C\\/a\\u003E\",\"created_at\":\"Sun Nov 30 18:40:10 +0000 2014\",\"id_str\":\"539126759736999937\",\"coordinates\":null,\"geo\":null,\"id\":539126759736999937,\"truncated\":false,\"in_reply_to_user_id\":null,\"favorited\":false,\"text\":\"\\u201c@NathanFillion: Thank you Nemo and Marion for an excellent evening at the @blackfrogeatery.\\u201d\\n\\nMARIAN! Curse you, autocorrect.\"},\"time_zone\":\"Pacific Time (US & Canada)\",\"created_at\":\"Wed Apr 15 05:57:40 +0000 2009\",\"lang\":\"en\",\"id_str\":\"31353077\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/31353077\\/1375475379\",\"statuses_count\":7874,\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"contributors_enabled\":false,\"profile_background_color\":\"131516\",\"screen_name\":\"NathanFillion\",\"utc_offset\":-28800,\"favourites_count\":193,\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"followers_count\":2710403,\"profile_link_color\":\"009999\",\"notifications\":false,\"following\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/504693293389586433\\/XYr9Dmzt_normal.jpeg\",\"protected\":false,\"is_translator\":false,\"default_profile_image\":false,\"description\":\"It costs nothing to say something kind. Even less to shut up altogether.\",\"profile_use_background_image\":true,\"profile_text_color\":\"333333\",\"friends_count\":526,\"default_profile\":false,\"geo_enabled\":false}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/lists/members/show.json?owner_screen_name=applepie&screen_name=NathanFillion&slug=stars",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401029"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "content-length": [
+                        "2299"
+                    ],
+                    "etag": [
+                        "\"14acdfe39db422f0af9ae812231a955a\""
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:29 GMT"
+                    ],
+                    "x-runtime": [
+                        "0.18540"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:29 UTC"
+                    ],
+                    "x-transaction": [
+                        "9bc62f03c49ad70c"
+                    ],
+                    "x-connection-hash": [
+                        "c416dd61da58fe6d35917e71be14c42d"
+                    ],
+                    "x-transaction-mask": [
+                        "a6183ffa5f8ca943ff1b53b5644ef114028ecc49"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "set-cookie": [
+                        "dnt=1; domain=.twitter.com; path=/; expires=Sat, 30-Nov-2024 14:15:29 GMT",
+                        "pid=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
+                        "lang=en; path=/",
+                        "lang=en; path=/",
+                        "lang=en; path=/",
+                        "twid=u%3D82301637%7CC4vLyBO04ZTRgFoYdu8kf7cmRFU%3D; domain=.twitter.com; path=/; secure",
+                        "_twitter_sess=BAh7BzoPY3JlYXRlZF9hdGwrCLaYoQNKAToHaWQiJWQ3NzVlYTQxMTgxMTY1%250AZGUxMTk1ZTYyNDIxYjljYjIy--9fde4fdf3e7cab13ef55fba95787bda86b427376; domain=.twitter.com; path=/; secure; HttpOnly",
+                        "guest_id=v1%3A141740012943742371; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:29 UTC"
+                    ],
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "vary": [
+                        "Accept-Encoding"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-mid": [
+                        "37c3470f5a803cf4b94cba39393e898ba9a03dbc"
+                    ]
+                },
+                "body": {
+                    "string": "{\"profile_sidebar_border_color\":\"eeeeee\",\"entities\":{\"description\":{\"urls\":[]}},\"name\":\"Nathan Fillion\",\"url\":null,\"listed_count\":37307,\"verified\":true,\"profile_background_tile\":true,\"location\":\"Los Angeles\",\"id\":31353077,\"profile_sidebar_fill_color\":\"efefef\",\"status\":{\"possibly_sensitive\":false,\"entities\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/IUDtaiFOqB\",\"indices\":[84,106],\"display_url\":\"youtu.be\\/3N1Q8oFpX1Y\",\"expanded_url\":\"http:\\/\\/youtu.be\\/3N1Q8oFpX1Y\"}],\"hashtags\":[],\"user_mentions\":[]},\"retweet_count\":65,\"in_reply_to_status_id\":null,\"place\":null,\"in_reply_to_screen_name\":null,\"contributors\":null,\"retweeted\":false,\"source\":\"\\u003Ca href=\\\"http:\\/\\/tapbots.com\\/tweetbot\\\" rel=\\\"nofollow\\\"\\u003ETweetbot for i\\u039fS\\u003C\\/a\\u003E\",\"created_at\":\"Mon Dec 01 01:29:47 +0000 2014\",\"id_str\":\"539229842567225344\",\"coordinates\":null,\"geo\":null,\"id\":539229842567225344,\"truncated\":false,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"favorited\":false,\"text\":\"I want a Jibo. With little legs. And he\\u2019s a little sarcastic, but self-deprecating. http:\\/\\/t.co\\/IUDtaiFOqB\",\"in_reply_to_user_id_str\":null},\"time_zone\":\"Pacific Time (US & Canada)\",\"created_at\":\"Wed Apr 15 05:57:40 +0000 2009\",\"lang\":\"en\",\"id_str\":\"31353077\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/31353077\\/1375475379\",\"statuses_count\":7875,\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"contributors_enabled\":false,\"profile_background_color\":\"131516\",\"screen_name\":\"NathanFillion\",\"utc_offset\":-28800,\"favourites_count\":193,\"follow_request_sent\":false,\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"followers_count\":2711002,\"profile_link_color\":\"009999\",\"notifications\":false,\"following\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/504693293389586433\\/XYr9Dmzt_normal.jpeg\",\"protected\":false,\"default_profile_image\":false,\"description\":\"It costs nothing to say something kind. Even less to shut up altogether.\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/504693293389586433\\/XYr9Dmzt_normal.jpeg\",\"profile_use_background_image\":true,\"profile_text_color\":\"333333\",\"friends_count\":526,\"is_translator\":false,\"default_profile\":false,\"geo_enabled\":false}"
+                }
+            }
+        }
+    ]
+}

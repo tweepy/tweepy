@@ -1,0 +1,173 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/statuses/retweeters/ids.json?id=266367358078169089",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:30 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "fc2eca688ad7fc2188687c1115335c96"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "90c5531da9ccff84"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "1022"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738009050965990; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:30 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:30 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380990"
+                    ]
+                },
+                "body": {
+                    "string": "{\"ids\":[2390428970,2392623769,2298388902,2218822532,2294010576,2298665443,2295646148,586229030,1377248521,1360513801,1362034669,1458196202,1231476126,1387371619,1183016636,188937623,1156915609,1206961129,396722289,755584388,838471987,1032012109,892834280,98585322,601235246,569558338,451776898,532092216,831618858,712469083,562549745,144683557,965210341,942200450,184662037,620862766,899643482,870248461,16482751,605168279,955312028,957010932,531917206,856105045,948683221,935491596,946377140,848197370,60412483,877388418,942234878,943352540,941760217,942234530,393226522,104938500,940243159,527197982,794327168,913965085,938792107,547911317,545004607,937135218,932267131,936550507,832543117,297861279,911901686,532505398,828583268,911730324,139532123,17916539,56933470,36912323,30592580,835617390,548741348,760957819,824311056,934584805,517135684,292837239,18059761,934165400,819782274,620144735,584653830,921575544,808089618,632563729],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/statuses/retweeters/ids.json?id=266367358078169089",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:16 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "eece888ce79adf5e2ad86307eadd88e1"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401015"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "1022"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:15 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740011569875202; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:16 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "5691e1c9185d5a52"
+                    ]
+                },
+                "body": {
+                    "string": "{\"ids\":[2390428970,2392623769,2298388902,2218822532,2294010576,2298665443,2295646148,586229030,1377248521,1360513801,1362034669,1458196202,1231476126,1387371619,1183016636,188937623,1156915609,1206961129,396722289,755584388,838471987,1032012109,892834280,98585322,601235246,569558338,451776898,532092216,831618858,712469083,562549745,144683557,965210341,942200450,184662037,620862766,899643482,870248461,16482751,605168279,955312028,957010932,531917206,856105045,948683221,935491596,946377140,848197370,60412483,877388418,942234878,943352540,941760217,942234530,393226522,104938500,940243159,527197982,794327168,913965085,938792107,547911317,545004607,937135218,932267131,936550507,832543117,297861279,911901686,532505398,828583268,911730324,139532123,17916539,56933470,36912323,30592580,835617390,548741348,760957819,824311056,934584805,517135684,292837239,18059761,934165400,819782274,620144735,584653830,921575544,808089618,632563729],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        }
+    ]
+}

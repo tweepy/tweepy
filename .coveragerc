@@ -1,2 +1,7 @@
 [run]
 source = tweepy
+
+[report]
+omit =
+  */python?.?/*
+  */site-packages/*

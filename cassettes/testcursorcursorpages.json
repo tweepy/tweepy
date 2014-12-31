@@ -1,0 +1,173 @@
+{
+    "version": 1, 
+    "interactions": [
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/friends/ids.json?cursor=-1"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "12"
+                    ], 
+                    "content-length": [
+                        "193"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "x-transaction": [
+                        "f9e87cf56c808da3"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "0c78677182eb831876d8d30675178164"
+                    ], 
+                    "set-cookie": [
+                        "lang=en", 
+                        "guest_id=v1%3A141745430126435964; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 17:18:21 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 17:18:21 GMT"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417455148"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "date": [
+                        "Mon, 01 Dec 2014 17:18:21 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "15"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"ids\":[783214,382267114,56505125,6844292,222953824,130649891,300392950,551373363,10228272,82407351,9302282],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        }, 
+        {
+            "request": {
+                "body": null, 
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }, 
+                "method": "GET", 
+                "uri": "https://api.twitter.com:443/1.1/followers/ids.json?cursor=-1&id=tweepytest"
+            }, 
+            "response": {
+                "status": {
+                    "message": "OK", 
+                    "code": 200
+                }, 
+                "headers": {
+                    "status": [
+                        "200 OK"
+                    ], 
+                    "x-rate-limit-remaining": [
+                        "12"
+                    ], 
+                    "content-length": [
+                        "193"
+                    ], 
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ], 
+                    "x-transaction": [
+                        "ee4340c900825beb"
+                    ], 
+                    "x-content-type-options": [
+                        "nosniff"
+                    ], 
+                    "x-connection-hash": [
+                        "420aafaa49fba78e3d159725ad9c663e"
+                    ], 
+                    "set-cookie": [
+                        "lang=en", 
+                        "guest_id=v1%3A141745430151997221; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 17:18:21 UTC"
+                    ], 
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ], 
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ], 
+                    "server": [
+                        "tsa_b"
+                    ], 
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 17:18:21 GMT"
+                    ], 
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ], 
+                    "x-rate-limit-reset": [
+                        "1417455148"
+                    ], 
+                    "pragma": [
+                        "no-cache"
+                    ], 
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ], 
+                    "date": [
+                        "Mon, 01 Dec 2014 17:18:21 UTC"
+                    ], 
+                    "x-rate-limit-limit": [
+                        "15"
+                    ], 
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ], 
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                }, 
+                "body": {
+                    "string": "{\"ids\":[2786453988,2300963106,1936745119,305754588,933938155,896350026,325253963,176506425,82407351,9302282],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        }
+    ]
+}

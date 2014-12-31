@@ -46,7 +46,7 @@ class BaseIterator(object):
         self.limit = 0
 
     def __next__(self):
-        self.next()
+        return self.next()
 
     def next(self):
         raise NotImplementedError
@@ -115,12 +115,11 @@ class IdIterator(BaseIterator):
             # This is a special invocation that returns the underlying
             # APIMethod class
             model = ModelParser().parse(self.method(create=True), data)
-
             if hasattr(self.method, '__self__'):
                 self.method.__self__.parser = old_parser
                 result = self.method.__self__.parser.parse(self.method(create=True), data)
             else:
-                result = self.method()
+                result = model
 
             if len(self.results) != 0:
                 self.index += 1

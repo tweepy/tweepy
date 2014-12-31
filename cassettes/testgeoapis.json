@@ -1,0 +1,503 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/similar_places.json?lat=37.7821120599&name=South+of+Market+Child+Care&long=-122.400612831",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:19 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "9719a72383c3198a9e6bc7c803941454"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "856b0ab4c497ebc9"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "19925"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141738007906456441; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:19 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:19 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380979"
+                    ]
+                },
+                "body": {
+                    "string": "{\"result\":{\"places\":[{\"id\":\"1d019624e6b4dcff\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1d019624e6b4dcff.json\",\"place_type\":\"neighborhood\",\"name\":\"South of Market\",\"full_name\":\"South of Market, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.418714,37.764094],[-122.418714,37.789283],[-122.379692,37.789283],[-122.379692,37.764094],[-122.418714,37.764094]]]},\"attributes\":{}},{\"id\":\"5c92ab5379de3839\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5c92ab5379de3839.json\",\"place_type\":\"neighborhood\",\"name\":\"South Beach\",\"full_name\":\"South Beach, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.401378,37.7776245],[-122.401378,37.798014],[-122.3809835,37.798014],[-122.3809835,37.7776245],[-122.401378,37.7776245]]]},\"attributes\":{}},{\"id\":\"640e4689c80fb4c5\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/640e4689c80fb4c5.json\",\"place_type\":\"neighborhood\",\"name\":\"Upper Market\",\"full_name\":\"Upper Market, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.446503,37.7617761],[-122.446503,37.769655],[-122.426242,37.769655],[-122.426242,37.7617761],[-122.446503,37.7617761]]]},\"attributes\":{}},{\"id\":\"746cc5651750e057\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/746cc5651750e057.json\",\"place_type\":\"city\",\"name\":\"South San Francisco\",\"full_name\":\"South San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.471871,37.6345111],[-122.471871,37.683086],[-122.374366,37.683086],[-122.374366,37.6345111],[-122.471871,37.6345111]]]},\"attributes\":{}},{\"id\":\"78f29e0fbc3e5c3b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/78f29e0fbc3e5c3b.json\",\"place_type\":\"neighborhood\",\"name\":\"South of Midtown\",\"full_name\":\"South of Midtown, Palo Alto\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"3ad0f706b3fa62a8\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3ad0f706b3fa62a8.json\",\"place_type\":\"city\",\"name\":\"Palo Alto\",\"full_name\":\"Palo Alto, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.190523,37.362824],[-122.190523,37.465918],[-122.097537,37.465918],[-122.097537,37.362824],[-122.190523,37.362824]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.131468,37.417566],[-122.131468,37.429148],[-122.114745,37.429148],[-122.114745,37.417566],[-122.131468,37.417566]]]},\"attributes\":{}},{\"id\":\"3412e9dd2250b64d\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3412e9dd2250b64d.json\",\"place_type\":\"neighborhood\",\"name\":\"University South\",\"full_name\":\"University South, Palo Alto\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"3ad0f706b3fa62a8\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3ad0f706b3fa62a8.json\",\"place_type\":\"city\",\"name\":\"Palo Alto\",\"full_name\":\"Palo Alto, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.190523,37.362824],[-122.190523,37.465918],[-122.097537,37.465918],[-122.097537,37.362824],[-122.190523,37.362824]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.164271,37.438302],[-122.164271,37.45074],[-122.143171,37.45074],[-122.143171,37.438302],[-122.164271,37.438302]]]},\"attributes\":{}},{\"id\":\"18cccad2227da65c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/18cccad2227da65c.json\",\"place_type\":\"neighborhood\",\"name\":\"Market Almaden\",\"full_name\":\"Market Almaden, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.890935,37.3243217],[-121.890935,37.330009],[-121.883041,37.330009],[-121.883041,37.3243217],[-121.890935,37.3243217]]]},\"attributes\":{}},{\"id\":\"2a240dbd5e3d0d60\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/2a240dbd5e3d0d60.json\",\"place_type\":\"neighborhood\",\"name\":\"Cumberland South\",\"full_name\":\"Cumberland South, Sunnyvale\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"45cadd6ef118ec9f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/45cadd6ef118ec9f.json\",\"place_type\":\"city\",\"name\":\"Sunnyvale\",\"full_name\":\"Sunnyvale, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.065206,37.3300682],[-122.065206,37.4267257],[-121.982475,37.4267257],[-121.982475,37.3300682],[-122.065206,37.3300682]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.050352,37.3594382],[-122.050352,37.3654137],[-122.0414998,37.3654137],[-122.0414998,37.3594382],[-122.050352,37.3594382]]]},\"attributes\":{}},{\"id\":\"2fa88dca68b9df96\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/2fa88dca68b9df96.json\",\"place_type\":\"neighborhood\",\"name\":\"South Los Altos\",\"full_name\":\"South Los Altos, Los Altos\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"6a4364ea6f987c10\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a4364ea6f987c10.json\",\"place_type\":\"city\",\"name\":\"Los Altos\",\"full_name\":\"Los Altos, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.129474,37.329932],[-122.129474,37.406473],[-122.060782,37.406473],[-122.060782,37.329932],[-122.129474,37.329932]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.078002,37.337478],[-122.078002,37.3592652],[-122.05969,37.3592652],[-122.05969,37.337478],[-122.078002,37.337478]]]},\"attributes\":{}},{\"id\":\"18b634927abdd39d\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/18b634927abdd39d.json\",\"place_type\":\"neighborhood\",\"name\":\"Calabazas South\",\"full_name\":\"Calabazas South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.03155,37.2939709],[-122.03155,37.3011451],[-122.0236949,37.3011451],[-122.0236949,37.2939709],[-122.03155,37.2939709]]]},\"attributes\":{}},{\"id\":\"05eacbd8d1aa01cd\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/05eacbd8d1aa01cd.json\",\"place_type\":\"neighborhood\",\"name\":\"Flickinger South\",\"full_name\":\"Flickinger South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.873283,37.379857],[-121.873283,37.3895353],[-121.862908,37.3895353],[-121.862908,37.379857],[-121.873283,37.379857]]]},\"attributes\":{}},{\"id\":\"7262a1ac091221f6\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7262a1ac091221f6.json\",\"place_type\":\"neighborhood\",\"name\":\"Vinci South\",\"full_name\":\"Vinci South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8786112,37.371757],[-121.8786112,37.385461],[-121.867352,37.385461],[-121.867352,37.371757],[-121.8786112,37.371757]]]},\"attributes\":{}},{\"id\":\"02d7ed9dda1ec670\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/02d7ed9dda1ec670.json\",\"place_type\":\"neighborhood\",\"name\":\"South Campus\",\"full_name\":\"South Campus, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.885042,37.326856],[-121.885042,37.335993],[-121.871896,37.335993],[-121.871896,37.326856],[-121.885042,37.326856]]]},\"attributes\":{}},{\"id\":\"4b0d4e092c2bbf38\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/4b0d4e092c2bbf38.json\",\"place_type\":\"neighborhood\",\"name\":\"Brookwood South\",\"full_name\":\"Brookwood South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.866968,37.331588],[-121.866968,37.340828],[-121.8615862,37.340828],[-121.8615862,37.331588],[-121.866968,37.331588]]]},\"attributes\":{}},{\"id\":\"6a2cd44438fa430a\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a2cd44438fa430a.json\",\"place_type\":\"neighborhood\",\"name\":\"Clayton South\",\"full_name\":\"Clayton South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.80151,37.3506109],[-121.80151,37.3556331],[-121.7948906,37.3556331],[-121.7948906,37.3506109],[-121.80151,37.3506109]]]},\"attributes\":{}},{\"id\":\"3f690c039272386c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3f690c039272386c.json\",\"place_type\":\"neighborhood\",\"name\":\"Little Portugal South\",\"full_name\":\"Little Portugal South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.861838,37.3463615],[-121.861838,37.3528054],[-121.8526191,37.3528054],[-121.8526191,37.3463615],[-121.861838,37.3463615]]]},\"attributes\":{}},{\"id\":\"5dfcb35d4822804e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5dfcb35d4822804e.json\",\"place_type\":\"neighborhood\",\"name\":\"Hillview South\",\"full_name\":\"Hillview South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8650841,37.241598],[-121.8650841,37.244396],[-121.860323,37.244396],[-121.860323,37.241598],[-121.8650841,37.241598]]]},\"attributes\":{}},{\"id\":\"27ae3d61c0cae65b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/27ae3d61c0cae65b.json\",\"place_type\":\"neighborhood\",\"name\":\"Mt Pleasant South\",\"full_name\":\"Mt Pleasant South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.814252,37.3446521],[-121.814252,37.35566],[-121.7999127,37.35566],[-121.7999127,37.3446521],[-121.814252,37.3446521]]]},\"attributes\":{}},{\"id\":\"6a138a4829d9e5e5\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a138a4829d9e5e5.json\",\"place_type\":\"neighborhood\",\"name\":\"Woodside of Almaden\",\"full_name\":\"Woodside of Almaden, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8338608,37.201186],[-121.8338608,37.2126851],[-121.8241277,37.2126851],[-121.8241277,37.201186],[-121.8338608,37.201186]]]},\"attributes\":{}},{\"id\":\"61582aaad5b1a0d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/61582aaad5b1a0d1.json\",\"place_type\":\"neighborhood\",\"name\":\"Creekside South\",\"full_name\":\"Creekside South, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.833133,37.192618],[-121.833133,37.201186],[-121.823138,37.201186],[-121.823138,37.192618],[-121.833133,37.192618]]]},\"attributes\":{}},{\"id\":\"75daccb751921c62\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/75daccb751921c62.json\",\"place_type\":\"neighborhood\",\"name\":\"Willow Glen South Lincoln Glen\",\"full_name\":\"Willow Glen South Lincoln Glen, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.912366,37.268005],[-121.912366,37.2863064],[-121.8769364,37.2863064],[-121.8769364,37.268005],[-121.912366,37.268005]]]},\"attributes\":{}},{\"id\":\"610b1535bed93356\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/610b1535bed93356.json\",\"place_type\":\"neighborhood\",\"name\":\"Hidden Glen South\",\"full_name\":\"Hidden Glen South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8511872,37.2311979],[-121.8511872,37.238863],[-121.83949,37.238863],[-121.83949,37.2311979],[-121.8511872,37.2311979]]]},\"attributes\":{}},{\"id\":\"59f07a02656e458c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/59f07a02656e458c.json\",\"place_type\":\"city\",\"name\":\"South Woodbridge\",\"full_name\":\"South Woodbridge, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.318079,38.148486],[-121.318079,38.158738],[-121.298049,38.158738],[-121.298049,38.148486],[-121.318079,38.148486]]]},\"attributes\":{}}],\"token\":\"e70e5b2a1c04e2f38d507b4fab266ece\"},\"query\":{\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/similar_places.json?lat=37.7821120599&name=South+of+Market+Child+Care&long=-122.400612831\",\"type\":\"similar_places\",\"params\":{\"coordinates\":{\"type\":\"Point\",\"coordinates\":[-122.400612831,37.7821120599]},\"name\":\"South of Market Child Care\",\"contained_within\":null,\"strict\":false,\"query\":null,\"autocomplete\":null,\"accuracy\":null,\"granularity\":\"\"}}}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/id/1ffd3558f2e98349.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:19 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "4b1b0ead5be444bf16c6539baabb05ec"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "4ec47c73c376fb8e"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "907"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141738007945355862; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:19 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:19 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380979"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":\"1ffd3558f2e98349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1ffd3558f2e98349.json\",\"place_type\":\"neighborhood\",\"name\":\"Dogpatch\",\"full_name\":\"Dogpatch, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"geometry\":null,\"polylines\":[],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39307792,37.75613103],[-122.39307792,37.764396],[-122.38719588,37.764396],[-122.38719588,37.75613103],[-122.39307792,37.75613103]]]},\"attributes\":{\"162834:id\":\"73222\"}}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/reverse_geocode.json?lat=30.2673701685&long=-97.7426147461",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:19 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "15690e28bd5a9291daefa14b46f33fde"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "fed511e426a6dc54"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "3146"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141738007978508933; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:19 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:19 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380979"
+                    ]
+                },
+                "body": {
+                    "string": "{\"result\":{\"places\":[{\"id\":\"c3f37afa9efcf94b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/c3f37afa9efcf94b.json\",\"place_type\":\"city\",\"name\":\"Austin\",\"full_name\":\"Austin, TX\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"e0060cda70f5f341\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/e0060cda70f5f341.json\",\"place_type\":\"admin\",\"name\":\"Texas\",\"full_name\":\"Texas, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-106.645646,25.837092],[-106.645646,36.500695],[-93.508131,36.500695],[-93.508131,25.837092],[-106.645646,25.837092]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.928935,30.127892],[-97.928935,30.5187994],[-97.5805133,30.5187994],[-97.5805133,30.127892],[-97.928935,30.127892]]]},\"attributes\":{}},{\"id\":\"1fa5d78e5cf5f072\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1fa5d78e5cf5f072.json\",\"place_type\":\"neighborhood\",\"name\":\"Downtown\",\"full_name\":\"Downtown, Austin\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"c3f37afa9efcf94b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/c3f37afa9efcf94b.json\",\"place_type\":\"city\",\"name\":\"Austin\",\"full_name\":\"Austin, TX\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.928935,30.127892],[-97.928935,30.5187994],[-97.5805133,30.5187994],[-97.5805133,30.127892],[-97.928935,30.127892]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.7567,30.2505491],[-97.7567,30.283936],[-97.7314833,30.283936],[-97.7314833,30.2505491],[-97.7567,30.2505491]]]},\"attributes\":{}},{\"id\":\"e0060cda70f5f341\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/e0060cda70f5f341.json\",\"place_type\":\"admin\",\"name\":\"Texas\",\"full_name\":\"Texas, US\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"96683cc9126741d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/96683cc9126741d1.json\",\"place_type\":\"country\",\"name\":\"United States\",\"full_name\":\"United States\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-179.231086,17.623468],[-179.231086,71.434357],[179.859685,71.434357],[179.859685,17.623468],[-179.231086,17.623468]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-106.645646,25.837092],[-106.645646,36.500695],[-93.508131,36.500695],[-93.508131,25.837092],[-106.645646,25.837092]]]},\"attributes\":{}},{\"id\":\"96683cc9126741d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/96683cc9126741d1.json\",\"place_type\":\"country\",\"name\":\"United States\",\"full_name\":\"United States\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-179.231086,17.623468],[-179.231086,71.434357],[179.859685,71.434357],[179.859685,17.623468],[-179.231086,17.623468]]]},\"attributes\":{}}]},\"query\":{\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/reverse_geocode.json?lat=30.2673701685&long=-97.7426147461\",\"type\":\"reverse_geocode\",\"params\":{\"accuracy\":0.0,\"coordinates\":{\"type\":\"Point\",\"coordinates\":[-97.7426147461,30.2673701685]},\"granularity\":\"neighborhood\"}}}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/similar_places.json?name=South+of+Market+Child+Care&lat=37.7821120598956&long=-122.400612831116",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:00 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "ac93e32987e8e91a2a57e1c67cbba7c8"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401000"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "19937"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:00 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141740010078128286; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:00 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "d8ba97b028f76db1"
+                    ]
+                },
+                "body": {
+                    "string": "{\"result\":{\"places\":[{\"id\":\"1d019624e6b4dcff\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1d019624e6b4dcff.json\",\"place_type\":\"neighborhood\",\"name\":\"South of Market\",\"full_name\":\"South of Market, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.418714,37.764094],[-122.418714,37.789283],[-122.379692,37.789283],[-122.379692,37.764094],[-122.418714,37.764094]]]},\"attributes\":{}},{\"id\":\"5c92ab5379de3839\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5c92ab5379de3839.json\",\"place_type\":\"neighborhood\",\"name\":\"South Beach\",\"full_name\":\"South Beach, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.401378,37.7776245],[-122.401378,37.798014],[-122.3809835,37.798014],[-122.3809835,37.7776245],[-122.401378,37.7776245]]]},\"attributes\":{}},{\"id\":\"640e4689c80fb4c5\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/640e4689c80fb4c5.json\",\"place_type\":\"neighborhood\",\"name\":\"Upper Market\",\"full_name\":\"Upper Market, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.446503,37.7617761],[-122.446503,37.769655],[-122.426242,37.769655],[-122.426242,37.7617761],[-122.446503,37.7617761]]]},\"attributes\":{}},{\"id\":\"746cc5651750e057\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/746cc5651750e057.json\",\"place_type\":\"city\",\"name\":\"South San Francisco\",\"full_name\":\"South San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.471871,37.6345111],[-122.471871,37.683086],[-122.374366,37.683086],[-122.374366,37.6345111],[-122.471871,37.6345111]]]},\"attributes\":{}},{\"id\":\"78f29e0fbc3e5c3b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/78f29e0fbc3e5c3b.json\",\"place_type\":\"neighborhood\",\"name\":\"South of Midtown\",\"full_name\":\"South of Midtown, Palo Alto\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"3ad0f706b3fa62a8\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3ad0f706b3fa62a8.json\",\"place_type\":\"city\",\"name\":\"Palo Alto\",\"full_name\":\"Palo Alto, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.190523,37.362824],[-122.190523,37.465918],[-122.097537,37.465918],[-122.097537,37.362824],[-122.190523,37.362824]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.131468,37.417566],[-122.131468,37.429148],[-122.114745,37.429148],[-122.114745,37.417566],[-122.131468,37.417566]]]},\"attributes\":{}},{\"id\":\"3412e9dd2250b64d\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3412e9dd2250b64d.json\",\"place_type\":\"neighborhood\",\"name\":\"University South\",\"full_name\":\"University South, Palo Alto\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"3ad0f706b3fa62a8\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3ad0f706b3fa62a8.json\",\"place_type\":\"city\",\"name\":\"Palo Alto\",\"full_name\":\"Palo Alto, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.190523,37.362824],[-122.190523,37.465918],[-122.097537,37.465918],[-122.097537,37.362824],[-122.190523,37.362824]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.164271,37.438302],[-122.164271,37.45074],[-122.143171,37.45074],[-122.143171,37.438302],[-122.164271,37.438302]]]},\"attributes\":{}},{\"id\":\"18cccad2227da65c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/18cccad2227da65c.json\",\"place_type\":\"neighborhood\",\"name\":\"Market Almaden\",\"full_name\":\"Market Almaden, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.890935,37.3243217],[-121.890935,37.330009],[-121.883041,37.330009],[-121.883041,37.3243217],[-121.890935,37.3243217]]]},\"attributes\":{}},{\"id\":\"2a240dbd5e3d0d60\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/2a240dbd5e3d0d60.json\",\"place_type\":\"neighborhood\",\"name\":\"Cumberland South\",\"full_name\":\"Cumberland South, Sunnyvale\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"45cadd6ef118ec9f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/45cadd6ef118ec9f.json\",\"place_type\":\"city\",\"name\":\"Sunnyvale\",\"full_name\":\"Sunnyvale, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.065206,37.3300682],[-122.065206,37.4267257],[-121.982475,37.4267257],[-121.982475,37.3300682],[-122.065206,37.3300682]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.050352,37.3594382],[-122.050352,37.3654137],[-122.0414998,37.3654137],[-122.0414998,37.3594382],[-122.050352,37.3594382]]]},\"attributes\":{}},{\"id\":\"2fa88dca68b9df96\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/2fa88dca68b9df96.json\",\"place_type\":\"neighborhood\",\"name\":\"South Los Altos\",\"full_name\":\"South Los Altos, Los Altos\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"6a4364ea6f987c10\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a4364ea6f987c10.json\",\"place_type\":\"city\",\"name\":\"Los Altos\",\"full_name\":\"Los Altos, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.129474,37.329932],[-122.129474,37.406473],[-122.060782,37.406473],[-122.060782,37.329932],[-122.129474,37.329932]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.078002,37.337478],[-122.078002,37.3592652],[-122.05969,37.3592652],[-122.05969,37.337478],[-122.078002,37.337478]]]},\"attributes\":{}},{\"id\":\"18b634927abdd39d\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/18b634927abdd39d.json\",\"place_type\":\"neighborhood\",\"name\":\"Calabazas South\",\"full_name\":\"Calabazas South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.03155,37.2939709],[-122.03155,37.3011451],[-122.0236949,37.3011451],[-122.0236949,37.2939709],[-122.03155,37.2939709]]]},\"attributes\":{}},{\"id\":\"05eacbd8d1aa01cd\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/05eacbd8d1aa01cd.json\",\"place_type\":\"neighborhood\",\"name\":\"Flickinger South\",\"full_name\":\"Flickinger South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.873283,37.379857],[-121.873283,37.3895353],[-121.862908,37.3895353],[-121.862908,37.379857],[-121.873283,37.379857]]]},\"attributes\":{}},{\"id\":\"7262a1ac091221f6\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7262a1ac091221f6.json\",\"place_type\":\"neighborhood\",\"name\":\"Vinci South\",\"full_name\":\"Vinci South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8786112,37.371757],[-121.8786112,37.385461],[-121.867352,37.385461],[-121.867352,37.371757],[-121.8786112,37.371757]]]},\"attributes\":{}},{\"id\":\"02d7ed9dda1ec670\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/02d7ed9dda1ec670.json\",\"place_type\":\"neighborhood\",\"name\":\"South Campus\",\"full_name\":\"South Campus, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.885042,37.326856],[-121.885042,37.335993],[-121.871896,37.335993],[-121.871896,37.326856],[-121.885042,37.326856]]]},\"attributes\":{}},{\"id\":\"4b0d4e092c2bbf38\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/4b0d4e092c2bbf38.json\",\"place_type\":\"neighborhood\",\"name\":\"Brookwood South\",\"full_name\":\"Brookwood South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.866968,37.331588],[-121.866968,37.340828],[-121.8615862,37.340828],[-121.8615862,37.331588],[-121.866968,37.331588]]]},\"attributes\":{}},{\"id\":\"6a2cd44438fa430a\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a2cd44438fa430a.json\",\"place_type\":\"neighborhood\",\"name\":\"Clayton South\",\"full_name\":\"Clayton South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.80151,37.3506109],[-121.80151,37.3556331],[-121.7948906,37.3556331],[-121.7948906,37.3506109],[-121.80151,37.3506109]]]},\"attributes\":{}},{\"id\":\"3f690c039272386c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/3f690c039272386c.json\",\"place_type\":\"neighborhood\",\"name\":\"Little Portugal South\",\"full_name\":\"Little Portugal South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.861838,37.3463615],[-121.861838,37.3528054],[-121.8526191,37.3528054],[-121.8526191,37.3463615],[-121.861838,37.3463615]]]},\"attributes\":{}},{\"id\":\"5dfcb35d4822804e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5dfcb35d4822804e.json\",\"place_type\":\"neighborhood\",\"name\":\"Hillview South\",\"full_name\":\"Hillview South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8650841,37.241598],[-121.8650841,37.244396],[-121.860323,37.244396],[-121.860323,37.241598],[-121.8650841,37.241598]]]},\"attributes\":{}},{\"id\":\"27ae3d61c0cae65b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/27ae3d61c0cae65b.json\",\"place_type\":\"neighborhood\",\"name\":\"Mt Pleasant South\",\"full_name\":\"Mt Pleasant South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.814252,37.3446521],[-121.814252,37.35566],[-121.7999127,37.35566],[-121.7999127,37.3446521],[-121.814252,37.3446521]]]},\"attributes\":{}},{\"id\":\"6a138a4829d9e5e5\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/6a138a4829d9e5e5.json\",\"place_type\":\"neighborhood\",\"name\":\"Woodside of Almaden\",\"full_name\":\"Woodside of Almaden, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8338608,37.201186],[-121.8338608,37.2126851],[-121.8241277,37.2126851],[-121.8241277,37.201186],[-121.8338608,37.201186]]]},\"attributes\":{}},{\"id\":\"61582aaad5b1a0d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/61582aaad5b1a0d1.json\",\"place_type\":\"neighborhood\",\"name\":\"Creekside South\",\"full_name\":\"Creekside South, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.833133,37.192618],[-121.833133,37.201186],[-121.823138,37.201186],[-121.823138,37.192618],[-121.833133,37.192618]]]},\"attributes\":{}},{\"id\":\"75daccb751921c62\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/75daccb751921c62.json\",\"place_type\":\"neighborhood\",\"name\":\"Willow Glen South Lincoln Glen\",\"full_name\":\"Willow Glen South Lincoln Glen, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.912366,37.268005],[-121.912366,37.2863064],[-121.8769364,37.2863064],[-121.8769364,37.268005],[-121.912366,37.268005]]]},\"attributes\":{}},{\"id\":\"610b1535bed93356\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/610b1535bed93356.json\",\"place_type\":\"neighborhood\",\"name\":\"Hidden Glen South\",\"full_name\":\"Hidden Glen South, San Jose\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"7d62cffe6f98f349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/7d62cffe6f98f349.json\",\"place_type\":\"city\",\"name\":\"San Jose\",\"full_name\":\"San Jose, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.035311,37.193164],[-122.035311,37.469154],[-121.71215,37.469154],[-121.71215,37.193164],[-122.035311,37.193164]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.8511872,37.2311979],[-121.8511872,37.238863],[-121.83949,37.238863],[-121.83949,37.2311979],[-121.8511872,37.2311979]]]},\"attributes\":{}},{\"id\":\"59f07a02656e458c\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/59f07a02656e458c.json\",\"place_type\":\"city\",\"name\":\"South Woodbridge\",\"full_name\":\"South Woodbridge, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"fbd6d2f5a4e4a15e\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/fbd6d2f5a4e4a15e.json\",\"place_type\":\"admin\",\"name\":\"California\",\"full_name\":\"California, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-124.482003,32.528832],[-124.482003,42.009519],[-114.131212,42.009519],[-114.131212,32.528832],[-124.482003,32.528832]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-121.318079,38.148486],[-121.318079,38.158738],[-121.298049,38.158738],[-121.298049,38.148486],[-121.318079,38.148486]]]},\"attributes\":{}}],\"token\":\"e70e5b2a1c04e2f38d507b4fab266ece\"},\"query\":{\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/similar_places.json?name=South+of+Market+Child+Care&lat=37.7821120598956&long=-122.400612831116\",\"type\":\"similar_places\",\"params\":{\"coordinates\":{\"type\":\"Point\",\"coordinates\":[-122.400612831116,37.7821120598956]},\"name\":\"South of Market Child Care\",\"contained_within\":null,\"strict\":false,\"query\":null,\"autocomplete\":null,\"accuracy\":null,\"granularity\":\"\"}}}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/id/1ffd3558f2e98349.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:01 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "e00c90ff8afc06c9e772b4245a9aa21e"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401001"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "907"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:01 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141740010134827203; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:01 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "13cfdade0932d838"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":\"1ffd3558f2e98349\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1ffd3558f2e98349.json\",\"place_type\":\"neighborhood\",\"name\":\"Dogpatch\",\"full_name\":\"Dogpatch, San Francisco\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"5a110d312052166f\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/5a110d312052166f.json\",\"place_type\":\"city\",\"name\":\"San Francisco\",\"full_name\":\"San Francisco, CA\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.514926,37.708075],[-122.514926,37.833238],[-122.357031,37.833238],[-122.357031,37.708075],[-122.514926,37.708075]]]},\"attributes\":{}}],\"geometry\":null,\"polylines\":[],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39307792,37.75613103],[-122.39307792,37.764396],[-122.38719588,37.764396],[-122.38719588,37.75613103],[-122.39307792,37.75613103]]]},\"attributes\":{\"162834:id\":\"73222\"}}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/geo/reverse_geocode.json?lat=30.267370168467806&long=-97.74261474609375",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:01 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "5bb53db4e2885b391f129707d3342126"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401001"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "3164"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:01 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141740010172732275; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:01 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "e5f7951f1793a014"
+                    ]
+                },
+                "body": {
+                    "string": "{\"result\":{\"places\":[{\"id\":\"c3f37afa9efcf94b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/c3f37afa9efcf94b.json\",\"place_type\":\"city\",\"name\":\"Austin\",\"full_name\":\"Austin, TX\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"e0060cda70f5f341\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/e0060cda70f5f341.json\",\"place_type\":\"admin\",\"name\":\"Texas\",\"full_name\":\"Texas, US\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-106.645646,25.837092],[-106.645646,36.500695],[-93.508131,36.500695],[-93.508131,25.837092],[-106.645646,25.837092]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.928935,30.127892],[-97.928935,30.5187994],[-97.5805133,30.5187994],[-97.5805133,30.127892],[-97.928935,30.127892]]]},\"attributes\":{}},{\"id\":\"1fa5d78e5cf5f072\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/1fa5d78e5cf5f072.json\",\"place_type\":\"neighborhood\",\"name\":\"Downtown\",\"full_name\":\"Downtown, Austin\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"c3f37afa9efcf94b\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/c3f37afa9efcf94b.json\",\"place_type\":\"city\",\"name\":\"Austin\",\"full_name\":\"Austin, TX\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.928935,30.127892],[-97.928935,30.5187994],[-97.5805133,30.5187994],[-97.5805133,30.127892],[-97.928935,30.127892]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.7567,30.2505491],[-97.7567,30.283936],[-97.7314833,30.283936],[-97.7314833,30.2505491],[-97.7567,30.2505491]]]},\"attributes\":{}},{\"id\":\"e0060cda70f5f341\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/e0060cda70f5f341.json\",\"place_type\":\"admin\",\"name\":\"Texas\",\"full_name\":\"Texas, US\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[{\"id\":\"96683cc9126741d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/96683cc9126741d1.json\",\"place_type\":\"country\",\"name\":\"United States\",\"full_name\":\"United States\",\"country_code\":\"US\",\"country\":\"United States\",\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-179.231086,17.623468],[-179.231086,71.434357],[179.859685,71.434357],[179.859685,17.623468],[-179.231086,17.623468]]]},\"attributes\":{}}],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-106.645646,25.837092],[-106.645646,36.500695],[-93.508131,36.500695],[-93.508131,25.837092],[-106.645646,25.837092]]]},\"attributes\":{}},{\"id\":\"96683cc9126741d1\",\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/id\\/96683cc9126741d1.json\",\"place_type\":\"country\",\"name\":\"United States\",\"full_name\":\"United States\",\"country_code\":\"US\",\"country\":\"United States\",\"contained_within\":[],\"bounding_box\":{\"type\":\"Polygon\",\"coordinates\":[[[-179.231086,17.623468],[-179.231086,71.434357],[179.859685,71.434357],[179.859685,17.623468],[-179.231086,17.623468]]]},\"attributes\":{}}]},\"query\":{\"url\":\"https:\\/\\/api.twitter.com\\/1.1\\/geo\\/reverse_geocode.json?lat=30.267370168467806&long=-97.74261474609375\",\"type\":\"reverse_geocode\",\"params\":{\"accuracy\":0.0,\"coordinates\":{\"type\":\"Point\",\"coordinates\":[-97.74261474609375,30.267370168467806]},\"granularity\":\"neighborhood\"}}}"
+                }
+            }
+        }
+    ]
+}

@@ -24,7 +24,7 @@ tape = vcr.VCR(
     filter_headers=['Authorization'],
     serializer='json',
     # Either use existing cassettes, or never use recordings:
-    record_mode='new_episodes' if use_replay else 'all',
+    record_mode='none' if use_replay else 'all',
 )
 
 
@@ -40,4 +40,3 @@ def create_auth():
     auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
     auth.set_access_token(oauth_token, oauth_token_secret)
     return auth
-

@@ -1,0 +1,173 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/users/suggestions.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:44 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "8de1ff75ab971d794432fbb8dcf07e12"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "c06dde888151211a"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "1326"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738010483452204; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:44 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:44 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417381004"
+                    ]
+                },
+                "body": {
+                    "string": "[{\"size\":343,\"slug\":\"music\",\"name\":\"Music\"},{\"size\":79,\"slug\":\"sports\",\"name\":\"Sports\"},{\"size\":83,\"slug\":\"photography\",\"name\":\"Photography\"},{\"size\":51,\"slug\":\"twitter\",\"name\":\"Twitter\"},{\"size\":83,\"slug\":\"entertainment\",\"name\":\"Entertainment\"},{\"size\":64,\"slug\":\"funny\",\"name\":\"Funny\"},{\"size\":111,\"slug\":\"news\",\"name\":\"News\"},{\"size\":67,\"slug\":\"technology\",\"name\":\"Technology\"},{\"size\":75,\"slug\":\"fashion\",\"name\":\"Fashion\"},{\"size\":64,\"slug\":\"food-drink\",\"name\":\"Food & Drink\"},{\"size\":209,\"slug\":\"television\",\"name\":\"Television\"},{\"size\":37,\"slug\":\"family\",\"name\":\"Family\"},{\"size\":71,\"slug\":\"art-design\",\"name\":\"Art & Design\"},{\"size\":45,\"slug\":\"business\",\"name\":\"Business\"},{\"size\":46,\"slug\":\"health\",\"name\":\"Health\"},{\"size\":64,\"slug\":\"books\",\"name\":\"Books\"},{\"size\":49,\"slug\":\"science\",\"name\":\"Science\"},{\"size\":76,\"slug\":\"faith-and-religion\",\"name\":\"Faith and Religion\"},{\"size\":52,\"slug\":\"government\",\"name\":\"Government\"},{\"size\":48,\"slug\":\"social-good\",\"name\":\"Social Good\"},{\"size\":127,\"slug\":\"nba\",\"name\":\"NBA\"},{\"size\":44,\"slug\":\"travel\",\"name\":\"Travel\"},{\"size\":51,\"slug\":\"staff-picks\",\"name\":\"Staff Picks\"},{\"size\":81,\"slug\":\"mlb\",\"name\":\"MLB\"},{\"size\":98,\"slug\":\"nascar\",\"name\":\"NASCAR\"},{\"size\":62,\"slug\":\"nhl\",\"name\":\"NHL\"},{\"size\":128,\"slug\":\"pga\",\"name\":\"PGA\"},{\"size\":68,\"slug\":\"gaming\",\"name\":\"Gaming\"}]"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/users/suggestions.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:33 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "2b39a6478901d73038a3cf5e200f1200"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401033"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "1326"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:33 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740013387945037; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:33 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "078e6a1cb2827ce5"
+                    ]
+                },
+                "body": {
+                    "string": "[{\"size\":343,\"slug\":\"music\",\"name\":\"Music\"},{\"size\":79,\"slug\":\"sports\",\"name\":\"Sports\"},{\"size\":83,\"slug\":\"photography\",\"name\":\"Photography\"},{\"size\":51,\"slug\":\"twitter\",\"name\":\"Twitter\"},{\"size\":83,\"slug\":\"entertainment\",\"name\":\"Entertainment\"},{\"size\":64,\"slug\":\"funny\",\"name\":\"Funny\"},{\"size\":111,\"slug\":\"news\",\"name\":\"News\"},{\"size\":67,\"slug\":\"technology\",\"name\":\"Technology\"},{\"size\":75,\"slug\":\"fashion\",\"name\":\"Fashion\"},{\"size\":64,\"slug\":\"food-drink\",\"name\":\"Food & Drink\"},{\"size\":209,\"slug\":\"television\",\"name\":\"Television\"},{\"size\":37,\"slug\":\"family\",\"name\":\"Family\"},{\"size\":71,\"slug\":\"art-design\",\"name\":\"Art & Design\"},{\"size\":45,\"slug\":\"business\",\"name\":\"Business\"},{\"size\":46,\"slug\":\"health\",\"name\":\"Health\"},{\"size\":64,\"slug\":\"books\",\"name\":\"Books\"},{\"size\":49,\"slug\":\"science\",\"name\":\"Science\"},{\"size\":76,\"slug\":\"faith-and-religion\",\"name\":\"Faith and Religion\"},{\"size\":52,\"slug\":\"government\",\"name\":\"Government\"},{\"size\":48,\"slug\":\"social-good\",\"name\":\"Social Good\"},{\"size\":127,\"slug\":\"nba\",\"name\":\"NBA\"},{\"size\":44,\"slug\":\"travel\",\"name\":\"Travel\"},{\"size\":51,\"slug\":\"staff-picks\",\"name\":\"Staff Picks\"},{\"size\":81,\"slug\":\"mlb\",\"name\":\"MLB\"},{\"size\":98,\"slug\":\"nascar\",\"name\":\"NASCAR\"},{\"size\":62,\"slug\":\"nhl\",\"name\":\"NHL\"},{\"size\":128,\"slug\":\"pga\",\"name\":\"PGA\"},{\"size\":68,\"slug\":\"gaming\",\"name\":\"Gaming\"}]"
+                }
+            }
+        }
+    ]
+}

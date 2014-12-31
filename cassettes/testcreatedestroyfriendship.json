@@ -1,0 +1,317 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                },
+                "method": "POST",
+                "uri": "https://api.twitter.com:443/1.1/friendships/destroy.json?id=twitter",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "15894b6e50c56b57f6858c6f20241b10"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "e6c5277856ef65b7"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "2806"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738007049493082; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:10 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:10 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:10 UTC"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"twitter\",\"location\":\"San Francisco, CA\",\"profile_location\":null,\"description\":\"Your official source for news, updates and tips from Twitter, Inc.\",\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"expanded_url\":\"http:\\/\\/blog.twitter.com\\/\",\"display_url\":\"blog.twitter.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":33620547,\"friends_count\":101,\"listed_count\":86770,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":21,\"utc_offset\":-28800,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":true,\"statuses_count\":1845,\"lang\":\"en\",\"status\":{\"created_at\":\"Wed Nov 26 16:29:15 +0000 2014\",\"id\":537644262628663296,\"id_str\":\"537644262628663296\",\"text\":\"We love a good bird reference. Cast your vote to help the @WhiteHouse select the National Thanksgiving Turkey: https:\\/\\/t.co\\/wMP98fpiEw\",\"source\":\"\\u003ca href=\\\"https:\\/\\/about.twitter.com\\/products\\/tweetdeck\\\" rel=\\\"nofollow\\\"\\u003eTweetDeck\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":289,\"favorite_count\":392,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"WhiteHouse\",\"name\":\"The White House\",\"id\":30313925,\"id_str\":\"30313925\",\"indices\":[58,69]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/wMP98fpiEw\",\"expanded_url\":\"https:\\/\\/twitter.com\\/WhiteHouse\\/status\\/537617841928015872\",\"display_url\":\"twitter.com\\/WhiteHouse\\/sta\\u2026\",\"indices\":[111,134]}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1347405327\",\"profile_link_color\":\"226699\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                },
+                "method": "POST",
+                "uri": "https://api.twitter.com:443/1.1/friendships/create.json?id=twitter",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "dedec37cf1907ea42e892423df26eeb9"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "42e0f4614edc7057"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "2807"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738007601069520; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:16 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:16 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:16 UTC"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"twitter\",\"location\":\"San Francisco, CA\",\"profile_location\":null,\"description\":\"Your official source for news, updates and tips from Twitter, Inc.\",\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"expanded_url\":\"http:\\/\\/blog.twitter.com\\/\",\"display_url\":\"blog.twitter.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":33620548,\"friends_count\":101,\"listed_count\":86770,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":21,\"utc_offset\":-28800,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":true,\"statuses_count\":1845,\"lang\":\"en\",\"status\":{\"created_at\":\"Wed Nov 26 16:29:15 +0000 2014\",\"id\":537644262628663296,\"id_str\":\"537644262628663296\",\"text\":\"We love a good bird reference. Cast your vote to help the @WhiteHouse select the National Thanksgiving Turkey: https:\\/\\/t.co\\/wMP98fpiEw\",\"source\":\"\\u003ca href=\\\"https:\\/\\/about.twitter.com\\/products\\/tweetdeck\\\" rel=\\\"nofollow\\\"\\u003eTweetDeck\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":289,\"favorite_count\":392,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"WhiteHouse\",\"name\":\"The White House\",\"id\":30313925,\"id_str\":\"30313925\",\"indices\":[58,69]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/wMP98fpiEw\",\"expanded_url\":\"https:\\/\\/twitter.com\\/WhiteHouse\\/status\\/537617841928015872\",\"display_url\":\"twitter.com\\/WhiteHouse\\/sta\\u2026\",\"indices\":[111,134]}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1347405327\",\"profile_link_color\":\"226699\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                },
+                "method": "POST",
+                "uri": "https://api.twitter.com:443/1.1/friendships/destroy.json?id=twitter",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "1fbac1123600a22ed3cde4fbf98845f9"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "50caee0ed1be04ae"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "2806"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:14:50 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740008999538855; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:14:50 UTC"
+                    ],
+                    "date": [
+                        "Mon, 01 Dec 2014 02:14:50 UTC"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"twitter\",\"location\":\"San Francisco, CA\",\"profile_location\":null,\"description\":\"Your official source for news, updates and tips from Twitter, Inc.\",\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"expanded_url\":\"http:\\/\\/blog.twitter.com\\/\",\"display_url\":\"blog.twitter.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":33621102,\"friends_count\":101,\"listed_count\":86772,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":21,\"utc_offset\":-28800,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":true,\"statuses_count\":1845,\"lang\":\"en\",\"status\":{\"created_at\":\"Wed Nov 26 16:29:15 +0000 2014\",\"id\":537644262628663296,\"id_str\":\"537644262628663296\",\"text\":\"We love a good bird reference. Cast your vote to help the @WhiteHouse select the National Thanksgiving Turkey: https:\\/\\/t.co\\/wMP98fpiEw\",\"source\":\"\\u003ca href=\\\"https:\\/\\/about.twitter.com\\/products\\/tweetdeck\\\" rel=\\\"nofollow\\\"\\u003eTweetDeck\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":290,\"favorite_count\":398,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"WhiteHouse\",\"name\":\"The White House\",\"id\":30313925,\"id_str\":\"30313925\",\"indices\":[58,69]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/wMP98fpiEw\",\"expanded_url\":\"https:\\/\\/twitter.com\\/WhiteHouse\\/status\\/537617841928015872\",\"display_url\":\"twitter.com\\/WhiteHouse\\/sta\\u2026\",\"indices\":[111,134]}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1347405327\",\"profile_link_color\":\"226699\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                },
+                "method": "POST",
+                "uri": "https://api.twitter.com:443/1.1/friendships/create.json?id=twitter",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "7d3ce2bdd5bf6eed9eb036098eb175de"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "f7fbca7fcc1bb556"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "2807"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:14:56 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740009640321920; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:14:56 UTC"
+                    ],
+                    "date": [
+                        "Mon, 01 Dec 2014 02:14:56 UTC"
+                    ]
+                },
+                "body": {
+                    "string": "{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"twitter\",\"location\":\"San Francisco, CA\",\"profile_location\":null,\"description\":\"Your official source for news, updates and tips from Twitter, Inc.\",\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/5iRhy7wTgu\",\"expanded_url\":\"http:\\/\\/blog.twitter.com\\/\",\"display_url\":\"blog.twitter.com\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":33621102,\"friends_count\":101,\"listed_count\":86772,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":21,\"utc_offset\":-28800,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":true,\"statuses_count\":1845,\"lang\":\"en\",\"status\":{\"created_at\":\"Wed Nov 26 16:29:15 +0000 2014\",\"id\":537644262628663296,\"id_str\":\"537644262628663296\",\"text\":\"We love a good bird reference. Cast your vote to help the @WhiteHouse select the National Thanksgiving Turkey: https:\\/\\/t.co\\/wMP98fpiEw\",\"source\":\"\\u003ca href=\\\"https:\\/\\/about.twitter.com\\/products\\/tweetdeck\\\" rel=\\\"nofollow\\\"\\u003eTweetDeck\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":290,\"favorite_count\":398,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"WhiteHouse\",\"name\":\"The White House\",\"id\":30313925,\"id_str\":\"30313925\",\"indices\":[58,69]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/wMP98fpiEw\",\"expanded_url\":\"https:\\/\\/twitter.com\\/WhiteHouse\\/status\\/537617841928015872\",\"display_url\":\"twitter.com\\/WhiteHouse\\/sta\\u2026\",\"indices\":[111,134]}]},\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/657090062\\/l1uqey5sy82r9ijhke1i.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/530553072594874368\\/7f9QErOD_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1347405327\",\"profile_link_color\":\"226699\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}"
+                }
+            }
+        }
+    ]
+}

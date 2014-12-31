@@ -1148,7 +1148,7 @@ class API(object):
 
     @property
     def search(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/search
+        """ :reference: https://dev.twitter.com/rest/reference/get/search/tweets
             :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode',
              'max_id', 'since', 'until', 'result_type', 'count',
               'include_entities', 'from', 'to', 'source']
@@ -1161,30 +1161,6 @@ class API(object):
                            'max_id', 'since', 'until', 'result_type',
                            'count', 'include_entities', 'from',
                            'to', 'source']
-        )
-
-    @property
-    def trends_daily(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/trends/daily
-            :allowed_param:'date', 'exclude'
-        """
-        return bind_api(
-            api=self,
-            path='/trends/daily.json',
-            payload_type='json',
-            allowed_param=['date', 'exclude']
-        )
-
-    @property
-    def trends_weekly(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/trends/weekly
-            :allowed_param:'date', 'exclude'
-        """
-        return bind_api(
-            api=self,
-            path='/trends/weekly.json',
-            payload_type='json',
-            allowed_param=['date', 'exclude']
         )
 
     @property

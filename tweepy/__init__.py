@@ -5,7 +5,7 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '2.3'
+__version__ = '3.1.0'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
@@ -21,7 +21,5 @@ from tweepy.cursor import Cursor
 api = API()
 
 def debug(enable=True, level=1):
-
-    import httplib
-    httplib.HTTPConnection.debuglevel = level
-
+    from six.moves.http_client import HTTPConnection
+    HTTPConnection.debuglevel = level

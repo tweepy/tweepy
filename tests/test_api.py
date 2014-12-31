@@ -386,11 +386,11 @@ class TweepyAPITests(TweepyTestCase):
             """Return True if a given place_name is in place_list."""
             return any([x.full_name.lower() == place_name.lower() for x in place_list])
 
-        twitter_hq = self.api.geo_similar_places(lat=37.7821120598956,
-                                                 long=-122.400612831116,
+        twitter_hq = self.api.geo_similar_places(lat='37.7821120598956',
+                                                 long='-122.400612831116',
                                                  name='South of Market Child Care')
         # Assumes that twitter_hq is first Place returned...
-        self.assertEqual(twitter_hq[0].id, '09aff2da00000000')
+        self.assertEqual(twitter_hq[0].id, '1d019624e6b4dcff')
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',

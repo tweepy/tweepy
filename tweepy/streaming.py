@@ -146,7 +146,7 @@ class ReadBuffer(object):
 
     def __init__(self, stream, chunk_size):
         self._stream = stream
-        self._buffer = ""
+        self._buffer = u""
         self._chunk_size = chunk_size
 
     def read_len(self, length):
@@ -154,7 +154,7 @@ class ReadBuffer(object):
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len)
+            self._buffer += self._stream.read(read_len).decode("ascii")
 
     def read_line(self, sep='\n'):
         start = 0
@@ -164,7 +164,7 @@ class ReadBuffer(object):
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size)
+            self._buffer += self._stream.read(self._chunk_size).decode("ascii")
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -197,6 +197,8 @@ class Stream(object):
         # fewer socket read calls.
         self.chunk_size = options.get("chunk_size",  512)
 
+        self.verify = options.get("verify", True)
+
         self.api = API()
         self.session = requests.Session()
         self.session.headers = options.get("headers") or {}
@@ -225,7 +227,8 @@ class Stream(object):
                                             data=self.body,
                                             timeout=self.timeout,
                                             stream=True,
-                                            auth=auth)
+                                            auth=auth,
+                                            verify=self.verify)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
@@ -413,7 +416,7 @@ class Stream(object):
         if languages:
             self.session.params['language'] = u','.join(map(str, languages))
         self.body = urlencode_noplus(self.session.params)
-        self.session.params['delimited'] = 'length'
+        self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
         self._start(async)
 

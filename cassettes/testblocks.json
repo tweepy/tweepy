@@ -1,0 +1,173 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/blocks/list.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:06 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "1d5b777ebf7aacf182c14f9ecd554535"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "3a0221edc29d466e"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "content-length": [
+                        "4635"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738006610469294; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:06 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:06 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380966"
+                    ]
+                },
+                "body": {
+                    "string": "{\"users\":[{\"id\":81928310,\"id_str\":\"81928310\",\"name\":\"asaf\",\"screen_name\":\"locksmithvista\",\"location\":\"\",\"profile_location\":null,\"description\":\"\",\"url\":null,\"entities\":{\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":298,\"friends_count\":1674,\"listed_count\":1,\"created_at\":\"Mon Oct 12 21:04:45 +0000 2009\",\"favourites_count\":0,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":false,\"statuses_count\":34,\"lang\":\"en\",\"status\":{\"created_at\":\"Tue Oct 27 18:06:52 +0000 2009\",\"id\":5206788265,\"id_str\":\"5206788265\",\"text\":\"---------------------   http:\\/\\/www.lockersmith.com\\/      ------------              dont get stuck out of yore car\\/appartment\",\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":1,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/44574448\\/2.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/44574448\\/2.jpg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/467120707\\/8318_101780806506521_100000238068041_50269_8288754_n_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/467120707\\/8318_101780806506521_100000238068041_50269_8288754_n_normal.jpg\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false},{\"id\":52573909,\"id_str\":\"52573909\",\"name\":\"ISABEL CITRINY\",\"screen_name\":\"isacauzadera\",\"location\":\"Rio de Janeiro - RJ\",\"profile_location\":null,\"description\":\"Brasil. 15 anos. Comer. Dormir. Zoeira. Potaria\",\"url\":\"http:\\/\\/t.co\\/ZaZoq73bre\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/ZaZoq73bre\",\"expanded_url\":\"http:\\/\\/ask.fm\\/icitriny\",\"display_url\":\"ask.fm\\/icitriny\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":2073,\"friends_count\":1467,\"listed_count\":346,\"created_at\":\"Wed Jul 01 00:26:55 +0000 2009\",\"favourites_count\":304,\"utc_offset\":-39600,\"time_zone\":\"International Date Line West\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":20523,\"lang\":\"pt\",\"status\":{\"created_at\":\"Thu May 02 16:12:29 +0000 2013\",\"id\":329991796329431042,\"id_str\":\"329991796329431042\",\"text\":\"krl esqueci a senha do meu tt to fudidaaaaaaaa\",\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":1,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"favorited\":false,\"retweeted\":false,\"lang\":\"pt\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"FFFFFF\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/858212120\\/6b2080ca641e6c0d1fa06fa9fb4ca5aa.jpeg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/858212120\\/6b2080ca641e6c0d1fa06fa9fb4ca5aa.jpeg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/3603154671\\/2720d557a78a2c358a365de48cacd987_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/3603154671\\/2720d557a78a2c358a365de48cacd987_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/52573909\\/1367468630\",\"profile_link_color\":\"42BD2A\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"FFFFFF\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/blocks/list.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:14:45 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "3f6a1c495ccd4c6afd387b44ff3f9961"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417400985"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "4635"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:14:45 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740008592262621; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:14:45 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "1f5c4544c1d4a410"
+                    ]
+                },
+                "body": {
+                    "string": "{\"users\":[{\"id\":81928310,\"id_str\":\"81928310\",\"name\":\"asaf\",\"screen_name\":\"locksmithvista\",\"location\":\"\",\"profile_location\":null,\"description\":\"\",\"url\":null,\"entities\":{\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":298,\"friends_count\":1674,\"listed_count\":1,\"created_at\":\"Mon Oct 12 21:04:45 +0000 2009\",\"favourites_count\":0,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":false,\"statuses_count\":34,\"lang\":\"en\",\"status\":{\"created_at\":\"Tue Oct 27 18:06:52 +0000 2009\",\"id\":5206788265,\"id_str\":\"5206788265\",\"text\":\"---------------------   http:\\/\\/www.lockersmith.com\\/      ------------              dont get stuck out of yore car\\/appartment\",\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":1,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/44574448\\/2.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/44574448\\/2.jpg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/467120707\\/8318_101780806506521_100000238068041_50269_8288754_n_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/467120707\\/8318_101780806506521_100000238068041_50269_8288754_n_normal.jpg\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false},{\"id\":52573909,\"id_str\":\"52573909\",\"name\":\"ISABEL CITRINY\",\"screen_name\":\"isacauzadera\",\"location\":\"Rio de Janeiro - RJ\",\"profile_location\":null,\"description\":\"Brasil. 15 anos. Comer. Dormir. Zoeira. Potaria\",\"url\":\"http:\\/\\/t.co\\/ZaZoq73bre\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/ZaZoq73bre\",\"expanded_url\":\"http:\\/\\/ask.fm\\/icitriny\",\"display_url\":\"ask.fm\\/icitriny\",\"indices\":[0,22]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":2073,\"friends_count\":1467,\"listed_count\":346,\"created_at\":\"Wed Jul 01 00:26:55 +0000 2009\",\"favourites_count\":304,\"utc_offset\":-39600,\"time_zone\":\"International Date Line West\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":20523,\"lang\":\"pt\",\"status\":{\"created_at\":\"Thu May 02 16:12:29 +0000 2013\",\"id\":329991796329431042,\"id_str\":\"329991796329431042\",\"text\":\"krl esqueci a senha do meu tt to fudidaaaaaaaa\",\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"truncated\":false,\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweet_count\":1,\"favorite_count\":0,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[]},\"favorited\":false,\"retweeted\":false,\"lang\":\"pt\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"FFFFFF\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/858212120\\/6b2080ca641e6c0d1fa06fa9fb4ca5aa.jpeg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/858212120\\/6b2080ca641e6c0d1fa06fa9fb4ca5aa.jpeg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/3603154671\\/2720d557a78a2c358a365de48cacd987_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/3603154671\\/2720d557a78a2c358a365de48cacd987_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/52573909\\/1367468630\",\"profile_link_color\":\"42BD2A\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"FFFFFF\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"muting\":false}],\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}"
+                }
+            }
+        }
+    ]
+}

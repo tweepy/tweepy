@@ -540,43 +540,6 @@ Help Methods
    :rtype: list of :class:`SearchResult` objects
 
 
-.. method:: API.trends()
-
-   Returns the top ten topics that are currently trending on Twitter. The
-   response includes the time of the request, the name of each trend, and
-   the url to the Twitter Search results page for that topic.
-
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_current([exclude])
-
-   Returns the current top 10 trending topics on Twitter. The response
-   includes the time of the request, the name of each trending topic, and
-   query used on Twitter Search results page for that topic.
-
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_daily([date], [exclude])
-
-   Returns the top 20 trending topics for each hour in a given day.
-
-   :param date: |date|
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_weekly([date], [exclude])
-
-   Returns the top 30 trending topics for each day in a given week.
-
-   :param date: |date|
-   :param exclude: |exclude|
-   :rtype: :class:`JSON` object
-
-
 List Methods
 ------------
 
@@ -738,15 +701,38 @@ List Methods
    :rtype: :class:`User` object if user is subscribed to the list, otherwise False.
 
 
-Local Trends Methods
+Trends Methods
 --------------------
 
-.. method:: API.trends_available([lat], [long])
+.. method:: API.trends_available()
 
-   Returns the locations that Twitter has trending topic information for. The response is an array of "locations" that encode the location's WOEID (a Yahoo! Where On Earth ID) and some other human-readable information such as a canonical name and country the location belongs in. [Coming soon]
+   Returns the locations that Twitter has trending topic information for. The response is an array of "locations" that encode the location's WOEID (a Yahoo! Where On Earth ID) and some other human-readable information such as a canonical name and country the location belongs in.
 
-   :param lat: If passed in conjunction with long, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest.
-   :param long: See lat.
+   :rtype: :class:`JSON` object
+
+
+.. method:: API.trends_place(id, [exclude])
+
+   Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+
+   The response is an array of “trend” objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL.
+
+   This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+
+   :param id: The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID.
+   :param exclude: Setting this equal to hashtags will remove all hashtags from the trends list.
+   :rtype: :class:`JSON` object
+
+.. method:: API.trends_closest(lat, long)
+
+   Returns the locations that Twitter has trending topic information for, closest to a specified location.
+
+   The response is an array of “locations” that encode the location’s WOEID and some other human-readable information such as a canonical name and country the location belongs in.
+
+   A WOEID is a Yahoo! Where On Earth ID.
+
+   :param lat: If provided with a long parameter the available trend locations will be sorted by distance, nearest to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is negative, East is positive) inclusive.
+   :param long: If provided with a lat parameter the available trend locations will be sorted by distance, nearest to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is negative, East is positive) inclusive.
    :rtype: :class:`JSON` object
 
 

@@ -1,0 +1,167 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/help/languages.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:48 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "186e9de0d5f65f02836c52d9bc18b60c"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "471d8f2b2f291ae8"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "1792"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141738010802209936; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:48 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:48 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Mon, 01 Dec 2014 20:41:48 GMT"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417381008"
+                    ]
+                },
+                "body": {
+                    "string": "[{\"code\":\"fr\",\"name\":\"French\",\"status\":\"production\"},{\"code\":\"en\",\"name\":\"English\",\"status\":\"production\"},{\"code\":\"ar\",\"name\":\"Arabic\",\"status\":\"production\"},{\"code\":\"ja\",\"name\":\"Japanese\",\"status\":\"production\"},{\"code\":\"es\",\"name\":\"Spanish\",\"status\":\"production\"},{\"code\":\"de\",\"name\":\"German\",\"status\":\"production\"},{\"code\":\"it\",\"name\":\"Italian\",\"status\":\"production\"},{\"code\":\"id\",\"name\":\"Indonesian\",\"status\":\"production\"},{\"code\":\"pt\",\"name\":\"Portuguese\",\"status\":\"production\"},{\"code\":\"ko\",\"name\":\"Korean\",\"status\":\"production\"},{\"code\":\"tr\",\"name\":\"Turkish\",\"status\":\"production\"},{\"code\":\"ru\",\"name\":\"Russian\",\"status\":\"production\"},{\"code\":\"nl\",\"name\":\"Dutch\",\"status\":\"production\"},{\"code\":\"fil\",\"name\":\"Filipino\",\"status\":\"production\"},{\"code\":\"msa\",\"name\":\"Malay\",\"status\":\"production\"},{\"code\":\"zh-tw\",\"name\":\"Traditional Chinese\",\"status\":\"production\"},{\"code\":\"zh-cn\",\"name\":\"Simplified Chinese\",\"status\":\"production\"},{\"code\":\"hi\",\"name\":\"Hindi\",\"status\":\"production\"},{\"code\":\"no\",\"name\":\"Norwegian\",\"status\":\"production\"},{\"code\":\"sv\",\"name\":\"Swedish\",\"status\":\"production\"},{\"code\":\"fi\",\"name\":\"Finnish\",\"status\":\"production\"},{\"code\":\"da\",\"name\":\"Danish\",\"status\":\"production\"},{\"code\":\"pl\",\"name\":\"Polish\",\"status\":\"production\"},{\"code\":\"hu\",\"name\":\"Hungarian\",\"status\":\"production\"},{\"code\":\"fa\",\"name\":\"Persian\",\"status\":\"production\"},{\"code\":\"he\",\"name\":\"Hebrew\",\"status\":\"production\"},{\"code\":\"th\",\"name\":\"Thai\",\"status\":\"production\"},{\"code\":\"uk\",\"name\":\"Ukrainian\",\"status\":\"production\"},{\"code\":\"cs\",\"name\":\"Czech\",\"status\":\"production\"},{\"code\":\"ro\",\"name\":\"Romanian\",\"status\":\"production\"},{\"code\":\"en-gb\",\"name\":\"British English\",\"status\":\"production\"},{\"code\":\"vi\",\"name\":\"Vietnamese\",\"status\":\"production\"},{\"code\":\"bn\",\"name\":\"Bengali\",\"status\":\"production\"}]"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/help/languages.json",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:37 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "32ae1761e5fcc2277aa55634a8ba1d0a"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401037"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "content-length": [
+                        "1792"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:37 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "expires": [
+                        "Tue, 02 Dec 2014 02:15:37 GMT"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "set-cookie": [
+                        "lang=en",
+                        "guest_id=v1%3A141740013763647041; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:37 UTC"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "a5f91d2dd0ae8414"
+                    ]
+                },
+                "body": {
+                    "string": "[{\"code\":\"fr\",\"name\":\"French\",\"status\":\"production\"},{\"code\":\"en\",\"name\":\"English\",\"status\":\"production\"},{\"code\":\"ar\",\"name\":\"Arabic\",\"status\":\"production\"},{\"code\":\"ja\",\"name\":\"Japanese\",\"status\":\"production\"},{\"code\":\"es\",\"name\":\"Spanish\",\"status\":\"production\"},{\"code\":\"de\",\"name\":\"German\",\"status\":\"production\"},{\"code\":\"it\",\"name\":\"Italian\",\"status\":\"production\"},{\"code\":\"id\",\"name\":\"Indonesian\",\"status\":\"production\"},{\"code\":\"pt\",\"name\":\"Portuguese\",\"status\":\"production\"},{\"code\":\"ko\",\"name\":\"Korean\",\"status\":\"production\"},{\"code\":\"tr\",\"name\":\"Turkish\",\"status\":\"production\"},{\"code\":\"ru\",\"name\":\"Russian\",\"status\":\"production\"},{\"code\":\"nl\",\"name\":\"Dutch\",\"status\":\"production\"},{\"code\":\"fil\",\"name\":\"Filipino\",\"status\":\"production\"},{\"code\":\"msa\",\"name\":\"Malay\",\"status\":\"production\"},{\"code\":\"zh-tw\",\"name\":\"Traditional Chinese\",\"status\":\"production\"},{\"code\":\"zh-cn\",\"name\":\"Simplified Chinese\",\"status\":\"production\"},{\"code\":\"hi\",\"name\":\"Hindi\",\"status\":\"production\"},{\"code\":\"no\",\"name\":\"Norwegian\",\"status\":\"production\"},{\"code\":\"sv\",\"name\":\"Swedish\",\"status\":\"production\"},{\"code\":\"fi\",\"name\":\"Finnish\",\"status\":\"production\"},{\"code\":\"da\",\"name\":\"Danish\",\"status\":\"production\"},{\"code\":\"pl\",\"name\":\"Polish\",\"status\":\"production\"},{\"code\":\"hu\",\"name\":\"Hungarian\",\"status\":\"production\"},{\"code\":\"fa\",\"name\":\"Persian\",\"status\":\"production\"},{\"code\":\"he\",\"name\":\"Hebrew\",\"status\":\"production\"},{\"code\":\"th\",\"name\":\"Thai\",\"status\":\"production\"},{\"code\":\"uk\",\"name\":\"Ukrainian\",\"status\":\"production\"},{\"code\":\"cs\",\"name\":\"Czech\",\"status\":\"production\"},{\"code\":\"ro\",\"name\":\"Romanian\",\"status\":\"production\"},{\"code\":\"en-gb\",\"name\":\"British English\",\"status\":\"production\"},{\"code\":\"vi\",\"name\":\"Vietnamese\",\"status\":\"production\"},{\"code\":\"bn\",\"name\":\"Bengali\",\"status\":\"production\"}]"
+                }
+            }
+        }
+    ]
+}

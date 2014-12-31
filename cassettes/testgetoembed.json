@@ -1,0 +1,153 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/statuses/oembed.json?id=266367358078169089",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Sun, 30 Nov 2014 20:41:20 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "73dd25bc831a538b7208c4cab55a7339"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-transaction": [
+                        "50e88ccc7ca87c7d"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "cache-control": [
+                        "must-revalidate, max-age=3153600000"
+                    ],
+                    "content-length": [
+                        "913"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141738008037832056; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:20 UTC"
+                    ],
+                    "last-modified": [
+                        "Sun, 30 Nov 2014 20:41:20 GMT"
+                    ],
+                    "expires": [
+                        "Tue, 06 Nov 2114 20:41:20 GMT"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "179"
+                    ],
+                    "x-rate-limit-limit": [
+                        "180"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417380980"
+                    ]
+                },
+                "body": {
+                    "string": "{\"cache_age\":\"3153600000\",\"url\":\"https:\\/\\/twitter.com\\/twitter\\/statuses\\/266367358078169089\",\"height\":null,\"provider_url\":\"https:\\/\\/twitter.com\",\"provider_name\":\"Twitter\",\"author_name\":\"Twitter\",\"version\":\"1.0\",\"author_url\":\"https:\\/\\/twitter.com\\/twitter\",\"type\":\"rich\",\"html\":\"\\u003Cblockquote class=\\\"twitter-tweet\\\"\\u003E\\u003Cp\\u003ERT \\u003Ca href=\\\"https:\\/\\/twitter.com\\/TwitterEng\\\"\\u003E@TwitterEng\\u003C\\/a\\u003E: Bolstering our infrastructure. &quot;As  usage patterns change, Twitter can remain resilient.&quot; \\u003Ca href=\\\"http:\\/\\/t.co\\/uML86B6s\\\"\\u003Ehttp:\\/\\/t.co\\/uML86B6s\\u003C\\/a\\u003E\\u003C\\/p\\u003E&mdash; Twitter (@twitter) \\u003Ca href=\\\"https:\\/\\/twitter.com\\/twitter\\/status\\/266367358078169089\\\"\\u003ENovember 8, 2012\\u003C\\/a\\u003E\\u003C\\/blockquote\\u003E\\n\\u003Cscript async src=\\\"\\/\\/platform.twitter.com\\/widgets.js\\\" charset=\\\"utf-8\\\"\\u003E\\u003C\\/script\\u003E\",\"width\":550}"
+                }
+            }
+        },
+        {
+            "request": {
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                },
+                "method": "GET",
+                "uri": "https://api.twitter.com:443/1.1/statuses/oembed.json?id=266367358078169089",
+                "body": null
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "date": [
+                        "Mon, 01 Dec 2014 02:15:02 UTC"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-connection-hash": [
+                        "152014dc0203aa6e3a8d742e06b802e0"
+                    ],
+                    "cache-control": [
+                        "must-revalidate, max-age=3153600000"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1417401002"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "expires": [
+                        "Wed, 07 Nov 2114 02:15:02 GMT"
+                    ],
+                    "set-cookie": [
+                        "guest_id=v1%3A141740010257203556; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:02 UTC"
+                    ],
+                    "last-modified": [
+                        "Mon, 01 Dec 2014 02:15:02 GMT"
+                    ],
+                    "content-length": [
+                        "913"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "179"
+                    ],
+                    "x-rate-limit-limit": [
+                        "180"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "x-transaction": [
+                        "aad83e7845d3b3b8"
+                    ]
+                },
+                "body": {
+                    "string": "{\"cache_age\":\"3153600000\",\"url\":\"https:\\/\\/twitter.com\\/twitter\\/statuses\\/266367358078169089\",\"height\":null,\"provider_url\":\"https:\\/\\/twitter.com\",\"provider_name\":\"Twitter\",\"author_name\":\"Twitter\",\"version\":\"1.0\",\"author_url\":\"https:\\/\\/twitter.com\\/twitter\",\"type\":\"rich\",\"html\":\"\\u003Cblockquote class=\\\"twitter-tweet\\\"\\u003E\\u003Cp\\u003ERT \\u003Ca href=\\\"https:\\/\\/twitter.com\\/TwitterEng\\\"\\u003E@TwitterEng\\u003C\\/a\\u003E: Bolstering our infrastructure. &quot;As  usage patterns change, Twitter can remain resilient.&quot; \\u003Ca href=\\\"http:\\/\\/t.co\\/uML86B6s\\\"\\u003Ehttp:\\/\\/t.co\\/uML86B6s\\u003C\\/a\\u003E\\u003C\\/p\\u003E&mdash; Twitter (@twitter) \\u003Ca href=\\\"https:\\/\\/twitter.com\\/twitter\\/status\\/266367358078169089\\\"\\u003ENovember 8, 2012\\u003C\\/a\\u003E\\u003C\\/blockquote\\u003E\\n\\u003Cscript async src=\\\"\\/\\/platform.twitter.com\\/widgets.js\\\" charset=\\\"utf-8\\\"\\u003E\\u003C\\/script\\u003E\",\"width\":550}"
+                }
+            }
+        }
+    ]
+}
