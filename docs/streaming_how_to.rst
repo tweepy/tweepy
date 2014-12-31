@@ -100,11 +100,11 @@ in a window of time, they will receive error 420.  The amount of time a client h
 will increase exponentially each time they make a failed attempt. 
 
 Tweepy's **Stream Listener** usefully passes error messages to an **on_error** stub. We can use **on_error** to 
-catch 420 errors and disconnect our stream.::
+catch 420 errors and disconnect our stream. ::
 
   class MyStreamListener(tweepy.StreamListener):
   
-  def on_error(self, status_code):
+      def on_error(self, status_code):
           if status_code == 420:
               #returning False in on_data disconnects the stream
               return False
