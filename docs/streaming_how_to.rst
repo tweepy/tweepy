@@ -10,7 +10,8 @@ connection, creating and destroying the session, reading incoming messages,
 and partially routing messages. 
 
 This page aims to help you get started using Twitter streams with Tweepy 
-by offering a first walk through. 
+by offering a first walk through.  Some features of Tweepy streaming are
+not covered here. See streaming.py in the Tweepy source code. 
 
 API authorization is required to access Twitter streams. 
 Follow the :ref:`auth_tutorial` if you need help with authentication. 
@@ -109,3 +110,4 @@ catch 420 errors and disconnect our stream.::
               return False
 
 For more information on error codes from the twitter api see `Twitter Response Codes Documentation`_.
+
