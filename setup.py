@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #from distutils.core import setup
-import re, uuid
+import re
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
@@ -14,8 +14,8 @@ if mo:
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
-install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
-reqs = [str(req.req) for req in install_reqs]
+requirementLines = [line.strip() for line in open('requirements.txt').readlines()]
+reqs = list(filter(None, requirementLines))
 
 setup(name="tweepy",
       version=version,
