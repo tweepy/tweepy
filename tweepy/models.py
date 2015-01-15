@@ -458,6 +458,16 @@ class Place(Model):
         return results
 
 
+class Media(Model):
+
+    @classmethod
+    def parse(cls, api, json):
+        media = cls(api)
+        for k, v in json.items():
+            setattr(media, k, v)
+        return media
+
+
 class ModelFactory(object):
     """
     Used by parsers for creating instances
@@ -475,6 +485,7 @@ class ModelFactory(object):
     list = List
     relation = Relation
     relationship = Relationship
+    media = Media
 
     json = JSONModel
     ids = IDModel
