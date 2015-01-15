@@ -175,11 +175,14 @@ class API(object):
             allowed_param=['id']
         )
 
-    @property
-    def update_status(self):
+    def update_status(self, media_ids=None, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update
-            :allowed_param:'status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates'
+            :allowed_param:'status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
         """
+        post_data = {}
+        if media_ids is not None:
+            post_data["media_ids"] = list_to_csv(media_ids)
+        
         return bind_api(
             api=self,
             path='/statuses/update.json',
@@ -187,7 +190,7 @@ class API(object):
             payload_type='status',
             allowed_param=['status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
             require_auth=True
-        )
+        )(post_data=post_data, *args, **kwargs)
 
     def media_upload(self, filename, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/media/upload
