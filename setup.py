@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 #from distutils.core import setup
-import re, uuid
+import re
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
+from pip.download import PipSession
 
 VERSIONFILE = "tweepy/__init__.py"
 ver_file = open(VERSIONFILE, "rt").read()
@@ -14,7 +15,7 @@ if mo:
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
-install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
+install_reqs = parse_requirements('requirements.txt', session=PipSession())
 reqs = [str(req.req) for req in install_reqs]
 
 setup(name="tweepy",
