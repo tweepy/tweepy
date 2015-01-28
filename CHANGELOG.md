@@ -1,5 +1,14 @@
-Version 3.1
------------
+Version 3.2.0
+-------------
+  - Remove deprecated trends methods.
+  - Fix tweepy.debug() to work in Python 3.
+  - Fixed issue #529 - StreamListener language filter stopped working.
+  - Add Documentation Page for streaming.
+  - Add media/upload endpoint.
+  - Add media_ids parameter to update_status().
+
+Version 3.1.0
+-------------
   - Allow specifying your own ssl certificates for streaming client.
   - Distribute Python Wheels instead of dumb binaries.
   - Fix cursor invocation, passing args to underlying method. (https://github.com/tweepy/tweepy/issues/515)
