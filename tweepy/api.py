@@ -1270,7 +1270,7 @@ class API(object):
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError('File is too big, must be less than 700kb.')
+                    raise TweepError('File is too big, must be less than %skb.' % max_size)
             except os.error:
                 raise TweepError('Unable to access file')
 
@@ -1279,7 +1279,7 @@ class API(object):
         else:
             f.seek(0, 2)  # Seek to end of file
             if f.tell() > (max_size * 1024):
-                raise TweepError('File is too big, must be less than 700kb.')
+                raise TweepError('File is too big, must be less than %skb.' % max_size)
             f.seek(0)  # Reset to beginning of file
             fp = f
 
