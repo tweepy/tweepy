@@ -1,9 +1,9 @@
 Tweepy: Twitter for Python!
 ======
-[![Build Status](https://travis-ci.org/tweepy/tweepy.png?branch=master)](https://travis-ci.org/tweepy/tweepy)
-[![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=v3.1.0)](http://docs.tweepy.org)
-[![Downloads](https://pypip.in/d/tweepy/badge.png)](https://crate.io/packages/tweepy) [![Downloads](https://pypip.in/v/tweepy/badge.png)](https://crate.io/packages/tweepy)
-[![Coverage Status](https://coveralls.io/repos/tweepy/tweepy/badge.png?branch=master)](https://coveralls.io/r/tweepy/tweepy?branch=master)
+[![Build Status](http://img.shields.io/travis/tweepy/tweepy/master.svg?style=flat)](https://travis-ci.org/tweepy/tweepy)
+[![Documentation Status](http://img.shields.io/badge/docs-v3.1.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
+[![Downloads](http://img.shields.io/pypi/dm/tweepy.svg?style=flat)](https://crate.io/packages/tweepy) [![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://crate.io/packages/tweepy)
+[![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/r/tweepy/tweepy?branch=master)
 
 Installation
 ------------
