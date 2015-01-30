@@ -1,0 +1,223 @@
+Metadata-Version: 1.1
+Name: oauthlib
+Version: 0.6.2
+Summary: A generic, spec-compliant, thorough implementation of the OAuth request-signing logic
+Home-page: https://github.com/idan/oauthlib
+Author: Ib Lundgren
+Author-email: ib.lundgren@gmail.com
+License: BSD
+Description: OAuthLib
+        ========
+        
+        *A generic, spec-compliant, thorough implementation of the OAuth request-signing
+        logic.*
+        
+        .. image:: https://travis-ci.org/idan/oauthlib.png?branch=master
+          :target: https://travis-ci.org/idan/oauthlib
+        .. image:: https://coveralls.io/repos/idan/oauthlib/badge.png?branch=master
+          :target: https://coveralls.io/r/idan/oauthlib
+        
+        
+        OAuth often seems complicated and difficult-to-implement. There are several
+        prominent libraries for handling OAuth requests, but they all suffer from one or
+        both of the following:
+        
+        1. They predate the `OAuth 1.0 spec`_, AKA RFC 5849.
+        2. They predate the `OAuth 2.0 spec`_, AKA RFC 6749.
+        3. They assume the usage of a specific HTTP request library.
+        
+        .. _`OAuth 1.0 spec`: http://tools.ietf.org/html/rfc5849
+        .. _`OAuth 2.0 spec`: http://tools.ietf.org/html/rfc6749
+        
+        OAuthLib is a generic utility which implements the logic of OAuth without
+        assuming a specific HTTP request object or web framework. Use it to graft OAuth
+        client support onto your favorite HTTP library, or provider support onto your
+        favourite web framework. If you're a maintainer of such a library, write a thin
+        veneer on top of OAuthLib and get OAuth support for very little effort.
+        
+        
+        Documentation
+        --------------
+        
+        Full documentation is available on `Read the Docs`_. All contributions are very
+        welcome! The documentation is still quite sparse, please open an issue for what
+        you'd like to know, or discuss it in our `G+ community`_, or even better, send a
+        pull request!
+        
+        .. _`G+ community`: https://plus.google.com/communities/101889017375384052571
+        .. _`Read the Docs`: https://oauthlib.readthedocs.org/en/latest/index.html
+        
+        Interested in making OAuth requests?
+        ------------------------------------
+        
+        Then you might be more interested in using `requests`_ which has OAuthLib
+        powered OAuth support provided by the `requests-oauthlib`_ library.
+        
+        .. _`requests`: https://github.com/kennethreitz/requests
+        .. _`requests-oauthlib`: https://github.com/requests/requests-oauthlib
+        
+        Which web frameworks are supported?
+        -----------------------------------
+        
+        The following packages provide OAuth support using OAuthLib.
+        
+        - For Django there is `django-oauth-toolkit`_, which includes `Django REST framework`_ support.
+        - For Flask there is `flask-oauthlib`_.
+        
+        If you have written an OAuthLib package that supports your favorite framework,
+        please open a Pull Request, updating the documentation.
+        
+        .. _`django-oauth-toolkit`: https://github.com/evonove/django-oauth-toolkit
+        .. _`flask-oauthlib`: https://github.com/lepture/flask-oauthlib
+        .. _`Django REST framework`: http://django-rest-framework.org
+        
+        Using OAuthLib? Please get in touch!
+        ------------------------------------
+        Patching OAuth support onto an http request framework? Creating an OAuth
+        provider extension for a web framework? Simply using OAuthLib to Get Things Done
+        or to learn?
+        
+        No matter which we'd love to hear from you in our `G+ community`_ or if you have
+        anything in particular you would like to have, change or comment on don't
+        hesitate for a second to send a pull request or open an issue. We might be quite
+        busy and therefore slow to reply but we love feedback!
+        
+        Chances are you have run into something annoying that you wish there was
+        documentation for, if you wish to gain eternal fame and glory, and a drink if we
+        have the pleasure to run into eachother, please send a docs pull request =)
+        
+        .. _`G+ community`: https://plus.google.com/communities/101889017375384052571
+        
+        License
+        -------
+        
+        OAuthLib is yours to use and abuse according to the terms of the BSD license.
+        Check the LICENSE file for full details.
+        
+        Changelog
+        ---------
+        
+        *OAuthLib is in active development, with the core of both OAuth 1 and 2
+        completed, for providers as well as clients.* See `supported features`_ for
+        details.
+        
+        .. _`supported features`: http://oauthlib.readthedocs.org/en/latest/feature_matrix.html
+        
+        0.6.2: 
+        
+        * Numerous OAuth2 provider errors now suggest a status code of 401 instead
+          of 400 (#247.
+        
+        * Added support for JSON web tokens with oauthlib.common.generate_signed_token.
+          Install extra dependency with oauthlib[signedtoken] (#237).
+        
+        * OAuth2 scopes can be arbitrary objects with __str__ defined (#240).
+        
+        * OAuth 1 Clients can now register custom signature methods (#239).
+        
+        * Exposed new method oauthlib.oauth2.is_secure_transport that checks whether
+          the given URL is HTTPS. Checks using this method can be disabled by setting
+          the environment variable OAUTHLIB_INSECURE_TRANSPORT (#249).
+        
+        * OAuth1 clients now has __repr__ and will be printed with secrets scrubbed.
+        
+        * OAuth1 Client.get_oauth_params now takes an oauthlib.Request as an argument.
+          
+        * urldecode will now raise a much more informative error message on
+          incorrectly encoded strings.
+        
+        * Plenty of typo and other doc fixes.
+        
+        0.6.1: Draft revocation endpoint features and numerous fixes including
+        
+        * (OAuth 2 Provider) is_within_original_scope to check whether a refresh token
+          is trying to aquire a new set of scopes that are a subset of the original scope.
+        
+        * (OAuth 2 Provider) expires_in token lifetime can be set per request.
+        
+        * (OAuth 2 Provider) client_authentication_required method added to differentiate
+          between public and confidential clients.
+        
+        * (OAuth 2 Provider) rotate_refresh_token now indicates whether a new refresh
+          token should be generated during token refresh or if old should be kept.
+        
+        * (OAuth 2 Provider) returned JSON headers no longer include charset.
+        
+        * (OAuth 2 Provider) validate_authorizatoin_request now also includes the
+          internal request object in the returned dictionary. Note that this is
+          not meant to be relied upon heavily and its interface might change.
+        
+        * and many style and typo fixes.
+        
+        0.6.0: OAuth 1 & 2 provider API refactor with breaking changes
+        
+        * All endpoint methods change contract to return 3 values instead of 4. The new
+          signature is `headers`, `body`, `status code` where the initial `redirect_uri`
+          has been relocated to its rightful place inside headers as `Location`.
+        
+        * OAuth 1 Access Token Endpoint has a new required validator method 
+          `invalidate_request_token`.
+        
+        * OAuth 1 Authorization Endpoint now returns a 200 response instead of 302 on
+          `oob` callbacks. 
+        
+        0.5.1: OAuth 1 provider fix for incorrect token param in nonce validation.
+        
+        0.5.0: OAuth 1 provider refactor. OAuth 2 refresh token validation fix.
+        
+        0.4.2: OAuth 2 draft to RFC. Removed OAuth 2 framework decorators.
+        
+        0.4.1: Documentation corrections and various small code fixes.
+        
+        0.4.0: OAuth 2 Provider support (experimental).
+        
+        0.3.8: OAuth 2 Client now uses custom errors and raise on expire
+        
+        0.3.7: OAuth 1 optional encoding of Client.sign return values
+        
+        0.3.6: Revert default urlencoding.
+        
+        0.3.5: Default unicode conversion (utf-8) and urlencoding of input.
+        
+        0.3.4: A number of small features and bug fixes.
+        
+        0.3.3: OAuth 1 Provider verify now return useful params
+        
+        0.3.2: Fixed #62, all Python 3 tests pass.
+        
+        0.3.1: Python 3.1, 3.2, 3.3 support (experimental)
+        
+        0.3.0: Initial OAuth 2 client support
+        
+        0.2.1: Exclude non urlencoded bodies during request verification
+        
+        0.2.0: OAuth provider support
+        
+        0.1.4: soft dependency on PyCrypto
+        
+        0.1.3: use python-rsa instead of pycrypto.
+        
+        0.1.1 / 0.1.2: Fix installation of pycrypto dependency.
+        
+        0.1.0: OAuth 1 client functionality seems to be working. Hooray!
+        
+        0.0.x: In the beginning, there was the word.
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: Implementation
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -1,0 +1,3 @@
+include README.rst LICENSE HISTORY.rst requirements.txt AUTHORS.rst
+graft tests/
+graft docs/
