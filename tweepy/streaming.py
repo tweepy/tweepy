@@ -403,7 +403,7 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            self.session.params['follow'] = u','.join(follow).encode(encoding)
+            self.session.params['follow'] = u','.join(map(str, follow)).encode(encoding)
         if track:
             self.session.params['track'] = u','.join(track).encode(encoding)
         if locations and len(locations) > 0:
