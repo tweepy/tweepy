@@ -79,6 +79,10 @@ class StreamListener(object):
         else:
             logging.error("Unknown message type: " + str(raw_data))
 
+    def keep_alive(self):
+        """Called when a keep-alive arrived"""
+        return
+
     def on_status(self, status):
         """Called when a new status arrives"""
         return
@@ -200,12 +204,16 @@ class Stream(object):
         self.verify = options.get("verify", True)
 
         self.api = API()
-        self.session = requests.Session()
-        self.session.headers = options.get("headers") or {}
-        self.session.params = None
+        self.headers = options.get("headers") or {}
+        self.new_session()
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
+
+    def new_session(self):
+        self.session = requests.Session()
+        self.session.headers = self.headers
+        self.session.params = None
 
     def _run(self):
         # Authenticate
@@ -270,12 +278,12 @@ class Stream(object):
         if resp:
             resp.close()
 
-        self.session = requests.Session()
+        self.new_session()
 
         if exception:
             # call a handler first so that the exception can be logged.
             self.listener.on_exception(exception)
-            raise exception
+            raise
 
     def _data(self, data):
         if self.listener.on_data(data) is False:
@@ -289,7 +297,7 @@ class Stream(object):
             while True:
                 line = buf.read_line().strip()
                 if not line:
-                    pass  # keep-alive new lines are expected
+                    self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
                     length = int(line)
                     break
