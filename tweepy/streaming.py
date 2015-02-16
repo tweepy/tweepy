@@ -20,7 +20,7 @@ from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
 
-from tweepy.utils import import_simplejson, urlencode_noplus
+from tweepy.utils import import_simplejson
 json = import_simplejson()
 
 STREAM_VERSION = '1.1'
@@ -125,7 +125,7 @@ class StreamListener(object):
         https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
         """
         return
-    
+
     def on_warning(self, notice):
         """Called when a disconnection warning message arrives"""
         return
@@ -397,44 +397,42 @@ class Stream(object):
 
     def filter(self, follow=None, track=None, async=False, locations=None,
                stall_warnings=False, languages=None, encoding='utf8'):
-        self.session.params = {}
+        self.body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            self.session.params['follow'] = u','.join(follow).encode(encoding)
+            self.body['follow'] = u','.join(follow).encode(encoding)
         if track:
-            self.session.params['track'] = u','.join(track).encode(encoding)
+            self.body['track'] = u','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.session.params['locations'] = u','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = u','.join(['%.4f' % l for l in locations])
         if stall_warnings:
-            self.session.params['stall_warnings'] = stall_warnings
+            self.body['stall_warnings'] = stall_warnings
         if languages:
-            self.session.params['language'] = u','.join(map(str, languages))
-        self.body = urlencode_noplus(self.session.params)
+            self.body['language'] = u','.join(map(str, languages))
         self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
         self._start(async)
 
     def sitestream(self, follow, stall_warnings=False,
                    with_='user', replies=False, async=False):
-        self.parameters = {}
+        self.body = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.parameters['follow'] = u','.join(map(six.text_type, follow))
-        self.parameters['delimited'] = 'length'
+        self.body['follow'] = u','.join(map(six.text_type, follow))
+        self.body['delimited'] = 'length'
         if stall_warnings:
-            self.parameters['stall_warnings'] = stall_warnings
+            self.body['stall_warnings'] = stall_warnings
         if with_:
-            self.parameters['with'] = with_
+            self.body['with'] = with_
         if replies:
-            self.parameters['replies'] = replies
-        self.body = urlencode_noplus(self.parameters)
+            self.body['replies'] = replies
         self._start(async)
 
     def disconnect(self):
