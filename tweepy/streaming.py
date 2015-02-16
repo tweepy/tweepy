@@ -200,12 +200,16 @@ class Stream(object):
         self.verify = options.get("verify", True)
 
         self.api = API()
-        self.session = requests.Session()
-        self.session.headers = options.get("headers") or {}
-        self.session.params = None
+        self.headers = options.get("headers") or {}
+        self.new_session()
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
+
+    def new_session(self):
+        self.session = requests.Session()
+        self.session.headers = self.headers
+        self.session.params = None
 
     def _run(self):
         # Authenticate
@@ -270,7 +274,7 @@ class Stream(object):
         if resp:
             resp.close()
 
-        self.session = requests.Session()
+        self.new_session()
 
         if exception:
             # call a handler first so that the exception can be logged.
