@@ -79,6 +79,10 @@ class StreamListener(object):
         else:
             logging.error("Unknown message type: " + str(raw_data))
 
+    def keep_alive(self):
+        """Called when a keep-alive arrived"""
+        return
+
     def on_status(self, status):
         """Called when a new status arrives"""
         return
@@ -293,7 +297,7 @@ class Stream(object):
             while True:
                 line = buf.read_line().strip()
                 if not line:
-                    pass  # keep-alive new lines are expected
+                    self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
                     length = int(line)
                     break
