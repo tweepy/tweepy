@@ -162,12 +162,8 @@ class TweepyStreamReadBuffer(unittest.TestCase):
         # Mock it's read function so it can't be called too many times
         mock_read = MagicMock(side_effect=on_read)
 
-        # Add an _fp member to it, like a real requests.raw stream
-        mock_fp = MagicMock()
-        mock_fp.isclosed.return_value = True
-
         try:
-            with patch.multiple(stream, read=mock_read, _fp=mock_fp, create=True):
+            with patch.multiple(stream, create=True, read=mock_read, closed=True):
                 # Now the stream can't call 'read' more than call_limit times
                 # and it looks like a requests stream that is closed
                 buf = ReadBuffer(stream, 50)
@@ -175,7 +171,6 @@ class TweepyStreamReadBuffer(unittest.TestCase):
         except InfiniteLoopException:
             self.fail("ReadBuffer.read_line tried to loop infinitely.")
 
-        self.assertEqual(mock_fp.isclosed.call_count, 1)
         # The mocked function not have been called at all since the stream looks closed
         self.assertEqual(mock_read.call_count, 0)
 

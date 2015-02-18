@@ -154,7 +154,7 @@ class ReadBuffer(object):
         self._chunk_size = chunk_size
 
     def read_len(self, length):
-        while not self._stream._fp.isclosed():
+        while not self._stream.closed:
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
@@ -162,7 +162,7 @@ class ReadBuffer(object):
 
     def read_line(self, sep='\n'):
         start = 0
-        while not self._stream._fp.isclosed():
+        while not self._stream.closed:
             loc = self._buffer.find(sep, start)
             if loc >= 0:
                 return self._pop(loc + len(sep))
@@ -292,9 +292,9 @@ class Stream(object):
     def _read_loop(self, resp):
         buf = ReadBuffer(resp.raw, self.chunk_size)
 
-        while self.running and not resp.raw._fp.isclosed():
+        while self.running and not resp.raw.closed:
             length = 0
-            while not resp.raw._fp.isclosed():
+            while not resp.raw.closed:
                 line = buf.read_line().strip()
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
@@ -334,7 +334,7 @@ class Stream(object):
             #         self._data(next_status_obj.decode('utf-8'))
 
 
-        if resp.raw._fp.isclosed():
+        if resp.raw.closed:
             self.on_closed(resp)
 
     def _start(self, async):
