@@ -1,3 +1,11 @@
+Version 3.3.0
+-------------
+  - Loosen our dependency requirements for Requests (>= 2.4.3)
+  - Fix issue with streams freezing up on Python 3 (Issue #556)
+  - Add keep_alive() callback to StreamListener when keep alive messages arrive
+  - Fix issue with stream session headers not being used when restarting connection
+  - Fix issue with streams getting stuck in a loop when connection dies. (PR #561)
+
 Version 3.2.0
 -------------
   - Remove deprecated trends methods.
