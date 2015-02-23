@@ -40,6 +40,22 @@ class StreamListener(object):
         """
         pass
 
+    def keep_alive(self):
+        """Called when a keep-alive arrived"""
+        return
+
+    def on_exception(self, exception):
+        """Called when an unhandled exception occurs."""
+        return
+
+    def on_error(self, status_code):
+        """Called when a non-200 status code is returned"""
+        return False
+
+    def on_timeout(self):
+        """Called when stream connection times out"""
+        return
+
     def on_data(self, raw_data):
         """Called when raw data is received from connection.
 
@@ -79,16 +95,8 @@ class StreamListener(object):
         else:
             logging.error("Unknown message type: " + str(raw_data))
 
-    def keep_alive(self):
-        """Called when a keep-alive arrived"""
-        return
-
     def on_status(self, status):
         """Called when a new status arrives"""
-        return
-
-    def on_exception(self, exception):
-        """Called when an unhandled exception occurs."""
         return
 
     def on_delete(self, status_id, user_id):
@@ -112,14 +120,6 @@ class StreamListener(object):
 
     def on_limit(self, track):
         """Called when a limitation notice arrives"""
-        return
-
-    def on_error(self, status_code):
-        """Called when a non-200 status code is returned"""
-        return False
-
-    def on_timeout(self):
-        """Called when stream connection times out"""
         return
 
     def on_disconnect(self, notice):
