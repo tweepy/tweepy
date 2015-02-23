@@ -40,6 +40,10 @@ class StreamListener(object):
         """
         pass
 
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
+
     def keep_alive(self):
         """Called when a keep-alive arrived"""
         return
@@ -309,7 +313,7 @@ class Stream(object):
                 self._data(next_status_obj)
 
         if resp.raw._fp.isclosed():
-            self.on_closed(resp)
+            self.listener.on_closed(resp)
 
     def _start(self, async):
         self.running = True
@@ -318,10 +322,6 @@ class Stream(object):
             self._thread.start()
         else:
             self._run()
-
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass
 
     def userstream(self,
                    stall_warnings=False,
