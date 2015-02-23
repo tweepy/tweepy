@@ -139,6 +139,10 @@ class StreamListener(object):
         return
 
 
+class ConnectionClosed(Exception):
+    pass
+
+
 class ReadBuffer(object):
     """Buffer data from the response in a smarter way than httplib/requests can.
 
@@ -162,6 +166,8 @@ class ReadBuffer(object):
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
+            if self.stream_closed():
+                raise ConnectionClosed()
             self._buffer += self._stream.read(read_len, decode_content=True).decode("ascii")
 
     def read_line(self, sep='\n'):
@@ -172,12 +178,17 @@ class ReadBuffer(object):
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
+            if self.stream_closed():
+                raise ConnectionClosed()
             self._buffer += self._stream.read(self._chunk_size, decode_content=True).decode("ascii")
 
     def _pop(self, length):
         r = self._buffer[:length]
         self._buffer = self._buffer[length:]
         return r
+
+    def stream_closed(self):
+        return self._stream._fp.isclosed()
 
 
 class Stream(object):
@@ -301,7 +312,11 @@ class Stream(object):
         while self.running:
             length = 0
             while True:
-                line = buf.read_line().strip()
+                try:
+                    line = buf.read_line().strip()
+                except ConnectionClosed:
+                    self.listener.on_closed(resp)
+                    return
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
@@ -310,11 +325,15 @@ class Stream(object):
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
+            try:
+                next_status_obj = buf.read_len(length)
+            except ConnectionClosed:
+                self.listener.on_closed(resp)
+                return
             if self.running:
                 self._data(next_status_obj)
 
-        if resp.raw._fp.isclosed():
+        if buf.stream_closed():
             self.listener.on_closed(resp)
 
     def _start(self, async):
