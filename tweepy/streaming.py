@@ -139,6 +139,10 @@ class StreamListener(object):
         return
 
 
+class ConnectionClosed(Exception):
+    pass
+
+
 class ReadBuffer(object):
     """Buffer data from the response in a smarter way than httplib/requests can.
 
@@ -158,20 +162,24 @@ class ReadBuffer(object):
         self._chunk_size = chunk_size
 
     def read_len(self, length):
-        while not self._stream.closed:
+        while True:
             if len(self._buffer) >= length:
                 return self._pop(length)
+            if self._stream.closed:
+                raise ConnectionClosed()
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len, decode_content=True).decode("ascii")
 
     def read_line(self, sep='\n'):
         start = 0
-        while not self._stream.closed:
+        while True:
             loc = self._buffer.find(sep, start)
             if loc >= 0:
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
+            if self._stream.closed:
+                raise ConnectionClosed()
             self._buffer += self._stream.read(self._chunk_size, decode_content=True).decode("ascii")
 
     def _pop(self, length):
@@ -301,7 +309,10 @@ class Stream(object):
         while self.running and not resp.raw.closed:
             length = 0
             while not resp.raw.closed:
-                line = buf.read_line().strip()
+                try:
+                    line = buf.read_line().strip()
+                except ConnectionClosed:
+                    break
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
@@ -310,7 +321,10 @@ class Stream(object):
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
+            try:
+                next_status_obj = buf.read_len(length)
+            except ConnectionClosed:
+                break
             if self.running:
                 self._data(next_status_obj)
 
