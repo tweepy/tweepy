@@ -162,7 +162,7 @@ class ReadBuffer(object):
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len).decode("ascii")
+            self._buffer += self._stream.read(read_len, decode_content=True).decode("ascii")
 
     def read_line(self, sep='\n'):
         start = 0
@@ -172,7 +172,7 @@ class ReadBuffer(object):
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size).decode("ascii")
+            self._buffer += self._stream.read(self._chunk_size, decode_content=True).decode("ascii")
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -209,6 +209,8 @@ class Stream(object):
 
         self.api = API()
         self.headers = options.get("headers") or {}
+        if options.get('compressed'):
+            self.headers['Accept-Encoding'] = ', '.join(('gzip', 'deflate'))
         self.new_session()
         self.body = None
         self.retry_time = self.retry_time_start
