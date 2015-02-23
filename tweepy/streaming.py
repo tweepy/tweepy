@@ -308,32 +308,6 @@ class Stream(object):
             if self.running:
                 self._data(next_status_obj)
 
-            # # Note: keep-alive newlines might be inserted before each length value.
-            # # read until we get a digit...
-            # c = b'\n'
-            # for c in resp.iter_content(decode_unicode=True):
-            #     if c == b'\n':
-            #         continue
-            #     break
-            #
-            # delimited_string = c
-            #
-            # # read rest of delimiter length..
-            # d = b''
-            # for d in resp.iter_content(decode_unicode=True):
-            #     if d != b'\n':
-            #         delimited_string += d
-            #         continue
-            #     break
-            #
-            # # read the next twitter status object
-            # if delimited_string.decode('utf-8').strip().isdigit():
-            #     status_id = int(delimited_string)
-            #     next_status_obj = resp.raw.read(status_id)
-            #     if self.running:
-            #         self._data(next_status_obj.decode('utf-8'))
-
-
         if resp.raw._fp.isclosed():
             self.on_closed(resp)
 
