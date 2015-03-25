@@ -175,14 +175,15 @@ class API(object):
             allowed_param=['id']
         )
 
-    def update_status(self, media_ids=None, *args, **kwargs):
+    def update_status(self, status, media_ids=None, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update
             :allowed_param:'status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
         """
+        kwargs["status"] = status
         post_data = {}
         if media_ids is not None:
             post_data["media_ids"] = list_to_csv(media_ids)
-        
+
         return bind_api(
             api=self,
             path='/statuses/update.json',
