@@ -182,7 +182,7 @@ class API(object):
         post_data = {}
         if media_ids is not None:
             post_data["media_ids"] = list_to_csv(media_ids)
-        
+
         return bind_api(
             api=self,
             path='/statuses/update.json',
