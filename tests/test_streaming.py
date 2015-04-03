@@ -12,7 +12,7 @@ else:
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
-from tweepy.models import Status
+from tweepy.models import Status, Event, User
 from tweepy.streaming import Stream, StreamListener, ReadBuffer
 
 from .config import create_auth
@@ -32,7 +32,10 @@ class MockStreamListener(StreamListener):
         self.test_case = test_case
         self.status_count = 0
         self.status_stop_count = 0
+        self.event_count = 0
+        self.event_stop_count = 0
         self.connect_cb = None
+        self.status_cb = None
 
     def on_connect(self):
         if self.connect_cb:
@@ -49,7 +52,19 @@ class MockStreamListener(StreamListener):
     def on_status(self, status):
         self.status_count += 1
         self.test_case.assertIsInstance(status, Status)
+
+        if self.status_cb:
+            self.status_cb(status)
+
         if self.status_stop_count == self.status_count:
+            return False
+
+    def on_event(self, event):
+        self.event_count += 1
+        self.test_case.assertIsInstance(event, Event)
+        self.test_case.assertIsInstance(event.source, User)
+        self.test_case.assertIsInstance(event.target, User)
+        if self.event_stop_count == self.event_count:
             return False
 
 
@@ -85,6 +100,16 @@ class TweepyStreamTests(unittest.TestCase):
         self.listener.status_stop_count = 1
         self.stream.userstream(_with='user', replies='all', stall_warnings=True)
         self.assertEqual(self.listener.status_count, 1)
+
+    def test_events(self):
+        def status_cb(status):
+            status.favorite()
+
+        self.listener.connect_cb = self.on_connect
+        self.listener.status_cb = self.status_cb
+        self.listener.event_stop_count = 1
+        self.stream.userstream()
+        self.assertEqual(self.listener.event_count, 1)
 
     def test_sample(self):
         self.listener.status_stop_count = 10
