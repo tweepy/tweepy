@@ -64,8 +64,9 @@ class StreamListener(object):
             if self.on_event(event) is False:
                 return False
         elif 'direct_message' in data:
-            status = Status.parse(self.api, data)
-            if self.on_direct_message(status) is False:
+            dm_model = getattr(self.api.parser.model_factory, 'direct_message')
+            dm = dm_model.parse(self.api, data)
+            if self.on_direct_message(dm) is False:
                 return False
         elif 'friends' in data:
             if self.on_friends(data['friends']) is False:
@@ -102,7 +103,7 @@ class StreamListener(object):
         """Called when a new event arrives"""
         return
 
-    def on_direct_message(self, status):
+    def on_direct_message(self, dm):
         """Called when a new direct message arrives"""
         return
 
