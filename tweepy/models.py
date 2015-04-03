@@ -220,6 +220,47 @@ class DirectMessage(Model):
         return self._api.destroy_direct_message(self.id)
 
 
+class Event(Model):
+    """
+    Types of event are listed here:
+    https://dev.twitter.com/streaming/overview/messages-types#Events_event
+    """
+
+    @classmethod
+    def parse(cls, api, json):
+        event = cls(api)
+        setattr(event, '_json', json)
+
+        event_name = json['event']
+        user_model = getattr(api.parser.model_factory, 'user') if api else User
+        status_model = getattr(api.parser.model_factory, 'status') if api else Status
+        list_model = getattr(api.parser.model_factory, 'list') if api else List
+
+        for k, v in json.items():
+            if k == 'target':
+                user = user_model.parse(api, v)
+                setattr(event, k, user)
+            elif k == 'source':
+                user = user_model.parse(api, v)
+                setattr(event, k, user)
+            elif k == 'created_at':
+                setattr(event, k, parse_datetime(v))
+            elif k == 'target_object':
+                if event_name in ('favorite', 'unfavorite'):
+                    target_object = status_model.parse(api, v)
+                elif event_name.startswith('list_'):
+                    target_object = list_model.parse(api, v)
+                else:
+                    # at the time of writing, the only other event defined to have a non-null
+                    # target_object is 'access_revoked', defined to be a 'client'. I don't have one
+                    # of those to hand.
+                    target_object = v
+                setattr(event, k, target_object)
+            else:
+                setattr(event, k, v)
+        return event
+
+
 class Friendship(Model):
 
     @classmethod
@@ -480,6 +521,7 @@ class ModelFactory(object):
     status = Status
     user = User
     direct_message = DirectMessage
+    event = Event
     friendship = Friendship
     saved_search = SavedSearch
     search_results = SearchResults

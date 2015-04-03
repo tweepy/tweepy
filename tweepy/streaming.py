@@ -59,8 +59,9 @@ class StreamListener(object):
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
         elif 'event' in data:
-            status = Status.parse(self.api, data)
-            if self.on_event(status) is False:
+            event_model = getattr(self.api.parser.model_factory, 'event')
+            event = event_model.parse(self.api, data)
+            if self.on_event(event) is False:
                 return False
         elif 'direct_message' in data:
             status = Status.parse(self.api, data)
@@ -97,7 +98,7 @@ class StreamListener(object):
         """Called when a delete notice arrives for a status"""
         return
 
-    def on_event(self, status):
+    def on_event(self, event):
         """Called when a new event arrives"""
         return
 
