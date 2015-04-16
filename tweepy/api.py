@@ -1012,7 +1012,7 @@ class API(object):
     @property
     def _add_list_members(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/create_all
-            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id',
+            :allowed_param:'screen_name', 'user_id', 'slug', 'list_id',
             'owner_id', 'owner_screen_name'
 
         """
@@ -1021,7 +1021,7 @@ class API(object):
             path='/lists/members/create_all.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id',
+            allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
                            'owner_id', 'owner_screen_name'],
             require_auth=True
         )
@@ -1037,7 +1037,7 @@ class API(object):
     @property
     def _remove_list_members(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/destroy_all
-            :allowed_param:'screen_name', 'user_id', 'slug', 'lit_id',
+            :allowed_param:'screen_name', 'user_id', 'slug', 'list_id',
             'owner_id', 'owner_screen_name'
 
         """
@@ -1046,7 +1046,7 @@ class API(object):
             path='/lists/members/destroy_all.json',
             method='POST',
             payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'lit_id',
+            allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
                            'owner_id', 'owner_screen_name'],
             require_auth=True
         )
