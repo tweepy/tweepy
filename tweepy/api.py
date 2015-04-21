@@ -182,7 +182,7 @@ class API(object):
         post_data = {}
         if media_ids is not None:
             post_data["media_ids"] = list_to_csv(media_ids)
-        
+
         return bind_api(
             api=self,
             path='/statuses/update.json',
@@ -584,6 +584,36 @@ class API(object):
             payload_type='user', payload_list=True,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
                            'skip_status', 'include_user_entities']
+        )
+
+    @property
+    def get_settings(self):
+        """ :reference: https://dev.twitter.com/rest/reference/get/account/settings
+        """
+        return bind_api(
+            api=self,
+            path='/account/settings.json',
+            payload_type='json',
+            use_cache=False
+        )
+
+    @property
+    def set_settings(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/account/settings
+            :allowed_param:'sleep_time_enabled', 'start_sleep_time',
+            'end_sleep_time', 'time_zone', 'trend_location_woeid',
+            'allow_contributor_request', 'lang'
+        """
+        return bind_api(
+            api=self,
+            path='/account/settings.json',
+            method='POST',
+            payload_type='json',
+            allowed_param=['sleep_time_enabled', 'start_sleep_time',
+                           'end_sleep_time', 'time_zone',
+                           'trend_location_woeid', 'allow_contributor_request',
+                           'lang'],
+            use_cache=False
         )
 
     def verify_credentials(self, **kargs):
