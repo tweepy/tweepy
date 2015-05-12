@@ -630,24 +630,6 @@ class API(object):
             require_auth=True
         )
 
-    @property
-    def update_profile_colors(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/post/account/update_profile_colors
-            :allowed_param:'profile_background_color', 'profile_text_color',
-             'profile_link_color', 'profile_sidebar_fill_color',
-             'profile_sidebar_border_color'],
-        """
-        return bind_api(
-            api=self,
-            path='/account/update_profile_colors.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['profile_background_color', 'profile_text_color',
-                           'profile_link_color', 'profile_sidebar_fill_color',
-                           'profile_sidebar_border_color'],
-            require_auth=True
-        )
-
     def update_profile_image(self, filename, file_=None):
         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile_image
             :allowed_param:'include_entities', 'skip_status'
@@ -694,14 +676,14 @@ class API(object):
     @property
     def update_profile(self):
         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile
-            :allowed_param:'name', 'url', 'location', 'description'
+            :allowed_param:'name', 'url', 'location', 'description', 'profile_link_color'
         """
         return bind_api(
             api=self,
             path='/account/update_profile.json',
             method='POST',
             payload_type='user',
-            allowed_param=['name', 'url', 'location', 'description'],
+            allowed_param=['name', 'url', 'location', 'description', 'profile_link_color'],
             require_auth=True
         )
 

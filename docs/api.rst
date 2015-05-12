@@ -356,19 +356,6 @@ Account Methods
    :rtype: :class:`User` object
 
 
-.. method:: API.update_profile_colors([profile_background_color], [profile_text_color], [profile_link_color], [profile_sidebar_fill_color], [profile_sidebar_border_color])
-
-   Sets one or more hex values that control the color scheme of the
-   authenticating user's profile page on twitter.com.
-
-   :param profile_background_color:
-   :param profile_text_color:
-   :param profile_link_color:
-   :param profile_sidebar_fill_color:
-   :param profile_sidebar_border_color:
-   :rtype: :class:`User` object
-
-
 .. method:: API.update_profile_image(filename)
 
    Update the authenticating user's profile image. Valid formats: GIF,
@@ -387,7 +374,7 @@ Account Methods
    :rtype: :class:`User` object
 
 
-.. method:: API.update_profile([name], [url], [location], [description])
+.. method:: API.update_profile([name], [url], [location], [description], [profile_link_color])
 
    Sets values that users are able to set under the "Account" tab of
    their settings page.
@@ -396,6 +383,7 @@ Account Methods
    :param url: Maximum of 100 characters. Will be prepended with "http://" if not present
    :param location: Maximum of 30 characters
    :param description: Maximum of 160 characters
+   :param profile_link_color: Three or six-character hex value
    :rtype: :class:`User` object
 
 
