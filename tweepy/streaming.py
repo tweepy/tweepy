@@ -169,6 +169,7 @@ class ReadBuffer(object):
             else:
                 start = len(self._buffer)
             self._buffer += self._stream.read(self._chunk_size).decode("ascii")
+        return '0'  # For situations in which the stream closes but the separator couldn't be found.
 
     def _pop(self, length):
         r = self._buffer[:length]
