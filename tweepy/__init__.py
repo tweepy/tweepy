@@ -10,7 +10,7 @@ __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
 from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResults, ModelFactory, Category
-from tweepy.error import TweepError
+from tweepy.error import TweepError, RateLimitError
 from tweepy.api import API
 from tweepy.cache import Cache, MemoryCache, FileCache
 from tweepy.auth import OAuthHandler, AppAuthHandler

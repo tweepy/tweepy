@@ -12,7 +12,7 @@ import requests
 
 import logging
 
-from tweepy.error import TweepError
+from tweepy.error import TweepError, RateLimitError, is_rate_limit_error_message
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
 
@@ -220,7 +220,11 @@ def bind_api(**config):
                     error_msg = self.parser.parse_error(resp.text)
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status_code
-                raise TweepError(error_msg, resp)
+
+                if is_rate_limit_error_message(error_msg):
+                    raise RateLimitError(error_msg, resp)
+                else:
+                    raise TweepError(error_msg, resp)
 
             # Parse the response payload
             result = self.parser.parse(self, resp.text)
