@@ -40,6 +40,26 @@ class StreamListener(object):
         """
         pass
 
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
+
+    def keep_alive(self):
+        """Called when a keep-alive arrived"""
+        return
+
+    def on_exception(self, exception):
+        """Called when an unhandled exception occurs."""
+        return
+
+    def on_error(self, status_code):
+        """Called when a non-200 status code is returned"""
+        return False
+
+    def on_timeout(self):
+        """Called when stream connection times out"""
+        return
+
     def on_data(self, raw_data):
         """Called when raw data is received from connection.
 
@@ -79,16 +99,8 @@ class StreamListener(object):
         else:
             logging.error("Unknown message type: " + str(raw_data))
 
-    def keep_alive(self):
-        """Called when a keep-alive arrived"""
-        return
-
     def on_status(self, status):
         """Called when a new status arrives"""
-        return
-
-    def on_exception(self, exception):
-        """Called when an unhandled exception occurs."""
         return
 
     def on_delete(self, status_id, user_id):
@@ -114,14 +126,6 @@ class StreamListener(object):
         """Called when a limitation notice arrives"""
         return
 
-    def on_error(self, status_code):
-        """Called when a non-200 status code is returned"""
-        return False
-
-    def on_timeout(self):
-        """Called when stream connection times out"""
-        return
-
     def on_disconnect(self, notice):
         """Called when twitter sends a disconnect notice
 
@@ -133,6 +137,10 @@ class StreamListener(object):
     def on_warning(self, notice):
         """Called when a disconnection warning message arrives"""
         return
+
+
+class ConnectionClosed(Exception):
+    pass
 
 
 class ReadBuffer(object):
@@ -154,21 +162,25 @@ class ReadBuffer(object):
         self._chunk_size = chunk_size
 
     def read_len(self, length):
-        while not self._stream.closed:
+        while True:
             if len(self._buffer) >= length:
                 return self._pop(length)
+            if self._stream.closed:
+                raise ConnectionClosed()
             read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len).decode("ascii")
+            self._buffer += self._stream.read(read_len, decode_content=True).decode("ascii")
 
     def read_line(self, sep='\n'):
         start = 0
-        while not self._stream.closed:
+        while True:
             loc = self._buffer.find(sep, start)
             if loc >= 0:
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size).decode("ascii")
+            if self._stream.closed:
+                raise ConnectionClosed()
+            self._buffer += self._stream.read(self._chunk_size, decode_content=True).decode("ascii")
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -205,6 +217,8 @@ class Stream(object):
 
         self.api = API()
         self.headers = options.get("headers") or {}
+        if options.get('compressed'):
+            self.headers['Accept-Encoding'] = ', '.join(('gzip', 'deflate'))
         self.new_session()
         self.body = None
         self.retry_time = self.retry_time_start
@@ -295,7 +309,10 @@ class Stream(object):
         while self.running and not resp.raw.closed:
             length = 0
             while not resp.raw.closed:
-                line = buf.read_line().strip()
+                try:
+                    line = buf.read_line().strip()
+                except ConnectionClosed:
+                    break
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
@@ -304,38 +321,15 @@ class Stream(object):
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
+            try:
+                next_status_obj = buf.read_len(length)
+            except ConnectionClosed:
+                break
             if self.running:
                 self._data(next_status_obj)
 
-            # # Note: keep-alive newlines might be inserted before each length value.
-            # # read until we get a digit...
-            # c = b'\n'
-            # for c in resp.iter_content(decode_unicode=True):
-            #     if c == b'\n':
-            #         continue
-            #     break
-            #
-            # delimited_string = c
-            #
-            # # read rest of delimiter length..
-            # d = b''
-            # for d in resp.iter_content(decode_unicode=True):
-            #     if d != b'\n':
-            #         delimited_string += d
-            #         continue
-            #     break
-            #
-            # # read the next twitter status object
-            # if delimited_string.decode('utf-8').strip().isdigit():
-            #     status_id = int(delimited_string)
-            #     next_status_obj = resp.raw.read(status_id)
-            #     if self.running:
-            #         self._data(next_status_obj.decode('utf-8'))
-
-
         if resp.raw.closed:
-            self.on_closed(resp)
+            self.listener.on_closed(resp)
 
     def _start(self, async):
         self.running = True
@@ -344,10 +338,6 @@ class Stream(object):
             self._thread.start()
         else:
             self._run()
-
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass
 
     def userstream(self,
                    stall_warnings=False,
