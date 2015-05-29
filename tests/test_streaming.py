@@ -174,6 +174,16 @@ class TweepyStreamReadBuffer(unittest.TestCase):
         # The mocked function not have been called at all since the stream looks closed
         self.assertEqual(mock_read.call_count, 0)
 
+    def test_read_unicode_tweet(self):
+        stream = '11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n'
+        for length in [1, 2, 5, 10, 20, 50]:
+            buf = ReadBuffer(six.StringIO(stream), length)
+            self.assertEqual('11\n', buf.read_line())
+            self.assertEqual('{id:12345}\n', buf.read_len(11))
+            self.assertEqual('\n', buf.read_line())
+            self.assertEqual('23\n', buf.read_line())
+            self.assertEqual('{id:23456, test:"\xe3\x81\x93"}\n', buf.read_len(23))
+
 
 class TweepyStreamBackoffTests(unittest.TestCase):
     def setUp(self):
