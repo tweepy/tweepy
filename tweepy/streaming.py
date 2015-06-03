@@ -150,7 +150,7 @@ class ReadBuffer(object):
 
     def __init__(self, stream, chunk_size):
         self._stream = stream
-        self._buffer = ''
+        self._buffer = bytes()
         self._chunk_size = chunk_size
 
     def read_len(self, length):
