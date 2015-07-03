@@ -404,7 +404,7 @@ class Stream(object):
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
-               stall_warnings=False, languages=None, encoding='utf8'):
+               stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
         self.body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -423,6 +423,8 @@ class Stream(object):
             self.body['stall_warnings'] = stall_warnings
         if languages:
             self.body['language'] = u','.join(map(str, languages))
+        if filter_level:
+            self.body['filter_level'] = unicode(filter_level, encoding)
         self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
         self._start(async)
