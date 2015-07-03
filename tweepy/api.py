@@ -618,7 +618,7 @@ class API(object):
 
     def verify_credentials(self, **kargs):
         """ :reference: https://dev.twitter.com/rest/reference/get/account/verify_credentials
-            :allowed_param:'include_entities', 'skip_status'
+            :allowed_param:'include_entities', 'skip_status', 'include_email'
         """
         try:
             return bind_api(
@@ -626,7 +626,7 @@ class API(object):
                 path='/account/verify_credentials.json',
                 payload_type='user',
                 require_auth=True,
-                allowed_param=['include_entities', 'skip_status'],
+                allowed_param=['include_entities', 'skip_status', 'include_email'],
             )(**kargs)
         except TweepError as e:
             if e.response and e.response.status == 401:
