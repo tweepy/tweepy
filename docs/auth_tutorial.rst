@@ -121,4 +121,4 @@ So now that we have our OAuthHandler equipped with an access token, we
 are ready for business::
 
    api = tweepy.API(auth)
-   api.update_status('tweepy + oauth!')
+   api.update_status(status='tweepy + oauth!')
