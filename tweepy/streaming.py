@@ -46,7 +46,10 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
-        data = json.loads(raw_data)
+        if six.PY2:
+          data = json.loads(raw_data)
+        elif six.PY3:
+          data = json.loads(raw_data.decode('ascii'))
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
@@ -150,7 +153,7 @@ class ReadBuffer(object):
 
     def __init__(self, stream, chunk_size):
         self._stream = stream
-        self._buffer = ''
+        self._buffer = six.b('')
         self._chunk_size = chunk_size
 
     def read_len(self, length):
@@ -160,7 +163,7 @@ class ReadBuffer(object):
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
 
-    def read_line(self, sep='\n'):
+    def read_line(self, sep=six.b('\n')):
         start = 0
         while not self._stream.closed:
             loc = self._buffer.find(sep, start)
