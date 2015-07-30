@@ -528,13 +528,13 @@ class API(object):
     @property
     def friends(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/friends/list
-            :allowed_param:'id', 'user_id', 'screen_name', 'cursor'
+            :allowed_param:'id', 'user_id', 'screen_name', 'cursor', 'skip_status', 'include_user_entities'
         """
         return bind_api(
             api=self,
             path='/friends/list.json',
             payload_type='user', payload_list=True,
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor']
+            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'skip_status', 'include_user_entities']
         )
 
     @property
