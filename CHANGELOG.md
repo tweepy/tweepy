@@ -1,3 +1,5 @@
+See https://github.com/tweepy/tweepy/releases for change logs.
+
 Version 3.3.0
 -------------
   - Loosen our dependency requirements for Requests (>= 2.4.3)
