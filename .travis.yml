@@ -43,6 +43,9 @@ script:
 after_success:
   - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
 
+before_deploy:
+  - pip install twine
+
 deploy:
   provider: pypi
   user: jroesslein
