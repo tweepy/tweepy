@@ -158,7 +158,7 @@ class ReadBuffer(object):
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len)
+            self._buffer += self._stream.read(read_len).decode('utf-8')
 
     def read_line(self, sep='\n'):
         start = 0
@@ -168,7 +168,7 @@ class ReadBuffer(object):
                 return self._pop(loc + len(sep))
             else:
                 start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size)
+            self._buffer += self._stream.read(self._chunk_size).decode('utf-8')
 
     def _pop(self, length):
         r = self._buffer[:length]
