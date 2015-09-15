@@ -21,7 +21,7 @@ Github and install it manually:
     cd tweepy
     python setup.py install
 
-Python 2.6 and 2.7, 3.3 & 3.4 are supported.
+Python 2.6 and 2.7, 3.3, 3.4  & 3.5 are supported.
 
 Documentation
 -------------
