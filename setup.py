@@ -14,8 +14,9 @@ if mo:
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
-install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
-reqs = [str(req.req) for req in install_reqs]
+import os
+from setuptools import setup
+with open('requirements.txt') as f: reqs = f.read().splitlines()
 
 setup(name="tweepy",
       version=version,
