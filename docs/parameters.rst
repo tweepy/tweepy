@@ -14,4 +14,5 @@
 .. |slug| replace:: the slug name or numerical ID of the list
 .. |list_mode| replace:: Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified.
 .. |list_owner| replace:: the screen name of the owner of the list
+.. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
 
