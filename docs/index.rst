@@ -16,6 +16,7 @@ Contents:
    code_snippet.rst
    cursor_tutorial.rst
    api.rst
+   streaming_how_to.rst
 
 Indices and tables
 ==================
