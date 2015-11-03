@@ -15,7 +15,7 @@ access_token=""
 access_token_secret=""
 
 class StdOutListener(StreamListener):
-    """ A listener handles tweets are the received from the stream.
+    """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
 
     """
