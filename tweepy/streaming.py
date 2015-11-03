@@ -7,6 +7,7 @@
 from __future__ import absolute_import, print_function
 
 import logging
+import re
 import requests
 from requests.exceptions import Timeout
 from threading import Thread
@@ -148,10 +149,11 @@ class ReadBuffer(object):
     use small chunks so it can read the length and the tweet in 2 read calls.
     """
 
-    def __init__(self, stream, chunk_size):
+    def __init__(self, stream, chunk_size, encoding='utf-8'):
         self._stream = stream
-        self._buffer = ''
+        self._buffer = six.b('')
         self._chunk_size = chunk_size
+        self._encoding = encoding
 
     def read_len(self, length):
         while not self._stream.closed:
@@ -160,7 +162,13 @@ class ReadBuffer(object):
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
 
-    def read_line(self, sep='\n'):
+    def read_line(self, sep=six.b('\n')):
+        """Read the data stream until a given separator is found (default \n)
+
+        :param sep: Separator to read until. Must by of the bytes type (str in python 2,
+            bytes in python 3)
+        :return: The str of the data read until sep
+        """
         start = 0
         while not self._stream.closed:
             loc = self._buffer.find(sep, start)
@@ -173,7 +181,7 @@ class ReadBuffer(object):
     def _pop(self, length):
         r = self._buffer[:length]
         self._buffer = self._buffer[length:]
-        return r
+        return r.decode(self._encoding)
 
 
 class Stream(object):
@@ -290,7 +298,14 @@ class Stream(object):
             self.running = False
 
     def _read_loop(self, resp):
-        buf = ReadBuffer(resp.raw, self.chunk_size)
+        charset = resp.headers.get('content-type', default='')
+        enc_search = re.search('charset=(?P<enc>\S*)', charset)
+        if enc_search is not None:
+            encoding = enc_search.group('enc')
+        else:
+            encoding = 'utf-8'
+
+        buf = ReadBuffer(resp.raw, self.chunk_size, encoding=encoding)
 
         while self.running and not resp.raw.closed:
             length = 0

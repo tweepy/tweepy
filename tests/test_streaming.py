@@ -120,13 +120,13 @@ class TweepyStreamTests(unittest.TestCase):
         self.assertEqual(u'Caf\xe9'.encode('utf8'), s.session.params['follow'])
 
 
-class TweepyStreamReadBuffer(unittest.TestCase):
+class TweepyStreamReadBufferTests(unittest.TestCase):
 
-    stream = """11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n"""
+    stream = six.b("""11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n""")
 
     def test_read_tweet(self):
         for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(six.StringIO(self.stream), length)
+            buf = ReadBuffer(six.BytesIO(self.stream), length)
             self.assertEqual('11\n', buf.read_line())
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
@@ -157,13 +157,14 @@ class TweepyStreamReadBuffer(unittest.TestCase):
             return ""
 
         # Create a fake stream
-        stream = six.StringIO('')
+        stream = six.BytesIO(six.b(''))
 
         # Mock it's read function so it can't be called too many times
         mock_read = MagicMock(side_effect=on_read)
 
         try:
-            with patch.multiple(stream, create=True, read=mock_read, closed=True):
+            stream.close()
+            with patch.multiple(stream, create=True, read=mock_read):
                 # Now the stream can't call 'read' more than call_limit times
                 # and it looks like a requests stream that is closed
                 buf = ReadBuffer(stream, 50)
@@ -175,14 +176,14 @@ class TweepyStreamReadBuffer(unittest.TestCase):
         self.assertEqual(mock_read.call_count, 0)
 
     def test_read_unicode_tweet(self):
-        stream = '11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n'
+        stream = six.b('11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n')
         for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(six.StringIO(stream), length)
+            buf = ReadBuffer(six.BytesIO(stream), length)
             self.assertEqual('11\n', buf.read_line())
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
             self.assertEqual('23\n', buf.read_line())
-            self.assertEqual('{id:23456, test:"\xe3\x81\x93"}\n', buf.read_len(23))
+            self.assertEqual(u'{id:23456, test:"\u3053"}\n', buf.read_len(23))
 
 
 class TweepyStreamBackoffTests(unittest.TestCase):
