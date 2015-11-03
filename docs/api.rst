@@ -216,7 +216,7 @@ User methods
 Direct Message Methods
 ----------------------
 
-.. method:: API.direct_messages([since_id], [max_id], [count], [page])
+.. method:: API.direct_messages([since_id], [max_id], [count], [page], [full_text])
 
    Returns direct messages sent to the authenticating user.
 
@@ -224,10 +224,20 @@ Direct Message Methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
+   :param full_text: |full_text|
    :rtype: list of :class:`DirectMessage` objects
 
 
-.. method:: API.sent_direct_messages([since_id], [max_id], [count], [page])
+.. method:: API.get_direct_message([id], [full_text])
+
+   Returns a specific direct message.
+
+   :param id: |id|
+   :param full_text: |full_text|
+   :rtype: :class:`DirectMessage` object
+
+
+.. method:: API.sent_direct_messages([since_id], [max_id], [count], [page], [full_text])
 
    Returns direct messages sent by the authenticating user.
 
@@ -235,6 +245,7 @@ Direct Message Methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
+   :param full_text: |full_text|
    :rtype: list of :class:`DirectMessage` objects
 
 
