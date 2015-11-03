@@ -3,6 +3,7 @@ import random
 import shutil
 from time import sleep
 import os
+from ast import literal_eval
 
 from nose import SkipTest
 
@@ -31,6 +32,18 @@ class TweepyErrorTests(unittest.TestCase):
 
 
 class TweepyAPITests(TweepyTestCase):
+
+    @tape.use_cassette('testfailure.json')
+    def testapierror(self):
+        from tweepy.error import TweepError
+
+        with self.assertRaises(TweepError) as cm:
+            self.api.direct_messages()
+
+        reason, = literal_eval(cm.exception.reason)
+        self.assertEqual(reason['message'], 'Bad Authentication data.')
+        self.assertEqual(reason['code'], 215)
+        self.assertEqual(cm.exception.api_code, 215)
 
     # TODO: Actually have some sort of better assertion
     @tape.use_cassette('testgetoembed.json')
