@@ -57,7 +57,7 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     repo: tweepy/tweepy
-    branch: release
+    tags: true
 
 matrix:
   fast_finish: true
