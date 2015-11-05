@@ -85,7 +85,6 @@ class OAuthHandler(AuthHandler):
             self.request_token = self._get_request_token(access_type=access_type)
             return self.oauth.authorization_url(url)
         except Exception as e:
-            raise
             raise TweepError(e)
 
     def get_access_token(self, verifier=None):
