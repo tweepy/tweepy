@@ -123,7 +123,6 @@ class OAuthHandler(AuthHandler):
                                        'x_auth_username': username,
                                        'x_auth_password': password})
 
-            print(r.content)
             credentials = parse_qs(r.content)
             return credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0]
         except Exception as e:
