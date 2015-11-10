@@ -8,16 +8,25 @@ import os
 import mimetypes
 
 import six
-import urllib
+
+if six.PY2:
+    from urllib import urlencode
+elif six.PY3:
+    from urllib.parse import urlencode
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser, RawParser
 from tweepy.utils import list_to_csv
 
+IMAGE_MIMETYPES = ('image/gif', 'image/jpeg', 'image/png', 'image/webp')
+CHUNKED_MIMETYPES = ('image/gif', 'image/jpeg', 'image/png', 'image/webp', 'video/mp4')
 
 class API(object):
     """Twitter API"""
+
+    max_size_standard = 5120  # standard uploads must be less then 5 MB
+    max_size_chunked = 15360  # chunked uploads must be less than 15 MB
 
     def __init__(self, auth_handler=None,
                  host='api.twitter.com', search_host='search.twitter.com',
@@ -196,10 +205,28 @@ class API(object):
 
     def media_upload(self, filename, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/media/upload
+            :reference https://dev.twitter.com/rest/reference/post/media/upload-chunked
+            :allowed_param:
+        """
+
+        mime, _ = mimetypes.guess_type(filename)
+        size = os.path.getsize(filename)
+
+        if mime in IMAGE_MIMETYPES and size < self.max_size_standard:
+            return self.image_upload(filename, *args, **kwargs)
+
+        elif mime in CHUNKED_MIMETYPES:
+            return self.upload_chunked(filename, *args, **kwargs)
+
+        else:
+            raise TweepError("Can't upload media with mime type %s" % mime)
+
+    def image_upload(self, filename, *args, **kwargs):
+        """ :reference: https://dev.twitter.com/rest/reference/post/media/upload
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 4883, form_field='media', f=f)
+        headers, post_data = API._pack_image(filename, self.max_size_standard, form_field='media', f=f)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
@@ -212,13 +239,14 @@ class API(object):
             upload_api=True
         )(*args, **kwargs)
 
-    def video_upload(self, filename, *args, **kwargs):
+    def upload_chunked(self, filename, *args, **kwargs):
         """ :reference https://dev.twitter.com/rest/reference/post/media/upload-chunked
             :allowed_param:
         """
         f = kwargs.pop('file', None)
+
         # Initialize upload (Twitter cannot handle videos > 15 MB)
-        headers, post_data, fp = API._chunk_video('init', filename, 15360, form_field='media', f=f)
+        headers, post_data, fp = API._chunk_media('init', filename, self.max_size_chunked, form_field='media', f=f)
         kwargs.update({ 'headers': headers, 'post_data': post_data })
 
         # Send the INIT request
@@ -238,7 +266,7 @@ class API(object):
             fsize = os.path.getsize(filename)
             nloops = int(fsize / chunk_size) + (1 if fsize % chunk_size > 0 else 0)
             for i in range(nloops):
-                headers, post_data, fp = API._chunk_video('append', filename, 15360, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i)
+                headers, post_data, fp = API._chunk_media('append', filename, self.max_size_chunked, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i)
                 kwargs.update({ 'headers': headers, 'post_data': post_data, 'parser': RawParser() })
                 # The APPEND command returns an empty response body
                 bind_api(
@@ -251,8 +279,9 @@ class API(object):
                     upload_api=True
                 )(*args, **kwargs)
             # When all chunks have been sent, we can finalize.
-            headers, post_data, fp = API._chunk_video('finalize', filename, 15360, media_id=media_info.media_id)
-            kwargs.update({ 'headers': headers, 'post_data': post_data })
+            headers, post_data, fp = API._chunk_media('finalize', filename, self.max_size_chunked, media_id=media_info.media_id)
+            kwargs = {'headers': headers, 'post_data': post_data}
+
             # The FINALIZE command returns media information
             return bind_api(
                 api=self,
@@ -1335,7 +1364,7 @@ class API(object):
     @staticmethod
     def _pack_image(filename, max_size, form_field="image", f=None):
         """Pack image from file into multipart-formdata post body"""
-        # image must be less than 700kb in size
+        # image must be less than 5MB in size
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
@@ -1357,7 +1386,7 @@ class API(object):
         if file_type is None:
             raise TweepError('Could not determine file type')
         file_type = file_type[0]
-        if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
+        if file_type not in IMAGE_MIMETYPES:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
@@ -1386,7 +1415,7 @@ class API(object):
         return headers, body
 
     @staticmethod
-    def _chunk_video(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0):
+    def _chunk_media(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0):
         fp = None
         if command == 'init':
             if f is None:
@@ -1424,11 +1453,11 @@ class API(object):
         body = list()
         if command == 'init':
             body.append(
-                urllib.urlencode({
+                urlencode({
                     'command': 'INIT',
                     'media_type': file_type,
                     'total_bytes': file_size
-                })
+                }).encode('utf-8')
             )
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -1461,10 +1490,10 @@ class API(object):
             if media_id is None:
                 raise TweepError('Media ID is required for FINALIZE command.')
             body.append(
-                urllib.urlencode({
+                urlencode({
                     'command': 'FINALIZE',
                     'media_id': media_id
-                })
+                }).encode('utf-8')
             )
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
