@@ -217,14 +217,16 @@ def bind_api(**config):
             self.api.last_response = resp
             if resp.status_code and not 200 <= resp.status_code < 300:
                 try:
-                    error_msg = self.parser.parse_error(resp.text)
+                    error_msg, api_error_code = \
+                        self.parser.parse_error(resp.text)
                 except Exception:
                     error_msg = "Twitter error response: status code = %s" % resp.status_code
+                    api_error_code = None
 
                 if is_rate_limit_error_message(error_msg):
                     raise RateLimitError(error_msg, resp)
                 else:
-                    raise TweepError(error_msg, resp)
+                    raise TweepError(error_msg, resp, api_code=api_error_code)
 
             # Parse the response payload
             result = self.parser.parse(self, resp.text)
