@@ -262,7 +262,11 @@ class API(object):
 
         # If a media ID has been generated, we can send the file
         if media_info.media_id:
-            chunk_size = kwargs.pop('chunk_size', 4096)
+            # default chunk size is 1MB, can be overridden with keyword argument.
+            # minimum chunk size is 16K, which keeps the maximum number of chunks under 999
+            chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
+            chunk_size = max(chunk_size, 16 * 2014)
+
             fsize = os.path.getsize(filename)
             nloops = int(fsize / chunk_size) + (1 if fsize % chunk_size > 0 else 0)
             for i in range(nloops):
