@@ -9,7 +9,8 @@ from __future__ import absolute_import, print_function
 import logging
 import re
 import requests
-from requests.exceptions import Timeout
+from requests.exceptions import Timeout, ConnectionError
+from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from threading import Thread
 from time import sleep
 
@@ -261,7 +262,7 @@ class Stream(object):
                     self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
                     self._read_loop(resp)
-            except (Timeout, ssl.SSLError) as exc:
+            except (Timeout, ssl.SSLError, ConnectionError, ReadTimeoutError, ProtocolError) as exc:
                 # This is still necessary, as a SSLError can actually be
                 # thrown when using Requests
                 # If it's not time out treat it like any other exception
