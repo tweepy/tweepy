@@ -160,7 +160,10 @@ def bind_api(**config):
                                 sleep_time = self._reset_time - int(time.time())
                                 if sleep_time > 0:
                                     if self.wait_on_rate_limit_notify:
-                                        log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
+                                        if callable(self.wait_on_rate_limit_notify):
+                                            self.wait_on_rate_limit_notify(sleep_time)
+                                        else:
+                                            log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
                                     time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # if self.wait_on_rate_limit and self._reset_time is not None and \
