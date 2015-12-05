@@ -16,9 +16,13 @@ OAuth Authentication
 
 Tweepy tries to make OAuth as painless as possible for you. To begin
 the process we need to register our client application with
-Twitter. Create a new application and once you
-are done you should have your consumer token and secret. Keep these
-two handy, you'll need them.
+Twitter. To create a new application you will need to go to 
+`Twitter App page <https://apps.twitter.com>`_ and click on "Create a
+new app". Follow the instruction and agree with the terms and
+conditions. Now that you have created your application go to "Keys and 
+Access Tokens". This is where you will find your Consumer Key 
+(consumer_token), Consumer Secret (consumer_secret).
+Keep these two handy, you'll need them.
 
 The next step is creating an OAuthHandler instance. Into this we pass
 our consumer token and secret which was given to us in the previous
@@ -100,6 +104,11 @@ treasure box. To fetch this token we do the following::
    except tweepy.TweepError:
        print 'Error! Failed to get access token.'
    
+Alternatively, to create the tokens you can go on your app page,
+click on Keys and Access Tokens, then scroll down the page and
+click on "Create my access Tokens". You will now see your Access
+Token and Access Token Secret. 
+
 It is a good idea to save the access token for later use. You do not
 need to re-fetch it each time. Twitter currently does not expire the
 tokens, so the only time it would ever go invalid is if the user
