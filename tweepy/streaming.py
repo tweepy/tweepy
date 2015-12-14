@@ -291,7 +291,7 @@ class Stream(object):
         if exception:
             # call a handler first so that the exception can be logged.
             self.listener.on_exception(exception)
-            raise exception
+            raise
 
     def _data(self, data):
         if self.listener.on_data(data) is False:
