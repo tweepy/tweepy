@@ -208,15 +208,21 @@ class API(object):
             :reference https://dev.twitter.com/rest/reference/post/media/upload-chunked
             :allowed_param:
         """
+        f = kwargs.pop('file', None)
 
         mime, _ = mimetypes.guess_type(filename)
-        size = os.path.getsize(filename)
+        try:
+            size = os.path.getsize(filename)
+        except OSError:
+            f.seek(0, 2)
+            size = f.tell()
+            f.seek(0)
 
         if mime in IMAGE_MIMETYPES and size < self.max_size_standard:
-            return self.image_upload(filename, *args, **kwargs)
+            return self.image_upload(filename, f=f, *args, **kwargs)
 
         elif mime in CHUNKED_MIMETYPES:
-            return self.upload_chunked(filename, *args, **kwargs)
+            return self.upload_chunked(filename, f=f, *args, **kwargs)
 
         else:
             raise TweepError("Can't upload media with mime type %s" % mime)
@@ -1452,7 +1458,7 @@ class API(object):
         if file_type is None:
             raise TweepError('Could not determine file type')
 
-        if file_type not in ['video/mp4']:
+        if file_type not in CHUNKED_MIMETYPES:
             raise TweepError('Invalid file type for video: %s' % file_type)
 
         BOUNDARY = b'Tw3ePy'
