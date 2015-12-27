@@ -28,9 +28,10 @@ Hello Tweepy
    for tweet in public_tweets:
        print tweet.text
 
-This example will download your home timeline tweets and print each
-one of their texts to the console. Twitter requires all requests to
-use OAuth for authentication.
+   api.update_status('Hello Twitter!')
+
+This example will download your home timeline tweets, print each
+one of their texts to the console, then post a 'Hello Twitter' status to your timeline. Twitter requires all requests to use OAuth for authentication.
 The :ref:`auth_tutorial` goes into more details about authentication.
 
 API
