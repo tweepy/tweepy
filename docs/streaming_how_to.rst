@@ -66,7 +66,7 @@ We need an api to stream. See :ref:`auth_tutorial` to learn how to get an api ob
 Once we have an api and a status listener we can create our stream object.::
 
   myStreamListener = MyStreamListener()
-  myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener())
+  myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
 
 Step 3: Starting a Stream
 =========================
