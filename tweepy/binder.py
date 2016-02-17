@@ -182,19 +182,20 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    resp = self.session.request(self.method,
-                                                full_url,
-                                                data=self.post_data,
-                                                timeout=self.api.timeout,
-                                                auth=auth,
-                                                proxies=self.api.proxy)
-                except UnicodeEncodeError:
-                    resp = self.session.request(self.method,
-                                                full_url,
-                                                data=self.post_data.decode('utf-8'),
-                                                timeout=self.api.timeout,
-                                                auth=auth,
-                                                proxies=self.api.proxy)
+                    try:
+                        resp = self.session.request(self.method,
+                                                    full_url,
+                                                    data=self.post_data,
+                                                    timeout=self.api.timeout,
+                                                    auth=auth,
+                                                    proxies=self.api.proxy)
+                    except UnicodeEncodeError:
+                        resp = self.session.request(self.method,
+                                                    full_url,
+                                                    data=self.post_data.decode('utf-8'),
+                                                    timeout=self.api.timeout,
+                                                    auth=auth,
+                                                    proxies=self.api.proxy)
                 except Exception as e:
                     six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
 
