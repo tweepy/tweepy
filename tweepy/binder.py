@@ -185,6 +185,13 @@ def bind_api(**config):
                                                 timeout=self.api.timeout,
                                                 auth=auth,
                                                 proxies=self.api.proxy)
+                except UnicodeEncodeError:
+                    resp = self.session.request(self.method,
+                                                full_url,
+                                                data=self.post_data.decode('utf-8'),
+                                                timeout=self.api.timeout,
+                                                auth=auth,
+                                                proxies=self.api.proxy)
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e)
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
