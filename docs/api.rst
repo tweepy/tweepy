@@ -639,7 +639,7 @@ List Methods
 .. method:: API.add_list_member(slug, id)
 
    Add a member to a list. The authenticated user must own the list to be
-   able to add members to it. Lists are limited to having 500 members.
+   able to add members to it. Lists are limited to 5,000 members.
 
    :param slug: |slug|
    :param id: the ID of the user to add as a member
