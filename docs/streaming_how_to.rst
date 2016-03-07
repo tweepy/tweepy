@@ -1,4 +1,4 @@
-.. _streaming_how_to:
+.. _streaming.py: https://github.com/tweepy/tweepy/blob/master/examples/streaming.py
 .. _Twitter Streaming API Documentation: https://dev.twitter.com/streaming/overview
 .. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
 
@@ -11,7 +11,7 @@ and partially routing messages.
 
 This page aims to help you get started using Twitter streams with Tweepy 
 by offering a first walk through.  Some features of Tweepy streaming are
-not covered here. See streaming.py in the Tweepy source code. 
+not covered here. See `streaming.py`_ in the Tweepy source code. 
 
 API authorization is required to access Twitter streams. 
 Follow the :ref:`auth_tutorial` if you need help with authentication. 
