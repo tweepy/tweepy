@@ -198,7 +198,7 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 3072, form_field='media', f=f)
+        headers, post_data = API._pack_image(filename, 4883, form_field='media', f=f)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
