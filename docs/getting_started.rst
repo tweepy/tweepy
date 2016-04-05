@@ -26,7 +26,7 @@ Hello Tweepy
    
    public_tweets = api.home_timeline()
    for tweet in public_tweets:
-       print tweet.text
+       print(tweet.text)
 
 This example will download your home timeline tweets and print each
 one of their texts to the console. Twitter requires all requests to
@@ -55,10 +55,10 @@ the following code returns to us an User model::
 Models contain the data and some helper methods which we can then
 use::
 
-   print user.screen_name
-   print user.followers_count
+   print(user.screen_name)
+   print(user.followers_count)
    for friend in user.friends():
-      print friend.screen_name
+      print(friend.screen_name)
 
 For more information about models please see ModelsReference.
 
