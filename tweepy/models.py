@@ -246,7 +246,7 @@ class Event(Model):
             elif k == 'created_at':
                 setattr(event, k, parse_datetime(v))
             elif k == 'target_object':
-                if event_name in ('favorite', 'unfavorite'):
+                if event_name in ('favorite', 'unfavorite', 'quoted_tweet'):
                     target_object = status_model.parse(api, v)
                 elif event_name.startswith('list_'):
                     target_object = list_model.parse(api, v)
