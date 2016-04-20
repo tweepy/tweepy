@@ -814,3 +814,83 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
    
    Inherits from :exc:`TweepError`, so ``except TweepError`` will
    catch a ``RateLimitError`` too.
+
+:mod:`tweepy.parsers` --- Parsers
+=================================
+
+Any :class:`Parser` object (and those that inherit from it) should be assigned to an instance of ``tweepy.API``.
+
+.. class:: Parser()
+
+   This class is the base class from which all other parsers inherit from. Any inheriting class should implement its two methods (i.e., :func:`parse(method, payload)` and :func:`parse_error(payload)`).
+   
+.. method:: Parser.parse(method, payload)
+
+   Abstract method to be implemented by inheriting classes. Throws a ``NotImplementedError`` when not overriden.
+   
+.. method:: Parser.parse(payload)
+
+   Abstract method to be implemented by inheriting classes. Throws a ``NotImplementedError`` when not overriden.
+   
+.. class:: RawParser()
+
+   Bases: :class:`Parser`
+
+   An implementation of :class:`Parser` that simply returns the payload without doing any processing on the payload.
+   
+.. method:: RawParser.parse(method, payload)
+
+   Returns ``payload`` without doing anything.
+   
+   :param method: Not used in this implementation.
+   :param payload: The message passed to the parser to process.
+   
+   :rtype: Whatever the class of ``payload`` was upon being passed.
+   
+.. method:: RawParser.parse_error(payload)
+
+   Returns ``payload`` without doing anything.
+   
+   :param payload: The message passed to the parser to process.
+   
+   :rtype: Whatever the class of ``payload`` was upon being passed.
+   
+.. class:: JSONParser()
+
+   Bases: :class:`Parser`
+
+   An implementation of :class:`Parser`` used for parsing :class:`JSON` payloads. It tries to import the :class:`simplejson` library. If it fails, it imports the :class:`json` library. If that fails as well, it will try to import the :class:`simplejson` library from ``django.utils``. If that fails too, an :exc:`ImportError` is thrown.
+   
+.. method:: JSONParser.parse(method, payload)
+
+   Returns the ``payload`` object after being parsed by the :class:`JSON` library imported during construction. If 'cursor' was set in the session's parameters (i.e., paginated results), it will return the tuple ``(payload, cursors)``, where ``cursors`` is itself a tuple containing ``(previous_cursor, next_cursor)``, to be used for navigating the results. Raises a :exc:`TweepError` if the :class:`JSON` library fails to parse ``payload``.
+   
+   :param method: Not used in this implementation.
+   :param payload: A :class:`JSON`-encoded message to be parsed by the method.
+   
+   :rtype: Depending on the payload, either a :class:`JSON`-decoded message or a tuple containing the :class:`JSON`-decoded message and the ``cursors`` used for navigating.
+   
+.. method:: JSONParser.parse_error(payload)
+
+  Returns a tuple containing the reason for the error and the error code thrown by the :class:`API` to be used for debugging. If there is more than one error code, the error codes will be grouped as a list.
+  
+  :param payload: A :class:`JSON`-encoded :class:`dict` containing the error message and code.
+  
+  :rtype: A tuple
+  
+.. class:: ModelParser(model_factory=None)
+
+   Bases: :class:`JSONParser`
+
+   An implementation of :class:`Parser` used to variably parse a ``payload`` depending on which :class:`Model`'s :func:`parse()` method is appropriate.
+   
+   :param model_factory: The factory to be used for creating instances of model. Defaults to :class:`ModelFactory`.
+   
+.. method:: ModelParser.parse(method, payload)
+
+   Returns the ``payload`` object after being parsed first by the :class:`JSON` library imported during construction and then by the :func:`parse()` method of the model specified in ``method.payload_type`` if ``method.payload_list`` is not set. If ``method.payload_list`` is set, the function instead parses it with the :func:`parse_list()` method of the model. Returns the result if ``cursors`` was not set but returns a tuple of ``(result, cursors)`` if it was set.
+   
+   :param method: Specifies which model of the model_factory's :func:`parse()` method to call via ``method.payload_type`` and whether or not the payload is a list via ``method.payload_list``
+   :param payload: A :class:`JSON`-encoded message to be parsed by the method.
+   
+   :rtype Depends on the result returned by the model specified by :func:`method.payload_type.parse()`
