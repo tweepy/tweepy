@@ -258,7 +258,8 @@ Direct Message Methods
    :param screen_name: screen name of the recipient user
    :param user_id: user id of the recipient user
    :rtype: :class:`DirectMessage` object
-
+   
+   NB: You must call it like: send_direct_message(screen_name='username', text='blah') in other case it will throw a error
 
 .. method:: API.destroy_direct_message(id)
 
