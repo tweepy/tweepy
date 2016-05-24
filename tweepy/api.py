@@ -273,7 +273,6 @@ class API(object):
             require_auth=True
         )
 
-
     @property
     def retweets(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/retweets/%3Aid
