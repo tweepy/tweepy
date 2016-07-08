@@ -41,6 +41,7 @@ object::
 
    for status in tweepy.Cursor(api.user_timeline).items():
        # process status here
+       # process_status function should be defined above.
        process_status(status)
 
 Now that looks much better! Cursor handles all the pagination work for
@@ -74,6 +75,7 @@ would use the pages() method::
 
    for page in tweepy.Cursor(api.user_timeline).pages():
        # page is a list of statuses
+       # process_page function should be defined above.
        process_page(page)
 
 
