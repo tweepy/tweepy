@@ -177,7 +177,7 @@ class API(object):
 
     def update_status(self, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update
-            :allowed_param:'status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
+            :allowed_param:'status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
         """
         post_data = {}
         media_ids = kwargs.pop("media_ids", None)
@@ -189,7 +189,7 @@ class API(object):
             path='/statuses/update.json',
             method='POST',
             payload_type='status',
-            allowed_param=['status', 'in_reply_to_status_id', 'in_reply_to_status_id_str','lat', 'long', 'source', 'place_id', 'display_coordinates'],
+            allowed_param=['status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
             require_auth=True
         )(post_data=post_data, *args, **kwargs)
 
@@ -213,7 +213,7 @@ class API(object):
 
     def update_with_media(self, filename, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update_with_media
-            :allowed_param:'status', 'possibly_sensitive', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'lat', 'long', 'place_id', 'display_coordinates'
+            :allowed_param:'status', 'possibly_sensitive', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'place_id', 'display_coordinates'
         """
         f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 3072, form_field='media[]', f=f)
@@ -225,8 +225,8 @@ class API(object):
             method='POST',
             payload_type='status',
             allowed_param=[
-                'status', 'possibly_sensitive', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 
-                'lat', 'long', 'place_id', 'display_coordinates'
+                'status', 'possibly_sensitive', 'in_reply_to_status_id', 'in_reply_to_status_id_str',
+                'auto_populate_reply_metadata', 'lat', 'long', 'place_id', 'display_coordinates'
             ],
             require_auth=True
         )(*args, **kwargs)
