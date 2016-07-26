@@ -56,7 +56,6 @@ def bind_api(**config):
             self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
                                                         api.wait_on_rate_limit_notify)
             self.parser = kwargs.pop('parser', api.parser)
-            self.session.headers = kwargs.pop('headers', {})
             self.build_parameters(args, kwargs)
 
             # Pick correct URL root to use
@@ -77,14 +76,42 @@ def bind_api(**config):
             else:
                 self.host = api.host
 
+            # Monitoring rate limits
+            self._remaining_calls = None
+            self._reset_time = None
+
+            headers = kwargs.pop('headers', {})
+
             # Manually set Host header to fix an issue in python 2.5
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
-            self.session.headers['Host'] = self.host
-            # Monitoring rate limits
-            self._remaining_calls = None
-            self._reset_time = None
+            headers['Host'] = self.host
+
+            keep_alive = self.api.keep_alive
+            if keep_alive is not None:
+                if keep_alive == False:
+                    headers['Connection'] = 'close'
+                else:
+                    try:
+                        keep_alive = int(keep_alive)
+                        if not 0 <= keep_alive <= 65535:
+                            raise ValueError("Too large keep-alive timeout")
+                    except (TypeError, ValueError):
+                        pass
+                    else:
+                        headers['Connection'] = 'keep-alive'
+                        keep_alive_header = 'timeout={0}'.format(keep_alive)
+                        try:
+                            max_requests_per_conn = int(self.api.max_requests_per_conn)
+                        except (TypeError, ValueError):
+                            pass
+                        else:
+                            keep_alive_header = '{0}, max={1}'.format(keep_alive_header, max_requests_per_conn)
+
+                        headers['Keep-Alive'] = keep_alive_header
+
+            self.session.headers = headers
 
         def build_parameters(self, args, kwargs):
             self.session.params = {}

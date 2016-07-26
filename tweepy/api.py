@@ -24,7 +24,8 @@ class API(object):
                  search_root='', upload_root='/1.1', retry_count=0,
                  retry_delay=0, retry_errors=None, timeout=60, parser=None,
                  compression=False, wait_on_rate_limit=False,
-                 wait_on_rate_limit_notify=False, proxy=''):
+                 wait_on_rate_limit_notify=False, proxy='', keep_alive=None,
+                 max_requests_per_conn=100):
         """ Api instance Constructor
 
         :param auth_handler:
@@ -44,6 +45,8 @@ class API(object):
         :param wait_on_rate_limit: If the api wait when it hits the rate limit, default:False
         :param wait_on_rate_limit_notify: If the api print a notification when the rate limit is hit, default:False
         :param proxy: Url to use as proxy during the HTTP request, default:''
+        :param keep_alive: Timeout, in seconds, to keep connection alive, or False to close it immediately
+        :param max_requests_per_conn: Maximum number of requests per kept-alive connection
 
         :raise TypeError: If the given parser is not a ModelParser instance.
         """
@@ -66,6 +69,8 @@ class API(object):
         self.proxy = {}
         if proxy:
             self.proxy['https'] = proxy
+        self.keep_alive = keep_alive
+        self.max_requests_per_conn = max_requests_per_conn
 
         # Attempt to explain more clearly the parser argument requirements
         # https://github.com/tweepy/tweepy/issues/421
