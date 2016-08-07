@@ -45,7 +45,7 @@ Timeline methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` of :class:`tweepy.models.Status`
 
 .. method:: API.statuses_lookup(id, [include_entities], [trim_user], [map])
 
@@ -56,7 +56,7 @@ Timeline methods
    :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
    :param map: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` object
 
 
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], [count], [page])
@@ -72,7 +72,7 @@ Timeline methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` of :class:`tweepy.models.Status`
 
 
 .. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
@@ -84,7 +84,7 @@ Timeline methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` object
 
 
 Status methods
@@ -151,7 +151,7 @@ Status methods
 
    :param id: |sid|
    :param count: Specifies the number of retweets to retrieve.
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` object
 
 
 User methods
@@ -184,7 +184,7 @@ User methods
    :param cursor: |cursor|
    :param skip_status: |skip_status|
    :param include_user_entities: |include_user_entities|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`tweepy.models.ResultSet` of :class:`tweepy.models.User`
 
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
@@ -197,7 +197,7 @@ User methods
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param cursor: |cursor|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`tweepy.models.ResultSet` of :class:`tweepy.models.User`
 
 .. method:: API.search_users(q, [per_page], [page])
 
@@ -422,7 +422,7 @@ Favorite Methods
 
    :param id: The ID or screen name of the user to request favorites
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`tweepy.models.ResultSet` of :class:`tweepy.models.Status`
 
 
 .. method:: API.create_favorite(id)
@@ -474,7 +474,7 @@ Block Methods
    blocking.
 
    :param page: |page|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`tweepy.models.ResultSet` object
 
 
 .. method:: API.blocks_ids()
@@ -506,7 +506,7 @@ Saved Searches Methods
 
    Returns the authenticated user's saved search queries.
 
-   :rtype: list of :class:`SavedSearch` objects
+   :rtype: :class:`tweepy.models.ResultSet` object
 
 
 .. method:: API.get_saved_search(id)
@@ -550,7 +550,7 @@ Help Methods
    :param since_id: |since_id|
    :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
    :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
-   :rtype: list of :class:`SearchResult` objects
+   :rtype: :class:`tweepy.models.SearchResults` object
 
 
 List Methods
