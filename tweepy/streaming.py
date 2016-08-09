@@ -58,8 +58,7 @@ class StreamListener(object):
             status = Status.parse(self.api, data)
             if self.on_status(status) is False:
                 return False
-        
-        if 'delete' in data:
+        elif 'delete' in data:
             delete = data['delete']['status']
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
@@ -320,7 +319,6 @@ class Stream(object):
                 
                 if line is not None:
                     line = line.strip()
-                
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
@@ -419,15 +417,13 @@ class Stream(object):
         self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
-    def sample(self, async=False, languages=None, stall_warnings=False):
+    def sample(self, async=False, languages=None):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json' % STREAM_VERSION
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            self.session.params['stall_warnings'] = 'true'
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
