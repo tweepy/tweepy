@@ -52,7 +52,7 @@ class StreamListener(object):
             logging.error("Empty message")
             return
         
-        data = json.loads(raw_data) 
+        data = json.loads(raw_data)  
         
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
