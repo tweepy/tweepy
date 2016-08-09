@@ -47,13 +47,20 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
-        data = json.loads(raw_data)
+        
+        if raw_data is None:
+            logging.error("Empty message")
+            return
+        
+        data = json.loads(raw_data) 
+        
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
             if self.on_status(status) is False:
                 return False
-        elif 'delete' in data:
+        
+        if 'delete' in data:
             delete = data['delete']['status']
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
