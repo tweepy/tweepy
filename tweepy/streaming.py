@@ -54,7 +54,6 @@ class StreamListener(object):
         
         data = json.loads(raw_data) 
         
-
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
             if self.on_status(status) is False:
