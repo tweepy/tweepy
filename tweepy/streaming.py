@@ -416,15 +416,13 @@ class Stream(object):
         self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
         self._start(async)
 
-    def sample(self, async=False, languages=None, stall_warnings=False):
+    def sample(self, async=False, languages=None):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/sample.json' % STREAM_VERSION
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            self.session.params['stall_warnings'] = 'true'
         self._start(async)
 
     def filter(self, follow=None, track=None, async=False, locations=None,
