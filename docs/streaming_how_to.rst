@@ -86,7 +86,7 @@ A Few More Pointers
 
 Async Streaming
 ---------------
-Streams not terminate unless the connection is closed, blocking the thread. 
+Streams do not terminate unless the connection is closed, blocking the thread. 
 Tweepy offers a convenient **async** parameter on **filter** so the stream will run on a new
 thread. For example ::
 
