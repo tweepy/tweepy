@@ -158,7 +158,7 @@ def bind_api(**config):
                                 sleep_time = self._reset_time - int(time.time())
                                 if sleep_time > 0:
                                     if self.wait_on_rate_limit_notify:
-                                        print("Rate limit reached. Sleeping for:", sleep_time)
+                                        log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
                                     time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # if self.wait_on_rate_limit and self._reset_time is not None and \
@@ -166,7 +166,7 @@ def bind_api(**config):
                 #     sleep_time = self._reset_time - int(time.time())
                 #     if sleep_time > 0:
                 #         if self.wait_on_rate_limit_notify:
-                #             print("Rate limit reached. Sleeping for: " + str(sleep_time))
+                #             log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
                 #         time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # Apply authentication
