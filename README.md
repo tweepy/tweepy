@@ -24,13 +24,3 @@ Github and install it manually:
     python setup.py install
 
 Python 2.6 and 2.7, 3.3, 3.4  & 3.5 are supported.
-
-Documentation
--------------
-  - [Website (Work in-progress)](http://tweepy.github.com/)
-  - [Twitter Developers](http://dev.twitter.com/)
-
-Community
----------
-  - [Discussion Forum](http://discuss.tweepy.org)
-  - IRC Chat (Freenode.net #tweepy)
