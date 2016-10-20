@@ -1,4 +1,4 @@
-Tweepy: Twitter for Python!
+Tweepy: Twitter for Python! (Fixed for Python 3)
 ======
 
 __This project is no longer maintained__
