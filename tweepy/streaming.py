@@ -314,7 +314,7 @@ class Stream(object):
                 try:
                     line = line.strip()
                 except AttributeError:
-                    pass
+                    continue
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
