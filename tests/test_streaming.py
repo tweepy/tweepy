@@ -175,6 +175,23 @@ class TweepyStreamReadBufferTests(unittest.TestCase):
         # The mocked function not have been called at all since the stream looks closed
         self.assertEqual(mock_read.call_count, 0)
 
+    @skip
+    def test_read_incomplete_buffer(self):
+        from six.moves import http_client as httplib
+        for length in [1, 2, 5, 10, 20, 50]:
+            with self.assertRaises(httplib.IncompleteRead):
+                msg = "11\n".replace('\n', '')
+                buf = ReadBuffer(six.BytesIO(six.b(msg)), length)
+                buf.read_line()
+            with self.assertRaises(httplib.IncompleteRead):
+                msg = '{id:12345}'
+                buf = ReadBuffer(six.BytesIO(six.b(msg)), length)
+                buf.read_len(len(msg) - 1)
+            with self.assertRaises(httplib.IncompleteRead):
+                msg = '{id:23456, test:"blah"}\n'
+                buf = ReadBuffer(six.BytesIO(six.b(msg)), length)
+                buf.read_len(len(msg) - 2)
+
     def test_read_unicode_tweet(self):
         stream = six.b('11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n')
         for length in [1, 2, 5, 10, 20, 50]:

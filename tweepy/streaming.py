@@ -8,21 +8,20 @@ from __future__ import absolute_import, print_function
 
 import logging
 import re
-import requests
-import sys
-from requests.exceptions import Timeout
+import ssl
 from threading import Thread
 from time import sleep
 
+import requests
 import six
-
-import ssl
-
-from tweepy.models import Status
+from requests.exceptions import Timeout
+from requests.packages.urllib3.exceptions import TimeoutError
+from six.moves import http_client as httplib
 from tweepy.api import API
 from tweepy.error import TweepError
-
+from tweepy.models import Status
 from tweepy.utils import import_simplejson
+
 json = import_simplejson()
 
 STREAM_VERSION = '1.1'
@@ -157,19 +156,29 @@ class ReadBuffer(object):
         self._encoding = encoding
 
     def read_len(self, length):
+        """Read the data stream until `length` characters been received
+
+        :param length: The number of characters to read from the stream(int)
+        :return: The str of the data read with `length` characters (str in
+            python 2, bytes in python 3)
+        """
         while not self._stream.closed:
             if len(self._buffer) >= length:
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
-        return six.b('')
+
+        # if stream is closed before enough characters were received
+        raise httplib.IncompleteRead('%d bytes read, %d more expected'
+                                     % (len(self._buffer), length - len(self._buffer)))
 
     def read_line(self, sep=six.b('\n')):
         """Read the data stream until a given separator is found (default \n)
 
-        :param sep: Separator to read until. Must by of the bytes type (str in python 2,
-            bytes in python 3)
-        :return: The str of the data read until sep
+        :param sep: Separator to read until. Must by of the bytes type (str in
+            python 2, bytes in python 3)
+        :return: The str of the data read until sep (str in python 2, bytes in
+            python 3)
         """
         start = 0
         while not self._stream.closed:
@@ -179,7 +188,9 @@ class ReadBuffer(object):
             else:
                 start = len(self._buffer)
             self._buffer += self._stream.read(self._chunk_size)
-        return six.b('')
+
+        # if stream is closed before a seperator was received
+        raise httplib.IncompleteRead('"%s" sep was not received' % (str(sep),))
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -210,7 +221,7 @@ class Stream(object):
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        self.chunk_size = options.get("chunk_size", 512)
 
         self.verify = options.get("verify", True)
 
@@ -264,7 +275,8 @@ class Stream(object):
                     self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
                     self._read_loop(resp)
-            except (Timeout, ssl.SSLError) as exc:
+            except (Timeout, TimeoutError, ssl.SSLError,
+                    httplib.IncompleteRead) as exc:
                 # This is still necessary, as a SSLError can actually be
                 # thrown when using Requests
                 # If it's not time out treat it like any other exception
