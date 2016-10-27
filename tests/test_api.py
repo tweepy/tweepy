@@ -235,26 +235,6 @@ class TweepyAPITests(TweepyTestCase):
         self.api.set_delivery_device('none')
     """
 
-    @tape.use_cassette('testupdateprofilecolors.json')
-    def testupdateprofilecolors(self):
-        original = self.api.me()
-        updated = self.api.update_profile_colors('000', '000', '000', '000', '000')
-
-        # restore colors
-        self.api.update_profile_colors(
-            original.profile_background_color,
-            original.profile_text_color,
-            original.profile_link_color,
-            original.profile_sidebar_fill_color,
-            original.profile_sidebar_border_color
-        )
-
-        self.assertEqual(updated.profile_background_color, '000000')
-        self.assertEqual(updated.profile_text_color, '000000')
-        self.assertEqual(updated.profile_link_color, '000000')
-        self.assertEqual(updated.profile_sidebar_fill_color, '000000')
-        self.assertEqual(updated.profile_sidebar_border_color, '000000')
-
     """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
@@ -273,7 +253,8 @@ class TweepyAPITests(TweepyTestCase):
         profile = {
             'name': 'Tweepy test 123',
             'location': 'pytopia',
-            'description': 'just testing things out'
+            'description': 'just testing things out',
+            'profile_link_color': '123ABC'
         }
         updated = self.api.update_profile(**profile)
         self.api.update_profile(
