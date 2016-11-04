@@ -33,7 +33,7 @@ class TweepyTestCase(unittest.TestCase):
         self.auth = create_auth()
         self.api = API(self.auth)
         self.api.retry_count = 2
-        self.api.retry_delay = 5
+        self.api.retry_delay = 0 if use_replay else 5
 
 
 def create_auth():
