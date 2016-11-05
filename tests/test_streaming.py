@@ -109,7 +109,7 @@ class TweepyStreamTests(unittest.TestCase):
         s.filter(track=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.session.params['track'])
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['track'])
 
     def test_follow_encoding(self):
         s = Stream(None, None)
@@ -117,7 +117,7 @@ class TweepyStreamTests(unittest.TestCase):
         s.filter(follow=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.session.params['follow'])
+        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['follow'])
 
 
 class TweepyStreamReadBufferTests(unittest.TestCase):
@@ -212,9 +212,9 @@ class TweepyStreamBackoffTests(unittest.TestCase):
         self.assertEqual(self.stream.retry_time, 3.0)
 
     mock_resp = MagicMock()
-    mock_resp.return_value.status = 420
+    mock_resp.return_value.status_code = 420
 
-    @patch(getresponse_location, mock_resp)
+    @patch('requests.Session.request', mock_resp)
     def test_420(self):
         self.stream = Stream(self.auth, self.listener, timeout=3.0, retry_count=0,
                              retry_time=1.0, retry_420=1.5, retry_time_cap=20.0)
