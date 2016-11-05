@@ -162,6 +162,7 @@ class ReadBuffer(object):
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
+        return six.b('')
 
     def read_line(self, sep=six.b('\n')):
         """Read the data stream until a given separator is found (default \n)
@@ -178,6 +179,7 @@ class ReadBuffer(object):
             else:
                 start = len(self._buffer)
             self._buffer += self._stream.read(self._chunk_size)
+        return six.b('')
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -323,7 +325,7 @@ class Stream(object):
                     raise TweepError('Expecting length, unexpected value found')
 
             next_status_obj = buf.read_len(length)
-            if self.running:
+            if self.running and next_status_obj:
                 self._data(next_status_obj)
 
             # # Note: keep-alive newlines might be inserted before each length value.
