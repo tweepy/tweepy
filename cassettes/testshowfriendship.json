@@ -2,64 +2,62 @@
     "version": 1,
     "interactions": [
         {
-            "request": {
-                "headers": {
-                    "Host": [
-                        "api.twitter.com"
-                    ]
-                },
-                "method": "GET",
-                "uri": "https://api.twitter.com:443/1.1/friendships/show.json?target_screen_name=twitter",
-                "body": null
-            },
             "response": {
                 "status": {
-                    "code": 200,
-                    "message": "OK"
+                    "message": "OK",
+                    "code": 200
+                },
+                "body": {
+                    "string": "{\"relationship\":{\"source\":{\"id\":794682839556038656,\"id_str\":\"794682839556038656\",\"screen_name\":\"TheTweepyTester\",\"following\":true,\"followed_by\":false,\"live_following\":false,\"following_received\":false,\"following_requested\":false,\"notifications_enabled\":false,\"can_dm\":false,\"blocking\":false,\"blocked_by\":false,\"muting\":false,\"want_retweets\":true,\"all_replies\":false,\"marked_spam\":false},\"target\":{\"id\":783214,\"id_str\":\"783214\",\"screen_name\":\"twitter\",\"following\":false,\"followed_by\":true,\"following_received\":false,\"following_requested\":false}}}"
                 },
                 "headers": {
-                    "date": [
-                        "Sun, 30 Nov 2014 20:41:39 UTC"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-connection-hash": [
-                        "cea8d59680e2cf7c94a31363f707212a"
-                    ],
-                    "x-rate-limit-limit": [
-                        "180"
-                    ],
-                    "server": [
-                        "tsa_b"
+                    "content-length": [
+                        "544"
                     ],
                     "x-transaction": [
-                        "a8010c7b1d3d767c"
+                        "002e4899001ee9d1"
                     ],
-                    "x-access-level": [
-                        "read-write-directmessages"
+                    "last-modified": [
+                        "Sat, 05 Nov 2016 21:43:59 GMT"
                     ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
+                    "x-rate-limit-reset": [
+                        "1478382709"
                     ],
                     "strict-transport-security": [
                         "max-age=631138519"
                     ],
+                    "server": [
+                        "tsa_b"
+                    ],
                     "cache-control": [
                         "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
                     ],
-                    "content-length": [
-                        "496"
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
-                    "set-cookie": [
-                        "lang=en",
-                        "guest_id=v1%3A141738009951337492; Domain=.twitter.com; Path=/; Expires=Tue, 29-Nov-2016 20:41:39 UTC"
+                    "x-rate-limit-remaining": [
+                        "178"
                     ],
-                    "last-modified": [
-                        "Sun, 30 Nov 2014 20:41:39 GMT"
+                    "date": [
+                        "Sat, 05 Nov 2016 21:43:59 GMT"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-rate-limit-limit": [
+                        "180"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
                     ],
                     "status": [
                         "200 OK"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
                     ],
                     "expires": [
                         "Tue, 31 Mar 1981 05:00:00 GMT"
@@ -67,105 +65,32 @@
                     "content-type": [
                         "application/json;charset=utf-8"
                     ],
-                    "x-rate-limit-remaining": [
-                        "179"
+                    "set-cookie": [
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A147838223983876886; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:43:59 UTC"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
+                    "x-access-level": [
+                        "read-write-directmessages"
                     ],
-                    "x-rate-limit-reset": [
-                        "1417380999"
+                    "x-response-time": [
+                        "24"
+                    ],
+                    "x-connection-hash": [
+                        "f03b37025ac07ad15e4852424c762a20"
                     ]
-                },
-                "body": {
-                    "string": "{\"relationship\":{\"source\":{\"id\":82301637,\"id_str\":\"82301637\",\"screen_name\":\"tweepytest\",\"following\":true,\"followed_by\":false,\"following_received\":false,\"following_requested\":false,\"notifications_enabled\":false,\"can_dm\":false,\"blocking\":false,\"blocked_by\":false,\"muting\":false,\"want_retweets\":true,\"all_replies\":false,\"marked_spam\":false},\"target\":{\"id\":783214,\"id_str\":\"783214\",\"screen_name\":\"twitter\",\"following\":false,\"followed_by\":true,\"following_received\":false,\"following_requested\":false}}}"
                 }
-            }
-        },
-        {
+            },
             "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/friendships/show.json?target_screen_name=twitter",
+                "body": null,
                 "headers": {
                     "Host": [
                         "api.twitter.com"
                     ]
-                },
-                "method": "GET",
-                "uri": "https://api.twitter.com:443/1.1/friendships/show.json?target_screen_name=twitter",
-                "body": null
-            },
-            "response": {
-                "status": {
-                    "code": 200,
-                    "message": "OK"
-                },
-                "headers": {
-                    "date": [
-                        "Mon, 01 Dec 2014 02:15:29 UTC"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-connection-hash": [
-                        "4f41e44851a397fa7205e82caa28e5a3"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1417401029"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "content-length": [
-                        "496"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "last-modified": [
-                        "Mon, 01 Dec 2014 02:15:29 GMT"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "x-rate-limit-limit": [
-                        "180"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "179"
-                    ],
-                    "set-cookie": [
-                        "lang=en",
-                        "guest_id=v1%3A141740012905635643; Domain=.twitter.com; Path=/; Expires=Wed, 30-Nov-2016 02:15:29 UTC"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "x-transaction": [
-                        "74cf827c2a74eed4"
-                    ]
-                },
-                "body": {
-                    "string": "{\"relationship\":{\"source\":{\"id\":82301637,\"id_str\":\"82301637\",\"screen_name\":\"tweepytest\",\"following\":true,\"followed_by\":false,\"following_received\":false,\"following_requested\":false,\"notifications_enabled\":false,\"can_dm\":false,\"blocking\":false,\"blocked_by\":false,\"muting\":false,\"want_retweets\":true,\"all_replies\":false,\"marked_spam\":false},\"target\":{\"id\":783214,\"id_str\":\"783214\",\"screen_name\":\"twitter\",\"following\":false,\"followed_by\":true,\"following_received\":false,\"following_requested\":false}}}"
                 }
             }
         }
