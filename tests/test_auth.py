@@ -4,6 +4,8 @@ from .config import *
 from tweepy import API, OAuthHandler
 
 import six
+import random
+
 if six.PY3:
     import unittest
 else:
