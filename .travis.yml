@@ -11,7 +11,7 @@ python:
 
 env:
   global:
-  - TWITTER_USERNAME="tweepytest"
+  - TWITTER_USERNAME="TheTweepyTester"
   - AWS_BUCKET="tweepy"
   - USE_REPLAY=1
   - secure: ! 'MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
