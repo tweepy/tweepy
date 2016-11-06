@@ -281,8 +281,6 @@ class Stream(object):
                                        self.snooze_time_cap)
             except Exception as exc:
                 exc_info = sys.exc_info()
-                print(exc_info)
-                import pdb; pdb.post_mortem(exc_info[2])
                 # any other exception is fatal, so kill loop
                 break
 
