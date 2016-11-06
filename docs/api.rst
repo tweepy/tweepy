@@ -98,13 +98,14 @@ Status methods
    :rtype: :class:`Status` object
 
 
-.. method:: API.update_status(status, [in_reply_to_status_id], [lat], [long], [source], [place_id])
+.. method:: API.update_status(status, [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id])
 
    Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param auto_populate_reply_metadata: Whether to automatically include the @mentions in the status metadata.
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
@@ -112,7 +113,7 @@ Status methods
    :rtype: :class:`Status` object
 
 
-.. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [lat], [long], [source], [place_id], [file])
+.. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [file])
 
    Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
@@ -120,6 +121,7 @@ Status methods
    :param filename: The filename of the image to upload. This will automatically be opened unless `file` is specified
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param auto_populate_reply_metadata: Whether to automatically include the @mentions in the status metadata.
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
