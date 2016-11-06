@@ -15,6 +15,8 @@ import logging
 from tweepy.error import TweepError, RateLimitError, is_rate_limit_error_message
 from tweepy.utils import convert_to_utf8_str
 from tweepy.models import Model
+import six
+import sys
 
 
 re_path_template = re.compile('{\w+}')
@@ -170,6 +172,7 @@ def bind_api(**config):
                 #         time.sleep(sleep_time + 5)  # sleep for few extra sec
 
                 # Apply authentication
+                auth = None
                 if self.api.auth:
                     auth = self.api.auth.apply_auth()
 
@@ -186,8 +189,10 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    raise TweepError('Failed to send request: %s' % e)
+                    six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
+
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
+
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)
                 elif isinstance(self._remaining_calls, int):
