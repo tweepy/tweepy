@@ -47,7 +47,7 @@ using the API. We must complete the following steps:
    us. Otherwise the user must manually supply us with the verifier
    code.
 
-#. Exchange the authorized request token for an access token. 
+#. Exchange the authorized request token for an access token.
 
 So let's fetch our request token to begin the dance::
 
@@ -80,7 +80,7 @@ twitter as a GET query parameter in the URL.
 
    # Example using callback (web app)
    verifier = request.GET.get('oauth_verifier')
-   
+
    # Example w/o callback (desktop)
    verifier = raw_input('Verifier:')
 
@@ -93,13 +93,14 @@ treasure box. To fetch this token we do the following::
    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
    token = session.get('request_token')
    session.delete('request_token')
-   auth.request_token = token
-   
+   auth.request_token = { 'oauth_token' : token,
+                            'oauth_token_secret' : verifier }
+
    try:
        auth.get_access_token(verifier)
    except tweepy.TweepError:
        print 'Error! Failed to get access token.'
-   
+
 It is a good idea to save the access token for later use. You do not
 need to re-fetch it each time. Twitter currently does not expire the
 tokens, so the only time it would ever go invalid is if the user
