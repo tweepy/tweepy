@@ -109,6 +109,17 @@ class TweepyAPITests(TweepyTestCase):
         deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
+    @tape.use_cassette('testupdateanddestroystatus.json')
+    def testupdateanddestroystatuswithoutkwarg(self):
+        # test update, passing text as a positional argument (#554)
+        text = tweet_text if use_replay else 'testing %i' % random.randint(0, 1000)
+        update = self.api.update_status(text)
+        self.assertEqual(update.text, text)
+
+        # test destroy
+        deleted = self.api.destroy_status(id=update.id)
+        self.assertEqual(deleted.id, update.id)
+
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
     def testupdatestatuswithmedia(self):
         update = self.api.update_with_media('examples/banner.png', status=tweet_text)

@@ -9,14 +9,24 @@ import mimetypes
 
 import six
 
+if six.PY2:
+    from urllib import urlencode
+elif six.PY3:
+    from urllib.parse import urlencode
+
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser, Parser
+from tweepy.parsers import ModelParser, Parser, RawParser
 from tweepy.utils import list_to_csv
 
+IMAGE_MIMETYPES = ('image/gif', 'image/jpeg', 'image/png', 'image/webp')
+CHUNKED_MIMETYPES = ('image/gif', 'image/jpeg', 'image/png', 'image/webp', 'video/mp4')
 
 class API(object):
     """Twitter API"""
+
+    max_size_standard = 5120  # standard uploads must be less then 5 MB
+    max_size_chunked = 15360  # chunked uploads must be less than 15 MB
 
     def __init__(self, auth_handler=None,
                  host='api.twitter.com', search_host='search.twitter.com',
@@ -195,10 +205,34 @@ class API(object):
 
     def media_upload(self, filename, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/media/upload
+            :reference https://dev.twitter.com/rest/reference/post/media/upload-chunked
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 3072, form_field='media', f=f)
+
+        mime, _ = mimetypes.guess_type(filename)
+        try:
+            size = os.path.getsize(filename)
+        except OSError:
+            f.seek(0, 2)
+            size = f.tell()
+            f.seek(0)
+
+        if mime in IMAGE_MIMETYPES and size < self.max_size_standard:
+            return self.image_upload(filename, f=f, *args, **kwargs)
+
+        elif mime in CHUNKED_MIMETYPES:
+            return self.upload_chunked(filename, f=f, *args, **kwargs)
+
+        else:
+            raise TweepError("Can't upload media with mime type %s" % mime)
+
+    def image_upload(self, filename, *args, **kwargs):
+        """ :reference: https://dev.twitter.com/rest/reference/post/media/upload
+            :allowed_param:
+        """
+        f = kwargs.pop('file', None)
+        headers, post_data = API._pack_image(filename, self.max_size_standard, form_field='media', f=f)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
@@ -210,6 +244,66 @@ class API(object):
             require_auth=True,
             upload_api=True
         )(*args, **kwargs)
+
+    def upload_chunked(self, filename, *args, **kwargs):
+        """ :reference https://dev.twitter.com/rest/reference/post/media/upload-chunked
+            :allowed_param:
+        """
+        f = kwargs.pop('file', None)
+
+        # Initialize upload (Twitter cannot handle videos > 15 MB)
+        headers, post_data, fp = API._chunk_media('init', filename, self.max_size_chunked, form_field='media', f=f)
+        kwargs.update({ 'headers': headers, 'post_data': post_data })
+
+        # Send the INIT request
+        media_info = bind_api(
+            api=self,
+            path='/media/upload.json',
+            method='POST',
+            payload_type='media',
+            allowed_param=[],
+            require_auth=True,
+            upload_api=True
+        )(*args, **kwargs)
+
+        # If a media ID has been generated, we can send the file
+        if media_info.media_id:
+            # default chunk size is 1MB, can be overridden with keyword argument.
+            # minimum chunk size is 16K, which keeps the maximum number of chunks under 999
+            chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
+            chunk_size = max(chunk_size, 16 * 2014)
+
+            fsize = os.path.getsize(filename)
+            nloops = int(fsize / chunk_size) + (1 if fsize % chunk_size > 0 else 0)
+            for i in range(nloops):
+                headers, post_data, fp = API._chunk_media('append', filename, self.max_size_chunked, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i)
+                kwargs.update({ 'headers': headers, 'post_data': post_data, 'parser': RawParser() })
+                # The APPEND command returns an empty response body
+                bind_api(
+                    api=self,
+                    path='/media/upload.json',
+                    method='POST',
+                    payload_type='media',
+                    allowed_param=[],
+                    require_auth=True,
+                    upload_api=True
+                )(*args, **kwargs)
+            # When all chunks have been sent, we can finalize.
+            headers, post_data, fp = API._chunk_media('finalize', filename, self.max_size_chunked, media_id=media_info.media_id)
+            kwargs = {'headers': headers, 'post_data': post_data}
+
+            # The FINALIZE command returns media information
+            return bind_api(
+                api=self,
+                path='/media/upload.json',
+                method='POST',
+                payload_type='media',
+                allowed_param=[],
+                require_auth=True,
+                upload_api=True
+            )(*args, **kwargs)
+        else:
+            return media_info
 
     def update_with_media(self, filename, *args, **kwargs):
         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update_with_media
@@ -1279,7 +1373,7 @@ class API(object):
     @staticmethod
     def _pack_image(filename, max_size, form_field="image", f=None):
         """Pack image from file into multipart-formdata post body"""
-        # image must be less than 700kb in size
+        # image must be less than 5MB in size
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
@@ -1297,11 +1391,12 @@ class API(object):
             fp = f
 
         # image must be gif, jpeg, or png
-        file_type = mimetypes.guess_type(filename)
+        file_type, _ = mimetypes.guess_type(filename)
+
         if file_type is None:
             raise TweepError('Could not determine file type')
-        file_type = file_type[0]
-        if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
+
+        if file_type not in IMAGE_MIMETYPES:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
@@ -1328,3 +1423,95 @@ class API(object):
         }
 
         return headers, body
+
+    @staticmethod
+    def _chunk_media(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0):
+        fp = None
+        if command == 'init':
+            if f is None:
+                file_size = os.path.getsize(filename)
+                try:
+                    if file_size > (max_size * 1024):
+                        raise TweepError('File is too big, must be less than %skb.' % max_size)
+                except os.error as e:
+                    raise TweepError('Unable to access file: %s' % e.strerror)
+
+                # build the mulitpart-formdata body
+                fp = open(filename, 'rb')
+            else:
+                f.seek(0, 2)  # Seek to end of file
+                file_size = f.tell()
+                if file_size > (max_size * 1024):
+                    raise TweepError('File is too big, must be less than %skb.' % max_size)
+                f.seek(0)  # Reset to beginning of file
+                fp = f
+        elif command != 'finalize':
+            if f is not None:
+                fp = f
+            else:
+                raise TweepError('File input for APPEND is mandatory.')
+
+        # video must be mp4
+        file_type, _ = mimetypes.guess_type(filename)
+
+        if file_type is None:
+            raise TweepError('Could not determine file type')
+
+        if file_type not in CHUNKED_MIMETYPES:
+            raise TweepError('Invalid file type for video: %s' % file_type)
+
+        BOUNDARY = b'Tw3ePy'
+        body = list()
+        if command == 'init':
+            body.append(
+                urlencode({
+                    'command': 'INIT',
+                    'media_type': file_type,
+                    'total_bytes': file_size
+                }).encode('utf-8')
+            )
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+        elif command == 'append':
+            if media_id is None:
+                raise TweepError('Media ID is required for APPEND command.')
+            body.append(b'--' + BOUNDARY)
+            body.append('Content-Disposition: form-data; name="command"'.encode('utf-8'))
+            body.append(b'')
+            body.append(b'APPEND')
+            body.append(b'--' + BOUNDARY)
+            body.append('Content-Disposition: form-data; name="media_id"'.encode('utf-8'))
+            body.append(b'')
+            body.append(str(media_id).encode('utf-8'))
+            body.append(b'--' + BOUNDARY)
+            body.append('Content-Disposition: form-data; name="segment_index"'.encode('utf-8'))
+            body.append(b'')
+            body.append(str(segment_index).encode('utf-8'))
+            body.append(b'--' + BOUNDARY)
+            body.append('Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(form_field, os.path.basename(filename)).encode('utf-8'))
+            body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+            body.append(b'')
+            body.append(fp.read(chunk_size))
+            body.append(b'--' + BOUNDARY + b'--')
+            headers = {
+                'Content-Type': 'multipart/form-data; boundary=Tw3ePy'
+            }
+        elif command == 'finalize':
+            if media_id is None:
+                raise TweepError('Media ID is required for FINALIZE command.')
+            body.append(
+                urlencode({
+                    'command': 'FINALIZE',
+                    'media_id': media_id
+                }).encode('utf-8')
+            )
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            }
+
+        body = b'\r\n'.join(body)
+        # build headers
+        headers['Content-Length'] = str(len(body))
+
+        return headers, body, fp
