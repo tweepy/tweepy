@@ -1,5 +1,6 @@
 .. _streaming_how_to:
 .. _Twitter Streaming API Documentation: https://dev.twitter.com/streaming/overview
+.. _Twitter Streaming API Connecting Documentation: https://dev.twitter.com/streaming/overview/connecting
 .. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
 
 *********************
@@ -99,15 +100,20 @@ rate limiting. If clients exceed a limited number of attempts to connect to the 
 in a window of time, they will receive error 420.  The amount of time a client has to wait after receiving error 420
 will increase exponentially each time they make a failed attempt. 
 
-Tweepy's **Stream Listener** usefully passes error messages to an **on_error** stub. We can use **on_error** to 
-catch 420 errors and disconnect our stream. ::
+Tweepy's **Stream Listener** passes error codes to an **on_error** stub. The
+default implementation returns **False** for all codes, but we can override it
+to allow Tweepy to reconnect for some or all codes, using the backoff
+strategies recommended in the `Twitter Streaming API Connecting
+Documentation`_. ::
 
   class MyStreamListener(tweepy.StreamListener):
   
       def on_error(self, status_code):
           if status_code == 420:
-              #returning False in on_data disconnects the stream
+              #returning False in on_error disconnects the stream
               return False
 
-For more information on error codes from the twitter api see `Twitter Response Codes Documentation`_.
+          # returning non-False reconnects the stream, with backoff.
+
+For more information on error codes from the Twitter API see `Twitter Response Codes Documentation`_.
 
