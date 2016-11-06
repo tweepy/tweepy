@@ -104,7 +104,7 @@ def bind_api(**config):
 
                 self.session.params[k] = convert_to_utf8_str(arg)
 
-            log.info("PARAMS: %r", self.session.params)
+            log.debug("PARAMS: %r", self.session.params)
 
         def build_path(self):
             for variable in re_path_template.findall(self.path):
