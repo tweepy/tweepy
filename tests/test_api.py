@@ -427,6 +427,19 @@ class TweepyAPITests(TweepyTestCase):
         self.api.home_timeline()
         self.assertTrue(self.api.cached_result)
 
+    @tape.use_cassette('testcachedresult.json')
+    def testcachedifferentqueryparameters(self):
+        self.api.cache = MemoryCache()
+
+        user1 = self.api.get_user('TheTweepyTester')
+        self.assertFalse(self.api.cached_result)
+        self.assertEquals('TheTweepyTester', user1.screen_name)
+
+        user2 = self.api.get_user('tweepytest')
+        self.assertEquals('tweepytest', user2.screen_name)
+        self.assertFalse(self.api.cached_result)
+
+
 
 class TweepyCacheTests(unittest.TestCase):
     timeout = 0.5

@@ -7,7 +7,7 @@ from __future__ import print_function
 import time
 import re
 
-from six.moves.urllib.parse import quote
+from six.moves.urllib.parse import quote, urlencode
 import requests
 
 import logging
@@ -132,7 +132,7 @@ def bind_api(**config):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
-                cache_result = self.api.cache.get(url)
+                cache_result = self.api.cache.get('%s?%s' % (url, urlencode(self.session.params)))
                 # if cache result found and not expired, return it
                 if cache_result:
                     # must restore api reference
@@ -233,7 +233,7 @@ def bind_api(**config):
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                self.api.cache.store(url, result)
+                self.api.cache.store('%s?%s' % (url, urlencode(self.session.params)), result)
 
             return result
 
