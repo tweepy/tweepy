@@ -10,7 +10,7 @@ import six
 from six.moves.urllib.parse import quote
 
 from email.utils import parsedate
-
+import mechanicalsoup
 
 def parse_datetime(string):
     return datetime(*(parsedate(string)[:6]))
@@ -56,3 +56,19 @@ def import_simplejson():
 def list_to_csv(item_list):
     if item_list:
         return ','.join([str(i) for i in item_list])
+
+def retweet_text(link):
+    """
+    preconditions:
+    link is a valid link to a tweet containing retweeted text
+
+    postconditions:
+    returns the retweeted text of the tweet
+    if the preconditions are not met it bad things will happen
+    --maybe it throws an exception
+    """
+    browser = mechanicalsoup.Browser()
+    retweet = browser.get(link)
+    retweet = retweet.soup.findAll('div', class_="QuoteTweet-text")[0]
+    retweet = retweet.text
+    return retweet
