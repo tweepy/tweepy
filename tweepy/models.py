@@ -60,6 +60,8 @@ class Model(object):
             a result set of model instances.
         """
         results = ResultSet()
+        if 'id' in json_list:
+            json_list = json_list['id']
         for obj in json_list:
             if obj:
                 results.append(cls.parse(api, obj))
