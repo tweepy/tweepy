@@ -589,7 +589,7 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.lists([cursor])
+.. method:: API.lists_all([cursor])
 
    List the lists of the specified user. Private lists will be included
    if the authenticated users is the same as the user who's lists are
@@ -799,9 +799,9 @@ which means ``tweepy.error`` itself does not need to be imported. For
 example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
 .. exception:: TweepError
-   
+
    The main exception Tweepy uses. Is raised for a number of things.
-   
+
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
    <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
@@ -810,9 +810,9 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
    error reason strings).
 
 .. exception:: RateLimitError
-   
+
    Is raised when an API method fails due to hitting Twitter's rate
    limit. Makes for easy handling of the rate limit specifically.
-   
+
    Inherits from :exc:`TweepError`, so ``except TweepError`` will
    catch a ``RateLimitError`` too.
