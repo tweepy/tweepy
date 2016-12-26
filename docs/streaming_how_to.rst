@@ -81,6 +81,11 @@ the word *python*. The **track** parameter is an array of search terms to stream
   
   myStream.filter(track=['python'])
 
+This example shows how to use **filter** to stream tweets by a specific user. The **follow** parameter is an array of IDs. ::
+
+  myStream.filter(follow=[2211149702])
+
+An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'.
 
 A Few More Pointers
 ===================
