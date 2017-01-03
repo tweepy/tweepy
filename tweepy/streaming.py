@@ -430,10 +430,13 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
+
         if follow:
-            self.body['follow'] = u','.join(follow).encode(encoding)
+            self.body['follow'] = u','.join(str(f) for f in follow).encode(encoding)
+
         if track:
-            self.body['track'] = u','.join(track).encode(encoding)
+            self.body['track'] = u','.join(str(f) for f in track).encode(encoding)
+
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
