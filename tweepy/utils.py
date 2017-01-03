@@ -17,12 +17,10 @@ def parse_datetime(string):
 
 
 def parse_html_value(html):
-
     return html[html.find('>')+1:html.rfind('<')]
 
 
 def parse_a_href(atag):
-
     start = atag.find('"') + 1
     end = atag.find('"', start)
     return atag[start:end]
@@ -35,22 +33,6 @@ def convert_to_utf8_str(arg):
     elif not isinstance(arg, bytes):
         arg = six.text_type(arg).encode('utf-8')
     return arg
-
-
-def import_simplejson():
-    try:
-        import simplejson as json
-    except ImportError:
-        try:
-            import json  # Python 2.6+
-        except ImportError:
-            try:
-                # Google App Engine
-                from django.utils import simplejson as json
-            except ImportError:
-                raise ImportError("Can't load a json library")
-
-    return json
 
 
 def list_to_csv(item_list):

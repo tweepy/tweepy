@@ -10,6 +10,7 @@ import logging
 import re
 import requests
 import sys
+import json
 from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
@@ -21,9 +22,6 @@ import ssl
 from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
-
-from tweepy.utils import import_simplejson
-json = import_simplejson()
 
 STREAM_VERSION = '1.1'
 
