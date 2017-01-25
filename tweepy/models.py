@@ -131,6 +131,51 @@ class Status(Model):
         return not result
 
 
+class Event(Model):
+    @classmethod
+    def parse(cls, api, json):
+        event = cls(api)
+        setattr(event, '_json', json)
+        for k, v in json.items():
+            if k == 'event':
+                setattr(event, k, v)
+            elif k == 'created_at':
+                setattr(event, k, parse_datetime(v))
+            elif k == 'source' or k == 'target':
+                user_model = getattr(api.parser.model_factory, 'user') if api else User
+                user = user_model.parse(api, v)
+                setattr(event, k, user)
+            elif k == 'target_object':
+                if json['event'] in ('favorite', 'unfavorite', 'quoted_tweet'):
+                    status = Status.parse(api, v)
+                    setattr(event, k, status)
+                elif json['event'] in ('list_created', 'list_destroyed', 'list_updated', 'list_member_added', 'list_member_removed', 'list_user_subscribed', 'list_user_unsubscribed'):
+                    list = List.parse(api, v)
+                    setattr(event, k, list)
+                else:
+                    setattr(event, k, v)
+
+    def __eq__(self, other):
+        if isinstance(other, Event):
+            return all((
+                self.event == other.event,
+                self.created_at == other.created_at,
+                self.source == other.source,
+                self.target == other.target,
+                self.target_object == other.target_object,
+            ))
+
+        return NotImplemented
+
+    def __ne__(self, other):
+        result = self == other
+
+        if result is NotImplemented:
+            return result
+
+        return not result
+
+
 class User(Model):
 
     @classmethod

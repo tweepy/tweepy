@@ -18,7 +18,7 @@ import six
 
 import ssl
 
-from tweepy.models import Status
+from tweepy.models import Status, Event
 from tweepy.api import API
 from tweepy.error import TweepError
 
@@ -59,7 +59,7 @@ class StreamListener(object):
             if self.on_delete(delete['id'], delete['user_id']) is False:
                 return False
         elif 'event' in data:
-            status = Status.parse(self.api, data)
+            status = Event.parse(self.api, data)
             if self.on_event(status) is False:
                 return False
         elif 'direct_message' in data:
@@ -97,7 +97,7 @@ class StreamListener(object):
         """Called when a delete notice arrives for a status"""
         return
 
-    def on_event(self, status):
+    def on_event(self, event):
         """Called when a new event arrives"""
         return
 
