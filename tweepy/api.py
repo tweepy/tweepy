@@ -114,7 +114,7 @@ class API(object):
     @property
     def user_timeline(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-            :allowed_param:'id', 'user_id', 'screen_name', 'since_id'
+            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts'
         """
         return bind_api(
             api=self,
@@ -331,6 +331,7 @@ class API(object):
             path='/users/lookup.json',
             payload_type='user', payload_list=True,
             method='POST',
+            allowed_param=['user_id', 'screen_name', 'include_entities']
         )
 
     def me(self):
@@ -487,7 +488,7 @@ class API(object):
     @property
     def show_friendship(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/friendships/show
-            :allowed_param:'source_id', 'source_screen_name'
+            :allowed_param:'source_id', 'source_screen_name', 'target_id', 'target_screen_name'
         """
         return bind_api(
             api=self,
@@ -707,7 +708,7 @@ class API(object):
     @property
     def update_profile(self):
         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile
-            :allowed_param:'name', 'url', 'location', 'description'
+            :allowed_param:'name', 'url', 'location', 'description', 'profile_link_color'
         """
         return bind_api(
             api=self,
@@ -1190,7 +1191,7 @@ class API(object):
         """ :reference: https://dev.twitter.com/rest/reference/get/search/tweets
             :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode',
              'max_id', 'since', 'until', 'result_type', 'count',
-              'include_entities', 'from', 'to', 'source']
+              'include_entities', 'from', 'to', 'source'
         """
         return bind_api(
             api=self,
