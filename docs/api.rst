@@ -86,6 +86,14 @@ Timeline methods
    :param page: |page|
    :rtype: list of :class:`Status` objects
 
+.. method:: API.mentions_timeline([since_id], [max_id], [count])
+
+   Returns the 20 most recent mentions, including retweets. 
+
+   :param since_id: |since_id|
+   :param max_id: |max_id|
+   :param count: |count|
+   :rtype: list of :class:`Status` objects
 
 Status methods
 --------------
