@@ -47,15 +47,15 @@ Timeline methods
    :param page: |page|
    :rtype: list of :class:`Status` objects
 
-.. method:: API.statuses_lookup(id, [include_entities], [trim_user], [map])
+.. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_])
 
    Returns full Tweet objects for up to 100 tweets per request, specified by the
    `id` parameter.
 
-   :param id: A list of Tweet IDs to lookup, up to 100
+   :param id_: A list of Tweet IDs to lookup, up to 100
    :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
-   :param map: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
+   :param map_: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
    :rtype: list of :class:`Status` objects
 
 
