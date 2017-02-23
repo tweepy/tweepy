@@ -73,9 +73,9 @@ class TweepyAPITests(TweepyTestCase):
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
+    @tape.use_cassette('testretweet.json')
     def testretweet(self):
-        # TODO(josh): Need a way to get random tweets to retweet.
-        raise SkipTest()
+        self.api.retweet(test_tweet_id)
 
     @tape.use_cassette('testretweets.json')
     def testretweets(self):
