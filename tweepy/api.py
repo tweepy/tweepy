@@ -125,6 +125,18 @@ class API(object):
         )
 
     @property
+    def retweeters(self):
+        """ :reference: https://dev.twitter.com/rest/reference/get/statuses/retweeters/ids 
+            :allowed_param:'id', 'cursor', 'stringify_ids'
+        """                    
+        return bind_api(
+            api=self,
+            path='https://api.twitter.com/1.1/statuses/retweeters/ids.json',
+            payload_type='ids',payload_list=True,
+            allowed_param=['id', 'cursor', 'stringify_ids']
+        )
+        
+    @property
     def mentions_timeline(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline
             :allowed_param:'since_id', 'max_id', 'count'
