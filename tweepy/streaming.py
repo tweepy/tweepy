@@ -48,6 +48,11 @@ class StreamListener(object):
         Override this method if you wish to manually handle
         the stream data. Return False to stop stream and close connection.
         """
+        
+        if raw_data is None:
+            logging.error("empty message")
+            return
+        
         data = json.loads(raw_data)
 
         if 'in_reply_to_status_id' in data:
@@ -313,7 +318,9 @@ class Stream(object):
         while self.running and not resp.raw.closed:
             length = 0
             while not resp.raw.closed:
-                line = buf.read_line().strip()
+                line = buf.read_line()
+                if line is not None:
+                    line = line.strip()
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
