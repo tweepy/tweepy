@@ -303,16 +303,6 @@ Friendship Methods
    :rtype: :class:`User` object
 
 
-.. method:: API.exists_friendship(user_a, user_b)
-
-   Checks if a friendship exists between two users. Will return True if
-   user_a follows user_b, otherwise False.
-
-   :param user_a: The ID or screen_name of the subject user.
-   :param user_b: The ID or screen_name of the user to test for following.
-   :rtype: True/False
-
-
 .. method:: API.show_friendship(source_id/source_screen_name, target_id/target_screen_name)
 
    Returns detailed information about the relationship between two users.
