@@ -313,7 +313,11 @@ class Stream(object):
         while self.running and not resp.raw.closed:
             length = 0
             while not resp.raw.closed:
-                line = buf.read_line().strip()
+                line = buf.read_line() #buf.read_line() may return none and hence stirip will give an error
+                try:
+                    line = line.strip()
+                except AttributeError:
+                    continue
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.isdigit():
