@@ -314,7 +314,9 @@ class Stream(object):
             length = 0
             while not resp.raw.closed:
                 line = buf.read_line()
-                if not line:
+                if line is None:
+                    self.listener.keep_alive()  # Not sure, but this might also be a keep-alive
+                elif not line.strip():
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.strip().isdigit():
                     length = int(line)
