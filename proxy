@@ -1,0 +1,2 @@
+api = tweepy.API(proxy_url=username:password@proxy_host:proxy_port)
+api = tweepy.API(proxy_url='192.0.2.1:3128')
