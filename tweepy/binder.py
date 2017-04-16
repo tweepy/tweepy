@@ -131,6 +131,13 @@ def bind_api(**config):
             url = self.api_root + self.path
             full_url = 'https://' + self.host + url
 
+            if self.method == 'POST':
+                if 'Content-Length' not in self.headers:
+                    if self.post_data:
+                        self.headers['Content-Length'] = len(self.post_data)
+                    else:
+                        self.headers['Content-Length'] = 0
+
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
