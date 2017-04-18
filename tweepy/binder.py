@@ -171,6 +171,9 @@ def bind_api(**config):
                 #             log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
                 #         time.sleep(sleep_time + 5)  # sleep for few extra sec
 
+                if not self.post_data:
+                    self.headers['Content-Length'] = 0
+
                 # Apply authentication
                 auth = None
                 if self.api.auth:
