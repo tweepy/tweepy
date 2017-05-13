@@ -201,6 +201,11 @@ class User(Model):
                                        *args,
                                        **kargs)
 
+    def friends_ids(self, *args, **kargs):
+        return self._api.friends_ids(user_id=self.id,
+                                       *args,
+                                       **kargs)
+
 
 class DirectMessage(Model):
 
