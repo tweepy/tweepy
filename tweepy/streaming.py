@@ -444,7 +444,7 @@ class Stream(object):
         if languages:
             self.body['language'] = u','.join(map(str, languages))
         if filter_level:
-            self.body['filter_level'] = filter_level.encode(encoding)
+            self.body['filter_level'] = u','.join(filter_level).encode(encoding)
         self.session.params = {'delimited': 'length'}
         self.host = 'stream.twitter.com'
         self._start(async)
