@@ -314,13 +314,17 @@ class Stream(object):
             length = 0
             while not resp.raw.closed:
                 line = buf.read_line()
+                if line:
+                    line = line.strip()
+
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
-                elif line.strip().isdigit():
+                elif line.isdigit():
                     length = int(line)
                     break
                 else:
-                    raise TweepError('Expecting length, unexpected value found')
+                    raise TweepError(
+                        'Expecting length, unexpected value found: %r' % line)
 
             next_status_obj = buf.read_len(length)
             if self.running and next_status_obj:
