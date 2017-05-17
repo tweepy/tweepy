@@ -88,7 +88,7 @@ class StreamListener(object):
             if self.on_user_withheld(data['user_withheld']) is False:
                 return False
         else:
-            logging.error("Unknown message type: " + str(raw_data))
+            logging.error("Unknown message type: %s", str(raw_data))
 
     def keep_alive(self):
         """Called when a keep-alive arrived"""
