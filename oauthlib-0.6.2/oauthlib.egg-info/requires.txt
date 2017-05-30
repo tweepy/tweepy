@@ -1,0 +1,13 @@
+
+
+[signedtoken]
+pycrypto
+pyjwt
+
+[rsa]
+pycrypto
+
+[test]
+nose
+pycrypto
+pyjwt

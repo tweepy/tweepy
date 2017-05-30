@@ -1,0 +1,6 @@
+oauthlib>=0.6.2
+requests>=2.0.0
+
+[rsa]
+oauthlib[rsa]>=0.6.2
+requests>=2.0.0
