@@ -88,7 +88,7 @@ def bind_api(**config):
             self._remaining_calls = None
             self._reset_time = None
 
-        def build_parameters(self, args, kwargs):
+        def build_parameters(self, *args, **kwargs):
             self.session.params = {}
             for idx, arg in enumerate(args):
                 if arg is None:
