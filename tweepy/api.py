@@ -498,6 +498,20 @@ class API(object):
         )
 
     @property
+    def mute_user(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/mutes/users/create
+            :allowed_param:'user_id', 'screen_name'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/create.json',
+            method='POST',
+            payload_type='user',
+            allowed_param=['user_id', 'screen_name'],
+            require_auth=True
+        )
+
+    @property
     def show_friendship(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/friendships/show
             :allowed_param:'source_id', 'source_screen_name', 'target_id', 'target_screen_name'

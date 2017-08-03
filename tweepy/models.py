@@ -181,6 +181,9 @@ class User(Model):
         self._api.destroy_friendship(user_id=self.id)
         self.following = False
 
+    def mute(self):
+        self._api.mute_user(user_id=self.id)
+
     def lists_memberships(self, *args, **kargs):
         return self._api.lists_memberships(user=self.screen_name,
                                            *args,
