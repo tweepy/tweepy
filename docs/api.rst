@@ -167,6 +167,16 @@ Status methods
 User methods
 ------------
 
+.. method:: API.lookup_users(user_ids/screen_names, [include_entities])
+
+   Returns a list of specified users' metadata. Missing users will be omitted
+   from the response.
+
+   :param user_ids: List of up to 100 user IDs whose information is wanted
+   :param screen_names: List of up to 100 user screen names whose information is wanted
+   :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
+   :rtype: List of :class:`User` objects
+
 .. method:: API.get_user(id/user_id/screen_name)
 
    Returns information about the specified user.
