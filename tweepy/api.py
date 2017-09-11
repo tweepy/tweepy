@@ -94,20 +94,20 @@ class API(object):
         )
 
     def statuses_lookup(self, id_, include_entities=None,
-                        trim_user=None, map_=None):
+                        trim_user=None, map_=None, tweet_mode=None):
         return self._statuses_lookup(list_to_csv(id_), include_entities,
-                                     trim_user, map_)
+                                     trim_user, map_, tweet_mode)
 
     @property
     def _statuses_lookup(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/lookup
-            :allowed_param:'id', 'include_entities', 'trim_user', 'map'
+            :allowed_param:'id', 'include_entities', 'trim_user', 'map', 'tweet_mode'
         """
         return bind_api(
             api=self,
             path='/statuses/lookup.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'include_entities', 'trim_user', 'map'],
+            allowed_param=['id', 'include_entities', 'trim_user', 'map', 'tweet_mode'],
             require_auth=True
         )
 
