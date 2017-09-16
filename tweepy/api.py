@@ -260,6 +260,20 @@ class API(object):
         )
 
     @property
+    def unretweet(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/statuses/unretweet/%3Aid
+            :allowed_param:'id'
+        """
+        return bind_api(
+            api=self,
+            path='/statuses/unretweet/{id}.json',
+            method='POST',
+            payload_type='status',
+            allowed_param=['id'],
+            require_auth=True
+        )
+
+    @property
     def retweets(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/retweets/%3Aid
             :allowed_param:'id', 'count'
