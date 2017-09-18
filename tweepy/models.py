@@ -9,17 +9,17 @@ from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
 
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
-    def __init__(self, max_id=None, since_id=None):
+    def __init__(self, min_id=None, since_id=None):
         super(ResultSet, self).__init__()
-        self._max_id = max_id
+        self._min_id = min_id
         self._since_id = since_id
 
     @property
-    def max_id(self):
-        if self._max_id:
-            return self._max_id
+    def min_id(self):
+        if self._min_id:
+            return self._min_id
         ids = self.ids()
-        # Max_id is always set to the *smallest* id, minus one, in the set
+        # Min_id is always set to the *smallest* id, minus one, in the set
         return (min(ids) - 1) if ids else None
 
     @property
