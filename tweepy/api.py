@@ -816,11 +816,14 @@ class API(object):
 
     @property
     def blocks_ids(self):
-        """ :reference: https://dev.twitter.com/rest/reference/get/blocks/ids """
+        """ :reference: https://dev.twitter.com/rest/reference/get/blocks/ids 
+            :allowed_param:'cursor'
+        """
         return bind_api(
             api=self,
             path='/blocks/ids.json',
             payload_type='json',
+            allowed_param=['cursor'],
             require_auth=True
         )
 
