@@ -1464,13 +1464,19 @@ class API(object):
         BOUNDARY = b'Tw3ePy'
         body = list()
         if command == 'init':
-            body.append(
-                urlencode({
-                    'command': 'INIT',
-                    'media_type': file_type,
-                    'total_bytes': file_size
-                }).encode('utf-8')
-            )
+            query = {
+                'command': 'INIT',
+                'media_type': file_type,
+                'total_bytes': file_size,
+            }
+            if file_type in IMAGE_MIMETYPES:
+                if file_type == 'image/gif':
+                    query['media_category'] = 'tweet_gif'
+                else:
+                    query['media_category'] = 'tweet_image'
+            elif file_type == 'video/mp4':
+                query['media_category'] = 'tweet_video'
+            body.append(urlencode(query).encode('utf-8'))
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             }
