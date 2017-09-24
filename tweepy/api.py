@@ -822,7 +822,7 @@ class API(object):
         return bind_api(
             api=self,
             path='/blocks/ids.json',
-            payload_type='json',
+            payload_type='ids',
             allowed_param=['cursor'],
             require_auth=True
         )
