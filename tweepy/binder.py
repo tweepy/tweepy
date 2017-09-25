@@ -240,6 +240,8 @@ def bind_api(**config):
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
                 self.api.cache.store('%s?%s' % (url, urlencode(self.session.params)), result)
 
+            self.session.close()
+
             return result
 
     def _call(*args, **kwargs):
