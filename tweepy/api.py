@@ -251,8 +251,12 @@ class API(object):
         """
         f = kwargs.pop('file', None)
 
+        # Media category is dependant on whether media is attached to a tweet
+        # or to a direct message. Assume tweet by default.
+        is_direct_message = kwargs.pop('is_direct_message', False)
+
         # Initialize upload (Twitter cannot handle videos > 15 MB)
-        headers, post_data, fp = API._chunk_media('init', filename, self.max_size_chunked, form_field='media', f=f)
+        headers, post_data, fp = API._chunk_media('init', filename, self.max_size_chunked, form_field='media', f=f, is_direct_message=is_direct_message)
         kwargs.update({ 'headers': headers, 'post_data': post_data })
 
         # Send the INIT request
@@ -276,7 +280,7 @@ class API(object):
             fsize = os.path.getsize(filename)
             nloops = int(fsize / chunk_size) + (1 if fsize % chunk_size > 0 else 0)
             for i in range(nloops):
-                headers, post_data, fp = API._chunk_media('append', filename, self.max_size_chunked, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i)
+                headers, post_data, fp = API._chunk_media('append', filename, self.max_size_chunked, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i, is_direct_message=is_direct_message)
                 kwargs.update({ 'headers': headers, 'post_data': post_data, 'parser': RawParser() })
                 # The APPEND command returns an empty response body
                 bind_api(
@@ -289,7 +293,7 @@ class API(object):
                     upload_api=True
                 )(*args, **kwargs)
             # When all chunks have been sent, we can finalize.
-            headers, post_data, fp = API._chunk_media('finalize', filename, self.max_size_chunked, media_id=media_info.media_id)
+            headers, post_data, fp = API._chunk_media('finalize', filename, self.max_size_chunked, media_id=media_info.media_id, is_direct_message=is_direct_message)
             kwargs = {'headers': headers, 'post_data': post_data}
 
             # The FINALIZE command returns media information
@@ -1426,7 +1430,7 @@ class API(object):
         return headers, body
 
     @staticmethod
-    def _chunk_media(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0):
+    def _chunk_media(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0, is_direct_message=False):
         fp = None
         if command == 'init':
             if f is None:
@@ -1468,14 +1472,9 @@ class API(object):
                 'command': 'INIT',
                 'media_type': file_type,
                 'total_bytes': file_size,
+                'media_category': API._get_media_category(
+                    is_direct_message, file_type)
             }
-            if file_type in IMAGE_MIMETYPES:
-                if file_type == 'image/gif':
-                    query['media_category'] = 'tweet_gif'
-                else:
-                    query['media_category'] = 'tweet_image'
-            elif file_type == 'video/mp4':
-                query['media_category'] = 'tweet_video'
             body.append(urlencode(query).encode('utf-8'))
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -1522,3 +1521,21 @@ class API(object):
         headers['Content-Length'] = str(len(body))
 
         return headers, body, fp
+
+    @staticmethod
+    def _get_media_category(is_direct_message, file_type):
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media
+            :allowed_param:
+        """
+        if is_direct_message:
+            prefix = 'dm'
+        else:
+            prefix = 'tweet'
+
+        if file_type in IMAGE_MIMETYPES:
+            if file_type == 'image/gif':
+                return prefix + '_gif'
+            else:
+                return prefix + '_image'
+        elif file_type == 'video/mp4':
+                    return prefix + '_video'
