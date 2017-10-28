@@ -159,16 +159,38 @@ class PageIterator(BaseIterator):
 
     def __init__(self, method, args, kargs):
         BaseIterator.__init__(self, method, args, kargs)
-        self.current_page = 0
+        self.current_page = 1
+        self.prev_page_ids = set()
+        self.current_page_ids = set()
+        self.flag = False
 
     def next(self):
+        if self.flag:
+            raise StopIteration
+
+        # Setting previous page and initailizing current page
+        self.prev_page_ids, self.current_page_ids = self.current_page_ids, set()
+
         if self.limit > 0:
             if self.current_page > self.limit:
                 raise StopIteration
 
         items = self.method(page=self.current_page, *self.args, **self.kargs)
+        # Removing duplicates in current page and setting flag to indicate
+        # end of results
+        temp_items = []
+        for item in items:
+            current_id = item._json['id']
+            if current_id in self.prev_page_ids:
+                self.flag = True
+            else:
+                self.current_page_ids.add(current_id)
+                temp_items.append(item)
+        items = temp_items
+
         if len(items) == 0:
             raise StopIteration
+
         self.current_page += 1
         return items
 
