@@ -88,7 +88,7 @@ Timeline methods
 
 .. method:: API.mentions_timeline([since_id], [max_id], [count])
 
-   Returns the 20 most recent mentions, including retweets. 
+   Returns the 20 most recent mentions, including retweets.
 
    :param since_id: |since_id|
    :param max_id: |max_id|
@@ -789,6 +789,16 @@ Geo Methods
 
    :param id: Valid Twitter ID of a location.
 
+
+Utility methods
+---------------
+
+.. method:: API.configuration()
+
+   Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.
+   It is recommended applications request this endpoint when they are loaded, but no more than once a day.
+
+
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
@@ -797,9 +807,9 @@ which means ``tweepy.error`` itself does not need to be imported. For
 example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
 .. exception:: TweepError
-   
+
    The main exception Tweepy uses. Is raised for a number of things.
-   
+
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
    <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
@@ -808,9 +818,9 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
    error reason strings).
 
 .. exception:: RateLimitError
-   
+
    Is raised when an API method fails due to hitting Twitter's rate
    limit. Makes for easy handling of the rate limit specifically.
-   
+
    Inherits from :exc:`TweepError`, so ``except TweepError`` will
    catch a ``RateLimitError`` too.
