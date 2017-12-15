@@ -313,7 +313,8 @@ class Stream(object):
         while self.running and not resp.raw.closed:
             length = 0
             while not resp.raw.closed:
-                line = buf.read_line().strip()
+                line = buf.read_line()
+                line = line.strip() if line else line
                 if not line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif line.strip().isdigit():
