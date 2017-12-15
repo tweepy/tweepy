@@ -95,16 +95,23 @@ class IdIterator(BaseIterator):
         BaseIterator.__init__(self, method, args, kargs)
         self.max_id = kargs.pop('max_id', None)
         self.num_tweets = 0
-        self.results = []
-        self.model_results = []
+        self.results = 0
+        self.model_results = 0
         self.index = 0
+        self.prev_result = None
+        self.prev_model = None
 
     def next(self):
         """Fetch a set of items with IDs less than current set."""
+        # print("num_tweets: {}, results: {}, model_results: {}, index: {}".format(self.num_tweets, len(self.results), len(self.model_results), self.index))
+        # print("result[0]: {}".format(str(self.results[0])[:100] if self.results else None))
+        # print("result[-1]: {}".format(str(self.results[-1])[:100] if self.results else None))
+        # print("model_results[0]: {}".format(str(self.model_results[0])[:100] if self.model_results else None))
+        # print("model_results[-1]: {}".format(str(self.model_results[-1])[:100] if self.model_results else None))
         if self.limit and self.limit == self.num_tweets:
             raise StopIteration
 
-        if self.index >= len(self.results) - 1:
+        if self.index >= self.results - 1:
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kargs)
 
             if hasattr(self.method, '__self__'):
@@ -121,13 +128,18 @@ class IdIterator(BaseIterator):
             else:
                 result = model
 
-            if len(self.results) != 0:
+
+            if self.results != 0:
                 self.index += 1
-            self.results.append(result)
-            self.model_results.append(model)
+            self.results += 1
+            self.model_results += 1
         else:
+            print("DON'T KNOW WHAT TO DO!!!!")
+            print("num_tweets: {}, results: {}, model_results: {}, index: {}".format(self.num_tweets, self.results,
+                                                                                     self.model_results,
+                                                                                     self.index))
             self.index += 1
-            result = self.results[self.index]
+            result = self.prev_result
             model = self.model_results[self.index]
 
         if len(result) == 0:
@@ -136,6 +148,10 @@ class IdIterator(BaseIterator):
         # since_id available
         self.max_id = model.max_id
         self.num_tweets += 1
+
+        self.prev_result = result
+        self.prev_model = model
+
         return result
 
     def prev(self):
