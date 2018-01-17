@@ -124,7 +124,7 @@ def bind_api(**config):
 
                 self.path = self.path.replace(variable, value)
 
-        def execute(self):
+        def _execute(self):
             self.api.cached_result = False
 
             # Build the request URL
@@ -240,9 +240,13 @@ def bind_api(**config):
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
                 self.api.cache.store('%s?%s' % (url, urlencode(self.session.params)), result)
 
-            self.session.close()
-
             return result
+
+        def execute(self):
+            try:
+                return self._execute()
+            finally:
+                self.session.close()
 
     def _call(*args, **kwargs):
         method = APIMethod(args, kwargs)
