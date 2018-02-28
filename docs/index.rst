@@ -17,7 +17,6 @@ Contents:
    cursor_tutorial.rst
    streaming_how_to.rst
    api.rst
-   streaming_how_to.rst
 
 Indices and tables
 ==================
