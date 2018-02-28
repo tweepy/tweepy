@@ -75,5 +75,5 @@ will wait for 15 minutes each time it hits the rate limit.
                time.sleep(15 * 60)
    
    for follower in limit_handled(tweepy.Cursor(api.followers).items()):
-       if follower.friends_count > 300:
+       if follower.friends_count < 300:
            print follower.screen_name
