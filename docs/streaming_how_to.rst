@@ -1,6 +1,6 @@
 .. _streaming_how_to:
-.. _Twitter Streaming API Documentation: https://dev.twitter.com/streaming/overview
-.. _Twitter Streaming API Connecting Documentation: https://dev.twitter.com/streaming/overview/connecting
+.. _Twitter Streaming API Documentation: https://developer.twitter.com/en/docs/tweets/filter-realtime/overview
+.. _Twitter Streaming API Connecting Documentation: https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
 .. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
 
 *********************
