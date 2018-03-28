@@ -1214,7 +1214,7 @@ class API(object):
             allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
                            'max_id', 'since', 'until', 'result_type',
                            'count', 'include_entities', 'from',
-                           'to', 'source']
+                           'to', 'source', 'page']
         )
 
     @property
