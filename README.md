@@ -6,7 +6,6 @@ Tweepy: Twitter for Python!
 [![Documentation Status](http://img.shields.io/badge/docs-v3.6.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
 [![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://crate.io/packages/tweepy)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/r/tweepy/tweepy?branch=master)
-[![Discord](https://img.shields.io/discord/102860784329052160.svg)](https://discord.gg/bJvqnhg)
 
 Installation
 ------------
@@ -23,4 +22,8 @@ GitHub and install it manually:
     python setup.py install
 
 Python 2.6 and 2.7, 3.3, 3.4, 3.5 & 3.6 are supported.
+
+Community
+---------
+- [Discord Chat](https://discord.gg/bJvqnhg)
 
