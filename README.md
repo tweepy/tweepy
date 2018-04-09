@@ -1,7 +1,6 @@
 Tweepy: Twitter for Python!
 ======
 
-[![Join the chat at https://gitter.im/tweepy/tweepy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tweepy/tweepy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](http://img.shields.io/travis/tweepy/tweepy/master.svg?style=flat)](https://travis-ci.org/tweepy/tweepy)
 [![Documentation Status](http://img.shields.io/badge/docs-v3.6.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
 [![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://crate.io/packages/tweepy)
