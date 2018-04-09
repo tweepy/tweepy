@@ -114,14 +114,15 @@ class API(object):
     @property
     def user_timeline(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts'
+            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts', 'trim_user', 'exclude_replies'
         """
         return bind_api(
             api=self,
             path='/statuses/user_timeline.json',
             payload_type='status', payload_list=True,
             allowed_param=['id', 'user_id', 'screen_name', 'since_id',
-                           'max_id', 'count', 'include_rts']
+                           'max_id', 'count', 'include_rts', 'trim_user', 
+                           'exclude_replies']
         )
 
     @property
