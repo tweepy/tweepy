@@ -807,8 +807,7 @@ Media methods
 
    :param media: The raw binary file content being uploaded. Cannot be used with `media_data`.
    :param media_data: The base64-encoded file content being uploaded. Cannot be used with `media`.
-   :param additional_owners: A comma-separated list of user IDs to set as additional owners allowed
-   to use the returned `media_id` in Tweets or Cards. Up to 100 additional owners may be specified.
+   :param additional_owners: A comma-separated list of user IDs to set as additional owners allowed to use the returned `media_id` in Tweets or Cards. Up to 100 additional owners may be specified.
 
 :mod:`tweepy.error` --- Exceptions
 ==================================
