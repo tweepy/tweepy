@@ -123,7 +123,7 @@ Status methods
 
 .. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [file])
 
-   Update the authenticated user's status. Statuses that are duplicates
+   *Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param filename: The filename of the image to upload. This will automatically be opened unless `file` is specified
@@ -798,6 +798,16 @@ Utility methods
    Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.
    It is recommended applications request this endpoint when they are loaded, but no more than once a day.
 
+Media methods
+-------------
+
+.. method:: API.media_upload()
+
+   Uploads images to twitter and returns a `media_id`.
+
+   :param media: The raw binary file content being uploaded. Cannot be used with `media_data`.
+   :param media_data: The base64-encoded file content being uploaded. Cannot be used with `media`.
+   :param additional_owners: A comma-separated list of user IDs to set as additional owners allowed to use the returned `media_id` in Tweets or Cards. Up to 100 additional owners may be specified.
 
 :mod:`tweepy.error` --- Exceptions
 ==================================
