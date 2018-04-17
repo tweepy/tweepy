@@ -70,10 +70,8 @@ class CursorIterator(BaseIterator):
     def next(self):
         if self.next_cursor == 0 or (self.limit and self.num_tweets == self.limit):
             raise StopIteration
-        data, cursors = self.method(cursor=self.next_cursor,
-                                    *self.args,
-                                    **self.kargs)
-        self.prev_cursor, self.next_cursor = cursors
+        data, (self.prev_cursor, self.next_cursor) = self.method(
+            cursor=self.next_cursor, *self.args, **self.kargs)
         if len(data) == 0:
             raise StopIteration
         self.num_tweets += 1
@@ -82,9 +80,8 @@ class CursorIterator(BaseIterator):
     def prev(self):
         if self.prev_cursor == 0:
             raise TweepError('Can not page back more, at first page')
-        data, self.next_cursor, self.prev_cursor = self.method(cursor=self.prev_cursor,
-                                                               *self.args,
-                                                               **self.kargs)
+        data, (self.next_cursor, self.prev_cursor) = self.method(
+            cursor=self.prev_cursor, *self.args, **self.kargs)
         self.num_tweets -= 1
         return data
 
