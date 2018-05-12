@@ -105,7 +105,7 @@ class TweepyStreamTests(unittest.TestCase):
 
     def test_track_encoding(self):
         s = Stream(None, None)
-        s._start = lambda async: None
+        s._start = lambda is_async: None
         s.filter(track=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded
@@ -113,7 +113,7 @@ class TweepyStreamTests(unittest.TestCase):
 
     def test_follow_encoding(self):
         s = Stream(None, None)
-        s._start = lambda async: None
+        s._start = lambda is_async: None
         s.filter(follow=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded
