@@ -1,14 +1,9 @@
-import unittest
 import os
+import unittest
 
-from tweepy import API, Cursor
+from tweepy import API
 from tweepy.error import TweepError
 
-import six
-if six.PY3:
-    import unittest
-else:
-    import unittest2 as unittest
 from .config import create_auth
 
 testratelimit = 'TEST_RATE_LIMIT' in os.environ
