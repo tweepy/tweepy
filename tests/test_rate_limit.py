@@ -15,7 +15,7 @@ class TweepyRateLimitTests(unittest.TestCase):
         self.api = API(create_auth())
         self.api.retry_count = 2
         self.api.retry_delay = 5
-        self.api.retry_errors = set([401, 404, 503])
+        self.api.retry_errors = {401, 404, 503}
         self.api.wait_on_rate_limit = True
                 
     def testratelimit(self):
@@ -26,7 +26,7 @@ class TweepyRateLimitTests(unittest.TestCase):
                 self.api.user_timeline(user_id=user_id, count=1, include_rts=True)
             except TweepError as e:
                 # continue if we're not autherized to access the user's timeline or she doesn't exist anymore
-                if e.response is not None and e.response.status in set([401, 404]): 
+                if e.response is not None and e.response.status in {401, 404}:
                     continue
                 raise e
 
