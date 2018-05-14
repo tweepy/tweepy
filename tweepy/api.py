@@ -66,6 +66,7 @@ class API(object):
         self.proxy = {}
         if proxy:
             self.proxy['https'] = proxy
+            self.auth.proxy=proxy
 
         # Attempt to explain more clearly the parser argument requirements
         # https://github.com/tweepy/tweepy/issues/421
