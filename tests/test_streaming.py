@@ -1,14 +1,8 @@
 from __future__ import absolute_import, print_function
 
-from .config import tape
-
 import six
-if six.PY3:
-    import unittest
-    from unittest.case import skip
-else:
-    import unittest2 as unittest
-    from unittest2.case import skip
+import unittest
+from unittest.case import skip
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler

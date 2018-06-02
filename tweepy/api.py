@@ -1324,7 +1324,7 @@ class API(object):
             filename = filename.encode("utf-8")
 
         BOUNDARY = b'Tw3ePy'
-        body = list()
+        body = []
         body.append(b'--' + BOUNDARY)
         body.append('Content-Disposition: form-data; name="{0}";'
                     ' filename="{1}"'.format(form_field, filename)
