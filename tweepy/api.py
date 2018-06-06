@@ -121,7 +121,7 @@ class API(object):
             path='/statuses/user_timeline.json',
             payload_type='status', payload_list=True,
             allowed_param=['id', 'user_id', 'screen_name', 'since_id',
-                           'max_id', 'count', 'include_rts', 'trim_user', 
+                           'max_id', 'count', 'include_rts', 'trim_user',
                            'exclude_replies']
         )
 
@@ -801,6 +801,38 @@ class API(object):
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True
         )
+
+
+
+    @property
+    def create_mute(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/mutes/users/create
+            :allowed_param:'id', 'user_id', 'screen_name'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/create.json',
+            method='POST',
+            payload_type='user',
+            allowed_param=['id', 'user_id', 'screen_name'],
+            require_auth=True
+        )
+
+    @property
+    def destroy_mute(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/mutes/users/destroy
+            :allowed_param:'id', 'user_id', 'screen_name'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/destroy.json',
+            method='POST',
+            payload_type='user',
+            allowed_param=['id', 'user_id', 'screen_name'],
+            require_auth=True
+        )
+
+
 
     @property
     def blocks(self):
