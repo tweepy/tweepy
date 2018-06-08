@@ -802,7 +802,15 @@ class API(object):
             require_auth=True
         )
 
-
+    @property
+    def mutes_ids(self):
+        """ :reference: https://dev.twitter.com/rest/reference/get/mutes/users/ids """
+        return bind_api(
+            api=self,
+            path='/mutes/users/ids.json',
+            payload_type='json',
+            require_auth=True
+        )
 
     @property
     def create_mute(self):
