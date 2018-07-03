@@ -220,6 +220,9 @@ class Stream(object):
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
+        
+        # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
+        self.proxies = options.get("proxies")
 
     def new_session(self):
         self.session = requests.Session()
@@ -247,7 +250,8 @@ class Stream(object):
                                             timeout=self.timeout,
                                             stream=True,
                                             auth=auth,
-                                            verify=self.verify)
+                                            verify=self.verify,
+                                            proxies = self.proxies)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
