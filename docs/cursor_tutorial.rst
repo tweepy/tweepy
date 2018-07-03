@@ -87,7 +87,23 @@ What if you only want n items or pages returned? You pass into the items() or pa
    # Only iterate through the first 200 statuses
    for status in tweepy.Cursor(api.user_timeline).items(200):
        process_status(status)
-   
+
    # Only iterate through the first 3 pages
    for page in tweepy.Cursor(api.user_timeline).pages(3):
        process_page(page)
+
+
+Include Tweets > 140 Characters
+-------------------------------
+
+Since twitter increased the maximum characters allowed in a tweet from 140 to 280, you may notice that tweets greater than 140 characters are truncated with a ...
+If you want your results to include the full text of the long tweets make these simple changes:
+- add the argument tweet_mode='extended' to your Cursor object call
+- change your usages of .text to .full_text
+
+.. code-block :: python
+
+# example code
+tweets = tweepy.Cursor(api.search, tweet_mode='extended')
+for tweet in tweets:
+    content = tweet.full_text
