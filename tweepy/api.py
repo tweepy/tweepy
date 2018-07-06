@@ -881,7 +881,7 @@ class API(object):
 
     @property
     def saved_searches(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id """
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list """
         return bind_api(
             api=self,
             path='/saved_searches/list.json',
