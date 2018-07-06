@@ -605,8 +605,7 @@ class API(object):
 
     @property
     def get_settings(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings
-        """
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
         return bind_api(
             api=self,
             path='/account/settings.json',
@@ -748,7 +747,7 @@ class API(object):
 
     @property
     def create_favorite(self):
-        """ :reference:https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
+        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
             :allowed_param:'id'
         """
         return bind_api(
@@ -839,8 +838,6 @@ class API(object):
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True
         )
-
-
 
     @property
     def blocks(self):
