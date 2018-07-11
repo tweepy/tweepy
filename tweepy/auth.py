@@ -130,7 +130,7 @@ class OAuthHandler(AuthHandler):
 
     def get_username(self):
         if self.username is None:
-            api = API(self)
+            api = API(self,proxy=self.proxy)
             user = api.verify_credentials()
             if user:
                 self.username = user.screen_name
