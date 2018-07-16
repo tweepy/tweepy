@@ -1148,6 +1148,17 @@ class API(object):
                            'owner_screen_name', 'owner_id']
         )
 
+    def is_list_member(self, owner_screen_name=None, slug=None, user_id=None):
+        """ Check if a user is a member of the specified list. """
+        try:
+            return self.show_list_member(owner_screen_name=owner_screen_name,
+                                            slug=slug, user_id=user_id)
+        except TweepError as e:
+            if e.api_code is 109:
+                return False
+            else:
+                raise
+
     @property
     def subscribe_list(self):
         """ :reference: https://dev.twitter.com/docs/api/1.1/post/lists/subscribers/create
