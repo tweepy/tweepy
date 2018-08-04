@@ -5,7 +5,7 @@
 from __future__ import print_function
 
 import os
-import mimetypes
+import imghdr
 
 import six
 
@@ -1353,11 +1353,10 @@ class API(object):
             fp = f
 
         # image must be gif, jpeg, or png
-        file_type = mimetypes.guess_type(filename)
+        file_type = imghdr.what(filename)
         if file_type is None:
             raise TweepError('Could not determine file type')
-        file_type = file_type[0]
-        if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
+        if file_type not in ['gif', 'jpeg', 'png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
