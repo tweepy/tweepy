@@ -130,7 +130,20 @@ class Status(Model):
 
         return not result
 
+    def __repr__(self):
+        try:
+            text = self.text
+        except:
+            text = self.full_text
+            
+        string = '[id {}]'.format(self.id) + ' @' + self.author.screen_name + ' : ' + text
 
+        return string
+
+    def exp(self):
+        print(self.__class__.__name__)
+
+    
 class User(Model):
 
     @classmethod
