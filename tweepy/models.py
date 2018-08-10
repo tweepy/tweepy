@@ -33,11 +33,12 @@ class ResultSet(list):
     def ids(self):
         return [item.id for item in self if hasattr(item, 'id')]
 
-
+    
 class Model(object):
 
     def __init__(self, api=None):
         self._api = api
+        self.object_repr = False
 
     def __getstate__(self):
         # pickle
@@ -66,8 +67,11 @@ class Model(object):
         return results
 
     def __repr__(self):
-        state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
+        if not self.object_repr:
+            state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
+            return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
+        else:
+            return object.__repr__(self)
 
 
 class Status(Model):
@@ -130,7 +134,18 @@ class Status(Model):
 
         return not result
 
+    def __repr__(self):
+        
+        try:
+            text = self.text
+        except:
+            text = self.full_text
+            
+        string = '[id {}]'.format(self.id) + ' @' + self.author.screen_name + ' : ' + text
 
+        return string
+    
+    
 class User(Model):
 
     @classmethod
