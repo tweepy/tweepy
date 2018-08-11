@@ -868,14 +868,14 @@ class API(object):
     @property
     def report_spam(self):
         """ :reference: https://dev.twitter.com/rest/reference/post/users/report_spam
-            :allowed_param:'user_id', 'screen_name'
+            :allowed_param:'user_id', 'screen_name', 'perform_block'
         """
         return bind_api(
             api=self,
             path='/users/report_spam.json',
             method='POST',
             payload_type='user',
-            allowed_param=['user_id', 'screen_name'],
+            allowed_param=['user_id', 'screen_name', 'perform_block'],
             require_auth=True
         )
 
