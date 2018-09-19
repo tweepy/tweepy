@@ -205,12 +205,8 @@ class Stream(object):
         self.snooze_time_step = options.get("snooze_time", 0.25)
         self.snooze_time_cap = options.get("snooze_time_cap", 16)
 
-        # The default socket.read size. Default to less than half the size of
-        # a tweet so that it reads tweets with the minimal latency of 2 reads
-        # per tweet. Values higher than ~1kb will increase latency by waiting
-        # for more data to arrive but may also increase throughput by doing
-        # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        # The default socket.read size. Default to keep-alive message size.
+        self.chunk_size = options.get("chunk_size",  8)
 
         self.verify = options.get("verify", True)
 
@@ -316,11 +312,12 @@ class Stream(object):
 
         while self.running and not resp.raw.closed:
             length = 0
-            while not resp.raw.closed:
+            while self.running and not resp.raw.closed:
                 line = buf.read_line()
                 stripped_line = line.strip() if line else line # line is sometimes None so we need to check here
                 if not stripped_line:
-                    self.listener.keep_alive()  # keep-alive new lines are expected
+                    if self.listener.keep_alive() is False:  # keep-alive new lines are expected
+                        self.running = False
                 elif stripped_line.isdigit():
                     length = int(stripped_line)
                     break
