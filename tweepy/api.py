@@ -412,7 +412,7 @@ class API(object):
         """
         return bind_api(
             api=self,
-            path='/direct_messages.json',
+            path='/direct_messages/events/list.json',
             payload_type='direct_message', payload_list=True,
             allowed_param=['since_id', 'max_id', 'count', 'full_text'],
             require_auth=True

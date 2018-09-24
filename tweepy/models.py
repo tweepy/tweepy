@@ -5,7 +5,7 @@
 from __future__ import absolute_import, print_function
 
 from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
-
+import json as pyjson
 
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
@@ -207,7 +207,7 @@ class DirectMessage(Model):
     @classmethod
     def parse(cls, api, json):
         dm = cls(api)
-        for k, v in json.items():
+        for k, v in pyjson.loads(dm._api.last_response.text).items():
             if k == 'sender' or k == 'recipient':
                 setattr(dm, k, User.parse(api, v))
             elif k == 'created_at':
