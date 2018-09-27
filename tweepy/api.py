@@ -94,34 +94,35 @@ class API(object):
         )
 
     def statuses_lookup(self, id_, include_entities=None,
-                        trim_user=None, map_=None):
+                        trim_user=None, map_=None, tweet_mode=None):
         return self._statuses_lookup(list_to_csv(id_), include_entities,
-                                     trim_user, map_)
+                                     trim_user, map_, tweet_mode)
 
     @property
     def _statuses_lookup(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/lookup
-            :allowed_param:'id', 'include_entities', 'trim_user', 'map'
+            :allowed_param:'id', 'include_entities', 'trim_user', 'map', 'tweet_mode'
         """
         return bind_api(
             api=self,
             path='/statuses/lookup.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'include_entities', 'trim_user', 'map'],
+            allowed_param=['id', 'include_entities', 'trim_user', 'map', 'tweet_mode'],
             require_auth=True
         )
 
     @property
     def user_timeline(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts'
+            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts', 'trim_user', 'exclude_replies'
         """
         return bind_api(
             api=self,
             path='/statuses/user_timeline.json',
             payload_type='status', payload_list=True,
             allowed_param=['id', 'user_id', 'screen_name', 'since_id',
-                           'max_id', 'count', 'include_rts']
+                           'max_id', 'count', 'include_rts', 'trim_user',
+                           'exclude_replies']
         )
 
     @property
@@ -802,6 +803,46 @@ class API(object):
         )
 
     @property
+    def mutes_ids(self):
+        """ :reference: https://dev.twitter.com/rest/reference/get/mutes/users/ids """
+        return bind_api(
+            api=self,
+            path='/mutes/users/ids.json',
+            payload_type='json',
+            require_auth=True
+        )
+
+    @property
+    def create_mute(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/mutes/users/create
+            :allowed_param:'id', 'user_id', 'screen_name'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/create.json',
+            method='POST',
+            payload_type='user',
+            allowed_param=['id', 'user_id', 'screen_name'],
+            require_auth=True
+        )
+
+    @property
+    def destroy_mute(self):
+        """ :reference: https://dev.twitter.com/rest/reference/post/mutes/users/destroy
+            :allowed_param:'id', 'user_id', 'screen_name'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/destroy.json',
+            method='POST',
+            payload_type='user',
+            allowed_param=['id', 'user_id', 'screen_name'],
+            require_auth=True
+        )
+
+
+
+    @property
     def blocks(self):
         """ :reference: https://dev.twitter.com/rest/reference/get/blocks/list
             :allowed_param:'cursor'
@@ -1323,7 +1364,7 @@ class API(object):
             filename = filename.encode("utf-8")
 
         BOUNDARY = b'Tw3ePy'
-        body = list()
+        body = []
         body.append(b'--' + BOUNDARY)
         body.append('Content-Disposition: form-data; name="{0}";'
                     ' filename="{1}"'.format(form_field, filename)

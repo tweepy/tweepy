@@ -1,14 +1,8 @@
 from __future__ import absolute_import, print_function
 
-from .config import tape
-
 import six
-if six.PY3:
-    import unittest
-    from unittest.case import skip
-else:
-    import unittest2 as unittest
-    from unittest2.case import skip
+import unittest
+from unittest.case import skip
 
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
@@ -105,7 +99,7 @@ class TweepyStreamTests(unittest.TestCase):
 
     def test_track_encoding(self):
         s = Stream(None, None)
-        s._start = lambda async: None
+        s._start = lambda is_async: None
         s.filter(track=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded
@@ -113,7 +107,7 @@ class TweepyStreamTests(unittest.TestCase):
 
     def test_follow_encoding(self):
         s = Stream(None, None)
-        s._start = lambda async: None
+        s._start = lambda is_async: None
         s.filter(follow=[u'Caf\xe9'])
 
         # Should be UTF-8 encoded

@@ -103,6 +103,7 @@ Status methods
    Returns a single status specified by the ID parameter.
 
    :param id: |sid|
+   :tweet_mode: |Pass in 'extended' to get non truncated tweet text|
    :rtype: :class:`Status` object
 
 
@@ -123,7 +124,7 @@ Status methods
 
 .. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [file])
 
-   Update the authenticated user's status. Statuses that are duplicates
+   *Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param filename: The filename of the image to upload. This will automatically be opened unless `file` is specified
@@ -209,7 +210,7 @@ User methods
    :param cursor: |cursor|
    :rtype: list of :class:`User` objects
 
-.. method:: API.search_users(q, [per_page], [page])
+.. method:: API.search_users(q, [count], [page])
 
    Run a search for users similar to Find People button on Twitter.com;
    the same results returned by people search on Twitter.com will be
@@ -218,7 +219,7 @@ User methods
    this API.
 
    :param q: The query to run against people search.
-   :param per_page: Specifies the number of statuses to retrieve. May not be greater than 20.
+   :param count: Specifies the number of statuses to retrieve. May not be greater than 20.
    :param page: |page|
    :rtype: list of :class:`User` objects
 
@@ -613,7 +614,7 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [per_page], [page])
+.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [count], [page])
 
    Show tweet timeline for members of the specified list.
 
@@ -621,7 +622,7 @@ List Methods
    :param slug: |slug|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param per_page: Number of results per a page
+   :param count: Number of results per a page
    :param page: |page|
    :rtype: list of :class:`Status` objects
 
@@ -798,6 +799,16 @@ Utility methods
    Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.
    It is recommended applications request this endpoint when they are loaded, but no more than once a day.
 
+Media methods
+-------------
+
+.. method:: API.media_upload()
+
+   Uploads images to twitter and returns a `media_id`.
+
+   :param media: The raw binary file content being uploaded. Cannot be used with `media_data`.
+   :param media_data: The base64-encoded file content being uploaded. Cannot be used with `media`.
+   :param additional_owners: A comma-separated list of user IDs to set as additional owners allowed to use the returned `media_id` in Tweets or Cards. Up to 100 additional owners may be specified.
 
 :mod:`tweepy.error` --- Exceptions
 ==================================
