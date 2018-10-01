@@ -414,7 +414,7 @@ class API(object):
             api=self,
             path='/direct_messages/events/list.json',
             payload_type='direct_message', payload_list=True,
-            allowed_param=['since_id', 'cursor', 'count', 'full_text'],
+            allowed_param=['cursor', 'count'],
             require_auth=True
         )
 
