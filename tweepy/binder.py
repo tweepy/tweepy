@@ -182,12 +182,41 @@ def bind_api(**config):
 
                 # Execute request
                 try:
-                    resp = self.session.request(self.method,
-                                                full_url,
-                                                data=self.post_data,
-                                                timeout=self.api.timeout,
-                                                auth=auth,
-                                                proxies=self.api.proxy)
+                    try:
+                        if "type" in self.session.params and self.session.params["type"] == "message_create":
+                            data = {
+                                        "event": {
+                                            "type": self.session.params["type"],
+                                            "message_create": {
+                                                "target": {
+                                                    "recipient_id": self.session.params["recipient_id"]
+                                                },
+                                                "message_data": {
+                                                    "text": self.session.params["text"]
+                                                }
+                                            }
+                                        }
+                                    }
+                            resp = self.session.request(self.method,
+                                                        full_url,
+                                                        json=data,
+                                                        timeout=self.api.timeout,
+                                                        auth=auth,
+                                                        proxies=self.api.proxy)
+                        else:
+                            resp = self.session.request(self.method,
+                                                        full_url,
+                                                        data=self.post_data,
+                                                        timeout=self.api.timeout,
+                                                        auth=auth,
+                                                        proxies=self.api.proxy)
+                    except Exception:
+                        resp = self.session.request(self.method,
+                                                    full_url,
+                                                    data=self.post_data,
+                                                    timeout=self.api.timeout,
+                                                    auth=auth,
+                                                    proxies=self.api.proxy)
                 except Exception as e:
                     six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
 

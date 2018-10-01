@@ -449,12 +449,15 @@ class API(object):
         """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/new
             :allowed_param:'user', 'screen_name', 'user_id', 'text'
         """
+
+        # todo: handle request and response return type
+
         return bind_api(
             api=self,
-            path='/direct_messages/new.json',
+            path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
-            allowed_param=['user', 'screen_name', 'user_id', 'text'],
+            allowed_param=['type', 'message_data', 'recipient_id'],
             require_auth=True
         )
 
