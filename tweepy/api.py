@@ -190,7 +190,7 @@ class API(object):
             path='/statuses/update.json',
             method='POST',
             payload_type='status',
-            allowed_param=['status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
+            allowed_param=['status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'exclude_reply_user_ids', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
             require_auth=True
         )(post_data=post_data, *args, **kwargs)
 
