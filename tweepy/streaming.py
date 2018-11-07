@@ -364,6 +364,7 @@ class Stream(object):
         self.running = True
         if is_async:
             self._thread = Thread(target=self._run)
+            self._thread.daemon = True
             self._thread.start()
         else:
             self._run()
