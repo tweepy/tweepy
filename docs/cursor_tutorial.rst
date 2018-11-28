@@ -19,7 +19,7 @@ require less code Tweepy has the Cursor object.
 Old way vs Cursor way
 ---------------------
 
-First let's demonstrate iterating the statues in the authenticated
+First let's demonstrate iterating the statuses in the authenticated
 user's timeline. Here is how we would do it the "old way" before
 Cursor object was introduced::
 
