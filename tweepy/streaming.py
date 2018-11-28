@@ -189,8 +189,6 @@ class ReadBuffer(object):
 
 class Stream(object):
 
-    host = 'stream.twitter.com'
-
     def __init__(self, auth, listener, **options):
         self.auth = auth
         self.listener = listener
@@ -223,6 +221,7 @@ class Stream(object):
         
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
+        self.host = options.get('host', 'stream.twitter.com')
 
     def new_session(self):
         self.session = requests.Session()
@@ -451,7 +450,6 @@ class Stream(object):
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self.host = 'stream.twitter.com'
         self._start(is_async)
 
     def sitestream(self, follow, stall_warnings=False,
