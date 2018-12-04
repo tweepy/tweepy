@@ -97,9 +97,12 @@ Include Tweets > 140 Characters
 -------------------------------
 
 Since twitter increased the maximum number of characters allowed in a tweet from 140 to 280, you may notice that tweets greater than 140 characters are truncated with ...
+
 If you want your results to include the full text of the long tweets, make these simple changes:
-- add the argument tweet_mode='extended' to your Cursor object call
-- change your usage of .text to .full_text
+
+- add the argument ``tweet_mode='extended'`` to your Cursor object call
+
+- change your usage of ``.text`` to ``.full_text``
 
 .. code-block :: python
 
