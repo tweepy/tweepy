@@ -80,7 +80,8 @@ would use the pages() method::
 Limits
 ------
 
-What if you only want n items or pages returned? You pass into the items() or pages() methods the limit you want to impose.
+What if you only want n items or pages returned? You pass into the
+items() or pages() methods the limit you want to impose.
 
 .. code-block :: python
 
@@ -96,11 +97,15 @@ What if you only want n items or pages returned? You pass into the items() or pa
 Include Tweets > 140 Characters
 -------------------------------
 
-Since twitter increased the maximum number of characters allowed in a tweet from 140 to 280, you may notice that tweets greater than 140 characters are truncated with ...
+Since twitter increased the maximum number of characters allowed in a
+tweet from 140 to 280, you may notice that tweets greater than 140
+characters are truncated with ...
 
-If you want your results to include the full text of the long tweets, make these simple changes:
+If you want your results to include the full text of the long tweets,
+make these simple changes:
 
-- add the argument ``tweet_mode='extended'`` to your Cursor object call
+- add the argument ``tweet_mode='extended'``
+  to your Cursor object call
 
 - change your usage of ``.text`` to ``.full_text``
 
