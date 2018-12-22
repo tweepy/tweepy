@@ -15,7 +15,7 @@ by offering a first walk through.  Some features of Tweepy streaming are
 not covered here. See streaming.py in the Tweepy source code. 
 
 API authorization is required to access Twitter streams. 
-Follow the :ref:`auth_tutorial` if you need help with authentication. 
+Follow the :ref:`auth_tutorial` if you need help wfith authentication. 
 
 Summary
 =======
@@ -93,10 +93,10 @@ A Few More Pointers
 Async Streaming
 ---------------
 Streams do not terminate unless the connection is closed, blocking the thread. 
-Tweepy offers a convenient **async** parameter on **filter** so the stream will run on a new
+Tweepy offers a convenient **is_async** parameter on **filter** so the stream will run on a new
 thread. For example ::
 
-  myStream.filter(track=['python'], async=True)
+  myStream.filter(track=['python'], is_async=True)
 
 Handling Errors
 ---------------
