@@ -65,7 +65,7 @@ request token in the session since we will need it inside the callback
 URL request. Here is a pseudo example of storing the request token in
 a session::
 
-   session.set('request_token', auth.request_token)
+   session.set('request_token', auth.request_token['oauth_token'])
 
 So now we can redirect the user to the URL returned to us earlier from
 the get_authorization_url() method.
