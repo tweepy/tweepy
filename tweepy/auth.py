@@ -31,7 +31,7 @@ class OAuthHandler(AuthHandler):
     OAUTH_HOST = 'api.twitter.com'
     OAUTH_ROOT = '/oauth/'
 
-    def __init__(self, consumer_key, consumer_secret, callback=None):
+    def __init__(self, consumer_key, consumer_secret, callback=None, access_token=None, access_token_secret=None):
         if type(consumer_key) == six.text_type:
             consumer_key = consumer_key.encode('ascii')
 
@@ -40,8 +40,8 @@ class OAuthHandler(AuthHandler):
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
-        self.access_token = None
-        self.access_token_secret = None
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
         self.callback = callback
         self.username = None
         self.oauth = OAuth1Session(consumer_key,
