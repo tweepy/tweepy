@@ -101,9 +101,11 @@ If you want your results to include the full text of the long tweets make these 
 - add the argument tweet_mode='extended' to your Cursor object call
 - change your usages of .text to .full_text
 
-.. code-block :: python
 
 # example code
-tweets = tweepy.Cursor(api.search, tweet_mode='extended')
-for tweet in tweets:
-    content = tweet.full_text
+
+.. code-block :: python
+
+   tweets = tweepy.Cursor(api.search, tweet_mode='extended')
+   for tweet in tweets:
+      content = tweet.full_text
