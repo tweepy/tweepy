@@ -83,7 +83,7 @@ the word *python*. The **track** parameter is an array of search terms to stream
 
 This example shows how to use **filter** to stream tweets by a specific user. The **follow** parameter is an array of IDs. ::
 
-  myStream.filter(follow=["2211149702"])
+  myStream.filter(follow=['2211149702'])
 
 An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'.
 
@@ -96,7 +96,7 @@ Streams do not terminate unless the connection is closed, blocking the thread.
 Tweepy offers a convenient **async** parameter on **filter** so the stream will run on a new
 thread. For example ::
 
-  myStream.filter(track=['python'], async=True)
+  myStream.filter(track=['python'], is_async=True)
 
 Handling Errors
 ---------------
@@ -115,7 +115,7 @@ Documentation`_. ::
   
       def on_error(self, status_code):
           if status_code == 420:
-              #returning False in on_error disconnects the stream
+              # returning False in on_error disconnects the stream
               return False
 
           # returning non-False reconnects the stream, with backoff.
