@@ -53,7 +53,7 @@ Timeline methods
    `id` parameter.
 
    :param id_: A list of Tweet IDs to lookup, up to 100
-   :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
+   :param include_entities: A boolean indicating whether or not to include [entities](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object.html#entitiesobject) in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
    :param map_: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
    :rtype: list of :class:`Status` objects
@@ -823,7 +823,7 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
-   <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
+   <https://developer.twitter.com/en/docs/basics/response-codes.html>`_) can be accessed
    at ``TweepError.response.text``. Note, however, that ``TweepError``\ s
    also may be raised with other things as message (for example plain
    error reason strings).
