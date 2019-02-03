@@ -823,7 +823,7 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
-   <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
+   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be accessed
    at ``TweepError.response.text``. Note, however, that ``TweepError``\ s
    also may be raised with other things as message (for example plain
    error reason strings).
