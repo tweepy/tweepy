@@ -44,6 +44,7 @@ class OAuthHandler(AuthHandler):
         self.access_token_secret = None
         self.callback = callback
         self.username = None
+        self.user_id = None
         self.oauth = OAuth1Session(consumer_key,
                                    client_secret=consumer_secret,
                                    callback_uri=self.callback)
@@ -102,6 +103,8 @@ class OAuthHandler(AuthHandler):
             resp = self.oauth.fetch_access_token(url)
             self.access_token = resp['oauth_token']
             self.access_token_secret = resp['oauth_token_secret']
+            self.username = resp["screen_name"]
+            self.user_id = resp["user_id"]
             return self.access_token, self.access_token_secret
         except Exception as e:
             raise TweepError(e)
@@ -134,11 +137,23 @@ class OAuthHandler(AuthHandler):
             user = api.verify_credentials()
             if user:
                 self.username = user.screen_name
+                self.user_id = user.id
             else:
                 raise TweepError('Unable to get username,'
                                  ' invalid oauth token!')
         return self.username
 
+    def get_user_id(self):
+        if self.user_id is None:
+            api = API(self)
+            user = api.verify_credentials()
+            if user:
+                self.username = user.screen_name
+                self.user_id = user.id
+            else:
+                raise TweepError('Unable to get user_id,'
+                                 ' invalid oauth token!')
+        return self.user_id
 
 class OAuth2Bearer(AuthBase):
     def __init__(self, bearer_token):
