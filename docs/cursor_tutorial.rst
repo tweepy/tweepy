@@ -103,7 +103,7 @@ If you want your results to include the full text of the long tweets make these 
 
 .. code-block :: python
 
-# example code
-tweets = tweepy.Cursor(api.search, tweet_mode='extended')
-for tweet in tweets:
-    content = tweet.full_text
+   # example code
+   tweets = tweepy.Cursor(api.search, tweet_mode='extended')
+   for tweet in tweets:
+       content = tweet.full_text
