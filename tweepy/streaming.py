@@ -193,6 +193,7 @@ class Stream(object):
         self.auth = auth
         self.listener = listener
         self.running = False
+        self.daemon = options.get("daemon", False)
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
         # values according to
@@ -363,6 +364,7 @@ class Stream(object):
         self.running = True
         if is_async:
             self._thread = Thread(target=self._run)
+            self._thread.daemon = self.daemon
             self._thread.start()
         else:
             self._run()
