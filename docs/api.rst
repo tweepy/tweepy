@@ -542,15 +542,15 @@ Saved Searches Methods
 Help Methods
 ------------
 
-.. method:: API.search(q[,lang],[locale],[rpp],[page],[since_id],[geocode],[show_user])
+.. method:: API.search(q[,lang],[locale],[count],[page],[since_id],[geocode],[show_user])
 
    Returns tweets that match a specified query.
 
    :param q: the search query string
    :param lang: Restricts tweets to the given language, given by an ISO 639-1 code.
    :param locale: Specify the language of the query you are sending. This is intended for language-specific clients and the default should work in the majority of cases.
-   :param rpp: The number of tweets to return per page, up to a max of 100.
-   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on rpp * page.
+   :param count: The number of tweets to return per page, up to a max of 100.
+   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on count * page.
    :param since_id: |since_id|
    :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
    :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
