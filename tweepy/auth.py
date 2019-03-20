@@ -44,6 +44,7 @@ class OAuthHandler(AuthHandler):
         self.access_token_secret = None
         self.callback = callback
         self.username = None
+        self.request_token = {}
         self.oauth = OAuth1Session(consumer_key,
                                    client_secret=consumer_secret,
                                    callback_uri=self.callback)
