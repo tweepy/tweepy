@@ -20,7 +20,7 @@ setup(name="tweepy",
       author="Joshua Roesslein",
       author_email="tweepy@googlegroups.com",
       url="http://github.com/tweepy/tweepy",
-      packages=find_packages(exclude=['tests']),
+      packages=find_packages(exclude=['tests', 'examples']),
       install_requires=[
           "requests>=2.11.1",
           "requests_oauthlib>=0.7.0",
