@@ -146,7 +146,7 @@ class ReadBuffer(object):
     reads are quite slow. To combat this latency we can read big chunks,
     but the blocking part means we won't get results until enough tweets
     have arrived. That may not be a big deal for high throughput systems.
-    For low throughput systems we don't want to sacrafice latency, so we
+    For low throughput systems we don't want to sacrifice latency, so we
     use small chunks so it can read the length and the tweet in 2 read calls.
     """
 
