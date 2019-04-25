@@ -128,7 +128,7 @@ class StreamListener(object):
         """Called when twitter sends a disconnect notice
 
         Disconnect codes are listed here:
-        https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
+        https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/streaming-message-types
         """
         return
 
@@ -146,7 +146,7 @@ class ReadBuffer(object):
     reads are quite slow. To combat this latency we can read big chunks,
     but the blocking part means we won't get results until enough tweets
     have arrived. That may not be a big deal for high throughput systems.
-    For low throughput systems we don't want to sacrafice latency, so we
+    For low throughput systems we don't want to sacrifice latency, so we
     use small chunks so it can read the length and the tweet in 2 read calls.
     """
 
@@ -189,16 +189,15 @@ class ReadBuffer(object):
 
 class Stream(object):
 
-    host = 'stream.twitter.com'
-
     def __init__(self, auth, listener, **options):
         self.auth = auth
         self.listener = listener
         self.running = False
+        self.daemon = options.get("daemon", False)
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
         # values according to
-        # https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
+        # https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/connecting#reconnecting
         self.retry_time_start = options.get("retry_time", 5.0)
         self.retry_420_start = options.get("retry_420", 60.0)
         self.retry_time_cap = options.get("retry_time_cap", 320.0)
@@ -223,6 +222,7 @@ class Stream(object):
         
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
+        self.host = options.get('host', 'stream.twitter.com')
 
     def new_session(self):
         self.session = requests.Session()
@@ -364,6 +364,7 @@ class Stream(object):
         self.running = True
         if is_async:
             self._thread = Thread(target=self._run)
+            self._thread.daemon = self.daemon
             self._thread.start()
         else:
             self._run()
@@ -451,7 +452,6 @@ class Stream(object):
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self.host = 'stream.twitter.com'
         self._start(is_async)
 
     def sitestream(self, follow, stall_warnings=False,
