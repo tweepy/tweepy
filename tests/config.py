@@ -1,15 +1,10 @@
 import os
-
+import unittest
 import vcr
 
 from tweepy.auth import OAuthHandler
 from tweepy.api import API
 
-import six
-if six.PY3:
-    import unittest
-else:
-    import unittest2 as unittest
 
 username = os.environ.get('TWITTER_USERNAME', 'tweepytest')
 oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')

@@ -54,7 +54,7 @@ So let's fetch our request token to begin the dance::
    try:
        redirect_url = auth.get_authorization_url()
    except tweepy.TweepError:
-       print 'Error! Failed to get request token.'
+       print('Error! Failed to get request token.')
 
 This call requests the token from twitter and returns to us the
 authorization URL where the user must be redirect to authorize us. Now
@@ -65,7 +65,7 @@ request token in the session since we will need it inside the callback
 URL request. Here is a pseudo example of storing the request token in
 a session::
 
-   session.set('request_token', auth.request_token)
+   session.set('request_token', auth.request_token['oauth_token'])
 
 So now we can redirect the user to the URL returned to us earlier from
 the get_authorization_url() method.
@@ -99,7 +99,7 @@ treasure box. To fetch this token we do the following::
    try:
        auth.get_access_token(verifier)
    except tweepy.TweepError:
-       print 'Error! Failed to get access token.'
+       print('Error! Failed to get access token.')
 
 It is a good idea to save the access token for later use. You do not
 need to re-fetch it each time. Twitter currently does not expire the

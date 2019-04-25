@@ -53,7 +53,7 @@ Timeline methods
    `id` parameter.
 
    :param id_: A list of Tweet IDs to lookup, up to 100
-   :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
+   :param include_entities: A boolean indicating whether or not to include `entities <https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object>`_ in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
    :param map_: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
    :rtype: list of :class:`Status` objects
@@ -88,7 +88,7 @@ Timeline methods
 
 .. method:: API.mentions_timeline([since_id], [max_id], [count])
 
-   Returns the 20 most recent mentions, including retweets. 
+   Returns the 20 most recent mentions, including retweets.
 
    :param since_id: |since_id|
    :param max_id: |max_id|
@@ -103,27 +103,31 @@ Status methods
    Returns a single status specified by the ID parameter.
 
    :param id: |sid|
+   :tweet_mode: |Pass in 'extended' to get non truncated tweet text|
    :rtype: :class:`Status` object
 
 
-.. method:: API.update_status(status, [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id])
+.. method:: API.update_status(status, [in_reply_to_status_id], [in_reply_to_status_id_str], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [display_coordinates], [media_ids])
 
    Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param in_reply_to_status_id_str: The ID of an existing status that the update is in reply to (as string).
    :param auto_populate_reply_metadata: Whether to automatically include the @mentions in the status metadata.
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :param display_coordinates: Whether or not to put a pin on the exact coordinates a Tweet has been sent from.
+   :param media_ids: A comma-delimited list of media_ids to associate with the Tweet.
    :rtype: :class:`Status` object
 
 
 .. method:: API.update_with_media(filename, [status], [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [file])
 
-   Update the authenticated user's status. Statuses that are duplicates
+   *Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param filename: The filename of the image to upload. This will automatically be opened unless `file` is specified
@@ -209,7 +213,7 @@ User methods
    :param cursor: |cursor|
    :rtype: list of :class:`User` objects
 
-.. method:: API.search_users(q, [per_page], [page])
+.. method:: API.search_users(q, [count], [page])
 
    Run a search for users similar to Find People button on Twitter.com;
    the same results returned by people search on Twitter.com will be
@@ -218,7 +222,7 @@ User methods
    this API.
 
    :param q: The query to run against people search.
-   :param per_page: Specifies the number of statuses to retrieve. May not be greater than 20.
+   :param count: Specifies the number of statuses to retrieve. May not be greater than 20.
    :param page: |page|
    :rtype: list of :class:`User` objects
 
@@ -538,19 +542,19 @@ Saved Searches Methods
 Help Methods
 ------------
 
-.. method:: API.search(q[,lang],[locale],[rpp],[page],[since_id],[geocode],[show_user])
+.. method:: API.search(q[,lang],[locale],[count],[page],[since_id],[geocode],[show_user])
 
    Returns tweets that match a specified query.
 
    :param q: the search query string
    :param lang: Restricts tweets to the given language, given by an ISO 639-1 code.
    :param locale: Specify the language of the query you are sending. This is intended for language-specific clients and the default should work in the majority of cases.
-   :param rpp: The number of tweets to return per page, up to a max of 100.
-   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on rpp * page.
+   :param count: The number of tweets to return per page, up to a max of 100.
+   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on count * page.
    :param since_id: |since_id|
    :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
    :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
-   :rtype: list of :class:`SearchResult` objects
+   :rtype: list of :class:`SearchResults` objects
 
 
 List Methods
@@ -587,7 +591,7 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.lists([cursor])
+.. method:: API.lists_all([cursor])
 
    List the lists of the specified user. Private lists will be included
    if the authenticated users is the same as the user who's lists are
@@ -613,7 +617,7 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [per_page], [page])
+.. method:: API.list_timeline(owner, slug, [since_id], [max_id], [count], [page])
 
    Show tweet timeline for members of the specified list.
 
@@ -621,7 +625,7 @@ List Methods
    :param slug: |slug|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param per_page: Number of results per a page
+   :param count: Number of results per a page
    :param page: |page|
    :rtype: list of :class:`Status` objects
 
@@ -789,6 +793,26 @@ Geo Methods
 
    :param id: Valid Twitter ID of a location.
 
+
+Utility methods
+---------------
+
+.. method:: API.configuration()
+
+   Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length.
+   It is recommended applications request this endpoint when they are loaded, but no more than once a day.
+
+Media methods
+-------------
+
+.. method:: API.media_upload()
+
+   Uploads images to twitter and returns a `media_id`.
+
+   :param media: The raw binary file content being uploaded. Cannot be used with `media_data`.
+   :param media_data: The base64-encoded file content being uploaded. Cannot be used with `media`.
+   :param additional_owners: A comma-separated list of user IDs to set as additional owners allowed to use the returned `media_id` in Tweets or Cards. Up to 100 additional owners may be specified.
+
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
@@ -797,20 +821,20 @@ which means ``tweepy.error`` itself does not need to be imported. For
 example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
 .. exception:: TweepError
-   
+
    The main exception Tweepy uses. Is raised for a number of things.
-   
+
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
-   <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
-   at ``TweepError.message[0]['code']``. Note, however, that ``TweepError``\ s
+   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be accessed
+   at ``TweepError.response.text``. Note, however, that ``TweepError``\ s
    also may be raised with other things as message (for example plain
    error reason strings).
 
 .. exception:: RateLimitError
-   
+
    Is raised when an API method fails due to hitting Twitter's rate
    limit. Makes for easy handling of the rate limit specifically.
-   
+
    Inherits from :exc:`TweepError`, so ``except TweepError`` will
    catch a ``RateLimitError`` too.

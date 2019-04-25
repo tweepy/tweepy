@@ -6,6 +6,7 @@ from __future__ import print_function
 
 import time
 import datetime
+import hashlib
 import threading
 import os
 import logging
@@ -14,12 +15,6 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
-
-try:
-    import hashlib
-except ImportError:
-    # python 2.4
-    import md5 as hashlib
 
 try:
     import fcntl
