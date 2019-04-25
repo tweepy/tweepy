@@ -591,7 +591,7 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.lists([cursor])
+.. method:: API.lists_all([cursor])
 
    List the lists of the specified user. Private lists will be included
    if the authenticated users is the same as the user who's lists are
