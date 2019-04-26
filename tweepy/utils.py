@@ -7,7 +7,6 @@ from __future__ import print_function
 from datetime import datetime
 
 import six
-from six.moves.urllib.parse import quote
 
 from email.utils import parsedate
 

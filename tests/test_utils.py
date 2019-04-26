@@ -1,13 +1,9 @@
-import six
-if six.PY3:
-    import unittest
-else:
-    import unittest2 as unittest
-
 from tweepy.utils import *
 
 import random
 import string
+import unittest
+
 
 def mock_tweet():
     """Generate some random tweet text."""

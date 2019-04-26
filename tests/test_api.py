@@ -397,7 +397,7 @@ class TweepyAPITests(TweepyTestCase):
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
             """Return True if a given place_name is in place_list."""
-            return any([x.full_name.lower() == place_name.lower() for x in place_list])
+            return any(x.full_name.lower() == place_name.lower() for x in place_list)
 
         twitter_hq = self.api.geo_similar_places(lat='37.7821120598956',
                                                  long='-122.400612831116',

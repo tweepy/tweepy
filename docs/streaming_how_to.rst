@@ -1,6 +1,6 @@
 .. _streaming_how_to:
-.. _Twitter Streaming API Documentation: https://dev.twitter.com/streaming/overview
-.. _Twitter Streaming API Connecting Documentation: https://dev.twitter.com/streaming/overview/connecting
+.. _Twitter Streaming API Documentation: https://developer.twitter.com/en/docs/tweets/filter-realtime/overview
+.. _Twitter Streaming API Connecting Documentation: https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
 .. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
 
 *********************
@@ -83,7 +83,7 @@ the word *python*. The **track** parameter is an array of search terms to stream
 
 This example shows how to use **filter** to stream tweets by a specific user. The **follow** parameter is an array of IDs. ::
 
-  myStream.filter(follow=[2211149702])
+  myStream.filter(follow=["2211149702"])
 
 An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'.
 
@@ -93,10 +93,10 @@ A Few More Pointers
 Async Streaming
 ---------------
 Streams do not terminate unless the connection is closed, blocking the thread. 
-Tweepy offers a convenient **async** parameter on **filter** so the stream will run on a new
+Tweepy offers a convenient **is_async** parameter on **filter** so the stream will run on a new
 thread. For example ::
 
-  myStream.filter(track=['python'], async=True)
+  myStream.filter(track=['python'], is_async=True)
 
 Handling Errors
 ---------------

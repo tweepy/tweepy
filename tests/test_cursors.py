@@ -1,13 +1,6 @@
 from tweepy import Cursor
 
-from .config import create_auth
-from .config import TweepyTestCase, username, use_replay, tape
-
-import six
-if six.PY3:
-    import unittest
-else:
-    import unittest2 as unittest
+from .config import TweepyTestCase, username, tape
 
 
 class TweepyCursorTests(TweepyTestCase):
