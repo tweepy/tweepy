@@ -188,7 +188,7 @@ User methods
    :rtype: :class:`User` object
 
 
-.. method::API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
+.. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
 
    Returns an user's friends ordered in which they were added 100 at a time. If no user is specified it defaults to the authenticated user.
 
