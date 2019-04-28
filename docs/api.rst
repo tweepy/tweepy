@@ -167,6 +167,13 @@ Status methods
    :param count: Specifies the number of retweets to retrieve.
    :rtype: list of :class:`Status` objects
 
+.. method:: API.unretweet(id)
+
+   Untweets a retweeted status. Requires the id of the retweet to unretweet.
+
+   :param id: |sid|
+   :rtype: :class:`Status` object
+
 
 User methods
 ------------
