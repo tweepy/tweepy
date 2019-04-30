@@ -158,6 +158,14 @@ Status methods
    :param id: |sid|
    :rtype: :class:`Status` object
 
+.. method:: API.retweeters(id, [cursor], [stringify_ids])
+
+   Returns up to 100 user IDs belonging to users who have retweeted the Tweet specified by the id parameter.
+
+   :param id: |sid|
+   :param cursor: |cursor|
+   :param stringify_ids: Have ids returned as strings instead.
+   :rtype: list of Integers
 
 .. method:: API.retweets(id[,count])
 
