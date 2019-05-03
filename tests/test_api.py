@@ -223,12 +223,6 @@ class TweepyAPITests(TweepyTestCase):
     def testratelimitstatus(self):
         self.api.rate_limit_status()
 
-    """ TODO(josh): Remove once this deprecated API is gone.
-    def testsetdeliverydevice(self):
-        self.api.set_delivery_device('im')
-        self.api.set_delivery_device('none')
-    """
-
     @tape.use_cassette('testupdateprofilecolors.json')
     def testupdateprofilecolors(self):
         original = self.api.me()

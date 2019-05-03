@@ -382,15 +382,6 @@ Account Methods
    :rtype: :class:`JSON` object
 
 
-.. method:: API.set_delivery_device(device)
-
-   Sets which device Twitter delivers updates to for the authenticating
-   user. Sending "none" as the device parameter will disable SMS updates.
-
-   :param device: Must be one of: sms, none
-   :rtype: :class:`User` object
-
-
 .. method:: API.update_profile_image(filename)
 
    Update the authenticating user's profile image. Valid formats: GIF,

@@ -664,20 +664,6 @@ class API(object):
             use_cache=False
         )
 
-    @property
-    def set_delivery_device(self):
-        """ :reference: https://dev.twitter.com/rest/reference/post/account/update_delivery_device
-            :allowed_param:'device'
-        """
-        return bind_api(
-            api=self,
-            path='/account/update_delivery_device.json',
-            method='POST',
-            allowed_param=['device'],
-            payload_type='user',
-            require_auth=True
-        )
-
     def update_profile_image(self, filename, file_=None):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
             :allowed_param:'include_entities', 'skip_status'
