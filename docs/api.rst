@@ -485,6 +485,36 @@ Block Methods
    :rtype: list of Integers
 
 
+Mute Methods
+------------
+
+.. method:: API.create_mute(id/screen_name/user_id)
+
+   Mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.destroy_mute(id/screen_name/user_id)
+
+   Un-mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.mutes_ids()
+
+   Returns an array of numeric user ids the authenticating user has muted.
+
+   :rtype: list of Integers
+
+
 Spam Reporting Methods
 ----------------------
 
