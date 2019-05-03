@@ -756,11 +756,13 @@ Trends Methods
 
 .. method:: API.trends_place(id, [exclude])
 
-   Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+   Returns the top 50 trending topics for a specific WOEID, if trending information is available for it.
 
    The response is an array of “trend” objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL.
 
    This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+
+   The tweet_volume for the last 24 hours is also returned for many trends if this is available.
 
    :param id: The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID.
    :param exclude: Setting this equal to hashtags will remove all hashtags from the trends list.
