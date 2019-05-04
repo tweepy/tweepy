@@ -13,7 +13,7 @@ class TweepError(Exception):
         self.reason = six.text_type(reason)
         self.response = response
         self.api_code = api_code
-        Exception.__init__(self, reason)
+        super(TweepError, self).__init__(self, reason)
 
     def __str__(self):
         return self.reason
