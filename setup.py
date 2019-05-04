@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #from distutils.core import setup
-import re, uuid
+import re
 from setuptools import setup, find_packages
 
 VERSIONFILE = "tweepy/__init__.py"
