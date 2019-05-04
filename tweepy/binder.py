@@ -2,24 +2,23 @@
 # Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-import time
-import re
-
-from six.moves.urllib.parse import quote, urlencode
-import requests
-
 import logging
-
-from tweepy.error import TweepError, RateLimitError, is_rate_limit_error_message
-from tweepy.utils import convert_to_utf8_str
-from tweepy.models import Model
-import six
+import re
 import sys
+import time
 
+import requests
+import six
+from six.moves.urllib.parse import quote, urlencode
+
+from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
+from tweepy.models import Model
+from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile('{\w+}')
 
 log = logging.getLogger('tweepy.binder')
+
 
 def bind_api(**config):
 

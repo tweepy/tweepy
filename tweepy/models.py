@@ -4,7 +4,7 @@
 
 from __future__ import absolute_import
 
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
+from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 
 
 class ResultSet(list):

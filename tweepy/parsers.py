@@ -3,8 +3,9 @@
 # See LICENSE for details.
 
 import json as json_lib
-from tweepy.models import ModelFactory
+
 from tweepy.error import TweepError
+from tweepy.models import ModelFactory
 
 
 class Parser(object):

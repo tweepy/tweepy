@@ -2,8 +2,8 @@
 # Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-import os
 import mimetypes
+import os
 
 import six
 

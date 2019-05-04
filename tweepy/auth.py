@@ -2,15 +2,16 @@
 # Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-import six
 import logging
 
-from tweepy.error import TweepError
-from tweepy.api import API
 import requests
-from requests_oauthlib import OAuth1Session, OAuth1
+import six
 from requests.auth import AuthBase
+from requests_oauthlib import OAuth1, OAuth1Session
 from six.moves.urllib.parse import parse_qs
+
+from tweepy.api import API
+from tweepy.error import TweepError
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details

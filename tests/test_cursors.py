@@ -1,6 +1,5 @@
+from .config import tape, TweepyTestCase, username
 from tweepy import Cursor
-
-from .config import TweepyTestCase, username, tape
 
 
 class TweepyCursorTests(TweepyTestCase):

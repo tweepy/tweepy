@@ -4,6 +4,7 @@
 
 import six
 
+
 class TweepError(Exception):
     """Tweepy exception"""
 

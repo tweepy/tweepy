@@ -1,15 +1,15 @@
-import unittest
+import os
 import random
 import shutil
 import time
-import os
+import unittest
 from ast import literal_eval
 
 from nose import SkipTest
 
-from tweepy import Friendship, MemoryCache, FileCache, API
+from .config import tape, TweepyTestCase, use_replay, username
+from tweepy import API, FileCache, Friendship, MemoryCache
 from tweepy.parsers import Parser
-from .config import TweepyTestCase, username, use_replay, tape
 
 test_tweet_id = '266367358078169089'
 tweet_text = 'testing 1000'

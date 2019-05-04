@@ -6,22 +6,21 @@
 
 from __future__ import absolute_import
 
+import json
 import logging
 import re
 import requests
+import ssl
 import sys
-import json
-from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
 
 import six
+from requests.exceptions import Timeout
 
-import ssl
-
-from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
+from tweepy.models import Status
 
 STREAM_VERSION = '1.1'
 

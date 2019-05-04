@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-#from distutils.core import setup
+
+# from distutils.core import setup
 import re
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 VERSIONFILE = "tweepy/__init__.py"
 ver_file = open(VERSIONFILE, "rt").read()
