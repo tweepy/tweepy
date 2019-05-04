@@ -477,11 +477,12 @@ Block Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.blocks_ids()
+.. method:: API.blocks_ids([cursor])
 
    Returns an array of numeric user ids the authenticating user is
    blocking.
 
+   :param cursor: |cursor|
    :rtype: list of Integers
 
 
@@ -508,10 +509,11 @@ Mute Methods
    :rtype: :class:`User` object
 
 
-.. method:: API.mutes_ids()
+.. method:: API.mutes_ids([cursor])
 
    Returns an array of numeric user ids the authenticating user has muted.
 
+   :param cursor: |cursor|
    :rtype: list of Integers
 
 

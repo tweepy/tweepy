@@ -789,11 +789,14 @@ class API(object):
 
     @property
     def mutes_ids(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids """
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
+            :allowed_param:'cursor'
+        """
         return bind_api(
             api=self,
             path='/mutes/users/ids.json',
             payload_type='json',
+            allowed_param=['cursor'],
             require_auth=True
         )
 
@@ -840,11 +843,14 @@ class API(object):
 
     @property
     def blocks_ids(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids """
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
+            :allowed_param:'cursor'
+        """
         return bind_api(
             api=self,
             path='/blocks/ids.json',
             payload_type='json',
+            allowed_param=['cursor'],
             require_auth=True
         )
 
