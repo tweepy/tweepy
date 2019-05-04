@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2010 Joshua Roesslein
+# Copyright 2010-2019 Joshua Roesslein
 # See LICENSE for details.
 
 from __future__ import print_function
