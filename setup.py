@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-#from distutils.core import setup
-import re, uuid
-from setuptools import setup, find_packages
+
+# from distutils.core import setup
+import re
+from setuptools import find_packages, setup
 
 VERSIONFILE = "tweepy/__init__.py"
 ver_file = open(VERSIONFILE, "rt").read()
@@ -22,10 +23,10 @@ setup(name="tweepy",
       url="http://github.com/tweepy/tweepy",
       packages=find_packages(exclude=['tests', 'examples']),
       install_requires=[
+          "PySocks>=1.5.7",
           "requests>=2.11.1",
           "requests_oauthlib>=0.7.0",
           "six>=1.10.0",
-          "PySocks>=1.5.7",
       ],
       keywords="twitter library",
       python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
@@ -41,5 +42,6 @@ setup(name="tweepy",
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
       ],
       zip_safe=True)

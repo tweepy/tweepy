@@ -1,12 +1,12 @@
 import os
 import unittest
 
+from .config import create_auth
 from tweepy import API
 from tweepy.error import TweepError
 
-from .config import create_auth
-
 testratelimit = 'TEST_RATE_LIMIT' in os.environ
+
 
 @unittest.skipIf(not testratelimit, "skipping rate limiting test since testratelimit is not specified")
 class TweepyRateLimitTests(unittest.TestCase):

@@ -4,14 +4,14 @@ import six
 import unittest
 from unittest.case import skip
 
-from tweepy.api import API
-from tweepy.auth import OAuthHandler
-from tweepy.models import Status
-from tweepy.streaming import Stream, StreamListener, ReadBuffer
+from mock import MagicMock, patch
 
 from .config import create_auth
 from .test_utils import mock_tweet
-from mock import MagicMock, patch
+from tweepy.api import API
+from tweepy.auth import OAuthHandler
+from tweepy.models import Status
+from tweepy.streaming import ReadBuffer, Stream, StreamListener
 
 
 if six.PY3:

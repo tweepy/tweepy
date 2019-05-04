@@ -1,10 +1,10 @@
 from __future__ import absolute_import
 
-from .config import *
-from tweepy import API, OAuthHandler
-
 import random
 import unittest
+
+from .config import *
+from tweepy import API, OAuthHandler
 
 
 class TweepyAuthTests(unittest.TestCase):

@@ -1,10 +1,10 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import absolute_import, print_function
+from __future__ import absolute_import
 
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
+from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 
 
 class ResultSet(list):
@@ -60,6 +60,16 @@ class Model(object):
             a result set of model instances.
         """
         results = ResultSet()
+
+        # Handle map parameter for statuses/lookup
+        if isinstance(json_list, dict) and 'id' in json_list:
+            for _id, obj in json_list['id'].items():
+                if obj:
+                    results.append(cls.parse(api, obj))
+                else:
+                    results.append(cls.parse(api, {'id': int(_id)}))
+            return results
+
         for obj in json_list:
             if obj:
                 results.append(cls.parse(api, obj))

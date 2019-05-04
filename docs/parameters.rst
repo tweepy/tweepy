@@ -15,4 +15,6 @@
 .. |list_mode| replace:: Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified.
 .. |list_owner| replace:: the screen name of the owner of the list
 .. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
+.. |skip_status| replace:: When set to either true, t or 1 statuses will not be included in the returned user objects. Defaults to false.
+.. |include_user_entities| replace:: The user object entities node will not be included when set to false. Defaults to true.
 

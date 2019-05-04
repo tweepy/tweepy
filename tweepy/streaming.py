@@ -1,29 +1,26 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
-from __future__ import absolute_import, print_function
+from __future__ import absolute_import
 
+import json
 import logging
 import re
 import requests
+import ssl
 import sys
-from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
 
 import six
+from requests.exceptions import Timeout
 
-import ssl
-
-from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
-
-from tweepy.utils import import_simplejson
-json = import_simplejson()
+from tweepy.models import Status
 
 STREAM_VERSION = '1.1'
 

@@ -1,12 +1,11 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import print_function
+import json as json_lib
 
-from tweepy.models import ModelFactory
-from tweepy.utils import import_simplejson
 from tweepy.error import TweepError
+from tweepy.models import ModelFactory
 
 
 class Parser(object):
@@ -44,12 +43,9 @@ class JSONParser(Parser):
 
     payload_format = 'json'
 
-    def __init__(self):
-        self.json_lib = import_simplejson()
-
     def parse(self, method, payload):
         try:
-            json = self.json_lib.loads(payload)
+            json = json_lib.loads(payload)
         except Exception as e:
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
@@ -63,7 +59,7 @@ class JSONParser(Parser):
             return json
 
     def parse_error(self, payload):
-        error_object = self.json_lib.loads(payload)
+        error_object = json_lib.loads(payload)
 
         if 'error' in error_object:
             reason = error_object['error']

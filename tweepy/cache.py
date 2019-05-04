@@ -1,15 +1,13 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import print_function
-
-import time
 import datetime
 import hashlib
-import threading
-import os
 import logging
+import threading
+import time
+import os
 
 try:
     import cPickle as pickle
@@ -24,6 +22,7 @@ except ImportError:
     pass
 
 log = logging.getLogger('tweepy.cache')
+
 
 class Cache(object):
     """Cache interface"""

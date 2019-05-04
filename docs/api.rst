@@ -55,7 +55,7 @@ Timeline methods
    :param id_: A list of Tweet IDs to lookup, up to 100
    :param include_entities: A boolean indicating whether or not to include `entities <https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object>`_ in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
-   :param map_: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
+   :param map_: A boolean indicating whether or not to include tweets that cannot be shown. Defaults to False.
    :rtype: list of :class:`Status` objects
 
 
@@ -158,6 +158,14 @@ Status methods
    :param id: |sid|
    :rtype: :class:`Status` object
 
+.. method:: API.retweeters(id, [cursor], [stringify_ids])
+
+   Returns up to 100 user IDs belonging to users who have retweeted the Tweet specified by the id parameter.
+
+   :param id: |sid|
+   :param cursor: |cursor|
+   :param stringify_ids: Have ids returned as strings instead.
+   :rtype: list of Integers
 
 .. method:: API.retweets(id[,count])
 
@@ -166,6 +174,13 @@ Status methods
    :param id: |sid|
    :param count: Specifies the number of retweets to retrieve.
    :rtype: list of :class:`Status` objects
+
+.. method:: API.unretweet(id)
+
+   Untweets a retweeted status. Requires the id of the retweet to unretweet.
+
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 User methods
@@ -188,7 +203,7 @@ User methods
    :rtype: :class:`User` object
 
 
-.. method::API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
+.. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
 
    Returns an user's friends ordered in which they were added 100 at a time. If no user is specified it defaults to the authenticated user.
 
@@ -203,14 +218,17 @@ User methods
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
 
-   Returns an user's followers ordered in which they were added 100 at a
-   time. If no user is specified by id/screen name, it defaults to the
+   Returns a user's followers ordered in which they were added.
+   If no user is specified by id/screen name, it defaults to the
    authenticated user.
 
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param cursor: |cursor|
+   :param count: |count|
+   :param skip_status: |skip_status|
+   :param include_user_entities: |include_user_entities|
    :rtype: list of :class:`User` objects
 
 .. method:: API.search_users(q, [count], [page])
@@ -364,28 +382,6 @@ Account Methods
    :rtype: :class:`JSON` object
 
 
-.. method:: API.set_delivery_device(device)
-
-   Sets which device Twitter delivers updates to for the authenticating
-   user. Sending "none" as the device parameter will disable SMS updates.
-
-   :param device: Must be one of: sms, none
-   :rtype: :class:`User` object
-
-
-.. method:: API.update_profile_colors([profile_background_color], [profile_text_color], [profile_link_color], [profile_sidebar_fill_color], [profile_sidebar_border_color])
-
-   Sets one or more hex values that control the color scheme of the
-   authenticating user's profile page on twitter.com.
-
-   :param profile_background_color:
-   :param profile_text_color:
-   :param profile_link_color:
-   :param profile_sidebar_fill_color:
-   :param profile_sidebar_border_color:
-   :rtype: :class:`User` object
-
-
 .. method:: API.update_profile_image(filename)
 
    Update the authenticating user's profile image. Valid formats: GIF,
@@ -481,11 +477,43 @@ Block Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.blocks_ids()
+.. method:: API.blocks_ids([cursor])
 
    Returns an array of numeric user ids the authenticating user is
    blocking.
 
+   :param cursor: |cursor|
+   :rtype: list of Integers
+
+
+Mute Methods
+------------
+
+.. method:: API.create_mute(id/screen_name/user_id)
+
+   Mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.destroy_mute(id/screen_name/user_id)
+
+   Un-mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.mutes_ids([cursor])
+
+   Returns an array of numeric user ids the authenticating user has muted.
+
+   :param cursor: |cursor|
    :rtype: list of Integers
 
 
@@ -730,11 +758,13 @@ Trends Methods
 
 .. method:: API.trends_place(id, [exclude])
 
-   Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+   Returns the top 50 trending topics for a specific WOEID, if trending information is available for it.
 
    The response is an array of “trend” objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL.
 
    This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+
+   The tweet_volume for the last 24 hours is also returned for many trends if this is available.
 
    :param id: The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID.
    :param exclude: Setting this equal to hashtags will remove all hashtags from the trends list.
