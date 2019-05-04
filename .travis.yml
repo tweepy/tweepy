@@ -9,6 +9,12 @@ python:
 - '3.5'
 - '3.6'
 
+matrix:
+  fast_finish: true
+  include:
+    - python: 3.7
+      dist: xenial
+
 env:
   global:
   - TWITTER_USERNAME="TheTweepyTester"
@@ -58,6 +64,3 @@ deploy:
   on:
     repo: tweepy/tweepy
     tags: true
-
-matrix:
-  fast_finish: true
