@@ -60,6 +60,16 @@ class Model(object):
             a result set of model instances.
         """
         results = ResultSet()
+
+        # Handle map parameter for statuses/lookup
+        if isinstance(json_list, dict) and 'id' in json_list:
+            for _id, obj in json_list['id'].items():
+                if obj:
+                    results.append(cls.parse(api, obj))
+                else:
+                    results.append(cls.parse(api, {'id': int(_id)}))
+            return results
+
         for obj in json_list:
             if obj:
                 results.append(cls.parse(api, obj))
