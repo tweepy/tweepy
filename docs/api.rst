@@ -590,8 +590,8 @@ List Methods
 
 .. method:: API.create_list(name, [mode], [description])
 
-   Creates a new list for the authenticated user. Accounts are limited to
-   20 lists.
+   Creates a new list for the authenticated user.
+   Note that you can create up to 1000 lists per account.
 
    :param name: The name of the new list.
    :param mode: |list_mode|
