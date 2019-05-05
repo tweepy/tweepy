@@ -682,7 +682,7 @@ class API(object):
         """
         f = kargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 800, f=f)
-        bind_api(
+        return bind_api(
             api=self,
             path='/account/update_profile_background_image.json',
             method='POST',
@@ -697,7 +697,7 @@ class API(object):
         """
         f = kargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 700, form_field="banner", f=f)
-        bind_api(
+        return bind_api(
             api=self,
             path='/account/update_profile_banner.json',
             method='POST',
