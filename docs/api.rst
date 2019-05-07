@@ -520,7 +520,7 @@ Mute Methods
 Spam Reporting Methods
 ----------------------
 
-.. method:: API.report_spam([id/user_id/screen_name/perform_block])
+.. method:: API.report_spam(id/screen_name/user_id, [perform_block])
 
    The user specified in the id is blocked by the authenticated user and
    reported as a spammer.
