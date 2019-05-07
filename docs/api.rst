@@ -699,14 +699,17 @@ List Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.is_list_member(owner, slug, id)
+.. method:: API.show_list_member(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
-   Check if a user is a member of the specified list.
+   Check if the specified user is a member of the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to check
-   :rtype: :class:`User` object if user is a member of list, otherwise False.
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`User` object if user is a member of list
 
 
 .. method:: API.subscribe_list(owner, slug)
