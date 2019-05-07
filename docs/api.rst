@@ -659,13 +659,15 @@ List Methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.get_list(owner, slug)
+.. method:: API.get_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Show the specified list. Private lists will only be shown if the
+   Returns the specified list. Private lists will only be shown if the
    authenticated user owns the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
