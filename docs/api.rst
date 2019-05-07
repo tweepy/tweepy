@@ -520,7 +520,7 @@ Mute Methods
 Spam Reporting Methods
 ----------------------
 
-.. method:: API.report_spam([id/user_id/screen_name])
+.. method:: API.report_spam([id/user_id/screen_name/perform_block])
 
    The user specified in the id is blocked by the authenticated user and
    reported as a spammer.
@@ -528,6 +528,7 @@ Spam Reporting Methods
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
+   :param perform_block: A boolean indicating if the reported account should be blocked. Defaults to True.
    :rtype: :class:`User` object
 
 
