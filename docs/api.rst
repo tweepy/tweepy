@@ -742,14 +742,17 @@ List Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.is_subscribed_list(owner, slug, id)
+.. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
    Check if the specified user is a subscriber of the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to check
-   :rtype: :class:`User` object if user is subscribed to the list, otherwise False.
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`User` object if user is subscribed to list
 
 
 Trends Methods
