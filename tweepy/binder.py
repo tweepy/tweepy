@@ -246,13 +246,4 @@ def bind_api(**config):
         else:
             return method.execute()
 
-    # Set pagination mode
-    if 'cursor' in APIMethod.allowed_param:
-        _call.pagination_mode = 'cursor'
-    elif 'max_id' in APIMethod.allowed_param:
-        if 'since_id' in APIMethod.allowed_param:
-            _call.pagination_mode = 'id'
-    elif 'page' in APIMethod.allowed_param:
-        _call.pagination_mode = 'page'
-
     return _call
