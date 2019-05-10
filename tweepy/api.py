@@ -799,6 +799,20 @@ class API(object):
             allowed_param=['cursor'],
             require_auth=True
         )
+    
+    @property
+    def mutes(self):
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
+            :allowed_param: 'cursor', 'include_entities', 'skip_status'
+        """
+        return bind_api(
+            api=self,
+            path='/mutes/users/list.json',
+            payload_type='user', payload_list=True,
+            allowed_param=['cursor', 'include_entities', 'skip_status'],
+            required_auth=True
+        )
+           
 
     @property
     def create_mute(self):
