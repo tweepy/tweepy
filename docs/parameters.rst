@@ -5,6 +5,7 @@
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
 .. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
+.. |include_entities| replace:: The entities node will not be included when set to false. Defaults to true.
 .. |include_user_entities| replace:: The user object entities node will not be included when set to false. Defaults to true.
 .. |list_id| replace:: The numerical id of the list.
 .. |list_mode| replace:: Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified.
