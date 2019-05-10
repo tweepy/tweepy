@@ -857,7 +857,7 @@ class API(object):
 
     @property
     def blocks_ids(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/-block-report-users/api-reference/get-blocks-ids
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
             :allowed_param:'cursor'
         """
         return bind_api(
