@@ -509,6 +509,16 @@ Mute Methods
    :rtype: :class:`User` object
 
 
+.. method:: API.mutes([cursor], [include_entities], [skip_status])
+
+   Returns an array of user objects the authenticating user has muted.
+
+   :param cursor: |cursor|
+   :param include_entities: |include_entities|
+   :param skip_status: |skip_status|
+   :rtype: list of :class:`User` objects
+
+
 .. method:: API.mutes_ids([cursor])
 
    Returns an array of numeric user ids the authenticating user has muted.
