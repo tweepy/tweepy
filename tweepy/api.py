@@ -81,13 +81,13 @@ class API(object):
     @property
     def home_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param:'since_id', 'max_id', 'count'
+            :allowed_param:'since_id', 'max_id', 'count', 'tweet_mode'
         """
         return bind_api(
             api=self,
             path='/statuses/home_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['since_id', 'max_id', 'count', 'tweet_mode'],
             require_auth=True
         )
 
@@ -112,7 +112,7 @@ class API(object):
     @property
     def user_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline
-            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts', 'trim_user', 'exclude_replies'
+            :allowed_param:'id', 'user_id', 'screen_name', 'since_id', 'max_id', 'count', 'include_rts', 'trim_user', 'exclude_replies', 'tweet_mode'
         """
         return bind_api(
             api=self,
@@ -120,19 +120,19 @@ class API(object):
             payload_type='status', payload_list=True,
             allowed_param=['id', 'user_id', 'screen_name', 'since_id',
                            'max_id', 'count', 'include_rts', 'trim_user',
-                           'exclude_replies']
+                           'exclude_replies', 'tweet_mode']
         )
 
     @property
     def mentions_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
-            :allowed_param:'since_id', 'max_id', 'count'
+            :allowed_param:'since_id', 'max_id', 'count', 'tweet_mode'
         """
         return bind_api(
             api=self,
             path='/statuses/mentions_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['since_id', 'max_id', 'count', 'tweet_mode'],
             require_auth=True
         )
 
@@ -722,13 +722,13 @@ class API(object):
     @property
     def favorites(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
-            :allowed_param:'screen_name', 'user_id', 'max_id', 'count', 'since_id', 'max_id'
+            :allowed_param:'screen_name', 'user_id', 'max_id', 'count', 'since_id', 'max_id', 'tweet_mode'
         """
         return bind_api(
             api=self,
             path='/favorites/list.json',
             payload_type='status', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'max_id', 'count', 'since_id', 'max_id']
+            allowed_param=['screen_name', 'user_id', 'max_id', 'count', 'since_id', 'max_id', 'tweet_mode']
         )
 
     @property
