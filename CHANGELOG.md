@@ -1,5 +1,24 @@
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
+Version 3.6.0
+-------------
+### New Features / Improvements
+- Parse `Status.quoted_status` as a `Status` object ([#633](https://github.com/tweepy/tweepy/pull/633))
+- Allow `in_reply_to_status_id_str` as a parameter for `API.update_status` and `API.update_with_media` ([#693](https://github.com/tweepy/tweepy/pull/693))
+- Add `stall_warnings` parameter to `Stream.sample` ([#701](https://github.com/tweepy/tweepy/pull/701))
+- Add `API.unretweet` ([#735](https://github.com/tweepy/tweepy/issues/735), [#736](https://github.com/tweepy/tweepy/pull/736))
+- Allow `auto_populate_reply_metadata` as a parameter for `API.update_status` and `API.update_with_media` ([#761](https://github.com/tweepy/tweepy/pull/761))
+- Allow `profile_link_color` as a parameter for `API.update_profile`
+- Add support for Python 3.6 ([#831](https://github.com/tweepy/tweepy/pull/831), [#884](https://github.com/tweepy/tweepy/pull/884))
+
+### Bug Fixes
+- Update file size limit for `API.media_upload` ([#717](https://github.com/tweepy/tweepy/pull/717))
+- Fix `JSONParser.parse` returning `None` in certain cases ([#765](https://github.com/tweepy/tweepy/issues/765), [#766](https://github.com/tweepy/tweepy/pull/766))
+- Include URL parameters when accessing cache ([#777](https://github.com/tweepy/tweepy/pull/777))
+- Properly re-raise exceptions during streaming
+- Fix `AttributeError` and `TypeError` during streaming ([#698](https://github.com/tweepy/tweepy/issues/698))
+- Properly encode `filter_level` for `Stream.filter` ([#782](https://github.com/tweepy/tweepy/issues/782))
+
 Version 3.5.0
 -------------
 ### Features / Improvements
