@@ -1,5 +1,21 @@
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
+Version 3.7.0
+-------------
+### New Features / Improvements
+- Allow `trim_user` and `exclude_replies` as parameters for `API.user_timeline` ([#909](https://github.com/tweepy/tweepy/pull/909))
+- Allow `tweet_mode` parameter for `API.statuses_lookup` ([#840](https://github.com/tweepy/tweepy/issues/840), [#926](https://github.com/tweepy/tweepy/pull/926))
+- Drop support for Python 2.6 and 3.3
+- [Discord Server](https://discord.gg/bJvqnhg)
+- Add proxy support for streams ([#1033](https://github.com/tweepy/tweepy/pull/1033))
+- Add `API.create_mute`, `API.destroy_mute`, and `API.mutes_ids` ([#1055](https://github.com/tweepy/tweepy/pull/1055))
+- Allow `tweet_mode` parameter for `API.lookup_users` ([#1130](https://github.com/tweepy/tweepy/pull/1130))
+
+### Bug Fixes
+- Fix `AttributeError` during streaming ([#1026](https://github.com/tweepy/tweepy/issues/1026), [#1027](https://github.com/tweepy/tweepy/pull/1027))
+- Update how requirements are specified ([#1029](https://github.com/tweepy/tweepy/issues/1029), [#1030](https://github.com/tweepy/tweepy/pull/1030))
+- Fix compatibility issue with Python 3.7 ([#1017](https://github.com/tweepy/tweepy/issues/1017), [#1042](https://github.com/tweepy/tweepy/pull/1042))
+
 Version 3.6.0
 -------------
 ### New Features / Improvements
