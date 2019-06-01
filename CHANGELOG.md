@@ -1,4 +1,30 @@
-See https://github.com/tweepy/tweepy/releases for change logs.
+Also see https://github.com/tweepy/tweepy/releases for changelogs.
+
+Version 3.5.0
+-------------
+### Features / Improvements
+- Allow 'full_text' param when getting direct messages ( #664 )
+- Explicitly return api code when parsing error ( #666 )
+- Remove deprecated function and clean up codes ( #583 )
+
+### Bug Fixes
+- update_status: first positional argument should be 'status' ( #578 )
+- Fix "TypeError: Can't convert 'bytes' object to str implicitly" ( #615 #658 #635 )
+- Fix duplicate raise in auth.py ( #667 )
+
+Version 3.4.0
+-------------
+### New Features
+- Add API for account/settings (PR #596)
+- Added RateLimitError for easily working with the rate limit. (Issue #600, PR #611) @obskyr 
+- Allow include_email param for verify_credentials API (PR #623)
+- Added support for the "filter_level" parameter for the streaming API (PR #619)
+
+### Bug Fixes
+- Streaming: don't decode stream bytes until json.decode (PR #606)
+- Typo fix on _add_list_members, _remove_list_members properties. (PR #593)
+- Fixes issue #570 - add "exception" when raising one
+- Change raise in streaming.py to raise exception (PR #621)
 
 Version 3.3.0
 -------------
