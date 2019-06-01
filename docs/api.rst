@@ -211,6 +211,7 @@ User methods
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param cursor: |cursor|
+   :param count: |count|
    :param skip_status: |skip_status|
    :param include_user_entities: |include_user_entities|
    :rtype: list of :class:`User` objects
