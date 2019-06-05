@@ -15,7 +15,7 @@ from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
 from tweepy.utils import convert_to_utf8_str
 
-re_path_template = re.compile('{\w+}')
+re_path_template = re.compile(r'{\w+}')
 
 log = logging.getLogger('tweepy.binder')
 
