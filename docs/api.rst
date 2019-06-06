@@ -582,18 +582,24 @@ Saved Searches Methods
 Help Methods
 ------------
 
-.. method:: API.search(q[,lang],[locale],[count],[page],[since_id],[geocode],[show_user])
+.. method:: API.search(q, [geocode], [lang], [locale], [result_type], [count], [until], [since_id], [max_id], [include_entities])
 
    Returns tweets that match a specified query.
 
-   :param q: the search query string
-   :param lang: Restricts tweets to the given language, given by an ISO 639-1 code.
-   :param locale: Specify the language of the query you are sending. This is intended for language-specific clients and the default should work in the majority of cases.
-   :param count: The number of tweets to return per page, up to a max of 100.
-   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on count * page.
-   :param since_id: |since_id|
-   :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
-   :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
+   :param q: the search query string of 500 characters maximum, including operators. Queries may additionally be limited by complexity.
+   :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly. A maximum of 1,000 distinct "sub-regions" will be considered when using the radius modifier.
+   :param lang: Restricts tweets to the given language, given by an ISO 639-1 code. Language detection is best-effort.
+   :param locale: Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific consumers and the default should work in the majority of cases.
+   :param result_type: Specifies what type of search results you would prefer to receive. The current default is "mixed." Valid values include:
+
+                       * mixed : include both popular and real time results in the response
+                       * recent : return only the most recent results in the response
+                       * popular : return only the most popular results in the response
+   :param count: The number of tweets to return per page, up to a maximum of 100. Defaults to 15.
+   :param until: Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week.
+   :param since_id: |since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.	
+   :param max_id: |max_id|
+   :param include_entities: |include_entities|
    :rtype: list of :class:`SearchResults` objects
 
 
