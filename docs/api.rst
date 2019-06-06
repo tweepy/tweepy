@@ -682,13 +682,17 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.add_list_member(slug, id)
+.. method:: API.add_list_member(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
    Add a member to a list. The authenticated user must own the list to be
    able to add members to it. Lists are limited to 5,000 members.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to add as a member
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 .. method:: API.add_list_members(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
