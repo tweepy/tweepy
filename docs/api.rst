@@ -691,17 +691,17 @@ List Methods
    :param id: the ID of the user to add as a member
    :rtype: :class:`List` object
 
-.. method:: API.add_list_members(screen_name, user_id, slug, list_id, owner_id, owner_screen_name)
+.. method:: API.add_list_members(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
    Add up to 100 members to a list. The authenticated user must own the list to be
    able to add members to it. Lists are limited to 5,000 members.
 
+   :param list_id: |list_id|
+   :param slug: |slug|
    :param screen_name: A comma separated list of screen names, up to 100 are allowed in a single request
    :param user_id: A comma separated list of user IDs, up to 100 are allowed in a single request
-   :param slug: |slug|
-   :param list_id: The numerical id of the list
-   :param owner_id: The user ID of the user who owns the list being requested by a slug
-   :param owner_screen_name: The screen name of the user who owns the list being requested by a slug
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 .. method:: API.remove_list_member(slug, id)
