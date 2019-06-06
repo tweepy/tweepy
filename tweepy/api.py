@@ -1248,17 +1248,16 @@ class API(object):
     def search(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
             :allowed_param:'q', 'lang', 'locale', 'since_id', 'geocode',
-             'max_id', 'since', 'until', 'result_type', 'count',
-              'include_entities', 'from', 'to', 'source'
+             'max_id', 'until', 'result_type', 'count',
+              'include_entities'
         """
         return bind_api(
             api=self,
             path='/search/tweets.json',
             payload_type='search_results',
             allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
-                           'max_id', 'since', 'until', 'result_type',
-                           'count', 'include_entities', 'from',
-                           'to', 'source']
+                           'max_id', 'until', 'result_type', 'count',
+                           'include_entities']
         )
 
     @property
