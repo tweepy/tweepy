@@ -75,8 +75,17 @@ class StreamListener(object):
         elif 'warning' in data:
             if self.on_warning(data['warning']) is False:
                 return False
+        elif 'scrub_geo' in data:
+            if self.on_scrub_geo(data['scrub_geo']) is False:
+                return False
+        elif 'status_withheld' in data:
+            if self.on_status_withheld(data['status_withheld']) is False:
+                return False
+        elif 'user_withheld' in data:
+            if self.on_user_withheld(data['user_withheld']) is False:
+                return False
         else:
-            logging.error("Unknown message type: " + str(raw_data))
+            logging.error("Unknown message type: %s", str(raw_data))
 
     def keep_alive(self):
         """Called when a keep-alive arrived"""
@@ -133,6 +142,17 @@ class StreamListener(object):
         """Called when a disconnection warning message arrives"""
         return
 
+    def on_scrub_geo(self, notice):
+        """Called when a location deletion notice arrives"""
+        return
+
+    def on_status_withheld(self, notice):
+        """Called when a status withheld content notice arrives"""
+        return
+
+    def on_user_withheld(self, notice):
+        """Called when a user withheld content notice arrives"""
+        return
 
 class ReadBuffer(object):
     """Buffer data from the response in a smarter way than httplib/requests can.
