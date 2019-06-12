@@ -24,6 +24,8 @@ from tweepy.models import Status
 
 STREAM_VERSION = '1.1'
 
+log = logging.getLogger(__name__)
+
 
 class StreamListener(object):
 
@@ -85,7 +87,7 @@ class StreamListener(object):
             if self.on_user_withheld(data['user_withheld']) is False:
                 return False
         else:
-            logging.error("Unknown message type: %s", raw_data)
+            log.error("Unknown message type: %s", raw_data)
 
     def keep_alive(self):
         """Called when a keep-alive arrived"""

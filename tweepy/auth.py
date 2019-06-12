@@ -17,6 +17,8 @@ WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
 https://dev.twitter.com/discussions/21281"""
 
+log = logging.getLogger(__name__)
+
 
 class AuthHandler(object):
 
@@ -83,7 +85,7 @@ class OAuthHandler(AuthHandler):
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
                 if access_type:
-                    logging.warning(WARNING_MESSAGE)
+                    log.warning(WARNING_MESSAGE)
             else:
                 url = self._get_oauth_url('authorize')
             self.request_token = self._get_request_token(access_type=access_type)
