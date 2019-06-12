@@ -21,7 +21,7 @@ except ImportError:
     # TODO: use win32file
     pass
 
-log = logging.getLogger('tweepy.cache')
+log = logging.getLogger(__name__)
 
 
 class Cache(object):

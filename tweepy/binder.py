@@ -17,7 +17,7 @@ from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile(r'{\w+}')
 
-log = logging.getLogger('tweepy.binder')
+log = logging.getLogger(__name__)
 
 
 def bind_api(**config):
