@@ -459,14 +459,13 @@ class API(object):
 
     @property
     def destroy_direct_message(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
             :allowed_param:'id'
         """
         return bind_api(
             api=self,
-            path='/direct_messages/destroy.json',
-            method='POST',
-            payload_type='direct_message',
+            path='/direct_messages/events/destroy.json',
+            method='DELETE',
             allowed_param=['id'],
             require_auth=True
         )

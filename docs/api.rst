@@ -287,11 +287,13 @@ Direct Message Methods
 
 .. method:: API.destroy_direct_message(id)
 
-   Destroy a direct message. Authenticating user must be the recipient of
-   the direct message.
+   Deletes the direct message specified in the required ID parameter.
+   The authenticating user must be the recipient of the specified direct message.
+   Direct Messages are only removed from the interface of the user context provided.
+   Other members of the conversation can still access the Direct Messages.
 
-   :param id: The ID of the direct message to destroy.
-   :rtype: :class:`DirectMessage` object
+   :param id: The id of the Direct Message that should be deleted.
+   :rtype: None
 
 
 Friendship Methods

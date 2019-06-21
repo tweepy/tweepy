@@ -205,7 +205,7 @@ def bind_api(**config):
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
-                if resp.status_code == 200:
+                if resp.status_code in (200, 204):
                     break
                 elif (resp.status_code == 429 or resp.status_code == 420) and self.wait_on_rate_limit:
                     if 'retry-after' in resp.headers:
