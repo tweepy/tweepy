@@ -24,10 +24,10 @@ class TweepyCursorTests(TweepyTestCase):
     @tape.use_cassette('testcursorcursorpages.json')
     def testcursorcursorpages(self):
         pages = list(Cursor(self.api.friends_ids).pages(1))
-        self.assert_(len(pages) == 1)
+        self.assertTrue(len(pages) == 1)
 
         pages = list(Cursor(self.api.followers_ids, username).pages(1))
-        self.assert_(len(pages) == 1)
+        self.assertTrue(len(pages) == 1)
 
     @tape.use_cassette('testcursorsetstartcursor.json')
     def testcursorsetstartcursor(self):

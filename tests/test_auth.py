@@ -16,9 +16,9 @@ class TweepyAuthTests(unittest.TestCase):
         auth_url = auth.get_authorization_url()
         print('Please authorize: ' + auth_url)
         verifier = raw_input('PIN: ').strip()
-        self.assert_(len(verifier) > 0)
+        self.assertTrue(len(verifier) > 0)
         access_token = auth.get_access_token(verifier)
-        self.assert_(access_token is not None)
+        self.assertTrue(access_token is not None)
 
         # build api object test using oauth
         api = API(auth)

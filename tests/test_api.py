@@ -188,8 +188,8 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testshowfriendship.json')
     def testshowfriendship(self):
         source, target = self.api.show_friendship(target_screen_name='twitter')
-        self.assert_(isinstance(source, Friendship))
-        self.assert_(isinstance(target, Friendship))
+        self.assertTrue(isinstance(source, Friendship))
+        self.assertTrue(isinstance(target, Friendship))
 
     @tape.use_cassette('testfriendsids.json')
     def testfriendsids(self):
