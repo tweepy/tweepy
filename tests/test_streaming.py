@@ -1,10 +1,10 @@
 from __future__ import absolute_import, print_function
 
-import six
 import unittest
 from unittest.case import skip
 
 from mock import MagicMock, patch
+import six
 
 from .config import create_auth
 from .test_utils import mock_tweet
