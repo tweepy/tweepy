@@ -407,14 +407,14 @@ class API(object):
 
     @property
     def get_direct_message(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-message
-            :allowed_param:'id', 'full_text'
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
+            :allowed_param:'id'
         """
         return bind_api(
             api=self,
-            path='/direct_messages/show/{id}.json',
+            path='/direct_messages/events/show.json',
             payload_type='direct_message',
-            allowed_param=['id', 'full_text'],
+            allowed_param=['id'],
             require_auth=True
         )
 
