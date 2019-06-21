@@ -44,4 +44,4 @@ class TweepyCursorTests(TweepyTestCase):
         cursor = Cursor(self.api.user_timeline, id='twitter').items(5)
         status = cursor.next()
 
-        self.assertEquals(status.user.screen_name, 'twitter')
+        self.assertEqual(status.user.screen_name, 'twitter')

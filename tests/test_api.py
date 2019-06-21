@@ -427,10 +427,10 @@ class TweepyAPITests(TweepyTestCase):
 
         user1 = self.api.get_user('TheTweepyTester')
         self.assertFalse(self.api.cached_result)
-        self.assertEquals('TheTweepyTester', user1.screen_name)
+        self.assertEqual('TheTweepyTester', user1.screen_name)
 
         user2 = self.api.get_user('tweepytest')
-        self.assertEquals('tweepytest', user2.screen_name)
+        self.assertEqual('tweepytest', user2.screen_name)
         self.assertFalse(self.api.cached_result)
 
 
