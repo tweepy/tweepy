@@ -431,17 +431,29 @@ class API(object):
             require_auth=True
         )
 
+    def send_direct_message(self, recipient_id, text, quick_reply_type=None, attachment_type=None, attachment_media_id=None):
+        """ Send a direct message to the specified user from the authenticating user """
+        json_payload = {'event': {'type': 'message_create', 'message_create': {'target': {'recipient_id': recipient_id}}}}
+        json_payload['event']['message_create']['message_data'] = {'text': text}
+        if quick_reply_type is not None:
+            json_payload['event']['message_create']['message_data']['quick_reply'] = {'type': quick_reply_type}
+        if attachment_type is not None and attachment_media_id is not None:
+            json_payload['event']['message_create']['message_data']['attachment'] = {'type': attachment_type}
+            json_payload['event']['message_create']['message_data']['attachment']['media'] = {'id': attachment_media_id}
+
+        return self._send_direct_message(json_payload=json_payload)
+
     @property
-    def send_direct_message(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-message
-            :allowed_param:'user', 'screen_name', 'user_id', 'text'
+    def _send_direct_message(self):
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+            :allowed_param:'recipient_id', 'text', 'quick_reply_type', 'attachment_type', attachment_media_id'
         """
         return bind_api(
             api=self,
-            path='/direct_messages/new.json',
+            path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
-            allowed_param=['user', 'screen_name', 'user_id', 'text'],
+            allowed_param=['recipient_id', 'text', 'quick_reply_type', 'attachment_type', 'attachment_media_id'],
             require_auth=True
         )
 
