@@ -3,6 +3,8 @@ from __future__ import absolute_import
 import random
 import unittest
 
+from six.moves import input
+
 from .config import *
 from tweepy import API, OAuthHandler
 
@@ -15,7 +17,7 @@ class TweepyAuthTests(unittest.TestCase):
         # test getting access token
         auth_url = auth.get_authorization_url()
         print('Please authorize: ' + auth_url)
-        verifier = raw_input('PIN: ').strip()
+        verifier = input('PIN: ').strip()
         self.assertTrue(len(verifier) > 0)
         access_token = auth.get_access_token(verifier)
         self.assertTrue(access_token is not None)
@@ -29,5 +31,5 @@ class TweepyAuthTests(unittest.TestCase):
         auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
         auth_url = auth.get_authorization_url(access_type='read')
         print('Please open: ' + auth_url)
-        answer = raw_input('Did Twitter only request read permissions? (y/n) ')
+        answer = input('Did Twitter only request read permissions? (y/n) ')
         self.assertEqual('y', answer.lower())
