@@ -154,13 +154,9 @@ class TweepyAPITests(TweepyTestCase):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)
 
-    @tape.use_cassette('testdirectmessages.json')
-    def testdirectmessages(self):
-        self.api.direct_messages()
-
-    @tape.use_cassette('testsentdirectmessages.json')
-    def testsentdirectmessages(self):
-        self.api.sent_direct_messages()
+    @tape.use_cassette('testlistdirectmessages.json')
+    def testlistdirectmessages(self):
+        self.api.list_direct_messages()
 
     @tape.use_cassette('testsendanddestroydirectmessage.json')
     def testsendanddestroydirectmessage(self):

@@ -249,18 +249,6 @@ User methods
 Direct Message Methods
 ----------------------
 
-.. method:: API.direct_messages([since_id], [max_id], [count], [page], [full_text])
-
-   Returns direct messages sent to the authenticating user.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
-   :rtype: list of :class:`DirectMessage` objects
-
-
 .. method:: API.get_direct_message([id], [full_text])
 
    Returns a specific direct message.
@@ -270,15 +258,13 @@ Direct Message Methods
    :rtype: :class:`DirectMessage` object
 
 
-.. method:: API.sent_direct_messages([since_id], [max_id], [count], [page], [full_text])
+.. method:: API.list_direct_messages([count], [cursor])
 
-   Returns direct messages sent by the authenticating user.
+   Returns all Direct Message events (both sent and received)
+   within the last 30 days. Sorted in reverse-chronological order.
 
-   :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
+   :param cursor: |cursor|
    :rtype: list of :class:`DirectMessage` objects
 
 

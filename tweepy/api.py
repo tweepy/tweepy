@@ -406,19 +406,6 @@ class API(object):
         )
 
     @property
-    def direct_messages(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-messages
-            :allowed_param:'since_id', 'max_id', 'count', 'full_text'
-        """
-        return bind_api(
-            api=self,
-            path='/direct_messages.json',
-            payload_type='direct_message', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count', 'full_text'],
-            require_auth=True
-        )
-
-    @property
     def get_direct_message(self):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-message
             :allowed_param:'id', 'full_text'
@@ -432,15 +419,15 @@ class API(object):
         )
 
     @property
-    def sent_direct_messages(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-sent-message
-            :allowed_param:'since_id', 'max_id', 'count', 'page', 'full_text'
+    def list_direct_messages(self):
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/list-events
+            :allowed_param:'count', 'cursor'
         """
         return bind_api(
             api=self,
-            path='/direct_messages/sent.json',
+            path='/direct_messages/events/list.json',
             payload_type='direct_message', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count', 'page', 'full_text'],
+            allowed_param=['count', 'cursor'],
             require_auth=True
         )
 
