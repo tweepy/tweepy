@@ -228,13 +228,13 @@ class Friendship(Model):
 
         # parse source
         source = cls(api)
-        setattr(source,'_json',relationship['source'])
+        setattr(source, '_json', relationship['source'])
         for k, v in relationship['source'].items():
             setattr(source, k, v)
 
         # parse target
         target = cls(api)
-        setattr(target,'_json',relationship['target'])
+        setattr(target, '_json', relationship['target'])
         for k, v in relationship['target'].items():
             setattr(target, k, v)
 
@@ -246,7 +246,7 @@ class Category(Model):
     @classmethod
     def parse(cls, api, json):
         category = cls(api)
-        setattr(category,'_json',json)
+        setattr(category, '_json', json)
         for k, v in json.items():
             setattr(category, k, v)
         return category
@@ -292,7 +292,7 @@ class List(Model):
     @classmethod
     def parse(cls, api, json):
         lst = List(api)
-        setattr(lst,'_json',json)
+        setattr(lst, '_json', json)
         for k, v in json.items():
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
