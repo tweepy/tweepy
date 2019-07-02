@@ -629,15 +629,18 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.update_list(slug, [name], [mode], [description])
+.. method:: API.update_list(list_id/slug, [name], [mode], [description], [owner_screen_name/owner_id])
 
-   Updates the specified list. Note: this current throws a 500. Twitter
-   is looking into the issue.
+   Updates the specified list.
+   The authenticated user must own the list to be able to update it.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param name: What you'd like to change the lists name to.
+   :param name: The name for the list.
    :param mode: |list_mode|
-   :param description: What you'd like to change the list description to.
+   :param description: The description to give the list.
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
    :rtype: :class:`List` object
 
 
