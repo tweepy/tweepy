@@ -617,10 +617,14 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.destroy_list(slug)
+.. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
 
-   Deletes the specified list. Must be owned by the authenticated user.
+   Deletes the specified list.
+   The authenticated user must own the list to be able to destroy it.
 
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
+   :param list_id: |list_id|
    :param slug: |slug|
    :rtype: :class:`List` object
 
