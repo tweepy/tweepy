@@ -11,7 +11,7 @@ __license__ = 'MIT'
 
 from tweepy.api import API
 from tweepy.auth import AppAuthHandler, OAuthHandler
-from tweepy.cache import Cache, FileCache, MemoryCache
+from tweepy.cache import Cache, FileCache, MemoryCache, RedisCache
 from tweepy.cursor import Cursor
 from tweepy.error import RateLimitError, TweepError
 from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User

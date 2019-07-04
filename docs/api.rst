@@ -19,7 +19,7 @@ This page contains some basic documentation for the Tweepy module.
    :param auth_handler: authentication handler to be used
    :param host: general API host
    :param search_host: search API host
-   :param cache: cache backend to use
+   :param cache: cache backend to use (:class:`tweepy.FileCache('cache_dir')`, :class:`tweepy.MemoryCache()`, :class:`tweepy.RedisCache(client)`)
    :param api_root: general API path root
    :param search_root: search API path root
    :param retry_count: default number of retries to attempt when error occurs
@@ -590,7 +590,7 @@ Help Methods
                        * popular : return only the most popular results in the response
    :param count: The number of tweets to return per page, up to a maximum of 100. Defaults to 15.
    :param until: Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week.
-   :param since_id: |since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.	
+   :param since_id: |since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.
    :param max_id: |max_id|
    :param include_entities: |include_entities|
    :rtype: :class:`SearchResults` object
