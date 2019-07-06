@@ -121,7 +121,7 @@ Status methods
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
    :param display_coordinates: Whether or not to put a pin on the exact coordinates a Tweet has been sent from.
-   :param media_ids: A comma-delimited list of media_ids to associate with the Tweet.
+   :param media_ids: A list of media_ids to associate with the Tweet.
    :rtype: :class:`Status` object
 
 
