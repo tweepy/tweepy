@@ -266,7 +266,7 @@ class TweepyAPITests(TweepyTestCase):
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
-        self.api.create_friendship('twitter') # restore
+        self.api.create_friendship('twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
     def testblocks(self):
@@ -385,7 +385,7 @@ class TweepyAPITests(TweepyTestCase):
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',
-            self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461))) # Austin, TX, USA
+            self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461)))  # Austin, TX, USA
 
     @tape.use_cassette('testsupportedlanguages.json')
     def testsupportedlanguages(self):
