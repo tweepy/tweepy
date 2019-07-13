@@ -133,22 +133,6 @@ class TweepyAPITests(TweepyTestCase):
     def testsearchusers(self):
         self.api.search_users('twitter')
 
-    @tape.use_cassette('testsuggestedcategories.json')
-    def testsuggestedcategories(self):
-        self.api.suggested_categories()
-
-    @tape.use_cassette('testsuggestedusers.json')
-    def testsuggestedusers(self):
-        categories = self.api.suggested_categories()
-        if len(categories) != 0:
-            self.api.suggested_users(categories[0].slug)
-
-    @tape.use_cassette('testsuggesteduserstweets.json')
-    def testsuggesteduserstweets(self):
-        categories = self.api.suggested_categories()
-        if len(categories) != 0:
-            self.api.suggested_users_tweets(categories[0].slug)
-
     @tape.use_cassette('testme.json')
     def testme(self):
         me = self.api.me()

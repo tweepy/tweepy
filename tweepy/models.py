@@ -265,17 +265,6 @@ class Friendship(Model):
         return source, target
 
 
-class Category(Model):
-
-    @classmethod
-    def parse(cls, api, json):
-        category = cls(api)
-        setattr(category, '_json', json)
-        for k, v in json.items():
-            setattr(category, k, v)
-        return category
-
-
 class SavedSearch(Model):
 
     @classmethod
@@ -511,7 +500,6 @@ class ModelFactory(object):
     friendship = Friendship
     saved_search = SavedSearch
     search_results = SearchResults
-    category = Category
     list = List
     relation = Relation
     relationship = Relationship
