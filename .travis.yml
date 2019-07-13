@@ -14,7 +14,7 @@ matrix:
 
 env:
   global:
-  - TWITTER_USERNAME="TheTweepyTester"
+  - TWITTER_USERNAME="TweepyDev"
   - AWS_BUCKET="tweepy"
   - USE_REPLAY=1
   - secure: ! 'MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM

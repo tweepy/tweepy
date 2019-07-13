@@ -415,9 +415,9 @@ class TweepyAPITests(TweepyTestCase):
     def testcachedifferentqueryparameters(self):
         self.api.cache = MemoryCache()
 
-        user1 = self.api.get_user('TheTweepyTester')
+        user1 = self.api.get_user('TweepyDev')
         self.assertFalse(self.api.cached_result)
-        self.assertEqual('TheTweepyTester', user1.screen_name)
+        self.assertEqual('TweepyDev', user1.screen_name)
 
         user2 = self.api.get_user('Twitter')
         self.assertEqual('Twitter', user2.screen_name)
