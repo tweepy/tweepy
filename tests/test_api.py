@@ -116,11 +116,11 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testgetuser.json')
     def testgetuser(self):
-        u = self.api.get_user('twitter')
-        self.assertEqual(u.screen_name, 'twitter')
+        u = self.api.get_user('Twitter')
+        self.assertEqual(u.screen_name, 'Twitter')
 
         u = self.api.get_user(783214)
-        self.assertEqual(u.screen_name, 'twitter')
+        self.assertEqual(u.screen_name, 'Twitter')
 
     @tape.use_cassette('testlookupusers.json')
     def testlookupusers(self):
@@ -163,11 +163,11 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreatedestroyfriendship.json')
     def testcreatedestroyfriendship(self):
-        enemy = self.api.destroy_friendship('twitter')
-        self.assertEqual(enemy.screen_name, 'twitter')
+        enemy = self.api.destroy_friendship('Twitter')
+        self.assertEqual(enemy.screen_name, 'Twitter')
 
-        friend = self.api.create_friendship('twitter')
-        self.assertEqual(friend.screen_name, 'twitter')
+        friend = self.api.create_friendship('Twitter')
+        self.assertEqual(friend.screen_name, 'Twitter')
 
     @tape.use_cassette('testshowfriendship.json')
     def testshowfriendship(self):

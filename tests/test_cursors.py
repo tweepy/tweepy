@@ -41,7 +41,7 @@ class TweepyCursorTests(TweepyTestCase):
         Test cursor.next() behavior, id being passed correctly.
         Regression test for issue #518
         """
-        cursor = Cursor(self.api.user_timeline, id='twitter').items(5)
+        cursor = Cursor(self.api.user_timeline, id='Twitter').items(5)
         status = cursor.next()
 
-        self.assertEqual(status.user.screen_name, 'twitter')
+        self.assertEqual(status.user.screen_name, 'Twitter')
