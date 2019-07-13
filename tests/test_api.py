@@ -391,8 +391,10 @@ class TweepyAPITests(TweepyTestCase):
     def testsupportedlanguages(self):
         languages = self.api.supported_languages()
         expected_dict = {
-            "name": "English",
             "code": "en",
+            "debug": False,
+            "local_name": "English",
+            "name": "English",
             "status": "production"
         }
         self.assertTrue(expected_dict in languages)
