@@ -2,87 +2,6 @@
     "version": 1,
     "interactions": [
         {
-            "response": {
-                "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "{\"rate_limit_context\":{\"access_token\":\"794682839556038656-5sH6EGIw82VKhWAdckcj9aUfgayiNM7\"},\"resources\":{\"lists\":{\"\\/lists\\/list\":{\"limit\":15,\"remaining\":13,\"reset\":1478382704},\"\\/lists\\/memberships\":{\"limit\":75,\"remaining\":73,\"reset\":1478382704},\"\\/lists\\/subscribers\\/show\":{\"limit\":15,\"remaining\":14,\"reset\":1478382710},\"\\/lists\\/members\":{\"limit\":900,\"remaining\":898,\"reset\":1478382703},\"\\/lists\\/subscriptions\":{\"limit\":15,\"remaining\":13,\"reset\":1478382704},\"\\/lists\\/show\":{\"limit\":75,\"remaining\":73,\"reset\":1478382702},\"\\/lists\\/ownerships\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/lists\\/subscribers\":{\"limit\":180,\"remaining\":178,\"reset\":1478382704},\"\\/lists\\/members\\/show\":{\"limit\":15,\"remaining\":14,\"reset\":1478382709},\"\\/lists\\/statuses\":{\"limit\":900,\"remaining\":898,\"reset\":1478382705}},\"application\":{\"\\/application\\/rate_limit_status\":{\"limit\":180,\"remaining\":178,\"reset\":1478382706}},\"mutes\":{\"\\/mutes\\/users\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/mutes\\/users\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136}},\"live_video_stream\":{\"\\/live_video_stream\\/status\\/:id\":{\"limit\":1000,\"remaining\":1000,\"reset\":1478383136}},\"friendships\":{\"\\/friendships\\/outgoing\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friendships\\/list\":{\"limit\":200,\"remaining\":200,\"reset\":1478383136},\"\\/friendships\\/no_retweets\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friendships\\/lookup\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friendships\\/incoming\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friendships\\/show\":{\"limit\":180,\"remaining\":179,\"reset\":1478382709}},\"auth\":{\"\\/auth\\/csrf_token\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136}},\"blocks\":{\"\\/blocks\\/list\":{\"limit\":15,\"remaining\":12,\"reset\":1478382634},\"\\/blocks\\/ids\":{\"limit\":15,\"remaining\":12,\"reset\":1478382634}},\"geo\":{\"\\/geo\\/similar_places\":{\"limit\":15,\"remaining\":13,\"reset\":1478382701},\"\\/geo\\/id\\/:place_id\":{\"limit\":75,\"remaining\":73,\"reset\":1478382701},\"\\/geo\\/reverse_geocode\":{\"limit\":15,\"remaining\":13,\"reset\":1478382702},\"\\/geo\\/search\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136}},\"users\":{\"\\/users\\/report_spam\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/users\\/show\\/:id\":{\"limit\":900,\"remaining\":892,\"reset\":1478382702},\"\\/users\\/search\":{\"limit\":900,\"remaining\":899,\"reset\":1478382708},\"\\/users\\/suggestions\\/:slug\":{\"limit\":15,\"remaining\":14,\"reset\":1478382711},\"\\/users\\/derived_info\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/users\\/profile_banner\":{\"limit\":180,\"remaining\":180,\"reset\":1478383136},\"\\/users\\/suggestions\\/:slug\\/members\":{\"limit\":15,\"remaining\":14,\"reset\":1478382711},\"\\/users\\/lookup\":{\"limit\":900,\"remaining\":896,\"reset\":1478382705},\"\\/users\\/suggestions\":{\"limit\":15,\"remaining\":12,\"reset\":1478382710}},\"followers\":{\"\\/followers\\/ids\":{\"limit\":15,\"remaining\":10,\"reset\":1478382638},\"\\/followers\\/list\":{\"limit\":15,\"remaining\":12,\"reset\":1478382637}},\"collections\":{\"\\/collections\\/list\":{\"limit\":1000,\"remaining\":1000,\"reset\":1478383136},\"\\/collections\\/entries\":{\"limit\":1000,\"remaining\":1000,\"reset\":1478383136},\"\\/collections\\/show\":{\"limit\":1000,\"remaining\":1000,\"reset\":1478383136}},\"statuses\":{\"\\/statuses\\/retweeters\\/ids\":{\"limit\":75,\"remaining\":74,\"reset\":1478382706},\"\\/statuses\\/retweets_of_me\":{\"limit\":75,\"remaining\":74,\"reset\":1478382707},\"\\/statuses\\/home_timeline\":{\"limit\":15,\"remaining\":10,\"reset\":1478382635},\"\\/statuses\\/show\\/:id\":{\"limit\":900,\"remaining\":898,\"reset\":1478382702},\"\\/statuses\\/user_timeline\":{\"limit\":900,\"remaining\":890,\"reset\":1478382733},\"\\/statuses\\/friends\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/statuses\\/retweets\\/:id\":{\"limit\":75,\"remaining\":74,\"reset\":1478382707},\"\\/statuses\\/mentions_timeline\":{\"limit\":75,\"remaining\":73,\"reset\":1478382706},\"\\/statuses\\/oembed\":{\"limit\":180,\"remaining\":178,\"reset\":1478382702},\"\\/statuses\\/lookup\":{\"limit\":900,\"remaining\":900,\"reset\":1478383136}},\"contacts\":{\"\\/contacts\\/uploaded_by\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136},\"\\/contacts\\/users\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136},\"\\/contacts\\/addressbook\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136},\"\\/contacts\\/users_and_uploaded_by\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136},\"\\/contacts\\/delete\\/status\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136}},\"tweet_prompts\":{\"\\/tweet_prompts\\/report_interaction\":{\"limit\":180,\"remaining\":180,\"reset\":1478383136},\"\\/tweet_prompts\\/show\":{\"limit\":180,\"remaining\":180,\"reset\":1478383136}},\"moments\":{\"\\/moments\\/permissions\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136}},\"help\":{\"\\/help\\/tos\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/help\\/configuration\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/help\\/privacy\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/help\\/settings\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/help\\/languages\":{\"limit\":15,\"remaining\":14,\"reset\":1478382712}},\"feedback\":{\"\\/feedback\\/show\\/:id\":{\"limit\":180,\"remaining\":180,\"reset\":1478383136},\"\\/feedback\\/events\":{\"limit\":1000,\"remaining\":1000,\"reset\":1478383136}},\"business_experience\":{\"\\/business_experience\\/dashboard_settings\\/destroy\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/business_experience\\/dashboard_features\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/business_experience\\/keywords\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/business_experience\\/dashboard_settings\\/update\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/business_experience\\/dashboard_settings\\/show\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136}},\"friends\":{\"\\/friends\\/following\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friends\\/following\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/friends\\/list\":{\"limit\":15,\"remaining\":12,\"reset\":1478382638},\"\\/friends\\/ids\":{\"limit\":15,\"remaining\":11,\"reset\":1478382701}},\"drafts\":{\"\\/drafts\\/statuses\\/update\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/drafts\\/statuses\\/destroy\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/drafts\\/statuses\\/ids\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/drafts\\/statuses\\/list\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/drafts\\/statuses\\/show\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136},\"\\/drafts\\/statuses\\/create\":{\"limit\":450,\"remaining\":450,\"reset\":1478383136}},\"direct_messages\":{\"\\/direct_messages\\/sent\":{\"limit\":300,\"remaining\":299,\"reset\":1478382709},\"\\/direct_messages\":{\"limit\":300,\"remaining\":297,\"reset\":1478382637},\"\\/direct_messages\\/sent_and_received\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136},\"\\/direct_messages\\/show\":{\"limit\":300,\"remaining\":300,\"reset\":1478383136}},\"media\":{\"\\/media\\/upload\":{\"limit\":500,\"remaining\":500,\"reset\":1478383136}},\"account\":{\"\\/account\\/login_verification_enrollment\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/account\\/update_profile\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/account\\/verify_credentials\":{\"limit\":75,\"remaining\":68,\"reset\":1478382705},\"\\/account\\/settings\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136}},\"favorites\":{\"\\/favorites\\/list\":{\"limit\":75,\"remaining\":72,\"reset\":1478382637}},\"device\":{\"\\/device\\/token\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136}},\"saved_searches\":{\"\\/saved_searches\\/destroy\\/:id\":{\"limit\":15,\"remaining\":15,\"reset\":1478383136},\"\\/saved_searches\\/show\\/:id\":{\"limit\":15,\"remaining\":14,\"reset\":1478382708},\"\\/saved_searches\\/list\":{\"limit\":15,\"remaining\":14,\"reset\":1478382707}},\"search\":{\"\\/search\\/tweets\":{\"limit\":180,\"remaining\":179,\"reset\":1478382708}},\"trends\":{\"\\/trends\\/closest\":{\"limit\":75,\"remaining\":75,\"reset\":1478383136},\"\\/trends\\/available\":{\"limit\":75,\"remaining\":75,\"reset\":1478383136},\"\\/trends\\/place\":{\"limit\":75,\"remaining\":75,\"reset\":1478383136}},\"live_pipeline\":{\"\\/live_pipeline\\/events\":{\"limit\":180,\"remaining\":180,\"reset\":1478383136}}}}"
-                },
-                "headers": {
-                    "content-length": [
-                        "7865"
-                    ],
-                    "x-transaction": [
-                        "00256caa00c3c7f3"
-                    ],
-                    "last-modified": [
-                        "Sat, 05 Nov 2016 21:43:56 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382706"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "178"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:43:56 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
-                    ],
-                    "x-rate-limit-limit": [
-                        "180"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838223631082011; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:43:56 UTC"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-response-time": [
-                        "39"
-                    ],
-                    "x-connection-hash": [
-                        "0664e0ecc91a47e9e43fe147443dbe9e"
-                    ]
-                }
-            },
             "request": {
                 "method": "GET",
                 "uri": "https://api.twitter.com/1.1/application/rate_limit_status.json",
@@ -91,6 +10,88 @@
                     "Host": [
                         "api.twitter.com"
                     ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-xss-protection": [
+                        "0"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "last-modified": [
+                        "Sat, 13 Jul 2019 02:27:48 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-connection-hash": [
+                        "a40a4cb30b0ebd9310893b89dd1cdcb0"
+                    ],
+                    "x-rate-limit-limit": [
+                        "180"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "175"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:48 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_xpYtOeC8qlWYv3k3o6O/WA==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:48 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298486829677915; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:48 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-transaction": [
+                        "0005a1190097e42f"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "13185"
+                    ],
+                    "x-response-time": [
+                        "21"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984896"
+                    ]
+                },
+                "body": {
+                    "string": "{\"rate_limit_context\":{\"access_token\":\"1072250532645998596-GLDgUASI6CnhZeLx75GGpUtbVe2eQ0\"},\"resources\":{\"lists\":{\"\\/lists\\/list\":{\"limit\":15,\"remaining\":10,\"reset\":1562984892},\"\\/lists\\/memberships\":{\"limit\":75,\"remaining\":70,\"reset\":1562984893},\"\\/lists\\/subscribers\\/show\":{\"limit\":15,\"remaining\":9,\"reset\":1562984901},\"\\/lists\\/members\":{\"limit\":900,\"remaining\":893,\"reset\":1562984892},\"\\/lists\\/subscriptions\":{\"limit\":15,\"remaining\":10,\"reset\":1562984893},\"\\/lists\\/show\":{\"limit\":75,\"remaining\":68,\"reset\":1562984890},\"\\/lists\\/ownerships\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/lists\\/subscribers\":{\"limit\":180,\"remaining\":173,\"reset\":1562984893},\"\\/lists\\/members\\/show\":{\"limit\":15,\"remaining\":7,\"reset\":1562984900},\"\\/lists\\/statuses\":{\"limit\":900,\"remaining\":893,\"reset\":1562984894}},\"application\":{\"\\/application\\/rate_limit_status\":{\"limit\":180,\"remaining\":175,\"reset\":1562984896}},\"mutes\":{\"\\/mutes\\/users\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/mutes\\/users\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"live_video_stream\":{\"\\/live_video_stream\\/status\\/:id\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768}},\"friendships\":{\"\\/friendships\\/outgoing\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friendships\\/list\":{\"limit\":200,\"remaining\":200,\"reset\":1562985768},\"\\/friendships\\/no_retweets\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friendships\\/lookup\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friendships\\/incoming\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friendships\\/show\":{\"limit\":180,\"remaining\":176,\"reset\":1562984900}},\"guide\":{\"\\/guide\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768}},\"auth\":{\"\\/auth\\/csrf_token\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"blocks\":{\"\\/blocks\\/list\":{\"limit\":15,\"remaining\":10,\"reset\":1562984883},\"\\/blocks\\/ids\":{\"limit\":15,\"remaining\":10,\"reset\":1562984884}},\"geo\":{\"\\/geo\\/similar_places\":{\"limit\":15,\"remaining\":10,\"reset\":1562984889},\"\\/geo\\/id\\/:place_id\":{\"limit\":75,\"remaining\":70,\"reset\":1562984889},\"\\/geo\\/reverse_geocode\":{\"limit\":15,\"remaining\":10,\"reset\":1562984890},\"\\/geo\\/search\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"users\":{\"\\/users\\/report_spam\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/users\\/contributors\\/pending\":{\"limit\":2000,\"remaining\":2000,\"reset\":1562985768},\"\\/users\\/show\\/:id\":{\"limit\":900,\"remaining\":867,\"reset\":1562984884},\"\\/users\\/search\":{\"limit\":900,\"remaining\":896,\"reset\":1562984899},\"\\/users\\/suggestions\\/:slug\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/users\\/contributees\\/pending\":{\"limit\":200,\"remaining\":200,\"reset\":1562985768},\"\\/users\\/derived_info\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/users\\/profile_banner\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/users\\/suggestions\\/:slug\\/members\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/users\\/lookup\":{\"limit\":900,\"remaining\":890,\"reset\":1562984894},\"\\/users\\/suggestions\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"followers\":{\"\\/followers\\/ids\":{\"limit\":15,\"remaining\":2,\"reset\":1562984888},\"\\/followers\\/list\":{\"limit\":15,\"remaining\":10,\"reset\":1562984888}},\"collections\":{\"\\/collections\\/list\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768},\"\\/collections\\/entries\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768},\"\\/collections\\/show\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768}},\"statuses\":{\"\\/statuses\\/retweeters\\/ids\":{\"limit\":75,\"remaining\":71,\"reset\":1562984896},\"\\/statuses\\/retweets_of_me\":{\"limit\":75,\"remaining\":71,\"reset\":1562984897},\"\\/statuses\\/home_timeline\":{\"limit\":15,\"remaining\":5,\"reset\":1562984885},\"\\/statuses\\/show\\/:id\":{\"limit\":900,\"remaining\":895,\"reset\":1562984891},\"\\/statuses\\/user_timeline\":{\"limit\":900,\"remaining\":876,\"reset\":1562984923},\"\\/statuses\\/friends\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/statuses\\/retweets\\/:id\":{\"limit\":75,\"remaining\":71,\"reset\":1562984897},\"\\/statuses\\/mentions_timeline\":{\"limit\":75,\"remaining\":70,\"reset\":1562984896},\"\\/statuses\\/oembed\":{\"limit\":180,\"remaining\":175,\"reset\":1562984890},\"\\/statuses\\/lookup\":{\"limit\":900,\"remaining\":900,\"reset\":1562985768}},\"custom_profiles\":{\"\\/custom_profiles\\/list\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/custom_profiles\\/show\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768}},\"webhooks\":{\"\\/webhooks\\/subscriptions\\/direct_messages\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"contacts\":{\"\\/contacts\\/uploaded_by\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/contacts\\/users\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/contacts\\/addressbook\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/contacts\\/users_and_uploaded_by\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/contacts\\/delete\\/status\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768}},\"labs\":{\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/\":{\"limit\":50,\"remaining\":50,\"reset\":1562985768},\"\\/labs\\/:version\\/users\":{\"limit\":900,\"remaining\":900,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/rules\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/:rule_id\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/rules&POST\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/rules&DELETE\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\":{\"limit\":900,\"remaining\":900,\"reset\":1562985768},\"\\/labs\\/:version\\/tweets\\/stream\\/filter\\/rules\\/validation&POST\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768}},\"i\":{\"\\/i\\/config\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"tweet_prompts\":{\"\\/tweet_prompts\\/report_interaction\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/tweet_prompts\\/show\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768}},\"moments\":{\"\\/moments\\/statuses\\/update\":{\"limit\":5,\"remaining\":5,\"reset\":1562985768},\"\\/moments\\/permissions\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768}},\"limiter_scalding_report_creation\":{\"\\/limiter_scalding_report_creation\":{\"limit\":4500,\"remaining\":4500,\"reset\":1562985768}},\"help\":{\"\\/help\\/tos\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/help\\/configuration\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/help\\/privacy\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/help\\/settings\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/help\\/languages\":{\"limit\":15,\"remaining\":11,\"reset\":1562984902}},\"feedback\":{\"\\/feedback\\/show\\/:id\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/feedback\\/events\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768}},\"business_experience\":{\"\\/business_experience\\/dashboard_settings\\/destroy\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/business_experience\\/dashboard_features\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/business_experience\\/keywords\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/business_experience\\/dashboard_settings\\/update\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/business_experience\\/dashboard_settings\\/show\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768}},\"graphql&POST\":{\"\\/graphql&POST\":{\"limit\":2500,\"remaining\":2500,\"reset\":1562985768}},\"friends\":{\"\\/friends\\/following\\/ids\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friends\\/following\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/friends\\/list\":{\"limit\":15,\"remaining\":10,\"reset\":1562984889},\"\\/friends\\/ids\":{\"limit\":15,\"remaining\":2,\"reset\":1562984889}},\"sandbox\":{\"\\/sandbox\\/account_activity\\/webhooks\\/:id\\/subscriptions\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768}},\"drafts\":{\"\\/drafts\\/statuses\\/update\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/drafts\\/statuses\\/destroy\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/drafts\\/statuses\\/ids\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/drafts\\/statuses\\/list\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/drafts\\/statuses\\/show\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/drafts\\/statuses\\/create\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768}},\"direct_messages\":{\"\\/direct_messages\\/sent\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/direct_messages\\/broadcasts\\/list\":{\"limit\":60,\"remaining\":60,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/lists\\/members\\/show\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768},\"\\/direct_messages\\/mark_read\":{\"limit\":1000,\"remaining\":1000,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/ids\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/direct_messages\\/sent_and_received\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/direct_messages\\/broadcasts\\/statuses\\/list\":{\"limit\":60,\"remaining\":60,\"reset\":1562985768},\"\\/direct_messages\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/lists\\/members\\/ids\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/show\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/direct_messages\\/broadcasts\\/show\":{\"limit\":60,\"remaining\":60,\"reset\":1562985768},\"\\/direct_messages\\/broadcasts\\/statuses\\/show\":{\"limit\":60,\"remaining\":60,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/lists\\/list\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/direct_messages\\/show\":{\"limit\":300,\"remaining\":300,\"reset\":1562985768},\"\\/direct_messages\\/events\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/direct_messages\\/subscribers\\/lists\\/show\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768},\"\\/direct_messages\\/events\\/show\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"media\":{\"\\/media\\/upload\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768}},\"traffic\":{\"\\/traffic\\/map\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"account_activity\":{\"\\/account_activity\\/all\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/all\\/:instance_name\\/subscriptions\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768},\"\\/account_activity\\/direct_messages\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/webhooks\\/:id\\/subscriptions\\/direct_messages\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/webhooks\\/:id\\/subscriptions\\/all\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768},\"\\/account_activity\\/direct_messages\\/:instance_name\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/webhooks\\/:id\\/subscriptions\\/all\\/list\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/webhooks\\/:id\\/subscriptions\\/direct_messages\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768},\"\\/account_activity\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/direct_messages\\/:instance_name\\/subscriptions\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account_activity\\/webhooks\\/:id\\/subscriptions\":{\"limit\":500,\"remaining\":500,\"reset\":1562985768},\"\\/account_activity\\/all\\/:instance_name\\/webhooks\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"account\":{\"\\/account\\/login_verification_enrollment\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account\\/update_profile\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/account\\/verify_credentials\":{\"limit\":75,\"remaining\":50,\"reset\":1562984895},\"\\/account\\/settings\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"safety\":{\"\\/safety\\/detection_feedback\":{\"limit\":450000,\"remaining\":450000,\"reset\":1562985768}},\"favorites\":{\"\\/favorites\\/list\":{\"limit\":75,\"remaining\":72,\"reset\":1562985491}},\"device\":{\"\\/device\\/token\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768}},\"tweets\":{\"\\/tweets\\/stream\\/filter\\/rules\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/tweets\\/stream\\/filter\\/:instance_name\":{\"limit\":50,\"remaining\":50,\"reset\":1562985768},\"\\/tweets\\/search\\/:product\\/:label\":{\"limit\":1800,\"remaining\":1800,\"reset\":1562985768},\"\\/tweets\\/search\\/:product\\/:instance\\/counts\":{\"limit\":900,\"remaining\":900,\"reset\":1562985768},\"\\/tweets\\/stream\\/filter\\/rules\\/:instance_name\\/validation&POST\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/tweets\\/stream\\/filter\\/rules\\/:instance_name&POST\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/tweets\\/stream\\/filter\\/rules\\/:instance_name&DELETE\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768},\"\\/tweets\\/stream\\/filter\\/rules\\/:instance_name\\/:rule_id\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768}},\"saved_searches\":{\"\\/saved_searches\\/destroy\\/:id\":{\"limit\":15,\"remaining\":15,\"reset\":1562985768},\"\\/saved_searches\\/show\\/:id\":{\"limit\":15,\"remaining\":11,\"reset\":1562984898},\"\\/saved_searches\\/list\":{\"limit\":15,\"remaining\":11,\"reset\":1562984898}},\"oauth\":{\"\\/oauth\\/invalidate_token\":{\"limit\":450,\"remaining\":450,\"reset\":1562985768}},\"search\":{\"\\/search\\/tweets\":{\"limit\":180,\"remaining\":176,\"reset\":1562984899}},\"trends\":{\"\\/trends\\/closest\":{\"limit\":75,\"remaining\":75,\"reset\":1562985768},\"\\/trends\\/available\":{\"limit\":75,\"remaining\":75,\"reset\":1562985768},\"\\/trends\\/place\":{\"limit\":75,\"remaining\":75,\"reset\":1562985768}},\"live_pipeline\":{\"\\/live_pipeline\\/events\":{\"limit\":180,\"remaining\":180,\"reset\":1562985768}}}}"
                 }
             }
         }

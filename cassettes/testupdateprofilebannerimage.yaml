@@ -72,47 +72,80 @@ interactions:
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAD4f+9/AVKOStPdjXi8AAAAAElFTkSuQmCCDQotLVR3M2VQeS0tDQo=
     headers:
-      Content-Length: ['3977']
-      Content-Type: [multipart/form-data; boundary=Tw3ePy]
-      Host: [api.twitter.com]
+      Content-Length:
+      - '3977'
+      Content-Type:
+      - multipart/form-data; boundary=Tw3ePy
+      Host:
+      - api.twitter.com
     method: POST
     uri: https://api.twitter.com/1.1/account/update_profile_banner.json
   response:
-    body: {string: ''}
+    body:
+      string: ''
     headers:
-      cache-control: ['no-cache, no-store, must-revalidate, pre-check=0, post-check=0']
-      content-length: ['0']
-      content-security-policy: ['default-src ''self''; connect-src ''self''; font-src
-          ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; frame-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          img-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; media-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          object-src ''none''; script-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; style-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; report-uri https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;']
-      content-type: [text/html;charset=utf-8]
-      date: ['Sat, 05 Nov 2016 21:44:05 GMT']
-      expires: ['Tue, 31 Mar 1981 05:00:00 GMT']
-      last-modified: ['Sat, 05 Nov 2016 21:44:05 GMT']
-      pragma: [no-cache]
-      server: [tsa_b]
-      set-cookie: [lang=en; Path=/, 'guest_id=v1%3A147838224433394832; Domain=.twitter.com;
-          Path=/; Expires=Mon, 05-Nov-2018 21:44:05 UTC']
-      status: [201 Created]
-      strict-transport-security: [max-age=631138519]
-      vary: [Origin]
-      x-access-level: [read-write-directmessages]
-      x-connection-hash: [e925010f58ac5fc07aadb87eff14a862]
-      x-frame-options: [SAMEORIGIN]
-      x-rate-limit-limit: ['30']
-      x-rate-limit-remaining: ['26']
-      x-rate-limit-reset: ['1478382714']
-      x-response-time: ['1245']
-      x-transaction: [0007dadd0041b91c]
-      x-tsa-request-body-time: ['2']
-      x-twitter-response-tags: [BouncerCompliant]
-      x-xss-protection: [1; mode=block]
-    status: {code: 201, message: Created}
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-length:
+      - '0'
+      content-security-policy:
+      - default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; object-src 'none'; script-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri
+        https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;
+      content-type:
+      - text/html;charset=utf-8
+      date:
+      - Sat, 13 Jul 2019 02:27:57 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sat, 13 Jul 2019 02:27:57 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_h6IUKN5HxCyZCx5Atd8aCQ=="; Max-Age=63072000; Expires=Mon,
+        12 Jul 2021 02:27:57 GMT; Path=/; Domain=.twitter.com
+      - lang=en; Path=/
+      - guest_id=v1%3A156298487735465902; Max-Age=63072000; Expires=Mon, 12 Jul 2021
+        02:27:57 GMT; Path=/; Domain=.twitter.com
+      status:
+      - 201 Created
+      strict-transport-security:
+      - max-age=631138519
+      vary:
+      - Origin
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - ae7a04b60a8f6991c0fbef1b1e16d85b
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '30'
+      x-rate-limit-remaining:
+      - '17'
+      x-rate-limit-reset:
+      - '1562984905'
+      x-response-time:
+      - '440'
+      x-transaction:
+      - 001c20cf000b97cd
+      x-tsa-request-body-time:
+      - '60'
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 201
+      message: Created
 - request:
     body: !!binary |
       LS1UdzNlUHkNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iYmFubmVyIjsg
@@ -186,46 +219,77 @@ interactions:
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAD4f+9/AVKOStPdjXi8AAAAAElFTkSuQmCCDQotLVR3M2VQeS0tDQo=
     headers:
-      Content-Length: ['3977']
-      Content-Type: [multipart/form-data; boundary=Tw3ePy]
-      Cookie: [lang=en; guest_id=v1%3A147838224433394832]
-      Host: [api.twitter.com]
+      Content-Length:
+      - '3977'
+      Content-Type:
+      - multipart/form-data; boundary=Tw3ePy
+      Cookie:
+      - guest_id=v1%3A156298487735465902; personalization_id="v1_h6IUKN5HxCyZCx5Atd8aCQ==";
+        lang=en
+      Host:
+      - api.twitter.com
     method: POST
     uri: https://api.twitter.com/1.1/account/update_profile_banner.json
   response:
-    body: {string: ''}
+    body:
+      string: ''
     headers:
-      cache-control: ['no-cache, no-store, must-revalidate, pre-check=0, post-check=0']
-      content-length: ['0']
-      content-security-policy: ['default-src ''self''; connect-src ''self''; font-src
-          ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; frame-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          img-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; media-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          object-src ''none''; script-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; style-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; report-uri https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;']
-      content-type: [text/html;charset=utf-8]
-      date: ['Sat, 05 Nov 2016 21:44:11 GMT']
-      expires: ['Tue, 31 Mar 1981 05:00:00 GMT']
-      last-modified: ['Sat, 05 Nov 2016 21:44:11 GMT']
-      pragma: [no-cache]
-      server: [tsa_b]
-      status: [201 Created]
-      strict-transport-security: [max-age=631138519]
-      vary: [Origin]
-      x-access-level: [read-write-directmessages]
-      x-connection-hash: [e925010f58ac5fc07aadb87eff14a862]
-      x-frame-options: [SAMEORIGIN]
-      x-rate-limit-limit: ['30']
-      x-rate-limit-remaining: ['25']
-      x-rate-limit-reset: ['1478382714']
-      x-response-time: ['990']
-      x-transaction: [0007b15600b7a3e3]
-      x-tsa-request-body-time: ['8']
-      x-twitter-response-tags: [BouncerCompliant]
-      x-xss-protection: [1; mode=block]
-    status: {code: 201, message: Created}
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-length:
+      - '0'
+      content-security-policy:
+      - default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; object-src 'none'; script-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri
+        https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;
+      content-type:
+      - text/html;charset=utf-8
+      date:
+      - Sat, 13 Jul 2019 02:28:03 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sat, 13 Jul 2019 02:28:03 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 201 Created
+      strict-transport-security:
+      - max-age=631138519
+      vary:
+      - Origin
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - ae7a04b60a8f6991c0fbef1b1e16d85b
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '30'
+      x-rate-limit-remaining:
+      - '16'
+      x-rate-limit-reset:
+      - '1562984905'
+      x-response-time:
+      - '569'
+      x-transaction:
+      - 00ae56a600415b1d
+      x-tsa-request-body-time:
+      - '17'
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 201
+      message: Created
 - request:
     body: !!binary |
       LS1UdzNlUHkNCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iYmFubmVyIjsg
@@ -299,44 +363,75 @@ interactions:
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAD4f+9/AVKOStPdjXi8AAAAAElFTkSuQmCCDQotLVR3M2VQeS0tDQo=
     headers:
-      Content-Length: ['3977']
-      Content-Type: [multipart/form-data; boundary=Tw3ePy]
-      Cookie: [lang=en; guest_id=v1%3A147838224433394832]
-      Host: [api.twitter.com]
+      Content-Length:
+      - '3977'
+      Content-Type:
+      - multipart/form-data; boundary=Tw3ePy
+      Cookie:
+      - guest_id=v1%3A156298487735465902; personalization_id="v1_h6IUKN5HxCyZCx5Atd8aCQ==";
+        lang=en
+      Host:
+      - api.twitter.com
     method: POST
     uri: https://api.twitter.com/1.1/account/update_profile_banner.json
   response:
-    body: {string: ''}
+    body:
+      string: ''
     headers:
-      cache-control: ['no-cache, no-store, must-revalidate, pre-check=0, post-check=0']
-      content-length: ['0']
-      content-security-policy: ['default-src ''self''; connect-src ''self''; font-src
-          ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; frame-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          img-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com
-          data:; media-src ''self'' https://*.twimg.com https://twitter.com https://ton.twitter.com;
-          object-src ''none''; script-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; style-src ''self'' https://*.twimg.com https://twitter.com
-          https://ton.twitter.com; report-uri https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;']
-      content-type: [text/html;charset=utf-8]
-      date: ['Sat, 05 Nov 2016 21:44:17 GMT']
-      expires: ['Tue, 31 Mar 1981 05:00:00 GMT']
-      last-modified: ['Sat, 05 Nov 2016 21:44:17 GMT']
-      pragma: [no-cache]
-      server: [tsa_b]
-      status: [201 Created]
-      strict-transport-security: [max-age=631138519]
-      vary: [Origin]
-      x-access-level: [read-write-directmessages]
-      x-connection-hash: [e925010f58ac5fc07aadb87eff14a862]
-      x-frame-options: [SAMEORIGIN]
-      x-rate-limit-limit: ['30']
-      x-rate-limit-remaining: ['24']
-      x-rate-limit-reset: ['1478382714']
-      x-response-time: ['949']
-      x-transaction: [0080adeb005b3016]
-      x-tsa-request-body-time: ['0']
-      x-twitter-response-tags: [BouncerCompliant]
-      x-xss-protection: [1; mode=block]
-    status: {code: 201, message: Created}
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-length:
+      - '0'
+      content-security-policy:
+      - default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; object-src 'none'; script-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri
+        https://twitter.com/i/csp_report?a=OBZG6ZTJNRSWE2LSMQ%3D%3D%3D%3D%3D%3D&ro=false;
+      content-type:
+      - text/html;charset=utf-8
+      date:
+      - Sat, 13 Jul 2019 02:28:08 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sat, 13 Jul 2019 02:28:08 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 201 Created
+      strict-transport-security:
+      - max-age=631138519
+      vary:
+      - Origin
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - ae7a04b60a8f6991c0fbef1b1e16d85b
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '30'
+      x-rate-limit-remaining:
+      - '15'
+      x-rate-limit-reset:
+      - '1562984905'
+      x-response-time:
+      - '421'
+      x-transaction:
+      - 00a4358600567500
+      x-tsa-request-body-time:
+      - '17'
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 201
+      message: Created
 version: 1
