@@ -263,8 +263,8 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreatedestroyfavorite.json')
     def testcreatedestroyfavorite(self):
-        self.api.create_favorite(4901062372)
-        self.api.destroy_favorite(4901062372)
+        self.api.create_favorite(145344012)
+        self.api.destroy_favorite(145344012)
 
     @tape.use_cassette('testcreatedestroyblock.json')
     def testcreatedestroyblock(self):
@@ -305,11 +305,11 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlisttimeline.json')
     def testlisttimeline(self):
-        self.api.list_timeline('applepie', 'stars')
+        self.api.list_timeline('Twitter', 'Official-Twitter-Accounts')
 
     @tape.use_cassette('testgetlist.json')
     def testgetlist(self):
-        self.api.get_list(owner_screen_name='applepie', slug='stars')
+        self.api.get_list(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testaddremovelistmember.json')
     def testaddremovelistmember(self):
@@ -330,7 +330,7 @@ class TweepyAPITests(TweepyTestCase):
         params = {
             'slug': 'test',
             'owner_screen_name': username,
-            'screen_name': ['twitterapi', 'twittermobile']
+            'screen_name': ['Twitter', 'TwitterAPI']
         }
 
         def assert_list(l):
@@ -341,28 +341,28 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlistmembers.json')
     def testlistmembers(self):
-        self.api.list_members('applepie', 'stars')
+        self.api.list_members('Twitter', 'Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistmember.json')
     def testshowlistmember(self):
-        self.assertTrue(self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
+        self.assertTrue(self.api.show_list_member(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterAPI'))
 
     @tape.use_cassette('testsubscribeunsubscribelist.json')
     def testsubscribeunsubscribelist(self):
         params = {
-            'owner_screen_name': 'applepie',
-            'slug': 'stars'
+            'owner_screen_name': 'Twitter',
+            'slug': 'Official-Twitter-Accounts'
         }
         self.api.subscribe_list(**params)
         self.api.unsubscribe_list(**params)
 
     @tape.use_cassette('testlistsubscribers.json')
     def testlistsubscribers(self):
-        self.api.list_subscribers('applepie', 'stars')
+        self.api.list_subscribers('Twitter', 'Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistsubscriber.json')
     def testshowlistsubscriber(self):
-        self.assertTrue(self.api.show_list_subscriber('tweepytest', 'test', 'applepie'))
+        self.assertTrue(self.api.show_list_subscriber('Twitter', 'Official-Twitter-Accounts', 'TwitterMktg'))
 
     @tape.use_cassette('testsavedsearches.json')
     def testsavedsearches(self):
@@ -419,8 +419,8 @@ class TweepyAPITests(TweepyTestCase):
         self.assertFalse(self.api.cached_result)
         self.assertEqual('TheTweepyTester', user1.screen_name)
 
-        user2 = self.api.get_user('tweepytest')
-        self.assertEqual('tweepytest', user2.screen_name)
+        user2 = self.api.get_user('Twitter')
+        self.assertEqual('Twitter', user2.screen_name)
         self.assertFalse(self.api.cached_result)
 
 
