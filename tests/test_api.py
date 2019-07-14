@@ -138,32 +138,22 @@ class TweepyAPITests(TweepyTestCase):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)
 
-    @tape.use_cassette('testdirectmessages.json')
-    def testdirectmessages(self):
-        raise SkipTest()
-        self.api.direct_messages()
-
-    @tape.use_cassette('testsentdirectmessages.json')
-    def testsentdirectmessages(self):
-        raise SkipTest()
-        self.api.sent_direct_messages()
+    @tape.use_cassette('testlistdirectmessages.json')
+    def testlistdirectmessages(self):
+        self.api.list_direct_messages()
 
     @tape.use_cassette('testsendanddestroydirectmessage.json')
     def testsendanddestroydirectmessage(self):
-        raise SkipTest()
+        me = self.api.me()
 
         # send
-        sent_dm = self.api.send_direct_message(username, text='test message')
-        self.assertEqual(sent_dm.text, 'test message')
-        self.assertEqual(sent_dm.sender.screen_name, username)
-        self.assertEqual(sent_dm.recipient.screen_name, username)
+        sent_dm = self.api.send_direct_message(me.id, text='test message')
+        self.assertEqual(sent_dm.message_create['message_data']['text'], 'test message')
+        self.assertEqual(int(sent_dm.message_create['sender_id']), me.id)
+        self.assertEqual(int(sent_dm.message_create['target']['recipient_id']), me.id)
 
         # destroy
-        destroyed_dm = self.api.destroy_direct_message(sent_dm.id)
-        self.assertEqual(destroyed_dm.text, sent_dm.text)
-        self.assertEqual(destroyed_dm.id, sent_dm.id)
-        self.assertEqual(destroyed_dm.sender.screen_name, username)
-        self.assertEqual(destroyed_dm.recipient.screen_name, username)
+        self.api.destroy_direct_message(sent_dm.id)
 
     @tape.use_cassette('testcreatedestroyfriendship.json')
     def testcreatedestroyfriendship(self):

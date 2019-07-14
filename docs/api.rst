@@ -249,18 +249,6 @@ User methods
 Direct Message Methods
 ----------------------
 
-.. method:: API.direct_messages([since_id], [max_id], [count], [page], [full_text])
-
-   Returns direct messages sent to the authenticating user.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
-   :rtype: list of :class:`DirectMessage` objects
-
-
 .. method:: API.get_direct_message([id], [full_text])
 
    Returns a specific direct message.
@@ -270,36 +258,42 @@ Direct Message Methods
    :rtype: :class:`DirectMessage` object
 
 
-.. method:: API.sent_direct_messages([since_id], [max_id], [count], [page], [full_text])
+.. method:: API.list_direct_messages([count], [cursor])
 
-   Returns direct messages sent by the authenticating user.
+   Returns all Direct Message events (both sent and received)
+   within the last 30 days. Sorted in reverse-chronological order.
 
-   :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
+   :param cursor: |cursor|
    :rtype: list of :class:`DirectMessage` objects
 
 
-.. method:: API.send_direct_message(user/screen_name/user_id, text)
+.. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], [attachment_type], [attachment_media_id])
 
    Sends a new direct message to the specified user from the
    authenticating user.
 
-   :param user: The ID or screen name of the recipient user.
-   :param screen_name: screen name of the recipient user
-   :param user_id: user id of the recipient user
+   :param recipient_id: The ID of the user who should receive the direct message.
+   :param text: The text of your Direct Message. Max length of 10,000 characters.
+   :param quick_reply_type: The Quick Reply type to present to the user:
+
+                       * options - Array of Options objects (20 max).
+                       * text_input - Text Input object.
+                       * location - Location object.
+   :param attachment_type: The attachment type. Can be media or location.
+   :param attachment_media_id: A media id to associate with the message. A Direct Message may only reference a single media_id.
    :rtype: :class:`DirectMessage` object
 
 
 .. method:: API.destroy_direct_message(id)
 
-   Destroy a direct message. Authenticating user must be the recipient of
-   the direct message.
+   Deletes the direct message specified in the required ID parameter.
+   The authenticating user must be the recipient of the specified direct message.
+   Direct Messages are only removed from the interface of the user context provided.
+   Other members of the conversation can still access the Direct Messages.
 
-   :param id: The ID of the direct message to destroy.
-   :rtype: :class:`DirectMessage` object
+   :param id: The id of the Direct Message that should be deleted.
+   :rtype: None
 
 
 Friendship Methods
