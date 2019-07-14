@@ -2,87 +2,6 @@
     "version": 1,
     "interactions": [
         {
-            "response": {
-                "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "[{\"code\":\"fr\",\"name\":\"French\",\"status\":\"production\"},{\"code\":\"en\",\"name\":\"English\",\"status\":\"production\"},{\"code\":\"ar\",\"name\":\"Arabic\",\"status\":\"production\"},{\"code\":\"ja\",\"name\":\"Japanese\",\"status\":\"production\"},{\"code\":\"es\",\"name\":\"Spanish\",\"status\":\"production\"},{\"code\":\"de\",\"name\":\"German\",\"status\":\"production\"},{\"code\":\"it\",\"name\":\"Italian\",\"status\":\"production\"},{\"code\":\"id\",\"name\":\"Indonesian\",\"status\":\"production\"},{\"code\":\"pt\",\"name\":\"Portuguese\",\"status\":\"production\"},{\"code\":\"ko\",\"name\":\"Korean\",\"status\":\"production\"},{\"code\":\"tr\",\"name\":\"Turkish\",\"status\":\"production\"},{\"code\":\"ru\",\"name\":\"Russian\",\"status\":\"production\"},{\"code\":\"nl\",\"name\":\"Dutch\",\"status\":\"production\"},{\"code\":\"fil\",\"name\":\"Filipino\",\"status\":\"production\"},{\"code\":\"msa\",\"name\":\"Malay\",\"status\":\"production\"},{\"code\":\"zh-tw\",\"name\":\"Traditional Chinese\",\"status\":\"production\"},{\"code\":\"zh-cn\",\"name\":\"Simplified Chinese\",\"status\":\"production\"},{\"code\":\"hi\",\"name\":\"Hindi\",\"status\":\"production\"},{\"code\":\"no\",\"name\":\"Norwegian\",\"status\":\"production\"},{\"code\":\"sv\",\"name\":\"Swedish\",\"status\":\"production\"},{\"code\":\"fi\",\"name\":\"Finnish\",\"status\":\"production\"},{\"code\":\"da\",\"name\":\"Danish\",\"status\":\"production\"},{\"code\":\"pl\",\"name\":\"Polish\",\"status\":\"production\"},{\"code\":\"hu\",\"name\":\"Hungarian\",\"status\":\"production\"},{\"code\":\"fa\",\"name\":\"Persian\",\"status\":\"production\"},{\"code\":\"he\",\"name\":\"Hebrew\",\"status\":\"production\"},{\"code\":\"th\",\"name\":\"Thai\",\"status\":\"production\"},{\"code\":\"uk\",\"name\":\"Ukrainian\",\"status\":\"production\"},{\"code\":\"cs\",\"name\":\"Czech\",\"status\":\"production\"},{\"code\":\"ro\",\"name\":\"Romanian\",\"status\":\"production\"},{\"code\":\"en-gb\",\"name\":\"British English\",\"status\":\"production\"},{\"code\":\"vi\",\"name\":\"Vietnamese\",\"status\":\"production\"},{\"code\":\"bn\",\"name\":\"Bengali\",\"status\":\"production\"}]"
-                },
-                "headers": {
-                    "content-length": [
-                        "1792"
-                    ],
-                    "x-transaction": [
-                        "00581a2e0082f28e"
-                    ],
-                    "last-modified": [
-                        "Sat, 05 Nov 2016 21:44:02 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382712"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "13"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:44:02 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
-                    ],
-                    "x-rate-limit-limit": [
-                        "15"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838224219134003; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:44:02 UTC"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-response-time": [
-                        "13"
-                    ],
-                    "x-connection-hash": [
-                        "b4d310aa8bc9ac46c929800c69050484"
-                    ]
-                }
-            },
             "request": {
                 "method": "GET",
                 "uri": "https://api.twitter.com/1.1/help/languages.json",
@@ -91,6 +10,88 @@
                     "Host": [
                         "api.twitter.com"
                     ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "last-modified": [
+                        "Sat, 13 Jul 2019 02:27:53 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-connection-hash": [
+                        "36758e1652e26a82488ef3925fbedf2c"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "10"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:53 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_Weu0kWaoZYpviHe6bek+Fw==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:53 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298487394476394; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:53 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-transaction": [
+                        "003987ce00eec660"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "4845"
+                    ],
+                    "x-response-time": [
+                        "12"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984902"
+                    ]
+                },
+                "body": {
+                    "string": "[{\"code\":\"fr\",\"name\":\"French\",\"local_name\":\"fran\\u00e7ais\",\"status\":\"production\",\"debug\":false},{\"code\":\"en\",\"name\":\"English\",\"local_name\":\"English\",\"status\":\"production\",\"debug\":false},{\"code\":\"ar\",\"name\":\"Arabic\",\"local_name\":\"\\u0627\\u0644\\u0639\\u0631\\u0628\\u064a\\u0629\",\"status\":\"production\",\"debug\":false},{\"code\":\"ja\",\"name\":\"Japanese\",\"local_name\":\"\\u65e5\\u672c\\u8a9e\",\"status\":\"production\",\"debug\":false},{\"code\":\"es\",\"name\":\"Spanish\",\"local_name\":\"espa\\u00f1ol\",\"status\":\"production\",\"debug\":false},{\"code\":\"de\",\"name\":\"German\",\"local_name\":\"Deutsch\",\"status\":\"production\",\"debug\":false},{\"code\":\"it\",\"name\":\"Italian\",\"local_name\":\"italiano\",\"status\":\"production\",\"debug\":false},{\"code\":\"id\",\"name\":\"Indonesian\",\"local_name\":\"Indonesia\",\"status\":\"production\",\"debug\":false},{\"code\":\"pt\",\"name\":\"Portuguese\",\"local_name\":\"portugu\\u00eas\",\"status\":\"production\",\"debug\":false},{\"code\":\"ko\",\"name\":\"Korean\",\"local_name\":\"\\ud55c\\uad6d\\uc5b4\",\"status\":\"production\",\"debug\":false},{\"code\":\"tr\",\"name\":\"Turkish\",\"local_name\":\"T\\u00fcrk\\u00e7e\",\"status\":\"production\",\"debug\":false},{\"code\":\"ru\",\"name\":\"Russian\",\"local_name\":\"\\u0440\\u0443\\u0441\\u0441\\u043a\\u0438\\u0439\",\"status\":\"production\",\"debug\":false},{\"code\":\"nl\",\"name\":\"Dutch\",\"local_name\":\"Nederlands\",\"status\":\"production\",\"debug\":false},{\"code\":\"fil\",\"name\":\"Filipino\",\"local_name\":\"Filipino\",\"status\":\"production\",\"debug\":false},{\"code\":\"msa\",\"name\":\"Malay\",\"local_name\":\"Melayu\",\"status\":\"production\",\"debug\":false},{\"code\":\"zh-tw\",\"name\":\"Traditional Chinese\",\"local_name\":\"\\u7e41\\u9ad4\\u4e2d\\u6587\",\"status\":\"production\",\"debug\":false},{\"code\":\"zh-cn\",\"name\":\"Simplified Chinese\",\"local_name\":\"\\u7b80\\u4f53\\u4e2d\\u6587\",\"status\":\"production\",\"debug\":false},{\"code\":\"hi\",\"name\":\"Hindi\",\"local_name\":\"\\u0939\\u093f\\u0928\\u094d\\u0926\\u0940\",\"status\":\"production\",\"debug\":false},{\"code\":\"no\",\"name\":\"Norwegian\",\"local_name\":\"norsk\",\"status\":\"production\",\"debug\":false},{\"code\":\"sv\",\"name\":\"Swedish\",\"local_name\":\"svenska\",\"status\":\"production\",\"debug\":false},{\"code\":\"fi\",\"name\":\"Finnish\",\"local_name\":\"suomi\",\"status\":\"production\",\"debug\":false},{\"code\":\"da\",\"name\":\"Danish\",\"local_name\":\"dansk\",\"status\":\"production\",\"debug\":false},{\"code\":\"pl\",\"name\":\"Polish\",\"local_name\":\"polski\",\"status\":\"production\",\"debug\":false},{\"code\":\"hu\",\"name\":\"Hungarian\",\"local_name\":\"magyar\",\"status\":\"production\",\"debug\":false},{\"code\":\"fa\",\"name\":\"Persian\",\"local_name\":\"\\u0641\\u0627\\u0631\\u0633\\u06cc\",\"status\":\"production\",\"debug\":false},{\"code\":\"he\",\"name\":\"Hebrew\",\"local_name\":\"\\u05e2\\u05d1\\u05e8\\u05d9\\u05ea\",\"status\":\"production\",\"debug\":false},{\"code\":\"ur\",\"name\":\"Urdu\",\"local_name\":\"\\u0627\\u0631\\u062f\\u0648\",\"status\":\"beta\",\"debug\":false},{\"code\":\"th\",\"name\":\"Thai\",\"local_name\":\"\\u0e44\\u0e17\\u0e22\",\"status\":\"production\",\"debug\":false},{\"code\":\"uk\",\"name\":\"Ukrainian\",\"local_name\":\"\\u0443\\u043a\\u0440\\u0430\\u0457\\u043d\\u0441\\u044c\\u043a\\u0430\",\"status\":\"production\",\"debug\":false},{\"code\":\"ca\",\"name\":\"Catalan\",\"local_name\":\"catal\\u00e0\",\"status\":\"production\",\"debug\":false},{\"code\":\"ga\",\"name\":\"Irish\",\"local_name\":\"Gaeilge\",\"status\":\"beta\",\"debug\":false},{\"code\":\"el\",\"name\":\"Greek\",\"local_name\":\"\\u0395\\u03bb\\u03bb\\u03b7\\u03bd\\u03b9\\u03ba\\u03ac\",\"status\":\"production\",\"debug\":false},{\"code\":\"eu\",\"name\":\"Basque\",\"local_name\":\"euskara\",\"status\":\"beta\",\"debug\":false},{\"code\":\"cs\",\"name\":\"Czech\",\"local_name\":\"\\u010de\\u0161tina\",\"status\":\"production\",\"debug\":false},{\"code\":\"gl\",\"name\":\"Galician\",\"local_name\":\"galego\",\"status\":\"beta\",\"debug\":false},{\"code\":\"ro\",\"name\":\"Romanian\",\"local_name\":\"rom\\u00e2n\\u0103\",\"status\":\"production\",\"debug\":false},{\"code\":\"hr\",\"name\":\"Croatian\",\"local_name\":\"hrvatski\",\"status\":\"production\",\"debug\":false},{\"code\":\"en-gb\",\"name\":\"British English\",\"local_name\":\"British English\",\"status\":\"production\",\"debug\":false},{\"code\":\"vi\",\"name\":\"Vietnamese\",\"local_name\":\"Ti\\u1ebfng Vi\\u1ec7t\",\"status\":\"production\",\"debug\":false},{\"code\":\"bn\",\"name\":\"Bangla\",\"local_name\":\"\\u09ac\\u09be\\u0982\\u09b2\\u09be\",\"status\":\"production\",\"debug\":false},{\"code\":\"bg\",\"name\":\"Bulgarian\",\"local_name\":\"\\u0431\\u044a\\u043b\\u0433\\u0430\\u0440\\u0441\\u043a\\u0438\",\"status\":\"production\",\"debug\":false},{\"code\":\"sr\",\"name\":\"Serbian\",\"local_name\":\"\\u0441\\u0440\\u043f\\u0441\\u043a\\u0438\",\"status\":\"production\",\"debug\":false},{\"code\":\"sk\",\"name\":\"Slovak\",\"local_name\":\"sloven\\u010dina\",\"status\":\"production\",\"debug\":false},{\"code\":\"gu\",\"name\":\"Gujarati\",\"local_name\":\"\\u0a97\\u0ac1\\u0a9c\\u0ab0\\u0abe\\u0aa4\\u0ac0\",\"status\":\"production\",\"debug\":false},{\"code\":\"mr\",\"name\":\"Marathi\",\"local_name\":\"\\u092e\\u0930\\u093e\\u0920\\u0940\",\"status\":\"production\",\"debug\":false},{\"code\":\"ta\",\"name\":\"Tamil\",\"local_name\":\"\\u0ba4\\u0bae\\u0bbf\\u0bb4\\u0bcd\",\"status\":\"production\",\"debug\":false},{\"code\":\"kn\",\"name\":\"Kannada\",\"local_name\":\"\\u0c95\\u0ca8\\u0ccd\\u0ca8\\u0ca1\",\"status\":\"production\",\"debug\":false}]"
                 }
             }
         }
