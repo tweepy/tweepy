@@ -121,7 +121,7 @@ Status methods
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
    :param display_coordinates: Whether or not to put a pin on the exact coordinates a Tweet has been sent from.
-   :param media_ids: A comma-delimited list of media_ids to associate with the Tweet.
+   :param media_ids: A list of media_ids to associate with the Tweet.
    :rtype: :class:`Status` object
 
 
@@ -611,23 +611,30 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.destroy_list(slug)
+.. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
 
-   Deletes the specified list. Must be owned by the authenticated user.
+   Deletes the specified list.
+   The authenticated user must own the list to be able to destroy it.
 
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
+   :param list_id: |list_id|
    :param slug: |slug|
    :rtype: :class:`List` object
 
 
-.. method:: API.update_list(slug, [name], [mode], [description])
+.. method:: API.update_list(list_id/slug, [name], [mode], [description], [owner_screen_name/owner_id])
 
-   Updates the specified list. Note: this current throws a 500. Twitter
-   is looking into the issue.
+   Updates the specified list.
+   The authenticated user must own the list to be able to update it.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param name: What you'd like to change the lists name to.
+   :param name: The name for the list.
    :param mode: |list_mode|
-   :param description: What you'd like to change the list description to.
+   :param description: The description to give the list.
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
    :rtype: :class:`List` object
 
 

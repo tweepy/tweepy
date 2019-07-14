@@ -22,8 +22,8 @@ class TweepyResultSetTests(TweepyTestCase):
         self.assertListEqual(ids, ids_fixture)
 
     def testmaxid(self):
-        self.assertEqual(self.results.max_id, 100)
+        self.assertEqual(self.results.max_id, 0)
 
     def testsinceid(self):
-        self.assertEqual(self.results.since_id, 1)
+        self.assertEqual(self.results.since_id, 100)
 

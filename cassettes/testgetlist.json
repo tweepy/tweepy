@@ -2,29 +2,36 @@
     "version": 1,
     "interactions": [
         {
+            "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/lists/show.json?owner_screen_name=Twitter&slug=Official-Twitter-Accounts",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }
+            },
             "response": {
                 "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "{\"id\":8078,\"id_str\":\"8078\",\"name\":\"stars\",\"uri\":\"\\/applepie\\/lists\\/stars\",\"subscriber_count\":7,\"member_count\":54,\"mode\":\"public\",\"description\":\"\",\"slug\":\"stars\",\"full_name\":\"@applepie\\/stars\",\"created_at\":\"Fri Oct 16 00:25:42 +0000 2009\",\"following\":false,\"user\":{\"id\":9302282,\"id_str\":\"9302282\",\"name\":\"Josh Roesslein\",\"screen_name\":\"applepie\",\"location\":\"San Francisco Bay Area\",\"description\":\"pro\\u00b7gram\\u00b7mer (n) An organism capable of converting caffeine into code. Coding @ http:\\/\\/t.co\\/Rt18iqhC9z\",\"url\":null,\"entities\":{\"description\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/Rt18iqhC9z\",\"expanded_url\":\"http:\\/\\/OpenGov.com\",\"display_url\":\"OpenGov.com\",\"indices\":[80,102]}]}},\"protected\":false,\"followers_count\":540,\"friends_count\":327,\"listed_count\":31,\"created_at\":\"Mon Oct 08 03:00:34 +0000 2007\",\"favourites_count\":16,\"utc_offset\":-25200,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":8125,\"lang\":\"en\",\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"3B94D9\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"profile_link_color\":\"ABB8C2\",\"profile_sidebar_border_color\":\"000000\",\"profile_sidebar_fill_color\":\"000000\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":false,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"none\"}}"
+                    "code": 200,
+                    "message": "OK"
                 },
                 "headers": {
-                    "content-length": [
-                        "1947"
+                    "content-type": [
+                        "application/json;charset=utf-8"
                     ],
-                    "x-transaction": [
-                        "00a6bb8700243251"
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
                     ],
                     "last-modified": [
-                        "Sat, 05 Nov 2016 21:43:51 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382702"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
+                        "Sat, 13 Jul 2019 02:27:41 GMT"
                     ],
                     "server": [
                         "tsa_b"
@@ -32,17 +39,8 @@
                     "cache-control": [
                         "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "73"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:43:51 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
+                    "x-connection-hash": [
+                        "5cf1755c77e883bc5a3a11c0898b98df"
                     ],
                     "x-rate-limit-limit": [
                         "75"
@@ -50,47 +48,50 @@
                     "x-frame-options": [
                         "SAMEORIGIN"
                     ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838223160649710; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:43:51 UTC"
+                    "x-rate-limit-remaining": [
+                        "68"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:41 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_lZPB6YLPBIV7R4nA+12o/A==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:41 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298486191963552; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:41 GMT; Path=/; Domain=.twitter.com"
+                    ],
                     "x-access-level": [
                         "read-write-directmessages"
                     ],
-                    "x-response-time": [
-                        "64"
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
                     ],
-                    "x-connection-hash": [
-                        "e9d4c8ce1e3363b843698debac09b090"
+                    "x-transaction": [
+                        "0081c0cd00f9e38f"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "1993"
+                    ],
+                    "x-response-time": [
+                        "50"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984890"
                     ]
-                }
-            },
-            "request": {
-                "method": "GET",
-                "uri": "https://api.twitter.com/1.1/lists/show.json?owner_screen_name=applepie&slug=stars",
-                "body": null,
-                "headers": {
-                    "Host": [
-                        "api.twitter.com"
-                    ]
+                },
+                "body": {
+                    "string": "{\"id\":84839422,\"id_str\":\"84839422\",\"name\":\"Official Twitter Accounts\",\"uri\":\"\\/Twitter\\/lists\\/official-twitter-accounts\",\"subscriber_count\":763,\"member_count\":130,\"mode\":\"public\",\"description\":\"Accounts managed by Twitter, Inc.\",\"slug\":\"official-twitter-accounts\",\"full_name\":\"@Twitter\\/official-twitter-accounts\",\"created_at\":\"Tue Feb 05 18:14:21 +0000 2013\",\"following\":false,\"user\":{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"Twitter\",\"location\":\"Everywhere\",\"description\":\"What\\u2019s happening?!\",\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"expanded_url\":\"https:\\/\\/about.twitter.com\\/\",\"display_url\":\"about.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":56335782,\"friends_count\":140,\"listed_count\":90877,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":5965,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":10829,\"lang\":null,\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1556918042\",\"profile_link_color\":\"1B95E0\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}}"
                 }
             }
         }

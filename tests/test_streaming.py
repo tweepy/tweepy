@@ -1,10 +1,10 @@
 from __future__ import absolute_import, print_function
 
-import six
 import unittest
 from unittest.case import skip
 
 from mock import MagicMock, patch
+import six
 
 from .config import create_auth
 from .test_utils import mock_tweet
@@ -87,15 +87,15 @@ class TweepyStreamTests(unittest.TestCase):
     def test_sample(self):
         self.listener.status_stop_count = 10
         self.stream.sample()
-        self.assertEquals(self.listener.status_count,
-                          self.listener.status_stop_count)
+        self.assertEqual(self.listener.status_count,
+                         self.listener.status_stop_count)
 
     def test_filter_track(self):
         self.listener.status_stop_count = 5
         phrases = ['twitter']
         self.stream.filter(track=phrases)
-        self.assertEquals(self.listener.status_count,
-                          self.listener.status_stop_count)
+        self.assertEqual(self.listener.status_count,
+                         self.listener.status_stop_count)
 
     def test_track_encoding(self):
         s = Stream(None, None)

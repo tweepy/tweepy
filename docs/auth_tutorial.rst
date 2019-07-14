@@ -8,13 +8,14 @@ Authentication Tutorial
 Introduction
 ============
 
-Tweepy supports oauth authentication. Authentication is
-handled by the tweepy.AuthHandler class.
+Tweepy supports both OAuth 1a (application-user) and OAuth 2
+(application-only) authentication. Authentication is handled by the
+tweepy.AuthHandler class.
 
-OAuth Authentication
-====================
+OAuth 1a Authentication
+=======================
 
-Tweepy tries to make OAuth as painless as possible for you. To begin
+Tweepy tries to make OAuth 1a as painless as possible for you. To begin
 the process we need to register our client application with
 Twitter. Create a new application and once you
 are done you should have your consumer token and secret. Keep these
@@ -36,7 +37,7 @@ If the callback URL will not be changing, it is best to just configure
 it statically on twitter.com when setting up your application's
 profile.
 
-Unlike basic auth, we must do the OAuth "dance" before we can start
+Unlike basic auth, we must do the OAuth 1a "dance" before we can start
 using the API. We must complete the following steps:
 
 #. Get a request token from twitter
@@ -123,3 +124,25 @@ are ready for business::
 
    api = tweepy.API(auth)
    api.update_status('tweepy + oauth!')
+
+OAuth 2 Authentication
+======================
+
+Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of
+authentication where an application makes API requests without the
+user context. Use this method if you just need read-only access to
+public information.
+
+Like OAuth 1a, we first register our client application and acquire
+a consumer token and secret.
+
+Then we create an AppAuthHandler instance, passing in our consumer
+token and secret::
+
+   auth = tweepy.AppAuthHandler(consumer_token, consumer_secret)
+
+With the bearer token received, we are now ready for business::
+
+   api = tweepy.API(auth)
+   for tweet in tweepy.Cursor(api.search, q='tweepy').items(10):
+       print(tweet.text)

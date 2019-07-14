@@ -211,6 +211,20 @@ class User(Model):
                                        *args,
                                        **kargs)
 
+    def __eq__(self, other):
+        if isinstance(other, User):
+            return self.id == other.id
+
+        return NotImplemented
+
+    def __ne__(self, other):
+        result = self == other
+
+        if result is NotImplemented:
+            return result
+
+        return not result
+
 
 class DirectMessage(Model):
 
@@ -247,25 +261,17 @@ class Friendship(Model):
 
         # parse source
         source = cls(api)
+        setattr(source, '_json', relationship['source'])
         for k, v in relationship['source'].items():
             setattr(source, k, v)
 
         # parse target
         target = cls(api)
+        setattr(target, '_json', relationship['target'])
         for k, v in relationship['target'].items():
             setattr(target, k, v)
 
         return source, target
-
-
-class Category(Model):
-
-    @classmethod
-    def parse(cls, api, json):
-        category = cls(api)
-        for k, v in json.items():
-            setattr(category, k, v)
-        return category
 
 
 class SavedSearch(Model):
@@ -308,6 +314,7 @@ class List(Model):
     @classmethod
     def parse(cls, api, json):
         lst = List(api)
+        setattr(lst, '_json', json)
         for k, v in json.items():
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
@@ -502,7 +509,6 @@ class ModelFactory(object):
     friendship = Friendship
     saved_search = SavedSearch
     search_results = SearchResults
-    category = Category
     list = List
     relation = Relation
     relationship = Relationship
