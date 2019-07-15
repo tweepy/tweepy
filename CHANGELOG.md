@@ -1,5 +1,36 @@
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
+Version 3.8.0
+-------------
+### New Features / Improvements
+- Allow streams to use daemon threads ([#1126](https://github.com/tweepy/tweepy/pull/1126))
+- Remove `API.set_delivery_device` ([#1203](https://github.com/tweepy/tweepy/issues/1203))
+- Remove simplejson import and usage ([#832](https://github.com/tweepy/tweepy/pull/832))
+- Allow `cursor` parameter for `API.blocks_ids` and `API.mutes_ids` ([#1208](https://github.com/tweepy/tweepy/pull/1208))
+- Drop support for Python 3.4
+- Allow `perform_block` parameter for `API.report_spam` ([#1090](https://github.com/tweepy/tweepy/pull/1090))
+- Add `API.mutes` ([#1197](https://github.com/tweepy/tweepy/issues/1197), [#1215](https://github.com/tweepy/tweepy/pull/1215))
+- Allow `count` parameter for `API.friends` ([#577](https://github.com/tweepy/tweepy/issues/577))
+- Remove `since`, `from`, `to`, and `source` as allowed parameters for `API.search`
+- Handle location deletion and withheld content notices for streams ([#886](https://github.com/tweepy/tweepy/pull/886))
+- Allow usage of equality and difference operators with `User` objects ([#939](https://github.com/tweepy/tweepy/pull/939))
+- Add `_json` attribute to `Category`, `Friendship`, and `List` models ([#590](https://github.com/tweepy/tweepy/issues/590), [#1169](https://github.com/tweepy/tweepy/pull/1169))
+- Remove `API.suggested_categories`, `API.suggested_users`, and `API.suggested_users_tweets`
+- Update and improve tests and cassettes ([#1242](https://github.com/tweepy/tweepy/pull/1242))
+- Update `DirectMessage` model ([#1081](https://github.com/tweepy/tweepy/issues/1081), [#1228](https://github.com/tweepy/tweepy/pull/1228))
+- Replace `API.direct_messages` and `API.sent_direct_messages` with `API.list_direct_messages` ([#1081](https://github.com/tweepy/tweepy/issues/1081), [#1228](https://github.com/tweepy/tweepy/pull/1228))
+- Update `API.get_direct_message`, `API.send_direct_message`, and `API.destroy_direct_message` ([#1081](https://github.com/tweepy/tweepy/issues/1081), [#1228](https://github.com/tweepy/tweepy/pull/1228))
+- Update and improve various documentation
+
+### Bug Fixes
+- Exclude examples during installation ([#1141](https://github.com/tweepy/tweepy/issues/1141), [#1164](https://github.com/tweepy/tweepy/pull/1164))
+- Properly initialize `OAuthHandler.request_token` ([#1149](https://github.com/tweepy/tweepy/pull/1149))
+- Properly handle `map_` parameter for `API.statuses_lookup` ([#598](https://github.com/tweepy/tweepy/issues/598))
+- Support cursor pagination for `API.blocks_ids` and `API.mutes_ids` ([#930](https://github.com/tweepy/tweepy/issues/930), [#931](https://github.com/tweepy/tweepy/pull/931))
+- Return values for `API.update_profile_background_image` and `API.update_profile_banner` ([#904](https://github.com/tweepy/tweepy/pull/904))
+- Replace usage of root logger
+- Close Requests sessions ([#810](https://github.com/tweepy/tweepy/issues/810), [#1093](https://github.com/tweepy/tweepy/issues/1093), [#1237](https://github.com/tweepy/tweepy/issues/1237))
+
 Version 3.7.0
 -------------
 ### New Features / Improvements
