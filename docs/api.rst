@@ -594,7 +594,7 @@ Help Methods
    :param since_id: |since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.	
    :param max_id: |max_id|
    :param include_entities: |include_entities|
-   :rtype: list of :class:`SearchResults` objects
+   :rtype: :class:`SearchResults` object
 
 
 List Methods
