@@ -93,9 +93,9 @@ can be used to print the full text of the Tweet, or if it's a Retweet, the
 full text of the Retweeted Tweet::
 
    status = api.get_status(id, tweet_mode="extended")
-   if hasattr(status, "retweeted_status"):  # Check if Retweet
+   try:
        print(status.retweeted_status.full_text)
-   else:
+   except AttributeError:  # Not a Retweet
        print(status.full_text)
 
 If ``status`` is a Retweet, ``status.full_text`` could be truncated.
@@ -105,14 +105,14 @@ Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::
 
    def on_status(self, status):
        if hasattr(status, "retweeted_status"):  # Check if Retweet
-           if hasattr(status.retweeted_status, "extended_tweet"):
+           try:
                print(status.retweeted_status.extended_tweet["full_text"])
-           else:
+           except AttributeError:
                print(status.retweeted_status.text)
        else:
-           if hasattr(status, "extended_tweet"):
+           try:
                print(status.extended_tweet["full_text"])
-           else:
+           except AttributeError:
                print(status.text)
 
 If ``status`` is a Retweet, it will not have an ``extended_tweet`` attribute,
