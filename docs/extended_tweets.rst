@@ -73,7 +73,7 @@ Handling Retweets
 =================
 
 When using extended mode with a Retweet, the ``full_text`` attribute of the
-Status object will be truncated with an ellipsis character instead of
+Status object may be truncated with an ellipsis character instead of
 containing the full text of the Retweet. However, since the
 ``retweeted_status`` attribute (of a Status object that is a Retweet) is
 itself a Status object, the ``full_text`` attribute of the Retweeted Status
@@ -81,7 +81,7 @@ object can be used instead.
 
 This also applies similarly to Status objects/payloads that are Retweets from
 streams. The ``extended_tweet`` attribute/field will be a dictionary with a
-``full_text`` sub-field/key that is truncated with an ellipsis character.
+``full_text`` sub-field/key that may be truncated with an ellipsis character.
 Instead, the ``extended_tweet`` attribute/field of the Retweeted Status (from
 the ``retweeted_status`` attribute/field) can be used.
 
