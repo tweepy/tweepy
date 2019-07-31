@@ -80,7 +80,7 @@ itself a Status object, the ``full_text`` attribute of the Retweeted Status
 object can be used instead.
 
 This also applies similarly to Status objects/payloads that are Retweets from
-streams. The ``extended_tweet`` attribute/field will be a dictionary with a
+streams. The dictionary from the ``extended_tweet`` attribute/field contains a
 ``full_text`` sub-field/key that may be truncated with an ellipsis character.
 Instead, the ``extended_tweet`` attribute/field of the Retweeted Status (from
 the ``retweeted_status`` attribute/field) can be used.
