@@ -103,7 +103,6 @@ Status methods
    Returns a single status specified by the ID parameter.
 
    :param id: |sid|
-   :tweet_mode: |Pass in 'extended' to get non truncated tweet text|
    :rtype: :class:`Status` object
 
 
