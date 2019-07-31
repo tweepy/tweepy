@@ -17,7 +17,7 @@ just to manage the pagination loop. To help make pagination easier and
 require less code, Tweepy has the Cursor object.
 
 Old way vs Cursor way
----------------------
+=====================
 
 First let's demonstrate iterating the statuses in the authenticated
 user's timeline. Here is how we would do it the "old way" before the
@@ -48,7 +48,7 @@ us behind the scenes, so our code can now focus entirely on processing
 the results.
 
 Passing parameters into the API method
---------------------------------------
+======================================
 
 What if you need to pass in parameters to the API method?
 
@@ -66,7 +66,7 @@ Now Cursor will pass the parameter into the method for us whenever it
 makes a request.
 
 Items or Pages
---------------
+==============
 
 So far we have just demonstrated pagination iterating per
 item. What if instead you want to process per page of results? You
@@ -78,7 +78,7 @@ would use the pages() method::
 
 
 Limits
-------
+======
 
 What if you only want n items or pages returned? You pass into the
 items() or pages() methods the limit you want to impose.
