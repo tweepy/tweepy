@@ -18,19 +18,19 @@ OAuth 1a Authentication
 Tweepy tries to make OAuth 1a as painless as possible for you. To begin
 the process we need to register our client application with
 Twitter. Create a new application and once you
-are done you should have your consumer token and secret. Keep these
+are done you should have your consumer key and secret. Keep these
 two handy, you'll need them.
 
 The next step is creating an OAuthHandler instance. Into this we pass
-our consumer token and secret which was given to us in the previous
+our consumer key and secret which was given to us in the previous
 paragraph::
 
-   auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
+   auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 
 If you have a web application and are using a callback URL that needs
 to be supplied dynamically you would pass it in like so::
 
-   auth = tweepy.OAuthHandler(consumer_token, consumer_secret,
+   auth = tweepy.OAuthHandler(consumer_key, consumer_secret,
    callback_url)
 
 If the callback URL will not be changing, it is best to just configure
@@ -134,12 +134,12 @@ user context. Use this method if you just need read-only access to
 public information.
 
 Like OAuth 1a, we first register our client application and acquire
-a consumer token and secret.
+a consumer key and secret.
 
 Then we create an AppAuthHandler instance, passing in our consumer
-token and secret::
+key and secret::
 
-   auth = tweepy.AppAuthHandler(consumer_token, consumer_secret)
+   auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
 
 With the bearer token received, we are now ready for business::
 
