@@ -8,7 +8,7 @@ from ast import literal_eval
 from nose import SkipTest
 
 from .config import tape, TweepyTestCase, use_replay, username
-from tweepy import API, FileCache, Friendship, MemoryCache
+from tweepy import API, FileCache, Friendship, MemoryCache, RedisCache
 from tweepy.parsers import Parser
 
 test_tweet_id = '266367358078169089'
@@ -459,6 +459,20 @@ class TweepyCacheTests(unittest.TestCase):
         finally:
             if os.path.exists('cache_test_dir'):
                 shutil.rmtree('cache_test_dir')
+
+    def testrediscache(self):
+        try:
+            import redis
+        except ImportError:
+            raise SkipTest()
+        host, port = self.memcache_servers[0].split(':')
+        try:
+            client = redis.Redis(host=host, port=int(port))
+            client.ping()
+        except redis.exceptions.ConnectionError:
+            raise SkipTest()
+        self.cache = RedisCache(client, timeout=self.timeout)
+        self._run_tests()
 
 if __name__ == '__main__':
     unittest.main()
