@@ -4,8 +4,6 @@
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
-from __future__ import absolute_import
-
 import json
 import logging
 import re

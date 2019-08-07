@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function
-
 from tweepy import OAuthHandler, Stream, StreamListener
 
 # Go to http://apps.twitter.com and create an app.
