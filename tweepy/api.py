@@ -5,8 +5,6 @@
 import mimetypes
 import os
 
-import six
-
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser

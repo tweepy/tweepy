@@ -5,8 +5,6 @@
 from datetime import datetime
 from email.utils import parsedate
 
-import six
-
 
 def parse_datetime(string):
     return datetime(*(parsedate(string)[:6]))

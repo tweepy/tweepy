@@ -2,8 +2,6 @@
 # Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-import six
-
 
 class TweepError(Exception):
     """Tweepy exception"""
