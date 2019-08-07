@@ -20,7 +20,7 @@ https://dev.twitter.com/discussions/21281"""
 log = logging.getLogger(__name__)
 
 
-class AuthHandler(object):
+class AuthHandler:
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
@@ -37,10 +37,10 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == six.text_type:
+        if type(consumer_key) == str:
             consumer_key = consumer_key.encode('ascii')
 
-        if type(consumer_secret) == six.text_type:
+        if type(consumer_secret) == str:
             consumer_secret = consumer_secret.encode('ascii')
 
         self.consumer_key = consumer_key

@@ -11,7 +11,7 @@ mo = re.search(VSRE, ver_file, re.M)
 if mo:
     version = mo.group(1)
 else:
-    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
+    raise RuntimeError("Unable to find version string in {}.".format(VERSIONFILE))
 
 setup(name="tweepy",
       version=version,

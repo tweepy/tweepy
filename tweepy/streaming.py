@@ -27,7 +27,7 @@ STREAM_VERSION = '1.1'
 log = logging.getLogger(__name__)
 
 
-class StreamListener(object):
+class StreamListener:
 
     def __init__(self, api=None):
         self.api = api or API()
@@ -156,7 +156,7 @@ class StreamListener(object):
         """Called when a user withheld content notice arrives"""
         return
 
-class ReadBuffer(object):
+class ReadBuffer:
     """Buffer data from the response in a smarter way than httplib/requests can.
 
     Tweets are roughly in the 2-12kb range, averaging around 3kb.
@@ -171,7 +171,7 @@ class ReadBuffer(object):
 
     def __init__(self, stream, chunk_size, encoding='utf-8'):
         self._stream = stream
-        self._buffer = six.b('')
+        self._buffer = b''
         self._chunk_size = chunk_size
         self._encoding = encoding
 
@@ -181,9 +181,9 @@ class ReadBuffer(object):
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
-        return six.b('')
+        return b''
 
-    def read_line(self, sep=six.b('\n')):
+    def read_line(self, sep=b'\n'):
         """Read the data stream until a given separator is found (default \n)
 
         :param sep: Separator to read until. Must by of the bytes type
@@ -197,7 +197,7 @@ class ReadBuffer(object):
             else:
                 start = len(self._buffer)
             self._buffer += self._stream.read(self._chunk_size)
-        return six.b('')
+        return b''
 
     def _pop(self, length):
         r = self._buffer[:length]
@@ -205,7 +205,7 @@ class ReadBuffer(object):
         return r.decode(self._encoding)
 
 
-class Stream(object):
+class Stream:
 
     def __init__(self, auth, listener, **options):
         self.auth = auth
@@ -249,7 +249,7 @@ class Stream(object):
 
     def _run(self):
         # Authenticate
-        url = "https://%s%s" % (self.host, self.url)
+        url = "https://{}{}".format(self.host, self.url)
 
         # Connect and process the stream
         error_counter = 0
@@ -416,7 +416,7 @@ class Stream(object):
                                  "it has to be a multiple of 4")
             self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
-            self.session.params['track'] = u','.join(track).encode(encoding)
+            self.session.params['track'] = ','.join(track).encode(encoding)
 
         self._start(is_async)
 
@@ -455,18 +455,18 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            self.body['follow'] = u','.join(follow).encode(encoding)
+            self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
-            self.body['track'] = u','.join(track).encode(encoding)
+            self.body['track'] = ','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = u','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:
-            self.body['language'] = u','.join(map(str, languages))
+            self.body['language'] = ','.join(map(str, languages))
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
@@ -478,7 +478,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.body['follow'] = u','.join(map(six.text_type, follow))
+        self.body['follow'] = ','.join(map(str, follow))
         self.body['delimited'] = 'length'
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings

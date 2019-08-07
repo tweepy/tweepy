@@ -8,7 +8,7 @@ from tweepy.error import TweepError
 from tweepy.models import ModelFactory
 
 
-class Parser(object):
+class Parser:
 
     def parse(self, method, payload):
         """

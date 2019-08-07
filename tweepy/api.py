@@ -13,7 +13,7 @@ from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
-class API(object):
+class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
@@ -1321,16 +1321,16 @@ class API(object):
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, six.text_type):
+        if isinstance(filename, str):
             filename = filename.encode("utf-8")
 
         BOUNDARY = b'Tw3ePy'
         body = []
         body.append(b'--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="{0}";'
-                    ' filename="{1}"'.format(form_field, filename)
+        body.append('Content-Disposition: form-data; name="{}";'
+                    ' filename="{}"'.format(form_field, filename)
                     .encode('utf-8'))
-        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+        body.append('Content-Type: {}'.format(file_type).encode('utf-8'))
         body.append(b'')
         body.append(fp.read())
         body.append(b'--' + BOUNDARY + b'--')

@@ -6,7 +6,7 @@ from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 
 
-class Cursor(object):
+class Cursor:
     """Pagination helper class"""
 
     def __init__(self, method, *args, **kargs):
@@ -35,7 +35,7 @@ class Cursor(object):
         return i
 
 
-class BaseIterator(object):
+class BaseIterator:
 
     def __init__(self, method, args, kargs):
         self.method = method

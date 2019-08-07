@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 def bind_api(**config):
 
-    class APIMethod(object):
+    class APIMethod:
 
         api = config['api']
         path = config['path']
@@ -132,7 +132,7 @@ def bind_api(**config):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
-                cache_result = self.api.cache.get('%s?%s' % (url, urlencode(self.session.params)))
+                cache_result = self.api.cache.get('{}?{}'.format(url, urlencode(self.session.params)))
                 # if cache result found and not expired, return it
                 if cache_result:
                     # must restore api reference
@@ -188,7 +188,7 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
+                    raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
 
@@ -237,7 +237,7 @@ def bind_api(**config):
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                self.api.cache.store('%s?%s' % (url, urlencode(self.session.params)), result)
+                self.api.cache.store('{}?{}'.format(url, urlencode(self.session.params)), result)
 
             return result
 

@@ -10,7 +10,7 @@ from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
     def __init__(self, max_id=None, since_id=None):
-        super(ResultSet, self).__init__()
+        super().__init__()
         self._max_id = max_id
         self._since_id = since_id
 
@@ -34,7 +34,7 @@ class ResultSet(list):
         return [item.id for item in self if hasattr(item, 'id')]
 
 
-class Model(object):
+class Model:
 
     def __init__(self, api=None):
         self._api = api
@@ -76,8 +76,8 @@ class Model(object):
         return results
 
     def __repr__(self):
-        state = ['%s=%s' % (k, repr(v)) for (k, v) in vars(self).items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
+        state = ['{}={}'.format(k, repr(v)) for (k, v) in vars(self).items()]
+        return '{}({})'.format(self.__class__.__name__, ', '.join(state))
 
 
 class Status(Model):
@@ -496,7 +496,7 @@ class Media(Model):
         return media
 
 
-class ModelFactory(object):
+class ModelFactory:
     """
     Used by parsers for creating instances
     of models. You may subclass this factory
