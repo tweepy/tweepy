@@ -186,8 +186,7 @@ class ReadBuffer(object):
     def read_line(self, sep=six.b('\n')):
         """Read the data stream until a given separator is found (default \n)
 
-        :param sep: Separator to read until. Must by of the bytes type (str in python 2,
-            bytes in python 3)
+        :param sep: Separator to read until. Must by of the bytes type
         :return: The str of the data read until sep
         """
         start = 0
