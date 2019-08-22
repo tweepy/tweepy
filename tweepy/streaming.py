@@ -1,31 +1,30 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
-from __future__ import absolute_import, print_function
+from __future__ import absolute_import
 
+import json
 import logging
 import re
 import requests
+import ssl
 import sys
-from requests.exceptions import Timeout
 from threading import Thread
 from time import sleep
 
 import six
+from requests.exceptions import Timeout
 
-import ssl
-
-from tweepy.models import Status
 from tweepy.api import API
 from tweepy.error import TweepError
-
-from tweepy.utils import import_simplejson
-json = import_simplejson()
+from tweepy.models import Status
 
 STREAM_VERSION = '1.1'
+
+log = logging.getLogger(__name__)
 
 
 class StreamListener(object):
@@ -78,8 +77,17 @@ class StreamListener(object):
         elif 'warning' in data:
             if self.on_warning(data['warning']) is False:
                 return False
+        elif 'scrub_geo' in data:
+            if self.on_scrub_geo(data['scrub_geo']) is False:
+                return False
+        elif 'status_withheld' in data:
+            if self.on_status_withheld(data['status_withheld']) is False:
+                return False
+        elif 'user_withheld' in data:
+            if self.on_user_withheld(data['user_withheld']) is False:
+                return False
         else:
-            logging.error("Unknown message type: " + str(raw_data))
+            log.error("Unknown message type: %s", raw_data)
 
     def keep_alive(self):
         """Called when a keep-alive arrived"""
@@ -128,7 +136,7 @@ class StreamListener(object):
         """Called when twitter sends a disconnect notice
 
         Disconnect codes are listed here:
-        https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
+        https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/streaming-message-types
         """
         return
 
@@ -136,6 +144,17 @@ class StreamListener(object):
         """Called when a disconnection warning message arrives"""
         return
 
+    def on_scrub_geo(self, notice):
+        """Called when a location deletion notice arrives"""
+        return
+
+    def on_status_withheld(self, notice):
+        """Called when a status withheld content notice arrives"""
+        return
+
+    def on_user_withheld(self, notice):
+        """Called when a user withheld content notice arrives"""
+        return
 
 class ReadBuffer(object):
     """Buffer data from the response in a smarter way than httplib/requests can.
@@ -146,7 +165,7 @@ class ReadBuffer(object):
     reads are quite slow. To combat this latency we can read big chunks,
     but the blocking part means we won't get results until enough tweets
     have arrived. That may not be a big deal for high throughput systems.
-    For low throughput systems we don't want to sacrafice latency, so we
+    For low throughput systems we don't want to sacrifice latency, so we
     use small chunks so it can read the length and the tweet in 2 read calls.
     """
 
@@ -189,16 +208,15 @@ class ReadBuffer(object):
 
 class Stream(object):
 
-    host = 'stream.twitter.com'
-
     def __init__(self, auth, listener, **options):
         self.auth = auth
         self.listener = listener
         self.running = False
+        self.daemon = options.get("daemon", False)
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
         # values according to
-        # https://dev.twitter.com/docs/streaming-apis/connecting#Reconnecting
+        # https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/connecting#reconnecting
         self.retry_time_start = options.get("retry_time", 5.0)
         self.retry_420_start = options.get("retry_420", 60.0)
         self.retry_time_cap = options.get("retry_time_cap", 320.0)
@@ -223,6 +241,7 @@ class Stream(object):
         
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
+        self.host = options.get('host', 'stream.twitter.com')
 
     def new_session(self):
         self.session = requests.Session()
@@ -306,7 +325,7 @@ class Stream(object):
 
     def _read_loop(self, resp):
         charset = resp.headers.get('content-type', default='')
-        enc_search = re.search('charset=(?P<enc>\S*)', charset)
+        enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
         if enc_search is not None:
             encoding = enc_search.group('enc')
         else:
@@ -364,6 +383,7 @@ class Stream(object):
         self.running = True
         if is_async:
             self._thread = Thread(target=self._run)
+            self._thread.daemon = self.daemon
             self._thread.start()
         else:
             self._run()
@@ -451,7 +471,6 @@ class Stream(object):
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self.host = 'stream.twitter.com'
         self._start(is_async)
 
     def sitestream(self, follow, stall_warnings=False,

@@ -1,18 +1,23 @@
-from __future__ import print_function
+# Tweepy
+# Copyright 2009-2019 Joshua Roesslein
+# See LICENSE for details.
 
-import six
 import logging
 
-from tweepy.error import TweepError
-from tweepy.api import API
 import requests
-from requests_oauthlib import OAuth1Session, OAuth1
+import six
 from requests.auth import AuthBase
+from requests_oauthlib import OAuth1, OAuth1Session
 from six.moves.urllib.parse import parse_qs
+
+from tweepy.api import API
+from tweepy.error import TweepError
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
 https://dev.twitter.com/discussions/21281"""
+
+log = logging.getLogger(__name__)
 
 
 class AuthHandler(object):
@@ -44,6 +49,7 @@ class OAuthHandler(AuthHandler):
         self.access_token_secret = None
         self.callback = callback
         self.username = None
+        self.request_token = {}
         self.oauth = OAuth1Session(consumer_key,
                                    client_secret=consumer_secret,
                                    callback_uri=self.callback)
@@ -79,7 +85,7 @@ class OAuthHandler(AuthHandler):
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
                 if access_type:
-                    logging.warning(WARNING_MESSAGE)
+                    log.warning(WARNING_MESSAGE)
             else:
                 url = self._get_oauth_url('authorize')
             self.request_token = self._get_request_token(access_type=access_type)

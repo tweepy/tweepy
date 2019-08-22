@@ -1,21 +1,21 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
 """
 Tweepy Twitter API library
 """
-__version__ = '3.6.0'
+__version__ = '3.8.0'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
-from tweepy.models import Status, User, DirectMessage, Friendship, SavedSearch, SearchResults, ModelFactory, Category
-from tweepy.error import TweepError, RateLimitError
 from tweepy.api import API
-from tweepy.cache import Cache, MemoryCache, FileCache
-from tweepy.auth import OAuthHandler, AppAuthHandler
-from tweepy.streaming import Stream, StreamListener
+from tweepy.auth import AppAuthHandler, OAuthHandler
+from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
+from tweepy.error import RateLimitError, TweepError
+from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
+from tweepy.streaming import Stream, StreamListener
 
 # Global, unauthenticated instance of API
 api = API()

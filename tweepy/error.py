@@ -1,10 +1,9 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import print_function
-
 import six
+
 
 class TweepError(Exception):
     """Tweepy exception"""
@@ -13,7 +12,7 @@ class TweepError(Exception):
         self.reason = six.text_type(reason)
         self.response = response
         self.api_code = api_code
-        Exception.__init__(self, reason)
+        super(TweepError, self).__init__(reason)
 
     def __str__(self):
         return self.reason

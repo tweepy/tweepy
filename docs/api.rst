@@ -53,9 +53,9 @@ Timeline methods
    `id` parameter.
 
    :param id_: A list of Tweet IDs to lookup, up to 100
-   :param include_entities: A boolean indicating whether or not to include [entities](https://dev.twitter.com/docs/entities) in the returned tweets. Defaults to False.
+   :param include_entities: A boolean indicating whether or not to include `entities <https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object>`_ in the returned tweets. Defaults to False.
    :param trim_user: A boolean indicating if user IDs should be provided, instead of full user information. Defaults to False.
-   :param map_: A boolean indicating whether or not to include tweets that cannot be shown, but with a value of None. Defaults to False.
+   :param map_: A boolean indicating whether or not to include tweets that cannot be shown. Defaults to False.
    :rtype: list of :class:`Status` objects
 
 
@@ -103,22 +103,24 @@ Status methods
    Returns a single status specified by the ID parameter.
 
    :param id: |sid|
-   :tweet_mode: |Pass in 'extended' to get non truncated tweet text|
    :rtype: :class:`Status` object
 
 
-.. method:: API.update_status(status, [in_reply_to_status_id], [auto_populate_reply_metadata], [lat], [long], [source], [place_id])
+.. method:: API.update_status(status, [in_reply_to_status_id], [in_reply_to_status_id_str], [auto_populate_reply_metadata], [lat], [long], [source], [place_id], [display_coordinates], [media_ids])
 
    Update the authenticated user's status. Statuses that are duplicates
    or too long will be silently ignored.
 
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update is in reply to.
+   :param in_reply_to_status_id_str: The ID of an existing status that the update is in reply to (as string).
    :param auto_populate_reply_metadata: Whether to automatically include the @mentions in the status metadata.
    :param lat: The location's latitude that this tweet refers to.
    :param long: The location's longitude that this tweet refers to.
    :param source: Source of the update. Only supported by Identi.ca. Twitter ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user.
+   :param display_coordinates: Whether or not to put a pin on the exact coordinates a Tweet has been sent from.
+   :param media_ids: A list of media_ids to associate with the Tweet.
    :rtype: :class:`Status` object
 
 
@@ -155,6 +157,14 @@ Status methods
    :param id: |sid|
    :rtype: :class:`Status` object
 
+.. method:: API.retweeters(id, [cursor], [stringify_ids])
+
+   Returns up to 100 user IDs belonging to users who have retweeted the Tweet specified by the id parameter.
+
+   :param id: |sid|
+   :param cursor: |cursor|
+   :param stringify_ids: Have ids returned as strings instead.
+   :rtype: list of Integers
 
 .. method:: API.retweets(id[,count])
 
@@ -163,6 +173,13 @@ Status methods
    :param id: |sid|
    :param count: Specifies the number of retweets to retrieve.
    :rtype: list of :class:`Status` objects
+
+.. method:: API.unretweet(id)
+
+   Untweets a retweeted status. Requires the id of the retweet to unretweet.
+
+   :param id: |sid|
+   :rtype: :class:`Status` object
 
 
 User methods
@@ -185,7 +202,7 @@ User methods
    :rtype: :class:`User` object
 
 
-.. method::API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
+.. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], [include_user_entities])
 
    Returns an user's friends ordered in which they were added 100 at a time. If no user is specified it defaults to the authenticated user.
 
@@ -193,6 +210,7 @@ User methods
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param cursor: |cursor|
+   :param count: |count|
    :param skip_status: |skip_status|
    :param include_user_entities: |include_user_entities|
    :rtype: list of :class:`User` objects
@@ -200,14 +218,17 @@ User methods
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
 
-   Returns an user's followers ordered in which they were added 100 at a
-   time. If no user is specified by id/screen name, it defaults to the
+   Returns a user's followers ordered in which they were added.
+   If no user is specified by id/screen name, it defaults to the
    authenticated user.
 
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param cursor: |cursor|
+   :param count: |count|
+   :param skip_status: |skip_status|
+   :param include_user_entities: |include_user_entities|
    :rtype: list of :class:`User` objects
 
 .. method:: API.search_users(q, [count], [page])
@@ -227,18 +248,6 @@ User methods
 Direct Message Methods
 ----------------------
 
-.. method:: API.direct_messages([since_id], [max_id], [count], [page], [full_text])
-
-   Returns direct messages sent to the authenticating user.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
-   :rtype: list of :class:`DirectMessage` objects
-
-
 .. method:: API.get_direct_message([id], [full_text])
 
    Returns a specific direct message.
@@ -248,36 +257,42 @@ Direct Message Methods
    :rtype: :class:`DirectMessage` object
 
 
-.. method:: API.sent_direct_messages([since_id], [max_id], [count], [page], [full_text])
+.. method:: API.list_direct_messages([count], [cursor])
 
-   Returns direct messages sent by the authenticating user.
+   Returns all Direct Message events (both sent and received)
+   within the last 30 days. Sorted in reverse-chronological order.
 
-   :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
-   :param page: |page|
-   :param full_text: |full_text|
+   :param cursor: |cursor|
    :rtype: list of :class:`DirectMessage` objects
 
 
-.. method:: API.send_direct_message(user/screen_name/user_id, text)
+.. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], [attachment_type], [attachment_media_id])
 
    Sends a new direct message to the specified user from the
    authenticating user.
 
-   :param user: The ID or screen name of the recipient user.
-   :param screen_name: screen name of the recipient user
-   :param user_id: user id of the recipient user
+   :param recipient_id: The ID of the user who should receive the direct message.
+   :param text: The text of your Direct Message. Max length of 10,000 characters.
+   :param quick_reply_type: The Quick Reply type to present to the user:
+
+                       * options - Array of Options objects (20 max).
+                       * text_input - Text Input object.
+                       * location - Location object.
+   :param attachment_type: The attachment type. Can be media or location.
+   :param attachment_media_id: A media id to associate with the message. A Direct Message may only reference a single media_id.
    :rtype: :class:`DirectMessage` object
 
 
 .. method:: API.destroy_direct_message(id)
 
-   Destroy a direct message. Authenticating user must be the recipient of
-   the direct message.
+   Deletes the direct message specified in the required ID parameter.
+   The authenticating user must be the recipient of the specified direct message.
+   Direct Messages are only removed from the interface of the user context provided.
+   Other members of the conversation can still access the Direct Messages.
 
-   :param id: The ID of the direct message to destroy.
-   :rtype: :class:`DirectMessage` object
+   :param id: The id of the Direct Message that should be deleted.
+   :rtype: None
 
 
 Friendship Methods
@@ -359,28 +374,6 @@ Account Methods
    limit status for the requester's IP address is returned.
 
    :rtype: :class:`JSON` object
-
-
-.. method:: API.set_delivery_device(device)
-
-   Sets which device Twitter delivers updates to for the authenticating
-   user. Sending "none" as the device parameter will disable SMS updates.
-
-   :param device: Must be one of: sms, none
-   :rtype: :class:`User` object
-
-
-.. method:: API.update_profile_colors([profile_background_color], [profile_text_color], [profile_link_color], [profile_sidebar_fill_color], [profile_sidebar_border_color])
-
-   Sets one or more hex values that control the color scheme of the
-   authenticating user's profile page on twitter.com.
-
-   :param profile_background_color:
-   :param profile_text_color:
-   :param profile_link_color:
-   :param profile_sidebar_fill_color:
-   :param profile_sidebar_border_color:
-   :rtype: :class:`User` object
 
 
 .. method:: API.update_profile_image(filename)
@@ -478,18 +471,60 @@ Block Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.blocks_ids()
+.. method:: API.blocks_ids([cursor])
 
    Returns an array of numeric user ids the authenticating user is
    blocking.
 
+   :param cursor: |cursor|
+   :rtype: list of Integers
+
+
+Mute Methods
+------------
+
+.. method:: API.create_mute(id/screen_name/user_id)
+
+   Mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.destroy_mute(id/screen_name/user_id)
+
+   Un-mutes the user specified in the ID parameter for the authenticating user.
+
+   :param id: |uid|
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :rtype: :class:`User` object
+
+
+.. method:: API.mutes([cursor], [include_entities], [skip_status])
+
+   Returns an array of user objects the authenticating user has muted.
+
+   :param cursor: |cursor|
+   :param include_entities: |include_entities|
+   :param skip_status: |skip_status|
+   :rtype: list of :class:`User` objects
+
+
+.. method:: API.mutes_ids([cursor])
+
+   Returns an array of numeric user ids the authenticating user has muted.
+
+   :param cursor: |cursor|
    :rtype: list of Integers
 
 
 Spam Reporting Methods
 ----------------------
 
-.. method:: API.report_spam([id/user_id/screen_name])
+.. method:: API.report_spam(id/screen_name/user_id, [perform_block])
 
    The user specified in the id is blocked by the authenticated user and
    reported as a spammer.
@@ -497,6 +532,7 @@ Spam Reporting Methods
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
+   :param perform_block: A boolean indicating if the reported account should be blocked. Defaults to True.
    :rtype: :class:`User` object
 
 
@@ -539,19 +575,25 @@ Saved Searches Methods
 Help Methods
 ------------
 
-.. method:: API.search(q[,lang],[locale],[rpp],[page],[since_id],[geocode],[show_user])
+.. method:: API.search(q, [geocode], [lang], [locale], [result_type], [count], [until], [since_id], [max_id], [include_entities])
 
    Returns tweets that match a specified query.
 
-   :param q: the search query string
-   :param lang: Restricts tweets to the given language, given by an ISO 639-1 code.
-   :param locale: Specify the language of the query you are sending. This is intended for language-specific clients and the default should work in the majority of cases.
-   :param rpp: The number of tweets to return per page, up to a max of 100.
-   :param page: The page number (starting at 1) to return, up to a max of roughly 1500 results (based on rpp * page.
-   :param since_id: |since_id|
-   :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly.
-   :param show_user: When true, prepends "<user>:" to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false.
-   :rtype: list of :class:`SearchResults` objects
+   :param q: the search query string of 500 characters maximum, including operators. Queries may additionally be limited by complexity.
+   :param geocode: Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitide,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly. A maximum of 1,000 distinct "sub-regions" will be considered when using the radius modifier.
+   :param lang: Restricts tweets to the given language, given by an ISO 639-1 code. Language detection is best-effort.
+   :param locale: Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific consumers and the default should work in the majority of cases.
+   :param result_type: Specifies what type of search results you would prefer to receive. The current default is "mixed." Valid values include:
+
+                       * mixed : include both popular and real time results in the response
+                       * recent : return only the most recent results in the response
+                       * popular : return only the most popular results in the response
+   :param count: The number of tweets to return per page, up to a maximum of 100. Defaults to 15.
+   :param until: Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week.
+   :param since_id: |since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.	
+   :param max_id: |max_id|
+   :param include_entities: |include_entities|
+   :rtype: :class:`SearchResults` object
 
 
 List Methods
@@ -559,8 +601,8 @@ List Methods
 
 .. method:: API.create_list(name, [mode], [description])
 
-   Creates a new list for the authenticated user. Accounts are limited to
-   20 lists.
+   Creates a new list for the authenticated user.
+   Note that you can create up to 1000 lists per account.
 
    :param name: The name of the new list.
    :param mode: |list_mode|
@@ -568,27 +610,34 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.destroy_list(slug)
+.. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
 
-   Deletes the specified list. Must be owned by the authenticated user.
+   Deletes the specified list.
+   The authenticated user must own the list to be able to destroy it.
 
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
+   :param list_id: |list_id|
    :param slug: |slug|
    :rtype: :class:`List` object
 
 
-.. method:: API.update_list(slug, [name], [mode], [description])
+.. method:: API.update_list(list_id/slug, [name], [mode], [description], [owner_screen_name/owner_id])
 
-   Updates the specified list. Note: this current throws a 500. Twitter
-   is looking into the issue.
+   Updates the specified list.
+   The authenticated user must own the list to be able to update it.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param name: What you'd like to change the lists name to.
+   :param name: The name for the list.
    :param mode: |list_mode|
-   :param description: What you'd like to change the list description to.
+   :param description: The description to give the list.
+   :param owner_screen_name: |owner_screen_name|
+   :param owner_id: |owner_id|
    :rtype: :class:`List` object
 
 
-.. method:: API.lists([cursor])
+.. method:: API.lists_all([cursor])
 
    List the lists of the specified user. Private lists will be included
    if the authenticated users is the same as the user who's lists are
@@ -627,23 +676,43 @@ List Methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.get_list(owner, slug)
+.. method:: API.get_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Show the specified list. Private lists will only be shown if the
+   Returns the specified list. Private lists will only be shown if the
    authenticated user owns the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
-.. method:: API.add_list_member(slug, id)
+.. method:: API.add_list_member(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
    Add a member to a list. The authenticated user must own the list to be
-   able to add members to it. Lists are limited to having 500 members.
+   able to add members to it. Lists are limited to 5,000 members.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to add as a member
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`List` object
+
+
+.. method:: API.add_list_members(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
+
+   Add up to 100 members to a list. The authenticated user must own the list to be
+   able to add members to it. Lists are limited to 5,000 members.
+
+   :param list_id: |list_id|
+   :param slug: |slug|
+   :param screen_name: A comma separated list of screen names, up to 100 are allowed in a single request
+   :param user_id: A comma separated list of user IDs, up to 100 are allowed in a single request
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
@@ -657,24 +726,43 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.list_members(owner, slug, cursor)
+.. method:: API.remove_list_members(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
+
+   Remove up to 100 members from a list. The authenticated user must own the list to be
+   able to remove members from it. Lists are limited to 5,000 members.
+
+   :param list_id: |list_id|
+   :param slug: |slug|
+   :param screen_name: A comma separated list of screen names, up to 100 are allowed in a single request
+   :param user_id: A comma separated list of user IDs, up to 100 are allowed in a single request
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`List` object
+
+
+.. method:: API.list_members(list_id/slug, [owner_id/owner_screen_name], [cursor])
 
    Returns the members of the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :param cursor: |cursor|
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.is_list_member(owner, slug, id)
+.. method:: API.show_list_member(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
-   Check if a user is a member of the specified list.
+   Check if the specified user is a member of the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to check
-   :rtype: :class:`User` object if user is a member of list, otherwise False.
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`User` object if user is a member of list
 
 
 .. method:: API.subscribe_list(owner, slug)
@@ -705,14 +793,17 @@ List Methods
    :rtype: list of :class:`User` objects
 
 
-.. method:: API.is_subscribed_list(owner, slug, id)
+.. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, [owner_id/owner_screen_name])
 
    Check if the specified user is a subscriber of the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to check
-   :rtype: :class:`User` object if user is subscribed to the list, otherwise False.
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
+   :rtype: :class:`User` object if user is subscribed to list
 
 
 Trends Methods
@@ -727,11 +818,13 @@ Trends Methods
 
 .. method:: API.trends_place(id, [exclude])
 
-   Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+   Returns the top 50 trending topics for a specific WOEID, if trending information is available for it.
 
    The response is an array of “trend” objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL.
 
    This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+
+   The tweet_volume for the last 24 hours is also returned for many trends if this is available.
 
    :param id: The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID.
    :param exclude: Setting this equal to hashtags will remove all hashtags from the trends list.
@@ -823,7 +916,7 @@ example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
 
    When a ``TweepError`` is raised due to an error Twitter responded with,
    the error code (`as described in the API documentation
-   <https://dev.twitter.com/overview/api/response-codes>`_) can be accessed
+   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be accessed
    at ``TweepError.response.text``. Note, however, that ``TweepError``\ s
    also may be raised with other things as message (for example plain
    error reason strings).

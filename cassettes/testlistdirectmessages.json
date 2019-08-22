@@ -1,0 +1,99 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/direct_messages/events/list.json",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "content-length": [
+                        "56"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562991666"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "14"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "x-connection-hash": [
+                        "4d7817b7fe77dbb0e40785bd9f5dbe6b"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "date": [
+                        "Sat, 13 Jul 2019 04:06:06 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "last-modified": [
+                        "Sat, 13 Jul 2019 04:06:06 GMT"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-transaction": [
+                        "00daf5c0000082c2"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_TLAth1AvGuvuQAXnlvPVZQ==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 04:06:06 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156299076660481425; Max-Age=63072000; Expires=Mon, 12 Jul 2021 04:06:06 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-response-time": [
+                        "18"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ]
+                },
+                "body": {
+                    "string": "{\"events\":[],\"next_cursor\":\"MTE0MjA5ODA3OTUyNjYwMDcwOA\"}"
+                }
+            }
+        }
+    ]
+}

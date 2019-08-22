@@ -1,39 +1,22 @@
-sudo: false
-
 language: python
 cache: pip
 
 python:
 - '2.7'
-- '3.4'
 - '3.5'
 - '3.6'
 
+matrix:
+  fast_finish: true
+  include:
+    - python: 3.7
+      dist: xenial
+
 env:
   global:
-  - TWITTER_USERNAME="TheTweepyTester"
+  - TWITTER_USERNAME="TweepyDev"
   - AWS_BUCKET="tweepy"
   - USE_REPLAY=1
-  - secure: ! 'MZv5O5E5E1074sT14wnRThOeFoDTZy+AdIUy+S6XqY/DMVWF2utSx09GLbvM
-
-      EM+cnKavRLHTbKpoHPIzzhKx9DQLrxtYy+s3Rw9AeGo8K3LA7mcn4T4eCH7s
-
-      RGaEkEqH4wTbe01zsmBJ9n9pALmtFgDk9WeDlpAY9wc5cAPgrZ4='
-  - secure: ! 'f4nCh413cDJF3llGsUdaSz8Rw8WaEDzsSAqa7rK8IcozvS6+S82nm8A/xKYg
-
-      i6A6uC081XWa6JqQ9hyTxHam3OWGAYrytELrEUfkX4ZYMM8lmQYCmnhrN9r/
-
-      FaX1haT4lRfm9r0zAYZileLVmcTg8LSZzpRowA/DH9ZO8QD76b4='
-  - secure: ! 'YxZerqEAifcNS3qTbWyr2MAxDl1hMGv2p87nmw+AHP62LoTGEhHtulQdadjG
-
-      CNdhLzyIY+GgRotWVu39OfVPRKyfMBFrpPdUY7tKSZ/O8Ct9792mrSvCOpOV
-
-      Li/TYytFtrNQiB7yjcoaub1RabffBcLbu5YzbWN4gPrukQV03Jc='
-  - secure: ! 'nKkytraqLGUm33K1GpwkjOyxACDHYw4GMvOGyDwVTX7VNwqxbkUojB7qXYoQ
-
-      JjlEyFWS487IFteR87U9pt18qongJJIphaBdT9/lDVLsMWZ0Jh5ZLQfX+2jS
-
-      aF2UwsrYkzBUMrqMqYCc2+X6CuswLEZTVXDAlNh+emvhxZ5faMI='
   - secure: TPQSFGqdl6khXqQqTZ6euROoAmFRnONAlPXD6npvTIIN+fNfnz8lvZtOEWHo2jRPLoU3FyVUhYvTynj6B2hJinulP+RKOMbQ65HCZVHrsitwl1n1QZB5HegQDOYc5q6VTTYn/r8r5tGy35U0O80y1zycTLqSJiXlkdqsSq564pI=
 
 install:
@@ -58,6 +41,3 @@ deploy:
   on:
     repo: tweepy/tweepy
     tags: true
-
-matrix:
-  fast_finish: true

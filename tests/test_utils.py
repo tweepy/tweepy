@@ -1,8 +1,8 @@
-from tweepy.utils import *
-
 import random
 import string
 import unittest
+
+from tweepy.utils import *
 
 
 def mock_tweet():

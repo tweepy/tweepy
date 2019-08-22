@@ -2,29 +2,36 @@
     "version": 1,
     "interactions": [
         {
+            "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/lists/members/show.json?owner_screen_name=Twitter&slug=Official-Twitter-Accounts&screen_name=TwitterAPI",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }
+            },
             "response": {
                 "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "{\"id\":31353077,\"id_str\":\"31353077\",\"name\":\"Nathan Fillion\",\"screen_name\":\"NathanFillion\",\"location\":\"Los Angeles\",\"description\":\"It costs nothing to say something kind. Even less to shut up altogether.\",\"url\":null,\"entities\":{\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":3509531,\"friends_count\":611,\"listed_count\":37565,\"created_at\":\"Wed Apr 15 05:57:40 +0000 2009\",\"favourites_count\":261,\"utc_offset\":-25200,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":false,\"verified\":true,\"statuses_count\":10558,\"lang\":\"en\",\"status\":{\"created_at\":\"Sat Nov 05 01:41:20 +0000 2016\",\"id\":794716195446460416,\"id_str\":\"794716195446460416\",\"text\":\"Just posted a photo https:\\/\\/t.co\\/cyMOnKy43S\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/cyMOnKy43S\",\"expanded_url\":\"https:\\/\\/www.instagram.com\\/p\\/BMaQ8sojUUp\\/\",\"display_url\":\"instagram.com\\/p\\/BMaQ8sojUUp\\/\",\"indices\":[20,43]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/instagram.com\\\" rel=\\\"nofollow\\\"\\u003eInstagram\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":63,\"favorite_count\":461,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":true,\"profile_background_color\":\"131516\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme14\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/713071349699371010\\/IFGT6CVK_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/713071349699371010\\/IFGT6CVK_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/31353077\\/1375475379\",\"profile_link_color\":\"009999\",\"profile_sidebar_border_color\":\"EEEEEE\",\"profile_sidebar_fill_color\":\"EFEFEF\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"none\"}"
+                    "code": 200,
+                    "message": "OK"
                 },
                 "headers": {
-                    "content-length": [
-                        "2389"
+                    "content-type": [
+                        "application/json;charset=utf-8"
                     ],
-                    "x-transaction": [
-                        "00fdffba00a2bb1b"
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
                     ],
                     "last-modified": [
-                        "Sat, 05 Nov 2016 21:44:00 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382709"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
+                        "Sat, 13 Jul 2019 02:27:52 GMT"
                     ],
                     "server": [
                         "tsa_b"
@@ -32,17 +39,8 @@
                     "cache-control": [
                         "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "13"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:44:00 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
+                    "x-connection-hash": [
+                        "8f95361c55957f1cf9bc4c17e17f1628"
                     ],
                     "x-rate-limit-limit": [
                         "15"
@@ -50,47 +48,50 @@
                     "x-frame-options": [
                         "SAMEORIGIN"
                     ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838224002113328; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:44:00 UTC"
+                    "x-rate-limit-remaining": [
+                        "6"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:52 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_0O3eqCClYdJ3NMsdFxz4uA==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:52 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298487264860627; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:52 GMT; Path=/; Domain=.twitter.com"
+                    ],
                     "x-access-level": [
                         "read-write-directmessages"
                     ],
-                    "x-response-time": [
-                        "44"
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
                     ],
-                    "x-connection-hash": [
-                        "1aea52f973e0d01d3168d7d5220acfb7"
+                    "x-transaction": [
+                        "00db753d00e30e8d"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "2785"
+                    ],
+                    "x-response-time": [
+                        "37"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984900"
                     ]
-                }
-            },
-            "request": {
-                "method": "GET",
-                "uri": "https://api.twitter.com/1.1/lists/members/show.json?owner_screen_name=applepie&slug=stars&screen_name=NathanFillion",
-                "body": null,
-                "headers": {
-                    "Host": [
-                        "api.twitter.com"
-                    ]
+                },
+                "body": {
+                    "string": "{\"id\":6253282,\"id_str\":\"6253282\",\"name\":\"Twitter API\",\"screen_name\":\"TwitterAPI\",\"location\":\"San Francisco, CA\",\"description\":\"The Real Twitter API. Tweets about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.\",\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"expanded_url\":\"https:\\/\\/developer.twitter.com\",\"display_url\":\"developer.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":6121857,\"friends_count\":12,\"listed_count\":12893,\"created_at\":\"Wed May 23 06:01:13 +0000 2007\",\"favourites_count\":31,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":3666,\"lang\":null,\"status\":{\"created_at\":\"Mon Jun 24 17:50:46 +0000 2019\",\"id\":1143214899109277697,\"id_str\":\"1143214899109277697\",\"text\":\"We\\u2019ve spoken with all developers who\\u2019ve contacted us to discuss these new rate limits and elevations, and as of tod\\u2026 https:\\/\\/t.co\\/w8WoepBjeU\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/w8WoepBjeU\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1143214899109277697\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":1141392777600806912,\"in_reply_to_status_id_str\":\"1141392777600806912\",\"in_reply_to_user_id\":6253282,\"in_reply_to_user_id_str\":\"6253282\",\"in_reply_to_screen_name\":\"TwitterAPI\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":24,\"favorite_count\":38,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6253282\\/1497491515\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}"
                 }
             }
         }

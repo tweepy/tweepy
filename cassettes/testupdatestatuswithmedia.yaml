@@ -72,45 +72,79 @@ interactions:
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAAA+H/vfwFSjkrT3Y14vAAAAABJRU5ErkJggg0KLS1UdzNlUHktLQ0K
     headers:
-      Content-Length: ['3978']
-      Content-Type: [multipart/form-data; boundary=Tw3ePy]
-      Host: [api.twitter.com]
+      Content-Length:
+      - '3978'
+      Content-Type:
+      - multipart/form-data; boundary=Tw3ePy
+      Host:
+      - api.twitter.com
     method: POST
     uri: https://api.twitter.com/1.1/statuses/update_with_media.json?status=testing+1000
   response:
-    body: {string: '{"created_at":"Sat Nov 05 21:44:24 +0000 2016","id":795018956507582465,"id_str":"795018956507582465","text":"testing
-        1000 https:\/\/t.co\/HFZNy7Fz9o","truncated":false,"entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[],"media":[{"id":795018953181593600,"id_str":"795018953181593600","indices":[13,36],"media_url":"http:\/\/pbs.twimg.com\/media\/Cwh5hpYXgAAXF-1.jpg","media_url_https":"https:\/\/pbs.twimg.com\/media\/Cwh5hpYXgAAXF-1.jpg","url":"https:\/\/t.co\/HFZNy7Fz9o","display_url":"pic.twitter.com\/HFZNy7Fz9o","expanded_url":"https:\/\/twitter.com\/TheTweepyTester\/status\/795018956507582465\/photo\/1","type":"photo","sizes":{"small":{"w":680,"h":340,"resize":"fit"},"medium":{"w":1200,"h":600,"resize":"fit"},"thumb":{"w":150,"h":150,"resize":"crop"},"large":{"w":1252,"h":626,"resize":"fit"}}}]},"extended_entities":{"media":[{"id":795018953181593600,"id_str":"795018953181593600","indices":[13,36],"media_url":"http:\/\/pbs.twimg.com\/media\/Cwh5hpYXgAAXF-1.jpg","media_url_https":"https:\/\/pbs.twimg.com\/media\/Cwh5hpYXgAAXF-1.jpg","url":"https:\/\/t.co\/HFZNy7Fz9o","display_url":"pic.twitter.com\/HFZNy7Fz9o","expanded_url":"https:\/\/twitter.com\/TheTweepyTester\/status\/795018956507582465\/photo\/1","type":"photo","sizes":{"small":{"w":680,"h":340,"resize":"fit"},"medium":{"w":1200,"h":600,"resize":"fit"},"thumb":{"w":150,"h":150,"resize":"crop"},"large":{"w":1252,"h":626,"resize":"fit"}}}]},"source":"\u003ca
-        href=\"https:\/\/github.com\/tweepy\/tweepy\" rel=\"nofollow\"\u003eTweepy
-        dev\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":794682839556038656,"id_str":"794682839556038656","name":"Tweepy
-        Test","screen_name":"TheTweepyTester","location":"","description":"","url":null,"entities":{"description":{"urls":[]}},"protected":false,"followers_count":1,"friends_count":18,"listed_count":0,"created_at":"Fri
-        Nov 04 23:28:48 +0000 2016","favourites_count":0,"utc_offset":-25200,"time_zone":"Pacific
-        Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":112,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_6_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_6_normal.png","profile_banner_url":"https:\/\/pbs.twimg.com\/profile_banners\/794682839556038656\/1478382257","profile_link_color":"1B95E0","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":false,"default_profile":false,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}'}
+    body:
+      string: '{"created_at":"Sat Jul 13 05:33:14 +0000 2019","id":1149914662164684800,"id_str":"1149914662164684800","text":"testing
+        1000 https:\/\/t.co\/kIbedWfwG2","truncated":false,"entities":{"hashtags":[],"symbols":[],"user_mentions":[],"urls":[],"media":[{"id":1149914661267148800,"id_str":"1149914661267148800","indices":[13,36],"media_url":"http:\/\/pbs.twimg.com\/media\/D_VRSrrXkAAYzkx.png","media_url_https":"https:\/\/pbs.twimg.com\/media\/D_VRSrrXkAAYzkx.png","url":"https:\/\/t.co\/kIbedWfwG2","display_url":"pic.twitter.com\/kIbedWfwG2","expanded_url":"https:\/\/twitter.com\/TweepyDev\/status\/1149914662164684800\/photo\/1","type":"photo","sizes":{"medium":{"w":1200,"h":600,"resize":"fit"},"large":{"w":1252,"h":626,"resize":"fit"},"small":{"w":680,"h":340,"resize":"fit"},"thumb":{"w":150,"h":150,"resize":"crop"}}}]},"extended_entities":{"media":[{"id":1149914661267148800,"id_str":"1149914661267148800","indices":[13,36],"media_url":"http:\/\/pbs.twimg.com\/media\/D_VRSrrXkAAYzkx.png","media_url_https":"https:\/\/pbs.twimg.com\/media\/D_VRSrrXkAAYzkx.png","url":"https:\/\/t.co\/kIbedWfwG2","display_url":"pic.twitter.com\/kIbedWfwG2","expanded_url":"https:\/\/twitter.com\/TweepyDev\/status\/1149914662164684800\/photo\/1","type":"photo","sizes":{"medium":{"w":1200,"h":600,"resize":"fit"},"large":{"w":1252,"h":626,"resize":"fit"},"small":{"w":680,"h":340,"resize":"fit"},"thumb":{"w":150,"h":150,"resize":"crop"}}}]},"source":"\u003ca
+        href=\"https:\/\/github.com\/tweepy\/tweepy\" rel=\"nofollow\"\u003eTesting
+        for Tweepy\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":1072250532645998596,"id_str":"1072250532645998596","name":"Tweepy
+        Testing","screen_name":"TweepyDev","location":"","description":"Account used
+        to test Tweepy","url":"https:\/\/t.co\/XRfax6xExn","entities":{"url":{"urls":[{"url":"https:\/\/t.co\/XRfax6xExn","expanded_url":"https:\/\/github.com\/tweepy\/tweepy","display_url":"github.com\/tweepy\/tweepy","indices":[0,23]}]},"description":{"urls":[]}},"protected":false,"followers_count":1,"friends_count":2,"listed_count":0,"created_at":"Mon
+        Dec 10 22:03:43 +0000 2018","favourites_count":0,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":15,"lang":null,"contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_normal.png","profile_image_url_https":"https:\/\/abs.twimg.com\/sticky\/default_profile_images\/default_profile_normal.png","profile_banner_url":"https:\/\/pbs.twimg.com\/profile_banners\/1072250532645998596\/1562984888","profile_link_color":"1DA1F2","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":false,"default_profile":false,"default_profile_image":true,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}'
     headers:
-      cache-control: ['no-cache, no-store, must-revalidate, pre-check=0, post-check=0']
-      content-disposition: [attachment; filename=json.json]
-      content-length: ['3365']
-      content-type: [application/json;charset=utf-8]
-      date: ['Sat, 05 Nov 2016 21:44:24 GMT']
-      expires: ['Tue, 31 Mar 1981 05:00:00 GMT']
-      last-modified: ['Sat, 05 Nov 2016 21:44:24 GMT']
-      pragma: [no-cache]
-      server: [tsa_b]
-      set-cookie: [lang=en; Path=/, 'guest_id=v1%3A147838226382549038; Domain=.twitter.com;
-          Path=/; Expires=Mon, 05-Nov-2018 21:44:24 UTC']
-      status: [200 OK]
-      strict-transport-security: [max-age=631138519]
-      x-access-level: [read-write-directmessages]
-      x-connection-hash: [bcfd656236452da90d758354335ebe19]
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-mediaratelimit-class: [photos]
-      x-mediaratelimit-limit: ['3000']
-      x-mediaratelimit-remaining: ['2993']
-      x-mediaratelimit-reset: ['1478453411']
-      x-response-time: ['1136']
-      x-transaction: [00c4d70f0031146f]
-      x-tsa-request-body-time: ['1']
-      x-twitter-response-tags: [BouncerCompliant]
-      x-xss-protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-length:
+      - '3556'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Sat, 13 Jul 2019 05:33:14 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sat, 13 Jul 2019 05:33:14 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_irYfbjfPN1Ncd66KtB6Fwg=="; Max-Age=63072000; Expires=Mon,
+        12 Jul 2021 05:33:14 GMT; Path=/; Domain=.twitter.com
+      - lang=en; Path=/
+      - guest_id=v1%3A156299599427786135; Max-Age=63072000; Expires=Mon, 12 Jul 2021
+        05:33:14 GMT; Path=/; Domain=.twitter.com
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - f3d799a7209d97f8dbbe0878210d7678
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-mediaratelimit-class:
+      - photos
+      x-mediaratelimit-limit:
+      - '6000'
+      x-mediaratelimit-remaining:
+      - '5976'
+      x-mediaratelimit-reset:
+      - '1563065162'
+      x-response-time:
+      - '415'
+      x-transaction:
+      - 00502fc1003c9425
+      x-tsa-request-body-time:
+      - '61'
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - 1; mode=block; report=https://twitter.com/i/xss_report
+    status:
+      code: 200
+      message: OK
 version: 1

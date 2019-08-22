@@ -1,27 +1,24 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import print_function
-
-import time
-import re
-
-from six.moves.urllib.parse import quote, urlencode
-import requests
-
 import logging
-
-from tweepy.error import TweepError, RateLimitError, is_rate_limit_error_message
-from tweepy.utils import convert_to_utf8_str
-from tweepy.models import Model
-import six
+import re
 import sys
+import time
 
+import requests
+import six
+from six.moves.urllib.parse import quote, urlencode
 
-re_path_template = re.compile('{\w+}')
+from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
+from tweepy.models import Model
+from tweepy.utils import convert_to_utf8_str
 
-log = logging.getLogger('tweepy.binder')
+re_path_template = re.compile(r'{\w+}')
+
+log = logging.getLogger(__name__)
+
 
 def bind_api(**config):
 
@@ -47,6 +44,7 @@ def bind_api(**config):
                 raise TweepError('Authentication required!')
 
             self.post_data = kwargs.pop('post_data', None)
+            self.json_payload = kwargs.pop('json_payload', None)
             self.retry_count = kwargs.pop('retry_count',
                                           api.retry_count)
             self.retry_delay = kwargs.pop('retry_delay',
@@ -185,6 +183,7 @@ def bind_api(**config):
                     resp = self.session.request(self.method,
                                                 full_url,
                                                 data=self.post_data,
+                                                json=self.json_payload,
                                                 timeout=self.api.timeout,
                                                 auth=auth,
                                                 proxies=self.api.proxy)
@@ -206,7 +205,7 @@ def bind_api(**config):
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
-                if resp.status_code == 200:
+                if resp.status_code in (200, 204):
                     break
                 elif (resp.status_code == 429 or resp.status_code == 420) and self.wait_on_rate_limit:
                     if 'retry-after' in resp.headers:
@@ -244,10 +243,13 @@ def bind_api(**config):
 
     def _call(*args, **kwargs):
         method = APIMethod(args, kwargs)
-        if kwargs.get('create'):
-            return method
-        else:
-            return method.execute()
+        try:
+            if kwargs.get('create'):
+                return method
+            else:
+                return method.execute()
+        finally:
+            method.session.close()
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:

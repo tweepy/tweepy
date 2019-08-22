@@ -8,35 +8,36 @@ Authentication Tutorial
 Introduction
 ============
 
-Tweepy supports oauth authentication. Authentication is
-handled by the tweepy.AuthHandler class.
+Tweepy supports both OAuth 1a (application-user) and OAuth 2
+(application-only) authentication. Authentication is handled by the
+tweepy.AuthHandler class.
 
-OAuth Authentication
-====================
+OAuth 1a Authentication
+=======================
 
-Tweepy tries to make OAuth as painless as possible for you. To begin
+Tweepy tries to make OAuth 1a as painless as possible for you. To begin
 the process we need to register our client application with
 Twitter. Create a new application and once you
-are done you should have your consumer token and secret. Keep these
+are done you should have your consumer key and secret. Keep these
 two handy, you'll need them.
 
 The next step is creating an OAuthHandler instance. Into this we pass
-our consumer token and secret which was given to us in the previous
+our consumer key and secret which was given to us in the previous
 paragraph::
 
-   auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
+   auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 
 If you have a web application and are using a callback URL that needs
 to be supplied dynamically you would pass it in like so::
 
-   auth = tweepy.OAuthHandler(consumer_token, consumer_secret,
+   auth = tweepy.OAuthHandler(consumer_key, consumer_secret,
    callback_url)
 
 If the callback URL will not be changing, it is best to just configure
 it statically on twitter.com when setting up your application's
 profile.
 
-Unlike basic auth, we must do the OAuth "dance" before we can start
+Unlike basic auth, we must do the OAuth 1a "dance" before we can start
 using the API. We must complete the following steps:
 
 #. Get a request token from twitter
@@ -65,7 +66,7 @@ request token in the session since we will need it inside the callback
 URL request. Here is a pseudo example of storing the request token in
 a session::
 
-   session.set('request_token', auth.request_token)
+   session.set('request_token', auth.request_token['oauth_token'])
 
 So now we can redirect the user to the URL returned to us earlier from
 the get_authorization_url() method.
@@ -123,3 +124,25 @@ are ready for business::
 
    api = tweepy.API(auth)
    api.update_status('tweepy + oauth!')
+
+OAuth 2 Authentication
+======================
+
+Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of
+authentication where an application makes API requests without the
+user context. Use this method if you just need read-only access to
+public information.
+
+Like OAuth 1a, we first register our client application and acquire
+a consumer key and secret.
+
+Then we create an AppAuthHandler instance, passing in our consumer
+key and secret::
+
+   auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
+
+With the bearer token received, we are now ready for business::
+
+   api = tweepy.API(auth)
+   for tweet in tweepy.Cursor(api.search, q='tweepy').items(10):
+       print(tweet.text)

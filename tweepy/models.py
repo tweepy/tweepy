@@ -1,10 +1,10 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2019 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import absolute_import, print_function
+from __future__ import absolute_import
 
-from tweepy.utils import parse_datetime, parse_html_value, parse_a_href
+from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 
 
 class ResultSet(list):
@@ -60,6 +60,16 @@ class Model(object):
             a result set of model instances.
         """
         results = ResultSet()
+
+        # Handle map parameter for statuses/lookup
+        if isinstance(json_list, dict) and 'id' in json_list:
+            for _id, obj in json_list['id'].items():
+                if obj:
+                    results.append(cls.parse(api, obj))
+                else:
+                    results.append(cls.parse(api, {'id': int(_id)}))
+            return results
+
         for obj in json_list:
             if obj:
                 results.append(cls.parse(api, obj))
@@ -201,20 +211,43 @@ class User(Model):
                                        *args,
                                        **kargs)
 
+    def __eq__(self, other):
+        if isinstance(other, User):
+            return self.id == other.id
+
+        return NotImplemented
+
+    def __ne__(self, other):
+        result = self == other
+
+        if result is NotImplemented:
+            return result
+
+        return not result
+
 
 class DirectMessage(Model):
 
     @classmethod
     def parse(cls, api, json):
         dm = cls(api)
+        if "event" in json:
+            json = json["event"]
         for k, v in json.items():
-            if k == 'sender' or k == 'recipient':
-                setattr(dm, k, User.parse(api, v))
-            elif k == 'created_at':
-                setattr(dm, k, parse_datetime(v))
-            else:
-                setattr(dm, k, v)
+            setattr(dm, k, v)
         return dm
+
+    @classmethod
+    def parse_list(cls, api, json_list):
+        if isinstance(json_list, list):
+            item_list = json_list
+        else:
+            item_list = json_list['events']
+
+        results = ResultSet()
+        for obj in item_list:
+            results.append(cls.parse(api, obj))
+        return results
 
     def destroy(self):
         return self._api.destroy_direct_message(self.id)
@@ -228,25 +261,17 @@ class Friendship(Model):
 
         # parse source
         source = cls(api)
+        setattr(source, '_json', relationship['source'])
         for k, v in relationship['source'].items():
             setattr(source, k, v)
 
         # parse target
         target = cls(api)
+        setattr(target, '_json', relationship['target'])
         for k, v in relationship['target'].items():
             setattr(target, k, v)
 
         return source, target
-
-
-class Category(Model):
-
-    @classmethod
-    def parse(cls, api, json):
-        category = cls(api)
-        for k, v in json.items():
-            setattr(category, k, v)
-        return category
 
 
 class SavedSearch(Model):
@@ -289,6 +314,7 @@ class List(Model):
     @classmethod
     def parse(cls, api, json):
         lst = List(api)
+        setattr(lst, '_json', json)
         for k, v in json.items():
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
@@ -483,7 +509,6 @@ class ModelFactory(object):
     friendship = Friendship
     saved_search = SavedSearch
     search_results = SearchResults
-    category = Category
     list = List
     relation = Relation
     relationship = Relationship
