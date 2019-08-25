@@ -60,7 +60,7 @@ class CursorIterator(BaseIterator):
 
     def __init__(self, method, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
-        start_cursor = kwargs.pop('cursor', None)
+        start_cursor = self.kwargs.pop('cursor', None)
         self.next_cursor = start_cursor or -1
         self.prev_cursor = start_cursor or 0
         self.num_tweets = 0
@@ -91,7 +91,7 @@ class IdIterator(BaseIterator):
 
     def __init__(self, method, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
-        self.max_id = kwargs.pop('max_id', None)
+        self.max_id = self.kwargs.pop('max_id', None)
         self.num_tweets = 0
         self.results = []
         self.model_results = []
