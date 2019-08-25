@@ -12,11 +12,11 @@ class Cursor(object):
     def __init__(self, method, *args, **kwargs):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
-                self.iterator = CursorIterator(method, args, kwargs)
+                self.iterator = CursorIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'id':
-                self.iterator = IdIterator(method, args, kwargs)
+                self.iterator = IdIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'page':
-                self.iterator = PageIterator(method, args, kwargs)
+                self.iterator = PageIterator(method, *args, **kwargs)
             else:
                 raise TweepError('Invalid pagination mode.')
         else:
@@ -37,7 +37,7 @@ class Cursor(object):
 
 class BaseIterator(object):
 
-    def __init__(self, method, args, kwargs):
+    def __init__(self, method, *args, **kwargs):
         self.method = method
         self.args = args
         self.kwargs = kwargs
@@ -58,8 +58,8 @@ class BaseIterator(object):
 
 class CursorIterator(BaseIterator):
 
-    def __init__(self, method, args, kwargs):
-        BaseIterator.__init__(self, method, args, kwargs)
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
         start_cursor = kwargs.pop('cursor', None)
         self.next_cursor = start_cursor or -1
         self.prev_cursor = start_cursor or 0
@@ -89,8 +89,8 @@ class CursorIterator(BaseIterator):
 
 class IdIterator(BaseIterator):
 
-    def __init__(self, method, args, kwargs):
-        BaseIterator.__init__(self, method, args, kwargs)
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
         self.max_id = kwargs.pop('max_id', None)
         self.num_tweets = 0
         self.results = []
@@ -155,8 +155,8 @@ class IdIterator(BaseIterator):
 
 class PageIterator(BaseIterator):
 
-    def __init__(self, method, args, kwargs):
-        BaseIterator.__init__(self, method, args, kwargs)
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
         self.current_page = 0
 
     def next(self):

@@ -36,7 +36,7 @@ def bind_api(**config):
         use_cache = config.get('use_cache', True)
         session = requests.Session()
 
-        def __init__(self, args, kwargs):
+        def __init__(self, *args, **kwargs):
             api = self.api
             # If authentication is required and no credentials
             # are provided, throw an error.
@@ -242,7 +242,7 @@ def bind_api(**config):
             return result
 
     def _call(*args, **kwargs):
-        method = APIMethod(args, kwargs)
+        method = APIMethod(*args, **kwargs)
         try:
             if kwargs.get('create'):
                 return method
