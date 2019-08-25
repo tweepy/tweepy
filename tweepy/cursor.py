@@ -217,6 +217,8 @@ class ItemIterator(BaseIterator):
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
             self.current_page = self.page_iterator.next()
+            while len(self.current_page) == 0:
+                self.current_page = self.page_iterator.next()
             self.page_index = -1
         self.page_index += 1
         self.num_tweets += 1
