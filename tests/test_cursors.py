@@ -33,7 +33,7 @@ class TweepyCursorTests(TweepyTestCase):
     def testcursorsetstartcursor(self):
         c = Cursor(self.api.friends_ids, cursor=123456)
         self.assertEqual(c.iterator.next_cursor, 123456)
-        self.assertFalse('cursor' in c.iterator.kargs)
+        self.assertFalse('cursor' in c.iterator.kwargs)
 
     @tape.use_cassette('testcursornext.json')
     def testcursornext(self):

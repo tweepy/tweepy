@@ -591,7 +591,7 @@ class API(object):
             use_cache=False
         )
 
-    def verify_credentials(self, **kargs):
+    def verify_credentials(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
             :allowed_param:'include_entities', 'skip_status', 'include_email'
         """
@@ -602,7 +602,7 @@ class API(object):
                 payload_type='user',
                 require_auth=True,
                 allowed_param=['include_entities', 'skip_status', 'include_email'],
-            )(**kargs)
+            )(**kwargs)
         except TweepError as e:
             if e.response and e.response.status == 401:
                 return False
@@ -635,11 +635,11 @@ class API(object):
             require_auth=True
         )(self, post_data=post_data, headers=headers)
 
-    def update_profile_background_image(self, filename, **kargs):
+    def update_profile_background_image(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_background_image
             :allowed_param:'tile', 'include_entities', 'skip_status', 'use'
         """
-        f = kargs.pop('file', None)
+        f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 800, f=f)
         return bind_api(
             api=self,
@@ -650,11 +650,11 @@ class API(object):
             require_auth=True
         )(post_data=post_data, headers=headers)
 
-    def update_profile_banner(self, filename, **kargs):
+    def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param:'width', 'height', 'offset_left', 'offset_right'
         """
-        f = kargs.pop('file', None)
+        f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 700, form_field="banner", f=f)
         return bind_api(
             api=self,
