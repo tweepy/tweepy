@@ -99,7 +99,7 @@ class DMCursorIterator(BaseIterator):
     def next(self):
         if self.next_cursor == -1 or (self.limit and self.page_count == self.limit):
             raise StopIteration
-        data = self.method(cursor=self.next_cursor, *self.args, **self.kwargs)
+        data = self.method(cursor=self.next_cursor, return_cursors=True, *self.args, **self.kwargs)
         self.page_count += 1
         if isinstance(data, tuple):
             data, self.next_cursor = data
