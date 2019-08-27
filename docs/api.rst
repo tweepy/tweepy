@@ -130,8 +130,16 @@ Status methods
                               [source], [place_id], [display_coordinates], \
                               [media_ids])
 
-   Update the authenticated user's status. Statuses that are duplicates or too
-   long will be silently ignored.
+   Updates the authenticating user's current status, also known as Tweeting.
+
+   For each update attempt, the update text is compared with the authenticating
+   user's recent Tweets. Any attempt that would result in duplication will be
+   blocked, resulting in a 403 error. A user cannot submit the same status
+   twice in a row.
+
+   While not rate limited by the API, a user is limited in the number of Tweets
+   they can create at a time. If the number of updates posted by the user
+   reaches the current allowed limit this method will return an HTTP 403 error.
 
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update
