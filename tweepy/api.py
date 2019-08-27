@@ -176,7 +176,7 @@ class API(object):
 
     def update_status(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
-            :allowed_param:'status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
+            :allowed_param:'status', 'in_reply_to_status_id', 'auto_populate_reply_metadata', 'exclude_reply_user_ids', 'attachment_url', 'media_ids', 'possibly_sensitive', 'lat', 'long', 'place_id', 'display_coordinates', 'trim_user', 'enable_dmcommands', 'fail_dmcommands', 'card_uri'
         """
         post_data = {}
         media_ids = kwargs.pop("media_ids", None)
@@ -188,7 +188,7 @@ class API(object):
             path='/statuses/update.json',
             method='POST',
             payload_type='status',
-            allowed_param=['status', 'in_reply_to_status_id', 'in_reply_to_status_id_str', 'auto_populate_reply_metadata', 'lat', 'long', 'source', 'place_id', 'display_coordinates'],
+            allowed_param=['status', 'in_reply_to_status_id', 'auto_populate_reply_metadata', 'exclude_reply_user_ids', 'attachment_url', 'media_ids', 'possibly_sensitive', 'lat', 'long', 'place_id', 'display_coordinates', 'trim_user', 'enable_dmcommands', 'fail_dmcommands', 'card_uri'],
             require_auth=True
         )(post_data=post_data, *args, **kwargs)
 
