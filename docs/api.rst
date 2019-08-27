@@ -366,13 +366,12 @@ Account Methods
 
 .. method:: API.rate_limit_status()
 
-   Returns the remaining number of API requests available to the
-   requesting user before the API limit is reached for the current
-   hour. Calls to rate_limit_status do not count against the rate
-   limit. If authentication credentials are provided, the rate limit
-   status for the authenticating user is returned. Otherwise, the rate
-   limit status for the requester's IP address is returned.
+   Returns the current rate limits for methods belonging to the specified
+   resource families. When using application-only auth, this method's response
+   indicates the application-only auth rate limiting context.
 
+   :param resources: A comma-separated list of resource families you want to
+                     know the current rate limit disposition for.
    :rtype: :class:`JSON` object
 
 
