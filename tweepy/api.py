@@ -648,6 +648,8 @@ class API(object):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
             :allowed_param: 'include_entities', 'skip_status', 'include_email'
         """
+        if "include_email" in kwargs:
+            kwargs["include_email"] = str(kwargs["include_email"]).lower()
         try:
             return bind_api(
                 api=self,
