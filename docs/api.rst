@@ -454,7 +454,8 @@ Friendship Methods
 Account Methods
 ---------------
 
-.. method:: API.verify_credentials()
+.. method:: API.verify_credentials([include_entities], [skip_status], \
+                                   [include_email])
 
    Verify the supplied user credentials are valid.
 
