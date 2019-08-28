@@ -658,7 +658,7 @@ class API(object):
                                'include_email'],
             )(**kwargs)
         except TweepError as e:
-            if e.response and e.response.status == 401:
+            if e.response is not None and e.response.status_code == 401:
                 return False
             raise
 
