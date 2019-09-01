@@ -101,7 +101,8 @@ class API(object):
 
     def statuses_lookup(self, id_, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
-            :allowed_param: 'id', 'include_entities', 'trim_user', 'map'
+            :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
+                            'include_ext_alt_text', 'include_card_uri'
         """
         kwargs.update({'id': list_to_csv(id_)})
         if 'map_' in kwargs:
@@ -111,7 +112,8 @@ class API(object):
             api=self,
             path='/statuses/lookup.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'include_entities', 'trim_user', 'map'],
+            allowed_param=['id', 'include_entities', 'trim_user', 'map',
+                           'include_ext_alt_text', 'include_card_uri'],
             require_auth=True
         )(*args, **kwargs)
 

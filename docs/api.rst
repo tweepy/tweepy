@@ -60,7 +60,8 @@ Timeline methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_])
+.. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
+                                [include_ext_alt_text], [include_card_uri])
 
    Returns full Tweet objects for up to 100 tweets per request, specified by
    the `id` parameter.
@@ -70,6 +71,8 @@ Timeline methods
    :param trim_user: |trim_user|
    :param map_: A boolean indicating whether or not to include tweets that
                 cannot be shown. Defaults to False.
+   :param include_ext_alt_text: |include_ext_alt_text|
+   :param include_card_uri: |include_card_uri|
    :rtype: list of :class:`Status` objects
 
 
