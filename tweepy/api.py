@@ -99,25 +99,21 @@ class API(object):
             require_auth=True
         )
 
-    def statuses_lookup(self, id_, include_entities=None, trim_user=None,
-                        map_=None, tweet_mode=None):
-        return self._statuses_lookup(list_to_csv(id_), include_entities,
-                                     trim_user, map_, tweet_mode)
-
-    @property
-    def _statuses_lookup(self):
+    def statuses_lookup(self, id_, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
-            :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
-                            'tweet_mode'
+            :allowed_param: 'id', 'include_entities', 'trim_user', 'map'
         """
+        kwargs.update({'id': list_to_csv(id_)})
+        if 'map_' in kwargs:
+            kwargs['map'] = kwargs.pop('map_')
+
         return bind_api(
             api=self,
             path='/statuses/lookup.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'include_entities', 'trim_user', 'map',
-                           'tweet_mode'],
+            allowed_param=['id', 'include_entities', 'trim_user', 'map'],
             require_auth=True
-        )
+        )(*args, **kwargs)
 
     @property
     def user_timeline(self):
