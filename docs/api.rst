@@ -125,10 +125,12 @@ Status methods
 
 
 .. method:: API.update_status(status, [in_reply_to_status_id], \
-                              [in_reply_to_status_id_str], \
-                              [auto_populate_reply_metadata], [lat], [long], \
-                              [source], [place_id], [display_coordinates], \
-                              [media_ids])
+                              [auto_populate_reply_metadata], \
+                              [exclude_reply_user_ids], [attachment_url], \
+                              [media_ids], [possibly_sensitive], [lat], \
+                              [long], [place_id], [display_coordinates], \
+                              [trim_user], [enable_dmcommands], \
+                              [fail_dmcommands], [card_uri])
 
    Updates the authenticating user's current status, also known as Tweeting.
 
