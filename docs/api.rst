@@ -67,8 +67,7 @@ Timeline methods
 
    :param id_: A list of Tweet IDs to lookup, up to 100
    :param include_entities: |include_entities|
-   :param trim_user: A boolean indicating if user IDs should be provided,
-                     instead of full user information. Defaults to False.
+   :param trim_user: |trim_user|
    :param map_: A boolean indicating whether or not to include tweets that
                 cannot be shown. Defaults to False.
    :rtype: list of :class:`Status` objects
@@ -184,9 +183,7 @@ Status methods
    :param place_id: A place in the world.
    :param display_coordinates: Whether or not to put a pin on the exact
       coordinates a Tweet has been sent from.
-   :param trim_user: When set to either true, t, or 1, the response will
-      include a user object including only the author's ID. Omit this
-      parameter to receive the complete user object.
+   :param trim_user: |trim_user|
    :param enable_dmcommands: When set to true, enables shortcode commands for
       sending Direct Messages as part of the status text to send a Direct
       Message to a user. When set to false, disables this behavior and includes
