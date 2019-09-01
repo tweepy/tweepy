@@ -234,6 +234,26 @@ class API(object):
             upload_api=True
         )(*args, **kwargs)
 
+    def create_media_metadata(self, media_id, alt_text, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
+            :allowed_param:
+        """
+        kwargs.update({
+            'json_payload': {
+                'media_id': media_id,
+                'alt_text': {'text': alt_text}
+            }
+        })
+
+        return bind_api(
+            api=self,
+            path='/media/metadata/create.json',
+            method='POST',
+            allowed_param=[],
+            require_auth=True,
+            upload_api=True
+        )(*args, **kwargs)
+
     def update_with_media(self, filename, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
             :allowed_param: 'status', 'possibly_sensitive',
