@@ -1071,18 +1071,16 @@ Utility methods
 Media methods
 -------------
 
-.. method:: API.media_upload()
+.. method:: API.media_upload(filename, [file])
 
-   Uploads images to twitter and returns a `media_id`.
+   Use this endpoint to upload images to Twitter.
 
-   :param media: The raw binary file content being uploaded.
-                 Cannot be used with `media_data`.
-   :param media_data: The base64-encoded file content being uploaded.
-                      Cannot be used with `media`.
-   :param additional_owners: A comma-separated list of user IDs to set as
-                             additional owners allowed to use the returned
-                             `media_id` in Tweets or Cards.
-                             Up to 100 additional owners may be specified.
+   :param filename: The filename of the image to upload. This will
+                    automatically be opened unless `file` is specified.
+   :param file: A file object, which will be used instead of opening
+                ``filename``. ``filename`` is still required, for MIME type
+                detection and to use as a form field in the POST data.
+   :rtype: :class:`Media` object
 
 
 .. method:: API.create_media_metadata(media_id, alt_text)
