@@ -5,6 +5,7 @@
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
 .. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
+.. |include_card_uri| replace:: A boolean indicating if the retrieved Tweet should include a card_uri attribute when there is an ads card attached to the Tweet and when that card was attached using the card_uri value.
 .. |include_entities| replace:: The entities node will not be included when set to false. Defaults to true.
 .. |include_ext_alt_text| replace:: If alt text has been added to any attached media entities, this parameter will return an ext_alt_text value in the top-level key for the media entity.
 .. |include_user_entities| replace:: The user object entities node will not be included when set to false. Defaults to true.
