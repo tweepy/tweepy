@@ -177,13 +177,17 @@ class API(object):
     @property
     def get_status(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-show-id
-            :allowed_param: 'id'
+            :allowed_param: 'id', 'trim_user', 'include_my_retweet',
+                            'include_entities', 'include_ext_alt_text',
+                            'include_card_uri'
         """
         return bind_api(
             api=self,
             path='/statuses/show.json',
             payload_type='status',
-            allowed_param=['id']
+            allowed_param=['id', 'trim_user', 'include_my_retweet',
+                           'include_entities', 'include_ext_alt_text',
+                           'include_card_uri']
         )
 
     def update_status(self, *args, **kwargs):
