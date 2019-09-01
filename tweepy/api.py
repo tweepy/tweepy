@@ -200,9 +200,9 @@ class API(object):
                             'enable_dmcommands', 'fail_dmcommands', 'card_uri'
         """
         post_data = {}
-        media_ids = kwargs.pop("media_ids", None)
+        media_ids = kwargs.pop('media_ids', None)
         if media_ids is not None:
-            post_data["media_ids"] = list_to_csv(media_ids)
+            post_data['media_ids'] = list_to_csv(media_ids)
 
         return bind_api(
             api=self,
@@ -672,8 +672,8 @@ class API(object):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
             :allowed_param: 'include_entities', 'skip_status', 'include_email'
         """
-        if "include_email" in kwargs:
-            kwargs["include_email"] = str(kwargs["include_email"]).lower()
+        if 'include_email' in kwargs:
+            kwargs['include_email'] = str(kwargs['include_email']).lower()
         try:
             return bind_api(
                 api=self,
@@ -736,7 +736,7 @@ class API(object):
         """
         f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 700,
-                                             form_field="banner", f=f)
+                                             form_field='banner', f=f)
         return bind_api(
             api=self,
             path='/account/update_profile_banner.json',
@@ -1376,7 +1376,7 @@ class API(object):
     """ Internal use only """
 
     @staticmethod
-    def _pack_image(filename, max_size, form_field="image", f=None):
+    def _pack_image(filename, max_size, form_field='image', f=None):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
         if f is None:
@@ -1406,7 +1406,7 @@ class API(object):
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
-            filename = filename.encode("utf-8")
+            filename = filename.encode('utf-8')
 
         BOUNDARY = b'Tw3ePy'
         body = []
