@@ -1076,7 +1076,7 @@ Media methods
    Use this endpoint to upload images to Twitter.
 
    :param filename: The filename of the image to upload. This will
-                    automatically be opened unless `file` is specified.
+                    automatically be opened unless ``file`` is specified.
    :param file: A file object, which will be used instead of opening
                 ``filename``. ``filename`` is still required, for MIME type
                 detection and to use as a form field in the POST data.
