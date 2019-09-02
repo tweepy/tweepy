@@ -333,6 +333,34 @@ User methods
    :rtype: list of :class:`User` objects
 
 
+.. method:: API.lookup_users([user_ids], [screen_names], [include_entities], \
+                             [tweet_mode])
+
+   Returns fully-hydrated user objects for up to 100 users per request.
+
+   There are a few things to note when using this method.
+
+   * You must be following a protected user to be able to see their most recent
+     status update. If you don't follow a protected user their status will be
+     removed.
+   * The order of user IDs or screen names may not match the order of users in
+     the returned array.
+   * If a requested user is unknown, suspended, or deleted, then that user will
+     not be returned in the results list.
+   * If none of your lookup criteria can be satisfied by returning a user
+     object, a HTTP 404 will be thrown.
+
+   :param user_ids: A list of user IDs, up to 100 are allowed in a single
+                    request.
+   :param screen_names: A list of screen names, up to 100 are allowed in a
+                        single request.
+   :param include_entities: |include_entities|
+   :param tweet_mode: Valid request values are compat and extended, which give
+                      compatibility mode and extended mode, respectively for
+                      Tweets that contain over 140 characters.
+   :rtype: list of :class:`User` objects
+
+
 .. method:: API.search_users(q, [count], [page])
 
    Run a search for users similar to Find People button on Twitter.com; the
@@ -344,20 +372,6 @@ User methods
    :param count: Specifies the number of statuses to retrieve.
                  May not be greater than 20.
    :param page: |page|
-   :rtype: list of :class:`User` objects
-
-
-.. method:: API.lookup_users([user_ids], [screen_names], [include_entities], \
-                             [tweet_mode])
-
-   :param user_ids: A list of user IDs, up to 100 are allowed in a single
-                    request.
-   :param screen_names: A list of screen names, up to 100 are allowed in a
-                        single request.
-   :param include_entities: |include_entities|
-   :param tweet_mode: Valid request values are compat and extended, which give
-                      compatibility mode and extended mode, respectively for
-                      Tweets that contain over 140 characters.
    :rtype: list of :class:`User` objects
 
 
