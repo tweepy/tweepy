@@ -373,24 +373,7 @@ class API(object):
                            'omit_script', 'align', 'related', 'lang']
         )
 
-    def lookup_users(self, user_ids=None, screen_names=None,
-                     include_entities=None, tweet_mode=None):
-        """ Perform bulk look up of users from user ID or screen_name """
-        post_data = {}
-        if include_entities is not None:
-            include_entities = 'true' if include_entities else 'false'
-            post_data['include_entities'] = include_entities
-        if user_ids:
-            post_data['user_id'] = list_to_csv(user_ids)
-        if screen_names:
-            post_data['screen_name'] = list_to_csv(screen_names)
-        if tweet_mode:
-            post_data['tweet_mode'] = tweet_mode
-
-        return self._lookup_users(post_data=post_data)
-
-    @property
-    def _lookup_users(self):
+    def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
             allowed_param= 'user_id', 'screen_name', 'include_entities',
                            'tweet_mode'
@@ -402,7 +385,7 @@ class API(object):
             method='POST',
             allowed_param=['user_id', 'screen_name', 'include_entities',
                            'tweet_mode']
-        )
+        )(list_to_csv(user_ids), list_to_csv(screen_names), *args, **kwargs)
 
     def me(self):
         """ Get the authenticated user """
