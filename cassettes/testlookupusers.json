@@ -4,17 +4,14 @@
         {
             "request": {
                 "method": "POST",
-                "uri": "https://api.twitter.com/1.1/users/lookup.json",
-                "body": "user_id=6844292%2C6253282",
+                "uri": "https://api.twitter.com/1.1/users/lookup.json?user_id=6844292%2C6253282",
+                "body": null,
                 "headers": {
                     "Host": [
                         "api.twitter.com"
                     ],
                     "Content-Length": [
-                        "25"
-                    ],
-                    "Content-Type": [
-                        "application/x-www-form-urlencoded"
+                        "0"
                     ]
                 }
             },
@@ -24,100 +21,94 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block; report=https://twitter.com/i/xss_report"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
                     "expires": [
                         "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "last-modified": [
-                        "Sat, 13 Jul 2019 02:27:46 GMT"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "x-connection-hash": [
-                        "065e0f1090fe0af8e347ade9f1e5b3b5"
-                    ],
-                    "x-rate-limit-limit": [
-                        "900"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "891"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "date": [
-                        "Sat, 13 Jul 2019 02:27:46 GMT"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "set-cookie": [
-                        "personalization_id=\"v1_lnJrFg9RuFtNbaA26q8fcg==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:46 GMT; Path=/; Domain=.twitter.com",
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A156298486655448182; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:46 GMT; Path=/; Domain=.twitter.com"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
-                    ],
-                    "x-transaction": [
-                        "008baa540005aee1"
                     ],
                     "strict-transport-security": [
                         "max-age=631138519"
                     ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-rate-limit-limit": [
+                        "900"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-transaction": [
+                        "00559f4d0052f030"
+                    ],
+                    "last-modified": [
+                        "Mon, 02 Sep 2019 05:10:35 GMT"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-xss-protection": [
+                        "0"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-connection-hash": [
+                        "010f59898cadfd651ca6424d3f95ff5c"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_SxnPCZe6CRGq7UHiS3HNlA==\"; Max-Age=63072000; Expires=Wed, 1 Sep 2021 05:10:35 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156740103568038887; Max-Age=63072000; Expires=Wed, 1 Sep 2021 05:10:35 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "date": [
+                        "Mon, 02 Sep 2019 05:10:35 GMT"
+                    ],
+                    "content-length": [
+                        "7292"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
                     "content-disposition": [
                         "attachment; filename=json.json"
                     ],
-                    "x-tsa-request-body-time": [
-                        "0"
-                    ],
-                    "content-length": [
-                        "5370"
+                    "x-rate-limit-remaining": [
+                        "899"
                     ],
                     "x-response-time": [
                         "40"
                     ],
                     "x-rate-limit-reset": [
-                        "1562984894"
+                        "1567401935"
+                    ],
+                    "server": [
+                        "tsa_b"
                     ]
                 },
                 "body": {
-                    "string": "[{\"id\":6844292,\"id_str\":\"6844292\",\"name\":\"Twitter Engineering\",\"screen_name\":\"TwitterEng\",\"location\":\"\",\"description\":\"The official account for updates on what's happening within Twitter the app and service.\",\"url\":null,\"entities\":{\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":1301876,\"friends_count\":13,\"listed_count\":4317,\"created_at\":\"Sat Jun 16 00:14:36 +0000 2007\",\"favourites_count\":47,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":468,\"lang\":null,\"status\":{\"created_at\":\"Thu Jul 11 20:30:36 +0000 2019\",\"id\":1149415716228984832,\"id_str\":\"1149415716228984832\",\"text\":\"Shout out to our SRE and Eng teams for fixing an internal configuration change gone wrong. We've found the root cau\\u2026 https:\\/\\/t.co\\/gvILH7nwJh\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/gvILH7nwJh\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1149415716228984832\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":true,\"quoted_status_id\":1149412158121267200,\"quoted_status_id_str\":\"1149412158121267200\",\"retweet_count\":38,\"favorite_count\":150,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C6E2EE\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/875168599299637248\\/84CkAq6s_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/875168599299637248\\/84CkAq6s_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6844292\\/1497491421\",\"profile_link_color\":\"1F98C7\",\"profile_sidebar_border_color\":\"C6E2EE\",\"profile_sidebar_fill_color\":\"DAECF4\",\"profile_text_color\":\"663B12\",\"profile_use_background_image\":true,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},{\"id\":6253282,\"id_str\":\"6253282\",\"name\":\"Twitter API\",\"screen_name\":\"TwitterAPI\",\"location\":\"San Francisco, CA\",\"description\":\"The Real Twitter API. Tweets about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.\",\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"expanded_url\":\"https:\\/\\/developer.twitter.com\",\"display_url\":\"developer.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":6121857,\"friends_count\":12,\"listed_count\":12893,\"created_at\":\"Wed May 23 06:01:13 +0000 2007\",\"favourites_count\":31,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":3666,\"lang\":null,\"status\":{\"created_at\":\"Mon Jun 24 17:50:46 +0000 2019\",\"id\":1143214899109277697,\"id_str\":\"1143214899109277697\",\"text\":\"We\\u2019ve spoken with all developers who\\u2019ve contacted us to discuss these new rate limits and elevations, and as of tod\\u2026 https:\\/\\/t.co\\/w8WoepBjeU\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/w8WoepBjeU\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1143214899109277697\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":1141392777600806912,\"in_reply_to_status_id_str\":\"1141392777600806912\",\"in_reply_to_user_id\":6253282,\"in_reply_to_user_id_str\":\"6253282\",\"in_reply_to_screen_name\":\"TwitterAPI\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":24,\"favorite_count\":38,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6253282\\/1497491515\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}]"
+                    "string": "[{\"id\":6844292,\"id_str\":\"6844292\",\"name\":\"Twitter Engineering\",\"screen_name\":\"TwitterEng\",\"location\":\"\",\"description\":\"The official account for updates on what's happening within Twitter the app and service.\",\"url\":null,\"entities\":{\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":1302441,\"friends_count\":14,\"listed_count\":4314,\"created_at\":\"Sat Jun 16 00:14:36 +0000 2007\",\"favourites_count\":57,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":499,\"lang\":null,\"status\":{\"created_at\":\"Mon Aug 19 16:55:31 +0000 2019\",\"id\":1163494716840665090,\"id_str\":\"1163494716840665090\",\"text\":\"RT @TwitterOSS: When reasoning about the performance of @TwitterEng applications and services we need to be able to measure in milliseconds\\u2026\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterOSS\",\"name\":\"Twitter Open Source\",\"id\":376825877,\"id_str\":\"376825877\",\"indices\":[3,14]},{\"screen_name\":\"TwitterEng\",\"name\":\"Twitter Engineering\",\"id\":6844292,\"id_str\":\"6844292\",\"indices\":[56,67]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweeted_status\":{\"created_at\":\"Mon Aug 19 16:21:07 +0000 2019\",\"id\":1163486059641987072,\"id_str\":\"1163486059641987072\",\"text\":\"When reasoning about the performance of @TwitterEng applications and services we need to be able to measure in mill\\u2026 https:\\/\\/t.co\\/psxenmwbt0\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterEng\",\"name\":\"Twitter Engineering\",\"id\":6844292,\"id_str\":\"6844292\",\"indices\":[40,51]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/psxenmwbt0\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1163486059641987072\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"https:\\/\\/about.twitter.com\\/products\\/tweetdeck\\\" rel=\\\"nofollow\\\"\\u003eTweetDeck\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":58,\"favorite_count\":167,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"is_quote_status\":false,\"retweet_count\":58,\"favorite_count\":0,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C6E2EE\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme2\\/bg.gif\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/875168599299637248\\/84CkAq6s_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/875168599299637248\\/84CkAq6s_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6844292\\/1497491421\",\"profile_link_color\":\"1F98C7\",\"profile_sidebar_border_color\":\"C6E2EE\",\"profile_sidebar_fill_color\":\"DAECF4\",\"profile_text_color\":\"663B12\",\"profile_use_background_image\":true,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},{\"id\":6253282,\"id_str\":\"6253282\",\"name\":\"Twitter API\",\"screen_name\":\"TwitterAPI\",\"location\":\"San Francisco, CA\",\"description\":\"The Real Twitter API. Tweets about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.\",\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"expanded_url\":\"https:\\/\\/developer.twitter.com\",\"display_url\":\"developer.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":6116812,\"friends_count\":12,\"listed_count\":12876,\"created_at\":\"Wed May 23 06:01:13 +0000 2007\",\"favourites_count\":31,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":3672,\"lang\":null,\"status\":{\"created_at\":\"Tue Aug 27 17:30:39 +0000 2019\",\"id\":1166402661282746368,\"id_str\":\"1166402661282746368\",\"text\":\"RT @TwitterDev: Our latest Twitter Developer Labs release helps you quickly assess the impact of your Tweets. Today, we\\u2019re releasing \\n\\n\\u2728a n\\u2026\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterDev\",\"name\":\"Twitter Dev\",\"id\":2244994945,\"id_str\":\"2244994945\",\"indices\":[3,14]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweeted_status\":{\"created_at\":\"Tue Aug 27 17:25:06 +0000 2019\",\"id\":1166401263170281472,\"id_str\":\"1166401263170281472\",\"text\":\"Our latest Twitter Developer Labs release helps you quickly assess the impact of your Tweets. Today, we\\u2019re releasin\\u2026 https:\\/\\/t.co\\/a8PaA1wg5A\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/a8PaA1wg5A\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1166401263170281472\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":35,\"favorite_count\":82,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"is_quote_status\":false,\"retweet_count\":35,\"favorite_count\":0,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6253282\\/1497491515\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}]"
                 }
             }
         },
         {
             "request": {
                 "method": "POST",
-                "uri": "https://api.twitter.com/1.1/users/lookup.json",
-                "body": "screen_name=twitterapi%2Ctwitter",
+                "uri": "https://api.twitter.com/1.1/users/lookup.json?screen_name=twitterapi%2Ctwitter",
+                "body": null,
                 "headers": {
                     "Host": [
                         "api.twitter.com"
                     ],
                     "Content-Length": [
-                        "32"
-                    ],
-                    "Content-Type": [
-                        "application/x-www-form-urlencoded"
+                        "0"
                     ]
                 }
             },
@@ -127,83 +118,80 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block; report=https://twitter.com/i/xss_report"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
                     "expires": [
                         "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "last-modified": [
-                        "Sat, 13 Jul 2019 02:27:46 GMT"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "x-connection-hash": [
-                        "b81e77827647be2a1ad3e1cd086cb3e8"
-                    ],
-                    "x-rate-limit-limit": [
-                        "900"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "890"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "date": [
-                        "Sat, 13 Jul 2019 02:27:46 GMT"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "set-cookie": [
-                        "personalization_id=\"v1_UNzCcIA0WIY7TIQQTPKLyA==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:46 GMT; Path=/; Domain=.twitter.com",
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A156298486683290856; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:46 GMT; Path=/; Domain=.twitter.com"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
-                    ],
-                    "x-transaction": [
-                        "004be9850003eb60"
                     ],
                     "strict-transport-security": [
                         "max-age=631138519"
                     ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-rate-limit-limit": [
+                        "900"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-transaction": [
+                        "0008756400c47d8d"
+                    ],
+                    "last-modified": [
+                        "Mon, 02 Sep 2019 05:10:36 GMT"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-xss-protection": [
+                        "0"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-connection-hash": [
+                        "ad9c05b6a8759f347cf54cb041408374"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_yrk5WQQ2naX6MqLsvDIJhQ==\"; Max-Age=63072000; Expires=Wed, 1 Sep 2021 05:10:36 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156740103599367261; Max-Age=63072000; Expires=Wed, 1 Sep 2021 05:10:36 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "date": [
+                        "Mon, 02 Sep 2019 05:10:36 GMT"
+                    ],
+                    "content-length": [
+                        "6116"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
                     "content-disposition": [
                         "attachment; filename=json.json"
                     ],
-                    "x-tsa-request-body-time": [
-                        "1"
-                    ],
-                    "content-length": [
-                        "5234"
+                    "x-rate-limit-remaining": [
+                        "898"
                     ],
                     "x-response-time": [
-                        "45"
+                        "40"
                     ],
                     "x-rate-limit-reset": [
-                        "1562984894"
+                        "1567401935"
+                    ],
+                    "server": [
+                        "tsa_b"
                     ]
                 },
                 "body": {
-                    "string": "[{\"id\":6253282,\"id_str\":\"6253282\",\"name\":\"Twitter API\",\"screen_name\":\"TwitterAPI\",\"location\":\"San Francisco, CA\",\"description\":\"The Real Twitter API. Tweets about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.\",\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"expanded_url\":\"https:\\/\\/developer.twitter.com\",\"display_url\":\"developer.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":6121857,\"friends_count\":12,\"listed_count\":12893,\"created_at\":\"Wed May 23 06:01:13 +0000 2007\",\"favourites_count\":31,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":3666,\"lang\":null,\"status\":{\"created_at\":\"Mon Jun 24 17:50:46 +0000 2019\",\"id\":1143214899109277697,\"id_str\":\"1143214899109277697\",\"text\":\"We\\u2019ve spoken with all developers who\\u2019ve contacted us to discuss these new rate limits and elevations, and as of tod\\u2026 https:\\/\\/t.co\\/w8WoepBjeU\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/w8WoepBjeU\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1143214899109277697\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":1141392777600806912,\"in_reply_to_status_id_str\":\"1141392777600806912\",\"in_reply_to_user_id\":6253282,\"in_reply_to_user_id_str\":\"6253282\",\"in_reply_to_screen_name\":\"TwitterAPI\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":24,\"favorite_count\":38,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6253282\\/1497491515\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"Twitter\",\"location\":\"Everywhere\",\"description\":\"What\\u2019s happening?!\",\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"expanded_url\":\"https:\\/\\/about.twitter.com\\/\",\"display_url\":\"about.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":56335782,\"friends_count\":140,\"listed_count\":90877,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":5965,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":10829,\"lang\":null,\"status\":{\"created_at\":\"Fri Jul 12 20:00:49 +0000 2019\",\"id\":1149770607585824769,\"id_str\":\"1149770607585824769\",\"text\":\"@Caleb_Brentley Solid select\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"Caleb_Brentley\",\"name\":\"Caleb B. Gwaltney\",\"id\":3387807501,\"id_str\":\"3387807501\",\"indices\":[0,15]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":1149682806483804160,\"in_reply_to_status_id_str\":\"1149682806483804160\",\"in_reply_to_user_id\":3387807501,\"in_reply_to_user_id_str\":\"3387807501\",\"in_reply_to_screen_name\":\"Caleb_Brentley\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":6,\"favorite_count\":126,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1556918042\",\"profile_link_color\":\"1B95E0\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}]"
+                    "string": "[{\"id\":6253282,\"id_str\":\"6253282\",\"name\":\"Twitter API\",\"screen_name\":\"TwitterAPI\",\"location\":\"San Francisco, CA\",\"description\":\"The Real Twitter API. Tweets about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.\",\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/8IkCzCDr19\",\"expanded_url\":\"https:\\/\\/developer.twitter.com\",\"display_url\":\"developer.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":6116812,\"friends_count\":12,\"listed_count\":12876,\"created_at\":\"Wed May 23 06:01:13 +0000 2007\",\"favourites_count\":31,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":3672,\"lang\":null,\"status\":{\"created_at\":\"Tue Aug 27 17:30:39 +0000 2019\",\"id\":1166402661282746368,\"id_str\":\"1166402661282746368\",\"text\":\"RT @TwitterDev: Our latest Twitter Developer Labs release helps you quickly assess the impact of your Tweets. Today, we\\u2019re releasing \\n\\n\\u2728a n\\u2026\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterDev\",\"name\":\"Twitter Dev\",\"id\":2244994945,\"id_str\":\"2244994945\",\"indices\":[3,14]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweeted_status\":{\"created_at\":\"Tue Aug 27 17:25:06 +0000 2019\",\"id\":1166401263170281472,\"id_str\":\"1166401263170281472\",\"text\":\"Our latest Twitter Developer Labs release helps you quickly assess the impact of your Tweets. Today, we\\u2019re releasin\\u2026 https:\\/\\/t.co\\/a8PaA1wg5A\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/a8PaA1wg5A\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1166401263170281472\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"https:\\/\\/mobile.twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web App\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":35,\"favorite_count\":82,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"is_quote_status\":false,\"retweet_count\":35,\"favorite_count\":0,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/942858479592554497\\/BbazLO9L_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/6253282\\/1497491515\",\"profile_link_color\":\"0084B4\",\"profile_sidebar_border_color\":\"C0DEED\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":true,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"Twitter\",\"location\":\"Everywhere\",\"description\":\"What\\u2019s happening?!\",\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"expanded_url\":\"https:\\/\\/about.twitter.com\\/\",\"display_url\":\"about.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":56606249,\"friends_count\":35,\"listed_count\":90738,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":6211,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":11543,\"lang\":null,\"status\":{\"created_at\":\"Fri Aug 30 18:18:14 +0000 2019\",\"id\":1167501799324082178,\"id_str\":\"1167501799324082178\",\"text\":\"@WittLowry #TEAMWITT is on fire\",\"truncated\":false,\"entities\":{\"hashtags\":[{\"text\":\"TEAMWITT\",\"indices\":[11,20]}],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"WittLowry\",\"name\":\"Witt\",\"id\":284653613,\"id_str\":\"284653613\",\"indices\":[0,10]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":1167274429576933376,\"in_reply_to_status_id_str\":\"1167274429576933376\",\"in_reply_to_user_id\":284653613,\"in_reply_to_user_id_str\":\"284653613\",\"in_reply_to_screen_name\":\"WittLowry\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":629,\"favorite_count\":2503,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1111729635610382336\\/_65QFl7B_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1556918042\",\"profile_link_color\":\"1B95E0\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"}]"
                 }
             }
         }
