@@ -104,7 +104,7 @@ class API(object):
             :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
                             'include_ext_alt_text', 'include_card_uri'
         """
-        kwargs.update({'id': list_to_csv(id_)})
+        kwargs['id'] = list_to_csv(id_)
         if 'map_' in kwargs:
             kwargs['map'] = kwargs.pop('map_')
 
