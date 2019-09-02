@@ -692,7 +692,17 @@ Help Methods
                        [count], [until], [since_id], [max_id], \
                        [include_entities])
 
-   Returns tweets that match a specified query.
+   Returns a collection of relevant Tweets matching a specified query.
+   
+   Please note that Twitter's search service and, by extension, the Search API
+   is not meant to be an exhaustive source of Tweets. Not all Tweets will be
+   indexed or made available via the search interface.
+
+   In API v1.1, the response format of the Search API has been improved to
+   return Tweet objects more similar to the objects you’ll find across the REST
+   API and platform. However, perspectival attributes (fields that pertain to
+   the perspective of the authenticating user) are not currently supported on
+   this endpoint.\ [#]_\ [#]_
 
    :param q: the search query string of 500 characters maximum, including
       operators. Queries may additionally be limited by complexity.
@@ -1131,3 +1141,9 @@ The exceptions are available in the ``tweepy`` module directly, which means
 
    Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a
    ``RateLimitError`` too.
+
+
+.. rubric:: Footnotes
+
+.. [#] https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets
+.. [#] https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145
