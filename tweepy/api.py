@@ -196,10 +196,8 @@ class API(object):
                             'place_id', 'display_coordinates', 'trim_user',
                             'enable_dmcommands', 'fail_dmcommands', 'card_uri'
         """
-        post_data = {}
-        media_ids = kwargs.pop('media_ids', None)
-        if media_ids is not None:
-            post_data['media_ids'] = list_to_csv(media_ids)
+        if 'media_ids' in kwargs:
+            kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
 
         return bind_api(
             api=self,
@@ -214,7 +212,7 @@ class API(object):
                            'enable_dmcommands', 'fail_dmcommands',
                            'card_uri'],
             require_auth=True
-        )(post_data=post_data, *args, **kwargs)
+        )(*args, **kwargs)
 
     def media_upload(self, filename, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
