@@ -240,12 +240,10 @@ class API(object):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
             :allowed_param:
         """
-        kwargs.update({
-            'json_payload': {
-                'media_id': media_id,
-                'alt_text': {'text': alt_text}
-            }
-        })
+        kwargs['json_payload'] = {
+            'media_id': media_id,
+            'alt_text': {'text': alt_text}
+        }
 
         return bind_api(
             api=self,
