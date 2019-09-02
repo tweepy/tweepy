@@ -104,7 +104,6 @@ class API(object):
             :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
                             'include_ext_alt_text', 'include_card_uri'
         """
-        kwargs['id'] = list_to_csv(id_)
         if 'map_' in kwargs:
             kwargs['map'] = kwargs.pop('map_')
 
@@ -115,7 +114,7 @@ class API(object):
             allowed_param=['id', 'include_entities', 'trim_user', 'map',
                            'include_ext_alt_text', 'include_card_uri'],
             require_auth=True
-        )(*args, **kwargs)
+        )(list_to_csv(id_), *args, **kwargs)
 
     @property
     def user_timeline(self):
