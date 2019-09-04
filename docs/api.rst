@@ -849,10 +849,13 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.lists_subscriptions([cursor])
+.. method:: API.lists_subscriptions([screen_name], [user_id], [cursor])
 
-   List the lists the specified user follows.
+   Obtain a collection of the lists the specified user is subscribed to, 20
+   lists per page by default. Does not include the user's own lists.
 
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
    :param cursor: |cursor|
    :rtype: list of :class:`List` objects
 
