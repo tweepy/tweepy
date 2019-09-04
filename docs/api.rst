@@ -929,13 +929,18 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.remove_list_member(slug, id)
+.. method:: API.remove_list_member(list_id/slug, screen_name/user_id, \
+                                   [owner_id/owner_screen_name])
 
    Removes the specified member from the list. The authenticated user must be
    the list's owner to remove members from the list.
 
+   :param list_id: |list_id|
    :param slug: |slug|
-   :param id: the ID of the user to remove as a member
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
