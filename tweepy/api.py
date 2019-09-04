@@ -1014,14 +1014,14 @@ class API(object):
     def lists_memberships(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
             :allowed_param: 'screen_name', 'user_id', 'filter_to_owned_lists',
-                            'cursor'
+                            'cursor', 'count'
         """
         return bind_api(
             api=self,
             path='/lists/memberships.json',
             payload_type='list', payload_list=True,
             allowed_param=['screen_name', 'user_id', 'filter_to_owned_lists',
-                           'cursor'],
+                           'cursor', 'count'],
             require_auth=True
         )
 

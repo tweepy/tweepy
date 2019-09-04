@@ -833,7 +833,7 @@ List Methods
 
 
 .. method:: API.lists_memberships([screen_name], [user_id], \
-                                  [filter_to_owned_lists], [cursor])
+                                  [filter_to_owned_lists], [cursor], [count])
 
    Returns the lists the specified user has been added to. If ``user_id`` or
    ``screen_name`` are not provided, the memberships for the authenticating
@@ -845,6 +845,7 @@ List Methods
       lists the authenticating user owns, and the user represented by
       ``user_id`` or ``screen_name`` is a member of.
    :param cursor: |cursor|
+   :param count: |count|
    :rtype: list of :class:`List` objects
 
 
