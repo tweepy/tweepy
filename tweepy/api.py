@@ -1205,14 +1205,16 @@ class API(object):
     def list_subscribers(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
             :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id',
-                            'cursor'
+                            'cursor', 'count', 'include_entities',
+                            'skip_status'
         """
         return bind_api(
             api=self,
             path='/lists/subscribers.json',
             payload_type='user', payload_list=True,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
-                           'cursor']
+                           'cursor', 'count', 'include_entities',
+                           'skip_status']
         )
 
     @property

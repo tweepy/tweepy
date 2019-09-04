@@ -1012,7 +1012,8 @@ List Methods
 
 
 .. method:: API.list_subscribers(list_id/slug, [owner_id/owner_screen_name], \
-                                 [cursor])
+                                 [cursor], [count], [include_entities], \
+                                 [skip_status])
 
    Returns the subscribers of the specified list. Private list subscribers will
    only be shown if the authenticated user owns the specified list.
@@ -1022,6 +1023,9 @@ List Methods
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :param cursor: |cursor|
+   :param count: |count|
+   :param include_entities: |include_entities|
+   :param skip_status: |skip_status|
    :rtype: list of :class:`User` objects
 
 
