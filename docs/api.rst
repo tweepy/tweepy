@@ -754,8 +754,7 @@ Help Methods
       * mixed : include both popular and real time results in the response
       * recent : return only the most recent results in the response
       * popular : return only the most popular results in the response
-   :param count: The number of tweets to return per page, up to a maximum of
-      100. Defaults to 15.
+   :param count: |count|
    :param until: Returns tweets created before the given date. Date should be
       formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day
       limit. In other words, no tweets will be found for a date older than one
