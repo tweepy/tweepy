@@ -863,7 +863,8 @@ List Methods
 
 
 .. method:: API.list_timeline(list_id/slug, [owner_id/owner_screen_name], \
-                              [since_id], [max_id], [count], [include_rts])
+                              [since_id], [max_id], [count], \
+                              [include_entities], [include_rts])
 
    Returns a timeline of tweets authored by members of the specified list.
    Retweets are included by default. Use the ``include_rts=false`` parameter to
@@ -876,6 +877,7 @@ List Methods
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param count: |count|
+   :param include_entities: |include_entities|
    :param include_rts: A boolean indicating whether the list timeline will
       contain native retweets (if they exist) in addition to the standard
       stream of tweets. The output format of retweeted tweets is identical to

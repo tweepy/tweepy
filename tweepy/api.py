@@ -1042,14 +1042,16 @@ class API(object):
     def list_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
             :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id',
-                            'since_id', 'max_id', 'count', 'include_rts'
+                            'since_id', 'max_id', 'count', 'include_entities',
+                            'include_rts'
         """
         return bind_api(
             api=self,
             path='/lists/statuses.json',
             payload_type='status', payload_list=True,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
-                           'since_id', 'max_id', 'count', 'include_rts']
+                           'since_id', 'max_id', 'count', 'include_entities',
+                           'include_rts']
         )
 
     @property
