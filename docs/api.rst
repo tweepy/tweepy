@@ -1000,12 +1000,14 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.unsubscribe_list(owner, slug)
+.. method:: API.unsubscribe_list(list_id/slug, [owner_id/owner_screen_name])
 
    Unsubscribes the authenticated user from the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
