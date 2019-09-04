@@ -1,6 +1,6 @@
 .. API parameters:
 
-.. |count| replace:: Specifies the number of statuses to retrieve.
+.. |count| replace:: The number of results to try and retrieve per page.
 .. |cursor| replace:: Breaks the results into pages. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list.
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
