@@ -1028,13 +1028,13 @@ class API(object):
     @property
     def lists_subscriptions(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
-            :allowed_param: 'screen_name', 'user_id', 'cursor'
+            :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
         """
         return bind_api(
             api=self,
             path='/lists/subscriptions.json',
             payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'cursor'],
+            allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
             require_auth=True
         )
 
