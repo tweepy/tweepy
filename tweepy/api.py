@@ -1000,13 +1000,13 @@ class API(object):
     @property
     def lists_all(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-list
-            :allowed_param: 'screen_name', 'user_id'
+            :allowed_param: 'screen_name', 'user_id', 'reverse'
         """
         return bind_api(
             api=self,
             path='/lists/list.json',
             payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id'],
+            allowed_param=['screen_name', 'user_id', 'reverse'],
             require_auth=True
         )
 
