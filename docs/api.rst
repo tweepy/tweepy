@@ -989,12 +989,14 @@ List Methods
    :rtype: :class:`User` object if user is a member of list
 
 
-.. method:: API.subscribe_list(owner, slug)
+.. method:: API.subscribe_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Make the authenticated user follow the specified list.
+   Subscribes the authenticated user to the specified list.
 
-   :param owner: |list_owner|
+   :param list_id: |list_id|
    :param slug: |slug|
+   :param owner_id: |owner_id|
+   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
