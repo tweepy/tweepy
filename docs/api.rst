@@ -833,10 +833,18 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.lists_memberships([cursor])
+.. method:: API.lists_memberships([screen_name], [user_id], \
+                                  [filter_to_owned_lists], [cursor])
 
-   List the lists the specified user has been added to.
+   Returns the lists the specified user has been added to. If ``user_id`` or
+   ``screen_name`` are not provided, the memberships for the authenticating
+   user are returned.
 
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
+   :param filter_to_owned_lists: A boolean indicating whether to return just
+      lists the authenticating user owns, and the user represented by
+      ``user_id`` or ``screen_name`` is a member of.
    :param cursor: |cursor|
    :rtype: list of :class:`List` objects
 
