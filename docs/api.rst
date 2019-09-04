@@ -811,12 +811,20 @@ List Methods
    :rtype: :class:`List` object
 
 
-.. method:: API.lists_all([cursor])
+.. method:: API.lists_all([screen_name], [user_id])
 
-   List the lists of the specified user. Private lists will be included if the
-   authenticated users is the same as the user who's lists are being returned.
+   Returns all lists the authenticating or specified user subscribes to,
+   including their own. The user is specified using the ``user_id`` or
+   ``screen_name`` parameters. If no user is given, the authenticating user is
+   used.
 
-   :param cursor: |cursor|
+   A maximum of 100 results will be returned by this call. Subscribed lists are
+   returned first, followed by owned lists. This means that if a user
+   subscribes to 90 lists and owns 20 lists, this method returns 90
+   subscriptions and 10 owned lists.
+
+   :param screen_name: |screen_name|
+   :param user_id: |user_id|
    :rtype: list of :class:`List` objects
 
 
