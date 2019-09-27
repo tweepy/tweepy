@@ -597,7 +597,7 @@ class API(object):
             api=self,
             path='/followers/ids.json',
             payload_type='ids',
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count']
+            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count', 'stringify_ids']
         )
 
     @property
