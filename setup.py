@@ -4,15 +4,15 @@
 import re
 from setuptools import find_packages, setup
 
-VERSIONFILE = "tweepy/__init__.py"
-VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
-with open(VERSIONFILE, "rt") as ver_file:
-    mo = re.search(VSRE, ver_file.read(), re.M)
+VERSION_FILE = "tweepy/__init__.py"
+VERSION_REGEX = r"^__version__ = ['\"]([^'\"]*)['\"]"
+with open(VERSION_FILE, "rt") as version_file:
+    match = re.search(VERSION_REGEX, version_file.read(), re.M)
 
-if mo:
-    version = mo.group(1)
+if match:
+    version = match.group(1)
 else:
-    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
+    raise RuntimeError("Unable to find version string in %s." % (VERSION_FILE,))
 
 tests_require = [
     "mock>=1.0.1",
