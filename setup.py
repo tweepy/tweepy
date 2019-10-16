@@ -17,7 +17,6 @@ else:
 tests_require = [
     "mock>=1.0.1",
     "nose>=1.3.3",
-    "tox>=2.4.0",
     "vcrpy>=1.10.3",
 ]
 
@@ -37,7 +36,11 @@ setup(name="tweepy",
       ],
       tests_require=tests_require,
       extras_require={
-          "test": tests_require
+          "dev": [
+               "coveralls>=1.8.2",
+               "tox>=2.4.0",
+           ],
+          "test": tests_require,
       },
       keywords="twitter library",
       python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
