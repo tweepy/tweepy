@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-# from distutils.core import setup
 import re
 from setuptools import find_packages, setup
 
 VERSION_FILE = "tweepy/__init__.py"
-VERSION_REGEX = r"^__version__ = ['\"]([^'\"]*)['\"]"
-with open(VERSION_FILE, "rt") as version_file:
-    match = re.search(VERSION_REGEX, version_file.read(), re.M)
+with open(VERSION_FILE) as version_file:
+    match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                      version_file.read(), re.MULTILINE)
 
 if match:
     version = match.group(1)
