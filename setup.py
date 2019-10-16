@@ -14,6 +14,13 @@ if mo:
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
+tests_require = [
+    "mock>=1.0.1",
+    "nose>=1.3.3",
+    "tox>=1.7.2",
+    "vcrpy>=1.10.3",
+]
+
 setup(name="tweepy",
       version=version,
       description="Twitter library for python",
@@ -28,6 +35,10 @@ setup(name="tweepy",
           "requests_oauthlib>=0.7.0",
           "six>=1.10.0",
       ],
+      tests_require=tests_require,
+      extras_require={
+          "test": tests_require
+      },
       keywords="twitter library",
       python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
       classifiers=[
