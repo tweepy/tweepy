@@ -16,6 +16,7 @@ env:
   global:
   - TWITTER_USERNAME="TweepyDev"
   - AWS_BUCKET="tweepy"
+  - NOSE_WITH_COVERAGE=1
   - USE_REPLAY=1
   - secure: TPQSFGqdl6khXqQqTZ6euROoAmFRnONAlPXD6npvTIIN+fNfnz8lvZtOEWHo2jRPLoU3FyVUhYvTynj6B2hJinulP+RKOMbQ65HCZVHrsitwl1n1QZB5HegQDOYc5q6VTTYn/r8r5tGy35U0O80y1zycTLqSJiXlkdqsSq564pI=
 
@@ -23,7 +24,7 @@ install:
   - pip install .[dev,test]
 
 script:
-  - nosetests -v --with-coverage -c tests/travis-tests.cfg
+  - python setup.py nosetests
 
 after_success:
   - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi
