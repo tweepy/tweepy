@@ -18,6 +18,7 @@ Contents:
    extended_tweets.rst
    streaming_how_to.rst
    api.rst
+   running_tests.rst
 
 Indices and tables
 ==================
