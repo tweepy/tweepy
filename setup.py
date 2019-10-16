@@ -22,7 +22,7 @@ tests_require = [
 
 setup(name="tweepy",
       version=version,
-      description="Twitter library for python",
+      description="Twitter library for Python",
       license="MIT",
       author="Joshua Roesslein",
       author_email="tweepy@googlegroups.com",
