@@ -17,7 +17,7 @@ else:
 tests_require = [
     "mock>=1.0.1",
     "nose>=1.3.3",
-    "tox>=1.7.2",
+    "tox>=2.4.0",
     "vcrpy>=1.10.3",
 ]
 
