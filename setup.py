@@ -5,9 +5,9 @@ import re
 from setuptools import find_packages, setup
 
 VERSIONFILE = "tweepy/__init__.py"
-ver_file = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
-mo = re.search(VSRE, ver_file, re.M)
+with open(VERSIONFILE, "rt") as ver_file:
+    mo = re.search(VSRE, ver_file.read(), re.M)
 
 if mo:
     version = mo.group(1)
