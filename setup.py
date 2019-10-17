@@ -13,6 +13,9 @@ if match:
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSION_FILE,))
 
+with open("README.md") as readme_file:
+    long_description = readme_file.read()
+
 tests_require = [
     "mock>=1.0.1",
     "nose>=1.3.3",
@@ -22,6 +25,8 @@ tests_require = [
 setup(name="tweepy",
       version=version,
       description="Twitter library for Python",
+      long_description=long_description,
+      long_description_content_type="text/markdown",
       license="MIT",
       author="Joshua Roesslein",
       author_email="tweepy@googlegroups.com",
