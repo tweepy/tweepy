@@ -819,7 +819,7 @@ class API(object):
             allowed_param=['cursor'],
             require_auth=True
         )
-    
+
     @property
     def mutes(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
@@ -832,7 +832,7 @@ class API(object):
             allowed_param=['cursor', 'include_entities', 'skip_status'],
             required_auth=True
         )
-           
+
 
     @property
     def create_mute(self):
@@ -1022,6 +1022,19 @@ class API(object):
             payload_type='list', payload_list=True,
             allowed_param=['screen_name', 'user_id', 'filter_to_owned_lists',
                            'cursor', 'count'],
+            require_auth=True
+        )
+
+    @property
+    def lists_ownerships(self):
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+            :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
+        """
+        return bind_api(
+            api=self,
+            path='/lists/ownerships.json',
+            payload_type='list', payload_list=True,
+            allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
             require_auth=True
         )
 

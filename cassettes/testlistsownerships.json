@@ -1,0 +1,99 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/lists/ownerships.json",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "last-modified": [
+                        "Sat, 13 Jul 2019 02:27:44 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-connection-hash": [
+                        "25037a788cfa5c2a5a6656add6da8d4d"
+                    ],
+                    "x-rate-limit-limit": [
+                        "75"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "70"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:44 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_BGYj/OZeMyqRo/ANrpX+KA==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:44 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298486472902530; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:44 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-transaction": [
+                        "00bcf3d1008d708d"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "96"
+                    ],
+                    "x-response-time": [
+                        "17"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984893"
+                    ]
+                },
+                "body": {
+                    "string": "{\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\",\"lists\":[]}"
+                }
+            }
+        }
+    ]
+}
