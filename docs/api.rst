@@ -1126,30 +1126,6 @@ Geo Methods
                        This is only a guideline, which may not be adhered to.
 
 
-.. method:: API.reverse_geocode([lat], [long], [ip], [accuracy], \
-                                [granularity], [max_results])
-
-   Given a latitude and longitude, looks for nearby places (cities and
-   neighbourhoods) whose IDs can be specified in a call to
-   :func:`update_status` to appear as the name of the location. This call
-   provides a detailed response about the location in question; the
-   :func:`nearby_places` function should be preferred for getting a list of
-   places nearby without great detail.
-
-   :param lat: The location's latitude.
-   :param long: The location's longitude.
-   :param ip: The location's IP address. Twitter will attempt to geolocate
-              using the IP address.
-   :param accuracy: Specify the "region" in which to search, such as a number
-                    (then this is a radius in meters, but it can also take a
-                    string that is suffixed with ft to specify feet).
-                    If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
-   :param max_results: A hint as to the maximum number of results to return.
-                       This is only a guideline, which may not be adhered to.
-
-
 .. method:: API.geo_id(id)
 
    Given *id* of a place, provide more details about that place.
