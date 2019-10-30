@@ -5,26 +5,22 @@ python:
 - '2.7'
 - '3.5'
 - '3.6'
+- '3.7'
+- '3.8'
 
 matrix:
   fast_finish: true
-  include:
-    - python: 3.7
-      dist: xenial
 
 env:
   global:
-  - TWITTER_USERNAME="TweepyDev"
   - AWS_BUCKET="tweepy"
-  - USE_REPLAY=1
   - secure: TPQSFGqdl6khXqQqTZ6euROoAmFRnONAlPXD6npvTIIN+fNfnz8lvZtOEWHo2jRPLoU3FyVUhYvTynj6B2hJinulP+RKOMbQ65HCZVHrsitwl1n1QZB5HegQDOYc5q6VTTYn/r8r5tGy35U0O80y1zycTLqSJiXlkdqsSq564pI=
 
 install:
-  - pip install -r test_requirements.txt -r requirements.txt
-  - pip install coveralls
+  - pip install .[dev,test]
 
 script:
-  - nosetests -v --with-coverage -c tests/travis-tests.cfg
+  - python setup.py nosetests
 
 after_success:
   - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then coveralls; fi

@@ -5,8 +5,6 @@ import time
 import unittest
 from ast import literal_eval
 
-from nose import SkipTest
-
 from .config import tape, TweepyTestCase, use_replay, username
 from tweepy import API, FileCache, Friendship, MemoryCache
 from tweepy.parsers import Parser
@@ -74,8 +72,7 @@ class TweepyAPITests(TweepyTestCase):
         self.api.retweets_of_me()
 
     def testretweet(self):
-        # TODO(josh): Need a way to get random tweets to retweet.
-        raise SkipTest()
+        self.skipTest('Missing method to retrieve random Tweet to Retweet')
 
     @tape.use_cassette('testretweets.json')
     def testretweets(self):
