@@ -2,80 +2,54 @@
 
 
 ***********************
-Authentication Tutorial
+인증 지침
 ***********************
 
-Introduction
+들어가며
 ============
 
-Tweepy supports both OAuth 1a (application-user) and OAuth 2
-(application-only) authentication. Authentication is handled by the
-tweepy.AuthHandler class.
+Tweepy는 OAuth 1a(응용 프로그램-사용자)와 OAuth 2a(응용프로그램 전용)을 모두 지원합니다. 인증은 tweepy.AuthHandler 클래스를 통해 처리됩니다.
 
 OAuth 1a Authentication
 =======================
 
-Tweepy tries to make OAuth 1a as painless as possible for you. To begin
-the process we need to register our client application with
-Twitter. Create a new application and once you
-are done you should have your consumer key and secret. Keep these
-two handy, you'll need them.
+Tweepy는 OAuth 1a를 가능한 편리하게 만들려고 노력합니다. 과정을 시작하기 위해선 클라이언트 응용 프로그램을 등록할 필요가 있습니다. 새로운 응용 프로그램을 생성하고 끝내기 위해선 consumer key와 secret을 가져야 합니다. 이 2가지는 필요하므로 잘 보관합시다.
 
-The next step is creating an OAuthHandler instance. Into this we pass
-our consumer key and secret which was given to us in the previous
-paragraph::
+다음 단계는 OAuthHandler 인스턴스를 생성하는 것입니다. 여기서 이전 단락에서 주어진 consumer key와 secret을 전달합니다.::
 
    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 
-If you have a web application and are using a callback URL that needs
-to be supplied dynamically you would pass it in like so::
+웹 응용 프로그램이 있고 동적으로 동작하는 callback URL을 사용하는 경우에는 다음과 같이 전달합니다.::
 
    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,
    callback_url)
 
-If the callback URL will not be changing, it is best to just configure
-it statically on twitter.com when setting up your application's
-profile.
+callback URL이 변경되지 않는 경우, 응용 프로그램의 프로필을 설정할 때 twitter.com에서 정적으로 설정하는 것이 가장 좋습니다.
 
-Unlike basic auth, we must do the OAuth 1a "dance" before we can start
-using the API. We must complete the following steps:
+기초적인 인증과는 다르게, 우리는 API를 사용하기 전에 다음의 동작이 필요합니다.
 
-#. Get a request token from twitter
+#. 트위터에서 Request token 가져오기
 
-#. Redirect user to twitter.com to authorize our application
+#. 사용자를 twitter.com으로 리다이렉트 시켜서 응용 프로그램 인증하기
 
-#. If using a callback, twitter will redirect the user to
-   us. Otherwise the user must manually supply us with the verifier
-   code.
+#. Callback을 이용하는 경우, 트위터는 사용자를 우리에게 리다이렉트 합니다. 그렇지 않으면 사용자가 수동으로 검증 코드를 제공해야만 합니다.
 
-#. Exchange the authorized request token for an access token.
+#. 공인된 Request token을 접근을 위한 Token으로 교체하기
 
-So let's fetch our request token to begin the dance::
+그러면, 동작을 위해 우리의 Request token을 가져 옵시다::
 
    try:
        redirect_url = auth.get_authorization_url()
    except tweepy.TweepError:
        print('Error! Failed to get request token.')
 
-This call requests the token from twitter and returns to us the
-authorization URL where the user must be redirect to authorize us. Now
-if this is a desktop application we can just hang onto our
-OAuthHandler instance until the user returns back. In a web
-application we will be using a callback request. So we must store the
-request token in the session since we will need it inside the callback
-URL request. Here is a pseudo example of storing the request token in
-a session::
+이 명령은 트위터를 통하여 토큰을 요청하고, 사용자가 권한 부여를 위해 리다이렉트 해야하는 인증 URL을 반환합니다. 만약 데스크탑 응용 프로그램인 경우, 사용자가 돌아올 때까지 OAuthHandler 인스턴스를 유지할 수 있습니다. 따라서 요청 토큰은 Callback URL 요청에 필요하므로 세션에 저장해야 합니다. 다음은 요청한 Token을 세션에 저장하는 예시 코드입니다::
 
    session.set('request_token', auth.request_token['oauth_token'])
 
-So now we can redirect the user to the URL returned to us earlier from
-the get_authorization_url() method.
+따라서 이제 get_authorization_url() 메소드를 통하여 반환된 URL로 사용자를 리다이렉트 할 수 있습니다.
 
-If this is a desktop application (or any application not using
-callbacks) we must query the user for the "verifier code" that twitter
-will supply them after they authorize us. Inside a web application
-this verifier value will be supplied in the callback request from
-twitter as a GET query parameter in the URL.
+만약 데스크탑 응용 프로그램(또는 콜백을 사용하지 않는 응용 프로그램)이라면, 트위터가 승인 후 제공하는 “검증 코드”를 사용자에게 요구해야 합니다. 웹 응용 프로그램 내에서 이 검증 코드는 URL에서 GET 쿼리 매개변수의 형태로 트위터의 콜백 요청으로부터 제공됩니다.
 
 .. code-block :: python
 
@@ -85,9 +59,7 @@ twitter as a GET query parameter in the URL.
    # Example w/o callback (desktop)
    verifier = raw_input('Verifier:')
 
-The final step is exchanging the request token for an access
-token. The access token is the "key" for opening the Twitter API
-treasure box. To fetch this token we do the following::
+마지막 단계는 요청 토큰을 접근 토근으로 교체하는 것입니다. 접근 토큰은 트위터 API라는 보물 상자에 접근하기 위한 “열쇠”입니다. 이 토큰을 가져오기 위해 다음을 해야합니다::
 
    # Let's say this is a web app, so we need to re-build the auth handler
    # first...
@@ -102,46 +74,33 @@ treasure box. To fetch this token we do the following::
    except tweepy.TweepError:
        print('Error! Failed to get access token.')
 
-It is a good idea to save the access token for later use. You do not
-need to re-fetch it each time. Twitter currently does not expire the
-tokens, so the only time it would ever go invalid is if the user
-revokes our application access. To store the access token depends on
-your application. Basically you need to store 2 string values: key and
-secret::
+이것은 접근 토큰을 추후에 사용하기 위한 좋은 저장 방식입니다. 수시로 재접근할 필요가 없습니다. 트위터는 현재 토큰을 만료시키지 않으므로, 비활성화 되는 때는 사용자가 응용 프로그램 접근을 취소할 때입니다. 접근 토큰을 저장하는 방법은 응용 프로그램에 따라 달라지지만, 기본적으로 key와 secret 문자열 값은 저장할 필요가 있습니다.::
 
    auth.access_token
    auth.access_token_secret
 
-You can throw these into a database, file, or where ever you store
-your data. To re-build an OAuthHandler from this stored access token
-you would do this::
+토큰 값은 데이터베이스, 파일, 그 외 데이터 저장 장소에 저장이 가능합니다. 저장된 접근 토큰으로 다시 OAuthHandler를 다시 실행하기 위해선 다음을 해야 합니다::
 
    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
    auth.set_access_token(key, secret)
 
-So now that we have our OAuthHandler equipped with an access token, we
-are ready for business::
+SOAuthHandler가 접근 토큰을 받아들였다면, 이제 다음 명령을 수행할 준비가 되었습니다::
 
    api = tweepy.API(auth)
    api.update_status('tweepy + oauth!')
 
-OAuth 2 Authentication
+OAuth 2 인증
 ======================
 
-Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of
-authentication where an application makes API requests without the
-user context. Use this method if you just need read-only access to
-public information.
+Tweepy는 OAuth 2 인증 방식도 지원합니다. OAuth 2는 응용 프로그램이 사용자 없이 API 요청을 하는 인증 방식입니다. 공공 정보에 대해 읽기 전용 접근만 필요한 경우 이 방식을 사용하십시오.
 
-Like OAuth 1a, we first register our client application and acquire
-a consumer key and secret.
+OAuth 1a처럼, 먼저 클라이언트 응용프로그램을 등록하고 consumer key와 secret값을 얻어야 합니다.
 
-Then we create an AppAuthHandler instance, passing in our consumer
-key and secret::
+그 다음 AppAuthHandler 인스턴스를 생성하고, consumer key와 secret을 전달합니다.::
 
    auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
 
-With the bearer token received, we are now ready for business::
+토큰을 받았다면 이제 작업을 시작할 준비가 되었습니다::
 
    api = tweepy.API(auth)
    for tweet in tweepy.Cursor(api.search, q='tweepy').items(10):
