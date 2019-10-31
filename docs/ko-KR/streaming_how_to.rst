@@ -1,124 +1,88 @@
 .. _streaming_how_to:
-.. _Twitter Streaming API Documentation: https://developer.twitter.com/en/docs/tweets/filter-realtime/overview
-.. _Twitter Streaming API Connecting Documentation: https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
-.. _Twitter Response Codes Documentation: https://dev.twitter.com/overview/api/response-codes
+.. _트위터 스트리밍 API 설명서: https://developer.twitter.com/en/docs/tweets/filter-realtime/overview
+.. _트위터 스트리밍 API 연결 설명서: https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
+.. _트위터 응답 코드 설명서: https://dev.twitter.com/overview/api/response-codes
 
-*********************
-Streaming With Tweepy
-*********************
-Tweepy makes it easier to use the twitter streaming api by handling authentication, 
-connection, creating and destroying the session, reading incoming messages, 
-and partially routing messages. 
+************************
+Tweepy를 이용한 스트리밍
+************************
+Tweepy는 인증, 연결, 세션 생성 및 삭제, 수신 메시지 읽기 및 메시지 라우팅 등을 처리해줌으로써 트위터 스트리밍 API를 더 쉽게 사용할 수 있게 해줍니다.
 
-This page aims to help you get started using Twitter streams with Tweepy 
-by offering a first walk through.  Some features of Tweepy streaming are
-not covered here. See streaming.py in the Tweepy source code. 
+이 페이지는 당신이 Tweepy로 트위터 스트림을 사용하기 위한 첫 걸음을 제시하여 도움을 주는 것을 목표로 합니다. 트위터 스트리밍의 일부 기능은 여기에서 다루지 않습니다. 트위피 소스 코드의 streaming.py를 참조해주세요.
 
-API authorization is required to access Twitter streams. 
-Follow the :ref:`auth_tutorial` if you need help with authentication. 
+트위터 스트림에 접근하기 위해선 API 인증이 필요합니다. 인증 과정에 도움이 필요하다면 :ref:`auth_tutorial` 를 참조해주세요.
 
-Summary
-=======
-The Twitter streaming API is used to download twitter messages in real 
-time.  It is useful for obtaining a high volume of tweets, or for 
-creating a live feed using a site stream or user stream. 
-See the `Twitter Streaming API Documentation`_.
+요약
+====
+트위터 스트리밍 API는 트위터의 메세지를 실시간으로 다운로드 하는 데에 사용됩니다. 대량의 트윗을 얻거나 사이트 스트림 또는 사용자 스트림을 사용해서 라이브 피드를 만드는 데에 유용합니다. `트위터 스트리밍 API 설명서`_.을 봐주세요.
 
-The streaming api is quite different from the REST api because the
-REST api is used to *pull* data from twitter but the streaming api
-*pushes* messages to a persistent session. This allows the streaming 
-api to download more data in real time than could be done using the
-REST API. 
+스트리밍 API는 REST API와는 상당히 다릅니다. 왜냐하면 REST API는 트위터에서 데이터를 가져오는 데에 사용되는 반면에 스트리밍 API는 메세지를 지속되는 세션으로 보내주기 때문입니다. 이를 통해 스트리밍 API는 REST API를 사용하는 것보다 더 많은 데이터를 실시간으로 다운로드 할 수 있습니다.
 
-In Tweepy, an instance of **tweepy.Stream** establishes a streaming 
-session and routes messages to **StreamListener** instance.  The
-**on_data** method of a stream listener receives all messages and
-calls functions according to the message type. The default 
-**StreamListener** can classify most common twitter messages and 
-routes them to appropriately named methods, but these methods are 
-only stubs. 
+Tweepy에서 **tweepy.Stream** 의 경우엔 스트리밍 세션을 설정하고, **StreamListener** 인스턴스에게 메시지를 보내는 일을 합니다. 스트림 수신자의 **on_data** 메소드는 모든 메시지를 수신하고 메시지의 종류에 따라 함수를 호출합니다. 기본 **StreamListener** 는 가장 일반적인 트위터 메시지를 분류하여 적절하게 설정된 메소드로 보낼 수 있습니다. 하지만 기본 **StreamListener** 의 메소드들은 임시로 만들어 놓은 것에 불과합니다.
 
-Therefore using the streaming api has three steps. 
+그러므로 스트리밍 API를 사용할 때는 다음의 세 단계를 거쳐야 합니다.
 
-1. Create a class inheriting from **StreamListener**
+1. **StreamListener** 를 상속받은 클래스를 생성
 
-2. Using that class create a **Stream** object 
+2. 그 클래스를 사용해서 **Stream** 객체를 생성
 
-3. Connect to the Twitter API using the **Stream**.
+3. **Stream** 를 사용해서 트위터 API에 연결
 
 
-Step 1: Creating a **StreamListener**
-=====================================
-This simple stream listener prints status text.
-The **on_data** method of Tweepy's **StreamListener** conveniently passes 
-data from statuses to the **on_status** method.
-Create class **MyStreamListener** inheriting from  **StreamListener** 
-and overriding **on_status**.::
+1단계: **StreamListener** 생성
+==============================
+아래의 간단한 스트림 수신자는 status의 글을 출력합니다. Tweepy의 **StreamListener** 의 **on_data** 메소드는 손쉽게 status의 데이터를 **on_status** 메소드로 보내줍니다. **StreamListener** 를 상속받은 **MyStreamListener** 클래스를 생성하고 **on_status** 를 오버라이딩 합니다. ::
+
   import tweepy
-  #override tweepy.StreamListener to add logic to on_status
+  #tweepy.StreamListener에 on_status의 로직을 추가해서 오버라이딩
   class MyStreamListener(tweepy.StreamListener):
   
       def on_status(self, status):
           print(status.text)
 
-Step 2: Creating a **Stream**
-=============================
-We need an api to stream. See :ref:`auth_tutorial` to learn how to get an api object. 
-Once we have an api and a status listener we can create our stream object.::
+2단계: 스트림 생성
+==================
+스트림을 얻기 위해선 api 인스턴스가 필요합니다. api 객체를 얻는 방법은 :ref:`auth_tutorial` 를 참조해주세요. api와 status 수신자를 얻어낸 후엔 스트림 객체를 만들 수 있습니다. ::
 
   myStreamListener = MyStreamListener()
   myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
 
-Step 3: Starting a Stream
-=========================
-A number of twitter streams are available through Tweepy. Most cases 
-will use filter, the user_stream, or the sitestream. 
-For more information on the capabilities and limitations of the different
-streams see `Twitter Streaming API Documentation`_.
+3단계: 스트림을 시작
+====================
+Tweepy는 많은 트위터 스트림을 지원합니다. 대부분의 경우에는 filter, user_stream, sitestream 등을 사용하게 됩니다. 더 많은 다른 스트림의 지원 여부에 관한 정보는 `트위터 스트리밍 API 설명서`_.를 참조해주세요.
 
-In this example we will use **filter** to stream all tweets containing
-the word *python*. The **track** parameter is an array of search terms to stream. ::
+이 예제에선 **filter** 를 사용해서 *python* 이라는 단어를 포함하는 모든 트윗을 스트리밍 합니다. **track** 매개변수는 스트림에서 검색할 단어들의 배열입니다. ::
   
   myStream.filter(track=['python'])
 
-This example shows how to use **filter** to stream tweets by a specific user. The **follow** parameter is an array of IDs. ::
+이 예제는 **filter** 를 사용해서 특정 사용자의 트윗을 스트리밍 하는 방법을 보여줍니다. **follow** 매개변수는 사용자들의 ID의 배열입니다. ::
 
   myStream.filter(follow=["2211149702"])
 
-An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'.
+ID를 찾는 쉬운 방법은 변환 웹사이트를 이용하는 것입니다: 'what is my twitter ID' 를 검색하세요.
 
-A Few More Pointers
-===================
+추가적인 조언
+=============
 
-Async Streaming
+비동기 스트리밍
 ---------------
-Streams do not terminate unless the connection is closed, blocking the thread. 
-Tweepy offers a convenient **is_async** parameter on **filter** so the stream will run on a new
-thread. For example ::
+스트림은 연결이 끊어지지 않으면 종료되지 않고, 스레드가 차단됩니다. Tweepy는 **filter** 에서 편리성을 높여줄 매개변수인 **is_async** 를 제공하여 스트림이 새로운 스레드에서 실행 되도록 합니다. 예시 ::
 
   myStream.filter(track=['python'], is_async=True)
 
-Handling Errors
----------------
-When using Twitter's streaming API one must be careful of the dangers of 
-rate limiting. If clients exceed a limited number of attempts to connect to the streaming API 
-in a window of time, they will receive error 420.  The amount of time a client has to wait after receiving error 420
-will increase exponentially each time they make a failed attempt. 
+오류 처리
+---------
+트위터의 스트리밍 API를 사용할 때 가장 주의해야 할 점 중 하나는 속도 제한의 위험입니다. 만약 클라이언트가 정해진 시간동안 스트리밍 API에 접근 시도 횟수가 제한된 수를 초과한다면, 420 오류를 수신하게 됩니다. 클라이언트가 420 오류를 수신한 후 기다려야 하는 시간은 접속에 실패할 때마다 기하급수적으로 증가합니다.
 
-Tweepy's **Stream Listener** passes error codes to an **on_error** stub. The
-default implementation returns **False** for all codes, but we can override it
-to allow Tweepy to reconnect for some or all codes, using the backoff
-strategies recommended in the `Twitter Streaming API Connecting
-Documentation`_. ::
+Tweepy의 **Stream Listener** 은 오류 코드를 **on_error** 임시 메소드로 전송합니다. **on_error** 의 기본 구현은 모든 코드에서 **False** 을 반환하지만, `트위터 스트리밍 API 연결 설명서`_. 에서 권장하는 백오프 전략을 사용하여 어떤, 혹은 모든 코드에서 Tweepy가 다시 연결할 수 있도록 오버라이딩 할 수 있습니다. ::
 
   class MyStreamListener(tweepy.StreamListener):
   
       def on_error(self, status_code):
           if status_code == 420:
-              #returning False in on_error disconnects the stream
+              # on_error에서 False를 반환하면 스트림의 연결 차단
               return False
 
-          # returning non-False reconnects the stream, with backoff.
+          # Fasle가 아닌 값을 반환하면 스트림에 재연결
 
-For more information on error codes from the Twitter API see `Twitter Response Codes Documentation`_.
-
+트위터 API의 더 많은 오류 코드에 대한 정보를 보려면 `트위터 응답 코드 설명서`_. 를 참조하세요.

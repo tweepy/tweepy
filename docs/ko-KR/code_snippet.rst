@@ -2,14 +2,13 @@
 
 
 *************
-Code Snippets
+코드 조각
 *************
 
-Introduction
+소개
 ============
 
-Here are some code snippets to help you out with using Tweepy. Feel
-free to contribute your own snippets or improve the ones here!
+여기에는 당신이 트위피를 사용하는 데에 도움을 줄 몇 개의 코드 조각들이 있습니다. 마음껏 당신의 코드로 기여하거나 여기 있는 코드를 개선해주세요!
 
 OAuth
 =====
@@ -18,54 +17,51 @@ OAuth
 
    auth = tweepy.OAuthHandler("consumer_key", "consumer_secret")
    
-   # Redirect user to Twitter to authorize
+   # 권한을 얻기 위해 사용자를 트위터로 전송
    redirect_user(auth.get_authorization_url())
    
-   # Get access token
+   # 접근 토큰을 얻음
    auth.get_access_token("verifier_value")
    
-   # Construct the API instance
+   # API 인스턴스를 생성
    api = tweepy.API(auth)
 
-Pagination
-==========
+페이지 나누기
+=============
 
 .. code-block :: python
 
-   # Iterate through all of the authenticated user's friends
+   # 인증된 사용자의 모든 친구 사이를 반복
    for friend in tweepy.Cursor(api.friends).items():
-       # Process the friend here
+       # 여기서 friend의 처리
        process_friend(friend)
    
-   # Iterate through the first 200 statuses in the home timeline
+   # 타임라인의 가장 처음 200개의 status 사이를 반복
    for status in tweepy.Cursor(api.home_timeline).items(200):
-       # Process the status here
+       # 여기서 status의 처리
        process_status(status)
 
-FollowAll
-=========
+모든 팔로워를 팔로우
+====================
 
-This snippet will follow every follower of the authenticated user.
+이 코드는 인증된 사용자의 모든 팔로워를 팔로우 하도록 합니다.
 
 .. code-block :: python
 
    for follower in tweepy.Cursor(api.followers).items():
        follower.follow()
 
-Handling the rate limit using cursors
-=====================================
+커서를 이용한 시간 제한의 처리
+==============================
    
-Since cursors raise ``RateLimitError``\ s in their ``next()`` method,
-handling them can be done by wrapping the cursor in an iterator.
+커서는 커서 안의 ``next()``\ 메소드 안에서 ``RateLimitError``\ 를 일으킵니다. 이 오류는 커서를 반복자로 감쌈으로써 처리할 수 있습니다.
    
-Running this snippet will print all users you follow that themselves follow
-less than 300 people total - to exclude obvious spambots, for example - and
-will wait for 15 minutes each time it hits the rate limit.
+이 코드를 실행하면 당신이 팔로우한 모든 유저 중 300명 이하를 팔로우하는 유저들을 출력하고, 속도 제한에 도달할 때마다 15분간 기다릴 것입니다. 이 코드는 명백한 스팸봇을 제외하기 위한 예제입니다.
    
 .. code-block :: python
    
-   # In this example, the handler is time.sleep(15 * 60),
-   # but you can of course handle it in any way you want.
+   # 이 예제에서 처리자는 time.sleep(15*60)
+   # 하지만 물론 당신이 원하는 어떤 방법으로든 처리 가능
    
    def limit_handled(cursor):
        while True:
