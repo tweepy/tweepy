@@ -1,27 +1,20 @@
 .. _cursor_tutorial:
 
 ***************
-Cursor Tutorial
+커서 튜토리얼
 ***************
 
-This tutorial describes details on pagination with Cursor objects.
+이 튜토리얼은 커서 객체를 이용한 페이징에 대한 세부 사항을 설명합니다.
 
-Introduction
+들어가며
 ============
 
-We use pagination a lot in Twitter API development. Iterating through
-timelines, user lists, direct messages, etc. In order to perform
-pagination, we must supply a page/cursor parameter with each of our
-requests. The problem here is this requires a lot of boiler plate code
-just to manage the pagination loop. To help make pagination easier and
-require less code, Tweepy has the Cursor object.
+트위터 API 개발에서 페이징은 타임라인 반복, 사용자 목록, 쪽지, 그 외 여러 곳에서 자주 사용됩니다. 페이징을 수행하기 위해선 요청마다 페이지와 커서 매개변수를 전달해야 합니다. 여기서 문제는 페이징 루프를 관리하기 위해선 많은 표준 코드를 필요로 한다는 점입니다. 트위피는 페이징을 더 쉽고 적은 코드로 돕기 위해 커서 객체를 가지고 있습니다.
 
 Old way vs Cursor way
 =====================
 
-First let's demonstrate iterating the statuses in the authenticated
-user's timeline. Here is how we would do it the "old way" before the
-Cursor object was introduced::
+먼저 인증된 사용자의 타임라인 내에서 status를 반복하는 방법을 구현해봅시다. 커서 객체가 도입되기 전에 사용하던 “구식 방법”은 다음과 같습니다::
 
    page = 1
    while True:
@@ -35,42 +28,33 @@ Cursor object was introduced::
            break
        page += 1  # next page
 
-As you can see, we must manage the "page" parameter manually in our
-pagination loop. Now here is the version of the code using the Cursor
-object::
+보시다시피, 페이징 루프마다 "page" 매개변수를 수동으로 관리해야 합니다. 다음은 커서 객체를 사용하는 코드 버전입니다::
 
    for status in tweepy.Cursor(api.user_timeline).items():
        # process status here
        process_status(status)
 
-Now that looks much better! Cursor handles all the pagination work for
-us behind the scenes, so our code can now focus entirely on processing
-the results.
+훨씬 좋아보입니다! 커서가 씬 뒤에서 모든 페이징 작업을 처리하므로, 결과 처리를 위한 코드에만 집중 할 수 있습니다.
 
-Passing parameters into the API method
+API 메소드로 매개변수 전달하기
 ======================================
 
-What if you need to pass in parameters to the API method?
+API 메소드로 매개변수를 전달해야 한다면 어떻게 하시겠습니까?
 
 .. code-block :: python
 
    api.user_timeline(id="twitter")
 
-Since we pass Cursor the callable, we can not pass the parameters
-directly into the method. Instead we pass the parameters into the
-Cursor constructor method::
+커서를 호출 가능으로 전달했기 때문에, 메소드에 직접적으로 매개변수를 전달 할 수 없습니다. 대신 커서 생성자 메소드로 매개변수를 전달합니다::
 
    tweepy.Cursor(api.user_timeline, id="twitter")
 
-Now Cursor will pass the parameter into the method for us whenever it
-makes a request.
+이제 커서는 요청만 하면 매개변수를 전달해 줄 것입니다.
 
 Items or Pages
 ==============
 
-So far we have just demonstrated pagination iterating per
-item. What if instead you want to process per page of results? You
-would use the pages() method::
+지금까지 단지 항목당 페이징을 반복하는 방법을 구현해보았습니다. 대신 페이지별로 결과를 처리하려면 어떻게 하시겠습니까? pages() 메소드를 사용하십시오::
 
    for page in tweepy.Cursor(api.user_timeline).pages():
        # page is a list of statuses
@@ -80,8 +64,7 @@ would use the pages() method::
 Limits
 ======
 
-What if you only want n items or pages returned? You pass into the
-items() or pages() methods the limit you want to impose.
+n개의 항목이나 페이지만 반환하기를 원한다면 어떻게 하시겠습니까? items()나 pages() 메소드를 통해 원하는 한계값을 전달 할 수 있습니다.
 
 .. code-block :: python
 
