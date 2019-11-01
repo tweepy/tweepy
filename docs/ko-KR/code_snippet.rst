@@ -17,7 +17,7 @@ OAuth
 
    auth = tweepy.OAuthHandler("consumer_key", "consumer_secret")
    
-   # 권한을 얻기 위해 사용자를 트위터로 전송
+   # 권한을 얻기 위해 트위터로 리다이렉트
    redirect_user(auth.get_authorization_url())
    
    # 접근 토큰을 얻음
@@ -51,8 +51,8 @@ OAuth
    for follower in tweepy.Cursor(api.followers).items():
        follower.follow()
 
-커서를 이용한 시간 제한의 처리
-==============================
+커서 이용 속도 제한의 처리
+==========================
    
 커서는 커서 안의 ``next()``\ 메소드 안에서 ``RateLimitError``\ 를 일으킵니다. 이 오류는 커서를 반복자로 감쌈으로써 처리할 수 있습니다.
    
