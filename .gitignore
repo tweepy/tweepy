@@ -14,6 +14,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Windows file types
+*.bak
+
 # Distribution / packaging
 .Python
 build/
