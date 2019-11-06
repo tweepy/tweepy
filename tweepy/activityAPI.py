@@ -3,8 +3,6 @@
 # Simon Lucy (bpluly) 
 
 import tweepy
-import logging
-import logging.handlers
 
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
