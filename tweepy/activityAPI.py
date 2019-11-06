@@ -29,7 +29,6 @@ class ActivityAPI(API):
           else:
             apiPath = '/account_activity/all/webhooks.json'
           
-          logger.info(apiPath)
           self.cache=None
           self.use_cache=False
           self.parser=JSONParser()
@@ -64,7 +63,6 @@ class ActivityAPI(API):
               :allowed_param:'url', 'env'
           """
           post_data = {}
-          logger.info(kwargs)
           env = kwargs.pop('env')
           if env is not None:
             apiPath = '/account_activity/all/'+env+'/subscriptions.json'
@@ -81,7 +79,6 @@ class ActivityAPI(API):
               [{"id":"9999999999999999","url":"https://api.blah-blah/webhook","valid":true,"created_timestamp":"2019-09-16 16:47:16 +0000"}] 
           """
           post_data = {}
-          logger.info(kwargs)
           env = kwargs.pop('env')
           if env is not None:
             apiPath = '/account_activity/all/'+env+'/webhooks.json'
@@ -97,7 +94,6 @@ class ActivityAPI(API):
               [{"id":"9999999999999999","url":"https://api.blah-blah/webhook_id","valid":true,"created_timestamp":"2019-09-16 16:47:16 +0000"}] 
           """
           post_data = {}
-          logger.info(kwargs)
           env = kwargs.pop('env')
           if env is not None:
             apiPath = '/account_activity/all/'+env+'/webhook_id.json'
@@ -112,7 +108,6 @@ class ActivityAPI(API):
               :returns: an array of JSON. 
           """
           post_data = {}
-          logger.info(kwargs)
           env = kwargs.pop('env')
           if env is not None:
             apiPath = '/account_activity/all/'+env+'/subscriptions/list.json'
@@ -127,7 +122,6 @@ class ActivityAPI(API):
               :returns: an array of JSON. 
           """
           post_data = {}
-          logger.info(kwargs)
           env = kwargs.pop('env')
           if env is not None:
             apiPath = '/account_activity/all/subscriptions/count.json'
@@ -145,7 +139,6 @@ class ActivityAPI(API):
 
           apiPath = '/account_activity/replay/webhooks/'+webhookid+'/subscriptions/all.json'
           
-          logger.info(apiPath)
           self.cache=None
           self.use_cache=False
           self.parser=JSONParser()
