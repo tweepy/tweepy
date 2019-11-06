@@ -9,6 +9,7 @@ import logging.handlers
 from tweepy.binder import bind_api
 from tweepy.error import TweepError
 from tweepy.parsers import JSONParser, Parser
+from tweepy.api import API
 
 
 
