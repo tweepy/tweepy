@@ -13,7 +13,7 @@ from tweepy.parsers import JSONParser, Parser
 
 
   
-class ActivityAPI(tweepy.API):
+class ActivityAPI(API):
       pass
       
 
