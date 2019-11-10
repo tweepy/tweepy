@@ -23,5 +23,5 @@
 .. |slug| replace:: 숫자ID를 대신하여 목록을 식별할 수 있습니다. 이것을 사용하기로 결정한 경우, owner_id 또는 owner_screen_name 매개변수를 사용하여 목록 소유자도 지정해야 한다는 점에 유의하세요.
 .. |trim_user| replace:: A boolean indicating if user IDs should be provided, instead of complete user objects. Defaults to False.
 .. |uid| replace:: Specifies the ID or screen name of the user.
-.. |user_id| replace:: Specifies the ID of the user. Helpful for disambiguating when a valid user ID is also a valid screen name.
+.. |user_id| replace:: 사용자의 ID를 지정하세요. 유효한 사용자 ID와 유효한 닉네임이 같이 있다면 명확하게 하는 데 도움이 됩니다.
 
