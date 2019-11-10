@@ -19,7 +19,7 @@
 .. |screen_name| replace:: 사용자의 닉네임을 지정하세요. 유효한 닉네임과 사용자 ID가 같이 있다면 명확하게 하는 데 도움이 됩니다.
 .. |sid| replace:: The numerical ID of the status.
 .. |since_id| replace:: ID가 지정된 ID보다 더 큰(즉, 더 최근의) 경우에만 반환합니다.
-.. |skip_status| replace:: A boolean indicating whether statuses will not be included in the returned user objects. Defaults to false.
+.. |skip_status| replace:: 상태가 반환된 유저 객체들에 포함될지에 대한 참/거짓 여부. 기본값은 false.
 .. |slug| replace:: 숫자ID를 대신하여 목록을 식별할 수 있습니다. 이것을 사용하기로 결정한 경우, owner_id 또는 owner_screen_name 매개변수를 사용하여 목록 소유자도 지정해야 한다는 점에 유의하세요.
 .. |trim_user| replace:: A boolean indicating if user IDs should be provided, instead of complete user objects. Defaults to False.
 .. |uid| replace:: Specifies the ID or screen name of the user.
