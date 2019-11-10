@@ -423,7 +423,7 @@ User methods
    삭제한 이후에도 해당 DM에 접근할 수 있습니다.
 
    :param id: 삭제할 DM의 ID
-   :rtype: 없음
+   :rtype: None
 
 
 친구 관계 메소드
@@ -431,74 +431,72 @@ User methods
 
 .. method:: API.create_friendship(id/screen_name/user_id, [follow])
 
-   지정한 사용자와 친구(팔로우)를 맺습니다.
+   지정한 사용자와 친구를 맺습니다. (일명 팔로우)
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param follow: Enable notifications for the target user in addition to
-                  becoming friends.
-   :rtype: :class:`User` object
+   :param follow: 지정한 사용자를 팔로우 하고 대상 사용자에 대한 알림을 활성화합니다.
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_friendship(id/screen_name/user_id)
 
-   Destroy a friendship with the specified user (aka unfollow).
+   지정한 사용자를 친구 삭제 합니다. (일명 언팔로우)
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.show_friendship(source_id/source_screen_name, \
                                 target_id/target_screen_name)
 
-   Returns detailed information about the relationship between two users.
+   두 사용자의 관계에 대한 자세한 정보를 반환합니다.
 
-   :param source_id: The user_id of the subject user.
-   :param source_screen_name: The screen_name of the subject user.
-   :param target_id: The user_id of the target user.
-   :param target_screen_name: The screen_name of the target user.
-   :rtype: :class:`Friendship` object
+   :param source_id: 주대상 사용자의 user_id
+   :param source_screen_name: 주대상 사용자의 screen_name
+   :param target_id: 대상 사용자의 user_id
+   :param target_screen_name: 대상 사용자의 screen_name
+   :rtype: :class:`Friendship` 객체
 
 
 .. method:: API.friends_ids(id/screen_name/user_id, [cursor])
 
-   Returns an array containing the IDs of users being followed by the specified
-   user.
+   지정한 사용자가 팔로우한 사용자들의 ID를 담은 배열을 반환합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
 .. method:: API.followers_ids(id/screen_name/user_id)
 
-   Returns an array containing the IDs of users following the specified user.
+   지정한 사용자를 팔로우한 사용자들의 ID를 담은 배열을 반환합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
-Account Methods
----------------
+계정 메소드
+-----------
 
 .. method:: API.verify_credentials([include_entities], [skip_status], \
                                    [include_email])
 
-   Verify the supplied user credentials are valid.
+   제출한 사용자의 계정 사용 자격이 유효한지 판별합니다.
 
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
    :param include_email: When set to true email will be returned in the user
                          objects as a string.
-   :rtype: :class:`User` object if credentials are valid, otherwise False
+   :rtype: 자격이 유효하다면 :class:`User` 객체, 아니라면 False
 
 
 .. method:: API.rate_limit_status()
@@ -514,20 +512,19 @@ Account Methods
 
 .. method:: API.update_profile_image(filename)
 
-   Update the authenticating user's profile image. Valid formats: GIF, JPG, or
-   PNG
+   인증된 사용자의 프로필 사진을 갱신합니다. 유효한 형식: GIF, JPG, PNG
 
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
+   :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.update_profile_background_image(filename)
 
-   Update authenticating user's background image. Valid formats: GIF, JPG, or
+   인증됨 사용자의 배경 사진을 업데이트 합니다. Valid formats: GIF, JPG, or
    PNG
 
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
+   :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.update_profile([name], [url], [location], [description])
