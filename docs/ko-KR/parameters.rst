@@ -1,10 +1,10 @@
 .. API parameters:
 
 .. |count| replace:: 페이지 당 시도하고 검색할 결과의 수.
-.. |cursor| replace:: 결과를 페이지로 나눕니다. 페이징을 시작하려면 -1 값을 입력하세요. 응답 기관의 next_cursor와 previous_cursor에 반환된 값을 목록의 앞뒤에 제공하세요.
+.. |cursor| replace:: 결과를 페이지로 나눕니다. 페이징을 시작하려면 -1 값을 입력하세요. response의 next_cursor와 previous_cursor에 반환된 값을 목록의 앞뒤에 제공하세요.
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
-.. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
+.. |full_text| replace:: 메시지의 전문을 반환할지 여부를 확인하기 위한 논리값. False라면 140자로 잘린 메시지 내용을 반환하게 됩니다. 기본값은 False입니다.
 .. |include_card_uri| replace:: A boolean indicating if the retrieved Tweet should include a card_uri attribute when there is an ads card attached to the Tweet and when that card was attached using the card_uri value.
 .. |include_entities| replace:: false로 설정하면 엔티티 노드를 포함하지 않습니다. 기본값은 true.
 .. |include_ext_alt_text| replace:: If alt text has been added to any attached media entities, this parameter will return an ext_alt_text value in the top-level key for the media entity.
