@@ -375,68 +375,63 @@ User methods
    :rtype: list of :class:`User` objects
 
 
-Direct Message Methods
-----------------------
+다이렉트 메시지(DM) 메소드
+--------------------------
 
 .. method:: API.get_direct_message([id], [full_text])
 
-   Returns a specific direct message.
+   선택한 DM을 반환합니다.
 
    :param id: |id|
    :param full_text: |full_text|
-   :rtype: :class:`DirectMessage` object
+   :rtype: :class:`DirectMessage` 객체
 
 
 .. method:: API.list_direct_messages([count], [cursor])
 
-   Returns all Direct Message events (both sent and received) within the last
-   30 days. Sorted in reverse-chronological order.
+   최근 30일 이내의 모든 DM의 내역(송수신 모두)을 반환합니다. 반환값은 시
+   간역순으로 정렬되어 있습니다.
 
    :param count: |count|
    :param cursor: |cursor|
-   :rtype: list of :class:`DirectMessage` objects
+   :rtype: :class:`DirectMessage` 객체의 리스트
 
 
 .. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], \
                                     [attachment_type], [attachment_media_id])
 
-   Sends a new direct message to the specified user from the authenticating
-   user.
+   인증한 사용자의 계정으로 선택한 사용자에게 DM을 보냅니다.
 
-   :param recipient_id: The ID of the user who should receive the direct
-                        message.
-   :param text: The text of your Direct Message. Max length of 10,000
-                characters.
-   :param quick_reply_type: The Quick Reply type to present to the user:
+   :param recipient_id: DM을 받을 사용자의 ID
+   :param text: DM의 내용. 최대 글자수는 10000
+   :param quick_reply_type: 사용자에게 표시할 빠른 응답 유형:
 
-                            * options - Array of Options objects (20 max).
-                            * text_input - Text Input object.
-                            * location - Location object.
-   :param attachment_type: The attachment type. Can be media or location.
-   :param attachment_media_id: A media id to associate with the message.
-                               A Direct Message may only reference a single
-                               media_id.
-   :rtype: :class:`DirectMessage` object
+                            * options - Options 객체의 배열(최대 20)
+                            * text_input - Text Input 객체
+                            * location - Location 객체
+   :param attachment_type: 첨부 유형. 미디어 또는 위치 등입니다.
+   :param attachment_media_id: 메시지와 연결할 미디어의 id. DM은 하나의
+                              미디어 ID만을 참조할 수 있습니다.
+   :rtype: :class:`DirectMessage` 객체
 
 
 .. method:: API.destroy_direct_message(id)
 
-   Deletes the direct message specified in the required ID parameter. The
-   authenticating user must be the recipient of the specified direct message.
-   Direct Messages are only removed from the interface of the user context
-   provided. Other members of the conversation can still access the Direct
-   Messages.
+   ID 매개변수가 지정하는 DM을 삭제합니다. 삭제하기 위해서는 인증한
+   사용자가 해당 DM의 수신자여야 합니다. DM은 사용자 콘텍스트에서
+   제공하는 인터페이스에서만 제거됩니다. 대화에 참여한 다른 사용자는
+   삭제한 이후에도 해당 DM에 접근할 수 있습니다.
 
-   :param id: The id of the Direct Message that should be deleted.
-   :rtype: None
+   :param id: 삭제할 DM의 ID
+   :rtype: 없음
 
 
-Friendship Methods
-------------------
+친구 관계 메소드
+----------------
 
 .. method:: API.create_friendship(id/screen_name/user_id, [follow])
 
-   Create a new friendship with the specified user (aka follow).
+   지정한 사용자와 친구(팔로우)를 맺습니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
