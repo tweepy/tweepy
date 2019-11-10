@@ -768,24 +768,24 @@ Help Methods
    :rtype: :class:`SearchResults` object
 
 
-List Methods
+List 메소드
 ------------
 
 .. method:: API.create_list(name, [mode], [description])
 
-   Creates a new list for the authenticated user.
-   Note that you can create up to 1000 lists per account.
+   인증된 사용자에 대한 새 목록을 생성합니다.
+   계정 당 최대 1000개의 목록을 생성할 수 있음에 유의하세요.
 
-   :param name: The name of the new list.
+   :param name: 새 목록의 이름.
    :param mode: |list_mode|
-   :param description: The description of the list you are creating.
+   :param description: 생성 중인 목록에 대한 설명.
    :rtype: :class:`List` object
 
 
 .. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
 
-   Deletes the specified list.
-   The authenticated user must own the list to be able to destroy it.
+   지정된 목록을 삭제합니다.
+   인증된 사용자는 삭제하기 위해 해당 목록을 소유해야 합니다.
 
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
@@ -797,14 +797,14 @@ List Methods
 .. method:: API.update_list(list_id/slug, [name], [mode], [description], \
                             [owner_screen_name/owner_id])
 
-   Updates the specified list.
-   The authenticated user must own the list to be able to update it.
+   지정한 목록을 업데이트합니다.
+   인증된 사용자는 업데이트하기 위해 해당 목록을 소유해야 합니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
-   :param name: The name for the list.
+   :param name: 새 목록의 이름.
    :param mode: |list_mode|
-   :param description: The description to give the list.
+   :param description: 목록에 부여할 설명.
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
    :rtype: :class:`List` object
@@ -812,38 +812,32 @@ List Methods
 
 .. method:: API.lists_all([screen_name], [user_id], [reverse])
 
-   Returns all lists the authenticating or specified user subscribes to,
-   including their own. The user is specified using the ``user_id`` or
-   ``screen_name`` parameters. If no user is given, the authenticating user is
-   used.
+   인증된 사용자 또는 지정된 사용자가 가입한 모든 목록(소유한 목록 포함)을 반환합니다.
+   user_id나 screen_name 매개변수를 사용하여 사용자를 지정합니다.
+   만약 사용자를 지정하지 않는 경우, 인증된 사용자가 사용됩니다.
 
-   A maximum of 100 results will be returned by this call. Subscribed lists are
-   returned first, followed by owned lists. This means that if a user
-   subscribes to 90 lists and owns 20 lists, this method returns 90
-   subscriptions and 10 owned lists. The ``reverse`` method returns owned lists
-   first, so with ``reverse=true``, 20 owned lists and 80 subscriptions would
-   be returned.
+   이 호출로 최대 100개의 결과가 반환될 것입니다.
+   가입자 목록들이 먼저 반환되고, 이후에 소유한 목록들이 반환됩니다.
+   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면, 메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
+   매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로 20개의 소유목록과 80개의 가입 목록을 반환합니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param reverse: A boolean indicating if you would like owned lists to be
-                   returned first. See description above for information on how
-                   this parameter works.
+   :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부.
+   이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
    :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_memberships([screen_name], [user_id], \
                                   [filter_to_owned_lists], [cursor], [count])
 
-   Returns the lists the specified user has been added to. If ``user_id`` or
-   ``screen_name`` are not provided, the memberships for the authenticating
-   user are returned.
+  사용자가 추가된 목록들을 반환합니다.
+  user_id 또는 screen_name을 입력하지 않으면 인증된 사용자에 대한 멤버쉽이 반환됩니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param filter_to_owned_lists: A boolean indicating whether to return just
-      lists the authenticating user owns, and the user represented by
-      ``user_id`` or ``screen_name`` is a member of.
+   :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부.
+   user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
    :param cursor: |cursor|
    :param count: |count|
    :rtype: list of :class:`List` objects
@@ -852,8 +846,8 @@ List Methods
 .. method:: API.lists_subscriptions([screen_name], [user_id], [cursor], \
                                     [count])
 
-   Obtain a collection of the lists the specified user is subscribed to, 20
-   lists per page by default. Does not include the user's own lists.
+   지정된 사용자가 구독하는 목록들의 모음(기본적으로 페이지 당 20개의 목록)을 얻습니다.
+   사용자 자신의 목록은 포함하지 않습니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
@@ -866,9 +860,8 @@ List Methods
                               [since_id], [max_id], [count], \
                               [include_entities], [include_rts])
 
-   Returns a timeline of tweets authored by members of the specified list.
-   Retweets are included by default. Use the ``include_rts=false`` parameter to
-   omit retweets.
+   지정된 목록의 구성원이 작성한 트윗들의 타임라인을 반환합니다.
+   기본적으로 리트윗이 포함됩니다. 리트윗을 생략하려면 include_rts=false 매개변수를 이용하세요.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -878,17 +871,15 @@ List Methods
    :param max_id: |max_id|
    :param count: |count|
    :param include_entities: |include_entities|
-   :param include_rts: A boolean indicating whether the list timeline will
-      contain native retweets (if they exist) in addition to the standard
-      stream of tweets. The output format of retweeted tweets is identical to
-      the representation you see in home_timeline.
+   :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부.
+   리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
    :rtype: list of :class:`Status` objects
 
 
 .. method:: API.get_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Returns the specified list. Private lists will only be shown if the
-   authenticated user owns the specified list.
+   지정된 목록을 반환합니다.
+   private상태의 목록들은 오직 인증된 사용자가 지정된 목록을 소유한 경우에만 보여집니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -900,8 +891,8 @@ List Methods
 .. method:: API.add_list_member(list_id/slug, screen_name/user_id, \
                                 [owner_id/owner_screen_name])
 
-   Add a member to a list. The authenticated user must own the list to be able
-   to add members to it. Lists are limited to 5,000 members.
+   목록에 구성원을 추가합니다.
+   인증된 사용자는 목록에 구성원을 추가하기 위해 목록을 소유해야 하며, 목록은 최대 5000명으로 제한되어 있습니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -915,15 +906,13 @@ List Methods
 .. method:: API.add_list_members(list_id/slug, screen_name/user_id, \
                                  [owner_id/owner_screen_name])
 
-   Add up to 100 members to a list. The authenticated user must own the list to
-   be able to add members to it. Lists are limited to 5,000 members.
+   목록에 최대 100명의 구성원들을 추가합니다.
+   인증된 사용자는 목록에 구성원을 추가하기 위해 목록을 소유해야 하며, 목록은 최대 5000명으로 제한되어 있습니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
-   :param screen_name: A comma separated list of screen names, up to 100 are
-                       allowed in a single request
-   :param user_id: A comma separated list of user IDs, up to 100 are allowed in
-                   a single request
+   :param screen_name: 콤마로 닉네임 목록을 구분하며, 한 요청 당 100회로 제한됩니다.
+   :param user_id: 콤마로 사용자 ID 목록을 구분하며, 한 요청 당 100회로 제한됩니다.
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
@@ -932,8 +921,8 @@ List Methods
 .. method:: API.remove_list_member(list_id/slug, screen_name/user_id, \
                                    [owner_id/owner_screen_name])
 
-   Removes the specified member from the list. The authenticated user must be
-   the list's owner to remove members from the list.
+   목록에서 지정된 구성원을 제외합니다.
+   인증된 사용자는 목록에 구성원을 제외하기 위해 목록을 소유해야 합니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -947,16 +936,13 @@ List Methods
 .. method:: API.remove_list_members(list_id/slug, screen_name/user_id, \
                                     [owner_id/owner_screen_name])
 
-   Remove up to 100 members from a list. The authenticated user must own the
-   list to be able to remove members from it. Lists are limited to 5,000
-   members.
+   목록에서 최대 100명의 구성원을 제외합니다.
+   인증된 사용자는 목록에 구성원을 제외하기 위해 목록을 소유해야 하며, 목록은 최대 5000명으로 제한되어 있습니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
-   :param screen_name: A comma separated list of screen names, up to 100 are
-                       allowed in a single request
-   :param user_id: A comma separated list of user IDs, up to 100 are allowed in
-                   a single request
+   :param screen_name: 콤마로 닉네임 목록을 구분하며, 한 요청 당 100회로 제한됩니다.
+   :param user_id: 콤마로 사용자 ID 목록을 구분하며, 한 요청 당 100회로 제한됩니다.
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
@@ -965,7 +951,7 @@ List Methods
 .. method:: API.list_members(list_id/slug, [owner_id/owner_screen_name], \
                              [cursor])
 
-   Returns the members of the specified list.
+   지정된 목록의 구성원들을 반환합니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -978,7 +964,7 @@ List Methods
 .. method:: API.show_list_member(list_id/slug, screen_name/user_id, \
                                  [owner_id/owner_screen_name])
 
-   Check if the specified user is a member of the specified list.
+   지정된 사용자가 지정된 목록의 구성원인지 확인합니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -991,7 +977,7 @@ List Methods
 
 .. method:: API.subscribe_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Subscribes the authenticated user to the specified list.
+   인증된 사용자를 지정된 목록에 구독시킵니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -1002,7 +988,7 @@ List Methods
 
 .. method:: API.unsubscribe_list(list_id/slug, [owner_id/owner_screen_name])
 
-   Unsubscribes the authenticated user from the specified list.
+   인증된 사용자를 지정된 목록으로부터 구독 취소시킵니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -1015,8 +1001,8 @@ List Methods
                                  [cursor], [count], [include_entities], \
                                  [skip_status])
 
-   Returns the subscribers of the specified list. Private list subscribers will
-   only be shown if the authenticated user owns the specified list.
+   지정된 목록의 구독자들을 반환합니다.
+   private 상태의 목록 구독자들은 인증된 사용자가 지정된 목록을 소유하는 경우에만 표시됩니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
@@ -1032,7 +1018,7 @@ List Methods
 .. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, \
                                      [owner_id/owner_screen_name])
 
-   Check if the specified user is a subscriber of the specified list.
+   지정된 사용자가 지정된 목록의 구독자인지 확인합니다.
 
    :param list_id: |list_id|
    :param slug: |slug|
