@@ -1065,9 +1065,9 @@ Geo Methods
 .. method:: API.reverse_geocode([lat], [long], [accuracy], [granularity], \
                                 [max_results])
 
-   위도와 경도가 주어진 경우, update_status()를 위치의 이름을 나타내기 위해
+   위도와 경도가 주어진 경우, `update_status()`를 위치의 이름을 나타내기 위해
    호출하여 지정될 수 있는 ID를 가진 장소(도시와 그 인접)를 찾습니다.
-   이 호출은 해당 위치에 대한 상세한 반환을 제공하므로, nearby_places() 메소드는
+   이 호출은 해당 위치에 대한 상세한 반환을 제공하므로, `nearby_places()` 메소드는
    그다지 상세하지 않은 근처 장소의 목록을 얻는 데 사용하는 것이 추천됩니다.
 
    :param lat: 위치의 위도.
@@ -1103,9 +1103,9 @@ Media methods
    이 endpoint를 사용하여 Twitter에 이미지를 업로드하세요.
 
    :param filename: 업로드할 이미지의 파일 이름.
-   파일이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
-   :param file: 파일 이름을 여는 대신 사용할 파일 객체.
-   MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 파일 이름도 필요합니다.
+   ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
+   :param file: ``filename``을 여는 대신 사용할 파일 객체.
+   MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
    :rtype: :class:`Media` object
 
 
@@ -1122,17 +1122,17 @@ Media methods
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
-예외는 tweepy 모듈에서 직접 이용 가능하며, 이것은 tweepy.error 자체를 가져올 필요가 없다는 것을 의미합니다.
-예를 들어, tweepy.error.TweepError는 tweepy.TweepError로 이용 가능합니다.
+예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
+예를 들어, ``tweepy.error.TweepError``는 ``tweepy.TweepError``로 이용 가능합니다.
 
 
 .. exception:: TweepError
 
    Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
     
-   Twiiter가 응답한 오류로 인해 TweepError가 발생하면, TweepError.response.text에서
+   Twiiter가 응답한 오류로 인해 ``TweepError``가 발생하면, ``TweepError.response.text``에서
    에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
-   단, TweepError는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
+   단, ``TweepError``는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
 
 
 .. exception:: RateLimitError
@@ -1140,7 +1140,7 @@ Media methods
    API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
    rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   TweepError로부터 상속받으므로, TweepError는 RateLimitError또한 잡을 것으로 예측 가능합니다.
+   `TweepError`로부터 상속받으므로, ``except TweepError``또한 ``RateLimitError``를 잡을 수 있을겁니다.
 
 
 .. rubric:: Footnotes
