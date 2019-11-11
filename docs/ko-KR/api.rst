@@ -823,6 +823,7 @@ List 메소드
    :param user_id: |user_id|
    :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부.
    user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
+   
    :param cursor: |cursor|
    :param count: |count|
    
@@ -1042,6 +1043,7 @@ Trends Methods
 
    :param id: 트렌드 정보를 반환할 The Yahoo! Where On Earth ID.
               글로벌 정보는 WOEID를 1로 사용하여 이용할 수 있습니다.
+              
    :param exclude: 이것을 해시태그와 동일하게 설정하면 트렌드 목록에서 모든 해시태그를 제거합니다.
    :rtype: :class:`JSON` object
 
@@ -1112,6 +1114,7 @@ Media methods
 
    :param filename: 업로드할 이미지의 파일 이름.
    ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
+   
    :param file: ``filename``을 여는 대신 사용할 파일 객체.
    MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
    
