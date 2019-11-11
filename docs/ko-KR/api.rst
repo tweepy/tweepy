@@ -1130,16 +1130,16 @@ Media methods
 ==================================
 
 예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
-예를 들어, ``tweepy.error.TweepError``는 ``tweepy.TweepError``로 이용 가능합니다.
+예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로 이용 가능합니다.
 
 
 .. exception:: TweepError
 
    Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
     
-   Twiiter가 응답한 오류로 인해 ``TweepError``가 발생하면, ``TweepError.response.text``에서
+   Twiiter가 응답한 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서
    에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
-   단, ``TweepError``는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
+   단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
 
 
 .. exception:: RateLimitError
@@ -1147,7 +1147,7 @@ Media methods
    API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
    rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   `TweepError`로부터 상속받으므로, ``except TweepError``또한 ``RateLimitError``를 잡을 수 있을겁니다.
+   `TweepError`로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
 
 
 .. rubric:: Footnotes
