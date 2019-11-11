@@ -380,7 +380,7 @@ User methods
 
 .. method:: API.get_direct_message([id], [full_text])
 
-   선택한 DM을 반환합니다.
+   지정한 DM을 반환합니다.
 
    :param id: |id|
    :param full_text: |full_text|
@@ -400,7 +400,7 @@ User methods
 .. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], \
                                     [attachment_type], [attachment_media_id])
 
-   인증한 사용자의 계정으로 선택한 사용자에게 DM을 보냅니다.
+   인증한 사용자의 계정으로 지정한 사용자에게 DM을 보냅니다.
 
    :param recipient_id: DM을 받을 사용자의 ID
    :param text: DM의 내용. 최대 글자수는 10000
@@ -411,13 +411,13 @@ User methods
                             * location - Location 객체
    :param attachment_type: 첨부 유형. 미디어 또는 위치 등입니다.
    :param attachment_media_id: 메시지와 연결할 미디어의 id. DM은 하나의
-                              미디어 ID만을 참조할 수 있습니다.
+                               미디어 ID만을 참조할 수 있습니다.
    :rtype: :class:`DirectMessage` 객체
 
 
 .. method:: API.destroy_direct_message(id)
 
-   ID 매개변수가 지정하는 DM을 삭제합니다. 삭제하기 위해서는 인증한
+   ID 매개변수가 지정하는 DM을 삭제합니다. 삭제하기 위해서는 인증된
    사용자가 해당 DM의 수신자여야 합니다. DM은 사용자 콘텍스트에서
    제공하는 인터페이스에서만 제거됩니다. 대화에 참여한 다른 사용자는
    삭제한 이후에도 해당 DM에 접근할 수 있습니다.
@@ -537,35 +537,33 @@ User methods
    :rtype: :class:`User` 객체
 
 
-Favorite Methods
-----------------
+마음에 들어요 메소드
+--------------------
 
 .. method:: API.favorites([id], [page])
 
-   Returns the favorite statuses for the authenticating user or user specified
-   by the ID parameter.
+   인증된 유저 또는 ID 매개변수로 특정되는 유저가 마음에 들어요를 누른 status들을
+   반환합니다.
 
-   :param id: The ID or screen name of the user to request favorites
+   :param id: 마음에 들어요 목록을 요청할 사용자의 ID나 닉네임
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체의 리스트
 
 
 .. method:: API.create_favorite(id)
 
-   Favorites the status specified in the ID parameter as the authenticating
-   user.
+   ID 매개변수로 특정되는 status에 인증된 사용자의 계정으로 마음에 들어요를 누릅니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.destroy_favorite(id)
 
-   Un-favorites the status specified in the ID parameter as the authenticating
-   user.
+   ID 매개변수로 특정되는 status에 인증된 사용자의 계정으로 마음에 들어요를 해제 합니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 차단 메소드
@@ -573,44 +571,43 @@ Favorite Methods
 
 .. method:: API.create_block(id/screen_name/user_id)
 
-   Blocks the user specified in the ID parameter as the authenticating user.
-   Destroys a friendship to the blocked user if it exists.
+   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정으로 차단합니다. 차단된 사용자를
+   팔로우 중이었을 경우 언팔로우 합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_block(id/screen_name/user_id)
 
-   Un-blocks the user specified in the ID parameter for the authenticating
-   user.
+   인증된 사용자에서 ID 매개변수로 특정되는 사용자의 계정의 차단을 해제 합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.blocks([page])
 
-   Returns an array of user objects that the authenticating user is blocking.
+   인증된 사용자가 차단한 사용자들의 user 객체의 배열을 반환합니다.
 
    :param page: |page|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`User` 객체의 리스트
 
 
 .. method:: API.blocks_ids([cursor])
 
-   Returns an array of numeric user ids the authenticating user is blocking.
+   인증된 사용자가 차단한 사용자들의 ID의 배열을 반환합니다.
 
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
-Mute Methods
-------------
+음소거 메소드
+-------------
 
 .. method:: API.create_mute(id/screen_name/user_id)
 
