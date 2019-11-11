@@ -809,6 +809,7 @@ List 메소드
    :param user_id: |user_id|
    :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부.
    이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
+   
    :rtype: list of :class:`List` objects
 
 
@@ -824,6 +825,7 @@ List 메소드
    user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
    :param cursor: |cursor|
    :param count: |count|
+   
    :rtype: list of :class:`List` objects
 
 
@@ -857,6 +859,7 @@ List 메소드
    :param include_entities: |include_entities|
    :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부.
    리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
+   
    :rtype: list of :class:`Status` objects
 
 
