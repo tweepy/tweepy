@@ -501,13 +501,11 @@ User methods
 
 .. method:: API.rate_limit_status()
 
-   Returns the current rate limits for methods belonging to the specified
-   resource families. When using application-only auth, this method's response
+   지정한 리소스 그룹에 속하는 메소드들의 현재 속도 제한을 반환합니다. When using application-only auth, this method's response
    indicates the application-only auth rate limiting context.
 
-   :param resources: A comma-separated list of resource families you want to
-                     know the current rate limit disposition for.
-   :rtype: :class:`JSON` object
+   :param resources: 현재 속도 제한의 처리를 알고 싶은 리소스 그룹을 쉼표로 구분한 리스트
+   :rtype: :class:`JSON` 객체
 
 
 .. method:: API.update_profile_image(filename)
@@ -520,7 +518,7 @@ User methods
 
 .. method:: API.update_profile_background_image(filename)
 
-   인증됨 사용자의 배경 사진을 업데이트 합니다. Valid formats: GIF, JPG, or
+   인증됨 사용자의 배경 사진을 업데이트 합니다. 유효한 형식: GIF, JPG, or
    PNG
 
    :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
@@ -529,15 +527,14 @@ User methods
 
 .. method:: API.update_profile([name], [url], [location], [description])
 
-   Sets values that users are able to set under the "Account" tab of their
-   settings page.
+   설정 페이지의 계정 탭에서 설정할 수 있는 값을 설정합니다.
 
-   :param name: Maximum of 20 characters
-   :param url: Maximum of 100 characters.
-               Will be prepended with "http://" if not present
-   :param location: Maximum of 30 characters
-   :param description: Maximum of 160 characters
-   :rtype: :class:`User` object
+   :param name: 최대 20글자
+   :param url: 최대 100글자.
+               "http://"가 없는 경우 덧붙입니다.
+   :param location: 최대 30글자
+   :param description: 최대 100글자
+   :rtype: :class:`User` 객체
 
 
 Favorite Methods
@@ -571,8 +568,8 @@ Favorite Methods
    :rtype: :class:`Status` object
 
 
-Block Methods
--------------
+차단 메소드
+-----------
 
 .. method:: API.create_block(id/screen_name/user_id)
 
