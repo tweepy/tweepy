@@ -571,7 +571,7 @@ User methods
 
 .. method:: API.create_block(id/screen_name/user_id)
 
-   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정으로 차단합니다. 차단된 사용자를
+   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정에서 차단합니다. 차단된 사용자를
    팔로우 중이었을 경우 언팔로우 합니다.
 
    :param id: |uid|
@@ -582,7 +582,7 @@ User methods
 
 .. method:: API.destroy_block(id/screen_name/user_id)
 
-   인증된 사용자에서 ID 매개변수로 특정되는 사용자의 계정의 차단을 해제 합니다.
+   인증된 사용자의 계정에서 ID 매개변수로 특정되는 사용자의 계정의 차단을 해제 합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
@@ -606,101 +606,98 @@ User methods
    :rtype: 정수의 리스트
 
 
-음소거 메소드
+뮤트 메소드
 -------------
 
 .. method:: API.create_mute(id/screen_name/user_id)
 
-   Mutes the user specified in the ID parameter for the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 사용자를 뮤트합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_mute(id/screen_name/user_id)
 
-   Un-mutes the user specified in the ID parameter for the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 사용자의 뮤트를 해제합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.mutes([cursor], [include_entities], [skip_status])
 
-   Returns an array of user objects the authenticating user has muted.
+   인증된 사용자가 뮤트한 사용자들의 user 객체의 배열을 반환합니다.
 
    :param cursor: |cursor|
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`User` 객체의 리스트
 
 
 .. method:: API.mutes_ids([cursor])
 
-   Returns an array of numeric user ids the authenticating user has muted.
+   인증된 사용자가 뮤트한 사용자들의 ID의 배열을 반환합니다.
 
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 배열
 
 
-Spam Reporting Methods
+스팸 신고 메소드
 ----------------------
 
 .. method:: API.report_spam(id/screen_name/user_id, [perform_block])
 
-   The user specified in the id is blocked by the authenticated user and
-   reported as a spammer.
+   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정에서 차단하고, 스팸 계정으로 신고합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param perform_block: A boolean indicating if the reported account should be
-                         blocked. Defaults to True.
-   :rtype: :class:`User` object
+   :param perform_block: 신고한 계정을 차단할지 여부를 나타내는 논리값. 기본값은 True
+   :rtype: :class:`User` 객체
 
 
-Saved Searches Methods
+검색어 저장 메서드
 ----------------------
 
 .. method:: API.saved_searches()
 
-   Returns the authenticated user's saved search queries.
+   인증된 사용자 계정에 저장된 검색어 쿼리를 반환합니다.
 
-   :rtype: list of :class:`SavedSearch` objects
+   :rtype: :class:`SavedSearch` 객체의 리스트
 
 
 .. method:: API.get_saved_search(id)
 
-   Retrieve the data for a saved search owned by the authenticating user
-   specified by the given id.
+   주어진 ID로 특정되는 인증된 유저 소유의 검색어로 데이터를 검색합니다.
 
-   :param id: The id of the saved search to be retrieved.
-   :rtype: :class:`SavedSearch` object
+   :param id: 검색할 검색어의 ID
+   :rtype: :class:`SavedSearch` 객체
 
 
 .. method:: API.create_saved_search(query)
 
-   Creates a saved search for the authenticated user.
+   인증된 사용자의 계정에 새로운 검색어를 저장합니다.
 
-   :param query: The query of the search the user would like to save.
-   :rtype: :class:`SavedSearch` object
+   :param query: 저장하고 싶은 검색어의 쿼리
+   :rtype: :class:`SavedSearch` 객체
 
 
 .. method:: API.destroy_saved_search(id)
 
-   Destroys a saved search for the authenticated user. The search specified by
-   id must be owned by the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 검색어를 삭제합니다. 그 검색어는 인증된 사용자의
+   소유여야 합니다.
 
-   :param id: The id of the saved search to be deleted.
-   :rtype: :class:`SavedSearch` object
+   :param id: 삭제할 검색어의 ID
+   :rtype: :class:`SavedSearch` 객체
 
 
-Help Methods
-------------
+도움말 메소드
+-------------
 
 .. method:: API.search(q, [geocode], [lang], [locale], [result_type], \
                        [count], [until], [since_id], [max_id], \
