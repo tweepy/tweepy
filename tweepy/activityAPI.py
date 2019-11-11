@@ -93,10 +93,11 @@ class ActivityAPI(API):
           """
           post_data = {}
           env = kwargs.pop('env')
+          webhookID = kwargs.pop('webhookID')
           if env is not None:
-            apiPath = '/account_activity/all/'+env+'/webhook_id.json'
+            apiPath = '/account_activity/all/'+env+'/'+webhookID+'.json'
           else:
-            apiPath = '/account_activity/all/webhook_id.json'
+            apiPath = '/account_activity/all/'+webhookID+'.json'
 
           return bind_api(api=self, path=apiPath, method='PUT', payload_type='json', require_auth=True, use_cache=False)()
                     
