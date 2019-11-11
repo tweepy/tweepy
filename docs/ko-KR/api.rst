@@ -1058,6 +1058,7 @@ Trends Methods
    :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는
    거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다.
    경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   
    :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는
    거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다.
    경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
@@ -1080,6 +1081,7 @@ Geo Methods
    :param long: 위치의 경도.
    :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만,
    feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다.
+   
    :param granularity: 기본적으로 ‘neighborhood’로 가정하지만 'city'일 수도 있습니다.
    :param max_results: 반환할 최대 결과 숫자에 대한 힌트. 이것은 단지 지침일 뿐, 지켜지지 않을 수도 있습니다.
 
@@ -1147,7 +1149,7 @@ Media methods
    API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
    rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   `TweepError`로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
+   `TweepError` 로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
 
 
 .. rubric:: Footnotes
