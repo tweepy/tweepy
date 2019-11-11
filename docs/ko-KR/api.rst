@@ -800,8 +800,10 @@ List 메소드
 
    이 호출로 최대 100개의 결과가 반환될 것입니다.
    가입자 목록들이 먼저 반환되고, 이후에 소유한 목록들이 반환됩니다.
-   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면, 메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
-   매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로 20개의 소유목록과 80개의 가입 목록을 반환합니다.
+   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면,
+   메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
+   매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로
+   20개의 소유목록과 80개의 가입 목록을 반환합니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
@@ -1016,57 +1018,44 @@ Trends Methods
 
 .. method:: API.trends_available()
 
-   Returns the locations that Twitter has trending topic information for.
-   The response is an array of "locations" that encode the location's WOEID
-   (a Yahoo! Where On Earth ID) and some other human-readable information such
-   as a canonical name and country the location belongs in.
+   Twitter가 트렌드 정보를 가진 위치를 반환합니다.
+   반환은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 “location"의 배열과
+   정규 명칭 및 위치가 속한 국가같이 인간이 읽을 수 있는 정보로 이루어집니다.
 
    :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_place(id, [exclude])
 
-   Returns the top 50 trending topics for a specific WOEID,
-   if trending information is available for it.
+   트렌드 정보를 이용할 수 있는 경우, 특정 WOEID에 대한 상위 50개의 트렌드를 반환합니다.
 
-   The response is an array of “trend” objects that encode the name of the
-   trending topic, the query parameter that can be used to search for the topic
-   on Twitter Search, and the Twitter Search URL.
+   반환은 트렌드의 이름을 인코딩한 "trend" 객체 배열, 트위터 검색에서 주제를 검색하는 데
+   사용할 수 있는 쿼리 매개변수, 트위터 검색 URL로 이루어집니다. 
 
-   This information is cached for 5 minutes. Requesting more frequently than
-   that will not return any more data, and will count against your rate limit
-   usage.
+   이 정보는 5분마다 캐싱됩니다.
+   이보다 더 자주 요청하면 더 이상 데이터가 반환되지 않으며, 제한 사용량 비율에 반하여 계산합니다.
 
-   The tweet_volume for the last 24 hours is also returned for many trends if
-   this is available.
+   최근 24시간 동안의 tweet_volume도 이용할 수 있다면 많은 트렌드에 맞게 반환됩니다.
 
-   :param id: The Yahoo! Where On Earth ID of the location to return trending
-              information for. Global information is available by using 1 as
-              the WOEID.
-   :param exclude: Setting this equal to hashtags will remove all hashtags
-                   from the trends list.
+   :param id: 트렌드 정보를 반환할 The Yahoo! Where On Earth ID.
+              글로벌 정보는 WOEID를 1로 사용하여 이용할 수 있습니다.
+   :param exclude: 이것을 해시태그와 동일하게 설정하면 트렌드 목록에서 모든 해시태그를 제거합니다.
    :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_closest(lat, long)
 
-   Returns the locations that Twitter has trending topic information for,
-   closest to a specified location.
+   Twitter가 지정된 위치로부터 트렌드 정보를 가지고 있는 가장 가까운 위치를 반환합니다.
 
-   The response is an array of “locations” that encode the location’s WOEID and
-   some other human-readable information such as a canonical name and country
-   the location belongs in.
+   반환은 WOEID를 인코딩한 “location"의 배열과 정규 명칭 및 위치가 속한 국가같이
+   인간이 읽을 수 있는 정보로 이루어집니다.
 
-   A WOEID is a Yahoo! Where On Earth ID.
+   WOEID는 Yahoo! Where On Earth ID를 뜻합니다.
 
-   :param lat: If provided with a long parameter the available trend locations
-               will be sorted by distance, nearest to furthest, to the
-               co-ordinate pair. The valid ranges for longitude is -180.0 to
-               +180.0 (West is negative, East is positive) inclusive.
-   :param long: If provided with a lat parameter the available trend locations
-                will be sorted by distance, nearest to furthest, to the
-                co-ordinate pair. The valid ranges for longitude is -180.0 to
-                +180.0 (West is negative, East is positive) inclusive.
+   :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는
+   거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다.
+   경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
    :rtype: :class:`JSON` object
 
 
@@ -1076,29 +1065,24 @@ Geo Methods
 .. method:: API.reverse_geocode([lat], [long], [accuracy], [granularity], \
                                 [max_results])
 
-   Given a latitude and longitude, looks for places (cities and neighbourhoods)
-   whose IDs can be specified in a call to :func:`update_status` to appear as
-   the name of the location. This call provides a detailed response about the
-   location in question; the :func:`nearby_places` function should be preferred
-   for getting a list of places nearby without great detail.
+   위도와 경도가 주어진 경우, update_status()를 위치의 이름을 나타내기 위해
+   호출하여 지정될 수 있는 ID를 가진 장소(도시와 그 인접)를 찾습니다.
+   이 호출은 해당 위치에 대한 상세한 반환을 제공하므로, nearby_places() 메소드는
+   그다지 상세하지 않은 근처 장소의 목록을 얻는 데 사용하는 것이 추천됩니다.
 
-   :param lat: The location's latitude.
-   :param long: The location's longitude.
-   :param accuracy: Specify the "region" in which to search, such as a number
-                    (then this is a radius in meters, but it can also take a
-                    string that is suffixed with ft to specify feet).
-                    If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
-   :param max_results: A hint as to the maximum number of results to return.
-                       This is only a guideline, which may not be adhered to.
+   :param lat: 위치의 위도.
+   :param long: 위치의 경도.
+   :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만,
+   feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다. 
+   :param granularity: 기본적으로 ‘neighborhood’로 가정하지만 'city'일 수도 있습니다.
+   :param max_results: 반환할 최대 결과 숫자에 대한 힌트. 이것은 단지 지침일 뿐, 지켜지지 않을 수도 있습니다.
 
 
 .. method:: API.geo_id(id)
 
-   Given *id* of a place, provide more details about that place.
+   장소에 대한 ID를 지정하면 장소에 대한 더 자세한 정보를 제공합니다.
 
-   :param id: Valid Twitter ID of a location.
+   :param id: 위치의 유효한 Twitter ID.
 
 
 Utility methods
@@ -1106,10 +1090,9 @@ Utility methods
 
 .. method:: API.configuration()
 
-   Returns the current configuration used by Twitter including twitter.com
-   slugs which are not usernames, maximum photo resolutions, and t.co
-   shortened URL length. It is recommended applications request this endpoint
-   when they are loaded, but no more than once a day.
+   사용자 이름이 아닌 twitter.com 슬러그, 최대 사진 해상도, t.co 단축된 URL 길이 등을 포함한
+   Twitter에서 사용하는 현재 구성을 반환합니다. 응용 프로그램이 로드될 때 이 endpoint를
+   요청하는 것이 추천되지만, 하루에 1번 이상 요청하지 않는 것이 좋습니다.
 
 
 Media methods
@@ -1117,54 +1100,47 @@ Media methods
 
 .. method:: API.media_upload(filename, [file])
 
-   Use this endpoint to upload images to Twitter.
+   이 endpoint를 사용하여 Twitter에 이미지를 업로드하세요.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless ``file`` is specified.
-   :param file: A file object, which will be used instead of opening
-                ``filename``. ``filename`` is still required, for MIME type
-                detection and to use as a form field in the POST data.
+   :param filename: 업로드할 이미지의 파일 이름.
+   파일이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
+   :param file: 파일 이름을 여는 대신 사용할 파일 객체.
+   MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 파일 이름도 필요합니다.
    :rtype: :class:`Media` object
 
 
 .. method:: API.create_media_metadata(media_id, alt_text)
 
-   This endpoint can be used to provide additional information about the
-   uploaded media_id. This feature is currently only supported for images and
-   GIFs. Call this endpoint to attach additional metadata such as image alt
-   text.
+  이 endpoint는 업로드된 media_id에 대한 추가적인 정보를 제공하는데 사용될 수 있습니다.
+  이 기능은 현재 이미지와 GIF에서만 지원됩니다.
+  image al text와 같은 추가적인 metadata를 연결하려면 이 endpoint를 호출하세요.
    
-   :param media_id: The ID of the media to add alt text to.
-   :param alt_text: The alt text to add to the image.
+   :param media_id: alt text를 추가할 media의 ID
+   :param alt_text: 이미지에 추가할 Alt text
 
 
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
-The exceptions are available in the ``tweepy`` module directly, which means
-``tweepy.error`` itself does not need to be imported. For example,
-``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
+예외는 tweepy 모듈에서 직접 이용 가능하며, 이것은 tweepy.error 자체를 가져올 필요가 없다는 것을 의미합니다.
+예를 들어, tweepy.error.TweepError는 tweepy.TweepError로 이용 가능합니다.
 
 
 .. exception:: TweepError
 
-   The main exception Tweepy uses. Is raised for a number of things.
-
-   When a ``TweepError`` is raised due to an error Twitter responded with,
-   the error code (`as described in the API documentation
-   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be
-   accessed at ``TweepError.response.text``. Note, however, that
-   ``TweepError``\ s also may be raised with other things as message
-   (for example plain error reason strings).
+   Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
+    
+   Twiiter가 응답한 오류로 인해 TweepError가 발생하면, TweepError.response.text에서
+   에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
+   단, TweepError는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
 
 
 .. exception:: RateLimitError
 
-   Is raised when an API method fails due to hitting Twitter's rate limit.
-   Makes for easy handling of the rate limit specifically.
+   API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
+   rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a
-   ``RateLimitError`` too.
+   TweepError로부터 상속받으므로, TweepError는 RateLimitError또한 잡을 것으로 예측 가능합니다.
 
 
 .. rubric:: Footnotes
