@@ -494,8 +494,8 @@ User methods
 
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
-   :param include_email: When set to true email will be returned in the user
-                         objects as a string.
+   :param include_email: True로 설정한다면 이메일이 문자열 형태로 user 객체 안에 같이
+                         반환됩니다.
    :rtype: 자격이 유효하다면 :class:`User` 객체, 아니라면 False
 
 
@@ -518,8 +518,7 @@ User methods
 
 .. method:: API.update_profile_background_image(filename)
 
-   인증됨 사용자의 배경 사진을 업데이트 합니다. 유효한 형식: GIF, JPG, or
-   PNG
+   인증된 사용자의 배경 사진을 업데이트 합니다. 유효한 형식: GIF, JPG, PNG
 
    :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
    :rtype: :class:`User` 객체
