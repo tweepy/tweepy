@@ -807,8 +807,7 @@ List 메소드
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부.
-   이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
+   :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부. 이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
    
    :rtype: list of :class:`List` objects
 
@@ -1114,9 +1113,9 @@ Media methods
 
 .. method:: API.create_media_metadata(media_id, alt_text)
 
-  이 endpoint는 업로드된 media_id에 대한 추가적인 정보를 제공하는데 사용될 수 있습니다.
-  이 기능은 현재 이미지와 GIF에서만 지원됩니다.
-  image al text와 같은 추가적인 metadata를 연결하려면 이 endpoint를 호출하세요.
+    이 endpoint는 업로드된 media_id에 대한 추가적인 정보를 제공하는데 사용될 수 있습니다.
+    이 기능은 현재 이미지와 GIF에서만 지원됩니다.
+    image al text와 같은 추가적인 metadata를 연결하려면 이 endpoint를 호출하세요.
    
    :param media_id: alt text를 추가할 media의 ID
    :param alt_text: 이미지에 추가할 Alt text
@@ -1125,25 +1124,25 @@ Media methods
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
-예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
-예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로 이용 가능합니다.
+    예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
+    예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로 이용 가능합니다.
 
 
 .. exception:: TweepError
 
-   Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
+    Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
     
-   Twiiter가 응답한 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서
-   에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
-   단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
+    Twiiter가 응답한 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서
+    에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
+    단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
 
 
 .. exception:: RateLimitError
 
-   API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
-   rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
+    API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
+    rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   `TweepError` 로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
+    `TweepError` 로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
 
 
 .. rubric:: Footnotes
