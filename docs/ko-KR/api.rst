@@ -380,7 +380,7 @@ User methods
 
 .. method:: API.get_direct_message([id], [full_text])
 
-   선택한 DM을 반환합니다.
+   지정한 DM을 반환합니다.
 
    :param id: |id|
    :param full_text: |full_text|
@@ -400,7 +400,7 @@ User methods
 .. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], \
                                     [attachment_type], [attachment_media_id])
 
-   인증한 사용자의 계정으로 선택한 사용자에게 DM을 보냅니다.
+   인증한 사용자의 계정으로 지정한 사용자에게 DM을 보냅니다.
 
    :param recipient_id: DM을 받을 사용자의 ID
    :param text: DM의 내용. 최대 글자수는 10000
@@ -411,19 +411,19 @@ User methods
                             * location - Location 객체
    :param attachment_type: 첨부 유형. 미디어 또는 위치 등입니다.
    :param attachment_media_id: 메시지와 연결할 미디어의 id. DM은 하나의
-                              미디어 ID만을 참조할 수 있습니다.
+                               미디어 ID만을 참조할 수 있습니다.
    :rtype: :class:`DirectMessage` 객체
 
 
 .. method:: API.destroy_direct_message(id)
 
-   ID 매개변수가 지정하는 DM을 삭제합니다. 삭제하기 위해서는 인증한
+   ID 매개변수가 지정하는 DM을 삭제합니다. 삭제하기 위해서는 인증된
    사용자가 해당 DM의 수신자여야 합니다. DM은 사용자 콘텍스트에서
    제공하는 인터페이스에서만 제거됩니다. 대화에 참여한 다른 사용자는
    삭제한 이후에도 해당 DM에 접근할 수 있습니다.
 
    :param id: 삭제할 DM의 ID
-   :rtype: 없음
+   :rtype: None
 
 
 친구 관계 메소드
@@ -431,285 +431,272 @@ User methods
 
 .. method:: API.create_friendship(id/screen_name/user_id, [follow])
 
-   지정한 사용자와 친구(팔로우)를 맺습니다.
+   지정한 사용자와 친구를 맺습니다. (일명 팔로우)
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param follow: Enable notifications for the target user in addition to
-                  becoming friends.
-   :rtype: :class:`User` object
+   :param follow: 지정한 사용자를 팔로우 하고 대상 사용자에 대한 알림을 활성화합니다.
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_friendship(id/screen_name/user_id)
 
-   Destroy a friendship with the specified user (aka unfollow).
+   지정한 사용자를 친구 삭제 합니다. (일명 언팔로우)
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.show_friendship(source_id/source_screen_name, \
                                 target_id/target_screen_name)
 
-   Returns detailed information about the relationship between two users.
+   두 사용자의 관계에 대한 자세한 정보를 반환합니다.
 
-   :param source_id: The user_id of the subject user.
-   :param source_screen_name: The screen_name of the subject user.
-   :param target_id: The user_id of the target user.
-   :param target_screen_name: The screen_name of the target user.
-   :rtype: :class:`Friendship` object
+   :param source_id: 주대상 사용자의 user_id
+   :param source_screen_name: 주대상 사용자의 screen_name
+   :param target_id: 대상 사용자의 user_id
+   :param target_screen_name: 대상 사용자의 screen_name
+   :rtype: :class:`Friendship` 객체
 
 
 .. method:: API.friends_ids(id/screen_name/user_id, [cursor])
 
-   Returns an array containing the IDs of users being followed by the specified
-   user.
+   지정한 사용자가 팔로우한 사용자들의 ID를 담은 배열을 반환합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
 .. method:: API.followers_ids(id/screen_name/user_id)
 
-   Returns an array containing the IDs of users following the specified user.
+   지정한 사용자를 팔로우한 사용자들의 ID를 담은 배열을 반환합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
-Account Methods
----------------
+계정 메소드
+-----------
 
 .. method:: API.verify_credentials([include_entities], [skip_status], \
                                    [include_email])
 
-   Verify the supplied user credentials are valid.
+   제출한 사용자의 계정 사용 자격이 유효한지 판별합니다.
 
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
-   :param include_email: When set to true email will be returned in the user
-                         objects as a string.
-   :rtype: :class:`User` object if credentials are valid, otherwise False
+   :param include_email: True로 설정한다면 이메일이 문자열 형태로 user 객체 안에 같이
+                         반환됩니다.
+   :rtype: 자격이 유효하다면 :class:`User` 객체, 아니라면 False
 
 
 .. method:: API.rate_limit_status()
 
-   Returns the current rate limits for methods belonging to the specified
-   resource families. When using application-only auth, this method's response
-   indicates the application-only auth rate limiting context.
+   지정한 리소스 그룹에 속하는 메소드들의 현재 속도 제한을 반환합니다. 애플리케이션 전용 인증을
+   사용하고 있다면, 이 메소드의 응답은 애플리케이션 전용 인증의 속도 제한의 상황을 나타냅니다.
 
-   :param resources: A comma-separated list of resource families you want to
-                     know the current rate limit disposition for.
-   :rtype: :class:`JSON` object
+   :param resources: 현재 속도 제한의 처리를 알고 싶은 리소스 그룹을 쉼표로 구분한 리스트
+   :rtype: :class:`JSON` 객체
 
 
 .. method:: API.update_profile_image(filename)
 
-   Update the authenticating user's profile image. Valid formats: GIF, JPG, or
-   PNG
+   인증된 사용자의 프로필 사진을 갱신합니다. 유효한 형식: GIF, JPG, PNG
 
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
+   :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.update_profile_background_image(filename)
 
-   Update authenticating user's background image. Valid formats: GIF, JPG, or
-   PNG
+   인증된 사용자의 배경 사진을 업데이트 합니다. 유효한 형식: GIF, JPG, PNG
 
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
+   :param filename: 업로드할 이미지 파일의 로컬 경로. URL에 연결하는 것이 아닙니다!
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.update_profile([name], [url], [location], [description])
 
-   Sets values that users are able to set under the "Account" tab of their
-   settings page.
+   설정 페이지의 계정 탭에서 설정할 수 있는 값을 설정합니다.
 
-   :param name: Maximum of 20 characters
-   :param url: Maximum of 100 characters.
-               Will be prepended with "http://" if not present
-   :param location: Maximum of 30 characters
-   :param description: Maximum of 160 characters
-   :rtype: :class:`User` object
+   :param name: 최대 20글자
+   :param url: 최대 100글자.
+               "http://"가 없는 경우 덧붙입니다.
+   :param location: 최대 30글자
+   :param description: 최대 100글자
+   :rtype: :class:`User` 객체
 
 
-Favorite Methods
-----------------
+마음에 들어요 메소드
+--------------------
 
 .. method:: API.favorites([id], [page])
 
-   Returns the favorite statuses for the authenticating user or user specified
-   by the ID parameter.
+   인증된 유저 또는 ID 매개변수로 특정되는 유저가 마음에 들어요를 누른 status들을
+   반환합니다.
 
-   :param id: The ID or screen name of the user to request favorites
+   :param id: 마음에 들어요 목록을 요청할 사용자의 ID나 닉네임
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체의 리스트
 
 
 .. method:: API.create_favorite(id)
 
-   Favorites the status specified in the ID parameter as the authenticating
-   user.
+   ID 매개변수로 특정되는 status에 인증된 사용자의 계정으로 마음에 들어요를 누릅니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.destroy_favorite(id)
 
-   Un-favorites the status specified in the ID parameter as the authenticating
-   user.
+   ID 매개변수로 특정되는 status에 인증된 사용자의 계정으로 마음에 들어요를 해제 합니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
-Block Methods
--------------
+차단 메소드
+-----------
 
 .. method:: API.create_block(id/screen_name/user_id)
 
-   Blocks the user specified in the ID parameter as the authenticating user.
-   Destroys a friendship to the blocked user if it exists.
+   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정에서 차단합니다. 차단된 사용자를
+   팔로우 중이었을 경우 언팔로우 합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_block(id/screen_name/user_id)
 
-   Un-blocks the user specified in the ID parameter for the authenticating
-   user.
+   인증된 사용자의 계정에서 ID 매개변수로 특정되는 사용자의 계정의 차단을 해제 합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.blocks([page])
 
-   Returns an array of user objects that the authenticating user is blocking.
+   인증된 사용자가 차단한 사용자들의 user 객체의 배열을 반환합니다.
 
    :param page: |page|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`User` 객체의 리스트
 
 
 .. method:: API.blocks_ids([cursor])
 
-   Returns an array of numeric user ids the authenticating user is blocking.
+   인증된 사용자가 차단한 사용자들의 ID의 배열을 반환합니다.
 
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 리스트
 
 
-Mute Methods
-------------
+뮤트 메소드
+-------------
 
 .. method:: API.create_mute(id/screen_name/user_id)
 
-   Mutes the user specified in the ID parameter for the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 사용자를 뮤트합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.destroy_mute(id/screen_name/user_id)
 
-   Un-mutes the user specified in the ID parameter for the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 사용자의 뮤트를 해제합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.mutes([cursor], [include_entities], [skip_status])
 
-   Returns an array of user objects the authenticating user has muted.
+   인증된 사용자가 뮤트한 사용자들의 user 객체의 배열을 반환합니다.
 
    :param cursor: |cursor|
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`User` 객체의 리스트
 
 
 .. method:: API.mutes_ids([cursor])
 
-   Returns an array of numeric user ids the authenticating user has muted.
+   인증된 사용자가 뮤트한 사용자들의 ID의 배열을 반환합니다.
 
    :param cursor: |cursor|
-   :rtype: list of Integers
+   :rtype: 정수의 배열
 
 
-Spam Reporting Methods
+스팸 신고 메소드
 ----------------------
 
 .. method:: API.report_spam(id/screen_name/user_id, [perform_block])
 
-   The user specified in the id is blocked by the authenticated user and
-   reported as a spammer.
+   ID 매개변수로 특정되는 사용자를 인증된 사용자의 계정에서 차단하고, 스팸 계정으로 신고합니다.
 
    :param id: |uid|
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param perform_block: A boolean indicating if the reported account should be
-                         blocked. Defaults to True.
-   :rtype: :class:`User` object
+   :param perform_block: 신고한 계정을 차단할지 여부를 나타내는 논리값. 기본값은 True
+   :rtype: :class:`User` 객체
 
 
-Saved Searches Methods
+검색어 저장 메서드
 ----------------------
 
 .. method:: API.saved_searches()
 
-   Returns the authenticated user's saved search queries.
+   인증된 사용자 계정에 저장된 검색어 쿼리를 반환합니다.
 
-   :rtype: list of :class:`SavedSearch` objects
+   :rtype: :class:`SavedSearch` 객체의 리스트
 
 
 .. method:: API.get_saved_search(id)
 
-   Retrieve the data for a saved search owned by the authenticating user
-   specified by the given id.
+   주어진 ID로 특정되는 인증된 유저의 계정에 저장된 검색어로 데이터를 검색합니다.
 
-   :param id: The id of the saved search to be retrieved.
-   :rtype: :class:`SavedSearch` object
+   :param id: 검색할 검색어의 ID
+   :rtype: :class:`SavedSearch` 객체
 
 
 .. method:: API.create_saved_search(query)
 
-   Creates a saved search for the authenticated user.
+   인증된 사용자의 계정에 새로운 검색어를 저장합니다.
 
-   :param query: The query of the search the user would like to save.
-   :rtype: :class:`SavedSearch` object
+   :param query: 저장하고 싶은 검색어의 쿼리
+   :rtype: :class:`SavedSearch` 객체
 
 
 .. method:: API.destroy_saved_search(id)
 
-   Destroys a saved search for the authenticated user. The search specified by
-   id must be owned by the authenticating user.
+   인증된 사용자의 계정에서 ID로 특정되는 검색어를 삭제합니다. 그 검색어는 인증된 사용자의
+   계정에 저장된 검색어여야 합니다.
 
-   :param id: The id of the saved search to be deleted.
-   :rtype: :class:`SavedSearch` object
+   :param id: 삭제할 검색어의 ID
+   :rtype: :class:`SavedSearch` 객체
 
 
-Help Methods
-------------
+도움말 메소드
+-------------
 
 .. method:: API.search(q, [geocode], [lang], [locale], [result_type], \
                        [count], [until], [since_id], [max_id], \
@@ -813,28 +800,31 @@ List 메소드
 
    이 호출로 최대 100개의 결과가 반환될 것입니다.
    가입자 목록들이 먼저 반환되고, 이후에 소유한 목록들이 반환됩니다.
-   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면, 메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
-   매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로 20개의 소유목록과 80개의 가입 목록을 반환합니다.
+   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면,
+   메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
+   매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로
+   20개의 소유목록과 80개의 가입 목록을 반환합니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부.
-   이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
+   :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부. 이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
+   
    :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_memberships([screen_name], [user_id], \
                                   [filter_to_owned_lists], [cursor], [count])
 
-  사용자가 추가된 목록들을 반환합니다.
-  user_id 또는 screen_name을 입력하지 않으면 인증된 사용자에 대한 멤버쉽이 반환됩니다.
+    사용자가 추가된 목록들을 반환합니다.
+    user_id 또는 screen_name을 입력하지 않으면 인증된 사용자에 대한 멤버쉽이 반환됩니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부.
-   user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
+   :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부. user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
+   
    :param cursor: |cursor|
    :param count: |count|
+   
    :rtype: list of :class:`List` objects
 
 
@@ -866,8 +856,8 @@ List 메소드
    :param max_id: |max_id|
    :param count: |count|
    :param include_entities: |include_entities|
-   :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부.
-   리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
+   :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부. 리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
+   
    :rtype: list of :class:`Status` objects
 
 
@@ -1029,57 +1019,45 @@ Trends Methods
 
 .. method:: API.trends_available()
 
-   Returns the locations that Twitter has trending topic information for.
-   The response is an array of "locations" that encode the location's WOEID
-   (a Yahoo! Where On Earth ID) and some other human-readable information such
-   as a canonical name and country the location belongs in.
+   Twitter가 트렌드 정보를 가진 위치를 반환합니다.
+   반환은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 “location"의 배열과
+   정규 명칭 및 위치가 속한 국가같이 인간이 읽을 수 있는 정보로 이루어집니다.
 
    :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_place(id, [exclude])
 
-   Returns the top 50 trending topics for a specific WOEID,
-   if trending information is available for it.
+   트렌드 정보를 이용할 수 있는 경우, 특정 WOEID에 대한 상위 50개의 트렌드를 반환합니다.
 
-   The response is an array of “trend” objects that encode the name of the
-   trending topic, the query parameter that can be used to search for the topic
-   on Twitter Search, and the Twitter Search URL.
+   반환은 트렌드의 이름을 인코딩한 "trend" 객체 배열, 트위터 검색에서 주제를 검색하는 데
+   사용할 수 있는 쿼리 매개변수, 트위터 검색 URL로 이루어집니다. 
 
-   This information is cached for 5 minutes. Requesting more frequently than
-   that will not return any more data, and will count against your rate limit
-   usage.
+   이 정보는 5분마다 캐싱됩니다.
+   이보다 더 자주 요청하면 더 이상 데이터가 반환되지 않으며, 제한 사용량 비율에 반하여 계산합니다.
 
-   The tweet_volume for the last 24 hours is also returned for many trends if
-   this is available.
+   최근 24시간 동안의 tweet_volume도 이용할 수 있다면 많은 트렌드에 맞게 반환됩니다.
 
-   :param id: The Yahoo! Where On Earth ID of the location to return trending
-              information for. Global information is available by using 1 as
-              the WOEID.
-   :param exclude: Setting this equal to hashtags will remove all hashtags
-                   from the trends list.
+   :param id: 트렌드 정보를 반환할 The Yahoo! Where On Earth ID.
+              글로벌 정보는 WOEID를 1로 사용하여 이용할 수 있습니다.
+              
+   :param exclude: 이것을 해시태그와 동일하게 설정하면 트렌드 목록에서 모든 해시태그를 제거합니다.
    :rtype: :class:`JSON` object
 
 
 .. method:: API.trends_closest(lat, long)
 
-   Returns the locations that Twitter has trending topic information for,
-   closest to a specified location.
+   Twitter가 지정된 위치로부터 트렌드 정보를 가지고 있는 가장 가까운 위치를 반환합니다.
 
-   The response is an array of “locations” that encode the location’s WOEID and
-   some other human-readable information such as a canonical name and country
-   the location belongs in.
+   반환은 WOEID를 인코딩한 “location"의 배열과 정규 명칭 및 위치가 속한 국가같이
+   인간이 읽을 수 있는 정보로 이루어집니다.
 
-   A WOEID is a Yahoo! Where On Earth ID.
+   WOEID는 Yahoo! Where On Earth ID를 뜻합니다.
 
-   :param lat: If provided with a long parameter the available trend locations
-               will be sorted by distance, nearest to furthest, to the
-               co-ordinate pair. The valid ranges for longitude is -180.0 to
-               +180.0 (West is negative, East is positive) inclusive.
-   :param long: If provided with a lat parameter the available trend locations
-                will be sorted by distance, nearest to furthest, to the
-                co-ordinate pair. The valid ranges for longitude is -180.0 to
-                +180.0 (West is negative, East is positive) inclusive.
+   :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   
+   :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   
    :rtype: :class:`JSON` object
 
 
@@ -1089,29 +1067,24 @@ Geo Methods
 .. method:: API.reverse_geocode([lat], [long], [accuracy], [granularity], \
                                 [max_results])
 
-   Given a latitude and longitude, looks for places (cities and neighbourhoods)
-   whose IDs can be specified in a call to :func:`update_status` to appear as
-   the name of the location. This call provides a detailed response about the
-   location in question; the :func:`nearby_places` function should be preferred
-   for getting a list of places nearby without great detail.
+   위도와 경도가 주어진 경우, `update_status()`를 위치의 이름을 나타내기 위해
+   호출하여 지정될 수 있는 ID를 가진 장소(도시와 그 인접)를 찾습니다.
+   이 호출은 해당 위치에 대한 상세한 반환을 제공하므로, `nearby_places()` 메소드는
+   그다지 상세하지 않은 근처 장소의 목록을 얻는 데 사용하는 것이 추천됩니다.
 
-   :param lat: The location's latitude.
-   :param long: The location's longitude.
-   :param accuracy: Specify the "region" in which to search, such as a number
-                    (then this is a radius in meters, but it can also take a
-                    string that is suffixed with ft to specify feet).
-                    If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
-   :param max_results: A hint as to the maximum number of results to return.
-                       This is only a guideline, which may not be adhered to.
+   :param lat: 위치의 위도.
+   :param long: 위치의 경도.
+   :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만, feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다.
+   
+   :param granularity: 기본적으로 ‘neighborhood’로 가정하지만 'city'일 수도 있습니다.
+   :param max_results: 반환할 최대 결과 숫자에 대한 힌트. 이것은 단지 지침일 뿐, 지켜지지 않을 수도 있습니다.
 
 
 .. method:: API.geo_id(id)
 
-   Given *id* of a place, provide more details about that place.
+   장소에 대한 ID를 지정하면 장소에 대한 더 자세한 정보를 제공합니다.
 
-   :param id: Valid Twitter ID of a location.
+   :param id: 위치의 유효한 Twitter ID.
 
 
 Utility methods
@@ -1119,10 +1092,9 @@ Utility methods
 
 .. method:: API.configuration()
 
-   Returns the current configuration used by Twitter including twitter.com
-   slugs which are not usernames, maximum photo resolutions, and t.co
-   shortened URL length. It is recommended applications request this endpoint
-   when they are loaded, but no more than once a day.
+   사용자 이름이 아닌 twitter.com 슬러그, 최대 사진 해상도, t.co 단축된 URL 길이 등을 포함한
+   Twitter에서 사용하는 현재 구성을 반환합니다. 응용 프로그램이 로드될 때 이 endpoint를
+   요청하는 것이 추천되지만, 하루에 1번 이상 요청하지 않는 것이 좋습니다.
 
 
 Media methods
@@ -1130,54 +1102,47 @@ Media methods
 
 .. method:: API.media_upload(filename, [file])
 
-   Use this endpoint to upload images to Twitter.
+   이 endpoint를 사용하여 Twitter에 이미지를 업로드하세요.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless ``file`` is specified.
-   :param file: A file object, which will be used instead of opening
-                ``filename``. ``filename`` is still required, for MIME type
-                detection and to use as a form field in the POST data.
+   :param filename: 업로드할 이미지의 파일 이름. ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
+   
+   :param file: ``filename``을 여는 대신 사용할 파일 객체. MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
+   
    :rtype: :class:`Media` object
 
 
 .. method:: API.create_media_metadata(media_id, alt_text)
 
-   This endpoint can be used to provide additional information about the
-   uploaded media_id. This feature is currently only supported for images and
-   GIFs. Call this endpoint to attach additional metadata such as image alt
-   text.
+    이 endpoint는 업로드된 media_id에 대한 추가적인 정보를 제공하는데 사용될 수 있습니다.
+    이 기능은 현재 이미지와 GIF에서만 지원됩니다.
+    image al text와 같은 추가적인 metadata를 연결하려면 이 endpoint를 호출하세요.
    
-   :param media_id: The ID of the media to add alt text to.
-   :param alt_text: The alt text to add to the image.
+   :param media_id: alt text를 추가할 media의 ID
+   :param alt_text: 이미지에 추가할 Alt text
 
 
 :mod:`tweepy.error` --- Exceptions
 ==================================
 
-The exceptions are available in the ``tweepy`` module directly, which means
-``tweepy.error`` itself does not need to be imported. For example,
-``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
+    예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
+    예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로 이용 가능합니다.
 
 
 .. exception:: TweepError
 
-   The main exception Tweepy uses. Is raised for a number of things.
-
-   When a ``TweepError`` is raised due to an error Twitter responded with,
-   the error code (`as described in the API documentation
-   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be
-   accessed at ``TweepError.response.text``. Note, however, that
-   ``TweepError``\ s also may be raised with other things as message
-   (for example plain error reason strings).
+    Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
+    
+    Twiiter가 응답한 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서
+    에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
+    단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.
 
 
 .. exception:: RateLimitError
 
-   Is raised when an API method fails due to hitting Twitter's rate limit.
-   Makes for easy handling of the rate limit specifically.
+    API 메소드가 Twitter의 rate-limit에 도달하여 실패할 때 발생합니다.
+    rate-limit을 특별히 쉽게 다룰 수 있도록 제작했습니다.
 
-   Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a
-   ``RateLimitError`` too.
+    `TweepError` 로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
 
 
 .. rubric:: Footnotes
