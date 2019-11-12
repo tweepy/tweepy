@@ -501,8 +501,8 @@ User methods
 
 .. method:: API.rate_limit_status()
 
-   지정한 리소스 그룹에 속하는 메소드들의 현재 속도 제한을 반환합니다. When using application-only auth, this method's response
-   indicates the application-only auth rate limiting context.
+   지정한 리소스 그룹에 속하는 메소드들의 현재 속도 제한을 반환합니다. 애플리케이션 전용 인증을
+   사용하고 있다면, 이 메소드의 응답은 애플리케이션 전용 인증의 속도 제한의 상황을 나타냅니다.
 
    :param resources: 현재 속도 제한의 처리를 알고 싶은 리소스 그룹을 쉼표로 구분한 리스트
    :rtype: :class:`JSON` 객체
@@ -672,7 +672,7 @@ User methods
 
 .. method:: API.get_saved_search(id)
 
-   주어진 ID로 특정되는 인증된 유저 소유의 검색어로 데이터를 검색합니다.
+   주어진 ID로 특정되는 인증된 유저의 계정에 저장된 검색어로 데이터를 검색합니다.
 
    :param id: 검색할 검색어의 ID
    :rtype: :class:`SavedSearch` 객체
@@ -689,7 +689,7 @@ User methods
 .. method:: API.destroy_saved_search(id)
 
    인증된 사용자의 계정에서 ID로 특정되는 검색어를 삭제합니다. 그 검색어는 인증된 사용자의
-   소유여야 합니다.
+   계정에 저장된 검색어여야 합니다.
 
    :param id: 삭제할 검색어의 ID
    :rtype: :class:`SavedSearch` 객체
