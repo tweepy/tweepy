@@ -389,8 +389,8 @@ User methods
 
 .. method:: API.list_direct_messages([count], [cursor])
 
-   최근 30일 이내의 모든 DM의 내역(송수신 모두)을 반환합니다. 반환값은 시
-   간역순으로 정렬되어 있습니다.
+   최근 30일 이내의 모든 DM의 내역(송수신 모두)을 반환합니다. 반환값은
+   시간역순으로 정렬되어 있습니다.
 
    :param count: |count|
    :param cursor: |cursor|
