@@ -816,13 +816,12 @@ List 메소드
 .. method:: API.lists_memberships([screen_name], [user_id], \
                                   [filter_to_owned_lists], [cursor], [count])
 
-  사용자가 추가된 목록들을 반환합니다.
-  user_id 또는 screen_name을 입력하지 않으면 인증된 사용자에 대한 멤버쉽이 반환됩니다.
+    사용자가 추가된 목록들을 반환합니다.
+    user_id 또는 screen_name을 입력하지 않으면 인증된 사용자에 대한 멤버쉽이 반환됩니다.
 
    :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부.
-   user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
+   :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부. user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
    
    :param cursor: |cursor|
    :param count: |count|
@@ -858,8 +857,7 @@ List 메소드
    :param max_id: |max_id|
    :param count: |count|
    :param include_entities: |include_entities|
-   :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부.
-   리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
+   :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부. 리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
    
    :rtype: list of :class:`Status` objects
 
@@ -1057,13 +1055,9 @@ Trends Methods
 
    WOEID는 Yahoo! Where On Earth ID를 뜻합니다.
 
-   :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는
-   거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다.
-   경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
    
-   :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는
-   거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다.
-   경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
+   :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
    
    :rtype: :class:`JSON` object
 
@@ -1081,8 +1075,7 @@ Geo Methods
 
    :param lat: 위치의 위도.
    :param long: 위치의 경도.
-   :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만,
-   feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다.
+   :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만, feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다.
    
    :param granularity: 기본적으로 ‘neighborhood’로 가정하지만 'city'일 수도 있습니다.
    :param max_results: 반환할 최대 결과 숫자에 대한 힌트. 이것은 단지 지침일 뿐, 지켜지지 않을 수도 있습니다.
@@ -1112,11 +1105,9 @@ Media methods
 
    이 endpoint를 사용하여 Twitter에 이미지를 업로드하세요.
 
-   :param filename: 업로드할 이미지의 파일 이름.
-   ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
+   :param filename: 업로드할 이미지의 파일 이름. ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
    
-   :param file: ``filename``을 여는 대신 사용할 파일 객체.
-   MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
+   :param file: ``filename``을 여는 대신 사용할 파일 객체. MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
    
    :rtype: :class:`Media` object
 
