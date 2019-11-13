@@ -702,11 +702,11 @@ User methods
                        [count], [until], [since_id], [max_id], \
                        [include_entities])
 
-   Returns a collection of relevant Tweets matching a specified query.
+   지정한 쿼리와 관련된 트윗의 모음을 반환합니다.
    
-   Please note that Twitter's search service and, by extension, the Search API
-   is not meant to be an exhaustive source of Tweets. Not all Tweets will be
-   indexed or made available via the search interface.
+   트위터의 검색 서비스와, 더 나아가서 검색 API가 모든 트윗 소스에서 검색을 하는 것은 아니라는 것에
+   주의 해주세요. 모든 트윗이 색인화 돼있거나 검색 인터페이스를 통해 검색할 수 있게 만들어져 있지는
+   않습니다.
 
    In API v1.1, the response format of the Search API has been improved to
    return Tweet objects more similar to the objects you’ll find across the REST
