@@ -1,7 +1,7 @@
 .. API parameters:
 
 .. |count| replace:: 페이지 당 시도하고 검색할 결과의 수.
-.. |cursor| replace:: 결과를 페이지로 나눕니다. 페이징을 시작하려면 -1 값을 입력하세요. response의 next_cursor와 previous_cursor 속성의 반환값을 입력해서 목록의 페이지를 앞뒤로 옮기세요.
+.. |cursor| replace:: 결과를 페이지로 나눕니다. 페이징을 시작하려면 -1 값을 입력하세요. 응답 내용의 next_cursor와 previous_cursor 속성의 반환값을 입력해서 목록의 페이지를 앞뒤로 옮기세요.
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
 .. |full_text| replace:: 메시지의 전문을 반환할지 여부를 확인하기 위한 논리값. False라면 140자로 잘린 메시지 내용을 반환하게 됩니다. 기본값은 False입니다.
