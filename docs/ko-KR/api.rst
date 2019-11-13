@@ -695,8 +695,8 @@ User methods
    :rtype: :class:`SavedSearch` 객체
 
 
-도움말 메소드
--------------
+편의 기능 메소드
+----------------
 
 .. method:: API.search(q, [geocode], [lang], [locale], [result_type], \
                        [count], [until], [since_id], [max_id], \
@@ -708,14 +708,13 @@ User methods
    주의 해주세요. 모든 트윗이 색인화 돼있거나 검색 인터페이스를 통해 검색할 수 있게 만들어져 있지는
    않습니다.
 
-   In API v1.1, the response format of the Search API has been improved to
-   return Tweet objects more similar to the objects you’ll find across the REST
-   API and platform. However, perspectival attributes (fields that pertain to
+   API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한
+   트윗 객체를 반환하도록 향상되었습니다. However, perspectival attributes (fields that pertain to
    the perspective of the authenticating user) are not currently supported on
    this endpoint.\ [#]_\ [#]_
 
-   :param q: the search query string of 500 characters maximum, including
-      operators. Queries may additionally be limited by complexity.
+   :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에 따라
+      제한될 수 있습니다.
    :param geocode: Returns tweets by users located within a given radius of the
       given latitude/longitude.  The location is preferentially taking from the
       Geotagging API, but will fall back to their Twitter profile. The
@@ -725,17 +724,16 @@ User methods
       locations; however you can use this geocode parameter to search near
       geocodes directly. A maximum of 1,000 distinct "sub-regions" will be
       considered when using the radius modifier.
-   :param lang: Restricts tweets to the given language, given by an ISO 639-1
-      code. Language detection is best-effort.
-   :param locale: Specify the language of the query you are sending (only ja is
-      currently effective). This is intended for language-specific consumers
-      and the default should work in the majority of cases.
-   :param result_type: Specifies what type of search results you would prefer
-      to receive. The current default is "mixed." Valid values include:
+   :param lang: 트윗을 ISO 639-1 코드로 주어진 언어로 제한합니다. 언어 탐지가 적절하게 작동했다고
+      전제합니다.
+   :param locale: 전송한 쿼리의 언어를 명시하세요.(현재는 ja만 유효합니다.) 이는 언어별 사용자를
+      위한 것이며 대부분의 경우엔 기본값이 작동합니다.
+   :param result_type: 얻고 싶은 검색 결과의 형식에 대해 명시하세요. 현재 기본값은 "mixed"이며
+      유효한 값은 다음과 같습니다.:
 
-      * mixed : include both popular and real time results in the response
-      * recent : return only the most recent results in the response
-      * popular : return only the most popular results in the response
+      * mixed : 응답에 인기 결과와 실시간 결과 모두를 포함합니다.
+      * recent : 응답으로 가장 최근의 결과만을 반환합니다.
+      * popular : 응답으로 가장 인기 있는 결과만을 반환합니다.
    :param count: |count|
    :param until: Returns tweets created before the given date. Date should be
       formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day
@@ -747,7 +745,7 @@ User methods
       available.
    :param max_id: |max_id|
    :param include_entities: |include_entities|
-   :rtype: :class:`SearchResults` object
+   :rtype: :class:`SearchResults` 객체
 
 
 List 메소드
