@@ -705,16 +705,15 @@ User methods
    지정한 쿼리와 관련된 트윗의 모음을 반환합니다.
    
    트위터의 검색 서비스와, 더 나아가서 검색 API가 모든 트윗 소스에서 검색을 하는 것은 아니라는 것에
-   주의 해주세요. 모든 트윗이 색인화 돼있거나 검색 인터페이스를 통해 검색할 수 있게 만들어져 있지는
+   주의 해주세요. 모든 트윗이 검색 인터페이스를 통해 색인화 되어있거나 검색할 수 있게 만들어져 있지는
    않습니다.
 
    API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한
-   트윗 객체를 반환하도록 향상되었습니다. However, perspectival attributes (fields that pertain to
-   the perspective of the authenticating user) are not currently supported on
-   this endpoint.\ [#]_\ [#]_
+   트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 유저에 의존하는 필드)은 
+   현재 지원하지 않습니다.\ [#]_\ [#]_
 
-   :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에 따라
-      제한될 수 있습니다.
+   :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에
+      따라 제한될 수 있습니다.
    :param geocode: Returns tweets by users located within a given radius of the
       given latitude/longitude.  The location is preferentially taking from the
       Geotagging API, but will fall back to their Twitter profile. The
@@ -735,14 +734,10 @@ User methods
       * recent : 응답으로 가장 최근의 결과만을 반환합니다.
       * popular : 응답으로 가장 인기 있는 결과만을 반환합니다.
    :param count: |count|
-   :param until: Returns tweets created before the given date. Date should be
-      formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day
-      limit. In other words, no tweets will be found for a date older than one
-      week.
-   :param since_id: |since_id| There are limits to the number of Tweets which
-      can be accessed through the API. If the limit of Tweets has occurred
-      since the since_id, the since_id will be forced to the oldest ID
-      available.
+   :param until: 주어진 날짜 이전에 만들어진 트윗을 반환합니다. 날짜는 YYYY-MM-DD의 형식으로 주어야
+      합니다. 검색 색인은 7일동안만 유지됩니다. 다시 말해서 일주일 이상 지난 트윗은 찾을 수 없습니다.
+   :param since_id: |since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다.
+      since_id 이후로 트윗 수 제한을 초과한다면, since_id 는 가능한 가장 오래된 ID로 강제 설정됩니다.
    :param max_id: |max_id|
    :param include_entities: |include_entities|
    :rtype: :class:`SearchResults` 객체
