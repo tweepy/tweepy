@@ -736,8 +736,8 @@ User methods
    :param count: |count|
    :param until: 주어진 날짜 이전에 만들어진 트윗을 반환합니다. 날짜는 YYYY-MM-DD의 형식으로 주어야
       합니다. 검색 색인은 7일동안만 유지됩니다. 다시 말해서 일주일 이상 지난 트윗은 찾을 수 없습니다.
-   :param since_id: |since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다.
-      since_id 이후로 트윗 수 제한을 초과한다면, since_id 는 가능한 가장 오래된 ID로 강제 설정됩니다.
+   :param since_id: |since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다. since_id
+      이후로 트윗 수 제한을 초과한다면, since_id는 제한을 초과하지 않는 가장 오래된 ID로 강제 설정됩니다.
    :param max_id: |max_id|
    :param include_entities: |include_entities|
    :rtype: :class:`SearchResults` 객체
