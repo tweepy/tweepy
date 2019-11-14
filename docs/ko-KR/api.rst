@@ -660,7 +660,7 @@ User methods
    :rtype: :class:`User` 객체
 
 
-검색어 저장 메서드
+검색어 저장 메소드
 ----------------------
 
 .. method:: API.saved_searches()
@@ -705,7 +705,7 @@ User methods
    지정한 쿼리와 관련된 트윗의 모음을 반환합니다.
    
    트위터의 검색 서비스와, 더 나아가서 검색 API가 모든 트윗 소스에서 검색을 하는 것은 아니라는 것에
-   주의 해주세요. 모든 트윗이 검색 인터페이스를 통해 색인화 되어있거나 검색할 수 있게 만들어져 있지는
+   유의해주세요. 모든 트윗이 검색 인터페이스를 통해 색인화 되어있거나 검색할 수 있게 만들어져 있지는
    않습니다.
 
    API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한
@@ -714,15 +714,13 @@ User methods
 
    :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에
       따라 제한될 수 있습니다.
-   :param geocode: Returns tweets by users located within a given radius of the
-      given latitude/longitude.  The location is preferentially taking from the
-      Geotagging API, but will fall back to their Twitter profile. The
-      parameter value is specified by "latitide,longitude,radius", where radius
-      units must be specified as either "mi" (miles) or "km" (kilometers). Note
-      that you cannot use the near operator via the API to geocode arbitrary
-      locations; however you can use this geocode parameter to search near
-      geocodes directly. A maximum of 1,000 distinct "sub-regions" will be
-      considered when using the radius modifier.
+   :param geocode: 주어진 위도, 경도의 주어진 반경 내에 위치한 유저의 트윗만 반환합니다. 위치는
+      우선적으로 위치 정보 삽입 API에서 받아오지만, 트위터 프로필 내의 정보로 대체할 수 있습니다.
+      매개변수의 값은 "위도,경도,반경"의 형태로 지정되며, 반경은 "mi"(마일) 또는 "km"(킬로미터)
+      단위로 주어져야 합니다. API를 통해 근거리 연산자를 사용하여 임의의 위치를 geocode로 입력할
+      수는 없다는 점을 유의해주세요. 다만 이 geocode 매개변수를 통해 근처의 지오코드를 검색할 수는
+      있습니다. 반경 수식어를 사용할 경우에는 최대 1,000개의 분명하게 구분되는 "하위 영역"을 고려할
+      할 것입니다.
    :param lang: 트윗을 ISO 639-1 코드로 주어진 언어로 제한합니다. 언어 탐지가 적절하게 작동했다고
       전제합니다.
    :param locale: 전송한 쿼리의 언어를 명시하세요.(현재는 ja만 유효합니다.) 이는 언어별 사용자를
