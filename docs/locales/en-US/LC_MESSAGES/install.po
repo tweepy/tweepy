@@ -19,13 +19,13 @@ msgstr ""
 
 #: ../../install.rst:2
 msgid "Installation"
-msgstr "설치하기"
+msgstr ""
 
 #: ../../install.rst:4
 msgid "Install from PyPI::"
-msgstr "PyPI에서 설치하기"
+msgstr ""
 
 #: ../../install.rst:8
 msgid "Install from source::"
-msgstr "소스코드로부터 설치하기"
+msgstr ""
 

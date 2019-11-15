@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2009-2019, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 3.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-15 19:26+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../streaming_how_to.rst:8
+msgid "Streaming With Tweepy"
+msgstr ""
+
+#: ../../streaming_how_to.rst:9
+msgid ""
+"Tweepy makes it easier to use the twitter streaming api by handling "
+"authentication, connection, creating and destroying the session, reading "
+"incoming messages, and partially routing messages."
+msgstr ""
+
+#: ../../streaming_how_to.rst:13
+msgid ""
+"This page aims to help you get started using Twitter streams with Tweepy "
+"by offering a first walk through.  Some features of Tweepy streaming are "
+"not covered here. See streaming.py in the Tweepy source code."
+msgstr ""
+
+#: ../../streaming_how_to.rst:17
+msgid ""
+"API authorization is required to access Twitter streams. Follow the "
+":ref:`auth_tutorial` if you need help with authentication."
+msgstr ""
+
+#: ../../streaming_how_to.rst:21
+msgid "Summary"
+msgstr ""
+
+#: ../../streaming_how_to.rst:22
+msgid ""
+"The Twitter streaming API is used to download twitter messages in real "
+"time.  It is useful for obtaining a high volume of tweets, or for "
+"creating a live feed using a site stream or user stream. See the `Twitter"
+" Streaming API Documentation`_."
+msgstr ""
+
+#: ../../streaming_how_to.rst:27
+msgid ""
+"The streaming api is quite different from the REST api because the REST "
+"api is used to *pull* data from twitter but the streaming api *pushes* "
+"messages to a persistent session. This allows the streaming api to "
+"download more data in real time than could be done using the REST API."
+msgstr ""
+
+#: ../../streaming_how_to.rst:33
+msgid ""
+"In Tweepy, an instance of **tweepy.Stream** establishes a streaming "
+"session and routes messages to **StreamListener** instance.  The "
+"**on_data** method of a stream listener receives all messages and calls "
+"functions according to the message type. The default **StreamListener** "
+"can classify most common twitter messages and routes them to "
+"appropriately named methods, but these methods are only stubs."
+msgstr ""
+
+#: ../../streaming_how_to.rst:41
+msgid "Therefore using the streaming api has three steps."
+msgstr ""
+
+#: ../../streaming_how_to.rst:43
+msgid "Create a class inheriting from **StreamListener**"
+msgstr ""
+
+#: ../../streaming_how_to.rst:45
+msgid "Using that class create a **Stream** object"
+msgstr ""
+
+#: ../../streaming_how_to.rst:47
+msgid "Connect to the Twitter API using the **Stream**."
+msgstr ""
+
+#: ../../streaming_how_to.rst:51
+msgid "Step 1: Creating a **StreamListener**"
+msgstr ""
+
+#: ../../streaming_how_to.rst:52
+msgid ""
+"This simple stream listener prints status text. The **on_data** method of"
+" Tweepy's **StreamListener** conveniently passes data from statuses to "
+"the **on_status** method. Create class **MyStreamListener** inheriting "
+"from  **StreamListener** and overriding **on_status**.::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:65
+msgid "Step 2: Creating a **Stream**"
+msgstr ""
+
+#: ../../streaming_how_to.rst:66
+msgid ""
+"We need an api to stream. See :ref:`auth_tutorial` to learn how to get an"
+" api object. Once we have an api and a status listener we can create our "
+"stream object.::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:73
+msgid "Step 3: Starting a Stream"
+msgstr ""
+
+#: ../../streaming_how_to.rst:74
+msgid ""
+"A number of twitter streams are available through Tweepy. Most cases will"
+" use filter, the user_stream, or the sitestream. For more information on "
+"the capabilities and limitations of the different streams see `Twitter "
+"Streaming API Documentation`_."
+msgstr ""
+
+#: ../../streaming_how_to.rst:79
+msgid ""
+"In this example we will use **filter** to stream all tweets containing "
+"the word *python*. The **track** parameter is an array of search terms to"
+" stream. ::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:84
+msgid ""
+"This example shows how to use **filter** to stream tweets by a specific "
+"user. The **follow** parameter is an array of IDs. ::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:88
+msgid ""
+"An easy way to find a single ID is to use one of the many conversion "
+"websites: search for 'what is my twitter ID'."
+msgstr ""
+
+#: ../../streaming_how_to.rst:91
+msgid "A Few More Pointers"
+msgstr ""
+
+#: ../../streaming_how_to.rst:94
+msgid "Async Streaming"
+msgstr ""
+
+#: ../../streaming_how_to.rst:95
+msgid ""
+"Streams do not terminate unless the connection is closed, blocking the "
+"thread. Tweepy offers a convenient **is_async** parameter on **filter** "
+"so the stream will run on a new thread. For example ::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:102
+msgid "Handling Errors"
+msgstr ""
+
+#: ../../streaming_how_to.rst:103
+msgid ""
+"When using Twitter's streaming API one must be careful of the dangers of "
+"rate limiting. If clients exceed a limited number of attempts to connect "
+"to the streaming API in a window of time, they will receive error 420.  "
+"The amount of time a client has to wait after receiving error 420 will "
+"increase exponentially each time they make a failed attempt."
+msgstr ""
+
+#: ../../streaming_how_to.rst:108
+msgid ""
+"Tweepy's **Stream Listener** passes error codes to an **on_error** stub. "
+"The default implementation returns **False** for all codes, but we can "
+"override it to allow Tweepy to reconnect for some or all codes, using the"
+" backoff strategies recommended in the `Twitter Streaming API Connecting "
+"Documentation`_. ::"
+msgstr ""
+
+#: ../../streaming_how_to.rst:123
+msgid ""
+"For more information on error codes from the Twitter API see `Twitter "
+"Response Codes Documentation`_."
+msgstr ""
+
