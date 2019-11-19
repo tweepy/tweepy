@@ -2,14 +2,14 @@
 
 .. include:: parameters.rst
 
-API Reference
-=============
+API 레퍼런스
+============
 
-This page contains some basic documentation for the Tweepy module.
+이 페이지는 Tweepy 모듈에 대한 기초적인 안내를 포함하고 있습니다.
 
 
-:mod:`tweepy.api` --- Twitter API wrapper
-=========================================
+:mod:`tweepy.api` --- Twitter API 래퍼(Wrapper)
+================================================
 
 .. class:: API([auth_handler=None], [host='api.twitter.com'], \
                [search_host='search.twitter.com'], [cache=None], \
@@ -19,69 +19,61 @@ This page contains some basic documentation for the Tweepy module.
                [wait_on_rate_limit=False], [wait_on_rate_limit_notify=False], \
                [proxy=None])
 
-   This class provides a wrapper for the API as provided by Twitter.
-   The functions provided in this class are listed below.
+   이 클래스는 트위터로부터 제공되는 API의 래퍼를 제공합니다.
+   이 클래스가 제공하는 함수들은 아래와 같습니다.
 
-   :param auth_handler: authentication handler to be used
-   :param host: general API host
-   :param search_host: search API host
-   :param cache: cache backend to use
-   :param api_root: general API path root
-   :param search_root: search API path root
-   :param retry_count: default number of retries to attempt when error occurs
-   :param retry_delay: number of seconds to wait between retries
-   :param retry_errors: which HTTP status codes to retry
-   :param timeout: The maximum amount of time to wait for a response from
-                   Twitter
-   :param parser: The object to use for parsing the response from Twitter
-   :param compression: Whether or not to use GZIP compression for requests
-   :param wait_on_rate_limit: Whether or not to automatically wait for rate
-                              limits to replenish
-   :param wait_on_rate_limit_notify: Whether or not to print a notification
-                                     when Tweepy is waiting for rate limits to
-                                     replenish
-   :param proxy: The full url to an HTTPS proxy to use for connecting to
-                 Twitter.
+   :param auth_handler: 인증 핸들러
+   :param host: 일반 API 호스트
+   :param search_host: 검색 API 호스트
+   :param cache: 캐시 백엔드
+   :param api_root: 일반 API 루트 경로
+   :param search_root: 검색 API 루트 경로
+   :param retry_count: 에러가 발생했을 때 기본적으로 재시도할 횟수
+   :param retry_delay: 다음 재시도까지의 지연시간(초 단위)
+   :param retry_errors: 재시도할 HTTP 상태 코드
+   :param timeout: 트위터로부터의 응답을 기다릴 최대 시간
+   :param parser: 트위터로부터의 응답 결과를 파싱하는 데 사용할 객체
+   :param compression: 요청에 GZIP 압축을 사용할지의 여부
+   :param wait_on_rate_limit: 트위터 API 호출 제한 횟수 보충을 기다릴지의 여부
+   :param wait_on_rate_limit_notify: 트위터 API 호출 제한 횟수 보충을 기다릴 때,
+									 따로 안내 메세지를 출력할지의 여부
+   :param proxy: 트위터에 연결할 때 사용할 HTTPS 프록시의 전체 주소.
 
 
-Timeline methods
-----------------
+타임라인 메소드
+---------------
 
 .. method:: API.home_timeline([since_id], [max_id], [count], [page])
 
-   Returns the 20 most recent statuses, including retweets, posted by the
-   authenticating user and that user's friends. This is the equivalent of
-   /timeline/home on the Web.
+   현재 인증된 사용자와 이 사용자의 친구들에 의해 작성된 Status 중, 가장 최근에 작성된 20개의
+   Status를 (리트윗을 포함해) 반환합니다. 웹 상에서의 /timeline/home와 동일합니다.
 
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
                                 [include_ext_alt_text], [include_card_uri])
 
-   Returns full Tweet objects for up to 100 tweets per request, specified by
-   the ``id_`` parameter.
+   요청 1회당 트윗 객체를 최대 100개 반환합니다. ``id_`` 매개변수에 의해 구분됩니다.
 
-   :param id\_: A list of Tweet IDs to lookup, up to 100
+   :param id\_: 반환받을 트윗의 ID 리스트(최대 100개).
    :param include_entities: |include_entities|
    :param trim_user: |trim_user|
-   :param map\_: A boolean indicating whether or not to include tweets that
-                 cannot be shown. Defaults to False.
+   :param map\_: 볼 수 없는 트윗을 포함할지의 여부를 설정하는 boolean 형태의 변수입니다. 기본값은 False.
    :param include_ext_alt_text: |include_ext_alt_text|
    :param include_card_uri: |include_card_uri|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], \
                               [count], [page])
-
-   Returns the 20 most recent statuses posted from the authenticating user or
-   the user specified. It's also possible to request another user's timeline
-   via the id parameter.
+							  
+   현재 인증된 사용자 또는 지정된 사용자의 Status 중 가장 최근의 20개를 반환합니다.
+   ``id_`` 매개변수를 이용하면, 다른 사용자의 타임라인을 요청하는 것이 가능합니다.
 
    :param id: |uid|
    :param user_id: |user_id|
@@ -90,46 +82,43 @@ Timeline methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
 
-   Returns the 20 most recent tweets of the authenticated user that have been
-   retweeted by others.
+   현재 인증된 사용자의 최근 트윗 중, 다른 사용자에 의해 리트윗된 트윗 20개를 반환합니다.
 
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.mentions_timeline([since_id], [max_id], [count])
 
-   Returns the 20 most recent mentions, including retweets.
+   리트윗을 포함하는, 가장 최근의 멘션(답글) 20개를 반환합니다.
 
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param count: |count|
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
-Status methods
---------------
+Status 메소드
+-------------
 
 .. method:: API.get_status(id, [trim_user], [include_my_retweet], \
                            [include_entities], [include_ext_alt_text], \
                            [include_card_uri])
 
-   Returns a single status specified by the ID parameter.
+   ID 매개변수에 의해 구분된 하나의 Status 객체를 반환합니다.
 
    :param id: |sid|
    :param trim_user: |trim_user|
-   :param include_my_retweet: A boolean indicating if any Tweets returned that
-      have been retweeted by the authenticating user should include an
-      additional current_user_retweet node, containing the ID of the source
-      status for the retweet.
+   :param include_my_retweet: boolean 형태의 변수. 현재 인증된 사용자에 의해 리트윗된 트윗이,
+	  추가적으로 리트윗된 원본 트윗의 ID를 포함하는 current_user_retweet 노드를 포함해야 하는지를 지정합니다.
    :param include_entities: |include_entities|
    :param include_ext_alt_text: |include_ext_alt_text|
    :param include_card_uri: |include_card_uri|
@@ -144,69 +133,67 @@ Status methods
                               [trim_user], [enable_dmcommands], \
                               [fail_dmcommands], [card_uri])
 
-   Updates the authenticating user's current status, also known as Tweeting.
+   현재 인증된 사용자의 Status를 업데이트합니다. 흔히 '트윗을 작성한다'라고 불립니다.
 
-   For each update attempt, the update text is compared with the authenticating
-   user's recent Tweets. Any attempt that would result in duplication will be
-   blocked, resulting in a 403 error. A user cannot submit the same status
-   twice in a row.
+   Status 업데이트를 시도할 때 마다, 포함된 텍스트를 현재 인증된 사용자의 가장 최근 트윗과
+   비교합니다. 이에 따라, 중복된 업데이트 시도를 차단할 수 있으며, 이를 성공적으로 차단한 후에는
+   403 에러를 반환합니다. 참고: 사용자는 같은 Status 객체를 두 번 이상 연속해 게시할 수 없습니다.
 
-   While not rate limited by the API, a user is limited in the number of Tweets
-   they can create at a time. If the number of updates posted by the user
-   reaches the current allowed limit this method will return an HTTP 403 error.
+   트위터 API상에서의 제한은 초과하지 않았으나, 사용자의 일일 트윗 작성 제한수를 초과하는
+   경우가 발생할 수 있습니다. 업데이트 시도가 이 제한을 초과할 경우에도, HTTP 403 에러를
+   반환받을 것입니다.
 
-   :param status: The text of your status update.
-   :param in_reply_to_status_id: The ID of an existing status that the update
-      is in reply to. Note: This parameter will be ignored unless the author of
-      the Tweet this parameter references is mentioned within the status text.
-      Therefore, you must include @username, where username is the author of
-      the referenced Tweet, within the update.
-   :param auto_populate_reply_metadata: If set to true and used with
-      in_reply_to_status_id, leading @mentions will be looked up from the
-      original Tweet, and added to the new Tweet from there. This wil append
-      @mentions into the metadata of an extended Tweet as a reply chain grows,
-      until the limit on @mentions is reached. In cases where the original
-      Tweet has been deleted, the reply will fail.
-   :param exclude_reply_user_ids: When used with auto_populate_reply_metadata,
-      a comma-separated list of user ids which will be removed from the
-      server-generated @mentions prefix on an extended Tweet. Note that the
-      leading @mention cannot be removed as it would break the
-      in-reply-to-status-id semantics. Attempting to remove it will be
-      silently ignored.
-   :param attachment_url: In order for a URL to not be counted in the status
-      body of an extended Tweet, provide a URL as a Tweet attachment. This URL
-      must be a Tweet permalink, or Direct Message deep link. Arbitrary,
-      non-Twitter URLs must remain in the status text. URLs passed to the
-      attachment_url parameter not matching either a Tweet permalink or Direct
-      Message deep link will fail at Tweet creation and cause an exception.
-   :param media_ids: A list of media_ids to associate with the Tweet.
-      You may include up to 4 photos or 1 animated GIF or 1 video in a Tweet.
-   :param possibly_sensitive: If you upload Tweet media that might be
-      considered sensitive content such as nudity, or medical procedures, you
-      must set this value to true.
-   :param lat: The latitude of the location this Tweet refers to. This
-      parameter will be ignored unless it is inside the range -90.0 to +90.0
-      (North is positive) inclusive. It will also be ignored if there is no
-      corresponding long parameter.
-   :param long: The longitude of the location this Tweet refers to. The valid
-      ranges for longitude are -180.0 to +180.0 (East is positive) inclusive.
-      This parameter will be ignored if outside that range, if it is not a
-      number, if geo_enabled is disabled, or if there no corresponding lat
-      parameter.
-   :param place_id: A place in the world.
-   :param display_coordinates: Whether or not to put a pin on the exact
-      coordinates a Tweet has been sent from.
+   :param status: 포함된 텍스트. Status 업데이트(트윗 작성)에 쓰입니다.
+   :param in_reply_to_status_id: 답글을 작성할 대상 트윗의 ID.
+	  참고: 따로 값을 전달하지 않으면, 이 매개변수는 무시됩니다.
+	  따라서, @username를 반드시 포함해야 하며, 이는 대상 트윗을 작성한 사람의 @username
+	  이어야 합니다.
+   :param auto_populate_reply_metadata: True로 설정되고
+	  in_reply_to_status_id와 같이 사용되었을 경우,
+	  원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다.
+	  @멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다.
+	  원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다.
+   :param exclude_reply_user_ids: auto_populate_reply_metadata와
+	  같이 사용되었을 경우, 서버에서 생성된 @멘션 머릿말 중
+	  반점(,)으로 구분된 사용자 ID를 삭제합니다. 참고: 답글 @멘션은 제거될 수 없습니다.
+	  (∵ in_reply_to_status_id의 의미를 깨트릴 수 있음) 이 @멘션 ID를 제거하려는 시도는
+	  무시됩니다. 
+   :param attachment_url: URL이 Status 객체 중
+	  확장된 트윗의 텍스트에 포함되지 않도록, 트윗에 첨부되는 형식으로 제공합니다.
+	  이 URL은 트윗의 링크(Permalink) 또는 다이렉트 메세지(DM)의 깊은(Deep) 링크여야 합니다.
+	  단, 트위터와 관련 없는 임의의 URL은 포함됩니다. 즉, attachment_url에 트윗의 링크 또는
+	  다이렉트 메세지의 깊은 링크가 아닐 경우, 트윗 생성에 실패하며 예외를 발생시킬 것입니다.
+   :param media_ids: 트윗과 연결할 media_ids 리스트.
+	  트윗 하나당 최대 4개의 이미지, 1개의 움직이는 GIF 형식의 이미지 또는 1개의 동영상만
+	  포함할 수 있습니다.
+   :param possibly_sensitive: 나체 사진 또는 수술 과정 사진 등의,
+	  민감한 내용으로 여겨질 수 있는 미디어를 업로드할 경우
+	  반드시 이 속성값을 True로 설정해야 합니다.
+   :param lat: 이 트윗이 가리킬 위치의 위도. -90.0 부터 +90.0 (북반구가 양수값) 범위 안의
+	  값 이외의 값이 주어지면 전달된 값을 무시합니다. 아래의 ``long`` 매개변수가 지정되지
+	  않은 경우에도 무시합니다.
+   :param long: 이 트윗이 가리킬 위치의 경도. -180.0부터 +180.0 (동쪽이 양수값) 범위 안의
+	  값 이외의 값이 주어지거나, 숫자 이외의 값이 주어졌거나, ``geo_enabled`` 가 비활성화 되었거나,
+	  위의 ``lat`` 매개변수가 지정되지 않은 경우 전달된 값을 무시합니다.
+   :param place_id: (사용자가 위치 정보를 사용할 수 있는 경우)
+					트윗이 작성된 위치의 정보 (ID).
+   :param display_coordinates: 트윗이 작성되어 전송된 위치를 표시할지 말지의 여부.
    :param trim_user: |trim_user|
-   :param enable_dmcommands: When set to true, enables shortcode commands for
-      sending Direct Messages as part of the status text to send a Direct
-      Message to a user. When set to false, disables this behavior and includes
-      any leading characters in the status text that is posted
+   :param enable_dmcommands: True로 설정되었다면,
+	  Status 객체를 다이렉트 메세지로 사용자에게 보낼 때 텍스트의 일부를
+	  숏코드 커맨드(Shortcode Command)로 대체하여 보냅니다.
+	  False로 설정되었다면,
+	  Status 객체를 다이렉트 메세지로 사용자에게 보낼 때,
+	  위와 같은 변환 과정을 거치지 않고 텍스트 그대로를 보냅니다..
    :param fail_dmcommands: When set to true, causes any status text that starts
       with shortcode commands to return an API error. When set to false, allows
       shortcode commands to be sent in the status text and acted on by the API.
-   :param card_uri: Associate an ads card with the Tweet using the card_uri
-      value from any ads card response.
-   :rtype: :class:`Status` object
+	  True로 설정되었다면, 객체 텍스트가 숏코드 커맨드(Shortcode Command)로 시작할 때
+	  API 에러를 발생시킵니다.
+	  False로 설정되었다면, 숏코드 커맨드가 객체의 텍스트에 포함되고 API상에서 동작하는 것을 허용합니다.
+   :param card_uri: 트윗에 ``card_uri`` 속성을 이용하여 광고 카드를 추가합니다.
+	  
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.update_with_media(filename, [status], \
@@ -214,72 +201,68 @@ Status methods
                                   [auto_populate_reply_metadata], [lat], \
                                   [long], [source], [place_id], [file])
 
-   *Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated
-   user's status. Statuses that are duplicates or too long will be silently
-   ignored.
+   *더 이상 사용되지 않음*: :func:`API.media_upload` 를 대신 사용하세요.
+   현재 인증된 사용자의 Status를 미디어와 함께 업데이트합니다.
+   중복된 Status 작성 시도 또는 너무 긴 트윗의 작성 시도는 별다른 경고 없이 무시될 것입니다.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless `file` is specified
-   :param status: The text of your status update.
-   :param in_reply_to_status_id: The ID of an existing status that the update
-                                 is in reply to.
-   :param auto_populate_reply_metadata: Whether to automatically include the
-                                        @mentions in the status metadata.
-   :param lat: The location's latitude that this tweet refers to.
-   :param long: The location's longitude that this tweet refers to.
-   :param source: Source of the update. Only supported by Identi.ca. Twitter
-                  ignores this parameter.
-   :param place_id: Twitter ID of location which is listed in the Tweet if
-                    geolocation is enabled for the user.
-   :param file: A file object, which will be used instead of opening
-                `filename`. `filename` is still required, for MIME type
-                detection and to use as a form field in the POST data
-   :rtype: :class:`Status` object
+   :param filename: 업로드할 이미지의 이름. `file` 이 따로 지정된 것이 아니라면, 자동으로 열릴 것입니다.
+   :param status: Status 객체 업데이트에 사용할 텍스트
+   :param in_reply_to_status_id: 답글을 작성할 대상 트윗의 ID
+   :param auto_populate_reply_metadata: Status 메타데이터에 @멘션들을 포함할지의 여부
+   :param lat: 이 트윗이 가리킬 위치의 위도
+   :param long: 이 트윗이 가리킬 위치의 경도
+   :param source: 업데이트에 사용할 소스. Identi.ca 에서만 지원되며, 트위터는 이 매개변수를 무시합니다.
+   :param place_id: (사용자가 위치 정보를 사용할 수 있는 경우)
+					트윗이 작성된 위치의 정보 (ID).
+   :param file: 파일 객체로, `filename` 를 직접 여는 것 대신 사용됩니다.
+				물론 MIME 타입 감지 및 POST 데이터 형식의 필드로 `filename` 가 필요하기는 합니다.
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.destroy_status(id)
 
-   Destroy the status specified by the id parameter. The authenticated user
-   must be the author of the status to destroy.
+   지정한 Status 객체를 파괴합니다.
+   파괴하려는 Status 객체는 현재 인증된 사용자의 것이어야만 합니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.retweet(id)
 
-   Retweets a tweet. Requires the id of the tweet you are retweeting.
+   지정한 트윗을 리트윗합니다. 리트윗하려는 트윗의 ID를 필요로 합니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 .. method:: API.retweeters(id, [cursor], [stringify_ids])
 
-   Returns up to 100 user IDs belonging to users who have retweeted the Tweet
-   specified by the id parameter.
+   매개변수 ``id`` 에 의해 지정된 트윗을 리트윗한 사용자의 ID 중, 최대 100개를 반환합니다.
 
    :param id: |sid|
    :param cursor: |cursor|
-   :param stringify_ids: Have ids returned as strings instead.
-   :rtype: list of Integers
+   :param stringify_ids: 사용자 ID를 정수 타입 대신 문자열 타입으로 반환받습니다.
+   :rtype: 정수 리스트 (또는 문자열 리스트)
 
 
 .. method:: API.retweets(id, [count])
 
    Returns up to 100 of the first retweets of the given tweet.
+   지정한 트윗의 리트윗 중 가장 최근의 100개까지를 반환합니다.
 
    :param id: |sid|
-   :param count: Specifies the number of retweets to retrieve.
-   :rtype: list of :class:`Status` objects
+   :param count: 가져올 트윗의 갯수
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.unretweet(id)
 
    Untweets a retweeted status. Requires the id of the retweet to unretweet.
+   리트윗 Status를 취소합니다. 리트윗 취소할 트윗의 ID를 필요로 합니다.
 
    :param id: |sid|
-   :rtype: :class:`Status` object
+   :rtype: :class:`Status` 객체
 
 
 User methods
@@ -287,27 +270,28 @@ User methods
 
 .. method:: API.get_user(id/user_id/screen_name)
 
-   Returns information about the specified user.
+   지정한 사용자의 정보를 반환합니다.
 
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.me()
 
-   Returns the authenticated user's information.
+   현재 인증된 사용자의 정보를 반환합니다.
 
-   :rtype: :class:`User` object
+   :rtype: :class:`User` 객체
 
 
 .. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
                         [include_user_entities])
 
-   Returns an user's friends ordered in which they were added 100 at a time.
-   If no user is specified it defaults to the authenticated user.
-
+   대상 사용자의 팔로잉 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다.
+   ``id`` 또는 ``screen_name`` 을 통해 대상을 지정하지 않으면,
+   현재 인증된 사용자를 대상으로 합니다.
+   
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
@@ -315,13 +299,14 @@ User methods
    :param count: |count|
    :param skip_status: |skip_status|
    :param include_user_entities: |include_user_entities|
-   :rtype: list of :class:`User` objects
+   :rtype: class:`User` 객체 리스트
 
 
 .. method:: API.followers([id/screen_name/user_id], [cursor])
 
-   Returns a user's followers ordered in which they were added. If no user is
-   specified by id/screen name, it defaults to the authenticated user.
+   대상 사용자의 팔로워 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다.
+   ``id`` 또는 ``screen_name`` 을 통해 대상을 지정하지 않으면,
+   현재 인증된 사용자를 대상으로 합니다.
 
    :param id: |uid|
    :param user_id: |user_id|
@@ -330,49 +315,40 @@ User methods
    :param count: |count|
    :param skip_status: |skip_status|
    :param include_user_entities: |include_user_entities|
-   :rtype: list of :class:`User` objects
+   :rtype: :class:`User` 객체 리스트
 
 
 .. method:: API.lookup_users([user_ids], [screen_names], [include_entities], \
                              [tweet_mode])
 
-   Returns fully-hydrated user objects for up to 100 users per request.
+   매개변수에 의한 검색 기준을 충족하는 사용자 객체를 요청 1회당 최대 100개씩 반환합니다.
 
-   There are a few things to note when using this method.
+   이 메소드를 사용할때는 아래 사항을 참고하세요.
 
-   * You must be following a protected user to be able to see their most recent
-     status update. If you don't follow a protected user their status will be
-     removed.
-   * The order of user IDs or screen names may not match the order of users in
-     the returned array.
-   * If a requested user is unknown, suspended, or deleted, then that user will
-     not be returned in the results list.
-   * If none of your lookup criteria can be satisfied by returning a user
-     object, a HTTP 404 will be thrown.
+   * 비공개 설정된 사용자의 Status 객체 업데이트 내역을 보기 위해서는 해당 사용자를
+	 팔로우하고 있는 상태여야 합니다. 팔로우하고 있지 않다면, 해당 Status 객체는 삭제될 것입니다.
+   * 사용자 ID 또는 ``screen_name`` 의 순서는 반환받은 배열의 사용자 순서와 일치하지 않을 수 있습니다.
+   * 요청한 사용자를 찾을 수 없거나, 계정이 정지 또는 삭제되었다면, 해당 계정은 결과값 리스트로 반환되지 않을 것입니다.
+   * 검색 기준을 충족하는 결과가 아예 없을 경우, HTTP 404 오류가 발생합니다.
 
-   :param user_ids: A list of user IDs, up to 100 are allowed in a single
-                    request.
-   :param screen_names: A list of screen names, up to 100 are allowed in a
-                        single request.
+   :param user_ids: 사용자 ID 리스트이며, ID는 요청 1회당 최대 100개까지만 허용됩니다.
+   :param screen_names: ``screen_name`` 의 리스트이며, 이 역시 요청 1회당 최대 100개까지만 허용됩니다.
    :param include_entities: |include_entities|
-   :param tweet_mode: Valid request values are compat and extended, which give
-                      compatibility mode and extended mode, respectively for
-                      Tweets that contain over 140 characters.
-   :rtype: list of :class:`User` objects
+   :param tweet_mode: 인자로 compat 또는 extended를 넘길 수 있으며,
+					  각각 140자 이상의 데이터가 포함된 트윗에 대해 호환성 모드와 확장 모드를 제공합니다.
+   :rtype: list of :class:`User` 객체
 
 
 .. method:: API.search_users(q, [count], [page])
 
-   Run a search for users similar to Find People button on Twitter.com; the
-   same results returned by people search on Twitter.com will be returned by
-   using this API (about being listed in the People Search). It is only
-   possible to retrieve the first 1000 matches from this API.
+   트위터의 '사용자 검색' 과 동일한 검색 기능을 실행합니다.
+   이 API를 이용한 검색은, 트위터에서 제공하는 것과 동일한 검색 결과를
+   반환합니다. 단, 최대 첫 1000개의 결과만 가져올 수 있습니다.
 
-   :param q: The query to run against people search.
-   :param count: Specifies the number of statuses to retrieve.
-                 May not be greater than 20.
+   :param q: 사용자 검색에 사용할 검색어
+   :param count: 한 번에 가져올 결과의 수. 20보다 클 수 없습니다.
    :param page: |page|
-   :rtype: list of :class:`User` objects
+   :rtype: list of :class:`User` 객체
 
 
 다이렉트 메시지(DM) 메소드
@@ -541,7 +517,7 @@ User methods
 
 .. method:: API.favorites([id], [page])
 
-   인증된 유저 또는 ID 매개변수로 특정되는 유저가 마음에 들어요를 누른 status들을
+   인증된 사용자 또는 ID 매개변수로 특정되는 사용자가 마음에 들어요를 누른 status들을
    반환합니다.
 
    :param id: 마음에 들어요 목록을 요청할 사용자의 ID나 닉네임
@@ -672,7 +648,7 @@ User methods
 
 .. method:: API.get_saved_search(id)
 
-   주어진 ID로 특정되는 인증된 유저의 계정에 저장된 검색어로 데이터를 검색합니다.
+   주어진 ID로 특정되는 인증된 사용자의 계정에 저장된 검색어로 데이터를 검색합니다.
 
    :param id: 검색할 검색어의 ID
    :rtype: :class:`SavedSearch` 객체
@@ -709,12 +685,12 @@ User methods
    않습니다.
 
    API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한
-   트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 유저에 의존하는 필드)은 
+   트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 사용자에 의존하는 필드)은 
    현재 지원하지 않습니다.\ [#]_\ [#]_
 
    :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에
       따라 제한될 수 있습니다.
-   :param geocode: 주어진 위도, 경도의 주어진 반경 내에 위치한 유저의 트윗만 반환합니다. 위치는
+   :param geocode: 주어진 위도, 경도의 주어진 반경 내에 위치한 사용자의 트윗만 반환합니다. 위치는
       우선적으로 위치 정보 삽입 API에서 받아오지만, 트위터 프로필 내의 정보로 대체할 수 있습니다.
       매개변수의 값은 "위도,경도,반경"의 형태로 지정되며, 반경은 "mi"(마일) 또는 "km"(킬로미터)
       단위로 주어져야 합니다. API를 통해 근거리 연산자를 사용하여 임의의 위치를 geocode로 입력할
@@ -791,7 +767,7 @@ List 메소드
 
    이 호출로 최대 100개의 결과가 반환될 것입니다.
    가입자 목록들이 먼저 반환되고, 이후에 소유한 목록들이 반환됩니다.
-   따라서 만약 유저가 90개의 목록에 가입하고 20개의 목록을 소유한다면,
+   따라서 만약 사용자가 90개의 목록에 가입하고 20개의 목록을 소유한다면,
    메소드는 90개의 가입 목록과 10개의 소유 목록을 반환합니다.
    매개변수가 reverse=true인 반대의 메소드인 경우, 소유 목록을 먼저 반환하므로
    20개의 소유목록과 80개의 가입 목록을 반환합니다.
@@ -849,7 +825,7 @@ List 메소드
    :param include_entities: |include_entities|
    :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부. 리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
    
-   :rtype: list of :class:`Status` objects
+   :rtype: :class:`Status` 객체 리스트
 
 
 .. method:: API.get_list(list_id/slug, [owner_id/owner_screen_name])
@@ -934,7 +910,7 @@ List 메소드
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :param cursor: |cursor|
-   :rtype: list of :class:`User` objects
+   :rtype: list of :class:`User` 객체
 
 
 .. method:: API.show_list_member(list_id/slug, screen_name/user_id, \
@@ -948,7 +924,7 @@ List 메소드
    :param user_id: |user_id|
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
-   :rtype: :class:`User` object if user is a member of list
+   :rtype: :class:`User` 객체 if user is a member of list
 
 
 .. method:: API.subscribe_list(list_id/slug, [owner_id/owner_screen_name])
@@ -988,7 +964,7 @@ List 메소드
    :param count: |count|
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
-   :rtype: list of :class:`User` objects
+   :rtype: list of :class:`User` 객체
 
 
 .. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, \
@@ -1002,7 +978,7 @@ List 메소드
    :param user_id: |user_id|
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
-   :rtype: :class:`User` object if user is subscribed to list
+   :rtype: :class:`User` 객체 if user is subscribed to list
 
 
 Trends Methods
