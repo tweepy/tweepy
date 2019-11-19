@@ -9,8 +9,6 @@ if NOT "%PAPER%" == "" (
 	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%
 )
 
-pause
-
 if "%1" == "" goto help
 
 if "%1" == "help" (
@@ -113,4 +111,3 @@ results in %BUILDDIR%/doctest/output.txt.
 )
 
 :end
-pause

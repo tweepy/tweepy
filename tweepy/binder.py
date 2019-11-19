@@ -55,6 +55,7 @@ def bind_api(**config):
                                                  api.wait_on_rate_limit)
             self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
                                                         api.wait_on_rate_limit_notify)
+            self.return_cursors = kwargs.pop('return_cursors', False)
             self.parser = kwargs.pop('parser', api.parser)
             self.session.headers = kwargs.pop('headers', {})
             self.build_parameters(args, kwargs)
@@ -233,7 +234,8 @@ def bind_api(**config):
                     raise TweepError(error_msg, resp, api_code=api_error_code)
 
             # Parse the response payload
-            result = self.parser.parse(self, resp.text)
+            self.return_cursors = self.return_cursors or 'cursor' in self.session.params
+            result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
@@ -253,7 +255,10 @@ def bind_api(**config):
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
-        _call.pagination_mode = 'cursor'
+        if APIMethod.payload_type == 'direct_message':
+            _call.pagination_mode = 'dm_cursor'
+        else:
+            _call.pagination_mode = 'cursor'
     elif 'max_id' in APIMethod.allowed_param:
         if 'since_id' in APIMethod.allowed_param:
             _call.pagination_mode = 'id'

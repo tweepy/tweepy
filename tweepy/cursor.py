@@ -13,6 +13,8 @@ class Cursor(object):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, *args, **kwargs)
+            elif method.pagination_mode == 'dm_cursor':
+                self.iterator = DMCursorIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'id':
                 self.iterator = IdIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'page':
@@ -85,6 +87,28 @@ class CursorIterator(BaseIterator):
                                                                **self.kwargs)
         self.num_tweets -= 1
         return data
+
+
+class DMCursorIterator(BaseIterator):
+
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
+        self.next_cursor = self.kwargs.pop('cursor', None)
+        self.page_count = 0
+
+    def next(self):
+        if self.next_cursor == -1 or (self.limit and self.page_count == self.limit):
+            raise StopIteration
+        data = self.method(cursor=self.next_cursor, return_cursors=True, *self.args, **self.kwargs)
+        self.page_count += 1
+        if isinstance(data, tuple):
+            data, self.next_cursor = data
+        else:
+            self.next_cursor = -1
+        return data
+
+    def prev(self):
+        raise TweepError('This method does not allow backwards pagination')
 
 
 class IdIterator(BaseIterator):
@@ -193,6 +217,8 @@ class ItemIterator(BaseIterator):
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
             self.current_page = self.page_iterator.next()
+            while len(self.current_page) == 0:
+                self.current_page = self.page_iterator.next()
             self.page_index = -1
         self.page_index += 1
         self.num_tweets += 1
