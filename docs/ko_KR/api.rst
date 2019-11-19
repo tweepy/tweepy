@@ -980,8 +980,8 @@ List 메소드
    :rtype: :class:`User` 객체 if user is subscribed to list
 
 
-Trends Methods
---------------
+트렌드 메소드
+-------------
 
 .. method:: API.trends_available()
 
@@ -1027,8 +1027,8 @@ Trends Methods
    :rtype: :class:`JSON` object
 
 
-Geo Methods
------------
+위치정보 메소드
+---------------
 
 .. method:: API.reverse_geocode([lat], [long], [accuracy], [granularity], \
                                 [max_results])
@@ -1053,7 +1053,7 @@ Geo Methods
    :param id: 위치의 유효한 Twitter ID.
 
 
-Utility methods
+유틸리티 메소드
 ---------------
 
 .. method:: API.configuration()
@@ -1063,7 +1063,7 @@ Utility methods
    요청하는 것이 추천되지만, 하루에 1번 이상 요청하지 않는 것이 좋습니다.
 
 
-Media methods
+미디어 메소드
 -------------
 
 .. method:: API.media_upload(filename, [file])
@@ -1087,8 +1087,8 @@ Media methods
    :param alt_text: 이미지에 추가할 Alt text
 
 
-:mod:`tweepy.error` --- Exceptions
-==================================
+:mod:`tweepy.error` --- 예외
+=============================
 
     예외는 ``tweepy`` 모듈에서 직접 이용 가능하며, 이것은 ``tweepy.error`` 자체를 가져올 필요가 없다는 것을 의미합니다.
     예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로 이용 가능합니다.
@@ -1111,7 +1111,7 @@ Media methods
     `TweepError` 로부터 상속받으므로, ``except TweepError`` 또한 ``RateLimitError`` 를 잡을 수 있을겁니다.
 
 
-.. rubric:: Footnotes
+.. rubric:: 각주
 
 .. [#] https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets
 .. [#] https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145
