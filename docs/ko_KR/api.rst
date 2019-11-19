@@ -258,7 +258,6 @@ Status 메소드
 
 .. method:: API.unretweet(id)
 
-   Untweets a retweeted status. Requires the id of the retweet to unretweet.
    리트윗 Status를 취소합니다. 리트윗 취소할 트윗의 ID를 필요로 합니다.
 
    :param id: |sid|
@@ -366,7 +365,7 @@ User methods
 .. method:: API.list_direct_messages([count], [cursor])
 
    최근 30일 이내의 모든 DM의 내역(송수신 모두)을 반환합니다. 반환값은
-   시간역순으로 정렬되어 있습니다.
+   시간 역순으로 정렬되어 있습니다.
 
    :param count: |count|
    :param cursor: |cursor|
