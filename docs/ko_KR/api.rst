@@ -36,7 +36,7 @@ API 레퍼런스
    :param compression: 요청에 GZIP 압축을 사용할지의 여부
    :param wait_on_rate_limit: 트위터 API 호출 제한 횟수 보충을 기다릴지의 여부
    :param wait_on_rate_limit_notify: 트위터 API 호출 제한 횟수 보충을 기다릴 때,
-									 따로 안내 메세지를 출력할지의 여부
+                                     따로 안내 메세지를 출력할지의 여부
    :param proxy: 트위터에 연결할 때 사용할 HTTPS 프록시의 전체 주소.
 
 
@@ -71,7 +71,7 @@ API 레퍼런스
 
 .. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], \
                               [count], [page])
-							  
+
    현재 인증된 사용자 또는 지정된 사용자의 Status 중 가장 최근의 20개를 반환합니다.
    ``id_`` 매개변수를 이용하면, 다른 사용자의 타임라인을 요청하는 것이 가능합니다.
 
@@ -118,7 +118,7 @@ Status 메소드
    :param id: |sid|
    :param trim_user: |trim_user|
    :param include_my_retweet: boolean 형태의 변수. 현재 인증된 사용자에 의해 리트윗된 트윗이,
-	  추가적으로 리트윗된 원본 트윗의 ID를 포함하는 current_user_retweet 노드를 포함해야 하는지를 지정합니다.
+      추가적으로 리트윗된 원본 트윗의 ID를 포함하는 current_user_retweet 노드를 포함해야 하는지를 지정합니다.
    :param include_entities: |include_entities|
    :param include_ext_alt_text: |include_ext_alt_text|
    :param include_card_uri: |include_card_uri|
@@ -145,54 +145,54 @@ Status 메소드
 
    :param status: 포함된 텍스트. Status 업데이트(트윗 작성)에 쓰입니다.
    :param in_reply_to_status_id: 답글을 작성할 대상 트윗의 ID.
-	  참고: 따로 값을 전달하지 않으면, 이 매개변수는 무시됩니다.
-	  따라서, @username를 반드시 포함해야 하며, 이는 대상 트윗을 작성한 사람의 @username
-	  이어야 합니다.
+      참고: 따로 값을 전달하지 않으면, 이 매개변수는 무시됩니다.
+      따라서, @username를 반드시 포함해야 하며, 이는 대상 트윗을 작성한 사람의 @username
+      이어야 합니다.
    :param auto_populate_reply_metadata: True로 설정되고
-	  in_reply_to_status_id와 같이 사용되었을 경우,
-	  원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다.
-	  @멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다.
-	  원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다.
+      in_reply_to_status_id와 같이 사용되었을 경우,
+      원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다.
+      @멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다.
+      원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다.
    :param exclude_reply_user_ids: auto_populate_reply_metadata와
-	  같이 사용되었을 경우, 서버에서 생성된 @멘션 머릿말 중
-	  반점(,)으로 구분된 사용자 ID를 삭제합니다. 참고: 답글 @멘션은 제거될 수 없습니다.
-	  (∵ in_reply_to_status_id의 의미를 깨트릴 수 있음) 이 @멘션 ID를 제거하려는 시도는
-	  무시됩니다. 
+      같이 사용되었을 경우, 서버에서 생성된 @멘션 머릿말 중
+      반점(,)으로 구분된 사용자 ID를 삭제합니다. 참고: 답글 @멘션은 제거될 수 없습니다.
+      (∵ in_reply_to_status_id의 의미를 깨트릴 수 있음) 이 @멘션 ID를 제거하려는 시도는
+      무시됩니다.
    :param attachment_url: URL이 Status 객체 중
-	  확장된 트윗의 텍스트에 포함되지 않도록, 트윗에 첨부되는 형식으로 제공합니다.
-	  이 URL은 트윗의 링크(Permalink) 또는 다이렉트 메세지(DM)의 깊은(Deep) 링크여야 합니다.
-	  단, 트위터와 관련 없는 임의의 URL은 포함됩니다. 즉, attachment_url에 트윗의 링크 또는
-	  다이렉트 메세지의 깊은 링크가 아닐 경우, 트윗 생성에 실패하며 예외를 발생시킬 것입니다.
+      확장된 트윗의 텍스트에 포함되지 않도록, 트윗에 첨부되는 형식으로 제공합니다.
+      이 URL은 트윗의 링크(Permalink) 또는 다이렉트 메세지(DM)의 깊은(Deep) 링크여야 합니다.
+      단, 트위터와 관련 없는 임의의 URL은 포함됩니다. 즉, attachment_url에 트윗의 링크 또는
+      다이렉트 메세지의 깊은 링크가 아닐 경우, 트윗 생성에 실패하며 예외를 발생시킬 것입니다.
    :param media_ids: 트윗과 연결할 media_ids 리스트.
-	  트윗 하나당 최대 4개의 이미지, 1개의 움직이는 GIF 형식의 이미지 또는 1개의 동영상만
-	  포함할 수 있습니다.
+      트윗 하나당 최대 4개의 이미지, 1개의 움직이는 GIF 형식의 이미지 또는 1개의 동영상만
+      포함할 수 있습니다.
    :param possibly_sensitive: 나체 사진 또는 수술 과정 사진 등의,
-	  민감한 내용으로 여겨질 수 있는 미디어를 업로드할 경우
-	  반드시 이 속성값을 True로 설정해야 합니다.
+      민감한 내용으로 여겨질 수 있는 미디어를 업로드할 경우
+      반드시 이 속성값을 True로 설정해야 합니다.
    :param lat: 이 트윗이 가리킬 위치의 위도. -90.0 부터 +90.0 (북반구가 양수값) 범위 안의
-	  값 이외의 값이 주어지면 전달된 값을 무시합니다. 아래의 ``long`` 매개변수가 지정되지
-	  않은 경우에도 무시합니다.
+      값 이외의 값이 주어지면 전달된 값을 무시합니다. 아래의 ``long`` 매개변수가 지정되지
+      않은 경우에도 무시합니다.
    :param long: 이 트윗이 가리킬 위치의 경도. -180.0부터 +180.0 (동쪽이 양수값) 범위 안의
-	  값 이외의 값이 주어지거나, 숫자 이외의 값이 주어졌거나, ``geo_enabled`` 가 비활성화 되었거나,
-	  위의 ``lat`` 매개변수가 지정되지 않은 경우 전달된 값을 무시합니다.
+      값 이외의 값이 주어지거나, 숫자 이외의 값이 주어졌거나, ``geo_enabled`` 가 비활성화 되었거나,
+      위의 ``lat`` 매개변수가 지정되지 않은 경우 전달된 값을 무시합니다.
    :param place_id: (사용자가 위치 정보를 사용할 수 있는 경우)
-					트윗이 작성된 위치의 정보 (ID).
+                    트윗이 작성된 위치의 정보 (ID).
    :param display_coordinates: 트윗이 작성되어 전송된 위치를 표시할지 말지의 여부.
    :param trim_user: |trim_user|
    :param enable_dmcommands: True로 설정되었다면,
-	  Status 객체를 다이렉트 메세지로 사용자에게 보낼 때 텍스트의 일부를
-	  숏코드 커맨드(Shortcode Command)로 대체하여 보냅니다.
-	  False로 설정되었다면,
-	  Status 객체를 다이렉트 메세지로 사용자에게 보낼 때,
-	  위와 같은 변환 과정을 거치지 않고 텍스트 그대로를 보냅니다..
+      Status 객체를 다이렉트 메세지로 사용자에게 보낼 때 텍스트의 일부를
+      숏코드 커맨드(Shortcode Command)로 대체하여 보냅니다.
+      False로 설정되었다면,
+      Status 객체를 다이렉트 메세지로 사용자에게 보낼 때,
+      위와 같은 변환 과정을 거치지 않고 텍스트 그대로를 보냅니다..
    :param fail_dmcommands: When set to true, causes any status text that starts
       with shortcode commands to return an API error. When set to false, allows
       shortcode commands to be sent in the status text and acted on by the API.
-	  True로 설정되었다면, 객체 텍스트가 숏코드 커맨드(Shortcode Command)로 시작할 때
-	  API 에러를 발생시킵니다.
-	  False로 설정되었다면, 숏코드 커맨드가 객체의 텍스트에 포함되고 API상에서 동작하는 것을 허용합니다.
+      True로 설정되었다면, 객체 텍스트가 숏코드 커맨드(Shortcode Command)로 시작할 때
+      API 에러를 발생시킵니다.
+      False로 설정되었다면, 숏코드 커맨드가 객체의 텍스트에 포함되고 API상에서 동작하는 것을 허용합니다.
    :param card_uri: 트윗에 ``card_uri`` 속성을 이용하여 광고 카드를 추가합니다.
-	  
+
    :rtype: :class:`Status` 객체
 
 
@@ -213,9 +213,9 @@ Status 메소드
    :param long: 이 트윗이 가리킬 위치의 경도
    :param source: 업데이트에 사용할 소스. Identi.ca 에서만 지원되며, 트위터는 이 매개변수를 무시합니다.
    :param place_id: (사용자가 위치 정보를 사용할 수 있는 경우)
-					트윗이 작성된 위치의 정보 (ID).
+                    트윗이 작성된 위치의 정보 (ID).
    :param file: 파일 객체로, `filename` 를 직접 여는 것 대신 사용됩니다.
-				물론 MIME 타입 감지 및 POST 데이터 형식의 필드로 `filename` 가 필요하기는 합니다.
+                물론 MIME 타입 감지 및 POST 데이터 형식의 필드로 `filename` 가 필요하기는 합니다.
    :rtype: :class:`Status` 객체
 
 
@@ -290,7 +290,7 @@ User methods
    대상 사용자의 팔로잉 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다.
    ``id`` 또는 ``screen_name`` 을 통해 대상을 지정하지 않으면,
    현재 인증된 사용자를 대상으로 합니다.
-   
+
    :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
@@ -325,7 +325,7 @@ User methods
    이 메소드를 사용할때는 아래 사항을 참고하세요.
 
    * 비공개 설정된 사용자의 Status 객체 업데이트 내역을 보기 위해서는 해당 사용자를
-	 팔로우하고 있는 상태여야 합니다. 팔로우하고 있지 않다면, 해당 Status 객체는 삭제될 것입니다.
+     팔로우하고 있는 상태여야 합니다. 팔로우하고 있지 않다면, 해당 Status 객체는 삭제될 것입니다.
    * 사용자 ID 또는 ``screen_name`` 의 순서는 반환받은 배열의 사용자 순서와 일치하지 않을 수 있습니다.
    * 요청한 사용자를 찾을 수 없거나, 계정이 정지 또는 삭제되었다면, 해당 계정은 결과값 리스트로 반환되지 않을 것입니다.
    * 검색 기준을 충족하는 결과가 아예 없을 경우, HTTP 404 오류가 발생합니다.
@@ -334,7 +334,7 @@ User methods
    :param screen_names: ``screen_name`` 의 리스트이며, 이 역시 요청 1회당 최대 100개까지만 허용됩니다.
    :param include_entities: |include_entities|
    :param tweet_mode: 인자로 compat 또는 extended를 넘길 수 있으며,
-					  각각 140자 이상의 데이터가 포함된 트윗에 대해 호환성 모드와 확장 모드를 제공합니다.
+                      각각 140자 이상의 데이터가 포함된 트윗에 대해 호환성 모드와 확장 모드를 제공합니다.
    :rtype: list of :class:`User` 객체
 
 
@@ -678,13 +678,13 @@ User methods
                        [include_entities])
 
    지정한 쿼리와 관련된 트윗의 모음을 반환합니다.
-   
+
    트위터의 검색 서비스와, 더 나아가서 검색 API가 모든 트윗 소스에서 검색을 하는 것은 아니라는 것에
    유의해주세요. 모든 트윗이 검색 인터페이스를 통해 색인화 되어있거나 검색할 수 있게 만들어져 있지는
    않습니다.
 
    API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한
-   트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 사용자에 의존하는 필드)은 
+   트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 사용자에 의존하는 필드)은
    현재 지원하지 않습니다.\ [#]_\ [#]_
 
    :param q: 연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에
@@ -774,7 +774,7 @@ List 메소드
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param reverse: 소유 목록을 먼저 반환할지에 대한 참/거짓 여부. 이 매개변수가 어떻게 작동하는지에 대한 정보는 위의 설명을 참조하세요.
-   
+
    :rtype: list of :class:`List` objects
 
 
@@ -787,10 +787,9 @@ List 메소드
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param filter_to_owned_lists: 인증된 사용자 소유의 목록들을 반환할지에 대한 참/거짓 여부. user_id 또는 screen_name으로 표현되는 사용자 또한 같습니다.
-   
    :param cursor: |cursor|
    :param count: |count|
-   
+
    :rtype: list of :class:`List` objects
 
 
@@ -823,7 +822,7 @@ List 메소드
    :param count: |count|
    :param include_entities: |include_entities|
    :param include_rts: 목록 타임라인에 표준 트윗 외의 리트윗(있는 경우)도 포함할지 여부에 대한 참/거짓 여부. 리트윗된 트윗의 출력 형식은 홈 타임라인에서 보는 표현 방식과 동일합니다.
-   
+
    :rtype: :class:`Status` 객체 리스트
 
 
@@ -997,7 +996,7 @@ List 메소드
    트렌드 정보를 이용할 수 있는 경우, 특정 WOEID에 대한 상위 50개의 트렌드를 반환합니다.
 
    반환은 트렌드의 이름을 인코딩한 "trend" 객체 배열, 트위터 검색에서 주제를 검색하는 데
-   사용할 수 있는 쿼리 매개변수, 트위터 검색 URL로 이루어집니다. 
+   사용할 수 있는 쿼리 매개변수, 트위터 검색 URL로 이루어집니다.
 
    이 정보는 5분마다 캐싱됩니다.
    이보다 더 자주 요청하면 더 이상 데이터가 반환되지 않으며, 제한 사용량 비율에 반하여 계산합니다.
@@ -1006,7 +1005,6 @@ List 메소드
 
    :param id: 트렌드 정보를 반환할 The Yahoo! Where On Earth ID.
               글로벌 정보는 WOEID를 1로 사용하여 이용할 수 있습니다.
-              
    :param exclude: 이것을 해시태그와 동일하게 설정하면 트렌드 목록에서 모든 해시태그를 제거합니다.
    :rtype: :class:`JSON` object
 
@@ -1021,9 +1019,8 @@ List 메소드
    WOEID는 Yahoo! Where On Earth ID를 뜻합니다.
 
    :param lat: long 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
-   
    :param long: at 매개변수와 함께 제공되면 이용 가능한 트렌드 위치는 거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 쌍으로 정렬됩니다. 경도의 유효 범위는 -180.0~+180.0(서쪽은 음수, 동쪽은 양수)입니다.
-   
+
    :rtype: :class:`JSON` object
 
 
@@ -1041,7 +1038,6 @@ List 메소드
    :param lat: 위치의 위도.
    :param long: 위치의 경도.
    :param accuracy: 숫자로 검색할 “region"을 지정합니다. 이 경우 미터로의 반경이지만, feet 단위로 지정하기 위해 ft와 접해있는 문자열도 사용할 수 있습니다. 입력되지 않으면 0m로 가정합니다.
-   
    :param granularity: 기본적으로 ‘neighborhood’로 가정하지만 'city'일 수도 있습니다.
    :param max_results: 반환할 최대 결과 숫자에 대한 힌트. 이것은 단지 지침일 뿐, 지켜지지 않을 수도 있습니다.
 
@@ -1071,9 +1067,8 @@ List 메소드
    이 endpoint를 사용하여 Twitter에 이미지를 업로드하세요.
 
    :param filename: 업로드할 이미지의 파일 이름. ``file``이 자동으로 지정되지 않는 한 자동으로 열리게 됩니다.
-   
    :param file: ``filename``을 여는 대신 사용할 파일 객체. MME 타입 형식 감지 및 POST 데이터에서 양식 필드로 사용하려면 ``filename``도 필요합니다.
-   
+
    :rtype: :class:`Media` object
 
 
@@ -1082,7 +1077,7 @@ List 메소드
     이 endpoint는 업로드된 media_id에 대한 추가적인 정보를 제공하는데 사용될 수 있습니다.
     이 기능은 현재 이미지와 GIF에서만 지원됩니다.
     image al text와 같은 추가적인 metadata를 연결하려면 이 endpoint를 호출하세요.
-   
+
    :param media_id: alt text를 추가할 media의 ID
    :param alt_text: 이미지에 추가할 Alt text
 
@@ -1097,7 +1092,7 @@ List 메소드
 .. exception:: TweepError
 
     Tweepy가 사용하는 주요 예외. 많은 이유로 발생합니다.
-    
+
     Twiiter가 응답한 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서
     에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다.
     단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오.

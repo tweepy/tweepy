@@ -721,7 +721,7 @@ Help Methods
                        [include_entities])
 
    Returns a collection of relevant Tweets matching a specified query.
-   
+
    Please note that Twitter's search service and, by extension, the Search API
    is not meant to be an exhaustive source of Tweets. Not all Tweets will be
    indexed or made available via the search interface.
@@ -1165,7 +1165,7 @@ Media methods
    uploaded media_id. This feature is currently only supported for images and
    GIFs. Call this endpoint to attach additional metadata such as image alt
    text.
-   
+
    :param media_id: The ID of the media to add alt text to.
    :param alt_text: The alt text to add to the image.
 
