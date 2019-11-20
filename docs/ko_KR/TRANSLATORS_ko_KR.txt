@@ -1,0 +1,16 @@
+# TRANSLATORS of tweepy's documents.
+# Language: Korean (Korea, Republic of)
+
+# Please write down your name at below,
+# <GitHub Username> (<@GitHub ID>)
+# <GitHub Profile URL> forms.
+# If you don't have Username, please write GitHub ID twice.
+
+악동분홍토끼(@pinkrabbit412)
+https://github.com/pinkrabbit412
+
+thdkrhk99 (@thdkrhk99)
+https://github.com/thdkrhk99
+
+ifeve (@ifeve)
+https://github.com/ifeve
