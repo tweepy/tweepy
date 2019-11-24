@@ -1379,9 +1379,9 @@ class API(object):
 
         # image must be gif, jpeg, or png
         file_type = mimetypes.guess_type(filename)
+        file_type = file_type[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        file_type = file_type[0]
         if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
