@@ -1,0 +1,16 @@
+# TRANSLATORS of Tweepy's documentation.
+# Language: Korean (Korea, Republic of)
+
+# Please write down your name below, with the format:
+# <Name> (<@GitHub Username>)
+# <GitHub Profile URL>
+# GitHub Username in place of Name is acceptable.
+
+악동분홍토끼 (@pinkrabbit412)
+https://github.com/pinkrabbit412
+
+thdkrhk99 (@thdkrhk99)
+https://github.com/thdkrhk99
+
+ifeve (@ifeve)
+https://github.com/ifeve
