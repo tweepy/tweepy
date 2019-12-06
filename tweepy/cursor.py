@@ -17,6 +17,8 @@ class Cursor(object):
                 self.iterator = DMCursorIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'id':
                 self.iterator = IdIterator(method, *args, **kwargs)
+            elif method.pagination_mode == "next":
+                self.iterator = NextIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'page':
                 self.iterator = PageIterator(method, *args, **kwargs)
             else:
@@ -199,6 +201,28 @@ class PageIterator(BaseIterator):
             raise TweepError('Can not page back more, at first page')
         self.current_page -= 1
         return self.method(page=self.current_page, *self.args, **self.kwargs)
+
+
+class NextIterator(BaseIterator):
+
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
+        self.next_token = self.kwargs.pop('next', None)
+        self.page_count = 0
+
+    def next(self):
+        if self.next_token == -1 or (self.limit and self.page_count == self.limit):
+            raise StopIteration
+        data = self.method(next=self.next_token, return_cursors=True, *self.args, **self.kwargs)
+        self.page_count += 1
+        if isinstance(data, tuple):
+            data, self.next_token = data
+        else:
+            self.next_token = -1
+        return data
+
+    def prev(self):
+        raise TweepError('This method does not allow backwards pagination')
 
 
 class ItemIterator(BaseIterator):

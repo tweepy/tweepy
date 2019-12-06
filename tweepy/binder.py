@@ -234,7 +234,8 @@ def bind_api(**config):
                     raise TweepError(error_msg, resp, api_code=api_error_code)
 
             # Parse the response payload
-            self.return_cursors = self.return_cursors or 'cursor' in self.session.params
+            self.return_cursors = (self.return_cursors or
+                                   'cursor' in self.session.params or 'next' in self.session.params)
             result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
             # Store result into cache if one is available.
@@ -266,3 +267,10 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
+
+
+def pagination(mode):
+    def decorator(method):
+        method.pagination_mode = mode
+        return method
+    return decorator

@@ -7,7 +7,7 @@ import os
 
 import six
 
-from tweepy.binder import bind_api
+from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -1280,6 +1280,7 @@ class API(object):
                            'include_entities']
         )
     
+    @pagination(mode='next')
     def search_30_day(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
             :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
@@ -1294,6 +1295,7 @@ class API(object):
             require_auth=True
         )(*args, **kwargs)
     
+    @pagination(mode='next')
     def search_full_archive(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
             :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
