@@ -224,7 +224,12 @@ class User(Model):
             return result
 
         return not result
-
+    
+    def __hash__(self):
+        if hasattr(self, 'id'):
+            return hash(self.id)
+        else:
+            raise TypeError('unhashable type: {} (no id attribute)'.format(type(self)))
 
 class DirectMessage(Model):
 
