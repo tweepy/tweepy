@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tweepy 3.8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-28 09:41+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-12-28 10:33+0900\n"
 "Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid ""
 ":ref:`auth_tutorial` if you need help with authentication."
 msgstr ""
 "트위터 스트림에 접근하기 위해선 API 인증이 필요합니다. "
-"인증 과정에 대한 설명은 :ref:`auth_tutorial` 를 참고해주세요."
+"인증 과정에 대한 설명은 :ref:`auth_tutorial` 을 참고해주세요."
 
 #: ../../streaming_how_to.rst:21
 msgid "Summary"
@@ -96,15 +96,15 @@ msgstr "그러므로 스트리밍 API를 사용할 때는 다음의 세 단계�
 
 #: ../../streaming_how_to.rst:43
 msgid "Create a class inheriting from **StreamListener**"
-msgstr "1. **StreamListener** 를 상속 받는 클래스 생성"
+msgstr "**StreamListener** 를 상속 받는 클래스 생성"
 
 #: ../../streaming_how_to.rst:45
 msgid "Using that class create a **Stream** object"
-msgstr "2. 그 클래스를 이용해 **Stream** 객체를 생성"
+msgstr "그 클래스를 이용해 **Stream** 객체를 생성"
 
 #: ../../streaming_how_to.rst:47
 msgid "Connect to the Twitter API using the **Stream**."
-msgstr "3. **Stream** 을 사용해서 트위터 API에 연결"
+msgstr "**Stream** 을 사용해서 트위터 API에 연결"
 
 #: ../../streaming_how_to.rst:51
 msgid "Step 1: Creating a **StreamListener**"
@@ -225,12 +225,12 @@ msgstr ""
 "Tweepy의 **Stream Listener** 는 오류 코드를 **on_error** 스텁 메소드로 전송합니다. "
 "**on_error** 메소드는 기본적으로 **False** 을 반환하지만, "
 "`트위터 스트리밍 API 연결 설명서`_ 에서 권장하는 백오프 전략을 사용하여 "
-"어떤, 혹은 모든 코드에서 Tweepy가 다시 연결할 수 있게끔 이를 오버라이딩 할 수 있습니다. :: "
+"어떤, 혹은 모든 코드에서 Tweepy가 다시 연결할 수 있게끔 이를 재정의(Override) 할 수 있습니다. :: "
 
 #: ../../streaming_how_to.rst:123
 msgid ""
 "For more information on error codes from the Twitter API see `Twitter "
 "Response Codes Documentation`_."
 msgstr ""
-"트위터 API의 더 많은 오류 코드에 대한 정보를 보려면 `트위터 응답 코드 설명서`_. 를 참조하세요."
+"트위터 API의 더 많은 오류 코드에 대한 정보를 보려면 `트위터 응답 코드 설명서`_ 를 참조하세요."
 
