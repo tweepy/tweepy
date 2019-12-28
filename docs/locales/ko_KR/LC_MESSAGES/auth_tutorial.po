@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2009-2019, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 3.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-28 09:41+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../auth_tutorial.rst:6
+msgid "Authentication Tutorial"
+msgstr ""
+
+#: ../../auth_tutorial.rst:9
+msgid "Introduction"
+msgstr ""
+
+#: ../../auth_tutorial.rst:11
+msgid ""
+"Tweepy supports both OAuth 1a (application-user) and OAuth 2 "
+"(application-only) authentication. Authentication is handled by the "
+"tweepy.AuthHandler class."
+msgstr ""
+
+#: ../../auth_tutorial.rst:16
+msgid "OAuth 1a Authentication"
+msgstr ""
+
+#: ../../auth_tutorial.rst:18
+msgid ""
+"Tweepy tries to make OAuth 1a as painless as possible for you. To begin "
+"the process we need to register our client application with Twitter. "
+"Create a new application and once you are done you should have your "
+"consumer key and secret. Keep these two handy, you'll need them."
+msgstr ""
+
+#: ../../auth_tutorial.rst:24
+msgid ""
+"The next step is creating an OAuthHandler instance. Into this we pass our"
+" consumer key and secret which was given to us in the previous "
+"paragraph::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:30
+msgid ""
+"If you have a web application and are using a callback URL that needs to "
+"be supplied dynamically you would pass it in like so::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:36
+msgid ""
+"If the callback URL will not be changing, it is best to just configure it"
+" statically on twitter.com when setting up your application's profile."
+msgstr ""
+
+#: ../../auth_tutorial.rst:40
+msgid ""
+"Unlike basic auth, we must do the OAuth 1a \"dance\" before we can start "
+"using the API. We must complete the following steps:"
+msgstr ""
+
+#: ../../auth_tutorial.rst:43
+msgid "Get a request token from twitter"
+msgstr ""
+
+#: ../../auth_tutorial.rst:45
+msgid "Redirect user to twitter.com to authorize our application"
+msgstr ""
+
+#: ../../auth_tutorial.rst:47
+msgid ""
+"If using a callback, twitter will redirect the user to us. Otherwise the "
+"user must manually supply us with the verifier code."
+msgstr ""
+
+#: ../../auth_tutorial.rst:51
+msgid "Exchange the authorized request token for an access token."
+msgstr ""
+
+#: ../../auth_tutorial.rst:53
+msgid "So let's fetch our request token to begin the dance::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:60
+msgid ""
+"This call requests the token from twitter and returns to us the "
+"authorization URL where the user must be redirect to authorize us. Now if"
+" this is a desktop application we can just hang onto our OAuthHandler "
+"instance until the user returns back. In a web application we will be "
+"using a callback request. So we must store the request token in the "
+"session since we will need it inside the callback URL request. Here is a "
+"pseudo example of storing the request token in a session::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:71
+msgid ""
+"So now we can redirect the user to the URL returned to us earlier from "
+"the get_authorization_url() method."
+msgstr ""
+
+#: ../../auth_tutorial.rst:74
+msgid ""
+"If this is a desktop application (or any application not using callbacks)"
+" we must query the user for the \"verifier code\" that twitter will "
+"supply them after they authorize us. Inside a web application this "
+"verifier value will be supplied in the callback request from twitter as a"
+" GET query parameter in the URL."
+msgstr ""
+
+#: ../../auth_tutorial.rst:88
+msgid ""
+"The final step is exchanging the request token for an access token. The "
+"access token is the \"key\" for opening the Twitter API treasure box. To "
+"fetch this token we do the following::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:105
+msgid ""
+"It is a good idea to save the access token for later use. You do not need"
+" to re-fetch it each time. Twitter currently does not expire the tokens, "
+"so the only time it would ever go invalid is if the user revokes our "
+"application access. To store the access token depends on your "
+"application. Basically you need to store 2 string values: key and "
+"secret::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:115
+msgid ""
+"You can throw these into a database, file, or where ever you store your "
+"data. To re-build an OAuthHandler from this stored access token you would"
+" do this::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:122
+msgid ""
+"So now that we have our OAuthHandler equipped with an access token, we "
+"are ready for business::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:129
+msgid "OAuth 2 Authentication"
+msgstr ""
+
+#: ../../auth_tutorial.rst:131
+msgid ""
+"Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of "
+"authentication where an application makes API requests without the user "
+"context. Use this method if you just need read-only access to public "
+"information."
+msgstr ""
+
+#: ../../auth_tutorial.rst:136
+msgid ""
+"Like OAuth 1a, we first register our client application and acquire a "
+"consumer key and secret."
+msgstr ""
+
+#: ../../auth_tutorial.rst:139
+msgid ""
+"Then we create an AppAuthHandler instance, passing in our consumer key "
+"and secret::"
+msgstr ""
+
+#: ../../auth_tutorial.rst:144
+msgid "With the bearer token received, we are now ready for business::"
+msgstr ""
+
