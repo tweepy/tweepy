@@ -1120,8 +1120,8 @@ Geo Methods
                     (then this is a radius in meters, but it can also take a
                     string that is suffixed with ft to specify feet).
                     If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
+   :param granularity: Assumed to be ``neighborhood`` by default; can also be
+                       ``city``.
    :param max_results: A hint as to the maximum number of results to return.
                        This is only a guideline, which may not be adhered to.
 
