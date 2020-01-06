@@ -11,15 +11,15 @@ Introduction
 ============
 
 On May 24, 2016, Twitter
-`announced <https://blog.twitter.com/express-even-more-in-140-characters>`_
+`announced <https://blog.twitter.com/express-even-more-in-140-characters>`__
 changes to the way that replies and URLs are handled and
-`published plans <https://blog.twitter.com/2016/doing-more-with-140-characters>`_
+`published plans <https://blog.twitter.com/2016/doing-more-with-140-characters>`__
 around support for these changes in the Twitter API and initial technical
 documentation describing the updates to Tweet objects and API options.\ [#]_
 On September 26, 2017, Twitter
-`started testing <https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html>`_
+`started testing <https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html>`__
 280 characters for certain languages,\ [#]_ and on November 7, 2017,
-`announced <https://blog.twitter.com/official/en_us/topics/product/2017/tweetingmadeeasier.html>`_
+`announced <https://blog.twitter.com/official/en_us/topics/product/2017/tweetingmadeeasier.html>`__
 that the character limit was being expanded for Tweets in languages where
 cramming was an issue.\ [#]_
 
