@@ -1,12 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
+# Getting started
 # Copyright (C) 2009-2019, Joshua Roesslein
-# This file is distributed under the same license as the tweepy package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+# This file is distributed under the same license as the Tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: tweepy 3.8.0\n"
+"Project-Id-Version: Tweepy-ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-28 09:41+0900\n"
 "PO-Revision-Date: 2019-12-28 11:09+0900\n"
