@@ -3,7 +3,7 @@ Installation
 
 Install from PyPI::
 
-    easy_install tweepy
+    pip install tweepy
 
 Install from source::
 
