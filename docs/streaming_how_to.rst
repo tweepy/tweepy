@@ -54,6 +54,7 @@ The **on_data** method of Tweepy's **StreamListener** conveniently passes
 data from statuses to the **on_status** method.
 Create class **MyStreamListener** inheriting from  **StreamListener** 
 and overriding **on_status**.::
+
   import tweepy
   #override tweepy.StreamListener to add logic to on_status
   class MyStreamListener(tweepy.StreamListener):
