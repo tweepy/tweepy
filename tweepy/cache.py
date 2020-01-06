@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
 import datetime

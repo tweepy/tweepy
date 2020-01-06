@@ -40,7 +40,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'tweepy'
-copyright = u'2009-2019, Joshua Roesslein'
+copyright = u'2009-2020, Joshua Roesslein'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

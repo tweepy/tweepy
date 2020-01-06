@@ -1,5 +1,5 @@
 # Getting started
-# Copyright (C) 2009-2019, Joshua Roesslein
+# Copyright (C) 2009-2020, Joshua Roesslein
 # This file is distributed under the same license as the Tweepy package.
 # 악동분홍토끼 <pinkrabbit412@daum.net>, 2019.
 #
