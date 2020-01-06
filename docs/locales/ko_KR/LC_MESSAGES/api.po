@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tweepy 3.8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-28 09:41+0900\n"
-"PO-Revision-Date: 2020-01-06 15:18+0900\n"
+"PO-Revision-Date: 2020-01-06 15:26+0900\n"
 "Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -151,10 +151,10 @@ msgstr ":class:`Status` 객체 리스트"
 #: ../../api.rst:66
 msgid ""
 "Returns full Tweet objects for up to 100 tweets per request, specified by"
-" the ``id_`` parameter."
+" the ``id_``  parameter."
 msgstr ""
 "요청 1회당 트윗 객체를 최대 100개 반환합니다. "
-"``id_`` 매개변수에 의해 구분됩니다."
+"`` id_``  매개변수에 의해 구분됩니다."
 
 #: ../../api.rst:69
 msgid "A list of Tweet IDs to lookup, up to 100"
@@ -192,7 +192,7 @@ msgid ""
 "timeline via the id parameter."
 msgstr ""
 "현재 인증된 사용자 또는 지정된 사용자의 Status 중 가장 최근의 20개를 반환합니다. "
-"``id_`` 매개변수를 이용하면, 다른 사용자의 타임라인을 요청하는 것이 가능합니다."
+"`` id_``  매개변수를 이용하면, 다른 사용자의 타임라인을 요청하는 것이 가능합니다."
 
 #: ../../api.rst:86 ../../api.rst:292 ../../api.rst:311 ../../api.rst:326
 #: ../../api.rst:441 ../../api.rst:453 ../../api.rst:476 ../../api.rst:487
@@ -215,7 +215,7 @@ msgstr "사용자 일련번호. 어떤 값이 유효한 사용자 아이디인�
 #: ../../api.rst:673 ../../api.rst:827 ../../api.rst:842 ../../api.rst:858
 #: ../../api.rst:908 ../../api.rst:940 ../../api.rst:985 ../../api.rst:1039
 msgid "|screen_name|"
-msgstr "사용자 아이디(예: @pinkrabbit412에서의 ``pinkrabbit412``). 어떤 값이 유효한 사용자 아이디인지, 유효한 일련번호인지를 확실히 해야 할 때 도움이 됨."
+msgstr "사용자 아이디(예: @pinkrabbit412에서의 ``pinkrabbit412`` ). 어떤 값이 유효한 사용자 아이디인지, 유효한 일련번호인지를 확실히 해야 할 때 도움이 됨."
 
 #: ../../api.rst:98
 msgid ""
@@ -310,9 +310,9 @@ msgid ""
 " cases where the original Tweet has been deleted, the reply will fail."
 msgstr ""
 "True로 설정되고 in_reply_to_status_id와 같이 사용되었을 경우, "
-원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다. "
-@멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다. "
-원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다."
+"원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다. "
+"@멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다. "
+"원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다."
 
 #: ../../api.rst:170
 msgid ""
@@ -368,7 +368,7 @@ msgid ""
 "parameter."
 msgstr ""
 "이 트윗이 가리킬 위치의 위도. -90.0 ~ +90.0 (북반구가 양수값) 범위 밖의 "
-"값은 무시되며, 아래의 ``long`` 매개변수가 지정되지 않은 경우에도 무시됩니다."
+"값은 무시되며, 아래의 ``long``  매개변수가 지정되지 않은 경우에도 무시됩니다."
 
 #: ../../api.rst:191
 msgid ""
@@ -378,8 +378,8 @@ msgid ""
 "if geo_enabled is disabled, or if there no corresponding lat parameter."
 msgstr ""
 "이 트윗이 가리킬 위치의 경도. -180.0 ~ +180.0 (동쪽이 양수값) 범위 밖의 "
-"값, 숫자 이외의 값이 입력될 경우 무시되며, ``geo_enabled`` 가 비활성화 되었거나, "
-"위의 ``lat`` 매개변수가 지정되지 않은 경우에도 전달된 값이 무시됩니다."
+"값, 숫자 이외의 값이 입력될 경우 무시되며, ``geo_enabled``  가 비활성화 되었거나, "
+"위의 ``lat``  매개변수가 지정되지 않은 경우에도 전달된 값이 무시됩니다."
 
 #: ../../api.rst:196
 msgid "A place in the world."
@@ -419,7 +419,7 @@ msgid ""
 "Associate an ads card with the Tweet using the card_uri value from any "
 "ads card response."
 msgstr ""
-"트윗에 ``card_uri`` 속성을 이용하여 광고 카드를 추가합니다."
+"트윗에 ``card_uri``  속성을 이용하여 광고 카드를 추가합니다."
 
 #: ../../api.rst:217
 msgid ""
@@ -495,7 +495,7 @@ msgid ""
 "Returns up to 100 user IDs belonging to users who have retweeted the "
 "Tweet specified by the id parameter."
 msgstr ""
-"매개변수 ``id`` 에 의해 지정된 트윗을 리트윗한 사용자의 ID 중, 최대 100개를 반환합니다."
+"매개변수 ``id``  에 의해 지정된 트윗을 리트윗한 사용자의 ID 중, 최대 100개를 반환합니다."
 
 #: ../../api.rst:263 ../../api.rst:314 ../../api.rst:329 ../../api.rst:396
 #: ../../api.rst:479 ../../api.rst:490 ../../api.rst:619 ../../api.rst:650
@@ -544,7 +544,7 @@ msgid ""
 " If no user is specified it defaults to the authenticated user."
 msgstr ""
 "대상 사용자의 팔로잉 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다. "
-"``id`` 또는 ``screen_name`` 을 통해 대상을 지정하지 않으면, "
+"`` id``  또는 ``screen_name``  을 통해 대상을 지정하지 않으면, "
 "현재 인증된 사용자를 대상으로 합니다."
 
 #: ../../api.rst:316 ../../api.rst:331 ../../api.rst:503 ../../api.rst:652
@@ -567,7 +567,7 @@ msgid ""
 "is specified by id/screen name, it defaults to the authenticated user."
 msgstr ""
 "대상 사용자의 팔로워 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다. "
-"``id`` 또는 ``screen_name`` 을 통해 대상을 지정하지 않으면, "
+"`` id``  또는 ``screen_name``  을 통해 대상을 지정하지 않으면, "
 "현재 인증된 사용자를 대상으로 합니다."
 
 #: ../../api.rst:339
@@ -592,7 +592,7 @@ msgid ""
 "The order of user IDs or screen names may not match the order of users in"
 " the returned array."
 msgstr ""
-"사용자 ID 또는 ``screen_name`` 의 순서는 반환받은 배열의 사용자 순서와 일치하지 않을 수 있습니다."
+"사용자 ID 또는 ``screen_name``  의 순서는 반환받은 배열의 사용자 순서와 일치하지 않을 수 있습니다."
 
 #: ../../api.rst:348
 msgid ""
@@ -615,7 +615,7 @@ msgstr "사용자 ID 리스트이며, ID는 요청 1회당 최대 100개까지�
 
 #: ../../api.rst:355
 msgid "A list of screen names, up to 100 are allowed in a single request."
-msgstr "``screen_name`` 의 리스트이며, 이 역시 요청 1회당 최대 100개까지만 허용됨."
+msgstr "`` screen_name``  의 리스트이며, 이 역시 요청 1회당 최대 100개까지만 허용됨."
 
 #: ../../api.rst:358
 msgid ""
@@ -894,7 +894,7 @@ msgstr ""
 
 #: ../../api.rst:559
 msgid "The ID or screen name of the user to request favorites"
-msgstr "마음에 들어요 목록을 요청할 사용자의 ID나 ``screen_name``"
+msgstr "마음에 들어요 목록을 요청할 사용자의 ID나 ``screen_name`` "
 
 #: ../../api.rst:566
 msgid ""
@@ -1113,9 +1113,9 @@ msgid ""
 msgstr ""
 "얻고 싶은 검색 결과의 형식에 대해 명시하세요. 현재 기본값은 \"mixed\"이며, "
 "유효한 값은 다음과 같습니다: "
-"\"mixed\": 응답에 인기 결과와 실시간 결과 모두를 포함합니다."
-"\"recent\": 응답으로 가장 최근의 결과만을 반환합니다."
-"\"popular\": 응답으로 가장 인기 있는 결과만을 반환합니다."
+"* \"mixed\": 응답에 인기 결과와 실시간 결과 모두를 포함합니다."
+"* \"recent\": 응답으로 가장 최근의 결과만을 반환합니다."
+"* \"popular\": 응답으로 가장 인기 있는 결과만을 반환합니다."
 
 #: ../../api.rst:751
 msgid ""
@@ -1153,8 +1153,8 @@ msgid ""
 " through the API. If the limit of Tweets has occurred since the since_id,"
 " the since_id will be forced to the oldest ID available."
 msgstr ""
-"|since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다. ``since_id`` "
-"이후로 트윗 수 제한을 초과한다면, ``since_id``는 제한을 초과하지 않는 가장 오래된 ID로 강제 설정됩니다."
+"|since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다. ``since_id``  "
+"이후로 트윗 수 제한을 초과한다면, ``since_id`` 는 제한을 초과하지 않는 가장 오래된 ID로 강제 설정됩니다."
 
 #: ../../api.rst:768
 msgid ":class:`SearchResults` object"
@@ -1224,7 +1224,7 @@ msgstr "리스트의 ID."
 #: ../../api.rst:971 ../../api.rst:984 ../../api.rst:997 ../../api.rst:1008
 #: ../../api.rst:1022 ../../api.rst:1038
 msgid "|slug|"
-msgstr "리스트 지정에 리스트 ID(``list_id``) 대신 사용할 수 있습니다. 이를 사용할 경우, ``owner_id`` 또는 ``owner_screen_name`` 매개변수를 통해 목록 소유자도 지정해 주어야 함을 유의하세요."
+msgstr "리스트 지정에 리스트 ID(`` list_id`` ) 대신 사용할 수 있습니다. 이를 사용할 경우, ``owner_id``  또는 ``owner_screen_name``  매개변수를 통해 목록 소유자도 지정해 주어야 함을 유의하세요."
 
 #: ../../api.rst:800
 msgid ""
@@ -1245,13 +1245,13 @@ msgstr "리스트의 설명."
 #: ../../api.rst:815
 msgid ""
 "Returns all lists the authenticating or specified user subscribes to, "
-"including their own. The user is specified using the ``user_id`` or "
-"``screen_name`` parameters. If no user is given, the authenticating user "
+"including their own. The user is specified using the ``user_id``  or "
+"`` screen_name``  parameters. If no user is given, the authenticating user "
 "is used."
 msgstr ""
 "현재 인증된 사용자 또는 지정한 사용자가 구독 중인(이하 팔로우) "
 "리스트와, 소유하고 있는 리스트를 반환합니다. "
-"``user_id``나 ``screen_name`` 매개변수를 사용하여 사용자를 지정해야 하며, "
+"`` user_id`` 나 ``screen_name``  매개변수를 사용하여 사용자를 지정해야 하며, "
 "지정하지 않을 경우, 현재 인증된 사용자를 기준으로 합니다."
 
 #: ../../api.rst:820
@@ -1259,8 +1259,8 @@ msgid ""
 "A maximum of 100 results will be returned by this call. Subscribed lists "
 "are returned first, followed by owned lists. This means that if a user "
 "subscribes to 90 lists and owns 20 lists, this method returns 90 "
-"subscriptions and 10 owned lists. The ``reverse`` method returns owned "
-"lists first, so with ``reverse=true``, 20 owned lists and 80 "
+"subscriptions and 10 owned lists. The ``reverse``  method returns owned "
+"lists first, so with ``reverse=true`` , 20 owned lists and 80 "
 "subscriptions would be returned."
 msgstr ""
 "이 메소드는 최대 100개의 결과를 반환하며, "
@@ -1283,22 +1283,22 @@ msgstr ":class:`List` 객체의 리스트"
 
 #: ../../api.rst:838
 msgid ""
-"Returns the lists the specified user has been added to. If ``user_id`` or"
-" ``screen_name`` are not provided, the memberships for the authenticating"
+"Returns the lists the specified user has been added to. If ``user_id``  or"
+" ``screen_name``  are not provided, the memberships for the authenticating"
 " user are returned."
 msgstr ""
 "지정한 사용자가 추가되어 있는 리스트를 반환합니다. "
-"``user_id``나 ``screen_name``로 사용자를 지정하지 않았을 경우, "
+"`` user_id`` 나 ``screen_name`` 로 사용자를 지정하지 않았을 경우, "
 "현재 인증된 사용자가 추가되어 있는 리스트가 반환될 것입니다."
 
 #: ../../api.rst:844
 msgid ""
 "A boolean indicating whether to return just lists the authenticating user"
-" owns, and the user represented by ``user_id`` or ``screen_name`` is a "
+" owns, and the user represented by ``user_id``  or ``screen_name``  is a "
 "member of."
 msgstr ""
 "인증된 사용자가 소유하고 있는 리스트도 같이 반환할지 말지의 여부. "
-"``user_id`` 또는 ``screen_name`` 으로 어떤 사용자를 지정했을 경우, "
+"`` user_id``  또는 ``screen_name``  으로 어떤 사용자를 지정했을 경우, "
 "대상은 해당 사용자가 됩니다."
 
 #: ../../api.rst:855
@@ -1312,11 +1312,11 @@ msgstr ""
 #: ../../api.rst:869
 msgid ""
 "Returns a timeline of tweets authored by members of the specified list. "
-"Retweets are included by default. Use the ``include_rts=false`` parameter"
+"Retweets are included by default. Use the ``include_rts=false``  parameter"
 " to omit retweets."
 msgstr ""
 "지정한 리스트에 추가된 사람들이 작성한 트윗들로만 구성된 타임라인을 반환합니다."
-"기본적으로 리트윗이 포함되며, 이를 생략하려면 ``include_rts``를 False로 설정하세요."
+"기본적으로 리트윗이 포함되며, 이를 생략하려면 ``include_rts`` 를 False로 설정하세요."
 
 #: ../../api.rst:881
 msgid ""
@@ -1334,7 +1334,7 @@ msgid ""
 "authenticated user owns the specified list."
 msgstr ""
 "지정한 리스트를 반환합니다. "
-"비공개(``private``) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
+"비공개(`` private`` ) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
 
 #: ../../api.rst:903
 msgid ""
@@ -1357,14 +1357,14 @@ msgid ""
 "A comma separated list of screen names, up to 100 are allowed in a single"
 " request"
 msgstr ""
-"쉼표(,)로 구분되는 ``screen_name``들. 한 번에 최대 100개까지만 처리할 수 있습니다."
+"쉼표(,)로 구분되는 ``screen_name`` 들. 한 번에 최대 100개까지만 처리할 수 있습니다."
 
 #: ../../api.rst:925 ../../api.rst:958
 msgid ""
 "A comma separated list of user IDs, up to 100 are allowed in a single "
 "request"
 msgstr ""
-"쉼표(,)로 구분되는 ``user_id``들. 한 번에 최대 100개까지만 처리할 수 있습니다."
+"쉼표(,)로 구분되는 ``user_id`` 들. 한 번에 최대 100개까지만 처리할 수 있습니다."
 
 #: ../../api.rst:935
 msgid ""
@@ -1409,7 +1409,7 @@ msgid ""
 "will only be shown if the authenticated user owns the specified list."
 msgstr ""
 "지정한 리스트를 팔로우하는 사용자들을 반환합니다. "
-"비공개(``private``) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
+"비공개(`` private`` ) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
 
 #: ../../api.rst:1035
 msgid "Check if the specified user is a subscriber of the specified list."
@@ -1431,7 +1431,7 @@ msgid ""
 "information such as a canonical name and country the location belongs in."
 msgstr ""
 "트위터가 실시간 트렌드를 얻어오는 위치 정보를 반환합니다. "
-"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location``의 배열과, "
+"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location`` 의 배열과, "
 "정규 명칭 및 국가명 등의 인간이 읽을 수 있는 정보로 구성되어 있습니다."
 
 #: ../../api.rst:1061
@@ -1464,7 +1464,7 @@ msgid ""
 "The tweet_volume for the last 24 hours is also returned for many trends "
 "if this is available."
 msgstr ""
-"가능하다면, 최근 24시간 동안의 ``tweet_volume``도 반환될 것입니다."
+"가능하다면, 최근 24시간 동안의 ``tweet_volume`` 도 반환될 것입니다."
 
 #: ../../api.rst:1075
 msgid ""
@@ -1494,7 +1494,7 @@ msgid ""
 "and some other human-readable information such as a canonical name and "
 "country the location belongs in."
 msgstr ""
-"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location``의 배열과, "
+"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location`` 의 배열과, "
 "정규 명칭 및 국가명 등의 인간이 읽을 수 있는 정보로 구성되어 있습니다."
    
 #: ../../api.rst:1092
@@ -1508,7 +1508,7 @@ msgid ""
 "valid ranges for longitude is -180.0 to +180.0 (West is negative, East is"
 " positive) inclusive."
 msgstr ""
-"위도를 나타내는 매개변수이며, ``long`` 매개변수와 같이 사용해야만 합니다. "
+"위도를 나타내는 매개변수이며, ``long``  매개변수와 같이 사용해야만 합니다. "
 "해당 위치 기준, 이용 가능한 트렌드 위치가 "
 "거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 순서쌍으로 정렬됩니다. "
 "입력값의 유효 범위는 -180.0 ~ +180.0 (서쪽은 음수값, 동쪽이 양수값)입니다."
@@ -1520,7 +1520,7 @@ msgid ""
 "valid ranges for longitude is -180.0 to +180.0 (West is negative, East is"
 " positive) inclusive."
 msgstr ""
-"경도를 나타내는 매개변수이며, ``lat`` 매개변수와 같이 사용해야만 합니다. "
+"경도를 나타내는 매개변수이며, ``lat``  매개변수와 같이 사용해야만 합니다. "
 "해당 위치 기준, 이용 가능한 트렌드 위치가 "
 "거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 순서쌍으로 정렬됩니다. "
 "입력값의 유효 범위는 -180.0 ~ +180.0 (서쪽은 음수값, 동쪽이 양수값)입니다."
@@ -1559,12 +1559,12 @@ msgid ""
 "0m"
 msgstr ""
 "검색할 \"region\"을 지정하는 수 형태의 변수. "
-"기본적으로 미터(m) 단위로 인식되나, 접미어 ``ft``를 통해 피트(ft) 단위로 인식되게 할 수 있습니다."
+"기본적으로 미터(m) 단위로 인식되나, 접미어 ``ft`` 를 통해 피트(ft) 단위로 인식되게 할 수 있습니다."
 "기본값은 0(0m)입니다."
 
 #: ../../api.rst:1123
 msgid "Assumed to be `neighborhood' by default; can also be `city'."
-msgstr "기본값은 ``neighborhood``지만, ``city``도 될 수 있습니다."
+msgstr "기본값은 ``neighborhood`` 지만, ``city`` 도 될 수 있습니다."
 
 #: ../../api.rst:1125
 msgid ""
@@ -1608,18 +1608,18 @@ msgstr "이 메소드를 사용해 트위터에 이미지를 업로드할 수 �
 #: ../../api.rst:1154
 msgid ""
 "The filename of the image to upload. This will automatically be opened "
-"unless ``file`` is specified."
+"unless ``file``  is specified."
 msgstr ""
-"업로드할 이미지 파일의 이름. ``file``을 지정하지 않으면 자동으로 열리게 될 것입니다."
+"업로드할 이미지 파일의 이름. ``file`` 을 지정하지 않으면 자동으로 열리게 될 것입니다."
 
 #: ../../api.rst:1156
 msgid ""
-"A file object, which will be used instead of opening ``filename``. "
-"``filename`` is still required, for MIME type detection and to use as a "
+"A file object, which will be used instead of opening ``filename`` . "
+"`` filename``  is still required, for MIME type detection and to use as a "
 "form field in the POST data."
 msgstr ""
-"파일 객체로, ``filename`` 대신 사용합니다. "
-"단, MIME 타입 감지 및 POST 데이터 양식 필드로 사용해야 할 경우, ``filename``도 필요합니다."
+"파일 객체로, ``filename``  대신 사용합니다. "
+"단, MIME 타입 감지 및 POST 데이터 양식 필드로 사용해야 할 경우, ``filename`` 도 필요합니다."
 
 #: ../../api.rst:1159
 msgid ":class:`Media` object"
@@ -1632,7 +1632,7 @@ msgid ""
 "and GIFs. Call this endpoint to attach additional metadata such as image "
 "alt text."
 msgstr ""
-"이 메소드는 업로드된 ``media_id``에 대한 추가적인 정보를 제공하는 데 사용될 수 있습니다."
+"이 메소드는 업로드된 ``media_id`` 에 대한 추가적인 정보를 제공하는 데 사용될 수 있습니다."
 "이 기능은 현재 이미지 및 GIF에서만 지원되며, 이미지의 alt 텍스트와 같은 추가적인 메타데이터를 "
 "첨부하려면 이 메소드를 사용하세요."
 
@@ -1650,13 +1650,13 @@ msgstr ":mod:`tweepy.error` --- 예외"
 
 #: ../../api.rst:1176
 msgid ""
-"The exceptions are available in the ``tweepy`` module directly, which "
-"means ``tweepy.error`` itself does not need to be imported. For example, "
-"``tweepy.error.TweepError`` is available as ``tweepy.TweepError``."
+"The exceptions are available in the ``tweepy``  module directly, which "
+"means ``tweepy.error``  itself does not need to be imported. For example, "
+"`` tweepy.error.TweepError``  is available as ``tweepy.TweepError`` ."
 msgstr ""
-"예외는 ``tweepy`` 모듈에서 직접 이용 가능합니다. "
-"다시 말해, 예외 처리를 위해 ``tweepy.error`` 자체를 추가로 가져올(import) 필요가 없습니다. "
-"예를 들어, ``tweepy.error.TweepError``는 ``tweepy.TweepError``로도 이용 가능합니다."
+"예외는 ``tweepy``  모듈에서 직접 이용 가능합니다. "
+"다시 말해, 예외 처리를 위해 ``tweepy.error``  자체를 추가로 가져올(import) 필요가 없습니다. "
+"예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로도 이용 가능합니다."
 
 #: ../../api.rst:1183
 msgid "The main exception Tweepy uses. Is raised for a number of things."
@@ -1664,16 +1664,16 @@ msgstr "Tweepy가 사용하는 주요 예외. 발생 이유는 많습니다."
 
 #: ../../api.rst:1185
 msgid ""
-"When a ``TweepError`` is raised due to an error Twitter responded with, "
+"When a ``TweepError``  is raised due to an error Twitter responded with, "
 "the error code (`as described in the API documentation "
 "<https://developer.twitter.com/en/docs/basics/response-codes>`_) can be "
-"accessed at ``TweepError.response.text``. Note, however, that "
-"``TweepError``\\ s also may be raised with other things as message (for "
+"accessed at ``TweepError.response.text`` . Note, however, that "
+"`` TweepError`` \\ s also may be raised with other things as message (for "
 "example plain error reason strings)."
 msgstr ""
-"트위터로부터 반환된 오류로 인해 ``TweepError`` 가 발생하면, ``TweepError.response.text`` 에서 "
+"트위터로부터 반환된 오류로 인해 ``TweepError``  가 발생하면, ``TweepError.response.text``  에서 "
 "에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다. "
-"단, ``TweepError`` 는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오."
+"단, ``TweepError``  는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오."
 
 #: ../../api.rst:1195
 msgid ""
@@ -1685,10 +1685,10 @@ msgstr ""
 
 #: ../../api.rst:1198
 msgid ""
-"Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a "
-"``RateLimitError`` too."
+"Inherits from :exc:`TweepError`, so ``except TweepError``  will catch a "
+"`` RateLimitError``  too."
 msgstr ""
-":exc:`TweepError`를 상속받으므로, ``except TweepError``는 ``RateLimitError``도 처리할 것입니다."
+":exc:`TweepError`를 상속받으므로, ``except TweepError`` 는 ``RateLimitError`` 도 처리할 것입니다."
 
 #: ../../api.rst:1203
 msgid "Footnotes"
