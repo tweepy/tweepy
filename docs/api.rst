@@ -382,7 +382,7 @@ Direct Message Methods
 
    Returns a specific direct message.
 
-   :param id: |id|
+   :param id: The id of the Direct Message event that should be returned.
    :param full_text: |full_text|
    :rtype: :class:`DirectMessage` object
 
