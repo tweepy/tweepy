@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: index\n"
+"Language: pl\n"
+
+#: ../../index.rst:7
+msgid "Tweepy Documentation"
+msgstr "Dokumentacja Tweepy"
+
+#: ../../index.rst:9
+msgid "Contents:"
+msgstr "Zawartość:"
+
+#: ../../index.rst:25
+msgid "Indices and tables"
+msgstr "Indeksy i tabele"
+
+#: ../../index.rst:27
+msgid ":ref:`genindex`"
+msgstr ":ref:`genindex`"
+
+#: ../../index.rst:28
+msgid ":ref:`search`"
+msgstr ":ref:`search`"
+
