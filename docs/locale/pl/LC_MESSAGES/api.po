@@ -140,8 +140,8 @@ msgid "|page|"
 msgstr "Określa która stronę wyników otrzymać. Uwaga: istnieją limity stronnicowania."
 
 #: ../../api.rst
-msgid "Typ zwracany"
-msgstr ""
+msgid "Return type"
+msgstr "Typ zwracany"
 
 #: ../../api.rst:60 ../../api.rst:76 ../../api.rst:93 ../../api.rst:105
 #: ../../api.rst:115 ../../api.rst:274 ../../api.rst:561 ../../api.rst:885
@@ -1812,4 +1812,3 @@ msgstr ""
 
 #~ msgid "|id|"
 #~ msgstr "ID"
-
