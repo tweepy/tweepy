@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-14 17:03+0100\n"
+"PO-Revision-Date: 2020-01-18 22:43+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -31,7 +31,7 @@ msgstr "Pobierz kod źródłowy Tweepy do katalogu."
 
 #: ../../running_tests.rst:11
 msgid "Install from the downloaded source with the ``test`` extra, e.g. ``pip install .[test]``. Optionally install the ``dev`` extra as well, for ``tox`` and ``coverage``, e.g. ``pip install .[dev,test]``."
-msgstr "Zainstaluj z pobranego źródła z ``test`` extra, np. ``pip install .[test]`. Opcjonalnie możesz zainstalować też ``dev`` extra, dla ``tox`` i ``coverage`` np. ``pip install .[dev,test]``."
+msgstr "Zainstaluj z pobranego źródła z ``test`` extra, np. ``pip install .[test]``. Opcjonalnie możesz zainstalować też ``dev`` extra, dla ``tox`` i ``coverage`` np. ``pip install .[dev,test]``."
 
 #: ../../running_tests.rst:15
 msgid "Run ``python setup.py nosetests`` or simply ``nosetests`` in the source directory. With the ``dev`` extra, coverage will be shown, and ``tox`` can also be run to test different Python versions."
@@ -47,5 +47,5 @@ msgstr "``TWITTER_USERNAME`` ``CONSUMER_KEY`` ``CONSUMER_SECRET`` ``ACCESS_KEY``
 
 #: ../../running_tests.rst:28
 msgid "Simply set ``USE_REPLAY`` to ``False`` and provide the app and account credentials and username."
-msgstr "Po prostu ustaw ``USE_REPLAY`` jako ``FALS`` i dostarcz aplikacji dane logowania oraz nazwę użytkownika."
+msgstr "Po prostu ustaw ``USE_REPLAY`` jako ``FALSE`` i dostarcz aplikacji dane logowania oraz nazwę użytkownika."
 
