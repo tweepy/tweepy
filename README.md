@@ -19,7 +19,7 @@ GitHub and install it manually:
 
     git clone https://github.com/tweepy/tweepy.git
     cd tweepy
-    python setup.py install
+    pip install .
 
 You may also install Tweepy directly from the GitHub 
 repository using pip:
