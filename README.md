@@ -21,6 +21,12 @@ GitHub and install it manually:
     cd tweepy
     python setup.py install
 
+You may also install Tweepy directly from the GitHub 
+repository using pip:
+
+    pip install git+https://github.com/tweepy/tweepy.git
+
+
 Python 2.7, 3.5, 3.6, 3.7, & 3.8 are supported.
 
 Community

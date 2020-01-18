@@ -7,7 +7,4 @@ Install from PyPI::
 
 Install from source::
 
-    git clone git://github.com/tweepy/tweepy.git
-    cd tweepy
-    python setup.py install
-
+    pip install git+https://github.com/tweepy/tweepy.git
