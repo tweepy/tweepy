@@ -173,7 +173,7 @@ msgstr "Zwraca 20 ostatnich statusów zapostowanych przez zuwierzytelnionego uż
 #: ../../api.rst:590 ../../api.rst:601 ../../api.rst:630 ../../api.rst:640
 #: ../../api.rst:672
 msgid "|uid|"
-msgstr "|uid|"
+msgstr "Określa ID lub nazwę wyświetlaną użytkownika."
 
 #: ../../api.rst:87 ../../api.rst:293 ../../api.rst:312 ../../api.rst:327
 #: ../../api.rst:443 ../../api.rst:455 ../../api.rst:478 ../../api.rst:489
@@ -210,7 +210,7 @@ msgstr "Zwraca pojedyńczy status określony przez parametr ID."
 #: ../../api.rst:127 ../../api.rst:245 ../../api.rst:253 ../../api.rst:262
 #: ../../api.rst:272 ../../api.rst:281 ../../api.rst:569 ../../api.rst:578
 msgid "|sid|"
-msgstr "|sid|"
+msgstr "Numeryczne ID statusu."
 
 #: ../../api.rst:129
 msgid "A boolean indicating if any Tweets returned that have been retweeted by the authenticating user should include an additional current_user_retweet node, containing the ID of the source status for the retweet."
@@ -291,7 +291,7 @@ msgstr "Powiązuje karte reklamową z tweetem używając wartości card_uri z ja
 
 #: ../../api.rst:217
 msgid "*Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated user's status. Statuses that are duplicates or too long will be silently ignored."
-msgstr "*Deprecated*: używa :func:`API.media_upload`. Zaktualizuj status zuwierzytelnionego użytkownika. Statusy ktore są duplikatami lub są za długie będą dyskretnie ignorowane."
+msgstr "*Nierekomendowane*: używa :func:`API.media_upload`. Zaktualizuj status zuwierzytelnionego użytkownika. Statusy ktore są duplikatami lub są za długie będą dyskretnie ignorowane."
 
 #: ../../api.rst:221
 msgid "The filename of the image to upload. This will automatically be opened unless `file` is specified"
@@ -303,7 +303,7 @@ msgstr "ID istniejącego już statusu, dla ktorego aktualizacja jest odpowiedzi�
 
 #: ../../api.rst:226
 msgid "Whether to automatically include the @mentions in the status metadata."
-msgstr "Czy automatycznie zawierać @mentions w metadacie statusu."
+msgstr "Czy automatycznie zawierać @wzmianki w metadacie statusu."
 
 #: ../../api.rst:228
 msgid "The location's latitude that this tweet refers to."
@@ -802,11 +802,11 @@ msgstr "Zwraca tweety stworzone przed określoną datą. Data powinna być w for
 
 #: ../../api.rst:762
 msgid "|since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occurred since the since_id, the since_id will be forced to the oldest ID available."
-msgstr "|since_id| Liczba tweetów, które są dostępne w API jst limitowana. Jeżeli limit tweetów wydarzył się od since_id to since_id będzie najstarzym dostępnym ID."
+msgstr "Zwraca tylko statusy z ID większym (tzn. nowszym) niż określone ID. Liczba tweetów, które są dostępne w API jst limitowana. Jeżeli limit tweetów wydarzył się od since_id to since_id będzie najstarzym dostępnym ID."
 
 #: ../../api.rst:768
 msgid ":class:`SearchResults` object"
-msgstr "obiekt :class:`SearchResults"
+msgstr "obiekt :class:`SearchResults`"
 
 #: ../../api.rst:772
 msgid "List Methods"
@@ -822,7 +822,7 @@ msgstr "Nazwa nowej listy."
 
 #: ../../api.rst:780 ../../api.rst:806
 msgid "|list_mode|"
-msgstr "|list_mode|"
+msgstr "Czy lista jest publiczna czy prywatna. Wartości mogą być publiczne i prwyatne. Domyślnie listy są publiczne jeżeli nie jest ustawiony żaden tryb."
 
 #: ../../api.rst:781
 msgid "The description of the list you are creating."
@@ -1000,7 +1000,7 @@ msgstr "tweet_volume dla ostatnich 24 godzin jest także zwracane dla wielu tren
 
 #: ../../api.rst:1075
 msgid "The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID."
-msgstr "ID  Yahoo! Where On Earth lokacji, dla której mają być zwrócone informacje o trenach. Globalne informacje są dostępne używając 1 jako WOEID."
+msgstr "ID Yahoo! Where On Earth lokacji, dla której mają być zwrócone informacje o trenach. Globalne informacje są dostępne używając 1 jako WOEID."
 
 #: ../../api.rst:1078
 msgid "Setting this equal to hashtags will remove all hashtags from the trends list."
@@ -1137,4 +1137,3 @@ msgstr "https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/
 #: ../../api.rst:1205
 msgid "https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145"
 msgstr "https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145"
-
