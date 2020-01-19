@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../api.rst:6
 msgid "API Reference"
-msgstr "Odniesienie do API"
+msgstr "Odniesienia do API"
 
 #: ../../api.rst:8
 msgid "This page contains some basic documentation for the Tweepy module."
@@ -634,7 +634,7 @@ msgstr "Maximum 160 znaków."
 
 #: ../../api.rst:552
 msgid "Favorite Methods"
-msgstr "Ulubione metody."
+msgstr "Ulubione metody"
 
 #: ../../api.rst:556
 msgid "Returns the favorite statuses for the authenticating user or user specified by the ID parameter."

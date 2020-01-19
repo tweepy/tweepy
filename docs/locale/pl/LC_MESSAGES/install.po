@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-18 22:43+0100\n"
+"POT-Creation-Date: 2020-01-19 01:06+0100\n"
+"PO-Revision-Date: 2020-01-19 01:06+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -22,10 +22,15 @@ msgid "Installation"
 msgstr "Instalacja"
 
 #: ../../install.rst:4
-msgid "Install from PyPI::"
-msgstr "Instalacja z PyPl::"
+msgid "The easiest way to install the latest version from PyPI is by using pip::"
+msgstr "Użycie pip jest najprostszym sposobem na instalację najnowszej wersji z PyPI::"
 
 #: ../../install.rst:8
-msgid "Install from source::"
-msgstr "Instalacja ze źródła::"
+msgid ""
+"You can also use Git to clone the repository from GitHub to install the "
+"latest development version::"
+msgstr "Możesz także użyć Git do zklonowania repozytorium z GithHub i zainstalować najnowszą wersję deweloperską::"
 
+#: ../../install.rst:15
+msgid "Alternatively, install directly from the GitHub repository::"
+msgstr "Możesz także zainstalować prosto z repozytorium GitHub::"
