@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-18 22:43+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -75,19 +75,19 @@ msgstr "który kod statusu HTTP zostanie użyty do powtórzenia"
 
 #: ../../api.rst:34
 msgid "The maximum amount of time to wait for a response from Twitter"
-msgstr "maksymalna ilość czasu oczekiwania na odpowiedź od Twitter"
+msgstr "Maksymalna ilość czasu oczekiwania na odpowiedź od Twitter"
 
 #: ../../api.rst:36
 msgid "The object to use for parsing the response from Twitter"
-msgstr "obiekt, który zostanie użyty do analizy odpowiedzi od Twitter"
+msgstr "Obiekt, który zostanie użyty do analizy odpowiedzi od Twitter"
 
 #: ../../api.rst:37
 msgid "Whether or not to use GZIP compression for requests"
-msgstr "czy do żądań ma zostać użyta kompresja GZIP"
+msgstr "Czy do żądań ma zostać użyta kompresja GZIP"
 
 #: ../../api.rst:38
 msgid "Whether or not to automatically wait for rate limits to replenish"
-msgstr "czy automatycznie oczekiwać na wyczerpanie limitów wskaźników"
+msgstr "Czy automatycznie oczekiwać na wyczerpanie limitów wskaźników"
 
 #: ../../api.rst:40
 msgid "Whether or not to print a notification when Tweepy is waiting for rate limits to replenish"
@@ -95,7 +95,7 @@ msgstr "czy wyświetlać notyfikacje, gdy Tweepy oczekuje na wyczerpanie limitó
 
 #: ../../api.rst:43
 msgid "The full url to an HTTPS proxy to use for connecting to Twitter."
-msgstr "pełen URL proxy HTTPS, które jest użyte do połączenia z Twitter"
+msgstr "Pełen URL proxy HTTPS, które jest użyte do połączenia z Twitter."
 
 #: ../../api.rst:48
 msgid "Timeline methods"
@@ -108,23 +108,23 @@ msgstr "Zwraca 20 ostatnich statusów w tym retweety zapostowane przez zuwierzyt
 #: ../../api.rst:56 ../../api.rst:89 ../../api.rst:101 ../../api.rst:112
 #: ../../api.rst:877
 msgid "|since_id|"
-msgstr "zwraca tylko statusy z ID większym (tzn. nowszym) niż określone ID"
+msgstr "Zwraca tylko statusy z ID większym (tzn. nowszym) niż określone ID."
 
 #: ../../api.rst:57 ../../api.rst:90 ../../api.rst:102 ../../api.rst:113
 #: ../../api.rst:766 ../../api.rst:878
 msgid "|max_id|"
-msgstr "zwraca tylko statusy z ID mniejszym (tzn. starszym) lub równym określonemu ID"
+msgstr "Zwraca tylko statusy z ID mniejszym (tzn. starszym) lub równym określonemu ID."
 
 #: ../../api.rst:58 ../../api.rst:91 ../../api.rst:103 ../../api.rst:114
 #: ../../api.rst:315 ../../api.rst:330 ../../api.rst:395 ../../api.rst:757
 #: ../../api.rst:848 ../../api.rst:861 ../../api.rst:879 ../../api.rst:1026
 msgid "|count|"
-msgstr "liczba wyników do pobrania na stronę"
+msgstr "Liczba wyników do pobrania na stronę."
 
 #: ../../api.rst:59 ../../api.rst:92 ../../api.rst:104 ../../api.rst:374
 #: ../../api.rst:560 ../../api.rst:611
 msgid "|page|"
-msgstr "określa którą stronę wyników otrzymać. Uwaga: istnieją limity stronnicowania"
+msgstr "Określa którą stronę wyników otrzymać. Uwaga: istnieją limity stronnicowania."
 
 #: ../../api.rst
 msgid "Return type"
@@ -137,20 +137,20 @@ msgstr "lista obiektów :class:`Status`"
 
 #: ../../api.rst:66
 msgid "Returns full Tweet objects for up to 100 tweets per request, specified by the ``id_`` parameter."
-msgstr "Zwraca pełne obiekty Tweet, do 100 tweetow na jedno żądanie. Sprecyzowane w parametrze ``id_``"
+msgstr "Zwraca pełne obiekty Tweet, do 100 tweetow na jedno żądanie. Sprecyzowane w parametrze ``id_``."
 
 #: ../../api.rst:69
 msgid "A list of Tweet IDs to lookup, up to 100"
-msgstr "lista ID tweetów do wyszukania, maksymalnie 100"
+msgstr "Lista ID tweetów do wyszukania, maksymalnie 100"
 
 #: ../../api.rst:70 ../../api.rst:133 ../../api.rst:357 ../../api.rst:502
 #: ../../api.rst:651 ../../api.rst:767 ../../api.rst:880 ../../api.rst:1027
 msgid "|include_entities|"
-msgstr "ustawione jako false powoduje, że węzeł jednostek nie będzie zawarty. Domyślnie False"
+msgstr "Ustawione jako false powoduje, że węzeł jednostek nie będzie zawarty. Domyślnie False."
 
 #: ../../api.rst:71 ../../api.rst:128 ../../api.rst:199
 msgid "|trim_user|"
-msgstr "boolean wskazujacy czy dostarczyć ID użytkowników zamiast kompletnych obiektów user. Domyślnie False"
+msgstr "Boolean wskazujacy czy dostarczyć ID użytkowników zamiast kompletnych obiektów user. Domyślnie False."
 
 #: ../../api.rst:72
 msgid "A boolean indicating whether or not to include tweets that cannot be shown. Defaults to False."
@@ -158,11 +158,11 @@ msgstr "Boolean wskazujący czy zawarte będą tweety, które nie mogą być pok
 
 #: ../../api.rst:74 ../../api.rst:134
 msgid "|include_ext_alt_text|"
-msgstr "jeżeli alt tekst został dodany do którejś z dołączonych jednostek to ten parametr zwróci wartość ext_alt_text w kluczu top-level dla tej jednostki mediów"
+msgstr "Jeżeli alt tekst został dodany do którejś z dołączonych jednostek to ten parametr zwróci wartość ext_alt_text w kluczu top-level dla tej jednostki mediów."
 
 #: ../../api.rst:75 ../../api.rst:135
 msgid "|include_card_uri|"
-msgstr "boolean wkazujący czy otrzymany tweet powinien zawierać atrybut card_uri gdy do tweeta dołączona jest karta ads oraz gdy karta jest dołączona używając wartośći card_uri"
+msgstr "Boolean wkazujący czy otrzymany tweet powinien zawierać atrybut card_uri gdy do tweeta dołączona jest karta ads oraz gdy karta jest dołączona używając wartośći card_uri."
 
 #: ../../api.rst:82
 msgid "Returns the 20 most recent statuses posted from the authenticating user or the user specified. It's also possible to request another user's timeline via the id parameter."
@@ -181,7 +181,7 @@ msgstr "Określa ID lub nazwę wyświetlaną użytkownika."
 #: ../../api.rst:674 ../../api.rst:828 ../../api.rst:843 ../../api.rst:859
 #: ../../api.rst:909 ../../api.rst:941 ../../api.rst:986 ../../api.rst:1040
 msgid "|user_id|"
-msgstr "określa ID użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika"
+msgstr "Określa ID użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika."
 
 #: ../../api.rst:88 ../../api.rst:294 ../../api.rst:313 ../../api.rst:328
 #: ../../api.rst:442 ../../api.rst:454 ../../api.rst:477 ../../api.rst:488
@@ -189,7 +189,7 @@ msgstr "określa ID użytkownika. Przydatne do rozróżnienia czy nazwa wyświet
 #: ../../api.rst:673 ../../api.rst:827 ../../api.rst:842 ../../api.rst:858
 #: ../../api.rst:908 ../../api.rst:940 ../../api.rst:985 ../../api.rst:1039
 msgid "|screen_name|"
-msgstr "określa nazwę wyświetlaną użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika"
+msgstr "Określa nazwę wyświetlaną użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika."
 
 #: ../../api.rst:98
 msgid "Returns the 20 most recent tweets of the authenticated user that have been retweeted by others."
@@ -342,7 +342,7 @@ msgstr "Zwraca do maksymalnie 100 ID użytkowników, należących do użytkownik
 #: ../../api.rst:660 ../../api.rst:847 ../../api.rst:860 ../../api.rst:974
 #: ../../api.rst:1025
 msgid "|cursor|"
-msgstr "dzieli wyniki na strony. Ustaw wartość jako -1 by rozpocząć stronnicowanie. Dostarcz wartości tak jak są zwracane w tekście opowiedzi. Atrybuty next_cursor i previous_cursor używane są do przechoznenia na przód i w tył."
+msgstr "Dzieli wyniki na strony. Ustaw wartość jako -1 by rozpocząć stronnicowanie. Dostarcz wartości tak jak są zwracane w tekście opowiedzi. Atrybuty next_cursor i previous_cursor używane są do przechoznenia na przód i w tył."
 
 #: ../../api.rst:264
 msgid "Have ids returned as strings instead."
@@ -385,11 +385,11 @@ msgstr "Zwraca znajomych użytkownika po 100 na raz, posortowanych według chron
 #: ../../api.rst:316 ../../api.rst:331 ../../api.rst:503 ../../api.rst:652
 #: ../../api.rst:1028
 msgid "|skip_status|"
-msgstr "boolean wskazujący czy będą zawarte w zwróconych obiektach user. Domyślnie False"
+msgstr "Boolean wskazujący czy będą zawarte w zwróconych obiektach user. Domyślnie False."
 
 #: ../../api.rst:317 ../../api.rst:332
 msgid "|include_user_entities|"
-msgstr "gdy ustawione jako False to jednostki węzła obiektu user nie będą zawarte. Domyślnie True"
+msgstr "Gdy ustawione jako False to jednostki węzła obiektu user nie będą zawarte. Domyślnie True."
 
 #: ../../api.rst:318 ../../api.rst:333 ../../api.rst:361 ../../api.rst:375
 #: ../../api.rst:612 ../../api.rst:653 ../../api.rst:975 ../../api.rst:1029
@@ -458,11 +458,11 @@ msgstr "Zwraca wybraną wiadomość bezpośrednią."
 
 #: ../../api.rst:385
 msgid "|id|"
-msgstr "lista ID tweetów do wyszukania, maksymalnie 100"
+msgstr "Lista ID tweetów do wyszukania, maksymalnie 100."
 
 #: ../../api.rst:386
 msgid "|full_text|"
-msgstr "boolean wkazujący czy powinna być zwrócona całość tekstu wiadomości. Ustawione jako False powoduje, że wiadomość zostanie obcięta do 140 znaków. Domyślnie False"
+msgstr "Boolean wkazujący czy powinna być zwrócona całość tekstu wiadomości. Ustawione jako False powoduje, że wiadomość zostanie obcięta do 140 znaków. Domyślnie False."
 
 #: ../../api.rst:387 ../../api.rst:419
 msgid ":class:`DirectMessage` object"
@@ -478,7 +478,7 @@ msgstr "lista obiektów :class:`DirectMessage`"
 
 #: ../../api.rst:403
 msgid "Sends a new direct message to the specified user from the authenticating user."
-msgstr "Wysyła nową wiadomość bezpośrednią od zuwierzytelniongo użytkownika do wybranego użytkownika"
+msgstr "Wysyła nową wiadomość bezpośrednią od zuwierzytelniongo użytkownika do wybranego użytkownika."
 
 #: ../../api.rst:406
 msgid "The ID of the user who should receive the direct message."
@@ -498,7 +498,7 @@ msgstr "Typ Szybkiej Odpowiedzi do pokazania użytkownikowi:"
 
 #: ../../api.rst:412
 msgid "options - Array of Options objects (20 max)."
-msgstr "options - szyk obiektów Opcji (maks 20)."
+msgstr "options - Szyk obiektów Opcji (maks 20)."
 
 #: ../../api.rst:413
 msgid "text_input - Text Input object."
@@ -594,7 +594,7 @@ msgstr "Zwraca aktualne limity wartości dla metod należących do wybranej rodz
 
 #: ../../api.rst:515
 msgid "A comma-separated list of resource families you want to know the current rate limit disposition for."
-msgstr "Odseparowana przecinkami lista rodziny zasobów. Powinieneś znać aktualny limit wartośći dyspozycji dla:"
+msgstr "Odseparowana przecinkami lista rodziny zasobów. Powinieneś znać aktualny limit wartośći dyspozycji dla."
 
 #: ../../api.rst:517 ../../api.rst:1056 ../../api.rst:1080 ../../api.rst:1102
 msgid ":class:`JSON` object"
@@ -836,35 +836,35 @@ msgstr "obiekt :class:`List`"
 
 #: ../../api.rst:787
 msgid "Deletes the specified list. The authenticated user must own the list to be able to destroy it."
-msgstr "Usuwa określoną liste. Zuwierzytelniony użytkownik musi być właścicielem listy by ją usunąć."
+msgstr "Usuwa określoną listę. Zuwierzytelniony użytkownik musi być właścicielem listy by ją usunąć."
 
 #: ../../api.rst:790 ../../api.rst:808 ../../api.rst:876 ../../api.rst:896
 #: ../../api.rst:911 ../../api.rst:928 ../../api.rst:943 ../../api.rst:961
 #: ../../api.rst:973 ../../api.rst:988 ../../api.rst:999 ../../api.rst:1010
 #: ../../api.rst:1024 ../../api.rst:1042
 msgid "|owner_screen_name|"
-msgstr "nazwa wyświetlana użytkownika, który jest właścicielem listy żądanej przez żeton"
+msgstr "Nazwa wyświetlana użytkownika, który jest właścicielem listy żądanej przez żeton."
 
 #: ../../api.rst:791 ../../api.rst:809 ../../api.rst:875 ../../api.rst:895
 #: ../../api.rst:910 ../../api.rst:927 ../../api.rst:942 ../../api.rst:960
 #: ../../api.rst:972 ../../api.rst:987 ../../api.rst:998 ../../api.rst:1009
 #: ../../api.rst:1023 ../../api.rst:1041
 msgid "|owner_id|"
-msgstr "ID użytkownika, który jest właścicielem listy żadanej przez żeton"
+msgstr "ID użytkownika, który jest właścicielem listy żadanej przez żeton."
 
 #: ../../api.rst:792 ../../api.rst:803 ../../api.rst:873 ../../api.rst:893
 #: ../../api.rst:906 ../../api.rst:921 ../../api.rst:938 ../../api.rst:954
 #: ../../api.rst:970 ../../api.rst:983 ../../api.rst:996 ../../api.rst:1007
 #: ../../api.rst:1021 ../../api.rst:1037
 msgid "|list_id|"
-msgstr "numeryczna lista ID"
+msgstr "Numeryczna lista ID."
 
 #: ../../api.rst:793 ../../api.rst:804 ../../api.rst:874 ../../api.rst:894
 #: ../../api.rst:907 ../../api.rst:922 ../../api.rst:939 ../../api.rst:955
 #: ../../api.rst:971 ../../api.rst:984 ../../api.rst:997 ../../api.rst:1008
 #: ../../api.rst:1022 ../../api.rst:1038
 msgid "|slug|"
-msgstr "możesz zidentyfikować listę używając jej żetona zamiast numerycznego ID. Jeżeli się na to zdecydujesz to będziesz musiał określić właściciela listy używając parametrów owner_id lub owner_screen_name"
+msgstr "Możesz zidentyfikować listę używając jej żetona zamiast numerycznego ID. Jeżeli się na to zdecydujesz to będziesz musiał określić właściciela listy używając parametrów owner_id lub owner_screen_name."
 
 #: ../../api.rst:800
 msgid "Updates the specified list. The authenticated user must own the list to be able to update it."
@@ -1016,7 +1016,7 @@ msgstr "Ta odpowiedź jest szykiem \"locations\" który szyfruje WOEID lokacji o
 
 #: ../../api.rst:1092
 msgid "A WOEID is a Yahoo! Where On Earth ID."
-msgstr "WOEID jest to Yahoo! Where On Earth ID"
+msgstr "WOEID jest to Yahoo! Where On Earth ID."
 
 #: ../../api.rst:1094
 msgid "If provided with a long parameter the available trend locations will be sorted by distance, nearest to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is negative, East is positive) inclusive."
@@ -1124,7 +1124,7 @@ msgstr "Jest podniesione gdy metoda API nie działa ze względu na osiągnięcie
 
 #: ../../api.rst:1198
 msgid "Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a ``RateLimitError`` too."
-msgstr "Dziedziczy od :exc:`TweepError` więc ``except TweepError`` też złapie ``RateLimitError``"
+msgstr "Dziedziczy od :exc:`TweepError` więc ``except TweepError`` też złapie ``RateLimitError``."
 
 #: ../../api.rst:1203
 msgid "Footnotes"

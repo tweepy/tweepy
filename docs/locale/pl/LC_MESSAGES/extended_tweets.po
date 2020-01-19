@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-18 22:43+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -83,7 +83,7 @@ msgstr "Przykłady"
 
 #: ../../extended_tweets.rst:91
 msgid "Given an existing ``tweepy.API`` object and ``id`` for a Tweet, the following can be used to print the full text of the Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::"
-msgstr "Posiadając istniejący obiekt ``tweepy.API`` oraz ``id`` dla tweeta, można wyświetlić cały tekst tweeeta lub jeżeli jest to retweet, cały tekst retweetowanego tweeta."
+msgstr "Posiadając istniejący obiekt ``tweepy.API`` oraz ``id`` dla tweeta, można wyświetlić cały tekst tweeeta lub jeżeli jest to retweet, cały tekst retweetowanego tweeta::"
 
 #: ../../extended_tweets.rst:101
 msgid "If ``status`` is a Retweet, ``status.full_text`` could be truncated."
@@ -91,7 +91,7 @@ msgstr "Jeżeli ``status`` to retweet to ``status.full_text`` może być obcięt
 
 #: ../../extended_tweets.rst:103
 msgid "This Status event handler for a ``StreamListener`` prints the full text of the Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::"
-msgstr "Ten odbiornik zdarzeń dla ``StreamListener`` wyświetla pełny tekst tweeta, lub jeżeli jest to retweet, pełny tekst retweetowanego tweeta."
+msgstr "Ten odbiornik zdarzeń dla ``StreamListener`` wyświetla pełny tekst tweeta, lub jeżeli jest to retweet, pełny tekst retweetowanego tweeta::"
 
 #: ../../extended_tweets.rst:118
 msgid "If ``status`` is a Retweet, it will not have an ``extended_tweet`` attribute, and ``status.text`` could be truncated."

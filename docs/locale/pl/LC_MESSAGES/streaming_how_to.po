@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-18 22:43+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -63,7 +63,7 @@ msgstr "Używając tej klasy stwórz obiekt **Stream**"
 
 #: ../../streaming_how_to.rst:47
 msgid "Connect to the Twitter API using the **Stream**."
-msgstr "Połącz się z Twitter API używając **Stream**"
+msgstr "Połącz się z Twitter API używając **Stream**."
 
 #: ../../streaming_how_to.rst:51
 msgid "Step 1: Creating a **StreamListener**"
@@ -99,7 +99,7 @@ msgstr "W tym przykładzie pokazane zostanie jak użyć **filter** do przesyłan
 
 #: ../../streaming_how_to.rst:88
 msgid "An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'."
-msgstr "Prostym sposobem na znalezienie pojedyńczego ID jest użycie jednej z wielu stron internetowych do konwersji: szukaj 'jakie jest moje twitter ID'"
+msgstr "Prostym sposobem na znalezienie pojedyńczego ID jest użycie jednej z wielu stron internetowych do konwersji: szukaj 'jakie jest moje twitter ID'."
 
 #: ../../streaming_how_to.rst:91
 msgid "A Few More Pointers"

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-18 22:43+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -27,7 +27,7 @@ msgstr "Wprowadzenie"
 
 #: ../../auth_tutorial.rst:11
 msgid "Tweepy supports both OAuth 1a (application-user) and OAuth 2 (application-only) authentication. Authentication is handled by the tweepy.AuthHandler class."
-msgstr "Tweepy wpspiera obydwa sposoby uwierzytelniania - OAuth 1a (aplikacja-użytkownik) oraz OAuth 2 (tylko-aplikacja). Uwierzytelnianie jest obsługiwanie poprzez klasę tweepy.AuthHandler ."
+msgstr "Tweepy wpspiera obydwa sposoby uwierzytelniania - OAuth 1a (aplikacja-użytkownik) oraz OAuth 2 (tylko-aplikacja). Uwierzytelnianie jest obsługiwanie poprzez klasę tweepy.AuthHandler."
 
 #: ../../auth_tutorial.rst:16
 msgid "OAuth 1a Authentication"
@@ -55,11 +55,11 @@ msgstr "W przeciwieństwie do podstawowego uwierzytelniania musisz wykonać \"ta
 
 #: ../../auth_tutorial.rst:43
 msgid "Get a request token from twitter"
-msgstr "Zdobądź token żądania od Twittera."
+msgstr "Zdobądź token żądania od Twittera"
 
 #: ../../auth_tutorial.rst:45
 msgid "Redirect user to twitter.com to authorize our application"
-msgstr "Przekieruj użytkownika do twitter.com by uwierzytelnić swoją rejestrację."
+msgstr "Przekieruj użytkownika do twitter.com by uwierzytelnić swoją rejestrację"
 
 #: ../../auth_tutorial.rst:47
 msgid "If using a callback, twitter will redirect the user to us. Otherwise the user must manually supply us with the verifier code."
@@ -79,7 +79,7 @@ msgstr "To wywołanie żąda token od twittera i zwraca tobie zuwierzytelniony U
 
 #: ../../auth_tutorial.rst:71
 msgid "So now we can redirect the user to the URL returned to us earlier from the get_authorization_url() method."
-msgstr "Następnie możesz przekierować użytkownika do URL, który został ci zwrócony z metody get_authorization_url() ."
+msgstr "Następnie możesz przekierować użytkownika do URL, który został ci zwrócony z metody get_authorization_url()."
 
 #: ../../auth_tutorial.rst:74
 msgid "If this is a desktop application (or any application not using callbacks) we must query the user for the \"verifier code\" that twitter will supply them after they authorize us. Inside a web application this verifier value will be supplied in the callback request from twitter as a GET query parameter in the URL."
@@ -99,7 +99,7 @@ msgstr "Możesz wrzucić je do bazy danych, pliku lub gdziekolwiek składujesz d
 
 #: ../../auth_tutorial.rst:122
 msgid "So now that we have our OAuthHandler equipped with an access token, we are ready for business::"
-msgstr "Twój OAuthHandler jest teraz wyposażony w token dostępu - możesz zacząć pracę."
+msgstr "Twój OAuthHandler jest teraz wyposażony w token dostępu - możesz zacząć pracę::"
 
 #: ../../auth_tutorial.rst:129
 msgid "OAuth 2 Authentication"
