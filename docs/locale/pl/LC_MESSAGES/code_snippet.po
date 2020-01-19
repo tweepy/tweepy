@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-14 17:03+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -27,7 +27,7 @@ msgstr "Wprowadzenie"
 
 #: ../../code_snippet.rst:11
 msgid "Here are some code snippets to help you out with using Tweepy. Feel free to contribute your own snippets or improve the ones here!"
-msgstr "Tutaj znajdują się snippety, które mogą pomóc tobie w użytkowaniu Tweepy. Możesz także dodać swoje własne snippety lub usprawnić te, które się tutaj znajdują."
+msgstr "Tutaj znajdują się snippety, które mogą pomóc tobie w użytkowaniu Tweepy. Możesz także dodać swoje własne snippety lub usprawnić te, które się tutaj znajdują!"
 
 #: ../../code_snippet.rst:15
 msgid "OAuth"
@@ -47,7 +47,7 @@ msgstr "Ten snippet będzie obserwował każdego kto obserwuje uwierzytelnionego
 
 #: ../../code_snippet.rst:56
 msgid "Handling the rate limit using cursors"
-msgstr "Obsługiwanie limitu wartości używając kursorów."
+msgstr "Obsługiwanie limitu wartości używając kursorów"
 
 #: ../../code_snippet.rst:58
 msgid "Since cursors raise ``RateLimitError``\\ s in their ``next()`` method, handling them can be done by wrapping the cursor in an iterator."

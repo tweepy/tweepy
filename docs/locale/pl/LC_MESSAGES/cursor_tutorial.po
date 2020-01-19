@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-14 14:12+0100\n"
-"PO-Revision-Date: 2020-01-14 17:03+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
 "Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../cursor_tutorial.rst:5
 msgid "Cursor Tutorial"
-msgstr "Poradnik na temat kursorów."
+msgstr "Poradnik na temat kursorów"
 
 #: ../../cursor_tutorial.rst:7
 msgid "This tutorial describes details on pagination with Cursor objects."
@@ -63,7 +63,7 @@ msgstr "Jako że przekazujesz kursorowi obiekt wywoływany, nie możesz przekaza
 
 #: ../../cursor_tutorial.rst:65
 msgid "Now Cursor will pass the parameter into the method for us whenever it makes a request."
-msgstr "Kursor przekaże parametry do metody gdy tylko kursor stworzy żądanie."
+msgstr "Kursor przekaże parametry do metody gdy tylko stworzy żądanie."
 
 #: ../../cursor_tutorial.rst:69
 msgid "Items or Pages"
