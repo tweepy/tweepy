@@ -1377,11 +1377,11 @@ class API(object):
             f.seek(0)  # Reset to beginning of file
             fp = f
 
-        # image must be gif, jpeg, or png
+        # image must be gif, jpeg, png, webp
         file_type = imghdr.what(filename)
         if file_type is None:
             raise TweepError('Could not determine file type')
-        if file_type not in ['gif', 'jpeg', 'png']:
+        if file_type not in ['gif', 'jpeg', 'png', 'webp']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
