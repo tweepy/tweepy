@@ -219,7 +219,14 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 4883,
+
+        file_type = imghdr.what(filename)
+        if file_type == 'gif':
+            max_size = 15360
+        else:
+            max_size = 4883
+
+        headers, post_data = API._pack_image(filename, max_size,
                                              form_field='media', f=f)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
