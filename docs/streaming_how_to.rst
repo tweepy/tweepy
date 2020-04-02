@@ -15,6 +15,9 @@ by offering a first walk through.  Some features of Tweepy streaming are
 not covered here. See streaming.py in the Tweepy source code. 
 
 API authorization is required to access Twitter streams. 
+
+**Important**: You must authenticate using OAuth 1a if you want to use the streaming API.
+
 Follow the :ref:`auth_tutorial` if you need help with authentication. 
 
 Summary
