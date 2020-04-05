@@ -12,6 +12,7 @@ import re
 import requests
 import ssl
 import sys
+import urllib
 from threading import Thread
 from time import sleep
 
@@ -265,7 +266,8 @@ class Stream(object):
                 auth = self.auth.apply_auth()
                 resp = self.session.request('POST',
                                             url,
-                                            data=self.body,
+                                            data=urllib.parse.urlencode(
+                                                self.body, quote_via=urllib.parse.quote),,
                                             timeout=self.timeout,
                                             stream=True,
                                             auth=auth,
