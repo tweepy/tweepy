@@ -267,7 +267,7 @@ class Stream(object):
                 resp = self.session.request('POST',
                                             url,
                                             data=urllib.parse.urlencode(
-                                                self.body, quote_via=urllib.parse.quote),,
+                                                self.body, quote_via=urllib.parse.quote),
                                             timeout=self.timeout,
                                             stream=True,
                                             auth=auth,
