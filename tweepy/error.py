@@ -18,12 +18,9 @@ class TweepError(Exception):
         return self.reason
 
 
-def is_rate_limit_error_message(message):
-    """Check if the supplied error message belongs to a rate limit error."""
-    return isinstance(message, list) \
-        and len(message) > 0 \
-        and 'code' in message[0] \
-        and message[0]['code'] == 88
+def is_rate_limit_error_message(api_error_code):
+    """Check if the supplied error code belongs to a rate limit error."""
+    return api_error_code == 88
 
 
 class RateLimitError(TweepError):

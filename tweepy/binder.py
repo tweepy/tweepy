@@ -228,8 +228,8 @@ def bind_api(**config):
                     error_msg = "Twitter error response: status code = %s" % resp.status_code
                     api_error_code = None
 
-                if is_rate_limit_error_message(error_msg):
-                    raise RateLimitError(error_msg, resp)
+                if is_rate_limit_error_message(api_error_code):
+                    raise RateLimitError(error_msg, resp, api_code=api_error_code)
                 else:
                     raise TweepError(error_msg, resp, api_code=api_error_code)
 
