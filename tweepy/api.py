@@ -222,7 +222,7 @@ class API(object):
 
         file_type = imghdr.what(filename)
         if file_type == 'gif':
-            max_size = 15360
+            max_size = 14648
         else:
             max_size = 4883
 
