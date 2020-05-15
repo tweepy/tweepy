@@ -427,7 +427,7 @@ class API(object):
             require_auth=True
         )
 
-    def send_direct_message(self, recipient_id, text, quick_reply_type=None,
+    def send_direct_message(self, recipient_id, text, quick_reply_type=None, quick_reply_options = None,
                             attachment_type=None, attachment_media_id=None):
         """
         Send a direct message to the specified user from the authenticating
@@ -443,7 +443,7 @@ class API(object):
         }
         message_data = json_payload['event']['message_create']['message_data']
         if quick_reply_type is not None:
-            message_data['quick_reply'] = {'type': quick_reply_type}
+            message_data['quick_reply'] = {'type': quick_reply_type, 'options': quick_reply_options}
         if attachment_type is not None and attachment_media_id is not None:
             message_data['attachment'] = {'type': attachment_type}
             message_data['attachment']['media'] = {'id': attachment_media_id}
@@ -460,7 +460,7 @@ class API(object):
             path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
-            allowed_param=['recipient_id', 'text', 'quick_reply_type',
+            allowed_param=['recipient_id', 'text', 'quick_reply_type', 'quick_reply_options',
                            'attachment_type', 'attachment_media_id'],
             require_auth=True
         )
