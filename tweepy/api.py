@@ -591,13 +591,13 @@ class API(object):
     @property
     def followers_ids(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
-            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'count'
+            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
         """
         return bind_api(
             api=self,
             path='/followers/ids.json',
             payload_type='ids',
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count']
+            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count']
         )
 
     @property

@@ -480,7 +480,7 @@ Friendship Methods
    :rtype: list of Integers
 
 
-.. method:: API.followers_ids(id/screen_name/user_id)
+.. method:: API.followers_ids(id/screen_name/user_id, [cursor], [stringify_ids])
 
    Returns an array containing the IDs of users following the specified user.
 
@@ -488,6 +488,7 @@ Friendship Methods
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :param cursor: |cursor|
+   :param stringify_ids: Set to true to have ids returned as strings instead. Defaults to false.
    :rtype: list of Integers
 
 
