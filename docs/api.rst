@@ -468,6 +468,18 @@ Friendship Methods
    :rtype: :class:`Friendship` object
 
 
+.. method:: API.lookup_friendships([user_ids], [screen_names])
+
+   Returns the relationships of the authenticated user to the list of up to
+   100 screen_names or user_ids provided.
+
+   :param user_ids: A list of user IDs, up to 100 are allowed in a single
+                    request.
+   :param screen_names: A list of screen names, up to 100 are allowed in a
+                        single request.
+   :rtype: :class:`Relationship` object
+
+
 .. method:: API.friends_ids(id/screen_name/user_id, [cursor])
 
    Returns an array containing the IDs of users being followed by the specified
