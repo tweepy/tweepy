@@ -399,6 +399,10 @@ class Relationship(Model):
             if k == 'connections':
                 setattr(result, 'is_following', 'following' in v)
                 setattr(result, 'is_followed_by', 'followed_by' in v)
+                setattr(result, 'is_muted', 'muting' in v)
+                setattr(result, 'is_blocked', 'blocking' in v)
+                setattr(result, 'is_following_requested', 'following_requested' in v)
+                setattr(result, 'no_relationship', 'none' in v)
             else:
                 setattr(result, k, v)
         return result
