@@ -104,7 +104,7 @@ Receiving Events
 
 The GET handler of the Webhook receives all the events as JSON. Refer to the
 Twitter Developer documentation for the current schemas as they are subject to
-change. The rate at which events are sent to the Webhook cannot be determined.
-The best strategy is to hand off every event, perhaps by writing to a queue,
-and returning quickly.
+change. The rate at which events are sent to the Webhook cannot be determined
+the best strategy is to hand off every event, perhaps by writing to a queue,
+and return quickly.
 
