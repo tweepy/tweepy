@@ -468,7 +468,7 @@ Friendship Methods
    :rtype: :class:`Friendship` object
 
 
-.. method:: API.lookup_friendships([user_ids], [screen_names])
+.. method:: API.lookup_friendships(user_ids/screen_names)
 
    Returns the relationships of the authenticated user to the list of up to
    100 screen_names or user_ids provided.
