@@ -231,9 +231,9 @@ class DirectMessage(Model):
     @classmethod
     def parse(cls, api, json):
         dm = cls(api)
-        setattr(dm, '_json', json)
         if "event" in json:
             json = json["event"]
+        setattr(dm, '_json', json)
         for k, v in json.items():
             setattr(dm, k, v)
         return dm
