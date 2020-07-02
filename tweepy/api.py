@@ -227,7 +227,8 @@ class API(object):
             max_size = 4883
 
         headers, post_data = API._pack_image(filename, max_size,
-                                             form_field='media', f=f)
+                                             form_field='media', f=f,
+                                             file_type=file_type)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
@@ -1363,7 +1364,7 @@ class API(object):
     """ Internal use only """
 
     @staticmethod
-    def _pack_image(filename, max_size, form_field='image', f=None):
+    def _pack_image(filename, max_size, form_field='image', f=None, file_type=None):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
         if f is None:
@@ -1385,7 +1386,8 @@ class API(object):
             fp = f
 
         # image must be gif, jpeg, png, webp
-        file_type = imghdr.what(filename)
+        if not file_type:
+            file_type = imghdr.what(filename)
         if file_type is None:
             raise TweepError('Could not determine file type')
         if file_type not in ['gif', 'jpeg', 'png', 'webp']:
