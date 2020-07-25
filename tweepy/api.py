@@ -7,7 +7,7 @@ import os
 
 import six
 
-from tweepy.binder import bind_api
+from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -1287,6 +1287,36 @@ class API(object):
                            'max_id', 'until', 'result_type', 'count',
                            'include_entities']
         )
+    
+    @pagination(mode='next')
+    def search_30_day(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/30day/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
+    
+    @pagination(mode='next')
+    def search_full_archive(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
 
     @property
     def reverse_geocode(self):

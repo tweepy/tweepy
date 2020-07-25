@@ -50,7 +50,9 @@ class JSONParser(Parser):
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
         if return_cursors and isinstance(json, dict):
-            if 'next_cursor' in json:
+            if 'next' in json:
+                return json, json['next']
+            elif 'next_cursor' in json:
                 if 'previous_cursor' in json:
                     cursors = json['previous_cursor'], json['next_cursor']
                     return json, cursors
