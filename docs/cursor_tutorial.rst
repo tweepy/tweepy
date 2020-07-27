@@ -92,3 +92,15 @@ items() or pages() methods the limit you want to impose.
    # Only iterate through the first 3 pages
    for page in tweepy.Cursor(api.user_timeline).pages(3):
        process_page(page)
+      
+Rate Limits
+===========
+
+An important note about cursors is that the cursor by default will download data using the default page size. This means that if your code is frequently rate-limited, you may be able to increase the amount of data downloaded before being limited by setting the `count` attribute::
+
+   # Iterate through all of the authenticated user's friends
+      for friend in tweepy.Cursor(api.friends, count=200).items():
+      # Process the friend here
+      process_friend(friend)
+
+This will download the user's friends in pages of 200 instead of the default 20, allowing a maximum of 3000 users to be downloaded instead of 300 per 15 minute window.
