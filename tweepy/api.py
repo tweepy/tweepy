@@ -1421,7 +1421,9 @@ class API(object):
             file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        if file_type not in ['gif', 'jpeg', 'png', 'webp', 'image/gif', 'image/jpeg', 'image/png']:
+        if file_type in ['gif', 'jpeg', 'png', 'webp']:
+            file_type = 'image/' + file_type
+        elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):
