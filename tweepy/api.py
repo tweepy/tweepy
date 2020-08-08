@@ -221,7 +221,7 @@ class API(object):
         """
         f = kwargs.pop('file', None)
 
-        file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
+        file_type = imghdr.what(filename, f) or mimetypes.guess_type(filename)[0]
         if file_type == 'gif':
             max_size = 14649
         else:
