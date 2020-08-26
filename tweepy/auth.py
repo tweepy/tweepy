@@ -182,3 +182,13 @@ class AppAuthHandler(AuthHandler):
 
     def apply_auth(self):
         return OAuth2Bearer(self._bearer_token)
+
+    
+class BearerAuthHandler(AuthHandler):
+    """Bearer token authentication handler"""
+
+    def __init__(self, bearer_token):
+        self._bearer_token = bearer_token
+
+    def apply_auth(self):
+        return OAuth2Bearer(self._bearer_token)
