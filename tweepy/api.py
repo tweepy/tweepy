@@ -14,13 +14,20 @@ elif six.PY3:
 
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser, Parser
+from tweepy.parsers import ModelParser, Parser, RawParser
 from tweepy.utils import list_to_csv
 
 IMAGE_TYPES = ['gif', 'jpeg', 'png', 'webp']
 CHUNKED_TYPES = IMAGE_TYPES + ['video/mp4']
 
-MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less then 5 MB
+# Default chunk size, in kibibytes, 1 MB is given as example chunk size in Twitter API docs
+# The max is given in the docs as 5 MB.
+# minimum chunk size is 16 KiB, which keeps the maximum number of chunks under 999
+DEFAULT_CHUNKSIZE = 1024
+MAX_CHUNKSIZE = 5 * 1024
+MIN_CHUNKSIZE = 16
+
+MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
 MAX_UPLOAD_SIZE_CHUNKED = 14649  # chunked uploads must be less than 15 MB
 
 
@@ -231,26 +238,27 @@ class API(object):
         """
         f = kwargs.pop('file', None)
         file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
-        size = os.path.getsize(filename)
+        size_bytes = os.path.getsize(filename)
 
-        if file_type == 'gif' or file_type in CHUNKED_TYPES:
-            max_size = MAX_UPLOAD_SIZE_CHUNKED
-        else:
-            max_size = MAX_UPLOAD_SIZE_STANDARD
+        if file_type in IMAGE_TYPES or file_type in CHUNKED_TYPES:
+            if size_bytes > MAX_UPLOAD_SIZE_CHUNKED * 1024:
+                raise TweepError('Media files must be smaller than {} kb'.format(MAX_UPLOAD_SIZE_CHUNKED))
 
-        if file_type in IMAGE_TYPES and (size * 1024) < max_size:
-            return self.image_upload(filename, max_size, f=f, *args, **kwargs)
+            if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
+                return self.image_upload(filename, MAX_UPLOAD_SIZE_STANDARD * 1024, file_type=file_type, f=f, *args, **kwargs)
 
-        elif file_type in CHUNKED_TYPES:
-            return self.upload_chunked(filename, f=f, *args, **kwargs)
+            return self.upload_chunked(filename, f=f, file_type=file_type, *args, **kwargs)
+
+        raise TweepError('unsupported media type: %s' % file_type)
 
     def image_upload(self, filename, max_size, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
         headers, post_data = API._pack_image(filename, max_size,
-                                             form_field='media', f=f,
-                                             file_type=file_type)
+                                             form_field='media', f=kwargs.get('f'),
+                                             file_type=kwargs.get('file_type')
+                                             )
         kwargs.update({'headers': headers, 'post_data': post_data})
         return bind_api(
             api=self,
@@ -267,13 +275,21 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
+        file_type = kwargs.pop('file_type', None)
 
         # Media category is dependant on whether media is attached to a tweet
         # or to a direct message. Assume tweet by default.
         is_direct_message = kwargs.pop('is_direct_message', False)
 
         # Initialize upload (Twitter cannot handle videos > 15 MB)
-        headers, post_data, fp = API._chunk_media('init', filename, self.max_size_chunked, form_field='media', f=f, is_direct_message=is_direct_message)
+        headers, post_data, fp = API._chunk_media(
+            'init',
+            filename,
+            file_type=file_type,
+            form_field='media',
+            f=f,
+            is_direct_message=is_direct_message
+        )
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         # Send the INIT request
@@ -289,17 +305,24 @@ class API(object):
 
         # If a media ID has been generated, we can send the file
         if media_info.media_id:
-            # default chunk size is 1MB, can be overridden with keyword argument.
-            # minimum chunk size is 16K, which keeps the maximum number of chunks under 999
-            chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
-            chunk_size = max(chunk_size, 16 * 2014)
+            chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
+            chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
 
             fsize = os.path.getsize(filename)
-            nloops = int(fsize / chunk_size) + (1 if fsize % chunk_size > 0 else 0)
+            nloops = int(fsize / chunk_size / 1024.0) + (1 if fsize % chunk_size > 0 else 0)
 
             for i in range(nloops):
-                headers, post_data, fp = API._chunk_media('append', filename, self.max_size_chunked, chunk_size=chunk_size, f=fp, media_id=media_info.media_id, segment_index=i, is_direct_message=is_direct_message)
-                kwargs.update({ 'headers': headers, 'post_data': post_data, 'parser': RawParser() })
+                headers, post_data, fp = API._chunk_media(
+                    'append',
+                    filename,
+                    file_type=file_type,
+                    chunk_size=chunk_size,
+                    f=fp,
+                    media_id=media_info.media_id,
+                    segment_index=i,
+                    is_direct_message=is_direct_message
+                )
+                kwargs.update({'headers': headers, 'post_data': post_data, 'parser': RawParser()})
                 # The APPEND command returns an empty response body
                 bind_api(
                     api=self,
@@ -312,7 +335,14 @@ class API(object):
                 )(*args, **kwargs)
 
             # When all chunks have been sent, we can finalize.
-            headers, post_data, fp = API._chunk_media('finalize', filename, self.max_size_chunked, media_id=media_info.media_id, is_direct_message=is_direct_message)
+            fp.close()
+            headers, post_data, fp = API._chunk_media(
+                'finalize',
+                filename,
+                file_type=file_type,
+                media_id=media_info.media_id,
+                is_direct_message=is_direct_message
+            )
             kwargs = {'headers': headers, 'post_data': post_data}
 
             # The FINALIZE command returns media information
@@ -912,7 +942,7 @@ class API(object):
             allowed_param=['cursor'],
             require_auth=True
         )
-    
+
     @property
     def mutes(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
@@ -925,7 +955,7 @@ class API(object):
             allowed_param=['cursor', 'include_entities', 'skip_status'],
             required_auth=True
         )
-           
+
     @property
     def create_mute(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
@@ -1371,7 +1401,7 @@ class API(object):
                            'max_id', 'until', 'result_type', 'count',
                            'include_entities']
         )
-    
+
     @pagination(mode='next')
     def search_30_day(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
@@ -1386,7 +1416,7 @@ class API(object):
                            'next'],
             require_auth=True
         )(*args, **kwargs)
-    
+
     @pagination(mode='next')
     def search_full_archive(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
@@ -1504,7 +1534,7 @@ class API(object):
             file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        if file_type in ['gif', 'jpeg', 'png', 'webp']:
+        if file_type in IMAGE_TYPES:
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
@@ -1534,46 +1564,29 @@ class API(object):
 
         return headers, body
 
-
     @staticmethod
-    def _chunk_media(command, filename, max_size, form_field="media", chunk_size=4096, f=None, media_id=None, segment_index=0, is_direct_message=False):
-        fp = None
-        if command == 'init':
-            if f is None:
-                file_size = os.path.getsize(filename)
-                try:
-                    if file_size > (max_size * 1024):
-                        raise TweepError('File is too big, must be less than %skb.' % max_size)
-                except os.error as e:
-                    raise TweepError('Unable to access file: %s' % e.strerror)
-
-                # build the mulitpart-formdata body
-                fp = open(filename, 'rb')
-            else:
-                f.seek(0, 2)  # Seek to end of file
-                file_size = f.tell()
-                if file_size > (max_size * 1024):
-                    raise TweepError('File is too big, must be less than %skb.' % max_size)
-                f.seek(0)  # Reset to beginning of file
-                fp = f
-        elif command != 'finalize':
-            if f is not None:
-                fp = f
-            else:
-                raise TweepError('File input for APPEND is mandatory.')
-
-        # video must be mp4
-        file_type, _ = mimetypes.guess_type(filename)
-
-        if file_type is None:
-            raise TweepError('Could not determine file type')
-
-        if file_type not in CHUNKED_TYPES:
-            raise TweepError('Invalid file type for video: %s' % file_type)
-
+    def _chunk_media(command, filename, file_type,
+                     form_field="media", chunk_size=None, f=None,
+                     media_id=None, segment_index=0, is_direct_message=False
+                     ):
+        """
+        Break media file into chunks of 'chunk_size' KiB, and send an upload INIT request,
+        followed by a sequence of APPEND requests, and finally a FINALIZE request.
+        """
         BOUNDARY = b'Tw3ePy'
         body = list()
+
         if command == 'init':
+            fp = f or open(filename, 'rb')
+
+            fp.seek(0, 2)  # Seek to end of file
+            file_size = fp.tell()
+
+            if file_size > (MAX_UPLOAD_SIZE_CHUNKED * 1024):
+                raise TweepError('File is too big, must be less than %s KiB.' % MAX_UPLOAD_SIZE_CHUNKED)
+
+            fp.seek(0)  # Reset to beginning of file
+
             query = {
                 'command': 'INIT',
                 'media_type': file_type,
@@ -1584,9 +1597,16 @@ class API(object):
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             }
+
         elif command == 'append':
+            if f is not None:
+                fp = f
+            else:
+                raise TweepError('File input for APPEND is mandatory.')
+
             if media_id is None:
                 raise TweepError('Media ID is required for APPEND command.')
+
             body.append(b'--' + BOUNDARY)
             body.append('Content-Disposition: form-data; name="command"'.encode('utf-8'))
             body.append(b'')
@@ -1603,12 +1623,14 @@ class API(object):
             body.append('Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(form_field, os.path.basename(filename)).encode('utf-8'))
             body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
             body.append(b'')
-            body.append(fp.read(chunk_size))
+            body.append(fp.read(chunk_size * 1024))
             body.append(b'--' + BOUNDARY + b'--')
             headers = {
                 'Content-Type': 'multipart/form-data; boundary=Tw3ePy'
             }
+
         elif command == 'finalize':
+            fp = f
             if media_id is None:
                 raise TweepError('Media ID is required for FINALIZE command.')
             body.append(
@@ -1620,6 +1642,9 @@ class API(object):
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             }
+
+        else:
+            raise TweepError('Unknown command for chunked upload.')
 
         body = b'\r\n'.join(body)
         # build headers
@@ -1637,10 +1662,11 @@ class API(object):
         else:
             prefix = 'tweet'
 
-        if file_type in IMAGE_MIMETYPES:
+        if file_type in IMAGE_TYPES:
             if file_type.endswith('gif'):
                 return prefix + '_gif'
-            else:
-                return prefix + '_image'
-        elif file_type.endswith('mp4'):
+
+            return prefix + '_image'
+
+        if file_type.endswith('mp4'):
             return prefix + '_video'
