@@ -1277,6 +1277,15 @@ Media methods
    :param alt_text: The alt text to add to the image.
 
 
+.. method:: API.get_media_upload_status(media_id)
+
+   This endpoints sends a STATUS command that will check on the progress of
+   a chunked media upload. If the upload has succeeded, it's safe to create
+   a tweet with this ``media_id``\ .
+
+   :param media_id: The ID of the media to check.
+
+
 :mod:`tweepy.error` --- Exceptions
 ==================================
 

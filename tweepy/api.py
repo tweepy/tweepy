@@ -400,6 +400,20 @@ class API(object):
             require_auth=True
         )(*args, **kwargs)
 
+    def get_media_upload_status(self, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
+            :allowed_param: 'media_ids'
+        """
+        kwargs['command'] = 'STATUS'
+        return bind_api(
+            api=self,
+            path='/media/upload.json',
+            payload_type='media',
+            allowed_param=['media_id'],
+            upload_api=True,
+            require_auth=True
+        )(*args, **kwargs)
+
     @property
     def destroy_status(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
