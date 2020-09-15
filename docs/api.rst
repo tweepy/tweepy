@@ -282,6 +282,29 @@ Status methods
    :rtype: :class:`Status` object
 
 
+.. method:: API.get_oembed(id/url, [maxwidth], [hide_media], \
+      [omit_script], [align], [related], [lang])
+
+   Requests the Twitter oembed HTML for a given tweet.
+
+   :param id: |sid|
+   :param url: The URL of the Tweet to be embedded
+   :param maxwidth: The maximum width of a rendered Tweet in whole pixels.
+   :param hide_media: When set to `true`, links in a Tweet are not expanded to
+                      photo, video, or link previews.
+   :param omit_script: When set to `true`, the `<script>` responsible for
+                       loading `widgets.js` will not be returned. Your webpages
+                       should include their own reference to `widgets.js`
+   :param align: Specifies whether the embedded Tweet should be floated left,
+                 right, or center in the page relative to the parent element.
+   :param related: A comma-separated list of Twitter usernames related to your
+                   content.
+   :param lang: Request returned HTML and a rendered Tweet in the specified
+                Twitter language supported by embedded Tweets.
+
+   :rtype: `JSON` object
+
+
 User methods
 ------------
 
