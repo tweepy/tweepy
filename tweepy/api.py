@@ -1035,6 +1035,21 @@ class API(object):
         )
 
     @property
+    def lists_ownerships(self):
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+            :allowed_param: 'screen_name', 'user_id',
+                            'cursor', 'count'
+        """
+        return bind_api(
+            api=self,
+            path='/lists/ownerships.json',
+            payload_type='list', payload_list=True,
+            allowed_param=['screen_name', 'user_id',
+                           'cursor', 'count'],
+            require_auth=True
+        )
+
+    @property
     def lists_subscriptions(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
             :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
