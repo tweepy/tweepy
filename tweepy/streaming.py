@@ -41,7 +41,7 @@ class StreamListener(object):
         """
         pass
 
-    def on_data(self, raw_data):
+    async def on_data(self, raw_data):
         """Called when raw data is received from connection.
 
         Override this method if you wish to manually handle
@@ -156,6 +156,7 @@ class StreamListener(object):
         """Called when a user withheld content notice arrives"""
         return
 
+
 class ReadBuffer(object):
     """Buffer data from the response in a smarter way than httplib/requests can.
 
@@ -228,7 +229,7 @@ class Stream(object):
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        self.chunk_size = options.get("chunk_size", 512)
 
         self.verify = options.get("verify", True)
 
@@ -238,7 +239,7 @@ class Stream(object):
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
-        
+
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
         self.host = options.get('host', 'stream.twitter.com')
@@ -248,7 +249,7 @@ class Stream(object):
         self.session.headers = self.headers
         self.session.params = None
 
-    def _run(self):
+    async def _run(self):
         # Authenticate
         url = "https://%s%s" % (self.host, self.url)
 
@@ -270,7 +271,7 @@ class Stream(object):
                                             stream=True,
                                             auth=auth,
                                             verify=self.verify,
-                                            proxies = self.proxies)
+                                            proxies=self.proxies)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
@@ -286,7 +287,7 @@ class Stream(object):
                     self.retry_time = self.retry_time_start
                     self.snooze_time = self.snooze_time_step
                     self.listener.on_connect()
-                    self._read_loop(resp)
+                    await self._read_loop(resp)
             except (Timeout, ssl.SSLError) as exc:
                 # This is still necessary, as a SSLError can actually be
                 # thrown when using Requests
@@ -319,11 +320,11 @@ class Stream(object):
             self.listener.on_exception(exc_info[1])
             six.reraise(*exc_info)
 
-    def _data(self, data):
-        if self.listener.on_data(data) is False:
+    async def _data(self, data):
+        if await self.listener.on_data(data) is False:
             self.running = False
 
-    def _read_loop(self, resp):
+    async def _read_loop(self, resp):
         charset = resp.headers.get('content-type', default='')
         enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
         if enc_search is not None:
@@ -337,7 +338,7 @@ class Stream(object):
             length = 0
             while not resp.raw.closed:
                 line = buf.read_line()
-                stripped_line = line.strip() if line else line # line is sometimes None so we need to check here
+                stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
                 if not stripped_line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif stripped_line.isdigit():
@@ -348,7 +349,7 @@ class Stream(object):
 
             next_status_obj = buf.read_len(length)
             if self.running and next_status_obj:
-                self._data(next_status_obj)
+                await self._data(next_status_obj)
 
             # # Note: keep-alive newlines might be inserted before each length value.
             # # read until we get a digit...
@@ -375,18 +376,17 @@ class Stream(object):
             #     if self.running:
             #         self._data(next_status_obj.decode('utf-8'))
 
-
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, is_async):
+    async def _start(self, is_async):
         self.running = True
         if is_async:
             self._thread = Thread(target=self._run)
             self._thread.daemon = self.daemon
             self._thread.start()
         else:
-            self._run()
+            await self._run()
 
     def on_closed(self, resp):
         """ Called when the response has been closed by Twitter """
@@ -418,7 +418,6 @@ class Stream(object):
             self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
             self.session.params['track'] = u','.join(track).encode(encoding)
-
         self._start(is_async)
 
     def firehose(self, count=None, is_async=False):
@@ -448,8 +447,8 @@ class Stream(object):
             self.session.params['stall_warnings'] = 'true'
         self._start(is_async)
 
-    def filter(self, follow=None, track=None, is_async=False, locations=None,
-               stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
+    async def filter(self, follow=None, track=None, is_async=False, locations=None,
+                     stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
         self.body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
@@ -471,7 +470,7 @@ class Stream(object):
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self._start(is_async)
+        await self._start(is_async)
 
     def sitestream(self, follow, stall_warnings=False,
                    with_='user', replies=False, is_async=False):
