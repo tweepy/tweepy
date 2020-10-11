@@ -201,7 +201,7 @@ class User(Model):
                                            **kwargs)
 
     def lists_ownerships(self, *args, **kwargs):
-        return self._api.lists_memberships(user_id=self.id,
+        return self._api.lists_ownerships(user_id=self.id,
                                            *args,
                                            **kwargs)
 
