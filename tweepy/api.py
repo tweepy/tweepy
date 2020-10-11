@@ -1173,14 +1173,14 @@ class API(object):
     def list_members(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
             :allowed_param: 'owner_screen_name', 'slug', 'list_id', 'owner_id',
-                            'cursor'
+                            'cursor', 'count'
         """
         return bind_api(
             api=self,
             path='/lists/members.json',
             payload_type='user', payload_list=True,
             allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id',
-                           'cursor']
+                           'cursor', 'count']
         )
 
     @property
