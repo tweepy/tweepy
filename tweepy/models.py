@@ -61,14 +61,18 @@ class Model(object):
         """
         results = ResultSet()
 
-        # Handle map parameter for statuses/lookup
-        if isinstance(json_list, dict) and 'id' in json_list:
-            for _id, obj in json_list['id'].items():
-                if obj:
-                    results.append(cls.parse(api, obj))
-                else:
-                    results.append(cls.parse(api, {'id': int(_id)}))
-            return results
+        if isinstance(json_list, dict):
+            # Handle map parameter for statuses/lookup
+            if 'id' in json_list:
+                for _id, obj in json_list['id'].items():
+                    if obj:
+                        results.append(cls.parse(api, obj))
+                    else:
+                        results.append(cls.parse(api, {'id': int(_id)}))
+                return results
+            # Handle premium search
+            if 'results' in json_list:
+                json_list = json_list['results']
 
         for obj in json_list:
             if obj:

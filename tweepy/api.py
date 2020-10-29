@@ -3,11 +3,12 @@
 # See LICENSE for details.
 
 import imghdr
+import mimetypes
 import os
 
 import six
 
-from tweepy.binder import bind_api
+from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -220,7 +221,7 @@ class API(object):
         """
         f = kwargs.pop('file', None)
 
-        file_type = imghdr.what(filename)
+        file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
         if file_type == 'gif':
             max_size = 14649
         else:
@@ -1287,6 +1288,36 @@ class API(object):
                            'max_id', 'until', 'result_type', 'count',
                            'include_entities']
         )
+    
+    @pagination(mode='next')
+    def search_30_day(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/30day/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
+    
+    @pagination(mode='next')
+    def search_full_archive(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
 
     @property
     def reverse_geocode(self):
@@ -1387,10 +1418,12 @@ class API(object):
 
         # image must be gif, jpeg, png, webp
         if not file_type:
-            file_type = imghdr.what(filename)
+            file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        if file_type not in ['gif', 'jpeg', 'png', 'webp']:
+        if file_type in ['gif', 'jpeg', 'png', 'webp']:
+            file_type = 'image/' + file_type
+        elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
         if isinstance(filename, six.text_type):

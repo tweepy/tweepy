@@ -282,6 +282,29 @@ Status methods
    :rtype: :class:`Status` object
 
 
+.. method:: API.get_oembed(id/url, [maxwidth], [hide_media], \
+      [omit_script], [align], [related], [lang])
+
+   Requests the Twitter oembed HTML for a given tweet.
+
+   :param id: |sid|
+   :param url: The URL of the Tweet to be embedded
+   :param maxwidth: The maximum width of a rendered Tweet in whole pixels.
+   :param hide_media: When set to `true`, links in a Tweet are not expanded to
+                      photo, video, or link previews.
+   :param omit_script: When set to `true`, the `<script>` responsible for
+                       loading `widgets.js` will not be returned. Your webpages
+                       should include their own reference to `widgets.js`
+   :param align: Specifies whether the embedded Tweet should be floated left,
+                 right, or center in the page relative to the parent element.
+   :param related: A comma-separated list of Twitter usernames related to your
+                   content.
+   :param lang: Request returned HTML and a rendered Tweet in the specified
+                Twitter language supported by embedded Tweets.
+
+   :rtype: `JSON` object
+
+
 User methods
 ------------
 
@@ -305,7 +328,7 @@ User methods
 .. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
                         [include_user_entities])
 
-   Returns an user's friends ordered in which they were added 100 at a time.
+   Returns a user's friends ordered in which they were added 100 at a time.
    If no user is specified it defaults to the authenticated user.
 
    :param id: |uid|
@@ -725,8 +748,8 @@ Saved Searches Methods
    :rtype: :class:`SavedSearch` object
 
 
-Help Methods
-------------
+Search Methods
+--------------
 
 .. method:: API.search(q, [geocode], [lang], [locale], [result_type], \
                        [count], [until], [since_id], [max_id], \
@@ -778,6 +801,101 @@ Help Methods
    :param max_id: |max_id|
    :param include_entities: |include_entities|
    :rtype: :class:`SearchResults` object
+
+
+.. method:: API.search_30_day(environment_name, query, [tag], [fromDate], \
+                              [toDate], [maxResults], [next])
+
+   Premium search that provides Tweets posted within the last 30 days.
+
+   :param environment_name: The (case-sensitive) label associated with your
+      search developer environment, as displayed at
+      https://developer.twitter.com/en/account/environments.
+   :param query: The equivalent of one premium rule/filter, with up to 1,024
+      characters (256 with Sandbox dev environments).
+      This parameter should include ALL portions of the rule/filter, including
+      all operators, and portions of the rule should not be separated into
+      other parameters of the query.
+   :param tag: Tags can be used to segregate rules and their matching data into
+      different logical groups. If a rule tag is provided, the rule tag is
+      included in the 'matching_rules' attribute.
+      It is recommended to assign rule-specific UUIDs to rule tags and maintain
+      desired mappings on the client side.
+   :param fromDate: The oldest UTC timestamp (from most recent 30 days) from
+      which the Tweets will be provided. Timestamp is in minute granularity and
+      is inclusive (i.e. 12:00 includes the 00 minute).
+      Specified: Using only the fromDate with no toDate parameter will deliver
+      results for the query going back in time from now( ) until the fromDate.
+      Not Specified: If a fromDate is not specified, the API will deliver all
+      of the results for 30 days prior to now( ) or the toDate (if specified).
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the most recent 30 days, starting at the time of the
+      request, going backwards.
+   :param toDate: The latest, most recent UTC timestamp to which the Tweets
+      will be provided. Timestamp is in minute granularity and is not inclusive
+      (i.e. 11:59 does not include the 59th minute of the hour).
+      Specified: Using only the toDate with no fromDate parameter will deliver
+      the most recent 30 days of data prior to the toDate.
+      Not Specified: If a toDate is not specified, the API will deliver all of
+      the results from now( ) for the query going back in time to the fromDate.
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the entire 30-day index, starting at the time of the
+      request, going backwards.
+   :param maxResults: The maximum number of search results to be returned by a
+      request. A number between 10 and the system limit (currently 500, 100 for
+      Sandbox environments). By default, a request response will return 100
+      results.
+   :param next: This parameter is used to get the next 'page' of results. The
+      value used with the parameter is pulled directly from the response
+      provided by the API, and should not be modified.
+
+
+.. method:: API.search_full_archive(environment_name, query, [tag], \
+                                    [fromDate], [toDate], [maxResults], [next])
+
+   Premium search that provides Tweets from as early as 2006, starting with the
+   first Tweet posted in March 2006.
+
+   :param environment_name: The (case-sensitive) label associated with your
+      search developer environment, as displayed at
+      https://developer.twitter.com/en/account/environments.
+   :param query: The equivalent of one premium rule/filter, with up to 1,024
+      characters (256 with Sandbox dev environments).
+      This parameter should include ALL portions of the rule/filter, including
+      all operators, and portions of the rule should not be separated into
+      other parameters of the query.
+   :param tag: Tags can be used to segregate rules and their matching data into
+      different logical groups. If a rule tag is provided, the rule tag is
+      included in the 'matching_rules' attribute.
+      It is recommended to assign rule-specific UUIDs to rule tags and maintain
+      desired mappings on the client side.
+   :param fromDate: The oldest UTC timestamp (from most recent 30 days) from
+      which the Tweets will be provided. Timestamp is in minute granularity and
+      is inclusive (i.e. 12:00 includes the 00 minute).
+      Specified: Using only the fromDate with no toDate parameter will deliver
+      results for the query going back in time from now( ) until the fromDate.
+      Not Specified: If a fromDate is not specified, the API will deliver all
+      of the results for 30 days prior to now( ) or the toDate (if specified).
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the most recent 30 days, starting at the time of the
+      request, going backwards.
+   :param toDate: The latest, most recent UTC timestamp to which the Tweets
+      will be provided. Timestamp is in minute granularity and is not inclusive
+      (i.e. 11:59 does not include the 59th minute of the hour).
+      Specified: Using only the toDate with no fromDate parameter will deliver
+      the most recent 30 days of data prior to the toDate.
+      Not Specified: If a toDate is not specified, the API will deliver all of
+      the results from now( ) for the query going back in time to the fromDate.
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the entire 30-day index, starting at the time of the
+      request, going backwards.
+   :param maxResults: The maximum number of search results to be returned by a
+      request. A number between 10 and the system limit (currently 500, 100 for
+      Sandbox environments). By default, a request response will return 100
+      results.
+   :param next: This parameter is used to get the next 'page' of results. The
+      value used with the parameter is pulled directly from the response
+      provided by the API, and should not be modified.
 
 
 List Methods

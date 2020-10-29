@@ -1,5 +1,46 @@
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
+Version 3.9.0
+-------------
+### New Features / Improvements
+- Add `API.create_media_metadata` ([#716](https://github.com/tweepy/tweepy/issues/716))
+- Update allowed parameters for `API.update_status` ([#1101](https://github.com/tweepy/tweepy/issues/1101))
+  - Add `exclude_reply_user_ids`, `attachment_url`, `possibly_sensitive`, `trim_user`, `enable_dmcommands`, `fail_dmcommands`, `card_uri`
+  - Remove `in_reply_to_status_id_str`, `source`
+- Add allowed parameters to `API.get_status`
+  - `trim_user`, `include_my_retweet`, `include_entities`, `include_ext_alt_text`, `include_card_uri`
+- Add allowed parameters to `API.statuses_lookup`
+  - `include_ext_alt_text`, `include_card_uri`
+- Improve `API.lookup_users` ([#706](https://github.com/tweepy/tweepy/issues/706))
+- Improve and optimize `API.statuses_lookup`, `API.create_media_metadata`, `API.update_status`
+- Add `reverse` as allowed parameter for `API.lists_all`
+- Add `count` as allowed parameter for `API.lists_memberships`
+- Add `count` as allowed parameter for `API.lists_subscriptions`
+- Add `include_entities` as allowed parameter for `API.list_timeline`
+- Add allowed parameters to `API.list_subscribers`
+  - `count`, `include_entities`, `skip_status`
+- Add support for Python 3.8
+- Update and improve setup.py
+- Use requests socks extra instead of requiring PySocks directly
+- Allow uploading of images with file names without extensions ([#1060](https://github.com/tweepy/tweepy/issues/1060), [#1086](https://github.com/tweepy/tweepy/pull/1086))
+- Support uploading WebP images ([#1298](https://github.com/tweepy/tweepy/issues/1298))
+- Add missing attributes to `Relationship` model ([#1375](https://github.com/tweepy/tweepy/pull/1375))
+- Update max allowed size for uploaded GIFs ([#1336](https://github.com/tweepy/tweepy/issues/1336), [#1338](https://github.com/tweepy/tweepy/pull/1338))
+- Add `_json` attribute to `DirectMessage` model ([#1342](https://github.com/tweepy/tweepy/pull/1342))
+- Update and improve tests ([#1217](https://github.com/tweepy/tweepy/issues/1217))
+- Add documentation for extended Tweets
+- Document `API.lookup_users` ([#539](https://github.com/tweepy/tweepy/issues/539))
+- Add documentation for running tests ([#681](https://github.com/tweepy/tweepy/issues/681))
+- Add Korean translation of documentation ([#1296](https://github.com/tweepy/tweepy/pull/1296))
+- Add Polish translation of documentation ([#1316](https://github.com/tweepy/tweepy/pull/1316))
+- Document `API.lookup_friendships` ([#1375](https://github.com/tweepy/tweepy/pull/1375))
+- Update and improve various documentation
+
+### Bug Fixes
+- Fix handling of invalid credentials for `API.verify_credentials`
+- Handle boolean value for `API.verify_credentials` include_email parameter ([#890](https://github.com/tweepy/tweepy/issues/890))
+- Allow `Cursor` to be used with `API.list_direct_messages` by adding DMCursorIterator ([#1261](https://github.com/tweepy/tweepy/issues/1261), [#1262](https://github.com/tweepy/tweepy/pull/1262))
+
 Version 3.8.0
 -------------
 ### New Features / Improvements
