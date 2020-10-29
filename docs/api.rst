@@ -305,7 +305,7 @@ User methods
 .. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
                         [include_user_entities])
 
-   Returns an user's friends ordered in which they were added 100 at a time.
+   Returns a user's friends ordered in which they were added 100 at a time.
    If no user is specified it defaults to the authenticated user.
 
    :param id: |uid|
