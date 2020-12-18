@@ -285,21 +285,47 @@ Status methods
 .. method:: API.get_oembed(id/url, [maxwidth], [hide_media], [omit_script], \
                            [align], [related], [lang])
 
-   Requests the Twitter oembed HTML for a given tweet.
+   Returns a single Tweet, specified by either a Tweet web URL or the Tweet ID,
+   in an oEmbed-compatible format. The returned HTML snippet will be
+   automatically recognized as an Embedded Tweet when Twitter's widget
+   JavaScript is included on the page.
+
+   The oEmbed endpoint allows customization of the final appearance of an
+   Embedded Tweet by setting the corresponding properties in HTML markup to be
+   interpreted by Twitter's JavaScript bundled with the HTML response by
+   default. The format of the returned markup may change over time as Twitter
+   adds new features or adjusts its Tweet representation.
+
+   The Tweet fallback markup is meant to be cached on your servers for up to
+   the suggested cache lifetime specified in the ``cache_age``.
 
    :param id: |sid|
    :param url: The URL of the Tweet to be embedded
-   :param maxwidth: The maximum width of a rendered Tweet in whole pixels.
-   :param hide_media: When set to ``true``, links in a Tweet are not expanded
-                      to photo, video, or link previews.
-   :param omit_script: When set to ``true``, the ``<script>`` responsible for
-                       loading ``widgets.js`` will not be returned. Your
-                       webpages should include their own reference to
-                       ``widgets.js``
+   :param maxwidth: The maximum width of a rendered Tweet in whole pixels. A
+                    supplied value under or over the allowed range will be
+                    returned as the minimum or maximum supported width
+                    respectively; the reset width value will be reflected in
+                    the returned ``width`` property. Note that Twitter does not
+                    support the oEmbed ``maxheight`` parameter. Tweets are
+                    fundamentally text, and are therefore of unpredictable
+                    height that cannot be scaled like an image or video.
+                    Relatedly, the oEmbed response will not provide a value for
+                    ``height``. Implementations that need consistent heights
+                    for Tweets should refer to the ``hide_thread`` and
+                    ``hide_media`` parameters below.
+   :param hide_media: When set to ``true``, ``"t"``, or ``1``, links in a
+                      Tweet are not expanded to photo, video, or link previews.
+   :param omit_script: When set to ``true``, ``"t"``, or ``1``, the
+                       ``<script>`` responsible for loading ``widgets.js`` will
+                       not be returned. Your webpages should include their own
+                       reference to ``widgets.js`` for use across all Twitter
+                       widgets including Embedded Tweets.
    :param align: Specifies whether the embedded Tweet should be floated left,
                  right, or center in the page relative to the parent element.
    :param related: A comma-separated list of Twitter usernames related to your
-                   content.
+                   content. This value will be forwarded to Tweet action
+                   intents if a viewer chooses to reply, like, or retweet the
+                   embedded Tweet.
    :param lang: Request returned HTML and a rendered Tweet in the specified
                 Twitter language supported by embedded Tweets.
 
