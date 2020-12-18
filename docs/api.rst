@@ -282,8 +282,9 @@ Status methods
    :rtype: :class:`Status` object
 
 
-.. method:: API.get_oembed(id/url, [maxwidth], [hide_media], [omit_script], \
-                           [align], [related], [lang])
+.. method:: API.get_oembed(url, [maxwidth], [hide_media], [hide_thread], \
+                           [omit_script], [align], [related], [lang], \
+                           [theme], [link_color], [widget_type], [dnt])
 
    Returns a single Tweet, specified by either a Tweet web URL or the Tweet ID,
    in an oEmbed-compatible format. The returned HTML snippet will be
@@ -299,7 +300,6 @@ Status methods
    The Tweet fallback markup is meant to be cached on your servers for up to
    the suggested cache lifetime specified in the ``cache_age``.
 
-   :param id: |sid|
    :param url: The URL of the Tweet to be embedded
    :param maxwidth: The maximum width of a rendered Tweet in whole pixels. A
                     supplied value under or over the allowed range will be
@@ -315,6 +315,10 @@ Status methods
                     ``hide_media`` parameters below.
    :param hide_media: When set to ``true``, ``"t"``, or ``1``, links in a
                       Tweet are not expanded to photo, video, or link previews.
+   :param hide_thread: When set to ``true``, ``"t"``, or ``1``, a collapsed
+                       version of the previous Tweet in a conversation thread
+                       will not be displayed when the requested Tweet is in
+                       reply to another Tweet.
    :param omit_script: When set to ``true``, ``"t"``, or ``1``, the
                        ``<script>`` responsible for loading ``widgets.js`` will
                        not be returned. Your webpages should include their own
@@ -328,6 +332,15 @@ Status methods
                    embedded Tweet.
    :param lang: Request returned HTML and a rendered Tweet in the specified
                 Twitter language supported by embedded Tweets.
+   :param theme: When set to ``dark``, the Tweet is displayed with light text
+                 over a dark background.
+   :param link_color: Adjust the color of Tweet text links with a hexadecimal
+                      color value.
+   :param widget_type: Set to ``video`` to return a Twitter Video embed for the
+                       given Tweet.
+   :param dnt: When set to ``true``, the Tweet and its embedded page on your
+               site are not used for purposes that include personalized
+               suggestions and personalized ads.
 
    :rtype: :class:`JSON` object
 

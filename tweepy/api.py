@@ -368,15 +368,17 @@ class API(object):
     @property
     def get_oembed(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
-            :allowed_param: 'id', 'url', 'maxwidth', 'hide_media',
-                            'omit_script', 'align', 'related', 'lang'
+            :allowed_param: 'url', 'maxwidth', 'hide_media', 'hide_thread',
+                            'omit_script', 'align', 'related', 'lang', 'theme',
+                            'link_color', 'widget_type', 'dnt'
         """
         return bind_api(
             api=self,
             path='/statuses/oembed.json',
             payload_type='json',
-            allowed_param=['id', 'url', 'maxwidth', 'hide_media',
-                           'omit_script', 'align', 'related', 'lang']
+            allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
+                           'omit_script', 'align', 'related', 'lang', 'theme',
+                           'link_color', 'widget_type', 'dnt']
         )
 
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
