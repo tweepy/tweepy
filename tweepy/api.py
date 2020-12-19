@@ -90,13 +90,13 @@ class API(object):
     @property
     def home_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param: 'since_id', 'max_id', 'count'
+            :allowed_param: 'count', 'since_id', 'max_id'
         """
         return bind_api(
             api=self,
             path='/statuses/home_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['count', 'since_id', 'max_id'],
             require_auth=True
         )
 
