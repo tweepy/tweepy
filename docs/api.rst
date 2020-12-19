@@ -601,15 +601,6 @@ Account Methods
    :rtype: :class:`User` object
 
 
-.. method:: API.update_profile_background_image(filename)
-
-   Update authenticating user's background image. Valid formats: GIF, JPG, or
-   PNG
-
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
-
-
 .. method:: API.update_profile([name], [url], [location], [description])
 
    Sets values that users are able to set under the "Account" tab of their

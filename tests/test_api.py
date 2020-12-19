@@ -217,9 +217,6 @@ class TweepyAPITests(TweepyTestCase):
     """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
-
-    def testupdateprofilebg(self):
-        self.api.update_profile_background_image('examples/bg.png')
     """
 
     @tape.use_cassette('testupdateprofilebannerimage.yaml', serializer='yaml')

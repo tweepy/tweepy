@@ -702,21 +702,6 @@ class API(object):
             require_auth=True
         )(self, post_data=post_data, headers=headers)
 
-    def update_profile_background_image(self, filename, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_background_image
-            :allowed_param: 'tile', 'include_entities', 'skip_status', 'use'
-        """
-        f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 800, f=f)
-        return bind_api(
-            api=self,
-            path='/account/update_profile_background_image.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
-            require_auth=True
-        )(post_data=post_data, headers=headers)
-
     def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
