@@ -48,7 +48,7 @@ Timeline methods
 ----------------
 
 .. method:: API.home_timeline([since_id], [max_id], [trim_user], [exclude_replies], \
-                              [count], [page])
+                              [count])
 
    Returns the 20 most recent statuses, including retweets, posted by the
    authenticating user and that user's friends. This is the equivalent of
@@ -59,7 +59,6 @@ Timeline methods
    :param trim_user: |trim_user|
    :param exclude_replies: |exclude_replies|
    :param count: |count|
-   :param page: |page|
    :rtype: list of :class:`Status` objects
 
 
