@@ -48,7 +48,7 @@ Timeline methods
 ----------------
 
 .. method:: API.home_timeline([count], [since_id], [max_id], [trim_user], \
-                              [exclude_replies])
+                              [exclude_replies], [include_entities])
 
    Returns the 20 most recent statuses, including retweets, posted by the
    authenticating user and that user's friends. This is the equivalent of
@@ -63,6 +63,7 @@ Timeline methods
                            that the API will return a number of tweets equal
                            to the count parameter before replies are filtered
                            out. Defaults to True.
+   :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
 
