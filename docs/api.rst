@@ -58,11 +58,12 @@ Timeline methods
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param trim_user: |trim_user|
-   :param exclude_replies: A boolean which will prevent reply tweets from
-                           being included with the returned timeline. Note
-                           that the API will return a number of tweets equal
-                           to the count parameter before replies are filtered
-                           out. Defaults to True.
+   :param exclude_replies: This parameter will prevent replies from appearing
+                           in the returned timeline. Using ``exclude_replies``
+                           with the ``count`` parameter will mean you will
+                           receive up-to count Tweets — this is because the
+                           ``count`` parameter retrieves that many Tweets
+                           before filtering out retweets and replies.
    :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
