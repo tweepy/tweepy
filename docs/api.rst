@@ -47,16 +47,24 @@ This page contains some basic documentation for the Tweepy module.
 Timeline methods
 ----------------
 
-.. method:: API.home_timeline([since_id], [max_id], [count], [page])
+.. method:: API.home_timeline([count], [since_id], [max_id], [trim_user], \
+                              [exclude_replies], [include_entities])
 
    Returns the 20 most recent statuses, including retweets, posted by the
    authenticating user and that user's friends. This is the equivalent of
    /timeline/home on the Web.
 
+   :param count: |count|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
+   :param trim_user: |trim_user|
+   :param exclude_replies: This parameter will prevent replies from appearing
+                           in the returned timeline. Using ``exclude_replies``
+                           with the ``count`` parameter will mean you will
+                           receive up-to count Tweets — this is because the
+                           ``count`` parameter retrieves that many Tweets
+                           before filtering out retweets and replies.
+   :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
 
