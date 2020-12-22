@@ -1423,12 +1423,11 @@ class API(object):
 
         # image must be gif, jpeg, png, webp
         if not file_type:
-            if f is None:
-                file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
-            else:
-                file_type = imghdr.what(filename, h=f.read()) or mimetypes.guess_type(filename)[0]
-                f.seek(0)  # Reset to beginning of file
-
+            h = None
+            if f is not None:
+                h = f.read(32)
+                f.seek(0)
+            file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
