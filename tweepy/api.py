@@ -1395,7 +1395,7 @@ class API(object):
             except os.error as e:
                 raise TweepError('Unable to access file: %s' % e.strerror)
 
-            # build the mulitpart-formdata body
+            # build the multipart-formdata body
             fp = open(filename, 'rb')
         else:
             f.seek(0, 2)  # Seek to end of file

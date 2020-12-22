@@ -363,7 +363,7 @@ class RedisCache(Cache):
 
     def count(self):
         """Note: This is not very efficient,
-        since it retreives all the keys from the redis
+        since it retrieves all the keys from the redis
         server to know how many keys we have"""
         return len(self.client.smembers(self.keys_container))
 
