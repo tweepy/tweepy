@@ -220,10 +220,12 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        h = None
-        if f:
-            h = f.read(32)
 
+        h = None
+        if f is not None:
+            location = f.tell()
+            h = f.read(32)
+            f.seek(location)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type == 'gif':
             max_size = 14649
