@@ -225,6 +225,8 @@ class API(object):
             file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
         else:
             file_type = imghdr.what(filename, h=f.read()) or mimetypes.guess_type(filename)[0]
+            f.seek(0)  # Reset to beginning of file
+
         if file_type == 'gif':
             max_size = 14649
         else:
@@ -1425,6 +1427,8 @@ class API(object):
                 file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
             else:
                 file_type = imghdr.what(filename, h=f.read()) or mimetypes.guess_type(filename)[0]
+                f.seek(0)  # Reset to beginning of file
+
         if file_type is None:
             raise TweepError('Could not determine file type')
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
