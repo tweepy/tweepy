@@ -46,7 +46,7 @@ setup(
     tests_require=tests_require,
     extras_require={
         "dev": [
-             "coveralls>=1.8.2",
+             "coveralls>=2.1.0",
              "tox>=2.4.0",
          ],
         "test": tests_require,
