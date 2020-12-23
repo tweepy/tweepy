@@ -1,6 +1,7 @@
 Tweepy: Twitter for Python!
 ======
 
+[![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
 [![Documentation Status](http://img.shields.io/badge/docs-v3.9.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
 [![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://pypi.org/project/tweepy/)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
