@@ -22,3 +22,23 @@ jobs:
       - name: Run tests
         run: |
           python setup.py nosetests
+      - name: Send coverage to Coveralls
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_FLAG_NAME: python-${{ matrix.python-version }}
+          COVERALLS_PARALLEL: true
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          coveralls
+  coveralls:
+    needs: test
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    container: python:3-slim
+    steps:
+    - name: Finish sending coverage to Coveralls
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        pip install coveralls
+        coveralls --finish
