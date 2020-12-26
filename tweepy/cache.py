@@ -5,14 +5,10 @@
 import datetime
 import hashlib
 import logging
+import pickle
 import threading
 import time
 import os
-
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
 
 try:
     import fcntl
