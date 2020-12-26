@@ -42,7 +42,6 @@ setup(
     install_requires=[
         "requests[socks]>=2.11.1",
         "requests_oauthlib>=0.7.0",
-        "six>=1.10.0",
     ],
     tests_require=tests_require,
     extras_require={
