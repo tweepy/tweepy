@@ -200,11 +200,6 @@ class User(Model):
                                            *args,
                                            **kwargs)
 
-    def lists_ownerships(self, *args, **kwargs):
-        return self._api.lists_ownerships(user_id=self.id,
-                                           *args,
-                                           **kwargs)
-
     def lists_subscriptions(self, *args, **kwargs):
         return self._api.lists_subscriptions(user_id=self.id,
                                              *args,
