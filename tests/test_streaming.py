@@ -14,7 +14,7 @@ from tweepy.streaming import ReadBuffer, Stream, StreamListener
 
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
-        super(MockStreamListener, self).__init__()
+        super().__init__()
         self.test_case = test_case
         self.status_count = 0
         self.status_stop_count = 0

@@ -8,7 +8,7 @@ from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
     def __init__(self, max_id=None, since_id=None):
-        super(ResultSet, self).__init__()
+        super().__init__()
         self._max_id = max_id
         self._since_id = since_id
 

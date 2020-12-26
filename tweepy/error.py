@@ -10,7 +10,7 @@ class TweepError(Exception):
         self.reason = str(reason)
         self.response = response
         self.api_code = api_code
-        super(TweepError, self).__init__(reason)
+        super().__init__(reason)
 
     def __str__(self):
         return self.reason
