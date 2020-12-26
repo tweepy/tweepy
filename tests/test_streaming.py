@@ -12,12 +12,6 @@ from tweepy.models import Status
 from tweepy.streaming import ReadBuffer, Stream, StreamListener
 
 
-if six.PY3:
-    getresponse_location = 'http.client.HTTPConnection.getresponse'
-else:
-    getresponse_location = 'httplib.HTTPConnection.getresponse'
-
-
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
         super(MockStreamListener, self).__init__()
