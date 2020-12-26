@@ -1355,18 +1355,6 @@ class API(object):
         )
 
     @property
-    def geo_similar_places(self):
-        """ :reference: https://dev.twitter.com/rest/reference/get/geo/similar_places
-            :allowed_param:'lat', 'long', 'name', 'contained_within'
-        """
-        return bind_api(
-            api=self,
-            path='/geo/similar_places.json',
-            payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'name', 'contained_within']
-        )
-
-    @property
     def supported_languages(self):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
         return bind_api(
