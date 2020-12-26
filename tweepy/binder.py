@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 def bind_api(**config):
 
-    class APIMethod(object):
+    class APIMethod:
 
         api = config['api']
         path = config['path']

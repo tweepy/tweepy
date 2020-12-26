@@ -25,7 +25,7 @@ STREAM_VERSION = '1.1'
 log = logging.getLogger(__name__)
 
 
-class StreamListener(object):
+class StreamListener:
 
     def __init__(self, api=None):
         self.api = api or API()
@@ -154,7 +154,7 @@ class StreamListener(object):
         """Called when a user withheld content notice arrives"""
         return
 
-class ReadBuffer(object):
+class ReadBuffer:
     """Buffer data from the response in a smarter way than httplib/requests can.
 
     Tweets are roughly in the 2-12kb range, averaging around 3kb.
@@ -204,7 +204,7 @@ class ReadBuffer(object):
         return r.decode(self._encoding)
 
 
-class Stream(object):
+class Stream:
 
     def __init__(self, auth, listener, **options):
         self.auth = auth

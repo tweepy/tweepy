@@ -24,7 +24,7 @@ except ImportError:
 log = logging.getLogger(__name__)
 
 
-class Cache(object):
+class Cache:
     """Cache interface"""
 
     def __init__(self, timeout=60):

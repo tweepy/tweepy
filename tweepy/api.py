@@ -12,7 +12,7 @@ from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
-class API(object):
+class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,

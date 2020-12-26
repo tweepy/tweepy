@@ -32,7 +32,7 @@ class ResultSet(list):
         return [item.id for item in self if hasattr(item, 'id')]
 
 
-class Model(object):
+class Model:
 
     def __init__(self, api=None):
         self._api = api
@@ -503,7 +503,7 @@ class Media(Model):
         return media
 
 
-class ModelFactory(object):
+class ModelFactory:
     """
     Used by parsers for creating instances
     of models. You may subclass this factory

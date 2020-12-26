@@ -19,7 +19,7 @@ https://dev.twitter.com/discussions/21281"""
 log = logging.getLogger(__name__)
 
 
-class AuthHandler(object):
+class AuthHandler:
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
