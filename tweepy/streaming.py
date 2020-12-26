@@ -477,7 +477,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.body['follow'] = ','.join(map(six.text_type, follow))
+        self.body['follow'] = ','.join(map(str, follow))
         self.body['delimited'] = 'length'
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings

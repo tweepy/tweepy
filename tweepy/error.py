@@ -2,14 +2,12 @@
 # Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
-import six
-
 
 class TweepError(Exception):
     """Tweepy exception"""
 
     def __init__(self, reason, response=None, api_code=None):
-        self.reason = six.text_type(reason)
+        self.reason = str(reason)
         self.response = response
         self.api_code = api_code
         super(TweepError, self).__init__(reason)

@@ -5,7 +5,6 @@
 import logging
 
 import requests
-import six
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
 from urllib.parse import parse_qs
@@ -37,10 +36,10 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == six.text_type:
+        if type(consumer_key) == str:
             consumer_key = consumer_key.encode('ascii')
 
-        if type(consumer_secret) == six.text_type:
+        if type(consumer_secret) == str:
             consumer_secret = consumer_secret.encode('ascii')
 
         self.consumer_key = consumer_key
