@@ -1,5 +1,31 @@
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
+Version 3.10.0
+--------------
+This will be the last major and minor version to support Python 2.7 ([#1253](https://github.com/tweepy/tweepy/issues/1253)) and Python 3.5.  
+The next non-patch release should be version 4.0.0.
+
+### New Features / Improvements
+- Add `API.search_30_day` and `API.search_full_archive` ([#1175](https://github.com/tweepy/tweepy/issues/1175), [#1294](https://github.com/tweepy/tweepy/pull/1294))
+- Update allowed parameters for `API.home_timeline` ([#1410](https://github.com/tweepy/tweepy/issues/1410), [#1458](https://github.com/tweepy/tweepy/pull/1458))
+  - Add `trim_user`, `exclude_replies`, `include_entities`
+  - Remove `page` as erroneously documented parameter
+  - Reorder `count` to be the first parameter
+- Update allowed parameters for `API.get_oembed`
+  - Add `hide_thread`, `theme`, `link_color`, `widget_type`, `dnt`
+  - Remove `id`
+- Remove `API.update_profile_background_image` ([#1466](https://github.com/tweepy/tweepy/issues/1466))
+- Add support for Python 3.9
+- Switch from Travis CI to GitHub Actions to run tests and deploy releases ([#1402](https://github.com/tweepy/tweepy/pull/1402))
+- Update and improve various documentation
+
+### Bug Fixes
+- Use `mimetypes.guess_type` as fallback for determining image file type ([#1411](https://github.com/tweepy/tweepy/issues/1411))
+- Use proper MIME type in Content-Type header for uploaded images
+- Allow `file` parameter to be used again for `API.media_upload` ([#1412](https://github.com/tweepy/tweepy/issues/1412), [#1413](https://github.com/tweepy/tweepy/pull/1413))
+- Allow `file` parameter to be used again for `API.update_profile_banner`, `API.update_profile_image`, and `API.update_with_media` ([#1475](https://github.com/tweepy/tweepy/pull/1475))
+- Fix `User.lists`, `User.lists_memberships`, and `User.lists_subscriptions` to retrieve information about the user in question rather than the authenticating user ([#1443](https://github.com/tweepy/tweepy/issues/1443), [#1444](https://github.com/tweepy/tweepy/pull/1444))
+
 Version 3.9.0
 -------------
 ### New Features / Improvements
