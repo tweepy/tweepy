@@ -196,17 +196,17 @@ class User(Model):
         self.following = False
 
     def lists_memberships(self, *args, **kwargs):
-        return self._api.lists_memberships(user=self.screen_name,
+        return self._api.lists_memberships(user_id=self.id,
                                            *args,
                                            **kwargs)
 
     def lists_subscriptions(self, *args, **kwargs):
-        return self._api.lists_subscriptions(user=self.screen_name,
+        return self._api.lists_subscriptions(user_id=self.id,
                                              *args,
                                              **kwargs)
 
     def lists(self, *args, **kwargs):
-        return self._api.lists_all(user=self.screen_name,
+        return self._api.lists_all(user_id=self.id,
                                    *args,
                                    **kwargs)
 
