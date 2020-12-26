@@ -169,7 +169,7 @@ class ReadBuffer(object):
 
     def __init__(self, stream, chunk_size, encoding='utf-8'):
         self._stream = stream
-        self._buffer = six.b('')
+        self._buffer = b''
         self._chunk_size = chunk_size
         self._encoding = encoding
 
@@ -179,9 +179,9 @@ class ReadBuffer(object):
                 return self._pop(length)
             read_len = max(self._chunk_size, length - len(self._buffer))
             self._buffer += self._stream.read(read_len)
-        return six.b('')
+        return b''
 
-    def read_line(self, sep=six.b('\n')):
+    def read_line(self, sep=b'\n'):
         """Read the data stream until a given separator is found (default \n)
 
         :param sep: Separator to read until. Must by of the bytes type (str in python 2,
@@ -196,7 +196,7 @@ class ReadBuffer(object):
             else:
                 start = len(self._buffer)
             self._buffer += self._stream.read(self._chunk_size)
-        return six.b('')
+        return b''
 
     def _pop(self, length):
         r = self._buffer[:length]
