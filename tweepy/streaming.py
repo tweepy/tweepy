@@ -415,7 +415,7 @@ class Stream(object):
                                  "it has to be a multiple of 4")
             self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
         if track:
-            self.session.params['track'] = u','.join(track).encode(encoding)
+            self.session.params['track'] = ','.join(track).encode(encoding)
 
         self._start(is_async)
 
@@ -454,18 +454,18 @@ class Stream(object):
             raise TweepError('Stream object already connected!')
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
         if follow:
-            self.body['follow'] = u','.join(follow).encode(encoding)
+            self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
-            self.body['track'] = u','.join(track).encode(encoding)
+            self.body['track'] = ','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = u','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:
-            self.body['language'] = u','.join(map(str, languages))
+            self.body['language'] = ','.join(map(str, languages))
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
@@ -477,7 +477,7 @@ class Stream(object):
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = '/%s/site.json' % STREAM_VERSION
-        self.body['follow'] = u','.join(map(six.text_type, follow))
+        self.body['follow'] = ','.join(map(six.text_type, follow))
         self.body['delimited'] = 'length'
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings

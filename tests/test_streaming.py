@@ -98,18 +98,18 @@ class TweepyStreamTests(unittest.TestCase):
     def test_track_encoding(self):
         s = Stream(None, None)
         s._start = lambda is_async: None
-        s.filter(track=[u'Caf\xe9'])
+        s.filter(track=['Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['track'])
+        self.assertEqual('Caf\xe9'.encode('utf8'), s.body['track'])
 
     def test_follow_encoding(self):
         s = Stream(None, None)
         s._start = lambda is_async: None
-        s.filter(follow=[u'Caf\xe9'])
+        s.filter(follow=['Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['follow'])
+        self.assertEqual('Caf\xe9'.encode('utf8'), s.body['follow'])
 
 
 class TweepyStreamReadBufferTests(unittest.TestCase):
@@ -175,7 +175,7 @@ class TweepyStreamReadBufferTests(unittest.TestCase):
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
             self.assertEqual('23\n', buf.read_line())
-            self.assertEqual(u'{id:23456, test:"\u3053"}\n', buf.read_len(23))
+            self.assertEqual('{id:23456, test:"\u3053"}\n', buf.read_len(23))
 
 
 class TweepyStreamBackoffTests(unittest.TestCase):
