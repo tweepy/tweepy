@@ -58,12 +58,7 @@ Timeline methods
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param trim_user: |trim_user|
-   :param exclude_replies: This parameter will prevent replies from appearing
-                           in the returned timeline. Using ``exclude_replies``
-                           with the ``count`` parameter will mean you will
-                           receive up-to count Tweets — this is because the
-                           ``count`` parameter retrieves that many Tweets
-                           before filtering out retweets and replies.
+   :param exclude_replies: |exclude_replies|
    :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
@@ -95,8 +90,16 @@ Timeline methods
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
+   :param max_id: |max_id|
+   :param trim_user: |trim_user|
+   :param exclude_replies: |exclude_replies|
+   :include_rts: When set to false , the timeline will strip any native
+                 retweets (though they will still count toward both the
+                 maximal length of the timeline and the slice selected
+                 by the count parameter). Note: If you're using the
+                 trim_user parameter in conjunction with include_rts,
+                 the retweets will still contain a full user object.
    :rtype: list of :class:`Status` objects
 
 
