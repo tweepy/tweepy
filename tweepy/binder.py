@@ -9,7 +9,7 @@ import time
 
 import requests
 import six
-from six.moves.urllib.parse import quote, urlencode
+from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
