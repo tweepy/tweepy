@@ -46,7 +46,7 @@ class TweepyAPITests(TweepyTestCase):
     # TODO: Actually have some sort of better assertion
     @tape.use_cassette('testgetoembed.json')
     def testgetoembed(self):
-        data = self.api.get_oembed(test_tweet_id)
+        data = self.api.get_oembed("https://twitter.com/Twitter/status/" + test_tweet_id)
         self.assertEqual(data['author_name'], "Twitter")
 
     @tape.use_cassette('testparserargumenthastobeaparserinstance.json')
@@ -217,9 +217,6 @@ class TweepyAPITests(TweepyTestCase):
     """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
-
-    def testupdateprofilebg(self):
-        self.api.update_profile_background_image('examples/bg.png')
     """
 
     @tape.use_cassette('testupdateprofilebannerimage.yaml', serializer='yaml')

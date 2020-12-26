@@ -90,13 +90,15 @@ class API(object):
     @property
     def home_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param: 'since_id', 'max_id', 'count'
+            :allowed_param: 'count', 'since_id', 'max_id', 'trim_user',
+                            'exclude_replies', 'include_entities'
         """
         return bind_api(
             api=self,
             path='/statuses/home_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['count', 'since_id', 'max_id', 'trim_user',
+                           'exclude_replies', 'include_entities'],
             require_auth=True
         )
 
@@ -221,12 +223,12 @@ class API(object):
         """
         f = kwargs.pop('file', None)
 
-        if f is None:
-            file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
-        else:
-            file_type = imghdr.what(filename, h=f.read()) or mimetypes.guess_type(filename)[0]
-            f.seek(0)  # Reset to beginning of file
-
+        h = None
+        if f is not None:
+            location = f.tell()
+            h = f.read(32)
+            f.seek(location)
+        file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type == 'gif':
             max_size = 14649
         else:
@@ -373,15 +375,17 @@ class API(object):
     @property
     def get_oembed(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
-            :allowed_param: 'id', 'url', 'maxwidth', 'hide_media',
-                            'omit_script', 'align', 'related', 'lang'
+            :allowed_param: 'url', 'maxwidth', 'hide_media', 'hide_thread',
+                            'omit_script', 'align', 'related', 'lang', 'theme',
+                            'link_color', 'widget_type', 'dnt'
         """
         return bind_api(
             api=self,
             path='/statuses/oembed.json',
             payload_type='json',
-            allowed_param=['id', 'url', 'maxwidth', 'hide_media',
-                           'omit_script', 'align', 'related', 'lang']
+            allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
+                           'omit_script', 'align', 'related', 'lang', 'theme',
+                           'link_color', 'widget_type', 'dnt']
         )
 
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
@@ -704,21 +708,6 @@ class API(object):
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True
         )(self, post_data=post_data, headers=headers)
-
-    def update_profile_background_image(self, filename, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_background_image
-            :allowed_param: 'tile', 'include_entities', 'skip_status', 'use'
-        """
-        f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 800, f=f)
-        return bind_api(
-            api=self,
-            path='/account/update_profile_background_image.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
-            require_auth=True
-        )(post_data=post_data, headers=headers)
 
     def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
