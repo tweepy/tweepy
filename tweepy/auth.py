@@ -8,7 +8,7 @@ import requests
 import six
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
-from six.moves.urllib.parse import parse_qs
+from urllib.parse import parse_qs
 
 from tweepy.api import API
 from tweepy.error import TweepError
