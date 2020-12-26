@@ -822,7 +822,7 @@ class API(object):
             allowed_param=['cursor'],
             require_auth=True
         )
-    
+
     @property
     def mutes(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
@@ -835,7 +835,7 @@ class API(object):
             allowed_param=['cursor', 'include_entities', 'skip_status'],
             required_auth=True
         )
-           
+
 
     @property
     def create_mute(self):
@@ -1282,7 +1282,7 @@ class API(object):
                            'max_id', 'until', 'result_type', 'count',
                            'include_entities']
         )
-    
+
     @pagination(mode='next')
     def search_30_day(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
@@ -1297,7 +1297,7 @@ class API(object):
                            'next'],
             require_auth=True
         )(*args, **kwargs)
-    
+
     @pagination(mode='next')
     def search_full_archive(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
@@ -1412,7 +1412,11 @@ class API(object):
 
         # image must be gif, jpeg, png, webp
         if not file_type:
-            file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
+            h = None
+            if f is not None:
+                h = f.read(32)
+                f.seek(0)
+            file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
