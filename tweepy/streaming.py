@@ -13,7 +13,6 @@ import sys
 from threading import Thread
 from time import sleep
 
-import six
 from requests.exceptions import Timeout
 
 from tweepy.api import API
@@ -315,7 +314,7 @@ class Stream:
         if exc_info:
             # call a handler first so that the exception can be logged.
             self.listener.on_exception(exc_info[1])
-            six.reraise(*exc_info)
+            raise exc_info[1]
 
     def _data(self, data):
         if self.listener.on_data(data) is False:

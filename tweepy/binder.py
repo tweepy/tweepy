@@ -8,7 +8,6 @@ import sys
 import time
 
 import requests
-import six
 from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
@@ -189,7 +188,7 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
+                    raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
 
