@@ -79,8 +79,9 @@ Timeline methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], \
-                              [count])
+.. method:: API.user_timeline([id/user_id/screen_name], [since_id], [count], \
+                              [max_id], [trim_user], [exclude_replies], \
+                              [include_rts])
 
    Returns the 20 most recent statuses posted from the authenticating user or
    the user specified. It's also possible to request another user's timeline
