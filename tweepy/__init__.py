@@ -21,5 +21,5 @@ from tweepy.streaming import Stream, StreamListener
 api = API()
 
 def debug(enable=True, level=1):
-    from six.moves.http_client import HTTPConnection
+    from http.client import HTTPConnection
     HTTPConnection.debuglevel = level

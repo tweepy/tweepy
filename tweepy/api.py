@@ -6,15 +6,13 @@ import imghdr
 import mimetypes
 import os
 
-import six
-
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
-class API(object):
+class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
@@ -1412,7 +1410,7 @@ class API(object):
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, six.text_type):
+        if isinstance(filename, str):
             filename = filename.encode('utf-8')
 
         BOUNDARY = b'Tw3ePy'

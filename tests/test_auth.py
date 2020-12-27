@@ -1,9 +1,5 @@
-from __future__ import absolute_import
-
 import random
 import unittest
-
-from six.moves import input
 
 from .config import *
 from tweepy import API, OAuthHandler
