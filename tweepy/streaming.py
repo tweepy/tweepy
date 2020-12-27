@@ -270,7 +270,7 @@ class Stream(object):
                                             stream=True,
                                             auth=auth,
                                             verify=self.verify,
-                                            proxies = self.proxies)
+                                            proxies=self.proxies)
                 if resp.status_code != 200:
                     if self.listener.on_error(resp.status_code) is False:
                         break
