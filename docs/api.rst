@@ -94,8 +94,8 @@ Timeline methods
    :param max_id: |max_id|
    :param trim_user: |trim_user|
    :param exclude_replies: |exclude_replies|
-   :include_rts: When set to false , the timeline will strip any native
-                 retweets (though they will still count toward both the
+   :param include_rts: When set to ``false``, the timeline will strip any
+                 native retweets (though they will still count toward both the
                  maximal length of the timeline and the slice selected
                  by the count parameter). Note: If you're using the
                  trim_user parameter in conjunction with include_rts,
