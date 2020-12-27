@@ -79,7 +79,7 @@ Timeline methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.user_timeline([id/user_id/screen_name], [since_id], [count], \
+.. method:: API.user_timeline([user_id/screen_name], [since_id], [count], \
                               [max_id], [trim_user], [exclude_replies], \
                               [include_rts])
 
@@ -87,7 +87,6 @@ Timeline methods
    the user specified. It's also possible to request another user's timeline
    via the id parameter.
 
-   :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param since_id: |since_id|
