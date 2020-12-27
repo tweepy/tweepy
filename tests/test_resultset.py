@@ -2,7 +2,8 @@ from .config import TweepyTestCase
 
 from tweepy.models import ResultSet
 
-class NoIdItem: pass
+class NoIdItem:
+    pass
 
 class IdItem:
     def __init__(self, id):
