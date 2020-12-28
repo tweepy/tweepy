@@ -3,11 +3,11 @@
 # See LICENSE for details.
 
 import logging
+from urllib.parse import parse_qs
 
 import requests
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
-from urllib.parse import parse_qs
 
 from tweepy.api import API
 from tweepy.error import TweepError

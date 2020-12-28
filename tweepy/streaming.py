@@ -7,12 +7,12 @@
 import json
 import logging
 import re
-import requests
 import ssl
 import sys
 from threading import Thread
 from time import sleep
 
+import requests
 from requests.exceptions import Timeout
 
 from tweepy.api import API
@@ -415,22 +415,6 @@ class Stream:
         if track:
             self.session.params['track'] = ','.join(track).encode(encoding)
 
-        self._start(is_async)
-
-    def firehose(self, count=None, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/firehose.json'
-        if count:
-            self.url += f'&count={count}'
-        self._start(is_async)
-
-    def retweet(self, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/retweet.json'
         self._start(is_async)
 
     def sample(self, is_async=False, languages=None, stall_warnings=False):
