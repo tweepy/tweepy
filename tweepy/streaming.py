@@ -417,13 +417,6 @@ class Stream:
 
         self._start(is_async)
 
-    def retweet(self, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
-        self._start(is_async)
-
     def sample(self, is_async=False, languages=None, stall_warnings=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
