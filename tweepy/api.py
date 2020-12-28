@@ -31,7 +31,7 @@ MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
 MAX_UPLOAD_SIZE_CHUNKED = 14649  # chunked uploads must be less than 15 MB
 
 
-class API(object):
+class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
@@ -107,13 +107,15 @@ class API(object):
     @property
     def home_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param: 'since_id', 'max_id', 'count'
+            :allowed_param: 'count', 'since_id', 'max_id', 'trim_user',
+                            'exclude_replies', 'include_entities'
         """
         return bind_api(
             api=self,
             path='/statuses/home_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['count', 'since_id', 'max_id', 'trim_user',
+                           'exclude_replies', 'include_entities'],
             require_auth=True
         )
 
@@ -237,7 +239,13 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
+
+        h = None
+        if f is not None:
+            location = f.tell()
+            h = f.read(32)
+            f.seek(location)
+        file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         size_bytes = os.path.getsize(filename)
 
         if file_type in IMAGE_TYPES or file_type in CHUNKED_TYPES:
@@ -496,15 +504,17 @@ class API(object):
     @property
     def get_oembed(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
-            :allowed_param: 'id', 'url', 'maxwidth', 'hide_media',
-                            'omit_script', 'align', 'related', 'lang'
+            :allowed_param: 'url', 'maxwidth', 'hide_media', 'hide_thread',
+                            'omit_script', 'align', 'related', 'lang', 'theme',
+                            'link_color', 'widget_type', 'dnt'
         """
         return bind_api(
             api=self,
             path='/statuses/oembed.json',
             payload_type='json',
-            allowed_param=['id', 'url', 'maxwidth', 'hide_media',
-                           'omit_script', 'align', 'related', 'lang']
+            allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
+                           'omit_script', 'align', 'related', 'lang', 'theme',
+                           'link_color', 'widget_type', 'dnt']
         )
 
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
@@ -827,21 +837,6 @@ class API(object):
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True
         )(self, post_data=post_data, headers=headers)
-
-    def update_profile_background_image(self, filename, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_background_image
-            :allowed_param: 'tile', 'include_entities', 'skip_status', 'use'
-        """
-        f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 800, f=f)
-        return bind_api(
-            api=self,
-            path='/account/update_profile_background_image.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
-            require_auth=True
-        )(post_data=post_data, headers=headers)
 
     def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
@@ -1488,18 +1483,6 @@ class API(object):
         )
 
     @property
-    def geo_similar_places(self):
-        """ :reference: https://dev.twitter.com/rest/reference/get/geo/similar_places
-            :allowed_param:'lat', 'long', 'name', 'contained_within'
-        """
-        return bind_api(
-            api=self,
-            path='/geo/similar_places.json',
-            payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'name', 'contained_within']
-        )
-
-    @property
     def supported_languages(self):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
         return bind_api(
@@ -1545,7 +1528,11 @@ class API(object):
 
         # image must be gif, jpeg, png, webp
         if not file_type:
-            file_type = imghdr.what(filename) or mimetypes.guess_type(filename)[0]
+            h = None
+            if f is not None:
+                h = f.read(32)
+                f.seek(0)
+            file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
         if file_type in IMAGE_TYPES:
@@ -1553,7 +1540,7 @@ class API(object):
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, six.text_type):
+        if isinstance(filename, str):
             filename = filename.encode('utf-8')
 
         BOUNDARY = b'Tw3ePy'

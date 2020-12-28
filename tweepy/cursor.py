@@ -6,7 +6,7 @@ from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 
 
-class Cursor(object):
+class Cursor:
     """Pagination helper class"""
 
     def __init__(self, method, *args, **kwargs):
@@ -39,7 +39,7 @@ class Cursor(object):
         return i
 
 
-class BaseIterator(object):
+class BaseIterator:
 
     def __init__(self, method, *args, **kwargs):
         self.method = method
@@ -240,9 +240,9 @@ class ItemIterator(BaseIterator):
                 raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
-            self.current_page = self.page_iterator.next()
+            self.current_page = next(self.page_iterator)
             while len(self.current_page) == 0:
-                self.current_page = self.page_iterator.next()
+                self.current_page = next(self.page_iterator)
             self.page_index = -1
         self.page_index += 1
         self.num_tweets += 1

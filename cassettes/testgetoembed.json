@@ -4,7 +4,7 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "https://api.twitter.com/1.1/statuses/oembed.json?id=266367358078169089",
+                "uri": "https://api.twitter.com/1.1/statuses/oembed.json?url=https%3A%2F%2Ftwitter.com%2FTwitter%2Fstatus%2F266367358078169089",
                 "body": null,
                 "headers": {
                     "Host": [
@@ -18,60 +18,60 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "content-type": [
-                        "application/json; charset=utf-8"
+                    "strict-transport-security": [
+                        "max-age=631138519"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    "date": [
+                        "Fri, 18 Dec 2020 13:28:43 GMT"
                     ],
-                    "server": [
-                        "tsa_b"
+                    "x-response-time": [
+                        "22"
                     ],
-                    "cache-control": [
-                        "must-revalidate, max-age=3153600000"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "x-connection-hash": [
-                        "f20848b1bd595645ddbfd9c752ca85f5"
+                    "set-cookie": [
+                        "personalization_id=\"v1_lNZrX8ERkRY3O6pDMRf0EQ==\"; Max-Age=63072000; Expires=Sun, 18 Dec 2022 13:28:43 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+                        "guest_id=v1%3A160829812347056154; Max-Age=63072000; Expires=Sun, 18 Dec 2022 13:28:43 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None"
                     ],
                     "content-length": [
                         "983"
                     ],
-                    "x-rate-limit-limit": [
-                        "180"
+                    "x-xss-protection": [
+                        "0"
                     ],
                     "expires": [
-                        "Mon, 19 Jun 2119 02:27:42 GMT"
+                        "Sun, 24 Nov 2120 13:28:43 GMT"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "cache-control": [
+                        "must-revalidate, max-age=3153600000"
+                    ],
+                    "last-modified": [
+                        "Fri, 18 Dec 2020 13:28:43 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-connection-hash": [
+                        "535f712e275b4e0dcb0621cfe640c1e5"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
                     "x-frame-options": [
                         "SAMEORIGIN"
                     ],
-                    "x-response-time": [
-                        "23"
-                    ],
                     "x-rate-limit-remaining": [
-                        "175"
+                        "177"
                     ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
-                    ],
-                    "last-modified": [
-                        "Sat, 13 Jul 2019 02:27:42 GMT"
-                    ],
-                    "date": [
-                        "Sat, 13 Jul 2019 02:27:42 GMT"
+                    "x-rate-limit-limit": [
+                        "180"
                     ],
                     "x-rate-limit-reset": [
-                        "1562984890"
+                        "1608298530"
                     ],
-                    "set-cookie": [
-                        "personalization_id=\"v1_khrXSwhAwqa8deQuSQp2gg==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:42 GMT; Path=/; Domain=.twitter.com",
-                        "guest_id=v1%3A156298486221234862; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:42 GMT; Path=/; Domain=.twitter.com"
+                    "content-type": [
+                        "application/json; charset=utf-8"
                     ]
                 },
                 "body": {

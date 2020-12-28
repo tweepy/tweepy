@@ -1,9 +1,9 @@
 Tweepy: Twitter for Python!
 ======
 
-[![Build Status](http://img.shields.io/travis/tweepy/tweepy/master.svg?style=flat)](https://travis-ci.org/tweepy/tweepy)
-[![Documentation Status](http://img.shields.io/badge/docs-v3.9.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
-[![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://pypi.org/project/tweepy/)
+[![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
+[![Documentation Status](https://img.shields.io/badge/docs-v3.10.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
+[![Version](https://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://pypi.org/project/tweepy/)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
 [![Discord](https://img.shields.io/discord/432685901596852224.svg)](https://discord.gg/bJvqnhg)
 
@@ -24,7 +24,7 @@ Alternatively, install directly from the GitHub repository:
 
     pip install git+https://github.com/tweepy/tweepy.git
 
-Python 2.7, 3.5, 3.6, 3.7, & 3.8 are supported.
+Python 3.5 - 3.9 are supported.
 
 Community
 ---------

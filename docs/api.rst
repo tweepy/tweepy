@@ -47,16 +47,24 @@ This page contains some basic documentation for the Tweepy module.
 Timeline methods
 ----------------
 
-.. method:: API.home_timeline([since_id], [max_id], [count], [page])
+.. method:: API.home_timeline([count], [since_id], [max_id], [trim_user], \
+                              [exclude_replies], [include_entities])
 
    Returns the 20 most recent statuses, including retweets, posted by the
    authenticating user and that user's friends. This is the equivalent of
    /timeline/home on the Web.
 
+   :param count: |count|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
+   :param trim_user: |trim_user|
+   :param exclude_replies: This parameter will prevent replies from appearing
+                           in the returned timeline. Using ``exclude_replies``
+                           with the ``count`` parameter will mean you will
+                           receive up-to count Tweets — this is because the
+                           ``count`` parameter retrieves that many Tweets
+                           before filtering out retweets and replies.
+   :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
 
@@ -282,6 +290,69 @@ Status methods
    :rtype: :class:`Status` object
 
 
+.. method:: API.get_oembed(url, [maxwidth], [hide_media], [hide_thread], \
+                           [omit_script], [align], [related], [lang], \
+                           [theme], [link_color], [widget_type], [dnt])
+
+   Returns a single Tweet, specified by either a Tweet web URL or the Tweet ID,
+   in an oEmbed-compatible format. The returned HTML snippet will be
+   automatically recognized as an Embedded Tweet when Twitter's widget
+   JavaScript is included on the page.
+
+   The oEmbed endpoint allows customization of the final appearance of an
+   Embedded Tweet by setting the corresponding properties in HTML markup to be
+   interpreted by Twitter's JavaScript bundled with the HTML response by
+   default. The format of the returned markup may change over time as Twitter
+   adds new features or adjusts its Tweet representation.
+
+   The Tweet fallback markup is meant to be cached on your servers for up to
+   the suggested cache lifetime specified in the ``cache_age``.
+
+   :param url: The URL of the Tweet to be embedded
+   :param maxwidth: The maximum width of a rendered Tweet in whole pixels. A
+                    supplied value under or over the allowed range will be
+                    returned as the minimum or maximum supported width
+                    respectively; the reset width value will be reflected in
+                    the returned ``width`` property. Note that Twitter does not
+                    support the oEmbed ``maxheight`` parameter. Tweets are
+                    fundamentally text, and are therefore of unpredictable
+                    height that cannot be scaled like an image or video.
+                    Relatedly, the oEmbed response will not provide a value for
+                    ``height``. Implementations that need consistent heights
+                    for Tweets should refer to the ``hide_thread`` and
+                    ``hide_media`` parameters below.
+   :param hide_media: When set to ``true``, ``"t"``, or ``1``, links in a
+                      Tweet are not expanded to photo, video, or link previews.
+   :param hide_thread: When set to ``true``, ``"t"``, or ``1``, a collapsed
+                       version of the previous Tweet in a conversation thread
+                       will not be displayed when the requested Tweet is in
+                       reply to another Tweet.
+   :param omit_script: When set to ``true``, ``"t"``, or ``1``, the
+                       ``<script>`` responsible for loading ``widgets.js`` will
+                       not be returned. Your webpages should include their own
+                       reference to ``widgets.js`` for use across all Twitter
+                       widgets including Embedded Tweets.
+   :param align: Specifies whether the embedded Tweet should be floated left,
+                 right, or center in the page relative to the parent element.
+   :param related: A comma-separated list of Twitter usernames related to your
+                   content. This value will be forwarded to Tweet action
+                   intents if a viewer chooses to reply, like, or retweet the
+                   embedded Tweet.
+   :param lang: Request returned HTML and a rendered Tweet in the specified
+                Twitter language supported by embedded Tweets.
+   :param theme: When set to ``dark``, the Tweet is displayed with light text
+                 over a dark background.
+   :param link_color: Adjust the color of Tweet text links with a hexadecimal
+                      color value.
+   :param widget_type: Set to ``video`` to return a Twitter Video embed for the
+                       given Tweet.
+   :param dnt: When set to ``true``, the Tweet and its embedded page on your
+               site are not used for purposes that include personalized
+               suggestions and personalized ads.
+
+   :rtype: :class:`JSON` object
+
+
 User methods
 ------------
 
@@ -305,7 +376,7 @@ User methods
 .. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
                         [include_user_entities])
 
-   Returns an user's friends ordered in which they were added 100 at a time.
+   Returns a user's friends ordered in which they were added 100 at a time.
    If no user is specified it defaults to the authenticated user.
 
    :param id: |uid|
@@ -532,15 +603,6 @@ Account Methods
 .. method:: API.update_profile_image(filename)
 
    Update the authenticating user's profile image. Valid formats: GIF, JPG, or
-   PNG
-
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
-
-
-.. method:: API.update_profile_background_image(filename)
-
-   Update authenticating user's background image. Valid formats: GIF, JPG, or
    PNG
 
    :param filename: local path to image file to upload. Not a remote URL!
