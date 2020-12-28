@@ -111,6 +111,18 @@ class TweepyAPITests(TweepyTestCase):
         update = self.api.update_with_media('examples/banner.png', status=tweet_text)
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
+    @tape.use_cassette('testmediauploadpng.yaml', serializer='yaml')
+    def testmediauploadpng(self):
+        self.api.media_upload('examples/banner.png')
+
+    @tape.use_cassette('testmediauploadgif.yaml', serializer='yaml')
+    def testmediauploadgif(self):
+        self.api.media_upload('examples/animated.gif')
+
+    @tape.use_cassette('testvideoupload.yaml', serializer='yaml')
+    def testvideoupload(self):
+        self.api.media_upload('examples/video.mp4')
+
     @tape.use_cassette('testgetuser.json')
     def testgetuser(self):
         u = self.api.get_user('Twitter')
@@ -403,7 +415,6 @@ class TweepyAPITests(TweepyTestCase):
         self.assertFalse(self.api.cached_result)
 
 
-
 class TweepyCacheTests(unittest.TestCase):
     timeout = 0.5
     memcache_servers = ['127.0.0.1:11211']  # must be running for test to pass
@@ -448,6 +459,7 @@ class TweepyCacheTests(unittest.TestCase):
         finally:
             if os.path.exists('cache_test_dir'):
                 shutil.rmtree('cache_test_dir')
+
 
 if __name__ == '__main__':
     unittest.main()
