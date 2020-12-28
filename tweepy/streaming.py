@@ -417,15 +417,6 @@ class Stream:
 
         self._start(is_async)
 
-    def firehose(self, count=None, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/firehose.json' % STREAM_VERSION
-        if count:
-            self.url += '&count=%s' % count
-        self._start(is_async)
-
     def retweet(self, is_async=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
