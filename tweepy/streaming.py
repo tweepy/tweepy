@@ -246,7 +246,7 @@ class Stream:
 
     def _run(self):
         # Authenticate
-        url = "https://%s%s" % (self.host, self.url)
+        url = f"https://{self.host}{self.url}"
 
         # Connect and process the stream
         error_counter = 0
@@ -399,7 +399,7 @@ class Stream:
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/user.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/user.json'
         self.host = 'userstream.twitter.com'
         if stall_warnings:
             self.session.params['stall_warnings'] = stall_warnings
@@ -411,7 +411,7 @@ class Stream:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
+            self.session.params['locations'] = ','.join([f'{l:.2f}' for l in locations])
         if track:
             self.session.params['track'] = ','.join(track).encode(encoding)
 
@@ -421,23 +421,23 @@ class Stream:
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/firehose.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/firehose.json'
         if count:
-            self.url += '&count=%s' % count
+            self.url += f'&count={count}'
         self._start(is_async)
 
     def retweet(self, is_async=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/retweet.json'
         self._start(is_async)
 
     def sample(self, is_async=False, languages=None, stall_warnings=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/sample.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
@@ -450,7 +450,7 @@ class Stream:
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/filter.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
             self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
@@ -459,7 +459,7 @@ class Stream:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:
@@ -474,7 +474,7 @@ class Stream:
         self.body = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/site.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/site.json'
         self.body['follow'] = ','.join(map(str, follow))
         self.body['delimited'] = 'length'
         if stall_warnings:

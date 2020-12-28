@@ -1381,18 +1381,16 @@ class API:
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError('File is too big, must be less than %skb.'
-                                     % max_size)
+                    raise TweepError(f'File is too big, must be less than {max_size}kb.')
             except os.error as e:
-                raise TweepError('Unable to access file: %s' % e.strerror)
+                raise TweepError(f'Unable to access file: {e.strerror}')
 
             # build the mulitpart-formdata body
             fp = open(filename, 'rb')
         else:
             f.seek(0, 2)  # Seek to end of file
             if f.tell() > (max_size * 1024):
-                raise TweepError('File is too big, must be less than %skb.'
-                                 % max_size)
+                raise TweepError(f'File is too big, must be less than {max_size}kb.')
             f.seek(0)  # Reset to beginning of file
             fp = f
 
@@ -1408,7 +1406,7 @@ class API:
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
-            raise TweepError('Invalid file type for image: %s' % file_type)
+            raise TweepError(f'Invalid file type for image: {file_type}')
 
         if isinstance(filename, str):
             filename = filename.encode('utf-8')

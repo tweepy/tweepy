@@ -11,7 +11,7 @@ with open(VERSION_FILE) as version_file:
 if match:
     version = match.group(1)
 else:
-    raise RuntimeError("Unable to find version string in %s." % (VERSION_FILE,))
+    raise RuntimeError(f"Unable to find version string in {VERSION_FILE}.")
 
 with open("README.md") as readme_file:
     long_description = readme_file.read()

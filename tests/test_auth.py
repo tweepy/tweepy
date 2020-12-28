@@ -20,7 +20,7 @@ class TweepyAuthTests(unittest.TestCase):
 
         # build api object test using oauth
         api = API(auth)
-        s = api.update_status('test %i' % random.randint(0, 1000))
+        s = api.update_status(f'test {random.randint(0, 1000)}')
         api.destroy_status(s.id)
 
     def testaccesstype(self):
