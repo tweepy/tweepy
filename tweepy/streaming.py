@@ -388,35 +388,6 @@ class Stream:
         """ Called when the response has been closed by Twitter """
         pass
 
-    def userstream(self,
-                   stall_warnings=False,
-                   _with=None,
-                   replies=None,
-                   track=None,
-                   locations=None,
-                   is_async=False,
-                   encoding='utf8'):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/user.json'
-        self.host = 'userstream.twitter.com'
-        if stall_warnings:
-            self.session.params['stall_warnings'] = stall_warnings
-        if _with:
-            self.session.params['with'] = _with
-        if replies:
-            self.session.params['replies'] = replies
-        if locations and len(locations) > 0:
-            if len(locations) % 4 != 0:
-                raise TweepError("Wrong number of locations points, "
-                                 "it has to be a multiple of 4")
-            self.session.params['locations'] = ','.join([f'{l:.2f}' for l in locations])
-        if track:
-            self.session.params['track'] = ','.join(track).encode(encoding)
-
-        self._start(is_async)
-
     def sample(self, is_async=False, languages=None, stall_warnings=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
@@ -451,22 +422,6 @@ class Stream:
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self._start(is_async)
-
-    def sitestream(self, follow, stall_warnings=False,
-                   with_='user', replies=False, is_async=False):
-        self.body = {}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/site.json'
-        self.body['follow'] = ','.join(map(str, follow))
-        self.body['delimited'] = 'length'
-        if stall_warnings:
-            self.body['stall_warnings'] = stall_warnings
-        if with_:
-            self.body['with'] = with_
-        if replies:
-            self.body['replies'] = replies
         self._start(is_async)
 
     def disconnect(self):
