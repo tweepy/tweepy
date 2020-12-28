@@ -53,7 +53,7 @@ setup(
     },
     test_suite="nose.collector",
     keywords="twitter library",
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Software Development :: Libraries",
