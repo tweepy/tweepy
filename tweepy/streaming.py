@@ -7,12 +7,12 @@
 import json
 import logging
 import re
-import requests
 import ssl
 import sys
 from threading import Thread
 from time import sleep
 
+import requests
 from requests.exceptions import Timeout
 
 from tweepy.api import API
