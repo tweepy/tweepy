@@ -831,7 +831,6 @@ class API:
             required_auth=True
         )
 
-
     @property
     def create_mute(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create

@@ -427,7 +427,7 @@ class TweepyCacheTests(unittest.TestCase):
             self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
 
         # test count
-        for i in range(0, 20):
+        for i in range(20):
             self.cache.store(f'testkey{i}', 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
