@@ -78,11 +78,8 @@ class API:
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{required}".'
-                ' It is currently a {actual}.'.format(
-                    required=parser_type.__name__,
-                    actual=type(self.parser)
-                )
+                f'"parser" argument has to be an instance of "{parser_type.__name__}".'
+                f' It is currently a {type(self.parser)}.'
             )
 
     @property
@@ -1289,7 +1286,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/30day/{}.json'.format(environment_name),
+            path=f'/tweets/search/30day/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1304,7 +1301,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            path=f'/tweets/search/fullarchive/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1414,10 +1411,10 @@ class API:
         BOUNDARY = b'Tw3ePy'
         body = []
         body.append(b'--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="{0}";'
-                    ' filename="{1}"'.format(form_field, filename)
+        body.append(f'Content-Disposition: form-data; name="{form_field}";'
+                    f' filename="{filename}"'
                     .encode('utf-8'))
-        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+        body.append(f'Content-Type: {file_type}'.encode('utf-8'))
         body.append(b'')
         body.append(fp.read())
         body.append(b'--' + BOUNDARY + b'--')

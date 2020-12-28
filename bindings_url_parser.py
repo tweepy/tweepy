@@ -8,7 +8,7 @@ import requests
 __author__ = 'jordiriera'
 
 url_root = 'https://dev.twitter.com'
-reference_line = re.compile(':reference: ({}.*) "'.format(url_root))
+reference_line = re.compile(f':reference: ({url_root}.*) "')
 
 
 def parse(filename):
