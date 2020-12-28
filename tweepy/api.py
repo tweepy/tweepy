@@ -5,12 +5,7 @@
 import imghdr
 import mimetypes
 import os
-import six
-
-if six.PY2:
-    from urllib import urlencode
-elif six.PY3:
-    from urllib.parse import urlencode
+from urllib.parse import urlencode
 
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
