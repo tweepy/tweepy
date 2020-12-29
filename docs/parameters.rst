@@ -4,6 +4,7 @@
 .. |cursor| replace:: Breaks the results into pages. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list.
 .. |date| replace:: Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD.
 .. |exclude| replace:: Setting this equal to hashtags will remove all hashtags from the trends list.
+.. |exclude_replies| replace:: This parameter will prevent replies from appearing in the returned timeline. Using ``exclude_replies`` with the ``count`` parameter will mean you will receive up-to count Tweets — this is because the ``count`` parameter retrieves that many Tweets before filtering out retweets and replies.
 .. |full_text| replace:: A boolean indicating whether or not the full text of a message should be returned. If False the message text returned will be truncated to 140 chars. Defaults to False.
 .. |include_card_uri| replace:: A boolean indicating if the retrieved Tweet should include a card_uri attribute when there is an ads card attached to the Tweet and when that card was attached using the card_uri value.
 .. |include_entities| replace:: The entities node will not be included when set to false. Defaults to true.
