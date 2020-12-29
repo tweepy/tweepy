@@ -52,9 +52,6 @@ class StreamListener:
         if 'delete' in data:
             delete = data['delete']['status']
             return self.on_delete(delete['id'], delete['user_id'])
-        if 'event' in data:
-            status = Status.parse(self.api, data)
-            return self.on_event(status)
         if 'limit' in data:
             return self.on_limit(data['limit']['track'])
         if 'disconnect' in data:
@@ -84,10 +81,6 @@ class StreamListener:
 
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
-        return
-
-    def on_event(self, status):
-        """Called when a new event arrives"""
         return
 
     def on_limit(self, track):
