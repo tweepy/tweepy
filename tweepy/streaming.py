@@ -315,7 +315,7 @@ class Stream:
             length = 0
             while not resp.raw.closed:
                 line = buf.read_line()
-                stripped_line = line.strip() if line else line # line is sometimes None so we need to check here
+                stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
                 if not stripped_line:
                     self.listener.keep_alive()  # keep-alive new lines are expected
                 elif stripped_line.isdigit():
