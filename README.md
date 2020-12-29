@@ -26,7 +26,10 @@ Alternatively, install directly from the GitHub repository:
 
 Python 3.5 - 3.9 are supported.
 
-Community
----------
-- [Discord Chat](https://discord.gg/bJvqnhg)
+Links
+-----
+
+- [Documentation](https://tweepy.readthedocs.io/en/latest/)
+- [Official Discord Server](https://discord.gg/bJvqnhg)
+- [Twitter API Documentation](https://developer.twitter.com/en/docs/twitter-api)
 
