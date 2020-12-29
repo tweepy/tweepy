@@ -48,36 +48,27 @@ class StreamListener:
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
-            if self.on_status(status) is False:
-                return False
-        elif 'delete' in data:
+            return self.on_status(status)
+        if 'delete' in data:
             delete = data['delete']['status']
-            if self.on_delete(delete['id'], delete['user_id']) is False:
-                return False
-        elif 'event' in data:
+            return self.on_delete(delete['id'], delete['user_id'])
+        if 'event' in data:
             status = Status.parse(self.api, data)
-            if self.on_event(status) is False:
-                return False
-        elif 'limit' in data:
-            if self.on_limit(data['limit']['track']) is False:
-                return False
-        elif 'disconnect' in data:
-            if self.on_disconnect(data['disconnect']) is False:
-                return False
-        elif 'warning' in data:
-            if self.on_warning(data['warning']) is False:
-                return False
-        elif 'scrub_geo' in data:
-            if self.on_scrub_geo(data['scrub_geo']) is False:
-                return False
-        elif 'status_withheld' in data:
-            if self.on_status_withheld(data['status_withheld']) is False:
-                return False
-        elif 'user_withheld' in data:
-            if self.on_user_withheld(data['user_withheld']) is False:
-                return False
-        else:
-            log.error("Unknown message type: %s", raw_data)
+            return self.on_event(status)
+        if 'limit' in data:
+            return self.on_limit(data['limit']['track'])
+        if 'disconnect' in data:
+            return self.on_disconnect(data['disconnect'])
+        if 'warning' in data:
+            return self.on_warning(data['warning'])
+        if 'scrub_geo' in data:
+            return self.on_scrub_geo(data['scrub_geo'])
+        if 'status_withheld' in data:
+            return self.on_status_withheld(data['status_withheld'])
+        if 'user_withheld' in data:
+            return self.on_user_withheld(data['user_withheld'])
+
+        log.error("Unknown message type: %s", raw_data)
 
     def keep_alive(self):
         """Called when a keep-alive arrived"""
