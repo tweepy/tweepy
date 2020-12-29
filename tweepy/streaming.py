@@ -210,7 +210,6 @@ class Stream:
 
         self.verify = options.get("verify", True)
 
-        self.api = API()
         self.headers = options.get("headers") or {}
         self.new_session()
         self.body = None
