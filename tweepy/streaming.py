@@ -407,6 +407,4 @@ class Stream:
         self._start(is_async)
 
     def disconnect(self):
-        if self.running is False:
-            return
         self.running = False
