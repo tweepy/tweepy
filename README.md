@@ -5,7 +5,7 @@ Tweepy: Twitter for Python!
 [![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest&style=flat)](https://tweepy.readthedocs.io/en/latest/)
 [![Version](https://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://pypi.org/project/tweepy/)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
-[![Discord](https://img.shields.io/discord/432685901596852224.svg)](https://discord.gg/bJvqnhg)
+[![Discord Server](https://discord.com/api/guilds/432685901596852224/embed.png)](https://discord.gg/bJvqnhg)
 
 Installation
 ------------
