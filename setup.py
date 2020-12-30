@@ -45,6 +45,10 @@ setup(
     ],
     tests_require=tests_require,
     extras_require={
+        "async": [
+            "aiohttp>=3.7.3,<4",
+            "oauthlib>=3.1.0,<4",
+        ],
         "dev": [
             "coveralls>=2.1.0",
             "tox>=2.4.0",
