@@ -46,7 +46,7 @@ class TweepyAPITests(TweepyTestCase):
     # TODO: Actually have some sort of better assertion
     @tape.use_cassette('testgetoembed.json')
     def testgetoembed(self):
-        data = self.api.get_oembed(test_tweet_id)
+        data = self.api.get_oembed("https://twitter.com/Twitter/status/" + test_tweet_id)
         self.assertEqual(data['author_name'], "Twitter")
 
     @tape.use_cassette('testparserargumenthastobeaparserinstance.json')
@@ -61,7 +61,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testusertimeline.json')
     def testusertimeline(self):
         self.api.user_timeline()
-        self.api.user_timeline('twitter')
+        self.api.user_timeline(screen_name='Twitter')
 
     @tape.use_cassette('testmentionstimeline.json')
     def testmentionstimeline(self):
@@ -217,9 +217,6 @@ class TweepyAPITests(TweepyTestCase):
     """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
-
-    def testupdateprofilebg(self):
-        self.api.update_profile_background_image('examples/bg.png')
     """
 
     @tape.use_cassette('testupdateprofilebannerimage.yaml', serializer='yaml')
@@ -368,11 +365,6 @@ class TweepyAPITests(TweepyTestCase):
             """Return True if a given place_name is in place_list."""
             return any(x.full_name.lower() == place_name.lower() for x in place_list)
 
-        twitter_hq = self.api.geo_similar_places(lat='37.7821120598956',
-                                                 long='-122.400612831116',
-                                                 name='South of Market Child Care')
-        # Assumes that twitter_hq is first Place returned...
-        self.assertEqual(twitter_hq[0].id, '1d019624e6b4dcff')
         # Test various API functions using Austin, TX, USA
         self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',
@@ -435,7 +427,7 @@ class TweepyCacheTests(unittest.TestCase):
             self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
 
         # test count
-        for i in range(0, 20):
+        for i in range(20):
             self.cache.store('testkey%i' % i, 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 

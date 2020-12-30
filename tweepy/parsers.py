@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
 import json as json_lib
@@ -8,7 +8,7 @@ from tweepy.error import TweepError
 from tweepy.models import ModelFactory
 
 
-class Parser(object):
+class Parser:
 
     def parse(self, method, payload, *args, **kwargs):
         """
@@ -50,7 +50,9 @@ class JSONParser(Parser):
             raise TweepError('Failed to parse JSON payload: %s' % e)
 
         if return_cursors and isinstance(json, dict):
-            if 'next_cursor' in json:
+            if 'next' in json:
+                return json, json['next']
+            elif 'next_cursor' in json:
                 if 'previous_cursor' in json:
                     cursors = json['previous_cursor'], json['next_cursor']
                     return json, cursors

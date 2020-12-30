@@ -1,8 +1,6 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
-
-from __future__ import absolute_import
 
 from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 
@@ -10,7 +8,7 @@ from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
     def __init__(self, max_id=None, since_id=None):
-        super(ResultSet, self).__init__()
+        super().__init__()
         self._max_id = max_id
         self._since_id = since_id
 
@@ -34,7 +32,7 @@ class ResultSet(list):
         return [item.id for item in self if hasattr(item, 'id')]
 
 
-class Model(object):
+class Model:
 
     def __init__(self, api=None):
         self._api = api
@@ -61,14 +59,18 @@ class Model(object):
         """
         results = ResultSet()
 
-        # Handle map parameter for statuses/lookup
-        if isinstance(json_list, dict) and 'id' in json_list:
-            for _id, obj in json_list['id'].items():
-                if obj:
-                    results.append(cls.parse(api, obj))
-                else:
-                    results.append(cls.parse(api, {'id': int(_id)}))
-            return results
+        if isinstance(json_list, dict):
+            # Handle map parameter for statuses/lookup
+            if 'id' in json_list:
+                for _id, obj in json_list['id'].items():
+                    if obj:
+                        results.append(cls.parse(api, obj))
+                    else:
+                        results.append(cls.parse(api, {'id': int(_id)}))
+                return results
+            # Handle premium search
+            if 'results' in json_list:
+                json_list = json_list['results']
 
         for obj in json_list:
             if obj:
@@ -132,14 +134,6 @@ class Status(Model):
 
         return NotImplemented
 
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
-
 
 class User(Model):
 
@@ -192,17 +186,17 @@ class User(Model):
         self.following = False
 
     def lists_memberships(self, *args, **kwargs):
-        return self._api.lists_memberships(user=self.screen_name,
+        return self._api.lists_memberships(user_id=self.id,
                                            *args,
                                            **kwargs)
 
     def lists_subscriptions(self, *args, **kwargs):
-        return self._api.lists_subscriptions(user=self.screen_name,
+        return self._api.lists_subscriptions(user_id=self.id,
                                              *args,
                                              **kwargs)
 
     def lists(self, *args, **kwargs):
-        return self._api.lists_all(user=self.screen_name,
+        return self._api.lists_all(user_id=self.id,
                                    *args,
                                    **kwargs)
 
@@ -217,19 +211,12 @@ class User(Model):
 
         return NotImplemented
 
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
-    
     def __hash__(self):
         if hasattr(self, 'id'):
             return self.id
         else:
             raise TypeError('unhashable type: {} (no id attribute)'.format(type(self)))
+
 
 class DirectMessage(Model):
 
@@ -238,6 +225,7 @@ class DirectMessage(Model):
         dm = cls(api)
         if "event" in json:
             json = json["event"]
+        setattr(dm, '_json', json)
         for k, v in json.items():
             setattr(dm, k, v)
         return dm
@@ -404,6 +392,10 @@ class Relationship(Model):
             if k == 'connections':
                 setattr(result, 'is_following', 'following' in v)
                 setattr(result, 'is_followed_by', 'followed_by' in v)
+                setattr(result, 'is_muted', 'muting' in v)
+                setattr(result, 'is_blocked', 'blocking' in v)
+                setattr(result, 'is_following_requested', 'following_requested' in v)
+                setattr(result, 'no_relationship', 'none' in v)
             else:
                 setattr(result, k, v)
         return result
@@ -501,7 +493,7 @@ class Media(Model):
         return media
 
 
-class ModelFactory(object):
+class ModelFactory:
     """
     Used by parsers for creating instances
     of models. You may subclass this factory

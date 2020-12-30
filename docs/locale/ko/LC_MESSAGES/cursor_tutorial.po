@@ -1,0 +1,127 @@
+# Cursor Tutorial
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-ko\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-28 09:41+0900\n"
+"PO-Revision-Date: 2019-12-28 11:26+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../cursor_tutorial.rst:5
+msgid "Cursor Tutorial"
+msgstr "커서(Cursor) 지침"
+
+#: ../../cursor_tutorial.rst:7
+msgid "This tutorial describes details on pagination with Cursor objects."
+msgstr "이 지침은 커서 객체를 이용한 페이징에 대한 세부 사항을 설명합니다."
+
+#: ../../cursor_tutorial.rst:10
+msgid "Introduction"
+msgstr "들어가며"
+
+#: ../../cursor_tutorial.rst:12
+msgid ""
+"We use pagination a lot in Twitter API development. Iterating through "
+"timelines, user lists, direct messages, etc. In order to perform "
+"pagination, we must supply a page/cursor parameter with each of our "
+"requests. The problem here is this requires a lot of boiler plate code "
+"just to manage the pagination loop. To help make pagination easier and "
+"require less code, Tweepy has the Cursor object."
+msgstr ""
+"트위터 API를 이용하는 개발에서, 페이징은 타임라인 반복, 사용자 목록, 쪽지, 그 외 여러 곳에서 자주 사용됩니다. "
+"페이징을 수행하기 위해서는, 각 요청마다 페이지/커서 매개변수를 전달해야 합니다. "
+"문제는, 페이징 루프를 관리하기 위해서는 많은 양의 표준 코드가 필요하다는 점입니다. "
+"Tweepy는 이런 페이징을 더 쉽고 적은 코드로 돕기 위해 커서 객체를 가지고 있습니다."
+
+#: ../../cursor_tutorial.rst:20
+msgid "Old way vs Cursor way"
+msgstr "기존 방법 vs 커서 방법"
+
+#: ../../cursor_tutorial.rst:22
+msgid ""
+"First let's demonstrate iterating the statuses in the authenticated "
+"user's timeline. Here is how we would do it the \"old way\" before the "
+"Cursor object was introduced::"
+msgstr ""
+"먼저, 인증된 사용자의 타임라인 내에서 status를 반복하는 방법을 구현해봅시다. "
+"커서 객체가 도입되기 전에 사용하던 \"기존 방법\"은 다음과 같습니다:: "
+
+#: ../../cursor_tutorial.rst:38
+msgid ""
+"As you can see, we must manage the \"page\" parameter manually in our "
+"pagination loop. Now here is the version of the code using the Cursor "
+"object::"
+msgstr ""
+"위 코드에서도 볼 수 있듯, 기존 방법은 페이징 루프마다 "page" 매개변수를 수동으로 관리해야 합니다. "
+"다음은 Tweepy의 커서 객체를 사용하는 예시 코드입니다:: "
+
+#: ../../cursor_tutorial.rst:46
+msgid ""
+"Now that looks much better! Cursor handles all the pagination work for us"
+" behind the scenes, so our code can now focus entirely on processing the "
+"results."
+msgstr ""
+"훨씬 나아 보이는군요! "
+"커서가 보이지 않는 곳에서 모든 페이징 작업을 처리해 주므로, "
+"우리는 결과 처리를 위한 코드에만 집중 할 수 있겠습니다."
+
+#: ../../cursor_tutorial.rst:51
+msgid "Passing parameters into the API method"
+msgstr "API 메소드로 매개변수 전달하기"
+
+#: ../../cursor_tutorial.rst:53
+msgid "What if you need to pass in parameters to the API method?"
+msgstr "API 메소드로 매개변수를 전달해야 한다면 어떻게 하시겠습니까?"
+
+#: ../../cursor_tutorial.rst:59
+msgid ""
+"Since we pass Cursor the callable, we can not pass the parameters "
+"directly into the method. Instead we pass the parameters into the Cursor "
+"constructor method::"
+msgstr ""
+"커서를 호출 가능으로 전달했기 때문에, 메소드에 직접적으로 매개변수를 전달 할 수 없습니다."
+"대신, 다음과 같이 커서 생성자 메소드로 매개변수를 전달합니다::"
+
+#: ../../cursor_tutorial.rst:65
+msgid ""
+"Now Cursor will pass the parameter into the method for us whenever it "
+"makes a request."
+msgstr ""
+"이제 커서는 요청을 받으면 메소드에 매개변수를 전달해 줄 것입니다."
+
+#: ../../cursor_tutorial.rst:69
+msgid "Items or Pages"
+msgstr "항목과 페이지"
+
+#: ../../cursor_tutorial.rst:71
+msgid ""
+"So far we have just demonstrated pagination iterating per item. What if "
+"instead you want to process per page of results? You would use the "
+"pages() method::"
+msgstr ""
+"지금까지 항목당 페이징을 반복하는 방법을 구현해보았습니다. "
+"페이지별로 결과를 처리하려면 어떻게 해야 할까요? "
+"이럴 때는 pages() 메소드를 사용해보세요::"
+
+#: ../../cursor_tutorial.rst:81
+msgid "Limits"
+msgstr "제한"
+
+#: ../../cursor_tutorial.rst:83
+msgid ""
+"What if you only want n items or pages returned? You pass into the "
+"items() or pages() methods the limit you want to impose."
+msgstr ""
+"일정 갯수의 항목이나 페이지만 반환받기를 원한다면 어떻게 해야 할까요? "
+"아래와 같이, items()나 pages() 메소드에 값을 전달하는 것으로 이를 설정 할 수 있습니다."
+

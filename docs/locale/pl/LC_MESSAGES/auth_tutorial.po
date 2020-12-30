@@ -1,0 +1,123 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../auth_tutorial.rst:6
+msgid "Authentication Tutorial"
+msgstr "Poradnik uwierzytelniania"
+
+#: ../../auth_tutorial.rst:9
+msgid "Introduction"
+msgstr "Wprowadzenie"
+
+#: ../../auth_tutorial.rst:11
+msgid "Tweepy supports both OAuth 1a (application-user) and OAuth 2 (application-only) authentication. Authentication is handled by the tweepy.AuthHandler class."
+msgstr "Tweepy wpspiera obydwa sposoby uwierzytelniania - OAuth 1a (aplikacja-użytkownik) oraz OAuth 2 (tylko-aplikacja). Uwierzytelnianie jest obsługiwanie poprzez klasę tweepy.AuthHandler."
+
+#: ../../auth_tutorial.rst:16
+msgid "OAuth 1a Authentication"
+msgstr "Uwierzytelnianie OAuth1a"
+
+#: ../../auth_tutorial.rst:18
+msgid "Tweepy tries to make OAuth 1a as painless as possible for you. To begin the process we need to register our client application with Twitter. Create a new application and once you are done you should have your consumer key and secret. Keep these two handy, you'll need them."
+msgstr "Tweepy stara się ułatwić tobie korzystanie z OAuth 1a. By rozpocząć proces uwierzytelniania musisz zarejestrować swoją rejestrację klienta na Twitterze. Stwórz nową rejestrację a gdy to zrobisz powinieneś posiadać swój klucz konsumenta i sekret. Nie strać ich, będą ci potrzebne."
+
+#: ../../auth_tutorial.rst:24
+msgid "The next step is creating an OAuthHandler instance. Into this we pass our consumer key and secret which was given to us in the previous paragraph::"
+msgstr "Następny krok to stworzenie instancji OAuthHandler. Do instancji tej przekaż swój klucz konsumenta oraz sekret, które zostały ci podane w poprzednim kroku::"
+
+#: ../../auth_tutorial.rst:30
+msgid "If you have a web application and are using a callback URL that needs to be supplied dynamically you would pass it in like so::"
+msgstr "Jeżeli posiadasz aplikacje sieciową i używasz wywołania zwrotnego URL które musi być dostarczone dynamicznie - musisz je także przekazać::"
+
+#: ../../auth_tutorial.rst:36
+msgid "If the callback URL will not be changing, it is best to just configure it statically on twitter.com when setting up your application's profile."
+msgstr "Jeżeli wywołanie zwrotne URL nie będzie zmieniane to najlepiej jest skonfigurować je statycznie na twitter.com gdy ustawiasz swój profil rejestracyjny."
+
+#: ../../auth_tutorial.rst:40
+msgid "Unlike basic auth, we must do the OAuth 1a \"dance\" before we can start using the API. We must complete the following steps:"
+msgstr "W przeciwieństwie do podstawowego uwierzytelniania musisz wykonać \"taniec\" OAuth 1a zanim będziesz mógł zacząć używać API. By to zrobić musisz wykonać następujące kroki:"
+
+#: ../../auth_tutorial.rst:43
+msgid "Get a request token from twitter"
+msgstr "Zdobądź token żądania od Twittera"
+
+#: ../../auth_tutorial.rst:45
+msgid "Redirect user to twitter.com to authorize our application"
+msgstr "Przekieruj użytkownika do twitter.com by uwierzytelnić swoją rejestrację"
+
+#: ../../auth_tutorial.rst:47
+msgid "If using a callback, twitter will redirect the user to us. Otherwise the user must manually supply us with the verifier code."
+msgstr "Jeżeli używasz wywołania zwrotnego to Twitter przekieruje użytkownika do ciebie. W innym wypadku użytkownik musi ręcznie dostarczyć ci kod weryfikacyjny."
+
+#: ../../auth_tutorial.rst:51
+msgid "Exchange the authorized request token for an access token."
+msgstr "Wymień token uwierzytelniania na token dostępu."
+
+#: ../../auth_tutorial.rst:53
+msgid "So let's fetch our request token to begin the dance::"
+msgstr "Pozyskaj token żądania by rozpocząć taniec::"
+
+#: ../../auth_tutorial.rst:60
+msgid "This call requests the token from twitter and returns to us the authorization URL where the user must be redirect to authorize us. Now if this is a desktop application we can just hang onto our OAuthHandler instance until the user returns back. In a web application we will be using a callback request. So we must store the request token in the session since we will need it inside the callback URL request. Here is a pseudo example of storing the request token in a session::"
+msgstr "To wywołanie żąda token od twittera i zwraca tobie zuwierzytelniony URL, w którym użytkownik musi być przekierowany by być zuwierzytelnionym. Jeżeli dzieje się to w aplikacji komputerowej to możesz trzymać się swojej instancji OAuthHandler póki nie wróci użytkownik. W aplikacji sieciowej używane będzie żądanie wywołania zwrotnego. Dlatego też musisz składować w sesji token żądania, gdyż będzie on potrzebny w środku żadania wywołania zwrotnego URL. Poniżej znajduje się przykład składowania tokenu żądania w sesji::"
+
+#: ../../auth_tutorial.rst:71
+msgid "So now we can redirect the user to the URL returned to us earlier from the get_authorization_url() method."
+msgstr "Następnie możesz przekierować użytkownika do URL, który został ci zwrócony z metody get_authorization_url()."
+
+#: ../../auth_tutorial.rst:74
+msgid "If this is a desktop application (or any application not using callbacks) we must query the user for the \"verifier code\" that twitter will supply them after they authorize us. Inside a web application this verifier value will be supplied in the callback request from twitter as a GET query parameter in the URL."
+msgstr "Jeżeli jest to aplikacja komputerowa (lub każda inna aplikacja używająca wywołania zwrotnego) to konieczne jest zapytanie użytkownika o \"kod weryfikacji\", który twitter dostarczy mu gdy zostaniesz zuwierzytelniony. W aplikacji sieciowej wartość weryfikacyjna będzie dostarczona w żądaniu wywołania zwrotnego  od twittera, w formie parametru zapytania GET w URL."
+
+#: ../../auth_tutorial.rst:88
+msgid "The final step is exchanging the request token for an access token. The access token is the \"key\" for opening the Twitter API treasure box. To fetch this token we do the following::"
+msgstr "Ostatnim krokiem jest wymiana tokenu żądania na token dostępu. Token dostępu jest \"kluczem\" otwierającym skarbiec Twitter API. By pozyskać ten token musisz poczynić następujące kroki::"
+
+#: ../../auth_tutorial.rst:105
+msgid "It is a good idea to save the access token for later use. You do not need to re-fetch it each time. Twitter currently does not expire the tokens, so the only time it would ever go invalid is if the user revokes our application access. To store the access token depends on your application. Basically you need to store 2 string values: key and secret::"
+msgstr "Warto jest zachować token dostępu na przyszłość. Nie musisz pozyskiwać go na nowo za każdym razem. Na tę chwilę Twitter nie wygasza ważności tokenów, tak więc stają się one nieważne tylko wtedy gdy użytkownik wycofa dostęp dla twojej aplikacji. Składowanie tokenu dostępu zależne jest od twojej aplikacji. W skrócie - musisz składować dwie wartości jako ciąg znaków: klucz i sekret::"
+
+#: ../../auth_tutorial.rst:115
+msgid "You can throw these into a database, file, or where ever you store your data. To re-build an OAuthHandler from this stored access token you would do this::"
+msgstr "Możesz wrzucić je do bazy danych, pliku lub gdziekolwiek składujesz dane. By ponownie zbudować OAuthHandler z zapisanych tokenów, musisz wykonać następujące kroki::"
+
+#: ../../auth_tutorial.rst:122
+msgid "So now that we have our OAuthHandler equipped with an access token, we are ready for business::"
+msgstr "Twój OAuthHandler jest teraz wyposażony w token dostępu - możesz zacząć pracę::"
+
+#: ../../auth_tutorial.rst:129
+msgid "OAuth 2 Authentication"
+msgstr "Uwierzytelnianie OAuth 2"
+
+#: ../../auth_tutorial.rst:131
+msgid "Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of authentication where an application makes API requests without the user context. Use this method if you just need read-only access to public information."
+msgstr "Tweepy wspiera także uwierzytelnianie OAuth 2. Jest to metoda uwierzytelniania, w której aplikacja wysyła żądania API bez kontekstu użytkownika. Używaj tej metody jeżeli potrzebujesz dostępu tylko do publicznych danych typu do-odczytu."
+
+#: ../../auth_tutorial.rst:136
+msgid "Like OAuth 1a, we first register our client application and acquire a consumer key and secret."
+msgstr "Tak jak w przypadku OAuth 1a, na początku zarejestruj swojego klienta i zdobądź klucz konsumenta oraz sekret."
+
+#: ../../auth_tutorial.rst:139
+msgid "Then we create an AppAuthHandler instance, passing in our consumer key and secret::"
+msgstr "Następnie stwórz instancję AppAuthHandle, przekazując swój klucz konsumenta oraz sekret::"
+
+#: ../../auth_tutorial.rst:144
+msgid "With the bearer token received, we are now ready for business::"
+msgstr "Po otrzymaniu tokenu nosiciela możesz w końcu rozpocząć pracę::"
+

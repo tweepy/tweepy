@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
 import logging
@@ -8,8 +8,7 @@ import sys
 import time
 
 import requests
-import six
-from six.moves.urllib.parse import quote, urlencode
+from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
@@ -22,7 +21,7 @@ log = logging.getLogger(__name__)
 
 def bind_api(**config):
 
-    class APIMethod(object):
+    class APIMethod:
 
         api = config['api']
         path = config['path']
@@ -189,7 +188,7 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
+                    raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
 
@@ -234,7 +233,8 @@ def bind_api(**config):
                     raise TweepError(error_msg, resp, api_code=api_error_code)
 
             # Parse the response payload
-            self.return_cursors = self.return_cursors or 'cursor' in self.session.params
+            self.return_cursors = (self.return_cursors or
+                                   'cursor' in self.session.params or 'next' in self.session.params)
             result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
             # Store result into cache if one is available.
@@ -266,3 +266,10 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
+
+
+def pagination(mode):
+    def decorator(method):
+        method.pagination_mode = mode
+        return method
+    return decorator

@@ -1,10 +1,8 @@
-from __future__ import absolute_import, print_function
-
+import io
 import unittest
 from unittest.case import skip
 
 from mock import MagicMock, patch
-import six
 
 from .config import create_auth
 from .test_utils import mock_tweet
@@ -14,15 +12,9 @@ from tweepy.models import Status
 from tweepy.streaming import ReadBuffer, Stream, StreamListener
 
 
-if six.PY3:
-    getresponse_location = 'http.client.HTTPConnection.getresponse'
-else:
-    getresponse_location = 'httplib.HTTPConnection.getresponse'
-
-
 class MockStreamListener(StreamListener):
     def __init__(self, test_case):
-        super(MockStreamListener, self).__init__()
+        super().__init__()
         self.test_case = test_case
         self.status_count = 0
         self.status_stop_count = 0
@@ -59,31 +51,6 @@ class TweepyStreamTests(unittest.TestCase):
     def on_connect(self):
         API(self.auth).update_status(mock_tweet())
 
-    def test_userstream(self):
-        # Generate random tweet which should show up in the stream.
-
-        self.listener.connect_cb = self.on_connect
-        self.listener.status_stop_count = 1
-        self.stream.userstream()
-        self.assertEqual(self.listener.status_count, 1)
-
-    @skip("Sitestream only available to whitelisted accounts.")
-    def test_sitestream(self):
-        self.listener.connect_cb = self.on_connect
-        self.listener.status_stop_count = 1
-        self.stream.sitestream(follow=[self.auth.get_username()])
-        self.assertEqual(self.listener.status_count, 1)
-
-    def test_userstream_with_params(self):
-        # Generate random tweet which should show up in the stream.
-        def on_connect():
-            API(self.auth).update_status(mock_tweet())
-
-        self.listener.connect_cb = on_connect
-        self.listener.status_stop_count = 1
-        self.stream.userstream(_with='user', replies='all', stall_warnings=True)
-        self.assertEqual(self.listener.status_count, 1)
-
     def test_sample(self):
         self.listener.status_stop_count = 10
         self.stream.sample()
@@ -100,27 +67,27 @@ class TweepyStreamTests(unittest.TestCase):
     def test_track_encoding(self):
         s = Stream(None, None)
         s._start = lambda is_async: None
-        s.filter(track=[u'Caf\xe9'])
+        s.filter(track=['Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['track'])
+        self.assertEqual('Caf\xe9'.encode('utf8'), s.body['track'])
 
     def test_follow_encoding(self):
         s = Stream(None, None)
         s._start = lambda is_async: None
-        s.filter(follow=[u'Caf\xe9'])
+        s.filter(follow=['Caf\xe9'])
 
         # Should be UTF-8 encoded
-        self.assertEqual(u'Caf\xe9'.encode('utf8'), s.body['follow'])
+        self.assertEqual('Caf\xe9'.encode('utf8'), s.body['follow'])
 
 
 class TweepyStreamReadBufferTests(unittest.TestCase):
 
-    stream = six.b("""11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n""")
+    stream = b"""11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n"""
 
     def test_read_tweet(self):
         for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(six.BytesIO(self.stream), length)
+            buf = ReadBuffer(io.BytesIO(self.stream), length)
             self.assertEqual('11\n', buf.read_line())
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
@@ -151,7 +118,7 @@ class TweepyStreamReadBufferTests(unittest.TestCase):
             return ""
 
         # Create a fake stream
-        stream = six.BytesIO(six.b(''))
+        stream = io.BytesIO(b'')
 
         # Mock it's read function so it can't be called too many times
         mock_read = MagicMock(side_effect=on_read)
@@ -170,14 +137,14 @@ class TweepyStreamReadBufferTests(unittest.TestCase):
         self.assertEqual(mock_read.call_count, 0)
 
     def test_read_unicode_tweet(self):
-        stream = six.b('11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n')
+        stream = b'11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n'
         for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(six.BytesIO(stream), length)
+            buf = ReadBuffer(io.BytesIO(stream), length)
             self.assertEqual('11\n', buf.read_line())
             self.assertEqual('{id:12345}\n', buf.read_len(11))
             self.assertEqual('\n', buf.read_line())
             self.assertEqual('23\n', buf.read_line())
-            self.assertEqual(u'{id:23456, test:"\u3053"}\n', buf.read_len(23))
+            self.assertEqual('{id:23456, test:"\u3053"}\n', buf.read_len(23))
 
 
 class TweepyStreamBackoffTests(unittest.TestCase):

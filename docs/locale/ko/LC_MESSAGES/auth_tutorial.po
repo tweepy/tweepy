@@ -1,0 +1,216 @@
+# Authentication Tutorial
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-ko\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-28 09:41+0900\n"
+"PO-Revision-Date: 2019-12-28 11:56+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../auth_tutorial.rst:6
+msgid "Authentication Tutorial"
+msgstr "인증 지침"
+
+#: ../../auth_tutorial.rst:9
+msgid "Introduction"
+msgstr "들어가며"
+
+#: ../../auth_tutorial.rst:11
+msgid ""
+"Tweepy supports both OAuth 1a (application-user) and OAuth 2 "
+"(application-only) authentication. Authentication is handled by the "
+"tweepy.AuthHandler class."
+msgstr ""
+"Tweepy는 OAuth 1a(응용 프로그램-사용자)와 OAuth 2a(응용프로그램 전용)을 모두 지원합니다. "
+"인증은 tweepy.AuthHandler 클래스를 통해 처리합니다."
+
+#: ../../auth_tutorial.rst:16
+msgid "OAuth 1a Authentication"
+msgstr "OAuth 1a 인증"
+
+#: ../../auth_tutorial.rst:18
+msgid ""
+"Tweepy tries to make OAuth 1a as painless as possible for you. To begin "
+"the process we need to register our client application with Twitter. "
+"Create a new application and once you are done you should have your "
+"consumer key and secret. Keep these two handy, you'll need them."
+msgstr ""
+"Tweepy는 OAuth 1a를 가능한 편리하게 제공하기 위해 노력합니다. "
+"다만, 이 과정을 시작하기 위해선 클라이언트 응용프로그램을 트위터에 등록할 필요가 있습니다. "
+"새로운 응용 프로그램을 생성하고, 그를 실행하기 위해서는 Consumer_key와 Secret을 가져야 합니다. "
+"이 2가지는 필요하므로 잘 보관합시다."
+
+#: ../../auth_tutorial.rst:24
+msgid ""
+"The next step is creating an OAuthHandler instance. Into this we pass our"
+" consumer key and secret which was given to us in the previous "
+"paragraph::"
+msgstr ""
+"아래 코드는 OAuthHandler 인스턴스를 생성하는 코드입니다. "
+"여기에, 위에서 얻은 Consumer_key와와 Secret을 전달합니다:: "
+
+#: ../../auth_tutorial.rst:30
+msgid ""
+"If you have a web application and are using a callback URL that needs to "
+"be supplied dynamically you would pass it in like so::"
+msgstr ""
+"웹 응용 프로그램이 있고 동적일 필요가 있는 콜백 URL을 사용하는 경우, 다음과 같이 전달합니다:: "
+
+#: ../../auth_tutorial.rst:36
+msgid ""
+"If the callback URL will not be changing, it is best to just configure it"
+" statically on twitter.com when setting up your application's profile."
+msgstr ""
+"콜백 URL을 변경하지 않을 경우, 응용 프로그램의 프로필을 설정할 때 "
+"twitter.com에서 정적으로 설정하는 것이 가장 좋습니다."
+
+#: ../../auth_tutorial.rst:40
+msgid ""
+"Unlike basic auth, we must do the OAuth 1a \"dance\" before we can start "
+"using the API. We must complete the following steps:"
+msgstr ""
+"기초적인 인증과는 다르게, 우리는 API를 사용하기 전에 다음의 \"OAuth 1a Dance\"과정이 거쳐야 합니다."
+"다음와 같은 과정을 완벽하게 완료해야 합니다."
+
+#: ../../auth_tutorial.rst:43
+msgid "Get a request token from twitter"
+msgstr "트위터에서 요청 토큰(Request Token)을 가져옵니다."
+
+#: ../../auth_tutorial.rst:45
+msgid "Redirect user to twitter.com to authorize our application"
+msgstr "사용자를 twitter.com으로 리다이렉트 시켜, 응용 프로그램을 인증합니다."
+
+#: ../../auth_tutorial.rst:47
+msgid ""
+"If using a callback, twitter will redirect the user to us. Otherwise the "
+"user must manually supply us with the verifier code."
+msgstr ""
+"콜백을 이용하는 경우, 트위터는 사용자를 우리에게 리다이렉트 할 것입니다. "
+"그렇지 않으면 사용자가 수동으로 검증 코드를 입력해야만 합니다."
+
+
+#: ../../auth_tutorial.rst:51
+msgid "Exchange the authorized request token for an access token."
+msgstr "인증된 요청 토큰을 접근 토큰(Access Token)으로 교체합니다."
+
+#: ../../auth_tutorial.rst:53
+msgid "So let's fetch our request token to begin the dance::"
+msgstr "자, 이제 인증 과정을 진행하기 위해 요청 토큰을 가져옵시다."
+
+#: ../../auth_tutorial.rst:60
+msgid ""
+"This call requests the token from twitter and returns to us the "
+"authorization URL where the user must be redirect to authorize us. Now if"
+" this is a desktop application we can just hang onto our OAuthHandler "
+"instance until the user returns back. In a web application we will be "
+"using a callback request. So we must store the request token in the "
+"session since we will need it inside the callback URL request. Here is a "
+"pseudo example of storing the request token in a session::"
+msgstr ""
+"이 호출은 트위터를 통하여 토큰을 요청하고, 사용자가 인증을 위해 리다이렉트 되어야 하는 인증 URL을 반환합니다. "
+"만약 데스크탑 응용 프로그램인 경우, 사용자가 돌아올 때까지 OAuthHandler 인스턴스를 유지할 수 있습니다. "
+"따라서, 요청 토큰은 콜백 URL 요청에 필요하므로 세션에 저장해야만 합니다. "
+"다음은 요청한 토큰을 세션에 저장하는 예시 코드입니다::"
+
+#: ../../auth_tutorial.rst:71
+msgid ""
+"So now we can redirect the user to the URL returned to us earlier from "
+"the get_authorization_url() method."
+msgstr ""
+"이제 get_authorization_url() 메소드를 통해, 이전에 반환받은 URL로 사용자를 리다이렉트 할 수 있습니다."
+
+#: ../../auth_tutorial.rst:74
+msgid ""
+"If this is a desktop application (or any application not using callbacks)"
+" we must query the user for the \"verifier code\" that twitter will "
+"supply them after they authorize us. Inside a web application this "
+"verifier value will be supplied in the callback request from twitter as a"
+" GET query parameter in the URL."
+msgstr ""
+"만약 데스크탑 응용 프로그램(또는 콜백을 사용하지 않는 응용 프로그램)이라면, "
+"트위터의 승인 이후 제공되는 \"검증 코드\"를 사용자에게 요구해야 합니다. "
+"웹 응용 프로그램 내에서 이 검증 코드는 URL에서 GET 쿼리 매개변수의 형태로 트위터의 콜백 요청에 의해 제공됩니다."
+
+#: ../../auth_tutorial.rst:88
+msgid ""
+"The final step is exchanging the request token for an access token. The "
+"access token is the \"key\" for opening the Twitter API treasure box. To "
+"fetch this token we do the following::"
+msgstr ""
+"마지막 단계는 요청 토큰을 접근 토큰으로 교체하는 것입니다. "
+"접근 토큰은 트위터 API라는 보물 상자에 접근하기 위한 \"열쇠\"입니다. "
+"이 토큰을 가져오기 위해서는, 다음과 같은 과정을 거쳐야합니다::"
+
+#: ../../auth_tutorial.rst:105
+msgid ""
+"It is a good idea to save the access token for later use. You do not need"
+" to re-fetch it each time. Twitter currently does not expire the tokens, "
+"so the only time it would ever go invalid is if the user revokes our "
+"application access. To store the access token depends on your "
+"application. Basically you need to store 2 string values: key and "
+"secret::"
+msgstr ""
+"차후 사용을 위해 접근 토큰을 저장하는 것은 좋은 생각입니다."
+"이렇게 하면, 사용할 때 마다 계속 접근할 필요가 없어집니다. "
+"트위터는 토큰을 만료시키지 않으므로, 비활성화 되는 때는 사용자가 응용 프로그램 접근을 취소할 때입니다. "
+"접근 토큰을 저장하는 방법은 응용 프로그램에 따라 달라지지만, 기본적으로 Key와 Secret 문자열 값은 저장할 필요가 있습니다:: "
+
+#: ../../auth_tutorial.rst:115
+msgid ""
+"You can throw these into a database, file, or where ever you store your "
+"data. To re-build an OAuthHandler from this stored access token you would"
+" do this::"
+msgstr ""
+"토큰 값은 데이터베이스, 파일, 그 외 데이터 저장 장소에 저장이 가능합니다. "
+"저장된 접근 토큰을 이용해, 다시 OAuthHandler를 실행하기 위해서는 다음과 같은 코드를 이용해야 합니다:: "
+
+#: ../../auth_tutorial.rst:122
+msgid ""
+"So now that we have our OAuthHandler equipped with an access token, we "
+"are ready for business::"
+msgstr ""
+"OAuthHandler가 접근 토큰을 전달받았으므로, 이제 다음 코드를 실행할 수 있습니다:: "
+
+#: ../../auth_tutorial.rst:129
+msgid "OAuth 2 Authentication"
+msgstr "OAuth 2 인증"
+
+#: ../../auth_tutorial.rst:131
+msgid ""
+"Tweepy also supports OAuth 2 authentication. OAuth 2 is a method of "
+"authentication where an application makes API requests without the user "
+"context. Use this method if you just need read-only access to public "
+"information."
+msgstr ""
+"Tweepy는 OAuth 2 인증 방식도 지원합니다. "
+"OAuth 2는 응용 프로그램이 사용자의 특별한 조작 없이도 API 요청을 할 수 있는 인증 방식입니다. "
+"공개된 정보에 대한 읽기 전용 접근만이 필요한 경우 이 방식을 사용하세요."
+
+#: ../../auth_tutorial.rst:136
+msgid ""
+"Like OAuth 1a, we first register our client application and acquire a "
+"consumer key and secret."
+msgstr ""
+"물론 OAuth 1a처럼, 먼저 클라이언트 응용프로그램을 등록하고 Consumer_key와 Secret값을 얻어야 합니다."
+
+#: ../../auth_tutorial.rst:139
+msgid ""
+"Then we create an AppAuthHandler instance, passing in our consumer key "
+"and secret::"
+msgstr ""
+"그런 다음, AppAuthHandler 인스턴스를 생성하고, Consumer_key와 Secret을 전달합니다::"
+
+#: ../../auth_tutorial.rst:144
+msgid "With the bearer token received, we are now ready for business::"
+msgstr "토큰을 전달받았다면, 이제 작업을 시작할 준비가 되었습니다:: "
+

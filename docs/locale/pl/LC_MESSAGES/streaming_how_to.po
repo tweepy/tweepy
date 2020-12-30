@@ -1,0 +1,131 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../streaming_how_to.rst:8
+msgid "Streaming With Tweepy"
+msgstr "Przesyłanie strumieniowe z Tweepy"
+
+#: ../../streaming_how_to.rst:9
+msgid "Tweepy makes it easier to use the twitter streaming api by handling authentication, connection, creating and destroying the session, reading incoming messages, and partially routing messages."
+msgstr "Tweepy ułatwia używanie API Twittera do przesyłania strumieniowego poprzez obsługę uwierzytelniania i połączenia, tworzenia i niszczenia nadchodzących wiadomości oraz częściowe przekierowywanie wiadomości."
+
+#: ../../streaming_how_to.rst:13
+msgid "This page aims to help you get started using Twitter streams with Tweepy by offering a first walk through.  Some features of Tweepy streaming are not covered here. See streaming.py in the Tweepy source code."
+msgstr "Celem tej strony jest objaśnienie pierwszych kroków na temat rozpoczęcia  przesyłania strumieniowego Twittera używając Tweepy. Niektóre funkcje przesyłania strumieniowego Tweepy nie są tu wyjaśnione. Po więcej informacji sprawdź streaming.py w kodzie źródłowym Tweepy."
+
+#: ../../streaming_how_to.rst:17
+msgid "API authorization is required to access Twitter streams. Follow the :ref:`auth_tutorial` if you need help with authentication."
+msgstr "Uwierzytelnienie API jest wymagane by uzyskać dostęp do strumienia Twittera. Sprawdź :ref:`auth_tutorial` jeżeli potrzebujesz pomocy z uwierzytelnianiem."
+
+#: ../../streaming_how_to.rst:21
+msgid "Summary"
+msgstr "Podsumowanie"
+
+#: ../../streaming_how_to.rst:22
+msgid "The Twitter streaming API is used to download twitter messages in real time.  It is useful for obtaining a high volume of tweets, or for creating a live feed using a site stream or user stream. See the `Twitter Streaming API Documentation`_."
+msgstr "API przesyłania strumieniowego Twittera jest używane do pobierania wiadomości z Twittera w czasie rzeczywistym. Jest to przydatne do zdobywania dużej ilości tweetów lub do tworzenia przekazu na żywo używając strumienia strony lub strumienia użytkownika. Zobacz `Dokumentację API przesyłania strumieniowego Twittera`_."
+
+#: ../../streaming_how_to.rst:27
+msgid "The streaming api is quite different from the REST api because the REST api is used to *pull* data from twitter but the streaming api *pushes* messages to a persistent session. This allows the streaming api to download more data in real time than could be done using the REST API."
+msgstr "API przesyłania strumieniowego różni się od REST API ponieważ REST API używane jest do *ściągania* danych z Twittera a API przesyłania strumieniowego *wypycha* wiadomości do trwałej sesji. Pozwala to API przesyłania strumieniowego do pobrania większej ilości danych w czasie rzeczywistym niż jest to możliwe używając REST API."
+
+#: ../../streaming_how_to.rst:33
+msgid "In Tweepy, an instance of **tweepy.Stream** establishes a streaming session and routes messages to **StreamListener** instance.  The **on_data** method of a stream listener receives all messages and calls functions according to the message type. The default **StreamListener** can classify most common twitter messages and routes them to appropriately named methods, but these methods are only stubs."
+msgstr "W Tweepy, instancja **tweepy.Stream** ustanawia sesję przesyłania strumieniowego i przekierowywuje wiadomości do instancji **StreamListener**. Metoda **on_data** odbiornika strumienia otrzymuje wszystkie wiadomości i nazywa funkcje według typu wiadomości. Domyślny **StreamListener** może sklasyfikować większość prostych wiadomości z Twittera i przekierować je do odpowiednio nazwanych metod, jednak metody te są tylko pniami."
+
+#: ../../streaming_how_to.rst:41
+msgid "Therefore using the streaming api has three steps."
+msgstr "Używanie API przesyłania strumieniowego zawiera się w trzech krokach."
+
+#: ../../streaming_how_to.rst:43
+msgid "Create a class inheriting from **StreamListener**"
+msgstr "Utwórz klasę dziedziczącą od **StreamListener**"
+
+#: ../../streaming_how_to.rst:45
+msgid "Using that class create a **Stream** object"
+msgstr "Używając tej klasy stwórz obiekt **Stream**"
+
+#: ../../streaming_how_to.rst:47
+msgid "Connect to the Twitter API using the **Stream**."
+msgstr "Połącz się z Twitter API używając **Stream**."
+
+#: ../../streaming_how_to.rst:51
+msgid "Step 1: Creating a **StreamListener**"
+msgstr "Krok 1: Tworzenie  **StreamListener**"
+
+#: ../../streaming_how_to.rst:52
+msgid "This simple stream listener prints status text. The **on_data** method of Tweepy's **StreamListener** conveniently passes data from statuses to the **on_status** method. Create class **MyStreamListener** inheriting from  **StreamListener** and overriding **on_status**.::"
+msgstr "Ten prosty odbiornik strumienia wyświetla tekst statusu. Metoda **on_data** używana przez **StreamListener** Tweepy wygodnie przekazuje dane ze statuu do metody **on_status**. Stwórz klasę **MyStreamListener* dziedziczącą od **StreamListener** i nadpisującą **on_status**.::"
+
+#: ../../streaming_how_to.rst:65
+msgid "Step 2: Creating a **Stream**"
+msgstr "Krok 2: Tworzenie **Stream**"
+
+#: ../../streaming_how_to.rst:66
+msgid "We need an api to stream. See :ref:`auth_tutorial` to learn how to get an api object. Once we have an api and a status listener we can create our stream object.::"
+msgstr "Do przesyłania strumieniowego potrzebne jest API. Zajrzyj do :ref:`auth_tutorial` by dowiedzieć się jak zdobyć obiekt API. Gdy masz już API oraz odbiornik statusu, możesz stworzyć własny obiekt strumienia.::"
+
+#: ../../streaming_how_to.rst:73
+msgid "Step 3: Starting a Stream"
+msgstr "Krok 3: Uruchamianie strumienia"
+
+#: ../../streaming_how_to.rst:74
+msgid "A number of twitter streams are available through Tweepy. Most cases will use filter, the user_stream, or the sitestream. For more information on the capabilities and limitations of the different streams see `Twitter Streaming API Documentation`_."
+msgstr "W Tweepy dostępne są różne strumienie Twittera. W większości przypadków będą one używać filtrów user_stream lub sitestream. Po więcej informacji na temat możliwości i ograniczeń poszczególnych strumieni zajrzyj do `Dokumentacji API przesyłania strumieniowego Twittera`_."
+
+#: ../../streaming_how_to.rst:79
+msgid "In this example we will use **filter** to stream all tweets containing the word *python*. The **track** parameter is an array of search terms to stream. ::"
+msgstr "W tym przykładzie użyty zostanie **filter** do przesłania strumieniowego wszystkich tweetów zawierających słowo *python*. Parametr *track* jest szykiem wyszukiwanych pojęć. ::"
+
+#: ../../streaming_how_to.rst:84
+msgid "This example shows how to use **filter** to stream tweets by a specific user. The **follow** parameter is an array of IDs. ::"
+msgstr "W tym przykładzie pokazane zostanie jak użyć **filter** do przesyłania strumieniowego tweetów wybranego użytkownika. Parametr **follow** jest szykiem zawierającym ID. ::"
+
+#: ../../streaming_how_to.rst:88
+msgid "An easy way to find a single ID is to use one of the many conversion websites: search for 'what is my twitter ID'."
+msgstr "Prostym sposobem na znalezienie pojedyńczego ID jest użycie jednej z wielu stron internetowych do konwersji: szukaj 'jakie jest moje twitter ID'."
+
+#: ../../streaming_how_to.rst:91
+msgid "A Few More Pointers"
+msgstr "Kilka innych wskaźników"
+
+#: ../../streaming_how_to.rst:94
+msgid "Async Streaming"
+msgstr "Przesyłanie strumieniowe asynchroniczne"
+
+#: ../../streaming_how_to.rst:95
+msgid "Streams do not terminate unless the connection is closed, blocking the thread. Tweepy offers a convenient **is_async** parameter on **filter** so the stream will run on a new thread. For example ::"
+msgstr "Strumienie nie zatrzymują się dopóki połączenie nie zostanie zamknięte, co zablokuje nić. Tweepy oferuje wygodny parametr **is_async** w **filter** co pozwala strumieniowi działać na nowej nici. Na przykład: ::"
+
+#: ../../streaming_how_to.rst:102
+msgid "Handling Errors"
+msgstr "Obsługa błędów"
+
+#: ../../streaming_how_to.rst:103
+msgid "When using Twitter's streaming API one must be careful of the dangers of rate limiting. If clients exceed a limited number of attempts to connect to the streaming API in a window of time, they will receive error 420.  The amount of time a client has to wait after receiving error 420 will increase exponentially each time they make a failed attempt."
+msgstr "Używając API przesyłania strumieniowego Twittera należy być świadomym niebezpieczeństw związanych z limitowaniem współczynników. Jeżeli klient przekroczy liczbę prób połqczenia w określonym czasie z API przesyłania strumieniowego to zwrócony zostanie błąd 420. Czas oczekiwania na ponowną próbę połączenia po otrzymaniu błędu 420 będzie gwałtownie zwiększał się za każdą kolejną nieudaną próbą."
+
+#: ../../streaming_how_to.rst:108
+msgid "Tweepy's **Stream Listener** passes error codes to an **on_error** stub. The default implementation returns **False** for all codes, but we can override it to allow Tweepy to reconnect for some or all codes, using the backoff strategies recommended in the `Twitter Streaming API Connecting Documentation`_. ::"
+msgstr "**Stream Listener** Tweepy przekazuje kod błędu do pnia **on_error**. Domyślne ustawienie zwraca **False** dla wszytkich kodów, jednak możliwe jest nadpisanie ustawień tak by umożliwiły one Tweepy ponowne połączenie się po otrzymaniu części lub wszystkich kodów. Możliwe jest to używając strategii rekomendowanych w `Dokumentacji łączenia z API przesyłania strumieniowego Twittera`_.::"
+
+#: ../../streaming_how_to.rst:123
+msgid "For more information on error codes from the Twitter API see `Twitter Response Codes Documentation`_."
+msgstr "Po więcej informacji na temat kodów błędów z API Twittera zajrzyj do `Dokumentacji kodów odpowiedzi Twittera`_."
+

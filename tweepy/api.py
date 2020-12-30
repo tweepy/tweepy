@@ -1,19 +1,18 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
+import imghdr
 import mimetypes
 import os
 
-import six
-
-from tweepy.binder import bind_api
+from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
-class API(object):
+class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
@@ -89,13 +88,15 @@ class API(object):
     @property
     def home_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param: 'since_id', 'max_id', 'count'
+            :allowed_param: 'count', 'since_id', 'max_id', 'trim_user',
+                            'exclude_replies', 'include_entities'
         """
         return bind_api(
             api=self,
             path='/statuses/home_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
+            allowed_param=['count', 'since_id', 'max_id', 'trim_user',
+                           'exclude_replies', 'include_entities'],
             require_auth=True
         )
 
@@ -119,17 +120,17 @@ class API(object):
     @property
     def user_timeline(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline
-            :allowed_param: 'id', 'user_id', 'screen_name', 'since_id',
-                            'max_id', 'count', 'include_rts', 'trim_user',
-                            'exclude_replies'
+            :allowed_param: 'user_id', 'screen_name', 'since_id', 'count',
+                            'max_id', 'trim_user', 'exclude_replies',
+                            'include_rts'
         """
         return bind_api(
             api=self,
             path='/statuses/user_timeline.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'user_id', 'screen_name', 'since_id',
-                           'max_id', 'count', 'include_rts', 'trim_user',
-                           'exclude_replies']
+            allowed_param=['user_id', 'screen_name', 'since_id', 'count',
+                           'max_id', 'trim_user', 'exclude_replies',
+                           'include_rts']
         )
 
     @property
@@ -219,8 +220,21 @@ class API(object):
             :allowed_param:
         """
         f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 4883,
-                                             form_field='media', f=f)
+
+        h = None
+        if f is not None:
+            location = f.tell()
+            h = f.read(32)
+            f.seek(location)
+        file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
+        if file_type == 'gif':
+            max_size = 14649
+        else:
+            max_size = 4883
+
+        headers, post_data = API._pack_image(filename, max_size,
+                                             form_field='media', f=f,
+                                             file_type=file_type)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
@@ -359,15 +373,17 @@ class API(object):
     @property
     def get_oembed(self):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
-            :allowed_param: 'id', 'url', 'maxwidth', 'hide_media',
-                            'omit_script', 'align', 'related', 'lang'
+            :allowed_param: 'url', 'maxwidth', 'hide_media', 'hide_thread',
+                            'omit_script', 'align', 'related', 'lang', 'theme',
+                            'link_color', 'widget_type', 'dnt'
         """
         return bind_api(
             api=self,
             path='/statuses/oembed.json',
             payload_type='json',
-            allowed_param=['id', 'url', 'maxwidth', 'hide_media',
-                           'omit_script', 'align', 'related', 'lang']
+            allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
+                           'omit_script', 'align', 'related', 'lang', 'theme',
+                           'link_color', 'widget_type', 'dnt']
         )
 
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
@@ -691,21 +707,6 @@ class API(object):
             require_auth=True
         )(self, post_data=post_data, headers=headers)
 
-    def update_profile_background_image(self, filename, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_background_image
-            :allowed_param: 'tile', 'include_entities', 'skip_status', 'use'
-        """
-        f = kwargs.pop('file', None)
-        headers, post_data = API._pack_image(filename, 800, f=f)
-        return bind_api(
-            api=self,
-            path='/account/update_profile_background_image.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['tile', 'include_entities', 'skip_status', 'use'],
-            require_auth=True
-        )(post_data=post_data, headers=headers)
-
     def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
@@ -819,7 +820,7 @@ class API(object):
             allowed_param=['cursor'],
             require_auth=True
         )
-    
+
     @property
     def mutes(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
@@ -832,7 +833,6 @@ class API(object):
             allowed_param=['cursor', 'include_entities', 'skip_status'],
             required_auth=True
         )
-           
 
     @property
     def create_mute(self):
@@ -1280,6 +1280,36 @@ class API(object):
                            'include_entities']
         )
 
+    @pagination(mode='next')
+    def search_30_day(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/30day/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
+
+    @pagination(mode='next')
+    def search_full_archive(self, environment_name, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                            'next'
+        """
+        return bind_api(
+            api=self,
+            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            payload_type='status', payload_list=True,
+            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
+                           'next'],
+            require_auth=True
+        )(*args, **kwargs)
+
     @property
     def reverse_geocode(self):
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-reverse_geocode
@@ -1322,18 +1352,6 @@ class API(object):
         )
 
     @property
-    def geo_similar_places(self):
-        """ :reference: https://dev.twitter.com/rest/reference/get/geo/similar_places
-            :allowed_param:'lat', 'long', 'name', 'contained_within'
-        """
-        return bind_api(
-            api=self,
-            path='/geo/similar_places.json',
-            payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'name', 'contained_within']
-        )
-
-    @property
     def supported_languages(self):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
         return bind_api(
@@ -1356,7 +1374,7 @@ class API(object):
     """ Internal use only """
 
     @staticmethod
-    def _pack_image(filename, max_size, form_field='image', f=None):
+    def _pack_image(filename, max_size, form_field='image', f=None, file_type=None):
         """Pack image from file into multipart-formdata post body"""
         # image must be less than 700kb in size
         if f is None:
@@ -1377,15 +1395,21 @@ class API(object):
             f.seek(0)  # Reset to beginning of file
             fp = f
 
-        # image must be gif, jpeg, or png
-        file_type = mimetypes.guess_type(filename)
+        # image must be gif, jpeg, png, webp
+        if not file_type:
+            h = None
+            if f is not None:
+                h = f.read(32)
+                f.seek(0)
+            file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        file_type = file_type[0]
-        if file_type not in ['image/gif', 'image/jpeg', 'image/png']:
+        if file_type in ['gif', 'jpeg', 'png', 'webp']:
+            file_type = 'image/' + file_type
+        elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError('Invalid file type for image: %s' % file_type)
 
-        if isinstance(filename, six.text_type):
+        if isinstance(filename, str):
             filename = filename.encode('utf-8')
 
         BOUNDARY = b'Tw3ePy'
