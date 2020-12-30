@@ -134,14 +134,6 @@ class Status(Model):
 
         return NotImplemented
 
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
-
 
 class User(Model):
 
@@ -218,14 +210,6 @@ class User(Model):
             return self.id == other.id
 
         return NotImplemented
-
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
 
 
 class DirectMessage(Model):
