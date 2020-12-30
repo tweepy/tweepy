@@ -36,12 +36,6 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if isinstance(consumer_key, str):
-            consumer_key = consumer_key.encode('ascii')
-
-        if isinstance(consumer_secret, str):
-            consumer_secret = consumer_secret.encode('ascii')
-
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = None
