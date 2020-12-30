@@ -227,7 +227,7 @@ class User(Model):
     
     def __hash__(self):
         if hasattr(self, 'id'):
-            return hash(self.id)
+            return self.id
         else:
             raise TypeError('unhashable type: {} (no id attribute)'.format(type(self)))
 
