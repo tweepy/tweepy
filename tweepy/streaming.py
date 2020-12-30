@@ -118,6 +118,7 @@ class StreamListener:
         """Called when a user withheld content notice arrives"""
         return
 
+
 class ReadBuffer:
     """Buffer data from the response in a smarter way than httplib/requests can.
 
@@ -189,7 +190,7 @@ class Stream:
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        self.chunk_size = options.get("chunk_size", 512)
 
         self.verify = options.get("verify", True)
 
@@ -198,7 +199,7 @@ class Stream:
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
-        
+
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
         self.host = options.get('host', 'stream.twitter.com')
