@@ -2,6 +2,7 @@
 # Copyright 2009-2020 Joshua Roesslein
 # See LICENSE for details.
 
+from tweepy.mixins import Hashable
 from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
 
 
@@ -82,7 +83,7 @@ class Model:
         return '%s(%s)' % (self.__class__.__name__, ', '.join(state))
 
 
-class Status(Model):
+class Status(Model, Hashable):
 
     @classmethod
     def parse(cls, api, json):
@@ -128,14 +129,8 @@ class Status(Model):
     def favorite(self):
         return self._api.create_favorite(self.id)
 
-    def __eq__(self, other):
-        if isinstance(other, Status):
-            return self.id == other.id
 
-        return NotImplemented
-
-
-class User(Model):
+class User(Model, Hashable):
 
     @classmethod
     def parse(cls, api, json):
@@ -204,15 +199,6 @@ class User(Model):
         return self._api.followers_ids(user_id=self.id,
                                        *args,
                                        **kwargs)
-
-    def __eq__(self, other):
-        if isinstance(other, User):
-            return self.id == other.id
-
-        return NotImplemented
-
-    def __hash__(self):
-        return self.id
 
 
 class DirectMessage(Model):
