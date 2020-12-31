@@ -211,6 +211,9 @@ class User(Model):
 
         return NotImplemented
 
+    def __hash__(self):
+        return self.id
+
 
 class DirectMessage(Model):
 
