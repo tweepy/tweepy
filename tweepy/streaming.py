@@ -333,9 +333,9 @@ class Stream:
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, is_async):
+    def _start(self, threaded):
         self.running = True
-        if is_async:
+        if threaded:
             self._thread = Thread(target=self._run)
             self._thread.daemon = self.daemon
             self._thread.start()
@@ -346,7 +346,7 @@ class Stream:
         """ Called when the response has been closed by Twitter """
         pass
 
-    def sample(self, is_async=False, languages=None, stall_warnings=False):
+    def sample(self, threaded=False, languages=None, stall_warnings=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
@@ -355,9 +355,9 @@ class Stream:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
             self.session.params['stall_warnings'] = 'true'
-        self._start(is_async)
+        self._start(threaded)
 
-    def filter(self, follow=None, track=None, is_async=False, locations=None,
+    def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
         self.body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
@@ -380,7 +380,7 @@ class Stream:
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {'delimited': 'length'}
-        self._start(is_async)
+        self._start(threaded)
 
     def disconnect(self):
         self.running = False
