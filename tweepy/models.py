@@ -212,10 +212,7 @@ class User(Model):
         return NotImplemented
 
     def __hash__(self):
-        if hasattr(self, 'id'):
-            return self.id
-        else:
-            raise TypeError('unhashable type: {} (no id attribute)'.format(type(self)))
+        return self.id
 
 
 class DirectMessage(Model):
