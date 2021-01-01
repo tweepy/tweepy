@@ -28,10 +28,10 @@ class AsyncStream:
         Consumer key
     consumer_secret: :class:`str`
         Consuemr secret
-    oauth_token: :class:`str`
-        OAuth token
-    oauth_token_secret: :class:`str`
-        OAuth token secret
+    access_token: :class:`str`
+        Access token
+    access_token_secret: :class:`str`
+        Access token secret
     max_retry: Optional[:class:`int`]
         Number of times to attempt to (re)connect the stream.
         Defaults to infinite.
@@ -39,12 +39,12 @@ class AsyncStream:
         Proxy URL
     """
 
-    def __init__(self, consumer_key, consumer_secret, oauth_token,
-                 oauth_token_secret, max_retry=inf, proxy=None):
+    def __init__(self, consumer_key, consumer_secret, access_token,
+                 access_token_secret, max_retry=inf, proxy=None):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
-        self.oauth_token = oauth_token
-        self.oauth_token_secret = oauth_token_secret
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
         self.max_retry = max_retry
         self.proxy = proxy
 
@@ -69,7 +69,7 @@ class AsyncStream:
         url = str(URL(url).with_query(sorted(params.items())))
 
         oauth_client = OAuthClient(self.consumer_key, self.consumer_secret,
-                                   self.oauth_token, self.oauth_token_secret)
+                                   self.access_token, self.access_token_secret)
 
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
