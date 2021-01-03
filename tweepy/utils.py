@@ -13,15 +13,6 @@ def parse_a_href(atag):
     return atag[start:end]
 
 
-def convert_to_utf8_str(arg):
-    # written by Michael Norton (http://docondev.blogspot.com/)
-    if isinstance(arg, str):
-        arg = arg.encode('utf-8')
-    elif not isinstance(arg, bytes):
-        arg = str(arg).encode('utf-8')
-    return arg
-
-
 def list_to_csv(item_list):
     if item_list:
         return ','.join(map(str, item_list))

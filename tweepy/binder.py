@@ -12,7 +12,6 @@ from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
-from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile(r'{\w+}')
 
@@ -92,7 +91,7 @@ def bind_api(**config):
                 if arg is None:
                     continue
                 try:
-                    self.session.params[self.allowed_param[idx]] = convert_to_utf8_str(arg)
+                    self.session.params[self.allowed_param[idx]] = str(arg)
                 except IndexError:
                     raise TweepError('Too many parameters supplied!')
 
@@ -102,7 +101,7 @@ def bind_api(**config):
                 if k in self.session.params:
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
 
-                self.session.params[k] = convert_to_utf8_str(arg)
+                self.session.params[k] = str(arg)
 
             log.debug("PARAMS: %r", self.session.params)
 
