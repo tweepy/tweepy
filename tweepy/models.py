@@ -2,8 +2,10 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
+from email.utils import parsedate_to_datetime
+
 from tweepy.mixins import Hashable
-from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
+from tweepy.utils import parse_a_href, parse_html_value
 
 
 class ResultSet(list):
@@ -96,7 +98,7 @@ class Status(Model, Hashable):
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
             elif k == 'created_at':
-                setattr(status, k, parse_datetime(v))
+                setattr(status, k, parsedate_to_datetime(v))
             elif k == 'source':
                 if '<' in v:
                     setattr(status, k, parse_html_value(v))
@@ -138,7 +140,7 @@ class User(Model, Hashable):
         setattr(user, '_json', json)
         for k, v in json.items():
             if k == 'created_at':
-                setattr(user, k, parse_datetime(v))
+                setattr(user, k, parsedate_to_datetime(v))
             elif k == 'status':
                 setattr(user, k, Status.parse(api, v))
             elif k == 'following':
@@ -257,7 +259,7 @@ class SavedSearch(Model):
         ss = cls(api)
         for k, v in json.items():
             if k == 'created_at':
-                setattr(ss, k, parse_datetime(v))
+                setattr(ss, k, parsedate_to_datetime(v))
             else:
                 setattr(ss, k, v)
         return ss
@@ -295,7 +297,7 @@ class List(Model):
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
             elif k == 'created_at':
-                setattr(lst, k, parse_datetime(v))
+                setattr(lst, k, parsedate_to_datetime(v))
             else:
                 setattr(lst, k, v)
         return lst

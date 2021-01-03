@@ -2,13 +2,6 @@
 # Copyright 2010-2021 Joshua Roesslein
 # See LICENSE for details.
 
-from datetime import datetime
-from email.utils import parsedate
-
-
-def parse_datetime(string):
-    return datetime(*(parsedate(string)[:6]))
-
 
 def parse_html_value(html):
     return html[html.find('>')+1:html.rfind('<')]
