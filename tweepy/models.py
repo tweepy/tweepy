@@ -5,7 +5,6 @@
 from email.utils import parsedate_to_datetime
 
 from tweepy.mixins import Hashable
-from tweepy.utils import parse_a_href, parse_html_value
 
 
 class ResultSet(list):
@@ -101,8 +100,12 @@ class Status(Model, Hashable):
                 setattr(status, k, parsedate_to_datetime(v))
             elif k == 'source':
                 if '<' in v:
-                    setattr(status, k, parse_html_value(v))
-                    setattr(status, 'source_url', parse_a_href(v))
+                    # At this point, v should be of the format:
+                    # <a href="{source_url}" rel="nofollow">{source}</a>
+                    setattr(status, k, v[v.find('>') + 1:v.rfind('<')])
+                    start = v.find('"') + 1
+                    end = v.find('"', start)
+                    setattr(status, 'source_url', v[start:end])
                 else:
                     setattr(status, k, v)
                     setattr(status, 'source_url', None)
