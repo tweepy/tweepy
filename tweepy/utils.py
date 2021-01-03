@@ -24,4 +24,4 @@ def convert_to_utf8_str(arg):
 
 def list_to_csv(item_list):
     if item_list:
-        return ','.join([str(i) for i in item_list])
+        return ','.join(map(str, item_list))
