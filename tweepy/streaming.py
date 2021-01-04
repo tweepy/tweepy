@@ -216,7 +216,6 @@ class Stream:
         # Connect and process the stream
         error_counter = 0
         resp = None
-        exc_info = None
         try:
             while self.running:
                 if self.retry_count is not None:
