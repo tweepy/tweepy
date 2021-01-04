@@ -273,10 +273,6 @@ class Stream:
                 resp.close()
             self.new_session()
 
-    def _data(self, data):
-        if self.listener.on_data(data) is False:
-            self.running = False
-
     def _read_loop(self, resp):
         charset = resp.headers.get('content-type', default='')
         enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
@@ -302,7 +298,8 @@ class Stream:
 
             next_status_obj = buf.read_len(length)
             if self.running and next_status_obj:
-                self._data(next_status_obj)
+                if self.listener.on_data(next_status_obj) is False:
+                    self.running = False
 
             # # Note: keep-alive newlines might be inserted before each length value.
             # # read until we get a digit...
@@ -327,8 +324,8 @@ class Stream:
             #     status_id = int(delimited_string)
             #     next_status_obj = resp.raw.read(status_id)
             #     if self.running:
-            #         self._data(next_status_obj.decode('utf-8'))
-
+            #         if self.listener.on_data(next_status_obj.decode('utf-8')) is False:
+            #             self.running = False
 
         if resp.raw.closed:
             self.on_closed(resp)
