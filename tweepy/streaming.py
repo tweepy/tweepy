@@ -296,9 +296,9 @@ class Stream:
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
-            if self.running and next_status_obj:
-                if self.listener.on_data(next_status_obj) is False:
+            data = buf.read_len(length)
+            if self.running and data:
+                if self.listener.on_data(data) is False:
                     self.running = False
 
             # # Note: keep-alive newlines might be inserted before each length value.
@@ -322,9 +322,9 @@ class Stream:
             # # read the next twitter status object
             # if delimited_string.decode('utf-8').strip().isdigit():
             #     status_id = int(delimited_string)
-            #     next_status_obj = resp.raw.read(status_id)
+            #     data = resp.raw.read(status_id)
             #     if self.running:
-            #         if self.listener.on_data(next_status_obj.decode('utf-8')) is False:
+            #         if self.listener.on_data(data.decode('utf-8')) is False:
             #             self.running = False
 
         if resp.raw.closed:
