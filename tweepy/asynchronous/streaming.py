@@ -340,18 +340,14 @@ class AsyncStream:
 
         This is called when a status withheld content notice is received.
         """
-        log.debug(
-            f"Received status withheld content notice: {notice}"
-        )
+        log.debug(f"Received status withheld content notice: {notice}")
 
     async def on_user_withheld(self, notice):
         """This method is a coroutine.
 
         This is called when a user withheld content notice is received.
         """
-        log.debug(
-            f"Received user withheld content notice: {notice}"
-        )
+        log.debug(f"Received user withheld content notice: {notice}")
 
     async def on_warning(self, notice):
         """This method is a coroutine.
