@@ -247,8 +247,7 @@ class Stream:
                         self.snooze_time = self.snooze_time_step
                         self.listener.on_connect()
                         self._read_loop(resp)
-                except (requests.ReadTimeout, requests.Timeout,
-                        ssl.SSLError) as exc:
+                except (requests.Timeout, ssl.SSLError) as exc:
                     # This is still necessary, as a SSLError can actually be
                     # thrown when using Requests
                     # If it's not time out treat it like any other exception
