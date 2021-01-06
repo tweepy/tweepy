@@ -149,24 +149,15 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
-                # handle running out of api calls
-                if self.wait_on_rate_limit:
-                    if self._reset_time is not None:
-                        if self._remaining_calls is not None:
-                            if self._remaining_calls < 1:
-                                sleep_time = self._reset_time - int(time.time())
-                                if sleep_time > 0:
-                                    if self.wait_on_rate_limit_notify:
-                                        log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
-                                    time.sleep(sleep_time + 5)  # sleep for few extra sec
-
-                # if self.wait_on_rate_limit and self._reset_time is not None and \
-                #                 self._remaining_calls is not None and self._remaining_calls < 1:
-                #     sleep_time = self._reset_time - int(time.time())
-                #     if sleep_time > 0:
-                #         if self.wait_on_rate_limit_notify:
-                #             log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
-                #         time.sleep(sleep_time + 5)  # sleep for few extra sec
+                if (self.wait_on_rate_limit and self._reset_time is not None
+                    and self._remaining_calls is not None
+                    and self._remaining_calls < 1):
+                    # Handle running out of API calls
+                    sleep_time = self._reset_time - int(time.time())
+                    if sleep_time > 0:
+                        if self.wait_on_rate_limit_notify:
+                            log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
+                        time.sleep(sleep_time + 5)  # Sleep for few extra sec
 
                 # Apply authentication
                 auth = None
