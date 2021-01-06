@@ -198,15 +198,15 @@ def bind_api(**config):
                 reset_time = resp.headers.get('x-rate-limit-reset')
                 if reset_time is not None:
                     self._reset_time = int(reset_time)
-                if self.wait_on_rate_limit and self._remaining_calls == 0 and (
-                        # if ran out of calls before waiting switching retry last call
-                        resp.status_code == 429 or resp.status_code == 420):
+                if (self.wait_on_rate_limit and self._remaining_calls == 0
+                    and resp.status_code in (420, 429)):
+                    # If ran out of calls before waiting switching retry last call
                     continue
                 retry_delay = self.retry_delay
                 # Exit request loop if non-retry error code
                 if resp.status_code in (200, 204):
                     break
-                elif (resp.status_code == 429 or resp.status_code == 420) and self.wait_on_rate_limit:
+                elif resp.status_code in (420, 429) and self.wait_on_rate_limit:
                     if 'retry-after' in resp.headers:
                         retry_delay = float(resp.headers['retry-after'])
                 elif self.retry_errors and resp.status_code not in self.retry_errors:
