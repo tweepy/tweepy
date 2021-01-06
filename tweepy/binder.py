@@ -157,7 +157,7 @@ def bind_api(**config):
                     if sleep_time > 0:
                         if self.wait_on_rate_limit_notify:
                             log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
-                        time.sleep(sleep_time + 5)  # Sleep for few extra sec
+                        time.sleep(sleep_time + 1)  # Sleep for extra sec
 
                 # Apply authentication
                 auth = None
