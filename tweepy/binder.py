@@ -189,27 +189,28 @@ def bind_api(**config):
                 except Exception as e:
                     raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
 
-                rem_calls = resp.headers.get('x-rate-limit-remaining')
+                if resp.status_code in (200, 204):
+                    break
 
+                rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)
-                elif isinstance(self._remaining_calls, int):
+                elif self._remaining_calls is not None:
                     self._remaining_calls -= 1
+
                 reset_time = resp.headers.get('x-rate-limit-reset')
                 if reset_time is not None:
                     self._reset_time = int(reset_time)
-                if (self.wait_on_rate_limit and self._remaining_calls == 0
-                    and resp.status_code in (420, 429)):
-                    # If ran out of calls before waiting switching retry last call
-                    continue
+
                 retry_delay = self.retry_delay
-                # Exit request loop if non-retry error code
-                if resp.status_code in (200, 204):
-                    break
-                elif resp.status_code in (420, 429) and self.wait_on_rate_limit:
+                if resp.status_code in (420, 429) and self.wait_on_rate_limit:
+                    if self._remaining_calls == 0:
+                        # If ran out of calls before waiting switching retry last call
+                        continue
                     if 'retry-after' in resp.headers:
                         retry_delay = float(resp.headers['retry-after'])
                 elif self.retry_errors and resp.status_code not in self.retry_errors:
+                    # Exit request loop if non-retry error code
                     break
 
                 # Sleep before retrying request again
