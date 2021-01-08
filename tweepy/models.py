@@ -1,8 +1,10 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.utils import parse_a_href, parse_datetime, parse_html_value
+from email.utils import parsedate_to_datetime
+
+from tweepy.mixins import Hashable
 
 
 class ResultSet(list):
@@ -82,7 +84,7 @@ class Model:
         return f'{self.__class__.__name__}({", ".join(state)})'
 
 
-class Status(Model):
+class Status(Model, Hashable):
 
     @classmethod
     def parse(cls, api, json):
@@ -95,11 +97,15 @@ class Status(Model):
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
             elif k == 'created_at':
-                setattr(status, k, parse_datetime(v))
+                setattr(status, k, parsedate_to_datetime(v))
             elif k == 'source':
                 if '<' in v:
-                    setattr(status, k, parse_html_value(v))
-                    setattr(status, 'source_url', parse_a_href(v))
+                    # At this point, v should be of the format:
+                    # <a href="{source_url}" rel="nofollow">{source}</a>
+                    setattr(status, k, v[v.find('>') + 1:v.rfind('<')])
+                    start = v.find('"') + 1
+                    end = v.find('"', start)
+                    setattr(status, 'source_url', v[start:end])
                 else:
                     setattr(status, k, v)
                     setattr(status, 'source_url', None)
@@ -128,22 +134,8 @@ class Status(Model):
     def favorite(self):
         return self._api.create_favorite(self.id)
 
-    def __eq__(self, other):
-        if isinstance(other, Status):
-            return self.id == other.id
 
-        return NotImplemented
-
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
-
-
-class User(Model):
+class User(Model, Hashable):
 
     @classmethod
     def parse(cls, api, json):
@@ -151,7 +143,7 @@ class User(Model):
         setattr(user, '_json', json)
         for k, v in json.items():
             if k == 'created_at':
-                setattr(user, k, parse_datetime(v))
+                setattr(user, k, parsedate_to_datetime(v))
             elif k == 'status':
                 setattr(user, k, Status.parse(api, v))
             elif k == 'following':
@@ -213,20 +205,6 @@ class User(Model):
                                        *args,
                                        **kwargs)
 
-    def __eq__(self, other):
-        if isinstance(other, User):
-            return self.id == other.id
-
-        return NotImplemented
-
-    def __ne__(self, other):
-        result = self == other
-
-        if result is NotImplemented:
-            return result
-
-        return not result
-
 
 class DirectMessage(Model):
 
@@ -284,7 +262,7 @@ class SavedSearch(Model):
         ss = cls(api)
         for k, v in json.items():
             if k == 'created_at':
-                setattr(ss, k, parse_datetime(v))
+                setattr(ss, k, parsedate_to_datetime(v))
             else:
                 setattr(ss, k, v)
         return ss
@@ -322,7 +300,7 @@ class List(Model):
             if k == 'user':
                 setattr(lst, k, User.parse(api, v))
             elif k == 'created_at':
-                setattr(lst, k, parse_datetime(v))
+                setattr(lst, k, parsedate_to_datetime(v))
             else:
                 setattr(lst, k, v)
         return lst

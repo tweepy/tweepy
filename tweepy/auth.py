@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 import logging
@@ -36,11 +36,12 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if isinstance(consumer_key, str):
-            consumer_key = consumer_key.encode('ascii')
-
-        if isinstance(consumer_secret, str):
-            consumer_secret = consumer_secret.encode('ascii')
+        if not isinstance(consumer_key, (str, bytes)):
+            raise TypeError("Consumer key must be string or bytes, not "
+                            + type(consumer_key).__name__)
+        if not isinstance(consumer_secret, (str, bytes)):
+            raise TypeError("Consumer secret must be string or bytes, not "
+                            + type(consumer_secret).__name__)
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret

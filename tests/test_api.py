@@ -61,7 +61,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testusertimeline.json')
     def testusertimeline(self):
         self.api.user_timeline()
-        self.api.user_timeline('twitter')
+        self.api.user_timeline(screen_name='Twitter')
 
     @tape.use_cassette('testmentionstimeline.json')
     def testmentionstimeline(self):
