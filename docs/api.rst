@@ -856,10 +856,10 @@ List Methods
    ``user_id`` and ``screen_name`` are not provided, the ownerships for the
    authenticating user are returned.
 
-   :param screen_name: |screen_name|
    :param user_id: |user_id|
-   :param cursor: |cursor|
+   :param screen_name: |screen_name|
    :param count: |count|
+   :param cursor: |cursor|
    :rtype: list of :class:`List` objects
 
 
