@@ -445,9 +445,9 @@ class API:
 
     def send_direct_message(self, recipient_id, text, quick_reply_type=None,
                             attachment_type=None, attachment_media_id=None):
-        """
-        Send a direct message to the specified user from the authenticating
-        user
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+            :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
+                            'attachment_type', attachment_media_id'
         """
         json_payload = {
             'event': {'type': 'message_create',
@@ -463,21 +463,13 @@ class API:
         if attachment_type is not None and attachment_media_id is not None:
             message_data['attachment'] = {'type': attachment_type}
             message_data['attachment']['media'] = {'id': attachment_media_id}
-        return self._send_direct_message(json_payload=json_payload)
-
-    @property
-    def _send_direct_message(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
-            :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
-                            'attachment_type', attachment_media_id'
-        """
         return bind_api(
             api=self,
             path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
             require_auth=True
-        )
+        )(json_payload=json_payload)
 
     @property
     def destroy_direct_message(self):
