@@ -1028,7 +1028,7 @@ class API(object):
     @property
     def lists_ownerships(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
-            :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
+            :allowed_param: 'user_id', 'screen_name', 'count', 'cursor'
         """
         return bind_api(
             api=self,
