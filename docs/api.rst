@@ -849,8 +849,7 @@ List Methods
    :rtype: list of :class:`List` objects
 
 
-.. method:: API.lists_ownerships([screen_name], [user_id], [cursor], \
-                                 [count])
+.. method:: API.lists_ownerships([user_id], [screen_name], [count], [cursor])
 
    Returns the lists owned by the specified user. Private lists will
    only be shown if the authenticated user is also the owner of the
