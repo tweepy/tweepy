@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install.rst
    getting_started.rst
    auth_tutorial.rst
    code_snippet.rst

@@ -47,16 +47,19 @@ This page contains some basic documentation for the Tweepy module.
 Timeline methods
 ----------------
 
-.. method:: API.home_timeline([since_id], [max_id], [count], [page])
+.. method:: API.home_timeline([count], [since_id], [max_id], [trim_user], \
+                              [exclude_replies], [include_entities])
 
    Returns the 20 most recent statuses, including retweets, posted by the
    authenticating user and that user's friends. This is the equivalent of
    /timeline/home on the Web.
 
+   :param count: |count|
    :param since_id: |since_id|
    :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
+   :param trim_user: |trim_user|
+   :param exclude_replies: |exclude_replies|
+   :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
 
@@ -76,20 +79,26 @@ Timeline methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], \
-                              [count], [page])
+.. method:: API.user_timeline([user_id/screen_name], [since_id], [count], \
+                              [max_id], [trim_user], [exclude_replies], \
+                              [include_rts])
 
    Returns the 20 most recent statuses posted from the authenticating user or
    the user specified. It's also possible to request another user's timeline
    via the id parameter.
 
-   :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
-   :param page: |page|
+   :param max_id: |max_id|
+   :param trim_user: |trim_user|
+   :param exclude_replies: |exclude_replies|
+   :param include_rts: When set to ``false``, the timeline will strip any
+      native retweets (though they will still count toward both the maximal
+      length of the timeline and the slice selected by the count parameter).
+      Note: If you're using the trim_user parameter in conjunction with
+      include_rts, the retweets will still contain a full user object.
    :rtype: list of :class:`Status` objects
 
 
@@ -282,6 +291,69 @@ Status methods
    :rtype: :class:`Status` object
 
 
+.. method:: API.get_oembed(url, [maxwidth], [hide_media], [hide_thread], \
+                           [omit_script], [align], [related], [lang], \
+                           [theme], [link_color], [widget_type], [dnt])
+
+   Returns a single Tweet, specified by either a Tweet web URL or the Tweet ID,
+   in an oEmbed-compatible format. The returned HTML snippet will be
+   automatically recognized as an Embedded Tweet when Twitter's widget
+   JavaScript is included on the page.
+
+   The oEmbed endpoint allows customization of the final appearance of an
+   Embedded Tweet by setting the corresponding properties in HTML markup to be
+   interpreted by Twitter's JavaScript bundled with the HTML response by
+   default. The format of the returned markup may change over time as Twitter
+   adds new features or adjusts its Tweet representation.
+
+   The Tweet fallback markup is meant to be cached on your servers for up to
+   the suggested cache lifetime specified in the ``cache_age``.
+
+   :param url: The URL of the Tweet to be embedded
+   :param maxwidth: The maximum width of a rendered Tweet in whole pixels. A
+                    supplied value under or over the allowed range will be
+                    returned as the minimum or maximum supported width
+                    respectively; the reset width value will be reflected in
+                    the returned ``width`` property. Note that Twitter does not
+                    support the oEmbed ``maxheight`` parameter. Tweets are
+                    fundamentally text, and are therefore of unpredictable
+                    height that cannot be scaled like an image or video.
+                    Relatedly, the oEmbed response will not provide a value for
+                    ``height``. Implementations that need consistent heights
+                    for Tweets should refer to the ``hide_thread`` and
+                    ``hide_media`` parameters below.
+   :param hide_media: When set to ``true``, ``"t"``, or ``1``, links in a
+                      Tweet are not expanded to photo, video, or link previews.
+   :param hide_thread: When set to ``true``, ``"t"``, or ``1``, a collapsed
+                       version of the previous Tweet in a conversation thread
+                       will not be displayed when the requested Tweet is in
+                       reply to another Tweet.
+   :param omit_script: When set to ``true``, ``"t"``, or ``1``, the
+                       ``<script>`` responsible for loading ``widgets.js`` will
+                       not be returned. Your webpages should include their own
+                       reference to ``widgets.js`` for use across all Twitter
+                       widgets including Embedded Tweets.
+   :param align: Specifies whether the embedded Tweet should be floated left,
+                 right, or center in the page relative to the parent element.
+   :param related: A comma-separated list of Twitter usernames related to your
+                   content. This value will be forwarded to Tweet action
+                   intents if a viewer chooses to reply, like, or retweet the
+                   embedded Tweet.
+   :param lang: Request returned HTML and a rendered Tweet in the specified
+                Twitter language supported by embedded Tweets.
+   :param theme: When set to ``dark``, the Tweet is displayed with light text
+                 over a dark background.
+   :param link_color: Adjust the color of Tweet text links with a hexadecimal
+                      color value.
+   :param widget_type: Set to ``video`` to return a Twitter Video embed for the
+                       given Tweet.
+   :param dnt: When set to ``true``, the Tweet and its embedded page on your
+               site are not used for purposes that include personalized
+               suggestions and personalized ads.
+
+   :rtype: :class:`JSON` object
+
+
 User methods
 ------------
 
@@ -305,7 +377,7 @@ User methods
 .. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
                         [include_user_entities])
 
-   Returns an user's friends ordered in which they were added 100 at a time.
+   Returns a user's friends ordered in which they were added 100 at a time.
    If no user is specified it defaults to the authenticated user.
 
    :param id: |uid|
@@ -382,7 +454,7 @@ Direct Message Methods
 
    Returns a specific direct message.
 
-   :param id: |id|
+   :param id: The id of the Direct Message event that should be returned.
    :param full_text: |full_text|
    :rtype: :class:`DirectMessage` object
 
@@ -468,6 +540,18 @@ Friendship Methods
    :rtype: :class:`Friendship` object
 
 
+.. method:: API.lookup_friendships(user_ids/screen_names)
+
+   Returns the relationships of the authenticated user to the list of up to
+   100 screen_names or user_ids provided.
+
+   :param user_ids: A list of user IDs, up to 100 are allowed in a single
+                    request.
+   :param screen_names: A list of screen names, up to 100 are allowed in a
+                        single request.
+   :rtype: :class:`Relationship` object
+
+
 .. method:: API.friends_ids(id/screen_name/user_id, [cursor])
 
    Returns an array containing the IDs of users being followed by the specified
@@ -520,15 +604,6 @@ Account Methods
 .. method:: API.update_profile_image(filename)
 
    Update the authenticating user's profile image. Valid formats: GIF, JPG, or
-   PNG
-
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
-
-
-.. method:: API.update_profile_background_image(filename)
-
-   Update authenticating user's background image. Valid formats: GIF, JPG, or
    PNG
 
    :param filename: local path to image file to upload. Not a remote URL!
@@ -713,15 +788,15 @@ Saved Searches Methods
    :rtype: :class:`SavedSearch` object
 
 
-Help Methods
-------------
+Search Methods
+--------------
 
 .. method:: API.search(q, [geocode], [lang], [locale], [result_type], \
                        [count], [until], [since_id], [max_id], \
                        [include_entities])
 
    Returns a collection of relevant Tweets matching a specified query.
-   
+
    Please note that Twitter's search service and, by extension, the Search API
    is not meant to be an exhaustive source of Tweets. Not all Tweets will be
    indexed or made available via the search interface.
@@ -766,6 +841,101 @@ Help Methods
    :param max_id: |max_id|
    :param include_entities: |include_entities|
    :rtype: :class:`SearchResults` object
+
+
+.. method:: API.search_30_day(environment_name, query, [tag], [fromDate], \
+                              [toDate], [maxResults], [next])
+
+   Premium search that provides Tweets posted within the last 30 days.
+
+   :param environment_name: The (case-sensitive) label associated with your
+      search developer environment, as displayed at
+      https://developer.twitter.com/en/account/environments.
+   :param query: The equivalent of one premium rule/filter, with up to 1,024
+      characters (256 with Sandbox dev environments).
+      This parameter should include ALL portions of the rule/filter, including
+      all operators, and portions of the rule should not be separated into
+      other parameters of the query.
+   :param tag: Tags can be used to segregate rules and their matching data into
+      different logical groups. If a rule tag is provided, the rule tag is
+      included in the 'matching_rules' attribute.
+      It is recommended to assign rule-specific UUIDs to rule tags and maintain
+      desired mappings on the client side.
+   :param fromDate: The oldest UTC timestamp (from most recent 30 days) from
+      which the Tweets will be provided. Timestamp is in minute granularity and
+      is inclusive (i.e. 12:00 includes the 00 minute).
+      Specified: Using only the fromDate with no toDate parameter will deliver
+      results for the query going back in time from now( ) until the fromDate.
+      Not Specified: If a fromDate is not specified, the API will deliver all
+      of the results for 30 days prior to now( ) or the toDate (if specified).
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the most recent 30 days, starting at the time of the
+      request, going backwards.
+   :param toDate: The latest, most recent UTC timestamp to which the Tweets
+      will be provided. Timestamp is in minute granularity and is not inclusive
+      (i.e. 11:59 does not include the 59th minute of the hour).
+      Specified: Using only the toDate with no fromDate parameter will deliver
+      the most recent 30 days of data prior to the toDate.
+      Not Specified: If a toDate is not specified, the API will deliver all of
+      the results from now( ) for the query going back in time to the fromDate.
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the entire 30-day index, starting at the time of the
+      request, going backwards.
+   :param maxResults: The maximum number of search results to be returned by a
+      request. A number between 10 and the system limit (currently 500, 100 for
+      Sandbox environments). By default, a request response will return 100
+      results.
+   :param next: This parameter is used to get the next 'page' of results. The
+      value used with the parameter is pulled directly from the response
+      provided by the API, and should not be modified.
+
+
+.. method:: API.search_full_archive(environment_name, query, [tag], \
+                                    [fromDate], [toDate], [maxResults], [next])
+
+   Premium search that provides Tweets from as early as 2006, starting with the
+   first Tweet posted in March 2006.
+
+   :param environment_name: The (case-sensitive) label associated with your
+      search developer environment, as displayed at
+      https://developer.twitter.com/en/account/environments.
+   :param query: The equivalent of one premium rule/filter, with up to 1,024
+      characters (256 with Sandbox dev environments).
+      This parameter should include ALL portions of the rule/filter, including
+      all operators, and portions of the rule should not be separated into
+      other parameters of the query.
+   :param tag: Tags can be used to segregate rules and their matching data into
+      different logical groups. If a rule tag is provided, the rule tag is
+      included in the 'matching_rules' attribute.
+      It is recommended to assign rule-specific UUIDs to rule tags and maintain
+      desired mappings on the client side.
+   :param fromDate: The oldest UTC timestamp (from most recent 30 days) from
+      which the Tweets will be provided. Timestamp is in minute granularity and
+      is inclusive (i.e. 12:00 includes the 00 minute).
+      Specified: Using only the fromDate with no toDate parameter will deliver
+      results for the query going back in time from now( ) until the fromDate.
+      Not Specified: If a fromDate is not specified, the API will deliver all
+      of the results for 30 days prior to now( ) or the toDate (if specified).
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the most recent 30 days, starting at the time of the
+      request, going backwards.
+   :param toDate: The latest, most recent UTC timestamp to which the Tweets
+      will be provided. Timestamp is in minute granularity and is not inclusive
+      (i.e. 11:59 does not include the 59th minute of the hour).
+      Specified: Using only the toDate with no fromDate parameter will deliver
+      the most recent 30 days of data prior to the toDate.
+      Not Specified: If a toDate is not specified, the API will deliver all of
+      the results from now( ) for the query going back in time to the fromDate.
+      If neither the fromDate or toDate parameter is used, the API will deliver
+      all results for the entire 30-day index, starting at the time of the
+      request, going backwards.
+   :param maxResults: The maximum number of search results to be returned by a
+      request. A number between 10 and the system limit (currently 500, 100 for
+      Sandbox environments). By default, a request response will return 100
+      results.
+   :param next: This parameter is used to get the next 'page' of results. The
+      value used with the parameter is pulled directly from the response
+      provided by the API, and should not be modified.
 
 
 List Methods
@@ -1134,32 +1304,8 @@ Geo Methods
                     (then this is a radius in meters, but it can also take a
                     string that is suffixed with ft to specify feet).
                     If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
-   :param max_results: A hint as to the maximum number of results to return.
-                       This is only a guideline, which may not be adhered to.
-
-
-.. method:: API.reverse_geocode([lat], [long], [ip], [accuracy], \
-                                [granularity], [max_results])
-
-   Given a latitude and longitude, looks for nearby places (cities and
-   neighbourhoods) whose IDs can be specified in a call to
-   :func:`update_status` to appear as the name of the location. This call
-   provides a detailed response about the location in question; the
-   :func:`nearby_places` function should be preferred for getting a list of
-   places nearby without great detail.
-
-   :param lat: The location's latitude.
-   :param long: The location's longitude.
-   :param ip: The location's IP address. Twitter will attempt to geolocate
-              using the IP address.
-   :param accuracy: Specify the "region" in which to search, such as a number
-                    (then this is a radius in meters, but it can also take a
-                    string that is suffixed with ft to specify feet).
-                    If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be `neighborhood' by default; can also be
-                       `city'.
+   :param granularity: Assumed to be ``neighborhood`` by default; can also be
+                       ``city``.
    :param max_results: A hint as to the maximum number of results to return.
                        This is only a guideline, which may not be adhered to.
 
@@ -1203,7 +1349,7 @@ Media methods
    uploaded media_id. This feature is currently only supported for images and
    GIFs. Call this endpoint to attach additional metadata such as image alt
    text.
-   
+
    :param media_id: The ID of the media to add alt text to.
    :param alt_text: The alt text to add to the image.
 

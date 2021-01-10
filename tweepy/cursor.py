@@ -1,20 +1,24 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, RawParser
 
 
-class Cursor(object):
+class Cursor:
     """Pagination helper class"""
 
     def __init__(self, method, *args, **kwargs):
         if hasattr(method, 'pagination_mode'):
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, *args, **kwargs)
+            elif method.pagination_mode == 'dm_cursor':
+                self.iterator = DMCursorIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'id':
                 self.iterator = IdIterator(method, *args, **kwargs)
+            elif method.pagination_mode == "next":
+                self.iterator = NextIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'page':
                 self.iterator = PageIterator(method, *args, **kwargs)
             else:
@@ -35,7 +39,7 @@ class Cursor(object):
         return i
 
 
-class BaseIterator(object):
+class BaseIterator:
 
     def __init__(self, method, *args, **kwargs):
         self.method = method
@@ -85,6 +89,28 @@ class CursorIterator(BaseIterator):
                                                                **self.kwargs)
         self.num_tweets -= 1
         return data
+
+
+class DMCursorIterator(BaseIterator):
+
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
+        self.next_cursor = self.kwargs.pop('cursor', None)
+        self.page_count = 0
+
+    def next(self):
+        if self.next_cursor == -1 or (self.limit and self.page_count == self.limit):
+            raise StopIteration
+        data = self.method(cursor=self.next_cursor, return_cursors=True, *self.args, **self.kwargs)
+        self.page_count += 1
+        if isinstance(data, tuple):
+            data, self.next_cursor = data
+        else:
+            self.next_cursor = -1
+        return data
+
+    def prev(self):
+        raise TweepError('This method does not allow backwards pagination')
 
 
 class IdIterator(BaseIterator):
@@ -177,6 +203,28 @@ class PageIterator(BaseIterator):
         return self.method(page=self.current_page, *self.args, **self.kwargs)
 
 
+class NextIterator(BaseIterator):
+
+    def __init__(self, method, *args, **kwargs):
+        BaseIterator.__init__(self, method, *args, **kwargs)
+        self.next_token = self.kwargs.pop('next', None)
+        self.page_count = 0
+
+    def next(self):
+        if self.next_token == -1 or (self.limit and self.page_count == self.limit):
+            raise StopIteration
+        data = self.method(next=self.next_token, return_cursors=True, *self.args, **self.kwargs)
+        self.page_count += 1
+        if isinstance(data, tuple):
+            data, self.next_token = data
+        else:
+            self.next_token = -1
+        return data
+
+    def prev(self):
+        raise TweepError('This method does not allow backwards pagination')
+
+
 class ItemIterator(BaseIterator):
 
     def __init__(self, page_iterator):
@@ -192,7 +240,9 @@ class ItemIterator(BaseIterator):
                 raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
-            self.current_page = self.page_iterator.next()
+            self.current_page = next(self.page_iterator)
+            while len(self.current_page) == 0:
+                self.current_page = next(self.page_iterator)
             self.page_index = -1
         self.page_index += 1
         self.num_tweets += 1

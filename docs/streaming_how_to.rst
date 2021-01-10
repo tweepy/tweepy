@@ -54,6 +54,7 @@ The **on_data** method of Tweepy's **StreamListener** conveniently passes
 data from statuses to the **on_status** method.
 Create class **MyStreamListener** inheriting from  **StreamListener** 
 and overriding **on_status**.::
+
   import tweepy
   #override tweepy.StreamListener to add logic to on_status
   class MyStreamListener(tweepy.StreamListener):
@@ -72,7 +73,7 @@ Once we have an api and a status listener we can create our stream object.::
 Step 3: Starting a Stream
 =========================
 A number of twitter streams are available through Tweepy. Most cases 
-will use filter, the user_stream, or the sitestream. 
+will use filter. 
 For more information on the capabilities and limitations of the different
 streams see `Twitter Streaming API Documentation`_.
 

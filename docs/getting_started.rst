@@ -47,7 +47,7 @@ Models
 When we invoke an API method most of the time returned back to us will
 be a Tweepy model class instance. This will contain the data returned
 from Twitter which we can then use inside our application. For example
-the following code returns to us an User model::
+the following code returns to us a User model::
 
    # Get the User object for twitter...
    user = api.get_user('twitter')

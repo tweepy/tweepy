@@ -1,14 +1,13 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 import logging
+from urllib.parse import parse_qs
 
 import requests
-import six
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
-from six.moves.urllib.parse import parse_qs
 
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -20,7 +19,7 @@ https://dev.twitter.com/discussions/21281"""
 log = logging.getLogger(__name__)
 
 
-class AuthHandler(object):
+class AuthHandler:
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
@@ -37,11 +36,12 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == six.text_type:
-            consumer_key = consumer_key.encode('ascii')
-
-        if type(consumer_secret) == six.text_type:
-            consumer_secret = consumer_secret.encode('ascii')
+        if not isinstance(consumer_key, (str, bytes)):
+            raise TypeError("Consumer key must be string or bytes, not "
+                            + type(consumer_key).__name__)
+        if not isinstance(consumer_secret, (str, bytes)):
+            raise TypeError("Consumer secret must be string or bytes, not "
+                            + type(consumer_secret).__name__)
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret

@@ -1,0 +1,1139 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../api.rst:6
+msgid "API Reference"
+msgstr "Odniesienia do API"
+
+#: ../../api.rst:8
+msgid "This page contains some basic documentation for the Tweepy module."
+msgstr "Ta strona zawiera podstawową dokumentację do modułu Tweepy."
+
+#: ../../api.rst:12
+msgid ":mod:`tweepy.api` --- Twitter API wrapper"
+msgstr ":mod:`tweepy.api` --- Twitter API wrapper"
+
+#: ../../api.rst:22
+msgid "This class provides a wrapper for the API as provided by Twitter. The functions provided in this class are listed below."
+msgstr "Ta klasa dostarcza wrapper dla API tak jak dostarczono to przez Twitter. Funkcje dostarczone w tej klasie są zapisane poniżej."
+
+#: ../../api.rst
+msgid "Parameters"
+msgstr "Parametry"
+
+#: ../../api.rst:25
+msgid "authentication handler to be used"
+msgstr "program obsługi autentykacji, który zostanie użyty"
+
+#: ../../api.rst:26
+msgid "general API host"
+msgstr "generalny host API"
+
+#: ../../api.rst:27
+msgid "search API host"
+msgstr "przeszukaj hosta API"
+
+#: ../../api.rst:28
+msgid "cache backend to use"
+msgstr "pamięć podręczna backend, która zostanie użyta"
+
+#: ../../api.rst:29
+msgid "general API path root"
+msgstr "generalna ścieżka korzenia API"
+
+#: ../../api.rst:30
+msgid "search API path root"
+msgstr "przeszukaj ścieżkę korzenia API"
+
+#: ../../api.rst:31
+msgid "default number of retries to attempt when error occurs"
+msgstr "domyślna liczba powtórzeń gdy wystąpi błąd"
+
+#: ../../api.rst:32
+msgid "number of seconds to wait between retries"
+msgstr "liczba sekund oczekiwania pomiędzy powtórzeniami"
+
+#: ../../api.rst:33
+msgid "which HTTP status codes to retry"
+msgstr "który kod statusu HTTP zostanie użyty do powtórzenia"
+
+#: ../../api.rst:34
+msgid "The maximum amount of time to wait for a response from Twitter"
+msgstr "Maksymalna ilość czasu oczekiwania na odpowiedź od Twitter"
+
+#: ../../api.rst:36
+msgid "The object to use for parsing the response from Twitter"
+msgstr "Obiekt, który zostanie użyty do analizy odpowiedzi od Twitter"
+
+#: ../../api.rst:37
+msgid "Whether or not to use GZIP compression for requests"
+msgstr "Czy do żądań ma zostać użyta kompresja GZIP"
+
+#: ../../api.rst:38
+msgid "Whether or not to automatically wait for rate limits to replenish"
+msgstr "Czy automatycznie oczekiwać na wyczerpanie limitów wskaźników"
+
+#: ../../api.rst:40
+msgid "Whether or not to print a notification when Tweepy is waiting for rate limits to replenish"
+msgstr "czy wyświetlać notyfikacje, gdy Tweepy oczekuje na wyczerpanie limitów wskaźników"
+
+#: ../../api.rst:43
+msgid "The full url to an HTTPS proxy to use for connecting to Twitter."
+msgstr "Pełen URL proxy HTTPS, które jest użyte do połączenia z Twitter."
+
+#: ../../api.rst:48
+msgid "Timeline methods"
+msgstr "Metody osi czasu"
+
+#: ../../api.rst:52
+msgid "Returns the 20 most recent statuses, including retweets, posted by the authenticating user and that user's friends. This is the equivalent of /timeline/home on the Web."
+msgstr "Zwraca 20 ostatnich statusów w tym retweety zapostowane przez zuwierzytelnionego użytkownika i jego znajomych. Jest to to samo co  /timeline/home."
+
+#: ../../api.rst:56 ../../api.rst:89 ../../api.rst:101 ../../api.rst:112
+#: ../../api.rst:877
+msgid "|since_id|"
+msgstr "Zwraca tylko statusy z ID większym (tzn. nowszym) niż określone ID."
+
+#: ../../api.rst:57 ../../api.rst:90 ../../api.rst:102 ../../api.rst:113
+#: ../../api.rst:766 ../../api.rst:878
+msgid "|max_id|"
+msgstr "Zwraca tylko statusy z ID mniejszym (tzn. starszym) lub równym określonemu ID."
+
+#: ../../api.rst:58 ../../api.rst:91 ../../api.rst:103 ../../api.rst:114
+#: ../../api.rst:315 ../../api.rst:330 ../../api.rst:395 ../../api.rst:757
+#: ../../api.rst:848 ../../api.rst:861 ../../api.rst:879 ../../api.rst:1026
+msgid "|count|"
+msgstr "Liczba wyników do pobrania na stronę."
+
+#: ../../api.rst:59 ../../api.rst:92 ../../api.rst:104 ../../api.rst:374
+#: ../../api.rst:560 ../../api.rst:611
+msgid "|page|"
+msgstr "Określa którą stronę wyników otrzymać. Uwaga: istnieją limity stronnicowania."
+
+#: ../../api.rst
+msgid "Return type"
+msgstr "Typ zwracany"
+
+#: ../../api.rst:60 ../../api.rst:76 ../../api.rst:93 ../../api.rst:105
+#: ../../api.rst:115 ../../api.rst:274 ../../api.rst:561 ../../api.rst:885
+msgid "list of :class:`Status` objects"
+msgstr "lista obiektów :class:`Status`"
+
+#: ../../api.rst:66
+msgid "Returns full Tweet objects for up to 100 tweets per request, specified by the ``id_`` parameter."
+msgstr "Zwraca pełne obiekty Tweet, do 100 tweetow na jedno żądanie. Sprecyzowane w parametrze ``id_``."
+
+#: ../../api.rst:69
+msgid "A list of Tweet IDs to lookup, up to 100"
+msgstr "Lista ID tweetów do wyszukania, maksymalnie 100"
+
+#: ../../api.rst:70 ../../api.rst:133 ../../api.rst:357 ../../api.rst:502
+#: ../../api.rst:651 ../../api.rst:767 ../../api.rst:880 ../../api.rst:1027
+msgid "|include_entities|"
+msgstr "Ustawione jako false powoduje, że węzeł jednostek nie będzie zawarty. Domyślnie False."
+
+#: ../../api.rst:71 ../../api.rst:128 ../../api.rst:199
+msgid "|trim_user|"
+msgstr "Boolean wskazujacy czy dostarczyć ID użytkowników zamiast kompletnych obiektów user. Domyślnie False."
+
+#: ../../api.rst:72
+msgid "A boolean indicating whether or not to include tweets that cannot be shown. Defaults to False."
+msgstr "Boolean wskazujący czy zawarte będą tweety, które nie mogą być pokazywane. Domyślnie ustawione jako False."
+
+#: ../../api.rst:74 ../../api.rst:134
+msgid "|include_ext_alt_text|"
+msgstr "Jeżeli alt tekst został dodany do którejś z dołączonych jednostek to ten parametr zwróci wartość ext_alt_text w kluczu top-level dla tej jednostki mediów."
+
+#: ../../api.rst:75 ../../api.rst:135
+msgid "|include_card_uri|"
+msgstr "Boolean wkazujący czy otrzymany tweet powinien zawierać atrybut card_uri gdy do tweeta dołączona jest karta ads oraz gdy karta jest dołączona używając wartośći card_uri."
+
+#: ../../api.rst:82
+msgid "Returns the 20 most recent statuses posted from the authenticating user or the user specified. It's also possible to request another user's timeline via the id parameter."
+msgstr "Zwraca 20 ostatnich statusów zapostowanych przez zuwierzytelnionego użytkownika lub wyznaczonego użytkownika. Możliwe jest także zażądanie osi czasu innego użytkownika za pomocą parametru id."
+
+#: ../../api.rst:86 ../../api.rst:292 ../../api.rst:311 ../../api.rst:326
+#: ../../api.rst:441 ../../api.rst:453 ../../api.rst:476 ../../api.rst:487
+#: ../../api.rst:590 ../../api.rst:601 ../../api.rst:630 ../../api.rst:640
+#: ../../api.rst:672
+msgid "|uid|"
+msgstr "Określa ID lub nazwę wyświetlaną użytkownika."
+
+#: ../../api.rst:87 ../../api.rst:293 ../../api.rst:312 ../../api.rst:327
+#: ../../api.rst:443 ../../api.rst:455 ../../api.rst:478 ../../api.rst:489
+#: ../../api.rst:592 ../../api.rst:603 ../../api.rst:632 ../../api.rst:642
+#: ../../api.rst:674 ../../api.rst:828 ../../api.rst:843 ../../api.rst:859
+#: ../../api.rst:909 ../../api.rst:941 ../../api.rst:986 ../../api.rst:1040
+msgid "|user_id|"
+msgstr "Określa ID użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika."
+
+#: ../../api.rst:88 ../../api.rst:294 ../../api.rst:313 ../../api.rst:328
+#: ../../api.rst:442 ../../api.rst:454 ../../api.rst:477 ../../api.rst:488
+#: ../../api.rst:591 ../../api.rst:602 ../../api.rst:631 ../../api.rst:641
+#: ../../api.rst:673 ../../api.rst:827 ../../api.rst:842 ../../api.rst:858
+#: ../../api.rst:908 ../../api.rst:940 ../../api.rst:985 ../../api.rst:1039
+msgid "|screen_name|"
+msgstr "Określa nazwę wyświetlaną użytkownika. Przydatne do rozróżnienia czy nazwa wyświetlana jest taka sama jak ID użytkownika."
+
+#: ../../api.rst:98
+msgid "Returns the 20 most recent tweets of the authenticated user that have been retweeted by others."
+msgstr "Zwraca 20 najnowszych tweetów od zuwierzytelnionego użytkownika, które zostały zretweetowane przez innych."
+
+#: ../../api.rst:110
+msgid "Returns the 20 most recent mentions, including retweets."
+msgstr "Zwraca 20 najnowszych wzmianek, w tym retweety."
+
+#: ../../api.rst:119
+msgid "Status methods"
+msgstr "Metody statusu"
+
+#: ../../api.rst:125
+msgid "Returns a single status specified by the ID parameter."
+msgstr "Zwraca pojedyńczy status określony przez parametr ID."
+
+#: ../../api.rst:127 ../../api.rst:245 ../../api.rst:253 ../../api.rst:262
+#: ../../api.rst:272 ../../api.rst:281 ../../api.rst:569 ../../api.rst:578
+msgid "|sid|"
+msgstr "Numeryczne ID statusu."
+
+#: ../../api.rst:129
+msgid "A boolean indicating if any Tweets returned that have been retweeted by the authenticating user should include an additional current_user_retweet node, containing the ID of the source status for the retweet."
+msgstr "Boolean wskazujący czy tweety, które zostały zretweetowane przez zuwierzytelnionego użytkownika powinny zawierać dodatkowy węzeł current_user_retweet, który zawiera ID statusu źródłowego dla retweeta."
+
+#: ../../api.rst:136 ../../api.rst:209 ../../api.rst:237 ../../api.rst:246
+#: ../../api.rst:254 ../../api.rst:282 ../../api.rst:570 ../../api.rst:579
+msgid ":class:`Status` object"
+msgstr "obiekt :class:`Status`"
+
+#: ../../api.rst:147
+msgid "Updates the authenticating user's current status, also known as Tweeting."
+msgstr "Aktualizuje status zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:149
+msgid "For each update attempt, the update text is compared with the authenticating user's recent Tweets. Any attempt that would result in duplication will be blocked, resulting in a 403 error. A user cannot submit the same status twice in a row."
+msgstr "Dla każdej próby aktualizacji, jej tekst jest porównywany z najnowszym tweetem zuwierzytelnionego użytkownika. Każda próba, której rezultatem był by duplikat, zostanie zablokowana, co spowoduje wystąpienie błędu 403. Użytkownik nie może wysłać tego samego statusu dwa razy pod rząd."
+
+#: ../../api.rst:154
+msgid "While not rate limited by the API, a user is limited in the number of Tweets they can create at a time. If the number of updates posted by the user reaches the current allowed limit this method will return an HTTP 403 error."
+msgstr "Mimo, że nie jest to limitowane przez API, użytkownik może stworzyć maksymalnie określoną liczbę tweetów za jednym razem. Jeżeli liczba aktualizacji zapostowana przez użytkownika osiągnie aktualny limit, metoda tha zwróci błąd HTTP 403."
+
+#: ../../api.rst:158 ../../api.rst:223
+msgid "The text of your status update."
+msgstr "Tekst statusu aktualizacji."
+
+#: ../../api.rst:159
+msgid "The ID of an existing status that the update is in reply to. Note: This parameter will be ignored unless the author of the Tweet this parameter references is mentioned within the status text. Therefore, you must include @username, where username is the author of the referenced Tweet, within the update."
+msgstr "ID istniejącego statusu dla którego odpowiada aktualizacja. Uwaga: Ten parametr zostanie zignorowany, chyba, że autor tweeta, do którego się odnosi jest wspomniany w ramach tekstu statusu. Tak więc w aktualizacji musisz zawrzeć @username, gdzie username jest autorem wspomnianego tweeta."
+
+#: ../../api.rst:164
+msgid "If set to true and used with in_reply_to_status_id, leading @mentions will be looked up from the original Tweet, and added to the new Tweet from there. This wil append @mentions into the metadata of an extended Tweet as a reply chain grows, until the limit on @mentions is reached. In cases where the original Tweet has been deleted, the reply will fail."
+msgstr "Jeżeli ustawione jako true i użyte w in_reply_to_status_id, głowne @mentions będą wyszukane w oryginalnym tweecie i dodane do nowego tweeta. To dołączy @mentions do metaaty istniejącego tweeta wraz z rozwojem łańcucha tweetów, póki nie zostanie osiągnięty limit @mentions. Odpowiedź nie powiedzie się, w przypadkach gdzie oryginalny tweet został usunięty."
+
+#: ../../api.rst:170
+msgid "When used with auto_populate_reply_metadata, a comma-separated list of user ids which will be removed from the server-generated @mentions prefix on an extended Tweet. Note that the leading @mention cannot be removed as it would break the in-reply-to-status-id semantics. Attempting to remove it will be silently ignored."
+msgstr "Gdy użyte z auto_populate_reply_metadata, lista ID użytkowników oddzielona przecinkami zostanie usunięta z wygenerowanego przez serwer prefiksu @mentions na rozszerzonym tweecie. Zauważ, że główne @mention nie mogą być usunięte ponieważ zepsuło by to semantykę in-reply-to-status-id. Próby ich usunięcia będą dyskretnie zignorowane."
+
+#: ../../api.rst:176
+msgid "In order for a URL to not be counted in the status body of an extended Tweet, provide a URL as a Tweet attachment. This URL must be a Tweet permalink, or Direct Message deep link. Arbitrary, non-Twitter URLs must remain in the status text. URLs passed to the attachment_url parameter not matching either a Tweet permalink or Direct Message deep link will fail at Tweet creation and cause an exception."
+msgstr "Aby URL nie był policzony w treść statusu rozszerzonego tweeta, dołacz go jako załącznik. URL ten musi być permalinkiem tweeta lub linkiem Wiadomości Bezpośredniej. Inne nie-twitterowe URL muszą pozostać w tekście statusu. URL przekazane do parametru attachment_url, które nie są przyporządkowane do permalinku tweeta lub Wiadomości Bezpośredniej, nie stworzą tweeta i spowodują wystąpienie wyjątku."
+
+#: ../../api.rst:182
+msgid "A list of media_ids to associate with the Tweet. You may include up to 4 photos or 1 animated GIF or 1 video in a Tweet."
+msgstr "Lista media_ids powiązanych z tweetem. Jeden tweet może zawierać maksymalnie 4 zdjęcia, 1 animowany GIF lub 1 video"
+
+#: ../../api.rst:184
+msgid "If you upload Tweet media that might be considered sensitive content such as nudity, or medical procedures, you must set this value to true."
+msgstr "Jeżeli prześlesz media tweeta, które mogą zawierać wrażliwy kontent taki jak nagość lub procedury medyczne to ta wartość musi być ustawiona jako true."
+
+#: ../../api.rst:187
+msgid "The latitude of the location this Tweet refers to. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there is no corresponding long parameter."
+msgstr "Szerokość geograficzna lokacji do której odnosi się tweet. Ten parametr zostanie zignorowany, chyba, że znajduje się pomiędzy -90.0 a +90.0 (północ to wartość dodatnia). Zostanie on także zignorowany jeżeli nie ma on dopasowanego parametru długości geograficznej."
+
+#: ../../api.rst:191
+msgid "The longitude of the location this Tweet refers to. The valid ranges for longitude are -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there no corresponding lat parameter."
+msgstr "Długość geograficzna do której odnosi się tweet. Poprawne wartości zawieraja się między -180.0 a +180.0 (wschód to wartość dodatnia). Ten parametr zostanie zignorowany jeżeli przekracza ten zakres, nie jest liczbą, gdy geo_enabled  jest wyłączone oraz jeżeli nie ma dopasowanego parametru szerokości geograficznej."
+
+#: ../../api.rst:196
+msgid "A place in the world."
+msgstr "Miejsce gdzieś na świecie."
+
+#: ../../api.rst:197
+msgid "Whether or not to put a pin on the exact coordinates a Tweet has been sent from."
+msgstr "Czy wbić szpilkę w miejsce o dokładnych koordynatach, z których został wysłany Tweet."
+
+#: ../../api.rst:200
+msgid "When set to true, enables shortcode commands for sending Direct Messages as part of the status text to send a Direct Message to a user. When set to false, disables this behavior and includes any leading characters in the status text that is posted"
+msgstr "Gdy ustawione jako true, pozwala używać krótkich komend do wysyłania Wiadomości Bezpośrednich jako częśc tekstu statusu do wysłania do użytkownika. Jeżeli ustawione jako false, powyższe rozwiązanie zostanie wyłączone i zawarte zostaną głowne znaki zapostowanego tekstu statusu."
+
+#: ../../api.rst:204
+msgid "When set to true, causes any status text that starts with shortcode commands to return an API error. When set to false, allows shortcode commands to be sent in the status text and acted on by the API."
+msgstr "Gdy ustawione jako true, powoduje, że jakikolwiek tekst statusu rozpoczęty komendą krótka wywołuje błąd API. Gdy ustawione jako true, pozwala krótkim komendom na zostanie wysłanym w tekście statusu i bycie użytym przez API"
+
+#: ../../api.rst:207
+msgid "Associate an ads card with the Tweet using the card_uri value from any ads card response."
+msgstr "Powiązuje karte reklamową z tweetem używając wartości card_uri z jakiejkolwiek odpowiedzi od karty reklamowej."
+
+#: ../../api.rst:217
+msgid "*Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated user's status. Statuses that are duplicates or too long will be silently ignored."
+msgstr "*Nierekomendowane*: używa :func:`API.media_upload`. Zaktualizuj status zuwierzytelnionego użytkownika. Statusy ktore są duplikatami lub są za długie będą dyskretnie ignorowane."
+
+#: ../../api.rst:221
+msgid "The filename of the image to upload. This will automatically be opened unless `file` is specified"
+msgstr "Nazwa pliku obrazu do wrzucenia. Będzie ona automatycznie otwarta, chyba, że `file` zostanie określone."
+
+#: ../../api.rst:224
+msgid "The ID of an existing status that the update is in reply to."
+msgstr "ID istniejącego już statusu, dla ktorego aktualizacja jest odpowiedzią."
+
+#: ../../api.rst:226
+msgid "Whether to automatically include the @mentions in the status metadata."
+msgstr "Czy automatycznie zawierać @wzmianki w metadacie statusu."
+
+#: ../../api.rst:228
+msgid "The location's latitude that this tweet refers to."
+msgstr "Szerokość geograficzna do której odnosi się tweet."
+
+#: ../../api.rst:229
+msgid "The location's longitude that this tweet refers to."
+msgstr "Długość geograficzna do której odnosi się tweet."
+
+#: ../../api.rst:230
+msgid "Source of the update. Only supported by Identi.ca. Twitter ignores this parameter."
+msgstr "Źródło aktualizacji. Wspierane tylko przez Identi.ca. Twitter ignoruje ten parametr."
+
+#: ../../api.rst:232
+msgid "Twitter ID of location which is listed in the Tweet if geolocation is enabled for the user."
+msgstr "Twitter ID lokacji, która jest wymieniona w tweecie gdy użytkownik ma włączoną geolokację."
+
+#: ../../api.rst:234
+msgid "A file object, which will be used instead of opening `filename`. `filename` is still required, for MIME type detection and to use as a form field in the POST data"
+msgstr "Plik, który zostanie użyty zamiast otwierania `filename`. `filename` jest nadal wymagany dla detekcji typu MIME oraz do używania pola formularzu w danych POST."
+
+#: ../../api.rst:242
+msgid "Destroy the status specified by the id parameter. The authenticated user must be the author of the status to destroy."
+msgstr "Niszczy status określony przez parametr ID. Zuwierzytelniony użytkownik musi być autorem statusu by go zniszczyć."
+
+#: ../../api.rst:251
+msgid "Retweets a tweet. Requires the id of the tweet you are retweeting."
+msgstr "Retweetuje tweet. Wymaga id tweeta, który retweetujesz."
+
+#: ../../api.rst:259
+msgid "Returns up to 100 user IDs belonging to users who have retweeted the Tweet specified by the id parameter."
+msgstr "Zwraca do maksymalnie 100 ID użytkowników, należących do użytkowników, którzy zretweetowali tweeta określonego przez paremetr ID."
+
+#: ../../api.rst:263 ../../api.rst:314 ../../api.rst:329 ../../api.rst:396
+#: ../../api.rst:479 ../../api.rst:490 ../../api.rst:619 ../../api.rst:650
+#: ../../api.rst:660 ../../api.rst:847 ../../api.rst:860 ../../api.rst:974
+#: ../../api.rst:1025
+msgid "|cursor|"
+msgstr "Dzieli wyniki na strony. Ustaw wartość jako -1 by rozpocząć stronnicowanie. Dostarcz wartości tak jak są zwracane w tekście opowiedzi. Atrybuty next_cursor i previous_cursor używane są do przechoznenia na przód i w tył."
+
+#: ../../api.rst:264
+msgid "Have ids returned as strings instead."
+msgstr "ID będą zwracane jago ciąg znaków."
+
+#: ../../api.rst:270
+msgid "Returns up to 100 of the first retweets of the given tweet."
+msgstr "Zwraca do maksymalnie 100 pierwszych retweetów wybranego tweeta."
+
+#: ../../api.rst:273
+msgid "Specifies the number of retweets to retrieve."
+msgstr "Określa liczbę retweetów do pozyskania."
+
+#: ../../api.rst:279
+msgid "Untweets a retweeted status. Requires the id of the retweet to unretweet."
+msgstr "Odtweetowuje zretweetowany status. Wymaga id retweeta."
+
+#: ../../api.rst:286
+msgid "User methods"
+msgstr "Metody użytkownika"
+
+#: ../../api.rst:290
+msgid "Returns information about the specified user."
+msgstr "Zwraca informacje o wybranym użytkowniku."
+
+#: ../../api.rst:295 ../../api.rst:302 ../../api.rst:446 ../../api.rst:456
+#: ../../api.rst:526 ../../api.rst:535 ../../api.rst:548 ../../api.rst:593
+#: ../../api.rst:604 ../../api.rst:633 ../../api.rst:643 ../../api.rst:677
+msgid ":class:`User` object"
+msgstr "obiekt :class:`User`"
+
+#: ../../api.rst:300
+msgid "Returns the authenticated user's information."
+msgstr "Zwraca informacje o zuwierzytelnionym użytkowniku."
+
+#: ../../api.rst:308
+msgid "Returns an user's friends ordered in which they were added 100 at a time. If no user is specified it defaults to the authenticated user."
+msgstr "Zwraca znajomych użytkownika po 100 na raz, posortowanych według chronologii dodania do znajomych. Jeżeli użytkownik nie jest określony to domyślnie będzie użyty zuwierzytelniony użytkownik."
+
+#: ../../api.rst:316 ../../api.rst:331 ../../api.rst:503 ../../api.rst:652
+#: ../../api.rst:1028
+msgid "|skip_status|"
+msgstr "Boolean wskazujący czy będą zawarte w zwróconych obiektach user. Domyślnie False."
+
+#: ../../api.rst:317 ../../api.rst:332
+msgid "|include_user_entities|"
+msgstr "Gdy ustawione jako False to jednostki węzła obiektu user nie będą zawarte. Domyślnie True."
+
+#: ../../api.rst:318 ../../api.rst:333 ../../api.rst:361 ../../api.rst:375
+#: ../../api.rst:612 ../../api.rst:653 ../../api.rst:975 ../../api.rst:1029
+msgid "list of :class:`User` objects"
+msgstr "lista obiektów :class:`User`"
+
+#: ../../api.rst:323
+msgid "Returns a user's followers ordered in which they were added. If no user is specified by id/screen name, it defaults to the authenticated user."
+msgstr "Zwraca obserwujących użytkownika według chronologii rozpoczęcia przez nich obserwowania. Jeżeli użytkownik nie jest określony to domyślnie będzie użyty zuwierzytelniony użytkownik."
+
+#: ../../api.rst:339
+msgid "Returns fully-hydrated user objects for up to 100 users per request."
+msgstr "Zwraca fully-hydrated obiekt użytkownika, maksymalnie 100 użytkowników na jedno żądanie."
+
+#: ../../api.rst:341
+msgid "There are a few things to note when using this method."
+msgstr "Należy mieć na uwadze kilka kwestii używając tej metody."
+
+#: ../../api.rst:343
+msgid "You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed."
+msgstr "Musisz obserwować chronionego użytkownika by móc zobaczyć ich najnowszą zmianę statusu. Jeżeli nie obserwujesz go jego status zostanie usunięty."
+
+#: ../../api.rst:346
+msgid "The order of user IDs or screen names may not match the order of users in the returned array."
+msgstr "Porządek ID użytkowników lub nazw wyświetlanych może nie być rownoważny z porządkiem użytkowników w zwróconym szyku."
+
+#: ../../api.rst:348
+msgid "If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list."
+msgstr "Jeżeli żądany użytkownik jest nieznany, zablokowany lub usunięty to nie zostanie on zwrócony do listy wyników."
+
+#: ../../api.rst:350
+msgid "If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown."
+msgstr "Jeżeli żadne z twoich wyszukiwań nie spełnia wymagań poprzez zwrócenie obiektu użytkownika, to wystąpi wtedy błąd HTTP 404."
+
+#: ../../api.rst:353
+msgid "A list of user IDs, up to 100 are allowed in a single request."
+msgstr "Lista ID użytkowników, masymalnie 100 może być zawartych w pojedyńczym żądaniu."
+
+#: ../../api.rst:355
+msgid "A list of screen names, up to 100 are allowed in a single request."
+msgstr "Lista nazw wyświetlanych, masymalnie 100 może być zawartych w pojedyńczym żądaniu."
+
+#: ../../api.rst:358
+msgid "Valid request values are compat and extended, which give compatibility mode and extended mode, respectively for Tweets that contain over 140 characters."
+msgstr "Poprawne wartości żądań są kompatybilne i rozszerzone, co nadaje im odpowiednio tryb kompatybilności lub trybowi rozszerzony, dla tweetów zawierających ponad 140 znaków."
+
+#: ../../api.rst:366
+msgid "Run a search for users similar to Find People button on Twitter.com; the same results returned by people search on Twitter.com will be returned by using this API (about being listed in the People Search). It is only possible to retrieve the first 1000 matches from this API."
+msgstr "Uruchom wyszukiwanie dla użytkowników podobne do przycisku Znajdź Ludzi na Twitter.com; używając teego API zostaną zwrócone te same rezultaty co w  przypadku wyszukiwania ludzi. Używając tego API możliwe jest uzyskanie makymalnie 1000 pierwszych wyników."
+
+#: ../../api.rst:371
+msgid "The query to run against people search."
+msgstr "Zapytanie, które jest uruchomione przeciwko wyszukiwaniom ludzi."
+
+#: ../../api.rst:372
+msgid "Specifies the number of statuses to retrieve. May not be greater than 20."
+msgstr "Określa liczbę statusów do uzyskania. Nie może być większe niz 20."
+
+#: ../../api.rst:379
+msgid "Direct Message Methods"
+msgstr "Metody wiadomości bezpośrednich"
+
+#: ../../api.rst:383
+msgid "Returns a specific direct message."
+msgstr "Zwraca wybraną wiadomość bezpośrednią."
+
+#: ../../api.rst:385
+msgid "|id|"
+msgstr "Lista ID tweetów do wyszukania, maksymalnie 100."
+
+#: ../../api.rst:386
+msgid "|full_text|"
+msgstr "Boolean wkazujący czy powinna być zwrócona całość tekstu wiadomości. Ustawione jako False powoduje, że wiadomość zostanie obcięta do 140 znaków. Domyślnie False."
+
+#: ../../api.rst:387 ../../api.rst:419
+msgid ":class:`DirectMessage` object"
+msgstr "obiekt :class:`DirectMessage`"
+
+#: ../../api.rst:392
+msgid "Returns all Direct Message events (both sent and received) within the last 30 days. Sorted in reverse-chronological order."
+msgstr "Zwraca wszystkie zdarzenia Wiadomości Bezpośrednich (otrzymane i wysłane) w ostatnich 30 dniach. Posortowane w odwrotnym porządku chronologicznym."
+
+#: ../../api.rst:397
+msgid "list of :class:`DirectMessage` objects"
+msgstr "lista obiektów :class:`DirectMessage`"
+
+#: ../../api.rst:403
+msgid "Sends a new direct message to the specified user from the authenticating user."
+msgstr "Wysyła nową wiadomość bezpośrednią od zuwierzytelniongo użytkownika do wybranego użytkownika."
+
+#: ../../api.rst:406
+msgid "The ID of the user who should receive the direct message."
+msgstr "ID użytkownika, który ma otrzymać wiadomość."
+
+#: ../../api.rst:408
+msgid "The text of your Direct Message. Max length of 10,000 characters."
+msgstr "Tekst twojej Wiadomości Bezpośrednij. Maksymalna długość: 10000 znaków."
+
+#: ../../api.rst:410
+msgid "The Quick Reply type to present to the user:  * options - Array of Options objects (20 max). * text_input - Text Input object. * location - Location object."
+msgstr "Typ Szybkiej Odpowiedzi do pokazania użytkownikowi  * options - szyk obiektów Opcji (maks 20). * text_input - tekst obiektu Input. * location - obiekt Lokacji."
+
+#: ../../api.rst:410
+msgid "The Quick Reply type to present to the user:"
+msgstr "Typ Szybkiej Odpowiedzi do pokazania użytkownikowi:"
+
+#: ../../api.rst:412
+msgid "options - Array of Options objects (20 max)."
+msgstr "options - Szyk obiektów Opcji (maks 20)."
+
+#: ../../api.rst:413
+msgid "text_input - Text Input object."
+msgstr "text_input - tekst obiektu Input."
+
+#: ../../api.rst:414
+msgid "location - Location object."
+msgstr "location - obiekt Lokacji."
+
+#: ../../api.rst:415
+msgid "The attachment type. Can be media or location."
+msgstr "Typ załącznika. Może być mediami lub lokacją."
+
+#: ../../api.rst:416
+msgid "A media id to associate with the message. A Direct Message may only reference a single media_id."
+msgstr "ID mediów do powiązania z wiadomością. Wiadomość bezpośrednia może odnosić si tylko do pojedyńczeego media_id."
+
+#: ../../api.rst:424
+msgid "Deletes the direct message specified in the required ID parameter. The authenticating user must be the recipient of the specified direct message. Direct Messages are only removed from the interface of the user context provided. Other members of the conversation can still access the Direct Messages."
+msgstr "Usuwa wiadomość bezpośrednią określona w wymaganym parametrze ID. Zuwierzytelniony użytkownik musi być odbiorcą tej konkretnej wiadomości bezpośredniej. Wiadomości bezpośrednie mogą być usunięte tylko z intefejsu dostarczonego kontektu użytkownika. Inni członkowie konwersacji nadal mają dostęp do Wiadomości Bezpośrednich."
+
+#: ../../api.rst:430
+msgid "The id of the Direct Message that should be deleted."
+msgstr "ID Wiadomości Bezpośredniej która ma zostać usunięta."
+
+#: ../../api.rst:435
+msgid "Friendship Methods"
+msgstr "Metody Znajomych"
+
+#: ../../api.rst:439
+msgid "Create a new friendship with the specified user (aka follow)."
+msgstr "Stwórz nową znajomość z wybranym użytkownikiem (obserwuj)."
+
+#: ../../api.rst:444
+msgid "Enable notifications for the target user in addition to becoming friends."
+msgstr "Włącz notyfikacje dla wybranego użytkownika wraz z dodaniem go do znajomych."
+
+#: ../../api.rst:451
+msgid "Destroy a friendship with the specified user (aka unfollow)."
+msgstr "Zerwij znajomość z wybranym użytkownikim (przestań obserwować)."
+
+#: ../../api.rst:462
+msgid "Returns detailed information about the relationship between two users."
+msgstr "Zwraca szczegółowe informacje na temat znajomości pomiędzy dwoma użytkownikami."
+
+#: ../../api.rst:464
+msgid "The user_id of the subject user."
+msgstr "user_id podanego użytkownika."
+
+#: ../../api.rst:465
+msgid "The screen_name of the subject user."
+msgstr "screen_name podanego użytkownika."
+
+#: ../../api.rst:466
+msgid "The user_id of the target user."
+msgstr "user_id wybranego użytkownika."
+
+#: ../../api.rst:467
+msgid "The screen_name of the target user."
+msgstr "screen_name wybranego użytkownika."
+
+#: ../../api.rst:468
+msgid ":class:`Friendship` object"
+msgstr "obiekt :class:`Friendship`"
+
+#: ../../api.rst:473
+msgid "Returns an array containing the IDs of users being followed by the specified user."
+msgstr "Zwraca szyk zawierający ID użytkowników obserwowanych przez wybranego użytkownika."
+
+#: ../../api.rst:485
+msgid "Returns an array containing the IDs of users following the specified user."
+msgstr "Zwraca szyk zawierający ID użytkowników obserwujących wybranego użytkownika."
+
+#: ../../api.rst:495
+msgid "Account Methods"
+msgstr "Metody konta"
+
+#: ../../api.rst:500
+msgid "Verify the supplied user credentials are valid."
+msgstr "Potwierdza, że dane podanego użytkownika są prawidłowe."
+
+#: ../../api.rst:504
+msgid "When set to true email will be returned in the user objects as a string."
+msgstr "Gdy ustawione jako true, e-mail będzie zwrócony w obiekcie użytkownika jako ciąg znaków."
+
+#: ../../api.rst:506
+msgid ":class:`User` object if credentials are valid, otherwise False"
+msgstr "obiekt :class:`User` jeżeli dane są prawidłowe, w innym przypadku False"
+
+#: ../../api.rst:511
+msgid "Returns the current rate limits for methods belonging to the specified resource families. When using application-only auth, this method's response indicates the application-only auth rate limiting context."
+msgstr "Zwraca aktualne limity wartości dla metod należących do wybranej rodziny zasobów. Używając tego uwierzytelniania (tylko dla aplikacji), odpowiedź tej metody wskaże limit kontekstu dla tego uwierzytelniania."
+
+#: ../../api.rst:515
+msgid "A comma-separated list of resource families you want to know the current rate limit disposition for."
+msgstr "Odseparowana przecinkami lista rodziny zasobów. Powinieneś znać aktualny limit wartośći dyspozycji dla."
+
+#: ../../api.rst:517 ../../api.rst:1056 ../../api.rst:1080 ../../api.rst:1102
+msgid ":class:`JSON` object"
+msgstr "obiekt :class:`JSON`"
+
+#: ../../api.rst:522
+msgid "Update the authenticating user's profile image. Valid formats: GIF, JPG, or PNG"
+msgstr "Aktualizuje zdjęcie profilowe zuwierzytelnionego użytkownika. Poprawne formaty: GIF, JPG oraz PNG"
+
+#: ../../api.rst:525 ../../api.rst:534
+msgid "local path to image file to upload. Not a remote URL!"
+msgstr "ścieżka lokalna dla obrazu, który ma być wrzucony. Nie jest to remote URL!"
+
+#: ../../api.rst:531
+msgid "Update authenticating user's background image. Valid formats: GIF, JPG, or PNG"
+msgstr "Aktualizuje zdjęcie w tle użytkownika. Poprawne formaty: GIF, JPG oraz PNG"
+
+#: ../../api.rst:540
+msgid "Sets values that users are able to set under the \"Account\" tab of their settings page."
+msgstr "Ustawia wartości, które użytkownicy mogą ustawić pod zakładką \"Konto\" w ustawieniach swojego konta."
+
+#: ../../api.rst:543
+msgid "Maximum of 20 characters"
+msgstr "Maksimum 20 znaków."
+
+#: ../../api.rst:544
+msgid "Maximum of 100 characters. Will be prepended with \"http://\" if not present"
+msgstr "Maximum 100 znaków. Będzie poprzedzone \"http://\" jeżeli jeszcze nie jest."
+
+#: ../../api.rst:546
+msgid "Maximum of 30 characters"
+msgstr "Maximum 30 znaków."
+
+#: ../../api.rst:547
+msgid "Maximum of 160 characters"
+msgstr "Maximum 160 znaków."
+
+#: ../../api.rst:552
+msgid "Favorite Methods"
+msgstr "Ulubione metody"
+
+#: ../../api.rst:556
+msgid "Returns the favorite statuses for the authenticating user or user specified by the ID parameter."
+msgstr "Zwraca ulubione statusy zuwierzytelnionego użytkownika lub użytkownika określonego przez parametr ID."
+
+#: ../../api.rst:559
+msgid "The ID or screen name of the user to request favorites"
+msgstr "ID lub nazwa wyświetlana użytkownika od którego żądane sa ulubione"
+
+#: ../../api.rst:566
+msgid "Favorites the status specified in the ID parameter as the authenticating user."
+msgstr "Ustawia jako ulubione statusy określone przez parametr ID jako zuwierzytelniony użytkownik."
+
+#: ../../api.rst:575
+msgid "Un-favorites the status specified in the ID parameter as the authenticating user."
+msgstr "Usuwa z ulubionych statusy określone przez parametr ID jako zuwierzytelniony użytkownik."
+
+#: ../../api.rst:583
+msgid "Block Methods"
+msgstr "Metody Blokowania"
+
+#: ../../api.rst:587
+msgid "Blocks the user specified in the ID parameter as the authenticating user. Destroys a friendship to the blocked user if it exists."
+msgstr "Blokuje użytkownika określonego przez parametr ID jako zuwierzytelniony użytkownik. Przerywa znajomość jeżeli taka istniała."
+
+#: ../../api.rst:598
+msgid "Un-blocks the user specified in the ID parameter for the authenticating user."
+msgstr "Odblokowywuje użytkownika określonego przez parametr ID jako zuwierzytelniony użytkownik."
+
+#: ../../api.rst:609
+msgid "Returns an array of user objects that the authenticating user is blocking."
+msgstr "Zwraca szyk obiektów użytkownika, który blokowany jest przez zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:617
+msgid "Returns an array of numeric user ids the authenticating user is blocking."
+msgstr "Zwraca szyk numerycznych ID użytkowników, którzy blokowani są przez zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:624
+msgid "Mute Methods"
+msgstr "Metody Wyciszania"
+
+#: ../../api.rst:628
+msgid "Mutes the user specified in the ID parameter for the authenticating user."
+msgstr "Wycisza użytkownika określonego przez parametr ID dla zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:638
+msgid "Un-mutes the user specified in the ID parameter for the authenticating user."
+msgstr "Wyłącza wyciszenie użytkownika określonego przez parametr ID dla zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:648
+msgid "Returns an array of user objects the authenticating user has muted."
+msgstr "Zwraca szyk obiektów użytkownika, którego wyciszył zuwierzytelniony użytkownik."
+
+#: ../../api.rst:658
+msgid "Returns an array of numeric user ids the authenticating user has muted."
+msgstr "Zwraca szyk numerycznych id użytkowników, których wyciszył zuwierzytelniony użytkownik."
+
+#: ../../api.rst:665
+msgid "Spam Reporting Methods"
+msgstr "Metody Reportowania Spamu"
+
+#: ../../api.rst:669
+msgid "The user specified in the id is blocked by the authenticated user and reported as a spammer."
+msgstr "Użytkownik określony przez ID zostaje zablokowany przez zuwierzytelniongo użytkownika oraz zgłoszony jako spammer."
+
+#: ../../api.rst:675
+msgid "A boolean indicating if the reported account should be blocked. Defaults to True."
+msgstr "Boolean wskazujący czy zgłoszone konto ma być zablokowane. Domyślnie true."
+
+#: ../../api.rst:681
+msgid "Saved Searches Methods"
+msgstr "Metody Zapisanych wyszukań"
+
+#: ../../api.rst:685
+msgid "Returns the authenticated user's saved search queries."
+msgstr "Zwraca zapisane zapytania zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:687
+msgid "list of :class:`SavedSearch` objects"
+msgstr "lista obiektów :class:`SavedSearch`"
+
+#: ../../api.rst:692
+msgid "Retrieve the data for a saved search owned by the authenticating user specified by the given id."
+msgstr "Pobiera dane dla zapisanych wyszukiwań należących o zuwierzytelnionego użytkownika, określone przez podane ID."
+
+#: ../../api.rst:695
+msgid "The id of the saved search to be retrieved."
+msgstr "ID zapisanego wyszukania które ma zostać pobrane."
+
+#: ../../api.rst:696 ../../api.rst:704 ../../api.rst:713
+msgid ":class:`SavedSearch` object"
+msgstr "obiekt :class:`SavedSearch`"
+
+#: ../../api.rst:701
+msgid "Creates a saved search for the authenticated user."
+msgstr "Tworzy zapisane wyszukani dla zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:703
+msgid "The query of the search the user would like to save."
+msgstr "Zapytanie dla wyszukania, które użytkownik chciałby zapisać."
+
+#: ../../api.rst:709
+msgid "Destroys a saved search for the authenticated user. The search specified by id must be owned by the authenticating user."
+msgstr "Niszczy zapisane wyszukianie dla zuwierzytelnionego użytkownika. Wyszukanie określone przez ID musi należeć do zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:712
+msgid "The id of the saved search to be deleted."
+msgstr "ID zapisanego wyszukania które ma zostać usunięte."
+
+#: ../../api.rst:717
+msgid "Help Methods"
+msgstr "Metody Pomocy"
+
+#: ../../api.rst:723
+msgid "Returns a collection of relevant Tweets matching a specified query."
+msgstr "Zwraca zbiór odpowiednich tweetów pasujących do określonego zapytania."
+
+#: ../../api.rst:725
+msgid "Please note that Twitter's search service and, by extension, the Search API is not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed or made available via the search interface."
+msgstr "Proszę miej na uwadze, że usługa wyszukiwania Twittera oraz Search API nie są w założeniu pełnym źródłem tweetów. Nie wszystkie tweety będą zindeksowane lub udostępnione przez wyszukiwarkę."
+
+#: ../../api.rst:729
+msgid "In API v1.1, the response format of the Search API has been improved to return Tweet objects more similar to the objects you’ll find across the REST API and platform. However, perspectival attributes (fields that pertain to the perspective of the authenticating user) are not currently supported on this endpoint.\\ [#]_\\ [#]_"
+msgstr "W API v1.1 format odpowiedzi dla Search API został udoskonalony tak by zwracał obiekty tweetów podobnie jak obiekty, które możesz znaleśść w REST API oraz platformie. Jednakże, atrybuty perspektywiczne (pola które odnoszą się do perspektywy zuwierzytelnionego użytkownika) nie są na tą chwilę wspierane w tym punkcie końcowym.\\ [#]_\\ [#]_"
+
+#: ../../api.rst:735
+msgid "the search query string of 500 characters maximum, including operators. Queries may additionally be limited by complexity."
+msgstr "ciąg znaków zapytania wyszukiwania dla maksimum 500 znaków, wliczając w to operatory. Zapytania mogą być także ograniczone przez ich zawiłość."
+
+#: ../../api.rst:737
+msgid "Returns tweets by users located within a given radius of the given latitude/longitude.  The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by \"latitide,longitude,radius\", where radius units must be specified as either \"mi\" (miles) or \"km\" (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly. A maximum of 1,000 distinct \"sub-regions\" will be considered when using the radius modifier."
+msgstr "Zwraca tweety w oparciu o lokalizacje użytkownika wewnątrz promienia podanej szerokości/długości geograficznej. Lokacja domyślnie jest pobierana z Geotagging API, lecz zostanie cofnięta do profilu Twitter. Wartość parametru jest określona przez \"szerokość,długość,promień\" gdzie jednostki promienia muszą być określone jako \"mi\" (mile) lub \"km\" (kilometry). Uwaga: nie możesz użyć pobliskiego operatora poprzez API by zgeokodyfikować przypadkowe lokacje; jenakże możesz użyć tego parametru geocode do wyszukania geokodów bezpośrednio. Maksymalnie 1000 różnych \"podregionów\" będzie brane pod uwagę używajac modyfikatora promienia."
+
+#: ../../api.rst:746
+msgid "Restricts tweets to the given language, given by an ISO 639-1 code. Language detection is best-effort."
+msgstr "Ogranicza tweey to podanego języka, nadanego przez kod ISO 639-1. Detekcja języka jest best-effort."
+
+#: ../../api.rst:748
+msgid "Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific consumers and the default should work in the majority of cases."
+msgstr "Określa język zapytania, które będzie wysłane (na tę chwię tylko \"ja\"). Jesto skierowane do konsumentów posiadających szczególne wymagania językowe. Domyślnie działa w większości przypadków."
+
+#: ../../api.rst:751
+msgid "Specifies what type of search results you would prefer to receive. The current default is \"mixed.\" Valid values include:  * mixed : include both popular and real time results in the response * recent : return only the most recent results in the response * popular : return only the most popular results in the response"
+msgstr "Określa jaki typ wyników wyszukiwania chciałbyś otrzymywać. Domyślnie \"mixed\". Poprawne wartości zawierają: * mixed : zawiera wyniki popularne oraz w czasie rzeczywistym *recent : zwraca tylko najnowsze wyniki * popular : zwraca tylko popularne wyniki"
+
+#: ../../api.rst:751
+msgid "Specifies what type of search results you would prefer to receive. The current default is \"mixed.\" Valid values include:"
+msgstr "Określa jaki typ wynimów wyszukiwania chciałbyś otrzymywać. Domyślnie ustawienie to \"mixed.\". Poprawne wartości to:"
+
+#: ../../api.rst:754
+msgid "mixed : include both popular and real time results in the response"
+msgstr "mixed : zwraca w odpowiedzi rezultaty popularne oraz te będące w czasie rzeczywistym"
+
+#: ../../api.rst:755
+msgid "recent : return only the most recent results in the response"
+msgstr "recent : zwraca w odpowiedzi tylko najnowsze rezultaty"
+
+#: ../../api.rst:756
+msgid "popular : return only the most popular results in the response"
+msgstr "popular : zwraca w odpowiedzi tylko najbardziej popularne rezultaty"
+
+#: ../../api.rst:758
+msgid "Returns tweets created before the given date. Date should be formatted as YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In other words, no tweets will be found for a date older than one week."
+msgstr "Zwraca tweety stworzone przed określoną datą. Data powinna być w formacie YYYY-MM-DD. Miej na uwadze, że indeks wyszukiwania ma 7-dniowy limit. Innymi słowami, nie zostaną znalezione żadne tweety starsze niż tydzień."
+
+#: ../../api.rst:762
+msgid "|since_id| There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occurred since the since_id, the since_id will be forced to the oldest ID available."
+msgstr "Zwraca tylko statusy z ID większym (tzn. nowszym) niż określone ID. Liczba tweetów, które są dostępne w API jst limitowana. Jeżeli limit tweetów wydarzył się od since_id to since_id będzie najstarzym dostępnym ID."
+
+#: ../../api.rst:768
+msgid ":class:`SearchResults` object"
+msgstr "obiekt :class:`SearchResults`"
+
+#: ../../api.rst:772
+msgid "List Methods"
+msgstr "Metoda Listy"
+
+#: ../../api.rst:776
+msgid "Creates a new list for the authenticated user. Note that you can create up to 1000 lists per account."
+msgstr "Tworzy nową listę dla zuwierzytelnionego użytkownia. Miej na uwadzę, że możesz stworzyć maksymalnie 1000 list dla jednego konta."
+
+#: ../../api.rst:779
+msgid "The name of the new list."
+msgstr "Nazwa nowej listy."
+
+#: ../../api.rst:780 ../../api.rst:806
+msgid "|list_mode|"
+msgstr "Czy lista jest publiczna czy prywatna. Wartości mogą być publiczne i prwyatne. Domyślnie listy są publiczne jeżeli nie jest ustawiony żaden tryb."
+
+#: ../../api.rst:781
+msgid "The description of the list you are creating."
+msgstr "Opis listy, którą tworzysz."
+
+#: ../../api.rst:782 ../../api.rst:794 ../../api.rst:810 ../../api.rst:897
+#: ../../api.rst:912 ../../api.rst:929 ../../api.rst:944 ../../api.rst:962
+#: ../../api.rst:1000 ../../api.rst:1011
+msgid ":class:`List` object"
+msgstr "obiekt :class:`List`"
+
+#: ../../api.rst:787
+msgid "Deletes the specified list. The authenticated user must own the list to be able to destroy it."
+msgstr "Usuwa określoną listę. Zuwierzytelniony użytkownik musi być właścicielem listy by ją usunąć."
+
+#: ../../api.rst:790 ../../api.rst:808 ../../api.rst:876 ../../api.rst:896
+#: ../../api.rst:911 ../../api.rst:928 ../../api.rst:943 ../../api.rst:961
+#: ../../api.rst:973 ../../api.rst:988 ../../api.rst:999 ../../api.rst:1010
+#: ../../api.rst:1024 ../../api.rst:1042
+msgid "|owner_screen_name|"
+msgstr "Nazwa wyświetlana użytkownika, który jest właścicielem listy żądanej przez żeton."
+
+#: ../../api.rst:791 ../../api.rst:809 ../../api.rst:875 ../../api.rst:895
+#: ../../api.rst:910 ../../api.rst:927 ../../api.rst:942 ../../api.rst:960
+#: ../../api.rst:972 ../../api.rst:987 ../../api.rst:998 ../../api.rst:1009
+#: ../../api.rst:1023 ../../api.rst:1041
+msgid "|owner_id|"
+msgstr "ID użytkownika, który jest właścicielem listy żadanej przez żeton."
+
+#: ../../api.rst:792 ../../api.rst:803 ../../api.rst:873 ../../api.rst:893
+#: ../../api.rst:906 ../../api.rst:921 ../../api.rst:938 ../../api.rst:954
+#: ../../api.rst:970 ../../api.rst:983 ../../api.rst:996 ../../api.rst:1007
+#: ../../api.rst:1021 ../../api.rst:1037
+msgid "|list_id|"
+msgstr "Numeryczna lista ID."
+
+#: ../../api.rst:793 ../../api.rst:804 ../../api.rst:874 ../../api.rst:894
+#: ../../api.rst:907 ../../api.rst:922 ../../api.rst:939 ../../api.rst:955
+#: ../../api.rst:971 ../../api.rst:984 ../../api.rst:997 ../../api.rst:1008
+#: ../../api.rst:1022 ../../api.rst:1038
+msgid "|slug|"
+msgstr "Możesz zidentyfikować listę używając jej żetona zamiast numerycznego ID. Jeżeli się na to zdecydujesz to będziesz musiał określić właściciela listy używając parametrów owner_id lub owner_screen_name."
+
+#: ../../api.rst:800
+msgid "Updates the specified list. The authenticated user must own the list to be able to update it."
+msgstr "Aktualizuje wybraną listę. Zuwierzytelniony użytkownik musi być właścicielem listy by ją zaktualizować."
+
+#: ../../api.rst:805
+msgid "The name for the list."
+msgstr "Nazwa listy."
+
+#: ../../api.rst:807
+msgid "The description to give the list."
+msgstr "Opis nadany liście."
+
+#: ../../api.rst:815
+msgid "Returns all lists the authenticating or specified user subscribes to, including their own. The user is specified using the ``user_id`` or ``screen_name`` parameters. If no user is given, the authenticating user is used."
+msgstr "Zwraca wszystkie listy, które subskrybuje zuwierzytelniony lub określony użytkownik, w tym ich własne. Użytkownik określony jest poprzez parametry ``user_id`` lub ``screen name``. Jeżeli użytkownik nie jest podany to zostanie wtedy użyty zuwierzytelniony użytkownik."
+
+#: ../../api.rst:820
+msgid "A maximum of 100 results will be returned by this call. Subscribed lists are returned first, followed by owned lists. This means that if a user subscribes to 90 lists and owns 20 lists, this method returns 90 subscriptions and 10 owned lists. The ``reverse`` method returns owned lists first, so with ``reverse=true``, 20 owned lists and 80 subscriptions would be returned."
+msgstr "Maksymalnie 100 wyników może być zwrócone przez to wywołanie. Listy subskrybowane są zwrócone jako pirwsze, tuż za nimi listy posiadane na własność. To oznacza, że jeżeli użytkownik subsrybuje 90 list i posiada 20 list to ta metoa zwróci 90 list subskrybowanych i 10 list posiadanych. Metoda ``reverse`` zwraca posiadane listy jako pierwsze, tak więc z ustawieniem ``reverse=true`` zwrócone będzie 20 list posiadanych i 80 subskrybowanych."
+
+#: ../../api.rst:829
+msgid "A boolean indicating if you would like owned lists to be returned first. See description above for information on how this parameter works."
+msgstr "Boolean wskazujący czy chiałbyś by posiadane na własność listy zostały zwrócone jako pierwsze. Zobacz opis powyżej po więcej informacji na temat tego parametru."
+
+#: ../../api.rst:832 ../../api.rst:849 ../../api.rst:862
+msgid "list of :class:`List` objects"
+msgstr "lista obiektów :class:`List`"
+
+#: ../../api.rst:838
+msgid "Returns the lists the specified user has been added to. If ``user_id`` or ``screen_name`` are not provided, the memberships for the authenticating user are returned."
+msgstr "Zwraca listy, do których został dodany wybrany użytkownik. Jeżeli ``user_id`` lub ``screen_name`` nie są podane to zwracane jest członkostwo dla zuwierzytelnionego użytkownika."
+
+#: ../../api.rst:844
+msgid "A boolean indicating whether to return just lists the authenticating user owns, and the user represented by ``user_id`` or ``screen_name`` is a member of."
+msgstr "Boolean wskazujący czy zwrócić tylko listy, które posiada zuwierzytelniony użytkownik oraz użytkownik reprezentowany przez ``user_id`` lub ``screen_name``."
+
+#: ../../api.rst:855
+msgid "Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user's own lists."
+msgstr "Zdobywa kolekcję list do którye subskrybuje wybrany użytkownnik, domyślnie 20 list na jedną stronę. Nie zawiera list posiadanych przez użytkownika."
+
+#: ../../api.rst:869
+msgid "Returns a timeline of tweets authored by members of the specified list. Retweets are included by default. Use the ``include_rts=false`` parameter to omit retweets."
+msgstr "Zwraca oś czasu tweetów, których autorami są członkowie wybranej listy. Domyślnie zawiera retweety. Użyj parametru ``include_rts=false`` by pominąć retweety."
+
+#: ../../api.rst:881
+msgid "A boolean indicating whether the list timeline will contain native retweets (if they exist) in addition to the standard stream of tweets. The output format of retweeted tweets is identical to the representation you see in home_timeline."
+msgstr "Boolean wskazujący czy oś czasu listy będzie zawierać natywne retweety (jeżeli istnieją) w dodatku do standardowego strumienia tweetów. Format wyjścia reteetowanych tweetów jest identyczny do tego widocznego w home_timeline."
+
+#: ../../api.rst:890
+msgid "Returns the specified list. Private lists will only be shown if the authenticated user owns the specified list."
+msgstr "Zwraca wybraną listę. Prywate listy będą pokazane tylko jeżeli zuwierzytelniony użytkownik jest ich właścicielem."
+
+#: ../../api.rst:903
+msgid "Add a member to a list. The authenticated user must own the list to be able to add members to it. Lists are limited to 5,000 members."
+msgstr "Dodaje nowego członka do listy. Zuwierzytelniony użytkownik musi być właścicielem listy by dodawać do niej członków. Lista może zawierać maksymalnie 5000 członków."
+
+#: ../../api.rst:918
+msgid "Add up to 100 members to a list. The authenticated user must own the list to be able to add members to it. Lists are limited to 5,000 members."
+msgstr "Dodaje członków do listy, maksymalnie 100. Zuwierzytelniony użytkownik musi być właścicielem listy by dodawać do niej członków. Lista może zawierać maksymalnie 5000 członków."
+
+#: ../../api.rst:923 ../../api.rst:956
+msgid "A comma separated list of screen names, up to 100 are allowed in a single request"
+msgstr "Oddzielona przecinkami lista nazw, maksymalnie 100 na jedno żądanie."
+
+#: ../../api.rst:925 ../../api.rst:958
+msgid "A comma separated list of user IDs, up to 100 are allowed in a single request"
+msgstr "Oddzielona przecinkami lista ID użytkowników, maksymalnie 100 na jedno żądanie."
+
+#: ../../api.rst:935
+msgid "Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list."
+msgstr "Usuwa wybranego użytkownika z listy. Zuwierzytelniony użytkownik musi być właścicielem listy by usuwać z niej użytkowników."
+
+#: ../../api.rst:950
+msgid "Remove up to 100 members from a list. The authenticated user must own the list to be able to remove members from it. Lists are limited to 5,000 members."
+msgstr "Usuwa użytkowników z listy, maksymalnie 100. Zuwierzytelniony użytkownik musi być właścicielem listy by usuwać z niej użytkowników. Listy mogą zawierać maksymalnie 5000 użytkowników."
+
+#: ../../api.rst:968
+msgid "Returns the members of the specified list."
+msgstr "Zwraca użytkowników z określonej listy."
+
+#: ../../api.rst:981
+msgid "Check if the specified user is a member of the specified list."
+msgstr "Sprawdza czy określony użytkownik jest członkiem określonej listy."
+
+#: ../../api.rst:989
+msgid ":class:`User` object if user is a member of list"
+msgstr "obiekt :class:`User` jeżeli użytkownik jest członkiem listy"
+
+#: ../../api.rst:994
+msgid "Subscribes the authenticated user to the specified list."
+msgstr "Subskrybuje zuwierzytelnionego użytkownika do określonej listy."
+
+#: ../../api.rst:1005
+msgid "Unsubscribes the authenticated user from the specified list."
+msgstr "Anuluje subskrypcję zuwierzytelnionego użytkownika do określonej listy."
+
+#: ../../api.rst:1018
+msgid "Returns the subscribers of the specified list. Private list subscribers will only be shown if the authenticated user owns the specified list."
+msgstr "Zwraca subskrybentów wybranej listy. Subskrybenci prywatnych list będą wyświetleni tylko jeżeli zuwierzytelniony użytkownik jest właścicielem listy."
+
+#: ../../api.rst:1035
+msgid "Check if the specified user is a subscriber of the specified list."
+msgstr "Sprawdza czy określony użytkownik jest subskrybentem określonej listy."
+
+#: ../../api.rst:1043
+msgid ":class:`User` object if user is subscribed to list"
+msgstr "obiekt :class:`User` jeżeli użytkownik subskrybuje listę"
+
+#: ../../api.rst:1047
+msgid "Trends Methods"
+msgstr "Metody Trendów"
+
+#: ../../api.rst:1051
+msgid "Returns the locations that Twitter has trending topic information for. The response is an array of \"locations\" that encode the location's WOEID (a Yahoo! Where On Earth ID) and some other human-readable information such as a canonical name and country the location belongs in."
+msgstr "Zwraca lokację, dla której Twitter posiada informacje o trendujących tematach. Odpowiedź będzie w formie szyku `\"locations\", który szyfruje WOEID ( Yahoo! Where On Earth ID) lokacji i inne odczytywalne przez człowieka informacje takie jak autentyczna nazwa oraz państwo, w którym znajduje się lokacja."
+
+#: ../../api.rst:1061
+msgid "Returns the top 50 trending topics for a specific WOEID, if trending information is available for it."
+msgstr "Zwraca top 50 trendujących tematów dla wybranego WOEID jeżeli są dla nich dostępne informacje."
+
+#: ../../api.rst:1064
+msgid "The response is an array of “trend” objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL."
+msgstr "Ta odpowiedź jest szykiem obiektów \"trend\" które szyfrują nazwę trendującego tematu, parametr zapytania, który może być użyty do wyszukania tematu na Twitter Search a także Twitter Search URL."
+
+#: ../../api.rst:1068
+msgid "This information is cached for 5 minutes. Requesting more frequently than that will not return any more data, and will count against your rate limit usage."
+msgstr "Ta informacja zostaje zmagazynowana na 5 minut. Zażądanie większej częstotliwości nie zwróci większej ilości danych i nie będzie liczyć się jako wspólczynnik limitu używania."
+
+#: ../../api.rst:1072
+msgid "The tweet_volume for the last 24 hours is also returned for many trends if this is available."
+msgstr "tweet_volume dla ostatnich 24 godzin jest także zwracane dla wielu trendów jeżeli jest to możliwe."
+
+#: ../../api.rst:1075
+msgid "The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID."
+msgstr "ID Yahoo! Where On Earth lokacji, dla której mają być zwrócone informacje o trenach. Globalne informacje są dostępne używając 1 jako WOEID."
+
+#: ../../api.rst:1078
+msgid "Setting this equal to hashtags will remove all hashtags from the trends list."
+msgstr "Ustawienie tego jako jednakowe z hashtagami, spowoduje usunięcie hashtagów z listy trendów."
+
+#: ../../api.rst:1085
+msgid "Returns the locations that Twitter has trending topic information for, closest to a specified location."
+msgstr "Zwraca lokację, dla której Twitter ma trendujące tematy najbardziej zbliżone do określonej lokacji."
+
+#: ../../api.rst:1088
+msgid "The response is an array of “locations” that encode the location’s WOEID and some other human-readable information such as a canonical name and country the location belongs in."
+msgstr "Ta odpowiedź jest szykiem \"locations\" który szyfruje WOEID lokacji oraz inne odczytywalne przz człowieka informacje takie jak autentyczna nazwa oraz państwo w którym lokacja się znajduje."
+
+#: ../../api.rst:1092
+msgid "A WOEID is a Yahoo! Where On Earth ID."
+msgstr "WOEID jest to Yahoo! Where On Earth ID."
+
+#: ../../api.rst:1094
+msgid "If provided with a long parameter the available trend locations will be sorted by distance, nearest to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is negative, East is positive) inclusive."
+msgstr "Jeżeli podana jest długość gograficzna to dostępne trendy lokacji będa ustawione wg. dystansu od najbliższej do najdalszej, w parach co-ordinate. Poprawne wartości długośći gograficznej to wyłącznie wartości od -180.0 do +180.0 (zachód to wartość negatywna, wschód to pozytywna)."
+
+#: ../../api.rst:1098
+msgid "If provided with a lat parameter the available trend locations will be sorted by distance, nearest to furthest, to the co-ordinate pair. The valid ranges for longitude is -180.0 to +180.0 (West is negative, East is positive) inclusive."
+msgstr "Jeżeli podana jest szerokość gograficzna to dostępne trendy lokacji będa ustawione wg. dystansu od najbliższej do najdalszej, w parach co-ordinate. Poprawne wartości długośći gograficznej to wyłącznie wartości od -180.0 do +180.0 (zachód to wartość negatywna, wschód to pozytywna)."
+
+#: ../../api.rst:1106
+msgid "Geo Methods"
+msgstr "Metody Geo"
+
+#: ../../api.rst:1111
+msgid "Given a latitude and longitude, looks for places (cities and neighbourhoods) whose IDs can be specified in a call to :func:`update_status` to appear as the name of the location. This call provides a detailed response about the location in question; the :func:`nearby_places` function should be preferred for getting a list of places nearby without great detail."
+msgstr "Posiadając szerokość i długość geograficzną, wyszukiwane będą miejsca (miasta i dzielnice), których ID mogą być określone w wywołaniu dla :func:`update_status` tak by wyglądały jako nazwa lokacji. To wywołanie dostarcza szczegółowe informacje na temat lokacji; funkcja :func:`nearby_places` powinna być używana do zdobywania list miejscw okolicy, bez szczegółowych informacji."
+
+#: ../../api.rst:1117
+msgid "The location's latitude."
+msgstr "Szerokość geograficzna lokacji."
+
+#: ../../api.rst:1118
+msgid "The location's longitude."
+msgstr "Długość geograficzna lokacji."
+
+#: ../../api.rst:1119
+msgid "Specify the \"region\" in which to search, such as a number (then this is a radius in meters, but it can also take a string that is suffixed with ft to specify feet). If this is not passed in, then it is assumed to be 0m"
+msgstr "Określa \"region\" do wyszukiwania, między innymi numer (wtedy jest to zasięg w metrach, ale może być to też ciąg znaków zakończonych jako stopy). Jeżeli nie jest to przekazane, założony będzie zasięg 0m."
+
+#: ../../api.rst:1123
+msgid "Assumed to be `neighborhood' by default; can also be `city'."
+msgstr "Domyślnie przyjmuje się, że jest to `neighborhood'; może być także `city`."
+
+#: ../../api.rst:1125
+msgid "A hint as to the maximum number of results to return. This is only a guideline, which may not be adhered to."
+msgstr "Wskazówka co do maksymalnej liczby rezultatów, które zostaną zwrócone. Jest to tylko wskazanie, nie musisz się do niego stosować."
+
+#: ../../api.rst:1131
+msgid "Given *id* of a place, provide more details about that place."
+msgstr "Posiadając *id* lokacji podaje więcej informacji na jej temat."
+
+#: ../../api.rst:1133
+msgid "Valid Twitter ID of a location."
+msgstr "Poprawny ID Twittera lokacji."
+
+#: ../../api.rst:1137
+msgid "Utility methods"
+msgstr "Metody Użyteczności"
+
+#: ../../api.rst:1141
+msgid "Returns the current configuration used by Twitter including twitter.com slugs which are not usernames, maximum photo resolutions, and t.co shortened URL length. It is recommended applications request this endpoint when they are loaded, but no more than once a day."
+msgstr "Zwraca aktualną konfigurację używaną przez Twitter, w tym żetony twitter.cm, które nie są nazwami użytkowników, maksymalne rozmiary zdjęcia oraz długość skróconego URL t.co. Zaleca się by aplikacje żądały tego punktu końcowego gdy są obłaowane, jednak nie więcej niż raz dziennie."
+
+#: ../../api.rst:1148
+msgid "Media methods"
+msgstr "Metody Mediów"
+
+#: ../../api.rst:1152
+msgid "Use this endpoint to upload images to Twitter."
+msgstr "Użyj tego punktu końcowego by wrzucić obraz na Twitter."
+
+#: ../../api.rst:1154
+msgid "The filename of the image to upload. This will automatically be opened unless ``file`` is specified."
+msgstr "Nazwa pliku obrazu do wrzucenia. Jest automatycznie otwarte, chyba, że ``file`` jest określone."
+
+#: ../../api.rst:1156
+msgid "A file object, which will be used instead of opening ``filename``. ``filename`` is still required, for MIME type detection and to use as a form field in the POST data."
+msgstr "Obiekt pliku, który musi być użyty zamiast otwierania ``filename``. ``filename`` jest nadal wymagane dla detekcji typu MIME oraz do użytwania pól formy w danych POST."
+
+#: ../../api.rst:1159
+msgid ":class:`Media` object"
+msgstr "obiekt :class:`Media`"
+
+#: ../../api.rst:1164
+msgid "This endpoint can be used to provide additional information about the uploaded media_id. This feature is currently only supported for images and GIFs. Call this endpoint to attach additional metadata such as image alt text."
+msgstr "Ten punkt końcowy może być użyty do dostarczenia dodatkowych informacji na temat wrzuconego media_id. Ta funkcja na tę chwilę jest wspierana tylko przez obrazy i GIFy. Wywołaj ten punkt końcowy by dodać dodatkowe metadane takie jak alt text."
+
+#: ../../api.rst:1169
+msgid "The ID of the media to add alt text to."
+msgstr "ID mediów, do których dodany jest alt text."
+
+#: ../../api.rst:1170
+msgid "The alt text to add to the image."
+msgstr "Alt tekst który zostanie dodany do obrazu."
+
+#: ../../api.rst:1174
+msgid ":mod:`tweepy.error` --- Exceptions"
+msgstr ":mod:`tweepy.error` --- Wyjątki"
+
+#: ../../api.rst:1176
+msgid "The exceptions are available in the ``tweepy`` module directly, which means ``tweepy.error`` itself does not need to be imported. For example, ``tweepy.error.TweepError`` is available as ``tweepy.TweepError``."
+msgstr "Wyjątki są dostępne bezpośrednio w module ``tweepy`` co oznacza, że ``tweepy.error`` sam w sobie nie musi zostać zimportowany. Na przykład: ``tweepy.error.TweepError`` jest dostępny jako ``tweepy.TweepError``."
+
+#: ../../api.rst:1183
+msgid "The main exception Tweepy uses. Is raised for a number of things."
+msgstr "Główny wyjątek używany przez Tweepy. Pojawia się w różnych przypadkach."
+
+#: ../../api.rst:1185
+msgid "When a ``TweepError`` is raised due to an error Twitter responded with, the error code (`as described in the API documentation <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be accessed at ``TweepError.response.text``. Note, however, that ``TweepError``\\ s also may be raised with other things as message (for example plain error reason strings)."
+msgstr "Gdy podniesiony jest ``TweepError`` z powodu błedu, którym odpowiedział Twitter to kod błedu (`tak jak jest to określone w dokumentacji API <https://developer.twitter.com/en/docs/basics/response-codes>`_) może być znaleziony w ``TweepError.response.text``.. Uwaga: ``TweepError``\\ s może być także podniesiony wraz z innymi rzeczami jako wiadomość (na przykład jako prosty błąd ciągów znaków powodu)."
+
+#: ../../api.rst:1195
+msgid "Is raised when an API method fails due to hitting Twitter's rate limit. Makes for easy handling of the rate limit specifically."
+msgstr "Jest podniesione gdy metoda API nie działa ze względu na osiągnięcie limitu współczynników określonej przez Twitter. Ułatwia to obsługę limitu współczynników."
+
+#: ../../api.rst:1198
+msgid "Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a ``RateLimitError`` too."
+msgstr "Dziedziczy od :exc:`TweepError` więc ``except TweepError`` też złapie ``RateLimitError``."
+
+#: ../../api.rst:1203
+msgid "Footnotes"
+msgstr "Przypisy"
+
+#: ../../api.rst:1204
+msgid "https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets"
+msgstr "https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets"
+
+#: ../../api.rst:1205
+msgid "https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145"
+msgstr "https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-is-already-favorited-by-the-user/11145"

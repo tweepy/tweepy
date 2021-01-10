@@ -1,0 +1,39 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../index.rst:7
+msgid "Tweepy Documentation"
+msgstr "Dokumentacja Tweepy"
+
+#: ../../index.rst:9
+msgid "Contents:"
+msgstr "Zawartość:"
+
+#: ../../index.rst:25
+msgid "Indices and tables"
+msgstr "Indeksy i tabele"
+
+#: ../../index.rst:27
+msgid ":ref:`genindex`"
+msgstr ":ref:`genindex`"
+
+#: ../../index.rst:28
+msgid ":ref:`search`"
+msgstr ":ref:`search`"
+

@@ -1,0 +1,115 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../extended_tweets.rst:6
+msgid "Extended Tweets"
+msgstr "Rozszerzone Tweety"
+
+#: ../../extended_tweets.rst:8
+msgid "This supplements `Twitter's Tweet updates documentation`_."
+msgstr "Te informacje uzupełniają `Dokumentację aktualizacji tweetów Twittera`_."
+
+#: ../../extended_tweets.rst:11
+msgid "Introduction"
+msgstr "Wprowadzenie"
+
+#: ../../extended_tweets.rst:13
+msgid "On May 24, 2016, Twitter `announced <https://blog.twitter.com/express-even-more-in-140-characters>`_ changes to the way that replies and URLs are handled and `published plans <https://blog.twitter.com/2016/doing-more-with-140-characters>`_ around support for these changes in the Twitter API and initial technical documentation describing the updates to Tweet objects and API options.\\ [#]_ On September 26, 2017, Twitter `started testing <https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html>`_ 280 characters for certain languages,\\ [#]_ and on November 7, 2017, `announced <https://blog.twitter.com/official/en_us/topics/product/2017/tweetingmadeeasier.html>`_ that the character limit was being expanded for Tweets in languages where cramming was an issue.\\ [#]_"
+msgstr "24 maja 2016, Twitter `ogłosił <https://blog.twitter.com/express-even-more-in-140-characters>`_ zmiany w sposobie obsługi odpowiedzi i URL oraz `opublikował plany <https://blog.twitter.com/2016/doing-more-with-140-characters>`_ co do wsparcia tych zmian w API Twittera oraz wstępną dokumentację techniczną opisującą aktualizacje dla obiektów Tweet oraz opcji API. \\ [#]_ 26 września 2017 Twitter `zaczął testować <https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html>`_ 280 znaków dla wybranych języków,\\ [#]_ a 7 listopada 2017 `oglosił, że <https://blog.twitter.com/official/en_us/topics/product/2017/tweetingmadeeasier.html>`_ limit znaków zotanie rozszerzony dla tweetów w językach, w których zapchanie jest problemem.\\ [#]_"
+
+#: ../../extended_tweets.rst:27
+msgid "Standard API methods"
+msgstr "Standardowe metody API"
+
+#: ../../extended_tweets.rst:29
+msgid "Any ``tweepy.API`` method that returns a Status object accepts a new ``tweet_mode`` parameter. Valid values for this parameter are ``compat`` and ``extended``, which give compatibility mode and extended mode, respectively. The default mode (if no parameter is provided) is compatibility mode."
+msgstr "Każda metoda ``tweepy API``, która zwraca obiekt Status akceptuje nowy parametr ``tweet_mode``. Poprawne wartości dla tego parametru to ``compat`` oraz ``extened``, które dają odpowiednio tryb kompatybilności oraz tryb rozszerzony. Domyślny tryb (gdy nie ma podanego parametru) to tryb kompatybilności."
+
+#: ../../extended_tweets.rst:35
+msgid "Compatibility mode"
+msgstr "Tryb kompatybilności"
+
+#: ../../extended_tweets.rst:37
+msgid "By default, using compatibility mode, the ``text`` attribute of Status objects returned by ``tweepy.API`` methods is truncated to 140 characters, as needed. When this truncation occurs, the ``truncated`` attribute of the Status object will be ``True``, and only entities that are fully contained within the available 140 characters range will be included in the ``entities`` attribute. It will also be discernible that the ``text`` attribute of the Status object is truncated as it will be suffixed with an ellipsis character, a space, and a shortened self-permalink URL to the Tweet."
+msgstr "Domyślnie, używając trybu kompatybilności, atrybut ``text`` obiektu Status zwrócony przez metody ``tweepy API`` jest obcięty do 140 znaków, tak jak jest to wymagane. Gdy zachodzi obcinanie, atrybut ``truncated`` obiektu Status jest ``True`` i tylko jednostki, które są całkowicie zawarte w dostępnych 140 znakach będa zawarte w atrybucie ``entities``. Zostanie także zaobserwowane to, że atrybut ``text` obiektu Satus jest obcięty, ponieważ będzie on zakończony elipsą, spacją oraz skróconym permamentnym URL do tweeta."
+
+#: ../../extended_tweets.rst:47
+msgid "Extended mode"
+msgstr "Tryb rozszerzony"
+
+#: ../../extended_tweets.rst:49
+msgid "When using extended mode, the ``text`` attribute of Status objects returned by ``tweepy.API`` methods is replaced by a ``full_text`` attribute, which contains the entire untruncated text of the Tweet. The ``truncated`` attribute of the Status object will be ``False``, and the ``entities`` attribute will contain all entities. Additionally, the Status object will have a ``display_text_range`` attribute, an array of two Unicode code point indices, identifying the inclusive start and exclusive end of the displayable content of the Tweet."
+msgstr "Używając trybu rozszerzonego, atrybut ``text`` obiektu Status zwrócony przez metody ``tweepy API`` jest zastąpiony przez atrybut ``full_text``, który zawiera cały, nieobcięty tekst tweeta. Atrybut ``truncated`` obiektu Status jest ``False`` a atrybut ``entities`` zawiera wszystkie jednostki. Dodatkowo, obiekt Status będzie posiadał atrybut ``display_text_range``, szyk dwóch indeksów wskaźników kodu Unicode, które identyfikują włączny start i wyłączny koniec wyświetlanej zawartości tweeta."
+
+#: ../../extended_tweets.rst:59
+msgid "Streaming"
+msgstr "Przesyłanie strumieniowe"
+
+#: ../../extended_tweets.rst:61
+msgid "By default, the Status objects from streams may contain an ``extended_tweet`` attribute representing the equivalent field in the raw data/payload for the Tweet. This attribute/field will only exist for extended Tweets, containing a dictionary of sub-fields. The ``full_text`` sub-field/key of this dictionary will contain the full, untruncated text of the Tweet, and the ``entities`` sub-field/key will contain the full set of entities. If there are extended entities, the ``extended_entities`` sub-field/key will contain the full set of those. Additionally, the ``display_text_range`` sub-field/key will contain an array of two Unicode code point indices, identifying the inclusive start and exclusive end of the displayable content of the Tweet."
+msgstr "Domyśnie, obiekty Status ze strumieni mogą zawierać atrybut ``extended_tweet`` reprezentujący równowartość pól w nieprzetworzonych danych/właściwych danych dla tweeta. Ten atrybut/pole będzie istnieć tylko dla rozszerzonych tweeetów zawierających słownik podpól. Podpole/klucz ``full_text`` tego słownika będzie zawierać pełny, nieobcięty tekst tweeta a podpole/klucz ``entities`` będzie zawierać pełny zbiór jednostek. Jeżeli pojawią się rozszerzone jednostki to podpole/klucz ``extended_entities`` będzie zawierać pełen ich zbiór. Dodatkowo, podpole/klucz ``display_text_range`` będzie zawierać szyk dwóch indeksów wskaźników kodu Unicode, które identyfikują włączny start i wyłączny koniec wyświetlanej zawartości tweeta."
+
+#: ../../extended_tweets.rst:73
+msgid "Handling Retweets"
+msgstr "Obsługa retweetów"
+
+#: ../../extended_tweets.rst:75
+msgid "When using extended mode with a Retweet, the ``full_text`` attribute of the Status object may be truncated with an ellipsis character instead of containing the full text of the Retweet. However, since the ``retweeted_status`` attribute (of a Status object that is a Retweet) is itself a Status object, the ``full_text`` attribute of the Retweeted Status object can be used instead."
+msgstr "Używając rozszerzonego trybu dla retweetów, atrybut ``full_text`` obiektu Status  może być skrócony poprzez elipsę zamiast zawierania całości tekstu retweeta. Jednakże, ponieważ atrybut ``retweeted_status`` (dla obiektu Status, który jest retweetem) jest sam w sobie obiektem Statusu, to atrybut ``full_text`` dla obiektu Status retweeta, może być użyty zamiennie."
+
+#: ../../extended_tweets.rst:82
+msgid "This also applies similarly to Status objects/payloads that are Retweets from streams. The dictionary from the ``extended_tweet`` attribute/field contains a ``full_text`` sub-field/key that may be truncated with an ellipsis character. Instead, the ``extended_tweet`` attribute/field of the Retweeted Status (from the ``retweeted_status`` attribute/field) can be used."
+msgstr "Działa to podobnie dla obiektu/danych właściwych, które są retweetami ze strumieni. Słownik od atrybutu/pola ``extended_tweet`` zawiera podpole/klucz ``full_text``, który może być obcięty elipsą. Zamiast tego może być użyty atrybut/pole ``extended_tweet`` Statusu retweeta (od atrybutu/pola ``retweeted_status``)."
+
+#: ../../extended_tweets.rst:89
+msgid "Examples"
+msgstr "Przykłady"
+
+#: ../../extended_tweets.rst:91
+msgid "Given an existing ``tweepy.API`` object and ``id`` for a Tweet, the following can be used to print the full text of the Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::"
+msgstr "Posiadając istniejący obiekt ``tweepy.API`` oraz ``id`` dla tweeta, można wyświetlić cały tekst tweeeta lub jeżeli jest to retweet, cały tekst retweetowanego tweeta::"
+
+#: ../../extended_tweets.rst:101
+msgid "If ``status`` is a Retweet, ``status.full_text`` could be truncated."
+msgstr "Jeżeli ``status`` to retweet to ``status.full_text`` może być obcięty."
+
+#: ../../extended_tweets.rst:103
+msgid "This Status event handler for a ``StreamListener`` prints the full text of the Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::"
+msgstr "Ten odbiornik zdarzeń dla ``StreamListener`` wyświetla pełny tekst tweeta, lub jeżeli jest to retweet, pełny tekst retweetowanego tweeta::"
+
+#: ../../extended_tweets.rst:118
+msgid "If ``status`` is a Retweet, it will not have an ``extended_tweet`` attribute, and ``status.text`` could be truncated."
+msgstr "Jeżeli ``status`` to retweet to nie będzie on posiadał atrybutu ``extended_tweeet`` a ``status.text`` moze być obcięty."
+
+#: ../../extended_tweets.rst:122
+msgid "Footnotes"
+msgstr "Przypisy"
+
+#: ../../extended_tweets.rst:123
+msgid "https://twittercommunity.com/t/upcoming-changes-to-simplify-replies-and-links-in-tweets/67497"
+msgstr "https://twittercommunity.com/t/upcoming-changes-to-simplify-replies-and-links-in-tweets/67497"
+
+#: ../../extended_tweets.rst:124
+msgid "https://twittercommunity.com/t/testing-280-characters-for-certain-languages/94126"
+msgstr "https://twittercommunity.com/t/testing-280-characters-for-certain-languages/94126"
+
+#: ../../extended_tweets.rst:125
+msgid "https://twittercommunity.com/t/updating-the-character-limit-and-the-twitter-text-library/96425"
+msgstr "https://twittercommunity.com/t/updating-the-character-limit-and-the-twitter-text-library/96425"
+

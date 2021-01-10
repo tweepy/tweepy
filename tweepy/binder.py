@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2019 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 import logging
@@ -8,12 +8,10 @@ import sys
 import time
 
 import requests
-import six
-from six.moves.urllib.parse import quote, urlencode
+from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
-from tweepy.utils import convert_to_utf8_str
 
 re_path_template = re.compile(r'{\w+}')
 
@@ -22,7 +20,7 @@ log = logging.getLogger(__name__)
 
 def bind_api(**config):
 
-    class APIMethod(object):
+    class APIMethod:
 
         api = config['api']
         path = config['path']
@@ -55,6 +53,7 @@ def bind_api(**config):
                                                  api.wait_on_rate_limit)
             self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
                                                         api.wait_on_rate_limit_notify)
+            self.return_cursors = kwargs.pop('return_cursors', False)
             self.parser = kwargs.pop('parser', api.parser)
             self.session.headers = kwargs.pop('headers', {})
             self.build_parameters(args, kwargs)
@@ -92,7 +91,7 @@ def bind_api(**config):
                 if arg is None:
                     continue
                 try:
-                    self.session.params[self.allowed_param[idx]] = convert_to_utf8_str(arg)
+                    self.session.params[self.allowed_param[idx]] = str(arg)
                 except IndexError:
                     raise TweepError('Too many parameters supplied!')
 
@@ -102,7 +101,7 @@ def bind_api(**config):
                 if k in self.session.params:
                     raise TweepError('Multiple values for parameter %s supplied!' % k)
 
-                self.session.params[k] = convert_to_utf8_str(arg)
+                self.session.params[k] = str(arg)
 
             log.debug("PARAMS: %r", self.session.params)
 
@@ -150,24 +149,15 @@ def bind_api(**config):
             # or maximum number of retries is reached.
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
-                # handle running out of api calls
-                if self.wait_on_rate_limit:
-                    if self._reset_time is not None:
-                        if self._remaining_calls is not None:
-                            if self._remaining_calls < 1:
-                                sleep_time = self._reset_time - int(time.time())
-                                if sleep_time > 0:
-                                    if self.wait_on_rate_limit_notify:
-                                        log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
-                                    time.sleep(sleep_time + 5)  # sleep for few extra sec
-
-                # if self.wait_on_rate_limit and self._reset_time is not None and \
-                #                 self._remaining_calls is not None and self._remaining_calls < 1:
-                #     sleep_time = self._reset_time - int(time.time())
-                #     if sleep_time > 0:
-                #         if self.wait_on_rate_limit_notify:
-                #             log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
-                #         time.sleep(sleep_time + 5)  # sleep for few extra sec
+                if (self.wait_on_rate_limit and self._reset_time is not None
+                    and self._remaining_calls is not None
+                    and self._remaining_calls < 1):
+                    # Handle running out of API calls
+                    sleep_time = self._reset_time - int(time.time())
+                    if sleep_time > 0:
+                        if self.wait_on_rate_limit_notify:
+                            log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
+                        time.sleep(sleep_time + 1)  # Sleep for extra sec
 
                 # Apply authentication
                 auth = None
@@ -188,29 +178,30 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    six.reraise(TweepError, TweepError('Failed to send request: %s' % e), sys.exc_info()[2])
+                    raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
+
+                if resp.status_code in (200, 204):
+                    break
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
-
                 if rem_calls is not None:
                     self._remaining_calls = int(rem_calls)
-                elif isinstance(self._remaining_calls, int):
+                elif self._remaining_calls is not None:
                     self._remaining_calls -= 1
+
                 reset_time = resp.headers.get('x-rate-limit-reset')
                 if reset_time is not None:
                     self._reset_time = int(reset_time)
-                if self.wait_on_rate_limit and self._remaining_calls == 0 and (
-                        # if ran out of calls before waiting switching retry last call
-                        resp.status_code == 429 or resp.status_code == 420):
-                    continue
+
                 retry_delay = self.retry_delay
-                # Exit request loop if non-retry error code
-                if resp.status_code in (200, 204):
-                    break
-                elif (resp.status_code == 429 or resp.status_code == 420) and self.wait_on_rate_limit:
+                if resp.status_code in (420, 429) and self.wait_on_rate_limit:
+                    if self._remaining_calls == 0:
+                        # If ran out of calls before waiting switching retry last call
+                        continue
                     if 'retry-after' in resp.headers:
                         retry_delay = float(resp.headers['retry-after'])
                 elif self.retry_errors and resp.status_code not in self.retry_errors:
+                    # Exit request loop if non-retry error code
                     break
 
                 # Sleep before retrying request again
@@ -233,7 +224,9 @@ def bind_api(**config):
                     raise TweepError(error_msg, resp, api_code=api_error_code)
 
             # Parse the response payload
-            result = self.parser.parse(self, resp.text)
+            self.return_cursors = (self.return_cursors or
+                                   'cursor' in self.session.params or 'next' in self.session.params)
+            result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
@@ -253,7 +246,10 @@ def bind_api(**config):
 
     # Set pagination mode
     if 'cursor' in APIMethod.allowed_param:
-        _call.pagination_mode = 'cursor'
+        if APIMethod.payload_type == 'direct_message':
+            _call.pagination_mode = 'dm_cursor'
+        else:
+            _call.pagination_mode = 'cursor'
     elif 'max_id' in APIMethod.allowed_param:
         if 'since_id' in APIMethod.allowed_param:
             _call.pagination_mode = 'id'
@@ -261,3 +257,10 @@ def bind_api(**config):
         _call.pagination_mode = 'page'
 
     return _call
+
+
+def pagination(mode):
+    def decorator(method):
+        method.pagination_mode = mode
+        return method
+    return decorator
