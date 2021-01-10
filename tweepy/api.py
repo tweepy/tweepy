@@ -1034,7 +1034,7 @@ class API(object):
             api=self,
             path='/lists/ownerships.json',
             payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
+            allowed_param=['user_id', 'screen_name', 'count', 'cursor'],
             require_auth=True
         )
 
