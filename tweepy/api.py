@@ -476,8 +476,6 @@ class API:
             path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
-            allowed_param=['recipient_id', 'text', 'quick_reply_type',
-                           'attachment_type', 'attachment_media_id'],
             require_auth=True
         )
 
