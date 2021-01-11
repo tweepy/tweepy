@@ -192,7 +192,7 @@ class AsyncStream:
         if stall_warnings:
             body["stall_warnings"] = "true"
 
-        self.task = await asyncio.create_task(
+        self.task = asyncio.create_task(
             self._connect("POST", endpoint, headers=headers, body=body or None)
         )
         return self.task
@@ -221,7 +221,7 @@ class AsyncStream:
         if stall_warnings:
             params["stall_warnings"] = "true"
 
-        self.task = await asyncio.create_task(
+        self.task = asyncio.create_task(
             self._connect("GET", endpoint, params=params)
         )
         return self.task
