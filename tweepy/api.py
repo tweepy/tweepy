@@ -1120,13 +1120,6 @@ class API:
     def remove_list_members(self, screen_name=None, user_id=None, slug=None,
                             list_id=None, owner_id=None,
                             owner_screen_name=None):
-        """ Perform bulk remove of list members from user ID or screenname """
-        return self._remove_list_members(list_to_csv(screen_name),
-                                         list_to_csv(user_id), slug, list_id,
-                                         owner_id, owner_screen_name)
-
-    @property
-    def _remove_list_members(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
             :allowed_param: 'screen_name', 'user_id', 'slug', 'list_id',
                             'owner_id', 'owner_screen_name'
@@ -1139,7 +1132,8 @@ class API:
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
                            'owner_id', 'owner_screen_name'],
             require_auth=True
-        )
+        )(list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
+          owner_id, owner_screen_name)
 
     @property
     def list_members(self):
