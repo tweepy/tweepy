@@ -440,7 +440,7 @@ class API:
             require_auth=True
         )
 
-    def send_direct_message(self, recipient_id, text, quick_reply_type=None,
+    def send_direct_message(self, recipient_id, text, quick_reply_options=None,
                             attachment_type=None, attachment_media_id=None):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
             :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
@@ -455,8 +455,11 @@ class API:
             }
         }
         message_data = json_payload['event']['message_create']['message_data']
-        if quick_reply_type is not None:
-            message_data['quick_reply'] = {'type': quick_reply_type}
+        if quick_reply_options is not None:
+            message_data['quick_reply'] = {
+                'type': 'options',
+                'options': quick_reply_options
+            }
         if attachment_type is not None and attachment_media_id is not None:
             message_data['attachment'] = {'type': attachment_type}
             message_data['attachment']['media'] = {'id': attachment_media_id}
