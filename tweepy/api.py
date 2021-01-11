@@ -461,8 +461,10 @@ class API:
                 'options': quick_reply_options
             }
         if attachment_type is not None and attachment_media_id is not None:
-            message_data['attachment'] = {'type': attachment_type}
-            message_data['attachment']['media'] = {'id': attachment_media_id}
+            message_data['attachment'] = {
+                'type': attachment_type,
+                'media': {'id': attachment_media_id}
+            }
         return bind_api(
             api=self,
             path='/direct_messages/events/new.json',
