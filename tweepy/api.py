@@ -532,12 +532,6 @@ class API:
         )
 
     def lookup_friendships(self, user_ids=None, screen_names=None):
-        """ Perform bulk look up of friendships from user ID or screenname """
-        return self._lookup_friendships(list_to_csv(user_ids),
-                                        list_to_csv(screen_names))
-
-    @property
-    def _lookup_friendships(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
             :allowed_param: 'user_id', 'screen_name'
         """
@@ -547,7 +541,7 @@ class API:
             payload_type='relationship', payload_list=True,
             allowed_param=['user_id', 'screen_name'],
             require_auth=True
-        )
+        )(list_to_csv(user_ids), list_to_csv(screen_names))
 
     @property
     def friends_ids(self):
