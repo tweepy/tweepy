@@ -210,7 +210,7 @@ class Stream:
 
     def _run(self):
         # Authenticate
-        url = "https://%s%s" % (self.host, self.url)
+        url = f"https://{self.host}{self.url}"
 
         # Connect and process the stream
         error_counter = 0
@@ -346,7 +346,7 @@ class Stream:
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/sample.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
@@ -359,7 +359,7 @@ class Stream:
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/filter.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
             self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
@@ -368,7 +368,7 @@ class Stream:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:

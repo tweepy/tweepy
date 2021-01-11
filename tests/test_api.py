@@ -432,7 +432,7 @@ class TweepyCacheTests(unittest.TestCase):
 
         # test count
         for i in range(20):
-            self.cache.store('testkey%i' % i, 'testvalue')
+            self.cache.store(f'testkey{i}', 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
         # test flush

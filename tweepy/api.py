@@ -78,11 +78,8 @@ class API:
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{required}".'
-                ' It is currently a {actual}.'.format(
-                    required=parser_type.__name__,
-                    actual=type(self.parser)
-                )
+                f'"parser" argument has to be an instance of "{parser_type.__name__}".'
+                f' It is currently a {type(self.parser)}.'
             )
 
     @property
@@ -1291,7 +1288,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/30day/{}.json'.format(environment_name),
+            path=f'/tweets/search/30day/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1306,7 +1303,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            path=f'/tweets/search/fullarchive/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1383,18 +1380,16 @@ class API:
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError('File is too big, must be less than %skb.'
-                                     % max_size)
+                    raise TweepError(f'File is too big, must be less than {max_size}kb.')
             except os.error as e:
-                raise TweepError('Unable to access file: %s' % e.strerror)
+                raise TweepError(f'Unable to access file: {e.strerror}')
 
             # build the mulitpart-formdata body
             fp = open(filename, 'rb')
         else:
             f.seek(0, 2)  # Seek to end of file
             if f.tell() > (max_size * 1024):
-                raise TweepError('File is too big, must be less than %skb.'
-                                 % max_size)
+                raise TweepError(f'File is too big, must be less than {max_size}kb.')
             f.seek(0)  # Reset to beginning of file
             fp = f
 
@@ -1410,7 +1405,7 @@ class API:
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
-            raise TweepError('Invalid file type for image: %s' % file_type)
+            raise TweepError(f'Invalid file type for image: {file_type}')
 
         if isinstance(filename, str):
             filename = filename.encode('utf-8')
@@ -1418,10 +1413,10 @@ class API:
         BOUNDARY = b'Tw3ePy'
         body = []
         body.append(b'--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="{0}";'
-                    ' filename="{1}"'.format(form_field, filename)
+        body.append(f'Content-Disposition: form-data; name="{form_field}";'
+                    f' filename="{filename}"'
                     .encode('utf-8'))
-        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+        body.append(f'Content-Type: {file_type}'.encode('utf-8'))
         body.append(b'')
         body.append(fp.read())
         body.append(b'--' + BOUNDARY + b'--')

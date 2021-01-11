@@ -99,7 +99,7 @@ def bind_api(**config):
                 if arg is None:
                     continue
                 if k in self.session.params:
-                    raise TweepError('Multiple values for parameter %s supplied!' % k)
+                    raise TweepError(f'Multiple values for parameter {k} supplied!')
 
                 self.session.params[k] = str(arg)
 
@@ -116,7 +116,7 @@ def bind_api(**config):
                     try:
                         value = quote(self.session.params[name])
                     except KeyError:
-                        raise TweepError('No parameter value found for path variable: %s' % name)
+                        raise TweepError(f'No parameter value found for path variable: {name}')
                     del self.session.params[name]
 
                 self.path = self.path.replace(variable, value)
@@ -131,7 +131,7 @@ def bind_api(**config):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
-                cache_result = self.api.cache.get('%s?%s' % (url, urlencode(self.session.params)))
+                cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
                 # if cache result found and not expired, return it
                 if cache_result:
                     # must restore api reference
@@ -156,7 +156,7 @@ def bind_api(**config):
                     sleep_time = self._reset_time - int(time.time())
                     if sleep_time > 0:
                         if self.wait_on_rate_limit_notify:
-                            log.warning("Rate limit reached. Sleeping for: %d" % sleep_time)
+                            log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
                         time.sleep(sleep_time + 1)  # Sleep for extra sec
 
                 # Apply authentication
@@ -178,7 +178,7 @@ def bind_api(**config):
                                                 auth=auth,
                                                 proxies=self.api.proxy)
                 except Exception as e:
-                    raise TweepError('Failed to send request: %s' % e).with_traceback(sys.exc_info()[2])
+                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
                 if resp.status_code in (200, 204):
                     break
@@ -215,7 +215,7 @@ def bind_api(**config):
                     error_msg, api_error_code = \
                         self.parser.parse_error(resp.text)
                 except Exception:
-                    error_msg = "Twitter error response: status code = %s" % resp.status_code
+                    error_msg = f"Twitter error response: status code = {resp.status_code}"
                     api_error_code = None
 
                 if is_rate_limit_error_message(error_msg):
@@ -230,7 +230,7 @@ def bind_api(**config):
 
             # Store result into cache if one is available.
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                self.api.cache.store('%s?%s' % (url, urlencode(self.session.params)), result)
+                self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
 
             return result
 

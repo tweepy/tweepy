@@ -11,7 +11,7 @@ with open(VERSION_FILE) as version_file:
 if match:
     version = match.group(1)
 else:
-    raise RuntimeError("Unable to find version string in %s." % (VERSION_FILE,))
+    raise RuntimeError(f"Unable to find version string in {VERSION_FILE}.")
 
 with open("README.md") as readme_file:
     long_description = readme_file.read()
@@ -53,7 +53,7 @@ setup(
     },
     test_suite="nose.collector",
     keywords="twitter library",
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Software Development :: Libraries",
@@ -61,7 +61,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
