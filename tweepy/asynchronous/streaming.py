@@ -170,7 +170,7 @@ class AsyncStream:
 
         Returns :class:`asyncio.Task`
         """
-        if self.task is not None:
+        if self.task is not None and not self.task.done():
             raise TweepError('Stream is already connected')
 
         endpoint = "statuses/filter"
@@ -212,7 +212,7 @@ class AsyncStream:
 
         Returns :class:`asyncio.Task`
         """
-        if self.task is not None:
+        if self.task is not None and not self.task.done():
             raise TweepError("Stream is already connected")
 
         endpoint = "statuses/sample"
