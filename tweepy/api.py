@@ -441,7 +441,8 @@ class API:
         )
 
     def send_direct_message(self, recipient_id, text, quick_reply_options=None,
-                            attachment_type=None, attachment_media_id=None):
+                            attachment_type=None, attachment_media_id=None,
+                            ctas=None):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
             :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
                             'attachment_type', attachment_media_id'
@@ -465,6 +466,8 @@ class API:
                 'type': attachment_type,
                 'media': {'id': attachment_media_id}
             }
+        if ctas is not None:
+            message_data['ctas'] = ctas
         return bind_api(
             api=self,
             path='/direct_messages/events/new.json',
