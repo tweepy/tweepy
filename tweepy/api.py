@@ -326,6 +326,8 @@ class API:
             'media_type': media_type,
             'media_category': media_category
         }
+        if additional_owners is not None:
+            post_data["additional_owners"] = list_to_csv(additional_owners)
         return bind_api(
             api=self,
             path='/media/upload.json',
