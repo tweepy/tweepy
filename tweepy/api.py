@@ -240,16 +240,15 @@ class API:
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         size_bytes = os.path.getsize(filename)
 
-        if file_type in IMAGE_TYPES or file_type in CHUNKED_TYPES:
-            if size_bytes > MAX_UPLOAD_SIZE_CHUNKED * 1024:
-                raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
+        if file_type not in IMAGE_TYPES and file_type not in CHUNKED_TYPES:
+            raise TweepError(f'unsupported media type: {file_type}')
+        if size_bytes > MAX_UPLOAD_SIZE_CHUNKED * 1024:
+            raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
-            if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-                return self.image_upload(filename, MAX_UPLOAD_SIZE_STANDARD * 1024, file_type=file_type, f=f, *args, **kwargs)
-
+        if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
+            return self.image_upload(filename, MAX_UPLOAD_SIZE_STANDARD * 1024, file_type=file_type, f=f, *args, **kwargs)
+        else:
             return self.upload_chunked(filename, f=f, file_type=file_type, *args, **kwargs)
-
-        raise TweepError(f'unsupported media type: {file_type}')
 
     def image_upload(self, filename, max_size, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
