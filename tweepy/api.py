@@ -250,7 +250,7 @@ class API:
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
             return self.image_upload(filename, f=f, *args, **kwargs)
         else:
-            return self.upload_chunked(filename, f=f, file_type=file_type, *args, **kwargs)
+            return self.chunked_upload(filename, f=f, file_type=file_type, *args, **kwargs)
 
     def image_upload(self, filename, f=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
@@ -270,7 +270,7 @@ class API:
             upload_api=True
         )(*args, files=files, **kwargs)
 
-    def upload_chunked(self, filename, *args, **kwargs):
+    def chunked_upload(self, filename, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
             :allowed_param:
         """
