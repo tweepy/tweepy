@@ -237,8 +237,10 @@ class API:
             location = f.tell()
             h = f.read(32)
             f.seek(location)
+            size_bytes = os.stat(f.fileno()).st_size
+        else:
+            size_bytes = os.path.getsize(filename)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
-        size_bytes = os.path.getsize(filename)
 
         if file_type not in IMAGE_TYPES and file_type not in CHUNKED_TYPES:
             raise TweepError(f'unsupported media type: {file_type}')
