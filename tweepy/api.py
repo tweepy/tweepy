@@ -225,18 +225,16 @@ class API:
             require_auth=True
         )(*args, **kwargs)
 
-    def media_upload(self, filename, *args, **kwargs):
+    def media_upload(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
-        f = kwargs.pop('file', None)
-
         h = None
-        if f is not None:
-            location = f.tell()
-            h = f.read(32)
-            f.seek(location)
-            size_bytes = os.stat(f.fileno()).st_size
+        if file is not None:
+            location = file.tell()
+            h = file.read(32)
+            file.seek(location)
+            size_bytes = os.stat(file.fileno()).st_size
         else:
             size_bytes = os.path.getsize(filename)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
@@ -247,9 +245,9 @@ class API:
             raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-            return self.simple_upload(filename, f=f, *args, **kwargs)
+            return self.simple_upload(filename, f=file, *args, **kwargs)
         else:
-            return self.chunked_upload(filename, f=f, file_type=file_type, *args, **kwargs)
+            return self.chunked_upload(filename, f=file, file_type=file_type, *args, **kwargs)
 
     def simple_upload(self, filename, f=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
