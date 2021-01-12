@@ -269,11 +269,10 @@ class API:
             upload_api=True
         )(*args, files=files, **kwargs)
 
-    def chunked_upload(self, filename, *args, **kwargs):
+    def chunked_upload(self, filename, f=None, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
             :allowed_param:
         """
-        f = kwargs.pop('file', None)
         file_type = kwargs.pop('file_type', None)
         # Media category is dependant on whether media is attached to a tweet
         # or to a direct message. Assume tweet by default.
