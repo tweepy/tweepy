@@ -42,6 +42,7 @@ def bind_api(**config):
                 raise TweepError('Authentication required!')
 
             self.post_data = kwargs.pop('post_data', None)
+            self.files = kwargs.pop('files', None)
             self.json_payload = kwargs.pop('json_payload', None)
             self.retry_count = kwargs.pop('retry_count',
                                           api.retry_count)
@@ -173,6 +174,7 @@ def bind_api(**config):
                     resp = self.session.request(self.method,
                                                 full_url,
                                                 data=self.post_data,
+                                                files=self.files,
                                                 json=self.json_payload,
                                                 timeout=self.api.timeout,
                                                 auth=auth,

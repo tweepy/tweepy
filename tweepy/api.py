@@ -248,19 +248,18 @@ class API:
             raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-            return self.image_upload(filename, MAX_UPLOAD_SIZE_STANDARD * 1024, file_type=file_type, f=f, *args, **kwargs)
+            return self.image_upload(filename, f=f, *args, **kwargs)
         else:
             return self.upload_chunked(filename, f=f, file_type=file_type, *args, **kwargs)
 
-    def image_upload(self, filename, max_size, *args, **kwargs):
+    def image_upload(self, filename, f=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
-        headers, post_data = API._pack_image(filename, max_size,
-                                             form_field='media', f=kwargs.get('f'),
-                                             file_type=kwargs.get('file_type')
-                                             )
-        kwargs.update({'headers': headers, 'post_data': post_data})
+        if f is not None:
+            files = {'media': (filename, f)}
+        else:
+            files = {'media': open(filename, 'rb')}
         return bind_api(
             api=self,
             path='/media/upload.json',
@@ -269,7 +268,7 @@ class API:
             allowed_param=[],
             require_auth=True,
             upload_api=True
-        )(*args, **kwargs)
+        )(*args, files=files, **kwargs)
 
     def upload_chunked(self, filename, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
