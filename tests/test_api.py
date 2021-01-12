@@ -407,7 +407,6 @@ class TweepyAPITests(TweepyTestCase):
         self.assertFalse(self.api.cached_result)
 
 
-
 class TweepyCacheTests(unittest.TestCase):
     timeout = 0.5
     memcache_servers = ['127.0.0.1:11211']  # must be running for test to pass
@@ -452,6 +451,7 @@ class TweepyCacheTests(unittest.TestCase):
         finally:
             if os.path.exists('cache_test_dir'):
                 shutil.rmtree('cache_test_dir')
+
 
 if __name__ == '__main__':
     unittest.main()
