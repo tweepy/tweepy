@@ -29,7 +29,7 @@ class MockStreamListener(StreamListener):
         return False
 
     def on_error(self, code):
-        print("response: %s" % code)
+        print(f"response: {code}")
         return True
 
     def on_status(self, status):
@@ -50,31 +50,6 @@ class TweepyStreamTests(unittest.TestCase):
 
     def on_connect(self):
         API(self.auth).update_status(mock_tweet())
-
-    def test_userstream(self):
-        # Generate random tweet which should show up in the stream.
-
-        self.listener.connect_cb = self.on_connect
-        self.listener.status_stop_count = 1
-        self.stream.userstream()
-        self.assertEqual(self.listener.status_count, 1)
-
-    @skip("Sitestream only available to whitelisted accounts.")
-    def test_sitestream(self):
-        self.listener.connect_cb = self.on_connect
-        self.listener.status_stop_count = 1
-        self.stream.sitestream(follow=[self.auth.get_username()])
-        self.assertEqual(self.listener.status_count, 1)
-
-    def test_userstream_with_params(self):
-        # Generate random tweet which should show up in the stream.
-        def on_connect():
-            API(self.auth).update_status(mock_tweet())
-
-        self.listener.connect_cb = on_connect
-        self.listener.status_stop_count = 1
-        self.stream.userstream(_with='user', replies='all', stall_warnings=True)
-        self.assertEqual(self.listener.status_count, 1)
 
     def test_sample(self):
         self.listener.status_stop_count = 10

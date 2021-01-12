@@ -73,7 +73,7 @@ Once we have an api and a status listener we can create our stream object.::
 Step 3: Starting a Stream
 =========================
 A number of twitter streams are available through Tweepy. Most cases 
-will use filter, the user_stream, or the sitestream. 
+will use filter. 
 For more information on the capabilities and limitations of the different
 streams see `Twitter Streaming API Documentation`_.
 

@@ -1,13 +1,13 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 import logging
+from urllib.parse import parse_qs
 
 import requests
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
-from urllib.parse import parse_qs
 
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -36,11 +36,12 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if isinstance(consumer_key, str):
-            consumer_key = consumer_key.encode('ascii')
-
-        if isinstance(consumer_secret, str):
-            consumer_secret = consumer_secret.encode('ascii')
+        if not isinstance(consumer_key, (str, bytes)):
+            raise TypeError("Consumer key must be string or bytes, not "
+                            + type(consumer_key).__name__)
+        if not isinstance(consumer_secret, (str, bytes)):
+            raise TypeError("Consumer secret must be string or bytes, not "
+                            + type(consumer_secret).__name__)
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -67,7 +68,7 @@ class OAuthHandler(AuthHandler):
         try:
             url = self._get_oauth_url('request_token')
             if access_type:
-                url += '?x_auth_access_type=%s' % access_type
+                url += f'?x_auth_access_type={access_type}'
             return self.oauth.fetch_request_token(url)
         except Exception as e:
             raise TweepError(e)
@@ -172,7 +173,7 @@ class AppAuthHandler(AuthHandler):
         data = resp.json()
         if data.get('token_type') != 'bearer':
             raise TweepError('Expected token_type to equal "bearer", '
-                             'but got %s instead' % data.get('token_type'))
+                             f'but got {data.get("token_type")} instead')
 
         self._bearer_token = data['access_token']
 

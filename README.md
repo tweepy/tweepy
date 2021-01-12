@@ -2,10 +2,11 @@ Tweepy: Twitter for Python!
 ======
 
 [![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
-[![Documentation Status](https://img.shields.io/badge/docs-v3.10.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
-[![Version](https://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://pypi.org/project/tweepy/)
+[![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest)](https://tweepy.readthedocs.io/en/latest/)
+[![PyPI Version](https://img.shields.io/pypi/v/tweepy?label=PyPI)](https://pypi.org/project/tweepy/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/tweepy?label=Python)](https://pypi.org/project/tweepy/)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
-[![Discord](https://img.shields.io/discord/432685901596852224.svg)](https://discord.gg/bJvqnhg)
+[![Discord Server](https://discord.com/api/guilds/432685901596852224/embed.png)](https://discord.gg/bJvqnhg)
 
 Installation
 ------------
@@ -24,9 +25,12 @@ Alternatively, install directly from the GitHub repository:
 
     pip install git+https://github.com/tweepy/tweepy.git
 
-Python 3.5 - 3.9 are supported.
+Python 3.6 - 3.9 are supported.
 
-Community
----------
-- [Discord Chat](https://discord.gg/bJvqnhg)
+Links
+-----
+
+- [Documentation](https://tweepy.readthedocs.io/en/latest/)
+- [Official Discord Server](https://discord.gg/bJvqnhg)
+- [Twitter API Documentation](https://developer.twitter.com/en/docs/twitter-api)
 

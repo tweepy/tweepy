@@ -61,7 +61,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testusertimeline.json')
     def testusertimeline(self):
         self.api.user_timeline()
-        self.api.user_timeline('twitter')
+        self.api.user_timeline(screen_name='Twitter')
 
     @tape.use_cassette('testmentionstimeline.json')
     def testmentionstimeline(self):
@@ -295,6 +295,10 @@ class TweepyAPITests(TweepyTestCase):
     def testlistsmemberships(self):
         self.api.lists_memberships()
 
+    @tape.use_cassette('testlistsownerships.json')
+    def testlistsownerships(self):
+        self.api.lists_ownerships()
+
     @tape.use_cassette('testlistssubscriptions.json')
     def testlistssubscriptions(self):
         self.api.lists_subscriptions()
@@ -438,8 +442,8 @@ class TweepyCacheTests(unittest.TestCase):
             self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
 
         # test count
-        for i in range(0, 20):
-            self.cache.store('testkey%i' % i, 'testvalue')
+        for i in range(20):
+            self.cache.store(f'testkey{i}', 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
         # test flush

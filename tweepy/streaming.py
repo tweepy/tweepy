@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
@@ -7,13 +7,11 @@
 import json
 import logging
 import re
-import requests
 import ssl
-import sys
 from threading import Thread
 from time import sleep
 
-from requests.exceptions import Timeout
+import requests
 
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -48,45 +46,26 @@ class StreamListener:
 
         if 'in_reply_to_status_id' in data:
             status = Status.parse(self.api, data)
-            if self.on_status(status) is False:
-                return False
-        elif 'delete' in data:
+            return self.on_status(status)
+        if 'delete' in data:
             delete = data['delete']['status']
-            if self.on_delete(delete['id'], delete['user_id']) is False:
-                return False
-        elif 'event' in data:
-            status = Status.parse(self.api, data)
-            if self.on_event(status) is False:
-                return False
-        elif 'direct_message' in data:
-            status = Status.parse(self.api, data)
-            if self.on_direct_message(status) is False:
-                return False
-        elif 'friends' in data:
-            if self.on_friends(data['friends']) is False:
-                return False
-        elif 'limit' in data:
-            if self.on_limit(data['limit']['track']) is False:
-                return False
-        elif 'disconnect' in data:
-            if self.on_disconnect(data['disconnect']) is False:
-                return False
-        elif 'warning' in data:
-            if self.on_warning(data['warning']) is False:
-                return False
-        elif 'scrub_geo' in data:
-            if self.on_scrub_geo(data['scrub_geo']) is False:
-                return False
-        elif 'status_withheld' in data:
-            if self.on_status_withheld(data['status_withheld']) is False:
-                return False
-        elif 'user_withheld' in data:
-            if self.on_user_withheld(data['user_withheld']) is False:
-                return False
-        else:
-            log.error("Unknown message type: %s", raw_data)
+            return self.on_delete(delete['id'], delete['user_id'])
+        if 'limit' in data:
+            return self.on_limit(data['limit']['track'])
+        if 'disconnect' in data:
+            return self.on_disconnect(data['disconnect'])
+        if 'warning' in data:
+            return self.on_warning(data['warning'])
+        if 'scrub_geo' in data:
+            return self.on_scrub_geo(data['scrub_geo'])
+        if 'status_withheld' in data:
+            return self.on_status_withheld(data['status_withheld'])
+        if 'user_withheld' in data:
+            return self.on_user_withheld(data['user_withheld'])
 
-    def keep_alive(self):
+        log.error("Unknown message type: %s", raw_data)
+
+    def on_keep_alive(self):
         """Called when a keep-alive arrived"""
         return
 
@@ -100,21 +79,6 @@ class StreamListener:
 
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
-        return
-
-    def on_event(self, status):
-        """Called when a new event arrives"""
-        return
-
-    def on_direct_message(self, status):
-        """Called when a new direct message arrives"""
-        return
-
-    def on_friends(self, friends):
-        """Called when a friends list arrives.
-
-        friends is a list that contains user_id
-        """
         return
 
     def on_limit(self, track):
@@ -152,6 +116,7 @@ class StreamListener:
     def on_user_withheld(self, notice):
         """Called when a user withheld content notice arrives"""
         return
+
 
 class ReadBuffer:
     """Buffer data from the response in a smarter way than httplib/requests can.
@@ -224,17 +189,16 @@ class Stream:
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        self.chunk_size = options.get("chunk_size", 512)
 
         self.verify = options.get("verify", True)
 
-        self.api = API()
         self.headers = options.get("headers") or {}
         self.new_session()
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
-        
+
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
         self.host = options.get('host', 'stream.twitter.com')
@@ -246,78 +210,67 @@ class Stream:
 
     def _run(self):
         # Authenticate
-        url = "https://%s%s" % (self.host, self.url)
+        url = f"https://{self.host}{self.url}"
 
         # Connect and process the stream
         error_counter = 0
         resp = None
-        exc_info = None
-        while self.running:
-            if self.retry_count is not None:
-                if error_counter > self.retry_count:
-                    # quit if error count greater than retry count
-                    break
-            try:
-                auth = self.auth.apply_auth()
-                resp = self.session.request('POST',
-                                            url,
-                                            data=self.body,
-                                            timeout=self.timeout,
-                                            stream=True,
-                                            auth=auth,
-                                            verify=self.verify,
-                                            proxies=self.proxies)
-                if resp.status_code != 200:
-                    if self.listener.on_error(resp.status_code) is False:
+        try:
+            while self.running:
+                if self.retry_count is not None:
+                    if error_counter > self.retry_count:
+                        # quit if error count greater than retry count
                         break
-                    error_counter += 1
-                    if resp.status_code == 420:
-                        self.retry_time = max(self.retry_420_start,
-                                              self.retry_time)
-                    sleep(self.retry_time)
-                    self.retry_time = min(self.retry_time * 2,
-                                          self.retry_time_cap)
-                else:
-                    error_counter = 0
-                    self.retry_time = self.retry_time_start
-                    self.snooze_time = self.snooze_time_step
-                    self.listener.on_connect()
-                    self._read_loop(resp)
-            except (Timeout, ssl.SSLError) as exc:
-                # This is still necessary, as a SSLError can actually be
-                # thrown when using Requests
-                # If it's not time out treat it like any other exception
-                if isinstance(exc, ssl.SSLError):
-                    if not (exc.args and 'timed out' in str(exc.args[0])):
-                        exc_info = sys.exc_info()
+                try:
+                    auth = self.auth.apply_auth()
+                    resp = self.session.request('POST',
+                                                url,
+                                                data=self.body,
+                                                timeout=self.timeout,
+                                                stream=True,
+                                                auth=auth,
+                                                verify=self.verify,
+                                                proxies=self.proxies)
+                    if resp.status_code != 200:
+                        if self.listener.on_error(resp.status_code) is False:
+                            break
+                        error_counter += 1
+                        if resp.status_code == 420:
+                            self.retry_time = max(self.retry_420_start,
+                                                  self.retry_time)
+                        sleep(self.retry_time)
+                        self.retry_time = min(self.retry_time * 2,
+                                              self.retry_time_cap)
+                    else:
+                        error_counter = 0
+                        self.retry_time = self.retry_time_start
+                        self.snooze_time = self.snooze_time_step
+                        self.listener.on_connect()
+                        self._read_loop(resp)
+                except (requests.Timeout, ssl.SSLError) as exc:
+                    # This is still necessary, as a SSLError can actually be
+                    # thrown when using Requests
+                    # If it's not time out treat it like any other exception
+                    if isinstance(exc, ssl.SSLError):
+                        if not (exc.args and 'timed out' in str(exc.args[0])):
+                            raise
+                    if self.listener.on_timeout() is False:
                         break
-                if self.listener.on_timeout() is False:
-                    break
-                if self.running is False:
-                    break
-                sleep(self.snooze_time)
-                self.snooze_time = min(self.snooze_time + self.snooze_time_step,
-                                       self.snooze_time_cap)
-            except Exception as exc:
-                exc_info = sys.exc_info()
-                # any other exception is fatal, so kill loop
-                break
-
-        # cleanup
-        self.running = False
-        if resp:
-            resp.close()
-
-        self.new_session()
-
-        if exc_info:
-            # call a handler first so that the exception can be logged.
-            self.listener.on_exception(exc_info[1])
-            raise exc_info[1]
-
-    def _data(self, data):
-        if self.listener.on_data(data) is False:
+                    if self.running is False:
+                        break
+                    sleep(self.snooze_time)
+                    self.snooze_time = min(
+                        self.snooze_time + self.snooze_time_step,
+                        self.snooze_time_cap
+                    )
+        except Exception as exc:
+            self.listener.on_exception(exc)
+            raise
+        finally:
             self.running = False
+            if resp:
+                resp.close()
+            self.new_session()
 
     def _read_loop(self, resp):
         charset = resp.headers.get('content-type', default='')
@@ -333,18 +286,19 @@ class Stream:
             length = 0
             while not resp.raw.closed:
                 line = buf.read_line()
-                stripped_line = line.strip() if line else line # line is sometimes None so we need to check here
+                stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
                 if not stripped_line:
-                    self.listener.keep_alive()  # keep-alive new lines are expected
+                    self.listener.on_keep_alive()  # keep-alive new lines are expected
                 elif stripped_line.isdigit():
                     length = int(stripped_line)
                     break
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
-            if self.running and next_status_obj:
-                self._data(next_status_obj)
+            data = buf.read_len(length)
+            if self.running and data:
+                if self.listener.on_data(data) is False:
+                    self.running = False
 
             # # Note: keep-alive newlines might be inserted before each length value.
             # # read until we get a digit...
@@ -367,10 +321,10 @@ class Stream:
             # # read the next twitter status object
             # if delimited_string.decode('utf-8').strip().isdigit():
             #     status_id = int(delimited_string)
-            #     next_status_obj = resp.raw.read(status_id)
+            #     data = resp.raw.read(status_id)
             #     if self.running:
-            #         self._data(next_status_obj.decode('utf-8'))
-
+            #         if self.listener.on_data(data.decode('utf-8')) is False:
+            #             self.running = False
 
         if resp.raw.closed:
             self.on_closed(resp)
@@ -388,56 +342,11 @@ class Stream:
         """ Called when the response has been closed by Twitter """
         pass
 
-    def userstream(self,
-                   stall_warnings=False,
-                   _with=None,
-                   replies=None,
-                   track=None,
-                   locations=None,
-                   is_async=False,
-                   encoding='utf8'):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/user.json' % STREAM_VERSION
-        self.host = 'userstream.twitter.com'
-        if stall_warnings:
-            self.session.params['stall_warnings'] = stall_warnings
-        if _with:
-            self.session.params['with'] = _with
-        if replies:
-            self.session.params['replies'] = replies
-        if locations and len(locations) > 0:
-            if len(locations) % 4 != 0:
-                raise TweepError("Wrong number of locations points, "
-                                 "it has to be a multiple of 4")
-            self.session.params['locations'] = ','.join(['%.2f' % l for l in locations])
-        if track:
-            self.session.params['track'] = ','.join(track).encode(encoding)
-
-        self._start(is_async)
-
-    def firehose(self, count=None, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/firehose.json' % STREAM_VERSION
-        if count:
-            self.url += '&count=%s' % count
-        self._start(is_async)
-
-    def retweet(self, is_async=False):
-        self.session.params = {'delimited': 'length'}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/retweet.json' % STREAM_VERSION
-        self._start(is_async)
-
     def sample(self, is_async=False, languages=None, stall_warnings=False):
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/sample.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
@@ -450,7 +359,7 @@ class Stream:
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/filter.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
             self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
@@ -459,7 +368,7 @@ class Stream:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:
@@ -469,23 +378,5 @@ class Stream:
         self.session.params = {'delimited': 'length'}
         self._start(is_async)
 
-    def sitestream(self, follow, stall_warnings=False,
-                   with_='user', replies=False, is_async=False):
-        self.body = {}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = '/%s/site.json' % STREAM_VERSION
-        self.body['follow'] = ','.join(map(str, follow))
-        self.body['delimited'] = 'length'
-        if stall_warnings:
-            self.body['stall_warnings'] = stall_warnings
-        if with_:
-            self.body['with'] = with_
-        if replies:
-            self.body['replies'] = replies
-        self._start(is_async)
-
     def disconnect(self):
-        if self.running is False:
-            return
         self.running = False

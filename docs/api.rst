@@ -58,12 +58,7 @@ Timeline methods
    :param since_id: |since_id|
    :param max_id: |max_id|
    :param trim_user: |trim_user|
-   :param exclude_replies: This parameter will prevent replies from appearing
-                           in the returned timeline. Using ``exclude_replies``
-                           with the ``count`` parameter will mean you will
-                           receive up-to count Tweets — this is because the
-                           ``count`` parameter retrieves that many Tweets
-                           before filtering out retweets and replies.
+   :param exclude_replies: |exclude_replies|
    :param include_entities: |include_entities|
    :rtype: list of :class:`Status` objects
 
@@ -84,20 +79,26 @@ Timeline methods
    :rtype: list of :class:`Status` objects
 
 
-.. method:: API.user_timeline([id/user_id/screen_name], [since_id], [max_id], \
-                              [count], [page])
+.. method:: API.user_timeline([user_id/screen_name], [since_id], [count], \
+                              [max_id], [trim_user], [exclude_replies], \
+                              [include_rts])
 
    Returns the 20 most recent statuses posted from the authenticating user or
    the user specified. It's also possible to request another user's timeline
    via the id parameter.
 
-   :param id: |uid|
    :param user_id: |user_id|
    :param screen_name: |screen_name|
    :param since_id: |since_id|
-   :param max_id: |max_id|
    :param count: |count|
-   :param page: |page|
+   :param max_id: |max_id|
+   :param trim_user: |trim_user|
+   :param exclude_replies: |exclude_replies|
+   :param include_rts: When set to ``false``, the timeline will strip any
+      native retweets (though they will still count toward both the maximal
+      length of the timeline and the slice selected by the count parameter).
+      Note: If you're using the trim_user parameter in conjunction with
+      include_rts, the retweets will still contain a full user object.
    :rtype: list of :class:`Status` objects
 
 
@@ -1015,6 +1016,20 @@ List Methods
       ``user_id`` or ``screen_name`` is a member of.
    :param cursor: |cursor|
    :param count: |count|
+   :rtype: list of :class:`List` objects
+
+
+.. method:: API.lists_ownerships([user_id], [screen_name], [count], [cursor])
+
+   Returns the lists owned by the specified user. Private lists will only be
+   shown if the authenticated user is also the owner of the lists. If
+   ``user_id`` and ``screen_name`` are not provided, the ownerships for the
+   authenticating user are returned.
+
+   :param user_id: |user_id|
+   :param screen_name: |screen_name|
+   :param count: |count|
+   :param cursor: |cursor|
    :rtype: list of :class:`List` objects
 
 
