@@ -287,32 +287,29 @@ class API:
 
         fp.seek(0)  # Reset to beginning of file
 
-        # Send the INIT request
-        media_info = self.chunked_upload_init(
+        media_id = self.chunked_upload_init(
             file_size, file_type,
             API._get_media_category(is_direct_message, file_type),
             *args, **kwargs
-        )
-        # If a media ID has been generated, we can send the file
-        if media_info.media_id:
-            chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
-            chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
+        ).media_id
 
-            fsize = os.path.getsize(filename)
-            segments = int(fsize / chunk_size / 1024.0) + (1 if fsize % chunk_size > 0 else 0)
+        chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
+        chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
 
-            for segment_index in range(segments):
-                # The APPEND command returns an empty response body
-                self.chunked_upload_append(
-                    media_info.media_id,
-                    (os.path.basename(filename), fp.read(chunk_size * 1024)),
-                    segment_index, *args, **kwargs
-                )
-            # When all chunks have been sent, we can finalize.
-            fp.close()
-            # The FINALIZE command returns media information
-            return self.chunked_upload_finalize(media_info.media_id, *args,
-                                                **kwargs)
+        fsize = os.path.getsize(filename)
+        segments = int(fsize / chunk_size / 1024.0) + (1 if fsize % chunk_size > 0 else 0)
+
+        for segment_index in range(segments):
+            # The APPEND command returns an empty response body
+            self.chunked_upload_append(
+                media_id,
+                (os.path.basename(filename), fp.read(chunk_size * 1024)),
+                segment_index, *args, **kwargs
+            )
+
+        fp.close()
+        # The FINALIZE command returns media information
+        return self.chunked_upload_finalize(media_id, *args, **kwargs)
 
     def chunked_upload_init(self, total_bytes, media_type, media_category=None,
                             additional_owners=None, *args, **kwargs):
