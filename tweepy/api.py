@@ -245,16 +245,16 @@ class API:
             raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-            return self.simple_upload(filename, f=file, *args, **kwargs)
+            return self.simple_upload(filename, file=file, *args, **kwargs)
         else:
-            return self.chunked_upload(filename, f=file, file_type=file_type, *args, **kwargs)
+            return self.chunked_upload(filename, file=file, file_type=file_type, *args, **kwargs)
 
-    def simple_upload(self, filename, f=None, *args, **kwargs):
+    def simple_upload(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
-        if f is not None:
-            files = {'media': (filename, f)}
+        if file is not None:
+            files = {'media': (filename, file)}
         else:
             files = {'media': open(filename, 'rb')}
         return bind_api(
@@ -267,7 +267,7 @@ class API:
             upload_api=True
         )(*args, files=files, **kwargs)
 
-    def chunked_upload(self, filename, f=None, file_type=None,
+    def chunked_upload(self, filename, file=None, file_type=None,
                        is_direct_message=False, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
             :allowed_param:
@@ -277,7 +277,7 @@ class API:
 
         # Initialize upload (Twitter cannot handle videos > 15 MB)
 
-        fp = f or open(filename, 'rb')
+        fp = file or open(filename, 'rb')
 
         fp.seek(0, 2)  # Seek to end of file
         file_size = fp.tell()
