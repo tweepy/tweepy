@@ -1508,7 +1508,7 @@ class API:
                 if os.path.getsize(filename) > (max_size * 1024):
                     raise TweepError('File is too big, must be less than %skb.'
                                      % max_size)
-            except os.error as e:
+            except OSError as e:
                 raise TweepError('Unable to access file: %s' % e.strerror)
 
             # build the mulitpart-formdata body
