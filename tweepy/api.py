@@ -5,7 +5,6 @@
 import imghdr
 import mimetypes
 import os
-from urllib.parse import urlencode
 
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
