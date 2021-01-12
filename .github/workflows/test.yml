@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: python-${{ matrix.python-version }}
           COVERALLS_PARALLEL: true
+          COVERALLS_SERVICE_NAME: github
         if: ${{ github.event_name == 'push' }}
         run: |
           coveralls

@@ -283,6 +283,10 @@ class TweepyAPITests(TweepyTestCase):
     def testlistsmemberships(self):
         self.api.lists_memberships()
 
+    @tape.use_cassette('testlistsownerships.json')
+    def testlistsownerships(self):
+        self.api.lists_ownerships()
+
     @tape.use_cassette('testlistssubscriptions.json')
     def testlistssubscriptions(self):
         self.api.lists_subscriptions()
@@ -428,7 +432,7 @@ class TweepyCacheTests(unittest.TestCase):
 
         # test count
         for i in range(20):
-            self.cache.store('testkey%i' % i, 'testvalue')
+            self.cache.store(f'testkey{i}', 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
         # test flush

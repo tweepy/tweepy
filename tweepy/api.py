@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 import imghdr
@@ -78,11 +78,8 @@ class API:
         parser_type = Parser
         if not isinstance(self.parser, parser_type):
             raise TypeError(
-                '"parser" argument has to be an instance of "{required}".'
-                ' It is currently a {actual}.'.format(
-                    required=parser_type.__name__,
-                    actual=type(self.parser)
-                )
+                f'"parser" argument has to be an instance of "{parser_type.__name__}".'
+                f' It is currently a {type(self.parser)}.'
             )
 
     @property
@@ -443,11 +440,12 @@ class API:
             require_auth=True
         )
 
-    def send_direct_message(self, recipient_id, text, quick_reply_type=None,
-                            attachment_type=None, attachment_media_id=None):
-        """
-        Send a direct message to the specified user from the authenticating
-        user
+    def send_direct_message(self, recipient_id, text, quick_reply_options=None,
+                            attachment_type=None, attachment_media_id=None,
+                            ctas=None):
+        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+            :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
+                            'attachment_type', attachment_media_id'
         """
         json_payload = {
             'event': {'type': 'message_create',
@@ -458,28 +456,25 @@ class API:
             }
         }
         message_data = json_payload['event']['message_create']['message_data']
-        if quick_reply_type is not None:
-            message_data['quick_reply'] = {'type': quick_reply_type}
+        if quick_reply_options is not None:
+            message_data['quick_reply'] = {
+                'type': 'options',
+                'options': quick_reply_options
+            }
         if attachment_type is not None and attachment_media_id is not None:
-            message_data['attachment'] = {'type': attachment_type}
-            message_data['attachment']['media'] = {'id': attachment_media_id}
-        return self._send_direct_message(json_payload=json_payload)
-
-    @property
-    def _send_direct_message(self):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
-            :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
-                            'attachment_type', attachment_media_id'
-        """
+            message_data['attachment'] = {
+                'type': attachment_type,
+                'media': {'id': attachment_media_id}
+            }
+        if ctas is not None:
+            message_data['ctas'] = ctas
         return bind_api(
             api=self,
             path='/direct_messages/events/new.json',
             method='POST',
             payload_type='direct_message',
-            allowed_param=['recipient_id', 'text', 'quick_reply_type',
-                           'attachment_type', 'attachment_media_id'],
             require_auth=True
-        )
+        )(json_payload=json_payload)
 
     @property
     def destroy_direct_message(self):
@@ -537,12 +532,6 @@ class API:
         )
 
     def lookup_friendships(self, user_ids=None, screen_names=None):
-        """ Perform bulk look up of friendships from user ID or screenname """
-        return self._lookup_friendships(list_to_csv(user_ids),
-                                        list_to_csv(screen_names))
-
-    @property
-    def _lookup_friendships(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
             :allowed_param: 'user_id', 'screen_name'
         """
@@ -552,7 +541,7 @@ class API:
             payload_type='relationship', payload_list=True,
             allowed_param=['user_id', 'screen_name'],
             require_auth=True
-        )
+        )(list_to_csv(user_ids), list_to_csv(screen_names))
 
     @property
     def friends_ids(self):
@@ -1026,6 +1015,19 @@ class API:
         )
 
     @property
+    def lists_ownerships(self):
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+            :allowed_param: 'user_id', 'screen_name', 'count', 'cursor'
+        """
+        return bind_api(
+            api=self,
+            path='/lists/ownerships.json',
+            payload_type='list', payload_list=True,
+            allowed_param=['user_id', 'screen_name', 'count', 'cursor'],
+            require_auth=True
+        )
+
+    @property
     def lists_subscriptions(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
             :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
@@ -1100,13 +1102,6 @@ class API:
 
     def add_list_members(self, screen_name=None, user_id=None, slug=None,
                          list_id=None, owner_id=None, owner_screen_name=None):
-        """ Perform bulk add of list members from user ID or screenname """
-        return self._add_list_members(list_to_csv(screen_name),
-                                      list_to_csv(user_id), slug, list_id,
-                                      owner_id, owner_screen_name)
-
-    @property
-    def _add_list_members(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
             :allowed_param: 'screen_name', 'user_id', 'slug', 'list_id',
                             'owner_id', 'owner_screen_name'
@@ -1119,18 +1114,12 @@ class API:
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
                            'owner_id', 'owner_screen_name'],
             require_auth=True
-        )
+        )(list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
+          owner_id, owner_screen_name)
 
     def remove_list_members(self, screen_name=None, user_id=None, slug=None,
                             list_id=None, owner_id=None,
                             owner_screen_name=None):
-        """ Perform bulk remove of list members from user ID or screenname """
-        return self._remove_list_members(list_to_csv(screen_name),
-                                         list_to_csv(user_id), slug, list_id,
-                                         owner_id, owner_screen_name)
-
-    @property
-    def _remove_list_members(self):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
             :allowed_param: 'screen_name', 'user_id', 'slug', 'list_id',
                             'owner_id', 'owner_screen_name'
@@ -1143,7 +1132,8 @@ class API:
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
                            'owner_id', 'owner_screen_name'],
             require_auth=True
-        )
+        )(list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
+          owner_id, owner_screen_name)
 
     @property
     def list_members(self):
@@ -1288,7 +1278,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/30day/{}.json'.format(environment_name),
+            path=f'/tweets/search/30day/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1303,7 +1293,7 @@ class API:
         """
         return bind_api(
             api=self,
-            path='/tweets/search/fullarchive/{}.json'.format(environment_name),
+            path=f'/tweets/search/fullarchive/{environment_name}.json',
             payload_type='status', payload_list=True,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1380,18 +1370,16 @@ class API:
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError('File is too big, must be less than %skb.'
-                                     % max_size)
+                    raise TweepError(f'File is too big, must be less than {max_size}kb.')
             except os.error as e:
-                raise TweepError('Unable to access file: %s' % e.strerror)
+                raise TweepError(f'Unable to access file: {e.strerror}')
 
             # build the mulitpart-formdata body
             fp = open(filename, 'rb')
         else:
             f.seek(0, 2)  # Seek to end of file
             if f.tell() > (max_size * 1024):
-                raise TweepError('File is too big, must be less than %skb.'
-                                 % max_size)
+                raise TweepError(f'File is too big, must be less than {max_size}kb.')
             f.seek(0)  # Reset to beginning of file
             fp = f
 
@@ -1407,7 +1395,7 @@ class API:
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
-            raise TweepError('Invalid file type for image: %s' % file_type)
+            raise TweepError(f'Invalid file type for image: {file_type}')
 
         if isinstance(filename, str):
             filename = filename.encode('utf-8')
@@ -1415,10 +1403,10 @@ class API:
         BOUNDARY = b'Tw3ePy'
         body = []
         body.append(b'--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="{0}";'
-                    ' filename="{1}"'.format(form_field, filename)
+        body.append(f'Content-Disposition: form-data; name="{form_field}";'
+                    f' filename="{filename}"'
                     .encode('utf-8'))
-        body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+        body.append(f'Content-Type: {file_type}'.encode('utf-8'))
         body.append(b'')
         body.append(fp.read())
         body.append(b'--' + BOUNDARY + b'--')

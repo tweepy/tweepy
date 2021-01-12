@@ -1,5 +1,5 @@
 # Tweepy
-# Copyright 2009-2020 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
@@ -12,7 +12,6 @@ from threading import Thread
 from time import sleep
 
 import requests
-from requests.exceptions import Timeout
 
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -66,7 +65,7 @@ class StreamListener:
 
         log.error("Unknown message type: %s", raw_data)
 
-    def keep_alive(self):
+    def on_keep_alive(self):
         """Called when a keep-alive arrived"""
         return
 
@@ -117,6 +116,7 @@ class StreamListener:
     def on_user_withheld(self, notice):
         """Called when a user withheld content notice arrives"""
         return
+
 
 class ReadBuffer:
     """Buffer data from the response in a smarter way than httplib/requests can.
@@ -189,7 +189,7 @@ class Stream:
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size",  512)
+        self.chunk_size = options.get("chunk_size", 512)
 
         self.verify = options.get("verify", True)
 
@@ -198,7 +198,7 @@ class Stream:
         self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
-        
+
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
         self.host = options.get('host', 'stream.twitter.com')
@@ -210,12 +210,11 @@ class Stream:
 
     def _run(self):
         # Authenticate
-        url = "https://%s%s" % (self.host, self.url)
+        url = f"https://{self.host}{self.url}"
 
         # Connect and process the stream
         error_counter = 0
         resp = None
-        exc_info = None
         try:
             while self.running:
                 if self.retry_count is not None:
@@ -248,7 +247,7 @@ class Stream:
                         self.snooze_time = self.snooze_time_step
                         self.listener.on_connect()
                         self._read_loop(resp)
-                except (Timeout, ssl.SSLError) as exc:
+                except (requests.Timeout, ssl.SSLError) as exc:
                     # This is still necessary, as a SSLError can actually be
                     # thrown when using Requests
                     # If it's not time out treat it like any other exception
@@ -273,10 +272,6 @@ class Stream:
                 resp.close()
             self.new_session()
 
-    def _data(self, data):
-        if self.listener.on_data(data) is False:
-            self.running = False
-
     def _read_loop(self, resp):
         charset = resp.headers.get('content-type', default='')
         enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
@@ -293,16 +288,17 @@ class Stream:
                 line = buf.read_line()
                 stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
                 if not stripped_line:
-                    self.listener.keep_alive()  # keep-alive new lines are expected
+                    self.listener.on_keep_alive()  # keep-alive new lines are expected
                 elif stripped_line.isdigit():
                     length = int(stripped_line)
                     break
                 else:
                     raise TweepError('Expecting length, unexpected value found')
 
-            next_status_obj = buf.read_len(length)
-            if self.running and next_status_obj:
-                self._data(next_status_obj)
+            data = buf.read_len(length)
+            if self.running and data:
+                if self.listener.on_data(data) is False:
+                    self.running = False
 
             # # Note: keep-alive newlines might be inserted before each length value.
             # # read until we get a digit...
@@ -325,10 +321,10 @@ class Stream:
             # # read the next twitter status object
             # if delimited_string.decode('utf-8').strip().isdigit():
             #     status_id = int(delimited_string)
-            #     next_status_obj = resp.raw.read(status_id)
+            #     data = resp.raw.read(status_id)
             #     if self.running:
-            #         self._data(next_status_obj.decode('utf-8'))
-
+            #         if self.listener.on_data(data.decode('utf-8')) is False:
+            #             self.running = False
 
         if resp.raw.closed:
             self.on_closed(resp)
@@ -350,7 +346,7 @@ class Stream:
         self.session.params = {'delimited': 'length'}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/sample.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
         if languages:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
@@ -363,7 +359,7 @@ class Stream:
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = '/%s/statuses/filter.json' % STREAM_VERSION
+        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
             self.body['follow'] = ','.join(follow).encode(encoding)
         if track:
@@ -372,7 +368,7 @@ class Stream:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join(['%.4f' % l for l in locations])
+            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
             self.body['stall_warnings'] = stall_warnings
         if languages:
