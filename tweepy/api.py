@@ -296,7 +296,7 @@ class API:
         chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
         chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
 
-        segments = int(file_size / chunk_size / 1024.0) + (1 if file_size % chunk_size > 0 else 0)
+        segments = file_size // (chunk_size * 1024) + bool(file_size % chunk_size)
 
         for segment_index in range(segments):
             # The APPEND command returns an empty response body
