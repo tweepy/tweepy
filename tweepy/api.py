@@ -299,14 +299,14 @@ class API:
             chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
 
             fsize = os.path.getsize(filename)
-            nloops = int(fsize / chunk_size / 1024.0) + (1 if fsize % chunk_size > 0 else 0)
+            segments = int(fsize / chunk_size / 1024.0) + (1 if fsize % chunk_size > 0 else 0)
 
-            for i in range(nloops):
+            for segment_index in range(segments):
                 # The APPEND command returns an empty response body
                 self.chunked_upload_append(
                     media_info.media_id,
                     (os.path.basename(filename), fp.read(chunk_size * 1024)),
-                    i, *args, **kwargs
+                    segment_index, *args, **kwargs
                 )
             # When all chunks have been sent, we can finalize.
             fp.close()
