@@ -242,7 +242,7 @@ class API:
 
         if file_type in IMAGE_TYPES or file_type in CHUNKED_TYPES:
             if size_bytes > MAX_UPLOAD_SIZE_CHUNKED * 1024:
-                raise TweepError('Media files must be smaller than {} kb'.format(MAX_UPLOAD_SIZE_CHUNKED))
+                raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
             if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
                 return self.image_upload(filename, MAX_UPLOAD_SIZE_STANDARD * 1024, file_type=file_type, f=f, *args, **kwargs)
@@ -1604,8 +1604,8 @@ class API:
             body.append(b'')
             body.append(str(segment_index).encode('utf-8'))
             body.append(b'--' + BOUNDARY)
-            body.append('Content-Disposition: form-data; name="{0}"; filename="{1}"'.format(form_field, os.path.basename(filename)).encode('utf-8'))
-            body.append('Content-Type: {0}'.format(file_type).encode('utf-8'))
+            body.append(f'Content-Disposition: form-data; name="{form_field}"; filename="{os.path.basename(filename)}"'.encode('utf-8'))
+            body.append(f'Content-Type: {file_type}'.encode('utf-8'))
             body.append(b'')
             body.append(fp.read(chunk_size * 1024))
             body.append(b'--' + BOUNDARY + b'--')
