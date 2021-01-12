@@ -248,11 +248,11 @@ class API:
             raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-            return self.image_upload(filename, f=f, *args, **kwargs)
+            return self.simple_upload(filename, f=f, *args, **kwargs)
         else:
             return self.chunked_upload(filename, f=f, file_type=file_type, *args, **kwargs)
 
-    def image_upload(self, filename, f=None, *args, **kwargs):
+    def simple_upload(self, filename, f=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
