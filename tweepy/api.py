@@ -249,7 +249,7 @@ class API:
 
             return self.upload_chunked(filename, f=f, file_type=file_type, *args, **kwargs)
 
-        raise TweepError('unsupported media type: %s' % file_type)
+        raise TweepError(f'unsupported media type: {file_type}')
 
     def image_upload(self, filename, max_size, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
@@ -1567,7 +1567,7 @@ class API:
             file_size = fp.tell()
 
             if file_size > (MAX_UPLOAD_SIZE_CHUNKED * 1024):
-                raise TweepError('File is too big, must be less than %s KiB.' % MAX_UPLOAD_SIZE_CHUNKED)
+                raise TweepError(f'File is too big, must be less than {MAX_UPLOAD_SIZE_CHUNKED} KiB.')
 
             fp.seek(0)  # Reset to beginning of file
 
