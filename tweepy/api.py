@@ -22,7 +22,6 @@ MAX_CHUNKSIZE = 5 * 1024
 MIN_CHUNKSIZE = 16
 
 MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
-MAX_UPLOAD_SIZE_CHUNKED = 14649  # chunked uploads must be less than 15 MB
 
 
 class API:
@@ -241,8 +240,6 @@ class API:
 
         if file_type not in IMAGE_TYPES and file_type not in CHUNKED_TYPES:
             raise TweepError(f'unsupported media type: {file_type}')
-        if size_bytes > MAX_UPLOAD_SIZE_CHUNKED * 1024:
-            raise TweepError(f'Media files must be smaller than {MAX_UPLOAD_SIZE_CHUNKED} kb')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
             return self.simple_upload(filename, file=file, *args, **kwargs)
@@ -275,15 +272,10 @@ class API:
         # Media category is dependant on whether media is attached to a tweet
         # or to a direct message. Assume tweet by default.
 
-        # Initialize upload (Twitter cannot handle videos > 15 MB)
-
         fp = file or open(filename, 'rb')
 
         fp.seek(0, 2)  # Seek to end of file
         file_size = fp.tell()
-
-        if file_size > (MAX_UPLOAD_SIZE_CHUNKED * 1024):
-            raise TweepError(f'File is too big, must be less than {MAX_UPLOAD_SIZE_CHUNKED} KiB.')
 
         fp.seek(0)  # Reset to beginning of file
 
