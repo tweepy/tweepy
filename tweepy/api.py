@@ -254,9 +254,6 @@ class API:
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
             :allowed_param:
         """
-        # Media category is dependant on whether media is attached to a tweet
-        # or to a direct message. Assume tweet by default.
-
         fp = file or open(filename, 'rb')
 
         start = fp.tell()
@@ -271,9 +268,9 @@ class API:
         min_chunk_size, remainder = divmod(file_size, 1000)
         min_chunk_size += bool(remainder)
 
-        # Default chunk size, in bytes, 1 MB is given as example chunk size in Twitter API docs
-        # The max is given in the docs as 5 MB.
+        # Use 1 MiB as default chunk size
         chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
+        # Max chunk size is 5 MiB
         chunk_size = max(min(chunk_size, 5 * 1024 * 1024), min_chunk_size)
 
         segments, remainder = divmod(file_size, chunk_size)
