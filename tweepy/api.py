@@ -16,10 +16,8 @@ CHUNKED_TYPES = IMAGE_TYPES + ['video/mp4']
 
 # Default chunk size, in kibibytes, 1 MB is given as example chunk size in Twitter API docs
 # The max is given in the docs as 5 MB.
-# minimum chunk size is 16 KiB, which keeps the maximum number of chunks under 999
 DEFAULT_CHUNKSIZE = 1024
 MAX_CHUNKSIZE = 5 * 1024
-MIN_CHUNKSIZE = 16
 
 MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
 
@@ -285,8 +283,11 @@ class API:
             *args, **kwargs
         ).media_id
 
+        min_chunk_size, remainder = divmod(file_size, 1000)
+        min_chunk_size += bool(remainder)
+
         chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
-        chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), MIN_CHUNKSIZE)
+        chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), min_chunk_size)
 
         segments, remainder = divmod(file_size, chunk_size * 1024)
         segments += bool(remainder)
