@@ -244,7 +244,6 @@ class API:
             path='/media/upload.json',
             method='POST',
             payload_type='media',
-            allowed_param=[],
             require_auth=True,
             upload_api=True
         )(*args, post_data=post_data, files=files, **kwargs)
@@ -307,7 +306,6 @@ class API:
             path='/media/upload.json',
             method='POST',
             payload_type='media',
-            allowed_param=[],
             require_auth=True,
             upload_api=True
         )(*args, headers=headers, post_data=post_data, **kwargs)
@@ -327,7 +325,6 @@ class API:
             api=self,
             path='/media/upload.json',
             method='POST',
-            allowed_param=[],
             require_auth=True,
             upload_api=True
         )(*args, post_data=post_data, files=files, **kwargs)
@@ -346,7 +343,6 @@ class API:
             path='/media/upload.json',
             method='POST',
             payload_type='media',
-            allowed_param=[],
             require_auth=True,
             upload_api=True
         )(*args, headers=headers, post_data=post_data, **kwargs)
