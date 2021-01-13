@@ -259,10 +259,10 @@ class API:
 
         fp = file or open(filename, 'rb')
 
+        start = fp.tell()
         fp.seek(0, 2)  # Seek to end of file
-        file_size = fp.tell()
-
-        fp.seek(0)  # Reset to beginning of file
+        file_size = fp.tell() - start
+        fp.seek(start)
 
         media_id = self.chunked_upload_init(
             file_size, file_type,
