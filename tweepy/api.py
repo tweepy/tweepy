@@ -360,7 +360,6 @@ class API:
             api=self,
             path='/media/metadata/create.json',
             method='POST',
-            allowed_param=[],
             require_auth=True,
             upload_api=True
         )(*args, **kwargs)
