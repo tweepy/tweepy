@@ -13,8 +13,6 @@ from tweepy.utils import list_to_csv
 
 IMAGE_TYPES = ['gif', 'jpeg', 'png', 'webp']
 
-MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
-
 
 class API:
     """Twitter API"""
@@ -216,7 +214,8 @@ class API:
             require_auth=True
         )(*args, **kwargs)
 
-    def media_upload(self, filename, file=None, *args, **kwargs):
+    def media_upload(self, filename, file=None, chunked=False,
+                     *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
@@ -225,15 +224,12 @@ class API:
             location = file.tell()
             h = file.read(32)
             file.seek(location)
-            size_bytes = os.stat(file.fileno()).st_size
-        else:
-            size_bytes = os.path.getsize(filename)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
 
-        if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
-            return self.simple_upload(filename, file=file, *args, **kwargs)
-        else:
+        if chunked or file_type == 'video/mp4':
             return self.chunked_upload(filename, file=file, file_type=file_type, *args, **kwargs)
+        else:
+            return self.simple_upload(filename, file=file, *args, **kwargs)
 
     def simple_upload(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
