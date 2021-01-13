@@ -252,7 +252,7 @@ class API:
         )(*args, post_data=post_data, files=files, **kwargs)
 
     def chunked_upload(self, filename, file=None, file_type=None,
-                       is_direct_message=False, *args, **kwargs):
+                       media_category=None, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
             :allowed_param:
         """
@@ -267,9 +267,7 @@ class API:
         fp.seek(start)
 
         media_id = self.chunked_upload_init(
-            file_size, file_type,
-            API._get_media_category(is_direct_message, file_type),
-            *args, **kwargs
+            file_size, file_type, media_category, *args, **kwargs
         ).media_id
 
         min_chunk_size, remainder = divmod(file_size, 1000)
@@ -1550,22 +1548,3 @@ class API:
         }
 
         return headers, body
-
-    @staticmethod
-    def _get_media_category(is_direct_message, file_type):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media
-            :allowed_param:
-        """
-        if is_direct_message:
-            prefix = 'dm'
-        else:
-            prefix = 'tweet'
-
-        if file_type in IMAGE_TYPES:
-            if file_type.endswith('gif'):
-                return prefix + '_gif'
-
-            return prefix + '_image'
-
-        if file_type.endswith('mp4'):
-            return prefix + '_video'
