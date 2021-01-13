@@ -14,11 +14,6 @@ from tweepy.utils import list_to_csv
 IMAGE_TYPES = ['gif', 'jpeg', 'png', 'webp']
 CHUNKED_TYPES = IMAGE_TYPES + ['video/mp4']
 
-# Default chunk size, in kibibytes, 1 MB is given as example chunk size in Twitter API docs
-# The max is given in the docs as 5 MB.
-DEFAULT_CHUNKSIZE = 1024
-MAX_CHUNKSIZE = 5 * 1024
-
 MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
 
 
@@ -286,8 +281,10 @@ class API:
         min_chunk_size, remainder = divmod(file_size, 1000)
         min_chunk_size += bool(remainder)
 
-        chunk_size = kwargs.pop('chunk_size', DEFAULT_CHUNKSIZE)
-        chunk_size = max(min(chunk_size, MAX_CHUNKSIZE), min_chunk_size)
+        # Default chunk size, in kibibytes, 1 MB is given as example chunk size in Twitter API docs
+        # The max is given in the docs as 5 MB.
+        chunk_size = kwargs.pop('chunk_size', 1024)
+        chunk_size = max(min(chunk_size, 5 * 1024), min_chunk_size)
 
         segments, remainder = divmod(file_size, chunk_size * 1024)
         segments += bool(remainder)
