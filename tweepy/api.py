@@ -12,7 +12,6 @@ from tweepy.parsers import ModelParser, Parser, RawParser
 from tweepy.utils import list_to_csv
 
 IMAGE_TYPES = ['gif', 'jpeg', 'png', 'webp']
-CHUNKED_TYPES = IMAGE_TYPES + ['video/mp4']
 
 MAX_UPLOAD_SIZE_STANDARD = 4883  # standard uploads must be less than 5 MB
 
@@ -230,9 +229,6 @@ class API:
         else:
             size_bytes = os.path.getsize(filename)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
-
-        if file_type not in IMAGE_TYPES and file_type not in CHUNKED_TYPES:
-            raise TweepError(f'unsupported media type: {file_type}')
 
         if file_type in IMAGE_TYPES and size_bytes < MAX_UPLOAD_SIZE_STANDARD * 1024:
             return self.simple_upload(filename, file=file, *args, **kwargs)
