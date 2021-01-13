@@ -281,19 +281,19 @@ class API:
         min_chunk_size, remainder = divmod(file_size, 1000)
         min_chunk_size += bool(remainder)
 
-        # Default chunk size, in kibibytes, 1 MB is given as example chunk size in Twitter API docs
+        # Default chunk size, in bytes, 1 MB is given as example chunk size in Twitter API docs
         # The max is given in the docs as 5 MB.
-        chunk_size = kwargs.pop('chunk_size', 1024)
-        chunk_size = max(min(chunk_size, 5 * 1024), min_chunk_size)
+        chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
+        chunk_size = max(min(chunk_size, 5 * 1024 * 1024), min_chunk_size)
 
-        segments, remainder = divmod(file_size, chunk_size * 1024)
+        segments, remainder = divmod(file_size, chunk_size)
         segments += bool(remainder)
 
         for segment_index in range(segments):
             # The APPEND command returns an empty response body
             self.chunked_upload_append(
                 media_id,
-                (os.path.basename(filename), fp.read(chunk_size * 1024)),
+                (os.path.basename(filename), fp.read(chunk_size)),
                 segment_index, *args, **kwargs
             )
 
