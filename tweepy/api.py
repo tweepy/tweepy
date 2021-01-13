@@ -11,8 +11,6 @@ from tweepy.error import TweepError
 from tweepy.parsers import ModelParser, Parser, RawParser
 from tweepy.utils import list_to_csv
 
-IMAGE_TYPES = ['gif', 'jpeg', 'png', 'webp']
-
 
 class API:
     """Twitter API"""
@@ -1519,7 +1517,7 @@ class API:
             file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
             raise TweepError('Could not determine file type')
-        if file_type in IMAGE_TYPES:
+        if file_type in ('gif', 'jpeg', 'png', 'webp'):
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
             raise TweepError(f'Invalid file type for image: {file_type}')
