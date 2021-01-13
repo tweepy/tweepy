@@ -8,7 +8,7 @@ import os
 
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
-from tweepy.parsers import ModelParser, Parser, RawParser
+from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 
@@ -312,7 +312,8 @@ class API:
             upload_api=True
         )(*args, headers=headers, post_data=post_data, **kwargs)
 
-    def chunked_upload_append(self, media_id, media, segment_index, *args, **kwargs):
+    def chunked_upload_append(self, media_id, media, segment_index,
+                              *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
             :allowed_param:
         """
@@ -326,12 +327,10 @@ class API:
             api=self,
             path='/media/upload.json',
             method='POST',
-            payload_type='media',
             allowed_param=[],
             require_auth=True,
             upload_api=True
-        )(*args, post_data=post_data, files=files, parser=RawParser(),
-          **kwargs)
+        )(*args, post_data=post_data, files=files, **kwargs)
 
     def chunked_upload_finalize(self, media_id, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
