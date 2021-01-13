@@ -231,7 +231,8 @@ class API:
         else:
             return self.simple_upload(filename, file=file, *args, **kwargs)
 
-    def simple_upload(self, filename, file=None, *args, **kwargs):
+    def simple_upload(self, filename, file=None, media_category=None,
+                      *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
             :allowed_param:
         """
@@ -239,6 +240,7 @@ class API:
             files = {'media': (filename, file)}
         else:
             files = {'media': open(filename, 'rb')}
+        post_data = {'media_category': media_category}
         return bind_api(
             api=self,
             path='/media/upload.json',
@@ -247,7 +249,7 @@ class API:
             allowed_param=[],
             require_auth=True,
             upload_api=True
-        )(*args, files=files, **kwargs)
+        )(*args, post_data=post_data, files=files, **kwargs)
 
     def chunked_upload(self, filename, file=None, file_type=None,
                        is_direct_message=False, *args, **kwargs):
