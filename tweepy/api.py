@@ -4,7 +4,6 @@
 
 import imghdr
 import mimetypes
-import os
 
 from tweepy.binder import bind_api, pagination
 from tweepy.error import TweepError
@@ -278,9 +277,8 @@ class API:
         for segment_index in range(segments):
             # The APPEND command returns an empty response body
             self.chunked_upload_append(
-                media_id,
-                (os.path.basename(filename), fp.read(chunk_size)),
-                segment_index, *args, **kwargs
+                media_id, (filename, fp.read(chunk_size)), segment_index,
+                *args, **kwargs
             )
 
         fp.close()
