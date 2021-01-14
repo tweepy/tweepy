@@ -119,8 +119,8 @@ class TweepyAPITests(TweepyTestCase):
     def testmediauploadgif(self):
         self.api.media_upload('examples/animated.gif')
 
-    @tape.use_cassette('testvideoupload.yaml', serializer='yaml')
-    def testvideoupload(self):
+    @tape.use_cassette('testmediauploadmp4.yaml', serializer='yaml')
+    def testmediauploadmp4(self):
         self.api.media_upload('examples/video.mp4')
 
     @tape.use_cassette('testgetuser.json')
