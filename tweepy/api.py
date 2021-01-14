@@ -819,15 +819,17 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
         """
-        headers, post_data = API._pack_image(filename, 700,
-                                             form_field='banner', f=file)
+        if file is not None:
+            files = {'banner': (filename, file)}
+        else:
+            files = {'banner': open(filename, 'rb')}
         return bind_api(
             api=self,
             path='/account/update_profile_banner.json',
             method='POST',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True
-        )(post_data=post_data, headers=headers)
+        )(files=files)
 
     @property
     def update_profile(self):
