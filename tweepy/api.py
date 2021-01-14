@@ -221,7 +221,11 @@ class API:
             location = file.tell()
             h = file.read(32)
             file.seek(location)
-        file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
+        file_type = imghdr.what(filename, h=h)
+        if file_type is not None:
+            file_type = 'image/' + file_type
+        else:
+            file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type == 'video/mp4':
             return self.chunked_upload(filename, file=file, file_type=file_type, *args, **kwargs)
