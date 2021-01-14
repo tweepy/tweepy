@@ -798,7 +798,7 @@ class API:
             use_cache=False
         )
 
-    def update_profile_image(self, filename, file=None):
+    def update_profile_image(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
             :allowed_param: 'include_entities', 'skip_status'
         """
@@ -813,7 +813,7 @@ class API:
             payload_type='user',
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True
-        )(files=files)
+        )(*args, files=files, **kwargs)
 
     def update_profile_banner(self, filename, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
