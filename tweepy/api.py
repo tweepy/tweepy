@@ -364,7 +364,7 @@ class API:
             upload_api=True
         )(*args, **kwargs)
 
-    def update_with_media(self, filename, *args, **kwargs):
+    def update_with_media(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
             :allowed_param: 'status', 'possibly_sensitive',
                             'in_reply_to_status_id',
@@ -372,9 +372,8 @@ class API:
                             'auto_populate_reply_metadata', 'lat', 'long',
                             'place_id', 'display_coordinates'
         """
-        f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 3072,
-                                             form_field='media[]', f=f)
+                                             form_field='media[]', f=file)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
