@@ -228,7 +228,8 @@ class API:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
-            return self.chunked_upload(filename, file=file, file_type=file_type, *args, **kwargs)
+            return self.chunked_upload(filename, file=file,
+                                       file_type=file_type, *args, **kwargs)
         else:
             return self.simple_upload(filename, file=file, *args, **kwargs)
 
