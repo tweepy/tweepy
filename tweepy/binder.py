@@ -175,7 +175,7 @@ def bind_api(**config):
                 except Exception as e:
                     raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
-                if resp.status_code in (200, 204):
+                if 200 <= resp.status_code < 300:
                     break
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
