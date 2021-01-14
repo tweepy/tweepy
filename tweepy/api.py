@@ -16,11 +16,10 @@ class API:
     """Twitter API"""
 
     def __init__(self, auth_handler=None,
-                 host='api.twitter.com', search_host='search.twitter.com',
-                 upload_host='upload.twitter.com', cache=None, api_root='/1.1',
-                 search_root='', upload_root='/1.1', retry_count=0,
-                 retry_delay=0, retry_errors=None, timeout=60, parser=None,
-                 compression=False, wait_on_rate_limit=False,
+                 host='api.twitter.com', upload_host='upload.twitter.com',
+                 cache=None, api_root='/1.1', upload_root='/1.1',
+                 retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
+                 parser=None, compression=False, wait_on_rate_limit=False,
                  wait_on_rate_limit_notify=False, proxy=''):
         """
         API instance constructor
@@ -28,13 +27,10 @@ class API:
         :param auth_handler:
         :param host: url of the server of the rest api,
                      default: 'api.twitter.com'
-        :param search_host: url of the search server,
-                            default: 'search.twitter.com'
         :param upload_host: url of the upload server,
                             default: 'upload.twitter.com'
         :param cache: Cache to query if a GET method is used, default: None
         :param api_root: suffix of the api version, default: '/1.1'
-        :param search_root: suffix of the search version, default: ''
         :param upload_root: suffix of the upload version, default: '/1.1'
         :param retry_count: number of allowed retries, default: 0
         :param retry_delay: delay in second between retries, default: 0
@@ -54,10 +50,8 @@ class API:
         """
         self.auth = auth_handler
         self.host = host
-        self.search_host = search_host
         self.upload_host = upload_host
         self.api_root = api_root
-        self.search_root = search_root
         self.upload_root = upload_root
         self.cache = cache
         self.compression = compression
