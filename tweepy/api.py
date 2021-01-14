@@ -372,10 +372,10 @@ class API:
                             'auto_populate_reply_metadata', 'lat', 'long',
                             'place_id', 'display_coordinates'
         """
-        headers, post_data = API._pack_image(filename, 3072,
-                                             form_field='media[]', f=file)
-        kwargs.update({'headers': headers, 'post_data': post_data})
-
+        if file is not None:
+            files = {'media[]': (filename, file)}
+        else:
+            files = {'media[]': open(filename, 'rb')}
         return bind_api(
             api=self,
             path='/statuses/update_with_media.json',
@@ -387,7 +387,7 @@ class API:
                            'auto_populate_reply_metadata', 'lat', 'long',
                            'place_id', 'display_coordinates'],
             require_auth=True
-        )(*args, **kwargs)
+        )(*args, files=files, **kwargs)
 
     def get_media_upload_status(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
