@@ -798,11 +798,11 @@ class API:
             use_cache=False
         )
 
-    def update_profile_image(self, filename, file_=None):
+    def update_profile_image(self, filename, file=None):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
             :allowed_param: 'include_entities', 'skip_status'
         """
-        headers, post_data = API._pack_image(filename, 700, f=file_)
+        headers, post_data = API._pack_image(filename, 700, f=file)
         return bind_api(
             api=self,
             path='/account/update_profile_image.json',
