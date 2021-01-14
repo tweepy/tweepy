@@ -813,7 +813,7 @@ class API:
             payload_type='user',
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True
-        )(self, files=files)
+        )(files=files)
 
     def update_profile_banner(self, filename, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
