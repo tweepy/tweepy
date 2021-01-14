@@ -815,13 +815,12 @@ class API:
             require_auth=True
         )(self, files=files)
 
-    def update_profile_banner(self, filename, **kwargs):
+    def update_profile_banner(self, filename, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
         """
-        f = kwargs.pop('file', None)
         headers, post_data = API._pack_image(filename, 700,
-                                             form_field='banner', f=f)
+                                             form_field='banner', f=file)
         return bind_api(
             api=self,
             path='/account/update_profile_banner.json',
