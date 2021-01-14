@@ -802,7 +802,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
             :allowed_param: 'include_entities', 'skip_status'
         """
-        headers, post_data = API._pack_image(filename, 700, f=file)
+        if file is not None:
+            files = {'image': (filename, file)}
+        else:
+            files = {'image': open(filename, 'rb')}
         return bind_api(
             api=self,
             path='/account/update_profile_image.json',
@@ -810,7 +813,7 @@ class API:
             payload_type='user',
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True
-        )(self, post_data=post_data, headers=headers)
+        )(self, files=files)
 
     def update_profile_banner(self, filename, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
