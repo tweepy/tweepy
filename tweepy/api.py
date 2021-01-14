@@ -815,7 +815,7 @@ class API:
             require_auth=True
         )(*args, files=files, **kwargs)
 
-    def update_profile_banner(self, filename, file=None, **kwargs):
+    def update_profile_banner(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
             :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
         """
@@ -829,7 +829,7 @@ class API:
             method='POST',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True
-        )(files=files)
+        )(*args, files=files, **kwargs)
 
     @property
     def update_profile(self):
