@@ -388,7 +388,7 @@ class API:
 
     def get_media_upload_status(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
-            :allowed_param: 'media_ids'
+            :allowed_param: 'media_id'
         """
         return bind_api(
             api=self,
