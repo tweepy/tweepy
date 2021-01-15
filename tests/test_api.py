@@ -71,8 +71,10 @@ class TweepyAPITests(TweepyTestCase):
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
-    def testretweet(self):
-        self.skipTest('Missing method to retrieve random Tweet to Retweet')
+    @tape.use_cassette('testretweetandunretweet.json')
+    def testretweetandunretweet(self):
+        self.api.retweet(test_tweet_id)
+        self.api.unretweet(test_tweet_id)
 
     @tape.use_cassette('testretweets.json')
     def testretweets(self):
