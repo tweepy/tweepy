@@ -395,8 +395,8 @@ class API:
             path='/media/upload.json',
             payload_type='media',
             allowed_param=['media_id'],
-            upload_api=True,
-            require_auth=True
+            require_auth=True,
+            upload_api=True
         )(*args, command='STATUS', **kwargs)
 
     @property
