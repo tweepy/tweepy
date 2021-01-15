@@ -386,7 +386,7 @@ class API:
             require_auth=True
         )(*args, files=files, **kwargs)
 
-    def get_media_upload_status(self, *args, **kwargs):
+    def get_media_upload_status(self, media_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
             :allowed_param: 'media_id'
         """
@@ -397,7 +397,7 @@ class API:
             allowed_param=['media_id'],
             require_auth=True,
             upload_api=True
-        )(*args, command='STATUS', **kwargs)
+        )(*args, command='STATUS', media_id=media_id, **kwargs)
 
     @property
     def destroy_status(self):
