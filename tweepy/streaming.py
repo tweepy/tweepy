@@ -90,8 +90,8 @@ class StreamListener:
         """Called when a non-200 status code is returned"""
         return False
 
-    def on_timeout(self):
-        """Called when stream connection times out"""
+    def on_connection_error(self):
+        """Called when stream connection errors or times out"""
         return
 
     def on_disconnect(self, notice):
@@ -257,7 +257,7 @@ class Stream:
                     if isinstance(exc, ssl.SSLError):
                         if not (exc.args and 'timed out' in str(exc.args[0])):
                             raise
-                    if self.listener.on_timeout() is False:
+                    if self.listener.on_connection_error() is False:
                         break
                     if self.running is False:
                         break
