@@ -86,7 +86,7 @@ class StreamListener:
         """Called when a limitation notice arrives"""
         return
 
-    def on_error(self, status_code):
+    def on_request_error(self, status_code):
         """Called when a non-200 status code is returned"""
         return False
 
@@ -233,7 +233,7 @@ class Stream:
                                                 verify=self.verify,
                                                 proxies=self.proxies)
                     if resp.status_code != 200:
-                        if self.listener.on_error(resp.status_code) is False:
+                        if self.listener.on_request_error(resp.status_code) is False:
                             break
                         error_counter += 1
                         if resp.status_code == 420:
