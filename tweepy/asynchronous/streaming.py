@@ -110,7 +110,7 @@ class AsyncStream:
 
                             await self.on_closed(resp)
                         else:
-                            await self.on_http_error(resp.status)
+                            await self.on_request_error(resp.status)
 
                             error_count += 1
 
@@ -259,19 +259,19 @@ class AsyncStream:
         """
         log.exception("Stream encountered an exception")
 
-    async def on_http_error(self, status_code):
-        """This method is a coroutine.
-
-        This is called when a non-200 HTTP status code is encountered.
-        """
-        log.error(f"Stream encountered HTTP Error: {status_code}")
-
     async def on_keep_alive(self):
         """This method is a coroutine.
 
         This is called when a keep-alive message is received.
         """
         log.debug("Received keep-alive message")
+
+    async def on_request_error(self, status_code):
+        """This method is a coroutine.
+
+        This is called when a non-200 HTTP status code is encountered.
+        """
+        log.error(f"Stream encountered HTTP Error: {status_code}")
 
     async def on_data(self, raw_data):
         """This method is a coroutine.
