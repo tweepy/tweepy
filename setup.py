@@ -41,7 +41,7 @@ setup(
     packages=find_packages(exclude=["tests", "examples"]),
     install_requires=[
         "requests[socks]>=2.11.1",
-        "requests_oauthlib>=0.7.0",
+        "requests_oauthlib>=1.0.0",
     ],
     tests_require=tests_require,
     extras_require={
