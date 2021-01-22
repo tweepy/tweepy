@@ -156,9 +156,8 @@ class Stream:
     def new_session(self):
         self.session = requests.Session()
         self.session.headers = self.headers
-        self.session.params = None
 
-    def _run(self, body=None):
+    def _run(self, params=None, body=None):
         # Authenticate
         url = f"https://{self.host}{self.url}"
 
@@ -173,9 +172,9 @@ class Stream:
                 try:
                     auth = self.auth.apply_auth()
                     with self.session.request(
-                        'POST', url, data=body, timeout=self.timeout,
-                        stream=True, auth=auth, verify=self.verify,
-                        proxies=self.proxies
+                        'POST', url, params=params, data=body,
+                        timeout=self.timeout, stream=True, auth=auth,
+                        verify=self.verify, proxies=self.proxies
                     ) as resp:
                         if resp.status_code != 200:
                             if self.listener.on_request_error(resp.status_code) is False:
@@ -245,15 +244,15 @@ class Stream:
         pass
 
     def sample(self, threaded=False, languages=None, stall_warnings=False):
-        self.session.params = {}
+        params = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/sample.json'
         if languages:
-            self.session.params['language'] = ','.join(map(str, languages))
+            params['language'] = ','.join(map(str, languages))
         if stall_warnings:
-            self.session.params['stall_warnings'] = 'true'
-        self._start(threaded=threaded)
+            params['stall_warnings'] = 'true'
+        self._start(params=params, threaded=threaded)
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
@@ -277,7 +276,6 @@ class Stream:
             body['language'] = ','.join(map(str, languages))
         if filter_level:
             body['filter_level'] = filter_level
-        self.session.params = {}
         self._start(body=body, threaded=threaded)
 
     def disconnect(self):
