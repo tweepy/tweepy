@@ -237,7 +237,7 @@ class Stream:
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, threaded, *args, **kwargs):
+    def _start(self, threaded=False, *args, **kwargs):
         self.running = True
         if threaded:
             self._thread = Thread(target=self._run, args=args, kwargs=kwargs)
@@ -259,7 +259,7 @@ class Stream:
             self.session.params['language'] = ','.join(map(str, languages))
         if stall_warnings:
             self.session.params['stall_warnings'] = 'true'
-        self._start(threaded)
+        self._start(threaded=threaded)
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
@@ -284,7 +284,7 @@ class Stream:
         if filter_level:
             body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {}
-        self._start(threaded, body=body)
+        self._start(body=body, threaded=threaded)
 
     def disconnect(self):
         self.running = False
