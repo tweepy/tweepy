@@ -150,14 +150,13 @@ class Stream:
 
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
-        self.host = options.get('host', 'stream.twitter.com')
 
     def new_session(self):
         self.session = requests.Session()
 
     def _run(self, params=None, body=None):
         # Authenticate
-        url = f"https://{self.host}{self.url}"
+        url = f"https://stream.twitter.com{self.url}"
 
         # Connect and process the stream
         error_counter = 0
