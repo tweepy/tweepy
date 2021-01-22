@@ -144,18 +144,17 @@ class Stream:
 
         self.verify = options.get("verify", True)
 
-        self.new_session()
+        self.session = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
 
         # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
         self.proxies = options.get("proxies")
 
-    def new_session(self):
-        self.session = requests.Session()
-
     def _run(self, params=None, body=None):
         # Authenticate
+        if self.session is None:
+            self.session = requests.Session()
         url = f"https://stream.twitter.com{self.url}"
 
         # Connect and process the stream
@@ -212,7 +211,6 @@ class Stream:
             raise
         finally:
             self.running = False
-            self.new_session()
 
     def _read_loop(self, resp):
         for line in resp.iter_lines(chunk_size=self.chunk_size):
