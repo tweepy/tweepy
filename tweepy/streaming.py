@@ -6,7 +6,6 @@
 
 import json
 import logging
-import re
 import ssl
 from threading import Thread
 from time import sleep
@@ -119,55 +118,6 @@ class StreamListener:
         return
 
 
-class ReadBuffer:
-    """Buffer data from the response in a smarter way than httplib/requests can.
-
-    Tweets are roughly in the 2-12kb range, averaging around 3kb.
-    Requests/urllib3/httplib/socket all use socket.read, which blocks
-    until enough data is returned. On some systems (eg google appengine), socket
-    reads are quite slow. To combat this latency we can read big chunks,
-    but the blocking part means we won't get results until enough tweets
-    have arrived. That may not be a big deal for high throughput systems.
-    For low throughput systems we don't want to sacrifice latency, so we
-    use small chunks so it can read the length and the tweet in 2 read calls.
-    """
-
-    def __init__(self, stream, chunk_size, encoding='utf-8'):
-        self._stream = stream
-        self._buffer = b''
-        self._chunk_size = chunk_size
-        self._encoding = encoding
-
-    def read_len(self, length):
-        while not self._stream.closed:
-            if len(self._buffer) >= length:
-                return self._pop(length)
-            read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len)
-        return b''
-
-    def read_line(self, sep=b'\n'):
-        """Read the data stream until a given separator is found (default \n)
-
-        :param sep: Separator to read until. Must by of the bytes type
-        :return: The str of the data read until sep
-        """
-        start = 0
-        while not self._stream.closed:
-            loc = self._buffer.find(sep, start)
-            if loc >= 0:
-                return self._pop(loc + len(sep))
-            else:
-                start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size)
-        return b''
-
-    def _pop(self, length):
-        r = self._buffer[:length]
-        self._buffer = self._buffer[length:]
-        return r.decode(self._encoding)
-
-
 class Stream:
 
     def __init__(self, auth, listener, **options):
@@ -276,49 +226,14 @@ class Stream:
             self.new_session()
 
     def _read_loop(self, resp):
-        charset = resp.headers.get('content-type', default='')
-        enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
-        if enc_search is not None:
-            encoding = enc_search.group('enc')
-        else:
-            encoding = 'utf-8'
-
-        buf = ReadBuffer(resp.raw, self.chunk_size, encoding=encoding)
-
-        while self.running and not resp.raw.closed:
-            line = buf.read_line()
-            stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
-            if not stripped_line:
-                self.listener.on_keep_alive()  # keep-alive new lines are expected
-            elif self.running:
-                if self.listener.on_data(stripped_line) is False:
-                    self.running = False
-
-            # # Note: keep-alive newlines might be inserted before each length value.
-            # # read until we get a digit...
-            # c = b'\n'
-            # for c in resp.iter_content(decode_unicode=True):
-            #     if c == b'\n':
-            #         continue
-            #     break
-            #
-            # delimited_string = c
-            #
-            # # read rest of delimiter length..
-            # d = b''
-            # for d in resp.iter_content(decode_unicode=True):
-            #     if d != b'\n':
-            #         delimited_string += d
-            #         continue
-            #     break
-            #
-            # # read the next twitter status object
-            # if delimited_string.decode('utf-8').strip().isdigit():
-            #     status_id = int(delimited_string)
-            #     data = resp.raw.read(status_id)
-            #     if self.running:
-            #         if self.listener.on_data(data.decode('utf-8')) is False:
-            #             self.running = False
+        for line in resp.iter_lines(chunk_size=self.chunk_size):
+            if not self.running:
+                break
+            if not line:
+                self.listener.on_keep_alive()
+            elif self.listener.on_data(line) is False:
+                self.running = False
+                break
 
         if resp.raw.closed:
             self.on_closed(resp)

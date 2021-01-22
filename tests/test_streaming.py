@@ -1,4 +1,3 @@
-import io
 import unittest
 from unittest.case import skip
 
@@ -9,7 +8,7 @@ from .test_utils import mock_tweet
 from tweepy.api import API
 from tweepy.auth import OAuthHandler
 from tweepy.models import Status
-from tweepy.streaming import ReadBuffer, Stream, StreamListener
+from tweepy.streaming import Stream, StreamListener
 
 
 class MockStreamListener(StreamListener):
@@ -79,72 +78,6 @@ class TweepyStreamTests(unittest.TestCase):
 
         # Should be UTF-8 encoded
         self.assertEqual('Caf\xe9'.encode('utf8'), s.body['follow'])
-
-
-class TweepyStreamReadBufferTests(unittest.TestCase):
-
-    stream = b"""11\n{id:12345}\n\n24\n{id:23456, test:"blah"}\n"""
-
-    def test_read_tweet(self):
-        for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(io.BytesIO(self.stream), length)
-            self.assertEqual('11\n', buf.read_line())
-            self.assertEqual('{id:12345}\n', buf.read_len(11))
-            self.assertEqual('\n', buf.read_line())
-            self.assertEqual('24\n', buf.read_line())
-            self.assertEqual('{id:23456, test:"blah"}\n', buf.read_len(24))
-
-    def test_read_empty_buffer(self):
-        """
-        Requests can be closed by twitter.
-        The ReadBuffer should not loop infinitely when this happens.
-        Instead it should return and let the outer _read_loop handle it.
-        """
-
-        # If the test fails, we are in danger of an infinite loop
-        # so we need to do some work to block that from happening
-        class InfiniteLoopException(Exception):
-            pass
-
-        self.called_count = 0
-        call_limit = 5
-        def on_read(chunk_size):
-            self.called_count += 1
-
-            if self.called_count > call_limit:
-                # we have failed
-                raise InfiniteLoopException("Oops, read() was called a bunch of times")
-
-            return ""
-
-        # Create a fake stream
-        stream = io.BytesIO(b'')
-
-        # Mock it's read function so it can't be called too many times
-        mock_read = MagicMock(side_effect=on_read)
-
-        try:
-            stream.close()
-            with patch.multiple(stream, create=True, read=mock_read):
-                # Now the stream can't call 'read' more than call_limit times
-                # and it looks like a requests stream that is closed
-                buf = ReadBuffer(stream, 50)
-                buf.read_line("\n")
-        except InfiniteLoopException:
-            self.fail("ReadBuffer.read_line tried to loop infinitely.")
-
-        # The mocked function not have been called at all since the stream looks closed
-        self.assertEqual(mock_read.call_count, 0)
-
-    def test_read_unicode_tweet(self):
-        stream = b'11\n{id:12345}\n\n23\n{id:23456, test:"\xe3\x81\x93"}\n\n'
-        for length in [1, 2, 5, 10, 20, 50]:
-            buf = ReadBuffer(io.BytesIO(stream), length)
-            self.assertEqual('11\n', buf.read_line())
-            self.assertEqual('{id:12345}\n', buf.read_len(11))
-            self.assertEqual('\n', buf.read_line())
-            self.assertEqual('23\n', buf.read_line())
-            self.assertEqual('{id:23456, test:"\u3053"}\n', buf.read_len(23))
 
 
 class TweepyStreamBackoffTests(unittest.TestCase):
