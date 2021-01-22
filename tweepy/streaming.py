@@ -144,7 +144,6 @@ class Stream:
 
         self.verify = options.get("verify", True)
 
-        self.headers = options.get("headers") or {}
         self.new_session()
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
@@ -155,7 +154,6 @@ class Stream:
 
     def new_session(self):
         self.session = requests.Session()
-        self.session.headers = self.headers
 
     def _run(self, params=None, body=None):
         # Authenticate
