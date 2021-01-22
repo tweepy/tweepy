@@ -286,21 +286,12 @@ class Stream:
         buf = ReadBuffer(resp.raw, self.chunk_size, encoding=encoding)
 
         while self.running and not resp.raw.closed:
-            length = 0
-            while not resp.raw.closed:
-                line = buf.read_line()
-                stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
-                if not stripped_line:
-                    self.listener.on_keep_alive()  # keep-alive new lines are expected
-                elif stripped_line.isdigit():
-                    length = int(stripped_line)
-                    break
-                else:
-                    raise TweepError('Expecting length, unexpected value found')
-
-            data = buf.read_len(length)
-            if self.running and data:
-                if self.listener.on_data(data) is False:
+            line = buf.read_line()
+            stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
+            if not stripped_line:
+                self.listener.on_keep_alive()  # keep-alive new lines are expected
+            elif self.running:
+                if self.listener.on_data(stripped_line) is False:
                     self.running = False
 
             # # Note: keep-alive newlines might be inserted before each length value.
@@ -346,7 +337,7 @@ class Stream:
         pass
 
     def sample(self, is_async=False, languages=None, stall_warnings=False):
-        self.session.params = {'delimited': 'length'}
+        self.session.params = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/sample.json'
@@ -378,7 +369,7 @@ class Stream:
             self.body['language'] = ','.join(map(str, languages))
         if filter_level:
             self.body['filter_level'] = filter_level.encode(encoding)
-        self.session.params = {'delimited': 'length'}
+        self.session.params = {}
         self._start(is_async)
 
     def disconnect(self):
