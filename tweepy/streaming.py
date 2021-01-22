@@ -262,16 +262,16 @@ class Stream:
         self._start(threaded=threaded)
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
-               stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
+               stall_warnings=False, languages=None, filter_level=None):
         body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
-            body['follow'] = ','.join(follow).encode(encoding)
+            body['follow'] = ','.join(follow)
         if track:
-            body['track'] = ','.join(track).encode(encoding)
+            body['track'] = ','.join(track)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
@@ -282,7 +282,7 @@ class Stream:
         if languages:
             body['language'] = ','.join(map(str, languages))
         if filter_level:
-            body['filter_level'] = filter_level.encode(encoding)
+            body['filter_level'] = filter_level
         self.session.params = {}
         self._start(body=body, threaded=threaded)
 
