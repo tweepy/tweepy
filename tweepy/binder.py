@@ -29,7 +29,6 @@ def bind_api(**config):
         allowed_param = config.get('allowed_param', [])
         method = config.get('method', 'GET')
         require_auth = config.get('require_auth', False)
-        search_api = config.get('search_api', False)
         upload_api = config.get('upload_api', False)
         use_cache = config.get('use_cache', True)
         session = requests.Session()
@@ -59,9 +58,7 @@ def bind_api(**config):
             self.build_parameters(args, kwargs)
 
             # Pick correct URL root to use
-            if self.search_api:
-                self.api_root = api.search_root
-            elif self.upload_api:
+            if self.upload_api:
                 self.api_root = api.upload_root
             else:
                 self.api_root = api.api_root
@@ -69,9 +66,7 @@ def bind_api(**config):
             # Perform any path variable substitution
             self.build_path()
 
-            if self.search_api:
-                self.host = api.search_host
-            elif self.upload_api:
+            if self.upload_api:
                 self.host = api.upload_host
             else:
                 self.host = api.host
@@ -180,7 +175,7 @@ def bind_api(**config):
                 except Exception as e:
                     raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
-                if resp.status_code in (200, 204):
+                if 200 <= resp.status_code < 300:
                     break
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')

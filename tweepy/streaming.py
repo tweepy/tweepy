@@ -6,12 +6,12 @@
 
 import json
 import logging
-import re
 import ssl
 from threading import Thread
 from time import sleep
 
 import requests
+import urllib3
 
 from tweepy.api import API
 from tweepy.error import TweepError
@@ -85,12 +85,12 @@ class StreamListener:
         """Called when a limitation notice arrives"""
         return
 
-    def on_error(self, status_code):
+    def on_request_error(self, status_code):
         """Called when a non-200 status code is returned"""
         return False
 
-    def on_timeout(self):
-        """Called when stream connection times out"""
+    def on_connection_error(self):
+        """Called when stream connection errors or times out"""
         return
 
     def on_disconnect(self, notice):
@@ -116,55 +116,6 @@ class StreamListener:
     def on_user_withheld(self, notice):
         """Called when a user withheld content notice arrives"""
         return
-
-
-class ReadBuffer:
-    """Buffer data from the response in a smarter way than httplib/requests can.
-
-    Tweets are roughly in the 2-12kb range, averaging around 3kb.
-    Requests/urllib3/httplib/socket all use socket.read, which blocks
-    until enough data is returned. On some systems (eg google appengine), socket
-    reads are quite slow. To combat this latency we can read big chunks,
-    but the blocking part means we won't get results until enough tweets
-    have arrived. That may not be a big deal for high throughput systems.
-    For low throughput systems we don't want to sacrifice latency, so we
-    use small chunks so it can read the length and the tweet in 2 read calls.
-    """
-
-    def __init__(self, stream, chunk_size, encoding='utf-8'):
-        self._stream = stream
-        self._buffer = b''
-        self._chunk_size = chunk_size
-        self._encoding = encoding
-
-    def read_len(self, length):
-        while not self._stream.closed:
-            if len(self._buffer) >= length:
-                return self._pop(length)
-            read_len = max(self._chunk_size, length - len(self._buffer))
-            self._buffer += self._stream.read(read_len)
-        return b''
-
-    def read_line(self, sep=b'\n'):
-        """Read the data stream until a given separator is found (default \n)
-
-        :param sep: Separator to read until. Must by of the bytes type
-        :return: The str of the data read until sep
-        """
-        start = 0
-        while not self._stream.closed:
-            loc = self._buffer.find(sep, start)
-            if loc >= 0:
-                return self._pop(loc + len(sep))
-            else:
-                start = len(self._buffer)
-            self._buffer += self._stream.read(self._chunk_size)
-        return b''
-
-    def _pop(self, length):
-        r = self._buffer[:length]
-        self._buffer = self._buffer[length:]
-        return r.decode(self._encoding)
 
 
 class Stream:
@@ -195,7 +146,6 @@ class Stream:
 
         self.headers = options.get("headers") or {}
         self.new_session()
-        self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
 
@@ -208,7 +158,7 @@ class Stream:
         self.session.headers = self.headers
         self.session.params = None
 
-    def _run(self):
+    def _run(self, body=None):
         # Authenticate
         url = f"https://{self.host}{self.url}"
 
@@ -225,14 +175,14 @@ class Stream:
                     auth = self.auth.apply_auth()
                     resp = self.session.request('POST',
                                                 url,
-                                                data=self.body,
+                                                data=body,
                                                 timeout=self.timeout,
                                                 stream=True,
                                                 auth=auth,
                                                 verify=self.verify,
                                                 proxies=self.proxies)
                     if resp.status_code != 200:
-                        if self.listener.on_error(resp.status_code) is False:
+                        if self.listener.on_request_error(resp.status_code) is False:
                             break
                         error_counter += 1
                         if resp.status_code == 420:
@@ -247,14 +197,16 @@ class Stream:
                         self.snooze_time = self.snooze_time_step
                         self.listener.on_connect()
                         self._read_loop(resp)
-                except (requests.Timeout, ssl.SSLError) as exc:
+                except (requests.ConnectionError, requests.Timeout,
+                        ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
+                        urllib3.exceptions.ProtocolError) as exc:
                     # This is still necessary, as a SSLError can actually be
                     # thrown when using Requests
                     # If it's not time out treat it like any other exception
                     if isinstance(exc, ssl.SSLError):
                         if not (exc.args and 'timed out' in str(exc.args[0])):
                             raise
-                    if self.listener.on_timeout() is False:
+                    if self.listener.on_connection_error() is False:
                         break
                     if self.running is False:
                         break
@@ -273,77 +225,33 @@ class Stream:
             self.new_session()
 
     def _read_loop(self, resp):
-        charset = resp.headers.get('content-type', default='')
-        enc_search = re.search(r'charset=(?P<enc>\S*)', charset)
-        if enc_search is not None:
-            encoding = enc_search.group('enc')
-        else:
-            encoding = 'utf-8'
-
-        buf = ReadBuffer(resp.raw, self.chunk_size, encoding=encoding)
-
-        while self.running and not resp.raw.closed:
-            length = 0
-            while not resp.raw.closed:
-                line = buf.read_line()
-                stripped_line = line.strip() if line else line  # line is sometimes None so we need to check here
-                if not stripped_line:
-                    self.listener.on_keep_alive()  # keep-alive new lines are expected
-                elif stripped_line.isdigit():
-                    length = int(stripped_line)
-                    break
-                else:
-                    raise TweepError('Expecting length, unexpected value found')
-
-            data = buf.read_len(length)
-            if self.running and data:
-                if self.listener.on_data(data) is False:
-                    self.running = False
-
-            # # Note: keep-alive newlines might be inserted before each length value.
-            # # read until we get a digit...
-            # c = b'\n'
-            # for c in resp.iter_content(decode_unicode=True):
-            #     if c == b'\n':
-            #         continue
-            #     break
-            #
-            # delimited_string = c
-            #
-            # # read rest of delimiter length..
-            # d = b''
-            # for d in resp.iter_content(decode_unicode=True):
-            #     if d != b'\n':
-            #         delimited_string += d
-            #         continue
-            #     break
-            #
-            # # read the next twitter status object
-            # if delimited_string.decode('utf-8').strip().isdigit():
-            #     status_id = int(delimited_string)
-            #     data = resp.raw.read(status_id)
-            #     if self.running:
-            #         if self.listener.on_data(data.decode('utf-8')) is False:
-            #             self.running = False
+        for line in resp.iter_lines(chunk_size=self.chunk_size):
+            if not self.running:
+                break
+            if not line:
+                self.listener.on_keep_alive()
+            elif self.listener.on_data(line) is False:
+                self.running = False
+                break
 
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, threaded):
+    def _start(self, threaded, *args, **kwargs):
         self.running = True
         if threaded:
-            self._thread = Thread(target=self._run)
+            self._thread = Thread(target=self._run, args=args, kwargs=kwargs)
             self._thread.daemon = self.daemon
             self._thread.start()
         else:
-            self._run()
+            self._run(*args, **kwargs)
 
     def on_closed(self, resp):
         """ Called when the response has been closed by Twitter """
         pass
 
     def sample(self, threaded=False, languages=None, stall_warnings=False):
-        self.session.params = {'delimited': 'length'}
+        self.session.params = {}
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/sample.json'
@@ -355,28 +263,28 @@ class Stream:
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
-        self.body = {}
+        body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
-            self.body['follow'] = ','.join(follow).encode(encoding)
+            body['follow'] = ','.join(follow).encode(encoding)
         if track:
-            self.body['track'] = ','.join(track).encode(encoding)
+            body['track'] = ','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
+            body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
-            self.body['stall_warnings'] = stall_warnings
+            body['stall_warnings'] = stall_warnings
         if languages:
-            self.body['language'] = ','.join(map(str, languages))
+            body['language'] = ','.join(map(str, languages))
         if filter_level:
-            self.body['filter_level'] = filter_level.encode(encoding)
-        self.session.params = {'delimited': 'length'}
-        self._start(threaded)
+            body['filter_level'] = filter_level.encode(encoding)
+        self.session.params = {}
+        self._start(threaded, body=body)
 
     def disconnect(self):
         self.running = False
