@@ -240,8 +240,8 @@ class Stream:
     def _start(self, threaded=False, *args, **kwargs):
         self.running = True
         if threaded:
-            self._thread = Thread(target=self._run, args=args, kwargs=kwargs)
-            self._thread.daemon = self.daemon
+            self._thread = Thread(target=self._run, args=args, kwargs=kwargs,
+                                  daemon=self.daemon)
             self._thread.start()
         else:
             self._run(*args, **kwargs)
