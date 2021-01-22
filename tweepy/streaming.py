@@ -254,7 +254,6 @@ class Stream:
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
         body = {}
-        self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/filter.json'
