@@ -164,7 +164,6 @@ class Stream:
 
         # Connect and process the stream
         error_counter = 0
-        resp = None
         try:
             while self.running:
                 if self.retry_count is not None:
@@ -173,30 +172,27 @@ class Stream:
                         break
                 try:
                     auth = self.auth.apply_auth()
-                    resp = self.session.request('POST',
-                                                url,
-                                                data=body,
-                                                timeout=self.timeout,
-                                                stream=True,
-                                                auth=auth,
-                                                verify=self.verify,
-                                                proxies=self.proxies)
-                    if resp.status_code != 200:
-                        if self.listener.on_request_error(resp.status_code) is False:
-                            break
-                        error_counter += 1
-                        if resp.status_code == 420:
-                            self.retry_time = max(self.retry_420_start,
-                                                  self.retry_time)
-                        sleep(self.retry_time)
-                        self.retry_time = min(self.retry_time * 2,
-                                              self.retry_time_cap)
-                    else:
-                        error_counter = 0
-                        self.retry_time = self.retry_time_start
-                        self.snooze_time = self.snooze_time_step
-                        self.listener.on_connect()
-                        self._read_loop(resp)
+                    with self.session.request(
+                        'POST', url, data=body, timeout=self.timeout,
+                        stream=True, auth=auth, verify=self.verify,
+                        proxies=self.proxies
+                    ) as resp:
+                        if resp.status_code != 200:
+                            if self.listener.on_request_error(resp.status_code) is False:
+                                break
+                            error_counter += 1
+                            if resp.status_code == 420:
+                                self.retry_time = max(self.retry_420_start,
+                                                      self.retry_time)
+                            sleep(self.retry_time)
+                            self.retry_time = min(self.retry_time * 2,
+                                                  self.retry_time_cap)
+                        else:
+                            error_counter = 0
+                            self.retry_time = self.retry_time_start
+                            self.snooze_time = self.snooze_time_step
+                            self.listener.on_connect()
+                            self._read_loop(resp)
                 except (requests.ConnectionError, requests.Timeout,
                         ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
                         urllib3.exceptions.ProtocolError) as exc:
@@ -220,8 +216,6 @@ class Stream:
             raise
         finally:
             self.running = False
-            if resp:
-                resp.close()
             self.new_session()
 
     def _read_loop(self, resp):
