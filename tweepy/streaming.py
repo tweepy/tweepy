@@ -146,7 +146,6 @@ class Stream:
 
         self.headers = options.get("headers") or {}
         self.new_session()
-        self.body = None
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
 
@@ -159,7 +158,7 @@ class Stream:
         self.session.headers = self.headers
         self.session.params = None
 
-    def _run(self):
+    def _run(self, body=None):
         # Authenticate
         url = f"https://{self.host}{self.url}"
 
@@ -176,7 +175,7 @@ class Stream:
                     auth = self.auth.apply_auth()
                     resp = self.session.request('POST',
                                                 url,
-                                                data=self.body,
+                                                data=body,
                                                 timeout=self.timeout,
                                                 stream=True,
                                                 auth=auth,
@@ -238,14 +237,14 @@ class Stream:
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, is_async):
+    def _start(self, is_async, *args, **kwargs):
         self.running = True
         if is_async:
-            self._thread = Thread(target=self._run)
+            self._thread = Thread(target=self._run, args=args, kwargs=kwargs)
             self._thread.daemon = self.daemon
             self._thread.start()
         else:
-            self._run()
+            self._run(*args, **kwargs)
 
     def on_closed(self, resp):
         """ Called when the response has been closed by Twitter """
@@ -264,28 +263,28 @@ class Stream:
 
     def filter(self, follow=None, track=None, is_async=False, locations=None,
                stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
-        self.body = {}
+        body = {}
         self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
         if self.running:
             raise TweepError('Stream object already connected!')
         self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
-            self.body['follow'] = ','.join(follow).encode(encoding)
+            body['follow'] = ','.join(follow).encode(encoding)
         if track:
-            self.body['track'] = ','.join(track).encode(encoding)
+            body['track'] = ','.join(track).encode(encoding)
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            self.body['locations'] = ','.join([f'{l:.4f}' for l in locations])
+            body['locations'] = ','.join([f'{l:.4f}' for l in locations])
         if stall_warnings:
-            self.body['stall_warnings'] = stall_warnings
+            body['stall_warnings'] = stall_warnings
         if languages:
-            self.body['language'] = ','.join(map(str, languages))
+            body['language'] = ','.join(map(str, languages))
         if filter_level:
-            self.body['filter_level'] = filter_level.encode(encoding)
+            body['filter_level'] = filter_level.encode(encoding)
         self.session.params = {}
-        self._start(is_async)
+        self._start(is_async, body=body)
 
     def disconnect(self):
         self.running = False
