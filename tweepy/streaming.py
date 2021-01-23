@@ -231,8 +231,8 @@ class Stream:
     def _start(self, *args, threaded=False, **kwargs):
         self.running = True
         if threaded:
-            self._thread = Thread(target=self._run, args=args, kwargs=kwargs,
-                                  daemon=self.daemon)
+            self._thread = Thread(target=self._run, name="Tweepy Stream",
+                                  args=args, kwargs=kwargs, daemon=self.daemon)
             self._thread.start()
         else:
             self._run(*args, **kwargs)
