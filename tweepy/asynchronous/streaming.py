@@ -32,7 +32,7 @@ class AsyncStream:
         Access token
     access_token_secret: :class:`str`
         Access token secret
-    max_retry: Optional[:class:`int`]
+    max_retries: Optional[:class:`int`]
         Number of times to attempt to (re)connect the stream.
         Defaults to infinite.
     proxy: Optional[:class:`str`]
@@ -40,12 +40,12 @@ class AsyncStream:
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
-                 access_token_secret, max_retry=inf, proxy=None):
+                 access_token_secret, max_retries=inf, proxy=None):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.access_token_secret = access_token_secret
-        self.max_retry = max_retry
+        self.max_retries = max_retries
         self.proxy = proxy
 
         self.session = None
@@ -81,7 +81,7 @@ class AsyncStream:
         http_420_error_wait_start = 60
 
         try:
-            while error_count <= self.max_retry:
+            while error_count <= self.max_retries:
                 request_url, request_headers, request_body = oauth_client.sign(
                     url, method, body, headers
                 )
