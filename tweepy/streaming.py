@@ -153,11 +153,11 @@ class Stream:
         if proxy:
             self.proxies["https"] = proxy
 
-    def _run(self, params=None, body=None):
+    def _run(self, endpoint, params=None, body=None):
         # Authenticate
         if self.session is None:
             self.session = requests.Session()
-        url = f"https://stream.twitter.com{self.url}"
+        url = f"https://stream.twitter.com/{STREAM_VERSION}/{endpoint}.json"
 
         # Connect and process the stream
         error_counter = 0
@@ -245,19 +245,19 @@ class Stream:
         params = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
+        endpoint = 'statuses/sample'
         if languages:
             params['language'] = ','.join(map(str, languages))
         if stall_warnings:
             params['stall_warnings'] = 'true'
-        self._start(params=params, threaded=threaded)
+        self._start(endpoint, params=params, threaded=threaded)
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
         body = {}
         if self.running:
             raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
+        endpoint = 'statuses/filter'
         if follow:
             body['follow'] = ','.join(follow)
         if track:
@@ -273,7 +273,7 @@ class Stream:
             body['language'] = ','.join(map(str, languages))
         if filter_level:
             body['filter_level'] = filter_level
-        self._start(body=body, threaded=threaded)
+        self._start(endpoint, body=body, threaded=threaded)
 
     def disconnect(self):
         self.running = False
