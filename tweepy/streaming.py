@@ -127,9 +127,6 @@ class Stream:
         self.access_token = access_token
         self.access_token_secret = access_token_secret
         self.listener = listener
-        self.running = False
-        self.daemon = options.get("daemon", False)
-        self.max_retries = options.get("max_retries", inf)
 
         # The default socket.read size. Default to less than half the size of
         # a tweet so that it reads tweets with the minimal latency of 2 reads
@@ -137,15 +134,18 @@ class Stream:
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
         self.chunk_size = options.get("chunk_size", 512)
-
-        self.verify = options.get("verify", True)
-
-        self.session = None
+        self.daemon = options.get("daemon", False)
+        self.max_retries = options.get("max_retries", inf)
 
         self.proxies = {}
         proxy = options.get("proxy")
         if proxy:
             self.proxies["https"] = proxy
+
+        self.verify = options.get("verify", True)
+
+        self.running = False
+        self.session = None
 
     def _run(self, endpoint, params=None, body=None):
         if self.session is None:
