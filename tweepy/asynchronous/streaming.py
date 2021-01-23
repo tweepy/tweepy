@@ -74,11 +74,11 @@ class AsyncStream:
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         stall_timeout = 90
-        network_error_wait = network_error_step = 0.25
-        network_error_max = 16
-        http_error_wait = http_error_start = 5
-        http_error_max = 320
-        http_420_error_start = 60
+        network_error_wait = network_error_wait_step = 0.25
+        network_error_wait_max = 16
+        http_error_wait = http_error_wait_start = 5
+        http_error_wait_max = 320
+        http_420_error_wait_start = 60
 
         try:
             while error_count <= self.max_retry:
@@ -92,8 +92,8 @@ class AsyncStream:
                     ) as resp:
                         if resp.status == 200:
                             error_count = 0
-                            http_error_wait = http_error_start
-                            network_error_wait = network_error_step
+                            http_error_wait = http_error_wait_start
+                            network_error_wait = network_error_wait_step
 
                             await self.on_connect()
 
@@ -115,15 +115,15 @@ class AsyncStream:
                             error_count += 1
 
                             if resp.status == 420:
-                                if http_error_wait < http_420_error_start:
-                                    http_error_wait = http_420_error_start
+                                if http_error_wait < http_420_error_wait_start:
+                                    http_error_wait = http_420_error_wait_start
 
                             await asyncio.sleep(http_error_wait)
 
                             http_error_wait *= 2
                             if resp.status != 420:
-                                if http_error_wait > http_error_max:
-                                    http_error_wait = http_error_max
+                                if http_error_wait > http_error_wait_max:
+                                    http_error_wait = http_error_wait_max
                 except (aiohttp.ClientConnectionError,
                         aiohttp.ClientPayloadError,
                         asyncio.TimeoutError) as e:
@@ -131,9 +131,9 @@ class AsyncStream:
 
                     await asyncio.sleep(network_error_wait)
 
-                    network_error_wait += network_error_step
-                    if network_error_wait > network_error_max:
-                        network_error_wait = network_error_max
+                    network_error_wait += network_error_wait_step
+                    if network_error_wait > network_error_wait_max:
+                        network_error_wait = network_error_wait_max
         except asyncio.CancelledError:
             return
         except Exception as e:
