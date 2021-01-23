@@ -258,7 +258,7 @@ class Stream:
         else:
             self._connect(endpoint, body=body)
 
-    def sample(self, threaded=False, languages=None, stall_warnings=False):
+    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
             raise TweepError('Stream object already connected!')
 
