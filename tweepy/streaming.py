@@ -143,6 +143,8 @@ class Stream:
         self.session = None
 
     def _connect(self, endpoint, params=None, body=None):
+        self.running = True
+
         if self.session is None:
             self.session = requests.Session()
 
@@ -224,7 +226,6 @@ class Stream:
             self.running = False
 
     def _start(self, *args, threaded=False, **kwargs):
-        self.running = True
         if threaded:
             self._thread = Thread(target=self._connect, name="Tweepy Stream",
                                   args=args, kwargs=kwargs, daemon=self.daemon)
