@@ -191,7 +191,20 @@ class Stream:
                             http_error_wait = http_error_wait_start
                             network_error_wait = network_error_wait_step
                             self.listener.on_connect()
-                            self._read_loop(resp)
+
+                            for line in resp.iter_lines(
+                                chunk_size=self.chunk_size
+                            ):
+                                if not self.running:
+                                    break
+                                if not line:
+                                    self.listener.on_keep_alive()
+                                elif self.listener.on_data(line) is False:
+                                    self.running = False
+                                    break
+
+                            if resp.raw.closed:
+                                self.on_closed(resp)
                 except (requests.ConnectionError, requests.Timeout,
                         ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
                         urllib3.exceptions.ProtocolError) as exc:
@@ -216,19 +229,6 @@ class Stream:
         finally:
             self.session.close()
             self.running = False
-
-    def _read_loop(self, resp):
-        for line in resp.iter_lines(chunk_size=self.chunk_size):
-            if not self.running:
-                break
-            if not line:
-                self.listener.on_keep_alive()
-            elif self.listener.on_data(line) is False:
-                self.running = False
-                break
-
-        if resp.raw.closed:
-            self.on_closed(resp)
 
     def _start(self, *args, threaded=False, **kwargs):
         self.running = True
