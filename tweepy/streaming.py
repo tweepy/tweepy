@@ -259,10 +259,12 @@ class Stream:
             self._connect(endpoint, body=body)
 
     def sample(self, threaded=False, languages=None, stall_warnings=False):
-        params = {}
         if self.running:
             raise TweepError('Stream object already connected!')
+
         endpoint = 'statuses/sample'
+
+        params = {}
         if languages:
             params['language'] = ','.join(map(str, languages))
         if stall_warnings:
