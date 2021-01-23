@@ -121,28 +121,23 @@ class StreamListener:
 class Stream:
 
     def __init__(self, consumer_key, consumer_secret, access_token,
-                 access_token_secret, listener, **options):
+                 access_token_secret, listener, *, chunk_size=512,
+                 daemon=False, max_retries=inf, proxy=None, verify=True):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.access_token_secret = access_token_secret
         self.listener = listener
-
         # The default socket.read size. Default to less than half the size of
         # a tweet so that it reads tweets with the minimal latency of 2 reads
         # per tweet. Values higher than ~1kb will increase latency by waiting
         # for more data to arrive but may also increase throughput by doing
         # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size", 512)
-        self.daemon = options.get("daemon", False)
-        self.max_retries = options.get("max_retries", inf)
-
-        self.proxies = {}
-        proxy = options.get("proxy")
-        if proxy:
-            self.proxies["https"] = proxy
-
-        self.verify = options.get("verify", True)
+        self.chunk_size = chunk_size
+        self.daemon = daemon
+        self.max_retries = max_retries
+        self.proxies = {"https": proxy} if proxy else {}
+        self.verify = verify
 
         self.running = False
         self.session = None
