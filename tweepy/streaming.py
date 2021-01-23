@@ -11,6 +11,7 @@ from threading import Thread
 from time import sleep
 
 import requests
+from requests_oauthlib import OAuth1
 import urllib3
 
 from tweepy.api import API
@@ -120,8 +121,12 @@ class StreamListener:
 
 class Stream:
 
-    def __init__(self, auth, listener, **options):
-        self.auth = auth
+    def __init__(self, consumer_key, consumer_secret, access_token,
+                 access_token_secret, listener, **options):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
         self.listener = listener
         self.running = False
         self.daemon = options.get("daemon", False)
@@ -147,7 +152,11 @@ class Stream:
     def _run(self, endpoint, params=None, body=None):
         if self.session is None:
             self.session = requests.Session()
+
         url = f"https://stream.twitter.com/{STREAM_VERSION}/{endpoint}.json"
+
+        auth = OAuth1(self.consumer_key, self.consumer_secret,
+                      self.access_token, self.access_token_secret)
 
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
@@ -163,7 +172,6 @@ class Stream:
                     if error_count > self.retry_count:
                         break
                 try:
-                    auth = self.auth.apply_auth()
                     with self.session.request(
                         'POST', url, params=params, data=body,
                         timeout=self.timeout, stream=True, auth=auth,
