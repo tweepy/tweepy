@@ -230,6 +230,7 @@ class Stream:
         self.thread = Thread(target=self._connect, name="Tweepy Stream",
                              args=args, kwargs=kwargs, daemon=self.daemon)
         self.thread.start()
+        return self.thread
 
     def filter(self, *, follow=None, track=None, locations=None,
                filter_level=None, languages=None, stall_warnings=False,
@@ -257,7 +258,7 @@ class Stream:
             body['stall_warnings'] = stall_warnings
 
         if threaded:
-            self._threaded_connect(endpoint, body=body)
+            return self._threaded_connect(endpoint, body=body)
         else:
             self._connect(endpoint, body=body)
 
@@ -274,7 +275,7 @@ class Stream:
             params['stall_warnings'] = 'true'
 
         if threaded:
-            self._threaded_connect(endpoint, params=params)
+            return self._threaded_connect(endpoint, params=params)
         else:
             self._connect(endpoint, params=params)
 
