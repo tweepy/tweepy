@@ -231,13 +231,15 @@ class Stream:
                              args=args, kwargs=kwargs, daemon=self.daemon)
         self.thread.start()
 
-    def filter(self, *, follow=None, track=None, threaded=False,
-               locations=None, stall_warnings=False, languages=None,
-               filter_level=None):
-        body = {}
+    def filter(self, *, follow=None, track=None, locations=None,
+               filter_level=None, languages=None, stall_warnings=False,
+               threaded=False):
         if self.running:
             raise TweepError('Stream object already connected!')
+
         endpoint = 'statuses/filter'
+
+        body = {}
         if follow:
             body['follow'] = ','.join(follow)
         if track:
@@ -247,12 +249,12 @@ class Stream:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
             body['locations'] = ','.join([f'{l:.4f}' for l in locations])
-        if stall_warnings:
-            body['stall_warnings'] = stall_warnings
-        if languages:
-            body['language'] = ','.join(map(str, languages))
         if filter_level:
             body['filter_level'] = filter_level
+        if languages:
+            body['language'] = ','.join(map(str, languages))
+        if stall_warnings:
+            body['stall_warnings'] = stall_warnings
 
         if threaded:
             self._threaded_connect(endpoint, body=body)
