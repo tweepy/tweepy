@@ -33,7 +33,7 @@ setup(
     author_email="tweepy@googlegroups.com",
     url="https://www.tweepy.org/",
     project_urls={
-        "Documentation": "https://tweepy.readthedocs.io/",
+        "Documentation": "https://tweepy.readthedocs.io",
         "Issue Tracker": "https://github.com/tweepy/tweepy/issues",
         "Source Code": "https://github.com/tweepy/tweepy",
     },
