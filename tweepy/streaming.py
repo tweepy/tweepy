@@ -141,6 +141,7 @@ class Stream:
 
         self.running = False
         self.session = None
+        self.thread = None
 
     def _connect(self, endpoint, params=None, body=None):
         self.running = True
@@ -226,9 +227,9 @@ class Stream:
             self.running = False
 
     def _threaded_connect(self, *args, **kwargs):
-        self._thread = Thread(target=self._connect, name="Tweepy Stream",
-                              args=args, kwargs=kwargs, daemon=self.daemon)
-        self._thread.start()
+        self.thread = Thread(target=self._connect, name="Tweepy Stream",
+                             args=args, kwargs=kwargs, daemon=self.daemon)
+        self.thread.start()
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
