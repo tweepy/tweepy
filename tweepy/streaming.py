@@ -19,8 +19,6 @@ from tweepy.api import API
 from tweepy.error import TweepError
 from tweepy.models import Status
 
-STREAM_VERSION = '1.1'
-
 log = logging.getLogger(__name__)
 
 
@@ -153,7 +151,7 @@ class Stream:
         if self.session is None:
             self.session = requests.Session()
 
-        url = f"https://stream.twitter.com/{STREAM_VERSION}/{endpoint}.json"
+        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
 
         auth = OAuth1(self.consumer_key, self.consumer_secret,
                       self.access_token, self.access_token_secret)
