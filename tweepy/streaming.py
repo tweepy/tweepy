@@ -239,21 +239,6 @@ class Stream:
         else:
             self._run(*args, **kwargs)
 
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass
-
-    def sample(self, threaded=False, languages=None, stall_warnings=False):
-        params = {}
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        endpoint = 'statuses/sample'
-        if languages:
-            params['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            params['stall_warnings'] = 'true'
-        self._start(endpoint, params=params, threaded=threaded)
-
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
         body = {}
@@ -277,5 +262,20 @@ class Stream:
             body['filter_level'] = filter_level
         self._start(endpoint, body=body, threaded=threaded)
 
+    def sample(self, threaded=False, languages=None, stall_warnings=False):
+        params = {}
+        if self.running:
+            raise TweepError('Stream object already connected!')
+        endpoint = 'statuses/sample'
+        if languages:
+            params['language'] = ','.join(map(str, languages))
+        if stall_warnings:
+            params['stall_warnings'] = 'true'
+        self._start(endpoint, params=params, threaded=threaded)
+
     def disconnect(self):
         self.running = False
+
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
