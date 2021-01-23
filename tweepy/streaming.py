@@ -129,7 +129,7 @@ class Stream:
         self.listener = listener
         self.running = False
         self.daemon = options.get("daemon", False)
-        self.retry_count = options.get("retry_count", inf)
+        self.max_retries = options.get("max_retries", inf)
 
         # The default socket.read size. Default to less than half the size of
         # a tweet so that it reads tweets with the minimal latency of 2 reads
@@ -166,7 +166,7 @@ class Stream:
         http_420_error_wait_start = 60
 
         try:
-            while self.running and error_count <= self.retry_count:
+            while self.running and error_count <= self.max_retries:
                 try:
                     with self.session.request(
                         'POST', url, params=params, data=body,
