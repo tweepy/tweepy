@@ -228,7 +228,7 @@ class Stream:
         if resp.raw.closed:
             self.on_closed(resp)
 
-    def _start(self, threaded=False, *args, **kwargs):
+    def _start(self, *args, threaded=False, **kwargs):
         self.running = True
         if threaded:
             self._thread = Thread(target=self._run, args=args, kwargs=kwargs,
