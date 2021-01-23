@@ -130,7 +130,6 @@ class Stream:
         self.listener = listener
         self.running = False
         self.daemon = options.get("daemon", False)
-        self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
 
         # The default socket.read size. Default to less than half the size of
@@ -160,6 +159,7 @@ class Stream:
 
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
+        stall_timeout = 90
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
@@ -174,7 +174,7 @@ class Stream:
                 try:
                     with self.session.request(
                         'POST', url, params=params, data=body,
-                        timeout=self.timeout, stream=True, auth=auth,
+                        timeout=stall_timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
                         if resp.status_code != 200:
