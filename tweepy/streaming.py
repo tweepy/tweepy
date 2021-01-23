@@ -6,6 +6,7 @@
 
 import json
 import logging
+from math import inf
 import ssl
 from threading import Thread
 from time import sleep
@@ -130,7 +131,7 @@ class Stream:
         self.listener = listener
         self.running = False
         self.daemon = options.get("daemon", False)
-        self.retry_count = options.get("retry_count")
+        self.retry_count = options.get("retry_count", inf)
 
         # The default socket.read size. Default to less than half the size of
         # a tweet so that it reads tweets with the minimal latency of 2 reads
@@ -167,10 +168,7 @@ class Stream:
         http_420_error_wait_start = 60
 
         try:
-            while self.running:
-                if self.retry_count is not None:
-                    if error_count > self.retry_count:
-                        break
+            while self.running and error_count <= self.retry_count:
                 try:
                     with self.session.request(
                         'POST', url, params=params, data=body,
