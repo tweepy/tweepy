@@ -148,8 +148,10 @@ class Stream:
         self.retry_time = self.retry_time_start
         self.snooze_time = self.snooze_time_step
 
-        # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
-        self.proxies = options.get("proxies")
+        self.proxies = {}
+        proxy = options.get("proxy")
+        if proxy:
+            self.proxies["https"] = proxy
 
     def _run(self, params=None, body=None):
         # Authenticate
