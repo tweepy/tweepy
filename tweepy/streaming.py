@@ -149,7 +149,7 @@ class Stream:
             self.session = requests.Session()
         url = f"https://stream.twitter.com/{STREAM_VERSION}/{endpoint}.json"
 
-        error_counter = 0
+        error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
@@ -160,7 +160,7 @@ class Stream:
         try:
             while self.running:
                 if self.retry_count is not None:
-                    if error_counter > self.retry_count:
+                    if error_count > self.retry_count:
                         break
                 try:
                     auth = self.auth.apply_auth()
@@ -172,7 +172,7 @@ class Stream:
                         if resp.status_code != 200:
                             if self.listener.on_request_error(resp.status_code) is False:
                                 break
-                            error_counter += 1
+                            error_count += 1
                             if resp.status_code == 420:
                                 http_error_wait = max(
                                     http_420_error_wait_start, http_error_wait
@@ -181,7 +181,7 @@ class Stream:
                             http_error_wait = min(http_error_wait * 2,
                                                   http_error_wait_max)
                         else:
-                            error_counter = 0
+                            error_count = 0
                             http_error_wait = http_error_wait_start
                             network_error_wait = network_error_wait_step
                             self.listener.on_connect()
