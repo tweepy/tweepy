@@ -40,7 +40,7 @@ setup(
     download_url="https://pypi.org/project/tweepy/",
     packages=find_packages(exclude=["tests", "examples"]),
     install_requires=[
-        "requests[socks]>=2.11.1,<3",
+        "requests>=2.11.1,<3",
         "requests_oauthlib>=1.0.0,<2",
     ],
     tests_require=tests_require,
@@ -49,6 +49,7 @@ setup(
             "coveralls>=2.1.0",
             "tox>=2.4.0",
          ],
+        "socks": ["requests[socks]>=2.11.1,<3"],
         "test": tests_require,
     },
     test_suite="nose.collector",
