@@ -245,10 +245,10 @@ class Stream:
         if track:
             body['track'] = ','.join(track)
         if locations and len(locations) > 0:
-            if len(locations) % 4 != 0:
+            if len(locations) % 4:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            body['locations'] = ','.join([f'{l:.4f}' for l in locations])
+            body['locations'] = ','.join(f'{l:.4f}' for l in locations)
         if filter_level:
             body['filter_level'] = filter_level
         if languages:
