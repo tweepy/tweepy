@@ -210,6 +210,7 @@ class Stream:
             self.listener.on_exception(exc)
             raise
         finally:
+            self.session.close()
             self.running = False
 
     def _read_loop(self, resp):
