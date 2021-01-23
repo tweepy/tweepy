@@ -225,13 +225,10 @@ class Stream:
             self.session.close()
             self.running = False
 
-    def _start(self, *args, threaded=False, **kwargs):
-        if threaded:
-            self._thread = Thread(target=self._connect, name="Tweepy Stream",
-                                  args=args, kwargs=kwargs, daemon=self.daemon)
-            self._thread.start()
-        else:
-            self._connect(*args, **kwargs)
+    def _threaded_connect(self, *args, **kwargs):
+        self._thread = Thread(target=self._connect, name="Tweepy Stream",
+                              args=args, kwargs=kwargs, daemon=self.daemon)
+        self._thread.start()
 
     def filter(self, follow=None, track=None, threaded=False, locations=None,
                stall_warnings=False, languages=None, filter_level=None):
@@ -254,7 +251,11 @@ class Stream:
             body['language'] = ','.join(map(str, languages))
         if filter_level:
             body['filter_level'] = filter_level
-        self._start(endpoint, body=body, threaded=threaded)
+
+        if threaded:
+            self._threaded_connect(endpoint, body=body)
+        else:
+            self._connect(endpoint, body=body)
 
     def sample(self, threaded=False, languages=None, stall_warnings=False):
         params = {}
@@ -265,7 +266,11 @@ class Stream:
             params['language'] = ','.join(map(str, languages))
         if stall_warnings:
             params['stall_warnings'] = 'true'
-        self._start(endpoint, params=params, threaded=threaded)
+
+        if threaded:
+            self._threaded_connect(endpoint, params=params)
+        else:
+            self._connect(endpoint, params=params)
 
     def disconnect(self):
         self.running = False
