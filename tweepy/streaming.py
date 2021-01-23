@@ -127,13 +127,6 @@ class Stream:
         self.daemon = options.get("daemon", False)
         self.timeout = options.get("timeout", 300.0)
         self.retry_count = options.get("retry_count")
-        # values according to
-        # https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/connecting#reconnecting
-        self.retry_time_start = options.get("retry_time", 5.0)
-        self.retry_420_start = options.get("retry_420", 60.0)
-        self.retry_time_cap = options.get("retry_time_cap", 320.0)
-        self.snooze_time_step = options.get("snooze_time", 0.25)
-        self.snooze_time_cap = options.get("snooze_time_cap", 16)
 
         # The default socket.read size. Default to less than half the size of
         # a tweet so that it reads tweets with the minimal latency of 2 reads
@@ -145,8 +138,6 @@ class Stream:
         self.verify = options.get("verify", True)
 
         self.session = None
-        self.retry_time = self.retry_time_start
-        self.snooze_time = self.snooze_time_step
 
         self.proxies = {}
         proxy = options.get("proxy")
@@ -161,6 +152,14 @@ class Stream:
 
         # Connect and process the stream
         error_counter = 0
+
+        # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
+        network_error_wait = network_error_wait_step = 0.25
+        network_error_wait_max = 16
+        http_error_wait = http_error_wait_start = 5
+        http_error_wait_max = 320
+        http_420_error_wait_start = 60
+
         try:
             while self.running:
                 if self.retry_count is not None:
@@ -179,15 +178,16 @@ class Stream:
                                 break
                             error_counter += 1
                             if resp.status_code == 420:
-                                self.retry_time = max(self.retry_420_start,
-                                                      self.retry_time)
-                            sleep(self.retry_time)
-                            self.retry_time = min(self.retry_time * 2,
-                                                  self.retry_time_cap)
+                                http_error_wait = max(
+                                    http_420_error_wait_start, http_error_wait
+                                )
+                            sleep(http_error_wait)
+                            http_error_wait = min(http_error_wait * 2,
+                                                  http_error_wait_max)
                         else:
                             error_counter = 0
-                            self.retry_time = self.retry_time_start
-                            self.snooze_time = self.snooze_time_step
+                            http_error_wait = http_error_wait_start
+                            network_error_wait = network_error_wait_step
                             self.listener.on_connect()
                             self._read_loop(resp)
                 except (requests.ConnectionError, requests.Timeout,
@@ -203,10 +203,10 @@ class Stream:
                         break
                     if self.running is False:
                         break
-                    sleep(self.snooze_time)
-                    self.snooze_time = min(
-                        self.snooze_time + self.snooze_time_step,
-                        self.snooze_time_cap
+                    sleep(network_error_wait)
+                    network_error_wait = min(
+                        network_error_wait + network_error_wait_step,
+                        network_error_wait_max
                     )
         except Exception as exc:
             self.listener.on_exception(exc)
