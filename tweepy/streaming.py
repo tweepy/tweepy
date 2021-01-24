@@ -15,7 +15,6 @@ import requests
 from requests_oauthlib import OAuth1
 import urllib3
 
-from tweepy.api import API
 from tweepy.error import TweepError
 from tweepy.models import Status
 
@@ -23,9 +22,6 @@ log = logging.getLogger(__name__)
 
 
 class StreamListener:
-
-    def __init__(self, api=None):
-        self.api = api or API()
 
     def on_connect(self):
         """Called once connected to streaming server.
@@ -62,7 +58,7 @@ class StreamListener:
         data = json.loads(raw_data)
 
         if 'in_reply_to_status_id' in data:
-            status = Status.parse(self.api, data)
+            status = Status.parse(None, data)
             return self.on_status(status)
         if 'delete' in data:
             delete = data['delete']['status']
