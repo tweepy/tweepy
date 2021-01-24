@@ -90,16 +90,17 @@ class Stream:
                             http_error_wait = http_error_wait_start
                             network_error_wait = network_error_wait_step
                             self.on_connect()
+                            if not self.running:
+                                break
 
                             for line in resp.iter_lines(
                                 chunk_size=self.chunk_size
                             ):
-                                if not self.running:
-                                    break
-                                if not line:
+                                if line:
+                                    self.on_data(line)
+                                else:
                                     self.on_keep_alive()
-                                elif self.on_data(line) is False:
-                                    self.running = False
+                                if not self.running:
                                     break
 
                             if resp.raw.closed:
@@ -217,7 +218,7 @@ class Stream:
         """Called when raw data is received from connection.
 
         Override this method if you wish to manually handle
-        the stream data. Return False to stop stream and close connection.
+        the stream data.
         """
         data = json.loads(raw_data)
 
