@@ -186,7 +186,7 @@ class Stream:
 
     def on_closed(self, resp):
         """ Called when the response has been closed by Twitter """
-        pass
+        log.error("Stream connection closed by Twitter")
 
     def on_connect(self):
         """Called once connected to streaming server.
