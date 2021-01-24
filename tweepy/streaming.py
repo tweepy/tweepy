@@ -36,6 +36,23 @@ class StreamListener:
         """
         log.info("Stream connected")
 
+    def on_connection_error(self):
+        """Called when stream connection errors or times out"""
+        log.error("Stream connection has errored or timed out")
+
+    def on_exception(self, exception):
+        """Called when an unhandled exception occurs."""
+        log.exception("Stream encountered an exception")
+
+    def on_keep_alive(self):
+        """Called when a keep-alive arrived"""
+        log.debug("Received keep-alive signal")
+
+    def on_request_error(self, status_code):
+        """Called when a non-200 status code is returned"""
+        log.error("Stream encountered HTTP error: %d", status_code)
+        return False
+
     def on_data(self, raw_data):
         """Called when raw data is received from connection.
 
@@ -50,49 +67,28 @@ class StreamListener:
         if 'delete' in data:
             delete = data['delete']['status']
             return self.on_delete(delete['id'], delete['user_id'])
-        if 'limit' in data:
-            return self.on_limit(data['limit']['track'])
         if 'disconnect' in data:
             return self.on_disconnect(data['disconnect'])
-        if 'warning' in data:
-            return self.on_warning(data['warning'])
+        if 'limit' in data:
+            return self.on_limit(data['limit']['track'])
         if 'scrub_geo' in data:
             return self.on_scrub_geo(data['scrub_geo'])
         if 'status_withheld' in data:
             return self.on_status_withheld(data['status_withheld'])
         if 'user_withheld' in data:
             return self.on_user_withheld(data['user_withheld'])
+        if 'warning' in data:
+            return self.on_warning(data['warning'])
 
         log.error("Unknown message type: %s", raw_data)
-
-    def on_keep_alive(self):
-        """Called when a keep-alive arrived"""
-        log.debug("Received keep-alive signal")
 
     def on_status(self, status):
         """Called when a new status arrives"""
         log.debug("Received status: %d", status.id)
 
-    def on_exception(self, exception):
-        """Called when an unhandled exception occurs."""
-        log.exception("Stream encountered an exception")
-
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
         log.debug("Received status deletion notice: %d", status_id)
-
-    def on_limit(self, track):
-        """Called when a limitation notice arrives"""
-        log.debug("Received limit notice: %d", track)
-
-    def on_request_error(self, status_code):
-        """Called when a non-200 status code is returned"""
-        log.error("Stream encountered HTTP error: %d", status_code)
-        return False
-
-    def on_connection_error(self):
-        """Called when stream connection errors or times out"""
-        log.error("Stream connection has errored or timed out")
 
     def on_disconnect(self, notice):
         """Called when twitter sends a disconnect notice
@@ -102,9 +98,9 @@ class StreamListener:
         """
         log.warning("Received disconnect message: %s", notice)
 
-    def on_warning(self, notice):
-        """Called when a disconnection warning message arrives"""
-        log.warning("Received stall warning: %s", notice)
+    def on_limit(self, track):
+        """Called when a limitation notice arrives"""
+        log.debug("Received limit notice: %d", track)
 
     def on_scrub_geo(self, notice):
         """Called when a location deletion notice arrives"""
@@ -117,6 +113,10 @@ class StreamListener:
     def on_user_withheld(self, notice):
         """Called when a user withheld content notice arrives"""
         log.debug("Received user withheld content notice: %s", notice)
+
+    def on_warning(self, notice):
+        """Called when a disconnection warning message arrives"""
+        log.warning("Received stall warning: %s", notice)
 
 
 class Stream:
