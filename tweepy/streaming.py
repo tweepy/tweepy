@@ -211,7 +211,6 @@ class Stream:
     def on_request_error(self, status_code):
         """Called when a non-200 status code is returned"""
         log.error("Stream encountered HTTP error: %d", status_code)
-        return False
 
     def on_data(self, raw_data):
         """Called when raw data is received from connection.
