@@ -74,7 +74,8 @@ class Stream:
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
                         if resp.status_code != 200:
-                            if self.on_request_error(resp.status_code) is False:
+                            self.on_request_error(resp.status_code)
+                            if not self.running:
                                 break
                             error_count += 1
                             if resp.status_code == 420:
