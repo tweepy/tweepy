@@ -34,7 +34,7 @@ class StreamListener:
         is received from the server. Allows the listener
         to perform some work prior to entering the read loop.
         """
-        pass
+        log.info("Stream connected")
 
     def on_data(self, raw_data):
         """Called when raw data is received from connection.
@@ -67,31 +67,32 @@ class StreamListener:
 
     def on_keep_alive(self):
         """Called when a keep-alive arrived"""
-        return
+        log.debug("Received keep-alive signal")
 
     def on_status(self, status):
         """Called when a new status arrives"""
-        return
+        log.debug("Received status: %d", status.id)
 
     def on_exception(self, exception):
         """Called when an unhandled exception occurs."""
-        return
+        log.exception("Stream encountered an exception")
 
     def on_delete(self, status_id, user_id):
         """Called when a delete notice arrives for a status"""
-        return
+        log.debug("Received status deletion notice: %d", status_id)
 
     def on_limit(self, track):
         """Called when a limitation notice arrives"""
-        return
+        log.debug("Received limit notice: %d", track)
 
     def on_request_error(self, status_code):
         """Called when a non-200 status code is returned"""
+        log.error("Stream encountered HTTP error: %d", status_code)
         return False
 
     def on_connection_error(self):
         """Called when stream connection errors or times out"""
-        return
+        log.error("Stream connection has errored or timed out")
 
     def on_disconnect(self, notice):
         """Called when twitter sends a disconnect notice
@@ -99,23 +100,23 @@ class StreamListener:
         Disconnect codes are listed here:
         https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/streaming-message-types
         """
-        return
+        log.warning("Received disconnect message: %s", notice)
 
     def on_warning(self, notice):
         """Called when a disconnection warning message arrives"""
-        return
+        log.warning("Received stall warning: %s", notice)
 
     def on_scrub_geo(self, notice):
         """Called when a location deletion notice arrives"""
-        return
+        log.debug("Received location deletion notice: %s", notice)
 
     def on_status_withheld(self, notice):
         """Called when a status withheld content notice arrives"""
-        return
+        log.debug("Received status withheld content notice: %s", notice)
 
     def on_user_withheld(self, notice):
         """Called when a user withheld content notice arrives"""
-        return
+        log.debug("Received user withheld content notice: %s", notice)
 
 
 class Stream:
