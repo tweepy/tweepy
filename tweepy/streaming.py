@@ -227,7 +227,7 @@ class Stream:
             delete = data['delete']['status']
             return self.on_delete(delete['id'], delete['user_id'])
         if 'disconnect' in data:
-            return self.on_disconnect(data['disconnect'])
+            return self.on_disconnect_message(data['disconnect'])
         if 'limit' in data:
             return self.on_limit(data['limit']['track'])
         if 'scrub_geo' in data:
@@ -249,7 +249,7 @@ class Stream:
         """Called when a delete notice arrives for a status"""
         log.debug("Received status deletion notice: %d", status_id)
 
-    def on_disconnect(self, notice):
+    def on_disconnect_message(self, notice):
         """Called when twitter sends a disconnect notice
 
         Disconnect codes are listed here:
