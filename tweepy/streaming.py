@@ -124,7 +124,6 @@ class Stream:
                     )
         except Exception as exc:
             self.on_exception(exc)
-            raise
         finally:
             self.session.close()
             self.running = False
