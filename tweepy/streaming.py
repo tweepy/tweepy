@@ -127,6 +127,7 @@ class Stream:
         finally:
             self.session.close()
             self.running = False
+            self.on_disconnect()
 
     def _threaded_connect(self, *args, **kwargs):
         self.thread = Thread(target=self._connect, name="Tweepy Stream",
@@ -199,6 +200,10 @@ class Stream:
     def on_connection_error(self):
         """Called when stream connection errors or times out"""
         log.error("Stream connection has errored or timed out")
+
+    def on_disconnect(self):
+        """Called when the stream has disconnected"""
+        log.info("Stream disconnected")
 
     def on_exception(self, exception):
         """Called when an unhandled exception occurs."""
