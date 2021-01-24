@@ -271,7 +271,7 @@ class AsyncStream:
 
         This is called when a non-200 HTTP status code is encountered.
         """
-        log.error(f"Stream encountered HTTP Error: {status_code}")
+        log.error("Stream encountered HTTP Error: %d", status_code)
 
     async def on_data(self, raw_data):
         """This method is a coroutine.
@@ -298,60 +298,60 @@ class AsyncStream:
                 method = getattr(self, "on_" + message_type)
                 return await method(data[message_type])
 
-        log.warning(f"Received unknown message type: {raw_data}")
+        log.warning("Received unknown message type: %s", raw_data)
 
     async def on_status(self, status):
         """This method is a coroutine.
 
         This is called when a status is received.
         """
-        log.debug(f"Received status: {status.id}")
+        log.debug("Received status: %d", status.id)
 
     async def on_delete(self, status_id, user_id):
         """This method is a coroutine.
 
         This is called when a status deletion notice is received.
         """
-        log.debug(f"Received status deletion notice: {status_id}")
+        log.debug("Received status deletion notice: %d", status_id)
 
     async def on_disconnect(self, notice):
         """This method is a coroutine.
 
         This is called when a disconnect notice is received.
         """
-        log.warning(f"Received disconnect message: {notice}")
+        log.warning("Received disconnect message: %s", notice)
 
     async def on_limit(self, track):
         """This method is a coroutine.
 
         This is called when a limit notice is received.
         """
-        log.debug(f"Received limit notice: {track}")
+        log.debug("Received limit notice: %d", track)
 
     async def on_scrub_geo(self, notice):
         """This method is a coroutine.
 
         This is called when a location deletion notice is received.
         """
-        log.debug(f"Received location deletion notice: {notice}")
+        log.debug("Received location deletion notice: %s", notice)
 
     async def on_status_withheld(self, notice):
         """This method is a coroutine.
 
         This is called when a status withheld content notice is received.
         """
-        log.debug(f"Received status withheld content notice: {notice}")
+        log.debug("Received status withheld content notice: %s", notice)
 
     async def on_user_withheld(self, notice):
         """This method is a coroutine.
 
         This is called when a user withheld content notice is received.
         """
-        log.debug(f"Received user withheld content notice: {notice}")
+        log.debug("Received user withheld content notice: %s", notice)
 
     async def on_warning(self, notice):
         """This method is a coroutine.
 
         This is called when a stall warning message is received.
         """
-        log.warning(f"Received stall warning: {notice}")
+        log.warning("Received stall warning: %s", notice)
