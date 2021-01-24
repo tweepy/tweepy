@@ -21,14 +21,178 @@ from tweepy.models import Status
 log = logging.getLogger(__name__)
 
 
-class StreamListener:
+class Stream:
+
+    def __init__(self, consumer_key, consumer_secret, access_token,
+                 access_token_secret, *, chunk_size=512, daemon=False,
+                 max_retries=inf, proxy=None, verify=True):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
+        # The default socket.read size. Default to less than half the size of
+        # a tweet so that it reads tweets with the minimal latency of 2 reads
+        # per tweet. Values higher than ~1kb will increase latency by waiting
+        # for more data to arrive but may also increase throughput by doing
+        # fewer socket read calls.
+        self.chunk_size = chunk_size
+        self.daemon = daemon
+        self.max_retries = max_retries
+        self.proxies = {"https": proxy} if proxy else {}
+        self.verify = verify
+
+        self.running = False
+        self.session = None
+        self.thread = None
+
+    def _connect(self, endpoint, params=None, body=None):
+        self.running = True
+
+        if self.session is None:
+            self.session = requests.Session()
+
+        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
+
+        auth = OAuth1(self.consumer_key, self.consumer_secret,
+                      self.access_token, self.access_token_secret)
+
+        error_count = 0
+        # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
+        stall_timeout = 90
+        network_error_wait = network_error_wait_step = 0.25
+        network_error_wait_max = 16
+        http_error_wait = http_error_wait_start = 5
+        http_error_wait_max = 320
+        http_420_error_wait_start = 60
+
+        try:
+            while self.running and error_count <= self.max_retries:
+                try:
+                    with self.session.request(
+                        'POST', url, params=params, data=body,
+                        timeout=stall_timeout, stream=True, auth=auth,
+                        verify=self.verify, proxies=self.proxies
+                    ) as resp:
+                        if resp.status_code != 200:
+                            if self.on_request_error(resp.status_code) is False:
+                                break
+                            error_count += 1
+                            if resp.status_code == 420:
+                                http_error_wait = max(
+                                    http_420_error_wait_start, http_error_wait
+                                )
+                            sleep(http_error_wait)
+                            http_error_wait = min(http_error_wait * 2,
+                                                  http_error_wait_max)
+                        else:
+                            error_count = 0
+                            http_error_wait = http_error_wait_start
+                            network_error_wait = network_error_wait_step
+                            self.on_connect()
+
+                            for line in resp.iter_lines(
+                                chunk_size=self.chunk_size
+                            ):
+                                if not self.running:
+                                    break
+                                if not line:
+                                    self.on_keep_alive()
+                                elif self.on_data(line) is False:
+                                    self.running = False
+                                    break
+
+                            if resp.raw.closed:
+                                self.on_closed(resp)
+                except (requests.ConnectionError, requests.Timeout,
+                        ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
+                        urllib3.exceptions.ProtocolError) as exc:
+                    # This is still necessary, as a SSLError can actually be
+                    # thrown when using Requests
+                    # If it's not time out treat it like any other exception
+                    if isinstance(exc, ssl.SSLError):
+                        if not (exc.args and 'timed out' in str(exc.args[0])):
+                            raise
+                    if self.on_connection_error() is False:
+                        break
+                    if self.running is False:
+                        break
+                    sleep(network_error_wait)
+                    network_error_wait = min(
+                        network_error_wait + network_error_wait_step,
+                        network_error_wait_max
+                    )
+        except Exception as exc:
+            self.on_exception(exc)
+            raise
+        finally:
+            self.session.close()
+            self.running = False
+
+    def _threaded_connect(self, *args, **kwargs):
+        self.thread = Thread(target=self._connect, name="Tweepy Stream",
+                             args=args, kwargs=kwargs, daemon=self.daemon)
+        self.thread.start()
+        return self.thread
+
+    def filter(self, *, follow=None, track=None, locations=None,
+               filter_level=None, languages=None, stall_warnings=False,
+               threaded=False):
+        if self.running:
+            raise TweepError('Stream object already connected!')
+
+        endpoint = 'statuses/filter'
+
+        body = {}
+        if follow:
+            body['follow'] = ','.join(follow)
+        if track:
+            body['track'] = ','.join(track)
+        if locations and len(locations) > 0:
+            if len(locations) % 4:
+                raise TweepError("Wrong number of locations points, "
+                                 "it has to be a multiple of 4")
+            body['locations'] = ','.join(f'{l:.4f}' for l in locations)
+        if filter_level:
+            body['filter_level'] = filter_level
+        if languages:
+            body['language'] = ','.join(map(str, languages))
+        if stall_warnings:
+            body['stall_warnings'] = stall_warnings
+
+        if threaded:
+            return self._threaded_connect(endpoint, body=body)
+        else:
+            self._connect(endpoint, body=body)
+
+    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
+        if self.running:
+            raise TweepError('Stream object already connected!')
+
+        endpoint = 'statuses/sample'
+
+        params = {}
+        if languages:
+            params['language'] = ','.join(map(str, languages))
+        if stall_warnings:
+            params['stall_warnings'] = 'true'
+
+        if threaded:
+            return self._threaded_connect(endpoint, params=params)
+        else:
+            self._connect(endpoint, params=params)
+
+    def disconnect(self):
+        self.running = False
+
+    def on_closed(self, resp):
+        """ Called when the response has been closed by Twitter """
+        pass
 
     def on_connect(self):
         """Called once connected to streaming server.
 
         This will be invoked once a successful response
-        is received from the server. Allows the listener
-        to perform some work prior to entering the read loop.
+        is received from the server.
         """
         log.info("Stream connected")
 
@@ -113,172 +277,3 @@ class StreamListener:
     def on_warning(self, notice):
         """Called when a disconnection warning message arrives"""
         log.warning("Received stall warning: %s", notice)
-
-
-class Stream:
-
-    def __init__(self, consumer_key, consumer_secret, access_token,
-                 access_token_secret, listener, *, chunk_size=512,
-                 daemon=False, max_retries=inf, proxy=None, verify=True):
-        self.consumer_key = consumer_key
-        self.consumer_secret = consumer_secret
-        self.access_token = access_token
-        self.access_token_secret = access_token_secret
-        self.listener = listener
-        # The default socket.read size. Default to less than half the size of
-        # a tweet so that it reads tweets with the minimal latency of 2 reads
-        # per tweet. Values higher than ~1kb will increase latency by waiting
-        # for more data to arrive but may also increase throughput by doing
-        # fewer socket read calls.
-        self.chunk_size = chunk_size
-        self.daemon = daemon
-        self.max_retries = max_retries
-        self.proxies = {"https": proxy} if proxy else {}
-        self.verify = verify
-
-        self.running = False
-        self.session = None
-        self.thread = None
-
-    def _connect(self, endpoint, params=None, body=None):
-        self.running = True
-
-        if self.session is None:
-            self.session = requests.Session()
-
-        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
-
-        auth = OAuth1(self.consumer_key, self.consumer_secret,
-                      self.access_token, self.access_token_secret)
-
-        error_count = 0
-        # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
-        stall_timeout = 90
-        network_error_wait = network_error_wait_step = 0.25
-        network_error_wait_max = 16
-        http_error_wait = http_error_wait_start = 5
-        http_error_wait_max = 320
-        http_420_error_wait_start = 60
-
-        try:
-            while self.running and error_count <= self.max_retries:
-                try:
-                    with self.session.request(
-                        'POST', url, params=params, data=body,
-                        timeout=stall_timeout, stream=True, auth=auth,
-                        verify=self.verify, proxies=self.proxies
-                    ) as resp:
-                        if resp.status_code != 200:
-                            if self.listener.on_request_error(resp.status_code) is False:
-                                break
-                            error_count += 1
-                            if resp.status_code == 420:
-                                http_error_wait = max(
-                                    http_420_error_wait_start, http_error_wait
-                                )
-                            sleep(http_error_wait)
-                            http_error_wait = min(http_error_wait * 2,
-                                                  http_error_wait_max)
-                        else:
-                            error_count = 0
-                            http_error_wait = http_error_wait_start
-                            network_error_wait = network_error_wait_step
-                            self.listener.on_connect()
-
-                            for line in resp.iter_lines(
-                                chunk_size=self.chunk_size
-                            ):
-                                if not self.running:
-                                    break
-                                if not line:
-                                    self.listener.on_keep_alive()
-                                elif self.listener.on_data(line) is False:
-                                    self.running = False
-                                    break
-
-                            if resp.raw.closed:
-                                self.on_closed(resp)
-                except (requests.ConnectionError, requests.Timeout,
-                        ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
-                        urllib3.exceptions.ProtocolError) as exc:
-                    # This is still necessary, as a SSLError can actually be
-                    # thrown when using Requests
-                    # If it's not time out treat it like any other exception
-                    if isinstance(exc, ssl.SSLError):
-                        if not (exc.args and 'timed out' in str(exc.args[0])):
-                            raise
-                    if self.listener.on_connection_error() is False:
-                        break
-                    if self.running is False:
-                        break
-                    sleep(network_error_wait)
-                    network_error_wait = min(
-                        network_error_wait + network_error_wait_step,
-                        network_error_wait_max
-                    )
-        except Exception as exc:
-            self.listener.on_exception(exc)
-            raise
-        finally:
-            self.session.close()
-            self.running = False
-
-    def _threaded_connect(self, *args, **kwargs):
-        self.thread = Thread(target=self._connect, name="Tweepy Stream",
-                             args=args, kwargs=kwargs, daemon=self.daemon)
-        self.thread.start()
-        return self.thread
-
-    def filter(self, *, follow=None, track=None, locations=None,
-               filter_level=None, languages=None, stall_warnings=False,
-               threaded=False):
-        if self.running:
-            raise TweepError('Stream object already connected!')
-
-        endpoint = 'statuses/filter'
-
-        body = {}
-        if follow:
-            body['follow'] = ','.join(follow)
-        if track:
-            body['track'] = ','.join(track)
-        if locations and len(locations) > 0:
-            if len(locations) % 4:
-                raise TweepError("Wrong number of locations points, "
-                                 "it has to be a multiple of 4")
-            body['locations'] = ','.join(f'{l:.4f}' for l in locations)
-        if filter_level:
-            body['filter_level'] = filter_level
-        if languages:
-            body['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            body['stall_warnings'] = stall_warnings
-
-        if threaded:
-            return self._threaded_connect(endpoint, body=body)
-        else:
-            self._connect(endpoint, body=body)
-
-    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
-        if self.running:
-            raise TweepError('Stream object already connected!')
-
-        endpoint = 'statuses/sample'
-
-        params = {}
-        if languages:
-            params['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            params['stall_warnings'] = 'true'
-
-        if threaded:
-            return self._threaded_connect(endpoint, params=params)
-        else:
-            self._connect(endpoint, params=params)
-
-    def disconnect(self):
-        self.running = False
-
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass

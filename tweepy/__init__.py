@@ -15,7 +15,7 @@ from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
 from tweepy.error import RateLimitError, TweepError
 from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
-from tweepy.streaming import Stream, StreamListener
+from tweepy.streaming import Stream
 
 # Global, unauthenticated instance of API
 api = API()
