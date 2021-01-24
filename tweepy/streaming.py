@@ -115,7 +115,7 @@ class Stream:
                         if not (exc.args and 'timed out' in str(exc.args[0])):
                             raise
                     self.on_connection_error()
-                    if self.running is False:
+                    if not self.running:
                         break
                     sleep(network_error_wait)
                     network_error_wait = min(
