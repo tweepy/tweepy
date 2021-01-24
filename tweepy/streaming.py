@@ -114,8 +114,7 @@ class Stream:
                     if isinstance(exc, ssl.SSLError):
                         if not (exc.args and 'timed out' in str(exc.args[0])):
                             raise
-                    if self.on_connection_error() is False:
-                        break
+                    self.on_connection_error()
                     if self.running is False:
                         break
                     sleep(network_error_wait)
