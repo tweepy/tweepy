@@ -45,7 +45,7 @@ class Stream:
         self.session = None
         self.thread = None
 
-    def _connect(self, endpoint, params=None, body=None):
+    def _connect(self, method, endpoint, params=None, body=None):
         self.running = True
 
         if self.session is None:
@@ -69,7 +69,7 @@ class Stream:
             while self.running and error_count <= self.max_retries:
                 try:
                     with self.session.request(
-                        'POST', url, params=params, data=body,
+                        method, url, params=params, data=body,
                         timeout=stall_timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
@@ -141,6 +141,7 @@ class Stream:
         if self.running:
             raise TweepError('Stream object already connected!')
 
+        method = 'POST'
         endpoint = 'statuses/filter'
 
         body = {}
@@ -161,14 +162,15 @@ class Stream:
             body['stall_warnings'] = stall_warnings
 
         if threaded:
-            return self._threaded_connect(endpoint, body=body)
+            return self._threaded_connect(method, endpoint, body=body)
         else:
-            self._connect(endpoint, body=body)
+            self._connect(method, endpoint, body=body)
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
             raise TweepError('Stream object already connected!')
 
+        method = 'GET'
         endpoint = 'statuses/sample'
 
         params = {}
@@ -178,9 +180,9 @@ class Stream:
             params['stall_warnings'] = 'true'
 
         if threaded:
-            return self._threaded_connect(endpoint, params=params)
+            return self._threaded_connect(method, endpoint, params=params)
         else:
-            self._connect(endpoint, params=params)
+            self._connect(method, endpoint, params=params)
 
     def disconnect(self):
         self.running = False
