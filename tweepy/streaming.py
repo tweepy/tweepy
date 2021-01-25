@@ -45,7 +45,7 @@ class Stream:
         self.session = None
         self.thread = None
 
-    def _connect(self, method, endpoint, params=None, body=None):
+    def _connect(self, method, endpoint, params=None, headers=None, body=None):
         self.running = True
 
         if self.session is None:
@@ -69,7 +69,7 @@ class Stream:
             while self.running and error_count <= self.max_retries:
                 try:
                     with self.session.request(
-                        method, url, params=params, data=body,
+                        method, url, params=params, headers=headers, data=body,
                         timeout=stall_timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
@@ -143,6 +143,7 @@ class Stream:
 
         method = 'POST'
         endpoint = 'statuses/filter'
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
 
         body = {}
         if follow:
@@ -162,9 +163,10 @@ class Stream:
             body['stall_warnings'] = stall_warnings
 
         if threaded:
-            return self._threaded_connect(method, endpoint, body=body)
+            return self._threaded_connect(method, endpoint, headers=headers,
+                                          body=body)
         else:
-            self._connect(method, endpoint, body=body)
+            self._connect(method, endpoint, headers=headers, body=body)
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
