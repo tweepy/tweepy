@@ -7,6 +7,7 @@
 import json
 import logging
 from math import inf
+from platform import python_version
 import ssl
 from threading import Thread
 from time import sleep
@@ -15,6 +16,7 @@ import requests
 from requests_oauthlib import OAuth1
 import urllib3
 
+import tweepy
 from tweepy.error import TweepError
 from tweepy.models import Status
 
@@ -44,12 +46,18 @@ class Stream:
         self.running = False
         self.session = None
         self.thread = None
+        self.user_agent = (
+            f"Python/{python_version()} "
+            f"Requests/{requests.__version__} "
+            f"Tweepy/{tweepy.__version__}"
+        )
 
     def _connect(self, method, endpoint, params=None, headers=None, body=None):
         self.running = True
 
         if self.session is None:
             self.session = requests.Session()
+            self.session.headers["User-Agent"] = self.user_agent
 
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
 
