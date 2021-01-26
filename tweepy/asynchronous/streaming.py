@@ -58,19 +58,6 @@ class AsyncStream:
 
     async def _connect(self, method, endpoint, params={}, headers=None,
                        body=None):
-        if self.session is None or self.session.closed:
-            self.session = aiohttp.ClientSession(
-                headers={"User-Agent": self.user_agent},
-                # Override default 5 min. total timeout
-                timeout=aiohttp.ClientTimeout()
-            )
-
-        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
-        url = str(URL(url).with_query(sorted(params.items())))
-
-        oauth_client = OAuthClient(self.consumer_key, self.consumer_secret,
-                                   self.access_token, self.access_token_secret)
-
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         stall_timeout = 90
@@ -79,6 +66,18 @@ class AsyncStream:
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
         http_420_error_wait_start = 60
+
+        oauth_client = OAuthClient(self.consumer_key, self.consumer_secret,
+                                   self.access_token, self.access_token_secret)
+
+        if self.session is None or self.session.closed:
+            self.session = aiohttp.ClientSession(
+                headers={"User-Agent": self.user_agent},
+                timeout=aiohttp.ClientTimeout(sock_read=stall_timeout)
+            )
+
+        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
+        url = str(URL(url).with_query(sorted(params.items())))
 
         try:
             while error_count <= self.max_retries:
@@ -97,11 +96,7 @@ class AsyncStream:
 
                             await self.on_connect()
 
-                            while not resp.content.at_eof():
-                                line = await asyncio.wait_for(
-                                    resp.content.readline(),
-                                    timeout=stall_timeout
-                                )
+                            async for line in resp.content:
                                 line = line.strip()
                                 if line:
                                     await self.on_data(line)
@@ -125,8 +120,7 @@ class AsyncStream:
                                 if http_error_wait > http_error_wait_max:
                                     http_error_wait = http_error_wait_max
                 except (aiohttp.ClientConnectionError,
-                        aiohttp.ClientPayloadError,
-                        asyncio.TimeoutError) as e:
+                        aiohttp.ClientPayloadError) as e:
                     await self.on_connection_error()
 
                     await asyncio.sleep(network_error_wait)
