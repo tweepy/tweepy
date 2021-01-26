@@ -241,7 +241,7 @@ class AsyncStream:
     async def on_connect(self):
         """This method is a coroutine.
 
-        This is called after successfully coneccting to the streaming API.
+        This is called after successfully connecting to the streaming API.
         """
         log.info("Stream connected")
 
