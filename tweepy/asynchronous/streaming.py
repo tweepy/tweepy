@@ -292,8 +292,8 @@ class AsyncStream:
             return await self.on_delete(delete["id"], delete["user_id"])
         if "limit" in data:
             return await self.on_limit(data["limit"]["track"])
-        for message_type in ("disconnect", "scrub_geo", "status_withheld",
-                             "user_withheld", "warning"):
+        for message_type in ("disconnect_message", "scrub_geo",
+                             "status_withheld", "user_withheld", "warning"):
             if message_type in data:
                 method = getattr(self, "on_" + message_type)
                 return await method(data[message_type])
@@ -314,12 +314,12 @@ class AsyncStream:
         """
         log.debug("Received status deletion notice: %d", status_id)
 
-    async def on_disconnect(self, notice):
+    async def on_disconnect_message(self, message):
         """This method is a coroutine.
 
-        This is called when a disconnect notice is received.
+        This is called when a disconnect message is received.
         """
-        log.warning("Received disconnect message: %s", notice)
+        log.warning("Received disconnect message: %s", message)
 
     async def on_limit(self, track):
         """This method is a coroutine.
