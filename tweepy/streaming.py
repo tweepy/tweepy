@@ -120,7 +120,7 @@ class Stream:
                     # thrown when using Requests
                     # If it's not time out treat it like any other exception
                     if isinstance(exc, ssl.SSLError):
-                        if not (exc.args and 'timed out' in str(exc.args[0])):
+                        if not (exc.args and "timed out" in str(exc.args[0])):
                             raise
                     self.on_connection_error()
                     if not self.running:
@@ -147,28 +147,28 @@ class Stream:
                filter_level=None, languages=None, stall_warnings=False,
                threaded=False):
         if self.running:
-            raise TweepError('Stream object already connected!')
+            raise TweepError("Stream object already connected!")
 
-        method = 'POST'
-        endpoint = 'statuses/filter'
+        method = "POST"
+        endpoint = "statuses/filter"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
 
         body = {}
         if follow:
-            body['follow'] = ','.join(follow)
+            body["follow"] = ','.join(follow)
         if track:
-            body['track'] = ','.join(track)
+            body["track"] = ','.join(track)
         if locations and len(locations) > 0:
             if len(locations) % 4:
                 raise TweepError("Wrong number of locations points, "
                                  "it has to be a multiple of 4")
-            body['locations'] = ','.join(f'{l:.4f}' for l in locations)
+            body["locations"] = ','.join(f"{l:.4f}" for l in locations)
         if filter_level:
-            body['filter_level'] = filter_level
+            body["filter_level"] = filter_level
         if languages:
-            body['language'] = ','.join(map(str, languages))
+            body["language"] = ','.join(map(str, languages))
         if stall_warnings:
-            body['stall_warnings'] = stall_warnings
+            body["stall_warnings"] = stall_warnings
 
         if threaded:
             return self._threaded_connect(method, endpoint, headers=headers,
@@ -178,16 +178,16 @@ class Stream:
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
-            raise TweepError('Stream object already connected!')
+            raise TweepError("Stream object already connected!")
 
-        method = 'GET'
-        endpoint = 'statuses/sample'
+        method = "GET"
+        endpoint = "statuses/sample"
 
         params = {}
         if languages:
-            params['language'] = ','.join(map(str, languages))
+            params["language"] = ','.join(map(str, languages))
         if stall_warnings:
-            params['stall_warnings'] = 'true'
+            params["stall_warnings"] = "true"
 
         if threaded:
             return self._threaded_connect(method, endpoint, params=params)
@@ -237,24 +237,24 @@ class Stream:
         """
         data = json.loads(raw_data)
 
-        if 'in_reply_to_status_id' in data:
+        if "in_reply_to_status_id" in data:
             status = Status.parse(None, data)
             return self.on_status(status)
-        if 'delete' in data:
-            delete = data['delete']['status']
-            return self.on_delete(delete['id'], delete['user_id'])
-        if 'disconnect' in data:
-            return self.on_disconnect_message(data['disconnect'])
-        if 'limit' in data:
-            return self.on_limit(data['limit']['track'])
-        if 'scrub_geo' in data:
-            return self.on_scrub_geo(data['scrub_geo'])
-        if 'status_withheld' in data:
-            return self.on_status_withheld(data['status_withheld'])
-        if 'user_withheld' in data:
-            return self.on_user_withheld(data['user_withheld'])
-        if 'warning' in data:
-            return self.on_warning(data['warning'])
+        if "delete" in data:
+            delete = data["delete"]["status"]
+            return self.on_delete(delete["id"], delete["user_id"])
+        if "disconnect" in data:
+            return self.on_disconnect_message(data["disconnect"])
+        if "limit" in data:
+            return self.on_limit(data["limit"]["track"])
+        if "scrub_geo" in data:
+            return self.on_scrub_geo(data["scrub_geo"])
+        if "status_withheld" in data:
+            return self.on_status_withheld(data["status_withheld"])
+        if "user_withheld" in data:
+            return self.on_user_withheld(data["user_withheld"])
+        if "warning" in data:
+            return self.on_warning(data["warning"])
 
         log.error("Unknown message type: %s", raw_data)
 
