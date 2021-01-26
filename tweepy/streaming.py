@@ -206,42 +206,40 @@ class Stream:
         self.running = False
 
     def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
+        """This is called when the stream has been closed by Twitter."""
         log.error("Stream connection closed by Twitter")
 
     def on_connect(self):
-        """Called once connected to streaming server.
-
-        This will be invoked once a successful response
-        is received from the server.
+        """This is called after successfully connecting to the streaming API.
         """
         log.info("Stream connected")
 
     def on_connection_error(self):
-        """Called when stream connection errors or times out"""
+        """This is called when the stream connection errors or times out."""
         log.error("Stream connection has errored or timed out")
 
     def on_disconnect(self):
-        """Called when the stream has disconnected"""
+        """This is called when the stream has disconnected."""
         log.info("Stream disconnected")
 
     def on_exception(self, exception):
-        """Called when an unhandled exception occurs."""
+        """This is called when an unhandled exception occurs."""
         log.exception("Stream encountered an exception")
 
     def on_keep_alive(self):
-        """Called when a keep-alive arrived"""
+        """This is called when a keep-alive signal is received."""
         log.debug("Received keep-alive signal")
 
     def on_request_error(self, status_code):
-        """Called when a non-200 status code is returned"""
+        """This is called when a non-200 HTTP status code is encountered."""
         log.error("Stream encountered HTTP error: %d", status_code)
 
     def on_data(self, raw_data):
-        """Called when raw data is received from connection.
+        """This is called when raw data is received from the stream.
+        This method handles sending the data to other methods, depending on the
+        message type.
 
-        Override this method if you wish to manually handle
-        the stream data.
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/streaming-message-types
         """
         data = json.loads(raw_data)
 
@@ -267,37 +265,33 @@ class Stream:
         log.error("Unknown message type: %s", raw_data)
 
     def on_status(self, status):
-        """Called when a new status arrives"""
+        """This is called when a status is received."""
         log.debug("Received status: %d", status.id)
 
     def on_delete(self, status_id, user_id):
-        """Called when a delete notice arrives for a status"""
+        """This is called when a status deletion notice is received."""
         log.debug("Received status deletion notice: %d", status_id)
 
     def on_disconnect_message(self, notice):
-        """Called when twitter sends a disconnect notice
-
-        Disconnect codes are listed here:
-        https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/streaming-message-types
-        """
+        """This is called when a disconnect message is received."""
         log.warning("Received disconnect message: %s", notice)
 
     def on_limit(self, track):
-        """Called when a limitation notice arrives"""
+        """This is called when a limit notice is received."""
         log.debug("Received limit notice: %d", track)
 
     def on_scrub_geo(self, notice):
-        """Called when a location deletion notice arrives"""
+        """This is called when a location deletion notice is received."""
         log.debug("Received location deletion notice: %s", notice)
 
     def on_status_withheld(self, notice):
-        """Called when a status withheld content notice arrives"""
+        """This is called when a status withheld content notice is received."""
         log.debug("Received status withheld content notice: %s", notice)
 
     def on_user_withheld(self, notice):
-        """Called when a user withheld content notice arrives"""
+        """This is called when a user withheld content notice is received."""
         log.debug("Received user withheld content notice: %s", notice)
 
     def on_warning(self, notice):
-        """Called when a disconnection warning message arrives"""
+        """This is called when a stall warning message is received."""
         log.warning("Received stall warning: %s", notice)
