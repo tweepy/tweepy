@@ -295,11 +295,14 @@ class AsyncStream:
             return await self.on_disconnect_message(data["disconnect"])
         if "limit" in data:
             return await self.on_limit(data["limit"]["track"])
-        for message_type in ("scrub_geo","status_withheld", "user_withheld",
-                             "warning"):
-            if message_type in data:
-                method = getattr(self, "on_" + message_type)
-                return await method(data[message_type])
+        if "scrub_geo" in data:
+            return await self.on_scrub_geo(data["scrub_geo"])
+        if "status_withheld" in data:
+            return await self.on_status_withheld(data["status_withheld"])
+        if "user_withheld" in data:
+            return await self.on_user_withheld(data["user_withheld"])
+        if "warning" in data:
+            return await self.on_warning(data["warning"])
 
         log.warning("Received unknown message type: %s", raw_data)
 
