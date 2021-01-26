@@ -141,6 +141,7 @@ class AsyncStream:
             raise
         finally:
             await self.session.close()
+            await self.on_disconnect()
 
     async def filter(self, follow=None, track=None, locations=None,
                      stall_warnings=False):
@@ -251,6 +252,13 @@ class AsyncStream:
         This is called when the stream connection errors or times out.
         """
         log.error("Stream connection has errored or timed out")
+
+    async def on_disconnect(self):
+        """This method is a coroutine.
+
+        This is called when the stream has disconnected.
+        """
+        log.info("Stream disconnected")
 
     async def on_exception(self, exception):
         """This method is a coroutine.
