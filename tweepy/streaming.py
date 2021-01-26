@@ -154,7 +154,7 @@ class Stream:
                filter_level=None, languages=None, stall_warnings=False,
                threaded=False):
         if self.running:
-            raise TweepError("Stream object already connected!")
+            raise TweepError("Stream is already connected")
 
         method = "POST"
         endpoint = "statuses/filter"
@@ -167,8 +167,9 @@ class Stream:
             body["track"] = ','.join(track)
         if locations and len(locations) > 0:
             if len(locations) % 4:
-                raise TweepError("Wrong number of locations points, "
-                                 "it has to be a multiple of 4")
+                raise TweepError(
+                    "Number of location coordinates should be a multiple of 4"
+                )
             body["locations"] = ','.join(f"{l:.4f}" for l in locations)
         if filter_level:
             body["filter_level"] = filter_level
@@ -185,7 +186,7 @@ class Stream:
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
-            raise TweepError("Stream object already connected!")
+            raise TweepError("Stream is already connected")
 
         method = "GET"
         endpoint = "statuses/sample"
