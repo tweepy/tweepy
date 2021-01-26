@@ -138,7 +138,6 @@ class AsyncStream:
             return
         except Exception as e:
             await self.on_exception(e)
-            raise
         finally:
             await self.session.close()
             await self.on_disconnect()
