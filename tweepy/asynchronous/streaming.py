@@ -171,7 +171,7 @@ class AsyncStream:
         Returns :class:`asyncio.Task`
         """
         if self.task is not None and not self.task.done():
-            raise TweepError('Stream is already connected')
+            raise TweepError("Stream is already connected")
 
         endpoint = "statuses/filter"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
