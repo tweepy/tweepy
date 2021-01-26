@@ -291,10 +291,12 @@ class AsyncStream:
         if "delete" in data:
             delete = data["delete"]["status"]
             return await self.on_delete(delete["id"], delete["user_id"])
+        if "disconnect" in data:
+            return await self.on_disconnect_message(data["disconnect"])
         if "limit" in data:
             return await self.on_limit(data["limit"]["track"])
-        for message_type in ("disconnect_message", "scrub_geo",
-                             "status_withheld", "user_withheld", "warning"):
+        for message_type in ("scrub_geo","status_withheld", "user_withheld",
+                             "warning"):
             if message_type in data:
                 method = getattr(self, "on_" + message_type)
                 return await method(data[message_type])
