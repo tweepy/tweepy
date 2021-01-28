@@ -131,16 +131,10 @@ class IdIterator(BaseIterator):
         if self.index >= len(self.results) - 1:
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kwargs)
 
-            if hasattr(self.method, '__self__'):
-                old_parser = self.method.__self__.parser
-                # Hack for models which expect ModelParser to be set
-                self.method.__self__.parser = ModelParser()
-
             # This is a special invocation that returns the underlying
             # APIMethod class
             model = ModelParser().parse(self.method(create=True), data)
             if hasattr(self.method, '__self__'):
-                self.method.__self__.parser = old_parser
                 result = self.method.__self__.parser.parse(self.method(create=True), data)
             else:
                 result = model
