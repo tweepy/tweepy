@@ -708,14 +708,14 @@ class API:
     def favorites(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
             :allowed_param: 'screen_name', 'user_id', 'max_id', 'count',
-                            'since_id', 'max_id'
+                            'since_id'
         """
         return bind_api(
             api=self,
             path='/favorites/list.json',
             payload_type='status', payload_list=True,
             allowed_param=['screen_name', 'user_id', 'max_id', 'count',
-                           'since_id', 'max_id']
+                           'since_id']
         )(*args, **kwargs)
 
     def create_favorite(self, *args, **kwargs):
