@@ -262,7 +262,7 @@ class Stream:
         if "warning" in data:
             return self.on_warning(data["warning"])
 
-        log.error("Unknown message type: %s", raw_data)
+        log.error("Received unknown message type: %s", raw_data)
 
     def on_status(self, status):
         """This is called when a status is received."""
