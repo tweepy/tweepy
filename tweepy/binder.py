@@ -239,18 +239,6 @@ def bind_api(**config):
         finally:
             method.session.close()
 
-    # Set pagination mode
-    if 'cursor' in APIMethod.allowed_param:
-        if APIMethod.payload_type == 'direct_message':
-            _call.pagination_mode = 'dm_cursor'
-        else:
-            _call.pagination_mode = 'cursor'
-    elif 'max_id' in APIMethod.allowed_param:
-        if 'since_id' in APIMethod.allowed_param:
-            _call.pagination_mode = 'id'
-    elif 'page' in APIMethod.allowed_param:
-        _call.pagination_mode = 'page'
-
     return _call
 
 
