@@ -19,7 +19,7 @@ class API:
                  host='api.twitter.com', upload_host='upload.twitter.com',
                  cache=None, api_root='/1.1', upload_root='/1.1',
                  retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-                 parser=None, compression=False, wait_on_rate_limit=False,
+                 parser=None, wait_on_rate_limit=False,
                  wait_on_rate_limit_notify=False, proxy=''):
         """
         API instance constructor
@@ -39,7 +39,6 @@ class API:
                         seconds, default: 60
         :param parser: ModelParser instance to parse the responses,
                        default: None
-        :param compression: If the response is compressed, default: False
         :param wait_on_rate_limit: If the api wait when it hits the rate limit,
                                    default: False
         :param wait_on_rate_limit_notify: If the api print a notification when
@@ -54,7 +53,6 @@ class API:
         self.api_root = api_root
         self.upload_root = upload_root
         self.cache = cache
-        self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors

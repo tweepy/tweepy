@@ -154,10 +154,6 @@ def bind_api(**config):
                 if self.api.auth:
                     auth = self.api.auth.apply_auth()
 
-                # Request compression if configured
-                if self.api.compression:
-                    self.headers['Accept-encoding'] = 'gzip'
-
                 # Execute request
                 try:
                     resp = self.session.request(self.method,
