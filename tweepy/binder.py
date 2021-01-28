@@ -54,7 +54,7 @@ def bind_api(**config):
                                                         api.wait_on_rate_limit_notify)
             self.return_cursors = kwargs.pop('return_cursors', False)
             self.parser = kwargs.pop('parser', api.parser)
-            self.session.headers = kwargs.pop('headers', {})
+            self.headers = kwargs.pop('headers', {})
             self.build_parameters(args, kwargs)
 
             # Pick correct URL root to use
@@ -75,7 +75,7 @@ def bind_api(**config):
             # or older where Host is set including the 443 port.
             # This causes Twitter to issue 301 redirect.
             # See Issue https://github.com/tweepy/tweepy/issues/12
-            self.session.headers['Host'] = self.host
+            self.headers['Host'] = self.host
             # Monitoring rate limits
             self._remaining_calls = None
             self._reset_time = None
@@ -161,12 +161,13 @@ def bind_api(**config):
 
                 # Request compression if configured
                 if self.api.compression:
-                    self.session.headers['Accept-encoding'] = 'gzip'
+                    self.headers['Accept-encoding'] = 'gzip'
 
                 # Execute request
                 try:
                     resp = self.session.request(self.method,
                                                 full_url,
+                                                headers=self.headers,
                                                 data=self.post_data,
                                                 json=self.json_payload,
                                                 timeout=self.api.timeout,
