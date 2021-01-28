@@ -134,10 +134,7 @@ class IdIterator(BaseIterator):
             # This is a special invocation that returns the underlying
             # APIMethod class
             model = ModelParser().parse(self.method(create=True), data)
-            if hasattr(self.method, '__self__'):
-                result = self.method.__self__.parser.parse(self.method(create=True), data)
-            else:
-                result = model
+            result = self.method.__self__.parser.parse(self.method(create=True), data)
 
             if len(self.results) != 0:
                 self.index += 1
