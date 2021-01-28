@@ -379,8 +379,8 @@ class API:
 
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
-            allowed_param= 'user_id', 'screen_name', 'include_entities',
-                           'tweet_mode'
+            :allowed_param: 'user_id', 'screen_name', 'include_entities',
+                            'tweet_mode'
         """
         return bind_api(
             api=self,
