@@ -92,8 +92,10 @@ class Status(Model, Hashable):
         setattr(status, '_json', json)
         for k, v in json.items():
             if k == 'user':
-                user_model = getattr(api.parser.model_factory, 'user') if api else User
-                user = user_model.parse(api, v)
+                try:
+                    user = api.parser.model_factory.user.parse(api, v)
+                except AttributeError:
+                    user = User.parse(api, v)
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
             elif k == 'created_at':
