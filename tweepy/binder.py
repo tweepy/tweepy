@@ -23,23 +23,11 @@ class APIMethod:
         self.payload_type = kwargs.pop('payload_type', None)
         self.payload_list = kwargs.pop('payload_list', False)
         self.allowed_param = kwargs.pop('allowed_param', [])
-        self.upload_api = kwargs.pop('upload_api', False)
         self.session = requests.Session()
 
         self.parser = kwargs.pop('parser', api.parser)
         self.headers = kwargs.pop('headers', {})
         self.build_parameters(args, kwargs)
-
-        # Pick correct URL root to use
-        if self.upload_api:
-            self.api_root = api.upload_root
-        else:
-            self.api_root = api.api_root
-
-        if self.upload_api:
-            self.host = api.upload_host
-        else:
-            self.host = api.host
 
         # Monitoring rate limits
         self._remaining_calls = None
@@ -66,7 +54,8 @@ class APIMethod:
         log.debug("PARAMS: %r", self.session.params)
 
     def execute(self, method, *, json_payload=None, post_data=None,
-                require_auth=False, return_cursors=False, use_cache=True):
+                require_auth=False, return_cursors=False, upload_api=False,
+                use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.api.auth:
@@ -74,9 +63,20 @@ class APIMethod:
 
         self.api.cached_result = False
 
+        # Pick correct URL root to use
+        if upload_api:
+            api_root = self.api.upload_root
+        else:
+            api_root = self.api.api_root
+
+        if upload_api:
+            host = self.api.upload_host
+        else:
+            host = self.api.host
+
         # Build the request URL
-        url = self.api_root + self.path
-        full_url = 'https://' + self.host + url
+        url = api_root + self.path
+        full_url = 'https://' + host + url
 
         # Query the cache if one is available
         # and this request uses a GET method.
@@ -187,6 +187,7 @@ def bind_api(*args, **kwargs):
     post_data = kwargs.pop('post_data', None)
     require_auth = kwargs.pop('require_auth', False)
     return_cursors = kwargs.pop('return_cursors', False)
+    upload_api = kwargs.pop('upload_api', False)
     use_cache = kwargs.pop('use_cache', True)
 
     method = APIMethod(*args, **kwargs)
@@ -197,7 +198,7 @@ def bind_api(*args, **kwargs):
             return method.execute(
                 http_method, json_payload=json_payload, post_data=post_data,
                 require_auth=require_auth, return_cursors=return_cursors,
-                use_cache=use_cache
+                upload_api=upload_api, use_cache=use_cache
             )
     finally:
         method.session.close()
