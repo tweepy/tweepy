@@ -266,16 +266,15 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def destroy_status(self, *args, **kwargs):
+    def destroy_status(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
             :allowed_param: 'id'
         """
         return bind_api(
             *args, api=self,
-            path='/statuses/destroy/{id}.json',
+            path=f'/statuses/destroy/{status_id}.json',
             method='POST',
             payload_type='status',
-            allowed_param=['id'],
             require_auth=True, **kwargs
         )
 
