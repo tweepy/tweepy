@@ -32,7 +32,6 @@ class APIMethod:
         if self.require_auth and not api.auth:
             raise TweepError('Authentication required!')
 
-        self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
         self.parser = kwargs.pop('parser', api.parser)
         self.headers = kwargs.pop('headers', {})
@@ -73,7 +72,7 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, method, *, return_cursors=False, use_cache=True):
+    def execute(self, method, *, post_data=None, return_cursors=False, use_cache=True):
         self.api.cached_result = False
 
         # Build the request URL
@@ -121,7 +120,7 @@ class APIMethod:
                 resp = self.session.request(method,
                                             full_url,
                                             headers=self.headers,
-                                            data=self.post_data,
+                                            data=post_data,
                                             json=self.json_payload,
                                             timeout=self.api.timeout,
                                             auth=auth,
@@ -185,6 +184,7 @@ class APIMethod:
 
 def bind_api(*args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
+    post_data = kwargs.pop('post_data', None)
     return_cursors = kwargs.pop('return_cursors', False)
     use_cache = kwargs.pop('use_cache', True)
 
@@ -193,8 +193,10 @@ def bind_api(*args, **kwargs):
         if kwargs.get('create'):
             return method
         else:
-            return method.execute(http_method, return_cursors=return_cursors,
-                                  use_cache=use_cache)
+            return method.execute(
+                http_method, post_data=post_data,
+                return_cursors=return_cursors, use_cache=use_cache
+            )
     finally:
         method.session.close()
 
