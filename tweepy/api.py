@@ -302,15 +302,15 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def retweets(self, *args, **kwargs):
+    def retweets(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets-id
-            :allowed_param: 'id', 'count'
+            :allowed_param: 'count'
         """
         return bind_api(
             *args, api=self,
-            path='/statuses/retweets/{id}.json',
+            path=f'/statuses/retweets/{status_id}.json',
             payload_type='status', payload_list=True,
-            allowed_param=['id', 'count'],
+            allowed_param=['count'],
             require_auth=True, **kwargs
         )
 
