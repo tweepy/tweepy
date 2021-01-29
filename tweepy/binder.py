@@ -39,8 +39,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
-                                                api.wait_on_rate_limit)
         self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
                                                     api.wait_on_rate_limit_notify)
         self.return_cursors = kwargs.pop('return_cursors', False)
@@ -130,7 +128,7 @@ class APIMethod:
         # or maximum number of retries is reached.
         retries_performed = 0
         while retries_performed < self.api.retry_count + 1:
-            if (self.wait_on_rate_limit and self._reset_time is not None
+            if (self.api.wait_on_rate_limit and self._reset_time is not None
                 and self._remaining_calls is not None
                 and self._remaining_calls < 1):
                 # Handle running out of API calls
@@ -172,7 +170,7 @@ class APIMethod:
                 self._reset_time = int(reset_time)
 
             retry_delay = self.api.retry_delay
-            if resp.status_code in (420, 429) and self.wait_on_rate_limit:
+            if resp.status_code in (420, 429) and self.api.wait_on_rate_limit:
                 if self._remaining_calls == 0:
                     # If ran out of calls before waiting switching retry last call
                     continue
