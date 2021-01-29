@@ -19,7 +19,6 @@ class APIMethod:
 
     def __init__(self, *args, **kwargs):
         self.api = api = kwargs.pop('api')
-        self.path = kwargs.pop('path')
         self.payload_type = kwargs.pop('payload_type', None)
         self.payload_list = kwargs.pop('payload_list', False)
         self.allowed_param = kwargs.pop('allowed_param', [])
@@ -53,7 +52,7 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, method, *, json_payload=None, post_data=None,
+    def execute(self, method, path, *, json_payload=None, post_data=None,
                 require_auth=False, return_cursors=False, upload_api=False,
                 use_cache=True):
         # If authentication is required and no credentials
@@ -75,7 +74,7 @@ class APIMethod:
             host = self.api.host
 
         # Build the request URL
-        url = api_root + self.path
+        url = api_root + path
         full_url = 'https://' + host + url
 
         # Query the cache if one is available
@@ -183,6 +182,7 @@ class APIMethod:
 
 def bind_api(*args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
+    path = kwargs.pop('path')
     json_payload = kwargs.pop('json_payload', None)
     post_data = kwargs.pop('post_data', None)
     require_auth = kwargs.pop('require_auth', False)
@@ -196,9 +196,10 @@ def bind_api(*args, **kwargs):
             return method
         else:
             return method.execute(
-                http_method, json_payload=json_payload, post_data=post_data,
-                require_auth=require_auth, return_cursors=return_cursors,
-                upload_api=upload_api, use_cache=use_cache
+                http_method, path, json_payload=json_payload,
+                post_data=post_data, require_auth=require_auth,
+                return_cursors=return_cursors, upload_api=upload_api,
+                use_cache=use_cache
             )
     finally:
         method.session.close()
