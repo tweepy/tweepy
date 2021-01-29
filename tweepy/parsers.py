@@ -43,7 +43,7 @@ class JSONParser(Parser):
 
     payload_format = 'json'
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, method, payload, *, return_cursors=False):
         try:
             json = json_lib.loads(payload)
         except Exception as e:
@@ -81,7 +81,7 @@ class ModelParser(JSONParser):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, method, payload, *, return_cursors=False):
         try:
             if method.payload_type is None:
                 return
