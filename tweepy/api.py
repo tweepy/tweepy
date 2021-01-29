@@ -278,16 +278,15 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def retweet(self, *args, **kwargs):
+    def retweet(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
-            :allowed_param: 'id'
+            :allowed_param:
         """
         return bind_api(
             *args, api=self,
-            path='/statuses/retweet/{id}.json',
+            path=f'/statuses/retweet/{status_id}.json',
             method='POST',
             payload_type='status',
-            allowed_param=['id'],
             require_auth=True, **kwargs
         )
 
