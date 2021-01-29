@@ -39,8 +39,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.retry_errors = kwargs.pop('retry_errors',
-                                        api.retry_errors)
         self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
                                                 api.wait_on_rate_limit)
         self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
@@ -180,7 +178,7 @@ class APIMethod:
                     continue
                 if 'retry-after' in resp.headers:
                     retry_delay = float(resp.headers['retry-after'])
-            elif self.retry_errors and resp.status_code not in self.retry_errors:
+            elif self.api.retry_errors and resp.status_code not in self.api.retry_errors:
                 # Exit request loop if non-retry error code
                 break
 
