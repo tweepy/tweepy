@@ -3,7 +3,6 @@
 # See LICENSE for details.
 
 import logging
-import re
 import sys
 import time
 
@@ -12,8 +11,6 @@ from urllib.parse import quote, urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
-
-re_path_template = re.compile(r'{\w+}')
 
 log = logging.getLogger(__name__)
 
@@ -50,9 +47,6 @@ class APIMethod:
         else:
             self.api_root = api.api_root
 
-        # Perform any path variable substitution
-        self.build_path()
-
         if self.upload_api:
             self.host = api.upload_host
         else:
@@ -81,22 +75,6 @@ class APIMethod:
             self.session.params[k] = str(arg)
 
         log.debug("PARAMS: %r", self.session.params)
-
-    def build_path(self):
-        for variable in re_path_template.findall(self.path):
-            name = variable.strip('{}')
-
-            if name == 'user' and 'user' not in self.session.params and self.api.auth:
-                # No 'user' parameter provided, fetch it from Auth instead.
-                value = self.api.auth.get_username()
-            else:
-                try:
-                    value = quote(self.session.params[name])
-                except KeyError:
-                    raise TweepError(f'No parameter value found for path variable: {name}')
-                del self.session.params[name]
-
-            self.path = self.path.replace(variable, value)
 
     def execute(self):
         self.api.cached_result = False
