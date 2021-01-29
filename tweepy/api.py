@@ -135,18 +135,6 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def related_results(self, *args, **kwargs):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/related_results/show/%3id.format
-            :allowed_param: 'id'
-        """
-        return bind_api(
-            *args, api=self,
-            path='/related_results/show/{id}.json',
-            payload_type='relation', payload_list=True,
-            allowed_param=['id'],
-            require_auth=False, **kwargs
-        )
-
     @pagination(mode='id')
     def retweets_of_me(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
