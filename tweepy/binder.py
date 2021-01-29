@@ -23,14 +23,8 @@ class APIMethod:
         self.payload_type = kwargs.pop('payload_type', None)
         self.payload_list = kwargs.pop('payload_list', False)
         self.allowed_param = kwargs.pop('allowed_param', [])
-        self.require_auth = kwargs.pop('require_auth', False)
         self.upload_api = kwargs.pop('upload_api', False)
         self.session = requests.Session()
-
-        # If authentication is required and no credentials
-        # are provided, throw an error.
-        if self.require_auth and not api.auth:
-            raise TweepError('Authentication required!')
 
         self.parser = kwargs.pop('parser', api.parser)
         self.headers = kwargs.pop('headers', {})
@@ -72,7 +66,12 @@ class APIMethod:
         log.debug("PARAMS: %r", self.session.params)
 
     def execute(self, method, *, json_payload=None, post_data=None,
-                return_cursors=False, use_cache=True):
+                require_auth=False, return_cursors=False, use_cache=True):
+        # If authentication is required and no credentials
+        # are provided, throw an error.
+        if require_auth and not self.api.auth:
+            raise TweepError('Authentication required!')
+
         self.api.cached_result = False
 
         # Build the request URL
@@ -186,6 +185,7 @@ def bind_api(*args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
     json_payload = kwargs.pop('json_payload', None)
     post_data = kwargs.pop('post_data', None)
+    require_auth = kwargs.pop('require_auth', False)
     return_cursors = kwargs.pop('return_cursors', False)
     use_cache = kwargs.pop('use_cache', True)
 
@@ -196,7 +196,8 @@ def bind_api(*args, **kwargs):
         else:
             return method.execute(
                 http_method, json_payload=json_payload, post_data=post_data,
-                return_cursors=return_cursors, use_cache=use_cache
+                require_auth=require_auth, return_cursors=return_cursors,
+                use_cache=use_cache
             )
     finally:
         method.session.close()
