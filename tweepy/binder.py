@@ -39,8 +39,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
-                                                    api.wait_on_rate_limit_notify)
         self.return_cursors = kwargs.pop('return_cursors', False)
         self.parser = kwargs.pop('parser', api.parser)
         self.headers = kwargs.pop('headers', {})
@@ -134,7 +132,7 @@ class APIMethod:
                 # Handle running out of API calls
                 sleep_time = self._reset_time - int(time.time())
                 if sleep_time > 0:
-                    if self.wait_on_rate_limit_notify:
+                    if self.api.wait_on_rate_limit_notify:
                         log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
                     time.sleep(sleep_time + 1)  # Sleep for extra sec
 
