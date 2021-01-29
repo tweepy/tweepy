@@ -881,16 +881,15 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def destroy_saved_search(self, *args, **kwargs):
+    def destroy_saved_search(self, saved_search_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
-            :allowed_param: 'id'
+            :allowed_param:
         """
         return bind_api(
             *args, api=self,
-            path='/saved_searches/destroy/{id}.json',
+            path=f'/saved_searches/destroy/{saved_search_id}.json',
             method='POST',
             payload_type='saved_search',
-            allowed_param=['id'],
             require_auth=True, **kwargs
         )
 
