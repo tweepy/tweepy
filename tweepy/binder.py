@@ -164,8 +164,7 @@ class APIMethod:
         self.api.last_response = resp
         if resp.status_code and not 200 <= resp.status_code < 300:
             try:
-                error_msg, api_error_code = \
-                    self.parser.parse_error(resp.text)
+                error_msg, api_error_code = self.parser.parse_error(resp.text)
             except Exception:
                 error_msg = f"Twitter error response: status code = {resp.status_code}"
                 api_error_code = None
@@ -177,7 +176,7 @@ class APIMethod:
 
         # Parse the response payload
         self.return_cursors = (self.return_cursors or
-                                'cursor' in self.session.params or 'next' in self.session.params)
+                               'cursor' in self.session.params or 'next' in self.session.params)
         result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
         # Store result into cache if one is available.
