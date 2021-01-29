@@ -18,220 +18,216 @@ re_path_template = re.compile(r'{\w+}')
 log = logging.getLogger(__name__)
 
 
-def bind_api(**config):
+class APIMethod:
 
-    class APIMethod:
+    def __init__(self, *args, **kwargs):
+        self.api = api = kwargs.pop('api')
+        self.path = kwargs.pop('path')
+        self.payload_type = kwargs.pop('payload_type', None)
+        self.payload_list = kwargs.pop('payload_list', False)
+        self.allowed_param = kwargs.pop('allowed_param', [])
+        self.method = kwargs.pop('method', 'GET')
+        self.require_auth = kwargs.pop('require_auth', False)
+        self.upload_api = kwargs.pop('upload_api', False)
+        self.use_cache = kwargs.pop('use_cache', True)
+        self.session = requests.Session()
 
-        api = config['api']
-        path = config['path']
-        payload_type = config.get('payload_type', None)
-        payload_list = config.get('payload_list', False)
-        allowed_param = config.get('allowed_param', [])
-        method = config.get('method', 'GET')
-        require_auth = config.get('require_auth', False)
-        upload_api = config.get('upload_api', False)
-        use_cache = config.get('use_cache', True)
-        session = requests.Session()
+        # If authentication is required and no credentials
+        # are provided, throw an error.
+        if self.require_auth and not api.auth:
+            raise TweepError('Authentication required!')
 
-        def __init__(self, *args, **kwargs):
-            api = self.api
-            # If authentication is required and no credentials
-            # are provided, throw an error.
-            if self.require_auth and not api.auth:
-                raise TweepError('Authentication required!')
+        self.post_data = kwargs.pop('post_data', None)
+        self.json_payload = kwargs.pop('json_payload', None)
+        self.retry_count = kwargs.pop('retry_count',
+                                        api.retry_count)
+        self.retry_delay = kwargs.pop('retry_delay',
+                                        api.retry_delay)
+        self.retry_errors = kwargs.pop('retry_errors',
+                                        api.retry_errors)
+        self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
+                                                api.wait_on_rate_limit)
+        self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
+                                                    api.wait_on_rate_limit_notify)
+        self.return_cursors = kwargs.pop('return_cursors', False)
+        self.parser = kwargs.pop('parser', api.parser)
+        self.headers = kwargs.pop('headers', {})
+        self.build_parameters(args, kwargs)
 
-            self.post_data = kwargs.pop('post_data', None)
-            self.json_payload = kwargs.pop('json_payload', None)
-            self.retry_count = kwargs.pop('retry_count',
-                                          api.retry_count)
-            self.retry_delay = kwargs.pop('retry_delay',
-                                          api.retry_delay)
-            self.retry_errors = kwargs.pop('retry_errors',
-                                           api.retry_errors)
-            self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
-                                                 api.wait_on_rate_limit)
-            self.wait_on_rate_limit_notify = kwargs.pop('wait_on_rate_limit_notify',
-                                                        api.wait_on_rate_limit_notify)
-            self.return_cursors = kwargs.pop('return_cursors', False)
-            self.parser = kwargs.pop('parser', api.parser)
-            self.headers = kwargs.pop('headers', {})
-            self.build_parameters(args, kwargs)
+        # Pick correct URL root to use
+        if self.upload_api:
+            self.api_root = api.upload_root
+        else:
+            self.api_root = api.api_root
 
-            # Pick correct URL root to use
-            if self.upload_api:
-                self.api_root = api.upload_root
+        # Perform any path variable substitution
+        self.build_path()
+
+        if self.upload_api:
+            self.host = api.upload_host
+        else:
+            self.host = api.host
+
+        # Monitoring rate limits
+        self._remaining_calls = None
+        self._reset_time = None
+
+    def build_parameters(self, args, kwargs):
+        self.session.params = {}
+        for idx, arg in enumerate(args):
+            if arg is None:
+                continue
+            try:
+                self.session.params[self.allowed_param[idx]] = str(arg)
+            except IndexError:
+                raise TweepError('Too many parameters supplied!')
+
+        for k, arg in kwargs.items():
+            if arg is None:
+                continue
+            if k in self.session.params:
+                raise TweepError(f'Multiple values for parameter {k} supplied!')
+
+            self.session.params[k] = str(arg)
+
+        log.debug("PARAMS: %r", self.session.params)
+
+    def build_path(self):
+        for variable in re_path_template.findall(self.path):
+            name = variable.strip('{}')
+
+            if name == 'user' and 'user' not in self.session.params and self.api.auth:
+                # No 'user' parameter provided, fetch it from Auth instead.
+                value = self.api.auth.get_username()
             else:
-                self.api_root = api.api_root
-
-            # Perform any path variable substitution
-            self.build_path()
-
-            if self.upload_api:
-                self.host = api.upload_host
-            else:
-                self.host = api.host
-
-            # Monitoring rate limits
-            self._remaining_calls = None
-            self._reset_time = None
-
-        def build_parameters(self, args, kwargs):
-            self.session.params = {}
-            for idx, arg in enumerate(args):
-                if arg is None:
-                    continue
                 try:
-                    self.session.params[self.allowed_param[idx]] = str(arg)
-                except IndexError:
-                    raise TweepError('Too many parameters supplied!')
+                    value = quote(self.session.params[name])
+                except KeyError:
+                    raise TweepError(f'No parameter value found for path variable: {name}')
+                del self.session.params[name]
 
-            for k, arg in kwargs.items():
-                if arg is None:
-                    continue
-                if k in self.session.params:
-                    raise TweepError(f'Multiple values for parameter {k} supplied!')
+            self.path = self.path.replace(variable, value)
 
-                self.session.params[k] = str(arg)
+    def execute(self):
+        self.api.cached_result = False
 
-            log.debug("PARAMS: %r", self.session.params)
+        # Build the request URL
+        url = self.api_root + self.path
+        full_url = 'https://' + self.host + url
 
-        def build_path(self):
-            for variable in re_path_template.findall(self.path):
-                name = variable.strip('{}')
-
-                if name == 'user' and 'user' not in self.session.params and self.api.auth:
-                    # No 'user' parameter provided, fetch it from Auth instead.
-                    value = self.api.auth.get_username()
+        # Query the cache if one is available
+        # and this request uses a GET method.
+        if self.use_cache and self.api.cache and self.method == 'GET':
+            cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
+            # if cache result found and not expired, return it
+            if cache_result:
+                # must restore api reference
+                if isinstance(cache_result, list):
+                    for result in cache_result:
+                        if isinstance(result, Model):
+                            result._api = self.api
                 else:
-                    try:
-                        value = quote(self.session.params[name])
-                    except KeyError:
-                        raise TweepError(f'No parameter value found for path variable: {name}')
-                    del self.session.params[name]
+                    if isinstance(cache_result, Model):
+                        cache_result._api = self.api
+                self.api.cached_result = True
+                return cache_result
 
-                self.path = self.path.replace(variable, value)
+        # Continue attempting request until successful
+        # or maximum number of retries is reached.
+        retries_performed = 0
+        while retries_performed < self.retry_count + 1:
+            if (self.wait_on_rate_limit and self._reset_time is not None
+                and self._remaining_calls is not None
+                and self._remaining_calls < 1):
+                # Handle running out of API calls
+                sleep_time = self._reset_time - int(time.time())
+                if sleep_time > 0:
+                    if self.wait_on_rate_limit_notify:
+                        log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
+                    time.sleep(sleep_time + 1)  # Sleep for extra sec
 
-        def execute(self):
-            self.api.cached_result = False
+            # Apply authentication
+            auth = None
+            if self.api.auth:
+                auth = self.api.auth.apply_auth()
 
-            # Build the request URL
-            url = self.api_root + self.path
-            full_url = 'https://' + self.host + url
+            # Execute request
+            try:
+                resp = self.session.request(self.method,
+                                            full_url,
+                                            headers=self.headers,
+                                            data=self.post_data,
+                                            json=self.json_payload,
+                                            timeout=self.api.timeout,
+                                            auth=auth,
+                                            proxies=self.api.proxy)
+            except Exception as e:
+                raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
-            # Query the cache if one is available
-            # and this request uses a GET method.
-            if self.use_cache and self.api.cache and self.method == 'GET':
-                cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
-                # if cache result found and not expired, return it
-                if cache_result:
-                    # must restore api reference
-                    if isinstance(cache_result, list):
-                        for result in cache_result:
-                            if isinstance(result, Model):
-                                result._api = self.api
-                    else:
-                        if isinstance(cache_result, Model):
-                            cache_result._api = self.api
-                    self.api.cached_result = True
-                    return cache_result
+            if 200 <= resp.status_code < 300:
+                break
 
-            # Continue attempting request until successful
-            # or maximum number of retries is reached.
-            retries_performed = 0
-            while retries_performed < self.retry_count + 1:
-                if (self.wait_on_rate_limit and self._reset_time is not None
-                    and self._remaining_calls is not None
-                    and self._remaining_calls < 1):
-                    # Handle running out of API calls
-                    sleep_time = self._reset_time - int(time.time())
-                    if sleep_time > 0:
-                        if self.wait_on_rate_limit_notify:
-                            log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
-                        time.sleep(sleep_time + 1)  # Sleep for extra sec
+            rem_calls = resp.headers.get('x-rate-limit-remaining')
+            if rem_calls is not None:
+                self._remaining_calls = int(rem_calls)
+            elif self._remaining_calls is not None:
+                self._remaining_calls -= 1
 
-                # Apply authentication
-                auth = None
-                if self.api.auth:
-                    auth = self.api.auth.apply_auth()
+            reset_time = resp.headers.get('x-rate-limit-reset')
+            if reset_time is not None:
+                self._reset_time = int(reset_time)
 
-                # Execute request
-                try:
-                    resp = self.session.request(self.method,
-                                                full_url,
-                                                headers=self.headers,
-                                                data=self.post_data,
-                                                json=self.json_payload,
-                                                timeout=self.api.timeout,
-                                                auth=auth,
-                                                proxies=self.api.proxy)
-                except Exception as e:
-                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
+            retry_delay = self.retry_delay
+            if resp.status_code in (420, 429) and self.wait_on_rate_limit:
+                if self._remaining_calls == 0:
+                    # If ran out of calls before waiting switching retry last call
+                    continue
+                if 'retry-after' in resp.headers:
+                    retry_delay = float(resp.headers['retry-after'])
+            elif self.retry_errors and resp.status_code not in self.retry_errors:
+                # Exit request loop if non-retry error code
+                break
 
-                if 200 <= resp.status_code < 300:
-                    break
+            # Sleep before retrying request again
+            time.sleep(retry_delay)
+            retries_performed += 1
 
-                rem_calls = resp.headers.get('x-rate-limit-remaining')
-                if rem_calls is not None:
-                    self._remaining_calls = int(rem_calls)
-                elif self._remaining_calls is not None:
-                    self._remaining_calls -= 1
+        # If an error was returned, throw an exception
+        self.api.last_response = resp
+        if resp.status_code and not 200 <= resp.status_code < 300:
+            try:
+                error_msg, api_error_code = \
+                    self.parser.parse_error(resp.text)
+            except Exception:
+                error_msg = f"Twitter error response: status code = {resp.status_code}"
+                api_error_code = None
 
-                reset_time = resp.headers.get('x-rate-limit-reset')
-                if reset_time is not None:
-                    self._reset_time = int(reset_time)
-
-                retry_delay = self.retry_delay
-                if resp.status_code in (420, 429) and self.wait_on_rate_limit:
-                    if self._remaining_calls == 0:
-                        # If ran out of calls before waiting switching retry last call
-                        continue
-                    if 'retry-after' in resp.headers:
-                        retry_delay = float(resp.headers['retry-after'])
-                elif self.retry_errors and resp.status_code not in self.retry_errors:
-                    # Exit request loop if non-retry error code
-                    break
-
-                # Sleep before retrying request again
-                time.sleep(retry_delay)
-                retries_performed += 1
-
-            # If an error was returned, throw an exception
-            self.api.last_response = resp
-            if resp.status_code and not 200 <= resp.status_code < 300:
-                try:
-                    error_msg, api_error_code = \
-                        self.parser.parse_error(resp.text)
-                except Exception:
-                    error_msg = f"Twitter error response: status code = {resp.status_code}"
-                    api_error_code = None
-
-                if is_rate_limit_error_message(error_msg):
-                    raise RateLimitError(error_msg, resp)
-                else:
-                    raise TweepError(error_msg, resp, api_code=api_error_code)
-
-            # Parse the response payload
-            self.return_cursors = (self.return_cursors or
-                                   'cursor' in self.session.params or 'next' in self.session.params)
-            result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
-
-            # Store result into cache if one is available.
-            if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
-
-            return result
-
-    def _call(*args, **kwargs):
-        method = APIMethod(*args, **kwargs)
-        try:
-            if kwargs.get('create'):
-                return method
+            if is_rate_limit_error_message(error_msg):
+                raise RateLimitError(error_msg, resp)
             else:
-                return method.execute()
-        finally:
-            method.session.close()
+                raise TweepError(error_msg, resp, api_code=api_error_code)
 
-    return _call
+        # Parse the response payload
+        self.return_cursors = (self.return_cursors or
+                                'cursor' in self.session.params or 'next' in self.session.params)
+        result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
+
+        # Store result into cache if one is available.
+        if self.use_cache and self.api.cache and self.method == 'GET' and result:
+            self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
+
+        return result
+
+
+def bind_api(*args, **kwargs):
+    method = APIMethod(*args, **kwargs)
+    try:
+        if kwargs.get('create'):
+            return method
+        else:
+            return method.execute()
+    finally:
+        method.session.close()
 
 
 def pagination(mode):
