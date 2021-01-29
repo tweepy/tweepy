@@ -857,15 +857,14 @@ class API:
             require_auth=True, **kwargs
         )
 
-    def get_saved_search(self, *args, **kwargs):
+    def get_saved_search(self, saved_search_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
-            :allowed_param: 'id'
+            :allowed_param:
         """
         return bind_api(
             *args, api=self,
-            path='/saved_searches/show/{id}.json',
+            path=f'/saved_searches/show/{saved_search_id}.json',
             payload_type='saved_search',
-            allowed_param=['id'],
             require_auth=True, **kwargs
         )
 
