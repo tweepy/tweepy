@@ -268,7 +268,7 @@ class API:
 
     def destroy_status(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
-            :allowed_param: 'id'
+            :allowed_param:
         """
         return bind_api(
             *args, api=self,
