@@ -39,8 +39,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.retry_count = kwargs.pop('retry_count',
-                                        api.retry_count)
         self.retry_delay = kwargs.pop('retry_delay',
                                         api.retry_delay)
         self.retry_errors = kwargs.pop('retry_errors',
@@ -135,7 +133,7 @@ class APIMethod:
         # Continue attempting request until successful
         # or maximum number of retries is reached.
         retries_performed = 0
-        while retries_performed < self.retry_count + 1:
+        while retries_performed < self.api.retry_count + 1:
             if (self.wait_on_rate_limit and self._reset_time is not None
                 and self._remaining_calls is not None
                 and self._remaining_calls < 1):
