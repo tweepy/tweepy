@@ -25,7 +25,6 @@ class APIMethod:
         self.session = requests.Session()
 
         self.parser = kwargs.pop('parser', api.parser)
-        self.headers = kwargs.pop('headers', {})
         self.build_parameters(args, kwargs)
 
         # Monitoring rate limits
@@ -52,9 +51,9 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, method, path, *, json_payload=None, post_data=None,
-                require_auth=False, return_cursors=False, upload_api=False,
-                use_cache=True):
+    def execute(self, method, path, *, headers=None, json_payload=None,
+                post_data=None, require_auth=False, return_cursors=False,
+                upload_api=False, use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.api.auth:
@@ -117,7 +116,7 @@ class APIMethod:
             try:
                 resp = self.session.request(method,
                                             full_url,
-                                            headers=self.headers,
+                                            headers=headers,
                                             data=post_data,
                                             json=json_payload,
                                             timeout=self.api.timeout,
@@ -183,6 +182,7 @@ class APIMethod:
 def bind_api(*args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
     path = kwargs.pop('path')
+    headers = kwargs.pop('headers', {})
     json_payload = kwargs.pop('json_payload', None)
     post_data = kwargs.pop('post_data', None)
     require_auth = kwargs.pop('require_auth', False)
@@ -196,7 +196,7 @@ def bind_api(*args, **kwargs):
             return method
         else:
             return method.execute(
-                http_method, path, json_payload=json_payload,
+                http_method, path, headers=headers, json_payload=json_payload,
                 post_data=post_data, require_auth=require_auth,
                 return_cursors=return_cursors, upload_api=upload_api,
                 use_cache=use_cache
