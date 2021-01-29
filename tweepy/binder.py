@@ -23,7 +23,6 @@ class APIMethod:
         self.payload_type = kwargs.pop('payload_type', None)
         self.payload_list = kwargs.pop('payload_list', False)
         self.allowed_param = kwargs.pop('allowed_param', [])
-        self.method = kwargs.pop('method', 'GET')
         self.require_auth = kwargs.pop('require_auth', False)
         self.upload_api = kwargs.pop('upload_api', False)
         self.session = requests.Session()
@@ -75,7 +74,7 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, *, use_cache=True):
+    def execute(self, method, *, use_cache=True):
         self.api.cached_result = False
 
         # Build the request URL
@@ -84,7 +83,7 @@ class APIMethod:
 
         # Query the cache if one is available
         # and this request uses a GET method.
-        if use_cache and self.api.cache and self.method == 'GET':
+        if use_cache and self.api.cache and method == 'GET':
             cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
             # if cache result found and not expired, return it
             if cache_result:
@@ -120,7 +119,7 @@ class APIMethod:
 
             # Execute request
             try:
-                resp = self.session.request(self.method,
+                resp = self.session.request(method,
                                             full_url,
                                             headers=self.headers,
                                             data=self.post_data,
@@ -179,20 +178,22 @@ class APIMethod:
         result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
         # Store result into cache if one is available.
-        if use_cache and self.api.cache and self.method == 'GET' and result:
+        if use_cache and self.api.cache and method == 'GET' and result:
             self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
 
         return result
 
 
 def bind_api(*args, **kwargs):
+    http_method = kwargs.pop('method', 'GET')
     use_cache = kwargs.pop('use_cache', True)
+
     method = APIMethod(*args, **kwargs)
     try:
         if kwargs.get('create'):
             return method
         else:
-            return method.execute(use_cache=use_cache)
+            return method.execute(http_method, use_cache=use_cache)
     finally:
         method.session.close()
 
