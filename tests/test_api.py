@@ -372,7 +372,7 @@ class TweepyAPITests(TweepyTestCase):
             return any(x.full_name.lower() == place_name.lower() for x in place_list)
 
         # Test various API functions using Austin, TX, USA
-        self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
+        self.assertEqual(self.api.geo_id(place_id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461)))  # Austin, TX, USA
 

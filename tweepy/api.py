@@ -1253,15 +1253,14 @@ class API:
                            'max_results'], **kwargs
         )
 
-    def geo_id(self, *args, **kwargs):
+    def geo_id(self, place_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
-            :allowed_param: 'id'
+            :allowed_param:
         """
         return bind_api(
             *args, api=self,
-            path='/geo/id/{id}.json',
-            payload_type='place',
-            allowed_param=['id'], **kwargs
+            path=f'/geo/id/{place_id}.json',
+            payload_type='place', **kwargs
         )
 
     def geo_search(self, *args, **kwargs):
