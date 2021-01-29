@@ -26,7 +26,6 @@ class APIMethod:
         self.method = kwargs.pop('method', 'GET')
         self.require_auth = kwargs.pop('require_auth', False)
         self.upload_api = kwargs.pop('upload_api', False)
-        self.use_cache = kwargs.pop('use_cache', True)
         self.session = requests.Session()
 
         # If authentication is required and no credentials
@@ -76,7 +75,7 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self):
+    def execute(self, *, use_cache=True):
         self.api.cached_result = False
 
         # Build the request URL
@@ -85,7 +84,7 @@ class APIMethod:
 
         # Query the cache if one is available
         # and this request uses a GET method.
-        if self.use_cache and self.api.cache and self.method == 'GET':
+        if use_cache and self.api.cache and self.method == 'GET':
             cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
             # if cache result found and not expired, return it
             if cache_result:
@@ -180,19 +179,20 @@ class APIMethod:
         result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
 
         # Store result into cache if one is available.
-        if self.use_cache and self.api.cache and self.method == 'GET' and result:
+        if use_cache and self.api.cache and self.method == 'GET' and result:
             self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
 
         return result
 
 
 def bind_api(*args, **kwargs):
+    use_cache = kwargs.pop('use_cache', True)
     method = APIMethod(*args, **kwargs)
     try:
         if kwargs.get('create'):
             return method
         else:
-            return method.execute()
+            return method.execute(use_cache=use_cache)
     finally:
         method.session.close()
 
