@@ -39,8 +39,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.retry_delay = kwargs.pop('retry_delay',
-                                        api.retry_delay)
         self.retry_errors = kwargs.pop('retry_errors',
                                         api.retry_errors)
         self.wait_on_rate_limit = kwargs.pop('wait_on_rate_limit',
@@ -175,7 +173,7 @@ class APIMethod:
             if reset_time is not None:
                 self._reset_time = int(reset_time)
 
-            retry_delay = self.retry_delay
+            retry_delay = self.api.retry_delay
             if resp.status_code in (420, 429) and self.wait_on_rate_limit:
                 if self._remaining_calls == 0:
                     # If ran out of calls before waiting switching retry last call
