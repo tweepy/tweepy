@@ -34,7 +34,6 @@ class APIMethod:
 
         self.post_data = kwargs.pop('post_data', None)
         self.json_payload = kwargs.pop('json_payload', None)
-        self.return_cursors = kwargs.pop('return_cursors', False)
         self.parser = kwargs.pop('parser', api.parser)
         self.headers = kwargs.pop('headers', {})
         self.build_parameters(args, kwargs)
@@ -74,7 +73,7 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, method, *, use_cache=True):
+    def execute(self, method, *, return_cursors=False, use_cache=True):
         self.api.cached_result = False
 
         # Build the request URL
@@ -173,9 +172,9 @@ class APIMethod:
                 raise TweepError(error_msg, resp, api_code=api_error_code)
 
         # Parse the response payload
-        self.return_cursors = (self.return_cursors or
-                               'cursor' in self.session.params or 'next' in self.session.params)
-        result = self.parser.parse(self, resp.text, return_cursors=self.return_cursors)
+        return_cursors = (return_cursors or
+                          'cursor' in self.session.params or 'next' in self.session.params)
+        result = self.parser.parse(self, resp.text, return_cursors=return_cursors)
 
         # Store result into cache if one is available.
         if use_cache and self.api.cache and method == 'GET' and result:
@@ -186,6 +185,7 @@ class APIMethod:
 
 def bind_api(*args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
+    return_cursors = kwargs.pop('return_cursors', False)
     use_cache = kwargs.pop('use_cache', True)
 
     method = APIMethod(*args, **kwargs)
@@ -193,7 +193,8 @@ def bind_api(*args, **kwargs):
         if kwargs.get('create'):
             return method
         else:
-            return method.execute(http_method, use_cache=use_cache)
+            return method.execute(http_method, return_cursors=return_cursors,
+                                  use_cache=use_cache)
     finally:
         method.session.close()
 
