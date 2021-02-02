@@ -194,17 +194,14 @@ def bind_api(*args, **kwargs):
     allowed_param = kwargs.pop('allowed_param', [])
     method.build_parameters(allowed_param, args, kwargs)
     try:
-        if kwargs.get('create'):
-            return method
-        else:
-            return method.execute(
-                api, http_method, path, headers=headers,
-                json_payload=json_payload, parser=parser,
-                payload_list=payload_list, payload_type=payload_type,
-                post_data=post_data, require_auth=require_auth,
-                return_cursors=return_cursors, upload_api=upload_api,
-                use_cache=use_cache
-            )
+        return method.execute(
+            api, http_method, path, headers=headers,
+            json_payload=json_payload, parser=parser,
+            payload_list=payload_list, payload_type=payload_type,
+            post_data=post_data, require_auth=require_auth,
+            return_cursors=return_cursors, upload_api=upload_api,
+            use_cache=use_cache
+        )
     finally:
         method.session.close()
 
