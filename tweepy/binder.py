@@ -19,23 +19,24 @@ class APIMethod:
 
     def __init__(self, *args, **kwargs):
         self.api = api = kwargs.pop('api')
-        self.allowed_param = kwargs.pop('allowed_param', [])
         self.session = requests.Session()
 
         self.parser = kwargs.pop('parser', api.parser)
-        self.build_parameters(args, kwargs)
+
+        allowed_param = kwargs.pop('allowed_param', [])
+        self.build_parameters(allowed_param, args, kwargs)
 
         # Monitoring rate limits
         self._remaining_calls = None
         self._reset_time = None
 
-    def build_parameters(self, args, kwargs):
+    def build_parameters(self, allowed_param, args, kwargs):
         self.session.params = {}
         for idx, arg in enumerate(args):
             if arg is None:
                 continue
             try:
-                self.session.params[self.allowed_param[idx]] = str(arg)
+                self.session.params[allowed_param[idx]] = str(arg)
             except IndexError:
                 raise TweepError('Too many parameters supplied!')
 
