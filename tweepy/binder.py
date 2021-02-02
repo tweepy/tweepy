@@ -17,11 +17,8 @@ log = logging.getLogger(__name__)
 
 class APIMethod:
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.session = requests.Session()
-
-        allowed_param = kwargs.pop('allowed_param', [])
-        self.build_parameters(allowed_param, args, kwargs)
 
         # Monitoring rate limits
         self._remaining_calls = None
@@ -194,7 +191,9 @@ def bind_api(*args, **kwargs):
     upload_api = kwargs.pop('upload_api', False)
     use_cache = kwargs.pop('use_cache', True)
 
-    method = APIMethod(*args, **kwargs)
+    method = APIMethod()
+    allowed_param = kwargs.pop('allowed_param', [])
+    method.build_parameters(allowed_param, args, kwargs)
     try:
         if kwargs.get('create'):
             return method
