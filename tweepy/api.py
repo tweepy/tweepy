@@ -19,8 +19,7 @@ class API:
                  host='api.twitter.com', upload_host='upload.twitter.com',
                  cache=None, api_root='/1.1', upload_root='/1.1',
                  retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-                 parser=None, wait_on_rate_limit=False,
-                 wait_on_rate_limit_notify=False, proxy=''):
+                 parser=None, wait_on_rate_limit=False, proxy=''):
         """
         API instance constructor
 
@@ -41,8 +40,6 @@ class API:
                        default: None
         :param wait_on_rate_limit: If the api wait when it hits the rate limit,
                                    default: False
-        :param wait_on_rate_limit_notify: If the api print a notification when
-                                          the rate limit is hit, default: False
         :param proxy: Url to use as proxy during the HTTP request, default: ''
 
         :raise TypeError: If the given parser is not a ModelParser instance.
@@ -58,7 +55,6 @@ class API:
         self.retry_errors = retry_errors
         self.timeout = timeout
         self.wait_on_rate_limit = wait_on_rate_limit
-        self.wait_on_rate_limit_notify = wait_on_rate_limit_notify
         self.parser = parser or ModelParser()
         self.proxy = {}
         if proxy:

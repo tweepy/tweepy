@@ -91,8 +91,7 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
                 # Handle running out of API calls
                 sleep_time = reset_time - int(time.time())
                 if sleep_time > 0:
-                    if api.wait_on_rate_limit_notify:
-                        log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
+                    log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
                     time.sleep(sleep_time + 1)  # Sleep for extra sec
 
             # Apply authentication
