@@ -81,8 +81,8 @@ class ModelParser(JSONParser):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
-    def parse(self, method, payload, *, payload_list=False, payload_type=None,
-              return_cursors=False):
+    def parse(self, method, payload, *, api=None, payload_list=False,
+              payload_type=None, return_cursors=False):
         try:
             if payload_type is None:
                 return
@@ -97,9 +97,9 @@ class ModelParser(JSONParser):
             cursors = None
 
         if payload_list:
-            result = model.parse_list(method.api, json)
+            result = model.parse_list(api, json)
         else:
-            result = model.parse(method.api, json)
+            result = model.parse(api, json)
 
         if cursors:
             return result, cursors

@@ -18,7 +18,6 @@ log = logging.getLogger(__name__)
 class APIMethod:
 
     def __init__(self, *args, **kwargs):
-        self.api = api = kwargs.pop('api')
         self.session = requests.Session()
 
         allowed_param = kwargs.pop('allowed_param', [])
@@ -48,30 +47,27 @@ class APIMethod:
 
         log.debug("PARAMS: %r", self.session.params)
 
-    def execute(self, method, path, *, headers=None, json_payload=None,
+    def execute(self, api, method, path, *, headers=None, json_payload=None,
                 parser=None, payload_list=False, payload_type=None,
                 post_data=None, require_auth=False, return_cursors=False,
                 upload_api=False, use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
-        if require_auth and not self.api.auth:
+        if require_auth and not api.auth:
             raise TweepError('Authentication required!')
 
-        if parser is None:
-            parser = self.api.parser
-
-        self.api.cached_result = False
+        api.cached_result = False
 
         # Pick correct URL root to use
         if upload_api:
-            api_root = self.api.upload_root
+            api_root = api.upload_root
         else:
-            api_root = self.api.api_root
+            api_root = api.api_root
 
         if upload_api:
-            host = self.api.upload_host
+            host = api.upload_host
         else:
-            host = self.api.host
+            host = api.host
 
         # Build the request URL
         url = api_root + path
@@ -79,39 +75,39 @@ class APIMethod:
 
         # Query the cache if one is available
         # and this request uses a GET method.
-        if use_cache and self.api.cache and method == 'GET':
-            cache_result = self.api.cache.get(f'{url}?{urlencode(self.session.params)}')
+        if use_cache and api.cache and method == 'GET':
+            cache_result = api.cache.get(f'{url}?{urlencode(self.session.params)}')
             # if cache result found and not expired, return it
             if cache_result:
                 # must restore api reference
                 if isinstance(cache_result, list):
                     for result in cache_result:
                         if isinstance(result, Model):
-                            result._api = self.api
+                            result._api = api
                 else:
                     if isinstance(cache_result, Model):
-                        cache_result._api = self.api
-                self.api.cached_result = True
+                        cache_result._api = api
+                api.cached_result = True
                 return cache_result
 
         # Continue attempting request until successful
         # or maximum number of retries is reached.
         retries_performed = 0
-        while retries_performed < self.api.retry_count + 1:
-            if (self.api.wait_on_rate_limit and self._reset_time is not None
+        while retries_performed < api.retry_count + 1:
+            if (api.wait_on_rate_limit and self._reset_time is not None
                 and self._remaining_calls is not None
                 and self._remaining_calls < 1):
                 # Handle running out of API calls
                 sleep_time = self._reset_time - int(time.time())
                 if sleep_time > 0:
-                    if self.api.wait_on_rate_limit_notify:
+                    if api.wait_on_rate_limit_notify:
                         log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
                     time.sleep(sleep_time + 1)  # Sleep for extra sec
 
             # Apply authentication
             auth = None
-            if self.api.auth:
-                auth = self.api.auth.apply_auth()
+            if api.auth:
+                auth = api.auth.apply_auth()
 
             # Execute request
             try:
@@ -120,9 +116,9 @@ class APIMethod:
                                             headers=headers,
                                             data=post_data,
                                             json=json_payload,
-                                            timeout=self.api.timeout,
+                                            timeout=api.timeout,
                                             auth=auth,
-                                            proxies=self.api.proxy)
+                                            proxies=api.proxy)
             except Exception as e:
                 raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
@@ -139,14 +135,14 @@ class APIMethod:
             if reset_time is not None:
                 self._reset_time = int(reset_time)
 
-            retry_delay = self.api.retry_delay
-            if resp.status_code in (420, 429) and self.api.wait_on_rate_limit:
+            retry_delay = api.retry_delay
+            if resp.status_code in (420, 429) and api.wait_on_rate_limit:
                 if self._remaining_calls == 0:
                     # If ran out of calls before waiting switching retry last call
                     continue
                 if 'retry-after' in resp.headers:
                     retry_delay = float(resp.headers['retry-after'])
-            elif self.api.retry_errors and resp.status_code not in self.api.retry_errors:
+            elif api.retry_errors and resp.status_code not in api.retry_errors:
                 # Exit request loop if non-retry error code
                 break
 
@@ -155,7 +151,7 @@ class APIMethod:
             retries_performed += 1
 
         # If an error was returned, throw an exception
-        self.api.last_response = resp
+        api.last_response = resp
         if resp.status_code and not 200 <= resp.status_code < 300:
             try:
                 error_msg, api_error_code = parser.parse_error(resp.text)
@@ -171,23 +167,25 @@ class APIMethod:
         # Parse the response payload
         return_cursors = (return_cursors or
                           'cursor' in self.session.params or 'next' in self.session.params)
-        result = parser.parse(self, resp.text, payload_list=payload_list,
+        result = parser.parse(self, resp.text, api=api,
+                              payload_list=payload_list,
                               payload_type=payload_type,
                               return_cursors=return_cursors)
 
         # Store result into cache if one is available.
-        if use_cache and self.api.cache and method == 'GET' and result:
-            self.api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
+        if use_cache and api.cache and method == 'GET' and result:
+            api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
 
         return result
 
 
 def bind_api(*args, **kwargs):
+    api = kwargs.pop('api')
     http_method = kwargs.pop('method', 'GET')
     path = kwargs.pop('path')
     headers = kwargs.pop('headers', {})
     json_payload = kwargs.pop('json_payload', None)
-    parser = kwargs.pop('parser', None)
+    parser = kwargs.pop('parser', api.parser)
     payload_list = kwargs.pop('payload_list', False)
     payload_type = kwargs.pop('payload_type', None)
     post_data = kwargs.pop('post_data', None)
@@ -202,11 +200,12 @@ def bind_api(*args, **kwargs):
             return method
         else:
             return method.execute(
-                http_method, path, headers=headers, json_payload=json_payload,
-                parser=parser, payload_list=payload_list,
-                payload_type=payload_type, post_data=post_data,
-                require_auth=require_auth, return_cursors=return_cursors,
-                upload_api=upload_api, use_cache=use_cache
+                api, http_method, path, headers=headers,
+                json_payload=json_payload, parser=parser,
+                payload_list=payload_list, payload_type=payload_type,
+                post_data=post_data, require_auth=require_auth,
+                return_cursors=return_cursors, upload_api=upload_api,
+                use_cache=use_cache
             )
     finally:
         method.session.close()
