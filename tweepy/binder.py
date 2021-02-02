@@ -20,10 +20,6 @@ class APIMethod:
     def __init__(self):
         self.session = requests.Session()
 
-        # Monitoring rate limits
-        self._remaining_calls = None
-        self._reset_time = None
-
     def build_parameters(self, allowed_param, args, kwargs):
         self.session.params = {}
         for idx, arg in enumerate(args):
@@ -87,15 +83,19 @@ class APIMethod:
                 api.cached_result = True
                 return cache_result
 
+        # Monitoring rate limits
+        remaining_calls = None
+        reset_time = None
+
         # Continue attempting request until successful
         # or maximum number of retries is reached.
         retries_performed = 0
         while retries_performed < api.retry_count + 1:
-            if (api.wait_on_rate_limit and self._reset_time is not None
-                and self._remaining_calls is not None
-                and self._remaining_calls < 1):
+            if (api.wait_on_rate_limit and reset_time is not None
+                and remaining_calls is not None
+                and remaining_calls < 1):
                 # Handle running out of API calls
-                sleep_time = self._reset_time - int(time.time())
+                sleep_time = reset_time - int(time.time())
                 if sleep_time > 0:
                     if api.wait_on_rate_limit_notify:
                         log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
@@ -124,17 +124,17 @@ class APIMethod:
 
             rem_calls = resp.headers.get('x-rate-limit-remaining')
             if rem_calls is not None:
-                self._remaining_calls = int(rem_calls)
-            elif self._remaining_calls is not None:
-                self._remaining_calls -= 1
+                remaining_calls = int(rem_calls)
+            elif remaining_calls is not None:
+                remaining_calls -= 1
 
             reset_time = resp.headers.get('x-rate-limit-reset')
             if reset_time is not None:
-                self._reset_time = int(reset_time)
+                reset_time = int(reset_time)
 
             retry_delay = api.retry_delay
             if resp.status_code in (420, 429) and api.wait_on_rate_limit:
-                if self._remaining_calls == 0:
+                if remaining_calls == 0:
                     # If ran out of calls before waiting switching retry last call
                     continue
                 if 'retry-after' in resp.headers:
