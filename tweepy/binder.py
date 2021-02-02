@@ -19,8 +19,6 @@ class APIMethod:
 
     def __init__(self, *args, **kwargs):
         self.api = api = kwargs.pop('api')
-        self.payload_type = kwargs.pop('payload_type', None)
-        self.payload_list = kwargs.pop('payload_list', False)
         self.allowed_param = kwargs.pop('allowed_param', [])
         self.session = requests.Session()
 
@@ -52,8 +50,9 @@ class APIMethod:
         log.debug("PARAMS: %r", self.session.params)
 
     def execute(self, method, path, *, headers=None, json_payload=None,
-                post_data=None, require_auth=False, return_cursors=False,
-                upload_api=False, use_cache=True):
+                payload_list=False, payload_type=None, post_data=None,
+                require_auth=False, return_cursors=False, upload_api=False,
+                use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.api.auth:
@@ -170,7 +169,9 @@ class APIMethod:
         # Parse the response payload
         return_cursors = (return_cursors or
                           'cursor' in self.session.params or 'next' in self.session.params)
-        result = self.parser.parse(self, resp.text, return_cursors=return_cursors)
+        result = self.parser.parse(self, resp.text, payload_list=payload_list,
+                                   payload_type=payload_type,
+                                   return_cursors=return_cursors)
 
         # Store result into cache if one is available.
         if use_cache and self.api.cache and method == 'GET' and result:
@@ -184,6 +185,8 @@ def bind_api(*args, **kwargs):
     path = kwargs.pop('path')
     headers = kwargs.pop('headers', {})
     json_payload = kwargs.pop('json_payload', None)
+    payload_list = kwargs.pop('payload_list', False)
+    payload_type = kwargs.pop('payload_type', None)
     post_data = kwargs.pop('post_data', None)
     require_auth = kwargs.pop('require_auth', False)
     return_cursors = kwargs.pop('return_cursors', False)
@@ -197,6 +200,7 @@ def bind_api(*args, **kwargs):
         else:
             return method.execute(
                 http_method, path, headers=headers, json_payload=json_payload,
+                payload_list=payload_list, payload_type=payload_type,
                 post_data=post_data, require_auth=require_auth,
                 return_cursors=return_cursors, upload_api=upload_api,
                 use_cache=use_cache
@@ -209,4 +213,17 @@ def pagination(mode):
     def decorator(method):
         method.pagination_mode = mode
         return method
+    return decorator
+
+
+def payload(payload_type, **payload_kwargs):
+    payload_list = payload_kwargs.get('list', False)
+    def decorator(method):
+        def wrapper(*args, **kwargs):
+            kwargs['payload_list'] = payload_list
+            kwargs['payload_type'] = payload_type
+            return method(*args, **kwargs)
+        wrapper.payload_list = payload_list
+        wrapper.payload_type = payload_type
+        return wrapper
     return decorator
