@@ -21,8 +21,6 @@ class APIMethod:
         self.api = api = kwargs.pop('api')
         self.session = requests.Session()
 
-        self.parser = kwargs.pop('parser', api.parser)
-
         allowed_param = kwargs.pop('allowed_param', [])
         self.build_parameters(allowed_param, args, kwargs)
 
@@ -51,13 +49,16 @@ class APIMethod:
         log.debug("PARAMS: %r", self.session.params)
 
     def execute(self, method, path, *, headers=None, json_payload=None,
-                payload_list=False, payload_type=None, post_data=None,
-                require_auth=False, return_cursors=False, upload_api=False,
-                use_cache=True):
+                parser=None, payload_list=False, payload_type=None,
+                post_data=None, require_auth=False, return_cursors=False,
+                upload_api=False, use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.api.auth:
             raise TweepError('Authentication required!')
+
+        if parser is None:
+            parser = self.api.parser
 
         self.api.cached_result = False
 
@@ -157,7 +158,7 @@ class APIMethod:
         self.api.last_response = resp
         if resp.status_code and not 200 <= resp.status_code < 300:
             try:
-                error_msg, api_error_code = self.parser.parse_error(resp.text)
+                error_msg, api_error_code = parser.parse_error(resp.text)
             except Exception:
                 error_msg = f"Twitter error response: status code = {resp.status_code}"
                 api_error_code = None
@@ -170,9 +171,9 @@ class APIMethod:
         # Parse the response payload
         return_cursors = (return_cursors or
                           'cursor' in self.session.params or 'next' in self.session.params)
-        result = self.parser.parse(self, resp.text, payload_list=payload_list,
-                                   payload_type=payload_type,
-                                   return_cursors=return_cursors)
+        result = parser.parse(self, resp.text, payload_list=payload_list,
+                              payload_type=payload_type,
+                              return_cursors=return_cursors)
 
         # Store result into cache if one is available.
         if use_cache and self.api.cache and method == 'GET' and result:
@@ -186,6 +187,7 @@ def bind_api(*args, **kwargs):
     path = kwargs.pop('path')
     headers = kwargs.pop('headers', {})
     json_payload = kwargs.pop('json_payload', None)
+    parser = kwargs.pop('parser', None)
     payload_list = kwargs.pop('payload_list', False)
     payload_type = kwargs.pop('payload_type', None)
     post_data = kwargs.pop('post_data', None)
@@ -201,10 +203,10 @@ def bind_api(*args, **kwargs):
         else:
             return method.execute(
                 http_method, path, headers=headers, json_payload=json_payload,
-                payload_list=payload_list, payload_type=payload_type,
-                post_data=post_data, require_auth=require_auth,
-                return_cursors=return_cursors, upload_api=upload_api,
-                use_cache=use_cache
+                parser=parser, payload_list=payload_list,
+                payload_type=payload_type, post_data=post_data,
+                require_auth=require_auth, return_cursors=return_cursors,
+                upload_api=upload_api, use_cache=use_cache
             )
     finally:
         method.session.close()
