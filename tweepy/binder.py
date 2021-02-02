@@ -21,29 +21,31 @@ class APIMethod:
         self.session = requests.Session()
 
     def build_parameters(self, allowed_param, args, kwargs):
-        self.session.params = {}
+        params = {}
+
         for idx, arg in enumerate(args):
             if arg is None:
                 continue
             try:
-                self.session.params[allowed_param[idx]] = str(arg)
+                params[allowed_param[idx]] = str(arg)
             except IndexError:
                 raise TweepError('Too many parameters supplied!')
 
         for k, arg in kwargs.items():
             if arg is None:
                 continue
-            if k in self.session.params:
+            if k in params:
                 raise TweepError(f'Multiple values for parameter {k} supplied!')
+            params[k] = str(arg)
 
-            self.session.params[k] = str(arg)
+        log.debug("PARAMS: %r", params)
 
-        log.debug("PARAMS: %r", self.session.params)
+        return params
 
-    def execute(self, api, method, path, *, headers=None, json_payload=None,
-                parser=None, payload_list=False, payload_type=None,
-                post_data=None, require_auth=False, return_cursors=False,
-                upload_api=False, use_cache=True):
+    def execute(self, api, method, path, *, params=None, headers=None,
+                json_payload=None, parser=None, payload_list=False,
+                payload_type=None, post_data=None, require_auth=False,
+                return_cursors=False, upload_api=False, use_cache=True):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not api.auth:
@@ -69,7 +71,7 @@ class APIMethod:
         # Query the cache if one is available
         # and this request uses a GET method.
         if use_cache and api.cache and method == 'GET':
-            cache_result = api.cache.get(f'{url}?{urlencode(self.session.params)}')
+            cache_result = api.cache.get(f'{url}?{urlencode(params)}')
             # if cache result found and not expired, return it
             if cache_result:
                 # must restore api reference
@@ -110,6 +112,7 @@ class APIMethod:
             try:
                 resp = self.session.request(method,
                                             full_url,
+                                            params=params,
                                             headers=headers,
                                             data=post_data,
                                             json=json_payload,
@@ -162,15 +165,14 @@ class APIMethod:
                 raise TweepError(error_msg, resp, api_code=api_error_code)
 
         # Parse the response payload
-        return_cursors = (return_cursors or
-                          'cursor' in self.session.params or 'next' in self.session.params)
+        return_cursors = return_cursors or 'cursor' in params or 'next' in params
         result = parser.parse(resp.text, api=api, payload_list=payload_list,
                               payload_type=payload_type,
                               return_cursors=return_cursors)
 
         # Store result into cache if one is available.
         if use_cache and api.cache and method == 'GET' and result:
-            api.cache.store(f'{url}?{urlencode(self.session.params)}', result)
+            api.cache.store(f'{url}?{urlencode(params)}', result)
 
         return result
 
@@ -192,10 +194,10 @@ def bind_api(*args, **kwargs):
 
     method = APIMethod()
     allowed_param = kwargs.pop('allowed_param', [])
-    method.build_parameters(allowed_param, args, kwargs)
+    params = method.build_parameters(allowed_param, args, kwargs)
     try:
         return method.execute(
-            api, http_method, path, headers=headers,
+            api, http_method, path, params=params, headers=headers,
             json_payload=json_payload, parser=parser,
             payload_list=payload_list, payload_type=payload_type,
             post_data=post_data, require_auth=require_auth,
