@@ -15,7 +15,7 @@ from tweepy.models import Model
 log = logging.getLogger(__name__)
 
 
-def build_parameters(allowed_param, args, kwargs):
+def build_parameters(allowed_param, *args, **kwargs):
     params = {}
 
     for idx, arg in enumerate(args):
@@ -189,7 +189,7 @@ def bind_api(*args, **kwargs):
     use_cache = kwargs.pop('use_cache', True)
 
     allowed_param = kwargs.pop('allowed_param', [])
-    params = build_parameters(allowed_param, args, kwargs)
+    params = build_parameters(allowed_param, *args, **kwargs)
     return execute(
         api, http_method, path, params=params, headers=headers,
         json_payload=json_payload, parser=parser,
