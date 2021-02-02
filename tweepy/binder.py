@@ -164,8 +164,7 @@ class APIMethod:
         # Parse the response payload
         return_cursors = (return_cursors or
                           'cursor' in self.session.params or 'next' in self.session.params)
-        result = parser.parse(self, resp.text, api=api,
-                              payload_list=payload_list,
+        result = parser.parse(resp.text, api=api, payload_list=payload_list,
                               payload_type=payload_type,
                               return_cursors=return_cursors)
 

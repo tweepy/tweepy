@@ -133,12 +133,12 @@ class IdIterator(BaseIterator):
 
             # This is a special invocation that returns the underlying
             # APIMethod class
-            model = ModelParser().parse(self.method(create=True), data,
-                                        payload_list=self.method.payload_list,
-                                        payload_type=self.method.payload_type)
+            model = ModelParser().parse(
+                data, payload_list=self.method.payload_list,
+                payload_type=self.method.payload_type
+            )
             result = self.method.__self__.parser.parse(
-                self.method(create=True), data,
-                payload_list=self.method.payload_list,
+                data, payload_list=self.method.payload_list,
                 payload_type=self.method.payload_type
             )
 
