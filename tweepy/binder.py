@@ -77,6 +77,9 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
 
     session = requests.Session()
 
+    if parser is None:
+        parser = api.parser
+
     try:
         # Continue attempting request until successful
         # or maximum number of retries is reached.
@@ -151,9 +154,10 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
 
         # Parse the response payload
         return_cursors = return_cursors or 'cursor' in params or 'next' in params
-        result = parser.parse(resp.text, api=api, payload_list=payload_list,
-                            payload_type=payload_type,
-                            return_cursors=return_cursors)
+        result = parser.parse(
+            resp.text, api=api, payload_list=payload_list,
+            payload_type=payload_type, return_cursors=return_cursors
+        )
 
         # Store result into cache if one is available.
         if use_cache and api.cache and method == 'GET' and result:
@@ -168,9 +172,7 @@ def bind_api(*args, **kwargs):
     api = kwargs.pop('api')
     http_method = kwargs.pop('method', 'GET')
     path = kwargs.pop('path')
-    parser = kwargs.pop('parser', api.parser)
-
-    return execute(api, http_method, path, *args, parser=parser, **kwargs)
+    return execute(api, http_method, path, *args, **kwargs)
 
 
 def pagination(mode):
