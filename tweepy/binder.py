@@ -15,8 +15,27 @@ from tweepy.models import Model
 log = logging.getLogger(__name__)
 
 
-def build_parameters(allowed_param, *args, **kwargs):
-    params = {}
+def execute(api, method, path, *args, allowed_param=[], params=None,
+            headers=None, json_payload=None, parser=None, payload_list=False,
+            payload_type=None, post_data=None, require_auth=False,
+            return_cursors=False, upload_api=False, use_cache=True, **kwargs):
+    # If authentication is required and no credentials
+    # are provided, throw an error.
+    if require_auth and not api.auth:
+        raise TweepError('Authentication required!')
+
+    api.cached_result = False
+
+    # Build the request URL
+    if upload_api:
+        url = api.upload_root + path
+        full_url = 'https://' + api.upload_host + url
+    else:
+        url = api.api_root + path
+        full_url = 'https://' + api.host + url
+
+    if params is None:
+        params = {}
 
     for idx, arg in enumerate(args):
         if arg is None:
@@ -34,27 +53,6 @@ def build_parameters(allowed_param, *args, **kwargs):
         params[k] = str(arg)
 
     log.debug("PARAMS: %r", params)
-
-    return params
-
-def execute(api, method, path, *, params=None, headers=None, json_payload=None,
-            parser=None, payload_list=False, payload_type=None, post_data=None,
-            require_auth=False, return_cursors=False, upload_api=False,
-            use_cache=True):
-    # If authentication is required and no credentials
-    # are provided, throw an error.
-    if require_auth and not api.auth:
-        raise TweepError('Authentication required!')
-
-    api.cached_result = False
-
-    # Build the request URL
-    if upload_api:
-        url = api.upload_root + path
-        full_url = 'https://' + api.upload_host + url
-    else:
-        url = api.api_root + path
-        full_url = 'https://' + api.host + url
 
     # Query the cache if one is available
     # and this request uses a GET method.
@@ -170,27 +168,9 @@ def bind_api(*args, **kwargs):
     api = kwargs.pop('api')
     http_method = kwargs.pop('method', 'GET')
     path = kwargs.pop('path')
-    headers = kwargs.pop('headers', {})
-    json_payload = kwargs.pop('json_payload', None)
     parser = kwargs.pop('parser', api.parser)
-    payload_list = kwargs.pop('payload_list', False)
-    payload_type = kwargs.pop('payload_type', None)
-    post_data = kwargs.pop('post_data', None)
-    require_auth = kwargs.pop('require_auth', False)
-    return_cursors = kwargs.pop('return_cursors', False)
-    upload_api = kwargs.pop('upload_api', False)
-    use_cache = kwargs.pop('use_cache', True)
 
-    allowed_param = kwargs.pop('allowed_param', [])
-    params = build_parameters(allowed_param, *args, **kwargs)
-    return execute(
-        api, http_method, path, params=params, headers=headers,
-        json_payload=json_payload, parser=parser,
-        payload_list=payload_list, payload_type=payload_type,
-        post_data=post_data, require_auth=require_auth,
-        return_cursors=return_cursors, upload_api=upload_api,
-        use_cache=use_cache
-    )
+    return execute(api, http_method, path, *args, parser=parser, **kwargs)
 
 
 def pagination(mode):
