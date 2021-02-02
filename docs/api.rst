@@ -14,7 +14,7 @@ This page contains some basic documentation for the Tweepy module.
 .. class:: API([auth_handler=None], [host='api.twitter.com'], [cache=None], \
                [api_root='/1'], , [retry_count=0], [retry_delay=0], \
                [retry_errors=None], [timeout=60], [parser=ModelParser], \
-               [compression=False], [wait_on_rate_limit=False], [proxy=None])
+               [wait_on_rate_limit=False], [proxy=None])
 
    This class provides a wrapper for the API as provided by Twitter.
    The functions provided in this class are listed below.
@@ -29,7 +29,6 @@ This page contains some basic documentation for the Tweepy module.
    :param timeout: The maximum amount of time to wait for a response from
                    Twitter
    :param parser: The object to use for parsing the response from Twitter
-   :param compression: Whether or not to use GZIP compression for requests
    :param wait_on_rate_limit: Whether or not to automatically wait for rate
                               limits to replenish
    :param proxy: The full url to an HTTPS proxy to use for connecting to
