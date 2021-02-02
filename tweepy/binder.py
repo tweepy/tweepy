@@ -17,9 +17,6 @@ log = logging.getLogger(__name__)
 
 class APIMethod:
 
-    def __init__(self):
-        self.session = requests.Session()
-
     def build_parameters(self, allowed_param, args, kwargs):
         params = {}
 
@@ -89,92 +86,93 @@ class APIMethod:
         remaining_calls = None
         reset_time = None
 
-        # Continue attempting request until successful
-        # or maximum number of retries is reached.
-        retries_performed = 0
-        while retries_performed < api.retry_count + 1:
-            if (api.wait_on_rate_limit and reset_time is not None
-                and remaining_calls is not None
-                and remaining_calls < 1):
-                # Handle running out of API calls
-                sleep_time = reset_time - int(time.time())
-                if sleep_time > 0:
-                    if api.wait_on_rate_limit_notify:
-                        log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
-                    time.sleep(sleep_time + 1)  # Sleep for extra sec
+        session = requests.Session()
 
-            # Apply authentication
-            auth = None
-            if api.auth:
-                auth = api.auth.apply_auth()
+        try:
+            # Continue attempting request until successful
+            # or maximum number of retries is reached.
+            retries_performed = 0
+            while retries_performed < api.retry_count + 1:
+                if (api.wait_on_rate_limit and reset_time is not None
+                    and remaining_calls is not None
+                    and remaining_calls < 1):
+                    # Handle running out of API calls
+                    sleep_time = reset_time - int(time.time())
+                    if sleep_time > 0:
+                        if api.wait_on_rate_limit_notify:
+                            log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
+                        time.sleep(sleep_time + 1)  # Sleep for extra sec
 
-            # Execute request
-            try:
-                resp = self.session.request(method,
-                                            full_url,
-                                            params=params,
-                                            headers=headers,
-                                            data=post_data,
-                                            json=json_payload,
-                                            timeout=api.timeout,
-                                            auth=auth,
-                                            proxies=api.proxy)
-            except Exception as e:
-                raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
+                # Apply authentication
+                auth = None
+                if api.auth:
+                    auth = api.auth.apply_auth()
 
-            if 200 <= resp.status_code < 300:
-                break
+                # Execute request
+                try:
+                    resp = session.request(
+                        method, full_url, params=params, headers=headers,
+                        data=post_data, json=json_payload, timeout=api.timeout,
+                        auth=auth, proxies=api.proxy
+                    )
+                except Exception as e:
+                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
-            rem_calls = resp.headers.get('x-rate-limit-remaining')
-            if rem_calls is not None:
-                remaining_calls = int(rem_calls)
-            elif remaining_calls is not None:
-                remaining_calls -= 1
+                if 200 <= resp.status_code < 300:
+                    break
 
-            reset_time = resp.headers.get('x-rate-limit-reset')
-            if reset_time is not None:
-                reset_time = int(reset_time)
+                rem_calls = resp.headers.get('x-rate-limit-remaining')
+                if rem_calls is not None:
+                    remaining_calls = int(rem_calls)
+                elif remaining_calls is not None:
+                    remaining_calls -= 1
 
-            retry_delay = api.retry_delay
-            if resp.status_code in (420, 429) and api.wait_on_rate_limit:
-                if remaining_calls == 0:
-                    # If ran out of calls before waiting switching retry last call
-                    continue
-                if 'retry-after' in resp.headers:
-                    retry_delay = float(resp.headers['retry-after'])
-            elif api.retry_errors and resp.status_code not in api.retry_errors:
-                # Exit request loop if non-retry error code
-                break
+                reset_time = resp.headers.get('x-rate-limit-reset')
+                if reset_time is not None:
+                    reset_time = int(reset_time)
 
-            # Sleep before retrying request again
-            time.sleep(retry_delay)
-            retries_performed += 1
+                retry_delay = api.retry_delay
+                if resp.status_code in (420, 429) and api.wait_on_rate_limit:
+                    if remaining_calls == 0:
+                        # If ran out of calls before waiting switching retry last call
+                        continue
+                    if 'retry-after' in resp.headers:
+                        retry_delay = float(resp.headers['retry-after'])
+                elif api.retry_errors and resp.status_code not in api.retry_errors:
+                    # Exit request loop if non-retry error code
+                    break
 
-        # If an error was returned, throw an exception
-        api.last_response = resp
-        if resp.status_code and not 200 <= resp.status_code < 300:
-            try:
-                error_msg, api_error_code = parser.parse_error(resp.text)
-            except Exception:
-                error_msg = f"Twitter error response: status code = {resp.status_code}"
-                api_error_code = None
+                # Sleep before retrying request again
+                time.sleep(retry_delay)
+                retries_performed += 1
 
-            if is_rate_limit_error_message(error_msg):
-                raise RateLimitError(error_msg, resp)
-            else:
-                raise TweepError(error_msg, resp, api_code=api_error_code)
+            # If an error was returned, throw an exception
+            api.last_response = resp
+            if resp.status_code and not 200 <= resp.status_code < 300:
+                try:
+                    error_msg, api_error_code = parser.parse_error(resp.text)
+                except Exception:
+                    error_msg = f"Twitter error response: status code = {resp.status_code}"
+                    api_error_code = None
 
-        # Parse the response payload
-        return_cursors = return_cursors or 'cursor' in params or 'next' in params
-        result = parser.parse(resp.text, api=api, payload_list=payload_list,
-                              payload_type=payload_type,
-                              return_cursors=return_cursors)
+                if is_rate_limit_error_message(error_msg):
+                    raise RateLimitError(error_msg, resp)
+                else:
+                    raise TweepError(error_msg, resp, api_code=api_error_code)
 
-        # Store result into cache if one is available.
-        if use_cache and api.cache and method == 'GET' and result:
-            api.cache.store(f'{url}?{urlencode(params)}', result)
+            # Parse the response payload
+            return_cursors = return_cursors or 'cursor' in params or 'next' in params
+            result = parser.parse(resp.text, api=api, payload_list=payload_list,
+                                payload_type=payload_type,
+                                return_cursors=return_cursors)
 
-        return result
+            # Store result into cache if one is available.
+            if use_cache and api.cache and method == 'GET' and result:
+                api.cache.store(f'{url}?{urlencode(params)}', result)
+
+            return result
+        finally:
+            session.close()
 
 
 def bind_api(*args, **kwargs):
@@ -195,17 +193,14 @@ def bind_api(*args, **kwargs):
     method = APIMethod()
     allowed_param = kwargs.pop('allowed_param', [])
     params = method.build_parameters(allowed_param, args, kwargs)
-    try:
-        return method.execute(
-            api, http_method, path, params=params, headers=headers,
-            json_payload=json_payload, parser=parser,
-            payload_list=payload_list, payload_type=payload_type,
-            post_data=post_data, require_auth=require_auth,
-            return_cursors=return_cursors, upload_api=upload_api,
-            use_cache=use_cache
-        )
-    finally:
-        method.session.close()
+    return method.execute(
+        api, http_method, path, params=params, headers=headers,
+        json_payload=json_payload, parser=parser,
+        payload_list=payload_list, payload_type=payload_type,
+        post_data=post_data, require_auth=require_auth,
+        return_cursors=return_cursors, upload_api=upload_api,
+        use_cache=use_cache
+    )
 
 
 def pagination(mode):
