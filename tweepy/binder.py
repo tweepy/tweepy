@@ -48,20 +48,13 @@ def execute(api, method, path, *, params=None, headers=None, json_payload=None,
 
     api.cached_result = False
 
-    # Pick correct URL root to use
-    if upload_api:
-        api_root = api.upload_root
-    else:
-        api_root = api.api_root
-
-    if upload_api:
-        host = api.upload_host
-    else:
-        host = api.host
-
     # Build the request URL
-    url = api_root + path
-    full_url = 'https://' + host + url
+    if upload_api:
+        url = api.upload_root + path
+        full_url = 'https://' + api.upload_host + url
+    else:
+        url = api.api_root + path
+        full_url = 'https://' + api.host + url
 
     # Query the cache if one is available
     # and this request uses a GET method.
@@ -90,7 +83,7 @@ def execute(api, method, path, *, params=None, headers=None, json_payload=None,
         # Continue attempting request until successful
         # or maximum number of retries is reached.
         retries_performed = 0
-        while retries_performed < api.retry_count + 1:
+        while retries_performed <= api.retry_count:
             if (api.wait_on_rate_limit and reset_time is not None
                 and remaining_calls is not None
                 and remaining_calls < 1):
