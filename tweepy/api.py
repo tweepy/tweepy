@@ -792,7 +792,7 @@ class API:
             'POST', 'account/update_profile_banner',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True,
-            post_data=post_data, headers=headers
+            post_data=post_data, headers=headers, **kwargs
         )
 
     @payload('user')
