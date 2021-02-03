@@ -167,10 +167,9 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
         session.close()
 
 
-def bind_api(api, *args, **kwargs):
-    http_method = kwargs.pop('method', 'GET')
+def bind_api(api, method, *args, **kwargs):
     path = kwargs.pop('path')
-    return execute(api, http_method, path, *args, **kwargs)
+    return execute(api, method, path, *args, **kwargs)
 
 
 def pagination(mode):
