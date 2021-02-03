@@ -98,7 +98,7 @@ class API:
     def request(
         self, method, endpoint, *args, allowed_param=[], params=None,
         headers=None, json_payload=None, parser=None, payload_list=False,
-        payload_type=None, post_data=None, require_auth=False,
+        payload_type=None, post_data=None, require_auth=True,
         return_cursors=False, upload_api=False, use_cache=True, **kwargs
     ):
         # If authentication is required and no credentials
@@ -255,8 +255,7 @@ class API:
         return self.request(
             'GET', 'statuses/home_timeline', *args,
             allowed_param=['count', 'since_id', 'max_id', 'trim_user',
-                           'exclude_replies', 'include_entities'],
-            require_auth=True, **kwargs
+                           'exclude_replies', 'include_entities'], **kwargs
         )
 
     @payload('status', list=True)
@@ -272,7 +271,7 @@ class API:
             'GET', 'statuses/lookup', list_to_csv(id_), *args,
             allowed_param=['id', 'include_entities', 'trim_user', 'map',
                            'include_ext_alt_text', 'include_card_uri'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @pagination(mode='id')
@@ -287,8 +286,7 @@ class API:
             'GET', 'statuses/user_timeline', *args,
             allowed_param=['user_id', 'screen_name', 'since_id', 'count',
                            'max_id', 'trim_user', 'exclude_replies',
-                           'include_rts'],
-            require_auth=True, **kwargs
+                           'include_rts'], **kwargs
         )
 
     @pagination(mode='id')
@@ -299,8 +297,7 @@ class API:
         """
         return self.request(
             'GET', 'statuses/mentions_timeline', *args,
-            allowed_param=['since_id', 'max_id', 'count'],
-            require_auth=True, **kwargs
+            allowed_param=['since_id', 'max_id', 'count'], **kwargs
         )
 
     @pagination(mode='id')
@@ -311,8 +308,7 @@ class API:
         """
         return self.request(
             'GET', 'statuses/retweets_of_me', *args,
-            allowed_param=['since_id', 'max_id', 'count'],
-            require_auth=True, **kwargs
+            allowed_param=['since_id', 'max_id', 'count'], **kwargs
         )
 
     @payload('status')
@@ -326,8 +322,7 @@ class API:
             'GET', 'statuses/show', *args,
             allowed_param=['id', 'trim_user', 'include_my_retweet',
                            'include_entities', 'include_ext_alt_text',
-                           'include_card_uri'],
-            require_auth=True, **kwargs
+                           'include_card_uri'], **kwargs
         )
 
     @payload('status')
@@ -351,8 +346,7 @@ class API:
                            'media_ids', 'possibly_sensitive', 'lat', 'long',
                            'place_id', 'display_coordinates', 'trim_user',
                            'enable_dmcommands', 'fail_dmcommands',
-                           'card_uri'],
-            require_auth=True, **kwargs
+                           'card_uri'], **kwargs
         )
 
     @payload('media')
@@ -381,7 +375,6 @@ class API:
         return self.request(
             'POST', 'media/upload', *args,
             allowed_param=[],
-            require_auth=True,
             upload_api=True, **kwargs
         )
 
@@ -397,7 +390,6 @@ class API:
         return self.request(
             'POST', 'media/metadata/create', *args,
             allowed_param=[],
-            require_auth=True,
             upload_api=True, **kwargs
         )
 
@@ -421,8 +413,7 @@ class API:
                            'in_reply_to_status_id',
                            'in_reply_to_status_id_str',
                            'auto_populate_reply_metadata', 'lat', 'long',
-                           'place_id', 'display_coordinates'],
-            require_auth=True, **kwargs
+                           'place_id', 'display_coordinates'], **kwargs
         )
 
     @payload('status')
@@ -431,8 +422,7 @@ class API:
             :allowed_param:
         """
         return self.request(
-            'POST', f'statuses/destroy/{status_id}', *args,
-            require_auth=True, **kwargs
+            'POST', f'statuses/destroy/{status_id}', *args, **kwargs
         )
 
     @payload('status')
@@ -441,8 +431,7 @@ class API:
             :allowed_param:
         """
         return self.request(
-            'POST', f'statuses/retweet/{status_id}', *args,
-            require_auth=True, **kwargs
+            'POST', f'statuses/retweet/{status_id}', *args, **kwargs
         )
 
     @payload('status')
@@ -451,8 +440,7 @@ class API:
             :allowed_param:
         """
         return self.request(
-            'POST', f'statuses/unretweet/{status_id}', *args,
-            require_auth=True, **kwargs
+            'POST', f'statuses/unretweet/{status_id}', *args, **kwargs
         )
 
     @payload('status', list=True)
@@ -462,8 +450,7 @@ class API:
         """
         return self.request(
             'GET', f'statuses/retweets/{status_id}', *args,
-            allowed_param=['count'],
-            require_auth=True, **kwargs
+            allowed_param=['count'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -474,8 +461,7 @@ class API:
         """
         return self.request(
             'GET', 'statuses/retweeters/ids', *args,
-            allowed_param=['id', 'cursor', 'stringify_ids'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'cursor', 'stringify_ids'], **kwargs
         )
 
     @payload('user')
@@ -485,8 +471,7 @@ class API:
         """
         return self.request(
             'GET', 'users/show', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @payload('json')
@@ -500,7 +485,8 @@ class API:
             'GET', 'statuses/oembed', *args,
             allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
                            'omit_script', 'align', 'related', 'lang', 'theme',
-                           'link_color', 'widget_type', 'dnt'], **kwargs
+                           'link_color', 'widget_type', 'dnt'],
+            require_auth=False, **kwargs
         )
 
     @payload('user', list=True)
@@ -513,8 +499,7 @@ class API:
             'POST', 'users/lookup', list_to_csv(user_ids),
             list_to_csv(screen_names), *args,
             allowed_param=['user_id', 'screen_name', 'include_entities',
-                           'tweet_mode'],
-            require_auth=True, **kwargs
+                           'tweet_mode'], **kwargs
         )
 
     def me(self):
@@ -529,7 +514,6 @@ class API:
         """
         return self.request(
             'GET', 'users/search', *args,
-            require_auth=True,
             allowed_param=['q', 'count', 'page'], **kwargs
         )
 
@@ -540,8 +524,7 @@ class API:
         """
         return self.request(
             'GET', 'direct_messages/events/show', *args,
-            allowed_param=['id'],
-            require_auth=True, **kwargs
+            allowed_param=['id'], **kwargs
         )
 
     @pagination(mode='dm_cursor')
@@ -552,8 +535,7 @@ class API:
         """
         return self.request(
             'GET', 'direct_messages/events/list', *args,
-            allowed_param=['count', 'cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['count', 'cursor'], **kwargs
         )
 
     @payload('direct_message')
@@ -587,7 +569,6 @@ class API:
             message_data['ctas'] = ctas
         return self.request(
             'POST', 'direct_messages/events/new',
-            require_auth=True, 
             json_payload=json_payload, **kwargs
         )
 
@@ -597,8 +578,7 @@ class API:
         """
         return self.request(
             'DELETE', 'direct_messages/events/destroy', *args,
-            allowed_param=['id'],
-            require_auth=True, **kwargs
+            allowed_param=['id'], **kwargs
         )
 
     @payload('user')
@@ -608,8 +588,7 @@ class API:
         """
         return self.request(
             'POST', 'friendships/create', *args,
-            allowed_param=['id', 'user_id', 'screen_name', 'follow'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name', 'follow'], **kwargs
         )
 
     @payload('user')
@@ -619,8 +598,7 @@ class API:
         """
         return self.request(
             'POST', 'friendships/destroy', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @payload('friendship')
@@ -632,8 +610,7 @@ class API:
         return self.request(
             'GET', 'friendships/show', *args,
             allowed_param=['source_id', 'source_screen_name',
-                           'target_id', 'target_screen_name'],
-            require_auth=True, **kwargs
+                           'target_id', 'target_screen_name'], **kwargs
         )
 
     @payload('relationship', list=True)
@@ -644,8 +621,7 @@ class API:
         return self.request(
             'GET', 'friendships/lookup', list_to_csv(user_ids),
             list_to_csv(screen_names),
-            allowed_param=['user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['user_id', 'screen_name'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -656,8 +632,7 @@ class API:
         """
         return self.request(
             'GET', 'friends/ids', *args,
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name', 'cursor'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -670,8 +645,7 @@ class API:
         return self.request(
             'GET', 'friends/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities'],
-            require_auth=True, **kwargs
+                           'skip_status', 'include_user_entities'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -682,8 +656,7 @@ class API:
         """
         return self.request(
             'GET', 'friendships/incoming', *args,
-            allowed_param=['cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['cursor'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -694,8 +667,7 @@ class API:
         """
         return self.request(
             'GET', 'friendships/outgoing', *args,
-            allowed_param=['cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['cursor'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -707,7 +679,7 @@ class API:
         return self.request(
             'GET', 'followers/ids', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @pagination(mode='cursor')
@@ -720,16 +692,14 @@ class API:
         return self.request(
             'GET', 'followers/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities'],
-            require_auth=True, **kwargs
+                           'skip_status', 'include_user_entities'], **kwargs
         )
 
     @payload('json')
     def get_settings(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
         return self.request(
-            'GET', 'account/settings', *args,
-            require_auth=True, use_cache=False, **kwargs
+            'GET', 'account/settings', *args, use_cache=False, **kwargs
         )
 
     @payload('json')
@@ -746,7 +716,7 @@ class API:
                            'end_sleep_time', 'time_zone',
                            'trend_location_woeid',
                            'allow_contributor_request', 'lang'],
-            require_auth=True, use_cache=False, **kwargs
+            use_cache=False, **kwargs
         )
 
     @payload('user')
@@ -759,7 +729,6 @@ class API:
         try:
             return self.request(
                 'GET', 'account/verify_credentials',
-                require_auth=True,
                 allowed_param=['include_entities', 'skip_status',
                                'include_email'], **kwargs
             )
@@ -775,8 +744,7 @@ class API:
         """
         return self.request(
             'GET', 'application/rate_limit_status', *args,
-            allowed_param=['resources'],
-            require_auth=True, use_cache=False, **kwargs
+            allowed_param=['resources'], use_cache=False, **kwargs
         )
 
     @payload('user')
@@ -788,7 +756,6 @@ class API:
         return self.request(
             'POST', 'account/update_profile_image', *args,
             allowed_param=['include_entities', 'skip_status'],
-            require_auth=True,
             post_data=post_data, headers=headers, **kwargs
         )
 
@@ -802,7 +769,6 @@ class API:
         return self.request(
             'POST', 'account/update_profile_banner',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
-            require_auth=True,
             post_data=post_data, headers=headers, **kwargs
         )
 
@@ -815,8 +781,7 @@ class API:
         return self.request(
             'POST', 'account/update_profile', *args,
             allowed_param=['name', 'url', 'location', 'description',
-                           'profile_link_color'],
-            require_auth=True, **kwargs
+                           'profile_link_color'], **kwargs
         )
 
     @pagination(mode='id')
@@ -829,8 +794,7 @@ class API:
         return self.request(
             'GET', 'favorites/list', *args,
             allowed_param=['screen_name', 'user_id', 'max_id', 'count',
-                           'since_id'],
-            require_auth=True, **kwargs
+                           'since_id'], **kwargs
         )
 
     @payload('status')
@@ -840,8 +804,7 @@ class API:
         """
         return self.request(
             'POST', 'favorites/create', *args,
-            allowed_param=['id'],
-            require_auth=True, **kwargs
+            allowed_param=['id'], **kwargs
         )
 
     @payload('status')
@@ -851,8 +814,7 @@ class API:
         """
         return self.request(
             'POST', 'favorites/destroy', *args,
-            allowed_param=['id'],
-            require_auth=True, **kwargs
+            allowed_param=['id'], **kwargs
         )
 
     @payload('user')
@@ -862,8 +824,7 @@ class API:
         """
         return self.request(
             'POST', 'blocks/create', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @payload('user')
@@ -873,8 +834,7 @@ class API:
         """
         return self.request(
             'POST', 'blocks/destroy', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -885,8 +845,7 @@ class API:
         """
         return self.request(
             'GET', 'mutes/users/ids', *args,
-            allowed_param=['cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['cursor'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -898,7 +857,7 @@ class API:
         return self.request(
             'GET', 'mutes/users/list', *args,
             allowed_param=['cursor', 'include_entities', 'skip_status'],
-            required_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('user')
@@ -908,8 +867,7 @@ class API:
         """
         return self.request(
             'POST', 'mutes/users/create', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @payload('user')
@@ -919,8 +877,7 @@ class API:
         """
         return self.request(
             'POST', 'mutes/users/destroy', *args,
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -931,8 +888,7 @@ class API:
         """
         return self.request(
             'GET', 'blocks/list', *args,
-            allowed_param=['cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['cursor'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -943,8 +899,7 @@ class API:
         """
         return self.request(
             'GET', 'blocks/ids', *args,
-            allowed_param=['cursor'],
-            require_auth=True, **kwargs
+            allowed_param=['cursor'], **kwargs
         )
 
     @payload('user')
@@ -954,17 +909,13 @@ class API:
         """
         return self.request(
             'POST', 'users/report_spam', *args,
-            allowed_param=['user_id', 'screen_name', 'perform_block'],
-            require_auth=True, **kwargs
+            allowed_param=['user_id', 'screen_name', 'perform_block'], **kwargs
         )
 
     @payload('saved_search', list=True)
     def saved_searches(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list """
-        return self.request(
-            'GET', 'saved_searches/list', *args,
-            require_auth=True, **kwargs
-        )
+        return self.request('GET', 'saved_searches/list', *args, **kwargs)
 
     @payload('saved_search')
     def get_saved_search(self, saved_search_id, *args, **kwargs):
@@ -972,8 +923,7 @@ class API:
             :allowed_param:
         """
         return self.request(
-            'GET', f'saved_searches/show/{saved_search_id}', *args,
-            require_auth=True, **kwargs
+            'GET', f'saved_searches/show/{saved_search_id}', *args, **kwargs
         )
 
     @payload('saved_search')
@@ -983,8 +933,7 @@ class API:
         """
         return self.request(
             'POST', 'saved_searches/create', *args,
-            allowed_param=['query'],
-            require_auth=True, **kwargs
+            allowed_param=['query'], **kwargs
         )
 
     @payload('saved_search')
@@ -994,7 +943,7 @@ class API:
         """
         return self.request(
             'POST', f'saved_searches/destroy/{saved_search_id}', *args,
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('list')
@@ -1004,8 +953,7 @@ class API:
         """
         return self.request(
             'POST', 'lists/create', *args,
-            allowed_param=['name', 'mode', 'description'],
-            require_auth=True, **kwargs
+            allowed_param=['name', 'mode', 'description'], **kwargs
         )
 
     @payload('list')
@@ -1016,7 +964,7 @@ class API:
         return self.request(
             'POST', 'lists/destroy', *args,
             allowed_param=['owner_screen_name', 'owner_id', 'list_id', 'slug'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('list')
@@ -1028,8 +976,7 @@ class API:
         return self.request(
             'POST', 'lists/update', *args,
             allowed_param=['list_id', 'slug', 'name', 'mode', 'description',
-                           'owner_screen_name', 'owner_id'],
-            require_auth=True, **kwargs
+                           'owner_screen_name', 'owner_id'], **kwargs
         )
 
     @payload('list', list=True)
@@ -1039,8 +986,7 @@ class API:
         """
         return self.request(
             'GET', 'lists/list', *args,
-            allowed_param=['screen_name', 'user_id', 'reverse'],
-            require_auth=True, **kwargs
+            allowed_param=['screen_name', 'user_id', 'reverse'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -1053,8 +999,7 @@ class API:
         return self.request(
             'GET', 'lists/memberships', *args,
             allowed_param=['screen_name', 'user_id', 'filter_to_owned_lists',
-                           'cursor', 'count'],
-            require_auth=True, **kwargs
+                           'cursor', 'count'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -1066,7 +1011,7 @@ class API:
         return self.request(
             'GET', 'lists/ownerships', *args,
             allowed_param=['user_id', 'screen_name', 'count', 'cursor'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @pagination(mode='cursor')
@@ -1078,7 +1023,7 @@ class API:
         return self.request(
             'GET', 'lists/subscriptions', *args,
             allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @pagination(mode='id')
@@ -1093,8 +1038,7 @@ class API:
             'GET', 'lists/statuses', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'since_id', 'max_id', 'count', 'include_entities',
-                           'include_rts'],
-            require_auth=True, **kwargs
+                           'include_rts'], **kwargs
         )
 
     @payload('list')
@@ -1105,7 +1049,7 @@ class API:
         return self.request(
             'GET', 'lists/show', *args,
             allowed_param=['owner_screen_name', 'owner_id', 'slug', 'list_id'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('list')
@@ -1117,8 +1061,7 @@ class API:
         return self.request(
             'POST', 'lists/members/create', *args,
             allowed_param=['screen_name', 'user_id', 'owner_screen_name',
-                           'owner_id', 'slug', 'list_id'],
-            require_auth=True, **kwargs
+                           'owner_id', 'slug', 'list_id'], **kwargs
         )
 
     @payload('list')
@@ -1130,8 +1073,7 @@ class API:
         return self.request(
             'POST', 'lists/members/destroy', *args,
             allowed_param=['screen_name', 'user_id', 'owner_screen_name',
-                           'owner_id', 'slug', 'list_id'],
-            require_auth=True, **kwargs
+                           'owner_id', 'slug', 'list_id'], **kwargs
         )
 
     @payload('list')
@@ -1146,8 +1088,7 @@ class API:
             'POST', 'lists/members/create_all', list_to_csv(screen_name),
             list_to_csv(user_id), slug, list_id, owner_id, owner_screen_name,
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
-                           'owner_id', 'owner_screen_name'],
-            require_auth=True, **kwargs
+                           'owner_id', 'owner_screen_name'], **kwargs
         )
 
     @payload('list')
@@ -1162,8 +1103,7 @@ class API:
             'POST', 'lists/members/destroy_all', list_to_csv(screen_name),
             list_to_csv(user_id), slug, list_id, owner_id, owner_screen_name,
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
-                           'owner_id', 'owner_screen_name'],
-            require_auth=True, **kwargs
+                           'owner_id', 'owner_screen_name'], **kwargs
         )
 
     @pagination(mode='cursor')
@@ -1176,8 +1116,7 @@ class API:
         return self.request(
             'GET', 'lists/members', *args,
             allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id',
-                           'cursor'],
-            require_auth=True, **kwargs
+                           'cursor'], **kwargs
         )
 
     @payload('user')
@@ -1189,8 +1128,7 @@ class API:
         return self.request(
             'GET', 'lists/members/show', *args,
             allowed_param=['list_id', 'slug', 'user_id', 'screen_name',
-                           'owner_screen_name', 'owner_id'],
-            require_auth=True, **kwargs
+                           'owner_screen_name', 'owner_id'], **kwargs
         )
 
     @payload('list')
@@ -1201,7 +1139,7 @@ class API:
         return self.request(
             'POST', 'lists/subscribers/create', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('list')
@@ -1212,7 +1150,7 @@ class API:
         return self.request(
             'POST', 'lists/subscribers/destroy', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @pagination(mode='cursor')
@@ -1227,8 +1165,7 @@ class API:
             'GET', 'lists/subscribers', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'cursor', 'count', 'include_entities',
-                           'skip_status'],
-            require_auth=True, **kwargs
+                           'skip_status'], **kwargs
         )
 
     @payload('user')
@@ -1240,15 +1177,13 @@ class API:
         return self.request(
             'GET', 'lists/subscribers/show', *args,
             allowed_param=['owner_screen_name', 'slug', 'screen_name',
-                           'owner_id', 'list_id', 'user_id'],
-            require_auth=True, **kwargs
+                           'owner_id', 'list_id', 'user_id'], **kwargs
         )
 
     @payload('json')
     def trends_available(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available """
-        return self.request('GET', 'trends/available', *args,
-                            require_auth=True, **kwargs)
+        return self.request('GET', 'trends/available', *args, **kwargs)
 
     @payload('json')
     def trends_place(self, *args, **kwargs):
@@ -1257,8 +1192,7 @@ class API:
         """
         return self.request(
             'GET', 'trends/place', *args,
-            allowed_param=['id', 'exclude'],
-            require_auth=True, **kwargs
+            allowed_param=['id', 'exclude'], **kwargs
         )
 
     @payload('json')
@@ -1268,8 +1202,7 @@ class API:
         """
         return self.request(
             'GET', 'trends/closest', *args,
-            allowed_param=['lat', 'long'],
-            require_auth=True, **kwargs
+            allowed_param=['lat', 'long'], **kwargs
         )
 
     @pagination(mode='id')
@@ -1284,8 +1217,7 @@ class API:
             'GET', 'search/tweets', *args,
             allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
                            'max_id', 'until', 'result_type', 'count',
-                           'include_entities'],
-            require_auth=True, **kwargs
+                           'include_entities'], **kwargs
         )
 
     @pagination(mode='next')
@@ -1298,8 +1230,7 @@ class API:
         return self.request(
             'GET', f'tweets/search/30day/{environment_name}', *args,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                           'next'],
-            require_auth=True, **kwargs
+                           'next'], **kwargs
         )
 
     @pagination(mode='next')
@@ -1312,8 +1243,7 @@ class API:
         return self.request(
             'GET', f'tweets/search/fullarchive/{environment_name}', *args,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                           'next'],
-            require_auth=True, **kwargs
+                           'next'], **kwargs
         )
 
     @payload('place', list=True)
@@ -1325,8 +1255,7 @@ class API:
         return self.request(
             'GET', 'geo/reverse_geocode', *args,
             allowed_param=['lat', 'long', 'accuracy', 'granularity',
-                           'max_results'],
-            require_auth=True, **kwargs
+                           'max_results'], **kwargs
         )
 
     @payload('place')
@@ -1334,8 +1263,7 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
             :allowed_param:
         """
-        return self.request('GET', f'geo/id/{place_id}', *args,
-                            require_auth=True, **kwargs)
+        return self.request('GET', f'geo/id/{place_id}', *args, **kwargs)
 
     @payload('place', list=True)
     def geo_search(self, *args, **kwargs):
@@ -1348,24 +1276,18 @@ class API:
             'GET', 'geo/search', *args,
             allowed_param=['lat', 'long', 'query', 'ip', 'granularity',
                            'accuracy', 'max_results', 'contained_within'],
-            require_auth=True, **kwargs
+            **kwargs
         )
 
     @payload('json')
     def supported_languages(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
-        return self.request(
-            'GET', 'help/languages', *args,
-            require_auth=True, **kwargs
-        )
+        return self.request('GET', 'help/languages', *args, **kwargs)
 
     @payload('json')
     def configuration(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration """
-        return self.request(
-            'GET', 'help/configuration', *args,
-            require_auth=True, **kwargs
-        )
+        return self.request('GET', 'help/configuration', *args, **kwargs)
 
     """ Internal use only """
 
