@@ -648,7 +648,7 @@ class API:
         """
         headers, post_data = API._pack_image(filename, 700, f=file_)
         return bind_api(
-            self, api=self,
+            api=self,
             path='/account/update_profile_image.json',
             method='POST',
             allowed_param=['include_entities', 'skip_status'],
