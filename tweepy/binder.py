@@ -15,10 +15,10 @@ from tweepy.models import Model
 log = logging.getLogger(__name__)
 
 
-def execute(api, method, path, *args, allowed_param=[], params=None,
-            headers=None, json_payload=None, parser=None, payload_list=False,
-            payload_type=None, post_data=None, require_auth=False,
-            return_cursors=False, upload_api=False, use_cache=True, **kwargs):
+def bind_api(api, method, path, *args, allowed_param=[], params=None,
+             headers=None, json_payload=None, parser=None, payload_list=False,
+             payload_type=None, post_data=None, require_auth=False,
+             return_cursors=False, upload_api=False, use_cache=True, **kwargs):
     # If authentication is required and no credentials
     # are provided, throw an error.
     if require_auth and not api.auth:
@@ -165,10 +165,6 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
         return result
     finally:
         session.close()
-
-
-def bind_api(api, method, path, *args, **kwargs):
-    return execute(api, method, path, *args, **kwargs)
 
 
 def pagination(mode):
