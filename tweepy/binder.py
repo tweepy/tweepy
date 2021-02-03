@@ -27,11 +27,10 @@ def bind_api(api, method, endpoint, *args, allowed_param=[], params=None,
     api.cached_result = False
 
     # Build the request URL
+    path = f'/1.1/{endpoint}.json'
     if upload_api:
-        path = f'{api.upload_root}/{endpoint}.json'
         url = 'https://' + api.upload_host + path
     else:
-        path = f'{api.api_root}/{endpoint}.json'
         url = 'https://' + api.host + path
 
     if params is None:

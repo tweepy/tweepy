@@ -17,9 +17,8 @@ class API:
 
     def __init__(self, auth_handler=None,
                  host='api.twitter.com', upload_host='upload.twitter.com',
-                 cache=None, api_root='/1.1', upload_root='/1.1',
-                 retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-                 parser=None, wait_on_rate_limit=False, proxy=''):
+                 cache=None, retry_count=0, retry_delay=0, retry_errors=None,
+                 timeout=60, parser=None, wait_on_rate_limit=False, proxy=''):
         """
         API instance constructor
 
@@ -29,8 +28,6 @@ class API:
         :param upload_host: url of the upload server,
                             default: 'upload.twitter.com'
         :param cache: Cache to query if a GET method is used, default: None
-        :param api_root: suffix of the api version, default: '/1.1'
-        :param upload_root: suffix of the upload version, default: '/1.1'
         :param retry_count: number of allowed retries, default: 0
         :param retry_delay: delay in second between retries, default: 0
         :param retry_errors: default: None
@@ -47,8 +44,6 @@ class API:
         self.auth = auth_handler
         self.host = host
         self.upload_host = upload_host
-        self.api_root = api_root
-        self.upload_root = upload_root
         self.cache = cache
         self.retry_count = retry_count
         self.retry_delay = retry_delay
