@@ -78,7 +78,7 @@ class API:
                             'exclude_replies', 'include_entities'
         """
         return bind_api(
-            self, 'GET', '/statuses/home_timeline.json', *args,
+            self, 'GET', '/statuses/home_timeline', *args,
             allowed_param=['count', 'since_id', 'max_id', 'trim_user',
                            'exclude_replies', 'include_entities'],
             require_auth=True, **kwargs
@@ -94,7 +94,7 @@ class API:
             kwargs['map'] = kwargs.pop('map_')
 
         return bind_api(
-            self, 'GET', '/statuses/lookup.json', list_to_csv(id_), *args,
+            self, 'GET', '/statuses/lookup', list_to_csv(id_), *args,
             allowed_param=['id', 'include_entities', 'trim_user', 'map',
                            'include_ext_alt_text', 'include_card_uri'],
             require_auth=True, **kwargs
@@ -109,7 +109,7 @@ class API:
                             'include_rts'
         """
         return bind_api(
-            self, 'GET', '/statuses/user_timeline.json', *args,
+            self, 'GET', '/statuses/user_timeline', *args,
             allowed_param=['user_id', 'screen_name', 'since_id', 'count',
                            'max_id', 'trim_user', 'exclude_replies',
                            'include_rts'], **kwargs
@@ -122,7 +122,7 @@ class API:
             :allowed_param: 'since_id', 'max_id', 'count'
         """
         return bind_api(
-            self, 'GET', '/statuses/mentions_timeline.json', *args,
+            self, 'GET', '/statuses/mentions_timeline', *args,
             allowed_param=['since_id', 'max_id', 'count'],
             require_auth=True, **kwargs
         )
@@ -134,7 +134,7 @@ class API:
             :allowed_param: 'since_id', 'max_id', 'count'
         """
         return bind_api(
-            self, 'GET', '/statuses/retweets_of_me.json', *args,
+            self, 'GET', '/statuses/retweets_of_me', *args,
             allowed_param=['since_id', 'max_id', 'count'],
             require_auth=True, **kwargs
         )
@@ -147,7 +147,7 @@ class API:
                             'include_card_uri'
         """
         return bind_api(
-            self, 'GET', '/statuses/show.json', *args,
+            self, 'GET', '/statuses/show', *args,
             allowed_param=['id', 'trim_user', 'include_my_retweet',
                            'include_entities', 'include_ext_alt_text',
                            'include_card_uri'], **kwargs
@@ -167,7 +167,7 @@ class API:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
 
         return bind_api(
-            self, 'POST', '/statuses/update.json', *args,
+            self, 'POST', '/statuses/update', *args,
             allowed_param=['status', 'in_reply_to_status_id',
                            'auto_populate_reply_metadata',
                            'exclude_reply_user_ids', 'attachment_url',
@@ -202,7 +202,7 @@ class API:
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
-            self, 'POST', '/media/upload.json', *args,
+            self, 'POST', '/media/upload', *args,
             allowed_param=[],
             require_auth=True,
             upload_api=True, **kwargs
@@ -218,7 +218,7 @@ class API:
         }
 
         return bind_api(
-            self, 'POST', '/media/metadata/create.json', *args,
+            self, 'POST', '/media/metadata/create', *args,
             allowed_param=[],
             require_auth=True,
             upload_api=True, **kwargs
@@ -239,7 +239,7 @@ class API:
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return bind_api(
-            self, 'POST', '/statuses/update_with_media.json', *args,
+            self, 'POST', '/statuses/update_with_media', *args,
             allowed_param=['status', 'possibly_sensitive',
                            'in_reply_to_status_id',
                            'in_reply_to_status_id_str',
@@ -254,7 +254,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'POST', f'/statuses/destroy/{status_id}.json', *args,
+            self, 'POST', f'/statuses/destroy/{status_id}', *args,
             require_auth=True, **kwargs
         )
 
@@ -264,7 +264,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'POST', f'/statuses/retweet/{status_id}.json', *args,
+            self, 'POST', f'/statuses/retweet/{status_id}', *args,
             require_auth=True, **kwargs
         )
 
@@ -274,7 +274,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'POST', f'/statuses/unretweet/{status_id}.json', *args,
+            self, 'POST', f'/statuses/unretweet/{status_id}', *args,
             require_auth=True, **kwargs
         )
 
@@ -284,7 +284,7 @@ class API:
             :allowed_param: 'count'
         """
         return bind_api(
-            self, 'GET', f'/statuses/retweets/{status_id}.json', *args,
+            self, 'GET', f'/statuses/retweets/{status_id}', *args,
             allowed_param=['count'],
             require_auth=True, **kwargs
         )
@@ -296,7 +296,7 @@ class API:
             :allowed_param: 'id', 'cursor', 'stringify_ids
         """
         return bind_api(
-            self, 'GET', '/statuses/retweeters/ids.json', *args,
+            self, 'GET', '/statuses/retweeters/ids', *args,
             allowed_param=['id', 'cursor', 'stringify_ids'], **kwargs
         )
 
@@ -306,7 +306,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'GET', '/users/show.json', *args,
+            self, 'GET', '/users/show', *args,
             allowed_param=['id', 'user_id', 'screen_name'], **kwargs
         )
 
@@ -318,7 +318,7 @@ class API:
                             'link_color', 'widget_type', 'dnt'
         """
         return bind_api(
-            self, 'GET', '/statuses/oembed.json', *args,
+            self, 'GET', '/statuses/oembed', *args,
             allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
                            'omit_script', 'align', 'related', 'lang', 'theme',
                            'link_color', 'widget_type', 'dnt'], **kwargs
@@ -331,7 +331,7 @@ class API:
                             'tweet_mode'
         """
         return bind_api(
-            self, 'POST', '/users/lookup.json', list_to_csv(user_ids),
+            self, 'POST', '/users/lookup', list_to_csv(user_ids),
             list_to_csv(screen_names), *args,
             allowed_param=['user_id', 'screen_name', 'include_entities',
                            'tweet_mode'], **kwargs
@@ -348,7 +348,7 @@ class API:
             :allowed_param: 'q', 'count', 'page'
         """
         return bind_api(
-            self, 'GET', '/users/search.json', *args,
+            self, 'GET', '/users/search', *args,
             require_auth=True,
             allowed_param=['q', 'count', 'page'], **kwargs
         )
@@ -359,7 +359,7 @@ class API:
             :allowed_param: 'id'
         """
         return bind_api(
-            self, 'GET', '/direct_messages/events/show.json', *args,
+            self, 'GET', '/direct_messages/events/show', *args,
             allowed_param=['id'],
             require_auth=True, **kwargs
         )
@@ -371,7 +371,7 @@ class API:
             :allowed_param: 'count', 'cursor'
         """
         return bind_api(
-            self, 'GET', '/direct_messages/events/list.json', *args,
+            self, 'GET', '/direct_messages/events/list', *args,
             allowed_param=['count', 'cursor'],
             require_auth=True, **kwargs
         )
@@ -406,7 +406,7 @@ class API:
         if ctas is not None:
             message_data['ctas'] = ctas
         return bind_api(
-            self, 'POST', '/direct_messages/events/new.json',
+            self, 'POST', '/direct_messages/events/new',
             require_auth=True, 
             json_payload=json_payload, **kwargs
         )
@@ -416,7 +416,7 @@ class API:
             :allowed_param: 'id'
         """
         return bind_api(
-            self, 'DELETE', '/direct_messages/events/destroy.json', *args,
+            self, 'DELETE', '/direct_messages/events/destroy', *args,
             allowed_param=['id'],
             require_auth=True, **kwargs
         )
@@ -427,7 +427,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name', 'follow'
         """
         return bind_api(
-            self, 'POST', '/friendships/create.json', *args,
+            self, 'POST', '/friendships/create', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'follow'],
             require_auth=True, **kwargs
         )
@@ -438,7 +438,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'POST', '/friendships/destroy.json', *args,
+            self, 'POST', '/friendships/destroy', *args,
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True, **kwargs
         )
@@ -450,7 +450,7 @@ class API:
                             'target_screen_name'
         """
         return bind_api(
-            self, 'GET', '/friendships/show.json', *args,
+            self, 'GET', '/friendships/show', *args,
             allowed_param=['source_id', 'source_screen_name',
                            'target_id', 'target_screen_name'], **kwargs
         )
@@ -461,7 +461,7 @@ class API:
             :allowed_param: 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'GET', '/friendships/lookup.json', list_to_csv(user_ids),
+            self, 'GET', '/friendships/lookup', list_to_csv(user_ids),
             list_to_csv(screen_names),
             allowed_param=['user_id', 'screen_name'],
             require_auth=True, **kwargs
@@ -474,7 +474,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name', 'cursor'
         """
         return bind_api(
-            self, 'GET', '/friends/ids.json', *args,
+            self, 'GET', '/friends/ids', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor'], **kwargs
         )
 
@@ -486,7 +486,7 @@ class API:
                             'skip_status', 'include_user_entities'
         """
         return bind_api(
-            self, 'GET', '/friends/list.json', *args,
+            self, 'GET', '/friends/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
                            'skip_status', 'include_user_entities'], **kwargs
         )
@@ -498,7 +498,7 @@ class API:
             :allowed_param: 'cursor'
         """
         return bind_api(
-            self, 'GET', '/friendships/incoming.json', *args,
+            self, 'GET', '/friendships/incoming', *args,
             allowed_param=['cursor'], **kwargs
         )
 
@@ -509,7 +509,7 @@ class API:
             :allowed_param: 'cursor'
         """
         return bind_api(
-            self, 'GET', '/friendships/outgoing.json', *args,
+            self, 'GET', '/friendships/outgoing', *args,
             allowed_param=['cursor'], **kwargs
         )
 
@@ -520,7 +520,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'count'
         """
         return bind_api(
-            self, 'GET', '/followers/ids.json', *args,
+            self, 'GET', '/followers/ids', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count'],
             **kwargs
         )
@@ -533,7 +533,7 @@ class API:
                             'skip_status', 'include_user_entities'
         """
         return bind_api(
-            self, 'GET', '/followers/list.json', *args,
+            self, 'GET', '/followers/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
                            'skip_status', 'include_user_entities'], **kwargs
         )
@@ -542,7 +542,7 @@ class API:
     def get_settings(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
         return bind_api(
-            self, 'GET', '/account/settings.json', *args,
+            self, 'GET', '/account/settings', *args,
             use_cache=False, **kwargs
         )
 
@@ -555,7 +555,7 @@ class API:
                             'allow_contributor_request', 'lang'
         """
         return bind_api(
-            self, 'POST', '/account/settings.json', *args,
+            self, 'POST', '/account/settings', *args,
             allowed_param=['sleep_time_enabled', 'start_sleep_time',
                            'end_sleep_time', 'time_zone',
                            'trend_location_woeid',
@@ -572,7 +572,7 @@ class API:
             kwargs['include_email'] = str(kwargs['include_email']).lower()
         try:
             return bind_api(
-                self, 'GET', '/account/verify_credentials.json',
+                self, 'GET', '/account/verify_credentials',
                 require_auth=True,
                 allowed_param=['include_entities', 'skip_status',
                                'include_email'], **kwargs
@@ -588,7 +588,7 @@ class API:
             :allowed_param: 'resources'
         """
         return bind_api(
-            self, 'GET', '/application/rate_limit_status.json', *args,
+            self, 'GET', '/application/rate_limit_status', *args,
             allowed_param=['resources'],
             use_cache=False, **kwargs
         )
@@ -600,7 +600,7 @@ class API:
         """
         headers, post_data = API._pack_image(filename, 700, f=file_)
         return bind_api(
-            self, 'POST', '/account/update_profile_image.json', *args,
+            self, 'POST', '/account/update_profile_image', *args,
             allowed_param=['include_entities', 'skip_status'],
             require_auth=True,
             post_data=post_data, headers=headers, **kwargs
@@ -614,7 +614,7 @@ class API:
         headers, post_data = API._pack_image(filename, 700,
                                              form_field='banner', f=f)
         return bind_api(
-            self, 'POST', '/account/update_profile_banner.json',
+            self, 'POST', '/account/update_profile_banner',
             allowed_param=['width', 'height', 'offset_left', 'offset_right'],
             require_auth=True,
             post_data=post_data, headers=headers
@@ -627,7 +627,7 @@ class API:
                             'profile_link_color'
         """
         return bind_api(
-            self, 'POST', '/account/update_profile.json', *args,
+            self, 'POST', '/account/update_profile', *args,
             allowed_param=['name', 'url', 'location', 'description',
                            'profile_link_color'],
             require_auth=True, **kwargs
@@ -641,7 +641,7 @@ class API:
                             'since_id'
         """
         return bind_api(
-            self, 'GET', '/favorites/list.json', *args,
+            self, 'GET', '/favorites/list', *args,
             allowed_param=['screen_name', 'user_id', 'max_id', 'count',
                            'since_id'], **kwargs
         )
@@ -652,7 +652,7 @@ class API:
             :allowed_param: 'id'
         """
         return bind_api(
-            self, 'POST', '/favorites/create.json', *args,
+            self, 'POST', '/favorites/create', *args,
             allowed_param=['id'],
             require_auth=True, **kwargs
         )
@@ -663,7 +663,7 @@ class API:
             :allowed_param: 'id'
         """
         return bind_api(
-            self, 'POST', '/favorites/destroy.json', *args,
+            self, 'POST', '/favorites/destroy', *args,
             allowed_param=['id'],
             require_auth=True, **kwargs
         )
@@ -674,7 +674,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'POST', '/blocks/create.json', *args,
+            self, 'POST', '/blocks/create', *args,
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True, **kwargs
         )
@@ -685,7 +685,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'POST', '/blocks/destroy.json', *args,
+            self, 'POST', '/blocks/destroy', *args,
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True, **kwargs
         )
@@ -697,7 +697,7 @@ class API:
             :allowed_param: 'cursor'
         """
         return bind_api(
-            self, 'GET', '/mutes/users/ids.json', *args,
+            self, 'GET', '/mutes/users/ids', *args,
             allowed_param=['cursor'],
             require_auth=True, **kwargs
         )
@@ -709,7 +709,7 @@ class API:
             :allowed_param: 'cursor', 'include_entities', 'skip_status'
         """
         return bind_api(
-            self, 'GET', '/mutes/users/list.json', *args,
+            self, 'GET', '/mutes/users/list', *args,
             allowed_param=['cursor', 'include_entities', 'skip_status'],
             required_auth=True, **kwargs
         )
@@ -720,7 +720,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'POST', '/mutes/users/create.json', *args,
+            self, 'POST', '/mutes/users/create', *args,
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True, **kwargs
         )
@@ -731,7 +731,7 @@ class API:
             :allowed_param: 'id', 'user_id', 'screen_name'
         """
         return bind_api(
-            self, 'POST', '/mutes/users/destroy.json', *args,
+            self, 'POST', '/mutes/users/destroy', *args,
             allowed_param=['id', 'user_id', 'screen_name'],
             require_auth=True, **kwargs
         )
@@ -743,7 +743,7 @@ class API:
             :allowed_param: 'cursor'
         """
         return bind_api(
-            self, 'GET', '/blocks/list.json', *args,
+            self, 'GET', '/blocks/list', *args,
             allowed_param=['cursor'],
             require_auth=True, **kwargs
         )
@@ -755,7 +755,7 @@ class API:
             :allowed_param: 'cursor'
         """
         return bind_api(
-            self, 'GET', '/blocks/ids.json', *args,
+            self, 'GET', '/blocks/ids', *args,
             allowed_param=['cursor'],
             require_auth=True, **kwargs
         )
@@ -766,7 +766,7 @@ class API:
             :allowed_param: 'user_id', 'screen_name', 'perform_block'
         """
         return bind_api(
-            self, 'POST', '/users/report_spam.json', *args,
+            self, 'POST', '/users/report_spam', *args,
             allowed_param=['user_id', 'screen_name', 'perform_block'],
             require_auth=True, **kwargs
         )
@@ -775,7 +775,7 @@ class API:
     def saved_searches(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list """
         return bind_api(
-            self, 'GET', '/saved_searches/list.json', *args,
+            self, 'GET', '/saved_searches/list', *args,
             require_auth=True, **kwargs
         )
 
@@ -785,7 +785,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'GET', f'/saved_searches/show/{saved_search_id}.json', *args,
+            self, 'GET', f'/saved_searches/show/{saved_search_id}', *args,
             require_auth=True, **kwargs
         )
 
@@ -795,7 +795,7 @@ class API:
             :allowed_param: 'query'
         """
         return bind_api(
-            self, 'POST', '/saved_searches/create.json', *args,
+            self, 'POST', '/saved_searches/create', *args,
             allowed_param=['query'],
             require_auth=True, **kwargs
         )
@@ -806,7 +806,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'POST', f'/saved_searches/destroy/{saved_search_id}.json',
+            self, 'POST', f'/saved_searches/destroy/{saved_search_id}',
             *args,
             require_auth=True, **kwargs
         )
@@ -817,7 +817,7 @@ class API:
             :allowed_param: 'name', 'mode', 'description'
         """
         return bind_api(
-            self, 'POST', '/lists/create.json', *args,
+            self, 'POST', '/lists/create', *args,
             allowed_param=['name', 'mode', 'description'],
             require_auth=True, **kwargs
         )
@@ -828,7 +828,7 @@ class API:
             :allowed_param: 'owner_screen_name', 'owner_id', 'list_id', 'slug'
         """
         return bind_api(
-            self, 'POST', '/lists/destroy.json', *args,
+            self, 'POST', '/lists/destroy', *args,
             allowed_param=['owner_screen_name', 'owner_id', 'list_id', 'slug'],
             require_auth=True, **kwargs
         )
@@ -840,7 +840,7 @@ class API:
                             'owner_screen_name', 'owner_id'
         """
         return bind_api(
-            self, 'POST', '/lists/update.json', *args,
+            self, 'POST', '/lists/update', *args,
             allowed_param=['list_id', 'slug', 'name', 'mode', 'description',
                            'owner_screen_name', 'owner_id'],
             require_auth=True, **kwargs
@@ -852,7 +852,7 @@ class API:
             :allowed_param: 'screen_name', 'user_id', 'reverse'
         """
         return bind_api(
-            self, 'GET', '/lists/list.json', *args,
+            self, 'GET', '/lists/list', *args,
             allowed_param=['screen_name', 'user_id', 'reverse'],
             require_auth=True, **kwargs
         )
@@ -865,7 +865,7 @@ class API:
                             'cursor', 'count'
         """
         return bind_api(
-            self, 'GET', '/lists/memberships.json', *args,
+            self, 'GET', '/lists/memberships', *args,
             allowed_param=['screen_name', 'user_id', 'filter_to_owned_lists',
                            'cursor', 'count'],
             require_auth=True, **kwargs
@@ -878,7 +878,7 @@ class API:
             :allowed_param: 'user_id', 'screen_name', 'count', 'cursor'
         """
         return bind_api(
-            self, 'GET', '/lists/ownerships.json', *args,
+            self, 'GET', '/lists/ownerships', *args,
             allowed_param=['user_id', 'screen_name', 'count', 'cursor'],
             require_auth=True, **kwargs
         )
@@ -890,7 +890,7 @@ class API:
             :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
         """
         return bind_api(
-            self, 'GET', '/lists/subscriptions.json', *args,
+            self, 'GET', '/lists/subscriptions', *args,
             allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
             require_auth=True, **kwargs
         )
@@ -904,7 +904,7 @@ class API:
                             'include_rts'
         """
         return bind_api(
-            self, 'GET', '/lists/statuses.json', *args,
+            self, 'GET', '/lists/statuses', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'since_id', 'max_id', 'count', 'include_entities',
                            'include_rts'], **kwargs
@@ -916,7 +916,7 @@ class API:
             :allowed_param: 'owner_screen_name', 'owner_id', 'slug', 'list_id'
         """
         return bind_api(
-            self, 'GET', '/lists/show.json', *args,
+            self, 'GET', '/lists/show', *args,
             allowed_param=['owner_screen_name', 'owner_id', 'slug', 'list_id'],
             **kwargs
         )
@@ -928,7 +928,7 @@ class API:
                             'owner_id', 'slug', 'list_id'
         """
         return bind_api(
-            self, 'POST', '/lists/members/create.json', *args,
+            self, 'POST', '/lists/members/create', *args,
             allowed_param=['screen_name', 'user_id', 'owner_screen_name',
                            'owner_id', 'slug', 'list_id'],
             require_auth=True, **kwargs
@@ -941,7 +941,7 @@ class API:
                             'owner_id', 'slug', 'list_id'
         """
         return bind_api(
-            self, 'POST', '/lists/members/destroy.json', *args,
+            self, 'POST', '/lists/members/destroy', *args,
             allowed_param=['screen_name', 'user_id', 'owner_screen_name',
                            'owner_id', 'slug', 'list_id'],
             require_auth=True, **kwargs
@@ -956,7 +956,7 @@ class API:
                             'owner_id', 'owner_screen_name'
         """
         return bind_api(
-            self, 'POST', '/lists/members/create_all.json',
+            self, 'POST', '/lists/members/create_all',
             list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
             owner_id, owner_screen_name,
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
@@ -973,7 +973,7 @@ class API:
                             'owner_id', 'owner_screen_name'
         """
         return bind_api(
-            self, 'POST', '/lists/members/destroy_all.json',
+            self, 'POST', '/lists/members/destroy_all',
             list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
             owner_id, owner_screen_name,
             allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
@@ -989,7 +989,7 @@ class API:
                             'cursor'
         """
         return bind_api(
-            self, 'GET', '/lists/members.json', *args,
+            self, 'GET', '/lists/members', *args,
             allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id',
                            'cursor'], **kwargs
         )
@@ -1001,7 +1001,7 @@ class API:
                             'owner_screen_name', 'owner_id'
         """
         return bind_api(
-            self, 'GET', '/lists/members/show.json', *args,
+            self, 'GET', '/lists/members/show', *args,
             allowed_param=['list_id', 'slug', 'user_id', 'screen_name',
                            'owner_screen_name', 'owner_id'], **kwargs
         )
@@ -1012,7 +1012,7 @@ class API:
             :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id'
         """
         return bind_api(
-            self, 'POST', '/lists/subscribers/create.json', *args,
+            self, 'POST', '/lists/subscribers/create', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
             require_auth=True, **kwargs
         )
@@ -1023,7 +1023,7 @@ class API:
             :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id'
         """
         return bind_api(
-            self, 'POST', '/lists/subscribers/destroy.json', *args,
+            self, 'POST', '/lists/subscribers/destroy', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
             require_auth=True, **kwargs
         )
@@ -1037,7 +1037,7 @@ class API:
                             'skip_status'
         """
         return bind_api(
-            self, 'GET', '/lists/subscribers.json', *args,
+            self, 'GET', '/lists/subscribers', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'cursor', 'count', 'include_entities',
                            'skip_status'], **kwargs
@@ -1050,7 +1050,7 @@ class API:
                             'owner_id', 'list_id', 'user_id'
         """
         return bind_api(
-            self, 'GET', '/lists/subscribers/show.json', *args,
+            self, 'GET', '/lists/subscribers/show', *args,
             allowed_param=['owner_screen_name', 'slug', 'screen_name',
                            'owner_id', 'list_id', 'user_id'], **kwargs
         )
@@ -1058,7 +1058,7 @@ class API:
     @payload('json')
     def trends_available(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available """
-        return bind_api(self, 'GET', '/trends/available.json', *args, **kwargs)
+        return bind_api(self, 'GET', '/trends/available', *args, **kwargs)
 
     @payload('json')
     def trends_place(self, *args, **kwargs):
@@ -1066,7 +1066,7 @@ class API:
             :allowed_param: 'id', 'exclude'
         """
         return bind_api(
-            self, 'GET', '/trends/place.json', *args,
+            self, 'GET', '/trends/place', *args,
             allowed_param=['id', 'exclude'], **kwargs
         )
 
@@ -1076,7 +1076,7 @@ class API:
             :allowed_param: 'lat', 'long'
         """
         return bind_api(
-            self, 'GET', '/trends/closest.json', *args,
+            self, 'GET', '/trends/closest', *args,
             allowed_param=['lat', 'long'], **kwargs
         )
 
@@ -1089,7 +1089,7 @@ class API:
                             'include_entities'
         """
         return bind_api(
-            self, 'GET', '/search/tweets.json', *args,
+            self, 'GET', '/search/tweets', *args,
             allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
                            'max_id', 'until', 'result_type', 'count',
                            'include_entities'], **kwargs
@@ -1103,7 +1103,7 @@ class API:
                             'next'
         """
         return bind_api(
-            self, 'GET', f'/tweets/search/30day/{environment_name}.json',
+            self, 'GET', f'/tweets/search/30day/{environment_name}',
             *args,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1118,7 +1118,7 @@ class API:
                             'next'
         """
         return bind_api(
-            self, 'GET', f'/tweets/search/fullarchive/{environment_name}.json',
+            self, 'GET', f'/tweets/search/fullarchive/{environment_name}',
             *args,
             allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
                            'next'],
@@ -1132,7 +1132,7 @@ class API:
                             'max_results'
         """
         return bind_api(
-            self, 'GET', '/geo/reverse_geocode.json', *args,
+            self, 'GET', '/geo/reverse_geocode', *args,
             allowed_param=['lat', 'long', 'accuracy', 'granularity',
                            'max_results'], **kwargs
         )
@@ -1143,7 +1143,7 @@ class API:
             :allowed_param:
         """
         return bind_api(
-            self, 'GET', f'/geo/id/{place_id}.json', *args, **kwargs
+            self, 'GET', f'/geo/id/{place_id}', *args, **kwargs
         )
 
     @payload('place', list=True)
@@ -1154,7 +1154,7 @@ class API:
 
         """
         return bind_api(
-            self, 'GET', '/geo/search.json', *args,
+            self, 'GET', '/geo/search', *args,
             allowed_param=['lat', 'long', 'query', 'ip', 'granularity',
                            'accuracy', 'max_results', 'contained_within'],
             **kwargs
@@ -1164,7 +1164,7 @@ class API:
     def supported_languages(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
         return bind_api(
-            self, 'GET', '/help/languages.json', *args,
+            self, 'GET', '/help/languages', *args,
             require_auth=True, **kwargs
         )
 
@@ -1172,7 +1172,7 @@ class API:
     def configuration(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration """
         return bind_api(
-            self, 'GET', '/help/configuration.json', *args,
+            self, 'GET', '/help/configuration', *args,
             require_auth=True, **kwargs
         )
 
