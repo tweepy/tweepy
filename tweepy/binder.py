@@ -28,10 +28,10 @@ def bind_api(api, method, path, *args, allowed_param=[], params=None,
 
     # Build the request URL
     if upload_api:
-        url = f'{api.upload_root}{path}.json'
+        url = f'{api.upload_root}/{path}.json'
         full_url = 'https://' + api.upload_host + url
     else:
-        url = f'{api.api_root}{path}.json'
+        url = f'{api.api_root}/{path}.json'
         full_url = 'https://' + api.host + url
 
     if params is None:
