@@ -15,7 +15,7 @@ from tweepy.models import Model
 log = logging.getLogger(__name__)
 
 
-def bind_api(api, method, path, *args, allowed_param=[], params=None,
+def bind_api(api, method, endpoint, *args, allowed_param=[], params=None,
              headers=None, json_payload=None, parser=None, payload_list=False,
              payload_type=None, post_data=None, require_auth=False,
              return_cursors=False, upload_api=False, use_cache=True, **kwargs):
@@ -28,11 +28,11 @@ def bind_api(api, method, path, *args, allowed_param=[], params=None,
 
     # Build the request URL
     if upload_api:
-        url = f'{api.upload_root}/{path}.json'
-        full_url = 'https://' + api.upload_host + url
+        path = f'{api.upload_root}/{endpoint}.json'
+        url = 'https://' + api.upload_host + path
     else:
-        url = f'{api.api_root}/{path}.json'
-        full_url = 'https://' + api.host + url
+        path = f'{api.api_root}/{endpoint}.json'
+        url = 'https://' + api.host + path
 
     if params is None:
         params = {}
@@ -57,7 +57,7 @@ def bind_api(api, method, path, *args, allowed_param=[], params=None,
     # Query the cache if one is available
     # and this request uses a GET method.
     if use_cache and api.cache and method == 'GET':
-        cache_result = api.cache.get(f'{url}?{urlencode(params)}')
+        cache_result = api.cache.get(f'{path}?{urlencode(params)}')
         # if cache result found and not expired, return it
         if cache_result:
             # must restore api reference
@@ -102,7 +102,7 @@ def bind_api(api, method, path, *args, allowed_param=[], params=None,
             # Execute request
             try:
                 resp = session.request(
-                    method, full_url, params=params, headers=headers,
+                    method, url, params=params, headers=headers,
                     data=post_data, json=json_payload, timeout=api.timeout,
                     auth=auth, proxies=api.proxy
                 )
@@ -160,7 +160,7 @@ def bind_api(api, method, path, *args, allowed_param=[], params=None,
 
         # Store result into cache if one is available.
         if use_cache and api.cache and method == 'GET' and result:
-            api.cache.store(f'{url}?{urlencode(params)}', result)
+            api.cache.store(f'{path}?{urlencode(params)}', result)
 
         return result
     finally:
