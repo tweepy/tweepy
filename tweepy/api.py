@@ -326,7 +326,8 @@ class API:
             'GET', 'statuses/show', *args,
             allowed_param=['id', 'trim_user', 'include_my_retweet',
                            'include_entities', 'include_ext_alt_text',
-                           'include_card_uri'], **kwargs
+                           'include_card_uri'],
+            require_auth=True, **kwargs
         )
 
     @payload('status')
