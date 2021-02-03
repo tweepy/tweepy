@@ -12,13 +12,32 @@ from urllib.parse import urlencode
 
 import requests
 
-from tweepy.binder import pagination, payload
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 log = logging.getLogger(__name__)
+
+
+def pagination(mode):
+    def decorator(method):
+        method.pagination_mode = mode
+        return method
+    return decorator
+
+
+def payload(payload_type, **payload_kwargs):
+    payload_list = payload_kwargs.get('list', False)
+    def decorator(method):
+        def wrapper(*args, **kwargs):
+            kwargs['payload_list'] = payload_list
+            kwargs['payload_type'] = payload_type
+            return method(*args, **kwargs)
+        wrapper.payload_list = payload_list
+        wrapper.payload_type = payload_type
+        return wrapper
+    return decorator
 
 
 class API:
