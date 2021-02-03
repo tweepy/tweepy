@@ -5,9 +5,9 @@
 import logging
 import sys
 import time
+from urllib.parse import urlencode
 
 import requests
-from urllib.parse import urlencode
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
 from tweepy.models import Model
