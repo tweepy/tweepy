@@ -287,7 +287,8 @@ class API:
             'GET', 'statuses/user_timeline', *args,
             allowed_param=['user_id', 'screen_name', 'since_id', 'count',
                            'max_id', 'trim_user', 'exclude_replies',
-                           'include_rts'], **kwargs
+                           'include_rts'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='id')
@@ -472,7 +473,8 @@ class API:
         """
         return self.request(
             'GET', 'statuses/retweeters/ids', *args,
-            allowed_param=['id', 'cursor', 'stringify_ids'], **kwargs
+            allowed_param=['id', 'cursor', 'stringify_ids'],
+            require_auth=True, **kwargs
         )
 
     @payload('user')
@@ -482,7 +484,8 @@ class API:
         """
         return self.request(
             'GET', 'users/show', *args,
-            allowed_param=['id', 'user_id', 'screen_name'], **kwargs
+            allowed_param=['id', 'user_id', 'screen_name'],
+            require_auth=True, **kwargs
         )
 
     @payload('json')
@@ -509,7 +512,8 @@ class API:
             'POST', 'users/lookup', list_to_csv(user_ids),
             list_to_csv(screen_names), *args,
             allowed_param=['user_id', 'screen_name', 'include_entities',
-                           'tweet_mode'], **kwargs
+                           'tweet_mode'],
+            require_auth=True, **kwargs
         )
 
     def me(self):
@@ -627,7 +631,8 @@ class API:
         return self.request(
             'GET', 'friendships/show', *args,
             allowed_param=['source_id', 'source_screen_name',
-                           'target_id', 'target_screen_name'], **kwargs
+                           'target_id', 'target_screen_name'],
+            require_auth=True, **kwargs
         )
 
     @payload('relationship', list=True)
@@ -650,7 +655,8 @@ class API:
         """
         return self.request(
             'GET', 'friends/ids', *args,
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor'], **kwargs
+            allowed_param=['id', 'user_id', 'screen_name', 'cursor'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='cursor')
@@ -663,7 +669,8 @@ class API:
         return self.request(
             'GET', 'friends/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities'], **kwargs
+                           'skip_status', 'include_user_entities'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='cursor')
@@ -674,7 +681,8 @@ class API:
         """
         return self.request(
             'GET', 'friendships/incoming', *args,
-            allowed_param=['cursor'], **kwargs
+            allowed_param=['cursor'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='cursor')
@@ -685,7 +693,8 @@ class API:
         """
         return self.request(
             'GET', 'friendships/outgoing', *args,
-            allowed_param=['cursor'], **kwargs
+            allowed_param=['cursor'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='cursor')
@@ -697,7 +706,7 @@ class API:
         return self.request(
             'GET', 'followers/ids', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count'],
-            **kwargs
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='cursor')
@@ -710,7 +719,8 @@ class API:
         return self.request(
             'GET', 'followers/list', *args,
             allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities'], **kwargs
+                           'skip_status', 'include_user_entities'],
+            require_auth=True, **kwargs
         )
 
     @payload('json')
@@ -718,7 +728,7 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
         return self.request(
             'GET', 'account/settings', *args,
-            use_cache=False, **kwargs
+            require_auth=True, use_cache=False, **kwargs
         )
 
     @payload('json')
@@ -735,7 +745,7 @@ class API:
                            'end_sleep_time', 'time_zone',
                            'trend_location_woeid',
                            'allow_contributor_request', 'lang'],
-            use_cache=False, **kwargs
+            require_auth=True, use_cache=False, **kwargs
         )
 
     @payload('user')
@@ -765,7 +775,7 @@ class API:
         return self.request(
             'GET', 'application/rate_limit_status', *args,
             allowed_param=['resources'],
-            use_cache=False, **kwargs
+            require_auth=True, use_cache=False, **kwargs
         )
 
     @payload('user')
@@ -818,7 +828,8 @@ class API:
         return self.request(
             'GET', 'favorites/list', *args,
             allowed_param=['screen_name', 'user_id', 'max_id', 'count',
-                           'since_id'], **kwargs
+                           'since_id'],
+            require_auth=True, **kwargs
         )
 
     @payload('status')
@@ -1081,7 +1092,8 @@ class API:
             'GET', 'lists/statuses', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'since_id', 'max_id', 'count', 'include_entities',
-                           'include_rts'], **kwargs
+                           'include_rts'],
+            require_auth=True, **kwargs
         )
 
     @payload('list')
@@ -1092,7 +1104,7 @@ class API:
         return self.request(
             'GET', 'lists/show', *args,
             allowed_param=['owner_screen_name', 'owner_id', 'slug', 'list_id'],
-            **kwargs
+            require_auth=True, **kwargs
         )
 
     @payload('list')
@@ -1163,7 +1175,8 @@ class API:
         return self.request(
             'GET', 'lists/members', *args,
             allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id',
-                           'cursor'], **kwargs
+                           'cursor'],
+            require_auth=True, **kwargs
         )
 
     @payload('user')
@@ -1175,7 +1188,8 @@ class API:
         return self.request(
             'GET', 'lists/members/show', *args,
             allowed_param=['list_id', 'slug', 'user_id', 'screen_name',
-                           'owner_screen_name', 'owner_id'], **kwargs
+                           'owner_screen_name', 'owner_id'],
+            require_auth=True, **kwargs
         )
 
     @payload('list')
@@ -1212,7 +1226,8 @@ class API:
             'GET', 'lists/subscribers', *args,
             allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
                            'cursor', 'count', 'include_entities',
-                           'skip_status'], **kwargs
+                           'skip_status'],
+            require_auth=True, **kwargs
         )
 
     @payload('user')
@@ -1224,13 +1239,15 @@ class API:
         return self.request(
             'GET', 'lists/subscribers/show', *args,
             allowed_param=['owner_screen_name', 'slug', 'screen_name',
-                           'owner_id', 'list_id', 'user_id'], **kwargs
+                           'owner_id', 'list_id', 'user_id'],
+            require_auth=True, **kwargs
         )
 
     @payload('json')
     def trends_available(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available """
-        return self.request('GET', 'trends/available', *args, **kwargs)
+        return self.request('GET', 'trends/available', *args,
+                            require_auth=True, **kwargs)
 
     @payload('json')
     def trends_place(self, *args, **kwargs):
@@ -1239,7 +1256,8 @@ class API:
         """
         return self.request(
             'GET', 'trends/place', *args,
-            allowed_param=['id', 'exclude'], **kwargs
+            allowed_param=['id', 'exclude'],
+            require_auth=True, **kwargs
         )
 
     @payload('json')
@@ -1249,7 +1267,8 @@ class API:
         """
         return self.request(
             'GET', 'trends/closest', *args,
-            allowed_param=['lat', 'long'], **kwargs
+            allowed_param=['lat', 'long'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='id')
@@ -1264,7 +1283,8 @@ class API:
             'GET', 'search/tweets', *args,
             allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
                            'max_id', 'until', 'result_type', 'count',
-                           'include_entities'], **kwargs
+                           'include_entities'],
+            require_auth=True, **kwargs
         )
 
     @pagination(mode='next')
@@ -1304,7 +1324,8 @@ class API:
         return self.request(
             'GET', 'geo/reverse_geocode', *args,
             allowed_param=['lat', 'long', 'accuracy', 'granularity',
-                           'max_results'], **kwargs
+                           'max_results'],
+            require_auth=True, **kwargs
         )
 
     @payload('place')
@@ -1312,7 +1333,8 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
             :allowed_param:
         """
-        return self.request('GET', f'geo/id/{place_id}', *args, **kwargs)
+        return self.request('GET', f'geo/id/{place_id}', *args,
+                            require_auth=True, **kwargs)
 
     @payload('place', list=True)
     def geo_search(self, *args, **kwargs):
@@ -1325,7 +1347,7 @@ class API:
             'GET', 'geo/search', *args,
             allowed_param=['lat', 'long', 'query', 'ip', 'granularity',
                            'accuracy', 'max_results', 'contained_within'],
-            **kwargs
+            require_auth=True, **kwargs
         )
 
     @payload('json')
