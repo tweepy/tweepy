@@ -167,8 +167,7 @@ def execute(api, method, path, *args, allowed_param=[], params=None,
         session.close()
 
 
-def bind_api(*args, **kwargs):
-    api = kwargs.pop('api')
+def bind_api(api, *args, **kwargs):
     http_method = kwargs.pop('method', 'GET')
     path = kwargs.pop('path')
     return execute(api, http_method, path, *args, **kwargs)
