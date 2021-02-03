@@ -93,6 +93,8 @@ class API:
                 f' It is currently a {type(self.parser)}.'
             )
 
+        self.session = requests.Session()
+
     def bind_api(self, method, endpoint, *args, allowed_param=[], params=None,
                  headers=None, json_payload=None, parser=None, payload_list=False,
                  payload_type=None, post_data=None, require_auth=False,
@@ -152,8 +154,6 @@ class API:
         remaining_calls = None
         reset_time = None
 
-        session = requests.Session()
-
         if parser is None:
             parser = self.parser
 
@@ -178,7 +178,7 @@ class API:
 
                 # Execute request
                 try:
-                    resp = session.request(
+                    resp = self.session.request(
                         method, url, params=params, headers=headers,
                         data=post_data, json=json_payload, timeout=self.timeout,
                         auth=auth, proxies=self.proxy
@@ -241,7 +241,7 @@ class API:
 
             return result
         finally:
-            session.close()
+            self.session.close()
 
     @pagination(mode='id')
     @payload('status', list=True)
