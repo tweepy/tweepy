@@ -180,7 +180,7 @@ class PageIterator(BaseIterator):
 
     def __init__(self, method, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
-        self.current_page = 0
+        self.current_page = 1
 
     def next(self):
         if self.limit > 0:
