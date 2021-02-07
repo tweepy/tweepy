@@ -181,6 +181,12 @@ class PageIterator(BaseIterator):
     def __init__(self, method, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
         self.current_page = 1
+        # Keep track of previous page of items to handle Twitter API issue with
+        # duplicate pages
+        # https://twittercommunity.com/t/odd-pagination-behavior-with-get-users-search/148502
+        # https://github.com/tweepy/tweepy/issues/1465
+        # https://github.com/tweepy/tweepy/issues/958
+        self.previous_items = []
 
     def next(self):
         if self.limit > 0:
@@ -188,9 +194,16 @@ class PageIterator(BaseIterator):
                 raise StopIteration
 
         items = self.method(page=self.current_page, *self.args, **self.kwargs)
+
         if len(items) == 0:
             raise StopIteration
+
+        for item in items:
+            if item in self.previous_items:
+                raise StopIteration
+
         self.current_page += 1
+        self.previous_items = items
         return items
 
     def prev(self):
