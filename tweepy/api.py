@@ -264,9 +264,6 @@ class API:
             :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
                             'include_ext_alt_text', 'include_card_uri'
         """
-        if 'map_' in kwargs:
-            kwargs['map'] = kwargs.pop('map_')
-
         return self.request(
             'GET', 'statuses/lookup', list_to_csv(id_), *args,
             allowed_param=['id', 'include_entities', 'trim_user', 'map',
