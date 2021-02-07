@@ -833,7 +833,8 @@ class API:
 
     @payload('saved_search', list=True)
     def saved_searches(self, *args, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list """
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
+        """
         return self.request('GET', 'saved_searches/list', *args, **kwargs)
 
     @payload('saved_search')
@@ -1066,7 +1067,8 @@ class API:
 
     @payload('json')
     def trends_available(self, *args, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available """
+        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available
+        """
         return self.request('GET', 'trends/available', *args, **kwargs)
 
     @payload('json')
@@ -1150,12 +1152,14 @@ class API:
 
     @payload('json')
     def supported_languages(self, *args, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
+        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages
+        """
         return self.request('GET', 'help/languages', *args, **kwargs)
 
     @payload('json')
     def configuration(self, *args, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration """
+        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration
+        """
         return self.request('GET', 'help/configuration', *args, **kwargs)
 
     """ Internal use only """
