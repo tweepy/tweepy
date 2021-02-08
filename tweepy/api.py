@@ -300,7 +300,8 @@ class API:
         """
         return self.request(
             'GET', 'statuses/retweets_of_me', endpoint_parameters=(
-                'since_id', 'max_id', 'count'
+                'count', 'since_id', 'max_id', 'trim_user', 'include_entities',
+                'include_user_entities'
             ), **kwargs
         )
 
