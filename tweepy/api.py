@@ -284,11 +284,11 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def mentions_timeline(self, *args, **kwargs):
+    def mentions_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
         """
         return self.request(
-            'GET', 'statuses/mentions_timeline', *args, endpoint_parameters=(
+            'GET', 'statuses/mentions_timeline', endpoint_parameters=(
                 'since_id', 'max_id', 'count'
             ), **kwargs
         )
