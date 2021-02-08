@@ -260,11 +260,11 @@ class API:
         )
 
     @payload('status', list=True)
-    def statuses_lookup(self, id_, *args, **kwargs):
+    def statuses_lookup(self, id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
         """
         return self.request(
-            'GET', 'statuses/lookup', list_to_csv(id_), *args,
+            'GET', 'statuses/lookup', list_to_csv(id), *args,
             endpoint_parameters=(
                 'id', 'include_entities', 'trim_user', 'map',
                 'include_ext_alt_text', 'include_card_uri'
