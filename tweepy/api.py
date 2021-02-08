@@ -295,11 +295,11 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def retweets_of_me(self, *args, **kwargs):
+    def retweets_of_me(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
         """
         return self.request(
-            'GET', 'statuses/retweets_of_me', *args, endpoint_parameters=(
+            'GET', 'statuses/retweets_of_me', endpoint_parameters=(
                 'since_id', 'max_id', 'count'
             ), **kwargs
         )
