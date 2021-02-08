@@ -131,6 +131,8 @@ class API:
                 continue
             if k in params:
                 raise TweepError(f'Multiple values for parameter {k} supplied!')
+            if k not in endpoint_parameters:
+                log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
 
         log.debug("PARAMS: %r", params)
