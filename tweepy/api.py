@@ -249,11 +249,11 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def home_timeline(self, *args, **kwargs):
+    def home_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
         """
         return self.request(
-            'GET', 'statuses/home_timeline', *args, endpoint_parameters=(
+            'GET', 'statuses/home_timeline', endpoint_parameters=(
                 'count', 'since_id', 'max_id', 'trim_user', 'exclude_replies',
                 'include_entities'
             ), **kwargs
