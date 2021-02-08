@@ -289,7 +289,7 @@ class API:
         """
         return self.request(
             'GET', 'statuses/mentions_timeline', endpoint_parameters=(
-                'since_id', 'max_id', 'count'
+                'count', 'since_id', 'max_id', 'trim_user', 'include_entities'
             ), **kwargs
         )
 
