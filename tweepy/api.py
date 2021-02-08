@@ -306,11 +306,11 @@ class API:
         )
 
     @payload('status')
-    def get_status(self, id, *args, **kwargs):
+    def get_status(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-show-id
         """
         return self.request(
-            'GET', 'statuses/show', id, *args, endpoint_parameters=(
+            'GET', 'statuses/show', id, endpoint_parameters=(
                 'id', 'trim_user', 'include_my_retweet', 'include_entities',
                 'include_ext_alt_text', 'include_card_uri'
             ), **kwargs
