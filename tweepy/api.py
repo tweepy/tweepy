@@ -317,14 +317,14 @@ class API:
         )
 
     @payload('status')
-    def update_status(self, *args, **kwargs):
+    def update_status(self, status, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
         """
         if 'media_ids' in kwargs:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
 
         return self.request(
-            'POST', 'statuses/update', *args, endpoint_parameters=(
+            'POST', 'statuses/update', status, *args, endpoint_parameters=(
                 'status', 'in_reply_to_status_id',
                 'auto_populate_reply_metadata', 'exclude_reply_user_ids',
                 'attachment_url', 'media_ids', 'possibly_sensitive', 'lat',
