@@ -392,11 +392,11 @@ class API:
         )
 
     @payload('status')
-    def destroy_status(self, id, *args, **kwargs):
+    def destroy_status(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
         """
         return self.request(
-            'POST', f'statuses/destroy/{id}', *args, endpoint_parameters=(
+            'POST', f'statuses/destroy/{id}', endpoint_parameters=(
                 'trim_user',
             ), **kwargs
         )
