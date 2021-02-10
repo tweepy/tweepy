@@ -465,7 +465,7 @@ class API:
         )
 
     @payload('user', list=True)
-    def lookup_users(self, user_id=None, screen_name=None, *args, **kwargs):
+    def lookup_users(self, *args, user_id=None, screen_name=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
