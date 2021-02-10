@@ -12,10 +12,9 @@ This page contains some basic documentation for the Tweepy module.
 =========================================
 
 .. class:: API([auth_handler=None], [host='api.twitter.com'], [cache=None], \
-               [api_root='/1'], , [retry_count=0], [retry_delay=0], \
-               [retry_errors=None], [timeout=60], [parser=ModelParser], \
-               [compression=False], [wait_on_rate_limit=False], \
-               [wait_on_rate_limit_notify=False], [proxy=None])
+               [retry_count=0], [retry_delay=0], [retry_errors=None], \
+               [timeout=60], [parser=ModelParser], \
+               [wait_on_rate_limit=False], [proxy=None])
 
    This class provides a wrapper for the API as provided by Twitter.
    The functions provided in this class are listed below.
@@ -23,19 +22,14 @@ This page contains some basic documentation for the Tweepy module.
    :param auth_handler: authentication handler to be used
    :param host: general API host
    :param cache: cache backend to use
-   :param api_root: general API path root
    :param retry_count: default number of retries to attempt when error occurs
    :param retry_delay: number of seconds to wait between retries
    :param retry_errors: which HTTP status codes to retry
    :param timeout: The maximum amount of time to wait for a response from
                    Twitter
    :param parser: The object to use for parsing the response from Twitter
-   :param compression: Whether or not to use GZIP compression for requests
    :param wait_on_rate_limit: Whether or not to automatically wait for rate
                               limits to replenish
-   :param wait_on_rate_limit_notify: Whether or not to print a notification
-                                     when Tweepy is waiting for rate limits to
-                                     replenish
    :param proxy: The full url to an HTTPS proxy to use for connecting to
                  Twitter.
 

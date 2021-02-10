@@ -1,0 +1,181 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "uri": "https://api.twitter.com/1.1/statuses/retweet/266367358078169089.json",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "content-length": [
+                        "5623"
+                    ],
+                    "last-modified": [
+                        "Fri, 15 Jan 2021 06:38:38 GMT"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_LyzWP2F2DfgEYb/vgq8KvA==\"; Max-Age=63072000; Expires=Sun, 15 Jan 2023 06:38:38 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A161069271866473095; Max-Age=63072000; Expires=Sun, 15 Jan 2023 06:38:38 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-response-time": [
+                        "81"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-connection-hash": [
+                        "f1d7e3c2c0b377370c9a9f5f3e3a1a63"
+                    ],
+                    "x-transaction": [
+                        "00cb6be50064bb0d"
+                    ],
+                    "date": [
+                        "Fri, 15 Jan 2021 06:38:38 GMT"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-xss-protection": [
+                        "0"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                },
+                "body": {
+                    "string": "{\"created_at\":\"Fri Jan 15 06:38:38 +0000 2021\",\"id\":1349969223154606081,\"id_str\":\"1349969223154606081\",\"text\":\"RT @Twitter: RT @TwitterEng: Bolstering our infrastructure. \\\"As  usage patterns change, Twitter can remain resilient.\\\" http:\\/\\/t.co\\/uML86B6s\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"Twitter\",\"name\":\"Twitter\",\"id\":783214,\"id_str\":\"783214\",\"indices\":[3,11]},{\"screen_name\":\"TwitterEng\",\"name\":\"Twitter Engineering\",\"id\":6844292,\"id_str\":\"6844292\",\"indices\":[16,27]}],\"urls\":[{\"url\":\"http:\\/\\/t.co\\/uML86B6s\",\"expanded_url\":\"https:\\/\\/engineering.twitter.com\\/2012\\/11\\/bolstering-our-infrastructure.html\",\"display_url\":\"engineering.twitter.com\\/2012\\/11\\/bolste\\u2026\",\"indices\":[119,139]}]},\"source\":\"\\u003ca href=\\\"https:\\/\\/github.com\\/tweepy\\/tweepy\\\" rel=\\\"nofollow\\\"\\u003eTesting for Tweepy\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"user\":{\"id\":1072250532645998596,\"id_str\":\"1072250532645998596\",\"name\":\"Tweepy Testing\",\"screen_name\":\"TweepyDev\",\"location\":\"\",\"description\":\"Account used to test Tweepy\",\"url\":\"https:\\/\\/t.co\\/XRfax6xExn\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/XRfax6xExn\",\"expanded_url\":\"https:\\/\\/github.com\\/tweepy\\/tweepy\",\"display_url\":\"github.com\\/tweepy\\/tweepy\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":2,\"friends_count\":6,\"listed_count\":0,\"created_at\":\"Mon Dec 10 22:03:43 +0000 2018\",\"favourites_count\":0,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":false,\"statuses_count\":6,\"lang\":null,\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"000000\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/abs.twimg.com\\/sticky\\/default_profile_images\\/default_profile_normal.png\",\"profile_image_url_https\":\"https:\\/\\/abs.twimg.com\\/sticky\\/default_profile_images\\/default_profile_normal.png\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/1072250532645998596\\/1610623608\",\"profile_link_color\":\"1DA1F2\",\"profile_sidebar_border_color\":\"000000\",\"profile_sidebar_fill_color\":\"000000\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":false,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":true,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"none\"},\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"retweeted_status\":{\"created_at\":\"Thu Nov 08 02:31:41 +0000 2012\",\"id\":266367358078169089,\"id_str\":\"266367358078169089\",\"text\":\"RT @TwitterEng: Bolstering our infrastructure. \\\"As  usage patterns change, Twitter can remain resilient.\\\" http:\\/\\/t.co\\/uML86B6s\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterEng\",\"name\":\"Twitter Engineering\",\"id\":6844292,\"id_str\":\"6844292\",\"indices\":[3,14]}],\"urls\":[{\"url\":\"http:\\/\\/t.co\\/uML86B6s\",\"expanded_url\":\"https:\\/\\/engineering.twitter.com\\/2012\\/11\\/bolstering-our-infrastructure.html\",\"display_url\":\"engineering.twitter.com\\/2012\\/11\\/bolste\\u2026\",\"indices\":[106,126]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"user\":{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"Twitter\",\"location\":\"everywhere\",\"description\":\"What's happening?!\",\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"expanded_url\":\"https:\\/\\/about.twitter.com\\/\",\"display_url\":\"about.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":58917395,\"friends_count\":29,\"listed_count\":87019,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":6373,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":13993,\"lang\":null,\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1308010958862905345\\/-SGZioPb_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1308010958862905345\\/-SGZioPb_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1609475315\",\"profile_link_color\":\"1B95E0\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":[14192329],\"is_quote_status\":false,\"retweet_count\":207,\"favorite_count\":140,\"favorited\":false,\"retweeted\":true,\"possibly_sensitive\":false,\"lang\":\"en\"},\"is_quote_status\":false,\"retweet_count\":207,\"favorite_count\":0,\"favorited\":false,\"retweeted\":true,\"possibly_sensitive\":false,\"lang\":\"en\"}"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "uri": "https://api.twitter.com/1.1/statuses/unretweet/266367358078169089.json",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "content-length": [
+                        "2715"
+                    ],
+                    "last-modified": [
+                        "Fri, 15 Jan 2021 06:38:39 GMT"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_19X+j+/SXzdFbC+FuVdyrg==\"; Max-Age=63072000; Expires=Sun, 15 Jan 2023 06:38:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A161069271900288258; Max-Age=63072000; Expires=Sun, 15 Jan 2023 06:38:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-response-time": [
+                        "42"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "x-connection-hash": [
+                        "e1af87e98df2241c6902858ee34748e8"
+                    ],
+                    "x-transaction": [
+                        "000dc8aa0052c478"
+                    ],
+                    "date": [
+                        "Fri, 15 Jan 2021 06:38:39 GMT"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-xss-protection": [
+                        "0"
+                    ],
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ]
+                },
+                "body": {
+                    "string": "{\"created_at\":\"Thu Nov 08 02:31:41 +0000 2012\",\"id\":266367358078169089,\"id_str\":\"266367358078169089\",\"text\":\"RT @TwitterEng: Bolstering our infrastructure. \\\"As  usage patterns change, Twitter can remain resilient.\\\" http:\\/\\/t.co\\/uML86B6s\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"TwitterEng\",\"name\":\"Twitter Engineering\",\"id\":6844292,\"id_str\":\"6844292\",\"indices\":[3,14]}],\"urls\":[{\"url\":\"http:\\/\\/t.co\\/uML86B6s\",\"expanded_url\":\"https:\\/\\/engineering.twitter.com\\/2012\\/11\\/bolstering-our-infrastructure.html\",\"display_url\":\"engineering.twitter.com\\/2012\\/11\\/bolste\\u2026\",\"indices\":[106,126]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"user\":{\"id\":783214,\"id_str\":\"783214\",\"name\":\"Twitter\",\"screen_name\":\"Twitter\",\"location\":\"everywhere\",\"description\":\"What's happening?!\",\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/TAXQpsHa5X\",\"expanded_url\":\"https:\\/\\/about.twitter.com\\/\",\"display_url\":\"about.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":58917395,\"friends_count\":29,\"listed_count\":87019,\"created_at\":\"Tue Feb 20 14:35:54 +0000 2007\",\"favourites_count\":6373,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":true,\"verified\":true,\"statuses_count\":13993,\"lang\":null,\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"ACDED6\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme18\\/bg.gif\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1308010958862905345\\/-SGZioPb_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1308010958862905345\\/-SGZioPb_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/783214\\/1609475315\",\"profile_link_color\":\"1B95E0\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"F6F6F6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"regular\"},\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":207,\"favorite_count\":140,\"favorited\":false,\"retweeted\":true,\"possibly_sensitive\":false,\"lang\":\"en\"}"
+                }
+            }
+        }
+    ]
+}

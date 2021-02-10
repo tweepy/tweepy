@@ -3,12 +3,41 @@
 # See LICENSE for details.
 
 import imghdr
+import logging
 import mimetypes
+import os
+import sys
+import time
+from urllib.parse import urlencode
 
-from tweepy.binder import bind_api, pagination
-from tweepy.error import TweepError
+import requests
+
+from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
+from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
+
+log = logging.getLogger(__name__)
+
+
+def pagination(mode):
+    def decorator(method):
+        method.pagination_mode = mode
+        return method
+    return decorator
+
+
+def payload(payload_type, **payload_kwargs):
+    payload_list = payload_kwargs.get('list', False)
+    def decorator(method):
+        def wrapper(*args, **kwargs):
+            kwargs['payload_list'] = payload_list
+            kwargs['payload_type'] = payload_type
+            return method(*args, **kwargs)
+        wrapper.payload_list = payload_list
+        wrapper.payload_type = payload_type
+        return wrapper
+    return decorator
 
 
 class API:
@@ -16,10 +45,8 @@ class API:
 
     def __init__(self, auth_handler=None,
                  host='api.twitter.com', upload_host='upload.twitter.com',
-                 cache=None, api_root='/1.1', upload_root='/1.1',
-                 retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-                 parser=None, compression=False, wait_on_rate_limit=False,
-                 wait_on_rate_limit_notify=False, proxy=''):
+                 cache=None, retry_count=0, retry_delay=0, retry_errors=None,
+                 timeout=60, parser=None, wait_on_rate_limit=False, proxy=''):
         """
         API instance constructor
 
@@ -29,8 +56,6 @@ class API:
         :param upload_host: url of the upload server,
                             default: 'upload.twitter.com'
         :param cache: Cache to query if a GET method is used, default: None
-        :param api_root: suffix of the api version, default: '/1.1'
-        :param upload_root: suffix of the upload version, default: '/1.1'
         :param retry_count: number of allowed retries, default: 0
         :param retry_delay: delay in second between retries, default: 0
         :param retry_errors: default: None
@@ -38,11 +63,8 @@ class API:
                         seconds, default: 60
         :param parser: ModelParser instance to parse the responses,
                        default: None
-        :param compression: If the response is compressed, default: False
         :param wait_on_rate_limit: If the api wait when it hits the rate limit,
                                    default: False
-        :param wait_on_rate_limit_notify: If the api print a notification when
-                                          the rate limit is hit, default: False
         :param proxy: Url to use as proxy during the HTTP request, default: ''
 
         :raise TypeError: If the given parser is not a ModelParser instance.
@@ -50,16 +72,12 @@ class API:
         self.auth = auth_handler
         self.host = host
         self.upload_host = upload_host
-        self.api_root = api_root
-        self.upload_root = upload_root
         self.cache = cache
-        self.compression = compression
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
         self.timeout = timeout
         self.wait_on_rate_limit = wait_on_rate_limit
-        self.wait_on_rate_limit_notify = wait_on_rate_limit_notify
         self.parser = parser or ModelParser()
         self.proxy = {}
         if proxy:
@@ -75,140 +93,249 @@ class API:
                 f' It is currently a {type(self.parser)}.'
             )
 
-    @property
-    def home_timeline(self):
+        self.session = requests.Session()
+
+    def request(
+        self, method, endpoint, *args, endpoint_parameters=(), params=None,
+        headers=None, json_payload=None, parser=None, payload_list=False,
+        payload_type=None, post_data=None, files=None, require_auth=True,
+        return_cursors=False, upload_api=False, use_cache=True, **kwargs
+    ):
+        # If authentication is required and no credentials
+        # are provided, throw an error.
+        if require_auth and not self.auth:
+            raise TweepError('Authentication required!')
+
+        self.cached_result = False
+
+        # Build the request URL
+        path = f'/1.1/{endpoint}.json'
+        if upload_api:
+            url = 'https://' + self.upload_host + path
+        else:
+            url = 'https://' + self.host + path
+
+        if params is None:
+            params = {}
+
+        for idx, arg in enumerate(args):
+            if arg is None:
+                continue
+            try:
+                params[endpoint_parameters[idx]] = str(arg)
+            except IndexError:
+                raise TweepError('Too many parameters supplied!')
+
+        for k, arg in kwargs.items():
+            if arg is None:
+                continue
+            if k in params:
+                raise TweepError(f'Multiple values for parameter {k} supplied!')
+            if k not in endpoint_parameters:
+                log.warning(f'Unexpected parameter: {k}')
+            params[k] = str(arg)
+
+        log.debug("PARAMS: %r", params)
+
+        # Query the cache if one is available
+        # and this request uses a GET method.
+        if use_cache and self.cache and method == 'GET':
+            cache_result = self.cache.get(f'{path}?{urlencode(params)}')
+            # if cache result found and not expired, return it
+            if cache_result:
+                # must restore api reference
+                if isinstance(cache_result, list):
+                    for result in cache_result:
+                        if isinstance(result, Model):
+                            result._api = self
+                else:
+                    if isinstance(cache_result, Model):
+                        cache_result._api = self
+                self.cached_result = True
+                return cache_result
+
+        # Monitoring rate limits
+        remaining_calls = None
+        reset_time = None
+
+        if parser is None:
+            parser = self.parser
+
+        try:
+            # Continue attempting request until successful
+            # or maximum number of retries is reached.
+            retries_performed = 0
+            while retries_performed <= self.retry_count:
+                if (self.wait_on_rate_limit and reset_time is not None
+                    and remaining_calls is not None
+                    and remaining_calls < 1):
+                    # Handle running out of API calls
+                    sleep_time = reset_time - int(time.time())
+                    if sleep_time > 0:
+                        log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
+                        time.sleep(sleep_time + 1)  # Sleep for extra sec
+
+                # Apply authentication
+                auth = None
+                if self.auth:
+                    auth = self.auth.apply_auth()
+
+                # Execute request
+                try:
+                    resp = self.session.request(
+                        method, url, params=params, headers=headers,
+                        data=post_data, files=files, json=json_payload,
+                        timeout=self.timeout, auth=auth, proxies=self.proxy
+                    )
+                except Exception as e:
+                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
+
+                if 200 <= resp.status_code < 300:
+                    break
+
+                rem_calls = resp.headers.get('x-rate-limit-remaining')
+                if rem_calls is not None:
+                    remaining_calls = int(rem_calls)
+                elif remaining_calls is not None:
+                    remaining_calls -= 1
+
+                reset_time = resp.headers.get('x-rate-limit-reset')
+                if reset_time is not None:
+                    reset_time = int(reset_time)
+
+                retry_delay = self.retry_delay
+                if resp.status_code in (420, 429) and self.wait_on_rate_limit:
+                    if remaining_calls == 0:
+                        # If ran out of calls before waiting switching retry last call
+                        continue
+                    if 'retry-after' in resp.headers:
+                        retry_delay = float(resp.headers['retry-after'])
+                elif self.retry_errors and resp.status_code not in self.retry_errors:
+                    # Exit request loop if non-retry error code
+                    break
+
+                # Sleep before retrying request again
+                time.sleep(retry_delay)
+                retries_performed += 1
+
+            # If an error was returned, throw an exception
+            self.last_response = resp
+            if resp.status_code and not 200 <= resp.status_code < 300:
+                try:
+                    error_msg, api_error_code = parser.parse_error(resp.text)
+                except Exception:
+                    error_msg = f"Twitter error response: status code = {resp.status_code}"
+                    api_error_code = None
+
+                if is_rate_limit_error_message(error_msg):
+                    raise RateLimitError(error_msg, resp)
+                else:
+                    raise TweepError(error_msg, resp, api_code=api_error_code)
+
+            # Parse the response payload
+            return_cursors = return_cursors or 'cursor' in params or 'next' in params
+            result = parser.parse(
+                resp.text, api=self, payload_list=payload_list,
+                payload_type=payload_type, return_cursors=return_cursors
+            )
+
+            # Store result into cache if one is available.
+            if use_cache and self.cache and method == 'GET' and result:
+                self.cache.store(f'{path}?{urlencode(params)}', result)
+
+            return result
+        finally:
+            self.session.close()
+
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def home_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
-            :allowed_param: 'count', 'since_id', 'max_id', 'trim_user',
-                            'exclude_replies', 'include_entities'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/home_timeline.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['count', 'since_id', 'max_id', 'trim_user',
-                           'exclude_replies', 'include_entities'],
-            require_auth=True
+        return self.request(
+            'GET', 'statuses/home_timeline', endpoint_parameters=(
+                'count', 'since_id', 'max_id', 'trim_user', 'exclude_replies',
+                'include_entities'
+            ), **kwargs
         )
 
-    def statuses_lookup(self, id_, *args, **kwargs):
+    @payload('status', list=True)
+    def statuses_lookup(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
-            :allowed_param: 'id', 'include_entities', 'trim_user', 'map',
-                            'include_ext_alt_text', 'include_card_uri'
         """
-        if 'map_' in kwargs:
-            kwargs['map'] = kwargs.pop('map_')
+        return self.request(
+            'GET', 'statuses/lookup', list_to_csv(id), endpoint_parameters=(
+                'id', 'include_entities', 'trim_user', 'map',
+                'include_ext_alt_text', 'include_card_uri'
+            ), **kwargs
+        )
 
-        return bind_api(
-            api=self,
-            path='/statuses/lookup.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['id', 'include_entities', 'trim_user', 'map',
-                           'include_ext_alt_text', 'include_card_uri'],
-            require_auth=True
-        )(list_to_csv(id_), *args, **kwargs)
-
-    @property
-    def user_timeline(self):
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def user_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline
-            :allowed_param: 'user_id', 'screen_name', 'since_id', 'count',
-                            'max_id', 'trim_user', 'exclude_replies',
-                            'include_rts'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/user_timeline.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['user_id', 'screen_name', 'since_id', 'count',
-                           'max_id', 'trim_user', 'exclude_replies',
-                           'include_rts']
+        return self.request(
+            'GET', 'statuses/user_timeline', endpoint_parameters=(
+                'user_id', 'screen_name', 'since_id', 'count', 'max_id',
+                'trim_user', 'exclude_replies', 'include_rts'
+            ), **kwargs
         )
 
-    @property
-    def mentions_timeline(self):
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def mentions_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
-            :allowed_param: 'since_id', 'max_id', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/mentions_timeline.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
-            require_auth=True
+        return self.request(
+            'GET', 'statuses/mentions_timeline', endpoint_parameters=(
+                'count', 'since_id', 'max_id', 'trim_user', 'include_entities'
+            ), **kwargs
         )
 
-    @property
-    def related_results(self):
-        """ :reference: https://dev.twitter.com/docs/api/1.1/get/related_results/show/%3id.format
-            :allowed_param: 'id'
-        """
-        return bind_api(
-            api=self,
-            path='/related_results/show/{id}.json',
-            payload_type='relation', payload_list=True,
-            allowed_param=['id'],
-            require_auth=False
-        )
-
-    @property
-    def retweets_of_me(self):
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def retweets_of_me(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
-            :allowed_param: 'since_id', 'max_id', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/retweets_of_me.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['since_id', 'max_id', 'count'],
-            require_auth=True
+        return self.request(
+            'GET', 'statuses/retweets_of_me', endpoint_parameters=(
+                'count', 'since_id', 'max_id', 'trim_user', 'include_entities',
+                'include_user_entities'
+            ), **kwargs
         )
 
-    @property
-    def get_status(self):
+    @payload('status')
+    def get_status(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-show-id
-            :allowed_param: 'id', 'trim_user', 'include_my_retweet',
-                            'include_entities', 'include_ext_alt_text',
-                            'include_card_uri'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/show.json',
-            payload_type='status',
-            allowed_param=['id', 'trim_user', 'include_my_retweet',
-                           'include_entities', 'include_ext_alt_text',
-                           'include_card_uri']
+        return self.request(
+            'GET', 'statuses/show', id, endpoint_parameters=(
+                'id', 'trim_user', 'include_my_retweet', 'include_entities',
+                'include_ext_alt_text', 'include_card_uri'
+            ), **kwargs
         )
 
-    def update_status(self, *args, **kwargs):
+    @payload('status')
+    def update_status(self, status, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
-            :allowed_param: 'status', 'in_reply_to_status_id',
-                            'auto_populate_reply_metadata',
-                            'exclude_reply_user_ids', 'attachment_url',
-                            'media_ids', 'possibly_sensitive', 'lat', 'long',
-                            'place_id', 'display_coordinates', 'trim_user',
-                            'enable_dmcommands', 'fail_dmcommands', 'card_uri'
         """
         if 'media_ids' in kwargs:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
 
-        return bind_api(
-            api=self,
-            path='/statuses/update.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['status', 'in_reply_to_status_id',
-                           'auto_populate_reply_metadata',
-                           'exclude_reply_user_ids', 'attachment_url',
-                           'media_ids', 'possibly_sensitive', 'lat', 'long',
-                           'place_id', 'display_coordinates', 'trim_user',
-                           'enable_dmcommands', 'fail_dmcommands',
-                           'card_uri'],
-            require_auth=True
-        )(*args, **kwargs)
+        return self.request(
+            'POST', 'statuses/update', status, endpoint_parameters=(
+                'status', 'in_reply_to_status_id',
+                'auto_populate_reply_metadata', 'exclude_reply_user_ids',
+                'attachment_url', 'media_ids', 'possibly_sensitive', 'lat',
+                'long', 'place_id', 'display_coordinates', 'trim_user',
+                'enable_dmcommands', 'fail_dmcommands', 'card_uri'
+            ), **kwargs
+        )
 
     def media_upload(self, filename, file=None, chunked=False,
                      *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
-            :allowed_param:
         """
         h = None
         if file is not None:
@@ -227,29 +354,24 @@ class API:
         else:
             return self.simple_upload(filename, file=file, *args, **kwargs)
 
+    @payload('media')
     def simple_upload(self, filename, file=None, media_category=None,
                       *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
-            :allowed_param:
         """
         if file is not None:
             files = {'media': (filename, file)}
         else:
             files = {'media': open(filename, 'rb')}
         post_data = {'media_category': media_category}
-        return bind_api(
-            api=self,
-            path='/media/upload.json',
-            method='POST',
-            payload_type='media',
-            require_auth=True,
-            upload_api=True
-        )(*args, post_data=post_data, files=files, **kwargs)
+        return self.request(
+            'POST', 'media/upload', *args, post_data=post_data, files=files,
+            upload_api=True, **kwargs
+        )
 
     def chunked_upload(self, filename, file=None, file_type=None,
                        media_category=None, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
-            :allowed_param:
         """
         fp = file or open(filename, 'rb')
 
@@ -284,10 +406,10 @@ class API:
         # The FINALIZE command returns media information
         return self.chunked_upload_finalize(media_id, *args, **kwargs)
 
+    @payload('media')
     def chunked_upload_init(self, total_bytes, media_type, media_category=None,
                             additional_owners=None, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
-            :allowed_param:
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         post_data = {
@@ -298,19 +420,14 @@ class API:
         }
         if additional_owners is not None:
             post_data["additional_owners"] = list_to_csv(additional_owners)
-        return bind_api(
-            api=self,
-            path='/media/upload.json',
-            method='POST',
-            payload_type='media',
-            require_auth=True,
-            upload_api=True
-        )(*args, headers=headers, post_data=post_data, **kwargs)
+        return self.request(
+            'POST', 'media/upload', *args, headers=headers,
+            post_data=post_data, upload_api=True, **kwargs
+        )
 
     def chunked_upload_append(self, media_id, media, segment_index,
                               *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
-            :allowed_param:
         """
         post_data = {
             'command': 'APPEND',
@@ -318,245 +435,184 @@ class API:
             'segment_index': segment_index
         }
         files = {'media': media}
-        return bind_api(
-            api=self,
-            path='/media/upload.json',
-            method='POST',
-            require_auth=True,
-            upload_api=True
-        )(*args, post_data=post_data, files=files, **kwargs)
+        return self.request(
+            'POST', 'media/upload', *args, post_data=post_data, files=files,
+            upload_api=True, **kwargs
+        )
 
+    @payload('media')
     def chunked_upload_finalize(self, media_id, *args, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
-            :allowed_param:
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         post_data = {
             'command': 'FINALIZE',
             'media_id': media_id
         }
-        return bind_api(
-            api=self,
-            path='/media/upload.json',
-            method='POST',
-            payload_type='media',
-            require_auth=True,
-            upload_api=True
-        )(*args, headers=headers, post_data=post_data, **kwargs)
+        return self.request(
+            'POST', 'media/upload', *args, headers=headers,
+            post_data=post_data, upload_api=True, **kwargs
+        )
 
     def create_media_metadata(self, media_id, alt_text, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
-            :allowed_param:
         """
         kwargs['json_payload'] = {
             'media_id': media_id,
             'alt_text': {'text': alt_text}
         }
 
-        return bind_api(
-            api=self,
-            path='/media/metadata/create.json',
-            method='POST',
-            require_auth=True,
-            upload_api=True
-        )(*args, **kwargs)
+        return self.request(
+            'POST', 'media/metadata/create', *args,
+            upload_api=True, **kwargs
+        )
 
+    @payload('status')
     def update_with_media(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
-            :allowed_param: 'status', 'possibly_sensitive',
-                            'in_reply_to_status_id',
-                            'in_reply_to_status_id_str',
-                            'auto_populate_reply_metadata', 'lat', 'long',
-                            'place_id', 'display_coordinates'
         """
         if file is not None:
             files = {'media[]': (filename, file)}
         else:
             files = {'media[]': open(filename, 'rb')}
-        return bind_api(
-            api=self,
-            path='/statuses/update_with_media.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['status', 'possibly_sensitive',
-                           'in_reply_to_status_id',
-                           'in_reply_to_status_id_str',
-                           'auto_populate_reply_metadata', 'lat', 'long',
-                           'place_id', 'display_coordinates'],
-            require_auth=True
-        )(*args, files=files, **kwargs)
+        return self.request(
+            'POST',  'statuses/update_with_media', *args, endpoint_parameters=(
+                'status', 'possibly_sensitive', 'in_reply_to_status_id',
+                'in_reply_to_status_id_str', 'auto_populate_reply_metadata',
+                'lat', 'long', 'place_id', 'display_coordinates'
+            ), files=files, **kwargs
+        )
 
+    @payload('media')
     def get_media_upload_status(self, media_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
-            :allowed_param: 'media_id'
         """
-        return bind_api(
-            api=self,
-            path='/media/upload.json',
-            payload_type='media',
-            allowed_param=['media_id'],
-            require_auth=True,
-            upload_api=True
-        )(*args, command='STATUS', media_id=media_id, **kwargs)
+        return self.request(
+            'GET', 'media/upload', *args, endpoint_parameters=(
+                'command', 'media_id'
+            ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
+        )
 
-    @property
-    def destroy_status(self):
+    @payload('status')
+    def destroy_status(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/destroy/{id}.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', f'statuses/destroy/{status_id}', *args, **kwargs
         )
 
-    @property
-    def retweet(self):
+    @payload('status')
+    def retweet(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/retweet/{id}.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', f'statuses/retweet/{status_id}', *args, **kwargs
         )
 
-    @property
-    def unretweet(self):
+    @payload('status')
+    def unretweet(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/unretweet/{id}.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', f'statuses/unretweet/{status_id}', *args, **kwargs
         )
 
-    @property
-    def retweets(self):
+    @payload('status', list=True)
+    def retweets(self, status_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets-id
-            :allowed_param: 'id', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/retweets/{id}.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['id', 'count'],
-            require_auth=True
+        return self.request(
+            'GET', f'statuses/retweets/{status_id}', *args,
+            endpoint_parameters=(
+                'count',
+            ), **kwargs
         )
 
-    @property
-    def retweeters(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def retweeters(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
-            :allowed_param: 'id', 'cursor', 'stringify_ids
         """
-        return bind_api(
-            api=self,
-            path='/statuses/retweeters/ids.json',
-            payload_type='ids',
-            allowed_param=['id', 'cursor', 'stringify_ids']
+        return self.request(
+            'GET', 'statuses/retweeters/ids', *args, endpoint_parameters=(
+                'id', 'cursor', 'stringify_ids'
+            ), **kwargs
         )
 
-    @property
-    def get_user(self):
+    @payload('user')
+    def get_user(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-show
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/users/show.json',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name']
+        return self.request(
+            'GET', 'users/show', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def get_oembed(self):
+    @payload('json')
+    def get_oembed(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
-            :allowed_param: 'url', 'maxwidth', 'hide_media', 'hide_thread',
-                            'omit_script', 'align', 'related', 'lang', 'theme',
-                            'link_color', 'widget_type', 'dnt'
         """
-        return bind_api(
-            api=self,
-            path='/statuses/oembed.json',
-            payload_type='json',
-            allowed_param=['url', 'maxwidth', 'hide_media', 'hide_thread',
-                           'omit_script', 'align', 'related', 'lang', 'theme',
-                           'link_color', 'widget_type', 'dnt']
+        return self.request(
+            'GET', 'statuses/oembed', *args, endpoint_parameters=(
+                'url', 'maxwidth', 'hide_media', 'hide_thread', 'omit_script',
+                'align', 'related', 'lang', 'theme', 'link_color',
+                'widget_type', 'dnt'
+            ), require_auth=False, **kwargs
         )
 
+    @payload('user', list=True)
     def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
-            allowed_param= 'user_id', 'screen_name', 'include_entities',
-                           'tweet_mode'
         """
-        return bind_api(
-            api=self,
-            path='/users/lookup.json',
-            payload_type='user', payload_list=True,
-            method='POST',
-            allowed_param=['user_id', 'screen_name', 'include_entities',
-                           'tweet_mode']
-        )(list_to_csv(user_ids), list_to_csv(screen_names), *args, **kwargs)
+        return self.request(
+            'POST', 'users/lookup', list_to_csv(user_ids),
+            list_to_csv(screen_names), *args, endpoint_parameters=(
+                'user_id', 'screen_name', 'include_entities', 'tweet_mode'
+            ), **kwargs
+        )
 
     def me(self):
         """ Get the authenticated user """
         return self.get_user(screen_name=self.auth.get_username())
 
-    @property
-    def search_users(self):
+    @pagination(mode='page')
+    @payload('user', list=True)
+    def search_users(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-search
-            :allowed_param: 'q', 'count', 'page'
         """
-        return bind_api(
-            api=self,
-            path='/users/search.json',
-            payload_type='user', payload_list=True,
-            require_auth=True,
-            allowed_param=['q', 'count', 'page']
+        return self.request(
+            'GET', 'users/search', *args, endpoint_parameters=(
+                'q', 'count', 'page'
+            ), **kwargs
         )
 
-    @property
-    def get_direct_message(self):
+    @payload('direct_message')
+    def get_direct_message(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/direct_messages/events/show.json',
-            payload_type='direct_message',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'GET', 'direct_messages/events/show', *args, endpoint_parameters=(
+                'id',
+            ), **kwargs
         )
 
-    @property
-    def list_direct_messages(self):
+    @pagination(mode='dm_cursor')
+    @payload('direct_message', list=True)
+    def list_direct_messages(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/list-events
-            :allowed_param: 'count', 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/direct_messages/events/list.json',
-            payload_type='direct_message', payload_list=True,
-            allowed_param=['count', 'cursor'],
-            require_auth=True
+        return self.request(
+            'GET', 'direct_messages/events/list', *args, endpoint_parameters=(
+                'count', 'cursor'
+            ), **kwargs
         )
 
+    @payload('direct_message')
     def send_direct_message(self, recipient_id, text, quick_reply_options=None,
                             attachment_type=None, attachment_media_id=None,
-                            ctas=None):
+                            ctas=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
-            :allowed_param: 'recipient_id', 'text', 'quick_reply_type',
-                            'attachment_type', attachment_media_id'
         """
         json_payload = {
             'event': {'type': 'message_create',
@@ -579,899 +635,686 @@ class API:
             }
         if ctas is not None:
             message_data['ctas'] = ctas
-        return bind_api(
-            api=self,
-            path='/direct_messages/events/new.json',
-            method='POST',
-            payload_type='direct_message',
-            require_auth=True
-        )(json_payload=json_payload)
+        return self.request(
+            'POST', 'direct_messages/events/new',
+            json_payload=json_payload, **kwargs
+        )
 
-    @property
-    def destroy_direct_message(self):
+    def destroy_direct_message(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/direct_messages/events/destroy.json',
-            method='DELETE',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'DELETE', 'direct_messages/events/destroy', *args,
+            endpoint_parameters=(
+                'id',
+            ), **kwargs
         )
 
-    @property
-    def create_friendship(self):
+    @payload('user')
+    def create_friendship(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
-            :allowed_param: 'id', 'user_id', 'screen_name', 'follow'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/create.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name', 'follow'],
-            require_auth=True
+        return self.request(
+            'POST', 'friendships/create', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name', 'follow'
+            ), **kwargs
         )
 
-    @property
-    def destroy_friendship(self):
+    @payload('user')
+    def destroy_friendship(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/destroy.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True
+        return self.request(
+            'POST', 'friendships/destroy', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def show_friendship(self):
+    @payload('friendship')
+    def show_friendship(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
-            :allowed_param: 'source_id', 'source_screen_name', 'target_id',
-                            'target_screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/show.json',
-            payload_type='friendship',
-            allowed_param=['source_id', 'source_screen_name',
-                           'target_id', 'target_screen_name']
+        return self.request(
+            'GET', 'friendships/show', *args, endpoint_parameters=(
+                'source_id', 'source_screen_name', 'target_id',
+                'target_screen_name'
+            ), **kwargs
         )
 
-    def lookup_friendships(self, user_ids=None, screen_names=None):
+    @payload('relationship', list=True)
+    def lookup_friendships(self, user_ids=None, screen_names=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
-            :allowed_param: 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/lookup.json',
-            payload_type='relationship', payload_list=True,
-            allowed_param=['user_id', 'screen_name'],
-            require_auth=True
-        )(list_to_csv(user_ids), list_to_csv(screen_names))
+        return self.request(
+            'GET', 'friendships/lookup', list_to_csv(user_ids),
+            list_to_csv(screen_names), endpoint_parameters=(
+                'user_id', 'screen_name'
+            ), **kwargs
+        )
 
-    @property
-    def friends_ids(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def friends_ids(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
-            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/friends/ids.json',
-            payload_type='ids',
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor']
+        return self.request(
+            'GET', 'friends/ids', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name', 'cursor'
+            ), **kwargs
         )
 
-    @property
-    def friends(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def friends(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
-            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'count',
-                            'skip_status', 'include_user_entities'
         """
-        return bind_api(
-            api=self,
-            path='/friends/list.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities']
+        return self.request(
+            'GET', 'friends/list', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name', 'cursor', 'count',
+                'skip_status', 'include_user_entities'
+            ), **kwargs
         )
 
-    @property
-    def friendships_incoming(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def friendships_incoming(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
-            :allowed_param: 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/incoming.json',
-            payload_type='ids',
-            allowed_param=['cursor']
+        return self.request(
+            'GET', 'friendships/incoming', *args, endpoint_parameters=(
+                'cursor',
+            ), **kwargs
         )
 
-    @property
-    def friendships_outgoing(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def friendships_outgoing(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
-            :allowed_param: 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/friendships/outgoing.json',
-            payload_type='ids',
-            allowed_param=['cursor']
+        return self.request(
+            'GET', 'friendships/outgoing', *args, endpoint_parameters=(
+                'cursor',
+            ), **kwargs
         )
 
-    @property
-    def followers_ids(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def followers_ids(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
-            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/followers/ids.json',
-            payload_type='ids',
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count']
+        return self.request(
+            'GET', 'followers/ids', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name', 'cursor', 'count'
+            ), **kwargs
         )
 
-    @property
-    def followers(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def followers(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
-            :allowed_param: 'id', 'user_id', 'screen_name', 'cursor', 'count',
-                            'skip_status', 'include_user_entities'
         """
-        return bind_api(
-            api=self,
-            path='/followers/list.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['id', 'user_id', 'screen_name', 'cursor', 'count',
-                           'skip_status', 'include_user_entities']
+        return self.request(
+            'GET', 'followers/list', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name', 'cursor', 'count',
+                'skip_status', 'include_user_entities'
+            ), **kwargs
         )
 
-    @property
-    def get_settings(self):
+    @payload('json')
+    def get_settings(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
-        return bind_api(
-            api=self,
-            path='/account/settings.json',
-            payload_type='json',
-            use_cache=False
+        return self.request(
+            'GET', 'account/settings', *args, use_cache=False, **kwargs
         )
 
-    @property
-    def set_settings(self):
+    @payload('json')
+    def set_settings(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-settings
-            :allowed_param: 'sleep_time_enabled', 'start_sleep_time',
-                            'end_sleep_time', 'time_zone',
-                            'trend_location_woeid',
-                            'allow_contributor_request', 'lang'
         """
-        return bind_api(
-            api=self,
-            path='/account/settings.json',
-            method='POST',
-            payload_type='json',
-            allowed_param=['sleep_time_enabled', 'start_sleep_time',
-                           'end_sleep_time', 'time_zone',
-                           'trend_location_woeid',
-                           'allow_contributor_request', 'lang'],
-            use_cache=False
+        return self.request(
+            'POST', 'account/settings', *args, endpoint_parameters=(
+                'sleep_time_enabled', 'start_sleep_time', 'end_sleep_time',
+                'time_zone', 'trend_location_woeid',
+                'allow_contributor_request', 'lang'
+            ), use_cache=False, **kwargs
         )
 
+    @payload('user')
     def verify_credentials(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
-            :allowed_param: 'include_entities', 'skip_status', 'include_email'
         """
         if 'include_email' in kwargs:
             kwargs['include_email'] = str(kwargs['include_email']).lower()
         try:
-            return bind_api(
-                api=self,
-                path='/account/verify_credentials.json',
-                payload_type='user',
-                require_auth=True,
-                allowed_param=['include_entities', 'skip_status',
-                               'include_email'],
-            )(**kwargs)
+            return self.request(
+                'GET', 'account/verify_credentials', endpoint_parameters=(
+                    'include_entities', 'skip_status', 'include_email'
+                ), **kwargs
+            )
         except TweepError as e:
             if e.response is not None and e.response.status_code == 401:
                 return False
             raise
 
-    @property
-    def rate_limit_status(self):
+    @payload('json')
+    def rate_limit_status(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
-            :allowed_param: 'resources'
         """
-        return bind_api(
-            api=self,
-            path='/application/rate_limit_status.json',
-            payload_type='json',
-            allowed_param=['resources'],
-            use_cache=False
+        return self.request(
+            'GET', 'application/rate_limit_status', *args,
+            endpoint_parameters=(
+                'resources',
+            ), use_cache=False, **kwargs
         )
 
+    @payload('user')
     def update_profile_image(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
-            :allowed_param: 'include_entities', 'skip_status'
         """
         if file is not None:
             files = {'image': (filename, file)}
         else:
             files = {'image': open(filename, 'rb')}
-        return bind_api(
-            api=self,
-            path='/account/update_profile_image.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['include_entities', 'skip_status'],
-            require_auth=True
-        )(*args, files=files, **kwargs)
+        return self.request(
+            'POST',  'account/update_profile_image', *args,
+            endpoint_parameters=(
+                'include_entities', 'skip_status'
+            ), files=files, **kwargs
+        )
 
     def update_profile_banner(self, filename, file=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
-            :allowed_param: 'width', 'height', 'offset_left', 'offset_right'
         """
         if file is not None:
             files = {'banner': (filename, file)}
         else:
             files = {'banner': open(filename, 'rb')}
-        return bind_api(
-            api=self,
-            path='/account/update_profile_banner.json',
-            method='POST',
-            allowed_param=['width', 'height', 'offset_left', 'offset_right'],
-            require_auth=True
-        )(*args, files=files, **kwargs)
+        return self.request(
+            'POST', 'account/update_profile_banner', *args,
+            endpoint_parameters=(
+                'width', 'height', 'offset_left', 'offset_right'
+            ), files=files, **kwargs
+        )
 
-    @property
-    def update_profile(self):
+    @payload('user')
+    def update_profile(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
-            :allowed_param: 'name', 'url', 'location', 'description',
-                            'profile_link_color'
         """
-        return bind_api(
-            api=self,
-            path='/account/update_profile.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['name', 'url', 'location', 'description',
-                           'profile_link_color'],
-            require_auth=True
+        return self.request(
+            'POST', 'account/update_profile', *args, endpoint_parameters=(
+                'name', 'url', 'location', 'description', 'profile_link_color'
+            ), **kwargs
         )
 
-    @property
-    def favorites(self):
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def favorites(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
-            :allowed_param: 'screen_name', 'user_id', 'max_id', 'count',
-                            'since_id', 'max_id'
         """
-        return bind_api(
-            api=self,
-            path='/favorites/list.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'max_id', 'count',
-                           'since_id', 'max_id']
+        return self.request(
+            'GET', 'favorites/list', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'max_id', 'count', 'since_id'
+            ), **kwargs
         )
 
-    @property
-    def create_favorite(self):
+    @payload('status')
+    def create_favorite(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/favorites/create.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', 'favorites/create', *args, endpoint_parameters=(
+                'id',
+            ), **kwargs
         )
 
-    @property
-    def destroy_favorite(self):
+    @payload('status')
+    def destroy_favorite(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-destroy
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/favorites/destroy.json',
-            method='POST',
-            payload_type='status',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', 'favorites/destroy', *args, endpoint_parameters=(
+                'id',
+            ), **kwargs
         )
 
-    @property
-    def create_block(self):
+    @payload('user')
+    def create_block(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/blocks/create.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True
+        return self.request(
+            'POST', 'blocks/create', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def destroy_block(self):
+    @payload('user')
+    def destroy_block(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/blocks/destroy.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True
+        return self.request(
+            'POST', 'blocks/destroy', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def mutes_ids(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def mutes_ids(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
-            :allowed_param: 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/mutes/users/ids.json',
-            payload_type='ids',
-            allowed_param=['cursor'],
-            require_auth=True
+        return self.request(
+            'GET', 'mutes/users/ids', *args, endpoint_parameters=(
+                'cursor',
+            ), **kwargs
         )
 
-    @property
-    def mutes(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def mutes(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
-            :allowed_param: 'cursor', 'include_entities', 'skip_status'
         """
-        return bind_api(
-            api=self,
-            path='/mutes/users/list.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['cursor', 'include_entities', 'skip_status'],
-            required_auth=True
+        return self.request(
+            'GET', 'mutes/users/list', *args, endpoint_parameters=(
+                'cursor', 'include_entities', 'skip_status'
+            ), **kwargs
         )
 
-    @property
-    def create_mute(self):
+    @payload('user')
+    def create_mute(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/mutes/users/create.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True
+        return self.request(
+            'POST', 'mutes/users/create', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def destroy_mute(self):
+    @payload('user')
+    def destroy_mute(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
-            :allowed_param: 'id', 'user_id', 'screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/mutes/users/destroy.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['id', 'user_id', 'screen_name'],
-            require_auth=True
+        return self.request(
+            'POST', 'mutes/users/destroy', *args, endpoint_parameters=(
+                'id', 'user_id', 'screen_name'
+            ), **kwargs
         )
 
-    @property
-    def blocks(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def blocks(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
-            :allowed_param: 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/blocks/list.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['cursor'],
-            require_auth=True
+        return self.request(
+            'GET', 'blocks/list', *args, endpoint_parameters=(
+                'cursor',
+            ), **kwargs
         )
 
-    @property
-    def blocks_ids(self):
+    @pagination(mode='cursor')
+    @payload('ids')
+    def blocks_ids(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
-            :allowed_param: 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/blocks/ids.json',
-            payload_type='ids',
-            allowed_param=['cursor'],
-            require_auth=True
+        return self.request(
+            'GET', 'blocks/ids', *args, endpoint_parameters=(
+                'cursor',
+            ), **kwargs
         )
 
-    @property
-    def report_spam(self):
+    @payload('user')
+    def report_spam(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
-            :allowed_param: 'user_id', 'screen_name', 'perform_block'
         """
-        return bind_api(
-            api=self,
-            path='/users/report_spam.json',
-            method='POST',
-            payload_type='user',
-            allowed_param=['user_id', 'screen_name', 'perform_block'],
-            require_auth=True
+        return self.request(
+            'POST', 'users/report_spam', *args, endpoint_parameters=(
+                'user_id', 'screen_name', 'perform_block'
+            ), **kwargs
         )
 
-    @property
-    def saved_searches(self):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list """
-        return bind_api(
-            api=self,
-            path='/saved_searches/list.json',
-            payload_type='saved_search', payload_list=True,
-            require_auth=True
-        )
+    @payload('saved_search', list=True)
+    def saved_searches(self, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
+        """
+        return self.request('GET', 'saved_searches/list', *args, **kwargs)
 
-    @property
-    def get_saved_search(self):
+    @payload('saved_search')
+    def get_saved_search(self, saved_search_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/saved_searches/show/{id}.json',
-            payload_type='saved_search',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'GET', f'saved_searches/show/{saved_search_id}', *args, **kwargs
         )
 
-    @property
-    def create_saved_search(self):
+    @payload('saved_search')
+    def create_saved_search(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
-            :allowed_param: 'query'
         """
-        return bind_api(
-            api=self,
-            path='/saved_searches/create.json',
-            method='POST',
-            payload_type='saved_search',
-            allowed_param=['query'],
-            require_auth=True
+        return self.request(
+            'POST', 'saved_searches/create', *args, endpoint_parameters=(
+                'query',
+            ), **kwargs
         )
 
-    @property
-    def destroy_saved_search(self):
+    @payload('saved_search')
+    def destroy_saved_search(self, saved_search_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/saved_searches/destroy/{id}.json',
-            method='POST',
-            payload_type='saved_search',
-            allowed_param=['id'],
-            require_auth=True
+        return self.request(
+            'POST', f'saved_searches/destroy/{saved_search_id}', *args,
+            **kwargs
         )
 
-    @property
-    def create_list(self):
+    @payload('list')
+    def create_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-create
-            :allowed_param: 'name', 'mode', 'description'
         """
-        return bind_api(
-            api=self,
-            path='/lists/create.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['name', 'mode', 'description'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/create', *args, endpoint_parameters=(
+                'name', 'mode', 'description'
+            ), **kwargs
         )
 
-    @property
-    def destroy_list(self):
+    @payload('list')
+    def destroy_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
-            :allowed_param: 'owner_screen_name', 'owner_id', 'list_id', 'slug'
         """
-        return bind_api(
-            api=self,
-            path='/lists/destroy.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['owner_screen_name', 'owner_id', 'list_id', 'slug'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/destroy', *args, endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug'
+            ), **kwargs
         )
 
-    @property
-    def update_list(self):
+    @payload('list')
+    def update_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-update
-            :allowed_param: 'list_id', 'slug', 'name', 'mode', 'description',
-                            'owner_screen_name', 'owner_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/update.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['list_id', 'slug', 'name', 'mode', 'description',
-                           'owner_screen_name', 'owner_id'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/update', *args, endpoint_parameters=(
+                'list_id', 'slug', 'name', 'mode', 'description',
+                'owner_screen_name', 'owner_id'
+            ), **kwargs
         )
 
-    @property
-    def lists_all(self):
+    @payload('list', list=True)
+    def lists_all(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-list
-            :allowed_param: 'screen_name', 'user_id', 'reverse'
         """
-        return bind_api(
-            api=self,
-            path='/lists/list.json',
-            payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'reverse'],
-            require_auth=True
+        return self.request(
+            'GET', 'lists/list', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'reverse'
+            ), **kwargs
         )
 
-    @property
-    def lists_memberships(self):
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_memberships(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
-            :allowed_param: 'screen_name', 'user_id', 'filter_to_owned_lists',
-                            'cursor', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/lists/memberships.json',
-            payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'filter_to_owned_lists',
-                           'cursor', 'count'],
-            require_auth=True
+        return self.request(
+            'GET', 'lists/memberships', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'filter_to_owned_lists', 'cursor',
+                'count'
+            ), **kwargs
         )
 
-    @property
-    def lists_ownerships(self):
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_ownerships(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
-            :allowed_param: 'user_id', 'screen_name', 'count', 'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/lists/ownerships.json',
-            payload_type='list', payload_list=True,
-            allowed_param=['user_id', 'screen_name', 'count', 'cursor'],
-            require_auth=True
+        return self.request(
+            'GET', 'lists/ownerships', *args, endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor'
+            ), **kwargs
         )
 
-    @property
-    def lists_subscriptions(self):
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_subscriptions(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
-            :allowed_param: 'screen_name', 'user_id', 'cursor', 'count'
         """
-        return bind_api(
-            api=self,
-            path='/lists/subscriptions.json',
-            payload_type='list', payload_list=True,
-            allowed_param=['screen_name', 'user_id', 'cursor', 'count'],
-            require_auth=True
+        return self.request(
+            'GET', 'lists/subscriptions', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'cursor', 'count'
+            ), **kwargs
         )
 
-    @property
-    def list_timeline(self):
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def list_timeline(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
-            :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id',
-                            'since_id', 'max_id', 'count', 'include_entities',
-                            'include_rts'
         """
-        return bind_api(
-            api=self,
-            path='/lists/statuses.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
-                           'since_id', 'max_id', 'count', 'include_entities',
-                           'include_rts']
+        return self.request(
+            'GET', 'lists/statuses', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id',
+                'max_id', 'count', 'include_entities', 'include_rts'
+            ), **kwargs
         )
 
-    @property
-    def get_list(self):
+    @payload('list')
+    def get_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-show
-            :allowed_param: 'owner_screen_name', 'owner_id', 'slug', 'list_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/show.json',
-            payload_type='list',
-            allowed_param=['owner_screen_name', 'owner_id', 'slug', 'list_id']
+        return self.request(
+            'GET', 'lists/show', *args, endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'slug', 'list_id'
+            ), **kwargs
         )
 
-    @property
-    def add_list_member(self):
+    @payload('list')
+    def add_list_member(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create
-            :allowed_param: 'screen_name', 'user_id', 'owner_screen_name',
-                            'owner_id', 'slug', 'list_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members/create.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'owner_screen_name',
-                           'owner_id', 'slug', 'list_id'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/members/create', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'owner_screen_name', 'owner_id',
+                'slug', 'list_id'
+            ), **kwargs
         )
 
-    @property
-    def remove_list_member(self):
+    @payload('list')
+    def remove_list_member(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
-            :allowed_param: 'screen_name', 'user_id', 'owner_screen_name',
-                            'owner_id', 'slug', 'list_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members/destroy.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'owner_screen_name',
-                           'owner_id', 'slug', 'list_id'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/members/destroy', *args, endpoint_parameters=(
+                'screen_name', 'user_id', 'owner_screen_name', 'owner_id',
+                'slug', 'list_id'
+            ), **kwargs
         )
 
+    @payload('list')
     def add_list_members(self, screen_name=None, user_id=None, slug=None,
-                         list_id=None, owner_id=None, owner_screen_name=None):
+                         list_id=None, owner_id=None, owner_screen_name=None,
+                         **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
-            :allowed_param: 'screen_name', 'user_id', 'slug', 'list_id',
-                            'owner_id', 'owner_screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members/create_all.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
-                           'owner_id', 'owner_screen_name'],
-            require_auth=True
-        )(list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
-          owner_id, owner_screen_name)
+        return self.request(
+            'POST', 'lists/members/create_all', list_to_csv(screen_name),
+            list_to_csv(user_id), slug, list_id, owner_id, owner_screen_name,
+            endpoint_parameters=(
+                'screen_name', 'user_id', 'slug', 'list_id', 'owner_id',
+                'owner_screen_name'
+            ), **kwargs
+        )
 
+    @payload('list')
     def remove_list_members(self, screen_name=None, user_id=None, slug=None,
                             list_id=None, owner_id=None,
-                            owner_screen_name=None):
+                            owner_screen_name=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
-            :allowed_param: 'screen_name', 'user_id', 'slug', 'list_id',
-                            'owner_id', 'owner_screen_name'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members/destroy_all.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['screen_name', 'user_id', 'slug', 'list_id',
-                           'owner_id', 'owner_screen_name'],
-            require_auth=True
-        )(list_to_csv(screen_name), list_to_csv(user_id), slug, list_id,
-          owner_id, owner_screen_name)
+        return self.request(
+            'POST', 'lists/members/destroy_all', list_to_csv(screen_name),
+            list_to_csv(user_id), slug, list_id, owner_id, owner_screen_name,
+            endpoint_parameters=(
+                'screen_name', 'user_id', 'slug', 'list_id', 'owner_id',
+                'owner_screen_name'
+            ), **kwargs
+        )
 
-    @property
-    def list_members(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def list_members(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
-            :allowed_param: 'owner_screen_name', 'slug', 'list_id', 'owner_id',
-                            'cursor'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'list_id', 'owner_id',
-                           'cursor']
+        return self.request(
+            'GET', 'lists/members', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'list_id', 'owner_id', 'cursor'
+            ), **kwargs
         )
 
-    @property
-    def show_list_member(self):
+    @payload('user')
+    def show_list_member(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
-            :allowed_param: 'list_id', 'slug', 'user_id', 'screen_name',
-                            'owner_screen_name', 'owner_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/members/show.json',
-            payload_type='user',
-            allowed_param=['list_id', 'slug', 'user_id', 'screen_name',
-                           'owner_screen_name', 'owner_id']
+        return self.request(
+            'GET', 'lists/members/show', *args, endpoint_parameters=(
+                'list_id', 'slug', 'user_id', 'screen_name',
+                'owner_screen_name', 'owner_id'
+            ), **kwargs
         )
 
-    @property
-    def subscribe_list(self):
+    @payload('list')
+    def subscribe_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
-            :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/subscribers/create.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/subscribers/create', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            ), **kwargs
         )
 
-    @property
-    def unsubscribe_list(self):
+    @payload('list')
+    def unsubscribe_list(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
-            :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/subscribers/destroy.json',
-            method='POST',
-            payload_type='list',
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id'],
-            require_auth=True
+        return self.request(
+            'POST', 'lists/subscribers/destroy', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            ), **kwargs
         )
 
-    @property
-    def list_subscribers(self):
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def list_subscribers(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
-            :allowed_param: 'owner_screen_name', 'slug', 'owner_id', 'list_id',
-                            'cursor', 'count', 'include_entities',
-                            'skip_status'
         """
-        return bind_api(
-            api=self,
-            path='/lists/subscribers.json',
-            payload_type='user', payload_list=True,
-            allowed_param=['owner_screen_name', 'slug', 'owner_id', 'list_id',
-                           'cursor', 'count', 'include_entities',
-                           'skip_status']
+        return self.request(
+            'GET', 'lists/subscribers', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'owner_id', 'list_id', 'cursor',
+                'count', 'include_entities', 'skip_status'
+            ), **kwargs
         )
 
-    @property
-    def show_list_subscriber(self):
+    @payload('user')
+    def show_list_subscriber(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
-            :allowed_param: 'owner_screen_name', 'slug', 'screen_name',
-                            'owner_id', 'list_id', 'user_id'
         """
-        return bind_api(
-            api=self,
-            path='/lists/subscribers/show.json',
-            payload_type='user',
-            allowed_param=['owner_screen_name', 'slug', 'screen_name',
-                           'owner_id', 'list_id', 'user_id']
+        return self.request(
+            'GET', 'lists/subscribers/show', *args, endpoint_parameters=(
+                'owner_screen_name', 'slug', 'screen_name', 'owner_id',
+                'list_id', 'user_id'
+            ), **kwargs
         )
 
-    @property
-    def trends_available(self):
-        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available """
-        return bind_api(
-            api=self,
-            path='/trends/available.json',
-            payload_type='json'
-        )
+    @payload('json')
+    def trends_available(self, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available
+        """
+        return self.request('GET', 'trends/available', *args, **kwargs)
 
-    @property
-    def trends_place(self):
+    @payload('json')
+    def trends_place(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/trends-for-location/api-reference/get-trends-place
-            :allowed_param: 'id', 'exclude'
         """
-        return bind_api(
-            api=self,
-            path='/trends/place.json',
-            payload_type='json',
-            allowed_param=['id', 'exclude']
+        return self.request(
+            'GET', 'trends/place', *args, endpoint_parameters=(
+                'id', 'exclude'
+            ), **kwargs
         )
 
-    @property
-    def trends_closest(self):
+    @payload('json')
+    def trends_closest(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-closest
-            :allowed_param: 'lat', 'long'
         """
-        return bind_api(
-            api=self,
-            path='/trends/closest.json',
-            payload_type='json',
-            allowed_param=['lat', 'long']
+        return self.request(
+            'GET', 'trends/closest', *args, endpoint_parameters=(
+                'lat', 'long'
+            ), **kwargs
         )
 
-    @property
-    def search(self):
+    @pagination(mode='id')
+    @payload('search_results')
+    def search(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
-            :allowed_param: 'q', 'lang', 'locale', 'since_id', 'geocode',
-                            'max_id', 'until', 'result_type', 'count',
-                            'include_entities'
         """
-        return bind_api(
-            api=self,
-            path='/search/tweets.json',
-            payload_type='search_results',
-            allowed_param=['q', 'lang', 'locale', 'since_id', 'geocode',
-                           'max_id', 'until', 'result_type', 'count',
-                           'include_entities']
+        return self.request(
+            'GET', 'search/tweets', *args, endpoint_parameters=(
+                'q', 'lang', 'locale', 'since_id', 'geocode', 'max_id',
+                'until', 'result_type', 'count', 'include_entities'
+            ), **kwargs
         )
 
     @pagination(mode='next')
+    @payload('status', list=True)
     def search_30_day(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
-            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                            'next'
         """
-        return bind_api(
-            api=self,
-            path=f'/tweets/search/30day/{environment_name}.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                           'next'],
-            require_auth=True
-        )(*args, **kwargs)
+        return self.request(
+            'GET', f'tweets/search/30day/{environment_name}', *args,
+            endpoint_parameters=(
+                'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
+            ), **kwargs
+        )
 
     @pagination(mode='next')
+    @payload('status', list=True)
     def search_full_archive(self, environment_name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
-            :allowed_param: 'query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                            'next'
         """
-        return bind_api(
-            api=self,
-            path=f'/tweets/search/fullarchive/{environment_name}.json',
-            payload_type='status', payload_list=True,
-            allowed_param=['query', 'tag', 'fromDate', 'toDate', 'maxResults',
-                           'next'],
-            require_auth=True
-        )(*args, **kwargs)
+        return self.request(
+            'GET', f'tweets/search/fullarchive/{environment_name}', *args,
+            endpoint_parameters=(
+                'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
+            ), **kwargs
+        )
 
-    @property
-    def reverse_geocode(self):
+    @payload('place', list=True)
+    def reverse_geocode(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-reverse_geocode
-            :allowed_param: 'lat', 'long', 'accuracy', 'granularity',
-                            'max_results'
         """
-        return bind_api(
-            api=self,
-            path='/geo/reverse_geocode.json',
-            payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'accuracy', 'granularity',
-                           'max_results']
+        return self.request(
+            'GET', 'geo/reverse_geocode', *args, endpoint_parameters=(
+                'lat', 'long', 'accuracy', 'granularity', 'max_results'
+            ), **kwargs
         )
 
-    @property
-    def geo_id(self):
+    @payload('place')
+    def geo_id(self, place_id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
-            :allowed_param: 'id'
         """
-        return bind_api(
-            api=self,
-            path='/geo/id/{id}.json',
-            payload_type='place',
-            allowed_param=['id']
-        )
+        return self.request('GET', f'geo/id/{place_id}', *args, **kwargs)
 
-    @property
-    def geo_search(self):
+    @payload('place', list=True)
+    def geo_search(self, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-search
-            :allowed_param: 'lat', 'long', 'query', 'ip', 'granularity',
-                            'accuracy', 'max_results', 'contained_within'
-
         """
-        return bind_api(
-            api=self,
-            path='/geo/search.json',
-            payload_type='place', payload_list=True,
-            allowed_param=['lat', 'long', 'query', 'ip', 'granularity',
-                           'accuracy', 'max_results', 'contained_within']
+        return self.request(
+            'GET', 'geo/search', *args, endpoint_parameters=(
+                'lat', 'long', 'query', 'ip', 'granularity', 'accuracy',
+                'max_results', 'contained_within'
+            ), **kwargs
         )
 
-    @property
-    def supported_languages(self):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages """
-        return bind_api(
-            api=self,
-            path='/help/languages.json',
-            payload_type='json',
-            require_auth=True
-        )
+    @payload('json')
+    def supported_languages(self, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages
+        """
+        return self.request('GET', 'help/languages', *args, **kwargs)
 
-    @property
-    def configuration(self):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration """
-        return bind_api(
-            api=self,
-            path='/help/configuration.json',
-            payload_type='json',
-            require_auth=True
-        )
+    @payload('json')
+    def configuration(self, *args, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration
+        """
+        return self.request('GET', 'help/configuration', *args, **kwargs)

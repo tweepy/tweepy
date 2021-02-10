@@ -71,8 +71,10 @@ class TweepyAPITests(TweepyTestCase):
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
-    def testretweet(self):
-        self.skipTest('Missing method to retrieve random Tweet to Retweet')
+    @tape.use_cassette('testretweetandunretweet.json')
+    def testretweetandunretweet(self):
+        self.api.retweet(test_tweet_id)
+        self.api.unretweet(test_tweet_id)
 
     @tape.use_cassette('testretweets.json')
     def testretweets(self):
@@ -93,7 +95,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(id=update.id)
+        deleted = self.api.destroy_status(status_id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdateanddestroystatus.json')
@@ -103,7 +105,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(id=update.id)
+        deleted = self.api.destroy_status(status_id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
@@ -382,7 +384,7 @@ class TweepyAPITests(TweepyTestCase):
             return any(x.full_name.lower() == place_name.lower() for x in place_list)
 
         # Test various API functions using Austin, TX, USA
-        self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
+        self.assertEqual(self.api.geo_id(place_id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',
             self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461)))  # Austin, TX, USA
 

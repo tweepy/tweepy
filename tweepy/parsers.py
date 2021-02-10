@@ -10,7 +10,7 @@ from tweepy.models import ModelFactory
 
 class Parser:
 
-    def parse(self, method, payload, *args, **kwargs):
+    def parse(self, payload, *args, **kwargs):
         """
         Parse the response payload and return the result.
         Returns a tuple that contains the result data and the cursors
@@ -32,7 +32,7 @@ class RawParser(Parser):
     def __init__(self):
         pass
 
-    def parse(self, method, payload, *args, **kwargs):
+    def parse(self, payload, *args, **kwargs):
         return payload
 
     def parse_error(self, payload):
@@ -43,7 +43,7 @@ class JSONParser(Parser):
 
     payload_format = 'json'
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, payload, *, return_cursors=False, **kwargs):
         try:
             json = json_lib.loads(payload)
         except Exception as e:
@@ -81,24 +81,25 @@ class ModelParser(JSONParser):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, payload, *, api=None, payload_list=False,
+              payload_type=None, return_cursors=False):
         try:
-            if method.payload_type is None:
+            if payload_type is None:
                 return
-            model = getattr(self.model_factory, method.payload_type)
+            model = getattr(self.model_factory, payload_type)
         except AttributeError:
-            raise TweepError(f'No model for this payload type: {method.payload_type}')
+            raise TweepError(f'No model for this payload type: {payload_type}')
 
-        json = JSONParser.parse(self, method, payload, return_cursors=return_cursors)
+        json = JSONParser.parse(self, payload, return_cursors=return_cursors)
         if isinstance(json, tuple):
             json, cursors = json
         else:
             cursors = None
 
-        if method.payload_list:
-            result = model.parse_list(method.api, json)
+        if payload_list:
+            result = model.parse_list(api, json)
         else:
-            result = model.parse(method.api, json)
+            result = model.parse(api, json)
 
         if cursors:
             return result, cursors

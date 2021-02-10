@@ -131,19 +131,16 @@ class IdIterator(BaseIterator):
         if self.index >= len(self.results) - 1:
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kwargs)
 
-            if hasattr(self.method, '__self__'):
-                old_parser = self.method.__self__.parser
-                # Hack for models which expect ModelParser to be set
-                self.method.__self__.parser = ModelParser()
-
             # This is a special invocation that returns the underlying
             # APIMethod class
-            model = ModelParser().parse(self.method(create=True), data)
-            if hasattr(self.method, '__self__'):
-                self.method.__self__.parser = old_parser
-                result = self.method.__self__.parser.parse(self.method(create=True), data)
-            else:
-                result = model
+            model = ModelParser().parse(
+                data, payload_list=self.method.payload_list,
+                payload_type=self.method.payload_type
+            )
+            result = self.method.__self__.parser.parse(
+                data, payload_list=self.method.payload_list,
+                payload_type=self.method.payload_type
+            )
 
             if len(self.results) != 0:
                 self.index += 1
@@ -183,7 +180,13 @@ class PageIterator(BaseIterator):
 
     def __init__(self, method, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
-        self.current_page = 0
+        self.current_page = 1
+        # Keep track of previous page of items to handle Twitter API issue with
+        # duplicate pages
+        # https://twittercommunity.com/t/odd-pagination-behavior-with-get-users-search/148502
+        # https://github.com/tweepy/tweepy/issues/1465
+        # https://github.com/tweepy/tweepy/issues/958
+        self.previous_items = []
 
     def next(self):
         if self.limit > 0:
@@ -191,9 +194,16 @@ class PageIterator(BaseIterator):
                 raise StopIteration
 
         items = self.method(page=self.current_page, *self.args, **self.kwargs)
+
         if len(items) == 0:
             raise StopIteration
+
+        for item in items:
+            if item in self.previous_items:
+                raise StopIteration
+
         self.current_page += 1
+        self.previous_items = items
         return items
 
     def prev(self):

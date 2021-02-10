@@ -33,15 +33,15 @@ setup(
     author_email="tweepy@googlegroups.com",
     url="https://www.tweepy.org/",
     project_urls={
-        "Documentation": "https://tweepy.readthedocs.io/",
+        "Documentation": "https://tweepy.readthedocs.io",
         "Issue Tracker": "https://github.com/tweepy/tweepy/issues",
         "Source Code": "https://github.com/tweepy/tweepy",
     },
     download_url="https://pypi.org/project/tweepy/",
     packages=find_packages(exclude=["tests", "examples"]),
     install_requires=[
-        "requests[socks]>=2.11.1",
-        "requests_oauthlib>=0.7.0",
+        "requests>=2.11.1,<3",
+        "requests_oauthlib>=1.0.0,<2",
     ],
     tests_require=tests_require,
     extras_require={
@@ -49,6 +49,7 @@ setup(
             "coveralls>=2.1.0",
             "tox>=2.4.0",
          ],
+        "socks": ["requests[socks]>=2.11.1,<3"],
         "test": tests_require,
     },
     test_suite="nose.collector",
