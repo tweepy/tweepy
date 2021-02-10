@@ -428,7 +428,7 @@ class API:
         return self.request(
             'GET', f'statuses/retweets/{id}', *args,
             endpoint_parameters=(
-                'count',
+                'count', 'trim_user'
             ), **kwargs
         )
 
