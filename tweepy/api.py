@@ -412,11 +412,11 @@ class API:
         )
 
     @payload('status')
-    def unretweet(self, status_id, *args, **kwargs):
+    def unretweet(self, id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
         """
         return self.request(
-            'POST', f'statuses/unretweet/{status_id}', *args, **kwargs
+            'POST', f'statuses/unretweet/{id}', *args, **kwargs
         )
 
     @payload('status', list=True)
