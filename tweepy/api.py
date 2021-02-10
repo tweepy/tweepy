@@ -433,11 +433,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def retweeters(self, *args, **kwargs):
+    def retweeters(self, id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
         """
         return self.request(
-            'GET', 'statuses/retweeters/ids', *args, endpoint_parameters=(
+            'GET', 'statuses/retweeters/ids', id, *args, endpoint_parameters=(
                 'id', 'cursor', 'stringify_ids'
             ), **kwargs
         )
