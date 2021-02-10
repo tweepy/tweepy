@@ -125,7 +125,7 @@ class TweepyAPITests(TweepyTestCase):
     def testlookupusers(self):
         def check(users):
             self.assertEqual(len(users), 2)
-        check(self.api.lookup_users(user_ids=[6844292, 6253282]))
+        check(self.api.lookup_users(user_id=[6844292, 6253282]))
         check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
 
     @tape.use_cassette('testsearchusers.json')
