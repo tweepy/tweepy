@@ -422,12 +422,11 @@ class API:
         )
 
     @payload('status', list=True)
-    def retweets(self, id, *args, **kwargs):
+    def retweets(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets-id
         """
         return self.request(
-            'GET', f'statuses/retweets/{id}', *args,
-            endpoint_parameters=(
+            'GET', f'statuses/retweets/{id}', endpoint_parameters=(
                 'count', 'trim_user'
             ), **kwargs
         )
