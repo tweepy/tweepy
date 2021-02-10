@@ -453,11 +453,11 @@ class API:
         )
 
     @payload('json')
-    def get_oembed(self, url, *args, **kwargs):
+    def get_oembed(self, url, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
         """
         return self.request(
-            'GET', 'statuses/oembed', url, *args, endpoint_parameters=(
+            'GET', 'statuses/oembed', url, endpoint_parameters=(
                 'url', 'maxwidth', 'hide_media', 'hide_thread', 'omit_script',
                 'align', 'related', 'lang', 'theme', 'link_color',
                 'widget_type', 'dnt'
