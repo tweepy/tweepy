@@ -491,11 +491,12 @@ class API:
         )
 
     @payload('direct_message')
-    def get_direct_message(self, *args, **kwargs):
+    def get_direct_message(self, id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
         """
         return self.request(
-            'GET', 'direct_messages/events/show', *args, endpoint_parameters=(
+            'GET', 'direct_messages/events/show', id, *args,
+            endpoint_parameters=(
                 'id',
             ), **kwargs
         )
