@@ -371,7 +371,6 @@ class API:
 
         return self.request(
             'POST', 'media/metadata/create', *args,
-            endpoint_parameters=(),
             upload_api=True, **kwargs
         )
 
