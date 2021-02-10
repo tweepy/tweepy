@@ -402,11 +402,11 @@ class API:
         )
 
     @payload('status')
-    def retweet(self, id, *args, **kwargs):
+    def retweet(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
         """
         return self.request(
-            'POST', f'statuses/retweet/{id}', *args, endpoint_parameters=(
+            'POST', f'statuses/retweet/{id}', endpoint_parameters=(
                 'trim_user',
             ), **kwargs
         )
