@@ -113,7 +113,7 @@ class TweepyAPITests(TweepyTestCase):
         update = self.api.update_with_media('examples/banner.png', status=tweet_text)
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
-    @tape.use_cassette('testgetuser.json')
+    @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):
         u = self.api.get_user(screen_name='Twitter')
         self.assertEqual(u.screen_name, 'Twitter')
@@ -388,7 +388,7 @@ class TweepyAPITests(TweepyTestCase):
         }
         self.assertTrue(expected_dict in languages)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedresult(self):
         self.api.cache = MemoryCache()
         self.api.home_timeline()
@@ -396,7 +396,7 @@ class TweepyAPITests(TweepyTestCase):
         self.api.home_timeline()
         self.assertTrue(self.api.cached_result)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedifferentqueryparameters(self):
         self.api.cache = MemoryCache()
 
