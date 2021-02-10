@@ -502,11 +502,11 @@ class API:
 
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
-    def list_direct_messages(self, *args, **kwargs):
+    def list_direct_messages(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/list-events
         """
         return self.request(
-            'GET', 'direct_messages/events/list', *args, endpoint_parameters=(
+            'GET', 'direct_messages/events/list', endpoint_parameters=(
                 'count', 'cursor'
             ), **kwargs
         )
