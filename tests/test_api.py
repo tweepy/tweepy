@@ -95,7 +95,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(status_id=update.id)
+        deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdateanddestroystatus.json')
@@ -105,7 +105,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(status_id=update.id)
+        deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
