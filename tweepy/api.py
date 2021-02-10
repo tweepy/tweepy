@@ -543,11 +543,11 @@ class API:
             json_payload=json_payload, **kwargs
         )
 
-    def destroy_direct_message(self, id, *args, **kwargs):
+    def destroy_direct_message(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
         """
         return self.request(
-            'DELETE', 'direct_messages/events/destroy', id, *args,
+            'DELETE', 'direct_messages/events/destroy', id,
             endpoint_parameters=(
                 'id',
             ), **kwargs
