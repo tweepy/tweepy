@@ -448,7 +448,7 @@ class API:
         """
         return self.request(
             'GET', 'users/show', *args, endpoint_parameters=(
-                'user_id', 'screen_name'
+                'user_id', 'screen_name', 'include_entities'
             ), **kwargs
         )
 
