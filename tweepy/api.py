@@ -364,13 +364,13 @@ class API:
     def create_media_metadata(self, media_id, alt_text, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
         """
-        kwargs['json_payload'] = {
+        json_payload = {
             'media_id': media_id,
             'alt_text': {'text': alt_text}
         }
 
         return self.request(
-            'POST', 'media/metadata/create', *args,
+            'POST', 'media/metadata/create', *args, json_payload=json_payload,
             upload_api=True, **kwargs
         )
 
