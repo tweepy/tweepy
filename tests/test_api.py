@@ -115,10 +115,10 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testgetuser.json')
     def testgetuser(self):
-        u = self.api.get_user('Twitter')
+        u = self.api.get_user(screen_name='Twitter')
         self.assertEqual(u.screen_name, 'Twitter')
 
-        u = self.api.get_user(783214)
+        u = self.api.get_user(user_id=783214)
         self.assertEqual(u.screen_name, 'Twitter')
 
     @tape.use_cassette('testlookupusers.json')
@@ -400,11 +400,11 @@ class TweepyAPITests(TweepyTestCase):
     def testcachedifferentqueryparameters(self):
         self.api.cache = MemoryCache()
 
-        user1 = self.api.get_user('TweepyDev')
+        user1 = self.api.get_user(screen_name='TweepyDev')
         self.assertFalse(self.api.cached_result)
         self.assertEqual('TweepyDev', user1.screen_name)
 
-        user2 = self.api.get_user('Twitter')
+        user2 = self.api.get_user(screen_name='Twitter')
         self.assertEqual('Twitter', user2.screen_name)
         self.assertFalse(self.api.cached_result)
 
