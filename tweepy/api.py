@@ -465,12 +465,12 @@ class API:
         )
 
     @payload('user', list=True)
-    def lookup_users(self, *args, user_id=None, screen_name=None, **kwargs):
+    def lookup_users(self, *, user_id=None, screen_name=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
             'POST', 'users/lookup', list_to_csv(user_id),
-            list_to_csv(screen_name), *args, endpoint_parameters=(
+            list_to_csv(screen_name), endpoint_parameters=(
                 'user_id', 'screen_name', 'include_entities', 'tweet_mode'
             ), **kwargs
         )
