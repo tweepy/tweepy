@@ -443,11 +443,11 @@ class API:
         )
 
     @payload('user')
-    def get_user(self, *args, **kwargs):
+    def get_user(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-show
         """
         return self.request(
-            'GET', 'users/show', *args, endpoint_parameters=(
+            'GET', 'users/show', endpoint_parameters=(
                 'user_id', 'screen_name', 'include_entities'
             ), **kwargs
         )
