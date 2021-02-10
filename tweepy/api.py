@@ -486,7 +486,7 @@ class API:
         """
         return self.request(
             'GET', 'users/search', q, *args, endpoint_parameters=(
-                'q', 'count', 'page'
+                'q', 'count', 'page', 'include_entities'
             ), **kwargs
         )
 
