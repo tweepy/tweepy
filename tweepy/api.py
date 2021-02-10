@@ -512,7 +512,7 @@ class API:
         )
 
     @payload('direct_message')
-    def send_direct_message(self, recipient_id, text, quick_reply_options=None,
+    def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
                             attachment_type=None, attachment_media_id=None,
                             ctas=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
