@@ -481,12 +481,12 @@ class API:
 
     @pagination(mode='page')
     @payload('user', list=True)
-    def search_users(self, q, *args, **kwargs):
+    def search_users(self, q, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-search
         """
         return self.request(
-            'GET', 'users/search', q, *args, endpoint_parameters=(
-                'q', 'count', 'page', 'include_entities'
+            'GET', 'users/search', q, endpoint_parameters=(
+                'q', 'page', 'count', 'include_entities'
             ), **kwargs
         )
 
