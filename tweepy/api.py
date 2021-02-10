@@ -406,7 +406,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
         """
         return self.request(
-            'POST', f'statuses/retweet/{id}', *args, **kwargs
+            'POST', f'statuses/retweet/{id}', *args, endpoint_parameters=(
+                'trim_user',
+            ), **kwargs
         )
 
     @payload('status')
