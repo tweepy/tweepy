@@ -1,0 +1,77 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://api.twitter.com/1.1/friends/ids.json?screen_name=TweepyDev
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAFzKwQrCMAyA4XfJOYcmTZNmryIyZO4wGKusrQjDd9fj9Ph//Acs9wrDJSdTd1dn
+        ja5CSmhZxQkpmbFbRpIUo7oyWgpROagIqzFxJlROkTMjs4i7uKQrwja/2jj1vZYdhvDTY21fgwAI
+        j31+LqXX8/lnp7uVdlvHqfStwbD1dX1/AAAA//8DACleTB7DAAAA
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '153'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Fri, 12 Feb 2021 03:58:54 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Fri, 12 Feb 2021 03:58:54 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_Ckle6m0DOIQ6zRa+jgLJUg=="; Max-Age=63072000; Expires=Sun,
+        12 Feb 2023 03:58:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - lang=en; Path=/
+      - guest_id=v1%3A161310233437496974; Max-Age=63072000; Expires=Sun, 12 Feb 2023
+        03:58:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - c1e0c06b1a3689373d6a1ecdad8dbd97
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '13'
+      x-rate-limit-reset:
+      - '1613103206'
+      x-response-time:
+      - '22'
+      x-transaction:
+      - 004d8a93006dcf9b
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -168,7 +168,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertTrue(isinstance(source, Friendship))
         self.assertTrue(isinstance(target, Friendship))
 
-    @tape.use_cassette('testfriendsids.json')
+    @tape.use_cassette('testfriendsids.yaml', serializer='yaml')
     def testfriendsids(self):
         self.api.friends_ids(screen_name=username)
 
