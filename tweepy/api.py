@@ -658,8 +658,8 @@ class API:
         """
         return self.request(
             'GET', 'followers/list', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'cursor', 'count',
-                'skip_status', 'include_user_entities'
+                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
+                'include_user_entities'
             ), **kwargs
         )
 
