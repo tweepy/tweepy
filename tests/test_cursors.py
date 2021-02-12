@@ -18,7 +18,7 @@ class TweepyCursorTests(TweepyTestCase):
         items = list(Cursor(self.api.friends_ids).items(2))
         self.assertEqual(len(items), 2)
 
-        items = list(Cursor(self.api.followers_ids, username).items(1))
+        items = list(Cursor(self.api.followers_ids, screen_name=username).items(1))
         self.assertEqual(len(items), 1)
 
     @tape.use_cassette('testcursorcursorpages.json')
@@ -26,7 +26,7 @@ class TweepyCursorTests(TweepyTestCase):
         pages = list(Cursor(self.api.friends_ids).pages(1))
         self.assertTrue(len(pages) == 1)
 
-        pages = list(Cursor(self.api.followers_ids, username).pages(1))
+        pages = list(Cursor(self.api.followers_ids, screen_name=username).pages(1))
         self.assertTrue(len(pages) == 1)
 
     @tape.use_cassette('testcursorsetstartcursor.json')
