@@ -653,11 +653,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def followers(self, *args, **kwargs):
+    def followers(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
         """
         return self.request(
-            'GET', 'followers/list', *args, endpoint_parameters=(
+            'GET', 'followers/list', endpoint_parameters=(
                 'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
                 'include_user_entities'
             ), **kwargs
