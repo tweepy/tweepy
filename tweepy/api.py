@@ -602,7 +602,7 @@ class API:
         """
         return self.request(
             'GET', 'friends/ids', *args, endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor'
+                'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
             ), **kwargs
         )
 
