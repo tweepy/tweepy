@@ -1,0 +1,148 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://api.twitter.com/1.1/friends/ids.json?cursor=-1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAFzKwQrCMAyA4XfJOYcmTZNmryIyZO4wGKusrQjDd9fj9Ph//Acs9wrDJSdTd1dn
+        ja5CSmhZxQkpmbFbRpIUo7oyWgpROagIqzFxJlROkTMjs4i7uKQrwja/2jj1vZYdhvDTY21fgwAI
+        j31+LqXX8/lnp7uVdlvHqfStwbD1dX1/AAAA//8DACleTB7DAAAA
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '153'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Fri, 12 Feb 2021 23:29:04 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Fri, 12 Feb 2021 23:29:04 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_FXShy2e47TeUuAHnSV6pFw=="; Max-Age=63072000; Expires=Sun,
+        12 Feb 2023 23:29:04 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - lang=en; Path=/
+      - guest_id=v1%3A161317254433441601; Max-Age=63072000; Expires=Sun, 12 Feb 2023
+        23:29:04 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 20dbf735aab4e501dfdb0e5a3ee667c8
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '13'
+      x-rate-limit-reset:
+      - '1613173443'
+      x-response-time:
+      - '16'
+      x-transaction:
+      - 00722e2a00c9bc1f
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A161317254433441601; personalization_id="v1_FXShy2e47TeUuAHnSV6pFw==";
+        lang=en
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://api.twitter.com/1.1/followers/ids.json?cursor=-1&screen_name=TweepyDev
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWykwpVrKKNjQ1NzeyNLfQMTQxNTY2szQzitVRykutKIlPLi0qzi9SsjJA4ccX
+        lwDFlAyUdJQKilLLMvNLi5FVookhqS7JL0nMiU/OL80rUbLKK83JqQUAAAD//wMADfXWf4MAAAA=
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '113'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Fri, 12 Feb 2021 23:29:04 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Fri, 12 Feb 2021 23:29:04 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - c8fbfddf5b3c4a55a3a077b4b79a6f26
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '10'
+      x-rate-limit-reset:
+      - '1613173286'
+      x-response-time:
+      - '22'
+      x-transaction:
+      - 00b656fd007b3ff5
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
