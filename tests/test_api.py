@@ -159,7 +159,7 @@ class TweepyAPITests(TweepyTestCase):
         enemy = self.api.destroy_friendship('Twitter')
         self.assertEqual(enemy.screen_name, 'Twitter')
 
-        friend = self.api.create_friendship('Twitter')
+        friend = self.api.create_friendship(screen_name='Twitter')
         self.assertEqual(friend.screen_name, 'Twitter')
 
     @tape.use_cassette('testshowfriendship.json')
@@ -256,7 +256,7 @@ class TweepyAPITests(TweepyTestCase):
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
-        self.api.create_friendship('twitter')  # restore
+        self.api.create_friendship(screen_name='twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
     def testblocks(self):
