@@ -559,7 +559,7 @@ class API:
         """
         return self.request(
             'POST', 'friendships/create', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'follow'
+                'user_id', 'screen_name', 'follow'
             ), **kwargs
         )
 
