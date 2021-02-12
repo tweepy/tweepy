@@ -182,7 +182,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testfollowers.json')
     def testfollowers(self):
-        self.api.followers(username)
+        self.api.followers(screen_name=username)
 
     @tape.use_cassette('testverifycredentials.json')
     def testverifycredentials(self):
