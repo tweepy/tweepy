@@ -554,12 +554,12 @@ class API:
         )
 
     @payload('user')
-    def create_friendship(self, *args, **kwargs):
+    def create_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
         """
         return self.request(
-            'POST', 'friendships/create', *args, endpoint_parameters=(
-                'user_id', 'screen_name', 'follow'
+            'POST', 'friendships/create', endpoint_parameters=(
+                'screen_name', 'user_id', 'follow'
             ), **kwargs
         )
 
