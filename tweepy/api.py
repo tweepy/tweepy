@@ -454,16 +454,16 @@ class API:
             post_data=post_data, upload_api=True, **kwargs
         )
 
-    def create_media_metadata(self, media_id, alt_text, *args, **kwargs):
+    def create_media_metadata(self, media_id, alt_text, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
         """
-        kwargs['json_payload'] = {
+        json_payload = {
             'media_id': media_id,
             'alt_text': {'text': alt_text}
         }
 
         return self.request(
-            'POST', 'media/metadata/create', *args,
+            'POST', 'media/metadata/create', json_payload=json_payload,
             upload_api=True, **kwargs
         )
 
@@ -494,67 +494,72 @@ class API:
         )
 
     @payload('status')
-    def destroy_status(self, status_id, *args, **kwargs):
+    def destroy_status(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
         """
         return self.request(
-            'POST', f'statuses/destroy/{status_id}', *args, **kwargs
+            'POST', f'statuses/destroy/{id}', endpoint_parameters=(
+                'trim_user',
+            ), **kwargs
         )
 
     @payload('status')
-    def retweet(self, status_id, *args, **kwargs):
+    def retweet(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
         """
         return self.request(
-            'POST', f'statuses/retweet/{status_id}', *args, **kwargs
+            'POST', f'statuses/retweet/{id}', endpoint_parameters=(
+                'trim_user',
+            ), **kwargs
         )
 
     @payload('status')
-    def unretweet(self, status_id, *args, **kwargs):
+    def unretweet(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
         """
         return self.request(
-            'POST', f'statuses/unretweet/{status_id}', *args, **kwargs
+            'POST', f'statuses/unretweet/{id}', endpoint_parameters=(
+                'trim_user',
+            ), **kwargs
         )
 
     @payload('status', list=True)
-    def retweets(self, status_id, *args, **kwargs):
+    def retweets(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets-id
         """
         return self.request(
-            'GET', f'statuses/retweets/{status_id}', *args,
-            endpoint_parameters=(
-                'count',
+            'GET', f'statuses/retweets/{id}', endpoint_parameters=(
+                'count', 'trim_user'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('ids')
-    def retweeters(self, *args, **kwargs):
+    def retweeters(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
         """
         return self.request(
-            'GET', 'statuses/retweeters/ids', *args, endpoint_parameters=(
-                'id', 'cursor', 'stringify_ids'
+            'GET', 'statuses/retweeters/ids', id, endpoint_parameters=(
+                'id', 'count', 'cursor', 'stringify_ids'
             ), **kwargs
         )
 
     @payload('user')
-    def get_user(self, *args, **kwargs):
+    def get_user(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-show
         """
         return self.request(
-            'GET', 'users/show', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name'
+            'GET', 'users/show', endpoint_parameters=(
+                'user_id', 'screen_name', 'include_entities'
             ), **kwargs
         )
 
     @payload('json')
-    def get_oembed(self, *args, **kwargs):
+    def get_oembed(self, url, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
         """
         return self.request(
-            'GET', 'statuses/oembed', *args, endpoint_parameters=(
+            'GET', 'statuses/oembed', url, endpoint_parameters=(
                 'url', 'maxwidth', 'hide_media', 'hide_thread', 'omit_script',
                 'align', 'related', 'lang', 'theme', 'link_color',
                 'widget_type', 'dnt'
@@ -562,13 +567,13 @@ class API:
         )
 
     @payload('user', list=True)
-    def lookup_users(self, user_ids=None, screen_names=None, *args, **kwargs):
+    def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
-            'POST', 'users/lookup', list_to_csv(user_ids),
-            list_to_csv(screen_names), *args, endpoint_parameters=(
-                'user_id', 'screen_name', 'include_entities', 'tweet_mode'
+            'POST', 'users/lookup', list_to_csv(screen_name),
+            list_to_csv(user_id), endpoint_parameters=(
+                'screen_name', 'user_id', 'include_entities', 'tweet_mode'
             ), **kwargs
         )
 
@@ -578,38 +583,38 @@ class API:
 
     @pagination(mode='page')
     @payload('user', list=True)
-    def search_users(self, *args, **kwargs):
+    def search_users(self, q, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-search
         """
         return self.request(
-            'GET', 'users/search', *args, endpoint_parameters=(
-                'q', 'count', 'page'
+            'GET', 'users/search', q, endpoint_parameters=(
+                'q', 'page', 'count', 'include_entities'
             ), **kwargs
         )
 
     @payload('direct_message')
-    def get_direct_message(self, *args, **kwargs):
+    def get_direct_message(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
         """
         return self.request(
-            'GET', 'direct_messages/events/show', *args, endpoint_parameters=(
+            'GET', 'direct_messages/events/show', id, endpoint_parameters=(
                 'id',
             ), **kwargs
         )
 
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
-    def list_direct_messages(self, *args, **kwargs):
+    def list_direct_messages(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/list-events
         """
         return self.request(
-            'GET', 'direct_messages/events/list', *args, endpoint_parameters=(
+            'GET', 'direct_messages/events/list', endpoint_parameters=(
                 'count', 'cursor'
             ), **kwargs
         )
 
     @payload('direct_message')
-    def send_direct_message(self, recipient_id, text, quick_reply_options=None,
+    def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
                             attachment_type=None, attachment_media_id=None,
                             ctas=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
@@ -640,100 +645,100 @@ class API:
             json_payload=json_payload, **kwargs
         )
 
-    def destroy_direct_message(self, *args, **kwargs):
+    def destroy_direct_message(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
         """
         return self.request(
-            'DELETE', 'direct_messages/events/destroy', *args,
+            'DELETE', 'direct_messages/events/destroy', id,
             endpoint_parameters=(
                 'id',
             ), **kwargs
         )
 
     @payload('user')
-    def create_friendship(self, *args, **kwargs):
+    def create_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
         """
         return self.request(
-            'POST', 'friendships/create', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'follow'
+            'POST', 'friendships/create', endpoint_parameters=(
+                'screen_name', 'user_id', 'follow'
             ), **kwargs
         )
 
     @payload('user')
-    def destroy_friendship(self, *args, **kwargs):
+    def destroy_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
         """
         return self.request(
-            'POST', 'friendships/destroy', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name'
+            'POST', 'friendships/destroy', endpoint_parameters=(
+                'screen_name', 'user_id'
             ), **kwargs
         )
 
     @payload('friendship')
-    def show_friendship(self, *args, **kwargs):
+    def show_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
         """
         return self.request(
-            'GET', 'friendships/show', *args, endpoint_parameters=(
+            'GET', 'friendships/show', endpoint_parameters=(
                 'source_id', 'source_screen_name', 'target_id',
                 'target_screen_name'
             ), **kwargs
         )
 
     @payload('relationship', list=True)
-    def lookup_friendships(self, user_ids=None, screen_names=None, **kwargs):
+    def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
-            'GET', 'friendships/lookup', list_to_csv(user_ids),
-            list_to_csv(screen_names), endpoint_parameters=(
-                'user_id', 'screen_name'
+            'GET', 'friendships/lookup', list_to_csv(screen_name),
+            list_to_csv(user_id), endpoint_parameters=(
+                'screen_name', 'user_id'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friends_ids(self, *args, **kwargs):
+    def friends_ids(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
         """
         return self.request(
-            'GET', 'friends/ids', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'cursor'
+            'GET', 'friends/ids', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def friends(self, *args, **kwargs):
+    def friends(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
         """
         return self.request(
-            'GET', 'friends/list', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'cursor', 'count',
-                'skip_status', 'include_user_entities'
+            'GET', 'friends/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
+                'include_user_entities'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friendships_incoming(self, *args, **kwargs):
+    def friendships_incoming(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
         """
         return self.request(
-            'GET', 'friendships/incoming', *args, endpoint_parameters=(
-                'cursor',
+            'GET', 'friendships/incoming', endpoint_parameters=(
+                'cursor', 'stringify_ids'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friendships_outgoing(self, *args, **kwargs):
+    def friendships_outgoing(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
         """
         return self.request(
-            'GET', 'friendships/outgoing', *args, endpoint_parameters=(
-                'cursor',
+            'GET', 'friendships/outgoing', endpoint_parameters=(
+                'cursor', 'stringify_ids'
             ), **kwargs
         )
 

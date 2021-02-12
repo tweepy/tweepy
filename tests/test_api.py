@@ -95,7 +95,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(status_id=update.id)
+        deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdateanddestroystatus.json')
@@ -105,7 +105,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(update.text, tweet_text)
 
         # test destroy
-        deleted = self.api.destroy_status(status_id=update.id)
+        deleted = self.api.destroy_status(id=update.id)
         self.assertEqual(deleted.id, update.id)
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
@@ -125,20 +125,20 @@ class TweepyAPITests(TweepyTestCase):
     def testmediauploadmp4(self):
         self.api.media_upload('examples/video.mp4')
 
-    @tape.use_cassette('testgetuser.json')
+    @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):
-        u = self.api.get_user('Twitter')
+        u = self.api.get_user(screen_name='Twitter')
         self.assertEqual(u.screen_name, 'Twitter')
 
-        u = self.api.get_user(783214)
+        u = self.api.get_user(user_id=783214)
         self.assertEqual(u.screen_name, 'Twitter')
 
     @tape.use_cassette('testlookupusers.json')
     def testlookupusers(self):
         def check(users):
             self.assertEqual(len(users), 2)
-        check(self.api.lookup_users(user_ids=[6844292, 6253282]))
-        check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
+        check(self.api.lookup_users(user_id=[6844292, 6253282]))
+        check(self.api.lookup_users(screen_name=['twitterapi', 'twitter']))
 
     @tape.use_cassette('testsearchusers.json')
     def testsearchusers(self):
@@ -166,12 +166,12 @@ class TweepyAPITests(TweepyTestCase):
         # destroy
         self.api.destroy_direct_message(sent_dm.id)
 
-    @tape.use_cassette('testcreatedestroyfriendship.json')
+    @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):
-        enemy = self.api.destroy_friendship('Twitter')
+        enemy = self.api.destroy_friendship(screen_name='Twitter')
         self.assertEqual(enemy.screen_name, 'Twitter')
 
-        friend = self.api.create_friendship('Twitter')
+        friend = self.api.create_friendship(screen_name='Twitter')
         self.assertEqual(friend.screen_name, 'Twitter')
 
     @tape.use_cassette('testshowfriendship.json')
@@ -180,17 +180,17 @@ class TweepyAPITests(TweepyTestCase):
         self.assertTrue(isinstance(source, Friendship))
         self.assertTrue(isinstance(target, Friendship))
 
-    @tape.use_cassette('testfriendsids.json')
+    @tape.use_cassette('testfriendsids.yaml', serializer='yaml')
     def testfriendsids(self):
-        self.api.friends_ids(username)
+        self.api.friends_ids(screen_name=username)
 
     @tape.use_cassette('testfollowersids.json')
     def testfollowersids(self):
         self.api.followers_ids(username)
 
-    @tape.use_cassette('testfriends.json')
+    @tape.use_cassette('testfriends.yaml', serializer='yaml')
     def testfriends(self):
-        self.api.friends(username)
+        self.api.friends(screen_name=username)
 
     @tape.use_cassette('testfollowers.json')
     def testfollowers(self):
@@ -264,11 +264,11 @@ class TweepyAPITests(TweepyTestCase):
         self.api.create_favorite(145344012)
         self.api.destroy_favorite(145344012)
 
-    @tape.use_cassette('testcreatedestroyblock.json')
+    @tape.use_cassette('testcreatedestroyblock.yaml', serializer='yaml')
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
-        self.api.create_friendship('twitter')  # restore
+        self.api.create_friendship(screen_name='twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
     def testblocks(self):
@@ -400,7 +400,7 @@ class TweepyAPITests(TweepyTestCase):
         }
         self.assertTrue(expected_dict in languages)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedresult(self):
         self.api.cache = MemoryCache()
         self.api.home_timeline()
@@ -408,15 +408,15 @@ class TweepyAPITests(TweepyTestCase):
         self.api.home_timeline()
         self.assertTrue(self.api.cached_result)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedifferentqueryparameters(self):
         self.api.cache = MemoryCache()
 
-        user1 = self.api.get_user('TweepyDev')
+        user1 = self.api.get_user(screen_name='TweepyDev')
         self.assertFalse(self.api.cached_result)
         self.assertEqual('TweepyDev', user1.screen_name)
 
-        user2 = self.api.get_user('Twitter')
+        user2 = self.api.get_user(screen_name='Twitter')
         self.assertEqual('Twitter', user2.screen_name)
         self.assertFalse(self.api.cached_result)
 
