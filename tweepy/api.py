@@ -625,7 +625,7 @@ class API:
         """
         return self.request(
             'GET', 'friendships/incoming', *args, endpoint_parameters=(
-                'cursor',
+                'cursor', 'stringify_ids'
             ), **kwargs
         )
 
