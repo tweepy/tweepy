@@ -156,7 +156,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):
-        enemy = self.api.destroy_friendship('Twitter')
+        enemy = self.api.destroy_friendship(screen_name='Twitter')
         self.assertEqual(enemy.screen_name, 'Twitter')
 
         friend = self.api.create_friendship(screen_name='Twitter')
