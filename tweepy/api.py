@@ -585,7 +585,7 @@ class API:
         )
 
     @payload('relationship', list=True)
-    def lookup_friendships(self, user_id=None, screen_name=None, **kwargs):
+    def lookup_friendships(self, *, user_id=None, screen_name=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
