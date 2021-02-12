@@ -574,11 +574,11 @@ class API:
         )
 
     @payload('friendship')
-    def show_friendship(self, *args, **kwargs):
+    def show_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
         """
         return self.request(
-            'GET', 'friendships/show', *args, endpoint_parameters=(
+            'GET', 'friendships/show', endpoint_parameters=(
                 'source_id', 'source_screen_name', 'target_id',
                 'target_screen_name'
             ), **kwargs
