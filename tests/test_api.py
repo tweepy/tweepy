@@ -170,7 +170,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testfriendsids.json')
     def testfriendsids(self):
-        self.api.friends_ids(username)
+        self.api.friends_ids(screen_name=username)
 
     @tape.use_cassette('testfollowersids.json')
     def testfollowersids(self):
