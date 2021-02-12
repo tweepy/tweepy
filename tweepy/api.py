@@ -647,7 +647,7 @@ class API:
         """
         return self.request(
             'GET', 'followers/ids', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name', 'cursor', 'count'
+                'user_id', 'screen_name', 'cursor', 'count'
             ), **kwargs
         )
 
