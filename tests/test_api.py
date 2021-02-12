@@ -154,7 +154,7 @@ class TweepyAPITests(TweepyTestCase):
         # destroy
         self.api.destroy_direct_message(sent_dm.id)
 
-    @tape.use_cassette('testcreatedestroyfriendship.json')
+    @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):
         enemy = self.api.destroy_friendship('Twitter')
         self.assertEqual(enemy.screen_name, 'Twitter')
@@ -252,7 +252,7 @@ class TweepyAPITests(TweepyTestCase):
         self.api.create_favorite(145344012)
         self.api.destroy_favorite(145344012)
 
-    @tape.use_cassette('testcreatedestroyblock.json')
+    @tape.use_cassette('testcreatedestroyblock.yaml', serializer='yaml')
     def testcreatedestroyblock(self):
         self.api.create_block('twitter')
         self.api.destroy_block('twitter')
