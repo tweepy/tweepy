@@ -564,12 +564,12 @@ class API:
         )
 
     @payload('user')
-    def destroy_friendship(self, *args, **kwargs):
+    def destroy_friendship(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
         """
         return self.request(
-            'POST', 'friendships/destroy', *args, endpoint_parameters=(
-                'user_id', 'screen_name'
+            'POST', 'friendships/destroy', endpoint_parameters=(
+                'screen_name', 'user_id'
             ), **kwargs
         )
 
