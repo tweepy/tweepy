@@ -664,10 +664,11 @@ class API:
         )
 
     @payload('json')
-    def get_settings(self, *args, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings """
+    def get_settings(self, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings
+        """
         return self.request(
-            'GET', 'account/settings', *args, use_cache=False, **kwargs
+            'GET', 'account/settings', use_cache=False, **kwargs
         )
 
     @payload('json')
