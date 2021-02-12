@@ -620,11 +620,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friendships_incoming(self, *args, **kwargs):
+    def friendships_incoming(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
         """
         return self.request(
-            'GET', 'friendships/incoming', *args, endpoint_parameters=(
+            'GET', 'friendships/incoming', endpoint_parameters=(
                 'cursor', 'stringify_ids'
             ), **kwargs
         )
