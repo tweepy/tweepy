@@ -585,12 +585,12 @@ class API:
         )
 
     @payload('relationship', list=True)
-    def lookup_friendships(self, user_id=None, screen_names=None, **kwargs):
+    def lookup_friendships(self, user_id=None, screen_name=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
             'GET', 'friendships/lookup', list_to_csv(user_id),
-            list_to_csv(screen_names), endpoint_parameters=(
+            list_to_csv(screen_name), endpoint_parameters=(
                 'user_id', 'screen_name'
             ), **kwargs
         )
