@@ -608,11 +608,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def friends(self, *args, **kwargs):
+    def friends(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
         """
         return self.request(
-            'GET', 'friends/list', *args, endpoint_parameters=(
+            'GET', 'friends/list', endpoint_parameters=(
                 'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
                 'include_user_entities'
             ), **kwargs
