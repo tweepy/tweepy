@@ -255,7 +255,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testcreatedestroyblock.yaml', serializer='yaml')
     def testcreatedestroyblock(self):
         self.api.create_block(screen_name='twitter')
-        self.api.destroy_block('twitter')
+        self.api.destroy_block(screen_name='twitter')
         self.api.create_friendship(screen_name='twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
