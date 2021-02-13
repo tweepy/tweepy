@@ -740,12 +740,12 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def favorites(self, *args, **kwargs):
+    def favorites(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
         """
         return self.request(
-            'GET', 'favorites/list', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'max_id', 'count', 'since_id',
+            'GET', 'favorites/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'since_id', 'max_id',
                 'include_entities'
             ), **kwargs
         )
