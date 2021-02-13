@@ -745,7 +745,8 @@ class API:
         """
         return self.request(
             'GET', 'favorites/list', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'max_id', 'count', 'since_id'
+                'screen_name', 'user_id', 'max_id', 'count', 'since_id',
+                'include_entities'
             ), **kwargs
         )
 
