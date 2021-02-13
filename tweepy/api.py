@@ -761,11 +761,11 @@ class API:
         )
 
     @payload('status')
-    def destroy_favorite(self, id, *args, **kwargs):
+    def destroy_favorite(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-destroy
         """
         return self.request(
-            'POST', 'favorites/destroy', id, *args, endpoint_parameters=(
+            'POST', 'favorites/destroy', id, endpoint_parameters=(
                 'id', 'include_entities'
             ), **kwargs
         )
