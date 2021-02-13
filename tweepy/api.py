@@ -766,7 +766,7 @@ class API:
         """
         return self.request(
             'POST', 'favorites/destroy', id, *args, endpoint_parameters=(
-                'id',
+                'id', 'include_entities'
             ), **kwargs
         )
 
