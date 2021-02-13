@@ -733,7 +733,8 @@ class API:
         """
         return self.request(
             'POST', 'account/update_profile', *args, endpoint_parameters=(
-                'name', 'url', 'location', 'description', 'profile_link_color'
+                'name', 'url', 'location', 'description', 'profile_link_color',
+                'include_entities', 'skip_status'
             ), **kwargs
         )
 
