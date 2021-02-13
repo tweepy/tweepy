@@ -751,11 +751,11 @@ class API:
         )
 
     @payload('status')
-    def create_favorite(self, *args, **kwargs):
+    def create_favorite(self, id, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
         """
         return self.request(
-            'POST', 'favorites/create', *args, endpoint_parameters=(
+            'POST', 'favorites/create', id, *args, endpoint_parameters=(
                 'id',
             ), **kwargs
         )
