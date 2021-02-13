@@ -695,12 +695,11 @@ class API:
         )
 
     @payload('json')
-    def rate_limit_status(self, *args, **kwargs):
+    def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
         """
         return self.request(
-            'GET', 'application/rate_limit_status', *args,
-            endpoint_parameters=(
+            'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
         )
