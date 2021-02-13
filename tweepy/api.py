@@ -728,11 +728,11 @@ class API:
         )
 
     @payload('user')
-    def update_profile(self, *args, **kwargs):
+    def update_profile(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
         """
         return self.request(
-            'POST', 'account/update_profile', *args, endpoint_parameters=(
+            'POST', 'account/update_profile', endpoint_parameters=(
                 'name', 'url', 'location', 'description', 'profile_link_color',
                 'include_entities', 'skip_status'
             ), **kwargs
