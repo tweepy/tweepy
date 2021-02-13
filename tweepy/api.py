@@ -678,8 +678,7 @@ class API:
         return self.request(
             'POST', 'account/settings', *args, endpoint_parameters=(
                 'sleep_time_enabled', 'start_sleep_time', 'end_sleep_time',
-                'time_zone', 'trend_location_woeid',
-                'allow_contributor_request', 'lang'
+                'time_zone', 'trend_location_woeid', 'lang'
             ), use_cache=False, **kwargs
         )
 
