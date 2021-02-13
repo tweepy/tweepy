@@ -672,11 +672,11 @@ class API:
         )
 
     @payload('json')
-    def set_settings(self, *args, **kwargs):
+    def set_settings(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-settings
         """
         return self.request(
-            'POST', 'account/settings', *args, endpoint_parameters=(
+            'POST', 'account/settings', endpoint_parameters=(
                 'sleep_time_enabled', 'start_sleep_time', 'end_sleep_time',
                 'time_zone', 'trend_location_woeid', 'lang'
             ), use_cache=False, **kwargs
