@@ -710,8 +710,7 @@ class API:
         """
         headers, post_data = API._pack_image(filename, 700, f=file_)
         return self.request(
-            'POST', 'account/update_profile_image', *args,
-            endpoint_parameters=(
+            'POST', 'account/update_profile_image', endpoint_parameters=(
                 'include_entities', 'skip_status'
             ), post_data=post_data, headers=headers, **kwargs
         )
