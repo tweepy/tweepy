@@ -756,7 +756,7 @@ class API:
         """
         return self.request(
             'POST', 'favorites/create', id, *args, endpoint_parameters=(
-                'id',
+                'id', 'include_entities'
             ), **kwargs
         )
 
