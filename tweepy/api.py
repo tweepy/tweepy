@@ -771,12 +771,12 @@ class API:
         )
 
     @payload('user')
-    def create_block(self, *args, **kwargs):
+    def create_block(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
         """
         return self.request(
-            'POST', 'blocks/create', *args, endpoint_parameters=(
-                'user_id', 'screen_name', 'include_entities', 'skip_status'
+            'POST', 'blocks/create', endpoint_parameters=(
+                'screen_name', 'user_id', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
