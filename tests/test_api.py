@@ -186,7 +186,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testverifycredentials.json')
     def testverifycredentials(self):
-        self.assertNotEqual(self.api.verify_credentials(), False)
+        self.api.verify_credentials()
 
         # make sure that `me.status.entities` is not an empty dict
         me = self.api.verify_credentials(include_entities=True)

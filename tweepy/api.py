@@ -688,16 +688,11 @@ class API:
         """
         if 'include_email' in kwargs:
             kwargs['include_email'] = str(kwargs['include_email']).lower()
-        try:
-            return self.request(
-                'GET', 'account/verify_credentials', endpoint_parameters=(
-                    'include_entities', 'skip_status', 'include_email'
-                ), **kwargs
-            )
-        except TweepError as e:
-            if e.response is not None and e.response.status_code == 401:
-                return False
-            raise
+        return self.request(
+            'GET', 'account/verify_credentials', endpoint_parameters=(
+                'include_entities', 'skip_status', 'include_email'
+            ), **kwargs
+        )
 
     @payload('json')
     def rate_limit_status(self, *args, **kwargs):
