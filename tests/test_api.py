@@ -295,7 +295,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlisttimeline.json')
     def testlisttimeline(self):
-        self.api.list_timeline('Twitter', 'Official-Twitter-Accounts')
+        self.api.list_timeline(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testgetlist.json')
     def testgetlist(self):
