@@ -1027,17 +1027,17 @@ class API:
         )
 
     @payload('list')
-    def remove_list_members(self, screen_name=None, user_id=None, slug=None,
-                            list_id=None, owner_id=None,
-                            owner_screen_name=None, **kwargs):
+    def remove_list_members(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
         """
+        if 'user_id' in kwargs:
+            kwargs['user_id'] = list_to_csv(kwargs['user_id'])
+        if 'screen_name' in kwargs:
+            kwargs['screen_name'] = list_to_csv(kwargs['screen_name'])
         return self.request(
-            'POST', 'lists/members/destroy_all', list_to_csv(screen_name),
-            list_to_csv(user_id), slug, list_id, owner_id, owner_screen_name,
-            endpoint_parameters=(
-                'screen_name', 'user_id', 'slug', 'list_id', 'owner_id',
-                'owner_screen_name'
+            'POST', 'lists/members/destroy_all', endpoint_parameters=(
+                'list_id', 'slug', 'user_id', 'screen_name',
+                'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
