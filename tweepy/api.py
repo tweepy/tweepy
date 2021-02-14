@@ -903,11 +903,11 @@ class API:
         )
 
     @payload('list')
-    def destroy_list(self, *args, **kwargs):
+    def destroy_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
         """
         return self.request(
-            'POST', 'lists/destroy', *args, endpoint_parameters=(
+            'POST', 'lists/destroy', endpoint_parameters=(
                 'owner_screen_name', 'owner_id', 'list_id', 'slug'
             ), **kwargs
         )
