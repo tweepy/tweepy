@@ -797,7 +797,7 @@ class API:
         """
         return self.request(
             'GET', 'mutes/users/ids', *args, endpoint_parameters=(
-                'cursor',
+                'stringify_ids', 'cursor'
             ), **kwargs
         )
 
