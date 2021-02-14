@@ -924,12 +924,12 @@ class API:
         )
 
     @payload('list', list=True)
-    def lists_all(self, *args, **kwargs):
+    def lists_all(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-list
         """
         return self.request(
-            'GET', 'lists/list', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'reverse'
+            'GET', 'lists/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'reverse'
             ), **kwargs
         )
 
