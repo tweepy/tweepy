@@ -823,12 +823,12 @@ class API:
         )
 
     @payload('user')
-    def destroy_mute(self, *args, **kwargs):
+    def destroy_mute(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
         """
         return self.request(
-            'POST', 'mutes/users/destroy', *args, endpoint_parameters=(
-                'user_id', 'screen_name'
+            'POST', 'mutes/users/destroy', endpoint_parameters=(
+                'screen_name', 'user_id'
             ), **kwargs
         )
 
