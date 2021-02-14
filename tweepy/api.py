@@ -893,11 +893,11 @@ class API:
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
     @payload('list')
-    def create_list(self, *args, **kwargs):
+    def create_list(self, name, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-create
         """
         return self.request(
-            'POST', 'lists/create', *args, endpoint_parameters=(
+            'POST', 'lists/create', name, *args, endpoint_parameters=(
                 'name', 'mode', 'description'
             ), **kwargs
         )
