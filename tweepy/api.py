@@ -828,7 +828,7 @@ class API:
         """
         return self.request(
             'POST', 'mutes/users/destroy', *args, endpoint_parameters=(
-                'id', 'user_id', 'screen_name'
+                'user_id', 'screen_name'
             ), **kwargs
         )
 
