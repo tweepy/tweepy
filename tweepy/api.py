@@ -958,12 +958,12 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_subscriptions(self, *args, **kwargs):
+    def lists_subscriptions(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
         """
         return self.request(
-            'GET', 'lists/subscriptions', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'cursor', 'count'
+            'GET', 'lists/subscriptions', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor'
             ), **kwargs
         )
 
