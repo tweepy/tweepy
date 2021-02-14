@@ -839,7 +839,7 @@ class API:
         """
         return self.request(
             'GET', 'blocks/list', *args, endpoint_parameters=(
-                'cursor',
+                'include_entities', 'skip_status', 'cursor'
             ), **kwargs
         )
 
