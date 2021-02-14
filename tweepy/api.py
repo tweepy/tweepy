@@ -845,11 +845,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def blocks_ids(self, *args, **kwargs):
+    def blocks_ids(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
         """
         return self.request(
-            'GET', 'blocks/ids', *args, endpoint_parameters=(
+            'GET', 'blocks/ids', endpoint_parameters=(
                 'stringify_ids', 'cursor',
             ), **kwargs
         )
