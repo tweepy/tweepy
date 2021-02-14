@@ -850,7 +850,7 @@ class API:
         """
         return self.request(
             'GET', 'blocks/ids', *args, endpoint_parameters=(
-                'cursor',
+                'stringify_ids', 'cursor',
             ), **kwargs
         )
 
