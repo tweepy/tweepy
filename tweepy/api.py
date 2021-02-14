@@ -803,11 +803,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def mutes(self, *args, **kwargs):
+    def mutes(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
         """
         return self.request(
-            'GET', 'mutes/users/list', *args, endpoint_parameters=(
+            'GET', 'mutes/users/list', endpoint_parameters=(
                 'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
