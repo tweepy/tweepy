@@ -913,11 +913,11 @@ class API:
         )
 
     @payload('list')
-    def update_list(self, *args, **kwargs):
+    def update_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-update
         """
         return self.request(
-            'POST', 'lists/update', *args, endpoint_parameters=(
+            'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
             ), **kwargs
