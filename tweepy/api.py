@@ -935,13 +935,13 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_memberships(self, *args, **kwargs):
+    def lists_memberships(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
         """
         return self.request(
-            'GET', 'lists/memberships', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'filter_to_owned_lists', 'cursor',
-                'count'
+            'GET', 'lists/memberships', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor',
+                'filter_to_owned_lists'
             ), **kwargs
         )
 
