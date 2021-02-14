@@ -865,10 +865,10 @@ class API:
         )
 
     @payload('saved_search', list=True)
-    def saved_searches(self, *args, **kwargs):
+    def saved_searches(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
         """
-        return self.request('GET', 'saved_searches/list', *args, **kwargs)
+        return self.request('GET', 'saved_searches/list', **kwargs)
 
     @payload('saved_search')
     def get_saved_search(self, saved_search_id, *args, **kwargs):
