@@ -887,12 +887,10 @@ class API:
         )
 
     @payload('saved_search')
-    def destroy_saved_search(self, id, *args, **kwargs):
+    def destroy_saved_search(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
-        return self.request(
-            'POST', f'saved_searches/destroy/{id}', *args, **kwargs
-        )
+        return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
     @payload('list')
     def create_list(self, *args, **kwargs):
