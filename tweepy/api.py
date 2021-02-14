@@ -813,12 +813,12 @@ class API:
         )
 
     @payload('user')
-    def create_mute(self, *args, **kwargs):
+    def create_mute(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
         """
         return self.request(
-            'POST', 'mutes/users/create', *args, endpoint_parameters=(
-                'user_id', 'screen_name'
+            'POST', 'mutes/users/create', endpoint_parameters=(
+                'screen_name', 'user_id'
             ), **kwargs
         )
 
