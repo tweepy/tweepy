@@ -947,11 +947,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_ownerships(self, *args, **kwargs):
+    def lists_ownerships(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
         """
         return self.request(
-            'GET', 'lists/ownerships', *args, endpoint_parameters=(
+            'GET', 'lists/ownerships', endpoint_parameters=(
                 'user_id', 'screen_name', 'count', 'cursor'
             ), **kwargs
         )
