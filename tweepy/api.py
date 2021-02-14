@@ -855,12 +855,12 @@ class API:
         )
 
     @payload('user')
-    def report_spam(self, *args, **kwargs):
+    def report_spam(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
         """
         return self.request(
-            'POST', 'users/report_spam', *args, endpoint_parameters=(
-                'user_id', 'screen_name', 'perform_block'
+            'POST', 'users/report_spam', endpoint_parameters=(
+                'screen_name', 'user_id', 'perform_block'
             ), **kwargs
         )
 
