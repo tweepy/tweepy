@@ -792,11 +792,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def mutes_ids(self, *args, **kwargs):
+    def mutes_ids(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
         """
         return self.request(
-            'GET', 'mutes/users/ids', *args, endpoint_parameters=(
+            'GET', 'mutes/users/ids', endpoint_parameters=(
                 'stringify_ids', 'cursor'
             ), **kwargs
         )
