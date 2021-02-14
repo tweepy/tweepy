@@ -980,12 +980,12 @@ class API:
         )
 
     @payload('list')
-    def get_list(self, *args, **kwargs):
+    def get_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-show
         """
         return self.request(
-            'GET', 'lists/show', *args, endpoint_parameters=(
-                'owner_screen_name', 'owner_id', 'slug', 'list_id'
+            'GET', 'lists/show', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
