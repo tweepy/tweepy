@@ -877,11 +877,12 @@ class API:
         return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
     @payload('saved_search')
-    def create_saved_search(self, *args, **kwargs):
+    def create_saved_search(self, query, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
         """
         return self.request(
-            'POST', 'saved_searches/create', *args, endpoint_parameters=(
+            'POST', 'saved_searches/create', query, *args,
+            endpoint_parameters=(
                 'query',
             ), **kwargs
         )
