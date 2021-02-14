@@ -969,12 +969,12 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def list_timeline(self, *args, **kwargs):
+    def list_timeline(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
         """
         return self.request(
-            'GET', 'lists/statuses', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id', 'since_id',
+            'GET', 'lists/statuses', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'since_id',
                 'max_id', 'count', 'include_entities', 'include_rts'
             ), **kwargs
         )
