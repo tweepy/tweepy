@@ -834,11 +834,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def blocks(self, *args, **kwargs):
+    def blocks(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
         """
         return self.request(
-            'GET', 'blocks/list', *args, endpoint_parameters=(
+            'GET', 'blocks/list', endpoint_parameters=(
                 'include_entities', 'skip_status', 'cursor'
             ), **kwargs
         )
