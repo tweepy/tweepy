@@ -871,12 +871,10 @@ class API:
         return self.request('GET', 'saved_searches/list', **kwargs)
 
     @payload('saved_search')
-    def get_saved_search(self, id, *args, **kwargs):
+    def get_saved_search(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
         """
-        return self.request(
-            'GET', f'saved_searches/show/{id}', *args, **kwargs
-        )
+        return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
     @payload('saved_search')
     def create_saved_search(self, *args, **kwargs):
