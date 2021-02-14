@@ -1001,13 +1001,13 @@ class API:
         )
 
     @payload('list')
-    def remove_list_member(self, *args, **kwargs):
+    def remove_list_member(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
         """
         return self.request(
-            'POST', 'lists/members/destroy', *args, endpoint_parameters=(
-                'screen_name', 'user_id', 'owner_screen_name', 'owner_id',
-                'slug', 'list_id'
+            'POST', 'lists/members/destroy', endpoint_parameters=(
+                'list_id', 'slug', 'user_id', 'screen_name',
+                'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
