@@ -1087,13 +1087,13 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_subscribers(self, *args, **kwargs):
+    def list_subscribers(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
         """
         return self.request(
-            'GET', 'lists/subscribers', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id', 'cursor',
-                'count', 'include_entities', 'skip_status'
+            'GET', 'lists/subscribers', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
+                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
