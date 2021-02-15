@@ -1060,7 +1060,8 @@ class API:
         return self.request(
             'GET', 'lists/members/show', *args, endpoint_parameters=(
                 'list_id', 'slug', 'user_id', 'screen_name',
-                'owner_screen_name', 'owner_id'
+                'owner_screen_name', 'owner_id', 'include_entities',
+                'skip_status'
             ), **kwargs
         )
 
