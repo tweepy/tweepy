@@ -1054,11 +1054,11 @@ class API:
         )
 
     @payload('user')
-    def show_list_member(self, *args, **kwargs):
+    def show_list_member(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
         """
         return self.request(
-            'GET', 'lists/members/show', *args, endpoint_parameters=(
+            'GET', 'lists/members/show', endpoint_parameters=(
                 'list_id', 'slug', 'user_id', 'screen_name',
                 'owner_screen_name', 'owner_id', 'include_entities',
                 'skip_status'
