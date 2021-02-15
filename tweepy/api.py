@@ -1048,7 +1048,8 @@ class API:
         """
         return self.request(
             'GET', 'lists/members', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'list_id', 'owner_id', 'cursor'
+                'owner_screen_name', 'slug', 'list_id', 'owner_id', 'count',
+                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
