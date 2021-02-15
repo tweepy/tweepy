@@ -1066,12 +1066,12 @@ class API:
         )
 
     @payload('list')
-    def subscribe_list(self, *args, **kwargs):
+    def subscribe_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
         """
         return self.request(
-            'POST', 'lists/subscribers/create', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            'POST', 'lists/subscribers/create', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug'
             ), **kwargs
         )
 
