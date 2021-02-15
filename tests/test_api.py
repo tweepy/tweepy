@@ -348,7 +348,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlistsubscribers.json')
     def testlistsubscribers(self):
-        self.api.list_subscribers('Twitter', 'Official-Twitter-Accounts')
+        self.api.list_subscribers(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistsubscriber.json')
     def testshowlistsubscriber(self):
