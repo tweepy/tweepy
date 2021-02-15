@@ -1043,12 +1043,12 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_members(self, *args, **kwargs):
+    def list_members(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
         """
         return self.request(
-            'GET', 'lists/members', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'list_id', 'owner_id', 'count',
+            'GET', 'lists/members', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
                 'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
