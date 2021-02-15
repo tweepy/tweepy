@@ -1076,12 +1076,12 @@ class API:
         )
 
     @payload('list')
-    def unsubscribe_list(self, *args, **kwargs):
+    def unsubscribe_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
         """
         return self.request(
-            'POST', 'lists/subscribers/destroy', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            'POST', 'lists/subscribers/destroy', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
