@@ -1104,7 +1104,7 @@ class API:
         return self.request(
             'GET', 'lists/subscribers/show', *args, endpoint_parameters=(
                 'owner_screen_name', 'slug', 'screen_name', 'owner_id',
-                'list_id', 'user_id'
+                'list_id', 'user_id', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
