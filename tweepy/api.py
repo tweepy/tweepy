@@ -376,7 +376,8 @@ class API:
         )
 
     def chunked_upload(self, filename, file=None, file_type=None,
-                       media_category=None, *args, **kwargs):
+                       media_category=None, additional_owners=None, *args,
+                       **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
@@ -387,7 +388,8 @@ class API:
         fp.seek(start)
 
         media_id = self.chunked_upload_init(
-            file_size, file_type, media_category=media_category, **kwargs
+            file_size, file_type, media_category=media_category,
+            additional_owners=additional_owners, **kwargs
         ).media_id
 
         min_chunk_size, remainder = divmod(file_size, 1000)
