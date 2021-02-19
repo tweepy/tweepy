@@ -1196,10 +1196,10 @@ class API:
         )
 
     @payload('json')
-    def supported_languages(self, *args, **kwargs):
+    def supported_languages(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages
         """
-        return self.request('GET', 'help/languages', *args, **kwargs)
+        return self.request('GET', 'help/languages', **kwargs)
 
     @payload('json')
     def configuration(self, *args, **kwargs):
