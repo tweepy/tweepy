@@ -96,7 +96,7 @@ class API:
         self.session = requests.Session()
 
     def request(
-        self, method, endpoint, *args, endpoint_parameters=(), params=None,
+        self, method, endpoint, *, endpoint_parameters=(), params=None,
         headers=None, json_payload=None, parser=None, payload_list=False,
         payload_type=None, post_data=None, require_auth=True,
         return_cursors=False, upload_api=False, use_cache=True, **kwargs
@@ -117,24 +117,12 @@ class API:
 
         if params is None:
             params = {}
-
-        for idx, arg in enumerate(args):
-            if arg is None:
-                continue
-            try:
-                params[endpoint_parameters[idx]] = str(arg)
-            except IndexError:
-                raise TweepError('Too many parameters supplied!')
-
         for k, arg in kwargs.items():
             if arg is None:
                 continue
-            if k in params:
-                raise TweepError(f'Multiple values for parameter {k} supplied!')
             if k not in endpoint_parameters:
                 log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
-
         log.debug("PARAMS: %r", params)
 
         # Query the cache if one is available
