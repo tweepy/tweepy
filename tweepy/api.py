@@ -387,8 +387,7 @@ class API:
         fp.seek(start)
 
         media_id = self.chunked_upload_init(
-            file_size, file_type, media_category=media_category, *args,
-            **kwargs
+            file_size, file_type, media_category=media_category, **kwargs
         ).media_id
 
         min_chunk_size, remainder = divmod(file_size, 1000)
@@ -414,7 +413,7 @@ class API:
         return self.chunked_upload_finalize(media_id, *args, **kwargs)
 
     @payload('media')
-    def chunked_upload_init(self, total_bytes, media_type, *args,
+    def chunked_upload_init(self, total_bytes, media_type, *,
                             media_category=None, additional_owners=None,
                             **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
@@ -432,8 +431,8 @@ class API:
             post_data['additional_owners'] = list_to_csv(additional_owners)
 
         return self.request(
-            'POST', 'media/upload', *args, headers=headers,
-            post_data=post_data, upload_api=True, **kwargs
+            'POST', 'media/upload', headers=headers, post_data=post_data,
+            upload_api=True, **kwargs
         )
 
     def chunked_upload_append(self, media_id, media, segment_index,
