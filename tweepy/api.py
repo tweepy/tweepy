@@ -1191,8 +1191,7 @@ class API:
         """
         return self.request(
             'GET', 'geo/search', *args, endpoint_parameters=(
-                'lat', 'long', 'query', 'ip', 'granularity', 'accuracy',
-                'max_results', 'contained_within'
+                'lat', 'long', 'query', 'ip', 'granularity', 'max_results'
             ), **kwargs
         )
 
