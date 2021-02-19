@@ -352,10 +352,10 @@ class API:
             return self.chunked_upload(filename, file=file,
                                        file_type=file_type, *args, **kwargs)
         else:
-            return self.simple_upload(filename, file=file, *args, **kwargs)
+            return self.simple_upload(filename, file=file, **kwargs)
 
     @payload('media')
-    def simple_upload(self, filename, *args, file=None, media_category=None,
+    def simple_upload(self, filename, *, file=None, media_category=None,
                       additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
@@ -371,7 +371,7 @@ class API:
             post_data['additional_owners'] = additional_owners
 
         return self.request(
-            'POST', 'media/upload', *args, post_data=post_data, files=files,
+            'POST', 'media/upload', post_data=post_data, files=files,
             upload_api=True, **kwargs
         )
 
