@@ -1180,10 +1180,10 @@ class API:
         )
 
     @payload('place')
-    def geo_id(self, place_id, *args, **kwargs):
+    def geo_id(self, place_id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
         """
-        return self.request('GET', f'geo/id/{place_id}', *args, **kwargs)
+        return self.request('GET', f'geo/id/{place_id}', **kwargs)
 
     @payload('place', list=True)
     def geo_search(self, *args, **kwargs):
