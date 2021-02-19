@@ -410,7 +410,7 @@ class API:
 
         fp.close()
         # The FINALIZE command returns media information
-        return self.chunked_upload_finalize(media_id, *args, **kwargs)
+        return self.chunked_upload_finalize(media_id, **kwargs)
 
     @payload('media')
     def chunked_upload_init(self, total_bytes, media_type, *,
@@ -450,7 +450,7 @@ class API:
         )
 
     @payload('media')
-    def chunked_upload_finalize(self, media_id, *args, **kwargs):
+    def chunked_upload_finalize(self, media_id, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -459,8 +459,8 @@ class API:
             'media_id': media_id
         }
         return self.request(
-            'POST', 'media/upload', *args, headers=headers,
-            post_data=post_data, upload_api=True, **kwargs
+            'POST', 'media/upload', headers=headers, post_data=post_data,
+            upload_api=True, **kwargs
         )
 
     def create_media_metadata(self, media_id, alt_text, **kwargs):
