@@ -500,11 +500,11 @@ class API:
         )
 
     @payload('media')
-    def get_media_upload_status(self, media_id, *args, **kwargs):
+    def get_media_upload_status(self, media_id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
         """
         return self.request(
-            'GET', 'media/upload', *args, endpoint_parameters=(
+            'GET', 'media/upload', endpoint_parameters=(
                 'command', 'media_id'
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
