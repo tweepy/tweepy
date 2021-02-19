@@ -823,7 +823,7 @@ class API:
         )
 
     @payload('user')
-    def update_profile_image(self, filename, file=None, *args, **kwargs):
+    def update_profile_image(self, filename, *args, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
         """
         if file is not None:
