@@ -418,14 +418,17 @@ class API:
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
         post_data = {
             'command': 'INIT',
             'total_bytes': total_bytes,
             'media_type': media_type,
-            'media_category': media_category
         }
+        if media_category is not None:
+            post_data['media_category'] = media_category
         if additional_owners is not None:
-            post_data["additional_owners"] = list_to_csv(additional_owners)
+            post_data['additional_owners'] = list_to_csv(additional_owners)
+
         return self.request(
             'POST', 'media/upload', *args, headers=headers,
             post_data=post_data, upload_api=True, **kwargs
