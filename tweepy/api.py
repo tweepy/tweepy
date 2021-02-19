@@ -333,9 +333,8 @@ class API:
             ), **kwargs
         )
 
-    def media_upload(self, filename, file=None, chunked=False,
-                     media_category=None, additional_owners=None, *args,
-                     **kwargs):
+    def media_upload(self, filename, *args, file=None, chunked=False,
+                     media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
         h = None
