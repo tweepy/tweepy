@@ -1136,11 +1136,11 @@ class API:
 
     @pagination(mode='id')
     @payload('search_results')
-    def search(self, *args, **kwargs):
+    def search(self, q, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
         """
         return self.request(
-            'GET', 'search/tweets', *args, endpoint_parameters=(
+            'GET', 'search/tweets', q, *args, endpoint_parameters=(
                 'q', 'lang', 'locale', 'since_id', 'geocode', 'max_id',
                 'until', 'result_type', 'count', 'include_entities'
             ), **kwargs
