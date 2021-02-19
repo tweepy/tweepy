@@ -264,10 +264,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
         """
         return self.request(
-            'GET', 'statuses/lookup', list_to_csv(id), endpoint_parameters=(
+            'GET', 'statuses/lookup', endpoint_parameters=(
                 'id', 'include_entities', 'trim_user', 'map',
                 'include_ext_alt_text', 'include_card_uri'
-            ), **kwargs
+            ), id=list_to_csv(id), **kwargs
         )
 
     @pagination(mode='id')
@@ -310,10 +310,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-show-id
         """
         return self.request(
-            'GET', 'statuses/show', id, endpoint_parameters=(
+            'GET', 'statuses/show', endpoint_parameters=(
                 'id', 'trim_user', 'include_my_retweet', 'include_entities',
                 'include_ext_alt_text', 'include_card_uri'
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('status')
@@ -324,13 +324,13 @@ class API:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
 
         return self.request(
-            'POST', 'statuses/update', status, endpoint_parameters=(
+            'POST', 'statuses/update', endpoint_parameters=(
                 'status', 'in_reply_to_status_id',
                 'auto_populate_reply_metadata', 'exclude_reply_user_ids',
                 'attachment_url', 'media_ids', 'possibly_sensitive', 'lat',
                 'long', 'place_id', 'display_coordinates', 'trim_user',
                 'enable_dmcommands', 'fail_dmcommands', 'card_uri'
-            ), **kwargs
+            ), status=status, **kwargs
         )
 
     @payload('media')
@@ -381,10 +381,10 @@ class API:
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return self.request(
-            'POST', 'statuses/update_with_media', status, endpoint_parameters=(
+            'POST', 'statuses/update_with_media', endpoint_parameters=(
                 'status', 'possibly_sensitive', 'in_reply_to_status_id',
                 'lat', 'long', 'place_id', 'display_coordinates'
-            ), **kwargs
+            ), status=status, **kwargs
         )
 
     @payload('status')
@@ -433,9 +433,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
         """
         return self.request(
-            'GET', 'statuses/retweeters/ids', id, endpoint_parameters=(
+            'GET', 'statuses/retweeters/ids', endpoint_parameters=(
                 'id', 'count', 'cursor', 'stringify_ids'
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('user')
@@ -453,11 +453,11 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
         """
         return self.request(
-            'GET', 'statuses/oembed', url, endpoint_parameters=(
+            'GET', 'statuses/oembed', endpoint_parameters=(
                 'url', 'maxwidth', 'hide_media', 'hide_thread', 'omit_script',
                 'align', 'related', 'lang', 'theme', 'link_color',
                 'widget_type', 'dnt'
-            ), require_auth=False, **kwargs
+            ), url=url, require_auth=False, **kwargs
         )
 
     @payload('user', list=True)
@@ -465,10 +465,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
-            'POST', 'users/lookup', list_to_csv(screen_name),
-            list_to_csv(user_id), endpoint_parameters=(
+            'POST', 'users/lookup', endpoint_parameters=(
                 'screen_name', 'user_id', 'include_entities', 'tweet_mode'
-            ), **kwargs
+            ), screen_name=list_to_csv(screen_name),
+            user_id=list_to_csv(user_id), **kwargs
         )
 
     def me(self):
@@ -481,9 +481,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-search
         """
         return self.request(
-            'GET', 'users/search', q, endpoint_parameters=(
+            'GET', 'users/search', endpoint_parameters=(
                 'q', 'page', 'count', 'include_entities'
-            ), **kwargs
+            ), q=q, **kwargs
         )
 
     @payload('direct_message')
@@ -491,9 +491,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
         """
         return self.request(
-            'GET', 'direct_messages/events/show', id, endpoint_parameters=(
+            'GET', 'direct_messages/events/show', endpoint_parameters=(
                 'id',
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @pagination(mode='dm_cursor')
@@ -543,10 +543,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
         """
         return self.request(
-            'DELETE', 'direct_messages/events/destroy', id,
-            endpoint_parameters=(
+            'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
                 'id',
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('user')
@@ -585,10 +584,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
-            'GET', 'friendships/lookup', list_to_csv(screen_name),
-            list_to_csv(user_id), endpoint_parameters=(
+            'GET', 'friendships/lookup', endpoint_parameters=(
                 'screen_name', 'user_id'
-            ), **kwargs
+            ), screen_name=list_to_csv(screen_name),
+            user_id=list_to_csv(user_id), **kwargs
         )
 
     @pagination(mode='cursor')
@@ -750,9 +749,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
         """
         return self.request(
-            'POST', 'favorites/create', id, endpoint_parameters=(
+            'POST', 'favorites/create', endpoint_parameters=(
                 'id', 'include_entities'
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('status')
@@ -760,9 +759,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-destroy
         """
         return self.request(
-            'POST', 'favorites/destroy', id, endpoint_parameters=(
+            'POST', 'favorites/destroy', endpoint_parameters=(
                 'id', 'include_entities'
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('user')
@@ -876,9 +875,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
         """
         return self.request(
-            'POST', 'saved_searches/create', query, endpoint_parameters=(
+            'POST', 'saved_searches/create', endpoint_parameters=(
                 'query',
-            ), **kwargs
+            ), query=query, **kwargs
         )
 
     @payload('saved_search')
