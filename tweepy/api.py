@@ -836,7 +836,7 @@ class API:
             ), files=files, **kwargs
         )
 
-    def update_profile_banner(self, filename, *args, file=None, **kwargs):
+    def update_profile_banner(self, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
         if file is not None:
@@ -844,8 +844,7 @@ class API:
         else:
             files = {'banner': open(filename, 'rb')}
         return self.request(
-            'POST', 'account/update_profile_banner', *args,
-            endpoint_parameters=(
+            'POST', 'account/update_profile_banner', endpoint_parameters=(
                 'width', 'height', 'offset_left', 'offset_right'
             ), files=files, **kwargs
         )
