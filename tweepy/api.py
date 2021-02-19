@@ -334,7 +334,8 @@ class API:
         )
 
     def media_upload(self, filename, file=None, chunked=False,
-                     *args, **kwargs):
+                     media_category=None, additional_owners=None, *args,
+                     **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
         h = None
@@ -349,10 +350,16 @@ class API:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
-            return self.chunked_upload(filename, file=file,
-                                       file_type=file_type, **kwargs)
+            return self.chunked_upload(
+                filename, file=file, file_type=file_type,
+                media_category=media_category,
+                additional_owners=additional_owners, **kwargs
+            )
         else:
-            return self.simple_upload(filename, file=file, **kwargs)
+            return self.simple_upload(
+                filename, file=file, media_category=media_category,
+                additional_owners=additional_owners, **kwargs
+            )
 
     @payload('media')
     def simple_upload(self, filename, *, file=None, media_category=None,
