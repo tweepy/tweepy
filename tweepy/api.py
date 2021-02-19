@@ -836,7 +836,7 @@ class API:
             ), files=files, **kwargs
         )
 
-    def update_profile_banner(self, filename, file=None, *args, **kwargs):
+    def update_profile_banner(self, filename, *args, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
         if file is not None:
