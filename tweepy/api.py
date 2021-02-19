@@ -349,8 +349,8 @@ class API:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
-            return self.chunked_upload(filename, file=file,
-                                       file_type=file_type, *args, **kwargs)
+            return self.chunked_upload(filename, *args, file=file,
+                                       file_type=file_type, **kwargs)
         else:
             return self.simple_upload(filename, file=file, **kwargs)
 
@@ -375,9 +375,8 @@ class API:
             upload_api=True, **kwargs
         )
 
-    def chunked_upload(self, filename, file=None, file_type=None,
-                       media_category=None, additional_owners=None, *args,
-                       **kwargs):
+    def chunked_upload(self, filename, *args, file=None, file_type=None,
+                       media_category=None, additional_owners=None, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
