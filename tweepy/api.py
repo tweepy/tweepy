@@ -355,8 +355,8 @@ class API:
             return self.simple_upload(filename, file=file, *args, **kwargs)
 
     @payload('media')
-    def simple_upload(self, filename, file=None, media_category=None,
-                      additional_owners=None, *args, **kwargs):
+    def simple_upload(self, filename, *args, file=None, media_category=None,
+                      additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
         if file is not None:
