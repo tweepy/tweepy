@@ -1159,11 +1159,11 @@ class API:
 
     @pagination(mode='next')
     @payload('status', list=True)
-    def search_full_archive(self, environment_name, *args, **kwargs):
+    def search_full_archive(self, label, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
         """
         return self.request(
-            'GET', f'tweets/search/fullarchive/{environment_name}', *args,
+            'GET', f'tweets/search/fullarchive/{label}', *args,
             endpoint_parameters=(
                 'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
             ), **kwargs
