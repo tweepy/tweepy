@@ -238,7 +238,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def home_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-home_timeline
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
         """
         return self.request(
             'GET', 'statuses/home_timeline', endpoint_parameters=(
@@ -249,7 +249,7 @@ class API:
 
     @payload('status', list=True)
     def statuses_lookup(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-lookup
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
         """
         return self.request(
             'GET', 'statuses/lookup', endpoint_parameters=(
@@ -261,7 +261,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def user_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
         """
         return self.request(
             'GET', 'statuses/user_timeline', endpoint_parameters=(
@@ -273,7 +273,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def mentions_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
         """
         return self.request(
             'GET', 'statuses/mentions_timeline', endpoint_parameters=(
@@ -284,7 +284,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def retweets_of_me(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
         """
         return self.request(
             'GET', 'statuses/retweets_of_me', endpoint_parameters=(
@@ -295,7 +295,7 @@ class API:
 
     @payload('status')
     def get_status(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-show-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id
         """
         return self.request(
             'GET', 'statuses/show', endpoint_parameters=(
@@ -306,7 +306,7 @@ class API:
 
     @payload('status')
     def update_status(self, status, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
         """
         if 'media_ids' in kwargs:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
@@ -323,7 +323,7 @@ class API:
 
     @payload('media')
     def media_upload(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
         """
         h = None
         if file is not None:
@@ -348,7 +348,7 @@ class API:
         )
 
     def create_media_metadata(self, media_id, alt_text, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-metadata-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create
         """
         json_payload = {
             'media_id': media_id,
@@ -362,7 +362,7 @@ class API:
 
     @payload('status')
     def update_with_media(self, status, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
         headers, post_data = API._pack_image(filename, 3072,
                                              form_field='media[]', f=file)
@@ -377,7 +377,7 @@ class API:
 
     @payload('status')
     def destroy_status(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-destroy-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id
         """
         return self.request(
             'POST', f'statuses/destroy/{id}', endpoint_parameters=(
@@ -387,7 +387,7 @@ class API:
 
     @payload('status')
     def retweet(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-retweet-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id
         """
         return self.request(
             'POST', f'statuses/retweet/{id}', endpoint_parameters=(
@@ -397,7 +397,7 @@ class API:
 
     @payload('status')
     def unretweet(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
         """
         return self.request(
             'POST', f'statuses/unretweet/{id}', endpoint_parameters=(
@@ -407,7 +407,7 @@ class API:
 
     @payload('status', list=True)
     def retweets(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweets-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets-id
         """
         return self.request(
             'GET', f'statuses/retweets/{id}', endpoint_parameters=(
@@ -418,7 +418,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def retweeters(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
         """
         return self.request(
             'GET', 'statuses/retweeters/ids', endpoint_parameters=(
@@ -428,7 +428,7 @@ class API:
 
     @payload('user')
     def get_user(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-show
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
         """
         return self.request(
             'GET', 'users/show', endpoint_parameters=(
@@ -438,7 +438,7 @@ class API:
 
     @payload('json')
     def get_oembed(self, url, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-oembed
         """
         return self.request(
             'GET', 'statuses/oembed', endpoint_parameters=(
@@ -450,7 +450,7 @@ class API:
 
     @payload('user', list=True)
     def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
             'POST', 'users/lookup', endpoint_parameters=(
@@ -466,7 +466,7 @@ class API:
     @pagination(mode='page')
     @payload('user', list=True)
     def search_users(self, q, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-users-search
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
         """
         return self.request(
             'GET', 'users/search', endpoint_parameters=(
@@ -476,7 +476,7 @@ class API:
 
     @payload('direct_message')
     def get_direct_message(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-event
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
         """
         return self.request(
             'GET', 'direct_messages/events/show', endpoint_parameters=(
@@ -487,7 +487,7 @@ class API:
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
     def list_direct_messages(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/list-events
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events
         """
         return self.request(
             'GET', 'direct_messages/events/list', endpoint_parameters=(
@@ -499,7 +499,7 @@ class API:
     def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
                             attachment_type=None, attachment_media_id=None,
                             ctas=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event
         """
         json_payload = {
             'event': {'type': 'message_create',
@@ -528,7 +528,7 @@ class API:
         )
 
     def destroy_direct_message(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/delete-message-event
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event
         """
         return self.request(
             'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
@@ -538,7 +538,7 @@ class API:
 
     @payload('user')
     def create_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
         """
         return self.request(
             'POST', 'friendships/create', endpoint_parameters=(
@@ -548,7 +548,7 @@ class API:
 
     @payload('user')
     def destroy_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
         """
         return self.request(
             'POST', 'friendships/destroy', endpoint_parameters=(
@@ -558,7 +558,7 @@ class API:
 
     @payload('friendship')
     def show_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
         """
         return self.request(
             'GET', 'friendships/show', endpoint_parameters=(
@@ -569,7 +569,7 @@ class API:
 
     @payload('relationship', list=True)
     def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
             'GET', 'friendships/lookup', endpoint_parameters=(
@@ -581,7 +581,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def friends_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
         """
         return self.request(
             'GET', 'friends/ids', endpoint_parameters=(
@@ -592,7 +592,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def friends(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
         """
         return self.request(
             'GET', 'friends/list', endpoint_parameters=(
@@ -604,7 +604,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def friendships_incoming(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
         """
         return self.request(
             'GET', 'friendships/incoming', endpoint_parameters=(
@@ -615,7 +615,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def friendships_outgoing(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
         """
         return self.request(
             'GET', 'friendships/outgoing', endpoint_parameters=(
@@ -626,7 +626,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def followers_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
         """
         return self.request(
             'GET', 'followers/ids', endpoint_parameters=(
@@ -637,7 +637,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def followers(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
         """
         return self.request(
             'GET', 'followers/list', endpoint_parameters=(
@@ -648,7 +648,7 @@ class API:
 
     @payload('json')
     def get_settings(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-settings
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings
         """
         return self.request(
             'GET', 'account/settings', use_cache=False, **kwargs
@@ -656,7 +656,7 @@ class API:
 
     @payload('json')
     def set_settings(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-settings
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-settings
         """
         return self.request(
             'POST', 'account/settings', endpoint_parameters=(
@@ -667,7 +667,7 @@ class API:
 
     @payload('user')
     def verify_credentials(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
         """
         if 'include_email' in kwargs:
             kwargs['include_email'] = str(kwargs['include_email']).lower()
@@ -679,7 +679,7 @@ class API:
 
     @payload('json')
     def rate_limit_status(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
         """
         return self.request(
             'GET', 'application/rate_limit_status', endpoint_parameters=(
@@ -689,7 +689,7 @@ class API:
 
     @payload('user')
     def update_profile_image(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
         """
         headers, post_data = API._pack_image(filename, 700, f=file)
         return self.request(
@@ -699,7 +699,7 @@ class API:
         )
 
     def update_profile_banner(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
         headers, post_data = API._pack_image(filename, 700,
                                              form_field='banner', f=file)
@@ -711,7 +711,7 @@ class API:
 
     @payload('user')
     def update_profile(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
         """
         return self.request(
             'POST', 'account/update_profile', endpoint_parameters=(
@@ -723,7 +723,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def favorites(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list
         """
         return self.request(
             'GET', 'favorites/list', endpoint_parameters=(
@@ -734,7 +734,7 @@ class API:
 
     @payload('status')
     def create_favorite(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create
         """
         return self.request(
             'POST', 'favorites/create', endpoint_parameters=(
@@ -744,7 +744,7 @@ class API:
 
     @payload('status')
     def destroy_favorite(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-destroy
         """
         return self.request(
             'POST', 'favorites/destroy', endpoint_parameters=(
@@ -754,7 +754,7 @@ class API:
 
     @payload('user')
     def create_block(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
         """
         return self.request(
             'POST', 'blocks/create', endpoint_parameters=(
@@ -764,7 +764,7 @@ class API:
 
     @payload('user')
     def destroy_block(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
         """
         return self.request(
             'POST', 'blocks/destroy', endpoint_parameters=(
@@ -775,7 +775,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def mutes_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
         """
         return self.request(
             'GET', 'mutes/users/ids', endpoint_parameters=(
@@ -786,7 +786,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def mutes(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
         """
         return self.request(
             'GET', 'mutes/users/list', endpoint_parameters=(
@@ -796,7 +796,7 @@ class API:
 
     @payload('user')
     def create_mute(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
         """
         return self.request(
             'POST', 'mutes/users/create', endpoint_parameters=(
@@ -806,7 +806,7 @@ class API:
 
     @payload('user')
     def destroy_mute(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
         """
         return self.request(
             'POST', 'mutes/users/destroy', endpoint_parameters=(
@@ -817,7 +817,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def blocks(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
         """
         return self.request(
             'GET', 'blocks/list', endpoint_parameters=(
@@ -828,7 +828,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def blocks_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
         """
         return self.request(
             'GET', 'blocks/ids', endpoint_parameters=(
@@ -838,7 +838,7 @@ class API:
 
     @payload('user')
     def report_spam(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
         """
         return self.request(
             'POST', 'users/report_spam', endpoint_parameters=(
@@ -848,19 +848,19 @@ class API:
 
     @payload('saved_search', list=True)
     def saved_searches(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
         """
         return self.request('GET', 'saved_searches/list', **kwargs)
 
     @payload('saved_search')
     def get_saved_search(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
         """
         return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
     @payload('saved_search')
     def create_saved_search(self, query, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
         """
         return self.request(
             'POST', 'saved_searches/create', endpoint_parameters=(
@@ -870,13 +870,13 @@ class API:
 
     @payload('saved_search')
     def destroy_saved_search(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
     @payload('list')
     def create_list(self, name, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-create
         """
         return self.request(
             'POST', 'lists/create', endpoint_parameters=(
@@ -886,7 +886,7 @@ class API:
 
     @payload('list')
     def destroy_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
         """
         return self.request(
             'POST', 'lists/destroy', endpoint_parameters=(
@@ -896,7 +896,7 @@ class API:
 
     @payload('list')
     def update_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-update
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update
         """
         return self.request(
             'POST', 'lists/update', endpoint_parameters=(
@@ -907,7 +907,7 @@ class API:
 
     @payload('list', list=True)
     def lists_all(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-list
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-list
         """
         return self.request(
             'GET', 'lists/list', endpoint_parameters=(
@@ -918,7 +918,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def lists_memberships(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
         """
         return self.request(
             'GET', 'lists/memberships', endpoint_parameters=(
@@ -930,7 +930,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def lists_ownerships(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
         """
         return self.request(
             'GET', 'lists/ownerships', endpoint_parameters=(
@@ -941,7 +941,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def lists_subscriptions(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
         """
         return self.request(
             'GET', 'lists/subscriptions', endpoint_parameters=(
@@ -952,7 +952,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def list_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
         """
         return self.request(
             'GET', 'lists/statuses', endpoint_parameters=(
@@ -963,7 +963,7 @@ class API:
 
     @payload('list')
     def get_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-show
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-show
         """
         return self.request(
             'GET', 'lists/show', endpoint_parameters=(
@@ -973,7 +973,7 @@ class API:
 
     @payload('list')
     def add_list_member(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create
         """
         return self.request(
             'POST', 'lists/members/create', endpoint_parameters=(
@@ -984,7 +984,7 @@ class API:
 
     @payload('list')
     def remove_list_member(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
         """
         return self.request(
             'POST', 'lists/members/destroy', endpoint_parameters=(
@@ -995,7 +995,7 @@ class API:
 
     @payload('list')
     def add_list_members(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
         """
         if 'user_id' in kwargs:
             kwargs['user_id'] = list_to_csv(kwargs['user_id'])
@@ -1010,7 +1010,7 @@ class API:
 
     @payload('list')
     def remove_list_members(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy_all
         """
         if 'user_id' in kwargs:
             kwargs['user_id'] = list_to_csv(kwargs['user_id'])
@@ -1026,7 +1026,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def list_members(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members
         """
         return self.request(
             'GET', 'lists/members', endpoint_parameters=(
@@ -1037,7 +1037,7 @@ class API:
 
     @payload('user')
     def show_list_member(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
         """
         return self.request(
             'GET', 'lists/members/show', endpoint_parameters=(
@@ -1049,7 +1049,7 @@ class API:
 
     @payload('list')
     def subscribe_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
         """
         return self.request(
             'POST', 'lists/subscribers/create', endpoint_parameters=(
@@ -1059,7 +1059,7 @@ class API:
 
     @payload('list')
     def unsubscribe_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
         """
         return self.request(
             'POST', 'lists/subscribers/destroy', endpoint_parameters=(
@@ -1070,7 +1070,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def list_subscribers(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
         """
         return self.request(
             'GET', 'lists/subscribers', endpoint_parameters=(
@@ -1081,7 +1081,7 @@ class API:
 
     @payload('user')
     def show_list_subscriber(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
         """
         return self.request(
             'GET', 'lists/subscribers/show', endpoint_parameters=(
@@ -1092,13 +1092,13 @@ class API:
 
     @payload('json')
     def trends_available(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-available
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-available
         """
         return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
     def trends_place(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/trends/trends-for-location/api-reference/get-trends-place
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
         """
         return self.request(
             'GET', 'trends/place', endpoint_parameters=(
@@ -1108,7 +1108,7 @@ class API:
 
     @payload('json')
     def trends_closest(self, lat, long, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-closest
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-closest
         """
         return self.request(
             'GET', 'trends/closest', endpoint_parameters=(
@@ -1119,7 +1119,7 @@ class API:
     @pagination(mode='id')
     @payload('search_results')
     def search(self, q, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
         """
         return self.request(
             'GET', 'search/tweets', endpoint_parameters=(
@@ -1131,7 +1131,7 @@ class API:
     @pagination(mode='next')
     @payload('status', list=True)
     def search_30_day(self, label, query, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
         """
         return self.request(
             'GET', f'tweets/search/30day/{label}', endpoint_parameters=(
@@ -1142,7 +1142,7 @@ class API:
     @pagination(mode='next')
     @payload('status', list=True)
     def search_full_archive(self, label, query, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
         """
         return self.request(
             'GET', f'tweets/search/fullarchive/{label}', endpoint_parameters=(
@@ -1152,7 +1152,7 @@ class API:
 
     @payload('place', list=True)
     def reverse_geocode(self, lat, long, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-reverse_geocode
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-reverse_geocode
         """
         return self.request(
             'GET', 'geo/reverse_geocode', endpoint_parameters=(
@@ -1162,13 +1162,13 @@ class API:
 
     @payload('place')
     def geo_id(self, place_id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/geo/place-information/api-reference/get-geo-id-place_id
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
         """
         return self.request('GET', f'geo/id/{place_id}', **kwargs)
 
     @payload('place', list=True)
     def geo_search(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-search
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-search
         """
         return self.request(
             'GET', 'geo/search', endpoint_parameters=(
@@ -1178,13 +1178,13 @@ class API:
 
     @payload('json')
     def supported_languages(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/supported-languages/api-reference/get-help-languages
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
         """
         return self.request('GET', 'help/languages', **kwargs)
 
     @payload('json')
     def configuration(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
         """
         return self.request('GET', 'help/configuration', **kwargs)
 
