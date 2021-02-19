@@ -484,7 +484,7 @@ class API:
         )
 
     @payload('status')
-    def update_with_media(self, filename, status, *args, file=None, **kwargs):
+    def update_with_media(self, filename, status, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
         if file is not None:
@@ -492,7 +492,7 @@ class API:
         else:
             files = {'media[]': open(filename, 'rb')}
         return self.request(
-            'POST',  'statuses/update_with_media', *args, endpoint_parameters=(
+            'POST',  'statuses/update_with_media', endpoint_parameters=(
                 'status', 'possibly_sensitive', 'in_reply_to_status_id',
                 'lat', 'long', 'place_id', 'display_coordinates'
             ), status=status, files=files, **kwargs
