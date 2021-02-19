@@ -184,21 +184,21 @@ class TweepyAPITests(TweepyTestCase):
     def testfriendsids(self):
         self.api.friends_ids(screen_name=username)
 
-    @tape.use_cassette('testfollowersids.json')
+    @tape.use_cassette('testfollowersids.yaml', serializer='yaml')
     def testfollowersids(self):
-        self.api.followers_ids(username)
+        self.api.followers_ids(screen_name=username)
 
     @tape.use_cassette('testfriends.yaml', serializer='yaml')
     def testfriends(self):
         self.api.friends(screen_name=username)
 
-    @tape.use_cassette('testfollowers.json')
+    @tape.use_cassette('testfollowers.yaml', serializer='yaml')
     def testfollowers(self):
-        self.api.followers(username)
+        self.api.followers(screen_name=username)
 
     @tape.use_cassette('testverifycredentials.json')
     def testverifycredentials(self):
-        self.assertNotEqual(self.api.verify_credentials(), False)
+        self.api.verify_credentials()
 
         # make sure that `me.status.entities` is not an empty dict
         me = self.api.verify_credentials(include_entities=True)
@@ -266,8 +266,8 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreatedestroyblock.yaml', serializer='yaml')
     def testcreatedestroyblock(self):
-        self.api.create_block('twitter')
-        self.api.destroy_block('twitter')
+        self.api.create_block(screen_name='twitter')
+        self.api.destroy_block(screen_name='twitter')
         self.api.create_friendship(screen_name='twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
@@ -307,7 +307,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlisttimeline.json')
     def testlisttimeline(self):
-        self.api.list_timeline('Twitter', 'Official-Twitter-Accounts')
+        self.api.list_timeline(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testgetlist.json')
     def testgetlist(self):
@@ -343,7 +343,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlistmembers.json')
     def testlistmembers(self):
-        self.api.list_members('Twitter', 'Official-Twitter-Accounts')
+        self.api.list_members(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistmember.json')
     def testshowlistmember(self):
@@ -360,11 +360,11 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlistsubscribers.json')
     def testlistsubscribers(self):
-        self.api.list_subscribers('Twitter', 'Official-Twitter-Accounts')
+        self.api.list_subscribers(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistsubscriber.json')
     def testshowlistsubscriber(self):
-        self.assertTrue(self.api.show_list_subscriber('Twitter', 'Official-Twitter-Accounts', 'TwitterMktg'))
+        self.assertTrue(self.api.show_list_subscriber(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterMktg'))
 
     @tape.use_cassette('testsavedsearches.json')
     def testsavedsearches(self):
