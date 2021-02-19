@@ -1168,9 +1168,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-reverse_geocode
         """
         return self.request(
-            'GET', 'geo/reverse_geocode', lat, long, endpoint_parameters=(
+            'GET', 'geo/reverse_geocode', endpoint_parameters=(
                 'lat', 'long', 'accuracy', 'granularity', 'max_results'
-            ), **kwargs
+            ), lat=lat, long=long, **kwargs
         )
 
     @payload('place')
