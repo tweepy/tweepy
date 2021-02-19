@@ -1148,11 +1148,11 @@ class API:
 
     @pagination(mode='next')
     @payload('status', list=True)
-    def search_30_day(self, label, *args, **kwargs):
+    def search_30_day(self, label, query, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
         """
         return self.request(
-            'GET', f'tweets/search/30day/{label}', *args,
+            'GET', f'tweets/search/30day/{label}', query, *args,
             endpoint_parameters=(
                 'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
             ), **kwargs
