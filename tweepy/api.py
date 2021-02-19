@@ -375,7 +375,7 @@ class API:
         )
 
     @payload('status')
-    def update_with_media(self, filename, status, *, file=None, **kwargs):
+    def update_with_media(self, status, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
         headers, post_data = API._pack_image(filename, 3072,
