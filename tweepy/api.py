@@ -334,16 +334,14 @@ class API:
         )
 
     @payload('media')
-    def media_upload(self, filename, *args, **kwargs):
+    def media_upload(self, filename, *args, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
-        f = kwargs.pop('file', None)
-
         h = None
-        if f is not None:
-            location = f.tell()
-            h = f.read(32)
-            f.seek(location)
+        if file is not None:
+            location = file.tell()
+            h = file.read(32)
+            file.seek(location)
         file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type == 'gif':
             max_size = 14649
@@ -351,7 +349,7 @@ class API:
             max_size = 4883
 
         headers, post_data = API._pack_image(filename, max_size,
-                                             form_field='media', f=f,
+                                             form_field='media', f=file,
                                              file_type=file_type)
         kwargs.update({'headers': headers, 'post_data': post_data})
 
