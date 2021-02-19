@@ -354,9 +354,9 @@ class API:
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return self.request(
-            'POST', 'media/upload', *args,
-            endpoint_parameters=(),
-            upload_api=True, **kwargs
+            'POST', 'media/upload', *args, endpoint_parameters=(
+                'media_category', 'additional_owners'
+            ), upload_api=True, **kwargs
         )
 
     def create_media_metadata(self, media_id, alt_text, **kwargs):
