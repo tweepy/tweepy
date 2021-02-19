@@ -494,7 +494,6 @@ class API:
         return self.request(
             'POST',  'statuses/update_with_media', *args, endpoint_parameters=(
                 'status', 'possibly_sensitive', 'in_reply_to_status_id',
-                'in_reply_to_status_id_str', 'auto_populate_reply_metadata',
                 'lat', 'long', 'place_id', 'display_coordinates'
             ), files=files, **kwargs
         )
