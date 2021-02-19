@@ -356,14 +356,20 @@ class API:
 
     @payload('media')
     def simple_upload(self, filename, file=None, media_category=None,
-                      *args, **kwargs):
+                      additional_owners=None, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
         if file is not None:
             files = {'media': (filename, file)}
         else:
             files = {'media': open(filename, 'rb')}
-        post_data = {'media_category': media_category}
+
+        post_data = {}
+        if media_category is not None:
+            post_data['media_category'] = media_category
+        if additional_owners is not None:
+            post_data['additional_owners'] = additional_owners
+
         return self.request(
             'POST', 'media/upload', *args, post_data=post_data, files=files,
             upload_api=True, **kwargs
