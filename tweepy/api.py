@@ -1115,11 +1115,11 @@ class API:
         return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
-    def trends_place(self, id, *args, **kwargs):
+    def trends_place(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/trends-for-location/api-reference/get-trends-place
         """
         return self.request(
-            'GET', 'trends/place', id, *args, endpoint_parameters=(
+            'GET', 'trends/place', id, endpoint_parameters=(
                 'id', 'exclude'
             ), **kwargs
         )
