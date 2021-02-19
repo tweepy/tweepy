@@ -110,7 +110,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
     def testupdatestatuswithmedia(self):
-        update = self.api.update_with_media('examples/banner.png', status=tweet_text)
+        update = self.api.update_with_media(tweet_text, 'examples/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
     @tape.use_cassette('testmediauploadpng.yaml', serializer='yaml')
