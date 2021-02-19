@@ -405,7 +405,7 @@ class API:
             # The APPEND command returns an empty response body
             self.chunked_upload_append(
                 media_id, (filename, fp.read(chunk_size)), segment_index,
-                *args, **kwargs
+                **kwargs
             )
 
         fp.close()
@@ -435,8 +435,7 @@ class API:
             upload_api=True, **kwargs
         )
 
-    def chunked_upload_append(self, media_id, media, segment_index,
-                              *args, **kwargs):
+    def chunked_upload_append(self, media_id, media, segment_index, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
         """
         post_data = {
@@ -446,7 +445,7 @@ class API:
         }
         files = {'media': media}
         return self.request(
-            'POST', 'media/upload', *args, post_data=post_data, files=files,
+            'POST', 'media/upload', post_data=post_data, files=files,
             upload_api=True, **kwargs
         )
 
