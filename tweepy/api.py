@@ -1186,11 +1186,11 @@ class API:
         return self.request('GET', f'geo/id/{place_id}', **kwargs)
 
     @payload('place', list=True)
-    def geo_search(self, *args, **kwargs):
+    def geo_search(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-search
         """
         return self.request(
-            'GET', 'geo/search', *args, endpoint_parameters=(
+            'GET', 'geo/search', endpoint_parameters=(
                 'lat', 'long', 'query', 'ip', 'granularity', 'max_results'
             ), **kwargs
         )
