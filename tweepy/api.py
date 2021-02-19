@@ -334,7 +334,7 @@ class API:
         )
 
     @payload('media')
-    def media_upload(self, filename, *args, file=None, **kwargs):
+    def media_upload(self, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
         """
         h = None
@@ -354,7 +354,7 @@ class API:
         kwargs.update({'headers': headers, 'post_data': post_data})
 
         return self.request(
-            'POST', 'media/upload', *args, endpoint_parameters=(
+            'POST', 'media/upload', endpoint_parameters=(
                 'media_category', 'additional_owners'
             ), upload_api=True, **kwargs
         )
