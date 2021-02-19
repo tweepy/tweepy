@@ -1202,10 +1202,10 @@ class API:
         return self.request('GET', 'help/languages', **kwargs)
 
     @payload('json')
-    def configuration(self, *args, **kwargs):
+    def configuration(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/developer-utilities/configuration/api-reference/get-help-configuration
         """
-        return self.request('GET', 'help/configuration', *args, **kwargs)
+        return self.request('GET', 'help/configuration', **kwargs)
 
     """ Internal use only """
 
