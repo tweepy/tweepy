@@ -1125,11 +1125,11 @@ class API:
         )
 
     @payload('json')
-    def trends_closest(self, *args, **kwargs):
+    def trends_closest(self, lat, long, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-closest
         """
         return self.request(
-            'GET', 'trends/closest', *args, endpoint_parameters=(
+            'GET', 'trends/closest', lat, long, *args, endpoint_parameters=(
                 'lat', 'long'
             ), **kwargs
         )
