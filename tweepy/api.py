@@ -891,9 +891,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-create
         """
         return self.request(
-            'POST', 'lists/create', name, endpoint_parameters=(
+            'POST', 'lists/create', endpoint_parameters=(
                 'name', 'mode', 'description'
-            ), **kwargs
+            ), name=name, **kwargs
         )
 
     @payload('list')
@@ -1113,9 +1113,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/trends/trends-for-location/api-reference/get-trends-place
         """
         return self.request(
-            'GET', 'trends/place', id, endpoint_parameters=(
+            'GET', 'trends/place', endpoint_parameters=(
                 'id', 'exclude'
-            ), **kwargs
+            ), id=id, **kwargs
         )
 
     @payload('json')
@@ -1123,9 +1123,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/trends/locations-with-trending-topics/api-reference/get-trends-closest
         """
         return self.request(
-            'GET', 'trends/closest', lat, long, endpoint_parameters=(
+            'GET', 'trends/closest', endpoint_parameters=(
                 'lat', 'long'
-            ), **kwargs
+            ), lat=lat, long=long, **kwargs
         )
 
     @pagination(mode='id')
@@ -1134,10 +1134,10 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
         """
         return self.request(
-            'GET', 'search/tweets', q, endpoint_parameters=(
+            'GET', 'search/tweets', endpoint_parameters=(
                 'q', 'geocode', 'lang', 'locale', 'result_type', 'count',
                 'until', 'since_id', 'max_id', 'include_entities'
-            ), **kwargs
+            ), q=q, **kwargs
         )
 
     @pagination(mode='next')
@@ -1146,9 +1146,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
         """
         return self.request(
-            'GET', f'tweets/search/30day/{label}', query, endpoint_parameters=(
+            'GET', f'tweets/search/30day/{label}', endpoint_parameters=(
                 'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
-            ), **kwargs
+            ), query=query, **kwargs
         )
 
     @pagination(mode='next')
@@ -1157,10 +1157,9 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search
         """
         return self.request(
-            'GET', f'tweets/search/fullarchive/{label}', query,
-            endpoint_parameters=(
+            'GET', f'tweets/search/fullarchive/{label}', endpoint_parameters=(
                 'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
-            ), **kwargs
+            ), query=query, **kwargs
         )
 
     @payload('place', list=True)
