@@ -1170,11 +1170,12 @@ class API:
         )
 
     @payload('place', list=True)
-    def reverse_geocode(self, *args, **kwargs):
+    def reverse_geocode(self, lat, long, *args, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/geo/places-near-location/api-reference/get-geo-reverse_geocode
         """
         return self.request(
-            'GET', 'geo/reverse_geocode', *args, endpoint_parameters=(
+            'GET', 'geo/reverse_geocode', lat, long, *args,
+            endpoint_parameters=(
                 'lat', 'long', 'accuracy', 'granularity', 'max_results'
             ), **kwargs
         )
