@@ -1390,6 +1390,18 @@ Media methods
                          segment has index 1, and so on.
 
 
+.. method:: API.chunked_upload_finalize(media_id)
+
+   Use this endpoint after the entire media file is uploaded via appending.
+   If (and only if) the response contains a ``processing_info field``, it may
+   also be necessary to check its status and wait for it to return success
+   before proceeding to Tweet creation.
+
+   :param media_id: The ``media_id`` returned from the initialization.
+
+   :rtype: :class:`Media` object
+
+
 .. method:: API.create_media_metadata(media_id, alt_text)
 
    This endpoint can be used to provide additional information about the
