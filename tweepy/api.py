@@ -480,7 +480,7 @@ class API:
         else:
             files = {'media[]': open(filename, 'rb')}
         return self.request(
-            'POST',  'statuses/update_with_media', endpoint_parameters=(
+            'POST', 'statuses/update_with_media', endpoint_parameters=(
                 'status', 'possibly_sensitive', 'in_reply_to_status_id',
                 'lat', 'long', 'place_id', 'display_coordinates'
             ), status=status, files=files, **kwargs
