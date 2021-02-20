@@ -1346,6 +1346,28 @@ Media methods
    :rtype: :class:`Media` object
 
 
+.. method:: API.simple_upload(filename, [file], [media_category], \
+                              [additional_owners])
+
+   Use this endpoint to upload images to Twitter.
+   This does not use the chunked upload endpoint.
+
+   :param filename: The filename of the image to upload. This will
+                    automatically be opened unless ``file`` is specified.
+   :param file: A file object, which will be used instead of opening
+                ``filename``. ``filename`` is still required, for MIME type
+                detection and to use as a form field in the POST data.
+   :param media_category: The category that represents how the media will be
+                          used. This field is required when using the media
+                          with the Ads API.
+   :param additional_owners: A list of user IDs to set as additional owners
+                             allowed to use the returned ``media_id`` in Tweet
+                             or Cards. Up to 100 additional owners may be
+                             specified.
+
+   :rtype: :class:`Media` object
+
+
 .. method:: API.create_media_metadata(media_id, alt_text)
 
    This endpoint can be used to provide additional information about the
