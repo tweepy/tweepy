@@ -1349,6 +1349,21 @@ Media methods
    :rtype: :class:`Media` object
 
 
+.. method:: API.chunked_upload(filename, [file], [file_type], \
+                               [media_category], [additional_owners])
+
+   Use this endpoint to upload images to Twitter.
+   This uses the chunked upload endpoint.
+
+   :param filename: |filename|
+   :param file: |file|
+   :param file_type: The MIME type of the media being uploaded.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
 .. method:: API.create_media_metadata(media_id, alt_text)
 
    This endpoint can be used to provide additional information about the
