@@ -1322,7 +1322,7 @@ Media methods
                              [additional_owners])
 
    Use this endpoint to upload images to Twitter.
-   This automatically uses the chunked upload endpoint for videos.
+   This automatically uses the chunked upload endpoints for videos.
 
    :param filename: |filename|
    :param file: |file|
@@ -1339,7 +1339,7 @@ Media methods
                               [additional_owners])
 
    Use this endpoint to upload images to Twitter.
-   This does not use the chunked upload endpoint.
+   This does not use the chunked upload endpoints.
 
    :param filename: |filename|
    :param file: |file|
@@ -1352,8 +1352,8 @@ Media methods
 .. method:: API.chunked_upload(filename, [file], [file_type], \
                                [media_category], [additional_owners])
 
-   Use this endpoint to upload images to Twitter.
-   This uses the chunked upload endpoint.
+   Use this to upload images to Twitter.
+   This uses the chunked upload endpoints.
 
    :param filename: |filename|
    :param file: |file|
