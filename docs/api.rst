@@ -1321,15 +1321,28 @@ Utility methods
 Media methods
 -------------
 
-.. method:: API.media_upload(filename, [file])
+.. method:: API.media_upload(filename, [file], [chunked], [media_category], \
+                             [additional_owners])
 
    Use this endpoint to upload images to Twitter.
+   This automatically uses the chunked upload endpoint for videos.
 
    :param filename: The filename of the image to upload. This will
                     automatically be opened unless ``file`` is specified.
    :param file: A file object, which will be used instead of opening
                 ``filename``. ``filename`` is still required, for MIME type
                 detection and to use as a form field in the POST data.
+   :param chunked: Whether or not to use chunked media upload. Videos use
+                   chunked upload regardless of this parameter. Defaults to
+                   False.
+   :param media_category: The category that represents how the media will be
+                          used. This field is required when using the media
+                          with the Ads API.
+   :param additional_owners: A list of user IDs to set as additional owners
+                             allowed to use the returned ``media_id`` in Tweet
+                             or Cards. Up to 100 additional owners may be
+                             specified.
+
    :rtype: :class:`Media` object
 
 
