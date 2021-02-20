@@ -217,8 +217,7 @@ Status methods
    user's status. Statuses that are duplicates or too long will be silently
    ignored.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless `file` is specified
+   :param filename: |filename|
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update
                                  is in reply to.
@@ -230,9 +229,7 @@ Status methods
                   ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if
                     geolocation is enabled for the user.
-   :param file: A file object, which will be used instead of opening
-                `filename`. `filename` is still required, for MIME type
-                detection and to use as a form field in the POST data
+   :param file: |file|
    :rtype: :class:`Status` object
 
 
@@ -1327,21 +1324,13 @@ Media methods
    Use this endpoint to upload images to Twitter.
    This automatically uses the chunked upload endpoint for videos.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless ``file`` is specified.
-   :param file: A file object, which will be used instead of opening
-                ``filename``. ``filename`` is still required, for MIME type
-                detection and to use as a form field in the POST data.
+   :param filename: |filename|
+   :param file: |file|
    :param chunked: Whether or not to use chunked media upload. Videos use
                    chunked upload regardless of this parameter. Defaults to
                    False.
-   :param media_category: The category that represents how the media will be
-                          used. This field is required when using the media
-                          with the Ads API.
-   :param additional_owners: A list of user IDs to set as additional owners
-                             allowed to use the returned ``media_id`` in Tweet
-                             or Cards. Up to 100 additional owners may be
-                             specified.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
 
    :rtype: :class:`Media` object
 
@@ -1352,18 +1341,10 @@ Media methods
    Use this endpoint to upload images to Twitter.
    This does not use the chunked upload endpoint.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless ``file`` is specified.
-   :param file: A file object, which will be used instead of opening
-                ``filename``. ``filename`` is still required, for MIME type
-                detection and to use as a form field in the POST data.
-   :param media_category: The category that represents how the media will be
-                          used. This field is required when using the media
-                          with the Ads API.
-   :param additional_owners: A list of user IDs to set as additional owners
-                             allowed to use the returned ``media_id`` in Tweet
-                             or Cards. Up to 100 additional owners may be
-                             specified.
+   :param filename: |filename|
+   :param file: |file|
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
 
    :rtype: :class:`Media` object
 
