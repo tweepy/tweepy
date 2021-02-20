@@ -1364,6 +1364,19 @@ Media methods
    :rtype: :class:`Media` object
 
 
+.. method:: API.chunked_upload_init(total_bytes, media_type, \
+                                    [media_category], [additional_owners])
+
+   Use this endpoint to initiate a chunked file upload session.
+
+   :param total_bytes: The size of the media being uploaded in bytes.
+   :param media_type: The MIME type of the media being uploaded.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
 .. method:: API.create_media_metadata(media_id, alt_text)
 
    This endpoint can be used to provide additional information about the
