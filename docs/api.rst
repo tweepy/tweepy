@@ -1354,7 +1354,9 @@ Media methods
                                [media_category], [additional_owners])
 
    Use this to upload images to Twitter.
-   This uses the chunked upload endpoints.
+   This uses the chunked upload endpoints and calls
+   :func:`API.chunked_upload_init`, :func:`API.chunked_upload_append`, and
+   :func:`API.chunked_upload_finalize`.
 
    :param filename: |filename|
    :param file: |file|
