@@ -1,22 +1,18 @@
 import os
+import unittest
 
 import vcr
 
-from tweepy.auth import OAuthHandler
 from tweepy.api import API
+from tweepy.auth import OAuthHandler
 
-import six
-if six.PY3:
-    import unittest
-else:
-    import unittest2 as unittest
 
-username = os.environ.get('TWITTER_USERNAME', 'tweepytest')
+username = os.environ.get('TWITTER_USERNAME', 'TweepyDev')
 oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')
 oauth_consumer_secret = os.environ.get('CONSUMER_SECRET', '')
 oauth_token = os.environ.get('ACCESS_KEY', '')
 oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
-use_replay = os.environ.get('USE_REPLAY', False)
+use_replay = os.environ.get('USE_REPLAY', True)
 
 
 tape = vcr.VCR(

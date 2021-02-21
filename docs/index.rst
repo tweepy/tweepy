@@ -11,13 +11,15 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install.rst
    getting_started.rst
    auth_tutorial.rst
    code_snippet.rst
    cursor_tutorial.rst
+   extended_tweets.rst
    streaming_how_to.rst
    api.rst
-   streaming_how_to.rst
+   running_tests.rst
 
 Indices and tables
 ==================

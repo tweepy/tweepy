@@ -1,25 +1,14 @@
 # Tweepy
-# Copyright 2009-2010 Joshua Roesslein
+# Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-from __future__ import print_function
-
-import time
 import datetime
-import threading
-import os
+import hashlib
 import logging
-
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-try:
-    import hashlib
-except ImportError:
-    # python 2.4
-    import md5 as hashlib
+import pickle
+import threading
+import time
+import os
 
 try:
     import fcntl
@@ -28,9 +17,10 @@ except ImportError:
     # TODO: use win32file
     pass
 
-log = logging.getLogger('tweepy.cache')
+log = logging.getLogger(__name__)
 
-class Cache(object):
+
+class Cache:
     """Cache interface"""
 
     def __init__(self, timeout=60):

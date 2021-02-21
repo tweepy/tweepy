@@ -1,13 +1,14 @@
 """ script to parse the url of bindings and find if the page exists or not """
+
+import os
 import pprint
 import re
-import os
 import requests
 
 __author__ = 'jordiriera'
 
 url_root = 'https://dev.twitter.com'
-reference_line = re.compile(':reference: ({}.*) "'.format(url_root))
+reference_line = re.compile(f':reference: ({url_root}.*) "')
 
 
 def parse(filename):

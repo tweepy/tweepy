@@ -1,0 +1,1708 @@
+# API Reference
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-ko\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-28 09:41+0900\n"
+"PO-Revision-Date: 2020-01-06 15:26+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../api.rst:6
+msgid "API Reference"
+msgstr "API 레퍼런스"
+
+#: ../../api.rst:8
+msgid "This page contains some basic documentation for the Tweepy module."
+msgstr "이 페이지는 Tweepy 모듈에 대한 기초적인 안내를 포함하고 있습니다."
+
+#: ../../api.rst:12
+msgid ":mod:`tweepy.api` --- Twitter API wrapper"
+msgstr ":mod:`tweepy.api` --- Twitter API 래퍼(Wrapper)"
+
+#: ../../api.rst:22
+msgid ""
+"This class provides a wrapper for the API as provided by Twitter. The "
+"functions provided in this class are listed below."
+msgstr ""
+"이 클래스는 트위터로부터 제공되는 API의 래퍼를 제공합니다. "
+"이 클래스가 제공하는 함수들은 아래와 같습니다."
+
+#: ../../api.rst
+msgid "Parameters"
+msgstr "매개변수"
+
+#: ../../api.rst:25
+msgid "authentication handler to be used"
+msgstr "인증 핸들러"
+
+#: ../../api.rst:26
+msgid "general API host"
+msgstr "일반 API 호스트"
+
+#: ../../api.rst:27
+msgid "search API host"
+msgstr "검색 API 호스트"
+
+#: ../../api.rst:28
+msgid "cache backend to use"
+msgstr "캐시 백엔드"
+
+#: ../../api.rst:29
+msgid "general API path root"
+msgstr "일반 API 루트 경로"
+
+#: ../../api.rst:30
+msgid "search API path root"
+msgstr "검색 API 루트 경로"
+
+#: ../../api.rst:31
+msgid "default number of retries to attempt when error occurs"
+msgstr "에러가 발생했을 시, 재시도할 횟수"
+
+#: ../../api.rst:32
+msgid "number of seconds to wait between retries"
+msgstr "다음 재시도까지의 지연시간 (초 단위)"
+
+#: ../../api.rst:33
+msgid "which HTTP status codes to retry"
+msgstr "재시도할 HTTP 상태 코드"
+
+#: ../../api.rst:34
+msgid "The maximum amount of time to wait for a response from Twitter"
+msgstr "트위터로부터의 응답을 기다릴 최대 시간"
+
+#: ../../api.rst:36
+msgid "The object to use for parsing the response from Twitter"
+msgstr "트위터로부터의 응답 결과를 파싱하는 데 사용할 객체"
+
+#: ../../api.rst:37
+msgid "Whether or not to use GZIP compression for requests"
+msgstr "요청에 GZIP 압축을 사용할지의 여부"
+
+#: ../../api.rst:38
+msgid "Whether or not to automatically wait for rate limits to replenish"
+msgstr "트위터 API 호출 제한 횟수 보충을 기다릴지의 여부"
+
+#: ../../api.rst:40
+msgid ""
+"Whether or not to print a notification when Tweepy is waiting for rate "
+"limits to replenish"
+msgstr ""
+"트위터 API 호출 제한 횟수 보충을 기다릴 때, "
+"따로 안내 메세지를 출력할지의 여부"
+
+#: ../../api.rst:43
+msgid "The full url to an HTTPS proxy to use for connecting to Twitter."
+msgstr "트위터에 연결할 때 사용할 HTTPS 프록시의 전체 주소."
+
+#: ../../api.rst:48
+msgid "Timeline methods"
+msgstr "타임라인 메소드"
+
+#: ../../api.rst:52
+msgid ""
+"Returns the 20 most recent statuses, including retweets, posted by the "
+"authenticating user and that user's friends. This is the equivalent of "
+"/timeline/home on the Web."
+msgstr ""
+"현재 인증된 사용자와 이 사용자의 친구들에 의해 작성된 Status 중, 가장 최근에 작성된 20개의 "
+"Status를 (리트윗을 포함해) 반환합니다. 웹 상에서의 /timeline/home와 동일합니다."
+
+#: ../../api.rst:56 ../../api.rst:89 ../../api.rst:101 ../../api.rst:112
+#: ../../api.rst:877
+msgid "|since_id|"
+msgstr "지정한 ID보다 더 큰 ID값을 가지는 객체(즉, 지정한 객체보다 더 최근의 객체)만을 반환함."
+
+#: ../../api.rst:57 ../../api.rst:90 ../../api.rst:102 ../../api.rst:113
+#: ../../api.rst:766 ../../api.rst:878
+msgid "|max_id|"
+msgstr "지정한 ID보다 더 작은 ID값을 가지는 객체(즉, 지정한 객체보다 더 이전의 객체)만을 반환함."
+
+#: ../../api.rst:58 ../../api.rst:91 ../../api.rst:103 ../../api.rst:114
+#: ../../api.rst:315 ../../api.rst:330 ../../api.rst:395 ../../api.rst:757
+#: ../../api.rst:848 ../../api.rst:861 ../../api.rst:879 ../../api.rst:1026
+msgid "|count|"
+msgstr "페이지 당 시도하고 검색할 결과의 수."
+
+#: ../../api.rst:59 ../../api.rst:92 ../../api.rst:104 ../../api.rst:374
+#: ../../api.rst:560 ../../api.rst:611
+msgid "|page|"
+msgstr "검색할 페이지. (참고: 페이지 매김 제한 있음)"
+
+#: ../../api.rst
+msgid "Return type"
+msgstr "반환 형식"
+
+#: ../../api.rst:60 ../../api.rst:76 ../../api.rst:93 ../../api.rst:105
+#: ../../api.rst:115 ../../api.rst:274 ../../api.rst:561 ../../api.rst:885
+msgid "list of :class:`Status` objects"
+msgstr ":class:`Status` 객체 리스트"
+
+#: ../../api.rst:66
+msgid ""
+"Returns full Tweet objects for up to 100 tweets per request, specified by"
+" the ``id_``  parameter."
+msgstr ""
+"요청 1회당 트윗 객체를 최대 100개 반환합니다. "
+"`` id_``  매개변수에 의해 구분됩니다."
+
+#: ../../api.rst:69
+msgid "A list of Tweet IDs to lookup, up to 100"
+msgstr "반환받을 트윗의 ID 리스트(최대 100개)."
+
+#: ../../api.rst:70 ../../api.rst:133 ../../api.rst:357 ../../api.rst:502
+#: ../../api.rst:651 ../../api.rst:767 ../../api.rst:880 ../../api.rst:1027
+msgid "|include_entities|"
+msgstr "False로 설정하면 엔티티 노드를 포함하지 않음. 기본값은 True."
+
+#: ../../api.rst:71 ../../api.rst:128 ../../api.rst:199
+msgid "|trim_user|"
+msgstr "유저 ID가 반드시 유저 객체 대신 제공되어야 하는지를 나타내는 boolean 형태의 변수. 기본값은 False."
+
+#: ../../api.rst:72
+msgid ""
+"A boolean indicating whether or not to include tweets that cannot be "
+"shown. Defaults to False."
+msgstr ""
+"볼 수 없는 트윗을 포함할지의 여부를 설정하는 boolean 형태의 변수. "
+"기본값은 False."
+
+#: ../../api.rst:74 ../../api.rst:134
+msgid "|include_ext_alt_text|"
+msgstr "미디어 요소에 alt 속성 값이 있으면 ext_alt_text를 반환. ext_alt_text는 미디어 요소의 상위 레벨 Key 값이 됨."
+
+#: ../../api.rst:75 ../../api.rst:135
+msgid "|include_card_uri|"
+msgstr "(card_uri 값을 통한 일반 카드 및 광고 카드를 포함하는 트윗이 있다면) 가져온 트윗이 card_uri 값을 포함해야 하는지를 나타내는 boolean 형태의 변수."
+
+#: ../../api.rst:82
+msgid ""
+"Returns the 20 most recent statuses posted from the authenticating user "
+"or the user specified. It's also possible to request another user's "
+"timeline via the id parameter."
+msgstr ""
+"현재 인증된 사용자 또는 지정된 사용자의 Status 중 가장 최근의 20개를 반환합니다. "
+"`` id_``  매개변수를 이용하면, 다른 사용자의 타임라인을 요청하는 것이 가능합니다."
+
+#: ../../api.rst:86 ../../api.rst:292 ../../api.rst:311 ../../api.rst:326
+#: ../../api.rst:441 ../../api.rst:453 ../../api.rst:476 ../../api.rst:487
+#: ../../api.rst:590 ../../api.rst:601 ../../api.rst:630 ../../api.rst:640
+#: ../../api.rst:672
+msgid "|uid|"
+msgstr "사용자 일련번호 또는 계정 이름."
+
+#: ../../api.rst:87 ../../api.rst:293 ../../api.rst:312 ../../api.rst:327
+#: ../../api.rst:443 ../../api.rst:455 ../../api.rst:478 ../../api.rst:489
+#: ../../api.rst:592 ../../api.rst:603 ../../api.rst:632 ../../api.rst:642
+#: ../../api.rst:674 ../../api.rst:828 ../../api.rst:843 ../../api.rst:859
+#: ../../api.rst:909 ../../api.rst:941 ../../api.rst:986 ../../api.rst:1040
+msgid "|user_id|"
+msgstr "사용자 일련번호. 어떤 값이 유효한 사용자 아이디인지, 유효한 일련번호인지를 확실히 해야 할 때 도움이 됨."
+
+#: ../../api.rst:88 ../../api.rst:294 ../../api.rst:313 ../../api.rst:328
+#: ../../api.rst:442 ../../api.rst:454 ../../api.rst:477 ../../api.rst:488
+#: ../../api.rst:591 ../../api.rst:602 ../../api.rst:631 ../../api.rst:641
+#: ../../api.rst:673 ../../api.rst:827 ../../api.rst:842 ../../api.rst:858
+#: ../../api.rst:908 ../../api.rst:940 ../../api.rst:985 ../../api.rst:1039
+msgid "|screen_name|"
+msgstr "사용자 아이디(예: @pinkrabbit412에서의 ``pinkrabbit412`` ). 어떤 값이 유효한 사용자 아이디인지, 유효한 일련번호인지를 확실히 해야 할 때 도움이 됨."
+
+#: ../../api.rst:98
+msgid ""
+"Returns the 20 most recent tweets of the authenticated user that have "
+"been retweeted by others."
+msgstr ""
+"현재 인증된 사용자의 최근 트윗 중, "
+"다른 사용자에 의해 리트윗된 트윗 20개를 반환합니다."
+
+#: ../../api.rst:110
+msgid "Returns the 20 most recent mentions, including retweets."
+msgstr ""
+"리트윗을 포함하는, "
+"가장 최근의 멘션(답글) 20개를 반환합니다."
+
+#: ../../api.rst:119
+msgid "Status methods"
+msgstr "Status 메소드"
+
+#: ../../api.rst:125
+msgid "Returns a single status specified by the ID parameter."
+msgstr "ID 매개변수에 의해 구분된 하나의 Status 객체를 반환합니다."
+
+#: ../../api.rst:127 ../../api.rst:245 ../../api.rst:253 ../../api.rst:262
+#: ../../api.rst:272 ../../api.rst:281 ../../api.rst:569 ../../api.rst:578
+msgid "|sid|"
+msgstr "status의 ID."
+
+#: ../../api.rst:129
+msgid ""
+"A boolean indicating if any Tweets returned that have been retweeted by "
+"the authenticating user should include an additional current_user_retweet"
+" node, containing the ID of the source status for the retweet."
+msgstr ""
+"boolean 형태의 변수. 현재 인증된 사용자에 의해 리트윗된 트윗이, "
+"추가적으로 리트윗된 원본 트윗의 ID를 포함하는 current_user_retweet 노드를 포함해야 하는지를 지정합니다."
+
+#: ../../api.rst:136 ../../api.rst:209 ../../api.rst:237 ../../api.rst:246
+#: ../../api.rst:254 ../../api.rst:282 ../../api.rst:570 ../../api.rst:579
+msgid ":class:`Status` object"
+msgstr ":class:`Status` 객체"
+
+#: ../../api.rst:147
+msgid "Updates the authenticating user's current status, also known as Tweeting."
+msgstr "현재 인증된 사용자의 Status를 업데이트합니다. 흔히 '트윗을 작성한다'라고 불립니다."
+
+#: ../../api.rst:149
+msgid ""
+"For each update attempt, the update text is compared with the "
+"authenticating user's recent Tweets. Any attempt that would result in "
+"duplication will be blocked, resulting in a 403 error. A user cannot "
+"submit the same status twice in a row."
+msgstr ""
+"Status 업데이트를 시도할 때 마다, 포함된 텍스트를 현재 인증된 사용자의 가장 최근 트윗과 "
+"비교합니다. 이에 따라, 중복된 업데이트 시도를 차단할 수 있으며, 이를 성공적으로 차단한 후에는 "
+"403 에러를 반환합니다. (참고: 사용자는 같은 Status 객체를 두 번 이상 연속해 게시할 수 없습니다.)"
+
+#: ../../api.rst:154
+msgid ""
+"While not rate limited by the API, a user is limited in the number of "
+"Tweets they can create at a time. If the number of updates posted by the "
+"user reaches the current allowed limit this method will return an HTTP "
+"403 error."
+msgstr ""
+"트위터 API상에서의 제한은 초과하지 않았으나, 사용자의 일일 트윗 작성 제한수를 초과하는 "
+"경우가 발생할 수 있습니다. 업데이트 시도가 이 제한을 초과할 경우에도, HTTP 403 에러를 "
+"반환받을 것입니다."
+
+#: ../../api.rst:158 ../../api.rst:223
+msgid "The text of your status update."
+msgstr "포함된 텍스트. Status 업데이트(트윗 작성)에 쓰입니다."
+
+#: ../../api.rst:159
+msgid ""
+"The ID of an existing status that the update is in reply to. Note: This "
+"parameter will be ignored unless the author of the Tweet this parameter "
+"references is mentioned within the status text. Therefore, you must "
+"include @username, where username is the author of the referenced Tweet, "
+"within the update."
+msgstr ""
+"답글을 작성할 대상 트윗의 ID. "
+"(참고: 따로 값을 전달하지 않으면, 이 매개변수는 무시됩니다. "
+"따라서, @username를 반드시 포함해야 하며, 이는 대상 트윗을 작성한 사람의 @username "
+"이어야 합니다.)"
+
+#: ../../api.rst:164
+msgid ""
+"If set to true and used with in_reply_to_status_id, leading @mentions "
+"will be looked up from the original Tweet, and added to the new Tweet "
+"from there. This wil append @mentions into the metadata of an extended "
+"Tweet as a reply chain grows, until the limit on @mentions is reached. In"
+" cases where the original Tweet has been deleted, the reply will fail."
+msgstr ""
+"True로 설정되고 in_reply_to_status_id와 같이 사용되었을 경우, "
+"원본 트윗에 달린 답글 @멘션을 찾아, 새 트윗을 그 곳에 추가합니다. "
+"@멘션은 @멘션 갯수 제한 이하에서, 트윗 타래가 '확장된 트윗들의 메타데이터 형태'로 사용될 것입니다. "
+"원본 트윗이 삭제되었을 경우, 반환값 생성이 실패할 수 있습니다."
+
+#: ../../api.rst:170
+msgid ""
+"When used with auto_populate_reply_metadata, a comma-separated list of "
+"user ids which will be removed from the server-generated @mentions prefix"
+" on an extended Tweet. Note that the leading @mention cannot be removed "
+"as it would break the in-reply-to-status-id semantics. Attempting to "
+"remove it will be silently ignored."
+msgstr ""
+"auto_populate_reply_metadata와 "
+"같이 사용되었을 경우, 확장된 트윗(Extended Tweet)에서의 자동 생성된 멘션 대상 중 "
+"쉼표(,)로 구분된 사용자 ID를 삭제합니다. 답글 대상 멘션 대상은 제거될 수 없습니다. "
+"이는 in_reply_to_status_id의 의미를 깨트릴 수 있습니다. 따라서 이 @멘션 ID를 제거하려는 시도는 "
+"무시됩니다. "
+
+#: ../../api.rst:176
+msgid ""
+"In order for a URL to not be counted in the status body of an extended "
+"Tweet, provide a URL as a Tweet attachment. This URL must be a Tweet "
+"permalink, or Direct Message deep link. Arbitrary, non-Twitter URLs must "
+"remain in the status text. URLs passed to the attachment_url parameter "
+"not matching either a Tweet permalink or Direct Message deep link will "
+"fail at Tweet creation and cause an exception."
+msgstr ""
+"URL이 Status 객체 중 확장된 트윗의 텍스트에 포함되지 않도록, 트윗에 첨부되는 형식으로 제공합니다. "
+"이 URL은 트윗의 링크(Permalink) 또는 다이렉트 메세지(DM)의 깊은(Deep) 링크여야 합니다. "
+"단, 트위터와 관련 없는 임의의 URL은 포함됩니다. 즉, attachment_url에 트윗의 링크 또는 "
+"다이렉트 메세지의 깊은 링크가 아닐 경우, 트윗 생성에 실패하며 예외를 발생시킬 것입니다."
+
+#: ../../api.rst:182
+msgid ""
+"A list of media_ids to associate with the Tweet. You may include up to 4 "
+"photos or 1 animated GIF or 1 video in a Tweet."
+msgstr ""
+"트윗과 연결할 media_ids 의 리스트. "
+"트윗 하나당 최대 4개의 이미지나 1개의 움직이는 GIF 형식의 이미지, 또는 1개의 동영상만을 "
+"포함시킬 수 있습니다."
+
+#: ../../api.rst:184
+msgid ""
+"If you upload Tweet media that might be considered sensitive content such"
+" as nudity, or medical procedures, you must set this value to true."
+msgstr ""
+"민감한 콘텐츠인지 아닌지의 여부. 나체 사진 또는 수술 과정 사진 등의, "
+"민감한 내용으로 여겨질 수 있는 미디어를 업로드할 경우 "
+"반드시 이 속성값을 True로 설정해야 합니다."
+
+#: ../../api.rst:187
+msgid ""
+"The latitude of the location this Tweet refers to. This parameter will be"
+" ignored unless it is inside the range -90.0 to +90.0 (North is positive)"
+" inclusive. It will also be ignored if there is no corresponding long "
+"parameter."
+msgstr ""
+"이 트윗이 가리킬 위치의 위도. -90.0 ~ +90.0 (북반구가 양수값) 범위 밖의 "
+"값은 무시되며, 아래의 ``long``  매개변수가 지정되지 않은 경우에도 무시됩니다."
+
+#: ../../api.rst:191
+msgid ""
+"The longitude of the location this Tweet refers to. The valid ranges for "
+"longitude are -180.0 to +180.0 (East is positive) inclusive. This "
+"parameter will be ignored if outside that range, if it is not a number, "
+"if geo_enabled is disabled, or if there no corresponding lat parameter."
+msgstr ""
+"이 트윗이 가리킬 위치의 경도. -180.0 ~ +180.0 (동쪽이 양수값) 범위 밖의 "
+"값, 숫자 이외의 값이 입력될 경우 무시되며, ``geo_enabled``  가 비활성화 되었거나, "
+"위의 ``lat``  매개변수가 지정되지 않은 경우에도 전달된 값이 무시됩니다."
+
+#: ../../api.rst:196
+msgid "A place in the world."
+msgstr "(사용자가 위치 정보를 사용할 수 있는 경우) 트윗이 작성된 위치의 정보 (ID)."
+
+#: ../../api.rst:197
+msgid ""
+"Whether or not to put a pin on the exact coordinates a Tweet has been "
+"sent from."
+msgstr ""
+"트윗이 작성되어 전송된 위치를 표시할지 말지의 여부."
+
+#: ../../api.rst:200
+msgid ""
+"When set to true, enables shortcode commands for sending Direct Messages "
+"as part of the status text to send a Direct Message to a user. When set "
+"to false, disables this behavior and includes any leading characters in "
+"the status text that is posted"
+msgstr ""
+"True로 설정하면, Status 객체를 다이렉트 메세지로 사용자에게 보낼 때 텍스트의 일부를 "
+"숏코드 커맨드(Shortcode Command)로 대체하여 보냅니다. "
+"False로 설정하면, Status 객체를 다이렉트 메세지로 사용자에게 보낼 때, "
+"위와 같은 변환 과정을 거치지 않고 텍스트 그대로를 보냅니다."
+
+#: ../../api.rst:204
+msgid ""
+"When set to true, causes any status text that starts with shortcode "
+"commands to return an API error. When set to false, allows shortcode "
+"commands to be sent in the status text and acted on by the API."
+msgstr ""
+"True로 설정하면, 숏코드 커맨드로 시작하는 Status 텍스트가 API 에러를 발생시킬 것입니다. "
+"False로 설정하면, Status 객체의 텍스트가 숏코드 커맨드로 시작하는 것을 허용하고, "
+"API에 의해 동작하는 것을 허용할 것입니다."
+
+#: ../../api.rst:207
+msgid ""
+"Associate an ads card with the Tweet using the card_uri value from any "
+"ads card response."
+msgstr ""
+"트윗에 ``card_uri``  속성을 이용하여 광고 카드를 추가합니다."
+
+#: ../../api.rst:217
+msgid ""
+"*Deprecated*: Use :func:`API.media_upload` instead. Update the "
+"authenticated user's status. Statuses that are duplicates or too long "
+"will be silently ignored."
+msgstr ""
+"*더 이상 사용되지 않음*: :func:`API.media_upload` 를 대신 사용하세요. "
+"현재 인증된 사용자의 Status를 미디어와 함께 업데이트합니다. "
+"중복된 Status 작성 시도 또는 너무 긴 트윗의 작성 시도는 별다른 경고 없이 무시될 것입니다."
+
+#: ../../api.rst:221
+msgid ""
+"The filename of the image to upload. This will automatically be opened "
+"unless `file` is specified"
+msgstr ""
+"업로드할 이미지의 이름. `file` 이 따로 지정된 것이 아니라면, 자동으로 열릴 것입니다."
+
+#: ../../api.rst:224
+msgid "The ID of an existing status that the update is in reply to."
+msgstr "답글을 작성할 대상 트윗의 ID."
+
+#: ../../api.rst:226
+msgid "Whether to automatically include the @mentions in the status metadata."
+msgstr "Status 메타데이터에 @멘션들을 포함할지의 여부"
+
+#: ../../api.rst:228
+msgid "The location's latitude that this tweet refers to."
+msgstr "이 트윗이 가리킬 위치의 위도."
+
+#: ../../api.rst:229
+msgid "The location's longitude that this tweet refers to."
+msgstr "이 트윗이 가리킬 위치의 경도."
+
+#: ../../api.rst:230
+msgid ""
+"Source of the update. Only supported by Identi.ca. Twitter ignores this "
+"parameter."
+msgstr ""
+"업데이트에 사용할 소스. Identi.ca 에서만 지원되며, 트위터는 이 매개변수를 무시합니다."
+
+#: ../../api.rst:232
+msgid ""
+"Twitter ID of location which is listed in the Tweet if geolocation is "
+"enabled for the user."
+msgstr ""
+"(사용자가 위치 정보를 사용할 수 있는 경우) "
+"트윗이 작성된 위치의 정보 (ID)."
+
+#: ../../api.rst:234
+msgid ""
+"A file object, which will be used instead of opening `filename`. "
+"`filename` is still required, for MIME type detection and to use as a "
+"form field in the POST data"
+msgstr ""
+"파일 객체로, `filename` 를 직접 여는 것 대신 사용됩니다. "
+"물론 MIME 타입 감지 및 POST 데이터 형식의 필드로 `filename` 가 필요하기는 합니다."
+
+#: ../../api.rst:242
+msgid ""
+"Destroy the status specified by the id parameter. The authenticated user "
+"must be the author of the status to destroy."
+msgstr ""
+"지정한 Status 객체를 삭제합니다. "
+"삭제하려는 Status 객체는 현재 인증된 사용자의 것이어야만 합니다."
+
+#: ../../api.rst:251
+msgid "Retweets a tweet. Requires the id of the tweet you are retweeting."
+msgstr "지정한 트윗을 리트윗합니다. 리트윗하려는 트윗의 ID를 필요로 합니다."
+
+#: ../../api.rst:259
+msgid ""
+"Returns up to 100 user IDs belonging to users who have retweeted the "
+"Tweet specified by the id parameter."
+msgstr ""
+"매개변수 ``id``  에 의해 지정된 트윗을 리트윗한 사용자의 ID 중, 최대 100개를 반환합니다."
+
+#: ../../api.rst:263 ../../api.rst:314 ../../api.rst:329 ../../api.rst:396
+#: ../../api.rst:479 ../../api.rst:490 ../../api.rst:619 ../../api.rst:650
+#: ../../api.rst:660 ../../api.rst:847 ../../api.rst:860 ../../api.rst:974
+#: ../../api.rst:1025
+msgid "|cursor|"
+msgstr "결과를 페이지로 나누며, 페이징을 시작하려면 -1 값을 입력해야 합니다. 응답 내용의 next_cursor와 previous_cursor 속성의 반환값을 입력해서 목록의 페이지를 앞뒤로 옮길 수 있습니다."
+
+#: ../../api.rst:264
+msgid "Have ids returned as strings instead."
+msgstr "사용자 ID를 정수 타입 대신 문자열 타입으로 반환받습니다."
+
+#: ../../api.rst:270
+msgid "Returns up to 100 of the first retweets of the given tweet."
+msgstr "지정한 트윗의 리트윗 중 가장 최근의 100개까지를 반환합니다."
+
+#: ../../api.rst:273
+msgid "Specifies the number of retweets to retrieve."
+msgstr "가져올 리트윗의 갯수"
+
+#: ../../api.rst:279
+msgid "Untweets a retweeted status. Requires the id of the retweet to unretweet."
+msgstr "리트윗 Status를 취소(Untweet)합니다. 리트윗 취소할 트윗의 ID를 필요로 합니다."
+
+#: ../../api.rst:286
+msgid "User methods"
+msgstr ""
+
+#: ../../api.rst:290
+msgid "Returns information about the specified user."
+msgstr "지정한 사용자의 정보를 반환합니다."
+
+#: ../../api.rst:295 ../../api.rst:302 ../../api.rst:446 ../../api.rst:456
+#: ../../api.rst:526 ../../api.rst:535 ../../api.rst:548 ../../api.rst:593
+#: ../../api.rst:604 ../../api.rst:633 ../../api.rst:643 ../../api.rst:677
+msgid ":class:`User` object"
+msgstr ":class:`User` 객체"
+
+#: ../../api.rst:300
+msgid "Returns the authenticated user's information."
+msgstr "현재 인증된 사용자의 정보를 반환합니다."
+
+#: ../../api.rst:308
+msgid ""
+"Returns an user's friends ordered in which they were added 100 at a time."
+" If no user is specified it defaults to the authenticated user."
+msgstr ""
+"대상 사용자의 팔로잉 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다. "
+"`` id``  또는 ``screen_name``  을 통해 대상을 지정하지 않으면, "
+"현재 인증된 사용자를 대상으로 합니다."
+
+#: ../../api.rst:316 ../../api.rst:331 ../../api.rst:503 ../../api.rst:652
+#: ../../api.rst:1028
+msgid "|skip_status|"
+msgstr "반환된 유저 객체에 Statuses를 포함할지 말지의 여부. 기본값은 False(포함하기)."
+
+#: ../../api.rst:317 ../../api.rst:332
+msgid "|include_user_entities|"
+msgstr "False로 설정하면 유저 객체 노드가 포함되지 않음. 기본값은 True."
+
+#: ../../api.rst:318 ../../api.rst:333 ../../api.rst:361 ../../api.rst:375
+#: ../../api.rst:612 ../../api.rst:653 ../../api.rst:975 ../../api.rst:1029
+msgid "list of :class:`User` objects"
+msgstr ":class:`User` 객체 리스트"
+
+#: ../../api.rst:323
+msgid ""
+"Returns a user's followers ordered in which they were added. If no user "
+"is specified by id/screen name, it defaults to the authenticated user."
+msgstr ""
+"대상 사용자의 팔로워 목록을, 목록에 추가된 순서대로, 요청 1회당 최대 100개씩 반환합니다. "
+"`` id``  또는 ``screen_name``  을 통해 대상을 지정하지 않으면, "
+"현재 인증된 사용자를 대상으로 합니다."
+
+#: ../../api.rst:339
+msgid "Returns fully-hydrated user objects for up to 100 users per request."
+msgstr "매개변수에 의한 검색 기준을 충족하는 사용자 객체를 요청 1회당 최대 100개씩 반환합니다."
+
+#: ../../api.rst:341
+msgid "There are a few things to note when using this method."
+msgstr "이 메소드를 사용할때는 아래 사항을 참고하세요."
+
+#: ../../api.rst:343
+msgid ""
+"You must be following a protected user to be able to see their most "
+"recent status update. If you don't follow a protected user their status "
+"will be removed."
+msgstr ""
+"비공개 설정된 사용자의 Status 객체 업데이트 내역을 보기 위해서는 해당 사용자를 "
+"팔로우하고 있는 상태여야 합니다. 팔로우하고 있지 않다면, 해당 Status 객체는 삭제될 것입니다."
+
+#: ../../api.rst:346
+msgid ""
+"The order of user IDs or screen names may not match the order of users in"
+" the returned array."
+msgstr ""
+"사용자 ID 또는 ``screen_name``  의 순서는 반환받은 배열의 사용자 순서와 일치하지 않을 수 있습니다."
+
+#: ../../api.rst:348
+msgid ""
+"If a requested user is unknown, suspended, or deleted, then that user "
+"will not be returned in the results list."
+msgstr ""
+"요청한 사용자를 찾을 수 없거나, 계정이 정지 또는 삭제되었다면, "
+"해당 계정은 결과값 리스트로 반환되지 않을 것입니다."
+
+#: ../../api.rst:350
+msgid ""
+"If none of your lookup criteria can be satisfied by returning a user "
+"object, a HTTP 404 will be thrown."
+msgstr ""
+"검색 기준을 충족하는 결과가 아예 없을 경우, HTTP 404 오류가 발생합니다."
+
+#: ../../api.rst:353
+msgid "A list of user IDs, up to 100 are allowed in a single request."
+msgstr "사용자 ID 리스트이며, ID는 요청 1회당 최대 100개까지만 허용됨."
+
+#: ../../api.rst:355
+msgid "A list of screen names, up to 100 are allowed in a single request."
+msgstr "`` screen_name``  의 리스트이며, 이 역시 요청 1회당 최대 100개까지만 허용됨."
+
+#: ../../api.rst:358
+msgid ""
+"Valid request values are compat and extended, which give compatibility "
+"mode and extended mode, respectively for Tweets that contain over 140 "
+"characters."
+msgstr ""
+"인자로 compat 또는 extended를 넘길 수 있으며,"
+"각각 140자 이상의 데이터가 포함된 트윗에 대해 호환성 모드(Compatibility Mode)와 "
+"확장 모드(Extended Mode)를 제공합니다."
+
+#: ../../api.rst:366
+msgid ""
+"Run a search for users similar to Find People button on Twitter.com; the "
+"same results returned by people search on Twitter.com will be returned by"
+" using this API (about being listed in the People Search). It is only "
+"possible to retrieve the first 1000 matches from this API."
+msgstr ""
+"트위터의 '사용자 검색' 과 동일한 검색 기능을 실행합니다. "
+"이 API를 이용한 검색은, 트위터에서 제공하는 것과 동일한 검색 결과를 "
+"반환합니다. 단, 최대 첫 1000개의 결과만 가져올 수 있습니다."
+
+#: ../../api.rst:371
+msgid "The query to run against people search."
+msgstr " 사용자 검색에 사용할 검색어"
+
+#: ../../api.rst:372
+msgid "Specifies the number of statuses to retrieve. May not be greater than 20."
+msgstr "한 번에 가져올 결과의 수. 20보다 클 수 없습니"
+
+#: ../../api.rst:379
+msgid "Direct Message Methods"
+msgstr "쪽지(Direct Message, DM) 메소드"
+
+#: ../../api.rst:383
+msgid "Returns a specific direct message."
+msgstr "지정한 쪽지를 반환합니다."
+
+#: ../../api.rst:385
+msgid "|id|"
+msgstr "쪽지의 ID."
+
+#: ../../api.rst:386
+msgid "|full_text|"
+msgstr "메시지의 전문을 반환할지 말지의 여부를 나타내는 boolean형 인자. False라면 140자로 잘린 메시지 내용을 반환하게 됩니다. 기본값은 False."
+
+#: ../../api.rst:387 ../../api.rst:419
+msgid ":class:`DirectMessage` object"
+msgstr ":class:`DirectMessage` 객체"
+
+#: ../../api.rst:392
+msgid ""
+"Returns all Direct Message events (both sent and received) within the "
+"last 30 days. Sorted in reverse-chronological order."
+msgstr ""
+"최근 30일 이내의 모든 DM의 내역(송수신 모두)을 반환합니다. 반환값은 "
+"시간 역순으로 정렬되어 있습니다."
+
+#: ../../api.rst:397
+msgid "list of :class:`DirectMessage` objects"
+msgstr ":class:`DirectMessage` 객체의 리스트"
+
+#: ../../api.rst:403
+msgid ""
+"Sends a new direct message to the specified user from the authenticating "
+"user."
+msgstr ""
+"현재 인증된 사용자의 계정으로, 지정한 사용자에게 쪽지를 보냅니다."
+
+#: ../../api.rst:406
+msgid "The ID of the user who should receive the direct message."
+msgstr "쪽지를 받을 사용자의 ID."
+
+#: ../../api.rst:408
+msgid "The text of your Direct Message. Max length of 10,000 characters."
+msgstr "쪽지의 내용(텍스트). 최대 10,000자까지 입력 가능."
+
+#: ../../api.rst:410
+msgid ""
+"The Quick Reply type to present to the user:  * options - Array of "
+"Options objects (20 max). * text_input - Text Input object. * location - "
+"Location object."
+msgstr ""
+"사용자에게 표시할 빠른 응답 유형: "
+"* options - Options 객체의 배열(최대 20개) "
+"* text_input - Text Input 객체 "
+"* location - Location 객체"
+
+#: ../../api.rst:410
+msgid "The Quick Reply type to present to the user:"
+msgstr "사용자에게 표시할 빠른 응답 유형: "
+
+#: ../../api.rst:412
+msgid "options - Array of Options objects (20 max)."
+msgstr "options - Options 객체의 배열(최대 20개)."
+
+#: ../../api.rst:413
+msgid "text_input - Text Input object."
+msgstr "text_input - Text Input 객체."
+
+#: ../../api.rst:414
+msgid "location - Location object."
+msgstr "location - Location 객체."
+
+#: ../../api.rst:415
+msgid "The attachment type. Can be media or location."
+msgstr "컨텐츠 첨부 유형. 미디어나 위치 등이 될 수 있음."
+
+#: ../../api.rst:416
+msgid ""
+"A media id to associate with the message. A Direct Message may only "
+"reference a single media_id."
+msgstr ""
+"메시지와 연결할 미디어의 ID. 단, 쪽지는 하나의 미디어 ID만을 참조할 수 있음."
+
+#: ../../api.rst:424
+msgid ""
+"Deletes the direct message specified in the required ID parameter. The "
+"authenticating user must be the recipient of the specified direct "
+"message. Direct Messages are only removed from the interface of the user "
+"context provided. Other members of the conversation can still access the "
+"Direct Messages."
+msgstr ""
+"ID 매개변수가 지정하는 쪽지를 삭제합니다. 삭제하기 위해서는 인증된 "
+"사용자가 해당 DM의 수신자여야 합니다. 단, 쪽지는 사용자가 제공받는 "
+"인터페이스에서만 제거됩니다. 다시 말해, 대화에 참여한 다른 사용자는 "
+"이 삭제 작업 이후에도 해당 DM에 접근할 수 있습니다."
+
+#: ../../api.rst:430
+msgid "The id of the Direct Message that should be deleted."
+msgstr "삭제할 쪽지의 ID."
+
+#: ../../api.rst:435
+msgid "Friendship Methods"
+msgstr "친구 관계 메소드"
+
+#: ../../api.rst:439
+msgid "Create a new friendship with the specified user (aka follow)."
+msgstr "지정한 사용자와 친구를 맺습니다. (일명 팔로우)"
+
+#: ../../api.rst:444
+msgid "Enable notifications for the target user in addition to becoming friends."
+msgstr "지정한 사용자를 팔로우하고, 해당 사용자에 대한 알림을 활성화합니다."
+
+#: ../../api.rst:451
+msgid "Destroy a friendship with the specified user (aka unfollow)."
+msgstr "지정한 사용자를 친구 삭제 합니다. (일명 언팔로우)"
+
+#: ../../api.rst:462
+msgid "Returns detailed information about the relationship between two users."
+msgstr "두 사용자의 관계에 대한 자세한 정보를 반환합니다."
+
+#: ../../api.rst:464
+msgid "The user_id of the subject user."
+msgstr "주 대상 사용자의 user_id"
+
+#: ../../api.rst:465
+msgid "The screen_name of the subject user."
+msgstr "주 대상 사용자의 screen_name"
+
+#: ../../api.rst:466
+msgid "The user_id of the target user."
+msgstr "대상 사용자의 user_id"
+
+#: ../../api.rst:467
+msgid "The screen_name of the target user."
+msgstr "대상 사용자의 screen_name"
+
+#: ../../api.rst:468
+msgid ":class:`Friendship` object"
+msgstr ":class:`Friendship` 객체"
+
+#: ../../api.rst:473
+msgid ""
+"Returns an array containing the IDs of users being followed by the "
+"specified user."
+msgstr ""
+"지정한 사용자가 팔로우한 사용자들의 ID를 담은 배열을 반환합니다."
+
+#: ../../api.rst:485
+msgid "Returns an array containing the IDs of users following the specified user."
+msgstr "지정한 사용자를 팔로우하는 사용자들의 ID를 담은 배열을 반환합니다."
+
+#: ../../api.rst:495
+msgid "Account Methods"
+msgstr "계정 메소드"
+
+#: ../../api.rst:500
+msgid "Verify the supplied user credentials are valid."
+msgstr "제출한 사용자의 계정 사용 자격이 유효한지 판별합니다."
+
+#: ../../api.rst:504
+msgid "When set to true email will be returned in the user objects as a string."
+msgstr "True로 설정하면, 이메일이 문자열 형태로 User 객체에 포함되어 반환됩니다."
+
+#: ../../api.rst:506
+msgid ":class:`User` object if credentials are valid, otherwise False"
+msgstr "자격이 유효하다면 :class:`User` 객체, 아니라면 False"
+
+#: ../../api.rst:511
+msgid ""
+"Returns the current rate limits for methods belonging to the specified "
+"resource families. When using application-only auth, this method's "
+"response indicates the application-only auth rate limiting context."
+msgstr ""
+"지정한 리소스 그룹에 속하는 메소드들의 현재 한도 정보(Rate limit)를 반환합니다. 애플리케이션 전용 인증을 "
+"사용하고 있다면, 이 메소드의 응답은 애플리케이션 전용 인증 한도의 정보를 나타냅니다."
+
+#: ../../api.rst:515
+msgid ""
+"A comma-separated list of resource families you want to know the current "
+"rate limit disposition for."
+msgstr ""
+"현재 속도 제한의 처리를 알고 싶은 리소스 그룹을 쉼표(,)로 구분한 리스트"
+
+#: ../../api.rst:517 ../../api.rst:1056 ../../api.rst:1080 ../../api.rst:1102
+msgid ":class:`JSON` object"
+msgstr ":class:`JSON` 객체"
+
+#: ../../api.rst:522
+msgid ""
+"Update the authenticating user's profile image. Valid formats: GIF, JPG, "
+"or PNG"
+msgstr ""
+"현재 인증된 사용자의 프로필 사진을 바꿉니다. 유효한 파일 형식은 다음과 같습니다: GIF, JPG, PNG"
+
+#: ../../api.rst:525 ../../api.rst:534
+msgid "local path to image file to upload. Not a remote URL!"
+msgstr "업로드할 이미지 파일의 로컬 경로. 이외의 경로(URL 등)는 지원되지 않습니다."
+
+#: ../../api.rst:531
+msgid ""
+"Update authenticating user's background image. Valid formats: GIF, JPG, "
+"or PNG"
+msgstr ""
+"현재 인증된 사용자의 배경 사진(헤더)을 바꿉니다. 유효한 파일 형식은 다음과 같습니다: GIF, JPG, PNG"
+
+#: ../../api.rst:540
+msgid ""
+"Sets values that users are able to set under the \"Account\" tab of their"
+" settings page."
+msgstr ""
+"설정 페이지의 \"계정\" 탭에서 설정할 수 있는 값을 설정합니다."
+
+#: ../../api.rst:543
+msgid "Maximum of 20 characters"
+msgstr "최대 20자."
+
+#: ../../api.rst:544
+msgid ""
+"Maximum of 100 characters. Will be prepended with \"http://\" if not "
+"present"
+msgstr ""
+"최대 100글자."
+"\"http://\"가 없는 경우 덧붙입니다."
+
+#: ../../api.rst:546
+msgid "Maximum of 30 characters"
+msgstr "최대 30자."
+
+#: ../../api.rst:547
+msgid "Maximum of 160 characters"
+msgstr "최대 160자."
+
+#: ../../api.rst:552
+msgid "Favorite Methods"
+msgstr "마음에 들어요 메소드"
+
+#: ../../api.rst:556
+msgid ""
+"Returns the favorite statuses for the authenticating user or user "
+"specified by the ID parameter."
+msgstr ""
+"인증된 사용자 또는 ID 매개변수로 특정되는 사용자가 "
+"마음에 들어요를 누른 Status들을 반환합니다."
+
+#: ../../api.rst:559
+msgid "The ID or screen name of the user to request favorites"
+msgstr "마음에 들어요 목록을 요청할 사용자의 ID나 ``screen_name`` "
+
+#: ../../api.rst:566
+msgid ""
+"Favorites the status specified in the ID parameter as the authenticating "
+"user."
+msgstr ""
+"ID로 지정한 Status에, 현재 인증된 사용자 계정으로 마음에 들어요를 누릅니다."
+
+#: ../../api.rst:575
+msgid ""
+"Un-favorites the status specified in the ID parameter as the "
+"authenticating user."
+msgstr ""
+"ID로 지정한 Status에, 현재 인증된 사용자 계정으로 마음에 들어요를 취소합니다."
+
+#: ../../api.rst:583
+msgid "Block Methods"
+msgstr "차단 메소드"
+
+#: ../../api.rst:587
+msgid ""
+"Blocks the user specified in the ID parameter as the authenticating user."
+" Destroys a friendship to the blocked user if it exists."
+msgstr ""
+"ID로 지정한 사용자를, 현재 인증된 사용자의 계정에서 차단합니다."
+"차단한 사용자를 팔로우하는 중이라면, 자동적으로 언팔로우 합니다."
+
+#: ../../api.rst:598
+msgid ""
+"Un-blocks the user specified in the ID parameter for the authenticating "
+"user."
+msgstr ""
+"ID로 지정한 사용자를, 현재 인증된 사용자의 계정에서 차단 해제합니다."
+
+#: ../../api.rst:609
+msgid "Returns an array of user objects that the authenticating user is blocking."
+msgstr ""
+"현재 인증된 사용자가 차단한 계정을 User 객체의 배열 형태로 반환합니다."
+
+#: ../../api.rst:617
+msgid "Returns an array of numeric user ids the authenticating user is blocking."
+msgstr ""
+"현재 인증된 사용자가 차단한 계정을 ID의 배열 형태로 반환합니다."
+
+#: ../../api.rst:624
+msgid "Mute Methods"
+msgstr "뮤트 메소드"
+
+#: ../../api.rst:628
+msgid "Mutes the user specified in the ID parameter for the authenticating user."
+msgstr "ID로 지정한 사용자를, 현재 인증된 사용자의 계정에서 뮤트합니다."
+
+#: ../../api.rst:638
+msgid ""
+"Un-mutes the user specified in the ID parameter for the authenticating "
+"user."
+msgstr ""
+"ID로 지정한 사용자를, 현재 인증된 사용자의 계정에서 뮤트 해제합니다."
+
+#: ../../api.rst:648
+msgid "Returns an array of user objects the authenticating user has muted."
+msgstr "현재 인증된 사용자가 뮤트한 계정을 User 객체의 배열 형태로 반환합니다."
+
+#: ../../api.rst:658
+msgid "Returns an array of numeric user ids the authenticating user has muted."
+msgstr "현재 인증된 사용자가 차단한 계정을 ID의 배열 형태로 반환합니다."
+
+#: ../../api.rst:665
+msgid "Spam Reporting Methods"
+msgstr "스팸 신고 메소드"
+
+#: ../../api.rst:669
+msgid ""
+"The user specified in the id is blocked by the authenticated user and "
+"reported as a spammer."
+msgstr ""
+"ID로 지정한 사용자를 현재 인증된 사용자의 계정에서 차단하고, "
+"스팸 계정으로 트위터에 신고합니다."
+
+#: ../../api.rst:675
+msgid ""
+"A boolean indicating if the reported account should be blocked. Defaults "
+"to True."
+msgstr ""
+"신고한 계정을 차단할지 말지의 여부를 나타내는 boolean 형태의 변수. 기본값은 True."
+
+#: ../../api.rst:681
+msgid "Saved Searches Methods"
+msgstr "검색어 저장 메소드"
+
+#: ../../api.rst:685
+msgid "Returns the authenticated user's saved search queries."
+msgstr "현재 인증된 사용자 계정에 저장된 검색어 쿼리를 반환합니다."
+
+#: ../../api.rst:687
+msgid "list of :class:`SavedSearch` objects"
+msgstr ":class:`SavedSearch` 객체의 리스트"
+
+#: ../../api.rst:692
+msgid ""
+"Retrieve the data for a saved search owned by the authenticating user "
+"specified by the given id."
+msgstr ""
+"ID로 지정한, 인증된 사용자의 계정에 저장된 검색어로 검색을 수행합니다."
+
+#: ../../api.rst:695
+msgid "The id of the saved search to be retrieved."
+msgstr "검색할 검색어의 ID"
+
+#: ../../api.rst:696 ../../api.rst:704 ../../api.rst:713
+msgid ":class:`SavedSearch` object"
+msgstr ":class:`SavedSearch` 객체"
+
+#: ../../api.rst:701
+msgid "Creates a saved search for the authenticated user."
+msgstr "현재 인증된 사용자의 계정에 새 검색어를 저장합니다."
+
+#: ../../api.rst:703
+msgid "The query of the search the user would like to save."
+msgstr "저장하고 싶은 검색어의 쿼리"
+
+#: ../../api.rst:709
+msgid ""
+"Destroys a saved search for the authenticated user. The search specified "
+"by id must be owned by the authenticating user."
+msgstr ""
+"인증된 사용자의 계정에서 ID로 지정한 검색어를 삭제합니다. "
+"삭제하려는 검색어는 인증된 사용자의 계정에 저장된 검색어여야만 합니다."
+
+#: ../../api.rst:712
+msgid "The id of the saved search to be deleted."
+msgstr "삭제할 검색어의 ID"
+
+#: ../../api.rst:717
+msgid "Help Methods"
+msgstr "편의 기능 메소드"
+
+#: ../../api.rst:723
+msgid "Returns a collection of relevant Tweets matching a specified query."
+msgstr "지정한 쿼리와 관련된 트윗의 모음을 반환합니다."
+
+#: ../../api.rst:725
+msgid ""
+"Please note that Twitter's search service and, by extension, the Search "
+"API is not meant to be an exhaustive source of Tweets. Not all Tweets "
+"will be indexed or made available via the search interface."
+msgstr ""
+"트위터의 검색 서비스 및 검색 API가 모든 트윗을 대상으로 검색 작업을 수행하는 것은 아니라는 것을 "
+"유의하세요. 모든 트윗이 검색 인터페이스를 통해 색인화 되어있거나 검색할 수 있게 만들어져 있지는 "
+"않습니다."
+
+#: ../../api.rst:729
+msgid ""
+"In API v1.1, the response format of the Search API has been improved to "
+"return Tweet objects more similar to the objects you’ll find across the "
+"REST API and platform. However, perspectival attributes (fields that "
+"pertain to the perspective of the authenticating user) are not currently "
+"supported on this endpoint.\\ [#]_\\ [#]_"
+msgstr ""
+"API v1.1에서는, 검색 API의 응답 형식이 REST API나 플랫폼을 통해서 볼 수 있는 객체와 더 비슷한 "
+"트윗 객체를 반환하도록 향상되었습니다. 하지만, perspectival 속성(인증된 사용자에 의존하는 필드)은 "
+"현재 지원하지 않습니다.\ [#]_\ [#]_"
+
+#: ../../api.rst:735
+msgid ""
+"the search query string of 500 characters maximum, including operators. "
+"Queries may additionally be limited by complexity."
+msgstr ""
+"연산자를 포함하여 최대 500자의 검색하고자 하는 문자열 쿼리. 쿼리는 추가적으로 복잡도에 "
+"따라 제한될 수 있습니다."
+
+#: ../../api.rst:737
+msgid ""
+"Returns tweets by users located within a given radius of the given "
+"latitude/longitude.  The location is preferentially taking from the "
+"Geotagging API, but will fall back to their Twitter profile. The "
+"parameter value is specified by \"latitide,longitude,radius\", where "
+"radius units must be specified as either \"mi\" (miles) or \"km\" "
+"(kilometers). Note that you cannot use the near operator via the API to "
+"geocode arbitrary locations; however you can use this geocode parameter "
+"to search near geocodes directly. A maximum of 1,000 distinct \"sub-"
+"regions\" will be considered when using the radius modifier."
+msgstr ""
+"주어진 위도, 경도의 주어진 반경 내에 위치한 사용자의 트윗만 반환합니다. 위치는 "
+"우선적으로 위치 정보 삽입 API에서 받아오지만, 트위터 프로필 내의 정보로 대체할 수 있습니다. "
+"매개변수의 값은 \"위도, 경도, 반경\"의 형태로 지정되며, 반경은 \"mi\"(마일) 또는 \"km\"(킬로미터) "
+"단위로 주어져야 합니다. API를 통해 근거리 연산자를 사용하여 임의의 위치를 geocode로 입력할 "
+"수는 없다는 점을 유의해주세요. 다만 이 geocode 매개변수를 통해 근처의 지오코드를 검색할 수는 "
+"있습니다. 반경 수식어를 사용할 경우에는 최대 1,000개의 분명하게 구분되는 \"하위 영역\"을 고려할 "
+"할 것입니다."
+
+#: ../../api.rst:746
+msgid ""
+"Restricts tweets to the given language, given by an ISO 639-1 code. "
+"Language detection is best-effort."
+msgstr ""
+"트윗을 ISO 639-1 코드로 주어진 언어로 제한합니다. "
+"언어 감지가 적절하게 작동했다고 전제합니다."
+
+#: ../../api.rst:748
+msgid ""
+"Specify the language of the query you are sending (only ja is currently "
+"effective). This is intended for language-specific consumers and the "
+"default should work in the majority of cases."
+msgstr ""
+"전송한 쿼리의 언어를 명시하세요. (현재는 ja만 유효합니다.) "
+"이는 언어별 사용자를 위한 것이며 대부분의 경우엔 기본값이 적용됩니다."
+
+#: ../../api.rst:751
+msgid ""
+"Specifies what type of search results you would prefer to receive. The "
+"current default is \"mixed.\" Valid values include:  * mixed : include "
+"both popular and real time results in the response * recent : return only"
+" the most recent results in the response * popular : return only the most"
+" popular results in the response"
+msgstr ""
+"얻고 싶은 검색 결과의 형식에 대해 명시하세요. 현재 기본값은 \"mixed\"이며, "
+"유효한 값은 다음과 같습니다: "
+"* \"mixed\": 응답에 인기 결과와 실시간 결과 모두를 포함합니다."
+"* \"recent\": 응답으로 가장 최근의 결과만을 반환합니다."
+"* \"popular\": 응답으로 가장 인기 있는 결과만을 반환합니다."
+
+#: ../../api.rst:751
+msgid ""
+"Specifies what type of search results you would prefer to receive. The "
+"current default is \"mixed.\" Valid values include:"
+msgstr ""
+"얻고 싶은 검색 결과의 형식에 대해 명시하세요. 현재 기본값은 \"mixed\"이며, "
+"유효한 값은 다음과 같습니다: "
+
+#: ../../api.rst:754
+msgid "mixed : include both popular and real time results in the response"
+msgstr "\"mixed\": 응답에 인기 결과와 실시간 결과 모두를 포함합니다."
+
+#: ../../api.rst:755
+msgid "recent : return only the most recent results in the response"
+msgstr "\"recent\": 응답으로 가장 최근의 결과만을 반환합니다."
+
+#: ../../api.rst:756
+msgid "popular : return only the most popular results in the response"
+msgstr "\"popular\": 응답으로 가장 인기 있는 결과만을 반환합니다."
+
+#: ../../api.rst:758
+msgid ""
+"Returns tweets created before the given date. Date should be formatted as"
+" YYYY-MM-DD. Keep in mind that the search index has a 7-day limit. In "
+"other words, no tweets will be found for a date older than one week."
+msgstr ""
+"주어진 날짜 이전에 작성된 트윗을 반환합니다. "
+"날짜는 YYYY-MM-DD의 형식으로 주어져야 합니다. "
+"검색 색인은 7일 간만 유지됩니다. 다시 말해, 일주일 이상 지난 트윗은 찾을 수 없습니다."
+
+#: ../../api.rst:762
+msgid ""
+"|since_id| There are limits to the number of Tweets which can be accessed"
+" through the API. If the limit of Tweets has occurred since the since_id,"
+" the since_id will be forced to the oldest ID available."
+msgstr ""
+"|since_id| API를 통해서 접근할 수 있는 트윗의 수에는 제한이 있습니다. ``since_id``  "
+"이후로 트윗 수 제한을 초과한다면, ``since_id`` 는 제한을 초과하지 않는 가장 오래된 ID로 강제 설정됩니다."
+
+#: ../../api.rst:768
+msgid ":class:`SearchResults` object"
+msgstr ":class:`SearchResults` 객체"
+
+#: ../../api.rst:772
+msgid "List Methods"
+msgstr "리스트 메소드"
+
+#: ../../api.rst:776
+msgid ""
+"Creates a new list for the authenticated user. Note that you can create "
+"up to 1000 lists per account."
+msgstr ""
+"현재 인증된 사용자 계정에 새 리스트를 만듭니다. "
+"리스트는 계정 당 최대 1000개까지만 생성 가능함을 유의하세요."
+
+#: ../../api.rst:779
+msgid "The name of the new list."
+msgstr "새 리스트의 이름"
+
+#: ../../api.rst:780 ../../api.rst:806
+msgid "|list_mode|"
+msgstr "리스트의 공개 또는 비공개 여부. 인자로는 공개(public) 및 비공개(private)를 전달할 수 있으며, 기본값은 public."
+
+#: ../../api.rst:781
+msgid "The description of the list you are creating."
+msgstr "새 리스트의 설명."
+
+#: ../../api.rst:782 ../../api.rst:794 ../../api.rst:810 ../../api.rst:897
+#: ../../api.rst:912 ../../api.rst:929 ../../api.rst:944 ../../api.rst:962
+#: ../../api.rst:1000 ../../api.rst:1011
+msgid ":class:`List` object"
+msgstr ":class:`List` 객체"
+
+#: ../../api.rst:787
+msgid ""
+"Deletes the specified list. The authenticated user must own the list to "
+"be able to destroy it."
+msgstr ""
+"지정한 리스트를 삭제합니다. "
+"삭제를 위해서는, 현재 인증된 사용자가 해당 리스트의 소유자여야 합니다."
+
+#: ../../api.rst:790 ../../api.rst:808 ../../api.rst:876 ../../api.rst:896
+#: ../../api.rst:911 ../../api.rst:928 ../../api.rst:943 ../../api.rst:961
+#: ../../api.rst:973 ../../api.rst:988 ../../api.rst:999 ../../api.rst:1010
+#: ../../api.rst:1024 ../../api.rst:1042
+msgid "|owner_screen_name|"
+msgstr "슬러그에 의해 요청되는, 리스트 소유자인 사용자의 계정 이름."
+
+#: ../../api.rst:791 ../../api.rst:809 ../../api.rst:875 ../../api.rst:895
+#: ../../api.rst:910 ../../api.rst:927 ../../api.rst:942 ../../api.rst:960
+#: ../../api.rst:972 ../../api.rst:987 ../../api.rst:998 ../../api.rst:1009
+#: ../../api.rst:1023 ../../api.rst:1041
+msgid "|owner_id|"
+msgstr "슬러그에 의해 요청되는, 목록을 소유한 사용자의 ID."
+
+#: ../../api.rst:792 ../../api.rst:803 ../../api.rst:873 ../../api.rst:893
+#: ../../api.rst:906 ../../api.rst:921 ../../api.rst:938 ../../api.rst:954
+#: ../../api.rst:970 ../../api.rst:983 ../../api.rst:996 ../../api.rst:1007
+#: ../../api.rst:1021 ../../api.rst:1037
+msgid "|list_id|"
+msgstr "리스트의 ID."
+
+#: ../../api.rst:793 ../../api.rst:804 ../../api.rst:874 ../../api.rst:894
+#: ../../api.rst:907 ../../api.rst:922 ../../api.rst:939 ../../api.rst:955
+#: ../../api.rst:971 ../../api.rst:984 ../../api.rst:997 ../../api.rst:1008
+#: ../../api.rst:1022 ../../api.rst:1038
+msgid "|slug|"
+msgstr "리스트 지정에 리스트 ID(`` list_id`` ) 대신 사용할 수 있습니다. 이를 사용할 경우, ``owner_id``  또는 ``owner_screen_name``  매개변수를 통해 목록 소유자도 지정해 주어야 함을 유의하세요."
+
+#: ../../api.rst:800
+msgid ""
+"Updates the specified list. The authenticated user must own the list to "
+"be able to update it."
+msgstr ""
+"지정한 리스트의 정보를 수정합니다. "
+"갱신을 위해서는, 현재 인증된 사용자가 해당 리스트의 소유자여야 합니다."
+
+#: ../../api.rst:805
+msgid "The name for the list."
+msgstr "리스트의 이름."
+
+#: ../../api.rst:807
+msgid "The description to give the list."
+msgstr "리스트의 설명."
+
+#: ../../api.rst:815
+msgid ""
+"Returns all lists the authenticating or specified user subscribes to, "
+"including their own. The user is specified using the ``user_id``  or "
+"`` screen_name``  parameters. If no user is given, the authenticating user "
+"is used."
+msgstr ""
+"현재 인증된 사용자 또는 지정한 사용자가 구독 중인(이하 팔로우) "
+"리스트와, 소유하고 있는 리스트를 반환합니다. "
+"`` user_id`` 나 ``screen_name``  매개변수를 사용하여 사용자를 지정해야 하며, "
+"지정하지 않을 경우, 현재 인증된 사용자를 기준으로 합니다."
+
+#: ../../api.rst:820
+msgid ""
+"A maximum of 100 results will be returned by this call. Subscribed lists "
+"are returned first, followed by owned lists. This means that if a user "
+"subscribes to 90 lists and owns 20 lists, this method returns 90 "
+"subscriptions and 10 owned lists. The ``reverse``  method returns owned "
+"lists first, so with ``reverse=true`` , 20 owned lists and 80 "
+"subscriptions would be returned."
+msgstr ""
+"이 메소드는 최대 100개의 결과를 반환하며, "
+"팔로우하는 리스트가 먼저 반환되고, 그 이후 소유하고 있는 리스트가 반환됩니다. "
+"따라서 만약 사용자가 90개의 리스트를 팔로우하고 있고, 20개의 리스트를 소유하고 있다면 "
+"메소드는 90개의 팔로우 중인 리스트와, 10개의 소유 중인 리스트를 반환할 것입니다."
+"매개변수 reverse가 True로 설정되었다면, 소유 중인 리스트를 먼저 반환하므로"
+"20개의 소유 중인 리스트와, 80개의 팔로우 중인 리스트가 반환될 것입니다."
+
+#: ../../api.rst:829
+msgid ""
+"A boolean indicating if you would like owned lists to be returned first. "
+"See description above for information on how this parameter works."
+msgstr ""
+"소유 중인 리스트를 먼저 반환받을지의 여부. 기본값은 False."
+
+#: ../../api.rst:832 ../../api.rst:849 ../../api.rst:862
+msgid "list of :class:`List` objects"
+msgstr ":class:`List` 객체의 리스트"
+
+#: ../../api.rst:838
+msgid ""
+"Returns the lists the specified user has been added to. If ``user_id``  or"
+" ``screen_name``  are not provided, the memberships for the authenticating"
+" user are returned."
+msgstr ""
+"지정한 사용자가 추가되어 있는 리스트를 반환합니다. "
+"`` user_id`` 나 ``screen_name`` 로 사용자를 지정하지 않았을 경우, "
+"현재 인증된 사용자가 추가되어 있는 리스트가 반환될 것입니다."
+
+#: ../../api.rst:844
+msgid ""
+"A boolean indicating whether to return just lists the authenticating user"
+" owns, and the user represented by ``user_id``  or ``screen_name``  is a "
+"member of."
+msgstr ""
+"인증된 사용자가 소유하고 있는 리스트도 같이 반환할지 말지의 여부. "
+"`` user_id``  또는 ``screen_name``  으로 어떤 사용자를 지정했을 경우, "
+"대상은 해당 사용자가 됩니다."
+
+#: ../../api.rst:855
+msgid ""
+"Obtain a collection of the lists the specified user is subscribed to, 20 "
+"lists per page by default. Does not include the user's own lists."
+msgstr ""
+"지정한 사용자가 팔로우하는 리스트들(기본적으로, 페이지 당 20개의 리스트가 있음)을 반환합니다. "
+"단, 지정한 사용자가 소유하는 리스트는 포함되지 않습니다."
+
+#: ../../api.rst:869
+msgid ""
+"Returns a timeline of tweets authored by members of the specified list. "
+"Retweets are included by default. Use the ``include_rts=false``  parameter"
+" to omit retweets."
+msgstr ""
+"지정한 리스트에 추가된 사람들이 작성한 트윗들로만 구성된 타임라인을 반환합니다."
+"기본적으로 리트윗이 포함되며, 이를 생략하려면 ``include_rts`` 를 False로 설정하세요."
+
+#: ../../api.rst:881
+msgid ""
+"A boolean indicating whether the list timeline will contain native "
+"retweets (if they exist) in addition to the standard stream of tweets. "
+"The output format of retweeted tweets is identical to the representation "
+"you see in home_timeline."
+msgstr ""
+"타임라인에 리트윗을 포함할지 말지에 대한 여부를 나타내는 boolean 형태의 변수. "
+"리트윗의 출력 형식은 홈 타임라인에서의 출력 형식과 동일합니다."
+
+#: ../../api.rst:890
+msgid ""
+"Returns the specified list. Private lists will only be shown if the "
+"authenticated user owns the specified list."
+msgstr ""
+"지정한 리스트를 반환합니다. "
+"비공개(`` private`` ) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
+
+#: ../../api.rst:903
+msgid ""
+"Add a member to a list. The authenticated user must own the list to be "
+"able to add members to it. Lists are limited to 5,000 members."
+msgstr ""
+"리스트에 사용자를 추가합니다. "
+"리스트의 소유자만이 가능한 작업이며, 최대 5,000명까지만 추가 가능합니다."
+
+#: ../../api.rst:918
+msgid ""
+"Add up to 100 members to a list. The authenticated user must own the list"
+" to be able to add members to it. Lists are limited to 5,000 members."
+msgstr ""
+"리스트에 사용자들을 추가합니다. "
+"리스트의 소유자만이 가능한 작업이며, 최대 5,000명까지만 추가 가능합니다."
+
+#: ../../api.rst:923 ../../api.rst:956
+msgid ""
+"A comma separated list of screen names, up to 100 are allowed in a single"
+" request"
+msgstr ""
+"쉼표(,)로 구분되는 ``screen_name`` 들. 한 번에 최대 100개까지만 처리할 수 있습니다."
+
+#: ../../api.rst:925 ../../api.rst:958
+msgid ""
+"A comma separated list of user IDs, up to 100 are allowed in a single "
+"request"
+msgstr ""
+"쉼표(,)로 구분되는 ``user_id`` 들. 한 번에 최대 100개까지만 처리할 수 있습니다."
+
+#: ../../api.rst:935
+msgid ""
+"Removes the specified member from the list. The authenticated user must "
+"be the list's owner to remove members from the list."
+msgstr ""
+"리스트에서 지정한 사용자를 제거합니다. "
+"리스트의 소유자만이 가능한 작업이며, 최대 5,000명까지만 추가 가능합니다."
+
+#: ../../api.rst:950
+msgid ""
+"Remove up to 100 members from a list. The authenticated user must own the"
+" list to be able to remove members from it. Lists are limited to 5,000 "
+"members."
+msgstr ""
+"리스트에서 지정한 사용자들을 제거합니다. "
+"리스트의 소유자만이 가능한 작업이며, 최대 5,000명까지만 추가 가능합니다."
+
+#: ../../api.rst:968
+msgid "Returns the members of the specified list."
+msgstr "지정한 리스트에 속한 사람들을 반환합니다."
+
+#: ../../api.rst:981
+msgid "Check if the specified user is a member of the specified list."
+msgstr "지정한 사용자가, 지정한 리스트에 속해 있는지를 확인합니다."
+
+#: ../../api.rst:989
+msgid ":class:`User` object if user is a member of list"
+msgstr "지정한 사용자가 지정한 리스트에 속해 있을 경우, :class:`User` 객체"
+
+#: ../../api.rst:994
+msgid "Subscribes the authenticated user to the specified list."
+msgstr "지정한 리스트를, 현재 인증된 사용자의 계정을 이용해 팔로우합니다."
+
+#: ../../api.rst:1005
+msgid "Unsubscribes the authenticated user from the specified list."
+msgstr "지정한 리스트를, 현재 인증된 사용자의 계정을 이용해 언팔로우합니다."
+
+#: ../../api.rst:1018
+msgid ""
+"Returns the subscribers of the specified list. Private list subscribers "
+"will only be shown if the authenticated user owns the specified list."
+msgstr ""
+"지정한 리스트를 팔로우하는 사용자들을 반환합니다. "
+"비공개(`` private`` ) 리스트일 경우, 현재 인증된 사용자가 지정한 리스트의 소유자여야만 합니다."
+
+#: ../../api.rst:1035
+msgid "Check if the specified user is a subscriber of the specified list."
+msgstr "지정한 사용자가, 지정한 리스트를 팔로우하고 있는지를 확인합니다."
+
+#: ../../api.rst:1043
+msgid ":class:`User` object if user is subscribed to list"
+msgstr "지정한 사용자가 지정한 리스트를 팔로우할 경우, :class:`User` 객체"
+
+#: ../../api.rst:1047
+msgid "Trends Methods"
+msgstr "실시간 트렌드 메소드"
+
+#: ../../api.rst:1051
+msgid ""
+"Returns the locations that Twitter has trending topic information for. "
+"The response is an array of \"locations\" that encode the location's "
+"WOEID (a Yahoo! Where On Earth ID) and some other human-readable "
+"information such as a canonical name and country the location belongs in."
+msgstr ""
+"트위터가 실시간 트렌드를 얻어오는 위치 정보를 반환합니다. "
+"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location`` 의 배열과, "
+"정규 명칭 및 국가명 등의 인간이 읽을 수 있는 정보로 구성되어 있습니다."
+
+#: ../../api.rst:1061
+msgid ""
+"Returns the top 50 trending topics for a specific WOEID, if trending "
+"information is available for it."
+msgstr ""
+"트렌드 정보를 이용할 수 있는 경우, 지정된 WOEID에 대한 상위 50개의 트렌드를 반환합니다."
+
+#: ../../api.rst:1064
+msgid ""
+"The response is an array of “trend” objects that encode the name of the "
+"trending topic, the query parameter that can be used to search for the "
+"topic on Twitter Search, and the Twitter Search URL."
+msgstr ""
+"반환 형태는 트렌드의 이름을 인코딩한 \"trend\" 객체 배열이며, "
+"트위터 검색에서 주제를 검색하는 데에 사용할 수 있는 쿼리 매개변수, 트위터 검색 URL로 이루어집니다. "
+
+#: ../../api.rst:1068
+msgid ""
+"This information is cached for 5 minutes. Requesting more frequently than"
+" that will not return any more data, and will count against your rate "
+"limit usage."
+msgstr ""
+"이 정보는 5분마다 캐싱되며, 이보다 더 자주 요청하면 아무 데이터도 반환하지 않을 뿐더러 "
+"한도(Rate limit) 초과로 기록될 것입니다."
+
+#: ../../api.rst:1072
+msgid ""
+"The tweet_volume for the last 24 hours is also returned for many trends "
+"if this is available."
+msgstr ""
+"가능하다면, 최근 24시간 동안의 ``tweet_volume`` 도 반환될 것입니다."
+
+#: ../../api.rst:1075
+msgid ""
+"The Yahoo! Where On Earth ID of the location to return trending "
+"information for. Global information is available by using 1 as the WOEID."
+msgstr ""
+"트렌드 정보를 얻어오는 데에 기준으로 삼을 위치의 The Yahoo! Where On Earth ID. "
+"글로벌 트렌드 정보는 WOEID를 1로 지정하면 가져올 수 있습니다."
+
+#: ../../api.rst:1078
+msgid ""
+"Setting this equal to hashtags will remove all hashtags from the trends "
+"list."
+msgstr ""
+"해시태그와 동일하게 설정하면, 실시간 트렌드 리스트에서 모든 해시태그를 제거할 것입니다."
+
+#: ../../api.rst:1085
+msgid ""
+"Returns the locations that Twitter has trending topic information for, "
+"closest to a specified location."
+msgstr ""
+"트위터가 지정된 위치로부터 트렌드 정보를 가지고 있는 가장 가까운 위치를 반환합니다."
+
+#: ../../api.rst:1088
+msgid ""
+"The response is an array of “locations” that encode the location’s WOEID "
+"and some other human-readable information such as a canonical name and "
+"country the location belongs in."
+msgstr ""
+"반환값은 WOEID(The Yahoo! Where On Earth ID)를 인코딩한 ``location`` 의 배열과, "
+"정규 명칭 및 국가명 등의 인간이 읽을 수 있는 정보로 구성되어 있습니다."
+   
+#: ../../api.rst:1092
+msgid "A WOEID is a Yahoo! Where On Earth ID."
+msgstr "WOEID는 Yahoo! Where On Earth ID를 뜻합니다."
+
+#: ../../api.rst:1094
+msgid ""
+"If provided with a long parameter the available trend locations will be "
+"sorted by distance, nearest to furthest, to the co-ordinate pair. The "
+"valid ranges for longitude is -180.0 to +180.0 (West is negative, East is"
+" positive) inclusive."
+msgstr ""
+"위도를 나타내는 매개변수이며, ``long``  매개변수와 같이 사용해야만 합니다. "
+"해당 위치 기준, 이용 가능한 트렌드 위치가 "
+"거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 순서쌍으로 정렬됩니다. "
+"입력값의 유효 범위는 -180.0 ~ +180.0 (서쪽은 음수값, 동쪽이 양수값)입니다."
+
+#: ../../api.rst:1098
+msgid ""
+"If provided with a lat parameter the available trend locations will be "
+"sorted by distance, nearest to furthest, to the co-ordinate pair. The "
+"valid ranges for longitude is -180.0 to +180.0 (West is negative, East is"
+" positive) inclusive."
+msgstr ""
+"경도를 나타내는 매개변수이며, ``lat``  매개변수와 같이 사용해야만 합니다. "
+"해당 위치 기준, 이용 가능한 트렌드 위치가 "
+"거리별로 가장 가까운 위치부터 가장 먼 위치까지 좌표 순서쌍으로 정렬됩니다. "
+"입력값의 유효 범위는 -180.0 ~ +180.0 (서쪽은 음수값, 동쪽이 양수값)입니다."
+
+#: ../../api.rst:1106
+msgid "Geo Methods"
+msgstr "위치 정보 메소드"
+
+#: ../../api.rst:1111
+msgid ""
+"Given a latitude and longitude, looks for places (cities and "
+"neighbourhoods) whose IDs can be specified in a call to "
+":func:`update_status` to appear as the name of the location. This call "
+"provides a detailed response about the location in question; the "
+":func:`nearby_places` function should be preferred for getting a list of "
+"places nearby without great detail."
+msgstr ""
+"주어진 위도 및 경도를 바탕으로, :func:`update_status`를 호출해 "
+"지정된 ID가 가리키는 장소의 이름을 찾습니다."
+"이 메소드는 위치 정보에 대한 정보를 상세히 제공하므로, "
+"대략적인 정보가 필요할 경우에는 :func:`nearby_places`를 이용함이 권장됩니다."
+
+#: ../../api.rst:1117
+msgid "The location's latitude."
+msgstr "어떤 위치의 위도."
+
+#: ../../api.rst:1118
+msgid "The location's longitude."
+msgstr "어떤 위치의 경도."
+
+#: ../../api.rst:1119
+msgid ""
+"Specify the \"region\" in which to search, such as a number (then this is"
+" a radius in meters, but it can also take a string that is suffixed with "
+"ft to specify feet). If this is not passed in, then it is assumed to be "
+"0m"
+msgstr ""
+"검색할 \"region\"을 지정하는 수 형태의 변수. "
+"기본적으로 미터(m) 단위로 인식되나, 접미어 ``ft`` 를 통해 피트(ft) 단위로 인식되게 할 수 있습니다."
+"기본값은 0(0m)입니다."
+
+#: ../../api.rst:1123
+msgid "Assumed to be `neighborhood' by default; can also be `city'."
+msgstr "기본값은 ``neighborhood`` 지만, ``city`` 도 될 수 있습니다."
+
+#: ../../api.rst:1125
+msgid ""
+"A hint as to the maximum number of results to return. This is only a "
+"guideline, which may not be adhered to."
+msgstr ""
+"반환값의 갯수. 허용 범위를 초과하는 값일 경우, 무시됩니다."
+
+#: ../../api.rst:1131
+msgid "Given *id* of a place, provide more details about that place."
+msgstr "특정 *id*로 지정된 장소에 대한 자세한 정보를 제공합니다."
+
+#: ../../api.rst:1133
+msgid "Valid Twitter ID of a location."
+msgstr "특정 위치에 대한, 유효한 Twitter ID."
+
+#: ../../api.rst:1137
+msgid "Utility methods"
+msgstr "유틸리티 메소드"
+
+#: ../../api.rst:1141
+msgid ""
+"Returns the current configuration used by Twitter including twitter.com "
+"slugs which are not usernames, maximum photo resolutions, and t.co "
+"shortened URL length. It is recommended applications request this "
+"endpoint when they are loaded, but no more than once a day."
+msgstr ""
+"사용자 이름이 아닌 twitter.com 슬러그, 최대 사진 해상도, t.co 단축된 URL 길이 등을 포함하는, "
+"트위터에서 사용 중인 현재 설정값들을 반환합니다. 응용 프로그램이 로드될 때 이를 "
+"요청하는 것이 추천되나, 하루에 1번 이상 요청하지 않는 것이 좋습니다."
+
+
+#: ../../api.rst:1148
+msgid "Media methods"
+msgstr "미디어 메소드"
+
+#: ../../api.rst:1152
+msgid "Use this endpoint to upload images to Twitter."
+msgstr "이 메소드를 사용해 트위터에 이미지를 업로드할 수 있습니다."
+
+#: ../../api.rst:1154
+msgid ""
+"The filename of the image to upload. This will automatically be opened "
+"unless ``file``  is specified."
+msgstr ""
+"업로드할 이미지 파일의 이름. ``file`` 을 지정하지 않으면 자동으로 열리게 될 것입니다."
+
+#: ../../api.rst:1156
+msgid ""
+"A file object, which will be used instead of opening ``filename`` . "
+"`` filename``  is still required, for MIME type detection and to use as a "
+"form field in the POST data."
+msgstr ""
+"파일 객체로, ``filename``  대신 사용합니다. "
+"단, MIME 타입 감지 및 POST 데이터 양식 필드로 사용해야 할 경우, ``filename`` 도 필요합니다."
+
+#: ../../api.rst:1159
+msgid ":class:`Media` object"
+msgstr ":class:`Media` 객체"
+
+#: ../../api.rst:1164
+msgid ""
+"This endpoint can be used to provide additional information about the "
+"uploaded media_id. This feature is currently only supported for images "
+"and GIFs. Call this endpoint to attach additional metadata such as image "
+"alt text."
+msgstr ""
+"이 메소드는 업로드된 ``media_id`` 에 대한 추가적인 정보를 제공하는 데 사용될 수 있습니다."
+"이 기능은 현재 이미지 및 GIF에서만 지원되며, 이미지의 alt 텍스트와 같은 추가적인 메타데이터를 "
+"첨부하려면 이 메소드를 사용하세요."
+
+#: ../../api.rst:1169
+msgid "The ID of the media to add alt text to."
+msgstr "alt 텍스트를 추가할 미디어의 ID."
+
+#: ../../api.rst:1170
+msgid "The alt text to add to the image."
+msgstr "이미지에 추가할 alt 텍스트."
+
+#: ../../api.rst:1174
+msgid ":mod:`tweepy.error` --- Exceptions"
+msgstr ":mod:`tweepy.error` --- 예외"
+
+#: ../../api.rst:1176
+msgid ""
+"The exceptions are available in the ``tweepy``  module directly, which "
+"means ``tweepy.error``  itself does not need to be imported. For example, "
+"`` tweepy.error.TweepError``  is available as ``tweepy.TweepError`` ."
+msgstr ""
+"예외는 ``tweepy``  모듈에서 직접 이용 가능합니다. "
+"다시 말해, 예외 처리를 위해 ``tweepy.error``  자체를 추가로 가져올(import) 필요가 없습니다. "
+"예를 들어, ``tweepy.error.TweepError`` 는 ``tweepy.TweepError`` 로도 이용 가능합니다."
+
+#: ../../api.rst:1183
+msgid "The main exception Tweepy uses. Is raised for a number of things."
+msgstr "Tweepy가 사용하는 주요 예외. 발생 이유는 많습니다."
+
+#: ../../api.rst:1185
+msgid ""
+"When a ``TweepError``  is raised due to an error Twitter responded with, "
+"the error code (`as described in the API documentation "
+"<https://developer.twitter.com/en/docs/basics/response-codes>`_) can be "
+"accessed at ``TweepError.response.text`` . Note, however, that "
+"`` TweepError`` \\ s also may be raised with other things as message (for "
+"example plain error reason strings)."
+msgstr ""
+"트위터로부터 반환된 오류로 인해 ``TweepError``  가 발생하면, ``TweepError.response.text``  에서 "
+"에러 코드(API 문서<https://developer.twitter.com/en/docs/basics/response-codes>에서 설명된 대로)에 접근할 수 있습니다. "
+"단, ``TweepError``  는 다른 것을 메시지(예: 일반적인 에러 문자열)로 표시하여 발생할 수도 있음에 유의하십시오."
+
+#: ../../api.rst:1195
+msgid ""
+"Is raised when an API method fails due to hitting Twitter's rate limit. "
+"Makes for easy handling of the rate limit specifically."
+msgstr ""
+"API 메소드 호출이 트위터의 한도 제한(Rate Limit)에 도달하여 실패할 때 발생합니다. "
+"한도 제한 관련 예외를 쉽게 다룰 수 있도록 특별히 제작했습니다."
+
+#: ../../api.rst:1198
+msgid ""
+"Inherits from :exc:`TweepError`, so ``except TweepError``  will catch a "
+"`` RateLimitError``  too."
+msgstr ""
+":exc:`TweepError`를 상속받으므로, ``except TweepError`` 는 ``RateLimitError`` 도 처리할 것입니다."
+
+#: ../../api.rst:1203
+msgid "Footnotes"
+msgstr "각주"
+
+#: ../../api.rst:1204
+msgid "https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets"
+msgstr "https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets"
+
+#: ../../api.rst:1205
+msgid ""
+"https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-"
+"is-already-favorited-by-the-user/11145"
+msgstr ""
+"https://twittercommunity.com/t/favorited-reports-as-false-even-if-status-"
+"is-already-favorited-by-the-user/11145"
+

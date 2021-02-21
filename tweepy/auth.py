@@ -1,21 +1,25 @@
-from __future__ import print_function
+# Tweepy
+# Copyright 2009-2021 Joshua Roesslein
+# See LICENSE for details.
 
-import six
 import logging
+from urllib.parse import parse_qs
 
-from tweepy.error import TweepError
-from tweepy.api import API
 import requests
-from requests_oauthlib import OAuth1Session, OAuth1
 from requests.auth import AuthBase
-from six.moves.urllib.parse import parse_qs
+from requests_oauthlib import OAuth1, OAuth1Session
+
+from tweepy.api import API
+from tweepy.error import TweepError
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
 https://dev.twitter.com/discussions/21281"""
 
+log = logging.getLogger(__name__)
 
-class AuthHandler(object):
+
+class AuthHandler:
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
@@ -32,11 +36,12 @@ class OAuthHandler(AuthHandler):
     OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
-        if type(consumer_key) == six.text_type:
-            consumer_key = consumer_key.encode('ascii')
-
-        if type(consumer_secret) == six.text_type:
-            consumer_secret = consumer_secret.encode('ascii')
+        if not isinstance(consumer_key, (str, bytes)):
+            raise TypeError("Consumer key must be string or bytes, not "
+                            + type(consumer_key).__name__)
+        if not isinstance(consumer_secret, (str, bytes)):
+            raise TypeError("Consumer secret must be string or bytes, not "
+                            + type(consumer_secret).__name__)
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -44,6 +49,7 @@ class OAuthHandler(AuthHandler):
         self.access_token_secret = None
         self.callback = callback
         self.username = None
+        self.request_token = {}
         self.oauth = OAuth1Session(consumer_key,
                                    client_secret=consumer_secret,
                                    callback_uri=self.callback)
@@ -62,7 +68,7 @@ class OAuthHandler(AuthHandler):
         try:
             url = self._get_oauth_url('request_token')
             if access_type:
-                url += '?x_auth_access_type=%s' % access_type
+                url += f'?x_auth_access_type={access_type}'
             return self.oauth.fetch_request_token(url)
         except Exception as e:
             raise TweepError(e)
@@ -79,7 +85,7 @@ class OAuthHandler(AuthHandler):
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
                 if access_type:
-                    logging.warning(WARNING_MESSAGE)
+                    log.warning(WARNING_MESSAGE)
             else:
                 url = self._get_oauth_url('authorize')
             self.request_token = self._get_request_token(access_type=access_type)
@@ -167,7 +173,7 @@ class AppAuthHandler(AuthHandler):
         data = resp.json()
         if data.get('token_type') != 'bearer':
             raise TweepError('Expected token_type to equal "bearer", '
-                             'but got %s instead' % data.get('token_type'))
+                             f'but got {data.get("token_type")} instead')
 
         self._bearer_token = data['access_token']
 

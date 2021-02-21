@@ -1,15 +1,13 @@
-import unittest
+import os
 import random
 import shutil
 import time
-import os
+import unittest
 from ast import literal_eval
 
-from nose import SkipTest
-
-from tweepy import Friendship, MemoryCache, FileCache, API
+from .config import tape, TweepyTestCase, use_replay, username
+from tweepy import API, FileCache, Friendship, MemoryCache
 from tweepy.parsers import Parser
-from .config import TweepyTestCase, username, use_replay, tape
 
 test_tweet_id = '266367358078169089'
 tweet_text = 'testing 1000'
@@ -48,7 +46,7 @@ class TweepyAPITests(TweepyTestCase):
     # TODO: Actually have some sort of better assertion
     @tape.use_cassette('testgetoembed.json')
     def testgetoembed(self):
-        data = self.api.get_oembed(test_tweet_id)
+        data = self.api.get_oembed("https://twitter.com/Twitter/status/" + test_tweet_id)
         self.assertEqual(data['author_name'], "Twitter")
 
     @tape.use_cassette('testparserargumenthastobeaparserinstance.json')
@@ -63,7 +61,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testusertimeline.json')
     def testusertimeline(self):
         self.api.user_timeline()
-        self.api.user_timeline('twitter')
+        self.api.user_timeline(screen_name='Twitter')
 
     @tape.use_cassette('testmentionstimeline.json')
     def testmentionstimeline(self):
@@ -73,9 +71,10 @@ class TweepyAPITests(TweepyTestCase):
     def testretweetsofme(self):
         self.api.retweets_of_me()
 
-    def testretweet(self):
-        # TODO(josh): Need a way to get random tweets to retweet.
-        raise SkipTest()
+    @tape.use_cassette('testretweetandunretweet.json')
+    def testretweetandunretweet(self):
+        self.api.retweet(test_tweet_id)
+        self.api.unretweet(test_tweet_id)
 
     @tape.use_cassette('testretweets.json')
     def testretweets(self):
@@ -111,105 +110,83 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
     def testupdatestatuswithmedia(self):
-        update = self.api.update_with_media('examples/banner.png', status=tweet_text)
+        update = self.api.update_with_media(tweet_text, 'examples/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
-    @tape.use_cassette('testgetuser.json')
+    @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):
-        u = self.api.get_user('twitter')
-        self.assertEqual(u.screen_name, 'twitter')
+        u = self.api.get_user(screen_name='Twitter')
+        self.assertEqual(u.screen_name, 'Twitter')
 
-        u = self.api.get_user(783214)
-        self.assertEqual(u.screen_name, 'twitter')
+        u = self.api.get_user(user_id=783214)
+        self.assertEqual(u.screen_name, 'Twitter')
 
     @tape.use_cassette('testlookupusers.json')
     def testlookupusers(self):
         def check(users):
             self.assertEqual(len(users), 2)
-        check(self.api.lookup_users(user_ids=[6844292, 6253282]))
-        check(self.api.lookup_users(screen_names=['twitterapi', 'twitter']))
+        check(self.api.lookup_users(user_id=[6844292, 6253282]))
+        check(self.api.lookup_users(screen_name=['twitterapi', 'twitter']))
 
     @tape.use_cassette('testsearchusers.json')
     def testsearchusers(self):
         self.api.search_users('twitter')
-
-    @tape.use_cassette('testsuggestedcategories.json')
-    def testsuggestedcategories(self):
-        self.api.suggested_categories()
-
-    @tape.use_cassette('testsuggestedusers.json')
-    def testsuggestedusers(self):
-        categories = self.api.suggested_categories()
-        if len(categories) != 0:
-            self.api.suggested_users(categories[0].slug)
-
-    @tape.use_cassette('testsuggesteduserstweets.json')
-    def testsuggesteduserstweets(self):
-        categories = self.api.suggested_categories()
-        if len(categories) != 0:
-            self.api.suggested_users_tweets(categories[0].slug)
 
     @tape.use_cassette('testme.json')
     def testme(self):
         me = self.api.me()
         self.assertEqual(me.screen_name, username)
 
-    @tape.use_cassette('testdirectmessages.json')
-    def testdirectmessages(self):
-        self.api.direct_messages()
-
-    @tape.use_cassette('testsentdirectmessages.json')
-    def testsentdirectmessages(self):
-        self.api.sent_direct_messages()
+    @tape.use_cassette('testlistdirectmessages.json')
+    def testlistdirectmessages(self):
+        self.api.list_direct_messages()
 
     @tape.use_cassette('testsendanddestroydirectmessage.json')
     def testsendanddestroydirectmessage(self):
+        me = self.api.me()
+
         # send
-        sent_dm = self.api.send_direct_message(username, text='test message')
-        self.assertEqual(sent_dm.text, 'test message')
-        self.assertEqual(sent_dm.sender.screen_name, username)
-        self.assertEqual(sent_dm.recipient.screen_name, username)
+        sent_dm = self.api.send_direct_message(me.id, text='test message')
+        self.assertEqual(sent_dm.message_create['message_data']['text'], 'test message')
+        self.assertEqual(int(sent_dm.message_create['sender_id']), me.id)
+        self.assertEqual(int(sent_dm.message_create['target']['recipient_id']), me.id)
 
         # destroy
-        destroyed_dm = self.api.destroy_direct_message(sent_dm.id)
-        self.assertEqual(destroyed_dm.text, sent_dm.text)
-        self.assertEqual(destroyed_dm.id, sent_dm.id)
-        self.assertEqual(destroyed_dm.sender.screen_name, username)
-        self.assertEqual(destroyed_dm.recipient.screen_name, username)
+        self.api.destroy_direct_message(sent_dm.id)
 
-    @tape.use_cassette('testcreatedestroyfriendship.json')
+    @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):
-        enemy = self.api.destroy_friendship('twitter')
-        self.assertEqual(enemy.screen_name, 'twitter')
+        enemy = self.api.destroy_friendship(screen_name='Twitter')
+        self.assertEqual(enemy.screen_name, 'Twitter')
 
-        friend = self.api.create_friendship('twitter')
-        self.assertEqual(friend.screen_name, 'twitter')
+        friend = self.api.create_friendship(screen_name='Twitter')
+        self.assertEqual(friend.screen_name, 'Twitter')
 
     @tape.use_cassette('testshowfriendship.json')
     def testshowfriendship(self):
         source, target = self.api.show_friendship(target_screen_name='twitter')
-        self.assert_(isinstance(source, Friendship))
-        self.assert_(isinstance(target, Friendship))
+        self.assertTrue(isinstance(source, Friendship))
+        self.assertTrue(isinstance(target, Friendship))
 
-    @tape.use_cassette('testfriendsids.json')
+    @tape.use_cassette('testfriendsids.yaml', serializer='yaml')
     def testfriendsids(self):
-        self.api.friends_ids(username)
+        self.api.friends_ids(screen_name=username)
 
-    @tape.use_cassette('testfollowersids.json')
+    @tape.use_cassette('testfollowersids.yaml', serializer='yaml')
     def testfollowersids(self):
-        self.api.followers_ids(username)
+        self.api.followers_ids(screen_name=username)
 
-    @tape.use_cassette('testfriends.json')
+    @tape.use_cassette('testfriends.yaml', serializer='yaml')
     def testfriends(self):
-        self.api.friends(username)
+        self.api.friends(screen_name=username)
 
-    @tape.use_cassette('testfollowers.json')
+    @tape.use_cassette('testfollowers.yaml', serializer='yaml')
     def testfollowers(self):
-        self.api.followers(username)
+        self.api.followers(screen_name=username)
 
     @tape.use_cassette('testverifycredentials.json')
     def testverifycredentials(self):
-        self.assertNotEqual(self.api.verify_credentials(), False)
+        self.api.verify_credentials()
 
         # make sure that `me.status.entities` is not an empty dict
         me = self.api.verify_credentials(include_entities=True)
@@ -222,12 +199,6 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testratelimitstatus.json')
     def testratelimitstatus(self):
         self.api.rate_limit_status()
-
-    """ TODO(josh): Remove once this deprecated API is gone.
-    def testsetdeliverydevice(self):
-        self.api.set_delivery_device('im')
-        self.api.set_delivery_device('none')
-    """
 
     @tape.use_cassette('testupdateprofilecolors.json')
     def testupdateprofilecolors(self):
@@ -248,9 +219,6 @@ class TweepyAPITests(TweepyTestCase):
     """
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
-
-    def testupdateprofilebg(self):
-        self.api.update_profile_background_image('examples/bg.png')
     """
 
     @tape.use_cassette('testupdateprofilebannerimage.yaml', serializer='yaml')
@@ -281,14 +249,14 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreatedestroyfavorite.json')
     def testcreatedestroyfavorite(self):
-        self.api.create_favorite(4901062372)
-        self.api.destroy_favorite(4901062372)
+        self.api.create_favorite(145344012)
+        self.api.destroy_favorite(145344012)
 
-    @tape.use_cassette('testcreatedestroyblock.json')
+    @tape.use_cassette('testcreatedestroyblock.yaml', serializer='yaml')
     def testcreatedestroyblock(self):
-        self.api.create_block('twitter')
-        self.api.destroy_block('twitter')
-        self.api.create_friendship('twitter') # restore
+        self.api.create_block(screen_name='twitter')
+        self.api.destroy_block(screen_name='twitter')
+        self.api.create_friendship(screen_name='twitter')  # restore
 
     @tape.use_cassette('testblocks.json')
     def testblocks(self):
@@ -317,17 +285,21 @@ class TweepyAPITests(TweepyTestCase):
     def testlistsmemberships(self):
         self.api.lists_memberships()
 
+    @tape.use_cassette('testlistsownerships.json')
+    def testlistsownerships(self):
+        self.api.lists_ownerships()
+
     @tape.use_cassette('testlistssubscriptions.json')
     def testlistssubscriptions(self):
         self.api.lists_subscriptions()
 
     @tape.use_cassette('testlisttimeline.json')
     def testlisttimeline(self):
-        self.api.list_timeline('applepie', 'stars')
+        self.api.list_timeline(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testgetlist.json')
     def testgetlist(self):
-        self.api.get_list(owner_screen_name='applepie', slug='stars')
+        self.api.get_list(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testaddremovelistmember.json')
     def testaddremovelistmember(self):
@@ -348,7 +320,7 @@ class TweepyAPITests(TweepyTestCase):
         params = {
             'slug': 'test',
             'owner_screen_name': username,
-            'screen_name': ['twitterapi', 'twittermobile']
+            'screen_name': ['Twitter', 'TwitterAPI']
         }
 
         def assert_list(l):
@@ -359,28 +331,28 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testlistmembers.json')
     def testlistmembers(self):
-        self.api.list_members('applepie', 'stars')
+        self.api.list_members(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistmember.json')
     def testshowlistmember(self):
-        self.assertTrue(self.api.show_list_member(owner_screen_name='applepie', slug='stars', screen_name='NathanFillion'))
+        self.assertTrue(self.api.show_list_member(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterAPI'))
 
     @tape.use_cassette('testsubscribeunsubscribelist.json')
     def testsubscribeunsubscribelist(self):
         params = {
-            'owner_screen_name': 'applepie',
-            'slug': 'stars'
+            'owner_screen_name': 'Twitter',
+            'slug': 'Official-Twitter-Accounts'
         }
         self.api.subscribe_list(**params)
         self.api.unsubscribe_list(**params)
 
     @tape.use_cassette('testlistsubscribers.json')
     def testlistsubscribers(self):
-        self.api.list_subscribers('applepie', 'stars')
+        self.api.list_subscribers(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testshowlistsubscriber.json')
     def testshowlistsubscriber(self):
-        self.assertTrue(self.api.show_list_subscriber('tweepytest', 'test', 'applepie'))
+        self.assertTrue(self.api.show_list_subscriber(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterMktg'))
 
     @tape.use_cassette('testsavedsearches.json')
     def testsavedsearches(self):
@@ -397,29 +369,26 @@ class TweepyAPITests(TweepyTestCase):
     def testgeoapis(self):
         def place_name_in_list(place_name, place_list):
             """Return True if a given place_name is in place_list."""
-            return any([x.full_name.lower() == place_name.lower() for x in place_list])
+            return any(x.full_name.lower() == place_name.lower() for x in place_list)
 
-        twitter_hq = self.api.geo_similar_places(lat='37.7821120598956',
-                                                 long='-122.400612831116',
-                                                 name='South of Market Child Care')
-        # Assumes that twitter_hq is first Place returned...
-        self.assertEqual(twitter_hq[0].id, '1d019624e6b4dcff')
         # Test various API functions using Austin, TX, USA
-        self.assertEqual(self.api.geo_id(id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
+        self.assertEqual(self.api.geo_id(place_id='1ffd3558f2e98349').full_name, 'Dogpatch, San Francisco')
         self.assertTrue(place_name_in_list('Austin, TX',
-            self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461))) # Austin, TX, USA
+            self.api.reverse_geocode(lat=30.2673701685, long= -97.7426147461)))  # Austin, TX, USA
 
     @tape.use_cassette('testsupportedlanguages.json')
     def testsupportedlanguages(self):
         languages = self.api.supported_languages()
         expected_dict = {
-            "name": "English",
             "code": "en",
+            "debug": False,
+            "local_name": "English",
+            "name": "English",
             "status": "production"
         }
         self.assertTrue(expected_dict in languages)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedresult(self):
         self.api.cache = MemoryCache()
         self.api.home_timeline()
@@ -427,18 +396,17 @@ class TweepyAPITests(TweepyTestCase):
         self.api.home_timeline()
         self.assertTrue(self.api.cached_result)
 
-    @tape.use_cassette('testcachedresult.json')
+    @tape.use_cassette('testcachedresult.yaml', serializer='yaml')
     def testcachedifferentqueryparameters(self):
         self.api.cache = MemoryCache()
 
-        user1 = self.api.get_user('TheTweepyTester')
+        user1 = self.api.get_user(screen_name='TweepyDev')
         self.assertFalse(self.api.cached_result)
-        self.assertEquals('TheTweepyTester', user1.screen_name)
+        self.assertEqual('TweepyDev', user1.screen_name)
 
-        user2 = self.api.get_user('tweepytest')
-        self.assertEquals('tweepytest', user2.screen_name)
+        user2 = self.api.get_user(screen_name='Twitter')
+        self.assertEqual('Twitter', user2.screen_name)
         self.assertFalse(self.api.cached_result)
-
 
 
 class TweepyCacheTests(unittest.TestCase):
@@ -464,8 +432,8 @@ class TweepyCacheTests(unittest.TestCase):
             self.assertEqual(self.cache.count(), 0, 'Cache cleanup failed')
 
         # test count
-        for i in range(0, 20):
-            self.cache.store('testkey%i' % i, 'testvalue')
+        for i in range(20):
+            self.cache.store(f'testkey{i}', 'testvalue')
         self.assertEqual(self.cache.count(), 20, 'Count is wrong')
 
         # test flush
@@ -485,6 +453,7 @@ class TweepyCacheTests(unittest.TestCase):
         finally:
             if os.path.exists('cache_test_dir'):
                 shutil.rmtree('cache_test_dir')
+
 
 if __name__ == '__main__':
     unittest.main()

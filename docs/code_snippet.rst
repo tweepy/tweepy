@@ -37,8 +37,8 @@ Pagination
        # Process the friend here
        process_friend(friend)
    
-   # Iterate through the first 200 statuses in the friends timeline
-   for status in tweepy.Cursor(api.friends_timeline).items(200):
+   # Iterate through the first 200 statuses in the home timeline
+   for status in tweepy.Cursor(api.home_timeline).items(200):
        # Process the status here
        process_status(status)
 
@@ -55,7 +55,7 @@ This snippet will follow every follower of the authenticated user.
 Handling the rate limit using cursors
 =====================================
    
-Since cursors raise ``RateLimitError``\ s in their ``next()`` method,
+Since cursors raise ``RateLimitError``\ s while iterating,
 handling them can be done by wrapping the cursor in an iterator.
    
 Running this snippet will print all users you follow that themselves follow
@@ -70,10 +70,10 @@ will wait for 15 minutes each time it hits the rate limit.
    def limit_handled(cursor):
        while True:
            try:
-               yield cursor.next()
+               yield next(cursor)
            except tweepy.RateLimitError:
                time.sleep(15 * 60)
    
    for follower in limit_handled(tweepy.Cursor(api.followers).items()):
        if follower.friends_count < 300:
-           print follower.screen_name
+           print(follower.screen_name)

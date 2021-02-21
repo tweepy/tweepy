@@ -2,9 +2,10 @@ from .config import TweepyTestCase
 
 from tweepy.models import ResultSet
 
-class NoIdItem(object): pass
+class NoIdItem:
+    pass
 
-class IdItem(object):
+class IdItem:
     def __init__(self, id):
         self.id = id
 
@@ -22,8 +23,8 @@ class TweepyResultSetTests(TweepyTestCase):
         self.assertListEqual(ids, ids_fixture)
 
     def testmaxid(self):
-        self.assertEqual(self.results.max_id, 100)
+        self.assertEqual(self.results.max_id, 0)
 
     def testsinceid(self):
-        self.assertEqual(self.results.since_id, 1)
+        self.assertEqual(self.results.since_id, 100)
 

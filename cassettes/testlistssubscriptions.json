@@ -2,87 +2,6 @@
     "version": 1,
     "interactions": [
         {
-            "response": {
-                "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "{\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\",\"lists\":[]}"
-                },
-                "headers": {
-                    "content-length": [
-                        "96"
-                    ],
-                    "x-transaction": [
-                        "00a55c9900b80a75"
-                    ],
-                    "last-modified": [
-                        "Sat, 05 Nov 2016 21:43:53 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382704"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
-                    ],
-                    "server": [
-                        "tsa_b"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "13"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:43:53 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
-                    ],
-                    "x-rate-limit-limit": [
-                        "15"
-                    ],
-                    "x-frame-options": [
-                        "SAMEORIGIN"
-                    ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838223362943283; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:43:53 UTC"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "x-access-level": [
-                        "read-write-directmessages"
-                    ],
-                    "x-response-time": [
-                        "17"
-                    ],
-                    "x-connection-hash": [
-                        "fe88114ec5dd06da44132e1ae57d0605"
-                    ]
-                }
-            },
             "request": {
                 "method": "GET",
                 "uri": "https://api.twitter.com/1.1/lists/subscriptions.json",
@@ -91,6 +10,88 @@
                     "Host": [
                         "api.twitter.com"
                     ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "content-type": [
+                        "application/json;charset=utf-8"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
+                    ],
+                    "last-modified": [
+                        "Sat, 13 Jul 2019 02:27:45 GMT"
+                    ],
+                    "server": [
+                        "tsa_b"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                    ],
+                    "x-connection-hash": [
+                        "4d6f9df706626c4f81a07930e9370a99"
+                    ],
+                    "x-rate-limit-limit": [
+                        "15"
+                    ],
+                    "x-frame-options": [
+                        "SAMEORIGIN"
+                    ],
+                    "x-rate-limit-remaining": [
+                        "10"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:45 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_TRsXhCwTCeRKlVQMqVexHw==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:45 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298486504019521; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:45 GMT; Path=/; Domain=.twitter.com"
+                    ],
+                    "x-access-level": [
+                        "read-write-directmessages"
+                    ],
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
+                    ],
+                    "x-transaction": [
+                        "0040ba9d00c1bcb4"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "96"
+                    ],
+                    "x-response-time": [
+                        "16"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984893"
+                    ]
+                },
+                "body": {
+                    "string": "{\"next_cursor\":0,\"next_cursor_str\":\"0\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\",\"lists\":[]}"
                 }
             }
         }

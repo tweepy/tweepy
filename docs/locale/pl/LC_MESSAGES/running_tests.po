@@ -1,0 +1,51 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-14 14:12+0100\n"
+"PO-Revision-Date: 2020-01-19 09:28+0100\n"
+"Last-Translator: krzysztofturtle <hk19k93jj@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: POEditor.com\n"
+
+#: ../../running_tests.rst:5
+msgid "Running Tests"
+msgstr "Uruchamianie testów"
+
+#: ../../running_tests.rst:7
+msgid "These steps outline how to run tests for Tweepy:"
+msgstr "Te kroki wyjaśniają jak uruchamiać testy dla Tweepy:"
+
+#: ../../running_tests.rst:9
+msgid "Download Tweepy's source code to a directory."
+msgstr "Pobierz kod źródłowy Tweepy do katalogu."
+
+#: ../../running_tests.rst:11
+msgid "Install from the downloaded source with the ``test`` extra, e.g. ``pip install .[test]``. Optionally install the ``dev`` extra as well, for ``tox`` and ``coverage``, e.g. ``pip install .[dev,test]``."
+msgstr "Zainstaluj z pobranego źródła z ``test`` extra, np. ``pip install .[test]``. Opcjonalnie możesz zainstalować też ``dev`` extra, dla ``tox`` i ``coverage`` np. ``pip install .[dev,test]``."
+
+#: ../../running_tests.rst:15
+msgid "Run ``python setup.py nosetests`` or simply ``nosetests`` in the source directory. With the ``dev`` extra, coverage will be shown, and ``tox`` can also be run to test different Python versions."
+msgstr "Uruchom ``python setup.py nosetests`` lub po prostu ``nosetests`` w katalogu źródłowym. Z ``dev`` extra będzie wyświetlone sprawozdanie a ``tox`` może być także użyty do uruchomienia testu z inną wersją Python."
+
+#: ../../running_tests.rst:19
+msgid "To record new cassettes, the following environment variables can be used:"
+msgstr "By nagrywać nowe kasety możesz użyć niżej wymienionych zmiennych środowiskowych:"
+
+#: ../../running_tests.rst:21
+msgid "``TWITTER_USERNAME`` ``CONSUMER_KEY`` ``CONSUMER_SECRET`` ``ACCESS_KEY`` ``ACCESS_SECRET`` ``USE_REPLAY``"
+msgstr "``TWITTER_USERNAME`` ``CONSUMER_KEY`` ``CONSUMER_SECRET`` ``ACCESS_KEY`` ``ACCESS_SECRET`` ``USE_REPLAY``"
+
+#: ../../running_tests.rst:28
+msgid "Simply set ``USE_REPLAY`` to ``False`` and provide the app and account credentials and username."
+msgstr "Po prostu ustaw ``USE_REPLAY`` jako ``FALSE`` i dostarcz aplikacji dane logowania oraz nazwę użytkownika."
+

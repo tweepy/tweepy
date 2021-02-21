@@ -2,29 +2,36 @@
     "version": 1,
     "interactions": [
         {
+            "request": {
+                "method": "GET",
+                "uri": "https://api.twitter.com/1.1/lists/subscribers/show.json?owner_screen_name=Twitter&slug=Official-Twitter-Accounts&screen_name=TwitterMktg",
+                "body": null,
+                "headers": {
+                    "Host": [
+                        "api.twitter.com"
+                    ]
+                }
+            },
             "response": {
                 "status": {
-                    "message": "OK",
-                    "code": 200
-                },
-                "body": {
-                    "string": "{\"id\":9302282,\"id_str\":\"9302282\",\"name\":\"Josh Roesslein\",\"screen_name\":\"applepie\",\"location\":\"San Francisco Bay Area\",\"description\":\"pro\\u00b7gram\\u00b7mer (n) An organism capable of converting caffeine into code. Coding @ http:\\/\\/t.co\\/Rt18iqhC9z\",\"url\":null,\"entities\":{\"description\":{\"urls\":[{\"url\":\"http:\\/\\/t.co\\/Rt18iqhC9z\",\"expanded_url\":\"http:\\/\\/OpenGov.com\",\"display_url\":\"OpenGov.com\",\"indices\":[80,102]}]}},\"protected\":false,\"followers_count\":540,\"friends_count\":327,\"listed_count\":31,\"created_at\":\"Mon Oct 08 03:00:34 +0000 2007\",\"favourites_count\":16,\"utc_offset\":-25200,\"time_zone\":\"Pacific Time (US & Canada)\",\"geo_enabled\":true,\"verified\":false,\"statuses_count\":8125,\"lang\":\"en\",\"status\":{\"created_at\":\"Fri Nov 04 07:27:29 +0000 2016\",\"id\":794440918526926848,\"id_str\":\"794440918526926848\",\"text\":\"@NotDefinch Ahri should be a good one to wear :) Remember to put the sleeves on the right way this time m8 ;)\",\"truncated\":false,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"NotDefinch\",\"name\":\"DeFinch \\ud83c\\udf83\",\"id\":3018282480,\"id_str\":\"3018282480\",\"indices\":[0,11]}],\"urls\":[]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":794439530984206338,\"in_reply_to_status_id_str\":\"794439530984206338\",\"in_reply_to_user_id\":3018282480,\"in_reply_to_user_id_str\":\"3018282480\",\"in_reply_to_screen_name\":\"NotDefinch\",\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":0,\"favorite_count\":0,\"favorited\":false,\"retweeted\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"3B94D9\",\"profile_background_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"profile_background_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_background_images\\/8076084\\/200911032903-12395.jpg\",\"profile_background_tile\":false,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/2813279506\\/f0addfcfa062b23a94c00931ff35f03a_normal.jpeg\",\"profile_link_color\":\"ABB8C2\",\"profile_sidebar_border_color\":\"000000\",\"profile_sidebar_fill_color\":\"000000\",\"profile_text_color\":\"000000\",\"profile_use_background_image\":false,\"has_extended_profile\":false,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"none\"}"
+                    "code": 200,
+                    "message": "OK"
                 },
                 "headers": {
-                    "content-length": [
-                        "2592"
+                    "content-type": [
+                        "application/json;charset=utf-8"
                     ],
-                    "x-transaction": [
-                        "00867fcf00fea37c"
+                    "x-xss-protection": [
+                        "1; mode=block; report=https://twitter.com/i/xss_report"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "expires": [
+                        "Tue, 31 Mar 1981 05:00:00 GMT"
                     ],
                     "last-modified": [
-                        "Sat, 05 Nov 2016 21:44:00 GMT"
-                    ],
-                    "x-rate-limit-reset": [
-                        "1478382710"
-                    ],
-                    "strict-transport-security": [
-                        "max-age=631138519"
+                        "Sat, 13 Jul 2019 02:27:53 GMT"
                     ],
                     "server": [
                         "tsa_b"
@@ -32,17 +39,8 @@
                     "cache-control": [
                         "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-rate-limit-remaining": [
-                        "13"
-                    ],
-                    "date": [
-                        "Sat, 05 Nov 2016 21:44:00 GMT"
-                    ],
-                    "x-twitter-response-tags": [
-                        "BouncerCompliant"
+                    "x-connection-hash": [
+                        "e5700753f222691845ba861a48433a84"
                     ],
                     "x-rate-limit-limit": [
                         "15"
@@ -50,47 +48,50 @@
                     "x-frame-options": [
                         "SAMEORIGIN"
                     ],
-                    "status": [
-                        "200 OK"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "content-disposition": [
-                        "attachment; filename=json.json"
-                    ],
-                    "expires": [
-                        "Tue, 31 Mar 1981 05:00:00 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=utf-8"
-                    ],
-                    "set-cookie": [
-                        "lang=en; Path=/",
-                        "guest_id=v1%3A147838224022534305; Domain=.twitter.com; Path=/; Expires=Mon, 05-Nov-2018 21:44:00 UTC"
+                    "x-rate-limit-remaining": [
+                        "8"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
+                    "date": [
+                        "Sat, 13 Jul 2019 02:27:53 GMT"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "set-cookie": [
+                        "personalization_id=\"v1_IS40yXVek0Y0GmC+SclmXA==\"; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:53 GMT; Path=/; Domain=.twitter.com",
+                        "lang=en; Path=/",
+                        "guest_id=v1%3A156298487301030996; Max-Age=63072000; Expires=Mon, 12 Jul 2021 02:27:53 GMT; Path=/; Domain=.twitter.com"
+                    ],
                     "x-access-level": [
                         "read-write-directmessages"
                     ],
-                    "x-response-time": [
-                        "40"
+                    "x-twitter-response-tags": [
+                        "BouncerCompliant"
                     ],
-                    "x-connection-hash": [
-                        "b567214dbd1c0be3063f76ec761d8e54"
+                    "x-transaction": [
+                        "00161b2e007ae7c2"
+                    ],
+                    "strict-transport-security": [
+                        "max-age=631138519"
+                    ],
+                    "content-disposition": [
+                        "attachment; filename=json.json"
+                    ],
+                    "content-length": [
+                        "2792"
+                    ],
+                    "x-response-time": [
+                        "37"
+                    ],
+                    "x-rate-limit-reset": [
+                        "1562984901"
                     ]
-                }
-            },
-            "request": {
-                "method": "GET",
-                "uri": "https://api.twitter.com/1.1/lists/subscribers/show.json?owner_screen_name=tweepytest&slug=test&screen_name=applepie",
-                "body": null,
-                "headers": {
-                    "Host": [
-                        "api.twitter.com"
-                    ]
+                },
+                "body": {
+                    "string": "{\"id\":357750891,\"id_str\":\"357750891\",\"name\":\"Twitter Marketing\",\"screen_name\":\"TwitterMktg\",\"location\":\"Twitter HQ\",\"description\":\"Twitter connects you with the most valuable audiences, when they're the most receptive. #StartWithThem\",\"url\":\"https:\\/\\/t.co\\/Tfo4moo92y\",\"entities\":{\"url\":{\"urls\":[{\"url\":\"https:\\/\\/t.co\\/Tfo4moo92y\",\"expanded_url\":\"https:\\/\\/marketing.twitter.com\",\"display_url\":\"marketing.twitter.com\",\"indices\":[0,23]}]},\"description\":{\"urls\":[]}},\"protected\":false,\"followers_count\":993300,\"friends_count\":713,\"listed_count\":4544,\"created_at\":\"Thu Aug 18 21:08:15 +0000 2011\",\"favourites_count\":2740,\"utc_offset\":null,\"time_zone\":null,\"geo_enabled\":false,\"verified\":true,\"statuses_count\":7913,\"lang\":null,\"status\":{\"created_at\":\"Fri Jul 12 14:30:07 +0000 2019\",\"id\":1149687385497702405,\"id_str\":\"1149687385497702405\",\"text\":\"Stans on @Twitter influence the airwaves and shape what we listen to, making them the perfect audience for brands t\\u2026 https:\\/\\/t.co\\/Kg6JaIb4Nd\",\"truncated\":true,\"entities\":{\"hashtags\":[],\"symbols\":[],\"user_mentions\":[{\"screen_name\":\"Twitter\",\"name\":\"Twitter\",\"id\":783214,\"id_str\":\"783214\",\"indices\":[9,17]}],\"urls\":[{\"url\":\"https:\\/\\/t.co\\/Kg6JaIb4Nd\",\"expanded_url\":\"https:\\/\\/twitter.com\\/i\\/web\\/status\\/1149687385497702405\",\"display_url\":\"twitter.com\\/i\\/web\\/status\\/1\\u2026\",\"indices\":[117,140]}]},\"source\":\"\\u003ca href=\\\"http:\\/\\/twitter.com\\\" rel=\\\"nofollow\\\"\\u003eTwitter Web Client\\u003c\\/a\\u003e\",\"in_reply_to_status_id\":null,\"in_reply_to_status_id_str\":null,\"in_reply_to_user_id\":null,\"in_reply_to_user_id_str\":null,\"in_reply_to_screen_name\":null,\"geo\":null,\"coordinates\":null,\"place\":null,\"contributors\":null,\"is_quote_status\":false,\"retweet_count\":9,\"favorite_count\":6,\"favorited\":false,\"retweeted\":false,\"possibly_sensitive\":false,\"lang\":\"en\"},\"contributors_enabled\":false,\"is_translator\":false,\"is_translation_enabled\":false,\"profile_background_color\":\"C0DEED\",\"profile_background_image_url\":\"http:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_image_url_https\":\"https:\\/\\/abs.twimg.com\\/images\\/themes\\/theme1\\/bg.png\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/pbs.twimg.com\\/profile_images\\/1008726624320118784\\/rKY9KsBd_normal.jpg\",\"profile_image_url_https\":\"https:\\/\\/pbs.twimg.com\\/profile_images\\/1008726624320118784\\/rKY9KsBd_normal.jpg\",\"profile_banner_url\":\"https:\\/\\/pbs.twimg.com\\/profile_banners\\/357750891\\/1560519558\",\"profile_link_color\":\"19CF86\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"DDEEF6\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"has_extended_profile\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false,\"translator_type\":\"none\"}"
                 }
             }
         }

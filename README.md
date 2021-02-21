@@ -1,24 +1,36 @@
 Tweepy: Twitter for Python!
 ======
 
-[![Join the chat at https://gitter.im/tweepy/tweepy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tweepy/tweepy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](http://img.shields.io/travis/tweepy/tweepy/master.svg?style=flat)](https://travis-ci.org/tweepy/tweepy)
-[![Documentation Status](http://img.shields.io/badge/docs-v3.6.0-brightgreen.svg?style=flat)](http://docs.tweepy.org)
-[![Downloads](http://img.shields.io/pypi/dm/tweepy.svg?style=flat)](https://crate.io/packages/tweepy) [![Version](http://img.shields.io/pypi/v/tweepy.svg?style=flat)](https://crate.io/packages/tweepy)
-[![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/r/tweepy/tweepy?branch=master)
+[![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
+[![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest)](https://tweepy.readthedocs.io/en/latest/)
+[![PyPI Version](https://img.shields.io/pypi/v/tweepy?label=PyPI)](https://pypi.org/project/tweepy/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/tweepy?label=Python)](https://pypi.org/project/tweepy/)
+[![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
+[![Discord Server](https://discord.com/api/guilds/432685901596852224/embed.png)](https://discord.gg/bJvqnhg)
 
 Installation
 ------------
-The easiest way to install the latest version
-is by using pip/easy_install to pull it from PyPI:
+The easiest way to install the latest version from PyPI is by using pip:
 
     pip install tweepy
 
-You may also use Git to clone the repository from
-Github and install it manually:
+You can also use Git to clone the repository from GitHub to install the latest
+development version:
 
     git clone https://github.com/tweepy/tweepy.git
     cd tweepy
-    python setup.py install
+    pip install .
 
-Python 2.6 and 2.7, 3.3, 3.4  & 3.5 are supported.
+Alternatively, install directly from the GitHub repository:
+
+    pip install git+https://github.com/tweepy/tweepy.git
+
+Python 3.6 - 3.9 are supported.
+
+Links
+-----
+
+- [Documentation](https://tweepy.readthedocs.io/en/latest/)
+- [Official Discord Server](https://discord.gg/bJvqnhg)
+- [Twitter API Documentation](https://developer.twitter.com/en/docs/twitter-api)
+
