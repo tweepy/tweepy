@@ -162,9 +162,9 @@ class Stream:
 
         body = {}
         if follow:
-            body["follow"] = ','.join(follow)
+            body["follow"] = ','.join(map(str, follow))
         if track:
-            body["track"] = ','.join(track)
+            body["track"] = ','.join(map(str, track))
         if locations and len(locations) > 0:
             if len(locations) % 4:
                 raise TweepError(
