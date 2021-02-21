@@ -351,7 +351,7 @@ class API:
     @payload('media')
     def simple_upload(self, filename, *, file=None, media_category=None,
                       additional_owners=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
         """
         if file is not None:
             files = {'media': (filename, file)}
@@ -372,7 +372,7 @@ class API:
     def chunked_upload(self, filename, *, file=None, file_type=None,
                        wait_for_async_finalize=True, media_category=None,
                        additional_owners=None, **kwargs):
-        """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
+        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
 
