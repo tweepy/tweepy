@@ -370,7 +370,8 @@ class API:
         )
 
     def chunked_upload(self, filename, *, file=None, file_type=None,
-                       media_category=None, additional_owners=None, **kwargs):
+                       wait_for_async_finalize=True, media_category=None,
+                       additional_owners=None, **kwargs):
         """ :reference https://developer.twitter.com/en/docs/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
@@ -404,8 +405,14 @@ class API:
             )
 
         fp.close()
-        # The FINALIZE command returns media information
-        return self.chunked_upload_finalize(media_id, **kwargs)
+        media =  self.chunked_upload_finalize(media_id, **kwargs)
+
+        if wait_for_async_finalize and hasattr(media, 'processing_info'):
+            while media.processing_info['state'] in ('pending', 'in_progress'):
+                time.sleep(media.processing_info['check_after_secs'])
+                media = self.get_media_upload_status(media.media_id, **kwargs)
+
+        return media
 
     @payload('media')
     def chunked_upload_init(self, total_bytes, media_type, *,

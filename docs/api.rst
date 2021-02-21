@@ -1322,8 +1322,11 @@ Media methods
                              [additional_owners])
 
    Use this to upload media to Twitter.
-   This automatically uses the chunked upload endpoints for videos.
    This calls either :func:`API.simple_upload` or :func:`API.chunked_upload`.
+   Chunked media upload is automatically used for videos.
+   If ``chunked`` is set or the media is a video, ``wait_for_async_finalize``
+   can be specified as a keyword argument to be passed to
+   :func:`API.chunked_upload`.
 
    :param filename: |filename|
    :param file: |file|
@@ -1351,16 +1354,21 @@ Media methods
 
 
 .. method:: API.chunked_upload(filename, [file], [file_type], \
-                               [media_category], [additional_owners])
+                               [wait_for_async_finalize], [media_category], \
+                               [additional_owners])
 
    Use this to upload media to Twitter.
    This uses the chunked upload endpoints and calls
    :func:`API.chunked_upload_init`, :func:`API.chunked_upload_append`, and
    :func:`API.chunked_upload_finalize`.
+   If ``wait_for_async_finalize`` is set, this calls
+   :func:`API.get_media_upload_status` as well.
 
    :param filename: |filename|
    :param file: |file|
    :param file_type: The MIME type of the media being uploaded.
+   :param wait_for_async_finalize: Whether to wait for Twitter's API to finish
+                                   processing the media. Defaults to ``True``.
    :param media_category: |media_category|
    :param additional_owners: |additional_owners|
 
