@@ -432,10 +432,10 @@ class Stream(object):
         self.url = '/%s/statuses/filter.json' % STREAM_VERSION
 
         if follow:
-            self.body['follow'] = u','.join(str(f) for f in follow).encode(encoding)
+            self.body['follow'] = u','.join(map(str, follow)).encode(encoding)
 
         if track:
-            self.body['track'] = u','.join(str(f) for f in track).encode(encoding)
+            self.body['track'] = u','.join(map(str, track)).encode(encoding)
 
         if locations and len(locations) > 0:
             if len(locations) % 4 != 0:
