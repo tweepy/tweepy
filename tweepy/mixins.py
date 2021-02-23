@@ -12,7 +12,7 @@ class EqualityComparableID:
         return NotImplemented
 
 
-class Hashable(EqualityComparableID):
+class HashableID(EqualityComparableID):
     __slots__ = ()
 
     def __hash__(self):
