@@ -125,7 +125,7 @@ class Client:
 
         return Response(data, includes, errors, meta)
 
-    def follow(self, user_id):
+    def follow(self, target_user_id):
         """
         Follow user
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
@@ -134,7 +134,7 @@ class Client:
         route = f"/2/users/{source_user_id}/following"
 
         return self._make_request(
-            "POST", route, json={"target_user_id": str(user_id)},
+            "POST", route, json={"target_user_id": str(target_user_id)},
             user_auth=True
         )
 
@@ -214,37 +214,37 @@ class Client:
             data_type=User
         )
 
-    def get_users_followers(self, user_id, **params):
+    def get_users_followers(self, id, **params):
         """
         Followers lookup
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
         """
         return self._make_request(
-            "GET", f"/2/users/{user_id}/followers", params=params,
+            "GET", f"/2/users/{id}/followers", params=params,
             allowed_params=("expansions", "max_results", "pagination_token",
                             "tweet.fields", "user.fields"),
             data_type=User
         )
 
-    def get_users_following(self, user_id, **params):
+    def get_users_following(self, id, **params):
         """
         Following lookup
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-following
         """
         return self._make_request(
-            "GET", f"/2/users/{user_id}/following", params=params,
+            "GET", f"/2/users/{id}/following", params=params,
             allowed_params=("expansions", "max_results", "pagination_token",
                             "tweet.fields", "user.fields"),
             data_type=User
         )
 
-    def get_users_mentions(self, user_id, **params):
+    def get_users_mentions(self, id, **params):
         """
         User mention timeline
         https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-mentions
         """
         return self._make_request(
-            "GET", f"/2/users/{user_id}/mentions", params=params,
+            "GET", f"/2/users/{id}/mentions", params=params,
             allowed_params=("end_time", "expansions", "max_results",
                             "media.fields", "pagination_token", "place.fields",
                             "poll.fields", "since_id", "start_time",
@@ -252,13 +252,13 @@ class Client:
             data_type=Tweet
         )
 
-    def get_users_tweets(self, user_id, **params):
+    def get_users_tweets(self, id, **params):
         """
         User Tweet timeline
         https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
         """
         return self._make_request(
-            "GET", f"/2/users/{user_id}/tweets", params=params,
+            "GET", f"/2/users/{id}/tweets", params=params,
             allowed_params=("end_time", "exclude", "expansions", "max_results",
                             "media.fields", "pagination_token", "place.fields",
                             "poll.fields", "since_id", "start_time",
@@ -266,13 +266,13 @@ class Client:
             data_type=Tweet
         )
 
-    def hide_reply(self, tweet_id):
+    def hide_reply(self, id):
         """
         Hide replies
         https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies/api-reference/put-tweets-id-hidden
         """
         return self._make_request(
-            "PUT", f"/2/tweets/{tweet_id}/hidden", json={"hidden": True},
+            "PUT", f"/2/tweets/{id}/hidden", json={"hidden": True},
             user_auth=True
         )[0]["hidden"]
 
@@ -301,13 +301,13 @@ class Client:
             data_type=Tweet
         )
 
-    def unfollow(self, user_id):
+    def unfollow(self, target_user_id):
         """
         Unfollow user
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
         """
         source_user_id = self.access_token.partition('-')[0]
-        route = f"/2/users/{source_user_id}/following/{user_id}"
+        route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
         return self._make_request(
             "DELETE", route, user_auth=True
