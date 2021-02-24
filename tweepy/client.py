@@ -167,7 +167,7 @@ class Client:
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by-username-username
         """
-        if ids is not None and username is not None:
+        if ids is not None and usernames is not None:
             raise TypeError("Expected IDs or usernames, not both")
 
         route = "/2/users"
