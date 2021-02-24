@@ -282,6 +282,10 @@ class Client:
         )[0]["hidden"]
 
     def search_all_tweets(self, query, **params):
+        """
+        Search Tweets: Full-archive search
+        https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
+        """
         return self._make_request(
             "GET", "/2/tweets/search/all", params=params,
             endpoint_parameters=(
