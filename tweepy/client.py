@@ -80,11 +80,11 @@ class Client:
             # TODO: Handle rate limits
             return response.json()
 
-    def _make_request(self, method, route, params={}, allowed_params=None,
+    def _make_request(self, method, route, params={}, endpoint_parameters=None,
                       json=None, data_type=None, user_auth=False):
         request_params = {}
         for param_name, param_value in params.items():
-            if param_name in allowed_params:
+            if param_name in endpoint_parameters:
                 if isinstance(param_value, list):
                     request_params[param_name] = ','.join(map(str, param_value))
                 elif param_name in ("start_time", "end_time") and isinstance(param_value, datetime.datetime):
@@ -92,11 +92,11 @@ class Client:
                     # TODO: Constant datetime format string?
                 else:
                     request_params[param_name] = param_value
-            elif param_name.replace('_', '.') in allowed_params:
+            elif param_name.replace('_', '.') in endpoint_parameters:
                 # Use := when support for Python 3.7 is dropped
                 request_params[param_name.replace('_', '.')] = ','.join(param_value)
             else:
-                log.warn(f"'{param_name}' is not an allowed parameter")
+                log.warn(f"Unexpected parameter: {param_name}")
 
         response = self.request(method, route, params=request_params,
                                 json=json, user_auth=user_auth)
@@ -145,9 +145,10 @@ class Client:
         """
         return self._make_request(
             "GET", f"/2/tweets/{id}", params=params,
-            allowed_params=("expansions", "media.fields", "place.fields",
-                            "poll.fields", "tweet.fields", "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
         )
 
     def get_tweets(self, ids, **params):
@@ -158,10 +159,10 @@ class Client:
         params["ids"] = ids
         return self._make_request(
             "GET", "/2/tweets", params=params,
-            allowed_params=("ids", "expansions", "media.fields",
-                            "place.fields", "poll.fields", "tweet.fields",
-                            "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "ids", "expansions", "media.fields", "place.fields",
+                "poll.fields", "tweet.fields", "user.fields"
+            ), data_type=Tweet
         )
 
     def get_user(self, *, id=None, username=None, **params):
@@ -184,7 +185,7 @@ class Client:
 
         return self._make_request(
             "GET", route, params=params,
-            allowed_params=("expansions", "tweet_fields", "user_fields"),
+            endpoint_parameters=("expansions", "tweet_fields", "user_fields"),
             data_type=User
         )
 
@@ -209,9 +210,9 @@ class Client:
 
         return self._make_request(
             "GET", route, params=params,
-            allowed_params=("ids", "usernames", "expansions", "tweet_fields",
-                            "user_fields"),
-            data_type=User
+            endpoint_parameters=(
+                "ids", "usernames", "expansions", "tweet_fields", "user_fields"
+            ), data_type=User
         )
 
     def get_users_followers(self, id, **params):
@@ -221,8 +222,10 @@ class Client:
         """
         return self._make_request(
             "GET", f"/2/users/{id}/followers", params=params,
-            allowed_params=("expansions", "max_results", "pagination_token",
-                            "tweet.fields", "user.fields"),
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ),
             data_type=User
         )
 
@@ -233,9 +236,10 @@ class Client:
         """
         return self._make_request(
             "GET", f"/2/users/{id}/following", params=params,
-            allowed_params=("expansions", "max_results", "pagination_token",
-                            "tweet.fields", "user.fields"),
-            data_type=User
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=User
         )
 
     def get_users_mentions(self, id, **params):
@@ -245,11 +249,11 @@ class Client:
         """
         return self._make_request(
             "GET", f"/2/users/{id}/mentions", params=params,
-            allowed_params=("end_time", "expansions", "max_results",
-                            "media.fields", "pagination_token", "place.fields",
-                            "poll.fields", "since_id", "start_time",
-                            "tweet.fields", "until_id", "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "end_time", "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields", "since_id",
+                "start_time", "tweet.fields", "until_id", "user.fields"
+            ), data_type=Tweet
         )
 
     def get_users_tweets(self, id, **params):
@@ -259,11 +263,12 @@ class Client:
         """
         return self._make_request(
             "GET", f"/2/users/{id}/tweets", params=params,
-            allowed_params=("end_time", "exclude", "expansions", "max_results",
-                            "media.fields", "pagination_token", "place.fields",
-                            "poll.fields", "since_id", "start_time",
-                            "tweet.fields", "until_id", "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "end_time", "exclude", "expansions", "max_results",
+                "media.fields", "pagination_token", "place.fields",
+                "poll.fields", "since_id", "start_time", "tweet.fields",
+                "until_id", "user.fields"
+            ), data_type=Tweet
         )
 
     def hide_reply(self, id):
@@ -279,11 +284,12 @@ class Client:
     def search_all_tweets(self, query, **params):
         return self._make_request(
             "GET", "/2/tweets/search/all", params=params,
-            allowed_params=("end_time", "expansions", "max_results",
-                            "media.fields", "next_token", "place.fields",
-                            "poll.fields", "query", "since_id", "start_time",
-                            "tweet.fields", "until_id", "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "end_time", "expansions", "max_results", "media.fields",
+                "next_token", "place.fields", "poll.fields", "query",
+                "since_id", "start_time", "tweet.fields", "until_id",
+                "user.fields"
+            ), data_type=Tweet
         )
 
     def search_recent_tweets(self, query, **params):
@@ -294,11 +300,12 @@ class Client:
         params["query"] = query
         return self._make_request(
             "GET", "/2/tweets/search/recent", params=params,
-            allowed_params=("end_time", "expansions", "max_results",
-                            "media.fields", "next_token", "place.fields",
-                            "poll.fields", "query", "since_id", "start_time",
-                            "tweet.fields", "until_id", "user.fields"),
-            data_type=Tweet
+            endpoint_parameters=(
+                "end_time", "expansions", "max_results", "media.fields",
+                "next_token", "place.fields", "poll.fields", "query",
+                "since_id", "start_time", "tweet.fields", "until_id",
+                "user.fields"
+            ), data_type=Tweet
         )
 
     def unfollow(self, target_user_id):
