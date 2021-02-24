@@ -309,9 +309,7 @@ class Client:
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
-        return self._make_request(
-            "DELETE", route, user_auth=True
-        )
+        return self._make_request("DELETE", route, user_auth=True)
 
     def unhide_reply(self, tweet_id):
         """
