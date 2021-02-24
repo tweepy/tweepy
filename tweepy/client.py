@@ -185,7 +185,7 @@ class Client:
 
         return self._make_request(
             "GET", route, params=params,
-            endpoint_parameters=("expansions", "tweet_fields", "user_fields"),
+            endpoint_parameters=("expansions", "tweet.fields", "user.fields"),
             data_type=User
         )
 
@@ -211,7 +211,7 @@ class Client:
         return self._make_request(
             "GET", route, params=params,
             endpoint_parameters=(
-                "ids", "usernames", "expansions", "tweet_fields", "user_fields"
+                "ids", "usernames", "expansions", "tweet.fields", "user.fields"
             ), data_type=User
         )
 
