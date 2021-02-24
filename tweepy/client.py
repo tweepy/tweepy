@@ -141,7 +141,7 @@ class Client:
     def get_tweet(self, id, **params):
         """
         Tweet lookup
-        https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
+        https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id
         """
         return self._make_request(
             "GET", f"/2/tweets/{id}", params=params,
@@ -153,7 +153,7 @@ class Client:
     def get_tweets(self, ids, **params):
         """
         Tweets lookup
-        https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id
+        https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
         """
         params["ids"] = ids
         return self._make_request(
