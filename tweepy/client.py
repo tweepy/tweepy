@@ -138,21 +138,26 @@ class Client:
             user_auth=True
         )
 
-    def get_tweets(self, ids, **params):
+    def get_tweet(self, id, **params):
         """
         Tweet lookup
         https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}", params=params,
+            allowed_params=("expansions", "media.fields", "place.fields",
+                            "poll.fields", "tweet.fields", "user.fields"),
+            data_type=Tweet
+        )
+
+    def get_tweets(self, ids, **params):
+        """
+        Tweets lookup
         https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id
         """
-        route = "/2/tweets"
-
-        if isinstance(ids, (int, str)):
-            route += f"/{ids}"
-        else:
-            params["ids"] = ids
-
+        params["ids"] = ids
         return self._make_request(
-            "GET", route, params=params,
+            "GET", "/2/tweets", params=params,
             allowed_params=("ids", "expansions", "media.fields",
                             "place.fields", "poll.fields", "tweet.fields",
                             "user.fields"),
