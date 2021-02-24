@@ -125,6 +125,19 @@ class Client:
 
         return Response(data, includes, errors, meta)
 
+    def follow(self, user_id):
+        """
+        Follow user
+        https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
+        """
+        source_user_id = self.access_token.partition('-')[0]
+        route = f"/2/users/{source_user_id}/following"
+
+        return self._make_request(
+            "POST", route, json={"target_user_id": str(user_id)},
+            user_auth=True
+        )
+
     def get_tweets(self, ids, **params):
         """
         Tweet lookup
@@ -269,6 +282,18 @@ class Client:
                             "poll.fields", "query", "since_id", "start_time",
                             "tweet.fields", "until_id", "user.fields"),
             data_type=Tweet
+        )
+
+    def unfollow(self, user_id):
+        """
+        Unfollow user
+        https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
+        """
+        source_user_id = self.access_token.partition('-')[0]
+        route = f"/2/users/{source_user_id}/following/{user_id}"
+
+        return self._make_request(
+            "DELETE", route, user_auth=True
         )
 
     def unhide_reply(self, tweet_id):
