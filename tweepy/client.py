@@ -164,13 +164,35 @@ class Client:
             data_type=Tweet
         )
 
-    def get_users(self, *, ids=None, usernames=None, **params):
+    def get_user(self, *, id=None, username=None, **params):
         """
         User lookup
-        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-id
-        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by-username-username
+        """
+        if id is not None and username is not None:
+            raise TypeError("Expected ID or username, not both")
+
+        route = "/2/users"
+
+        if id is not None:
+            route += f"/{id}"
+        elif username is not None:
+            route += f"/by/username/{username}"
+        else:
+            raise TypeError("ID or username is required")
+
+        return self._make_request(
+            "GET", route, params=params,
+            allowed_params=("expansions", "tweet_fields", "user_fields"),
+            data_type=User
+        )
+
+    def get_users(self, *, ids=None, usernames=None, **params):
+        """
+        Users lookup
+        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
+        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by
         """
         if ids is not None and usernames is not None:
             raise TypeError("Expected IDs or usernames, not both")
@@ -178,20 +200,10 @@ class Client:
         route = "/2/users"
 
         if ids is not None:
-            if isinstance(ids, (int, str)):
-                route += f"/{ids}"
-            elif len(ids) == 1:
-                route += f"/{ids[0]}"
-            else:
-                params["ids"] = ids
+            params["ids"] = ids
         elif usernames is not None:
-            if isinstance(usernames, str):
-                route += f"/by/username/{usernames}"
-            elif len(usernames) == 1:
-                route += f"/by/username/{usernames[0]}"
-            else:
-                route += "/by"
-                params["usernames"] = usernames
+            route += "/by"
+            params["usernames"] = usernames
         else:
             raise TypeError("IDs or usernames are required")
 
