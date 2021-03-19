@@ -26,11 +26,12 @@ class Paginator:
         count = 0
         for response in PaginationIterator(self.method, *self.args,
                                            **self.kwargs):
-            for data in response.data:
-                yield data
-                count += 1
-                if count == limit:
-                    return
+            if response.data is not None:
+                for data in response.data:
+                    yield data
+                    count += 1
+                    if count == limit:
+                        return
 
 
 class PaginationIterator:
