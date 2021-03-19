@@ -17,6 +17,7 @@ from tweepy.cursor import Cursor
 from tweepy.error import RateLimitError, TweepError
 from tweepy.media import Media
 from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
+from tweepy.pagination import Paginator
 from tweepy.place import Place
 from tweepy.poll import Poll
 from tweepy.streaming import Stream
