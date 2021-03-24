@@ -4,7 +4,7 @@
 
 import json as json_lib
 
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 from tweepy.models import ModelFactory
 
 
@@ -47,7 +47,7 @@ class JSONParser(Parser):
         try:
             json = json_lib.loads(payload)
         except Exception as e:
-            raise TweepError(f'Failed to parse JSON payload: {e}')
+            raise TweepyException(f'Failed to parse JSON payload: {e}')
 
         if return_cursors and isinstance(json, dict):
             if 'next' in json:
@@ -88,7 +88,9 @@ class ModelParser(JSONParser):
                 return
             model = getattr(self.model_factory, payload_type)
         except AttributeError:
-            raise TweepError(f'No model for this payload type: {payload_type}')
+            raise TweepyException(
+                f'No model for this payload type: {payload_type}'
+            )
 
         json = JSONParser.parse(self, payload, return_cursors=return_cursors)
         if isinstance(json, tuple):

@@ -13,6 +13,7 @@ from urllib.parse import urlencode
 import requests
 
 from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
+from tweepy.errors import TweepyException
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -104,7 +105,7 @@ class API:
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.auth:
-            raise TweepError('Authentication required!')
+            raise TweepyException('Authentication required!')
 
         self.cached_result = False
 
@@ -176,7 +177,7 @@ class API:
                         auth=auth, proxies=self.proxy
                     )
                 except Exception as e:
-                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
+                    raise TweepyException(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
                 if 200 <= resp.status_code < 300:
                     break
@@ -1197,16 +1198,16 @@ class API:
         if f is None:
             try:
                 if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError(f'File is too big, must be less than {max_size}kb.')
+                    raise TweepyException(f'File is too big, must be less than {max_size}kb.')
             except os.error as e:
-                raise TweepError(f'Unable to access file: {e.strerror}')
+                raise TweepyException(f'Unable to access file: {e.strerror}')
 
             # build the mulitpart-formdata body
             fp = open(filename, 'rb')
         else:
             f.seek(0, 2)  # Seek to end of file
             if f.tell() > (max_size * 1024):
-                raise TweepError(f'File is too big, must be less than {max_size}kb.')
+                raise TweepyException(f'File is too big, must be less than {max_size}kb.')
             f.seek(0)  # Reset to beginning of file
             fp = f
 
@@ -1218,11 +1219,11 @@ class API:
                 f.seek(0)
             file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
         if file_type is None:
-            raise TweepError('Could not determine file type')
+            raise TweepyException('Could not determine file type')
         if file_type in ['gif', 'jpeg', 'png', 'webp']:
             file_type = 'image/' + file_type
         elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
-            raise TweepError(f'Invalid file type for image: {file_type}')
+            raise TweepyException(f'Invalid file type for image: {file_type}')
 
         if isinstance(filename, str):
             filename = filename.encode('utf-8')
