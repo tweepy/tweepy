@@ -12,7 +12,9 @@ from urllib.parse import urlencode
 
 import requests
 
-from tweepy.errors import HTTPException, NotFound, TooManyRequests, TweepyException
+from tweepy.errors import (
+    HTTPException, NotFound, TooManyRequests, TweepyException, Unauthorized
+)
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -208,6 +210,8 @@ class API:
 
             # If an error was returned, throw an exception
             self.last_response = resp
+            if resp.status_code == 401:
+                raise Unauthorized(resp)
             if resp.status_code == 404:
                 raise NotFound(resp)
             if resp.status_code == 429:

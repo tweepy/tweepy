@@ -13,8 +13,13 @@ from tweepy.api import API
 from tweepy.auth import AppAuthHandler, OAuthHandler
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
-from tweepy.errors import HTTPException, NotFound, TooManyRequests, TweepyException
-from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
+from tweepy.errors import (
+    HTTPException, NotFound, TooManyRequests, TweepyException, Unauthorized
+)
+from tweepy.models import (
+    DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults,
+    Status, User
+)
 from tweepy.streaming import Stream
 
 # Global, unauthenticated instance of API
