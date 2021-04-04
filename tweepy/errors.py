@@ -43,6 +43,11 @@ class HTTPException(TweepyException):
             )
 
 
+class NotFound(HTTPException):
+    """Exception raised for a 404 HTTP status code"""
+    pass
+
+
 class TooManyRequests(HTTPException):
     """Exception raised for a 429 HTTP status code"""
     pass
