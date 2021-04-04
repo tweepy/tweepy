@@ -2,6 +2,7 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
+
 class EqualityComparableID:
     __slots__ = ()
 
