@@ -6,11 +6,16 @@ from collections import namedtuple
 import datetime
 import logging
 from platform import python_version
+import time
 
 import requests
 
 import tweepy
 from tweepy.auth import OAuthHandler
+from tweepy.errors import (
+    BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
+    Unauthorized
+)
 from tweepy.media import Media
 from tweepy.place import Place
 from tweepy.poll import Poll
@@ -36,16 +41,21 @@ class Client:
         Access token
     access_token_secret: Optional[:class:`str`]
         Access token secret
+    wait_on_rate_limit: Optional[:class:`bool`]
+        Whether to wait when rate limit is exceeded
+        Defaults to False
     """
 
     def __init__(self, bearer_token=None, consumer_key=None,
                  consumer_secret=None, access_token=None,
-                 access_token_secret=None):
+                 access_token_secret=None, wait_on_rate_limit=False):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.access_token_secret = access_token_secret
+
+        self.wait_on_rate_limit = wait_on_rate_limit
 
         self.session = requests.Session()
         self.user_agent = (
@@ -65,19 +75,46 @@ class Client:
             auth = auth.apply_auth()
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
-        # TODO: log.debug
+        log.debug(
+            f"Making API request: {method} {host + route}\n"
+            f"Parameters: {params}\n"
+            f"Headers: {headers}\n"
+            f"Body: {json}"
+        )
         with self.session.request(
             method, host + route, params=params, json=json, headers=headers,
             auth=auth
         ) as response:
-            # TODO: log.debug
-            if response.status_code in (400, 403):
-                print(response.status_code)
-                # TODO: Handle
-            elif response.status_code != 200:
-                print(response.status_code)
-                # TODO: Handle
-            # TODO: Handle rate limits
+            log.debug(
+                "Received API response: "
+                f"{response.status_code} {response.reason}\n"
+                f"Headers: {response.headers}\n"
+                f"Content: {response.content}"
+            )
+            if response.status_code == 400:
+                raise BadRequest(response)
+            if response.status_code == 401:
+                raise Unauthorized(response)
+            if response.status_code == 403:
+                raise Forbidden(response)
+            # Handle 404?
+            if response.status_code == 429:
+                if self.wait_on_rate_limit:
+                    reset_time = int(response.headers["x-rate-limit-reset"])
+                    sleep_time = reset_time - int(time.time()) + 1
+                    if sleep_time > 0:
+                        log.warning(
+                            "Rate limit exceeded. "
+                            f"Sleeping for {sleep_time} seconds."
+                        )
+                        time.sleep(sleep_time)
+                    return self.request(method, route, params, json, user_auth)
+                else:
+                    raise TooManyRequests(response)
+            if response.status_code >= 500:
+                raise TwitterServerError(response)
+            if not 200 <= response.status_code < 300:
+                raise HTTPException(response)
             return response.json()
 
     def _make_request(self, method, route, params={}, endpoint_parameters=None,
