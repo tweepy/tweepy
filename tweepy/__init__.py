@@ -13,8 +13,7 @@ from tweepy.api import API
 from tweepy.auth import AppAuthHandler, OAuthHandler
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
-from tweepy.error import RateLimitError, TweepError
-from tweepy.errors import TweepyException
+from tweepy.errors import HTTPException, TooManyRequests, TweepyException
 from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
 from tweepy.streaming import Stream
 

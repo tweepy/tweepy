@@ -12,8 +12,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
-from tweepy.errors import TweepyException
+from tweepy.errors import HTTPException, TooManyRequests, TweepyException
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -209,17 +208,10 @@ class API:
 
             # If an error was returned, throw an exception
             self.last_response = resp
+            if resp.status_code == 429:
+                raise TooManyRequests(resp)
             if resp.status_code and not 200 <= resp.status_code < 300:
-                try:
-                    error_msg, api_error_code = parser.parse_error(resp.text)
-                except Exception:
-                    error_msg = f"Twitter error response: status code = {resp.status_code}"
-                    api_error_code = None
-
-                if is_rate_limit_error_message(error_msg):
-                    raise RateLimitError(error_msg, resp)
-                else:
-                    raise TweepError(error_msg, resp, api_code=api_error_code)
+                raise HTTPException(resp)
 
             # Parse the response payload
             return_cursors = return_cursors or 'cursor' in params or 'next' in params

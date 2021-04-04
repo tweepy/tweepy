@@ -3,7 +3,7 @@ import unittest
 
 from .config import create_auth
 from tweepy import API
-from tweepy.error import TweepError
+from tweepy.errors import HTTPException
 
 testratelimit = 'TEST_RATE_LIMIT' in os.environ
 
@@ -24,9 +24,9 @@ class TweepyRateLimitTests(unittest.TestCase):
         for user_id in test_user_ids:
             try:
                 self.api.user_timeline(user_id=user_id, count=1, include_rts=True)
-            except TweepError as e:
-                # continue if we're not autherized to access the user's timeline or she doesn't exist anymore
-                if e.response is not None and e.response.status in {401, 404}:
+            except HTTPException as e:
+                # continue if we're not autherized to access the user's timeline or user doesn't exist anymore
+                if e.response.status_code in (401, 404):
                     continue
                 raise e
 
