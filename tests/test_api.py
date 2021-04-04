@@ -99,6 +99,18 @@ class TweepyAPITests(TweepyTestCase):
         update = self.api.update_with_media(tweet_text, 'examples/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
+    @tape.use_cassette('testmediauploadpng.yaml', serializer='yaml')
+    def testmediauploadpng(self):
+        self.api.media_upload('examples/banner.png')
+
+    @tape.use_cassette('testmediauploadgif.yaml', serializer='yaml')
+    def testmediauploadgif(self):
+        self.api.media_upload('examples/animated.gif')
+
+    @tape.use_cassette('testmediauploadmp4.yaml', serializer='yaml')
+    def testmediauploadmp4(self):
+        self.api.media_upload('examples/video.mp4')
+
     @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):
         u = self.api.get_user(screen_name='Twitter')

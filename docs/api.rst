@@ -217,8 +217,7 @@ Status methods
    user's status. Statuses that are duplicates or too long will be silently
    ignored.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless `file` is specified
+   :param filename: |filename|
    :param status: The text of your status update.
    :param in_reply_to_status_id: The ID of an existing status that the update
                                  is in reply to.
@@ -230,9 +229,7 @@ Status methods
                   ignores this parameter.
    :param place_id: Twitter ID of location which is listed in the Tweet if
                     geolocation is enabled for the user.
-   :param file: A file object, which will be used instead of opening
-                `filename`. `filename` is still required, for MIME type
-                detection and to use as a form field in the POST data
+   :param file: |file|
    :rtype: :class:`Status` object
 
 
@@ -1321,15 +1318,98 @@ Utility methods
 Media methods
 -------------
 
-.. method:: API.media_upload(filename, [file])
+.. method:: API.media_upload(filename, [file], [chunked], [media_category], \
+                             [additional_owners])
 
-   Use this endpoint to upload images to Twitter.
+   Use this to upload media to Twitter.
+   This calls either :func:`API.simple_upload` or :func:`API.chunked_upload`.
+   Chunked media upload is automatically used for videos.
+   If ``chunked`` is set or the media is a video, ``wait_for_async_finalize``
+   can be specified as a keyword argument to be passed to
+   :func:`API.chunked_upload`.
 
-   :param filename: The filename of the image to upload. This will
-                    automatically be opened unless ``file`` is specified.
-   :param file: A file object, which will be used instead of opening
-                ``filename``. ``filename`` is still required, for MIME type
-                detection and to use as a form field in the POST data.
+   :param filename: |filename|
+   :param file: |file|
+   :param chunked: Whether or not to use chunked media upload. Videos use
+                   chunked upload regardless of this parameter. Defaults to
+                   False.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
+.. method:: API.simple_upload(filename, [file], [media_category], \
+                              [additional_owners])
+
+   Use this endpoint to upload media to Twitter.
+   This does not use the chunked upload endpoints.
+
+   :param filename: |filename|
+   :param file: |file|
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
+.. method:: API.chunked_upload(filename, [file], [file_type], \
+                               [wait_for_async_finalize], [media_category], \
+                               [additional_owners])
+
+   Use this to upload media to Twitter.
+   This uses the chunked upload endpoints and calls
+   :func:`API.chunked_upload_init`, :func:`API.chunked_upload_append`, and
+   :func:`API.chunked_upload_finalize`.
+   If ``wait_for_async_finalize`` is set, this calls
+   :func:`API.get_media_upload_status` as well.
+
+   :param filename: |filename|
+   :param file: |file|
+   :param file_type: The MIME type of the media being uploaded.
+   :param wait_for_async_finalize: Whether to wait for Twitter's API to finish
+                                   processing the media. Defaults to ``True``.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
+.. method:: API.chunked_upload_init(total_bytes, media_type, \
+                                    [media_category], [additional_owners])
+
+   Use this endpoint to initiate a chunked file upload session.
+
+   :param total_bytes: The size of the media being uploaded in bytes.
+   :param media_type: The MIME type of the media being uploaded.
+   :param media_category: |media_category|
+   :param additional_owners: |additional_owners|
+
+   :rtype: :class:`Media` object
+
+
+.. method:: API.chunked_upload_append(media_id, media, segment_index)
+
+   Use this endpoint to upload a chunk (consecutive byte range) of the media
+   file.
+
+   :param media_id: The ``media_id`` returned from the initialization.
+   :param media: The raw binary file content being uploaded. It must be <= 5
+                 MB.
+   :param segment_index: An ordered index of file chunk. It must be between
+                         0-999 inclusive. The first segment has index 0, second
+                         segment has index 1, and so on.
+
+
+.. method:: API.chunked_upload_finalize(media_id)
+
+   Use this endpoint after the entire media file is uploaded via appending.
+   If (and only if) the response contains a ``processing_info field``, it may
+   also be necessary to check its status and wait for it to return success
+   before proceeding to Tweet creation.
+
+   :param media_id: The ``media_id`` returned from the initialization.
+
    :rtype: :class:`Media` object
 
 
@@ -1342,6 +1422,15 @@ Media methods
 
    :param media_id: The ID of the media to add alt text to.
    :param alt_text: The alt text to add to the image.
+
+
+.. method:: API.get_media_upload_status(media_id)
+
+   This endpoints sends a STATUS command that will check on the progress of
+   a chunked media upload. If the upload has succeeded, it's safe to create
+   a tweet with this ``media_id``\ .
+
+   :param media_id: The ID of the media to check.
 
 
 :mod:`tweepy.error` --- Exceptions
