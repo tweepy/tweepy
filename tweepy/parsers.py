@@ -73,10 +73,15 @@ class ModelParser(JSONParser):
         else:
             cursors = None
 
-        if payload_list:
-            result = model.parse_list(api, json)
-        else:
-            result = model.parse(api, json)
+        try:
+            if payload_list:
+                result = model.parse_list(api, json)
+            else:
+                result = model.parse(api, json)
+        except KeyError:
+            raise TweepyException(
+                f"Unable to parse response payload: {json}"
+            ) from None
 
         if cursors:
             return result, cursors
