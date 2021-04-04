@@ -4,7 +4,7 @@
 
 from email.utils import parsedate_to_datetime
 
-from tweepy.mixins import Hashable
+from tweepy.mixins import HashableID
 
 
 class ResultSet(list):
@@ -84,7 +84,7 @@ class Model:
         return f'{self.__class__.__name__}({", ".join(state)})'
 
 
-class Status(Model, Hashable):
+class Status(Model, HashableID):
 
     @classmethod
     def parse(cls, api, json):
@@ -137,7 +137,7 @@ class Status(Model, Hashable):
         return self._api.create_favorite(self.id)
 
 
-class User(Model, Hashable):
+class User(Model, HashableID):
 
     @classmethod
     def parse(cls, api, json):
