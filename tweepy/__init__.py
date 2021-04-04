@@ -14,9 +14,15 @@ from tweepy.auth import AppAuthHandler, OAuthHandler
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.client import Client
 from tweepy.cursor import Cursor
-from tweepy.error import RateLimitError, TweepError
+from tweepy.errors import (
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TweepyException, TwitterServerError, Unauthorized
+)
 from tweepy.media import Media
-from tweepy.models import DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults, Status, User
+from tweepy.models import (
+    DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults,
+    Status, User
+)
 from tweepy.pagination import Paginator
 from tweepy.place import Place
 from tweepy.poll import Poll

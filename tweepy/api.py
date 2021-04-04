@@ -12,7 +12,10 @@ from urllib.parse import urlencode
 
 import requests
 
-from tweepy.error import is_rate_limit_error_message, RateLimitError, TweepError
+from tweepy.errors import (
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TweepyException, TwitterServerError, Unauthorized
+)
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
@@ -98,13 +101,13 @@ class API:
     def request(
         self, method, endpoint, *, endpoint_parameters=(), params=None,
         headers=None, json_payload=None, parser=None, payload_list=False,
-        payload_type=None, post_data=None, require_auth=True,
+        payload_type=None, post_data=None, files=None, require_auth=True,
         return_cursors=False, upload_api=False, use_cache=True, **kwargs
     ):
         # If authentication is required and no credentials
         # are provided, throw an error.
         if require_auth and not self.auth:
-            raise TweepError('Authentication required!')
+            raise TweepyException('Authentication required!')
 
         self.cached_result = False
 
@@ -120,7 +123,7 @@ class API:
         for k, arg in kwargs.items():
             if arg is None:
                 continue
-            if k not in endpoint_parameters:
+            if k not in endpoint_parameters and k != "tweet_mode":
                 log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
         log.debug("PARAMS: %r", params)
@@ -172,11 +175,11 @@ class API:
                 try:
                     resp = self.session.request(
                         method, url, params=params, headers=headers,
-                        data=post_data, json=json_payload, timeout=self.timeout,
-                        auth=auth, proxies=self.proxy
+                        data=post_data, files=files, json=json_payload,
+                        timeout=self.timeout, auth=auth, proxies=self.proxy
                     )
                 except Exception as e:
-                    raise TweepError(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
+                    raise TweepyException(f'Failed to send request: {e}').with_traceback(sys.exc_info()[2])
 
                 if 200 <= resp.status_code < 300:
                     break
@@ -208,17 +211,20 @@ class API:
 
             # If an error was returned, throw an exception
             self.last_response = resp
+            if resp.status_code == 400:
+                raise BadRequest(resp)
+            if resp.status_code == 401:
+                raise Unauthorized(resp)
+            if resp.status_code == 403:
+                raise Forbidden(resp)
+            if resp.status_code == 404:
+                raise NotFound(resp)
+            if resp.status_code == 429:
+                raise TooManyRequests(resp)
+            if resp.status_code >= 500:
+                raise TwitterServerError(resp)
             if resp.status_code and not 200 <= resp.status_code < 300:
-                try:
-                    error_msg, api_error_code = parser.parse_error(resp.text)
-                except Exception:
-                    error_msg = f"Twitter error response: status code = {resp.status_code}"
-                    api_error_code = None
-
-                if is_rate_limit_error_message(error_msg):
-                    raise RateLimitError(error_msg, resp)
-                else:
-                    raise TweepError(error_msg, resp, api_code=api_error_code)
+                raise HTTPException(resp)
 
             # Parse the response payload
             return_cursors = return_cursors or 'cursor' in params or 'next' in params
@@ -321,30 +327,148 @@ class API:
             ), status=status, **kwargs
         )
 
-    @payload('media')
-    def media_upload(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
+    def media_upload(self, filename, *, file=None, chunked=False,
+                     media_category=None, additional_owners=None, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
         h = None
         if file is not None:
             location = file.tell()
             h = file.read(32)
             file.seek(location)
-        file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
-        if file_type == 'gif':
-            max_size = 14649
+        file_type = imghdr.what(filename, h=h)
+        if file_type is not None:
+            file_type = 'image/' + file_type
         else:
-            max_size = 4883
+            file_type = mimetypes.guess_type(filename)[0]
 
-        headers, post_data = API._pack_image(filename, max_size,
-                                             form_field='media', f=file,
-                                             file_type=file_type)
-        kwargs.update({'headers': headers, 'post_data': post_data})
+        if chunked or file_type.startswith('video/'):
+            return self.chunked_upload(
+                filename, file=file, file_type=file_type,
+                media_category=media_category,
+                additional_owners=additional_owners, **kwargs
+            )
+        else:
+            return self.simple_upload(
+                filename, file=file, media_category=media_category,
+                additional_owners=additional_owners, **kwargs
+            )
+
+    @payload('media')
+    def simple_upload(self, filename, *, file=None, media_category=None,
+                      additional_owners=None, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
+        """
+        if file is not None:
+            files = {'media': (filename, file)}
+        else:
+            files = {'media': open(filename, 'rb')}
+
+        post_data = {}
+        if media_category is not None:
+            post_data['media_category'] = media_category
+        if additional_owners is not None:
+            post_data['additional_owners'] = additional_owners
 
         return self.request(
-            'POST', 'media/upload', endpoint_parameters=(
-                'media_category', 'additional_owners'
-            ), upload_api=True, **kwargs
+            'POST', 'media/upload', post_data=post_data, files=files,
+            upload_api=True, **kwargs
+        )
+
+    def chunked_upload(self, filename, *, file=None, file_type=None,
+                       wait_for_async_finalize=True, media_category=None,
+                       additional_owners=None, **kwargs):
+        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
+        """
+        fp = file or open(filename, 'rb')
+
+        start = fp.tell()
+        fp.seek(0, 2)  # Seek to end of file
+        file_size = fp.tell() - start
+        fp.seek(start)
+
+        media_id = self.chunked_upload_init(
+            file_size, file_type, media_category=media_category,
+            additional_owners=additional_owners, **kwargs
+        ).media_id
+
+        min_chunk_size, remainder = divmod(file_size, 1000)
+        min_chunk_size += bool(remainder)
+
+        # Use 1 MiB as default chunk size
+        chunk_size = kwargs.pop('chunk_size', 1024 * 1024)
+        # Max chunk size is 5 MiB
+        chunk_size = max(min(chunk_size, 5 * 1024 * 1024), min_chunk_size)
+
+        segments, remainder = divmod(file_size, chunk_size)
+        segments += bool(remainder)
+
+        for segment_index in range(segments):
+            # The APPEND command returns an empty response body
+            self.chunked_upload_append(
+                media_id, (filename, fp.read(chunk_size)), segment_index,
+                **kwargs
+            )
+
+        fp.close()
+        media =  self.chunked_upload_finalize(media_id, **kwargs)
+
+        if wait_for_async_finalize and hasattr(media, 'processing_info'):
+            while media.processing_info['state'] in ('pending', 'in_progress'):
+                time.sleep(media.processing_info['check_after_secs'])
+                media = self.get_media_upload_status(media.media_id, **kwargs)
+
+        return media
+
+    @payload('media')
+    def chunked_upload_init(self, total_bytes, media_type, *,
+                            media_category=None, additional_owners=None,
+                            **kwargs):
+        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
+        """
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+        post_data = {
+            'command': 'INIT',
+            'total_bytes': total_bytes,
+            'media_type': media_type,
+        }
+        if media_category is not None:
+            post_data['media_category'] = media_category
+        if additional_owners is not None:
+            post_data['additional_owners'] = list_to_csv(additional_owners)
+
+        return self.request(
+            'POST', 'media/upload', headers=headers, post_data=post_data,
+            upload_api=True, **kwargs
+        )
+
+    def chunked_upload_append(self, media_id, media, segment_index, **kwargs):
+        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
+        """
+        post_data = {
+            'command': 'APPEND',
+            'media_id': media_id,
+            'segment_index': segment_index
+        }
+        files = {'media': media}
+        return self.request(
+            'POST', 'media/upload', post_data=post_data, files=files,
+            upload_api=True, **kwargs
+        )
+
+    @payload('media')
+    def chunked_upload_finalize(self, media_id, **kwargs):
+        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
+        """
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        post_data = {
+            'command': 'FINALIZE',
+            'media_id': media_id
+        }
+        return self.request(
+            'POST', 'media/upload', headers=headers, post_data=post_data,
+            upload_api=True, **kwargs
         )
 
     def create_media_metadata(self, media_id, alt_text, **kwargs):
@@ -364,15 +488,25 @@ class API:
     def update_with_media(self, status, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
-        headers, post_data = API._pack_image(filename, 3072,
-                                             form_field='media[]', f=file)
-        kwargs.update({'headers': headers, 'post_data': post_data})
-
+        if file is not None:
+            files = {'media[]': (filename, file)}
+        else:
+            files = {'media[]': open(filename, 'rb')}
         return self.request(
             'POST', 'statuses/update_with_media', endpoint_parameters=(
                 'status', 'possibly_sensitive', 'in_reply_to_status_id',
                 'lat', 'long', 'place_id', 'display_coordinates'
-            ), status=status, **kwargs
+            ), status=status, files=files, **kwargs
+        )
+
+    @payload('media')
+    def get_media_upload_status(self, media_id, **kwargs):
+        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
+        """
+        return self.request(
+            'GET', 'media/upload', endpoint_parameters=(
+                'command', 'media_id'
+            ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
 
     @payload('status')
@@ -691,22 +825,27 @@ class API:
     def update_profile_image(self, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
         """
-        headers, post_data = API._pack_image(filename, 700, f=file)
+        if file is not None:
+            files = {'image': (filename, file)}
+        else:
+            files = {'image': open(filename, 'rb')}
         return self.request(
             'POST', 'account/update_profile_image', endpoint_parameters=(
                 'include_entities', 'skip_status'
-            ), post_data=post_data, headers=headers, **kwargs
+            ), files=files, **kwargs
         )
 
     def update_profile_banner(self, filename, *, file=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
-        headers, post_data = API._pack_image(filename, 700,
-                                             form_field='banner', f=file)
+        if file is not None:
+            files = {'banner': (filename, file)}
+        else:
+            files = {'banner': open(filename, 'rb')}
         return self.request(
             'POST', 'account/update_profile_banner', endpoint_parameters=(
                 'width', 'height', 'offset_left', 'offset_right'
-            ), post_data=post_data, headers=headers, **kwargs
+            ), files=files, **kwargs
         )
 
     @payload('user')
@@ -1187,64 +1326,3 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
         """
         return self.request('GET', 'help/configuration', **kwargs)
-
-    """ Internal use only """
-
-    @staticmethod
-    def _pack_image(filename, max_size, form_field='image', f=None, file_type=None):
-        """Pack image from file into multipart-formdata post body"""
-        # image must be less than 700kb in size
-        if f is None:
-            try:
-                if os.path.getsize(filename) > (max_size * 1024):
-                    raise TweepError(f'File is too big, must be less than {max_size}kb.')
-            except os.error as e:
-                raise TweepError(f'Unable to access file: {e.strerror}')
-
-            # build the mulitpart-formdata body
-            fp = open(filename, 'rb')
-        else:
-            f.seek(0, 2)  # Seek to end of file
-            if f.tell() > (max_size * 1024):
-                raise TweepError(f'File is too big, must be less than {max_size}kb.')
-            f.seek(0)  # Reset to beginning of file
-            fp = f
-
-        # image must be gif, jpeg, png, webp
-        if not file_type:
-            h = None
-            if f is not None:
-                h = f.read(32)
-                f.seek(0)
-            file_type = imghdr.what(filename, h=h) or mimetypes.guess_type(filename)[0]
-        if file_type is None:
-            raise TweepError('Could not determine file type')
-        if file_type in ['gif', 'jpeg', 'png', 'webp']:
-            file_type = 'image/' + file_type
-        elif file_type not in ['image/gif', 'image/jpeg', 'image/png']:
-            raise TweepError(f'Invalid file type for image: {file_type}')
-
-        if isinstance(filename, str):
-            filename = filename.encode('utf-8')
-
-        BOUNDARY = b'Tw3ePy'
-        body = []
-        body.append(b'--' + BOUNDARY)
-        body.append(f'Content-Disposition: form-data; name="{form_field}";'
-                    f' filename="{filename}"'
-                    .encode('utf-8'))
-        body.append(f'Content-Type: {file_type}'.encode('utf-8'))
-        body.append(b'')
-        body.append(fp.read())
-        body.append(b'--' + BOUNDARY + b'--')
-        body.append(b'')
-        fp.close()
-        body = b'\r\n'.join(body)
-
-        # build headers
-        headers = {
-            'Content-Type': 'multipart/form-data; boundary=Tw3ePy',
-            'Content-Length': str(len(body))
-        }
-
-        return headers, body

@@ -15,20 +15,6 @@ tweet_text = 'testing 1000'
 """Unit tests"""
 
 
-class TweepyErrorTests(unittest.TestCase):
-
-    def testpickle(self):
-        """Verify exceptions can be pickled and unpickled."""
-        import pickle
-        from tweepy.error import TweepError
-
-        e = TweepError('no reason', {'status': 200})
-        e2 = pickle.loads(pickle.dumps(e))
-
-        self.assertEqual(e.reason, e2.reason)
-        self.assertEqual(e.response, e2.response)
-
-
 class TweepyAPITests(TweepyTestCase):
 
     #@tape.use_cassette('testfailure.json')
@@ -112,6 +98,18 @@ class TweepyAPITests(TweepyTestCase):
     def testupdatestatuswithmedia(self):
         update = self.api.update_with_media(tweet_text, 'examples/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
+
+    @tape.use_cassette('testmediauploadpng.yaml', serializer='yaml')
+    def testmediauploadpng(self):
+        self.api.media_upload('examples/banner.png')
+
+    @tape.use_cassette('testmediauploadgif.yaml', serializer='yaml')
+    def testmediauploadgif(self):
+        self.api.media_upload('examples/animated.gif')
+
+    @tape.use_cassette('testmediauploadmp4.yaml', serializer='yaml')
+    def testmediauploadmp4(self):
+        self.api.media_upload('examples/video.mp4')
 
     @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):

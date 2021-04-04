@@ -17,7 +17,7 @@ from requests_oauthlib import OAuth1
 import urllib3
 
 import tweepy
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 from tweepy.models import Status
 
 log = logging.getLogger(__name__)
@@ -119,6 +119,7 @@ class Stream:
                             if http_error_wait > http_error_wait_max:
                                 http_error_wait = http_error_wait_max
                 except (requests.ConnectionError, requests.Timeout,
+                        requests.exceptions.ChunkedEncodingError,
                         ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
                         urllib3.exceptions.ProtocolError) as exc:
                     # This is still necessary, as a SSLError can actually be
@@ -154,7 +155,7 @@ class Stream:
                filter_level=None, languages=None, stall_warnings=False,
                threaded=False):
         if self.running:
-            raise TweepError("Stream is already connected")
+            raise TweepyException("Stream is already connected")
 
         method = "POST"
         endpoint = "statuses/filter"
@@ -167,7 +168,7 @@ class Stream:
             body["track"] = ','.join(map(str, track))
         if locations and len(locations) > 0:
             if len(locations) % 4:
-                raise TweepError(
+                raise TweepyException(
                     "Number of location coordinates should be a multiple of 4"
                 )
             body["locations"] = ','.join(f"{l:.4f}" for l in locations)
@@ -186,7 +187,7 @@ class Stream:
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         if self.running:
-            raise TweepError("Stream is already connected")
+            raise TweepyException("Stream is already connected")
 
         method = "GET"
         endpoint = "statuses/sample"

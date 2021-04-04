@@ -2,7 +2,7 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 from tweepy.parsers import ModelParser, RawParser
 
 
@@ -22,9 +22,9 @@ class Cursor:
             elif method.pagination_mode == 'page':
                 self.iterator = PageIterator(method, *args, **kwargs)
             else:
-                raise TweepError('Invalid pagination mode.')
+                raise TweepyException('Invalid pagination mode.')
         else:
-            raise TweepError('This method does not perform pagination')
+            raise TweepyException('This method does not perform pagination')
 
     def pages(self, limit=0):
         """Return iterator for pages"""
@@ -83,7 +83,7 @@ class CursorIterator(BaseIterator):
 
     def prev(self):
         if self.prev_cursor == 0:
-            raise TweepError('Can not page back more, at first page')
+            raise TweepyException('Can not page back more, at first page')
         data, self.next_cursor, self.prev_cursor = self.method(cursor=self.prev_cursor,
                                                                *self.args,
                                                                **self.kwargs)
@@ -110,7 +110,7 @@ class DMCursorIterator(BaseIterator):
         return data
 
     def prev(self):
-        raise TweepError('This method does not allow backwards pagination')
+        raise TweepyException('This method does not allow backwards pagination')
 
 
 class IdIterator(BaseIterator):
@@ -208,7 +208,7 @@ class PageIterator(BaseIterator):
 
     def prev(self):
         if self.current_page == 1:
-            raise TweepError('Can not page back more, at first page')
+            raise TweepyException('Can not page back more, at first page')
         self.current_page -= 1
         return self.method(page=self.current_page, *self.args, **self.kwargs)
 
@@ -232,7 +232,7 @@ class NextIterator(BaseIterator):
         return data
 
     def prev(self):
-        raise TweepError('This method does not allow backwards pagination')
+        raise TweepyException('This method does not allow backwards pagination')
 
 
 class ItemIterator(BaseIterator):
@@ -260,13 +260,13 @@ class ItemIterator(BaseIterator):
 
     def prev(self):
         if self.current_page is None:
-            raise TweepError('Can not go back more, at first page')
+            raise TweepyException('Can not go back more, at first page')
         if self.page_index == 0:
             # At the beginning of the current page, move to next...
             self.current_page = self.page_iterator.prev()
             self.page_index = len(self.current_page)
             if self.page_index == 0:
-                raise TweepError('No more items')
+                raise TweepyException('No more items')
         self.page_index -= 1
         self.num_tweets -= 1
         return self.current_page[self.page_index]
