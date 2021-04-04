@@ -13,8 +13,8 @@ from urllib.parse import urlencode
 import requests
 
 from tweepy.errors import (
-    Forbidden, HTTPException, NotFound, TooManyRequests, TweepyException,
-    Unauthorized
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TweepyException, Unauthorized
 )
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
@@ -211,6 +211,8 @@ class API:
 
             # If an error was returned, throw an exception
             self.last_response = resp
+            if resp.status_code == 400:
+                raise BadRequest(resp)
             if resp.status_code == 401:
                 raise Unauthorized(resp)
             if resp.status_code == 403:

@@ -43,6 +43,11 @@ class HTTPException(TweepyException):
             )
 
 
+class BadRequest(HTTPException):
+    """Exception raised for a 400 HTTP status code"""
+    pass
+
+
 class Unauthorized(HTTPException):
     """Exception raised for a 401 HTTP status code"""
     pass

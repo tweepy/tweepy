@@ -14,8 +14,8 @@ from tweepy.auth import AppAuthHandler, OAuthHandler
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
 from tweepy.errors import (
-    Forbidden, HTTPException, NotFound, TooManyRequests, TweepyException,
-    Unauthorized
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TweepyException, Unauthorized
 )
 from tweepy.models import (
     DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults,
