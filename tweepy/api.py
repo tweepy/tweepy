@@ -123,7 +123,7 @@ class API:
         for k, arg in kwargs.items():
             if arg is None:
                 continue
-            if k not in endpoint_parameters:
+            if k not in endpoint_parameters and k != "tweet_mode":
                 log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
         log.debug("PARAMS: %r", params)
