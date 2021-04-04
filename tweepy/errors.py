@@ -48,6 +48,11 @@ class Unauthorized(HTTPException):
     pass
 
 
+class Forbidden(HTTPException):
+    """Exception raised for a 403 HTTP status code"""
+    pass
+
+
 class NotFound(HTTPException):
     """Exception raised for a 404 HTTP status code"""
     pass

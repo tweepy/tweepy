@@ -13,7 +13,8 @@ from urllib.parse import urlencode
 import requests
 
 from tweepy.errors import (
-    HTTPException, NotFound, TooManyRequests, TweepyException, Unauthorized
+    Forbidden, HTTPException, NotFound, TooManyRequests, TweepyException,
+    Unauthorized
 )
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
@@ -212,6 +213,8 @@ class API:
             self.last_response = resp
             if resp.status_code == 401:
                 raise Unauthorized(resp)
+            if resp.status_code == 403:
+                raise Forbidden(resp)
             if resp.status_code == 404:
                 raise NotFound(resp)
             if resp.status_code == 429:
