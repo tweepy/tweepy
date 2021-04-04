@@ -119,6 +119,7 @@ class Stream:
                             if http_error_wait > http_error_wait_max:
                                 http_error_wait = http_error_wait_max
                 except (requests.ConnectionError, requests.Timeout,
+                        requests.exceptions.ChunkedEncodingError,
                         ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
                         urllib3.exceptions.ProtocolError) as exc:
                     # This is still necessary, as a SSLError can actually be
