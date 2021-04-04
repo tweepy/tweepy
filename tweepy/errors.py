@@ -66,3 +66,7 @@ class NotFound(HTTPException):
 class TooManyRequests(HTTPException):
     """Exception raised for a 429 HTTP status code"""
     pass
+
+
+class TwitterServerError(HTTPException):
+    """Exception raised for a 5xx HTTP status code"""

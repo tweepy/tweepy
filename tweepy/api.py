@@ -14,7 +14,7 @@ import requests
 
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
-    TweepyException, Unauthorized
+    TweepyException, TwitterServerError, Unauthorized
 )
 from tweepy.models import Model
 from tweepy.parsers import ModelParser, Parser
@@ -221,6 +221,8 @@ class API:
                 raise NotFound(resp)
             if resp.status_code == 429:
                 raise TooManyRequests(resp)
+            if resp.status_code >= 500:
+                raise TwitterServerError(resp)
             if resp.status_code and not 200 <= resp.status_code < 300:
                 raise HTTPException(resp)
 

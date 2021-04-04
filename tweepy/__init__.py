@@ -15,7 +15,7 @@ from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.cursor import Cursor
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
-    TweepyException, Unauthorized
+    TweepyException, TwitterServerError, Unauthorized
 )
 from tweepy.models import (
     DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults,
