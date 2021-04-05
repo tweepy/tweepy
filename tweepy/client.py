@@ -68,7 +68,6 @@ class Client:
         host = "https://api.twitter.com"
         headers = {"User-Agent": self.user_agent}
         auth = None
-        # TODO: Ability to choose app or user auth
         if user_auth:
             auth = OAuthHandler(self.consumer_key, self.consumer_secret)
             auth.set_access_token(self.access_token, self.access_token_secret)
@@ -175,7 +174,7 @@ class Client:
             user_auth=True
         )
 
-    def get_tweet(self, id, **params):
+    def get_tweet(self, id, *, user_auth=False, **params):
         """
         Tweet lookup
         https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets-id
@@ -185,10 +184,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "media.fields", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
-            ), data_type=Tweet
+            ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_tweets(self, ids, **params):
+    def get_tweets(self, ids, *, user_auth=False, **params):
         """
         Tweets lookup
         https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets
@@ -199,10 +198,10 @@ class Client:
             endpoint_parameters=(
                 "ids", "expansions", "media.fields", "place.fields",
                 "poll.fields", "tweet.fields", "user.fields"
-            ), data_type=Tweet
+            ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_user(self, *, id=None, username=None, **params):
+    def get_user(self, *, id=None, username=None, user_auth=False, **params):
         """
         User lookup
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-id
@@ -223,10 +222,10 @@ class Client:
         return self._make_request(
             "GET", route, params=params,
             endpoint_parameters=("expansions", "tweet.fields", "user.fields"),
-            data_type=User
+            data_type=User, user_auth=user_auth
         )
 
-    def get_users(self, *, ids=None, usernames=None, **params):
+    def get_users(self, *, ids=None, usernames=None, user_auth=False, **params):
         """
         Users lookup
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
@@ -249,10 +248,10 @@ class Client:
             "GET", route, params=params,
             endpoint_parameters=(
                 "ids", "usernames", "expansions", "tweet.fields", "user.fields"
-            ), data_type=User
+            ), data_type=User, user_auth=user_auth
         )
 
-    def get_users_followers(self, id, **params):
+    def get_users_followers(self, id, *, user_auth=False, **params):
         """
         Followers lookup
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
@@ -263,10 +262,10 @@ class Client:
                 "expansions", "max_results", "pagination_token",
                 "tweet.fields", "user.fields"
             ),
-            data_type=User
+            data_type=User, user_auth=user_auth
         )
 
-    def get_users_following(self, id, **params):
+    def get_users_following(self, id, *, user_auth=False, **params):
         """
         Following lookup
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-following
@@ -276,10 +275,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "max_results", "pagination_token",
                 "tweet.fields", "user.fields"
-            ), data_type=User
+            ), data_type=User, user_auth=user_auth
         )
 
-    def get_users_mentions(self, id, **params):
+    def get_users_mentions(self, id, *, user_auth=False, **params):
         """
         User mention timeline
         https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-mentions
@@ -290,10 +289,10 @@ class Client:
                 "end_time", "expansions", "max_results", "media.fields",
                 "pagination_token", "place.fields", "poll.fields", "since_id",
                 "start_time", "tweet.fields", "until_id", "user.fields"
-            ), data_type=Tweet
+            ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_users_tweets(self, id, **params):
+    def get_users_tweets(self, id, *, user_auth=False, **params):
         """
         User Tweet timeline
         https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
@@ -305,7 +304,7 @@ class Client:
                 "media.fields", "pagination_token", "place.fields",
                 "poll.fields", "since_id", "start_time", "tweet.fields",
                 "until_id", "user.fields"
-            ), data_type=Tweet
+            ), data_type=Tweet, user_auth=user_auth
         )
 
     def hide_reply(self, id):
@@ -334,7 +333,7 @@ class Client:
             ), data_type=Tweet
         )
 
-    def search_recent_tweets(self, query, **params):
+    def search_recent_tweets(self, query, *, user_auth=False, **params):
         """
         Search Tweets: recent search
         https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent
@@ -347,7 +346,7 @@ class Client:
                 "next_token", "place.fields", "poll.fields", "query",
                 "since_id", "start_time", "tweet.fields", "until_id",
                 "user.fields"
-            ), data_type=Tweet
+            ), data_type=Tweet, user_auth=user_auth
         )
 
     def unfollow(self, target_user_id):
