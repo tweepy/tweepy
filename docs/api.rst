@@ -2,8 +2,9 @@
 
 .. include:: parameters.rst
 
+*************
 API Reference
-=============
+*************
 
 This page contains some basic documentation for the Tweepy module.
 
