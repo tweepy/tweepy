@@ -567,6 +567,26 @@ class API:
         )
 
     @payload('status')
+    def create_favorite(self, id, **kwargs):
+        """create_favorite(id, *, include_entities)
+
+        Favorites the status specified in the ``id`` parameter as the
+        authenticating user.
+
+        :param id: |sid|
+        :param include_entities: |include_entities|
+
+        :rtype: :class:`Status` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create
+        """
+        return self.request(
+            'POST', 'favorites/create', endpoint_parameters=(
+                'id', 'include_entities'
+            ), id=id, **kwargs
+        )
+
+    @payload('status')
     def update_status(self, status, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
         """
@@ -1080,16 +1100,6 @@ class API:
                 'name', 'url', 'location', 'description', 'profile_link_color',
                 'include_entities', 'skip_status'
             ), **kwargs
-        )
-
-    @payload('status')
-    def create_favorite(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create
-        """
-        return self.request(
-            'POST', 'favorites/create', endpoint_parameters=(
-                'id', 'include_entities'
-            ), id=id, **kwargs
         )
 
     @payload('status')

@@ -45,6 +45,8 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.get_status
 
+.. automethod:: API.create_favorite
+
 
 Status methods
 --------------
@@ -443,15 +445,6 @@ Account Methods
 
 Favorite Methods
 ----------------
-
-.. method:: API.create_favorite(id)
-
-   Favorites the status specified in the ID parameter as the authenticating
-   user.
-
-   :param id: |sid|
-   :rtype: :class:`Status` object
-
 
 .. method:: API.destroy_favorite(id)
 
