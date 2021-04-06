@@ -30,20 +30,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.favorites
 
-.. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
-                                [include_ext_alt_text], [include_card_uri])
-
-   Returns full Tweet objects for up to 100 tweets per request, specified by
-   the ``id_`` parameter.
-
-   :param id\_: A list of Tweet IDs to lookup, up to 100
-   :param include_entities: |include_entities|
-   :param trim_user: |trim_user|
-   :param map\_: A boolean indicating whether or not to include tweets that
-                 cannot be shown. Defaults to False.
-   :param include_ext_alt_text: |include_ext_alt_text|
-   :param include_card_uri: |include_card_uri|
-   :rtype: list of :class:`Status` objects
+.. automethod:: API.statuses_lookup
 
 .. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
 
