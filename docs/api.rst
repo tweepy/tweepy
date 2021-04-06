@@ -47,6 +47,8 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.create_favorite
 
+.. automethod:: API.destroy_favorite
+
 
 Status methods
 --------------
@@ -441,18 +443,6 @@ Account Methods
    :param location: Maximum of 30 characters
    :param description: Maximum of 160 characters
    :rtype: :class:`User` object
-
-
-Favorite Methods
-----------------
-
-.. method:: API.destroy_favorite(id)
-
-   Un-favorites the status specified in the ID parameter as the authenticating
-   user.
-
-   :param id: |sid|
-   :rtype: :class:`Status` object
 
 
 Block Methods
