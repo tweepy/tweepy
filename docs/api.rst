@@ -28,6 +28,8 @@ Get Tweet timelines
 Post, retrieve, and engage with Tweets
 --------------------------------------
 
+.. automethod:: API.favorites
+
 .. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
                                 [include_ext_alt_text], [include_card_uri])
 
@@ -553,16 +555,6 @@ Account Methods
 
 Favorite Methods
 ----------------
-
-.. method:: API.favorites([id], [page])
-
-   Returns the favorite statuses for the authenticating user or user specified
-   by the ID parameter.
-
-   :param id: The ID or screen name of the user to request favorites
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
-
 
 .. method:: API.create_favorite(id)
 

@@ -342,6 +342,33 @@ class API:
 
     # Post, retrieve, and engage with Tweets
 
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def favorites(self, **kwargs):
+        """favorites(*, user_id, screen_name, count, since_id, max_id, \
+                     include_entities)
+
+        Returns the favorite statuses for the authenticating user or user
+        specified by the ID parameter.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param count: |count|
+        :param since_id: |since_id|
+        :param max_id: |max_id|
+        :param include_entities: |include_entities|
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list
+        """
+        return self.request(
+            'GET', 'favorites/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'since_id', 'max_id',
+                'include_entities'
+            ), **kwargs
+        )
+
     @payload('status', list=True)
     def statuses_lookup(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
@@ -922,18 +949,6 @@ class API:
             'POST', 'account/update_profile', endpoint_parameters=(
                 'name', 'url', 'location', 'description', 'profile_link_color',
                 'include_entities', 'skip_status'
-            ), **kwargs
-        )
-
-    @pagination(mode='id')
-    @payload('status', list=True)
-    def favorites(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list
-        """
-        return self.request(
-            'GET', 'favorites/list', endpoint_parameters=(
-                'user_id', 'screen_name', 'count', 'since_id', 'max_id',
-                'include_entities'
             ), **kwargs
         )
 
