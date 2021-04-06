@@ -56,7 +56,7 @@ class API:
     :param cache: The cache to query if a GET method is used
     :param host: The general REST API host server URL
     :param parser: The Parser instance to use for parsing the response from
-                   Twitter
+                   Twitter; defaults to an instance of ModelParser
     :param proxy: The full url to an HTTPS proxy to use for connecting to
                   Twitter
     :param retry_count: Number of retries to attempt when an error occurs
@@ -74,12 +74,15 @@ class API:
     """
 
     def __init__(self, auth_handler=None, *, cache=None,
-                 host='api.twitter.com', parser=ModelParser(), proxy=None,
+                 host='api.twitter.com', parser=None, proxy=None,
                  retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
                  upload_host='upload.twitter.com', wait_on_rate_limit=False):
         self.auth = auth_handler
         self.cache = cache
         self.host = host
+
+        if parser is None:
+            parser = ModelParser()
         self.parser = parser
 
         self.proxy = {}
