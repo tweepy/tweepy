@@ -73,10 +73,10 @@ class API:
     :reference: https://developer.twitter.com/en/docs/api-reference-index
     """
 
-    def __init__(self, auth_handler=None,
-                 host='api.twitter.com', upload_host='upload.twitter.com',
-                 cache=None, retry_count=0, retry_delay=0, retry_errors=None,
-                 timeout=60, parser=None, wait_on_rate_limit=False, proxy=''):
+    def __init__(self, auth_handler=None, host='api.twitter.com',
+                 upload_host='upload.twitter.com', cache=None, retry_count=0,
+                 retry_delay=0, retry_errors=None, timeout=60,
+                 parser=ModelParser(), wait_on_rate_limit=False, proxy=''):
         self.auth = auth_handler
         self.host = host
         self.upload_host = upload_host
@@ -86,7 +86,7 @@ class API:
         self.retry_errors = retry_errors
         self.timeout = timeout
         self.wait_on_rate_limit = wait_on_rate_limit
-        self.parser = parser or ModelParser()
+        self.parser = parser
         self.proxy = {}
         if proxy:
             self.proxy['https'] = proxy
@@ -94,11 +94,10 @@ class API:
         # Attempt to explain more clearly the parser argument requirements
         # https://github.com/tweepy/tweepy/issues/421
 
-        parser_type = Parser
-        if not isinstance(self.parser, parser_type):
+        if not isinstance(self.parser, Parser):
             raise TypeError(
-                f'"parser" argument has to be an instance of "{parser_type.__name__}".'
-                f' It is currently a {type(self.parser)}.'
+                '"parser" argument has to be an instance of "Parser". '
+                f'It is currently a {type(self.parser)}.'
             )
 
         self.session = requests.Session()
