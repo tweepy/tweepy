@@ -23,6 +23,8 @@ Timeline methods
 
 .. automethod:: API.mentions_timeline
 
+.. automethod:: API.user_timeline
+
 .. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
                                 [include_ext_alt_text], [include_card_uri])
 
@@ -37,30 +39,6 @@ Timeline methods
    :param include_ext_alt_text: |include_ext_alt_text|
    :param include_card_uri: |include_card_uri|
    :rtype: list of :class:`Status` objects
-
-
-.. method:: API.user_timeline([user_id/screen_name], [since_id], [count], \
-                              [max_id], [trim_user], [exclude_replies], \
-                              [include_rts])
-
-   Returns the 20 most recent statuses posted from the authenticating user or
-   the user specified. It's also possible to request another user's timeline
-   via the id parameter.
-
-   :param user_id: |user_id|
-   :param screen_name: |screen_name|
-   :param since_id: |since_id|
-   :param count: |count|
-   :param max_id: |max_id|
-   :param trim_user: |trim_user|
-   :param exclude_replies: |exclude_replies|
-   :param include_rts: When set to ``false``, the timeline will strip any
-      native retweets (though they will still count toward both the maximal
-      length of the timeline and the slice selected by the count parameter).
-      Note: If you're using the trim_user parameter in conjunction with
-      include_rts, the retweets will still contain a full user object.
-   :rtype: list of :class:`Status` objects
-
 
 .. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
 

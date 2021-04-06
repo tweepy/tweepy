@@ -303,6 +303,41 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def user_timeline(self, **kwargs):
+        """user_timeline(*, user_id, screen_name, since_id, count, max_id, \
+                         trim_user, exclude_replies, include_rts)
+
+        Returns the 20 most recent statuses posted from the authenticating user
+        or the user specified. It's also possible to request another user's
+        timeline via the id parameter.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param since_id: |since_id|
+        :param count: |count|
+        :param max_id: |max_id|
+        :param trim_user: |trim_user|
+        :param exclude_replies: |exclude_replies|
+        :param include_rts: When set to ``false``, the timeline will strip any
+            native retweets (though they will still count toward both the
+            maximal length of the timeline and the slice selected by the count
+            parameter). Note: If you're using the trim_user parameter in
+            conjunction with include_rts, the retweets will still contain a
+            full user object.
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
+        """
+        return self.request(
+            'GET', 'statuses/user_timeline', endpoint_parameters=(
+                'user_id', 'screen_name', 'since_id', 'count', 'max_id',
+                'trim_user', 'exclude_replies', 'include_rts'
+            ), **kwargs
+        )
+
     @payload('status', list=True)
     def statuses_lookup(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
@@ -312,18 +347,6 @@ class API:
                 'id', 'include_entities', 'trim_user', 'map',
                 'include_ext_alt_text', 'include_card_uri'
             ), id=list_to_csv(id), **kwargs
-        )
-
-    @pagination(mode='id')
-    @payload('status', list=True)
-    def user_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
-        """
-        return self.request(
-            'GET', 'statuses/user_timeline', endpoint_parameters=(
-                'user_id', 'screen_name', 'since_id', 'count', 'max_id',
-                'trim_user', 'exclude_replies', 'include_rts'
-            ), **kwargs
         )
 
     @pagination(mode='id')
