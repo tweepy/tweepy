@@ -49,34 +49,33 @@ def payload(payload_type, **payload_kwargs):
 
 
 class API:
-    """Twitter API"""
+    """This class provides a wrapper for the API as provided by Twitter.
+    The functions provided in this class are listed below.
+
+    :param auth_handler: The authentication handler to be used
+    :param host: The general REST API host server URL
+    :param upload_host: The URL of the upload server
+    :param cache: The cache to query if a GET method is used
+    :param retry_count: Number of retries to attempt when an error occurs
+    :param retry_delay: Number of seconds to wait between retries
+    :param retry_errors: Which HTTP status codes to retry
+    :param timeout: The maximum amount of time to wait for a response from
+                    Twitter
+    :param parser: The object to use for parsing the response from Twitter
+    :param wait_on_rate_limit: Whether or not to automatically wait for rate
+                               limits to replenish
+    :param proxy: The full url to an HTTPS proxy to use for connecting to
+                  Twitter
+    
+    :raise TypeError: If the given parser is not a ModelParser instance
+
+    :reference: https://developer.twitter.com/en/docs/api-reference-index
+    """
 
     def __init__(self, auth_handler=None,
                  host='api.twitter.com', upload_host='upload.twitter.com',
                  cache=None, retry_count=0, retry_delay=0, retry_errors=None,
                  timeout=60, parser=None, wait_on_rate_limit=False, proxy=''):
-        """
-        API instance constructor
-
-        :param auth_handler:
-        :param host: url of the server of the rest api,
-                     default: 'api.twitter.com'
-        :param upload_host: url of the upload server,
-                            default: 'upload.twitter.com'
-        :param cache: Cache to query if a GET method is used, default: None
-        :param retry_count: number of allowed retries, default: 0
-        :param retry_delay: delay in second between retries, default: 0
-        :param retry_errors: default: None
-        :param timeout: delay before to consider the request as timed out in
-                        seconds, default: 60
-        :param parser: ModelParser instance to parse the responses,
-                       default: None
-        :param wait_on_rate_limit: If the api wait when it hits the rate limit,
-                                   default: False
-        :param proxy: Url to use as proxy during the HTTP request, default: ''
-
-        :raise TypeError: If the given parser is not a ModelParser instance.
-        """
         self.auth = auth_handler
         self.host = host
         self.upload_host = upload_host
