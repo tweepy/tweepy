@@ -61,13 +61,14 @@ class API:
     :param retry_errors: Which HTTP status codes to retry
     :param timeout: The maximum amount of time to wait for a response from
                     Twitter
-    :param parser: The object to use for parsing the response from Twitter
+    :param parser: The Parser instance to use for parsing the response from
+                   Twitter
     :param wait_on_rate_limit: Whether or not to automatically wait for rate
                                limits to replenish
     :param proxy: The full url to an HTTPS proxy to use for connecting to
                   Twitter
     
-    :raise TypeError: If the given parser is not a ModelParser instance
+    :raise TypeError: If the given parser is not a Parser instance
 
     :reference: https://developer.twitter.com/en/docs/api-reference-index
     """
