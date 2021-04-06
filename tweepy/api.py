@@ -96,8 +96,8 @@ class API:
 
         if not isinstance(self.parser, Parser):
             raise TypeError(
-                '"parser" argument has to be an instance of "Parser". '
-                f'It is currently a {type(self.parser)}.'
+                "parser should be an instance of Parser, not " +
+                str(type(self.parser))
             )
 
         self.session = requests.Session()
