@@ -16,8 +16,11 @@ This page contains some basic documentation for the Tweepy module.
 
 .. autoclass:: API
 
+Tweets
+------
+
 Get Tweet timelines
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 .. automethod:: API.home_timeline
 
@@ -26,7 +29,7 @@ Get Tweet timelines
 .. automethod:: API.user_timeline
 
 Post, retrieve, and engage with Tweets
---------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. automethod:: API.favorites
 
