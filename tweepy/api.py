@@ -402,9 +402,9 @@ class API:
                       align, related, lang, theme, link_color, widget_type, \
                       dnt)
 
-        Returns a single Tweet, specified by either a Tweet web URL or the Tweet
-        ID, in an oEmbed-compatible format. The returned HTML snippet will be
-        automatically recognized as an Embedded Tweet when Twitter's widget
+        Returns a single Tweet, specified by either a Tweet web URL or the
+        Tweet ID, in an oEmbed-compatible format. The returned HTML snippet will
+        be automatically recognized as an Embedded Tweet when Twitter's widget
         JavaScript is included on the page.
 
         The oEmbed endpoint allows customization of the final appearance of an
@@ -517,8 +517,8 @@ class API:
         """retweets_of_me(*, count, since_id, max_id, trim_user, \
                           include_entities, include_user_entities)
 
-        Returns the 20 most recent Tweets of the authenticated user that have been
-        retweeted by others.
+        Returns the 20 most recent Tweets of the authenticated user that have
+        been retweeted by others.
 
         :param count: |count|
         :param since_id: |since_id|
