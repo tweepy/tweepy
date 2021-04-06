@@ -254,7 +254,23 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def home_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
+        """home_timeline(*, count, since_id, max_id, trim_user, \
+                         exclude_replies, include_entities)
+
+        Returns the 20 most recent statuses, including retweets, posted by
+        the authenticating user and that user's friends. This is the equivalent
+        of /timeline/home on the Web.
+
+        :param count: |count|
+        :param since_id: |since_id|
+        :param max_id: |max_id|
+        :param trim_user: |trim_user|
+        :param exclude_replies: |exclude_replies|
+        :param include_entities: |include_entities|
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
         """
         return self.request(
             'GET', 'statuses/home_timeline', endpoint_parameters=(
