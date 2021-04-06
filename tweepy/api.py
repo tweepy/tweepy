@@ -279,6 +279,30 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='id')
+    @payload('status', list=True)
+    def mentions_timeline(self, **kwargs):
+        """mentions_timeline(*, count, since_id, max_id, trim_user, \
+                             include_entities)
+
+        Returns the 20 most recent mentions, including retweets.
+
+        :param count: |count|
+        :param since_id: |since_id|
+        :param max_id: |max_id|
+        :param trim_user: |trim_user|
+        :param include_entities: |include_entities|
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
+        """
+        return self.request(
+            'GET', 'statuses/mentions_timeline', endpoint_parameters=(
+                'count', 'since_id', 'max_id', 'trim_user', 'include_entities'
+            ), **kwargs
+        )
+
     @payload('status', list=True)
     def statuses_lookup(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
@@ -299,17 +323,6 @@ class API:
             'GET', 'statuses/user_timeline', endpoint_parameters=(
                 'user_id', 'screen_name', 'since_id', 'count', 'max_id',
                 'trim_user', 'exclude_replies', 'include_rts'
-            ), **kwargs
-        )
-
-    @pagination(mode='id')
-    @payload('status', list=True)
-    def mentions_timeline(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
-        """
-        return self.request(
-            'GET', 'statuses/mentions_timeline', endpoint_parameters=(
-                'count', 'since_id', 'max_id', 'trim_user', 'include_entities'
             ), **kwargs
         )
 

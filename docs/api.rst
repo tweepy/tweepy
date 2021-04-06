@@ -21,6 +21,8 @@ Timeline methods
 
 .. automethod:: API.home_timeline
 
+.. automethod:: API.mentions_timeline
+
 .. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
                                 [include_ext_alt_text], [include_card_uri])
 
@@ -69,16 +71,6 @@ Timeline methods
    :param max_id: |max_id|
    :param count: |count|
    :param page: |page|
-   :rtype: list of :class:`Status` objects
-
-
-.. method:: API.mentions_timeline([since_id], [max_id], [count])
-
-   Returns the 20 most recent mentions, including retweets.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
    :rtype: list of :class:`Status` objects
 
 
