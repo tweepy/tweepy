@@ -53,43 +53,43 @@ class API:
     The functions provided in this class are listed below.
 
     :param auth_handler: The authentication handler to be used
-    :param host: The general REST API host server URL
-    :param upload_host: The URL of the upload server
     :param cache: The cache to query if a GET method is used
+    :param host: The general REST API host server URL
+    :param parser: The Parser instance to use for parsing the response from
+                   Twitter
+    :param proxy: The full url to an HTTPS proxy to use for connecting to
+                  Twitter
     :param retry_count: Number of retries to attempt when an error occurs
     :param retry_delay: Number of seconds to wait between retries
     :param retry_errors: Which HTTP status codes to retry
     :param timeout: The maximum amount of time to wait for a response from
                     Twitter
-    :param parser: The Parser instance to use for parsing the response from
-                   Twitter
+    :param upload_host: The URL of the upload server
     :param wait_on_rate_limit: Whether or not to automatically wait for rate
                                limits to replenish
-    :param proxy: The full url to an HTTPS proxy to use for connecting to
-                  Twitter
     
     :raise TypeError: If the given parser is not a Parser instance
 
     :reference: https://developer.twitter.com/en/docs/api-reference-index
     """
 
-    def __init__(self, auth_handler=None, host='api.twitter.com',
-                 upload_host='upload.twitter.com', cache=None, retry_count=0,
-                 retry_delay=0, retry_errors=None, timeout=60,
-                 parser=ModelParser(), wait_on_rate_limit=False, proxy=''):
+    def __init__(self, auth_handler=None, *, cache=None,
+                 host='api.twitter.com', parser=ModelParser(), proxy='',
+                 retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
+                 upload_host='upload.twitter.com', wait_on_rate_limit=False):
         self.auth = auth_handler
-        self.host = host
-        self.upload_host = upload_host
         self.cache = cache
-        self.retry_count = retry_count
-        self.retry_delay = retry_delay
-        self.retry_errors = retry_errors
-        self.timeout = timeout
-        self.wait_on_rate_limit = wait_on_rate_limit
+        self.host = host
         self.parser = parser
         self.proxy = {}
         if proxy:
             self.proxy['https'] = proxy
+        self.retry_count = retry_count
+        self.retry_delay = retry_delay
+        self.retry_errors = retry_errors
+        self.timeout = timeout
+        self.upload_host = upload_host
+        self.wait_on_rate_limit = wait_on_rate_limit
 
         # Attempt to explain more clearly the parser argument requirements
         # https://github.com/tweepy/tweepy/issues/421
