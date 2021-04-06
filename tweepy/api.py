@@ -540,7 +540,24 @@ class API:
 
     @payload('status')
     def get_status(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id
+        """get_status(id, *, trim_user, include_my_retweet, include_entities, \
+                      include_ext_alt_text, include_card_uri)
+
+        Returns a single status specified by the ID parameter.
+
+        :param id: |sid|
+        :param trim_user: |trim_user|
+        :param include_my_retweet: A boolean indicating if any Tweets returned
+            that have been retweeted by the authenticating user should include
+            an additional current_user_retweet node, containing the ID of the
+            source status for the retweet.
+        :param include_entities: |include_entities|
+        :param include_ext_alt_text: |include_ext_alt_text|
+        :param include_card_uri: |include_card_uri|
+
+        :rtype: :class:`Status` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id
         """
         return self.request(
             'GET', 'statuses/show', endpoint_parameters=(
