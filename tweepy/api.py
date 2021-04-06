@@ -468,6 +468,29 @@ class API:
             ), url=url, require_auth=False, **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('ids')
+    def retweeters(self, id, **kwargs):
+        """retweeters(id, *, count, cursor, stringify_ids)
+
+        Returns up to 100 user IDs belonging to users who have retweeted the
+        Tweet specified by the ``id`` parameter.
+
+        :param id: |sid|
+        :param count: |count|
+        :param cursor: |cursor|
+        :param stringify_ids: Have IDs returned as strings instead
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
+        """
+        return self.request(
+            'GET', 'statuses/retweeters/ids', endpoint_parameters=(
+                'id', 'count', 'cursor', 'stringify_ids'
+            ), id=id, **kwargs
+        )
+
     @pagination(mode='id')
     @payload('status', list=True)
     def retweets_of_me(self, **kwargs):
@@ -728,17 +751,6 @@ class API:
             'GET', f'statuses/retweets/{id}', endpoint_parameters=(
                 'count', 'trim_user'
             ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def retweeters(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
-        """
-        return self.request(
-            'GET', 'statuses/retweeters/ids', endpoint_parameters=(
-                'id', 'count', 'cursor', 'stringify_ids'
-            ), id=id, **kwargs
         )
 
     @payload('user')

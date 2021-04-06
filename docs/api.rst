@@ -37,6 +37,8 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.get_oembed
 
+.. automethod:: API.retweeters
+
 .. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
 
    Returns the 20 most recent tweets of the authenticated user that have been
@@ -183,17 +185,6 @@ Status methods
 
    :param id: |sid|
    :rtype: :class:`Status` object
-
-
-.. method:: API.retweeters(id, [cursor], [stringify_ids])
-
-   Returns up to 100 user IDs belonging to users who have retweeted the Tweet
-   specified by the id parameter.
-
-   :param id: |sid|
-   :param cursor: |cursor|
-   :param stringify_ids: Have ids returned as strings instead.
-   :rtype: list of Integers
 
 
 .. method:: API.retweets(id, [count])
