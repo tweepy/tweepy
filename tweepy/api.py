@@ -2,6 +2,7 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
+import functools
 import imghdr
 import logging
 import mimetypes
@@ -25,14 +26,18 @@ log = logging.getLogger(__name__)
 
 def pagination(mode):
     def decorator(method):
-        method.pagination_mode = mode
-        return method
+        @functools.wraps(method)
+        def wrapper(*args, **kwargs):
+            return method(*args, **kwargs)
+        wrapper.pagination_mode = mode
+        return wrapper
     return decorator
 
 
 def payload(payload_type, **payload_kwargs):
     payload_list = payload_kwargs.get('list', False)
     def decorator(method):
+        @functools.wraps(method)
         def wrapper(*args, **kwargs):
             kwargs['payload_list'] = payload_list
             kwargs['payload_type'] = payload_type
