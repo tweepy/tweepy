@@ -340,6 +340,8 @@ class API:
             ), **kwargs
         )
 
+    # Post, retrieve, and engage with Tweets
+
     @payload('status', list=True)
     def statuses_lookup(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup

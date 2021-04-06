@@ -25,6 +25,9 @@ Get Tweet timelines
 
 .. automethod:: API.user_timeline
 
+Post, retrieve, and engage with Tweets
+--------------------------------------
+
 .. method:: API.statuses_lookup(id_, [include_entities], [trim_user], [map_], \
                                 [include_ext_alt_text], [include_card_uri])
 
