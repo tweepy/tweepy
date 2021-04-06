@@ -74,16 +74,18 @@ class API:
     """
 
     def __init__(self, auth_handler=None, *, cache=None,
-                 host='api.twitter.com', parser=ModelParser(), proxy='',
+                 host='api.twitter.com', parser=ModelParser(), proxy=None,
                  retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
                  upload_host='upload.twitter.com', wait_on_rate_limit=False):
         self.auth = auth_handler
         self.cache = cache
         self.host = host
         self.parser = parser
+
         self.proxy = {}
-        if proxy:
+        if proxy is not None:
             self.proxy['https'] = proxy
+
         self.retry_count = retry_count
         self.retry_delay = retry_delay
         self.retry_errors = retry_errors
