@@ -491,6 +491,26 @@ class API:
             ), id=id, **kwargs
         )
 
+    @payload('status', list=True)
+    def retweets(self, id, **kwargs):
+        """retweets(id, *, count, trim_user)
+
+        Returns up to 100 of the first Retweets of the given Tweet.
+
+        :param id: |sid|
+        :param count: |count|
+        :param trim_user: |trim_user|
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets-id
+        """
+        return self.request(
+            'GET', f'statuses/retweets/{id}', endpoint_parameters=(
+                'count', 'trim_user'
+            ), **kwargs
+        )
+
     @pagination(mode='id')
     @payload('status', list=True)
     def retweets_of_me(self, **kwargs):
@@ -740,16 +760,6 @@ class API:
         return self.request(
             'POST', f'statuses/unretweet/{id}', endpoint_parameters=(
                 'trim_user',
-            ), **kwargs
-        )
-
-    @payload('status', list=True)
-    def retweets(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets-id
-        """
-        return self.request(
-            'GET', f'statuses/retweets/{id}', endpoint_parameters=(
-                'count', 'trim_user'
             ), **kwargs
         )
 
