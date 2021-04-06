@@ -16,8 +16,8 @@ This page contains some basic documentation for the Tweepy module.
 
 .. autoclass:: API
 
-Timeline methods
-----------------
+Get Tweet timelines
+-------------------
 
 .. automethod:: API.home_timeline
 

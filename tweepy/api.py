@@ -251,6 +251,8 @@ class API:
         finally:
             self.session.close()
 
+    # Get Tweet timelines
+
     @pagination(mode='id')
     @payload('status', list=True)
     def home_timeline(self, **kwargs):
