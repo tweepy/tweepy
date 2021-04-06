@@ -41,16 +41,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.retweets
 
-.. method:: API.retweets_of_me([since_id], [max_id], [count], [page])
-
-   Returns the 20 most recent tweets of the authenticated user that have been
-   retweeted by others.
-
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param page: |page|
-   :rtype: list of :class:`Status` objects
+.. automethod:: API.retweets_of_me
 
 
 Status methods

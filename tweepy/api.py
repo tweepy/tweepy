@@ -514,7 +514,22 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def retweets_of_me(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
+        """retweets_of_me(*, count, since_id, max_id, trim_user, \
+                          include_entities, include_user_entities)
+
+        Returns the 20 most recent Tweets of the authenticated user that have been
+        retweeted by others.
+
+        :param count: |count|
+        :param since_id: |since_id|
+        :param max_id: |max_id|
+        :param trim_user: |trim_user|
+        :param include_entities: |include_entities|
+        :param include_user_entities: |include_user_entities|
+
+        :rtype: list of :class:`Status` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets_of_me
         """
         return self.request(
             'GET', 'statuses/retweets_of_me', endpoint_parameters=(
