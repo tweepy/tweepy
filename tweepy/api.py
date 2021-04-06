@@ -52,7 +52,7 @@ class API:
     """This class provides a wrapper for the API as provided by Twitter.
     The functions provided in this class are listed below.
 
-    :param auth_handler: The authentication handler to be used
+    :param auth: The authentication handler to be used
     :param cache: The cache to query if a GET method is used
     :param host: The general REST API host server URL
     :param parser: The Parser instance to use for parsing the response from
@@ -73,11 +73,12 @@ class API:
     :reference: https://developer.twitter.com/en/docs/api-reference-index
     """
 
-    def __init__(self, auth_handler=None, *, cache=None,
-                 host='api.twitter.com', parser=None, proxy=None,
-                 retry_count=0, retry_delay=0, retry_errors=None, timeout=60,
-                 upload_host='upload.twitter.com', wait_on_rate_limit=False):
-        self.auth = auth_handler
+    def __init__(
+        self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
+        proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
+        timeout=60, upload_host='upload.twitter.com', wait_on_rate_limit=False
+    ):
+        self.auth = auth
         self.cache = cache
         self.host = host
 
