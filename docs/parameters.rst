@@ -26,6 +26,7 @@
 .. |since_id| replace:: Returns only statuses with an ID greater than (that is, more recent than) the specified ID.
 .. |skip_status| replace:: A boolean indicating whether statuses will not be included in the returned user objects. Defaults to false.
 .. |slug| replace:: You can identify a list by its slug instead of its numerical id. If you decide to do so, note that you'll also have to specify the list owner using the owner_id or owner_screen_name parameters.
+.. |stringify_ids| replace:: Have IDs returned as strings instead
 .. |trim_user| replace:: A boolean indicating if user IDs should be provided, instead of complete user objects. Defaults to False.
 .. |uid| replace:: Specifies the ID or screen name of the user.
 .. |user_id| replace:: Specifies the ID of the user. Helpful for disambiguating when a valid user ID is also a valid screen name.

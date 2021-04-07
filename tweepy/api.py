@@ -479,7 +479,7 @@ class API:
         :param id: |sid|
         :param count: |count|
         :param cursor: |cursor|
-        :param stringify_ids: Have IDs returned as strings instead
+        :param stringify_ids: |stringify_ids|
 
         :rtype: list of :class:`int`
 
@@ -1394,7 +1394,7 @@ class API:
         :param user_id: |user_id|
         :param screen_name: |screen_name|
         :param cursor: |cursor|
-        :param stringify_ids: Have IDs returned as strings instead
+        :param stringify_ids: |stringify_ids|
         :param count: |count|
 
         :rtype: list of :class:`int`
@@ -1445,7 +1445,7 @@ class API:
         :param user_id: |user_id|
         :param screen_name: |screen_name|
         :param cursor: |cursor|
-        :param stringify_ids: Have IDs returned as strings instead
+        :param stringify_ids: |stringify_ids|
         :param count: |count|
 
         :rtype: list of :class:`int`
