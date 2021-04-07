@@ -1220,6 +1220,39 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def add_list_members(self, **kwargs):
+        """add_list_members(*, list_id, slug, user_id, screen_name, \
+                            owner_screen_name, owner_id)
+
+        Add up to 100 members to a list. The authenticated user must own the
+        list to be able to add members to it. Lists are limited to 5,000
+        members.
+
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param user_id: A comma separated list of user IDs, up to 100 are
+                        allowed in a single request
+        :param screen_name: A comma separated list of screen names, up to 100
+                            are allowed in a single request
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
+        """
+        if 'user_id' in kwargs:
+            kwargs['user_id'] = list_to_csv(kwargs['user_id'])
+        if 'screen_name' in kwargs:
+            kwargs['screen_name'] = list_to_csv(kwargs['screen_name'])
+        return self.request(
+            'POST', 'lists/members/create_all', endpoint_parameters=(
+                'list_id', 'slug', 'user_id', 'screen_name',
+                'owner_screen_name', 'owner_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1813,21 +1846,6 @@ class API:
         """
         return self.request(
             'POST', 'lists/members/destroy', endpoint_parameters=(
-                'list_id', 'slug', 'user_id', 'screen_name',
-                'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @payload('list')
-    def add_list_members(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
-        """
-        if 'user_id' in kwargs:
-            kwargs['user_id'] = list_to_csv(kwargs['user_id'])
-        if 'screen_name' in kwargs:
-            kwargs['screen_name'] = list_to_csv(kwargs['screen_name'])
-        return self.request(
-            'POST', 'lists/members/create_all', endpoint_parameters=(
                 'list_id', 'slug', 'user_id', 'screen_name',
                 'owner_screen_name', 'owner_id'
             ), **kwargs
