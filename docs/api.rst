@@ -119,6 +119,8 @@ Follow, search, and get users
 
 .. automethod:: API.friends
 
+.. automethod:: API.friendships_incoming
+
 
 User methods
 ------------

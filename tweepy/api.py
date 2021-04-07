@@ -1485,6 +1485,27 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('ids')
+    def friendships_incoming(self, **kwargs):
+        """friendships_incoming(*, cursor, stringify_ids)
+
+        Returns a collection of numeric IDs for every user who has a pending
+        request to follow the authenticating user.
+
+        :param cursor: |cursor|
+        :param stringify_ids: |stringify_ids|
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
+        """
+        return self.request(
+            'GET', 'friendships/incoming', endpoint_parameters=(
+                'cursor', 'stringify_ids'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1790,17 +1811,6 @@ class API:
                 'screen_name', 'user_id'
             ), screen_name=list_to_csv(screen_name),
             user_id=list_to_csv(user_id), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def friendships_incoming(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-incoming
-        """
-        return self.request(
-            'GET', 'friendships/incoming', endpoint_parameters=(
-                'cursor', 'stringify_ids'
-            ), **kwargs
         )
 
     @pagination(mode='cursor')
