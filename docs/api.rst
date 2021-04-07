@@ -90,6 +90,8 @@ Create and manage lists
 
 .. automethod:: API.lists_subscriptions
 
+.. automethod:: API.create_list
+
 
 User methods
 ------------
@@ -594,17 +596,6 @@ Search Methods
 
 List Methods
 ------------
-
-.. method:: API.create_list(name, [mode], [description])
-
-   Creates a new list for the authenticated user.
-   Note that you can create up to 1000 lists per account.
-
-   :param name: The name of the new list.
-   :param mode: |list_mode|
-   :param description: The description of the list you are creating.
-   :rtype: :class:`List` object
-
 
 .. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
 

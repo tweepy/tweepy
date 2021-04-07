@@ -1151,6 +1151,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def create_list(self, name, **kwargs):
+        """create_list(name, *, mode, description)
+
+        Creates a new list for the authenticated user.
+        Note that you can create up to 1000 lists per account.
+
+        :param name: The name of the new list.
+        :param mode: |list_mode|
+        :param description: The description of the list you are creating.
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-create
+        """
+        return self.request(
+            'POST', 'lists/create', endpoint_parameters=(
+                'name', 'mode', 'description'
+            ), name=name, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1726,16 +1747,6 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
-
-    @payload('list')
-    def create_list(self, name, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-create
-        """
-        return self.request(
-            'POST', 'lists/create', endpoint_parameters=(
-                'name', 'mode', 'description'
-            ), name=name, **kwargs
-        )
 
     @payload('list')
     def destroy_list(self, **kwargs):
