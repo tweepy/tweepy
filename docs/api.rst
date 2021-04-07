@@ -57,33 +57,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.update_status
 
-
-Status methods
---------------
-
-.. method:: API.update_with_media(filename, [status], \
-                                  [in_reply_to_status_id], \
-                                  [auto_populate_reply_metadata], [lat], \
-                                  [long], [source], [place_id], [file])
-
-   *Deprecated*: Use :func:`API.media_upload` instead. Update the authenticated
-   user's status. Statuses that are duplicates or too long will be silently
-   ignored.
-
-   :param filename: |filename|
-   :param status: The text of your status update.
-   :param in_reply_to_status_id: The ID of an existing status that the update
-                                 is in reply to.
-   :param auto_populate_reply_metadata: Whether to automatically include the
-                                        @mentions in the status metadata.
-   :param lat: The location's latitude that this tweet refers to.
-   :param long: The location's longitude that this tweet refers to.
-   :param source: Source of the update. Only supported by Identi.ca. Twitter
-                  ignores this parameter.
-   :param place_id: Twitter ID of location which is listed in the Tweet if
-                    geolocation is enabled for the user.
-   :param file: |file|
-   :rtype: :class:`Status` object
+.. automethod:: API.update_with_media
 
 
 User methods
