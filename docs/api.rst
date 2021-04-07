@@ -72,6 +72,8 @@ Create and manage lists
 
 .. automethod:: API.lists_all
 
+.. automethod:: API.list_members
+
 
 User methods
 ------------
@@ -758,19 +760,6 @@ List Methods
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
-
-
-.. method:: API.list_members(list_id/slug, [owner_id/owner_screen_name], \
-                             [cursor])
-
-   Returns the members of the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :param cursor: |cursor|
-   :rtype: list of :class:`User` objects
 
 
 .. method:: API.show_list_member(list_id/slug, screen_name/user_id, \

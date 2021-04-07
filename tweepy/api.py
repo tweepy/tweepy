@@ -903,6 +903,34 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def list_members(self, **kwargs):
+        """list_members(*, list_id, slug, owner_screen_name, owner_id, count, \
+                        cursor, include_entities, skip_status)
+
+        Returns the members of the specified list.
+
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+        :param count: |count|
+        :param cursor: |cursor|
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members
+        """
+        return self.request(
+            'GET', 'lists/members', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
+                'cursor', 'include_entities', 'skip_status'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1615,18 +1643,6 @@ class API:
             'POST', 'lists/members/destroy_all', endpoint_parameters=(
                 'list_id', 'slug', 'user_id', 'screen_name',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('user', list=True)
-    def list_members(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members
-        """
-        return self.request(
-            'GET', 'lists/members', endpoint_parameters=(
-                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
-                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
