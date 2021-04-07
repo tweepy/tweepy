@@ -86,6 +86,8 @@ Create and manage lists
 
 .. automethod:: API.list_subscribers
 
+.. automethod:: API.show_list_subscriber
+
 
 User methods
 ------------
@@ -728,20 +730,6 @@ List Methods
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
-
-
-.. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, \
-                                     [owner_id/owner_screen_name])
-
-   Check if the specified user is a subscriber of the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :rtype: :class:`User` object if user is subscribed to list
 
 
 Trends Methods

@@ -1100,6 +1100,34 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def show_list_subscriber(self, **kwargs):
+        """show_list_subscriber(*, owner_screen_name, owner_id, list_id, \
+                                slug, user_id, screen_name, include_entities \
+                                skip_status)
+
+        Check if the specified user is a subscriber of the specified list.
+
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+
+        :rtype: :class:`User` object if user is subscribed to list
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
+        """
+        return self.request(
+            'GET', 'lists/subscribers/show', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug', 'user_id',
+                'screen_name', 'include_entities', 'skip_status'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1787,17 +1815,6 @@ class API:
         return self.request(
             'POST', 'lists/subscribers/destroy', endpoint_parameters=(
                 'list_id', 'slug', 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @payload('user')
-    def show_list_subscriber(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
-        """
-        return self.request(
-            'GET', 'lists/subscribers/show', endpoint_parameters=(
-                'owner_screen_name', 'owner_id', 'list_id', 'slug', 'user_id',
-                'screen_name', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
