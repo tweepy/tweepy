@@ -115,6 +115,8 @@ Follow, search, and get users
 
 .. automethod:: API.followers
 
+.. automethod:: API.friends_ids
+
 
 User methods
 ------------
@@ -297,18 +299,6 @@ Friendship Methods
    :param screen_names: A list of screen names, up to 100 are allowed in a
                         single request.
    :rtype: :class:`Relationship` object
-
-
-.. method:: API.friends_ids(id/screen_name/user_id, [cursor])
-
-   Returns an array containing the IDs of users being followed by the specified
-   user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param cursor: |cursor|
-   :rtype: list of Integers
 
 
 Account Methods

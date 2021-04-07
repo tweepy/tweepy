@@ -1434,6 +1434,30 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('ids')
+    def friends_ids(self, **kwargs):
+        """friends_ids(*, user_id, screen_name, cursor, stringify_ids, count)
+
+        Returns an array containing the IDs of users being followed by the
+        specified user.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param cursor: |cursor|
+        :param stringify_ids: Have IDs returned as strings instead
+        :param count: |count|
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
+        """
+        return self.request(
+            'GET', 'friends/ids', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1739,17 +1763,6 @@ class API:
                 'screen_name', 'user_id'
             ), screen_name=list_to_csv(screen_name),
             user_id=list_to_csv(user_id), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def friends_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
-        """
-        return self.request(
-            'GET', 'friends/ids', endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
-            ), **kwargs
         )
 
     @pagination(mode='cursor')
