@@ -78,6 +78,8 @@ Create and manage lists
 
 .. automethod:: API.lists_memberships
 
+.. automethod:: API.lists_ownerships
+
 
 User methods
 ------------
@@ -620,20 +622,6 @@ List Methods
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
    :rtype: :class:`List` object
-
-
-.. method:: API.lists_ownerships([user_id], [screen_name], [count], [cursor])
-
-   Returns the lists owned by the specified user. Private lists will only be
-   shown if the authenticated user is also the owner of the lists. If
-   ``user_id`` and ``screen_name`` are not provided, the ownerships for the
-   authenticating user are returned.
-
-   :param user_id: |user_id|
-   :param screen_name: |screen_name|
-   :param count: |count|
-   :param cursor: |cursor|
-   :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_subscriptions([screen_name], [user_id], [cursor], \

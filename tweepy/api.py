@@ -989,6 +989,31 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_ownerships(self, **kwargs):
+        """lists_ownerships(*, user_id, screen_name, count, cursor)
+
+        Returns the lists owned by the specified user. Private lists will only
+        be shown if the authenticated user is also the owner of the lists. If
+        ``user_id`` and ``screen_name`` are not provided, the ownerships for
+        the authenticating user are returned.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param count: |count|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`List` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+        """
+        return self.request(
+            'GET', 'lists/ownerships', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1593,17 +1618,6 @@ class API:
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('list', list=True)
-    def lists_ownerships(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
-        """
-        return self.request(
-            'GET', 'lists/ownerships', endpoint_parameters=(
-                'user_id', 'screen_name', 'count', 'cursor'
             ), **kwargs
         )
 
