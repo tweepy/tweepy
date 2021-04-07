@@ -1381,6 +1381,31 @@ class API:
             ), **kwargs
         )
 
+    # Follow, search, and get users
+
+    @pagination(mode='cursor')
+    @payload('ids')
+    def followers_ids(self, **kwargs):
+        """followers_ids(*, user_id, screen_name, cursor, count)
+
+        Returns an array containing the IDs of users following the specified
+        user.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param cursor: |cursor|
+        :param count: |count|
+
+        :rtype: list of Integers
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
+        """
+        return self.request(
+            'GET', 'followers/ids', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'count'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1730,17 +1755,6 @@ class API:
         return self.request(
             'GET', 'friendships/outgoing', endpoint_parameters=(
                 'cursor', 'stringify_ids'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def followers_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
-        """
-        return self.request(
-            'GET', 'followers/ids', endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor', 'count'
             ), **kwargs
         )
 

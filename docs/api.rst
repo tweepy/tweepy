@@ -108,6 +108,11 @@ Create and manage lists
 
 .. automethod:: API.update_list
 
+Follow, search, and get users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.followers_ids
+
 
 User methods
 ------------
@@ -311,17 +316,6 @@ Friendship Methods
 
    Returns an array containing the IDs of users being followed by the specified
    user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param cursor: |cursor|
-   :rtype: list of Integers
-
-
-.. method:: API.followers_ids(id/screen_name/user_id)
-
-   Returns an array containing the IDs of users following the specified user.
 
    :param id: |uid|
    :param screen_name: |screen_name|
