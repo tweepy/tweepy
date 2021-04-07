@@ -1697,6 +1697,25 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def destroy_friendship(self, **kwargs):
+        """destroy_friendship(*, screen_name, user_id)
+
+        Destroy a friendship with the specified user (aka unfollow).
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
+        """
+        return self.request(
+            'POST', 'friendships/destroy', endpoint_parameters=(
+                'screen_name', 'user_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1924,16 +1943,6 @@ class API:
             'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
                 'id',
             ), id=id, **kwargs
-        )
-
-    @payload('user')
-    def destroy_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
-        """
-        return self.request(
-            'POST', 'friendships/destroy', endpoint_parameters=(
-                'screen_name', 'user_id'
-            ), **kwargs
         )
 
     @payload('json')

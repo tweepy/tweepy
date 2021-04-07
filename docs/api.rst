@@ -137,6 +137,8 @@ Follow, search, and get users
 
 .. automethod:: API.create_friendship
 
+.. automethod:: API.destroy_friendship
+
 
 Direct Message Methods
 ----------------------
@@ -192,19 +194,6 @@ Direct Message Methods
 
    :param id: The id of the Direct Message that should be deleted.
    :rtype: None
-
-
-Friendship Methods
-------------------
-
-.. method:: API.destroy_friendship(id/screen_name/user_id)
-
-   Destroy a friendship with the specified user (aka unfollow).
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
 
 
 Account Methods
