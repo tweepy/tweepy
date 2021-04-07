@@ -133,19 +133,11 @@ Follow, search, and get users
 
 .. automethod:: API.search_users
 
+.. automethod:: API.get_user
+
 
 User methods
 ------------
-
-.. method:: API.get_user(id/user_id/screen_name)
-
-   Returns information about the specified user.
-
-   :param id: |uid|
-   :param user_id: |user_id|
-   :param screen_name: |screen_name|
-   :rtype: :class:`User` object
-
 
 .. method:: API.me()
 

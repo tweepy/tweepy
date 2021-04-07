@@ -1656,6 +1656,26 @@ class API:
             ), q=q, **kwargs
         )
 
+    @payload('user')
+    def get_user(self, **kwargs):
+        """get_user(*, user_id, screen_name, include_entities)
+
+        Returns information about the specified user.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param include_entities: |include_entities|
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
+        """
+        return self.request(
+            'GET', 'users/show', endpoint_parameters=(
+                'user_id', 'screen_name', 'include_entities'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1821,16 +1841,6 @@ class API:
             'GET', 'media/upload', endpoint_parameters=(
                 'command', 'media_id'
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
-        )
-
-    @payload('user')
-    def get_user(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
-        """
-        return self.request(
-            'GET', 'users/show', endpoint_parameters=(
-                'user_id', 'screen_name', 'include_entities'
-            ), **kwargs
         )
 
     def me(self):
