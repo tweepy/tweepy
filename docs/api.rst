@@ -84,6 +84,8 @@ Create and manage lists
 
 .. automethod:: API.list_timeline
 
+.. automethod:: API.list_subscribers
+
 
 User methods
 ------------
@@ -726,24 +728,6 @@ List Methods
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
-
-
-.. method:: API.list_subscribers(list_id/slug, [owner_id/owner_screen_name], \
-                                 [cursor], [count], [include_entities], \
-                                 [skip_status])
-
-   Returns the subscribers of the specified list. Private list subscribers will
-   only be shown if the authenticated user owns the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :param cursor: |cursor|
-   :param count: |count|
-   :param include_entities: |include_entities|
-   :param skip_status: |skip_status|
-   :rtype: list of :class:`User` objects
 
 
 .. method:: API.show_list_subscriber(list_id/slug, screen_name/user_id, \
