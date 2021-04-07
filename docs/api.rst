@@ -123,6 +123,8 @@ Follow, search, and get users
 
 .. automethod:: API.lookup_friendships
 
+.. automethod:: API.no_retweets_friendships
+
 
 User methods
 ------------

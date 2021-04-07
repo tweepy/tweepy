@@ -1529,6 +1529,25 @@ class API:
             user_id=list_to_csv(user_id), **kwargs
         )
 
+    @payload('json')
+    def no_retweets_friendships(self, **kwargs):
+        """no_retweets_friendships(*, stringify_ids)
+
+        Returns a collection of user_ids that the currently authenticated user
+        does not want to receive retweets from.
+
+        :param stringify_ids: |stringify_ids|
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-no_retweets-ids
+        """
+        return self.request(
+            'GET', 'friendships/no_retweets/ids', endpoint_parameters=(
+                'stringify_ids',
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
