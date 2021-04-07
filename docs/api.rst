@@ -49,6 +49,8 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.destroy_favorite
 
+.. automethod:: API.destroy_status
+
 
 Status methods
 --------------
@@ -148,15 +150,6 @@ Status methods
    :param place_id: Twitter ID of location which is listed in the Tweet if
                     geolocation is enabled for the user.
    :param file: |file|
-   :rtype: :class:`Status` object
-
-
-.. method:: API.destroy_status(id)
-
-   Destroy the status specified by the id parameter. The authenticated user
-   must be the author of the status to destroy.
-
-   :param id: |sid|
    :rtype: :class:`Status` object
 
 
