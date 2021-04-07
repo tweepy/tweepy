@@ -104,6 +104,8 @@ Create and manage lists
 
 .. automethod:: API.subscribe_list
 
+.. automethod:: API.unsubscribe_list
+
 
 User methods
 ------------
@@ -622,17 +624,6 @@ List Methods
    :param description: The description to give the list.
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
-   :rtype: :class:`List` object
-
-
-.. method:: API.unsubscribe_list(list_id/slug, [owner_id/owner_screen_name])
-
-   Unsubscribes the authenticated user from the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 

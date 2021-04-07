@@ -1333,6 +1333,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def unsubscribe_list(self, **kwargs):
+        """unsubscribe_list(*, list_id, slug, owner_screen_name, owner_id)
+
+        Unsubscribes the authenticated user from the specified list.
+
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
+        """
+        return self.request(
+            'POST', 'lists/subscribers/destroy', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1917,16 +1938,6 @@ class API:
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @payload('list')
-    def unsubscribe_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
-        """
-        return self.request(
-            'POST', 'lists/subscribers/destroy', endpoint_parameters=(
-                'list_id', 'slug', 'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
