@@ -667,7 +667,85 @@ class API:
 
     @payload('status')
     def update_status(self, status, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
+        """update_status(status, *, in_reply_to_status_id, \
+                         auto_populate_reply_metadata, \
+                         exclude_reply_user_ids, attachment_url, media_ids, \
+                         possibly_sensitive, lat, long, place_id, \
+                         display_coordinates, trim_user, enable_dmcommands, \
+                         fail_dmcommands, card_uri)
+
+        Updates the authenticating user's current status, also known as
+        Tweeting.
+
+        For each update attempt, the update text is compared with the
+        authenticating user's recent Tweets. Any attempt that would result in
+        duplication will be blocked, resulting in a 403 error. A user cannot
+        submit the same status twice in a row.
+
+        While not rate limited by the API, a user is limited in the number of
+        Tweets they can create at a time. If the number of updates posted by
+        the user reaches the current allowed limit this method will return an
+        HTTP 403 error.
+
+        :param status: The text of your status update.
+        :param in_reply_to_status_id: The ID of an existing status that the
+            update is in reply to. Note: This parameter will be ignored unless
+            the author of the Tweet this parameter references is mentioned
+            within the status text. Therefore, you must include @username,
+            where username is the author of the referenced Tweet, within the
+            update.
+        :param auto_populate_reply_metadata: If set to true and used with
+            in_reply_to_status_id, leading @mentions will be looked up from the
+            original Tweet, and added to the new Tweet from there. This wil
+            append @mentions into the metadata of an extended Tweet as a reply
+            chain grows, until the limit on @mentions is reached. In cases
+            where the original Tweet has been deleted, the reply will fail.
+        :param exclude_reply_user_ids: When used with
+            auto_populate_reply_metadata, a comma-separated list of user ids
+            which will be removed from the server-generated @mentions prefix on
+            an extended Tweet. Note that the leading @mention cannot be removed
+            as it would break the in-reply-to-status-id semantics. Attempting
+            to remove it will be silently ignored.
+        :param attachment_url: In order for a URL to not be counted in the
+            status body of an extended Tweet, provide a URL as a Tweet
+            attachment. This URL must be a Tweet permalink, or Direct Message
+            deep link. Arbitrary, non-Twitter URLs must remain in the status
+            text. URLs passed to the attachment_url parameter not matching
+            either a Tweet permalink or Direct Message deep link will fail at
+            Tweet creation and cause an exception.
+        :param media_ids: A list of media_ids to associate with the Tweet. You
+            may include up to 4 photos or 1 animated GIF or 1 video in a Tweet.
+        :param possibly_sensitive: If you upload Tweet media that might be
+            considered sensitive content such as nudity, or medical procedures,
+            you must set this value to true.
+        :param lat: The latitude of the location this Tweet refers to. This
+            parameter will be ignored unless it is inside the range -90.0 to
+            +90.0 (North is positive) inclusive. It will also be ignored if
+            there is no corresponding long parameter.
+        :param long: The longitude of the location this Tweet refers to. The
+            valid ranges for longitude are -180.0 to +180.0 (East is positive)
+            inclusive. This parameter will be ignored if outside that range, if
+            it is not a number, if geo_enabled is disabled, or if there no
+            corresponding lat parameter.
+        :param place_id: A place in the world.
+        :param display_coordinates: Whether or not to put a pin on the exact
+            coordinates a Tweet has been sent from.
+        :param trim_user: |trim_user|
+        :param enable_dmcommands: When set to true, enables shortcode commands
+            for sending Direct Messages as part of the status text to send a
+            Direct Message to a user. When set to false, disables this behavior
+            and includes any leading characters in the status text that is
+            posted
+        :param fail_dmcommands: When set to true, causes any status text that
+            starts with shortcode commands to return an API error. When set to
+            false, allows shortcode commands to be sent in the status text and
+            acted on by the API.
+        :param card_uri: Associate an ads card with the Tweet using the
+            card_uri value from any ads card response.
+
+        :rtype: :class:`Status` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
         """
         if 'media_ids' in kwargs:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
