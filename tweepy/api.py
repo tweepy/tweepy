@@ -1397,7 +1397,7 @@ class API:
         :param stringify_ids: Have IDs returned as strings instead
         :param count: |count|
 
-        :rtype: list of Integers
+        :rtype: list of :class:`int`
 
         :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-ids
         """
