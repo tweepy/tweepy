@@ -1676,6 +1676,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def create_friendship(self, **kwargs):
+        """create_friendship(*, screen_name, user_id, follow)
+
+        Create a new friendship with the specified user (aka follow).
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+        :param follow: Enable notifications for the target user in addition to
+                       becoming friends.
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
+        """
+        return self.request(
+            'POST', 'friendships/create', endpoint_parameters=(
+                'screen_name', 'user_id', 'follow'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1903,16 +1924,6 @@ class API:
             'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
                 'id',
             ), id=id, **kwargs
-        )
-
-    @payload('user')
-    def create_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
-        """
-        return self.request(
-            'POST', 'friendships/create', endpoint_parameters=(
-                'screen_name', 'user_id', 'follow'
-            ), **kwargs
         )
 
     @payload('user')

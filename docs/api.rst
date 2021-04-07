@@ -135,6 +135,8 @@ Follow, search, and get users
 
 .. automethod:: API.get_user
 
+.. automethod:: API.create_friendship
+
 
 Direct Message Methods
 ----------------------
@@ -194,18 +196,6 @@ Direct Message Methods
 
 Friendship Methods
 ------------------
-
-.. method:: API.create_friendship(id/screen_name/user_id, [follow])
-
-   Create a new friendship with the specified user (aka follow).
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param follow: Enable notifications for the target user in addition to
-                  becoming friends.
-   :rtype: :class:`User` object
-
 
 .. method:: API.destroy_friendship(id/screen_name/user_id)
 
