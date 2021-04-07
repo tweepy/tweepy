@@ -960,6 +960,35 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_memberships(self, **kwargs):
+        """lists_memberships(user_id, screen_name, count, cursor, \
+                             filter_to_owned_lists)
+
+        Returns the lists the specified user has been added to. If ``user_id``
+        or ``screen_name`` are not provided, the memberships for the
+        authenticating user are returned.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param count: |count|
+        :param cursor: |cursor|
+        :param filter_to_owned_lists: A boolean indicating whether to return
+            just lists the authenticating user owns, and the user represented
+            by ``user_id`` or ``screen_name`` is a member of.
+
+        :rtype: list of :class:`List` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
+        """
+        return self.request(
+            'GET', 'lists/memberships', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor',
+                'filter_to_owned_lists'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1564,18 +1593,6 @@ class API:
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('list', list=True)
-    def lists_memberships(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
-        """
-        return self.request(
-            'GET', 'lists/memberships', endpoint_parameters=(
-                'user_id', 'screen_name', 'count', 'cursor',
-                'filter_to_owned_lists'
             ), **kwargs
         )
 

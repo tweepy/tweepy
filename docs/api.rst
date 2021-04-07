@@ -76,6 +76,8 @@ Create and manage lists
 
 .. automethod:: API.show_list_member
 
+.. automethod:: API.lists_memberships
+
 
 User methods
 ------------
@@ -618,23 +620,6 @@ List Methods
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
    :rtype: :class:`List` object
-
-
-.. method:: API.lists_memberships([screen_name], [user_id], \
-                                  [filter_to_owned_lists], [cursor], [count])
-
-   Returns the lists the specified user has been added to. If ``user_id`` or
-   ``screen_name`` are not provided, the memberships for the authenticating
-   user are returned.
-
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param filter_to_owned_lists: A boolean indicating whether to return just
-      lists the authenticating user owns, and the user represented by
-      ``user_id`` or ``screen_name`` is a member of.
-   :param cursor: |cursor|
-   :param count: |count|
-   :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_ownerships([user_id], [screen_name], [count], [cursor])
