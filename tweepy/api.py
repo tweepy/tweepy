@@ -1592,6 +1592,45 @@ class API:
             ), **kwargs
         )
 
+    @payload('user', list=True)
+    def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
+        """lookup_users(*, screen_name, user_id, include_entities, tweet_mode)
+
+        Returns fully-hydrated user objects for up to 100 users per request.
+
+        There are a few things to note when using this method.
+
+        * You must be following a protected user to be able to see their most
+            recent status update. If you don't follow a protected user their
+            status will be removed.
+        * The order of user IDs or screen names may not match the order of
+            users in the returned array.
+        * If a requested user is unknown, suspended, or deleted, then that user
+            will not be returned in the results list.
+        * If none of your lookup criteria can be satisfied by returning a user
+            object, a HTTP 404 will be thrown.
+
+        :param screen_name: A list of screen names, up to 100 are allowed in a
+                            single request.
+        :param user_id: A list of user IDs, up to 100 are allowed in a single
+                        request.
+        :param include_entities: |include_entities|
+        :param tweet_mode: Valid request values are compat and extended, which
+                           give compatibility mode and extended mode,
+                           respectively for Tweets that contain over 140
+                           characters.
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
+        """
+        return self.request(
+            'POST', 'users/lookup', endpoint_parameters=(
+                'screen_name', 'user_id', 'include_entities', 'tweet_mode'
+            ), screen_name=list_to_csv(screen_name),
+            user_id=list_to_csv(user_id), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1767,17 +1806,6 @@ class API:
             'GET', 'users/show', endpoint_parameters=(
                 'user_id', 'screen_name', 'include_entities'
             ), **kwargs
-        )
-
-    @payload('user', list=True)
-    def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
-        """
-        return self.request(
-            'POST', 'users/lookup', endpoint_parameters=(
-                'screen_name', 'user_id', 'include_entities', 'tweet_mode'
-            ), screen_name=list_to_csv(screen_name),
-            user_id=list_to_csv(user_id), **kwargs
         )
 
     def me(self):
