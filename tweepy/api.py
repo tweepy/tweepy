@@ -1312,6 +1312,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def subscribe_list(self, **kwargs):
+        """subscribe_list(*, owner_screen_name, owner_id, list_id, slug)
+
+        Subscribes the authenticated user to the specified list.
+
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+        :param list_id: |list_id|
+        :param slug: |slug|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
+        """
+        return self.request(
+            'POST', 'lists/subscribers/create', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1896,16 +1917,6 @@ class API:
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @payload('list')
-    def subscribe_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
-        """
-        return self.request(
-            'POST', 'lists/subscribers/create', endpoint_parameters=(
-                'owner_screen_name', 'owner_id', 'list_id', 'slug'
             ), **kwargs
         )
 
