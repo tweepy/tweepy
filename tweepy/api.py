@@ -963,7 +963,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def lists_memberships(self, **kwargs):
-        """lists_memberships(user_id, screen_name, count, cursor, \
+        """lists_memberships(*, user_id, screen_name, count, cursor, \
                              filter_to_owned_lists)
 
         Returns the lists the specified user has been added to. If ``user_id``
