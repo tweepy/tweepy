@@ -1569,6 +1569,29 @@ class API:
             ), **kwargs
         )
 
+    @payload('friendship')
+    def show_friendship(self, **kwargs):
+        """show_friendship(*, source_id, source_screen_name, target_id, \
+                           target_screen_name)
+
+        Returns detailed information about the relationship between two users.
+
+        :param source_id: The user_id of the subject user.
+        :param source_screen_name: The screen_name of the subject user.
+        :param target_id: The user_id of the target user.
+        :param target_screen_name: The screen_name of the target user.
+
+        :rtype: :class:`Friendship` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
+        """
+        return self.request(
+            'GET', 'friendships/show', endpoint_parameters=(
+                'source_id', 'source_screen_name', 'target_id',
+                'target_screen_name'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1851,17 +1874,6 @@ class API:
         return self.request(
             'POST', 'friendships/destroy', endpoint_parameters=(
                 'screen_name', 'user_id'
-            ), **kwargs
-        )
-
-    @payload('friendship')
-    def show_friendship(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
-        """
-        return self.request(
-            'GET', 'friendships/show', endpoint_parameters=(
-                'source_id', 'source_screen_name', 'target_id',
-                'target_screen_name'
             ), **kwargs
         )
 

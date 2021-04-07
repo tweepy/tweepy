@@ -127,6 +127,8 @@ Follow, search, and get users
 
 .. automethod:: API.friendships_outgoing
 
+.. automethod:: API.show_friendship
+
 
 User methods
 ------------
@@ -269,18 +271,6 @@ Friendship Methods
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :rtype: :class:`User` object
-
-
-.. method:: API.show_friendship(source_id/source_screen_name, \
-                                target_id/target_screen_name)
-
-   Returns detailed information about the relationship between two users.
-
-   :param source_id: The user_id of the subject user.
-   :param source_screen_name: The screen_name of the subject user.
-   :param target_id: The user_id of the target user.
-   :param target_screen_name: The screen_name of the target user.
-   :rtype: :class:`Friendship` object
 
 
 Account Methods
