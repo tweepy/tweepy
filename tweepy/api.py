@@ -1172,6 +1172,28 @@ class API:
             ), name=name, **kwargs
         )
 
+    @payload('list')
+    def destroy_list(self, **kwargs):
+        """destroy_list(*, owner_screen_name, owner_id, list_id, slug)
+
+        Deletes the specified list.
+        The authenticated user must own the list to be able to destroy it.
+
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+        :param list_id: |list_id|
+        :param slug: |slug|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
+        """
+        return self.request(
+            'POST', 'lists/destroy', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1747,16 +1769,6 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
-
-    @payload('list')
-    def destroy_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
-        """
-        return self.request(
-            'POST', 'lists/destroy', endpoint_parameters=(
-                'owner_screen_name', 'owner_id', 'list_id', 'slug'
-            ), **kwargs
-        )
 
     @payload('list')
     def update_list(self, **kwargs):

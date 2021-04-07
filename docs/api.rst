@@ -92,6 +92,8 @@ Create and manage lists
 
 .. automethod:: API.create_list
 
+.. automethod:: API.destroy_list
+
 
 User methods
 ------------
@@ -596,18 +598,6 @@ Search Methods
 
 List Methods
 ------------
-
-.. method:: API.destroy_list([owner_screen_name/owner_id], list_id/slug)
-
-   Deletes the specified list.
-   The authenticated user must own the list to be able to destroy it.
-
-   :param owner_screen_name: |owner_screen_name|
-   :param owner_id: |owner_id|
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :rtype: :class:`List` object
-
 
 .. method:: API.update_list(list_id/slug, [name], [mode], [description], \
                             [owner_screen_name/owner_id])
