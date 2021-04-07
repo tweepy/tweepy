@@ -136,16 +136,6 @@ Follow, search, and get users
 .. automethod:: API.get_user
 
 
-User methods
-------------
-
-.. method:: API.me()
-
-   Returns the authenticated user's information.
-
-   :rtype: :class:`User` object
-
-
 Direct Message Methods
 ----------------------
 

@@ -1843,10 +1843,6 @@ class API:
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
 
-    def me(self):
-        """ Get the authenticated user """
-        return self.get_user(screen_name=self.auth.get_username())
-
     @payload('direct_message')
     def get_direct_message(self, id, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
