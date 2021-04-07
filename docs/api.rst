@@ -98,6 +98,8 @@ Create and manage lists
 
 .. automethod:: API.add_list_members
 
+.. automethod:: API.remove_list_member
+
 
 User methods
 ------------
@@ -616,21 +618,6 @@ List Methods
    :param description: The description to give the list.
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
-   :rtype: :class:`List` object
-
-
-.. method:: API.remove_list_member(list_id/slug, screen_name/user_id, \
-                                   [owner_id/owner_screen_name])
-
-   Removes the specified member from the list. The authenticated user must be
-   the list's owner to remove members from the list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 

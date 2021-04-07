@@ -1253,6 +1253,32 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def remove_list_member(self, **kwargs):
+        """remove_list_member(*, list_id, slug, user_id, screen_name, \
+                              owner_screen_name, owner_id)
+
+        Removes the specified member from the list. The authenticated user must
+        be the list's owner to remove members from the list.
+
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
+        """
+        return self.request(
+            'POST', 'lists/members/destroy', endpoint_parameters=(
+                'list_id', 'slug', 'user_id', 'screen_name',
+                'owner_screen_name', 'owner_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1836,17 +1862,6 @@ class API:
         return self.request(
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
-                'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @payload('list')
-    def remove_list_member(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-destroy
-        """
-        return self.request(
-            'POST', 'lists/members/destroy', endpoint_parameters=(
-                'list_id', 'slug', 'user_id', 'screen_name',
                 'owner_screen_name', 'owner_id'
             ), **kwargs
         )
