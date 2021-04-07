@@ -121,6 +121,8 @@ Follow, search, and get users
 
 .. automethod:: API.friendships_incoming
 
+.. automethod:: API.lookup_friendships
+
 
 User methods
 ------------
@@ -275,18 +277,6 @@ Friendship Methods
    :param target_id: The user_id of the target user.
    :param target_screen_name: The screen_name of the target user.
    :rtype: :class:`Friendship` object
-
-
-.. method:: API.lookup_friendships(user_ids/screen_names)
-
-   Returns the relationships of the authenticated user to the list of up to
-   100 screen_names or user_ids provided.
-
-   :param user_ids: A list of user IDs, up to 100 are allowed in a single
-                    request.
-   :param screen_names: A list of screen names, up to 100 are allowed in a
-                        single request.
-   :rtype: :class:`Relationship` object
 
 
 Account Methods

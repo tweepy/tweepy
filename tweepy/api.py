@@ -1506,6 +1506,29 @@ class API:
             ), **kwargs
         )
 
+    @payload('relationship', list=True)
+    def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
+        """lookup_friendships(*, screen_name, user_id)
+
+        Returns the relationships of the authenticated user to the list of up
+        to 100 screen_name or user_id provided.
+
+        :param screen_name: A list of screen names, up to 100 are allowed in a
+                            single request.
+        :param user_id: A list of user IDs, up to 100 are allowed in a single
+                        request.
+
+        :rtype: list of :class:`Relationship` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
+        """
+        return self.request(
+            'GET', 'friendships/lookup', endpoint_parameters=(
+                'screen_name', 'user_id'
+            ), screen_name=list_to_csv(screen_name),
+            user_id=list_to_csv(user_id), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1800,17 +1823,6 @@ class API:
                 'source_id', 'source_screen_name', 'target_id',
                 'target_screen_name'
             ), **kwargs
-        )
-
-    @payload('relationship', list=True)
-    def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
-        """
-        return self.request(
-            'GET', 'friendships/lookup', endpoint_parameters=(
-                'screen_name', 'user_id'
-            ), screen_name=list_to_csv(screen_name),
-            user_id=list_to_csv(user_id), **kwargs
         )
 
     @pagination(mode='cursor')
