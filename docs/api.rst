@@ -74,6 +74,8 @@ Create and manage lists
 
 .. automethod:: API.list_members
 
+.. automethod:: API.show_list_member
+
 
 User methods
 ------------
@@ -760,20 +762,6 @@ List Methods
    :param owner_id: |owner_id|
    :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
-
-
-.. method:: API.show_list_member(list_id/slug, screen_name/user_id, \
-                                 [owner_id/owner_screen_name])
-
-   Check if the specified user is a member of the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :rtype: :class:`User` object if user is a member of list
 
 
 .. method:: API.subscribe_list(list_id/slug, [owner_id/owner_screen_name])
