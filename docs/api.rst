@@ -131,6 +131,8 @@ Follow, search, and get users
 
 .. automethod:: API.lookup_users
 
+.. automethod:: API.search_users
+
 
 User methods
 ------------
@@ -150,20 +152,6 @@ User methods
    Returns the authenticated user's information.
 
    :rtype: :class:`User` object
-
-
-.. method:: API.search_users(q, [count], [page])
-
-   Run a search for users similar to Find People button on Twitter.com; the
-   same results returned by people search on Twitter.com will be returned by
-   using this API (about being listed in the People Search). It is only
-   possible to retrieve the first 1000 matches from this API.
-
-   :param q: The query to run against people search.
-   :param count: Specifies the number of statuses to retrieve.
-                 May not be greater than 20.
-   :param page: |page|
-   :rtype: list of :class:`User` objects
 
 
 Direct Message Methods

@@ -1631,6 +1631,31 @@ class API:
             user_id=list_to_csv(user_id), **kwargs
         )
 
+    @pagination(mode='page')
+    @payload('user', list=True)
+    def search_users(self, q, **kwargs):
+        """search_users(q, *, page, count, include_entities)
+
+        Run a search for users similar to Find People button on Twitter.com;
+        the same results returned by people search on Twitter.com will be
+        returned by using this API (about being listed in the People Search).
+        It is only possible to retrieve the first 1000 matches from this API.
+
+        :param q: The query to run against people search.
+        :param page: |page|
+        :param count: |count|
+        :param include_entities: |include_entities|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
+        """
+        return self.request(
+            'GET', 'users/search', endpoint_parameters=(
+                'q', 'page', 'count', 'include_entities'
+            ), q=q, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1811,17 +1836,6 @@ class API:
     def me(self):
         """ Get the authenticated user """
         return self.get_user(screen_name=self.auth.get_username())
-
-    @pagination(mode='page')
-    @payload('user', list=True)
-    def search_users(self, q, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
-        """
-        return self.request(
-            'GET', 'users/search', endpoint_parameters=(
-                'q', 'page', 'count', 'include_entities'
-            ), q=q, **kwargs
-        )
 
     @payload('direct_message')
     def get_direct_message(self, id, **kwargs):
