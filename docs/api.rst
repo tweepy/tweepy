@@ -88,6 +88,8 @@ Create and manage lists
 
 .. automethod:: API.show_list_subscriber
 
+.. automethod:: API.lists_subscriptions
+
 
 User methods
 ------------
@@ -630,19 +632,6 @@ List Methods
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
    :rtype: :class:`List` object
-
-
-.. method:: API.lists_subscriptions([screen_name], [user_id], [cursor], \
-                                    [count])
-
-   Obtain a collection of the lists the specified user is subscribed to, 20
-   lists per page by default. Does not include the user's own lists.
-
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param cursor: |cursor|
-   :param count: |count|
-   :rtype: list of :class:`List` objects
 
 
 .. method:: API.add_list_member(list_id/slug, screen_name/user_id, \

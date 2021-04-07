@@ -1128,6 +1128,29 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('list', list=True)
+    def lists_subscriptions(self, **kwargs):
+        """lists_subscriptions(*, user_id, screen_name, count, cursor)
+
+        Obtain a collection of the lists the specified user is subscribed to,
+        20 lists per page by default. Does not include the user's own lists.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param count: |count|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`List` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
+        """
+        return self.request(
+            'GET', 'lists/subscriptions', endpoint_parameters=(
+                'user_id', 'screen_name', 'count', 'cursor'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1732,17 +1755,6 @@ class API:
             'POST', 'lists/update', endpoint_parameters=(
                 'list_id', 'slug', 'name', 'mode', 'description',
                 'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('list', list=True)
-    def lists_subscriptions(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
-        """
-        return self.request(
-            'GET', 'lists/subscriptions', endpoint_parameters=(
-                'user_id', 'screen_name', 'count', 'cursor'
             ), **kwargs
         )
 
