@@ -1407,6 +1407,33 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def followers(self, **kwargs):
+        """followers(*, user_id, screen_name, cursor, count, skip_status, \
+                     include_user_entities)
+
+        Returns a user's followers ordered in which they were added. If no user
+        is specified by id/screen name, it defaults to the authenticated user.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param cursor: |cursor|
+        :param count: |count|
+        :param skip_status: |skip_status|
+        :param include_user_entities: |include_user_entities|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
+        """
+        return self.request(
+            'GET', 'followers/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
+                'include_user_entities'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1756,18 +1783,6 @@ class API:
         return self.request(
             'GET', 'friendships/outgoing', endpoint_parameters=(
                 'cursor', 'stringify_ids'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('user', list=True)
-    def followers(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
-        """
-        return self.request(
-            'GET', 'followers/list', endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
-                'include_user_entities'
             ), **kwargs
         )
 
