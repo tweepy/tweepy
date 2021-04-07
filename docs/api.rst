@@ -53,6 +53,8 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.retweet
 
+.. automethod:: API.unretweet
+
 
 Status methods
 --------------
@@ -152,14 +154,6 @@ Status methods
    :param place_id: Twitter ID of location which is listed in the Tweet if
                     geolocation is enabled for the user.
    :param file: |file|
-   :rtype: :class:`Status` object
-
-
-.. method:: API.unretweet(id)
-
-   Untweets a retweeted status. Requires the id of the retweet to unretweet.
-
-   :param id: |sid|
    :rtype: :class:`Status` object
 
 
