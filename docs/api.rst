@@ -125,6 +125,8 @@ Follow, search, and get users
 
 .. automethod:: API.no_retweets_friendships
 
+.. automethod:: API.friendships_outgoing
+
 
 User methods
 ------------
