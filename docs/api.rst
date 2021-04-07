@@ -139,6 +139,8 @@ Follow, search, and get users
 
 .. automethod:: API.destroy_friendship
 
+.. automethod:: API.update_friendship
+
 
 Direct Message Methods
 ----------------------

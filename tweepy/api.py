@@ -1716,6 +1716,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('friendship')
+    def update_friendship(self, **kwargs):
+        """update_friendship(*, screen_name, user_id, device, retweets)
+
+        Turn on/off Retweets and device notifications from the specified user.
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+        :param device: Turn on/off device notifications from the target user.
+        :param retweets: Turn on/off Retweets from the target user.
+
+        :rtype: :class:`Friendship` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-update
+        """
+        return self.request(
+            'POST', 'friendships/update', endpoint_parameters=(
+                'screen_name', 'user_id', 'device', 'retweets'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
