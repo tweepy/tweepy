@@ -627,6 +627,25 @@ class API:
         )
 
     @payload('status')
+    def retweet(self, id, **kwargs):
+        """retweet(id, *, trim_user)
+
+        Retweets a Tweet. Requires the ID of the Tweet you are retweeting.
+
+        :param id: |sid|
+        :param trim_user: |trim_user|
+
+        :rtype: :class:`Status` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id
+        """
+        return self.request(
+            'POST', f'statuses/retweet/{id}', endpoint_parameters=(
+                'trim_user',
+            ), **kwargs
+        )
+
+    @payload('status')
     def update_status(self, status, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
         """
@@ -823,16 +842,6 @@ class API:
             'GET', 'media/upload', endpoint_parameters=(
                 'command', 'media_id'
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
-        )
-
-    @payload('status')
-    def retweet(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id
-        """
-        return self.request(
-            'POST', f'statuses/retweet/{id}', endpoint_parameters=(
-                'trim_user',
-            ), **kwargs
         )
 
     @payload('status')
