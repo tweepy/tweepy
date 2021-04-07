@@ -106,6 +106,8 @@ Create and manage lists
 
 .. automethod:: API.unsubscribe_list
 
+.. automethod:: API.update_list
+
 
 User methods
 ------------
@@ -606,25 +608,6 @@ Search Methods
    :param next: This parameter is used to get the next 'page' of results. The
       value used with the parameter is pulled directly from the response
       provided by the API, and should not be modified.
-
-
-List Methods
-------------
-
-.. method:: API.update_list(list_id/slug, [name], [mode], [description], \
-                            [owner_screen_name/owner_id])
-
-   Updates the specified list.
-   The authenticated user must own the list to be able to update it.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param name: The name for the list.
-   :param mode: |list_mode|
-   :param description: The description to give the list.
-   :param owner_screen_name: |owner_screen_name|
-   :param owner_id: |owner_id|
-   :rtype: :class:`List` object
 
 
 Trends Methods

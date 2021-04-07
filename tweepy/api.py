@@ -1354,6 +1354,33 @@ class API:
             ), **kwargs
         )
 
+    @payload('list')
+    def update_list(self, **kwargs):
+        """update_list(*, list_id, slug, name, mode, description, \
+                       owner_screen_name, owner_id)
+
+        Updates the specified list.
+        The authenticated user must own the list to be able to update it.
+
+        :param list_id: |list_id|
+        :param slug: |slug|
+        :param name: The name for the list.
+        :param mode: |list_mode|
+        :param description: The description to give the list.
+        :param owner_screen_name: |owner_screen_name|
+        :param owner_id: |owner_id|
+
+        :rtype: :class:`List` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update
+        """
+        return self.request(
+            'POST', 'lists/update', endpoint_parameters=(
+                'list_id', 'slug', 'name', 'mode', 'description',
+                'owner_screen_name', 'owner_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1929,17 +1956,6 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
-
-    @payload('list')
-    def update_list(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update
-        """
-        return self.request(
-            'POST', 'lists/update', endpoint_parameters=(
-                'list_id', 'slug', 'name', 'mode', 'description',
-                'owner_screen_name', 'owner_id'
-            ), **kwargs
-        )
 
     @payload('json')
     def trends_available(self, **kwargs):
