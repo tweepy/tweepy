@@ -117,6 +117,8 @@ Follow, search, and get users
 
 .. automethod:: API.friends_ids
 
+.. automethod:: API.friends
+
 
 User methods
 ------------
@@ -136,22 +138,6 @@ User methods
    Returns the authenticated user's information.
 
    :rtype: :class:`User` object
-
-
-.. method:: API.friends([id/user_id/screen_name], [cursor], [skip_status], \
-                        [include_user_entities])
-
-   Returns a user's friends ordered in which they were added 100 at a time.
-   If no user is specified it defaults to the authenticated user.
-
-   :param id: |uid|
-   :param user_id: |user_id|
-   :param screen_name: |screen_name|
-   :param cursor: |cursor|
-   :param count: |count|
-   :param skip_status: |skip_status|
-   :param include_user_entities: |include_user_entities|
-   :rtype: list of :class:`User` objects
 
 
 .. method:: API.lookup_users([user_ids], [screen_names], [include_entities], \

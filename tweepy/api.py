@@ -1458,6 +1458,33 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def friends(self, **kwargs):
+        """friends(*, user_id, screen_name, cursor, count, skip_status, \
+                   include_user_entities)
+
+        Returns a user's friends ordered in which they were added 100 at a
+        time. If no user is specified it defaults to the authenticated user.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+        :param cursor: |cursor|
+        :param count: |count|
+        :param skip_status: |skip_status|
+        :param include_user_entities: |include_user_entities|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
+        """
+        return self.request(
+            'GET', 'friends/list', endpoint_parameters=(
+                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
+                'include_user_entities'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1763,18 +1790,6 @@ class API:
                 'screen_name', 'user_id'
             ), screen_name=list_to_csv(screen_name),
             user_id=list_to_csv(user_id), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('user', list=True)
-    def friends(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
-        """
-        return self.request(
-            'GET', 'friends/list', endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor', 'count', 'skip_status',
-                'include_user_entities'
-            ), **kwargs
         )
 
     @pagination(mode='cursor')
