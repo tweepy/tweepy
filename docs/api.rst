@@ -64,6 +64,14 @@ Search Tweets
 
 .. automethod:: API.search
 
+Accounts and users
+------------------
+
+Create and manage lists
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.lists_all
+
 
 User methods
 ------------
@@ -606,28 +614,6 @@ List Methods
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
    :rtype: :class:`List` object
-
-
-.. method:: API.lists_all([screen_name], [user_id], [reverse])
-
-   Returns all lists the authenticating or specified user subscribes to,
-   including their own. The user is specified using the ``user_id`` or
-   ``screen_name`` parameters. If no user is given, the authenticating user is
-   used.
-
-   A maximum of 100 results will be returned by this call. Subscribed lists are
-   returned first, followed by owned lists. This means that if a user
-   subscribes to 90 lists and owns 20 lists, this method returns 90
-   subscriptions and 10 owned lists. The ``reverse`` method returns owned lists
-   first, so with ``reverse=true``, 20 owned lists and 80 subscriptions would
-   be returned.
-
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param reverse: A boolean indicating if you would like owned lists to be
-                   returned first. See description above for information on how
-                   this parameter works.
-   :rtype: list of :class:`List` objects
 
 
 .. method:: API.lists_memberships([screen_name], [user_id], \
