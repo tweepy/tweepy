@@ -777,8 +777,8 @@ class API:
         :param file: |file|
         :param possibly_sensitive: Set to true for content which may not be
                                    suitable for every audience.
-        :param in_reply_to_status_id: The ID of an existing status that the update
-                                      is in reply to.
+        :param in_reply_to_status_id: The ID of an existing status that the
+                                      update is in reply to.
         :param lat: The location's latitude that this tweet refers to.
         :param long: The location's longitude that this tweet refers to.
         :param place_id: Twitter ID of location which is listed in the Tweet if
