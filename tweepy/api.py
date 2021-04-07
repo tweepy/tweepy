@@ -1529,7 +1529,7 @@ class API:
             user_id=list_to_csv(user_id), **kwargs
         )
 
-    @payload('json')
+    @payload('ids')
     def no_retweets_friendships(self, **kwargs):
         """no_retweets_friendships(*, stringify_ids)
 
