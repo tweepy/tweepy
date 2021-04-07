@@ -100,6 +100,8 @@ Create and manage lists
 
 .. automethod:: API.remove_list_member
 
+.. automethod:: API.remove_list_members
+
 
 User methods
 ------------
@@ -618,24 +620,6 @@ List Methods
    :param description: The description to give the list.
    :param owner_screen_name: |owner_screen_name|
    :param owner_id: |owner_id|
-   :rtype: :class:`List` object
-
-
-.. method:: API.remove_list_members(list_id/slug, screen_name/user_id, \
-                                    [owner_id/owner_screen_name])
-
-   Remove up to 100 members from a list. The authenticated user must own the
-   list to be able to remove members from it. Lists are limited to 5,000
-   members.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param screen_name: A comma separated list of screen names, up to 100 are
-                       allowed in a single request
-   :param user_id: A comma separated list of user IDs, up to 100 are allowed in
-                   a single request
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
    :rtype: :class:`List` object
 
 
