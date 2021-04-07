@@ -1386,7 +1386,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def followers_ids(self, **kwargs):
-        """followers_ids(*, user_id, screen_name, cursor, count)
+        """followers_ids(*, user_id, screen_name, cursor, stringify_ids, count)
 
         Returns an array containing the IDs of users following the specified
         user.
@@ -1394,6 +1394,7 @@ class API:
         :param user_id: |user_id|
         :param screen_name: |screen_name|
         :param cursor: |cursor|
+        :param stringify_ids: Have IDs returned as strings instead
         :param count: |count|
 
         :rtype: list of Integers
@@ -1402,7 +1403,7 @@ class API:
         """
         return self.request(
             'GET', 'followers/ids', endpoint_parameters=(
-                'user_id', 'screen_name', 'cursor', 'count'
+                'user_id', 'screen_name', 'cursor', 'stringify_ids', 'count'
             ), **kwargs
         )
 
