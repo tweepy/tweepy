@@ -82,6 +82,8 @@ Create and manage lists
 
 .. automethod:: API.get_list
 
+.. automethod:: API.list_timeline
+
 
 User methods
 ------------
@@ -637,29 +639,6 @@ List Methods
    :param cursor: |cursor|
    :param count: |count|
    :rtype: list of :class:`List` objects
-
-
-.. method:: API.list_timeline(list_id/slug, [owner_id/owner_screen_name], \
-                              [since_id], [max_id], [count], \
-                              [include_entities], [include_rts])
-
-   Returns a timeline of tweets authored by members of the specified list.
-   Retweets are included by default. Use the ``include_rts=false`` parameter to
-   omit retweets.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :param since_id: |since_id|
-   :param max_id: |max_id|
-   :param count: |count|
-   :param include_entities: |include_entities|
-   :param include_rts: A boolean indicating whether the list timeline will
-      contain native retweets (if they exist) in addition to the standard
-      stream of tweets. The output format of retweeted tweets is identical to
-      the representation you see in home_timeline.
-   :rtype: list of :class:`Status` objects
 
 
 .. method:: API.add_list_member(list_id/slug, screen_name/user_id, \
