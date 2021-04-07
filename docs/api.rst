@@ -80,6 +80,8 @@ Create and manage lists
 
 .. automethod:: API.lists_ownerships
 
+.. automethod:: API.get_list
+
 
 User methods
 ------------
@@ -658,18 +660,6 @@ List Methods
       stream of tweets. The output format of retweeted tweets is identical to
       the representation you see in home_timeline.
    :rtype: list of :class:`Status` objects
-
-
-.. method:: API.get_list(list_id/slug, [owner_id/owner_screen_name])
-
-   Returns the specified list. Private lists will only be shown if the
-   authenticated user owns the specified list.
-
-   :param list_id: |list_id|
-   :param slug: |slug|
-   :param owner_id: |owner_id|
-   :param owner_screen_name: |owner_screen_name|
-   :rtype: :class:`List` object
 
 
 .. method:: API.add_list_member(list_id/slug, screen_name/user_id, \
