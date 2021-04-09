@@ -1828,6 +1828,15 @@ class API:
             ), **kwargs
         )
 
+    def remove_profile_banner(self, **kwargs):
+        """remove_profile_banner()
+
+        Removes the uploaded profile banner for the authenticating user.
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-remove_profile_banner
+        """
+        return self.request('POST', 'account/remove_profile_banner', **kwargs)
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
