@@ -1789,6 +1789,21 @@ class API:
         """
         return self.request('GET', 'saved_searches/list', **kwargs)
 
+    @payload('saved_search')
+    def get_saved_search(self, id, **kwargs):
+        """get_saved_search(id)
+
+        Retrieve the data for a saved search owned by the authenticating user
+        specified by the given ID.
+
+        :param id: The ID of the saved search to be retrieved.
+
+        :rtype: :class:`SavedSearch` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
+        """
+        return self.request('GET', f'saved_searches/show/{id}', **kwargs)
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2170,12 +2185,6 @@ class API:
                 'screen_name', 'user_id', 'perform_block'
             ), **kwargs
         )
-
-    @payload('saved_search')
-    def get_saved_search(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
-        """
-        return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
     @payload('saved_search')
     def create_saved_search(self, query, **kwargs):

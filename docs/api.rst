@@ -150,6 +150,8 @@ Manage account settings and profile
 
 .. automethod:: API.saved_searches
 
+.. automethod:: API.get_saved_search
+
 
 Direct Message Methods
 ----------------------
@@ -343,15 +345,6 @@ Spam Reporting Methods
 
 Saved Searches Methods
 ----------------------
-
-.. method:: API.get_saved_search(id)
-
-   Retrieve the data for a saved search owned by the authenticating user
-   specified by the given id.
-
-   :param id: The id of the saved search to be retrieved.
-   :rtype: :class:`SavedSearch` object
-
 
 .. method:: API.create_saved_search(query)
 
