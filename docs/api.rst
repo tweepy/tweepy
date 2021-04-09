@@ -146,6 +146,8 @@ Manage account settings and profile
 
 .. automethod:: API.get_settings
 
+.. automethod:: API.verify_credentials
+
 
 Direct Message Methods
 ----------------------
@@ -205,18 +207,6 @@ Direct Message Methods
 
 Account Methods
 ---------------
-
-.. method:: API.verify_credentials([include_entities], [skip_status], \
-                                   [include_email])
-
-   Verify the supplied user credentials are valid.
-
-   :param include_entities: |include_entities|
-   :param skip_status: |skip_status|
-   :param include_email: When set to true email will be returned in the user
-                         objects as a string.
-   :rtype: :class:`User` object if credentials are valid, otherwise False
-
 
 .. method:: API.rate_limit_status()
 

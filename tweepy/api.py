@@ -1754,6 +1754,29 @@ class API:
             'GET', 'account/settings', use_cache=False, **kwargs
         )
 
+    @payload('user')
+    def verify_credentials(self, **kwargs):
+        """verify_credentials(*, include_entities, skip_status, include_email)
+
+        Verify the supplied user credentials are valid.
+
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+        :param include_email: When set to true email will be returned in the
+                              user objects as a string.
+
+        :rtype: :class:`User` object if credentials are valid, otherwise False
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
+        """
+        if 'include_email' in kwargs:
+            kwargs['include_email'] = str(kwargs['include_email']).lower()
+        return self.request(
+            'GET', 'account/verify_credentials', endpoint_parameters=(
+                'include_entities', 'skip_status', 'include_email'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1992,18 +2015,6 @@ class API:
                 'sleep_time_enabled', 'start_sleep_time', 'end_sleep_time',
                 'time_zone', 'trend_location_woeid', 'lang'
             ), use_cache=False, **kwargs
-        )
-
-    @payload('user')
-    def verify_credentials(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
-        """
-        if 'include_email' in kwargs:
-            kwargs['include_email'] = str(kwargs['include_email']).lower()
-        return self.request(
-            'GET', 'account/verify_credentials', endpoint_parameters=(
-                'include_entities', 'skip_status', 'include_email'
-            ), **kwargs
         )
 
     @payload('json')
