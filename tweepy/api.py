@@ -1804,6 +1804,30 @@ class API:
         """
         return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
+    @payload('json')
+    def get_profile_banner(self, **kwargs):
+        """get_profile_banner(*, user_id, screen_name)
+
+        Returns a map of the available size variations of the specified user's
+        profile banner. If the user has not uploaded a profile banner, a HTTP
+        404 will be served instead.
+
+        The profile banner data available at each size variant's URL is in PNG
+        format.
+
+        :param user_id: |user_id|
+        :param screen_name: |screen_name|
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-users-profile_banner
+        """
+        return self.request(
+            'GET', 'users/profile_banner', endpoint_parameters=(
+                'user_id', 'screen_name'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview

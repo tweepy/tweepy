@@ -152,6 +152,8 @@ Manage account settings and profile
 
 .. automethod:: API.get_saved_search
 
+.. automethod:: API.get_profile_banner
+
 
 Direct Message Methods
 ----------------------
