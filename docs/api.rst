@@ -156,6 +156,8 @@ Manage account settings and profile
 
 .. automethod:: API.remove_profile_banner
 
+.. automethod:: API.set_settings
+
 
 Direct Message Methods
 ----------------------
