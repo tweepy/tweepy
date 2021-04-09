@@ -141,6 +141,11 @@ Follow, search, and get users
 
 .. automethod:: API.update_friendship
 
+Manage account settings and profile
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.get_settings
+
 
 Direct Message Methods
 ----------------------

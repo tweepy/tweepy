@@ -1737,6 +1737,23 @@ class API:
             ), **kwargs
         )
 
+    # Manage account settings and profile
+
+    @payload('json')
+    def get_settings(self, **kwargs):
+        """get_settings()
+
+        Returns settings (including current trend, geo and sleep time
+        information) for the authenticating user.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings
+        """
+        return self.request(
+            'GET', 'account/settings', use_cache=False, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -1964,14 +1981,6 @@ class API:
             'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
                 'id',
             ), id=id, **kwargs
-        )
-
-    @payload('json')
-    def get_settings(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings
-        """
-        return self.request(
-            'GET', 'account/settings', use_cache=False, **kwargs
         )
 
     @payload('json')
