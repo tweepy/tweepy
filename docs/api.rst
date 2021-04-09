@@ -148,6 +148,8 @@ Manage account settings and profile
 
 .. automethod:: API.verify_credentials
 
+.. automethod:: API.saved_searches
+
 
 Direct Message Methods
 ----------------------
@@ -341,13 +343,6 @@ Spam Reporting Methods
 
 Saved Searches Methods
 ----------------------
-
-.. method:: API.saved_searches()
-
-   Returns the authenticated user's saved search queries.
-
-   :rtype: list of :class:`SavedSearch` objects
-
 
 .. method:: API.get_saved_search(id)
 
