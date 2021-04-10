@@ -2005,6 +2005,29 @@ class API:
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
+    # Mute, block, and report users
+
+    @pagination(mode='cursor')
+    @payload('ids')
+    def blocks_ids(self, **kwargs):
+        """blocks_ids(*, stringify_ids, cursor)
+
+        Returns an array of numeric user IDs the authenticating user is
+        blocking.
+
+        :param stringify_ids: |stringify_ids|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
+        """
+        return self.request(
+            'GET', 'blocks/ids', endpoint_parameters=(
+                'stringify_ids', 'cursor',
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2314,17 +2337,6 @@ class API:
         return self.request(
             'GET', 'blocks/list', endpoint_parameters=(
                 'include_entities', 'skip_status', 'cursor'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def blocks_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-ids
-        """
-        return self.request(
-            'GET', 'blocks/ids', endpoint_parameters=(
-                'stringify_ids', 'cursor',
             ), **kwargs
         )
 

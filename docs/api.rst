@@ -168,6 +168,11 @@ Manage account settings and profile
 
 .. automethod:: API.destroy_saved_search
 
+Mute, block, and report users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.blocks_ids
+
 
 Direct Message Methods
 ----------------------
@@ -270,14 +275,6 @@ Block Methods
 
    :param page: |page|
    :rtype: list of :class:`User` objects
-
-
-.. method:: API.blocks_ids([cursor])
-
-   Returns an array of numeric user ids the authenticating user is blocking.
-
-   :param cursor: |cursor|
-   :rtype: list of Integers
 
 
 Mute Methods
