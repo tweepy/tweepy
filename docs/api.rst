@@ -175,6 +175,8 @@ Mute, block, and report users
 
 .. automethod:: API.blocks
 
+.. automethod:: API.mutes_ids
+
 
 Direct Message Methods
 ----------------------
@@ -302,14 +304,6 @@ Mute Methods
    :param include_entities: |include_entities|
    :param skip_status: |skip_status|
    :rtype: list of :class:`User` objects
-
-
-.. method:: API.mutes_ids([cursor])
-
-   Returns an array of numeric user ids the authenticating user has muted.
-
-   :param cursor: |cursor|
-   :rtype: list of Integers
 
 
 Spam Reporting Methods

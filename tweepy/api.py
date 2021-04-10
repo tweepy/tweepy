@@ -2050,6 +2050,26 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('ids')
+    def mutes_ids(self, **kwargs):
+        """mutes_ids(*, stringify_ids, cursor)
+
+        Returns an array of numeric user IDs the authenticating user has muted.
+
+        :param stringify_ids: |stringify_ids|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`int`
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
+        """
+        return self.request(
+            'GET', 'mutes/users/ids', endpoint_parameters=(
+                'stringify_ids', 'cursor'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2306,17 +2326,6 @@ class API:
         return self.request(
             'POST', 'blocks/destroy', endpoint_parameters=(
                 'screen_name', 'user_id', 'include_entities', 'skip_status'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('ids')
-    def mutes_ids(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
-        """
-        return self.request(
-            'GET', 'mutes/users/ids', endpoint_parameters=(
-                'stringify_ids', 'cursor'
             ), **kwargs
         )
 
