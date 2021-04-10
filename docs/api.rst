@@ -160,6 +160,8 @@ Manage account settings and profile
 
 .. automethod:: API.update_profile
 
+.. automethod:: API.update_profile_banner
+
 
 Direct Message Methods
 ----------------------

@@ -1912,6 +1912,39 @@ class API:
             ), **kwargs
         )
 
+    def update_profile_banner(self, filename, *, file=None, **kwargs):
+        """update_profile_banner(filename, *, file, width, height, \
+                                 offset_left, offset_top)
+
+        Uploads a profile banner on behalf of the authenticating user.
+
+        :param filename: |filename|
+        :param file: |file|
+        :param width: The width of the preferred section of the image being
+            uploaded in pixels. Use with ``height``, ``offset_left``, and
+            ``offset_top`` to select the desired region of the image to use.
+        :param height: The height of the preferred section of the image being
+            uploaded in pixels. Use with ``width``, ``offset_left``, and
+            ``offset_top`` to select the desired region of the image to use.
+        :param offset_left: The number of pixels by which to offset the
+            uploaded image from the left. Use with ``height``, ``width``, and
+            ``offset_top`` to select the desired region of the image to use.
+        :param offset_top: The number of pixels by which to offset the uploaded
+            image from the top. Use with ``height``, ``width``, and
+            ``offset_left`` to select the desired region of the image to use.
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
+        """
+        if file is not None:
+            files = {'banner': (filename, file)}
+        else:
+            files = {'banner': open(filename, 'rb')}
+        return self.request(
+            'POST', 'account/update_profile_banner', endpoint_parameters=(
+                'width', 'height', 'offset_left', 'offset_right'
+            ), files=files, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2162,19 +2195,6 @@ class API:
         return self.request(
             'POST', 'account/update_profile_image', endpoint_parameters=(
                 'include_entities', 'skip_status'
-            ), files=files, **kwargs
-        )
-
-    def update_profile_banner(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
-        """
-        if file is not None:
-            files = {'banner': (filename, file)}
-        else:
-            files = {'banner': open(filename, 'rb')}
-        return self.request(
-            'POST', 'account/update_profile_banner', endpoint_parameters=(
-                'width', 'height', 'offset_left', 'offset_right'
             ), files=files, **kwargs
         )
 
