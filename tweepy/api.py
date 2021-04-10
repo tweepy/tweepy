@@ -2070,6 +2070,27 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def mutes(self, **kwargs):
+        """mutes(*, cursor, include_entities, skip_status)
+
+        Returns an array of user objects the authenticating user has muted.
+
+        :param cursor: |cursor|
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
+        """
+        return self.request(
+            'GET', 'mutes/users/list', endpoint_parameters=(
+                'cursor', 'include_entities', 'skip_status'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2326,17 +2347,6 @@ class API:
         return self.request(
             'POST', 'blocks/destroy', endpoint_parameters=(
                 'screen_name', 'user_id', 'include_entities', 'skip_status'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('user', list=True)
-    def mutes(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
-        """
-        return self.request(
-            'GET', 'mutes/users/list', endpoint_parameters=(
-                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
