@@ -179,6 +179,8 @@ Mute, block, and report users
 
 .. automethod:: API.mutes
 
+.. automethod:: API.create_block
+
 
 Direct Message Methods
 ----------------------
@@ -252,17 +254,6 @@ Account Methods
 
 Block Methods
 -------------
-
-.. method:: API.create_block(id/screen_name/user_id)
-
-   Blocks the user specified in the ID parameter as the authenticating user.
-   Destroys a friendship to the blocked user if it exists.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
-
 
 .. method:: API.destroy_block(id/screen_name/user_id)
 
