@@ -187,6 +187,8 @@ Mute, block, and report users
 
 .. automethod:: API.destroy_mute
 
+.. automethod:: API.report_spam
+
 
 Direct Message Methods
 ----------------------
@@ -256,22 +258,6 @@ Account Methods
    :param resources: A comma-separated list of resource families you want to
                      know the current rate limit disposition for.
    :rtype: :class:`JSON` object
-
-
-Spam Reporting Methods
-----------------------
-
-.. method:: API.report_spam(id/screen_name/user_id, [perform_block])
-
-   The user specified in the id is blocked by the authenticated user and
-   reported as a spammer.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :param perform_block: A boolean indicating if the reported account should be
-                         blocked. Defaults to True.
-   :rtype: :class:`User` object
 
 
 Search Methods

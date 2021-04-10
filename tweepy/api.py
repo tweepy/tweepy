@@ -2178,6 +2178,27 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def report_spam(self, **kwargs):
+        """report_spam(*, screen_name, user_id, perform_block)
+
+        Report the specified user as a spam account to Twitter.
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+        :param perform_block: A boolean indicating if the reported account
+                              should be blocked. Defaults to True.
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
+        """
+        return self.request(
+            'POST', 'users/report_spam', endpoint_parameters=(
+                'screen_name', 'user_id', 'perform_block'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2415,16 +2436,6 @@ class API:
             'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
-        )
-
-    @payload('user')
-    def report_spam(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
-        """
-        return self.request(
-            'POST', 'users/report_spam', endpoint_parameters=(
-                'screen_name', 'user_id', 'perform_block'
-            ), **kwargs
         )
 
     @payload('json')
