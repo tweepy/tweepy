@@ -1941,7 +1941,7 @@ class API:
             files = {'banner': open(filename, 'rb')}
         return self.request(
             'POST', 'account/update_profile_banner', endpoint_parameters=(
-                'width', 'height', 'offset_left', 'offset_right'
+                'width', 'height', 'offset_left', 'offset_top'
             ), files=files, **kwargs
         )
 
