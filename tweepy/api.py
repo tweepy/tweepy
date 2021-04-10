@@ -2251,6 +2251,57 @@ class API:
             ), id=id, **kwargs
         )
 
+    @payload('direct_message')
+    def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
+                            attachment_type=None, attachment_media_id=None,
+                            ctas=None, **kwargs):
+        """send_direct_message(recipient_id, text, *, quick_reply_options, \
+                               attachment_type, attachment_media_id, ctas)
+
+        Sends a new direct message to the specified user from the
+        authenticating user.
+
+        :param recipient_id: The ID of the user who should receive the direct
+                             message.
+        :param text: The text of your Direct Message. Max length of 10,000
+                     characters.
+        :param quick_reply_options: Array of Options objects (20 max).
+        :param attachment_type: The attachment type. Can be media or location.
+        :param attachment_media_id: A media id to associate with the message.
+                                    A Direct Message may only reference a
+                                    single media_id.
+        :param ctas: Array of 1-3 call-to-action (CTA) button objects
+
+        :rtype: :class:`DirectMessage` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event
+        """
+        json_payload = {
+            'event': {'type': 'message_create',
+                      'message_create': {
+                          'target': {'recipient_id': recipient_id},
+                          'message_data': {'text': text}
+                      }
+            }
+        }
+        message_data = json_payload['event']['message_create']['message_data']
+        if quick_reply_options is not None:
+            message_data['quick_reply'] = {
+                'type': 'options',
+                'options': quick_reply_options
+            }
+        if attachment_type is not None and attachment_media_id is not None:
+            message_data['attachment'] = {
+                'type': attachment_type,
+                'media': {'id': attachment_media_id}
+            }
+        if ctas is not None:
+            message_data['ctas'] = ctas
+        return self.request(
+            'POST', 'direct_messages/events/new',
+            json_payload=json_payload, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2416,38 +2467,6 @@ class API:
             'GET', 'media/upload', endpoint_parameters=(
                 'command', 'media_id'
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
-        )
-
-    @payload('direct_message')
-    def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
-                            attachment_type=None, attachment_media_id=None,
-                            ctas=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event
-        """
-        json_payload = {
-            'event': {'type': 'message_create',
-                      'message_create': {
-                          'target': {'recipient_id': recipient_id},
-                          'message_data': {'text': text}
-                      }
-            }
-        }
-        message_data = json_payload['event']['message_create']['message_data']
-        if quick_reply_options is not None:
-            message_data['quick_reply'] = {
-                'type': 'options',
-                'options': quick_reply_options
-            }
-        if attachment_type is not None and attachment_media_id is not None:
-            message_data['attachment'] = {
-                'type': attachment_type,
-                'media': {'id': attachment_media_id}
-            }
-        if ctas is not None:
-            message_data['ctas'] = ctas
-        return self.request(
-            'POST', 'direct_messages/events/new',
-            json_payload=json_payload, **kwargs
         )
 
     @payload('json')
