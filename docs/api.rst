@@ -166,6 +166,8 @@ Manage account settings and profile
 
 .. automethod:: API.create_saved_search
 
+.. automethod:: API.destroy_saved_search
+
 
 Direct Message Methods
 ----------------------
@@ -333,18 +335,6 @@ Spam Reporting Methods
    :param perform_block: A boolean indicating if the reported account should be
                          blocked. Defaults to True.
    :rtype: :class:`User` object
-
-
-Saved Searches Methods
-----------------------
-
-.. method:: API.destroy_saved_search(id)
-
-   Destroys a saved search for the authenticated user. The search specified by
-   id must be owned by the authenticating user.
-
-   :param id: The id of the saved search to be deleted.
-   :rtype: :class:`SavedSearch` object
 
 
 Search Methods

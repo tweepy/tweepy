@@ -1990,6 +1990,21 @@ class API:
             ), query=query, **kwargs
         )
 
+    @payload('saved_search')
+    def destroy_saved_search(self, id, **kwargs):
+        """destroy_saved_search(id)
+
+        Destroys a saved search for the authenticated user. The search
+        specified by ID must be owned by the authenticating user.
+
+        :param id: The ID of the saved search to be deleted.
+
+        :rtype: :class:`SavedSearch` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
+        """
+        return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2322,12 +2337,6 @@ class API:
                 'screen_name', 'user_id', 'perform_block'
             ), **kwargs
         )
-
-    @payload('saved_search')
-    def destroy_saved_search(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
-        """
-        return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
     @payload('json')
     def trends_available(self, **kwargs):
