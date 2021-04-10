@@ -2028,6 +2028,28 @@ class API:
             ), **kwargs
         )
 
+    @pagination(mode='cursor')
+    @payload('user', list=True)
+    def blocks(self, **kwargs):
+        """blocks(*, include_entities, skip_status, cursor)
+
+        Returns an array of user objects that the authenticating user is
+        blocking.
+
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`User` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
+        """
+        return self.request(
+            'GET', 'blocks/list', endpoint_parameters=(
+                'include_entities', 'skip_status', 'cursor'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2326,17 +2348,6 @@ class API:
         return self.request(
             'POST', 'mutes/users/destroy', endpoint_parameters=(
                 'screen_name', 'user_id'
-            ), **kwargs
-        )
-
-    @pagination(mode='cursor')
-    @payload('user', list=True)
-    def blocks(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
-        """
-        return self.request(
-            'GET', 'blocks/list', endpoint_parameters=(
-                'include_entities', 'skip_status', 'cursor'
             ), **kwargs
         )
 

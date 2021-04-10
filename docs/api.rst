@@ -173,6 +173,8 @@ Mute, block, and report users
 
 .. automethod:: API.blocks_ids
 
+.. automethod:: API.blocks
+
 
 Direct Message Methods
 ----------------------
@@ -267,14 +269,6 @@ Block Methods
    :param screen_name: |screen_name|
    :param user_id: |user_id|
    :rtype: :class:`User` object
-
-
-.. method:: API.blocks([page])
-
-   Returns an array of user objects that the authenticating user is blocking.
-
-   :param page: |page|
-   :rtype: list of :class:`User` objects
 
 
 Mute Methods
