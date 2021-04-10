@@ -185,6 +185,8 @@ Mute, block, and report users
 
 .. automethod:: API.create_mute
 
+.. automethod:: API.destroy_mute
+
 
 Direct Message Methods
 ----------------------
@@ -254,19 +256,6 @@ Account Methods
    :param resources: A comma-separated list of resource families you want to
                      know the current rate limit disposition for.
    :rtype: :class:`JSON` object
-
-
-Mute Methods
-------------
-
-.. method:: API.destroy_mute(id/screen_name/user_id)
-
-   Un-mutes the user specified in the ID parameter for the authenticating user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
 
 
 Spam Reporting Methods
