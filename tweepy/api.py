@@ -2233,6 +2233,24 @@ class API:
             ), **kwargs
         )
 
+    @payload('direct_message')
+    def get_direct_message(self, id, **kwargs):
+        """get_direct_message(id)
+
+        Returns a specific direct message.
+
+        :param id: The ID of the Direct Message event that should be returned.
+
+        :rtype: :class:`DirectMessage` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
+        """
+        return self.request(
+            'GET', 'direct_messages/events/show', endpoint_parameters=(
+                'id',
+            ), id=id, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2398,16 +2416,6 @@ class API:
             'GET', 'media/upload', endpoint_parameters=(
                 'command', 'media_id'
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
-        )
-
-    @payload('direct_message')
-    def get_direct_message(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
-        """
-        return self.request(
-            'GET', 'direct_messages/events/show', endpoint_parameters=(
-                'id',
-            ), id=id, **kwargs
         )
 
     @payload('direct_message')

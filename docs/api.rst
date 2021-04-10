@@ -199,14 +199,7 @@ Sending and receiving events
 
 .. automethod:: API.list_direct_messages
 
-
-.. method:: API.get_direct_message([id], [full_text])
-
-   Returns a specific direct message.
-
-   :param id: The id of the Direct Message event that should be returned.
-   :param full_text: |full_text|
-   :rtype: :class:`DirectMessage` object
+.. automethod:: API.get_direct_message
 
 
 .. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], \
