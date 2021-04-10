@@ -2138,6 +2138,26 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def create_mute(self, **kwargs):
+        """create_mute(*, screen_name, user_id)
+
+        Mutes the user specified in the ID parameter for the authenticating
+        user.
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
+        """
+        return self.request(
+            'POST', 'mutes/users/create', endpoint_parameters=(
+                'screen_name', 'user_id'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2375,16 +2395,6 @@ class API:
             'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
-        )
-
-    @payload('user')
-    def create_mute(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
-        """
-        return self.request(
-            'POST', 'mutes/users/create', endpoint_parameters=(
-                'screen_name', 'user_id'
-            ), **kwargs
         )
 
     @payload('user')

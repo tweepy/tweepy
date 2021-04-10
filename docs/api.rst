@@ -183,6 +183,8 @@ Mute, block, and report users
 
 .. automethod:: API.destroy_block
 
+.. automethod:: API.create_mute
+
 
 Direct Message Methods
 ----------------------
@@ -256,16 +258,6 @@ Account Methods
 
 Mute Methods
 ------------
-
-.. method:: API.create_mute(id/screen_name/user_id)
-
-   Mutes the user specified in the ID parameter for the authenticating user.
-
-   :param id: |uid|
-   :param screen_name: |screen_name|
-   :param user_id: |user_id|
-   :rtype: :class:`User` object
-
 
 .. method:: API.destroy_mute(id/screen_name/user_id)
 
