@@ -2212,6 +2212,27 @@ class API:
             ), id=id, **kwargs
         )
 
+    @pagination(mode='dm_cursor')
+    @payload('direct_message', list=True)
+    def list_direct_messages(self, **kwargs):
+        """list_direct_messages(*, count, cursor)
+
+        Returns all Direct Message events (both sent and received) within the
+        last 30 days. Sorted in reverse-chronological order.
+
+        :param count: |count|
+        :param cursor: |cursor|
+
+        :rtype: list of :class:`DirectMessage` objects
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events
+        """
+        return self.request(
+            'GET', 'direct_messages/events/list', endpoint_parameters=(
+                'count', 'cursor'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2387,17 +2408,6 @@ class API:
             'GET', 'direct_messages/events/show', endpoint_parameters=(
                 'id',
             ), id=id, **kwargs
-        )
-
-    @pagination(mode='dm_cursor')
-    @payload('direct_message', list=True)
-    def list_direct_messages(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events
-        """
-        return self.request(
-            'GET', 'direct_messages/events/list', endpoint_parameters=(
-                'count', 'cursor'
-            ), **kwargs
         )
 
     @payload('direct_message')

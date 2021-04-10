@@ -197,6 +197,8 @@ Sending and receiving events
 
 .. automethod:: API.destroy_direct_message
 
+.. automethod:: API.list_direct_messages
+
 
 .. method:: API.get_direct_message([id], [full_text])
 
@@ -205,16 +207,6 @@ Sending and receiving events
    :param id: The id of the Direct Message event that should be returned.
    :param full_text: |full_text|
    :rtype: :class:`DirectMessage` object
-
-
-.. method:: API.list_direct_messages([count], [cursor])
-
-   Returns all Direct Message events (both sent and received) within the last
-   30 days. Sorted in reverse-chronological order.
-
-   :param count: |count|
-   :param cursor: |cursor|
-   :rtype: list of :class:`DirectMessage` objects
 
 
 .. method:: API.send_direct_message(recipient_id, text, [quick_reply_type], \
