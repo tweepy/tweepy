@@ -2189,6 +2189,29 @@ class API:
             ), **kwargs
         )
 
+    # Sending and receiving events
+
+    def destroy_direct_message(self, id, **kwargs):
+        """destroy_direct_message(id)
+
+        Deletes the direct message specified in the required ID parameter. The
+        authenticating user must be the recipient of the specified direct
+        message. Direct Messages are only removed from the interface of the
+        user context provided. Other members of the conversation can still
+        access the Direct Messages.
+
+        :param id: The ID of the Direct Message that should be deleted.
+
+        :rtype: None
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event
+        """
+        return self.request(
+            'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
+                'id',
+            ), id=id, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2407,15 +2430,6 @@ class API:
         return self.request(
             'POST', 'direct_messages/events/new',
             json_payload=json_payload, **kwargs
-        )
-
-    def destroy_direct_message(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event
-        """
-        return self.request(
-            'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
-                'id',
-            ), id=id, **kwargs
         )
 
     @payload('json')

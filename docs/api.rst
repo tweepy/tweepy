@@ -189,9 +189,14 @@ Mute, block, and report users
 
 .. automethod:: API.report_spam
 
+Direct Messages
+---------------
 
-Direct Message Methods
-----------------------
+Sending and receiving events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.destroy_direct_message
+
 
 .. method:: API.get_direct_message([id], [full_text])
 
@@ -232,18 +237,6 @@ Direct Message Methods
                                A Direct Message may only reference a single
                                media_id.
    :rtype: :class:`DirectMessage` object
-
-
-.. method:: API.destroy_direct_message(id)
-
-   Deletes the direct message specified in the required ID parameter. The
-   authenticating user must be the recipient of the specified direct message.
-   Direct Messages are only removed from the interface of the user context
-   provided. Other members of the conversation can still access the Direct
-   Messages.
-
-   :param id: The id of the Direct Message that should be deleted.
-   :rtype: None
 
 
 Account Methods
