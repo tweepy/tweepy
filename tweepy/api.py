@@ -1945,6 +1945,33 @@ class API:
             ), files=files, **kwargs
         )
 
+    @payload('user')
+    def update_profile_image(self, filename, *, file=None, **kwargs):
+        """update_profile_image(filename, *, file, include_entities, \
+                                skip_status)
+
+        Update the authenticating user's profile image. Valid formats: GIF,
+        JPG, or PNG
+
+        :param filename: |filename|
+        :param file: |file|
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
+        """
+        if file is not None:
+            files = {'image': (filename, file)}
+        else:
+            files = {'image': open(filename, 'rb')}
+        return self.request(
+            'POST', 'account/update_profile_image', endpoint_parameters=(
+                'include_entities', 'skip_status'
+            ), files=files, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2182,20 +2209,6 @@ class API:
             'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
-        )
-
-    @payload('user')
-    def update_profile_image(self, filename, *, file=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
-        """
-        if file is not None:
-            files = {'image': (filename, file)}
-        else:
-            files = {'image': open(filename, 'rb')}
-        return self.request(
-            'POST', 'account/update_profile_image', endpoint_parameters=(
-                'include_entities', 'skip_status'
-            ), files=files, **kwargs
         )
 
     @payload('user')

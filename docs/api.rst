@@ -162,6 +162,8 @@ Manage account settings and profile
 
 .. automethod:: API.update_profile_banner
 
+.. automethod:: API.update_profile_image
+
 
 Direct Message Methods
 ----------------------
@@ -231,15 +233,6 @@ Account Methods
    :param resources: A comma-separated list of resource families you want to
                      know the current rate limit disposition for.
    :rtype: :class:`JSON` object
-
-
-.. method:: API.update_profile_image(filename)
-
-   Update the authenticating user's profile image. Valid formats: GIF, JPG, or
-   PNG
-
-   :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
 
 
 Block Methods
