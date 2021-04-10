@@ -671,8 +671,7 @@ class API:
                          auto_populate_reply_metadata, \
                          exclude_reply_user_ids, attachment_url, media_ids, \
                          possibly_sensitive, lat, long, place_id, \
-                         display_coordinates, trim_user, enable_dmcommands, \
-                         fail_dmcommands, card_uri)
+                         display_coordinates, trim_user, card_uri)
 
         Updates the authenticating user's current status, also known as
         Tweeting.
@@ -731,15 +730,6 @@ class API:
         :param display_coordinates: Whether or not to put a pin on the exact
             coordinates a Tweet has been sent from.
         :param trim_user: |trim_user|
-        :param enable_dmcommands: When set to true, enables shortcode commands
-            for sending Direct Messages as part of the status text to send a
-            Direct Message to a user. When set to false, disables this behavior
-            and includes any leading characters in the status text that is
-            posted
-        :param fail_dmcommands: When set to true, causes any status text that
-            starts with shortcode commands to return an API error. When set to
-            false, allows shortcode commands to be sent in the status text and
-            acted on by the API.
         :param card_uri: Associate an ads card with the Tweet using the
             card_uri value from any ads card response.
 
@@ -756,7 +746,7 @@ class API:
                 'auto_populate_reply_metadata', 'exclude_reply_user_ids',
                 'attachment_url', 'media_ids', 'possibly_sensitive', 'lat',
                 'long', 'place_id', 'display_coordinates', 'trim_user',
-                'enable_dmcommands', 'fail_dmcommands', 'card_uri'
+                'card_uri'
             ), status=status, **kwargs
         )
 
