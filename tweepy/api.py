@@ -1972,6 +1972,24 @@ class API:
             ), files=files, **kwargs
         )
 
+    @payload('saved_search')
+    def create_saved_search(self, query, **kwargs):
+        """create_saved_search(query)
+
+        Creates a saved search for the authenticated user.
+
+        :param query: The query of the search the user would like to save.
+
+        :rtype: :class:`SavedSearch` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
+        """
+        return self.request(
+            'POST', 'saved_searches/create', endpoint_parameters=(
+                'query',
+            ), query=query, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2303,16 +2321,6 @@ class API:
             'POST', 'users/report_spam', endpoint_parameters=(
                 'screen_name', 'user_id', 'perform_block'
             ), **kwargs
-        )
-
-    @payload('saved_search')
-    def create_saved_search(self, query, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
-        """
-        return self.request(
-            'POST', 'saved_searches/create', endpoint_parameters=(
-                'query',
-            ), query=query, **kwargs
         )
 
     @payload('saved_search')

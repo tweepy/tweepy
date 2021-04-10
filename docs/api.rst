@@ -164,6 +164,8 @@ Manage account settings and profile
 
 .. automethod:: API.update_profile_image
 
+.. automethod:: API.create_saved_search
+
 
 Direct Message Methods
 ----------------------
@@ -335,14 +337,6 @@ Spam Reporting Methods
 
 Saved Searches Methods
 ----------------------
-
-.. method:: API.create_saved_search(query)
-
-   Creates a saved search for the authenticated user.
-
-   :param query: The query of the search the user would like to save.
-   :rtype: :class:`SavedSearch` object
-
 
 .. method:: API.destroy_saved_search(id)
 
