@@ -158,6 +158,8 @@ Manage account settings and profile
 
 .. automethod:: API.set_settings
 
+.. automethod:: API.update_profile
+
 
 Direct Message Methods
 ----------------------
@@ -235,19 +237,6 @@ Account Methods
    PNG
 
    :param filename: local path to image file to upload. Not a remote URL!
-   :rtype: :class:`User` object
-
-
-.. method:: API.update_profile([name], [url], [location], [description])
-
-   Sets values that users are able to set under the "Account" tab of their
-   settings page.
-
-   :param name: Maximum of 20 characters
-   :param url: Maximum of 100 characters.
-               Will be prepended with "http://" if not present
-   :param location: Maximum of 30 characters
-   :param description: Maximum of 160 characters
    :rtype: :class:`User` object
 
 
