@@ -2115,6 +2115,29 @@ class API:
             ), **kwargs
         )
 
+    @payload('user')
+    def destroy_block(self, **kwargs):
+        """destroy_block(*, screen_name, user_id, include_entities, \
+                         skip_status)
+
+        Un-blocks the user specified in the ID parameter for the authenticating
+        user.
+
+        :param screen_name: |screen_name|
+        :param user_id: |user_id|
+        :param include_entities: |include_entities|
+        :param skip_status: |skip_status|
+
+        :rtype: :class:`User` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
+        """
+        return self.request(
+            'POST', 'blocks/destroy', endpoint_parameters=(
+                'screen_name', 'user_id', 'include_entities', 'skip_status'
+            ), **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2352,16 +2375,6 @@ class API:
             'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
-        )
-
-    @payload('user')
-    def destroy_block(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
-        """
-        return self.request(
-            'POST', 'blocks/destroy', endpoint_parameters=(
-                'screen_name', 'user_id', 'include_entities', 'skip_status'
-            ), **kwargs
         )
 
     @payload('user')
