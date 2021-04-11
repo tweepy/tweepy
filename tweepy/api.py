@@ -2515,6 +2515,31 @@ class API:
         )
 
     @payload('media')
+    def chunked_upload_finalize(self, media_id, **kwargs):
+        """chunked_upload_finalize(media_id)
+
+        Use this endpoint after the entire media file is uploaded via
+        appending. If (and only if) the response contains a
+        ``processing_info field``, it may also be necessary to check its status
+        and wait for it to return success before proceeding to Tweet creation.
+
+        :param media_id: The ``media_id`` returned from the initialization.
+
+        :rtype: :class:`Media` object
+
+        :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
+        """
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        post_data = {
+            'command': 'FINALIZE',
+            'media_id': media_id
+        }
+        return self.request(
+            'POST', 'media/upload', headers=headers, post_data=post_data,
+            upload_api=True, **kwargs
+        )
+
+    @payload('media')
     def chunked_upload_init(self, total_bytes, media_type, *,
                             media_category=None, additional_owners=None,
                             **kwargs):
@@ -2532,20 +2557,6 @@ class API:
         if additional_owners is not None:
             post_data['additional_owners'] = list_to_csv(additional_owners)
 
-        return self.request(
-            'POST', 'media/upload', headers=headers, post_data=post_data,
-            upload_api=True, **kwargs
-        )
-
-    @payload('media')
-    def chunked_upload_finalize(self, media_id, **kwargs):
-        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
-        """
-        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        post_data = {
-            'command': 'FINALIZE',
-            'media_id': media_id
-        }
         return self.request(
             'POST', 'media/upload', headers=headers, post_data=post_data,
             upload_api=True, **kwargs

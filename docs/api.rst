@@ -221,6 +221,8 @@ Upload media
 
 .. automethod:: API.chunked_upload_append
 
+.. automethod:: API.chunked_upload_finalize
+
 
 Account Methods
 ---------------
@@ -447,18 +449,6 @@ Media methods
    :param media_type: The MIME type of the media being uploaded.
    :param media_category: |media_category|
    :param additional_owners: |additional_owners|
-
-   :rtype: :class:`Media` object
-
-
-.. method:: API.chunked_upload_finalize(media_id)
-
-   Use this endpoint after the entire media file is uploaded via appending.
-   If (and only if) the response contains a ``processing_info field``, it may
-   also be necessary to check its status and wait for it to return success
-   before proceeding to Tweet creation.
-
-   :param media_id: The ``media_id`` returned from the initialization.
 
    :rtype: :class:`Media` object
 
