@@ -4,30 +4,26 @@
 
 .. include:: parameters.rst
 
-*************
-API Reference
-*************
+***********************************
+:mod:`tweepy.api` --- API Reference
+***********************************
 
 This page contains some basic documentation for the Tweepy module.
-
-
-:mod:`tweepy.api` --- Twitter API wrapper
-=========================================
 
 .. autoclass:: API
 
 Premium Search APIs
--------------------
+===================
 
 .. automethod:: API.search_30_day
 
 .. automethod:: API.search_full_archive
 
 Tweets
-------
+======
 
 Get Tweet timelines
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 .. automethod:: API.home_timeline
 
@@ -36,7 +32,7 @@ Get Tweet timelines
 .. automethod:: API.user_timeline
 
 Post, retrieve, and engage with Tweets
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 .. automethod:: API.favorites
 
@@ -67,15 +63,15 @@ Post, retrieve, and engage with Tweets
 .. automethod:: API.update_with_media
 
 Search Tweets
-^^^^^^^^^^^^^
+-------------
 
 .. automethod:: API.search
 
 Accounts and users
-------------------
+==================
 
 Create and manage lists
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 .. automethod:: API.lists_all
 
@@ -116,7 +112,7 @@ Create and manage lists
 .. automethod:: API.update_list
 
 Follow, search, and get users
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 .. automethod:: API.followers_ids
 
@@ -149,7 +145,7 @@ Follow, search, and get users
 .. automethod:: API.update_friendship
 
 Manage account settings and profile
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------
 
 .. automethod:: API.get_settings
 
@@ -176,7 +172,7 @@ Manage account settings and profile
 .. automethod:: API.destroy_saved_search
 
 Mute, block, and report users
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 .. automethod:: API.blocks_ids
 
@@ -197,10 +193,10 @@ Mute, block, and report users
 .. automethod:: API.report_spam
 
 Direct Messages
----------------
+===============
 
 Sending and receiving events
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 .. automethod:: API.destroy_direct_message
 
@@ -211,10 +207,10 @@ Sending and receiving events
 .. automethod:: API.send_direct_message
 
 Media
------
+=====
 
 Upload media
-^^^^^^^^^^^^
+------------
 
 .. automethod:: API.get_media_upload_status
 
@@ -233,50 +229,50 @@ Upload media
 .. automethod:: API.chunked_upload_init
 
 Trends
-------
+======
 
 Get locations with trending topics
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 .. automethod:: API.trends_available
 
 .. automethod:: API.trends_closest
 
 Get trends near a location
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 .. automethod:: API.trends_place
 
 Geo
----
+===
 
 Get information about a place
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 .. automethod:: API.geo_id
 
 Get places near a location
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 .. automethod:: API.reverse_geocode
 
 .. automethod:: API.geo_search
 
 Developer utilities
--------------------
+===================
 
 Get Twitter configuration details
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 .. automethod:: API.configuration
 
 Get Twitter supported languages
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 .. automethod:: API.supported_languages
 
 Get app rate limit status
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 .. automethod:: API.rate_limit_status
 
