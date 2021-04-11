@@ -268,19 +268,10 @@ Get Twitter supported languages
 
 .. automethod:: API.supported_languages
 
+Get app rate limit status
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Account Methods
----------------
-
-.. method:: API.rate_limit_status()
-
-   Returns the current rate limits for methods belonging to the specified
-   resource families. When using application-only auth, this method's response
-   indicates the application-only auth rate limiting context.
-
-   :param resources: A comma-separated list of resource families you want to
-                     know the current rate limit disposition for.
-   :rtype: :class:`JSON` object
+.. automethod:: API.rate_limit_status
 
 
 Search Methods

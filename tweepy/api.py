@@ -2807,9 +2807,22 @@ class API:
         """
         return self.request('GET', 'help/languages', **kwargs)
 
+    # Get app rate limit status
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
+        """rate_limit_status(*, resources)
+
+        Returns the current rate limits for methods belonging to the specified
+        resource families. When using application-only auth, this method's
+        response indicates the application-only auth rate limiting context.
+
+        :param resources: A comma-separated list of resource families you want
+                          to know the current rate limit disposition for.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
         """
         return self.request(
             'GET', 'application/rate_limit_status', endpoint_parameters=(
