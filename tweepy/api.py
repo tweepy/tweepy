@@ -2322,6 +2322,29 @@ class API:
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
 
+    def create_media_metadata(self, media_id, alt_text, **kwargs):
+        """create_media_metadata(media_id, alt_text)
+
+        This endpoint can be used to provide additional information about the
+        uploaded ``media_id``. This feature is currently only supported for
+        images and GIFs. Call this endpoint to attach additional metadata such
+        as image alt text.
+
+        :param media_id: The ID of the media to add alt text to.
+        :param alt_text: The alt text to add to the image.
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create
+        """
+        json_payload = {
+            'media_id': media_id,
+            'alt_text': {'text': alt_text}
+        }
+
+        return self.request(
+            'POST', 'media/metadata/create', json_payload=json_payload,
+            upload_api=True, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2463,19 +2486,6 @@ class API:
         }
         return self.request(
             'POST', 'media/upload', headers=headers, post_data=post_data,
-            upload_api=True, **kwargs
-        )
-
-    def create_media_metadata(self, media_id, alt_text, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create
-        """
-        json_payload = {
-            'media_id': media_id,
-            'alt_text': {'text': alt_text}
-        }
-
-        return self.request(
-            'POST', 'media/metadata/create', json_payload=json_payload,
             upload_api=True, **kwargs
         )
 

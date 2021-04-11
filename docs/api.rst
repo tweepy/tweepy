@@ -211,6 +211,8 @@ Upload media
 
 .. automethod:: API.get_media_upload_status
 
+.. automethod:: API.create_media_metadata
+
 
 Account Methods
 ---------------
@@ -521,17 +523,6 @@ Media methods
    :param media_id: The ``media_id`` returned from the initialization.
 
    :rtype: :class:`Media` object
-
-
-.. method:: API.create_media_metadata(media_id, alt_text)
-
-   This endpoint can be used to provide additional information about the
-   uploaded media_id. This feature is currently only supported for images and
-   GIFs. Call this endpoint to attach additional metadata such as image alt
-   text.
-
-   :param media_id: The ID of the media to add alt text to.
-   :param alt_text: The alt text to add to the image.
 
 
 :mod:`tweepy.error` --- Exceptions
