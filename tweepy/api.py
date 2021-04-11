@@ -2555,7 +2555,7 @@ class API:
 
         :rtype: :class:`Media` object
 
-        :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
