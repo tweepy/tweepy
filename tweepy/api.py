@@ -67,7 +67,7 @@ class API:
     :param upload_host: The URL of the upload server
     :param wait_on_rate_limit: Whether or not to automatically wait for rate
                                limits to replenish
-    
+
     :raise TypeError: If the given parser is not a Parser instance
 
     :reference: https://developer.twitter.com/en/docs/api-reference-index
