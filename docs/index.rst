@@ -16,10 +16,10 @@ Contents:
    auth_tutorial.rst
    code_snippet.rst
    cursor_tutorial.rst
-   extended_tweets.rst
    streaming_how_to.rst
    api.rst
    exceptions.rst
+   extended_tweets.rst
    running_tests.rst
 
 Indices and tables
