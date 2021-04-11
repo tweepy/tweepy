@@ -2446,7 +2446,7 @@ class API:
 
         :rtype: :class:`Media` object
 
-        :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
 
