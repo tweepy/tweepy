@@ -2346,7 +2346,26 @@ class API:
 
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
+        """media_upload(filename, *, file, chunked, media_category, \
+                        additional_owners)
+
+        Use this to upload media to Twitter. This calls either
+        :func:`API.simple_upload` or :func:`API.chunked_upload`. Chunked media
+        upload is automatically used for videos. If ``chunked`` is set or the
+        media is a video, ``wait_for_async_finalize`` can be specified as a
+        keyword argument to be passed to :func:`API.chunked_upload`.
+
+        :param filename: |filename|
+        :param file: |file|
+        :param chunked: Whether or not to use chunked media upload. Videos use
+                        chunked upload regardless of this parameter. Defaults
+                        to ``False``.
+        :param media_category: |media_category|
+        :param additional_owners: |additional_owners|
+
+        :rtype: :class:`Media` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
         h = None
         if file is not None:
