@@ -215,6 +215,8 @@ Upload media
 
 .. automethod:: API.media_upload
 
+.. automethod:: API.simple_upload
+
 
 Account Methods
 ---------------
@@ -431,20 +433,6 @@ Utility methods
 
 Media methods
 -------------
-
-.. method:: API.simple_upload(filename, [file], [media_category], \
-                              [additional_owners])
-
-   Use this endpoint to upload media to Twitter.
-   This does not use the chunked upload endpoints.
-
-   :param filename: |filename|
-   :param file: |file|
-   :param media_category: |media_category|
-   :param additional_owners: |additional_owners|
-
-   :rtype: :class:`Media` object
-
 
 .. method:: API.chunked_upload(filename, [file], [file_type], \
                                [wait_for_async_finalize], [media_category], \

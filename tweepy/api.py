@@ -2393,7 +2393,19 @@ class API:
     @payload('media')
     def simple_upload(self, filename, *, file=None, media_category=None,
                       additional_owners=None, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
+        """simple_upload(filename, *, file, media_category, additional_owners)
+
+        Use this endpoint to upload media to Twitter. This does not use the
+        chunked upload endpoints.
+
+        :param filename: |filename|
+        :param file: |file|
+        :param media_category: |media_category|
+        :param additional_owners: |additional_owners|
+
+        :rtype: :class:`Media` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
         """
         if file is not None:
             files = {'media': (filename, file)}
