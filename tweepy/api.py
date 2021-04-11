@@ -2660,6 +2660,22 @@ class API:
             ), id=id, **kwargs
         )
 
+    # Get information about a place
+
+    @payload('place')
+    def geo_id(self, place_id, **kwargs):
+        """geo_id(place_id)
+
+        Given ``place_id``, provide more details about that place.
+
+        :param place_id: Valid Twitter ID of a location.
+
+        :rtype: :class:`Place` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
+        """
+        return self.request('GET', f'geo/id/{place_id}', **kwargs)
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
@@ -2701,12 +2717,6 @@ class API:
                 'lat', 'long', 'accuracy', 'granularity', 'max_results'
             ), lat=lat, long=long, **kwargs
         )
-
-    @payload('place')
-    def geo_id(self, place_id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
-        """
-        return self.request('GET', f'geo/id/{place_id}', **kwargs)
 
     @payload('place', list=True)
     def geo_search(self, **kwargs):

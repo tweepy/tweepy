@@ -240,6 +240,14 @@ Get trends near a location
 
 .. automethod:: API.trends_place
 
+Geo
+---
+
+Get information about a place
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.geo_id
+
 
 Account Methods
 ---------------
@@ -375,13 +383,6 @@ Geo Methods
                        ``city``.
    :param max_results: A hint as to the maximum number of results to return.
                        This is only a guideline, which may not be adhered to.
-
-
-.. method:: API.geo_id(id)
-
-   Given *id* of a place, provide more details about that place.
-
-   :param id: Valid Twitter ID of a location.
 
 
 Utility methods
