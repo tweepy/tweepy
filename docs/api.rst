@@ -281,35 +281,6 @@ Get app rate limit status
 .. automethod:: API.rate_limit_status
 
 
-:mod:`tweepy.error` --- Exceptions
-==================================
-
-The exceptions are available in the ``tweepy`` module directly, which means
-``tweepy.error`` itself does not need to be imported. For example,
-``tweepy.error.TweepError`` is available as ``tweepy.TweepError``.
-
-
-.. exception:: TweepError
-
-   The main exception Tweepy uses. Is raised for a number of things.
-
-   When a ``TweepError`` is raised due to an error Twitter responded with,
-   the error code (`as described in the API documentation
-   <https://developer.twitter.com/en/docs/basics/response-codes>`_) can be
-   accessed at ``TweepError.response.text``. Note, however, that
-   ``TweepError``\ s also may be raised with other things as message
-   (for example plain error reason strings).
-
-
-.. exception:: RateLimitError
-
-   Is raised when an API method fails due to hitting Twitter's rate limit.
-   Makes for easy handling of the rate limit specifically.
-
-   Inherits from :exc:`TweepError`, so ``except TweepError`` will catch a
-   ``RateLimitError`` too.
-
-
 .. rubric:: Footnotes
 
 .. [#] https://web.archive.org/web/20170829051949/https://dev.twitter.com/rest/reference/get/search/tweets
