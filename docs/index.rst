@@ -21,6 +21,7 @@ Contents:
    exceptions.rst
    extended_tweets.rst
    running_tests.rst
+   changelog.md
 
 Indices and tables
 ==================

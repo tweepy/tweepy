@@ -1,3 +1,6 @@
+Changelog
+=========
+
 Also see https://github.com/tweepy/tweepy/releases for changelogs.
 
 Version 3.10.0
