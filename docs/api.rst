@@ -223,6 +223,8 @@ Upload media
 
 .. automethod:: API.chunked_upload_finalize
 
+.. automethod:: API.chunked_upload_init
+
 
 Account Methods
 ---------------
@@ -435,22 +437,6 @@ Utility methods
    slugs which are not usernames, maximum photo resolutions, and t.co
    shortened URL length. It is recommended applications request this endpoint
    when they are loaded, but no more than once a day.
-
-
-Media methods
--------------
-
-.. method:: API.chunked_upload_init(total_bytes, media_type, \
-                                    [media_category], [additional_owners])
-
-   Use this endpoint to initiate a chunked file upload session.
-
-   :param total_bytes: The size of the media being uploaded in bytes.
-   :param media_type: The MIME type of the media being uploaded.
-   :param media_category: |media_category|
-   :param additional_owners: |additional_owners|
-
-   :rtype: :class:`Media` object
 
 
 :mod:`tweepy.error` --- Exceptions
