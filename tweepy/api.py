@@ -2574,6 +2574,24 @@ class API:
             upload_api=True, **kwargs
         )
 
+    # Get locations with trending topics
+
+    @payload('json')
+    def trends_available(self, **kwargs):
+        """trends_available()
+
+        Returns the locations that Twitter has trending topic information for.
+        The response is an array of "locations" that encode the location's
+        WOEID (a Yahoo! Where On Earth ID) and some other human-readable
+        information such as a canonical name and country the location belongs
+        in.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-available
+        """
+        return self.request('GET', 'trends/available', **kwargs)
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
@@ -2583,12 +2601,6 @@ class API:
                 'resources',
             ), use_cache=False, **kwargs
         )
-
-    @payload('json')
-    def trends_available(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-available
-        """
-        return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
     def trends_place(self, id, **kwargs):

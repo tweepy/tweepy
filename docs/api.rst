@@ -225,6 +225,14 @@ Upload media
 
 .. automethod:: API.chunked_upload_init
 
+Trends
+------
+
+Get locations with trending topics
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.trends_available
+
 
 Account Methods
 ---------------
@@ -340,16 +348,6 @@ Search Methods
 
 Trends Methods
 --------------
-
-.. method:: API.trends_available()
-
-   Returns the locations that Twitter has trending topic information for.
-   The response is an array of "locations" that encode the location's WOEID
-   (a Yahoo! Where On Earth ID) and some other human-readable information such
-   as a canonical name and country the location belongs in.
-
-   :rtype: :class:`JSON` object
-
 
 .. method:: API.trends_place(id, [exclude])
 
