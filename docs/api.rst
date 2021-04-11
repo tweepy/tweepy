@@ -253,6 +253,8 @@ Get places near a location
 
 .. automethod:: API.reverse_geocode
 
+.. automethod:: API.geo_search
+
 
 Account Methods
 ---------------
