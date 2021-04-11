@@ -8,8 +8,6 @@
 :mod:`tweepy.api` --- API Reference
 ***********************************
 
-This page contains some basic documentation for the Tweepy module.
-
 .. autoclass:: API
 
 Premium Search APIs
