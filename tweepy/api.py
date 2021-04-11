@@ -2624,6 +2624,42 @@ class API:
             ), lat=lat, long=long, **kwargs
         )
 
+    # Get trends near a location
+
+    @payload('json')
+    def trends_place(self, id, **kwargs):
+        """trends_place(id *, exclude)
+
+        Returns the top 50 trending topics for a specific WOEID, if trending
+        information is available for it.
+
+        The response is an array of “trend” objects that encode the name of the
+        trending topic, the query parameter that can be used to search for the
+        topic on Twitter Search, and the Twitter Search URL.
+
+        This information is cached for 5 minutes. Requesting more frequently
+        than that will not return any more data, and will count against your
+        rate limit usage.
+
+        The tweet_volume for the last 24 hours is also returned for many trends
+        if this is available.
+
+        :param id: The Yahoo! Where On Earth ID of the location to return
+            trending information for. Global information is available by using
+            1 as the WOEID.
+        :param exclude: Setting this equal to hashtags will remove all hashtags
+                        from the trends list.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
+        """
+        return self.request(
+            'GET', 'trends/place', endpoint_parameters=(
+                'id', 'exclude'
+            ), id=id, **kwargs
+        )
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
@@ -2632,16 +2668,6 @@ class API:
             'GET', 'application/rate_limit_status', endpoint_parameters=(
                 'resources',
             ), use_cache=False, **kwargs
-        )
-
-    @payload('json')
-    def trends_place(self, id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
-        """
-        return self.request(
-            'GET', 'trends/place', endpoint_parameters=(
-                'id', 'exclude'
-            ), id=id, **kwargs
         )
 
     @pagination(mode='next')
