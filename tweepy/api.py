@@ -2501,7 +2501,7 @@ class API:
             between 0-999 inclusive. The first segment has index 0, second
             segment has index 1, and so on.
 
-        :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
         """
         post_data = {
             'command': 'APPEND',
