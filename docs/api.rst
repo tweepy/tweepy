@@ -233,6 +233,8 @@ Get locations with trending topics
 
 .. automethod:: API.trends_available
 
+.. automethod:: API.trends_closest
+
 
 Account Methods
 ---------------
@@ -370,28 +372,6 @@ Trends Methods
               the WOEID.
    :param exclude: Setting this equal to hashtags will remove all hashtags
                    from the trends list.
-   :rtype: :class:`JSON` object
-
-
-.. method:: API.trends_closest(lat, long)
-
-   Returns the locations that Twitter has trending topic information for,
-   closest to a specified location.
-
-   The response is an array of “locations” that encode the location’s WOEID and
-   some other human-readable information such as a canonical name and country
-   the location belongs in.
-
-   A WOEID is a Yahoo! Where On Earth ID.
-
-   :param lat: If provided with a long parameter the available trend locations
-               will be sorted by distance, nearest to furthest, to the
-               co-ordinate pair. The valid ranges for longitude is -180.0 to
-               +180.0 (West is negative, East is positive) inclusive.
-   :param long: If provided with a lat parameter the available trend locations
-                will be sorted by distance, nearest to furthest, to the
-                co-ordinate pair. The valid ranges for longitude is -180.0 to
-                +180.0 (West is negative, East is positive) inclusive.
    :rtype: :class:`JSON` object
 
 

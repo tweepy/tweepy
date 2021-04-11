@@ -2593,6 +2593,38 @@ class API:
         return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
+    def trends_closest(self, lat, long, **kwargs):
+        """trends_closest(lat, long)
+
+        Returns the locations that Twitter has trending topic information for,
+        closest to a specified location.
+
+        The response is an array of “locations” that encode the location’s
+        WOEID and some other human-readable information such as a canonical
+        name and country the location belongs in.
+
+        A WOEID is a Yahoo! Where On Earth ID.
+
+        :param lat: If provided with a long parameter the available trend
+            locations will be sorted by distance, nearest to furthest, to the
+            co-ordinate pair. The valid ranges for longitude is -180.0 to
+            +180.0 (West is negative, East is positive) inclusive.
+        :param long: If provided with a lat parameter the available trend
+            locations will be sorted by distance, nearest to furthest, to the
+            co-ordinate pair. The valid ranges for longitude is -180.0 to
+            +180.0 (West is negative, East is positive) inclusive.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-closest
+        """
+        return self.request(
+            'GET', 'trends/closest', endpoint_parameters=(
+                'lat', 'long'
+            ), lat=lat, long=long, **kwargs
+        )
+
+    @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
         """
@@ -2610,16 +2642,6 @@ class API:
             'GET', 'trends/place', endpoint_parameters=(
                 'id', 'exclude'
             ), id=id, **kwargs
-        )
-
-    @payload('json')
-    def trends_closest(self, lat, long, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-closest
-        """
-        return self.request(
-            'GET', 'trends/closest', endpoint_parameters=(
-                'lat', 'long'
-            ), lat=lat, long=long, **kwargs
         )
 
     @pagination(mode='next')
