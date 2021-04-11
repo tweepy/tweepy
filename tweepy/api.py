@@ -2302,6 +2302,26 @@ class API:
             json_payload=json_payload, **kwargs
         )
 
+    # Upload media
+
+    @payload('media')
+    def get_media_upload_status(self, media_id, **kwargs):
+        """get_media_upload_status(media_id)
+
+        This endpoints sends a STATUS command that will check on the progress
+        of a chunked media upload. If the upload has succeeded, it's safe to
+        create a Tweet with this ``media_id``.
+
+        :param media_id: The ID of the media to check.
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
+        """
+        return self.request(
+            'GET', 'media/upload', endpoint_parameters=(
+                'command', 'media_id'
+            ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
+        )
+
     def media_upload(self, filename, *, file=None, chunked=False,
                      media_category=None, additional_owners=None, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
@@ -2457,16 +2477,6 @@ class API:
         return self.request(
             'POST', 'media/metadata/create', json_payload=json_payload,
             upload_api=True, **kwargs
-        )
-
-    @payload('media')
-    def get_media_upload_status(self, media_id, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
-        """
-        return self.request(
-            'GET', 'media/upload', endpoint_parameters=(
-                'command', 'media_id'
-            ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
 
     @payload('json')
