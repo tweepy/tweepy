@@ -219,6 +219,8 @@ Upload media
 
 .. automethod:: API.chunked_upload
 
+.. automethod:: API.chunked_upload_append
+
 
 Account Methods
 ---------------
@@ -447,19 +449,6 @@ Media methods
    :param additional_owners: |additional_owners|
 
    :rtype: :class:`Media` object
-
-
-.. method:: API.chunked_upload_append(media_id, media, segment_index)
-
-   Use this endpoint to upload a chunk (consecutive byte range) of the media
-   file.
-
-   :param media_id: The ``media_id`` returned from the initialization.
-   :param media: The raw binary file content being uploaded. It must be <= 5
-                 MB.
-   :param segment_index: An ordered index of file chunk. It must be between
-                         0-999 inclusive. The first segment has index 0, second
-                         segment has index 1, and so on.
 
 
 .. method:: API.chunked_upload_finalize(media_id)

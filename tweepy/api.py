@@ -2488,6 +2488,32 @@ class API:
 
         return media
 
+    def chunked_upload_append(self, media_id, media, segment_index, **kwargs):
+        """chunked_upload_append(media_id, media, segment_index)
+
+        Use this endpoint to upload a chunk (consecutive byte range) of the
+        media file.
+
+        :param media_id: The ``media_id`` returned from the initialization.
+        :param media: The raw binary file content being uploaded. It must be <=
+                      5 MB.
+        :param segment_index: An ordered index of file chunk. It must be
+            between 0-999 inclusive. The first segment has index 0, second
+            segment has index 1, and so on.
+
+        :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
+        """
+        post_data = {
+            'command': 'APPEND',
+            'media_id': media_id,
+            'segment_index': segment_index
+        }
+        files = {'media': media}
+        return self.request(
+            'POST', 'media/upload', post_data=post_data, files=files,
+            upload_api=True, **kwargs
+        )
+
     @payload('media')
     def chunked_upload_init(self, total_bytes, media_type, *,
                             media_category=None, additional_owners=None,
@@ -2508,20 +2534,6 @@ class API:
 
         return self.request(
             'POST', 'media/upload', headers=headers, post_data=post_data,
-            upload_api=True, **kwargs
-        )
-
-    def chunked_upload_append(self, media_id, media, segment_index, **kwargs):
-        """ :reference https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
-        """
-        post_data = {
-            'command': 'APPEND',
-            'media_id': media_id,
-            'segment_index': segment_index
-        }
-        files = {'media': media}
-        return self.request(
-            'POST', 'media/upload', post_data=post_data, files=files,
             upload_api=True, **kwargs
         )
 
