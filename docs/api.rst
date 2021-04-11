@@ -248,6 +248,11 @@ Get information about a place
 
 .. automethod:: API.geo_id
 
+Get places near a location
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.reverse_geocode
+
 
 Account Methods
 ---------------
@@ -359,30 +364,6 @@ Search Methods
    :param next: This parameter is used to get the next 'page' of results. The
       value used with the parameter is pulled directly from the response
       provided by the API, and should not be modified.
-
-
-Geo Methods
------------
-
-.. method:: API.reverse_geocode([lat], [long], [accuracy], [granularity], \
-                                [max_results])
-
-   Given a latitude and longitude, looks for places (cities and neighbourhoods)
-   whose IDs can be specified in a call to :func:`update_status` to appear as
-   the name of the location. This call provides a detailed response about the
-   location in question; the :func:`nearby_places` function should be preferred
-   for getting a list of places nearby without great detail.
-
-   :param lat: The location's latitude.
-   :param long: The location's longitude.
-   :param accuracy: Specify the "region" in which to search, such as a number
-                    (then this is a radius in meters, but it can also take a
-                    string that is suffixed with ft to specify feet).
-                    If this is not passed in, then it is assumed to be 0m
-   :param granularity: Assumed to be ``neighborhood`` by default; can also be
-                       ``city``.
-   :param max_results: A hint as to the maximum number of results to return.
-                       This is only a guideline, which may not be adhered to.
 
 
 Utility methods
