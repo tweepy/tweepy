@@ -2788,6 +2788,25 @@ class API:
         """
         return self.request('GET', 'help/configuration', **kwargs)
 
+    # Get Twitter supported languages
+
+    @payload('json')
+    def supported_languages(self, **kwargs):
+        """supported_languages()
+
+        Returns the list of languages supported by Twitter along with the
+        language code supported by Twitter.
+
+        The language code may be formatted as ISO 639-1 alpha-2 (``en``), ISO
+        639-3 alpha-3 (``msa``), or ISO 639-1 alpha-2 combined with an ISO
+        3166-1 alpha-2 localization (``zh-tw``).
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
+        """
+        return self.request('GET', 'help/languages', **kwargs)
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
@@ -2819,9 +2838,3 @@ class API:
                 'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
             ), query=query, **kwargs
         )
-
-    @payload('json')
-    def supported_languages(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
-        """
-        return self.request('GET', 'help/languages', **kwargs)

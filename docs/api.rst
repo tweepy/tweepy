@@ -263,6 +263,11 @@ Get Twitter configuration details
 
 .. automethod:: API.configuration
 
+Get Twitter supported languages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.supported_languages
+
 
 Account Methods
 ---------------
