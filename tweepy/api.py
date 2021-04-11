@@ -2769,6 +2769,25 @@ class API:
             ), **kwargs
         )
 
+    # Get Twitter configuration details
+
+    @payload('json')
+    def configuration(self, **kwargs):
+        """configuration()
+
+        Returns the current configuration used by Twitter including twitter.com
+        slugs which are not usernames, maximum photo resolutions, and t.co
+        shortened URL length.
+
+        It is recommended applications request this endpoint when they are
+        loaded, but no more than once a day.
+
+        :rtype: :class:`JSON` object
+
+        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
+        """
+        return self.request('GET', 'help/configuration', **kwargs)
+
     @payload('json')
     def rate_limit_status(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
@@ -2806,9 +2825,3 @@ class API:
         """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
         """
         return self.request('GET', 'help/languages', **kwargs)
-
-    @payload('json')
-    def configuration(self, **kwargs):
-        """ :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
-        """
-        return self.request('GET', 'help/configuration', **kwargs)

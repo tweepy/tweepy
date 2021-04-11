@@ -255,6 +255,14 @@ Get places near a location
 
 .. automethod:: API.geo_search
 
+Developer utilities
+-------------------
+
+Get Twitter configuration details
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. automethod:: API.configuration
+
 
 Account Methods
 ---------------
@@ -366,17 +374,6 @@ Search Methods
    :param next: This parameter is used to get the next 'page' of results. The
       value used with the parameter is pulled directly from the response
       provided by the API, and should not be modified.
-
-
-Utility methods
----------------
-
-.. method:: API.configuration()
-
-   Returns the current configuration used by Twitter including twitter.com
-   slugs which are not usernames, maximum photo resolutions, and t.co
-   shortened URL length. It is recommended applications request this endpoint
-   when they are loaded, but no more than once a day.
 
 
 :mod:`tweepy.error` --- Exceptions
