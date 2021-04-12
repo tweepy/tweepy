@@ -293,6 +293,6 @@ class Stream:
         """This is called when a user withheld content notice is received."""
         log.debug("Received user withheld content notice: %s", notice)
 
-    def on_warning(self, notice):
+    def on_warning(self, warning):
         """This is called when a stall warning message is received."""
-        log.warning("Received stall warning: %s", notice)
+        log.warning("Received stall warning: %s", warning)
