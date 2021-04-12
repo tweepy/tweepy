@@ -273,9 +273,9 @@ class Stream:
         """This is called when a status deletion notice is received."""
         log.debug("Received status deletion notice: %d", status_id)
 
-    def on_disconnect_message(self, notice):
+    def on_disconnect_message(self, message):
         """This is called when a disconnect message is received."""
-        log.warning("Received disconnect message: %s", notice)
+        log.warning("Received disconnect message: %s", message)
 
     def on_limit(self, track):
         """This is called when a limit notice is received."""
