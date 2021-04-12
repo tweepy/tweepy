@@ -365,7 +365,7 @@ class Stream:
 
     def on_data(self, raw_data):
         """This is called when raw data is received from the stream.
-        This method handles sending the data to other methods, depending on the
+        This method handles sending the data to other methods based on the
         message type.
 
         Parameters
