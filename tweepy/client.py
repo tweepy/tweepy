@@ -225,7 +225,8 @@ class Client:
             data_type=User, user_auth=user_auth
         )
 
-    def get_users(self, *, ids=None, usernames=None, user_auth=False, **params):
+    def get_users(self, *, ids=None, usernames=None, user_auth=False,
+                  **params):
         """
         Users lookup
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
