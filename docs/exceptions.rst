@@ -6,25 +6,12 @@
 Exceptions
 **********
 
-.. autoexception:: TweepyException
+Exceptions are available directly in the :mod:`tweepy` module, which means
+:mod:`tweepy.errors` itself does not need to be imported. For example,
+:exc:`tweepy.errors.TweepyException` is available as
+:exc:`tweepy.TweepyException`.
 
-.. autoexception:: HTTPException
-   :show-inheritance:
-
-.. autoexception:: BadRequest
-   :show-inheritance:
-
-.. autoexception:: Unauthorized
-   :show-inheritance:
-
-.. autoexception:: Forbidden
-   :show-inheritance:
-
-.. autoexception:: NotFound
-   :show-inheritance:
-
-.. autoexception:: TooManyRequests
-   :show-inheritance:
-
-.. autoexception:: TwitterServerError
+.. automodule:: tweepy.errors
+   :members:
+   :member-order: bysource
    :show-inheritance:
