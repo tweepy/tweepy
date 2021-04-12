@@ -4,9 +4,9 @@
 
 .. include:: parameters.rst
 
-***********************************
-:mod:`tweepy.API` --- API Reference
-***********************************
+*************************************
+:class:`tweepy.API` --- API Reference
+*************************************
 
 .. autoclass:: API
 
