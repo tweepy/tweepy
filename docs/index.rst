@@ -18,6 +18,7 @@ Contents:
    cursor_tutorial.rst
    streaming_how_to.rst
    api.rst
+   stream.rst
    exceptions.rst
    extended_tweets.rst
    running_tests.rst
