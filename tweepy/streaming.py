@@ -316,12 +316,12 @@ class Stream:
         """Disconnect the stream"""
         self.running = False
 
-    def on_closed(self, resp):
+    def on_closed(self, response):
         """This is called when the stream has been closed by Twitter.
 
         Parameters
         ----------
-        resp : requests.Response
+        response : requests.Response
             The Response from Twitter
         """
         log.error("Stream connection closed by Twitter")
