@@ -2,9 +2,9 @@
 
 .. currentmodule:: tweepy
 
-*****************************************
-:mod:`tweepy.Stream` --- Stream Reference
-*****************************************
+*******************************************
+:class:`tweepy.Stream` --- Stream Reference
+*******************************************
 
 .. autoclass:: Stream
    :members:
