@@ -130,18 +130,13 @@ class TweepyAPITests(TweepyTestCase):
     def testsearchusers(self):
         self.api.search_users('twitter')
 
-    @tape.use_cassette('testme.json')
-    def testme(self):
-        me = self.api.me()
-        self.assertEqual(me.screen_name, username)
-
     @tape.use_cassette('testlistdirectmessages.json')
     def testlistdirectmessages(self):
         self.api.list_direct_messages()
 
     @tape.use_cassette('testsendanddestroydirectmessage.json')
     def testsendanddestroydirectmessage(self):
-        me = self.api.me()
+        me = self.api.verify_credentials()
 
         # send
         sent_dm = self.api.send_direct_message(me.id, text='test message')
@@ -200,7 +195,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testupdateprofilecolors.json')
     def testupdateprofilecolors(self):
-        original = self.api.me()
+        original = self.api.verify_credentials()
         updated = self.api.update_profile(profile_link_color='D0F900')
 
         # restore colors
@@ -225,7 +220,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testupdateprofile.json')
     def testupdateprofile(self):
-        original = self.api.me()
+        original = self.api.verify_credentials()
         profile = {
             'name': 'Tweepy test 123',
             'location': 'pytopia',

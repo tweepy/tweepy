@@ -25,10 +25,6 @@ class AuthHandler:
         """Apply authentication headers to request"""
         raise NotImplementedError
 
-    def get_username(self):
-        """Return the username of the authenticated user"""
-        raise NotImplementedError
-
 
 class OAuthHandler(AuthHandler):
     """OAuth authentication handler"""
@@ -133,17 +129,6 @@ class OAuthHandler(AuthHandler):
             return credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0]
         except Exception as e:
             raise TweepyException(e)
-
-    def get_username(self):
-        if self.username is None:
-            api = API(self)
-            user = api.verify_credentials()
-            if user:
-                self.username = user.screen_name
-            else:
-                raise TweepyException('Unable to get username,'
-                                      ' invalid oauth token!')
-        return self.username
 
 
 class OAuth2Bearer(AuthBase):
