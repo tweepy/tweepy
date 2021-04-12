@@ -1,7 +1,5 @@
 .. _exceptions:
 
-.. currentmodule:: tweepy
-
 **********
 Exceptions
 **********
