@@ -266,7 +266,7 @@ class API:
             https://developer.twitter.com/en/account/environments.
         :param query: The equivalent of one premium rule/filter, with up to
             1,024 characters (256 with Sandbox dev environments).
-            
+
             This parameter should include ALL portions of the rule/filter,
             including all operators, and portions of the rule should not be
             separated into other parameters of the query.
