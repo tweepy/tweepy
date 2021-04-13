@@ -17,6 +17,7 @@ Contents:
    code_snippet.rst
    cursor_tutorial.rst
    api.rst
+   client.rst
    stream.rst
    exceptions.rst
    extended_tweets.rst
