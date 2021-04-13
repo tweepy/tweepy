@@ -18,6 +18,7 @@ Contents:
    cursor_tutorial.rst
    api.rst
    client.rst
+   models.rst
    stream.rst
    exceptions.rst
    extended_tweets.rst
