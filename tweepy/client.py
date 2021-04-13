@@ -286,7 +286,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -376,7 +376,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -480,7 +480,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -588,7 +588,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -638,7 +638,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -682,7 +682,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -712,7 +712,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -756,7 +756,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -804,7 +804,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -835,7 +835,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -880,7 +880,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------
@@ -939,7 +939,7 @@ class Client:
 
         Returns
         -------
-        Response
+        :ref:`response_reference`
 
         References
         ----------

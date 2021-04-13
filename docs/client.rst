@@ -190,3 +190,11 @@ user data objects.
 .. _poll fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
 .. _Tweet fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+
+.. _response_reference:
+
+``Response``
+============
+The :obj:`Response` returned by :class:`Client` methods is a
+:class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``, and
+``meta`` fields, corresponding with the fields in responses from Twitter's API.
