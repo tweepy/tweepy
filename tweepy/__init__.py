@@ -19,16 +19,12 @@ from tweepy.errors import (
     TweepyException, TwitterServerError, Unauthorized
 )
 from tweepy.media import Media
-from tweepy.models import (
-    DirectMessage, Friendship, ModelFactory, SavedSearch, SearchResults,
-    Status, User
-)
 from tweepy.pagination import Paginator
 from tweepy.place import Place
 from tweepy.poll import Poll
 from tweepy.streaming import Stream
 from tweepy.tweet import ReferencedTweet, Tweet
-# from tweepy.user import User
+from tweepy.user import User
 
 # Global, unauthenticated instance of API
 api = API()

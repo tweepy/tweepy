@@ -6,7 +6,8 @@ import unittest
 from ast import literal_eval
 
 from .config import tape, TweepyTestCase, use_replay, username
-from tweepy import API, FileCache, Friendship, MemoryCache
+from tweepy import API, FileCache, MemoryCache
+from tweepy.models import Friendship
 from tweepy.parsers import Parser
 
 test_tweet_id = '266367358078169089'
