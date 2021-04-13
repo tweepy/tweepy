@@ -1,0 +1,68 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.1 Requests/2.25.1 Tweepy/3.10.0
+    method: GET
+    uri: https://api.twitter.com/2/tweets?ids=1293593516040269825%2C1293595870563381249
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAFRQy07CQBT9lcuwJTxaCqW7GtCgGw0IC3Ex7dzCmDLTzKOVEBJ/w9/zS5w2RGly
+        M4szJ+d1JowaSqK3M+GMRGTkzfzA3WgyHA+9ySz0AtIjBj+N+1yan69vDRkXNM9PcECFHdjZeegv
+        3Dsfj2BFazjPJRh3BwSBFXTXFTcGVfy87O/ETmzRySgEhYnlOeNi31CvLHA0KD3IlDw2+F5JKxjY
+        otZMsOFoVCWCtAoYlpjLwmGpPB6t4ObUh9jxjWT01OTNqRXpAbgGKVzsWjPBPRfCOTeBDsYUOhoM
+        TD+VA9/bqKp4oI8VtPAner9KPravcUguvdZaQTgdBhPfD0feePa/VrtPBAuqnHucpqi1654j1chq
+        +3WdFCoEKoSrmiJrc69TZlxpAyhYIbkwrkz2t/CNVadWvFkcuo3WVaq7QaW5FHf2WLTr7aelT3GZ
+        mBdyeb/8AgAA//8DADmclNgXAgAA
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '363'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 13 Apr 2021 03:47:51 GMT
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_I4pPzi3RhJuWUOrZMV196A=="; Max-Age=63072000; Expires=Thu,
+        13 Apr 2023 03:47:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A161828567137532771; Max-Age=63072000; Expires=Thu, 13 Apr 2023
+        03:47:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - e73d97435f0dceb85177cf88d0b7e5e6
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1618286571'
+      x-response-time:
+      - '64'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
