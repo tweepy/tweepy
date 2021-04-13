@@ -6,6 +6,18 @@ from math import inf
 
 
 class Paginator:
+    """:class:`Paginator` can be used to paginate for any :class:`Client`
+    methods that support pagination
+
+    Parameters
+    ----------
+    method
+        :class:`Client` method to paginate for
+    args
+        Positional arguments to pass to ``method``
+    kwargs
+        Keyword arguments to pass to ``method``
+    """
 
     def __init__(self, method, *args, **kwargs):
         self.method = method
@@ -20,6 +32,13 @@ class Paginator:
                                   **self.kwargs)
 
     def flatten(self, limit=inf):
+        """Flatten paginated data
+
+        Parameters
+        ----------
+        limit
+            Maximum number of results to yield
+        """
         if limit <= 0:
             return
 

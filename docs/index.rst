@@ -22,6 +22,7 @@ Contents:
    stream.rst
    exceptions.rst
    extended_tweets.rst
+   pagination.rst
    streaming.rst
    running_tests.rst
    changelog.md
