@@ -5,7 +5,7 @@ import time
 import unittest
 from ast import literal_eval
 
-from .config import tape, TweepyTestCase, use_replay, username
+from .config import tape, TweepyTestCase, username
 from tweepy import API, FileCache, MemoryCache
 from tweepy.models import Friendship
 from tweepy.parsers import Parser
