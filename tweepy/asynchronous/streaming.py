@@ -13,7 +13,7 @@ from oauthlib.oauth1 import Client as OAuthClient
 from yarl import URL
 
 import tweepy
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 from tweepy.models import Status
 
 log = logging.getLogger(__name__)
@@ -165,7 +165,7 @@ class AsyncStream:
         Returns :class:`asyncio.Task`
         """
         if self.task is not None and not self.task.done():
-            raise TweepError("Stream is already connected")
+            raise TweepyException("Stream is already connected")
 
         endpoint = "statuses/filter"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -177,7 +177,7 @@ class AsyncStream:
             body["track"] = ','.join(map(str, track))
         if locations is not None:
             if len(locations) % 4:
-                raise TweepError(
+                raise TweepyException(
                     "Number of location coordinates should be a multiple of 4"
                 )
             body["locations"] = ','.join(
@@ -207,7 +207,7 @@ class AsyncStream:
         Returns :class:`asyncio.Task`
         """
         if self.task is not None and not self.task.done():
-            raise TweepError("Stream is already connected")
+            raise TweepyException("Stream is already connected")
 
         endpoint = "statuses/sample"
 

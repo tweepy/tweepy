@@ -11,7 +11,7 @@ Asynchronous interfaces with the Twitter API
 try:
     import aiohttp
 except ModuleNotFoundError:
-    from tweepy.error import TweepError
-    raise TweepError("tweepy.asynchronous requires aiohttp to be installed")
+    from tweepy.errors import TweepyException
+    raise TweepyException("tweepy.asynchronous requires aiohttp to be installed")
 
 from tweepy.asynchronous.streaming import AsyncStream
