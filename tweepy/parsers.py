@@ -4,25 +4,17 @@
 
 import json as json_lib
 
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 from tweepy.models import ModelFactory
 
 
 class Parser:
 
-    def parse(self, method, payload, *args, **kwargs):
+    def parse(self, payload, *args, **kwargs):
         """
         Parse the response payload and return the result.
         Returns a tuple that contains the result data and the cursors
         (or None if not present).
-        """
-        raise NotImplementedError
-
-    def parse_error(self, payload):
-        """
-        Parse the error message and api error code from payload.
-        Return them as an (error_msg, error_code) tuple. If unable to parse the
-        message, throw an exception and default error message will be used.
         """
         raise NotImplementedError
 
@@ -32,10 +24,7 @@ class RawParser(Parser):
     def __init__(self):
         pass
 
-    def parse(self, method, payload, *args, **kwargs):
-        return payload
-
-    def parse_error(self, payload):
+    def parse(self, payload, *args, **kwargs):
         return payload
 
 
@@ -43,11 +32,11 @@ class JSONParser(Parser):
 
     payload_format = 'json'
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, payload, *, return_cursors=False, **kwargs):
         try:
             json = json_lib.loads(payload)
         except Exception as e:
-            raise TweepError(f'Failed to parse JSON payload: {e}')
+            raise TweepyException(f'Failed to parse JSON payload: {e}')
 
         if return_cursors and isinstance(json, dict):
             if 'next' in json:
@@ -60,20 +49,6 @@ class JSONParser(Parser):
                     return json, json['next_cursor']
         return json
 
-    def parse_error(self, payload):
-        error_object = json_lib.loads(payload)
-
-        if 'error' in error_object:
-            reason = error_object['error']
-            api_code = error_object.get('code')
-        else:
-            reason = error_object['errors']
-            api_code = [error.get('code') for error in
-                        reason if error.get('code')]
-            api_code = api_code[0] if len(api_code) == 1 else api_code
-
-        return reason, api_code
-
 
 class ModelParser(JSONParser):
 
@@ -81,24 +56,32 @@ class ModelParser(JSONParser):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
-    def parse(self, method, payload, return_cursors=False):
+    def parse(self, payload, *, api=None, payload_list=False,
+              payload_type=None, return_cursors=False):
         try:
-            if method.payload_type is None:
+            if payload_type is None:
                 return
-            model = getattr(self.model_factory, method.payload_type)
+            model = getattr(self.model_factory, payload_type)
         except AttributeError:
-            raise TweepError(f'No model for this payload type: {method.payload_type}')
+            raise TweepyException(
+                f'No model for this payload type: {payload_type}'
+            )
 
-        json = JSONParser.parse(self, method, payload, return_cursors=return_cursors)
+        json = JSONParser.parse(self, payload, return_cursors=return_cursors)
         if isinstance(json, tuple):
             json, cursors = json
         else:
             cursors = None
 
-        if method.payload_list:
-            result = model.parse_list(method.api, json)
-        else:
-            result = model.parse(method.api, json)
+        try:
+            if payload_list:
+                result = model.parse_list(api, json)
+            else:
+                result = model.parse(api, json)
+        except KeyError:
+            raise TweepyException(
+                f"Unable to parse response payload: {json}"
+            ) from None
 
         if cursors:
             return result, cursors

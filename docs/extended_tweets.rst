@@ -1,5 +1,5 @@
 .. _extended_tweets:
-.. _Twitter's Tweet updates documentation: https://developer.twitter.com/en/docs/tweets/tweet-updates
+.. _Twitter's Tweet updates documentation: https://web.archive.org/web/20200705045150/https://developer.twitter.com/en/docs/tweets/tweet-updates
 
 ***************
 Extended Tweets

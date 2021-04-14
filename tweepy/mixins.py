@@ -2,7 +2,8 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-class EqualityComparable:
+
+class EqualityComparableID:
     __slots__ = ()
 
     def __eq__(self, other):
@@ -12,7 +13,7 @@ class EqualityComparable:
         return NotImplemented
 
 
-class Hashable(EqualityComparable):
+class HashableID(EqualityComparableID):
     __slots__ = ()
 
     def __hash__(self):

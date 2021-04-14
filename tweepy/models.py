@@ -4,7 +4,7 @@
 
 from email.utils import parsedate_to_datetime
 
-from tweepy.mixins import Hashable
+from tweepy.mixins import HashableID
 
 
 class ResultSet(list):
@@ -84,7 +84,7 @@ class Model:
         return f'{self.__class__.__name__}({", ".join(state)})'
 
 
-class Status(Model, Hashable):
+class Status(Model, HashableID):
 
     @classmethod
     def parse(cls, api, json):
@@ -92,8 +92,10 @@ class Status(Model, Hashable):
         setattr(status, '_json', json)
         for k, v in json.items():
             if k == 'user':
-                user_model = getattr(api.parser.model_factory, 'user') if api else User
-                user = user_model.parse(api, v)
+                try:
+                    user = api.parser.model_factory.user.parse(api, v)
+                except AttributeError:
+                    user = User.parse(api, v)
                 setattr(status, 'author', user)
                 setattr(status, 'user', user)  # DEPRECIATED
             elif k == 'created_at':
@@ -135,7 +137,7 @@ class Status(Model, Hashable):
         return self._api.create_favorite(self.id)
 
 
-class User(Model, Hashable):
+class User(Model, HashableID):
 
     @classmethod
     def parse(cls, api, json):
@@ -278,7 +280,10 @@ class SearchResults(ResultSet):
         results.count = metadata.get('count')
         results.next_results = metadata.get('next_results')
 
-        status_model = getattr(api.parser.model_factory, 'status') if api else Status
+        try:
+            status_model = api.parser.model_factory.status
+        except AttributeError:
+            status_model = Status
 
         for status in json['statuses']:
             results.append(status_model.parse(api, status))

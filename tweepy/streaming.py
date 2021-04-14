@@ -6,285 +6,479 @@
 
 import json
 import logging
+from math import inf
+from platform import python_version
 import ssl
 from threading import Thread
 from time import sleep
 
 import requests
+from requests_oauthlib import OAuth1
 import urllib3
 
-from tweepy.api import API
-from tweepy.error import TweepError
+import tweepy
+from tweepy.errors import TweepyException
 from tweepy.models import Status
-
-STREAM_VERSION = '1.1'
 
 log = logging.getLogger(__name__)
 
 
-class StreamListener:
-
-    def __init__(self, api=None):
-        self.api = api or API()
-
-    def on_connect(self):
-        """Called once connected to streaming server.
-
-        This will be invoked once a successful response
-        is received from the server. Allows the listener
-        to perform some work prior to entering the read loop.
-        """
-        pass
-
-    def on_data(self, raw_data):
-        """Called when raw data is received from connection.
-
-        Override this method if you wish to manually handle
-        the stream data. Return False to stop stream and close connection.
-        """
-        data = json.loads(raw_data)
-
-        if 'in_reply_to_status_id' in data:
-            status = Status.parse(self.api, data)
-            return self.on_status(status)
-        if 'delete' in data:
-            delete = data['delete']['status']
-            return self.on_delete(delete['id'], delete['user_id'])
-        if 'limit' in data:
-            return self.on_limit(data['limit']['track'])
-        if 'disconnect' in data:
-            return self.on_disconnect(data['disconnect'])
-        if 'warning' in data:
-            return self.on_warning(data['warning'])
-        if 'scrub_geo' in data:
-            return self.on_scrub_geo(data['scrub_geo'])
-        if 'status_withheld' in data:
-            return self.on_status_withheld(data['status_withheld'])
-        if 'user_withheld' in data:
-            return self.on_user_withheld(data['user_withheld'])
-
-        log.error("Unknown message type: %s", raw_data)
-
-    def on_keep_alive(self):
-        """Called when a keep-alive arrived"""
-        return
-
-    def on_status(self, status):
-        """Called when a new status arrives"""
-        return
-
-    def on_exception(self, exception):
-        """Called when an unhandled exception occurs."""
-        return
-
-    def on_delete(self, status_id, user_id):
-        """Called when a delete notice arrives for a status"""
-        return
-
-    def on_limit(self, track):
-        """Called when a limitation notice arrives"""
-        return
-
-    def on_request_error(self, status_code):
-        """Called when a non-200 status code is returned"""
-        return False
-
-    def on_connection_error(self):
-        """Called when stream connection errors or times out"""
-        return
-
-    def on_disconnect(self, notice):
-        """Called when twitter sends a disconnect notice
-
-        Disconnect codes are listed here:
-        https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/streaming-message-types
-        """
-        return
-
-    def on_warning(self, notice):
-        """Called when a disconnection warning message arrives"""
-        return
-
-    def on_scrub_geo(self, notice):
-        """Called when a location deletion notice arrives"""
-        return
-
-    def on_status_withheld(self, notice):
-        """Called when a status withheld content notice arrives"""
-        return
-
-    def on_user_withheld(self, notice):
-        """Called when a user withheld content notice arrives"""
-        return
-
-
 class Stream:
+    """Filter and sample realtime Tweets
 
-    def __init__(self, auth, listener, **options):
-        self.auth = auth
-        self.listener = listener
+    Parameters
+    ----------
+    consumer_key : str
+        Twitter API Consumer Key
+    consumer_secret : str
+        Twitter API Consumer Secret
+    access_token: str
+        Twitter API Access Token
+    access_token_secret : str
+        Twitter API Access Token Secret
+    chunk_size : int
+        The default socket.read size. Default to 512, less than half the size
+        of a Tweet so that it reads Tweets with the minimal latency of 2 reads
+        per Tweet. Values higher than ~1kb will increase latency by waiting for
+        more data to arrive but may also increase throughput by doing fewer
+        socket read calls.
+    daemon : bool
+        Whether or not to use a daemon thread when using a thread to run the
+        stream
+    max_retries : int
+        Max number of times to retry connecting the stream
+    proxy : Optional[str]
+        URL of the proxy to use when connecting to the stream
+    verify : Union[bool, str]
+        Either a boolean, in which case it controls whether to verify the
+        server’s TLS certificate, or a string, in which case it must be a path
+        to a CA bundle to use.
+
+    Attributes
+    ----------
+    running : bool
+        Whether there's currently a stream running
+    session : Optional[:class:`requests.Session`]
+        Requests Session used to connect to the stream
+    thread : Optional[:class:`threading.Thread`]
+        Thread used to run the stream
+    user_agent : str
+        User agent used when connecting to the stream
+    """
+
+    def __init__(self, consumer_key, consumer_secret, access_token,
+                 access_token_secret, *, chunk_size=512, daemon=False,
+                 max_retries=inf, proxy=None, verify=True):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
+        self.chunk_size = chunk_size
+        self.daemon = daemon
+        self.max_retries = max_retries
+        self.proxies = {"https": proxy} if proxy else {}
+        self.verify = verify
+
         self.running = False
-        self.daemon = options.get("daemon", False)
-        self.timeout = options.get("timeout", 300.0)
-        self.retry_count = options.get("retry_count")
-        # values according to
-        # https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/connecting#reconnecting
-        self.retry_time_start = options.get("retry_time", 5.0)
-        self.retry_420_start = options.get("retry_420", 60.0)
-        self.retry_time_cap = options.get("retry_time_cap", 320.0)
-        self.snooze_time_step = options.get("snooze_time", 0.25)
-        self.snooze_time_cap = options.get("snooze_time_cap", 16)
+        self.session = None
+        self.thread = None
+        self.user_agent = (
+            f"Python/{python_version()} "
+            f"Requests/{requests.__version__} "
+            f"Tweepy/{tweepy.__version__}"
+        )
 
-        # The default socket.read size. Default to less than half the size of
-        # a tweet so that it reads tweets with the minimal latency of 2 reads
-        # per tweet. Values higher than ~1kb will increase latency by waiting
-        # for more data to arrive but may also increase throughput by doing
-        # fewer socket read calls.
-        self.chunk_size = options.get("chunk_size", 512)
+    def _connect(self, method, endpoint, params=None, headers=None, body=None):
+        self.running = True
 
-        self.verify = options.get("verify", True)
+        error_count = 0
+        # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
+        stall_timeout = 90
+        network_error_wait = network_error_wait_step = 0.25
+        network_error_wait_max = 16
+        http_error_wait = http_error_wait_start = 5
+        http_error_wait_max = 320
+        http_420_error_wait_start = 60
 
-        self.headers = options.get("headers") or {}
-        self.new_session()
-        self.retry_time = self.retry_time_start
-        self.snooze_time = self.snooze_time_step
+        auth = OAuth1(self.consumer_key, self.consumer_secret,
+                      self.access_token, self.access_token_secret)
 
-        # Example: proxies = {'http': 'http://localhost:1080', 'https': 'http://localhost:1080'}
-        self.proxies = options.get("proxies")
-        self.host = options.get('host', 'stream.twitter.com')
+        if self.session is None:
+            self.session = requests.Session()
+            self.session.headers["User-Agent"] = self.user_agent
 
-    def new_session(self):
-        self.session = requests.Session()
-        self.session.headers = self.headers
-        self.session.params = None
+        url = f"https://stream.twitter.com/1.1/{endpoint}.json"
 
-    def _run(self, body=None):
-        # Authenticate
-        url = f"https://{self.host}{self.url}"
-
-        # Connect and process the stream
-        error_counter = 0
-        resp = None
         try:
-            while self.running:
-                if self.retry_count is not None:
-                    if error_counter > self.retry_count:
-                        # quit if error count greater than retry count
-                        break
+            while self.running and error_count <= self.max_retries:
                 try:
-                    auth = self.auth.apply_auth()
-                    resp = self.session.request('POST',
-                                                url,
-                                                data=body,
-                                                timeout=self.timeout,
-                                                stream=True,
-                                                auth=auth,
-                                                verify=self.verify,
-                                                proxies=self.proxies)
-                    if resp.status_code != 200:
-                        if self.listener.on_request_error(resp.status_code) is False:
-                            break
-                        error_counter += 1
-                        if resp.status_code == 420:
-                            self.retry_time = max(self.retry_420_start,
-                                                  self.retry_time)
-                        sleep(self.retry_time)
-                        self.retry_time = min(self.retry_time * 2,
-                                              self.retry_time_cap)
-                    else:
-                        error_counter = 0
-                        self.retry_time = self.retry_time_start
-                        self.snooze_time = self.snooze_time_step
-                        self.listener.on_connect()
-                        self._read_loop(resp)
+                    with self.session.request(
+                        method, url, params=params, headers=headers, data=body,
+                        timeout=stall_timeout, stream=True, auth=auth,
+                        verify=self.verify, proxies=self.proxies
+                    ) as resp:
+                        if resp.status_code == 200:
+                            error_count = 0
+                            http_error_wait = http_error_wait_start
+                            network_error_wait = network_error_wait_step
+
+                            self.on_connect()
+                            if not self.running:
+                                break
+
+                            for line in resp.iter_lines(
+                                chunk_size=self.chunk_size
+                            ):
+                                if line:
+                                    self.on_data(line)
+                                else:
+                                    self.on_keep_alive()
+                                if not self.running:
+                                    break
+
+                            if resp.raw.closed:
+                                self.on_closed(resp)
+                        else:
+                            self.on_request_error(resp.status_code)
+                            if not self.running:
+                                break
+
+                            error_count += 1
+
+                            if resp.status_code == 420:
+                                if http_error_wait < http_420_error_wait_start:
+                                    http_error_wait = http_420_error_wait_start
+
+                            sleep(http_error_wait)
+
+                            http_error_wait *= 2
+                            if http_error_wait > http_error_wait_max:
+                                http_error_wait = http_error_wait_max
                 except (requests.ConnectionError, requests.Timeout,
+                        requests.exceptions.ChunkedEncodingError,
                         ssl.SSLError, urllib3.exceptions.ReadTimeoutError,
                         urllib3.exceptions.ProtocolError) as exc:
                     # This is still necessary, as a SSLError can actually be
                     # thrown when using Requests
                     # If it's not time out treat it like any other exception
                     if isinstance(exc, ssl.SSLError):
-                        if not (exc.args and 'timed out' in str(exc.args[0])):
+                        if not (exc.args and "timed out" in str(exc.args[0])):
                             raise
-                    if self.listener.on_connection_error() is False:
+
+                    self.on_connection_error()
+                    if not self.running:
                         break
-                    if self.running is False:
-                        break
-                    sleep(self.snooze_time)
-                    self.snooze_time = min(
-                        self.snooze_time + self.snooze_time_step,
-                        self.snooze_time_cap
-                    )
+
+                    sleep(network_error_wait)
+
+                    network_error_wait += network_error_wait_step
+                    if network_error_wait > network_error_wait_max:
+                        network_error_wait = network_error_wait_max
         except Exception as exc:
-            self.listener.on_exception(exc)
-            raise
+            self.on_exception(exc)
         finally:
+            self.session.close()
             self.running = False
-            if resp:
-                resp.close()
-            self.new_session()
+            self.on_disconnect()
 
-    def _read_loop(self, resp):
-        for line in resp.iter_lines(chunk_size=self.chunk_size):
-            if not self.running:
-                break
-            if not line:
-                self.listener.on_keep_alive()
-            elif self.listener.on_data(line) is False:
-                self.running = False
-                break
+    def _threaded_connect(self, *args, **kwargs):
+        self.thread = Thread(target=self._connect, name="Tweepy Stream",
+                             args=args, kwargs=kwargs, daemon=self.daemon)
+        self.thread.start()
+        return self.thread
 
-        if resp.raw.closed:
-            self.on_closed(resp)
+    def filter(self, *, follow=None, track=None, locations=None,
+               filter_level=None, languages=None, stall_warnings=False,
+               threaded=False):
+        """Filter realtime Tweets
 
-    def _start(self, threaded, *args, **kwargs):
-        self.running = True
-        if threaded:
-            self._thread = Thread(target=self._run, args=args, kwargs=kwargs)
-            self._thread.daemon = self.daemon
-            self._thread.start()
-        else:
-            self._run(*args, **kwargs)
+        Parameters
+        ----------
+        follow : Optional[List[Union[int, str]]]
+            User IDs, indicating the users to return statuses for in the stream
+        track : Optional[List[str]]
+            Keywords to track
+        locations : Optional[List[float]]
+            Specifies a set of bounding boxes to track
+        filter_level : Optional[str]
+            Setting this parameter to one of none, low, or medium will set the
+            minimum value of the filter_level Tweet attribute required to be
+            included in the stream. The default value is none, which includes
+            all available Tweets.
 
-    def on_closed(self, resp):
-        """ Called when the response has been closed by Twitter """
-        pass
+            When displaying a stream of Tweets to end users (dashboards or live
+            feeds at a presentation or conference, for example) it is suggested
+            that you set this value to medium.
+        languages : Optional[List[str]]
+            Setting this parameter to a comma-separated list of `BCP 47`_
+            language identifiers corresponding to any of the languages listed
+            on Twitter’s `advanced search`_ page will only return Tweets that
+            have been detected as being written in the specified languages. For
+            example, connecting with language=en will only stream Tweets
+            detected to be in the English language.
+        stall_warnings : bool
+            Specifies whether stall warnings should be delivered
+        threaded : bool
+            Whether or not to use a thread to run the stream
 
-    def sample(self, threaded=False, languages=None, stall_warnings=False):
-        self.session.params = {}
+        Raises
+        ------
+        TweepyException
+            When number of location coordinates is not a multiple of 4
+
+        Returns
+        -------
+        Optional[threading.Thread]
+            The thread if ``threaded`` is set to ``True``, else ``None``
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
+
+        .. _BCP 47: https://tools.ietf.org/html/bcp47
+        .. _advanced search: https://twitter.com/search-advanced
+        """
         if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/sample.json'
-        if languages:
-            self.session.params['language'] = ','.join(map(str, languages))
-        if stall_warnings:
-            self.session.params['stall_warnings'] = 'true'
-        self._start(threaded)
+            raise TweepyException("Stream is already connected")
 
-    def filter(self, follow=None, track=None, threaded=False, locations=None,
-               stall_warnings=False, languages=None, encoding='utf8', filter_level=None):
+        method = "POST"
+        endpoint = "statuses/filter"
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
         body = {}
-        self.session.headers['Content-type'] = "application/x-www-form-urlencoded"
-        if self.running:
-            raise TweepError('Stream object already connected!')
-        self.url = f'/{STREAM_VERSION}/statuses/filter.json'
         if follow:
-            body['follow'] = ','.join(follow).encode(encoding)
+            body["follow"] = ','.join(map(str, follow))
         if track:
-            body['track'] = ','.join(track).encode(encoding)
+            body["track"] = ','.join(map(str, track))
         if locations and len(locations) > 0:
-            if len(locations) % 4 != 0:
-                raise TweepError("Wrong number of locations points, "
-                                 "it has to be a multiple of 4")
-            body['locations'] = ','.join([f'{l:.4f}' for l in locations])
-        if stall_warnings:
-            body['stall_warnings'] = stall_warnings
-        if languages:
-            body['language'] = ','.join(map(str, languages))
+            if len(locations) % 4:
+                raise TweepyException(
+                    "Number of location coordinates should be a multiple of 4"
+                )
+            body["locations"] = ','.join(f"{l:.4f}" for l in locations)
         if filter_level:
-            body['filter_level'] = filter_level.encode(encoding)
-        self.session.params = {}
-        self._start(threaded, body=body)
+            body["filter_level"] = filter_level
+        if languages:
+            body["language"] = ','.join(map(str, languages))
+        if stall_warnings:
+            body["stall_warnings"] = stall_warnings
+
+        if threaded:
+            return self._threaded_connect(method, endpoint, headers=headers,
+                                          body=body)
+        else:
+            self._connect(method, endpoint, headers=headers, body=body)
+
+    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
+        """Sample realtime Tweets
+
+        Parameters
+        ----------
+        languages : Optional[List[str]]
+            Setting this parameter to a comma-separated list of `BCP 47`_
+            language identifiers corresponding to any of the languages listed
+            on Twitter’s `advanced search`_ page will only return Tweets that
+            have been detected as being written in the specified languages. For
+            example, connecting with language=en will only stream Tweets
+            detected to be in the English language.
+        stall_warnings : bool
+            Specifies whether stall warnings should be delivered
+        threaded : bool
+            Whether or not to use a thread to run the stream
+
+        Returns
+        -------
+        Optional[threading.Thread]
+            The thread if ``threaded`` is set to ``True``, else ``None``
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
+        """
+        if self.running:
+            raise TweepyException("Stream is already connected")
+
+        method = "GET"
+        endpoint = "statuses/sample"
+
+        params = {}
+        if languages:
+            params["language"] = ','.join(map(str, languages))
+        if stall_warnings:
+            params["stall_warnings"] = "true"
+
+        if threaded:
+            return self._threaded_connect(method, endpoint, params=params)
+        else:
+            self._connect(method, endpoint, params=params)
 
     def disconnect(self):
+        """Disconnect the stream"""
         self.running = False
+
+    def on_closed(self, response):
+        """This is called when the stream has been closed by Twitter.
+
+        Parameters
+        ----------
+        response : requests.Response
+            The Response from Twitter
+        """
+        log.error("Stream connection closed by Twitter")
+
+    def on_connect(self):
+        """This is called after successfully connecting to the streaming API.
+        """
+        log.info("Stream connected")
+
+    def on_connection_error(self):
+        """This is called when the stream connection errors or times out."""
+        log.error("Stream connection has errored or timed out")
+
+    def on_disconnect(self):
+        """This is called when the stream has disconnected."""
+        log.info("Stream disconnected")
+
+    def on_exception(self, exception):
+        """This is called when an unhandled exception occurs.
+
+        Parameters
+        ----------
+        exception : Exception
+            The unhandled exception
+        """
+        log.exception("Stream encountered an exception")
+
+    def on_keep_alive(self):
+        """This is called when a keep-alive signal is received."""
+        log.debug("Received keep-alive signal")
+
+    def on_request_error(self, status_code):
+        """This is called when a non-200 HTTP status code is encountered.
+
+        Parameters
+        ----------
+        status_code : int
+            The HTTP status code encountered
+        """
+        log.error("Stream encountered HTTP error: %d", status_code)
+
+    def on_data(self, raw_data):
+        """This is called when raw data is received from the stream.
+        This method handles sending the data to other methods based on the
+        message type.
+
+        Parameters
+        ----------
+        raw_data : JSON
+            The raw data from the stream
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/streaming-message-types
+        """
+        data = json.loads(raw_data)
+
+        if "in_reply_to_status_id" in data:
+            status = Status.parse(None, data)
+            return self.on_status(status)
+        if "delete" in data:
+            delete = data["delete"]["status"]
+            return self.on_delete(delete["id"], delete["user_id"])
+        if "disconnect" in data:
+            return self.on_disconnect_message(data["disconnect"])
+        if "limit" in data:
+            return self.on_limit(data["limit"]["track"])
+        if "scrub_geo" in data:
+            return self.on_scrub_geo(data["scrub_geo"])
+        if "status_withheld" in data:
+            return self.on_status_withheld(data["status_withheld"])
+        if "user_withheld" in data:
+            return self.on_user_withheld(data["user_withheld"])
+        if "warning" in data:
+            return self.on_warning(data["warning"])
+
+        log.error("Received unknown message type: %s", raw_data)
+
+    def on_status(self, status):
+        """This is called when a status is received.
+
+        Parameters
+        ----------
+        status : Status
+            The Status received
+        """
+        log.debug("Received status: %d", status.id)
+
+    def on_delete(self, status_id, user_id):
+        """This is called when a status deletion notice is received.
+
+        Parameters
+        ----------
+        status_id : int
+            The ID of the deleted Tweet
+        user_id : int
+            The ID of the author of the Tweet
+        """
+        log.debug("Received status deletion notice: %d", status_id)
+
+    def on_disconnect_message(self, message):
+        """This is called when a disconnect message is received.
+
+        Parameters
+        ----------
+        message : JSON
+            The disconnect message
+        """
+        log.warning("Received disconnect message: %s", message)
+
+    def on_limit(self, track):
+        """This is called when a limit notice is received.
+
+        Parameters
+        ----------
+        track : int
+            Total count of the number of undelivered Tweets since the
+            connection was opened
+        """
+        log.debug("Received limit notice: %d", track)
+
+    def on_scrub_geo(self, notice):
+        """This is called when a location deletion notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The location deletion notice
+        """
+        log.debug("Received location deletion notice: %s", notice)
+
+    def on_status_withheld(self, notice):
+        """This is called when a status withheld content notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The status withheld content notice
+        """
+        log.debug("Received status withheld content notice: %s", notice)
+
+    def on_user_withheld(self, notice):
+        """This is called when a user withheld content notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The user withheld content notice
+        """
+        log.debug("Received user withheld content notice: %s", notice)
+
+    def on_warning(self, warning):
+        """This is called when a stall warning message is received.
+
+        Parameters
+        ----------
+        warning : JSON
+            The stall warning
+        """
+        log.warning("Received stall warning: %s", warning)

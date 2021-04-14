@@ -10,7 +10,7 @@ from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
 
 from tweepy.api import API
-from tweepy.error import TweepError
+from tweepy.errors import TweepyException
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
@@ -23,10 +23,6 @@ class AuthHandler:
 
     def apply_auth(self, url, method, headers, parameters):
         """Apply authentication headers to request"""
-        raise NotImplementedError
-
-    def get_username(self):
-        """Return the username of the authenticated user"""
         raise NotImplementedError
 
 
@@ -71,7 +67,7 @@ class OAuthHandler(AuthHandler):
                 url += f'?x_auth_access_type={access_type}'
             return self.oauth.fetch_request_token(url)
         except Exception as e:
-            raise TweepError(e)
+            raise TweepyException(e)
 
     def set_access_token(self, key, secret):
         self.access_token = key
@@ -91,7 +87,7 @@ class OAuthHandler(AuthHandler):
             self.request_token = self._get_request_token(access_type=access_type)
             return self.oauth.authorization_url(url)
         except Exception as e:
-            raise TweepError(e)
+            raise TweepyException(e)
 
     def get_access_token(self, verifier=None):
         """
@@ -110,7 +106,7 @@ class OAuthHandler(AuthHandler):
             self.access_token_secret = resp['oauth_token_secret']
             return self.access_token, self.access_token_secret
         except Exception as e:
-            raise TweepError(e)
+            raise TweepyException(e)
 
     def get_xauth_access_token(self, username, password):
         """
@@ -132,18 +128,7 @@ class OAuthHandler(AuthHandler):
             credentials = parse_qs(r.content)
             return credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0]
         except Exception as e:
-            raise TweepError(e)
-
-    def get_username(self):
-        if self.username is None:
-            api = API(self)
-            user = api.verify_credentials()
-            if user:
-                self.username = user.screen_name
-            else:
-                raise TweepError('Unable to get username,'
-                                 ' invalid oauth token!')
-        return self.username
+            raise TweepyException(e)
 
 
 class OAuth2Bearer(AuthBase):
@@ -172,8 +157,8 @@ class AppAuthHandler(AuthHandler):
                              data={'grant_type': 'client_credentials'})
         data = resp.json()
         if data.get('token_type') != 'bearer':
-            raise TweepError('Expected token_type to equal "bearer", '
-                             f'but got {data.get("token_type")} instead')
+            raise TweepyException('Expected token_type to equal "bearer", '
+                                  f'but got {data.get("token_type")} instead')
 
         self._bearer_token = data['access_token']
 
