@@ -53,6 +53,12 @@ class TweepyTestCase(unittest.TestCase):
         # @TwitterDev and @TwitterAPI Tweets announcing API v2
         self.client.get_tweets(tweet_ids)
 
+    @tape.use_cassette("test_block_and_unblock.yaml", serializer="yaml")
+    def test_block_and_unblock(self):
+        user_id = 17874544  # User ID for @TwitterSupport
+        self.assertTrue(self.client.block(user_id))
+        self.assertFalse(self.client.unblock(user_id))
+
     @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")
     def test_follow_and_unfollow(self):
         user_id = 783214  # User ID for @Twitter

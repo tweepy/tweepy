@@ -49,6 +49,13 @@ Tweet lookup
 Users
 =====
 
+Blocks
+------
+
+.. automethod:: Client.unblock
+
+.. automethod:: Client.block
+
 Follows
 -------
 

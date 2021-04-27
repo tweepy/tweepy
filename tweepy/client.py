@@ -747,6 +747,63 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
+    # Blocks
+
+    def unblock(self, target_user_id):
+        """Unblock another user.
+
+        The request succeeds with no action when the user sends a request to a
+        user they're not blocking or have already unblocked.
+
+        Parameters
+        ----------
+        target_user_id : Union[int, str]
+            The user ID of the user that you would like to unblock.
+
+        Returns
+        -------
+        bool
+            Indicates whether the user is blocking the specified user as a
+            result of this request. The returned value is ``False`` for a
+            successful unblock request.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
+        """
+        source_user_id = self.access_token.partition('-')[0]
+        route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
+
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )[0]["blocking"]
+
+    def block(self, target_user_id):
+        """Block another user.
+
+        Parameters
+        ----------
+        target_user_id : Union[int, str]
+            The user ID of the user that you would like to block.
+
+        Returns
+        -------
+        bool
+            Indicates whether the user is blocking the specified user as a
+            result of this request.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/blocking"
+
+        return self._make_request(
+            "POST", route, json={"target_user_id": str(target_user_id)},
+            user_auth=True
+        )[0]["blocking"]
+
     # Follows
 
     def unfollow(self, target_user_id):
