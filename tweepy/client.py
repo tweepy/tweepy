@@ -193,7 +193,7 @@ class Client:
             user_auth=True
         )[0]["hidden"]
 
-    def unhide_reply(self, tweet_id):
+    def unhide_reply(self, id):
         """Unhides a reply to a Tweet.
 
         Parameters
@@ -212,7 +212,7 @@ class Client:
         https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies/api-reference/put-tweets-id-hidden
         """
         return self._make_request(
-            "PUT", f"/2/tweets/{tweet_id}/hidden", json={"hidden": False},
+            "PUT", f"/2/tweets/{id}/hidden", json={"hidden": False},
             user_auth=True
         )[0]["hidden"]
 
