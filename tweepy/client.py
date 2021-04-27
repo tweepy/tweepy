@@ -264,9 +264,10 @@ class Client:
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-user_id-likes
         """
         id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/likes"
+
         return self._make_request(
-            "POST", f"/2/users/{id}/likes", json={"tweet_id": str(tweet_id)},
-            user_auth=True
+            "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
         )[0]["liked"]
 
     # Search Tweets
