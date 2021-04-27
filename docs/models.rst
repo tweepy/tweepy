@@ -37,13 +37,13 @@ API v1.1
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup#example-response
 
-.. class:: tweepy.models.SearchResults
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets#example-response
-
 .. class:: tweepy.models.SavedSearch
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id#example-response
+
+.. class:: tweepy.models.SearchResults
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets#example-response
 
 .. class:: tweepy.models.Status
 
