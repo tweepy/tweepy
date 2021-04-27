@@ -17,9 +17,12 @@ Contents:
    code_snippet.rst
    cursor_tutorial.rst
    api.rst
+   client.rst
+   models.rst
    stream.rst
    exceptions.rst
    extended_tweets.rst
+   pagination.rst
    streaming.rst
    running_tests.rst
    changelog.md

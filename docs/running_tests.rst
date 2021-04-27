@@ -19,6 +19,7 @@ These steps outline how to run tests for Tweepy:
 To record new cassettes, the following environment variables can be used:
 
 ``TWITTER_USERNAME``
+``BEARER_TOKEN``
 ``CONSUMER_KEY``
 ``CONSUMER_SECRET``
 ``ACCESS_KEY``

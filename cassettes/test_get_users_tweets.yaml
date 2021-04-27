@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.1 Requests/2.25.1 Tweepy/3.10.0
+    method: GET
+    uri: https://api.twitter.com/2/users/783214/tweets
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAHyTzW7cIBSFX+WKTTazwGADnk2rVl1UbTZpdlVlYcPM4B+IAMfjjObdiydRa8VV
+        N5YNPt+5h3u5ICWjRPufF2QU2qOMCkwxywUrGeGCECzQDkV9jmnz4REOzkM0Xqsd9KbTt+9n7efX
+        RXTd/eHwMi95STKM88TjrPzL+aiMdYO0VQuTvvMa4knP77VFUdCMllgUlNCV9t54aZX8JEOQRwMy
+        yWc3QhjfOG88cFZ/2DBzlmNCOMFFlq+Yg+y09BFMvAtQy2AaGGQ8gdey7zeV5aJgjAiOU2Frim37
+        avAJApMMIOFkbNxoM1ywxT0v+PpErElOoZ4a1zsfbomUUfYuQtBLHhOWUHaDwwUuyywjmAq+wj2k
+        wj+7YIZ00HB0sg/vlZTlGWOipCUX6xDtoqmCHZuuMhaeejkbe4ST9ApiYulNJJKmJI1Lnt7JmhSi
+        Mbab/ajhXs61htSU71+/ffmxpPPwOGkdw7LYjiGCcjoscW9TdXukvMPGi2OcvDgvKCMrr2fTK2lf
+        tD2m4hf+MgWT7hs3vM7oMhEHn46y9jLFmpzv3Jii/NqhQS8X4IJcr3SI1X/crJ5Wf/zrongdxj5W
+        jRtT6/cZXjTnWEXXpd7tEc9yrEytrJvKhtdxohOd1fjiDjwK+STOyh5aylrMppah6/U3AAAA//8D
+        AB3BvbeeAwAA
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '522'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 13 Apr 2021 03:41:23 GMT
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_bo444/e9hn+uN/Yjvp/n1w=="; Max-Age=63072000; Expires=Thu,
+        13 Apr 2023 03:41:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A161828528362648741; Max-Age=63072000; Expires=Thu, 13 Apr 2023
+        03:41:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 6d6c9476af9fa3c647a21476e10941fe
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '1500'
+      x-rate-limit-remaining:
+      - '1499'
+      x-rate-limit-reset:
+      - '1618286183'
+      x-response-time:
+      - '71'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
