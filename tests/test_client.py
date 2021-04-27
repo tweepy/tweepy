@@ -14,7 +14,7 @@ class TweepyTestCase(unittest.TestCase):
             access_token or user_id, access_token_secret
         )
 
-    @tape.use_cassette("test_hide_and_unhide_reply.yaml", serializer='yaml')
+    @tape.use_cassette("test_hide_and_unhide_reply.yaml", serializer="yaml")
     def test_hide_and_unhide_reply(self):
         reply_id = 1344794616005066752  # Test Tweet for reply hide/unhide
         self.assertTrue(self.client.hide_reply(reply_id))
@@ -22,51 +22,51 @@ class TweepyTestCase(unittest.TestCase):
 
     # TODO: test_search_all_tweets with access to Academic Research product track
 
-    @tape.use_cassette("test_search_recent_tweets.yaml", serializer='yaml')
+    @tape.use_cassette("test_search_recent_tweets.yaml", serializer="yaml")
     def test_search_recent_tweets(self):
         self.client.search_recent_tweets("Tweepy")
 
-    @tape.use_cassette("test_get_users_mentions.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_users_mentions.yaml", serializer="yaml")
     def test_get_users_mentions(self):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_mentions(user_id)
 
-    @tape.use_cassette("test_get_users_tweets.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_users_tweets.yaml", serializer="yaml")
     def test_get_users_tweets(self):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_tweets(user_id)
 
-    @tape.use_cassette("test_get_tweet.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_tweet.yaml", serializer="yaml")
     def test_get_tweet(self):
         tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
         self.client.get_tweet(tweet_id)
 
-    @tape.use_cassette("test_get_tweets.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_tweets.yaml", serializer="yaml")
     def test_get_tweets(self):
         tweet_ids = [1293593516040269825, 1293595870563381249]
         # @TwitterDev and @TwitterAPI Tweets announcing API v2
         self.client.get_tweets(tweet_ids)
 
-    @tape.use_cassette("test_follow_and_unfollow.yaml", serializer='yaml')
+    @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")
     def test_follow_and_unfollow(self):
         user_id = 783214  # User ID for @Twitter
         self.client.unfollow(user_id)
         self.client.follow(user_id)
 
-    @tape.use_cassette("test_get_users_followers.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_users_followers.yaml", serializer="yaml")
     def test_get_users_followers(self):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_followers(user_id)
 
-    @tape.use_cassette("test_get_users_following.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_users_following.yaml", serializer="yaml")
     def test_get_users_following(self):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_following(user_id)
 
-    @tape.use_cassette("test_get_user.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_user.yaml", serializer="yaml")
     def test_get_user(self):
         self.client.get_user(username="Twitter")
 
-    @tape.use_cassette("test_get_users.yaml", serializer='yaml')
+    @tape.use_cassette("test_get_users.yaml", serializer="yaml")
     def test_get_users(self):
         self.client.get_users(usernames=["Twitter", "TwitterDev"])
