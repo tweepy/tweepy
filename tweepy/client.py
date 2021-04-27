@@ -232,7 +232,9 @@ class Client:
         Returns
         -------
         bool
-            Indicates if the Tweet was successfully unliked.
+            Indicates whether the user is unliking the specified Tweet as a
+            result of this request. The returned value is ``False`` for a
+            successful unlike request.
 
         References
         ----------
