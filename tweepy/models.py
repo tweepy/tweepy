@@ -356,20 +356,6 @@ class List(Model):
         )
 
 
-class Relation(Model):
-    @classmethod
-    def parse(cls, api, json):
-        result = cls(api)
-        for k, v in json.items():
-            if k == 'value' and json['kind'] in ['Tweet', 'LookedupStatus']:
-                setattr(result, k, Status.parse(api, v))
-            elif k == 'results':
-                setattr(result, k, Relation.parse_list(api, v))
-            else:
-                setattr(result, k, v)
-        return result
-
-
 class Relationship(Model):
     @classmethod
     def parse(cls, api, json):
@@ -493,7 +479,6 @@ class ModelFactory:
     saved_search = SavedSearch
     search_results = SearchResults
     list = List
-    relation = Relation
     relationship = Relationship
     media = Media
 
