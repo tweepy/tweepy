@@ -256,7 +256,8 @@ class Client:
         Returns
         -------
         bool
-            Indicates if the Tweet was successfully Liked.
+            Indicates whether the user likes the specified Tweet as a result of
+            this request.
 
         References
         ----------
