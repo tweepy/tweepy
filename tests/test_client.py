@@ -20,6 +20,12 @@ class TweepyTestCase(unittest.TestCase):
         self.assertTrue(self.client.hide_reply(reply_id))
         self.assertFalse(self.client.unhide_reply(reply_id))
 
+    @tape.use_cassette("test_like_and_unlike.yaml", serializer="yaml")
+    def test_like_and_unlike(self):
+        tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
+        self.assertTrue(self.client.like(tweet_id))
+        self.assertFalse(self.client.unlike(tweet_id))
+
     # TODO: test_search_all_tweets with access to Academic Research product track
 
     @tape.use_cassette("test_search_recent_tweets.yaml", serializer="yaml")

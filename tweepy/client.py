@@ -216,6 +216,56 @@ class Client:
             user_auth=True
         )[0]["hidden"]
 
+    # Likes
+
+    def unlike(self, tweet_id):
+        """Unlike a Tweet.
+
+        The request succeeds with no action when the user sends a request to a
+        user they're not liking the Tweet or have already unliked the Tweet.
+
+        Parameters
+        ----------
+        tweet_id : Union[int, str]
+            The ID of the Tweet that you would like to unlike.
+
+        Returns
+        -------
+        bool
+            Indicates if the Tweet was successfully unliked.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-user_id-likes
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/likes/{tweet_id}"
+
+        return self._make_request("DELETE", route, user_auth=True)[0]["liked"]
+
+    def like(self, tweet_id):
+        """Like a Tweet.
+
+        Parameters
+        ----------
+        tweet_id : Union[int, str]
+            The ID of the Tweet that you would like to Like.
+
+        Returns
+        -------
+        bool
+            Indicates if the Tweet was successfully Liked.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-user_id-likes
+        """
+        id = self.access_token.partition('-')[0]
+        return self._make_request(
+            "POST", f"/2/users/{id}/likes", json={"tweet_id": str(tweet_id)},
+            user_auth=True
+        )[0]["liked"]
+
     # Search Tweets
 
     def search_all_tweets(self, query, **params):

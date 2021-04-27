@@ -18,6 +18,13 @@ Hide replies
 
 .. automethod:: Client.unhide_reply
 
+Likes
+-----
+
+.. automethod:: Client.unlike
+
+.. automethod:: Client.like
+
 Search Tweets
 -------------
 
