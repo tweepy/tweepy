@@ -1,14 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2009-2021, Joshua Roesslein
-# This file is distributed under the same license as the tweepy package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
-#
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
 msgid ""
 msgstr ""
-"Project-Id-Version: tweepy 3.10.0\n"
+"Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-15 22:51+0200\n"
-"PO-Revision-Date: 2021-04-22 00:23+0200\n"
+"PO-Revision-Date: 2020-01-28 15:21+0100\n"
 "Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"

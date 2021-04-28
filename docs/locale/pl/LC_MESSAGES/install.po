@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: POEditor.com\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../../install.rst:2
 msgid "Installation"
