@@ -105,7 +105,7 @@ class CursorIterator(BaseIterator):
         self.num_tweets = 0
 
     def next(self):
-        if self.next_cursor == 0 or self.num_tweets == self.limit:
+        if self.next_cursor == 0 or self.num_tweets >= self.limit:
             raise StopIteration
         data, cursors = self.method(cursor=self.next_cursor,
                                     *self.args,
@@ -134,7 +134,7 @@ class DMCursorIterator(BaseIterator):
         self.page_count = 0
 
     def next(self):
-        if self.next_cursor == -1 or self.page_count == self.limit:
+        if self.next_cursor == -1 or self.page_count >= self.limit:
             raise StopIteration
         data = self.method(cursor=self.next_cursor, return_cursors=True, *self.args, **self.kwargs)
         self.page_count += 1
@@ -160,7 +160,7 @@ class IdIterator(BaseIterator):
 
     def next(self):
         """Fetch a set of items with IDs less than current set."""
-        if self.limit == self.num_tweets:
+        if self.num_tweets >= self.limit:
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
@@ -196,7 +196,7 @@ class IdIterator(BaseIterator):
 
     def prev(self):
         """Fetch a set of items with IDs greater than current set."""
-        if self.limit == self.num_tweets:
+        if self.num_tweets >= self.limit:
             raise StopIteration
 
         self.index -= 1
@@ -255,7 +255,7 @@ class NextIterator(BaseIterator):
         self.page_count = 0
 
     def next(self):
-        if self.next_token == -1 or self.page_count == self.limit:
+        if self.next_token == -1 or self.page_count >= self.limit:
             raise StopIteration
         data = self.method(next=self.next_token, return_cursors=True, *self.args, **self.kwargs)
         self.page_count += 1
@@ -279,7 +279,7 @@ class ItemIterator(BaseIterator):
         self.num_tweets = 0
 
     def next(self):
-        if self.num_tweets == self.limit:
+        if self.num_tweets >= self.limit:
             raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
