@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.1 Requests/2.25.1 Tweepy/3.10.0
+    method: GET
+    uri: https://api.twitter.com/2/users/by/username/Twitter
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlbKTFGyUjK3MDYyNFHSUcpLzE0F8kPKM0tKUouAAqXFqUVogrW1
+        AAAAAP//AwDiU9YFPgAAAA==
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '73'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 13 Apr 2021 03:53:58 UTC
+      server:
+      - tsa_devel
+      set-cookie:
+      - personalization_id="v1_hqeHOrpZtpMV+obFvsh9Iw=="; Max-Age=63072000; Expires=Thu,
+        13 Apr 2023 03:53:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A161828603844806570; Max-Age=63072000; Expires=Thu, 13 Apr 2023
+        03:53:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 0c5529d5329fbdc8c50561a632ba70f1d7e2c3030c8b2bda01f041b9ee98241b
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1618286938'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

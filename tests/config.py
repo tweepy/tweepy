@@ -7,11 +7,13 @@ from tweepy.api import API
 from tweepy.auth import OAuthHandler
 
 
+user_id = os.environ.get('TWITTER_USER_ID', '1072250532645998596')
 username = os.environ.get('TWITTER_USERNAME', 'TweepyDev')
-oauth_consumer_key = os.environ.get('CONSUMER_KEY', '')
-oauth_consumer_secret = os.environ.get('CONSUMER_SECRET', '')
-oauth_token = os.environ.get('ACCESS_KEY', '')
-oauth_token_secret = os.environ.get('ACCESS_SECRET', '')
+bearer_token = os.environ.get('BEARER_TOKEN', '')
+consumer_key = os.environ.get('CONSUMER_KEY', '')
+consumer_secret = os.environ.get('CONSUMER_SECRET', '')
+access_token = os.environ.get('ACCESS_KEY', '')
+access_token_secret = os.environ.get('ACCESS_SECRET', '')
 use_replay = os.environ.get('USE_REPLAY', True)
 
 
@@ -33,6 +35,6 @@ class TweepyTestCase(unittest.TestCase):
 
 
 def create_auth():
-    auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
-    auth.set_access_token(oauth_token, oauth_token_secret)
+    auth = OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
     return auth

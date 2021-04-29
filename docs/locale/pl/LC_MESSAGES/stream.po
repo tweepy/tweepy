@@ -1,0 +1,400 @@
+# Copyright (C) 2009-2021, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-15 22:51+0200\n"
+"PO-Revision-Date: 2021-04-28 15:37+0200\n"
+"Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: ../../stream.rst:7
+msgid ":class:`tweepy.Stream` --- Stream Reference"
+msgstr ":class:`tweepy.Stream` --- Odniesienia do przesyłania strumieniowego"
+
+#: of tweepy.streaming.Stream:1
+msgid "Filter and sample realtime Tweets"
+msgstr "Filtrowanie i samplowanie Tweetów w czasie rzeczywistym"
+
+#: of tweepy.streaming.Stream tweepy.streaming.Stream.filter
+#: tweepy.streaming.Stream.on_closed tweepy.streaming.Stream.on_data
+#: tweepy.streaming.Stream.on_delete
+#: tweepy.streaming.Stream.on_disconnect_message
+#: tweepy.streaming.Stream.on_exception tweepy.streaming.Stream.on_limit
+#: tweepy.streaming.Stream.on_request_error
+#: tweepy.streaming.Stream.on_scrub_geo tweepy.streaming.Stream.on_status
+#: tweepy.streaming.Stream.on_status_withheld
+#: tweepy.streaming.Stream.on_user_withheld tweepy.streaming.Stream.on_warning
+#: tweepy.streaming.Stream.sample
+msgid "Parameters"
+msgstr "Parametry"
+
+#: of tweepy.streaming.Stream:3
+msgid "Twitter API Consumer Key"
+msgstr "Twitter API Consumer Secret"
+
+#: of tweepy.streaming.Stream:5
+msgid "Twitter API Consumer Secret"
+msgstr "Twitter API Consumer Secret"
+
+#: of tweepy.streaming.Stream:7
+msgid "Twitter API Access Token"
+msgstr "Twitter API Access Token"
+
+#: of tweepy.streaming.Stream:9
+msgid "Twitter API Access Token Secret"
+msgstr "Twitter API Access Token Secret"
+
+#: of tweepy.streaming.Stream:11
+msgid ""
+"The default socket.read size. Default to 512, less than half the size of a "
+"Tweet so that it reads Tweets with the minimal latency of 2 reads per "
+"Tweet. Values higher than ~1kb will increase latency by waiting for more "
+"data to arrive but may also increase throughput by doing fewer socket read "
+"calls."
+msgstr ""
+"Domyślny rozmiar socket.read. Domyślnie 512, mniej niż połowa rozmiaru "
+"Tweeta, tak aby odczytywać Tweety z minimalnym opóźnieniem 2 odczytów na "
+"Tweeta. Wartości wyższe niż ~1kb zwiększą opóźnienie przez oczekiwanie na "
+"więcej danych, ale mogą również zwiększyć przepustowość przez wykonanie "
+"mniejszej ilości wywołań socket read."
+
+#: of tweepy.streaming.Stream:17
+msgid ""
+"Whether or not to use a daemon thread when using a thread to run the stream"
+msgstr ""
+"Czy używać wątku demona, gdy używany jest wątek do uruchomienia strumienia, "
+"czy nie"
+
+#: of tweepy.streaming.Stream:20
+msgid "Max number of times to retry connecting the stream"
+msgstr "Maksymalna liczba ponownych prób połączenia strumienia"
+
+#: of tweepy.streaming.Stream:22
+msgid "URL of the proxy to use when connecting to the stream"
+msgstr "URL proxy, który ma być użyty przy połączeniu do strumienia"
+
+#: of tweepy.streaming.Stream:24
+msgid ""
+"Either a boolean, in which case it controls whether to verify the server’s "
+"TLS certificate, or a string, in which case it must be a path to a CA "
+"bundle to use."
+msgstr ""
+"Albo boolean, kontrolujący czy zweryfikować certyfikat TLS serwera, albo "
+"string, w którym to przypadku musi to być ścieżka do pakietu CA, który ma "
+"zostać użyty."
+
+#: of tweepy.streaming.Stream:31
+msgid "Whether there's currently a stream running"
+msgstr "Czy aktualnie działa strumień czy nie"
+
+#: of tweepy.streaming.Stream
+msgid "type"
+msgstr "type"
+
+#: of tweepy.streaming.Stream:33
+msgid "bool"
+msgstr "bool"
+
+#: of tweepy.streaming.Stream:37
+msgid "Requests Session used to connect to the stream"
+msgstr "Sesja Request używana do łączenia się ze strumieniem"
+
+#: of tweepy.streaming.Stream:39
+msgid "Optional[:class:`requests.Session`]"
+msgstr "Opcjonalna[:class:`requests.Session`]"
+
+#: of tweepy.streaming.Stream:43
+msgid "Thread used to run the stream"
+msgstr "Wątek używany do uruchomienia strumienia"
+
+#: of tweepy.streaming.Stream:45
+msgid "Optional[:class:`threading.Thread`]"
+msgstr "Opcjonalna[:class:`threading.Thread`]"
+
+#: of tweepy.streaming.Stream:49
+msgid "User agent used when connecting to the stream"
+msgstr "User agent używany podczas łączenia się ze strumieniem"
+
+#: of tweepy.streaming.Stream:51
+msgid "str"
+msgstr "str"
+
+#: of tweepy.streaming.Stream.filter:1
+msgid "Filter realtime Tweets"
+msgstr "Filtrowanie Tweetów w czasie rzeczywistym"
+
+#: of tweepy.streaming.Stream.filter:3
+msgid "User IDs, indicating the users to return statuses for in the stream"
+msgstr ""
+"ID użytkowników, wskazujące tych, dla których mają być zwracane statusy w "
+"strumieniu"
+
+#: of tweepy.streaming.Stream.filter:5
+msgid "Keywords to track"
+msgstr "Słowa kluczowe do śledzenia"
+
+#: of tweepy.streaming.Stream.filter:7
+msgid "Specifies a set of bounding boxes to track"
+msgstr "Określa zestaw ram ograniczających do śledzenia"
+
+#: of tweepy.streaming.Stream.filter:9
+msgid ""
+"Setting this parameter to one of none, low, or medium will set the minimum "
+"value of the filter_level Tweet attribute required to be included in the "
+"stream. The default value is none, which includes all available Tweets.  "
+"When displaying a stream of Tweets to end users (dashboards or live feeds "
+"at a presentation or conference, for example) it is suggested that you set "
+"this value to medium."
+msgstr ""
+"Ustawienie tego parametru na jedną z wartości none, low lub medium ustawi "
+"minimalną wartość atrybutu filter_level Tweet wymaganą do uwzględnienia w "
+"strumieniu. Domyślną wartością jest none, która zawiera wszystkie dostępne "
+"Tweety.  W przypadku wyświetlania strumienia Tweetów użytkownikom końcowym "
+"(np. dashboardy lub transmisje na żywo podczas prezentacji lub konferencji) "
+"sugerowane jest ustawienie tej wartości na medium."
+
+#: of tweepy.streaming.Stream.filter:9
+msgid ""
+"Setting this parameter to one of none, low, or medium will set the minimum "
+"value of the filter_level Tweet attribute required to be included in the "
+"stream. The default value is none, which includes all available Tweets."
+msgstr ""
+"Ustawienie tego parametru na jedną z wartości none, low lub medium ustawi "
+"minimalną wartość atrybutu filter_level Tweet wymaganą do uwzględnienia w "
+"strumieniu. Domyślną wartością jest none, która zawiera wszystkie dostępne "
+"Tweety."
+
+#: of tweepy.streaming.Stream.filter:14
+msgid ""
+"When displaying a stream of Tweets to end users (dashboards or live feeds "
+"at a presentation or conference, for example) it is suggested that you set "
+"this value to medium."
+msgstr ""
+"W przypadku wyświetlania strumienia Tweetów użytkownikom końcowym (np. "
+"dashboardy lub transmisje na żywo podczas prezentacji lub konferencji) "
+"sugerowane jest ustawienie tej wartości na medium."
+
+#: of tweepy.streaming.Stream.filter:18 tweepy.streaming.Stream.sample:3
+msgid ""
+"Setting this parameter to a comma-separated list of `BCP 47`_ language "
+"identifiers corresponding to any of the languages listed on Twitter’s "
+"`advanced search`_ page will only return Tweets that have been detected as "
+"being written in the specified languages. For example, connecting with "
+"language=en will only stream Tweets detected to be in the English language."
+msgstr ""
+"Ustawienie tego parametru na oddzieloną przecinkami listę identyfikatorów "
+"języków `BCP 47`_ odpowiadających dowolnemu z języków wymienionych na "
+"stronie `advanced search`_ Twittera spowoduje zwrócenie tylko tweetów, "
+"które zostały wykryte jako napisane w podanych językach. Na przykład, "
+"połączenie z language=en spowoduje wyświetlenie tylko tweetów wykrytych "
+"jako napisane w języku angielskim."
+
+#: of tweepy.streaming.Stream.filter:25 tweepy.streaming.Stream.sample:10
+msgid "Specifies whether stall warnings should be delivered"
+msgstr ""
+"Określa, czy powinny być dostarczane ostrzeżenia o przeciągnięciu czy nie"
+
+#: of tweepy.streaming.Stream.filter:27 tweepy.streaming.Stream.sample:12
+msgid "Whether or not to use a thread to run the stream"
+msgstr "Czy użyć wątku do uruchomienia strumienia czy nie"
+
+#: of tweepy.streaming.Stream.filter
+msgid "Raises"
+msgstr "Podniesienia"
+
+#: of tweepy.streaming.Stream.filter:30
+msgid "When number of location coordinates is not a multiple of 4"
+msgstr "Gdy liczba współrzędnych lokalizacji nie jest wielokrotnością 4"
+
+#: of tweepy.streaming.Stream.filter tweepy.streaming.Stream.sample
+msgid "Returns"
+msgstr "Zwroty"
+
+#: of tweepy.streaming.Stream.filter:32 tweepy.streaming.Stream.sample:15
+msgid "The thread if ``threaded`` is set to ``True``, else ``None``"
+msgstr ""
+"Wątek, jeśli ``threaded`` jest ustawiony na ``True``, w przeciwnym razie "
+"``None``"
+
+#: of tweepy.streaming.Stream.filter tweepy.streaming.Stream.sample
+msgid "Return type"
+msgstr "Typ zwrotu"
+
+#: of tweepy.streaming.Stream.filter:36 tweepy.streaming.Stream.on_data:9
+#: tweepy.streaming.Stream.sample:19
+msgid "References"
+msgstr "Odniesienia"
+
+#: of tweepy.streaming.Stream.filter:37
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/"
+"api-reference/post-statuses-filter"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/"
+"api-reference/post-statuses-filter"
+
+#: of tweepy.streaming.Stream.sample:1
+msgid "Sample realtime Tweets"
+msgstr "Samplowanie Tweetów w czasie rzeczywistym"
+
+#: of tweepy.streaming.Stream.sample:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/"
+"api-reference/get-statuses-sample"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/"
+"api-reference/get-statuses-sample"
+
+#: of tweepy.streaming.Stream.disconnect:1
+msgid "Disconnect the stream"
+msgstr "Zamykanie strumienia"
+
+#: of tweepy.streaming.Stream.on_closed:1
+msgid "This is called when the stream has been closed by Twitter."
+msgstr ""
+"Jest to wywoływane, gdy strumień został zamknięty przez Twittera.``, else "
+"``None``."
+
+#: of tweepy.streaming.Stream.on_closed:3
+msgid "The Response from Twitter"
+msgstr "Odpowiedź z Twittera"
+
+#: of tweepy.streaming.Stream.on_connect:1
+msgid "This is called after successfully connecting to the streaming API."
+msgstr "Wywoływane po pomyślnym połączeniu się z API strumieniowym."
+
+#: of tweepy.streaming.Stream.on_connection_error:1
+msgid "This is called when the stream connection errors or times out."
+msgstr ""
+"Wywoływane, gdy połączenie strumieniowe ulegnie błędowi lub zostanie "
+"przerwane."
+
+#: of tweepy.streaming.Stream.on_disconnect:1
+msgid "This is called when the stream has disconnected."
+msgstr "Wywoływane, gdy strumień się rozłączy."
+
+#: of tweepy.streaming.Stream.on_exception:1
+msgid "This is called when an unhandled exception occurs."
+msgstr "Jest to wywoływane, gdy wystąpi nieobsługiwany wyjątek."
+
+#: of tweepy.streaming.Stream.on_exception:3
+msgid "The unhandled exception"
+msgstr "Nieobsługiwany wyjątek"
+
+#: of tweepy.streaming.Stream.on_keep_alive:1
+msgid "This is called when a keep-alive signal is received."
+msgstr "Wywoływane, gdy odbierany jest sygnał keep-alive."
+
+#: of tweepy.streaming.Stream.on_request_error:1
+msgid "This is called when a non-200 HTTP status code is encountered."
+msgstr "Wywoływane, gdy napotkany zostanie kod statusu HTTP inny niż-200."
+
+#: of tweepy.streaming.Stream.on_request_error:3
+msgid "The HTTP status code encountered"
+msgstr "Napotkany kod statusu HTTP"
+
+#: of tweepy.streaming.Stream.on_data:1
+msgid ""
+"This is called when raw data is received from the stream. This method "
+"handles sending the data to other methods based on the message type."
+msgstr ""
+"Metoda ta jest wywoływana, gdy ze strumienia są odbierane surowe dane. "
+"Zajmuje się ona wysyłaniem danych do innych metod w oparciu o typ "
+"wiadomości."
+
+#: of tweepy.streaming.Stream.on_data:5
+msgid "The raw data from the stream"
+msgstr "Surowe danie z strumienia"
+
+#: of tweepy.streaming.Stream.on_data:10
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/"
+"guides/streaming-message-types"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/"
+"guides/streaming-message-types"
+
+#: of tweepy.streaming.Stream.on_status:1
+msgid "This is called when a status is received."
+msgstr "Wywołane w momencie otrzymania statusu."
+
+#: of tweepy.streaming.Stream.on_status:3
+msgid "The Status received"
+msgstr "Otrzymany status"
+
+#: of tweepy.streaming.Stream.on_delete:1
+msgid "This is called when a status deletion notice is received."
+msgstr "Wywoływane w przypadku otrzymania powiadomienia o usunięciu statusu."
+
+#: of tweepy.streaming.Stream.on_delete:3
+msgid "The ID of the deleted Tweet"
+msgstr "ID usuniętego Tweeta"
+
+#: of tweepy.streaming.Stream.on_delete:5
+msgid "The ID of the author of the Tweet"
+msgstr "ID autora usuniętego Tweeta"
+
+#: of tweepy.streaming.Stream.on_disconnect_message:1
+msgid "This is called when a disconnect message is received."
+msgstr "Wywoływane, gdy zostanie odebrana wiadomość o rozłączeniu."
+
+#: of tweepy.streaming.Stream.on_disconnect_message:3
+msgid "The disconnect message"
+msgstr "Wiadomość o rozłączeniu"
+
+#: of tweepy.streaming.Stream.on_limit:1
+msgid "This is called when a limit notice is received."
+msgstr ""
+"Wywoływane w przypadku otrzymania zawiadomienia o przekroczeniu limitu."
+
+#: of tweepy.streaming.Stream.on_limit:3
+msgid ""
+"Total count of the number of undelivered Tweets since the connection was "
+"opened"
+msgstr ""
+"Całkowita liczba niedostarczonych Tweetów od momentu otwarcia połączenia"
+
+#: of tweepy.streaming.Stream.on_scrub_geo:1
+msgid "This is called when a location deletion notice is received."
+msgstr ""
+"Wywoływana w przypadku otrzymania powiadomienia o usunięciu lokalizacji."
+
+#: of tweepy.streaming.Stream.on_scrub_geo:3
+msgid "The location deletion notice"
+msgstr "Informacja o usunięciu lokacji"
+
+#: of tweepy.streaming.Stream.on_status_withheld:1
+msgid "This is called when a status withheld content notice is received."
+msgstr "Wywoływane w przypadku otrzymania powiadomienia o treści wstrzymanej."
+
+#: of tweepy.streaming.Stream.on_status_withheld:3
+msgid "The status withheld content notice"
+msgstr "Status wstrzymania zawiadomienia o treści"
+
+#: of tweepy.streaming.Stream.on_user_withheld:1
+msgid "This is called when a user withheld content notice is received."
+msgstr ""
+"Wywoływane po otrzymaniu powiadomienia o wstrzymaniu zawartości przez "
+"użytkownika."
+
+#: of tweepy.streaming.Stream.on_user_withheld:3
+msgid "The user withheld content notice"
+msgstr "Wstrzymanie zawartości przez użytkownika"
+
+#: of tweepy.streaming.Stream.on_warning:1
+msgid "This is called when a stall warning message is received."
+msgstr ""
+"Wywoływane po otrzymaniu komunikatu ostrzegającego o utknięciu w martwym "
+"punkcie."
+
+#: of tweepy.streaming.Stream.on_warning:3
+msgid "The stall warning"
+msgstr "Ostrzeżenie o utknięciu w martwym punkcie"

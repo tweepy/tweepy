@@ -1,0 +1,79 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-15 22:51+0200\n"
+"PO-Revision-Date: 2021-04-28 15:37+0200\n"
+"Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail."
+"com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: ../../exceptions.rst:5
+msgid "Exceptions"
+msgstr "Wyjątki"
+
+#: ../../exceptions.rst:7
+msgid ""
+"Exceptions are available directly in the :mod:`tweepy` module, which "
+"means :mod:`tweepy.errors` itself does not need to be imported. For "
+"example, :exc:`tweepy.errors.TweepyException` is available as :exc:"
+"`tweepy.TweepyException`."
+msgstr ""
+"Wyjątki są dostępne bezpośrednio w module :mod:`tweepy`, co oznacza, "
+"że :mod:`tweepy.errors` nie musi być importowany. Na przykład, :exc:"
+"`tweepy.errors.TweepyException` jest dostępny jako :exc:`tweepy."
+"TweepyException`."
+
+#: of tweepy.errors.TweepyException:1
+msgid "Bases: :class:`Exception`"
+msgstr "Postawy: :class:`Exception`"
+
+#: of tweepy.errors.TweepyException:1
+msgid "Base exception for Tweepy"
+msgstr "Podstawowy wyjątek dla Tweepy"
+
+#: of tweepy.errors.HTTPException:1
+msgid "Bases: :class:`tweepy.errors.TweepyException`"
+msgstr "Podstawy: :class:`tweepy.errors.TweepyException`"
+
+#: of tweepy.errors.HTTPException:1
+msgid "Exception raised when an HTTP request fails"
+msgstr "Wywołanie wyjątku gdy żądanie HTTP nie powiedzie się"
+
+#: of tweepy.errors.BadRequest:1 tweepy.errors.Forbidden:1
+#: tweepy.errors.NotFound:1 tweepy.errors.TooManyRequests:1
+#: tweepy.errors.TwitterServerError:1 tweepy.errors.Unauthorized:1
+msgid "Bases: :class:`tweepy.errors.HTTPException`"
+msgstr "Podstawy: :class:`tweepy.errors.HTTPException`"
+
+#: of tweepy.errors.BadRequest:1
+msgid "Exception raised for a 400 HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 400"
+
+#: of tweepy.errors.Unauthorized:1
+msgid "Exception raised for a 401 HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 401"
+
+#: of tweepy.errors.Forbidden:1
+msgid "Exception raised for a 403 HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 403"
+
+#: of tweepy.errors.NotFound:1
+msgid "Exception raised for a 404 HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 404"
+
+#: of tweepy.errors.TooManyRequests:1
+msgid "Exception raised for a 429 HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 429"
+
+#: of tweepy.errors.TwitterServerError:1
+msgid "Exception raised for a 5xx HTTP status code"
+msgstr "Wyjątek podniesiony dla kodu statusu HTTP 5xx"

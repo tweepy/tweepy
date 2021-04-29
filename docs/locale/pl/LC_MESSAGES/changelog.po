@@ -1,0 +1,1026 @@
+# Copyright (C) 2009-2020, Joshua Roesslein
+# This file is distributed under the same license as the Tweepy package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweepy-pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-15 22:51+0200\n"
+"PO-Revision-Date: 2021-04-28 15:37+0200\n"
+"Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
+"Language: pl\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: ../../changelog.md:1
+msgid "Changelog"
+msgstr "Changelog"
+
+#: ../../changelog.md:4
+msgid ""
+"These changelogs are also at https://github.com/tweepy/tweepy/releases as "
+"release notes."
+msgstr ""
+"Te changelogs są również dostępne na https://github.com/tweepy/tweepy/releases "
+"jako release notes."
+
+#: ../../changelog.md:6
+msgid "Version 3.10.0"
+msgstr "Wersja 3.10.0"
+
+#: ../../changelog.md:8
+msgid ""
+"This will be the last major and minor version to support Python 2.7 (#1253) and "
+"Python 3.5.<br />The next non-patch release should be version 4.0.0."
+msgstr ""
+"Będzie to ostatnia większa i mniejsza wersja wspierająca Pythona 2.7 (#1253) i "
+"Pythona 3.5.<br />Następnym wydaniem bez poprawek powinna być wersja 4.0.0."
+
+#: ../../changelog.md:11 ../../changelog.md:34 ../../changelog.md:75
+#: ../../changelog.md:106 ../../changelog.md:122
+msgid "New Features / Improvements"
+msgstr "Nowe funkcje / Usprawnienia"
+
+#: ../../changelog.md:12
+msgid "Add API.search_30_day and API.search_full_archive (#1175, #1294)"
+msgstr "Dodanie API.search_30_day and API.search_full_archive (#1175, #1294)"
+
+#: ../../changelog.md:13
+msgid "Update allowed parameters for API.home_timeline (#1410, #1458)"
+msgstr "Aktualizacja dozwolonych parametrów dla API.home_timeline (#1410, #1458)"
+
+#: ../../changelog.md:14
+msgid "Add trim_user, exclude_replies, include_entities"
+msgstr "Dodanie trim_user, exclude_replies, include_entities"
+
+#: ../../changelog.md:15
+msgid "Remove page as erroneously documented parameter"
+msgstr "Usunięcie strony jako błędnie udokumentowany parametr"
+
+#: ../../changelog.md:16
+msgid "Reorder count to be the first parameter"
+msgstr "Ustawienie count jako pierwszego parametru"
+
+#: ../../changelog.md:17
+msgid "Update allowed parameters for API.get_oembed"
+msgstr "Aktualizacja dozwolonych parametrów dla API.get_oembed"
+
+#: ../../changelog.md:18
+msgid "Add hide_thread, theme, link_color, widget_type, dnt"
+msgstr "Dodanie hide_thread, theme, link_color, widget_type, dnt"
+
+#: ../../changelog.md:19
+msgid "Remove id"
+msgstr "Usunięcie id"
+
+#: ../../changelog.md:20
+msgid "Remove API.update_profile_background_image (#1466)"
+msgstr "Usunięcie API.update_profile_background_image (#1466)"
+
+#: ../../changelog.md:21
+msgid "Add support for Python 3.9"
+msgstr "Dodanie wsparcia dla Python 3.9"
+
+#: ../../changelog.md:22
+msgid ""
+"Switch from Travis CI to GitHub Actions to run tests and deploy releases (#1402)"
+msgstr ""
+"Przejście z Travis CI na GitHub Actions do przeprowadzania testów i wdrażania "
+"nowych wersji (#1402)"
+
+#: ../../changelog.md:23 ../../changelog.md:66 ../../changelog.md:93
+msgid "Update and improve various documentation"
+msgstr "Zaktualizowanie i poprawa dokumentacji"
+
+#: ../../changelog.md:25 ../../changelog.md:68 ../../changelog.md:95
+#: ../../changelog.md:115 ../../changelog.md:131 ../../changelog.md:146
+#: ../../changelog.md:159
+msgid "Bug Fixes"
+msgstr "Naprawa błędów"
+
+#: ../../changelog.md:26
+msgid ""
+"Use mimetypes.guess_type as fallback for determining image file type (#1411)"
+msgstr ""
+"Użycie mimetypes.guess_type jako alternatywy dla określenia typu pliku obrazu "
+"(#1411)"
+
+#: ../../changelog.md:27
+msgid "Use proper MIME type in Content-Type header for uploaded images"
+msgstr ""
+"Użycie odpowiedniego typu MIME w nagłówku Content-Type dla przesyłanych obrazów"
+
+#: ../../changelog.md:28
+msgid "Allow file parameter to be used again for API.media_upload (#1412, #1413)"
+msgstr ""
+"Pozwolenie na ponowne użycie parametru file dla API.media_upload (#1412, #1413)"
+
+#: ../../changelog.md:29
+msgid ""
+"Allow file parameter to be used again for API.update_profile_banner, API."
+"update_profile_image, and API.update_with_media (#1475)"
+msgstr ""
+"Pozwolenie na ponowne użycie parametru pliku dla API.update_profile_banner, API."
+"update_profile_image, i API.update_with_media (#1475)"
+
+#: ../../changelog.md:30
+msgid ""
+"Fix User.lists, User.lists_memberships, and User.lists_subscriptions to "
+"retrieve information about the user in question rather than the authenticating "
+"user (#1443, #1444)"
+msgstr ""
+"Naprawienie User.lists, User.lists_memberships i User.lists_subscriptions, aby "
+"pobierały informacje o użytkowniku, którego dotyczą, a nie o zuwierzytelnionym "
+"użytkowniku (#1443, #1444)"
+
+#: ../../changelog.md:32
+msgid "Version 3.9.0"
+msgstr "Wersja 3.9.0"
+
+#: ../../changelog.md:35
+msgid "Add API.create_media_metadata (#716)"
+msgstr "Dodanie API.create_media_metadata (#716)"
+
+#: ../../changelog.md:36
+msgid "Update allowed parameters for API.update_status (#1101)"
+msgstr "Zaktualizowanie dozwolonych parametrów dla API.update_status (#1101)"
+
+#: ../../changelog.md:37
+msgid ""
+"Add exclude_reply_user_ids, attachment_url, possibly_sensitive, trim_user, "
+"enable_dmcommands, fail_dmcommands, card_uri"
+msgstr ""
+"Dodanie exclude_reply_user_ids, attachment_url, possibly_sensitive, trim_user, "
+"enable_dmcommands, fail_dmcommands, card_uri"
+
+#: ../../changelog.md:38
+msgid "Remove in_reply_to_status_id_str, source"
+msgstr "Usunięcie in_reply_to_status_id_str, source"
+
+#: ../../changelog.md:39
+msgid "Add allowed parameters to API.get_status"
+msgstr "Dodanie dozwolonych parametrów dla API.get_status"
+
+#: ../../changelog.md:40
+msgid ""
+"trim_user, include_my_retweet, include_entities, include_ext_alt_text, "
+"include_card_uri"
+msgstr ""
+"trim_user, include_my_retweet, include_entities, include_ext_alt_text, "
+"include_card_uri"
+
+#: ../../changelog.md:41
+msgid "Add allowed parameters to API.statuses_lookup"
+msgstr "Dodanie dozwolonych parametrów dla API.statuses_lookup"
+
+#: ../../changelog.md:42
+msgid "include_ext_alt_text, include_card_uri"
+msgstr "include_ext_alt_text, include_card_uri"
+
+#: ../../changelog.md:43
+msgid "Improve API.lookup_users (#706)"
+msgstr "Poprawienie API.lookup_users (#706)"
+
+#: ../../changelog.md:44
+msgid ""
+"Improve and optimize API.statuses_lookup, API.create_media_metadata, API."
+"update_status"
+msgstr ""
+"Poprawienie i optymalizacja API.statuses_lookup, API.create_media_metadata, API."
+"update_status"
+
+#: ../../changelog.md:45
+msgid "Add reverse as allowed parameter for API.lists_all"
+msgstr "Dodanie reverse jako dozwolonego parametru dla API.lists_all"
+
+#: ../../changelog.md:46
+msgid "Add count as allowed parameter for API.lists_memberships"
+msgstr "Dodanie count jako dozwolonego parametru dla API.lists_memberships"
+
+#: ../../changelog.md:47
+msgid "Add count as allowed parameter for API.lists_subscriptions"
+msgstr "Dodanie count jako dozwolonego parametru dla API.lists_subscriptions"
+
+#: ../../changelog.md:48
+msgid "Add include_entities as allowed parameter for API.list_timeline"
+msgstr "Dodanie include_entities jako dozwolonego parametru dla API.list_timeline"
+
+#: ../../changelog.md:49
+msgid "Add allowed parameters to API.list_subscribers"
+msgstr "Dodanie dozwolonych parametrów dla API.list_subscribers"
+
+#: ../../changelog.md:50
+msgid "count, include_entities, skip_status"
+msgstr "count, include_entities, skip_status"
+
+#: ../../changelog.md:51
+msgid "Add support for Python 3.8"
+msgstr "Dodanie wsparcia dla Python 3.8"
+
+#: ../../changelog.md:52
+msgid "Update and improve setup.py"
+msgstr "Aktualizacja i poprawa setup.py"
+
+#: ../../changelog.md:53
+msgid "Use requests socks extra instead of requiring PySocks directly"
+msgstr ""
+"Od teraz używane są requests socks extra zamiast wymagania PySocks bezpośrednio"
+
+#: ../../changelog.md:54
+msgid ""
+"Allow uploading of images with file names without extensions (#1060, #1086)"
+msgstr ""
+"Zezwalanie na wysyłanie obrazów z nazwami plików bez rozszerzeń (#1060, #1086"
+
+#: ../../changelog.md:55
+msgid "Support uploading WebP images (#1298)"
+msgstr "Wsparcie dla przesyłania obrazów WebP (#1298)"
+
+#: ../../changelog.md:56
+msgid "Add missing attributes to Relationship model (#1375)"
+msgstr "Dodanie brakującego atrybutu do modelu Relationship (#1375)"
+
+#: ../../changelog.md:57
+msgid "Update max allowed size for uploaded GIFs (#1336, #1338)"
+msgstr ""
+"Aktualizacja maksymalnego dozwolonego rozmiaru dla wysyłanych GIFów (#1336, "
+"#1338)"
+
+#: ../../changelog.md:58
+msgid "Add _json attribute to DirectMessage model (#1342)"
+msgstr "Dodanie atrybutu _json do modelu DirectMessage (#1342)"
+
+#: ../../changelog.md:59
+msgid "Update and improve tests (#1217)"
+msgstr "Aktualizacja i poprawa testów (#1217)"
+
+#: ../../changelog.md:60
+msgid "Add documentation for extended Tweets"
+msgstr "Dodanie dokumentacji dla rozszerzonych Tweetów"
+
+#: ../../changelog.md:61
+msgid "Document API.lookup_users (#539)"
+msgstr "Dodanie dokumentacji dla API.lookup_users (#539)"
+
+#: ../../changelog.md:62
+msgid "Add documentation for running tests (#681)"
+msgstr "Dodanie dokumentacji dla przeprowadzania testów (#681)"
+
+#: ../../changelog.md:63
+msgid "Add Korean translation of documentation (#1296)"
+msgstr "Dodanie koreańskiego tłumaczenia do dokumentacji (#1296)"
+
+#: ../../changelog.md:64
+msgid "Add Polish translation of documentation (#1316)"
+msgstr "Dodanie polskiego tłumaczenia do dokumentacji (#1316)"
+
+#: ../../changelog.md:65
+msgid "Document API.lookup_friendships (#1375)"
+msgstr "Dodanie dokumentacji dla API.lookup_friendships (#1375)"
+
+#: ../../changelog.md:69
+msgid "Fix handling of invalid credentials for API.verify_credentials"
+msgstr "Naprawa obsługi niepoprawnych danych dostępu dla API.verify_credentials"
+
+#: ../../changelog.md:70
+msgid ""
+"Handle boolean value for API.verify_credentials include_email parameter (#890)"
+msgstr ""
+"Obsługa wartości boolean dla parametru API.verify_credentials include_email "
+"(#890)"
+
+#: ../../changelog.md:71
+msgid ""
+"Allow Cursor to be used with API.list_direct_messages by adding "
+"DMCursorIterator (#1261, #1262)"
+msgstr ""
+"Zezwolenie na użycie kursora z API.list_direct_messages przez dodanie "
+"DMCursorIterator (#1261, #1262)"
+
+#: ../../changelog.md:73
+msgid "Version 3.8.0"
+msgstr "Wersja 3.8.0"
+
+#: ../../changelog.md:76
+msgid "Allow streams to use daemon threads (#1126)"
+msgstr "Zezwolenie strumieniom na używanie wątków demonów (#1126)"
+
+#: ../../changelog.md:77
+msgid "Remove API.set_delivery_device (#1203)"
+msgstr "Usunięcie API.set_delivery_device (#1203)"
+
+#: ../../changelog.md:78
+msgid "Remove simplejson import and usage (#832)"
+msgstr "Usunięcie simplejson import and usage (#832)"
+
+#: ../../changelog.md:79
+msgid "Allow cursor parameter for API.blocks_ids and API.mutes_ids (#1208)"
+msgstr "Dodanie parametru cursor dla API.blocks_ids and API.mutes_ids (#1208)"
+
+#: ../../changelog.md:80
+msgid "Drop support for Python 3.4"
+msgstr "Porzucenie wsparcia dla Python 3.4"
+
+#: ../../changelog.md:81
+msgid "Allow perform_block parameter for API.report_spam (#1090)"
+msgstr "Zezwolenie parametru perform_block dla API.report_spam (#1090)"
+
+#: ../../changelog.md:82
+msgid "Add API.mutes (#1197, #1215)"
+msgstr "Dodanie API.mutes (#1197, #1215)"
+
+#: ../../changelog.md:83
+msgid "Allow count parameter for API.friends (#577)"
+msgstr "Zezwolenie parametru count dla API.friends (#577)"
+
+#: ../../changelog.md:84
+msgid "Remove since, from, to, and source as allowed parameters for API.search"
+msgstr ""
+"Usunięcie since, from, to, oraz source jako dozwolonych parametrów dla API."
+"search"
+
+#: ../../changelog.md:85
+msgid "Handle location deletion and withheld content notices for streams (#886)"
+msgstr ""
+"Dodanie obsługi powiadomienia o usunięciu lokalizacji i wstrzymanej zawartości "
+"dla strumieni (#886)"
+
+#: ../../changelog.md:86
+msgid "Allow usage of equality and difference operators with User objects (#939)"
+msgstr ""
+"Zezwolenie na użycie operatorów równości i różnicy z obiektami User (#939)"
+
+#: ../../changelog.md:87
+msgid "Add _json attribute to Category, Friendship, and List models (#590, #1169)"
+msgstr ""
+"Dodanie atrybutu _json do modeli Category, Friendship oraz List (#590, #1169)"
+
+#: ../../changelog.md:88
+msgid ""
+"Remove API.suggested_categories, API.suggested_users, and API."
+"suggested_users_tweets"
+msgstr ""
+"Usunięcie API.suggested_categories, API.suggested_users oraz API."
+"suggested_users_tweets"
+
+#: ../../changelog.md:89
+msgid "Update and improve tests and cassettes (#1242)"
+msgstr "Aktualizacja i poprawa testów oraz kaset (#1242)"
+
+#: ../../changelog.md:90
+msgid "Update DirectMessage model (#1081, #1228)"
+msgstr "Akutalizacja modelu DirectMessage (#1081, #1228)"
+
+#: ../../changelog.md:91
+msgid ""
+"Replace API.direct_messages and API.sent_direct_messages with API."
+"list_direct_messages (#1081, #1228)"
+msgstr ""
+"Zamiana API.direct_messages oraz API.sent_direct_messages na API."
+"list_direct_messages (#1081, #1228)"
+
+#: ../../changelog.md:92
+msgid ""
+"Update API.get_direct_message, API.send_direct_message, and API."
+"destroy_direct_message (#1081, #1228)"
+msgstr ""
+"Aktualizacja API.get_direct_message, API.send_direct_message, and API."
+"destroy_direct_message (#1081, #1228"
+
+#: ../../changelog.md:96
+msgid "Exclude examples during installation (#1141, #1164)"
+msgstr "Wykluczenie przykładów podczas instalacji (#1141, #1164)"
+
+#: ../../changelog.md:97
+msgid "Properly initialize OAuthHandler.request_token (#1149)"
+msgstr "Poprawne inicjalizowanie OAuthHandler.request_token (#1149)"
+
+#: ../../changelog.md:98
+msgid "Properly handle map_ parameter for API.statuses_lookup (#598)"
+msgstr "Poprawna obsługa parametru map_ dla API.statuses_lookup (#598)"
+
+#: ../../changelog.md:99
+msgid ""
+"Support cursor pagination for API.blocks_ids and API.mutes_ids (#930, #931)"
+msgstr ""
+"Wsparcie indeksowania kursora dla API.blocks_ids oraz API.mutes_ids (#930, #931)"
+
+#: ../../changelog.md:100
+msgid ""
+"Return values for API.update_profile_background_image and API."
+"update_profile_banner (#904)"
+msgstr ""
+"Zwracanie wartości dla API.update_profile_background_image oraz API."
+"update_profile_banner (#904)"
+
+#: ../../changelog.md:101
+msgid "Replace usage of root logger"
+msgstr "Zamiana użycie rejestratora głównego"
+
+#: ../../changelog.md:102
+msgid "Close Requests sessions (#810, #1093, #1237)"
+msgstr "Zamknięcie sesji Requests (#810, #1093, #1237)"
+
+#: ../../changelog.md:104
+msgid "Version 3.7.0"
+msgstr "Wersja 3.7.0"
+
+#: ../../changelog.md:107
+msgid ""
+"Allow trim_user and exclude_replies as parameters for API.user_timeline (#909)"
+msgstr ""
+"Zezwolenie parametrów trim_user oraz exclude_replies dla API.user_timeline "
+"(#909)"
+
+#: ../../changelog.md:108
+msgid "Allow tweet_mode parameter for API.statuses_lookup (#840, #926)"
+msgstr "Zezwolenie parametru tweet_mode dla API.statuses_lookup (#840, #926)"
+
+#: ../../changelog.md:109
+msgid "Drop support for Python 2.6 and 3.3"
+msgstr "Porzucenie wsparcia dla Python 2.6 oraz 3.3"
+
+#: ../../changelog.md:110
+msgid "Discord Server"
+msgstr "Serwer Discord"
+
+#: ../../changelog.md:111
+msgid "Add proxy support for streams (#1033)"
+msgstr "Dodanie wsparcia proxy dla strumieni (#1033)"
+
+#: ../../changelog.md:112
+msgid "Add API.create_mute, API.destroy_mute, and API.mutes_ids (#1055)"
+msgstr "Dodanie API.create_mute, API.destroy_mute, and API.mutes_ids (#1055)"
+
+#: ../../changelog.md:113
+msgid "Allow tweet_mode parameter for API.lookup_users (#1130)"
+msgstr "Zezwolenie parametru tweet_mode dla API.lookup_users (#1130)"
+
+#: ../../changelog.md:116
+msgid "Fix AttributeError during streaming (#1026, #1027)"
+msgstr ""
+"Naprawienie AttributeError podczas przesyłania strumieniowego (#1026, #1027)"
+
+#: ../../changelog.md:117
+msgid "Update how requirements are specified (#1029, #1030)"
+msgstr "Uaktualnienie sposobu określania wymagań (#1029, #1030)"
+
+#: ../../changelog.md:118
+msgid "Fix compatibility issue with Python 3.7 (#1017, #1042)"
+msgstr "Naprawa problemu kompatybilności z Pythonem 3.7 (#1017, #1042)"
+
+#: ../../changelog.md:120
+msgid "Version 3.6.0"
+msgstr "Wersja 3.6.0"
+
+#: ../../changelog.md:123
+msgid "Parse Status.quoted_status as a Status object (#633)"
+msgstr "Parsowanie Status.quoted_status jako obiektu Status (#633)"
+
+#: ../../changelog.md:124
+msgid ""
+"Allow in_reply_to_status_id_str as a parameter for API.update_status and API."
+"update_with_media (#693)"
+msgstr ""
+"Zezwolenie parametru in_reply_to_status_id_str dla API.update_status oraz API."
+"update_with_media (#693)"
+
+#: ../../changelog.md:125
+msgid "Add stall_warnings parameter to Stream.sample (#701)"
+msgstr "Dodanie parametru stall_warnings dla Stream.sample (#701)"
+
+#: ../../changelog.md:126
+msgid "Add API.unretweet (#735, #736)"
+msgstr "Dodanie API.unretweet (#735, #736)"
+
+#: ../../changelog.md:127
+msgid ""
+"Allow auto_populate_reply_metadata as a parameter for API.update_status and API."
+"update_with_media (#761)"
+msgstr ""
+"Zezwolenie auto_populate_reply_metadata jako parametru dla API.update_status "
+"oraz API.update_with_media (#761)"
+
+#: ../../changelog.md:128
+msgid "Allow profile_link_color as a parameter for API.update_profile"
+msgstr ""
+"Zezwolenie profile_link_color jako parametru dla API.update_profile (#761)"
+
+#: ../../changelog.md:129
+msgid "Add support for Python 3.6 (#831, #884)"
+msgstr "Dodanie wsparcia dla Python 3.6 (#831, #884)"
+
+#: ../../changelog.md:132
+msgid "Update file size limit for API.media_upload (#717)"
+msgstr "Aktualizacja limitu rozmiaru pliku dla API.media_upload (#717)"
+
+#: ../../changelog.md:133
+msgid "Fix JSONParser.parse returning None in certain cases (#765, #766)"
+msgstr ""
+"Naprawaa JSONParser.parse zwracającego None w niektórych przypadkach (#765, "
+"#766)"
+
+#: ../../changelog.md:134
+msgid "Include URL parameters when accessing cache (#777)"
+msgstr "Uwzględnienie parametrów URL podczas dostępu do pamięci podręcznej (#777)"
+
+#: ../../changelog.md:135
+msgid "Properly re-raise exceptions during streaming"
+msgstr ""
+"Prawidłowe ponowne podnoszenie wyjątków podczas przesyłania strumieniowego"
+
+#: ../../changelog.md:136
+msgid "Fix AttributeError and TypeError during streaming (#698)"
+msgstr ""
+"Naperawa AttributeError oraz TypeError podczas przesyłania strumieniowego (#698)"
+
+#: ../../changelog.md:137
+msgid "Properly encode filter_level for Stream.filter (#782)"
+msgstr "Poprawne kodowanie filter_level dla Stream.filter (#782)"
+
+#: ../../changelog.md:139
+msgid "Version 3.5.0"
+msgstr "Wersja 3.5.0"
+
+#: ../../changelog.md:141
+msgid "Features / Improvements"
+msgstr "Nowe funkcje / Usprawnienia"
+
+#: ../../changelog.md:142
+msgid "Allow 'full_text' param when getting direct messages ( #664 )"
+msgstr ""
+"Zezwolenie parametru 'full_text\" podczas otrzymania bezpośredniej wiadomości "
+"( #664 )"
+
+#: ../../changelog.md:143
+msgid "Explicitly return api code when parsing error ( #666 )"
+msgstr "Wyraźnie zwrócenie kodu api przy błędzie parsowania ( #666 )"
+
+#: ../../changelog.md:144
+msgid "Remove deprecated function and clean up codes ( #583 )"
+msgstr "Usuniećie przestarzałych funkcję i czyszczenie kodu ( #583 )"
+
+#: ../../changelog.md:147
+msgid "update_status: first positional argument should be 'status' ( #578 )"
+msgstr "update_status: pierwszy argument pozycyjny powinien być 'status' ( #578 )"
+
+#: ../../changelog.md:148
+msgid ""
+"Fix \"TypeError: Can't convert 'bytes' object to str implicitly\" ( #615 #658 "
+"#635 )"
+msgstr ""
+"Naprawienie \"TypeError: Can't convert 'bytes' object to str implicitly"
+"\" ( #615 #658 #635 )"
+
+#: ../../changelog.md:149
+msgid "Fix duplicate raise in auth.py ( #667 )"
+msgstr "Naprawienie duplikatu podniesienia w auth.py ( #667 )"
+
+#: ../../changelog.md:151
+msgid "Version 3.4.0"
+msgstr "Wersja 3.4.0"
+
+#: ../../changelog.md:153
+msgid "New Features"
+msgstr "Nowe funkcje"
+
+#: ../../changelog.md:154
+msgid "Add API for account/settings (PR #596)"
+msgstr "Dodanie API dla konta/ustawień (PR #596)"
+
+#: ../../changelog.md:155
+msgid ""
+"Added RateLimitError for easily working with the rate limit. (Issue #600, PR "
+"#611) @obskyr"
+msgstr ""
+"Dodanie RateLimitError dla ułatwienia pracy z limitem przepływu. (Issue #600, "
+"PR #611) @obskyr"
+
+#: ../../changelog.md:156
+msgid "Allow include_email param for verify_credentials API (PR #623)"
+msgstr "Zezwolenie parametru include_email dla verify_credentials API (PR #623)"
+
+#: ../../changelog.md:157
+msgid ""
+"Added support for the \"filter_level\" parameter for the streaming API (PR #619)"
+msgstr ""
+"Dodanie wsparcia dla parametru \"filter_level\" podcas przesyłania "
+"strumieniowego API (PR #619)"
+
+#: ../../changelog.md:160
+msgid "Streaming: don't decode stream bytes until json.decode (PR #606)"
+msgstr ""
+"Przesyłanie strumieniowe: nie dekoduj bajtów strumienia przed json.decode (PR "
+"#606)"
+
+#: ../../changelog.md:161
+msgid "Typo fix on _add_list_members, _remove_list_members properties. (PR #593)"
+msgstr ""
+"Poprawka literówek we właściwościach _add_list_members, _remove_list_members. "
+"(PR #593)"
+
+#: ../../changelog.md:162
+msgid "Fixes issue #570 - add \"exception\" when raising one"
+msgstr "Poprawki do błędu #570 - dodanie \"exception\" przy podnoszeniu wyjątku"
+
+#: ../../changelog.md:163
+msgid "Change raise in streaming.py to raise exception (PR #621)"
+msgstr "Zmiana raise w streaming.py na raise exception (PR #621)"
+
+#: ../../changelog.md:165
+msgid "Version 3.3.0"
+msgstr "Wersja 3.3.0"
+
+#: ../../changelog.md:167
+msgid "Loosen our dependency requirements for Requests (>= 2.4.3)"
+msgstr ""
+"Rozluźnienie naszych wymagań dotyczących zależności dla Requests (>= 2.4.3)"
+
+#: ../../changelog.md:168
+msgid "Fix issue with streams freezing up on Python 3 (Issue #556)"
+msgstr ""
+"Naprawienie problemu z zawieszaniem się strumieni w Pythonie 3 (Issue #556)"
+
+#: ../../changelog.md:169
+msgid ""
+"Add keep_alive() callback to StreamListener when keep alive messages arrive"
+msgstr ""
+"Dodanie wywołania zwrotnego keep_alive() do StreamListener, gdy nadejdą "
+"wiadomości keep alive"
+
+#: ../../changelog.md:170
+msgid ""
+"Fix issue with stream session headers not being used when restarting connection"
+msgstr ""
+"Naprawienie problemu z nieużywaniem nagłówków sesji strumienia podczas "
+"ponownego uruchamiania połączenia"
+
+#: ../../changelog.md:171
+msgid ""
+"Fix issue with streams getting stuck in a loop when connection dies. (PR #561)"
+msgstr ""
+"Naprawienie problemu z utknięciem strumienia w pętli po utracie połączenia. (PR "
+"#561)"
+
+#: ../../changelog.md:173
+msgid "Version 3.2.0"
+msgstr "Wersja 3.2.0"
+
+#: ../../changelog.md:175
+msgid "Remove deprecated trends methods."
+msgstr "Usunięcie przestarzałych metod trendów."
+
+#: ../../changelog.md:176
+msgid "Fix tweepy.debug() to work in Python 3."
+msgstr "Naprawienie funkcji tweepy.debug(), aby działała w Pythonie 3."
+
+#: ../../changelog.md:177
+msgid "Fixed issue #529 - StreamListener language filter stopped working."
+msgstr "Naprawienie błędu #529 - filtr językowy StreamListener przestał działać."
+
+#: ../../changelog.md:178
+msgid "Add Documentation Page for streaming."
+msgstr "Dodanie dokumentacji dla przesyłania strumieniowego."
+
+#: ../../changelog.md:179
+msgid "Add media/upload endpoint."
+msgstr "Dodanie punktu końcowego media/upload."
+
+#: ../../changelog.md:180
+msgid "Add media_ids parameter to update_status()."
+msgstr "Dodanie parametru media_ids do update_status()."
+
+#: ../../changelog.md:182
+msgid "Version 3.1.0"
+msgstr "Wersja 3.1.0"
+
+#: ../../changelog.md:184
+msgid "Allow specifying your own ssl certificates for streaming client."
+msgstr ""
+"Umożliwienie określenia własnych certyfikatów ssl dla klienta strumieniowego."
+
+#: ../../changelog.md:185
+msgid "Distribute Python Wheels instead of dumb binaries."
+msgstr "Dystrybucja Python Wheels zamiast dumb binaries."
+
+#: ../../changelog.md:186
+msgid ""
+"Fix cursor invocation, passing args to underlying method. (https://github.com/"
+"tweepy/tweepy/issues/515)"
+msgstr ""
+"Poprawienie wywoływania kursora, przekazującego argumenty do metody bazowej. "
+"(https://github.com/tweepy/tweepy/issues/515)"
+
+#: ../../changelog.md:187
+msgid "Upgrade to Request 2.4.3"
+msgstr "Aktualizacja Request do wersji 2.4.3"
+
+#: ../../changelog.md:189
+msgid "Version 3.0"
+msgstr "Wersja 3.0"
+
+#: ../../changelog.md:191
+msgid ""
+"Added multiple list members operation api methods (add_list_members, "
+"remove_list_members)."
+msgstr ""
+"Dodanie metody multiple list members operation api (add_list_members, "
+"remove_list_members)."
+
+#: ../../changelog.md:192
+msgid "Added sitestream endpoint."
+msgstr "Dodanie punktu końcowego sitestream."
+
+#: ../../changelog.md:193
+msgid "Switch to using Requests instead of httplib."
+msgstr "Przejście na Requests z httplib."
+
+#: ../../changelog.md:194
+msgid "Fully removed support for non-secure HTTP."
+msgstr "Całkowite usunięcie wsparcia dla niezabezpieczonych HTTP."
+
+#: ../../changelog.md:195
+msgid "Proxy support."
+msgstr "Wsparcie dla proxy."
+
+#: ../../changelog.md:196
+msgid "Add API method for /statuses/lookup.json"
+msgstr "Dodanie metody API do /statuses/lookup.json"
+
+#: ../../changelog.md:197
+msgid "Add missing 'count' parameter to followers_ids"
+msgstr "Dodanie brakującego parametru 'count' do followers_ids"
+
+#: ../../changelog.md:198
+msgid "Added allowed_param to update_profile_image"
+msgstr "Dodanie allowed_param do update_profile_image"
+
+#: ../../changelog.md:199
+msgid "Comparison between Status objects"
+msgstr "Porównanie pomiędzy obiektami Status"
+
+#: ../../changelog.md:200
+msgid ""
+"Extend on_data method by including a conditional to process warning messages "
+"and add the definition of the method to manage those warning messages"
+msgstr ""
+"Rozszerzenie metody on_data o warunek do przetwarzania komunikatów "
+"ostrzegawczych i dodanie definicji metody do zarządzania tymi komunikatami "
+"ostrzegawczymi"
+
+#: ../../changelog.md:201
+msgid "Better Python 3 support."
+msgstr "Lepsze wsparcie Python 3."
+
+#: ../../changelog.md:203
+msgid "Version 2.2"
+msgstr "Wersja 2.2"
+
+#: ../../changelog.md:205
+msgid "Added update_profile_banner endpoint."
+msgstr "Dodanie punktu końcowego update_profile_banner."
+
+#: ../../changelog.md:206
+msgid "Don't treat HTTP status codes in 200 range as errors."
+msgstr "Wyłączenie traktowania kodów statusu HTTP z zakresu 200 jako błędów."
+
+#: ../../changelog.md:207
+msgid "Tests no longer packaged into egg releases."
+msgstr "Testy nie są już dołączane do egg releases."
+
+#: ../../changelog.md:208
+msgid "Improve test stability and enable CI testing on pull requests."
+msgstr ""
+"Poprawa stabilności testów oraz włączenie testowania Cl dla pull requestów."
+
+#: ../../changelog.md:209
+msgid "Removed Basic Auth."
+msgstr "Usunięcie Basic Auth."
+
+#: ../../changelog.md:210
+msgid "Use built-in timeout feature of httplib to fix appengine."
+msgstr "Użycie wbudowanej funkcji timeout w httplib, aby naprawić appengine."
+
+#: ../../changelog.md:211
+msgid "Added retweeters() endpoint."
+msgstr "Dodanie punktu końcoweo retweeters()"
+
+#: ../../changelog.md:212
+msgid "Removed deprecated retweeted_by and retweeted_by_ids."
+msgstr "Usunięcie wycofanych retweeted_by oraz retweeted_by_ids."
+
+#: ../../changelog.md:213
+msgid "Improved datetime parsing. Should be more thread safe."
+msgstr ""
+"Poprawienie parsowanie datetime. Powinno być bardziej bezpieczne dla wątków."
+
+#: ../../changelog.md:214
+msgid "Enable coverage reporting. Upload reports to Coveralls."
+msgstr "Włączenie raportowania zasięgu. Przesłanie raportów do Coveralls."
+
+#: ../../changelog.md:215
+msgid "https://coveralls.io/r/tweepy/tweepy"
+msgstr "https://coveralls.io/r/tweepy/tweepy"
+
+#: ../../changelog.md:216
+msgid "Removed deprecated test() endpoint."
+msgstr "Usunięcie przestarzałego punktu końcowego test()."
+
+#: ../../changelog.md:217
+msgid ""
+"New stream listeners callback on_disconnect(). Called whenever \"disconnect\" "
+"messages arrive from Twitter before connection is killed."
+msgstr ""
+"Nowe wywołanie zwrotne on_disconnect() dla słuchaczy strumienia. Wywoływany za "
+"każdym razem, gdy przychodzi wiadomość \"disconnect\" z Twittera przed "
+"zakończeniem połączenia."
+
+#: ../../changelog.md:219
+msgid ""
+"https://dev.twitter.com/docs/streaming-apis/"
+"messages#Disconnect_messages_disconnect"
+msgstr ""
+"https://dev.twitter.com/docs/streaming-apis/"
+"messages#Disconnect_messages_disconnect"
+
+#: ../../changelog.md:220 ../../changelog.md:245
+msgid "Compare View"
+msgstr "Porównanie Widoku"
+
+#: ../../changelog.md:221
+msgid "Use HTTPS by default."
+msgstr "Domyślne używanie protokołu HTTPS."
+
+#: ../../changelog.md:222
+msgid ""
+"Support setting the starting cursor postion (ex: Ex: Cursor(api.friends_ids, "
+"cursor=123456))"
+msgstr ""
+"Wsparcie ustawiania początkowej pozycji kursora (ex: Ex: Cursor(api."
+"friends_ids, cursor=123456))"
+
+#: ../../changelog.md:224
+msgid ""
+"Added API.cached_result instance flag that is \"True\" when cached result is "
+"returned."
+msgstr ""
+"Dodano flagę instancji API.cached_result, która przyjmuje wartość \"True\", gdy "
+"zwracany jest zbuforowany wynik."
+
+#: ../../changelog.md:225
+msgid "New Streaming client callbacks"
+msgstr "Nowe wywołania zwrotne klienta strumieniowego"
+
+#: ../../changelog.md:226
+msgid "on_event(status): called when new events arrive"
+msgstr "on_event(status): dodany gdy przychodzi nowy status"
+
+#: ../../changelog.md:227
+msgid "on_direct_message(status): called when a new direct message arrives."
+msgstr ""
+"on_direct_message(status): wywoływane gdy przychodzi nowa wiadomość "
+"bezpośrednia."
+
+#: ../../changelog.md:229
+msgid ""
+"Improvements to streaming client re-connection behavior / configuration. "
+"(https://github.com/tweepy/tweepy/"
+"commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+msgstr ""
+"Poprawienie zachowania / konfiguracji dla klienta streamowania. (https://github."
+"com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+
+#: ../../changelog.md:233
+msgid "Version 2.1"
+msgstr "Wersja 2.1"
+
+#: ../../changelog.md:235
+msgid "Added get_oembed()."
+msgstr "Dodanie get_oembed()."
+
+#: ../../changelog.md:236
+msgid "friends() and followers() are back and updated to v1.1."
+msgstr "powrót friends() oraz followers() i aktualizacji ich do v1.1."
+
+#: ../../changelog.md:237
+msgid "Fixed report_spam() endpoint."
+msgstr "Naprawienie punktu końcowego report_spam()."
+
+#: ../../changelog.md:238
+msgid "Added \"languages\" parameter to streaming filter() method."
+msgstr "Dodanie parametru \"languages\" do metody streamowanie filter()."
+
+#: ../../changelog.md:239
+msgid "Added \"timeout\" support for API object. Ex: API(timeout=1000)."
+msgstr "Dodanie wsparcia \"timeout\" dla obiektu API. Np: API(timeout=1000)."
+
+#: ../../changelog.md:240
+msgid "Python 2.5 no longer supported."
+msgstr "Usunięcie wsparcia dla Python 2.5."
+
+#: ../../changelog.md:241
+msgid "Added compression support. Ex: API(compression=True)."
+msgstr "Dodanie wsparcia dla kompresji. Np: API(compression=True)."
+
+#: ../../changelog.md:242
+msgid "Added on_connect() callback to StreamListener."
+msgstr "Dodanie wywołania zwrotnego on_connect() do StreamListener."
+
+#: ../../changelog.md:243
+msgid "Switched API search() to v1.1 endpoint. Some breaking changes."
+msgstr "Zmiana API search() na punkt końcowy v1.1. Przełomowe zmiany."
+
+#: ../../changelog.md:244
+msgid "Drop \"page\" based cursors and use \"ID\" based ones instead."
+msgstr ""
+"Porzuenie kursorów opartych na \"stronie\" i użycie zamiast nich kursorów "
+"opartych na \"ID\"."
+
+#: ../../changelog.md:247
+msgid "Version 2.0"
+msgstr "Wersja 2.0"
+
+#: ../../changelog.md:249
+msgid "Dedicated in memory of Aaron Swartz"
+msgstr "Dedykowane pamięci Aarona Swartza"
+
+#: ../../changelog.md:251
+msgid "Twitter API 1.1 support."
+msgstr "Wsparcie dla Twitter API 1.1."
+
+#: ../../changelog.md:252
+msgid "Basic Authentication deprecated."
+msgstr "Uwierzytelnianie podstawowe zostało wycofane."
+
+#: ../../changelog.md:253
+msgid "friends_timeline() removed."
+msgstr "usunięcie friends_timeline()."
+
+#: ../../changelog.md:254
+msgid "mentions() removed and replaced by mentions_timeline()."
+msgstr "usunięcie mentions() i zmiana na mentions_timeline()."
+
+#: ../../changelog.md:255 ../../changelog.md:258
+msgid "retweeted_by_user() removed."
+msgstr "usunięcie retweeted_by_user()."
+
+#: ../../changelog.md:256
+msgid "retweeted_by_me() removed."
+msgstr "usunięcie retweeted_by_me()."
+
+#: ../../changelog.md:257
+msgid "retweeted_to_me() removed."
+msgstr "usunięcie retweeted_to_me()."
+
+#: ../../changelog.md:259
+msgid "friends() removed."
+msgstr "usunięcie friends()."
+
+#: ../../changelog.md:260
+msgid "followers() removed."
+msgstr "usunięcie followers()."
+
+#: ../../changelog.md:261
+msgid "enable_notifications() removed."
+msgstr "usunięcie disable_notifications()."
+
+#: ../../changelog.md:262
+msgid "disable_notifications() removed."
+msgstr "usunięcie disable_notifications()."
+
+#: ../../changelog.md:263
+msgid "exists_block() removed."
+msgstr "usunięcie exists_block()."
+
+#: ../../changelog.md:264
+msgid "lists() removed and replaced by lists_all()."
+msgstr "usunięcie lists() i zmiana na lists_all()."
+
+#: ../../changelog.md:265
+msgid "is_list_member() removed."
+msgstr "usunięcie is_list_member()."
+
+#: ../../changelog.md:266
+msgid "show_list_member added."
+msgstr "dodanie show_list_member."
+
+#: ../../changelog.md:267
+msgid "is_subscribed_list() removed."
+msgstr "usunięcie is_subscribed_list()."
+
+#: ../../changelog.md:268
+msgid "show_list_subscriber() added."
+msgstr "dodanie show_list_subscriber()."
+
+#: ../../changelog.md:269
+msgid "trends_location() removed."
+msgstr "usunięcie trends_location()."
+
+#: ../../changelog.md:270
+msgid "nearby_places() removed."
+msgstr "usunięcie nearby_places()."

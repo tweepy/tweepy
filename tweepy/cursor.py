@@ -2,12 +2,25 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
+from math import inf
+
 from tweepy.errors import TweepyException
 from tweepy.parsers import ModelParser, RawParser
 
 
 class Cursor:
-    """Pagination helper class"""
+    """:class:`Cusor` can be used to paginate for any :class:`API` methods that
+    support pagination
+
+    Parameters
+    ----------
+    method
+        :class:`Client` method to paginate for
+    args
+        Positional arguments to pass to ``method``
+    kwargs
+        Keyword arguments to pass to ``method``
+    """
 
     def __init__(self, method, *args, **kwargs):
         if hasattr(method, 'pagination_mode'):
@@ -26,17 +39,39 @@ class Cursor:
         else:
             raise TweepyException('This method does not perform pagination')
 
-    def pages(self, limit=0):
-        """Return iterator for pages"""
-        if limit > 0:
-            self.iterator.limit = limit
+    def pages(self, limit=inf):
+        """Retrieve the page for each request
+
+        Parameters
+        ----------
+        limit
+            Maximum number of pages to iterate over
+
+        Returns
+        -------
+        CursorIterator or DMCursorIterator or IdIterator or NextIterator or \
+        PageIterator
+            Iterator to iterate through pages
+        """
+        self.iterator.limit = limit
         return self.iterator
 
-    def items(self, limit=0):
-        """Return iterator for items in each page"""
-        i = ItemIterator(self.iterator)
-        i.limit = limit
-        return i
+    def items(self, limit=inf):
+        """Retrieve the items in each page/request
+
+        Parameters
+        ----------
+        limit
+            Maximum number of items to iterate over
+
+        Returns
+        -------
+        ItemIterator
+            Iterator to iterate through items
+        """
+        iterator = ItemIterator(self.iterator)
+        iterator.limit = limit
+        return iterator
 
 
 class BaseIterator:
@@ -45,7 +80,7 @@ class BaseIterator:
         self.method = method
         self.args = args
         self.kwargs = kwargs
-        self.limit = 0
+        self.limit = inf
 
     def __next__(self):
         return self.next()
@@ -70,7 +105,7 @@ class CursorIterator(BaseIterator):
         self.num_tweets = 0
 
     def next(self):
-        if self.next_cursor == 0 or (self.limit and self.num_tweets == self.limit):
+        if self.next_cursor == 0 or self.num_tweets >= self.limit:
             raise StopIteration
         data, cursors = self.method(cursor=self.next_cursor,
                                     *self.args,
@@ -99,7 +134,7 @@ class DMCursorIterator(BaseIterator):
         self.page_count = 0
 
     def next(self):
-        if self.next_cursor == -1 or (self.limit and self.page_count == self.limit):
+        if self.next_cursor == -1 or self.page_count >= self.limit:
             raise StopIteration
         data = self.method(cursor=self.next_cursor, return_cursors=True, *self.args, **self.kwargs)
         self.page_count += 1
@@ -125,7 +160,7 @@ class IdIterator(BaseIterator):
 
     def next(self):
         """Fetch a set of items with IDs less than current set."""
-        if self.limit and self.limit == self.num_tweets:
+        if self.num_tweets >= self.limit:
             raise StopIteration
 
         if self.index >= len(self.results) - 1:
@@ -161,7 +196,7 @@ class IdIterator(BaseIterator):
 
     def prev(self):
         """Fetch a set of items with IDs greater than current set."""
-        if self.limit and self.limit == self.num_tweets:
+        if self.num_tweets >= self.limit:
             raise StopIteration
 
         self.index -= 1
@@ -189,9 +224,8 @@ class PageIterator(BaseIterator):
         self.previous_items = []
 
     def next(self):
-        if self.limit > 0:
-            if self.current_page > self.limit:
-                raise StopIteration
+        if self.current_page > self.limit:
+            raise StopIteration
 
         items = self.method(page=self.current_page, *self.args, **self.kwargs)
 
@@ -221,7 +255,7 @@ class NextIterator(BaseIterator):
         self.page_count = 0
 
     def next(self):
-        if self.next_token == -1 or (self.limit and self.page_count == self.limit):
+        if self.next_token == -1 or self.page_count >= self.limit:
             raise StopIteration
         data = self.method(next=self.next_token, return_cursors=True, *self.args, **self.kwargs)
         self.page_count += 1
@@ -239,15 +273,14 @@ class ItemIterator(BaseIterator):
 
     def __init__(self, page_iterator):
         self.page_iterator = page_iterator
-        self.limit = 0
+        self.limit = inf
         self.current_page = None
         self.page_index = -1
         self.num_tweets = 0
 
     def next(self):
-        if self.limit > 0:
-            if self.num_tweets == self.limit:
-                raise StopIteration
+        if self.num_tweets >= self.limit:
+            raise StopIteration
         if self.current_page is None or self.page_index == len(self.current_page) - 1:
             # Reached end of current page, get the next page...
             self.current_page = next(self.page_iterator)
