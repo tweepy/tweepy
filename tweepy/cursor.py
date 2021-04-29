@@ -69,9 +69,9 @@ class Cursor:
         ItemIterator
             Iterator to iterate through items
         """
-        i = ItemIterator(self.iterator)
-        i.limit = limit
-        return i
+        iterator = ItemIterator(self.iterator)
+        iterator.limit = limit
+        return iterator
 
 
 class BaseIterator:
