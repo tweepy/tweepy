@@ -34,7 +34,7 @@ extensions = [
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
   'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
-  'requests': ('https://docs.python-requests.org/en/latest/', None)
+  'requests': ('https://docs.python-requests.org/en/stable/', None)
 }
 
 rst_prolog = """
