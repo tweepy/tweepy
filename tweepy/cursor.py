@@ -7,7 +7,18 @@ from tweepy.parsers import ModelParser, RawParser
 
 
 class Cursor:
-    """Pagination helper class"""
+    """:class:`Cusor` can be used to paginate for any :class:`API` methods that
+    support pagination
+
+    Parameters
+    ----------
+    method
+        :class:`Client` method to paginate for
+    args
+        Positional arguments to pass to ``method``
+    kwargs
+        Keyword arguments to pass to ``method``
+    """
 
     def __init__(self, method, *args, **kwargs):
         if hasattr(method, 'pagination_mode'):
@@ -27,13 +38,36 @@ class Cursor:
             raise TweepyException('This method does not perform pagination')
 
     def pages(self, limit=0):
-        """Return iterator for pages"""
+        """Retrieve the page for each request
+
+        Parameters
+        ----------
+        limit
+            Maximum number of pages to iterate over
+
+        Returns
+        -------
+        CursorIterator or DMCursorIterator or IdIterator or NextIterator or \
+        PageIterator
+            Iterator to iterate through pages
+        """
         if limit > 0:
             self.iterator.limit = limit
         return self.iterator
 
     def items(self, limit=0):
-        """Return iterator for items in each page"""
+        """Retrieve the items in each page/request
+
+        Parameters
+        ----------
+        limit
+            Maximum number of items to iterate over
+
+        Returns
+        -------
+        ItemIterator
+            Iterator to iterate through items
+        """
         i = ItemIterator(self.iterator)
         i.limit = limit
         return i

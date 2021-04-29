@@ -6,6 +6,29 @@
 Pagination
 **********
 
+API v1.1
+========
+
+.. autoclass:: Cursor
+    :members:
+
+Example
+-------
+
+::
+
+    import tweepy
+
+    auth = tweepy.AppAuthHandler("Consumer Key here", "Consumer Secret here")
+    api = tweepy.API(auth)
+
+    for status in tweepy.Cursor(api.search, "Tweepy", count=100).items(250):
+        print(status.id)
+
+    for page in tweepy.Cursor(api.followers, screen_name="TwitterDev",
+                              count=200).pages(5):
+        print(len(page))
+
 API v2
 ======
 
