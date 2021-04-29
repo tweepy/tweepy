@@ -145,7 +145,7 @@ class AsyncStream:
             await self.on_disconnect()
 
     async def filter(self, follow=None, track=None, locations=None,
-                     stall_warnings=False):
+                     filter_level=None, languages=None, stall_warnings=False):
         """|coroutine|
 
         Filter realtime Tweets
@@ -164,6 +164,22 @@ class AsyncStream:
             Specifies a set of bounding boxes to track. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
+        filter_level : Optional[str]
+            Setting this parameter to one of none, low, or medium will set the
+            minimum value of the filter_level Tweet attribute required to be
+            included in the stream. The default value is none, which includes
+            all available Tweets.
+
+            When displaying a stream of Tweets to end users (dashboards or live
+            feeds at a presentation or conference, for example) it is suggested
+            that you set this value to medium.
+        languages : Optional[List[str]]
+            Setting this parameter to a comma-separated list of `BCP 47`_
+            language identifiers corresponding to any of the languages listed
+            on Twitter’s `advanced search`_ page will only return Tweets that
+            have been detected as being written in the specified languages. For
+            example, connecting with language=en will only stream Tweets
+            detected to be in the English language.
         stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
@@ -183,6 +199,9 @@ class AsyncStream:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
+
+        .. _BCP 47: https://tools.ietf.org/html/bcp47
+        .. _advanced search: https://twitter.com/search-advanced
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
@@ -203,6 +222,10 @@ class AsyncStream:
             body["locations"] = ','.join(
                 f"{location:.4f}" for location in locations
             )
+        if filter_level is not None:
+            body["filter_level"] = filter_level
+        if languages is not None:
+            body["language"] = ','.join(map(str, languages))
         if stall_warnings:
             body["stall_warnings"] = "true"
 
