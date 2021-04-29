@@ -169,6 +169,12 @@ class AsyncStream:
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected or when the number of location
+            coordinates is not a multiple of 4
+
         Returns
         -------
         asyncio.Task
@@ -217,6 +223,11 @@ class AsyncStream:
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected
+
         Returns
         -------
         asyncio.Task
@@ -249,6 +260,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when the stream has been closed by Twitter.
+
+        Parameters
+        ----------
+        response : aiohttp.ClientResponse
+            The response from Twitter
         """
         log.error("Stream connection closed by Twitter")
 
@@ -277,6 +293,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when an unhandled exception occurs.
+
+        Parameters
+        ----------
+        exception : Exception
+            The unhandled exception
         """
         log.exception("Stream encountered an exception")
 
@@ -291,6 +312,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a non-200 HTTP status code is encountered.
+
+        Parameters
+        ----------
+        status_code : int
+            The HTTP status code encountered
         """
         log.error("Stream encountered HTTP Error: %d", status_code)
 
@@ -300,6 +326,11 @@ class AsyncStream:
         This is called when raw data is received from the stream.
         This method handles sending the data to other methods, depending on the
         message type.
+
+        Parameters
+        ----------
+        raw_data : JSON
+            The raw data from the stream
 
         References
         ----------
@@ -332,6 +363,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a status is received.
+
+        Parameters
+        ----------
+        status : Status
+            The Status received
         """
         log.debug("Received status: %d", status.id)
 
@@ -339,6 +375,13 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a status deletion notice is received.
+
+        Parameters
+        ----------
+        status_id : int
+            The ID of the deleted Tweet
+        user_id : int
+            The ID of the author of the Tweet
         """
         log.debug("Received status deletion notice: %d", status_id)
 
@@ -346,6 +389,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a disconnect message is received.
+
+        Parameters
+        ----------
+        message : JSON
+            The disconnect message
         """
         log.warning("Received disconnect message: %s", message)
 
@@ -353,6 +401,12 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a limit notice is received.
+
+        Parameters
+        ----------
+        track : int
+            Total count of the number of undelivered Tweets since the
+            connection was opened
         """
         log.debug("Received limit notice: %d", track)
 
@@ -360,6 +414,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a location deletion notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The location deletion notice
         """
         log.debug("Received location deletion notice: %s", notice)
 
@@ -367,6 +426,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a status withheld content notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The status withheld content notice
         """
         log.debug("Received status withheld content notice: %s", notice)
 
@@ -374,6 +438,11 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a user withheld content notice is received.
+
+        Parameters
+        ----------
+        notice : JSON
+            The user withheld content notice
         """
         log.debug("Received user withheld content notice: %s", notice)
 
@@ -381,5 +450,10 @@ class AsyncStream:
         """|coroutine|
 
         This is called when a stall warning message is received.
+
+        Parameters
+        ----------
+        warning : JSON
+            The stall warning
         """
         log.warning("Received stall warning: %s", notice)
