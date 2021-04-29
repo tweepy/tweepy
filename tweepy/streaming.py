@@ -294,6 +294,9 @@ class Stream:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
+
+        .. _BCP 47: https://tools.ietf.org/html/bcp47
+        .. _advanced search: https://twitter.com/search-advanced
         """
         if self.running:
             raise TweepyException("Stream is already connected")
