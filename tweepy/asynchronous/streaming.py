@@ -48,7 +48,7 @@ class AsyncStream:
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
-                 access_token_secret, max_retries=inf, proxy=None):
+                 access_token_secret, *, max_retries=inf, proxy=None):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
