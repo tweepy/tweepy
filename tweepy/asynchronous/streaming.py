@@ -283,9 +283,9 @@ class AsyncStream:
     async def on_keep_alive(self):
         """|coroutine|
 
-        This is called when a keep-alive message is received.
+        This is called when a keep-alive signal is received.
         """
-        log.debug("Received keep-alive message")
+        log.debug("Received keep-alive signal")
 
     async def on_request_error(self, status_code):
         """|coroutine|
