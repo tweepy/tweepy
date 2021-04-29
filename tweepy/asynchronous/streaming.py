@@ -144,7 +144,7 @@ class AsyncStream:
             await self.session.close()
             await self.on_disconnect()
 
-    async def filter(self, follow=None, track=None, locations=None,
+    async def filter(self, *, follow=None, track=None, locations=None,
                      filter_level=None, languages=None, stall_warnings=False):
         """|coroutine|
 
