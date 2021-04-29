@@ -24,19 +24,27 @@ class AsyncStream:
 
     Parameters
     ----------
-    consumer_key: :class:`str`
-        Consumer key
-    consumer_secret: :class:`str`
-        Consuemr secret
-    access_token: :class:`str`
-        Access token
-    access_token_secret: :class:`str`
-        Access token secret
-    max_retries: Optional[:class:`int`]
+    consumer_key: str
+        Twitter API Consumer Key
+    consumer_secret: str
+        Twitter API Consumer Secret
+    access_token: str
+        Twitter API Access Token
+    access_token_secret: str
+        Twitter API Access Token Secret
+    max_retries: Optional[int]
         Number of times to attempt to (re)connect the stream.
-        Defaults to infinite.
-    proxy: Optional[:class:`str`]
+    proxy: Optional[str]
         Proxy URL
+
+    Attributes
+    ----------
+    session : Optional[aiohttp.ClientSession]
+        Aiohttp client session used to connect to the API
+    task : Optional[asyncio.Task]
+        The task running the stream
+    user_agent : str
+        User agent used when connecting to the API
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
@@ -138,31 +146,37 @@ class AsyncStream:
 
     async def filter(self, follow=None, track=None, locations=None,
                      stall_warnings=False):
-        """This method is a coroutine.
+        """|coroutine|
 
         Filter realtime Tweets
-        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
 
         Parameters
         ----------
-        follow: Optional[List[Union[:class:`int`, :class:`str`]]]
+        follow: Optional[List[Union[int, str]]]
             A list of user IDs, indicating the users to return statuses for in
             the stream. See https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        track: Optional[List[:class:`str`]]
+        track: Optional[List[str]]
             Keywords to track. Phrases of keywords are specified by a list. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        locations: Optional[List[:class:`float`]]
+        locations: Optional[List[float]]
             Specifies a set of bounding boxes to track. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        stall_warnings: Optional[:class:`bool`]
+        stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
-            for more information. Defaults to False.
+            for more information.
 
-        Returns :class:`asyncio.Task`
+        Returns
+        -------
+        asyncio.Task
+            The task running the stream
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
@@ -192,19 +206,25 @@ class AsyncStream:
         return self.task
 
     async def sample(self, stall_warnings=False):
-        """This method is a coroutine.
+        """|coroutine|
 
         Sample realtime Tweets
-        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
 
         Parameters
         ----------
-        stall_warnings: Optional[:class:`bool`]
+        stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
-            for more information. Defaults to False.
+            for more information.
 
-        Returns :class:`asyncio.Task`
+        Returns
+        -------
+        asyncio.Task
+            The task running the stream
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
@@ -226,61 +246,63 @@ class AsyncStream:
             self.task.cancel()
 
     async def on_closed(self, resp):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when the stream has been closed by Twitter.
         """
         log.error("Stream connection closed by Twitter")
 
     async def on_connect(self):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called after successfully connecting to the streaming API.
         """
         log.info("Stream connected")
 
     async def on_connection_error(self):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when the stream connection errors or times out.
         """
         log.error("Stream connection has errored or timed out")
 
     async def on_disconnect(self):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when the stream has disconnected.
         """
         log.info("Stream disconnected")
 
     async def on_exception(self, exception):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when an unhandled exception occurs.
         """
         log.exception("Stream encountered an exception")
 
     async def on_keep_alive(self):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a keep-alive message is received.
         """
         log.debug("Received keep-alive message")
 
     async def on_request_error(self, status_code):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a non-200 HTTP status code is encountered.
         """
         log.error("Stream encountered HTTP Error: %d", status_code)
 
     async def on_data(self, raw_data):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when raw data is received from the stream.
         This method handles sending the data to other methods, depending on the
         message type.
 
+        References
+        ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/streaming-message-types
         """
         data = json.loads(raw_data)
@@ -307,56 +329,56 @@ class AsyncStream:
         log.warning("Received unknown message type: %s", raw_data)
 
     async def on_status(self, status):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a status is received.
         """
         log.debug("Received status: %d", status.id)
 
     async def on_delete(self, status_id, user_id):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a status deletion notice is received.
         """
         log.debug("Received status deletion notice: %d", status_id)
 
     async def on_disconnect_message(self, message):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a disconnect message is received.
         """
         log.warning("Received disconnect message: %s", message)
 
     async def on_limit(self, track):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a limit notice is received.
         """
         log.debug("Received limit notice: %d", track)
 
     async def on_scrub_geo(self, notice):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a location deletion notice is received.
         """
         log.debug("Received location deletion notice: %s", notice)
 
     async def on_status_withheld(self, notice):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a status withheld content notice is received.
         """
         log.debug("Received status withheld content notice: %s", notice)
 
     async def on_user_withheld(self, notice):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a user withheld content notice is received.
         """
         log.debug("Received user withheld content notice: %s", notice)
 
     async def on_warning(self, notice):
-        """This method is a coroutine.
+        """|coroutine|
 
         This is called when a stall warning message is received.
         """

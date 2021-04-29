@@ -33,8 +33,14 @@ extensions = [
 
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
+  'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
   'requests': ('https://docs.python-requests.org/en/latest/', None)
 }
+
+rst_prolog = """
+.. |coroutine| replace:: This function is a coroutine_.
+.. _coroutine: https://docs.python.org/3/library/asyncio-task.html#coroutine
+"""
 
 # Add any paths that contain templates here, relative to this directory.
 #templates_path = ['_templates']

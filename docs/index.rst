@@ -19,6 +19,7 @@ Contents:
    client.rst
    models.rst
    stream.rst
+   asyncstream.rst
    exceptions.rst
    extended_tweets.rst
    pagination.rst
