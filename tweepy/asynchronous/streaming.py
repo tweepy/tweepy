@@ -234,13 +234,20 @@ class AsyncStream:
         )
         return self.task
 
-    async def sample(self, stall_warnings=False):
+    async def sample(self, languages=None, stall_warnings=False):
         """|coroutine|
 
         Sample realtime Tweets
 
         Parameters
         ----------
+        languages : Optional[List[str]]
+            Setting this parameter to a comma-separated list of `BCP 47`_
+            language identifiers corresponding to any of the languages listed
+            on Twitter’s `advanced search`_ page will only return Tweets that
+            have been detected as being written in the specified languages. For
+            example, connecting with language=en will only stream Tweets
+            detected to be in the English language.
         stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
@@ -259,6 +266,9 @@ class AsyncStream:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
+
+        .. _BCP 47: https://tools.ietf.org/html/bcp47
+        .. _advanced search: https://twitter.com/search-advanced
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
@@ -266,6 +276,8 @@ class AsyncStream:
         endpoint = "statuses/sample"
 
         params = {}
+        if languages is not None:
+            params["language"] = ','.join(map(str, languages))
         if stall_warnings:
             params["stall_warnings"] = "true"
 
