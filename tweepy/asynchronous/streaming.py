@@ -234,7 +234,7 @@ class AsyncStream:
         )
         return self.task
 
-    async def sample(self, languages=None, stall_warnings=False):
+    async def sample(self, *, languages=None, stall_warnings=False):
         """|coroutine|
 
         Sample realtime Tweets
