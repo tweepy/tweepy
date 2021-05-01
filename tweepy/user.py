@@ -33,7 +33,7 @@ class User(HashableID, DataMapping):
 
         self.pinned_tweet_id = data.get("pinned_tweet_id")
         if self.pinned_tweet_id is not None:
-            self.pinned_tweet_id = int(pinned_tweet_id)
+            self.pinned_tweet_id = int(self.pinned_tweet_id)
 
         self.profile_image_url = data.get("profile_image_url")
         self.protected = data.get("protected")
