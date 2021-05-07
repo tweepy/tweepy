@@ -55,7 +55,7 @@ class Client:
 
     def __init__(self, bearer_token=None, consumer_key=None,
                  consumer_secret=None, access_token=None,
-                 access_token_secret=None, wait_on_rate_limit=False):
+                 access_token_secret=None, *, wait_on_rate_limit=False):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
