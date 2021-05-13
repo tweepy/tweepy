@@ -6,7 +6,6 @@ import functools
 import imghdr
 import logging
 import mimetypes
-import os
 from platform import python_version
 import sys
 import time
