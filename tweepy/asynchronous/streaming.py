@@ -146,9 +146,7 @@ class AsyncStream:
 
     def filter(self, *, follow=None, track=None, locations=None,
                      filter_level=None, languages=None, stall_warnings=False):
-        """|coroutine|
-
-        Filter realtime Tweets
+        """Filter realtime Tweets
 
         Parameters
         ----------
@@ -235,9 +233,7 @@ class AsyncStream:
         return self.task
 
     def sample(self, *, languages=None, stall_warnings=False):
-        """|coroutine|
-
-        Sample realtime Tweets
+        """Sample realtime Tweets
 
         Parameters
         ----------
