@@ -7,12 +7,14 @@ import imghdr
 import logging
 import mimetypes
 import os
+from platform import python_version
 import sys
 import time
 from urllib.parse import urlencode
 
 import requests
 
+import tweepy
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TweepyException, TwitterServerError, Unauthorized
@@ -76,7 +78,8 @@ class API:
     def __init__(
         self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
         proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
-        timeout=60, upload_host='upload.twitter.com', wait_on_rate_limit=False
+        timeout=60, upload_host='upload.twitter.com', user_agent=None,
+        wait_on_rate_limit=False
     ):
         self.auth = auth
         self.cache = cache
@@ -95,6 +98,15 @@ class API:
         self.retry_errors = retry_errors
         self.timeout = timeout
         self.upload_host = upload_host
+
+        if user_agent is None:
+            user_agent = (
+                f"Python/{python_version()} "
+                f"Requests/{requests.__version__} "
+                f"Tweepy/{tweepy.__version__}"
+            )
+        self.user_agent = user_agent
+
         self.wait_on_rate_limit = wait_on_rate_limit
 
         # Attempt to explain more clearly the parser argument requirements
@@ -120,6 +132,10 @@ class API:
             raise TweepyException('Authentication required!')
 
         self.cached_result = False
+
+        if headers is None:
+            headers = {}
+        headers["User-Agent"] = self.user_agent
 
         # Build the request URL
         path = f'/1.1/{endpoint}.json'
