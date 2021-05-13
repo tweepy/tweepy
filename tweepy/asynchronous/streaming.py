@@ -144,11 +144,9 @@ class AsyncStream:
             await self.session.close()
             await self.on_disconnect()
 
-    async def filter(self, *, follow=None, track=None, locations=None,
+    def filter(self, *, follow=None, track=None, locations=None,
                      filter_level=None, languages=None, stall_warnings=False):
-        """|coroutine|
-
-        Filter realtime Tweets
+        """Filter realtime Tweets
 
         Parameters
         ----------
@@ -234,10 +232,8 @@ class AsyncStream:
         )
         return self.task
 
-    async def sample(self, *, languages=None, stall_warnings=False):
-        """|coroutine|
-
-        Sample realtime Tweets
+    def sample(self, *, languages=None, stall_warnings=False):
+        """Sample realtime Tweets
 
         Parameters
         ----------
