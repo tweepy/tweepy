@@ -1,1 +1,2 @@
 recommonmark==0.7.1
+sphinxcontrib-trio==1.1.2
