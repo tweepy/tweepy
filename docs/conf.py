@@ -28,8 +28,7 @@ extensions = [
   'recommonmark',
   'sphinx.ext.autodoc',
   'sphinx.ext.intersphinx',
-  'sphinx.ext.napoleon',
-  'sphinxcontrib_trio'
+  'sphinx.ext.napoleon'
 ]
 
 intersphinx_mapping = {
