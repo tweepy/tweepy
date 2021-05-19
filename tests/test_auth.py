@@ -8,7 +8,7 @@ from tweepy import API, OAuthHandler
 class TweepyAuthTests(unittest.TestCase):
 
     def testoauth(self):
-        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth = OAuthHandler(consumer_key, consumer_secret)
 
         # test getting access token
         auth_url = auth.get_authorization_url()
@@ -24,7 +24,7 @@ class TweepyAuthTests(unittest.TestCase):
         api.destroy_status(s.id)
 
     def testaccesstype(self):
-        auth = OAuthHandler(oauth_consumer_key, oauth_consumer_secret)
+        auth = OAuthHandler(consumer_key, consumer_secret)
         auth_url = auth.get_authorization_url(access_type='read')
         print('Please open: ' + auth_url)
         answer = input('Did Twitter only request read permissions? (y/n) ')
