@@ -2,6 +2,7 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
+import contextlib
 import functools
 import imghdr
 import logging
@@ -940,16 +941,17 @@ class API:
 
         :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
-        if file is not None:
-            files = {'media[]': (filename, file)}
-        else:
-            files = {'media[]': open(filename, 'rb')}
-        return self.request(
-            'POST', 'statuses/update_with_media', endpoint_parameters=(
-                'status', 'possibly_sensitive', 'in_reply_to_status_id',
-                'lat', 'long', 'place_id', 'display_coordinates'
-            ), status=status, files=files, **kwargs
-        )
+        with contextlib.ExitStack() as stack:
+            if file is not None:
+                files = {'media[]': (filename, file)}
+            else:
+                files = {'media[]': stack.enter_context(open(filename, 'rb'))}
+            return self.request(
+                'POST', 'statuses/update_with_media', endpoint_parameters=(
+                    'status', 'possibly_sensitive', 'in_reply_to_status_id',
+                    'lat', 'long', 'place_id', 'display_coordinates'
+                ), status=status, files=files, **kwargs
+            )
 
     # Search Tweets
 
