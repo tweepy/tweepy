@@ -2087,15 +2087,16 @@ class API:
 
         :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
-        if file is not None:
-            files = {'banner': (filename, file)}
-        else:
-            files = {'banner': open(filename, 'rb')}
-        return self.request(
-            'POST', 'account/update_profile_banner', endpoint_parameters=(
-                'width', 'height', 'offset_left', 'offset_top'
-            ), files=files, **kwargs
-        )
+        with contextlib.ExitStack() as stack:
+            if file is not None:
+                files = {'banner': (filename, file)}
+            else:
+                files = {'banner': stack.enter_context(open(filename, 'rb'))}
+            return self.request(
+                'POST', 'account/update_profile_banner', endpoint_parameters=(
+                    'width', 'height', 'offset_left', 'offset_top'
+                ), files=files, **kwargs
+            )
 
     @payload('user')
     def update_profile_image(self, filename, *, file=None, **kwargs):
