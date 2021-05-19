@@ -8,6 +8,9 @@ from tweepy import API, OAuthHandler
 class TweepyAuthTests(unittest.TestCase):
 
     def testoauth(self):
+        if not consumer_key or not consumer_secret:
+            self.skipTest("Missing consumer key and/or secret")
+
         auth = OAuthHandler(consumer_key, consumer_secret)
 
         # test getting access token
@@ -24,6 +27,9 @@ class TweepyAuthTests(unittest.TestCase):
         api.destroy_status(s.id)
 
     def testaccesstype(self):
+        if not consumer_key or not consumer_secret:
+            self.skipTest("Missing consumer key and/or secret")
+
         auth = OAuthHandler(consumer_key, consumer_secret)
         auth_url = auth.get_authorization_url(access_type='read')
         print('Please open: ' + auth_url)
