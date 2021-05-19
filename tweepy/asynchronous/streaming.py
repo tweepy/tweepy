@@ -227,9 +227,10 @@ class AsyncStream:
         if stall_warnings:
             body["stall_warnings"] = "true"
 
-        self.task = asyncio.create_task(
+        self.task = asyncio.ensure_future(
             self._connect("POST", endpoint, headers=headers, body=body or None)
         )
+        # Use create_task when support for Python 3.6 is dropped
         return self.task
 
     def sample(self, *, languages=None, stall_warnings=False):
@@ -277,9 +278,10 @@ class AsyncStream:
         if stall_warnings:
             params["stall_warnings"] = "true"
 
-        self.task = asyncio.create_task(
+        self.task = asyncio.ensure_future(
             self._connect("GET", endpoint, params=params)
         )
+        # Use create_task when support for Python 3.6 is dropped
         return self.task
 
     def disconnect(self):
