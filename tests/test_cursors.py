@@ -35,13 +35,13 @@ class TweepyCursorTests(TweepyTestCase):
         self.assertEqual(c.iterator.next_cursor, 123456)
         self.assertFalse('cursor' in c.iterator.kwargs)
 
-    @tape.use_cassette('testcursornext.json')
+    @tape.use_cassette('testcursornext.yaml', serializer='yaml')
     def testcursornext(self):
         """
-        Test next(cursor) behavior, id being passed correctly.
+        Test next(cursor) behavior, screen name being passed correctly.
         Regression test for issue #518
         """
-        cursor = Cursor(self.api.user_timeline, id='Twitter').items(5)
+        cursor = Cursor(self.api.user_timeline, screen_name='Twitter').items(5)
         status = next(cursor)
 
         self.assertEqual(status.user.screen_name, 'Twitter')
