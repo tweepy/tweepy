@@ -2570,21 +2570,22 @@ class API:
 
         :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
         """
-        if file is not None:
-            files = {'media': (filename, file)}
-        else:
-            files = {'media': open(filename, 'rb')}
+        with contextlib.ExitStack() as stack:
+            if file is not None:
+                files = {'media': (filename, file)}
+            else:
+                files = {'media': stack.enter_context(open(filename, 'rb'))}
 
-        post_data = {}
-        if media_category is not None:
-            post_data['media_category'] = media_category
-        if additional_owners is not None:
-            post_data['additional_owners'] = additional_owners
+            post_data = {}
+            if media_category is not None:
+                post_data['media_category'] = media_category
+            if additional_owners is not None:
+                post_data['additional_owners'] = additional_owners
 
-        return self.request(
-            'POST', 'media/upload', post_data=post_data, files=files,
-            upload_api=True, **kwargs
-        )
+            return self.request(
+                'POST', 'media/upload', post_data=post_data, files=files,
+                upload_api=True, **kwargs
+            )
 
     def chunked_upload(self, filename, *, file=None, file_type=None,
                        wait_for_async_finalize=True, media_category=None,
