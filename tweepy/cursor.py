@@ -15,7 +15,7 @@ class Cursor:
     Parameters
     ----------
     method
-        :class:`Client` method to paginate for
+        :class:`API` method to paginate for
     args
         Positional arguments to pass to ``method``
     kwargs
