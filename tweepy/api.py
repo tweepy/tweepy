@@ -675,49 +675,65 @@ class API:
         The Tweet fallback markup is meant to be cached on your servers for up
         to the suggested cache lifetime specified in the ``cache_age``.
 
-        :param url: The URL of the Tweet to be embedded
-        :param maxwidth: The maximum width of a rendered Tweet in whole pixels.
-            A supplied value under or over the allowed range will be returned
-            as the minimum or maximum supported width respectively; the reset
-            width value will be reflected in the returned ``width`` property.
-            Note that Twitter does not support the oEmbed ``maxheight``
-            parameter. Tweets are fundamentally text, and are therefore of
-            unpredictable height that cannot be scaled like an image or video.
-            Relatedly, the oEmbed response will not provide a value for
-            ``height``. Implementations that need consistent heights for Tweets
-            should refer to the ``hide_thread`` and ``hide_media`` parameters
-            below.
-        :param hide_media: When set to ``true``, ``"t"``, or ``1``, links in a
-            Tweet are not expanded to photo, video, or link previews.
-        :param hide_thread: When set to ``true``, ``"t"``, or ``1``, a
-            collapsed version of the previous Tweet in a conversation thread
-            will not be displayed when the requested Tweet is in reply to
-            another Tweet.
-        :param omit_script: When set to ``true``, ``"t"``, or ``1``, the
-            ``<script>`` responsible for loading ``widgets.js`` will not be
-            returned. Your webpages should include their own reference to
-            ``widgets.js`` for use across all Twitter widgets including
-            Embedded Tweets.
-        :param align: Specifies whether the embedded Tweet should be floated
-            left, right, or center in the page relative to the parent element.
-        :param related: A comma-separated list of Twitter usernames related to
-            your content. This value will be forwarded to Tweet action intents
-            if a viewer chooses to reply, like, or retweet the embedded Tweet.
-        :param lang: Request returned HTML and a rendered Tweet in the
-                     specified Twitter language supported by embedded Tweets.
-        :param theme: When set to ``dark``, the Tweet is displayed with light
-                      text over a dark background.
-        :param link_color: Adjust the color of Tweet text links with a
-                           hexadecimal color value.
-        :param widget_type: Set to ``video`` to return a Twitter Video embed
-                            for the given Tweet.
-        :param dnt: When set to ``true``, the Tweet and its embedded page on
-            your site are not used for purposes that include personalized
-            suggestions and personalized ads.
+        Parameters
+        ----------
+        url
+            The URL of the Tweet to be embedded
+        maxwidth
+            The maximum width of a rendered Tweet in whole pixels. A supplied
+            value under or over the allowed range will be returned as the
+            minimum or maximum supported width respectively; the reset width
+            value will be reflected in the returned ``width`` property. Note
+            that Twitter does not support the oEmbed ``maxheight`` parameter.
+            Tweets are fundamentally text, and are therefore of unpredictable
+            height that cannot be scaled like an image or video. Relatedly, the
+            oEmbed response will not provide a value for ``height``.
+            Implementations that need consistent heights for Tweets should
+            refer to the ``hide_thread`` and ``hide_media`` parameters below.
+        hide_media
+            When set to ``true``, ``"t"``, or ``1``, links in a Tweet are not
+            expanded to photo, video, or link previews.
+        hide_thread
+            When set to ``true``, ``"t"``, or ``1``, a collapsed version of the
+            previous Tweet in a conversation thread will not be displayed when
+            the requested Tweet is in reply to another Tweet.
+        omit_script
+            When set to ``true``, ``"t"``, or ``1``, the ``<script>``
+            responsible for loading ``widgets.js`` will not be returned. Your
+            webpages should include their own reference to ``widgets.js`` for
+            use across all Twitter widgets including Embedded Tweets.
+        align
+            Specifies whether the embedded Tweet should be floated left, right,
+            or center in the page relative to the parent element.
+        related
+            A comma-separated list of Twitter usernames related to your
+            content. This value will be forwarded to Tweet action intents if a
+            viewer chooses to reply, like, or retweet the embedded Tweet.
+        lang
+            Request returned HTML and a rendered Tweet in the specified Twitter
+            language supported by embedded Tweets.
+        theme
+            When set to ``dark``, the Tweet is displayed with light text over a
+            dark background.
+        link_color
+            Adjust the color of Tweet text links with a hexadecimal color
+            value.
+        widget_type
+            Set to ``video`` to return a Twitter Video embed for the given
+            Tweet.
+        dnt
+            When set to ``true``, the Tweet and its embedded page on your site
+            are not used for purposes that include personalized suggestions and
+            personalized ads.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        dict
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-oembed
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-oembed
         """
         return self.request(
             'GET', 'statuses/oembed', endpoint_parameters=(
