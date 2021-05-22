@@ -500,15 +500,26 @@ class API:
 
         Returns the 20 most recent mentions, including retweets.
 
-        :param count: |count|
-        :param since_id: |since_id|
-        :param max_id: |max_id|
-        :param trim_user: |trim_user|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        count
+            |count|
+        since_id
+            |since_id|
+        max_id
+            |max_id|
+        trim_user
+            |trim_user|
+        include_entities
+            |include_entities|
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
         """
         return self.request(
             'GET', 'statuses/mentions_timeline', endpoint_parameters=(
