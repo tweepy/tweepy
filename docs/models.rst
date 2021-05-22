@@ -1,7 +1,5 @@
 .. _models_reference:
 
-.. currentmodule:: tweepy
-
 ****************
 Models Reference
 ****************
@@ -56,26 +54,26 @@ API v1.1
 API v2
 ======
 
-.. class:: Media
+.. class:: tweepy.Media
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
 
-.. class:: Place
+.. class:: tweepy.Place
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
 
-.. class:: Poll
+.. class:: tweepy.Poll
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
 
-.. class:: ReferencedTweet
+.. class:: tweepy.ReferencedTweet
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 
-.. class:: Tweet
+.. class:: tweepy.Tweet
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 
-.. class:: User
+.. class:: tweepy.User
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
