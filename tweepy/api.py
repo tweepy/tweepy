@@ -624,17 +624,29 @@ class API:
         Returns full Tweet objects for up to 100 Tweets per request, specified
         by the ``id`` parameter.
 
-        :param id: A list of Tweet IDs to lookup, up to 100
-        :param include_entities: |include_entities|
-        :param trim_user: |trim_user|
-        :param map: A boolean indicating whether or not to include Tweets
-                    that cannot be shown. Defaults to False.
-        :param include_ext_alt_text: |include_ext_alt_text|
-        :param include_card_uri: |include_card_uri|
+        Parameters
+        ----------
+        id
+            A list of Tweet IDs to lookup, up to 100
+        include_entities
+            |include_entities|
+        trim_user
+            |trim_user|
+        map
+            A boolean indicating whether or not to include Tweets that cannot
+            be shown. Defaults to False.
+        include_ext_alt_text
+            |include_ext_alt_text|
+        include_card_uri
+            |include_card_uri|
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
         """
         return self.request(
             'GET', 'statuses/lookup', endpoint_parameters=(
