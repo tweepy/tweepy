@@ -354,7 +354,7 @@ class API:
 
         Returns
         -------
-        List[Status]
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
         References
         ----------
