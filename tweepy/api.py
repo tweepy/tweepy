@@ -51,7 +51,7 @@ def payload(payload_type, **payload_kwargs):
 
 
 class API:
-    """Twitter API v1.1 Client
+    """Twitter API v1.1 Interface
 
     Parameters
     ----------
