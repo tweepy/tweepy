@@ -919,12 +919,20 @@ class API:
         Un-favorites the status specified in the ``id`` parameter as the
         authenticating user.
 
-        :param id: |sid|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        id
+            |sid|
+        include_entities
+            |include_entities|
 
-        :rtype: :class:`Status` object
+        Returns
+        -------
+        :class:`~tweepy.models.Status`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-destroy
         """
         return self.request(
             'POST', 'favorites/destroy', endpoint_parameters=(
