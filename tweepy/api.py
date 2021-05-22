@@ -586,16 +586,27 @@ class API:
         Returns the favorite statuses for the authenticating user or user
         specified by the ID parameter.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param count: |count|
-        :param since_id: |since_id|
-        :param max_id: |max_id|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        count
+            |count|
+        since_id
+            |since_id|
+        max_id
+            |max_id|
+        include_entities
+            |include_entities|
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list
+        References
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-favorites-list
         """
         return self.request(
             'GET', 'favorites/list', endpoint_parameters=(
