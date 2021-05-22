@@ -537,23 +537,36 @@ class API:
         or the user specified. It's also possible to request another user's
         timeline via the id parameter.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param since_id: |since_id|
-        :param count: |count|
-        :param max_id: |max_id|
-        :param trim_user: |trim_user|
-        :param exclude_replies: |exclude_replies|
-        :param include_rts: When set to ``false``, the timeline will strip any
-            native retweets (though they will still count toward both the
-            maximal length of the timeline and the slice selected by the count
-            parameter). Note: If you're using the trim_user parameter in
-            conjunction with include_rts, the retweets will still contain a
-            full user object.
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        since_id
+            |since_id|
+        count
+            |count|
+        max_id
+            |max_id|
+        trim_user
+            |trim_user|
+        exclude_replies
+            |exclude_replies|
+        include_rts
+            When set to ``false``, the timeline will strip any native retweets
+            (though they will still count toward both the maximal length of the
+            timeline and the slice selected by the count parameter). Note: If
+            you're using the trim_user parameter in conjunction with
+            include_rts, the retweets will still contain a full user object.
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
         """
         return self.request(
             'GET', 'statuses/user_timeline', endpoint_parameters=(
