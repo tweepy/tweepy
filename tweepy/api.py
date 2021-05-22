@@ -462,16 +462,28 @@ class API:
         the authenticating user and that user's friends. This is the equivalent
         of /timeline/home on the Web.
 
-        :param count: |count|
-        :param since_id: |since_id|
-        :param max_id: |max_id|
-        :param trim_user: |trim_user|
-        :param exclude_replies: |exclude_replies|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        count
+            |count|
+        since_id
+            |since_id|
+        max_id
+            |max_id|
+        trim_user
+            |trim_user|
+        exclude_replies
+            |exclude_replies|
+        include_entities
+            |include_entities|
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
         """
         return self.request(
             'GET', 'statuses/home_timeline', endpoint_parameters=(
