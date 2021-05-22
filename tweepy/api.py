@@ -51,28 +51,42 @@ def payload(payload_type, **payload_kwargs):
 
 
 class API:
-    """This class provides a wrapper for the API as provided by Twitter.
-    The functions provided in this class are listed below.
+    """Twitter API v1.1 Client
 
-    :param auth: The authentication handler to be used
-    :param cache: The cache to query if a GET method is used
-    :param host: The general REST API host server URL
-    :param parser: The Parser instance to use for parsing the response from
-                   Twitter; defaults to an instance of ModelParser
-    :param proxy: The full url to an HTTPS proxy to use for connecting to
-                  Twitter
-    :param retry_count: Number of retries to attempt when an error occurs
-    :param retry_delay: Number of seconds to wait between retries
-    :param retry_errors: Which HTTP status codes to retry
-    :param timeout: The maximum amount of time to wait for a response from
-                    Twitter
-    :param upload_host: The URL of the upload server
-    :param wait_on_rate_limit: Whether or not to automatically wait for rate
-                               limits to replenish
+    Parameters
+    ----------
+    auth
+        The authentication handler to be used
+    cache
+        The cache to query if a GET method is used
+    host
+        The general REST API host server URL
+    parser
+        The Parser instance to use for parsing the response from Twitter;
+        defaults to an instance of ModelParser
+    proxy
+        The full url to an HTTPS proxy to use for connecting to Twitter
+    retry_count
+        Number of retries to attempt when an error occurs
+    retry_delay
+        Number of seconds to wait between retries
+    retry_errors
+        Which HTTP status codes to retry
+    timeout
+        The maximum amount of time to wait for a response from Twitter
+    upload_host
+        The URL of the upload server
+    wait_on_rate_limit
+        Whether or not to automatically wait for rate limits to replenish
 
-    :raise TypeError: If the given parser is not a Parser instance
+    Raises
+    ------
+    TypeError
+        If the given parser is not a Parser instance
 
-    :reference: https://developer.twitter.com/en/docs/api-reference-index
+    References
+    ----------
+    https://developer.twitter.com/en/docs/api-reference-index
     """
 
     def __init__(
