@@ -947,12 +947,20 @@ class API:
         Destroy the status specified by the ``id`` parameter. The authenticated
         user must be the author of the status to destroy.
 
-        :param id: |sid|
-        :param trim_user: |trim_user|
+        Parameters
+        ----------
+        id
+            |sid|
+        trim_user
+            |trim_user|
 
-        :rtype: :class:`Status` object
+        Returns
+        -------
+        :class:`~tweepy.models.Status`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id
         """
         return self.request(
             'POST', f'statuses/destroy/{id}', endpoint_parameters=(
