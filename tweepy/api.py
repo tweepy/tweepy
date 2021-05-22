@@ -751,14 +751,24 @@ class API:
         Returns up to 100 user IDs belonging to users who have retweeted the
         Tweet specified by the ``id`` parameter.
 
-        :param id: |sid|
-        :param count: |count|
-        :param cursor: |cursor|
-        :param stringify_ids: |stringify_ids|
+        Parameters
+        ----------
+        id
+            |sid|
+        count
+            |count|
+        cursor
+            |cursor|
+        stringify_ids
+            |stringify_ids|
 
-        :rtype: list of :class:`int`
+        Returns
+        -------
+        :py:class:`List`\ [:class:`int`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweeters-ids
         """
         return self.request(
             'GET', 'statuses/retweeters/ids', endpoint_parameters=(
