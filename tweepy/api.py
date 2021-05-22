@@ -782,13 +782,22 @@ class API:
 
         Returns up to 100 of the first Retweets of the given Tweet.
 
-        :param id: |sid|
-        :param count: |count|
-        :param trim_user: |trim_user|
+        Parameters
+        ----------
+        id
+            |sid|
+        count
+            |count|
+        trim_user
+            |trim_user|
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets-id
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-retweets-id
         """
         return self.request(
             'GET', f'statuses/retweets/{id}', endpoint_parameters=(
