@@ -891,12 +891,20 @@ class API:
         Favorites the status specified in the ``id`` parameter as the
         authenticating user.
 
-        :param id: |sid|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        id
+            |sid|
+        include_entities
+            |include_entities|
 
-        :rtype: :class:`Status` object
+        Returns
+        -------
+        :class:`~tweepy.models.Status`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-favorites-create
         """
         return self.request(
             'POST', 'favorites/create', endpoint_parameters=(
