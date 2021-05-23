@@ -657,9 +657,10 @@ class API:
 
     @payload('json')
     def get_oembed(self, url, **kwargs):
-        """get_oembed(url, *, maxwidth, hide_media, hide_thread, omit_script, \
-                      align, related, lang, theme, link_color, widget_type, \
-                      dnt)
+        """get_oembed(
+            url, *, maxwidth, hide_media, hide_thread, omit_script, align, \
+            related, lang, theme, link_color, widget_type, dnt \
+        )
 
         Returns a single Tweet, specified by either a Tweet web URL or the
         Tweet ID, in an oEmbed-compatible format. The returned HTML snippet will
