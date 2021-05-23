@@ -1130,9 +1130,10 @@ class API:
 
     @payload('status')
     def update_with_media(self, status, filename, *, file=None, **kwargs):
-        """update_with_media(status, filename, *, file, possibly_sensitive, \
-                             in_reply_to_status_id, lat, long, place_id, \
-                             display_coordinates)
+        """update_with_media( \
+            status, filename, *, file, possibly_sensitive, \
+            in_reply_to_status_id, lat, long, place_id, display_coordinates \
+        )
 
         .. deprecated:: 3.7.0
             Use :func:`API.media_upload` instead.
@@ -1140,23 +1141,37 @@ class API:
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
 
-        :param status: The text of your status update.
-        :param filename: |filename|
-        :param file: |file|
-        :param possibly_sensitive: Set to true for content which may not be
-                                   suitable for every audience.
-        :param in_reply_to_status_id: The ID of an existing status that the
-                                      update is in reply to.
-        :param lat: The location's latitude that this tweet refers to.
-        :param long: The location's longitude that this tweet refers to.
-        :param place_id: Twitter ID of location which is listed in the Tweet if
-                         geolocation is enabled for the user.
-        :param display_coordinates: Whether or not to put a pin on the exact
-                                    coordinates a Tweet has been sent from.
+        Parameters
+        ----------
+        status
+            The text of your status update.
+        filename
+            |filename|
+        file
+            |file|
+        possibly_sensitive
+            Set to true for content which may not be suitable for every
+            audience.
+        in_reply_to_status_id
+            The ID of an existing status that the update is in reply to.
+        lat
+            The location's latitude that this tweet refers to.
+        long
+            The location's longitude that this tweet refers to.
+        place_id
+            Twitter ID of location which is listed in the Tweet if geolocation
+            is enabled for the user.
+        display_coordinates
+            Whether or not to put a pin on the exact coordinates a Tweet has
+            been sent from.
 
-        :rtype: :class:`Status` object
+        Returns
+        -------
+        :class:`~tweepy.models.Status`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
         """
         with contextlib.ExitStack() as stack:
             if file is not None:
