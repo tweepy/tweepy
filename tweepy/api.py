@@ -1205,46 +1205,61 @@ class API:
         pertain to the perspective of the authenticating user) are not
         currently supported on this endpoint.\ [#]_\ [#]_
 
-        :param q: the search query string of 500 characters maximum, including
+        Parameters
+        ----------
+        q
+            The search query string of 500 characters maximum, including
             operators. Queries may additionally be limited by complexity.
-        :param geocode: Returns tweets by users located within a given radius
-            of the given latitude/longitude.  The location is preferentially
-            taking from the Geotagging API, but will fall back to their Twitter
-            profile. The parameter value is specified by
-            "latitide,longitude,radius", where radius units must be specified
-            as either "mi" (miles) or "km" (kilometers). Note that you cannot
-            use the near operator via the API to geocode arbitrary locations;
-            however you can use this geocode parameter to search near geocodes
-            directly. A maximum of 1,000 distinct "sub-regions" will be
-            considered when using the radius modifier.
-        :param lang: Restricts tweets to the given language, given by an ISO
-            639-1 code. Language detection is best-effort.
-        :param locale: Specify the language of the query you are sending (only
-            ja is currently effective). This is intended for language-specific
+        geocode
+            Returns tweets by users located within a given radius of the given
+            latitude/longitude.  The location is preferentially taking from the
+            Geotagging API, but will fall back to their Twitter profile. The
+            parameter value is specified by "latitide,longitude,radius", where
+            radius units must be specified as either "mi" (miles) or "km"
+            (kilometers). Note that you cannot use the near operator via the
+            API to geocode arbitrary locations; however you can use this
+            geocode parameter to search near geocodes directly. A maximum of
+            1,000 distinct "sub-regions" will be considered when using the
+            radius modifier.
+        lang
+            Restricts tweets to the given language, given by an ISO 639-1 code.
+            Language detection is best-effort.
+        locale
+            Specify the language of the query you are sending (only ja is
+            currently effective). This is intended for language-specific
             consumers and the default should work in the majority of cases.
-        :param result_type: Specifies what type of search results you would
-            prefer to receive. The current default is "mixed." Valid values
-            include:
+        result_type
+            Specifies what type of search results you would prefer to receive.
+            The current default is "mixed." Valid values include:
 
             * mixed : include both popular and real time results in the \
                       response
             * recent : return only the most recent results in the response
             * popular : return only the most popular results in the response
-        :param count: |count|
-        :param until: Returns tweets created before the given date. Date should
-            be formatted as YYYY-MM-DD. Keep in mind that the search index has
-            a 7-day limit. In other words, no tweets will be found for a date
+        count
+            |count|
+        until
+            Returns tweets created before the given date. Date should be
+            formatted as YYYY-MM-DD. Keep in mind that the search index has a
+            7-day limit. In other words, no tweets will be found for a date
             older than one week.
-        :param since_id: |since_id| There are limits to the number of Tweets
-            which can be accessed through the API. If the limit of Tweets has
-            occurred since the since_id, the since_id will be forced to the
-            oldest ID available.
-        :param max_id: |max_id|
-        :param include_entities: |include_entities|
+        since_id
+            |since_id| There are limits to the number of Tweets which can be
+            accessed through the API. If the limit of Tweets has occurred since
+            the since_id, the since_id will be forced to the oldest ID
+            available.
+        max_id
+            |max_id|
+        include_entities
+            |include_entities|
 
-        :rtype: :class:`SearchResults` object
+        Returns
+        -------
+        :class:`SearchResults`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
         """
         return self.request(
             'GET', 'search/tweets', endpoint_parameters=(
