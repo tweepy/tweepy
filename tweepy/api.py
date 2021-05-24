@@ -1299,7 +1299,7 @@ class API:
 
         Returns
         -------
-        :class:`~tweepy.models.List`
+        :py:class:`List`\ [:class:`~tweepy.models.List`]
 
         References
         ----------
