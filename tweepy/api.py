@@ -1355,24 +1355,44 @@ class API:
 
     @payload('user')
     def show_list_member(self, **kwargs):
-        """show_list_member(*, list_id, slug, user_id, screen_name, \
-                            owner_screen_name, owner_id, include_entities, \
-                            skip_status)
+        """show_list_member( \
+            *, list_id, slug, user_id, screen_name, owner_screen_name, \
+            owner_id, include_entities, skip_status \
+        )
 
         Check if the specified user is a member of the specified list.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: :class:`User` object if user is a member of list
+        Raises
+        ------
+        :class:`~tweepy.errors.NotFound`
+            The user is not a member of the list.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
+        Returns
+        -------
+        :class:`~tweepy.models.User`
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
         """
         return self.request(
             'GET', 'lists/members/show', endpoint_parameters=(
