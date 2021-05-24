@@ -1568,18 +1568,32 @@ class API:
         Returns the subscribers of the specified list. Private list subscribers
         will only be shown if the authenticated user owns the specified list.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
-        :param count: |count|
-        :param cursor: |cursor|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
+        count
+            |count|
+        cursor
+            |cursor|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
         """
         return self.request(
             'GET', 'lists/subscribers', endpoint_parameters=(
