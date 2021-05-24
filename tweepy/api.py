@@ -1484,6 +1484,8 @@ class API:
         Returns the specified list. Private lists will only be shown if the
         authenticated user owns the specified list.
 
+        Parameters
+        ----------
         list_id
             |list_id|
         slug
