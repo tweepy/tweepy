@@ -1721,14 +1721,24 @@ class API:
         Deletes the specified list.
         The authenticated user must own the list to be able to destroy it.
 
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
-        :param list_id: |list_id|
-        :param slug: |slug|
+        Parameters
+        ----------
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
+        list_id
+            |list_id|
+        slug
+            |slug|
 
-        :rtype: :class:`List` object
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-destroy
         """
         return self.request(
             'POST', 'lists/destroy', endpoint_parameters=(
