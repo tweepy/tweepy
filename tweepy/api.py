@@ -2484,14 +2484,24 @@ class API:
 
         Turn on/off Retweets and device notifications from the specified user.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
-        :param device: Turn on/off device notifications from the target user.
-        :param retweets: Turn on/off Retweets from the target user.
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
+        device
+            Turn on/off device notifications from the target user.
+        retweets
+            Turn on/off Retweets from the target user.
 
-        :rtype: :class:`Friendship` object
+        Returns
+        -------
+        :class:`~tweepy.models.Friendship`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-update
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-update
         """
         return self.request(
             'POST', 'friendships/update', endpoint_parameters=(
