@@ -2257,12 +2257,20 @@ class API:
         Returns a collection of numeric IDs for every protected user for whom
         the authenticating user has a pending follow request.
 
-        :param cursor: |cursor|
-        :param stringify_ids: |stringify_ids|
+        Parameters
+        ----------
+        cursor
+            |cursor|
+        stringify_ids
+            |stringify_ids|
 
-        :rtype: list of :class:`int`
+        Returns
+        -------
+        :py:class:`List`\ [:class:`int`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-outgoing
         """
         return self.request(
             'GET', 'friendships/outgoing', endpoint_parameters=(
