@@ -2135,16 +2135,28 @@ class API:
         Returns a user's friends ordered in which they were added 100 at a
         time. If no user is specified it defaults to the authenticated user.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param cursor: |cursor|
-        :param count: |count|
-        :param skip_status: |skip_status|
-        :param include_user_entities: |include_user_entities|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        cursor
+            |cursor|
+        count
+            |count|
+        skip_status
+            |skip_status|
+        include_user_entities
+            |include_user_entities|
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-list
         """
         return self.request(
             'GET', 'friends/list', endpoint_parameters=(
