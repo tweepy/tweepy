@@ -1659,14 +1659,24 @@ class API:
         Obtain a collection of the lists the specified user is subscribed to,
         20 lists per page by default. Does not include the user's own lists.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param count: |count|
-        :param cursor: |cursor|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        count
+            |count|
+        cursor
+            |cursor|
 
-        :rtype: list of :class:`List` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.List`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-subscriptions
         """
         return self.request(
             'GET', 'lists/subscriptions', endpoint_parameters=(
