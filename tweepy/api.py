@@ -2230,11 +2230,18 @@ class API:
         Returns a collection of user_ids that the currently authenticated user
         does not want to receive retweets from.
 
-        :param stringify_ids: |stringify_ids|
+        Parameters
+        ----------
+        stringify_ids
+            |stringify_ids|
 
-        :rtype: list of :class:`int`
+        Returns
+        -------
+        :py:class:`List`\ [:class:`int`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-no_retweets-ids
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-no_retweets-ids
         """
         return self.request(
             'GET', 'friendships/no_retweets/ids', endpoint_parameters=(
