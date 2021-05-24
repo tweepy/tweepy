@@ -1793,18 +1793,30 @@ class API:
         list to be able to add members to it. Lists are limited to 5,000
         members.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param user_id: A comma separated list of user IDs, up to 100 are
-                        allowed in a single request
-        :param screen_name: A comma separated list of screen names, up to 100
-                            are allowed in a single request
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        user_id
+            A comma separated list of user IDs, up to 100 are allowed in a
+            single request
+        screen_name
+            A comma separated list of screen names, up to 100 are allowed in a
+            single request
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
 
-        :rtype: :class:`List` object
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-members-create_all
         """
         if 'user_id' in kwargs:
             kwargs['user_id'] = list_to_csv(kwargs['user_id'])
