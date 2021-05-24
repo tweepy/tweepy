@@ -2427,14 +2427,23 @@ class API:
 
         Create a new friendship with the specified user (aka follow).
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
-        :param follow: Enable notifications for the target user in addition to
-                       becoming friends.
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
+        follow
+            Enable notifications for the target user in addition to becoming
+            friends.
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-create
         """
         return self.request(
             'POST', 'friendships/create', endpoint_parameters=(
