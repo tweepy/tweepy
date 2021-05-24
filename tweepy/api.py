@@ -2201,14 +2201,20 @@ class API:
         Returns the relationships of the authenticated user to the list of up
         to 100 screen_name or user_id provided.
 
-        :param screen_name: A list of screen names, up to 100 are allowed in a
-                            single request.
-        :param user_id: A list of user IDs, up to 100 are allowed in a single
-                        request.
+        Parameters
+        ----------
+        screen_name
+            A list of screen names, up to 100 are allowed in a single request.
+        user_id
+            A list of user IDs, up to 100 are allowed in a single request.
 
-        :rtype: list of :class:`Relationship` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Relationship`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-lookup
         """
         return self.request(
             'GET', 'friendships/lookup', endpoint_parameters=(
