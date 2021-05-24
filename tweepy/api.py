@@ -1512,9 +1512,10 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def list_timeline(self, **kwargs):
-        """list_timeline(*, list_id, slug, owner_screen_name, owner_id, \
-                         since_id, max_id, count, include_entities, \
-                         include_rts)
+        """list_timeline( \
+            *, list_id, slug, owner_screen_name, owner_id, since_id, max_id, \
+            count, include_entities, include_rts \
+        )
 
         Returns a timeline of Tweets authored by members of the specified list.
         Retweets are included by default. Use the ``include_rts=false``
