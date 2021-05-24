@@ -2457,12 +2457,20 @@ class API:
 
         Destroy a friendship with the specified user (aka unfollow).
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/post-friendships-destroy
         """
         return self.request(
             'POST', 'friendships/destroy', endpoint_parameters=(
