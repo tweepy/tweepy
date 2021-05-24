@@ -2060,16 +2060,29 @@ class API:
         Returns a user's followers ordered in which they were added. If no user
         is specified by id/screen name, it defaults to the authenticated user.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param cursor: |cursor|
-        :param count: |count|
-        :param skip_status: |skip_status|
-        :param include_user_entities: |include_user_entities|
 
-        :rtype: list of :class:`User` objects
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        cursor
+            |cursor|
+        count
+            |count|
+        skip_status
+            |skip_status|
+        include_user_entities
+            |include_user_entities|
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
         """
         return self.request(
             'GET', 'followers/list', endpoint_parameters=(
