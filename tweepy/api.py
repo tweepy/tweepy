@@ -2367,14 +2367,24 @@ class API:
         returned by using this API (about being listed in the People Search).
         It is only possible to retrieve the first 1000 matches from this API.
 
-        :param q: The query to run against people search.
-        :param page: |page|
-        :param count: |count|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        q
+            The query to run against people search.
+        page
+            |page|
+        count
+            |count|
+        include_entities
+            |include_entities|
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
         """
         return self.request(
             'GET', 'users/search', endpoint_parameters=(
