@@ -1918,14 +1918,24 @@ class API:
 
         Subscribes the authenticated user to the specified list.
 
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
-        :param list_id: |list_id|
-        :param slug: |slug|
+        Parameters
+        ----------
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
+        list_id
+            |list_id|
+        slug
+            |slug|
 
-        :rtype: :class:`List` object
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
         """
         return self.request(
             'POST', 'lists/subscribers/create', endpoint_parameters=(
