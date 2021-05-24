@@ -1520,22 +1520,37 @@ class API:
         Retweets are included by default. Use the ``include_rts=false``
         parameter to omit retweets.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
-        :param since_id: |since_id|
-        :param max_id: |max_id|
-        :param count: |count|
-        :param include_entities: |include_entities|
-        :param include_rts: A boolean indicating whether the list timeline will
-            contain native retweets (if they exist) in addition to the standard
-            stream of Tweets. The output format of retweeted Tweets is
-            identical to the representation you see in home_timeline.
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
+        since_id
+            |since_id|
+        max_id
+            |max_id|
+        count
+            |count|
+        include_entities
+            |include_entities|
+        include_rts
+            A boolean indicating whether the list timeline will contain native
+            retweets (if they exist) in addition to the standard stream of
+            Tweets. The output format of retweeted Tweets is identical to the
+            representation you see in home_timeline.
 
-        :rtype: list of :class:`Status` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Status`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-statuses
                 """
         return self.request(
             'GET', 'lists/statuses', endpoint_parameters=(
