@@ -1949,14 +1949,24 @@ class API:
 
         Unsubscribes the authenticated user from the specified list.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
 
-        :rtype: :class:`List` object
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
         """
         return self.request(
             'POST', 'lists/subscribers/destroy', endpoint_parameters=(
