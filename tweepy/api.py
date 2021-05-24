@@ -1286,15 +1286,24 @@ class API:
         lists first, so with ``reverse=true``, 20 owned lists and 80
         subscriptions would be returned.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param reverse: A boolean indicating if you would like owned lists to
-                        be returned first. See description above for
-                        information on how this parameter works.
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        reverse
+            A boolean indicating if you would like owned lists to be returned
+            first. See description above for information on how this parameter
+            works.
 
-        :rtype: list of :class:`List` objects
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-list
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-list
         """
         return self.request(
             'GET', 'lists/list', endpoint_parameters=(
