@@ -2099,15 +2099,26 @@ class API:
         Returns an array containing the IDs of users being followed by the
         specified user.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param cursor: |cursor|
-        :param stringify_ids: |stringify_ids|
-        :param count: |count|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        cursor
+            |cursor|
+        stringify_ids
+            |stringify_ids|
+        count
+            |count|
 
-        :rtype: list of :class:`int`
+        Returns
+        -------
+        :py:class:`List`\ [:class:`int`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friends-ids
         """
         return self.request(
             'GET', 'friends/ids', endpoint_parameters=(
