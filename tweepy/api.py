@@ -1982,17 +1982,30 @@ class API:
         Updates the specified list.
         The authenticated user must own the list to be able to update it.
 
-        :param list_id: |list_id|
-        :param slug: |slug|
-        :param name: The name for the list.
-        :param mode: |list_mode|
-        :param description: The description to give the list.
-        :param owner_screen_name: |owner_screen_name|
-        :param owner_id: |owner_id|
+        Parameters
+        ----------
+        list_id
+            |list_id|
+        slug
+            |slug|
+        name
+            The name for the list.
+        mode
+            |list_mode|
+        description
+            The description to give the list.
+        owner_screen_name
+            |owner_screen_name|
+        owner_id
+            |owner_id|
 
-        :rtype: :class:`List` object
+        Returns
+        -------
+        :class:`~tweepy.models.List`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/post-lists-update
         """
         return self.request(
             'POST', 'lists/update', endpoint_parameters=(
