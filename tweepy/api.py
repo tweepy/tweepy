@@ -1452,14 +1452,24 @@ class API:
         ``user_id`` and ``screen_name`` are not provided, the ownerships for
         the authenticating user are returned.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param count: |count|
-        :param cursor: |cursor|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        count
+            |count|
+        cursor
+            |cursor|
 
-        :rtype: list of :class:`List` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.List`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-ownerships
         """
         return self.request(
             'GET', 'lists/ownerships', endpoint_parameters=(
