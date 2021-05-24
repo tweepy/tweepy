@@ -2329,19 +2329,26 @@ class API:
         * If none of your lookup criteria can be satisfied by returning a \
             user object, a HTTP 404 will be thrown.
 
-        :param screen_name: A list of screen names, up to 100 are allowed in a
-                            single request.
-        :param user_id: A list of user IDs, up to 100 are allowed in a single
-                        request.
-        :param include_entities: |include_entities|
-        :param tweet_mode: Valid request values are compat and extended, which
-                           give compatibility mode and extended mode,
-                           respectively for Tweets that contain over 140
-                           characters.
+        Parameters
+        ----------
+        screen_name
+            A list of screen names, up to 100 are allowed in a single request.
+        user_id
+            A list of user IDs, up to 100 are allowed in a single request.
+        include_entities
+            |include_entities|
+        tweet_mode
+            Valid request values are compat and extended, which give
+            compatibility mode and extended mode, respectively for Tweets that
+            contain over 140 characters.
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-lookup
         """
         return self.request(
             'POST', 'users/lookup', endpoint_parameters=(
