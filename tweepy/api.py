@@ -1607,7 +1607,7 @@ class API:
     def show_list_subscriber(self, **kwargs):
         """show_list_subscriber( \
             *, owner_screen_name, owner_id, list_id, slug, user_id, \
-            screen_name, include_entities skip_status \
+            screen_name, include_entities, skip_status \
         )
 
         Check if the specified user is a subscriber of the specified list.
