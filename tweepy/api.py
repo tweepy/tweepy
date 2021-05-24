@@ -2285,14 +2285,24 @@ class API:
 
         Returns detailed information about the relationship between two users.
 
-        :param source_id: The user_id of the subject user.
-        :param source_screen_name: The screen_name of the subject user.
-        :param target_id: The user_id of the target user.
-        :param target_screen_name: The screen_name of the target user.
+        Parameters
+        ----------
+        source_id
+            The user_id of the subject user.
+        source_screen_name
+            The screen_name of the subject user.
+        target_id
+            The user_id of the target user.
+        target_screen_name
+            The screen_name of the target user.
 
-        :rtype: :class:`Friendship` object
+        Returns
+        -------
+        :class:`~tweepy.models.Friendship`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-friendships-show
         """
         return self.request(
             'GET', 'friendships/show', endpoint_parameters=(
