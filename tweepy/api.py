@@ -1412,17 +1412,28 @@ class API:
         or ``screen_name`` are not provided, the memberships for the
         authenticating user are returned.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param count: |count|
-        :param cursor: |cursor|
-        :param filter_to_owned_lists: A boolean indicating whether to return
-            just lists the authenticating user owns, and the user represented
-            by ``user_id`` or ``screen_name`` is a member of.
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        count
+            |count|
+        cursor
+            |cursor|
+        filter_to_owned_lists
+            A boolean indicating whether to return just lists the
+            authenticating user owns, and the user represented by ``user_id``
+            or ``screen_name`` is a member of.
 
-        :rtype: list of :class:`List` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.List`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/create-manage-lists/api-reference/get-lists-memberships
         """
         return self.request(
             'GET', 'lists/memberships', endpoint_parameters=(
