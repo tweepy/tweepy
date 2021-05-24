@@ -2398,13 +2398,22 @@ class API:
 
         Returns information about the specified user.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
-        :param include_entities: |include_entities|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
+        include_entities
+            |include_entities|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
         """
         return self.request(
             'GET', 'users/show', endpoint_parameters=(
