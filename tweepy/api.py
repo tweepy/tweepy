@@ -2711,23 +2711,35 @@ class API:
         Sets values that users are able to set under the "Account" tab of their
         settings page.
 
-        :param name: Full name associated with the profile.
-        :param url: URL associated with the profile. Will be prepended with
-                    ``http://`` if not present
-        :param location: The city or country describing where the user of the
-            account is located. The contents are not normalized or geocoded in
-            any way.
-        :param description: A description of the user owning the account.
-        :param profile_link_color: Sets a hex value that controls the color
-            scheme of links used on the authenticating user's profile page on
-            twitter.com. This must be a valid hexadecimal value, and may be
-            either three or six characters (ex: F00 or FF0000).
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        name
+            Full name associated with the profile.
+        url
+            URL associated with the profile. Will be prepended with ``http://``
+            if not present
+        location
+            The city or country describing where the user of the account is
+            located. The contents are not normalized or geocoded in any way.
+        description
+            A description of the user owning the account.
+        profile_link_color
+            Sets a hex value that controls the color scheme of links used on
+            the authenticating user's profile page on twitter.com. This must be
+            a valid hexadecimal value, and may be either three or six
+            characters (ex: F00 or FF0000).
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
         """
         return self.request(
             'POST', 'account/update_profile', endpoint_parameters=(
