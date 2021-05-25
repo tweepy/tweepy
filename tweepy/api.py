@@ -2754,22 +2754,32 @@ class API:
 
         Uploads a profile banner on behalf of the authenticating user.
 
-        :param filename: |filename|
-        :param file: |file|
-        :param width: The width of the preferred section of the image being
-            uploaded in pixels. Use with ``height``, ``offset_left``, and
-            ``offset_top`` to select the desired region of the image to use.
-        :param height: The height of the preferred section of the image being
-            uploaded in pixels. Use with ``width``, ``offset_left``, and
-            ``offset_top`` to select the desired region of the image to use.
-        :param offset_left: The number of pixels by which to offset the
-            uploaded image from the left. Use with ``height``, ``width``, and
-            ``offset_top`` to select the desired region of the image to use.
-        :param offset_top: The number of pixels by which to offset the uploaded
-            image from the top. Use with ``height``, ``width``, and
-            ``offset_left`` to select the desired region of the image to use.
+        Parameters
+        ----------
+        filename
+            |filename|
+        file:
+            |file|
+        width
+            The width of the preferred section of the image being uploaded in
+            pixels. Use with ``height``, ``offset_left``, and ``offset_top`` to
+            select the desired region of the image to use.
+        height
+            The height of the preferred section of the image being uploaded in
+            pixels. Use with ``width``, ``offset_left``, and ``offset_top`` to
+            select the desired region of the image to use.
+        offset_left
+            The number of pixels by which to offset the uploaded image from the
+            left. Use with ``height``, ``width``, and ``offset_top`` to select
+            the desired region of the image to use.
+        offset_top
+            The number of pixels by which to offset the uploaded image from the
+            top. Use with ``height``, ``width``, and ``offset_left`` to select
+            the desired region of the image to use.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_banner
         """
         with contextlib.ExitStack() as stack:
             if file is not None:
