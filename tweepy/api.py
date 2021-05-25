@@ -2657,30 +2657,41 @@ class API:
         
         Updates the authenticating user's settings.
 
-        :param sleep_time_enabled: When set to ``true``, ``t`` or ``1`` , will
-            enable sleep time for the user. Sleep time is the time when push or
-            SMS notifications should not be sent to the user.
-        :param start_sleep_time: The hour that sleep time should begin if it is
-            enabled. The value for this parameter should be provided in
-            `ISO 8601`_ format (i.e. 00-23). The time is considered to be in
-            the same timezone as the user's ``time_zone`` setting.
-        :param end_sleep_time: The hour that sleep time should end if it is
-            enabled. The value for this parameter should be provided in
-            `ISO 8601`_ format (i.e. 00-23). The time is considered to be in
-            the same timezone as the user's ``time_zone`` setting.
-        :param time_zone: The timezone dates and times should be displayed in
-            for the user. The timezone must be one of the `Rails TimeZone`_
-            names.
-        :param trend_location_woeid: The Yahoo! Where On Earth ID to use as the
-            user's default trend location. Global information is available by
-            using 1 as the WOEID.
-        :param lang: The language which Twitter should render in for this user.
-            The language must be specified by the appropriate two letter ISO
-            639-1 representation.
+        Parameters
+        ----------
+        sleep_time_enabled
+            When set to ``true``, ``t`` or ``1`` , will enable sleep time for
+            the user. Sleep time is the time when push or SMS notifications
+            should not be sent to the user.
+        start_sleep_time
+            The hour that sleep time should begin if it is enabled. The value
+            for this parameter should be provided in `ISO 8601`_ format (i.e.
+            00-23). The time is considered to be in the same timezone as the
+            user's ``time_zone`` setting.
+        end_sleep_time
+            The hour that sleep time should end if it is enabled. The value for
+            this parameter should be provided in `ISO 8601`_ format (i.e.
+            00-23). The time is considered to be in the same timezone as the
+            user's ``time_zone`` setting.
+        time_zone
+            The timezone dates and times should be displayed in for the user.
+            The timezone must be one of the `Rails TimeZone`_ names.
+        trend_location_woeid
+            The Yahoo! Where On Earth ID to use as the user's default trend
+            location. Global information is available by using 1 as the WOEID.
+        lang
+            The language which Twitter should render in for this user. The
+            language must be specified by the appropriate two letter ISO 639-1
+            representation.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-settings
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-settings
 
         .. _ISO 8601: https://en.wikipedia.org/wiki/ISO_8601
         .. _Rails TimeZone: https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
