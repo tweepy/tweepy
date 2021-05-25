@@ -2835,11 +2835,18 @@ class API:
 
         Creates a saved search for the authenticated user.
 
-        :param query: The query of the search the user would like to save.
+        Parameters
+        ----------
+        query
+            The query of the search the user would like to save.
 
-        :rtype: :class:`SavedSearch` object
+        Returns
+        -------
+        :class:`~tweepy.models.SavedSearch`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-create
         """
         return self.request(
             'POST', 'saved_searches/create', endpoint_parameters=(
