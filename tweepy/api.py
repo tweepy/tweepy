@@ -2537,14 +2537,28 @@ class API:
 
         Verify the supplied user credentials are valid.
 
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
-        :param include_email: When set to true email will be returned in the
-                              user objects as a string.
+        Parameters
+        ----------
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
+        include_email
+            When set to true email will be returned in the user objects as a
+            string.
 
-        :rtype: :class:`User` object if credentials are valid, otherwise False
+        Raises
+        ------
+        :class:`~tweepy.errors.Unauthorized`
+            Authentication unsuccessful
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
+        Returns
+        -------
+        :class:`~tweepy.models.User`
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-verify_credentials
         """
         if 'include_email' in kwargs:
             kwargs['include_email'] = str(kwargs['include_email']).lower()
