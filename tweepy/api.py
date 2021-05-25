@@ -2574,9 +2574,13 @@ class API:
 
         Returns the authenticated user's saved search queries.
 
-        :rtype: list of :class:`SavedSearch` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.SavedSearch`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-list
         """
         return self.request('GET', 'saved_searches/list', **kwargs)
 
