@@ -729,7 +729,7 @@ class API:
 
         Returns
         -------
-        dict
+        :class:`dict`
             JSON
 
         References
