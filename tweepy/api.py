@@ -2644,7 +2644,9 @@ class API:
 
         Removes the uploaded profile banner for the authenticating user.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-remove_profile_banner
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-remove_profile_banner
         """
         return self.request('POST', 'account/remove_profile_banner', **kwargs)
 
