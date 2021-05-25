@@ -2861,11 +2861,18 @@ class API:
         Destroys a saved search for the authenticated user. The search
         specified by ID must be owned by the authenticating user.
 
-        :param id: The ID of the saved search to be deleted.
+        Parameters
+        ----------
+        id
+            The ID of the saved search to be deleted.
 
-        :rtype: :class:`SavedSearch` object
+        Returns
+        -------
+        :class:`~tweepy.models.SavedSearch`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-saved_searches-destroy-id
         """
         return self.request('POST', f'saved_searches/destroy/{id}', **kwargs)
 
