@@ -2800,14 +2800,24 @@ class API:
         Update the authenticating user's profile image. Valid formats: GIF,
         JPG, or PNG
 
-        :param filename: |filename|
-        :param file: |file|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        filename
+            |filename|
+        file
+            |file|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile_image
         """
         if file is not None:
             files = {'image': (filename, file)}
