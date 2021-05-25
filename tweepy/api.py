@@ -2617,12 +2617,21 @@ class API:
         The profile banner data available at each size variant's URL is in PNG
         format.
 
-        :param user_id: |user_id|
-        :param screen_name: |screen_name|
+        Parameters
+        ----------
+        user_id
+            |user_id|
+        screen_name
+            |screen_name|
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-users-profile_banner
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-users-profile_banner
         """
         return self.request(
             'GET', 'users/profile_banner', endpoint_parameters=(
