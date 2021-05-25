@@ -2591,11 +2591,18 @@ class API:
         Retrieve the data for a saved search owned by the authenticating user
         specified by the given ID.
 
-        :param id: The ID of the saved search to be retrieved.
+        Parameters
+        ----------
+        id
+            The ID of the saved search to be retrieved.
 
-        :rtype: :class:`SavedSearch` object
+        Returns
+        -------
+        :class:`~tweepy.models.SavedSearch`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-saved_searches-show-id
         """
         return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
