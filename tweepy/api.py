@@ -2518,9 +2518,14 @@ class API:
         Returns settings (including current trend, geo and sleep time
         information) for the authenticating user.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/get-account-settings
         """
         return self.request(
             'GET', 'account/settings', use_cache=False, **kwargs
