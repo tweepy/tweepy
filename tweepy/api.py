@@ -3005,14 +3005,24 @@ class API:
         mentions or timeline (unless retweeted by another user). If a follow or
         friend relationship exists it is destroyed.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-create
         """
         return self.request(
             'POST', 'blocks/create', endpoint_parameters=(
