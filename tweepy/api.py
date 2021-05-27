@@ -3210,11 +3210,18 @@ class API:
 
         Returns a specific direct message.
 
-        :param id: The ID of the Direct Message event that should be returned.
+        Parameters
+        ----------
+        id
+            The ID of the Direct Message event that should be returned.
 
-        :rtype: :class:`DirectMessage` object
+        Returns
+        -------
+        :class:`~tweepy.models.DirectMessage`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/get-event
         """
         return self.request(
             'GET', 'direct_messages/events/show', endpoint_parameters=(
