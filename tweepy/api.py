@@ -3778,20 +3778,30 @@ class API:
         This request is an informative call and will deliver generalized
         results about geography.
 
-        :param lat: The location's latitude.
-        :param long: The location's longitude.
-        :param accuracy: Specify the "region" in which to search, such as a
-            number (then this is a radius in meters, but it can also take a
-            string that is suffixed with ft to specify feet). If this is not
-            passed in, then it is assumed to be 0m
-        :param granularity: Assumed to be ``neighborhood`` by default; can also
-                            be ``city``.
-        :param max_results: A hint as to the maximum number of results to
-            return. This is only a guideline, which may not be adhered to.
+        Parameters
+        ----------
+        lat
+            The location's latitude.
+        long
+            The location's longitude.
+        accuracy
+            Specify the "region" in which to search, such as a number (then
+            this is a radius in meters, but it can also take a string that is
+            suffixed with ft to specify feet). If this is not passed in, then
+            it is assumed to be 0m
+        granularity
+            Assumed to be ``neighborhood`` by default; can also be ``city``.
+        max_results
+            A hint as to the maximum number of results to return. This is only
+            a guideline, which may not be adhered to.
 
-        :rtype: list of :class:`Place` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Place`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-reverse_geocode
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-reverse_geocode
         """
         return self.request(
             'GET', 'geo/reverse_geocode', endpoint_parameters=(
