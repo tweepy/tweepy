@@ -3299,9 +3299,18 @@ class API:
         Check on the progress of a chunked media upload. If the upload has
         succeeded, it's safe to create a Tweet with this ``media_id``.
 
-        :param media_id: The ID of the media to check.
+        Parameters
+        ----------
+        media_id
+            The ID of the media to check.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/get-media-upload-status
         """
         return self.request(
             'GET', 'media/upload', endpoint_parameters=(
