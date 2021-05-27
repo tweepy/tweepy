@@ -45,5 +45,5 @@ class User(HashableID, DataMapping):
     def __repr__(self):
         return f"<User id={self.id} name={self.name} username={self.username}>"
 
-    def __str__(Self):
+    def __str__(self):
         return self.username
