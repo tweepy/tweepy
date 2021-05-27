@@ -3598,14 +3598,24 @@ class API:
 
         Use this endpoint to initiate a chunked file upload session.
 
-        :param total_bytes: The size of the media being uploaded in bytes.
-        :param media_type: The MIME type of the media being uploaded.
-        :param media_category: |media_category|
-        :param additional_owners: |additional_owners|
+        Parameters
+        ----------
+        total_bytes
+            The size of the media being uploaded in bytes.
+        media_type
+            The MIME type of the media being uploaded.
+        media_category
+            |media_category|
+        additional_owners
+            |additional_owners|
 
-        :rtype: :class:`Media` object
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-init
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
