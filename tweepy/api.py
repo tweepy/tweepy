@@ -3411,14 +3411,24 @@ class API:
         Use this endpoint to upload media to Twitter. This does not use the
         chunked upload endpoints.
 
-        :param filename: |filename|
-        :param file: |file|
-        :param media_category: |media_category|
-        :param additional_owners: |additional_owners|
+        Parameters
+        ----------
+        filename
+            |filename|
+        file
+            |file|
+        media_category
+            |media_category|
+        additional_owners
+            |additional_owners|
 
-        :rtype: :class:`Media` object
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload
         """
         with contextlib.ExitStack() as stack:
             if file is not None:
