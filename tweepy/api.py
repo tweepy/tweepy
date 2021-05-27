@@ -3566,11 +3566,18 @@ class API:
         ``processing_info field``, it may also be necessary to check its status
         and wait for it to return success before proceeding to Tweet creation.
 
-        :param media_id: The ``media_id`` returned from the initialization.
+        Parameters
+        ----------
+        media_id
+            The ``media_id`` returned from the initialization.
 
-        :rtype: :class:`Media` object
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-finalize
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         post_data = {
