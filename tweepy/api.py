@@ -3326,10 +3326,16 @@ class API:
         images and GIFs. Call this endpoint to attach additional metadata such
         as image alt text.
 
-        :param media_id: The ID of the media to add alt text to.
-        :param alt_text: The alt text to add to the image.
+        Parameters
+        ----------
+        media_id
+            The ID of the media to add alt text to.
+        alt_text
+            The alt text to add to the image.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-metadata-create
         """
         json_payload = {
             'media_id': media_id,
