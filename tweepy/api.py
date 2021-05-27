@@ -3125,6 +3125,8 @@ class API:
 
         Report the specified user as a spam account to Twitter.
 
+        Parameters
+        ----------
         screen_name
             |screen_name|
         user_id
