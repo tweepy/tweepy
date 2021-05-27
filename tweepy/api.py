@@ -3038,14 +3038,24 @@ class API:
         Un-blocks the user specified in the ID parameter for the authenticating
         user.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-blocks-destroy
         """
         return self.request(
             'POST', 'blocks/destroy', endpoint_parameters=(
