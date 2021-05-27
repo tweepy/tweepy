@@ -3918,9 +3918,14 @@ class API:
         639-3 alpha-3 (``msa``), or ISO 639-1 alpha-2 combined with an ISO
         3166-1 alpha-2 localization (``zh-tw``).
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
         """
         return self.request('GET', 'help/languages', **kwargs)
 
