@@ -3358,17 +3358,27 @@ class API:
         media is a video, ``wait_for_async_finalize`` can be specified as a
         keyword argument to be passed to :func:`API.chunked_upload`.
 
-        :param filename: |filename|
-        :param file: |file|
-        :param chunked: Whether or not to use chunked media upload. Videos use
-                        chunked upload regardless of this parameter. Defaults
-                        to ``False``.
-        :param media_category: |media_category|
-        :param additional_owners: |additional_owners|
+        Parameters
+        ----------
+        filename
+            |filename|
+        file
+            |file|
+        chunked
+            Whether or not to use chunked media upload. Videos use chunked
+            upload regardless of this parameter. Defaults to ``False``.
+        media_category
+            |media_category|
+        additional_owners
+            |additional_owners|
 
-        :rtype: :class:`Media` object
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
         h = None
         if file is not None:
