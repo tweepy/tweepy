@@ -3718,15 +3718,24 @@ class API:
         The tweet_volume for the last 24 hours is also returned for many trends
         if this is available.
 
-        :param id: The Yahoo! Where On Earth ID of the location to return
-            trending information for. Global information is available by using
-            1 as the WOEID.
-        :param exclude: Setting this equal to hashtags will remove all hashtags
-                        from the trends list.
+        Parameters
+        ----------
+        id
+            The Yahoo! Where On Earth ID of the location to return trending
+            information for. Global information is available by using 1 as the
+            WOEID.
+        exclude
+            Setting this equal to hashtags will remove all hashtags from the
+            trends list.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
         """
         return self.request(
             'GET', 'trends/place', endpoint_parameters=(
