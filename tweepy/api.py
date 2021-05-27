@@ -3160,11 +3160,14 @@ class API:
         user context provided. Other members of the conversation can still
         access the Direct Messages.
 
-        :param id: The ID of the Direct Message that should be deleted.
+        Parameters
+        ----------
+        id
+            The ID of the Direct Message that should be deleted.
 
-        :rtype: None
-
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/delete-message-event
         """
         return self.request(
             'DELETE', 'direct_messages/events/destroy', endpoint_parameters=(
