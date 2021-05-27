@@ -3646,9 +3646,14 @@ class API:
         information such as a canonical name and country the location belongs
         in.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-available
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-available
         """
         return self.request('GET', 'trends/available', **kwargs)
 
