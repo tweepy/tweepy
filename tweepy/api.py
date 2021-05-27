@@ -3531,14 +3531,20 @@ class API:
         Use this endpoint to upload a chunk (consecutive byte range) of the
         media file.
 
-        :param media_id: The ``media_id`` returned from the initialization.
-        :param media: The raw binary file content being uploaded. It must be <=
-                      5 MB.
-        :param segment_index: An ordered index of file chunk. It must be
-            between 0-999 inclusive. The first segment has index 0, second
-            segment has index 1, and so on.
+        Parameters
+        ----------
+        media_id
+            The ``media_id`` returned from the initialization.
+        media
+            The raw binary file content being uploaded. It must be <= 5 MB.
+        segment_index
+            An ordered index of file chunk. It must be between 0-999 inclusive.
+            The first segment has index 0, second segment has index 1, and so
+            on.
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-upload-append
         """
         post_data = {
             'command': 'APPEND',
