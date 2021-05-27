@@ -3183,12 +3183,20 @@ class API:
         Returns all Direct Message events (both sent and received) within the
         last 30 days. Sorted in reverse-chronological order.
 
-        :param count: |count|
-        :param cursor: |cursor|
+        Parameters
+        ----------
+        count
+            |count|
+        cursor
+            |cursor|
 
-        :rtype: list of :class:`DirectMessage` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.DirectMessage`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/list-events
         """
         return self.request(
             'GET', 'direct_messages/events/list', endpoint_parameters=(
