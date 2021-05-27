@@ -2973,13 +2973,22 @@ class API:
 
         Returns an array of user objects the authenticating user has muted.
 
-        :param cursor: |cursor|
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
+        Parameters
+        ----------
+        cursor
+            |cursor|
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-list
         """
         return self.request(
             'GET', 'mutes/users/list', endpoint_parameters=(
