@@ -3230,9 +3230,10 @@ class API:
         )
 
     @payload('direct_message')
-    def send_direct_message(self, recipient_id, text, *, quick_reply_options=None,
-                            attachment_type=None, attachment_media_id=None,
-                            ctas=None, **kwargs):
+    def send_direct_message(
+        self, recipient_id, text, *, quick_reply_options=None,
+        attachment_type=None, attachment_media_id=None, ctas=None, **kwargs
+    ):
         """send_direct_message(recipient_id, text, *, quick_reply_options, \
                                attachment_type, attachment_media_id, ctas)
 
