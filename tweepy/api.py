@@ -3670,18 +3670,27 @@ class API:
 
         A WOEID is a Yahoo! Where On Earth ID.
 
-        :param lat: If provided with a long parameter the available trend
-            locations will be sorted by distance, nearest to furthest, to the
-            co-ordinate pair. The valid ranges for longitude is -180.0 to
-            +180.0 (West is negative, East is positive) inclusive.
-        :param long: If provided with a lat parameter the available trend
-            locations will be sorted by distance, nearest to furthest, to the
-            co-ordinate pair. The valid ranges for longitude is -180.0 to
-            +180.0 (West is negative, East is positive) inclusive.
+        Parameters
+        ----------
+        lat
+            If provided with a long parameter the available trend locations
+            will be sorted by distance, nearest to furthest, to the co-ordinate
+            pair. The valid ranges for longitude is -180.0 to +180.0 (West is
+            negative, East is positive) inclusive.
+        long
+            If provided with a lat parameter the available trend locations will
+            be sorted by distance, nearest to furthest, to the co-ordinate
+            pair. The valid ranges for longitude is -180.0 to +180.0 (West is
+            negative, East is positive) inclusive.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-closest
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/trends/locations-with-trending-topics/api-reference/get-trends-closest
         """
         return self.request(
             'GET', 'trends/closest', endpoint_parameters=(
