@@ -3098,6 +3098,8 @@ class API:
         Un-mutes the user specified in the ID parameter for the authenticating
         user.
 
+        Parameters
+        ----------
         screen_name
             |screen_name|
         user_id
