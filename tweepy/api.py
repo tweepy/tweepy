@@ -3751,11 +3751,18 @@ class API:
 
         Given ``place_id``, provide more details about that place.
 
-        :param place_id: Valid Twitter ID of a location.
+        Parameters
+        ----------
+        place_id
+            Valid Twitter ID of a location.
 
-        :rtype: :class:`Place` object
+        Returns
+        -------
+        :class:`~tweepy.models.Place`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
         """
         return self.request('GET', f'geo/id/{place_id}', **kwargs)
 
