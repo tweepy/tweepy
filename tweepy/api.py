@@ -3239,20 +3239,29 @@ class API:
         Sends a new direct message to the specified user from the
         authenticating user.
 
-        :param recipient_id: The ID of the user who should receive the direct
-                             message.
-        :param text: The text of your Direct Message. Max length of 10,000
-                     characters.
-        :param quick_reply_options: Array of Options objects (20 max).
-        :param attachment_type: The attachment type. Can be media or location.
-        :param attachment_media_id: A media id to associate with the message.
-                                    A Direct Message may only reference a
-                                    single media_id.
-        :param ctas: Array of 1-3 call-to-action (CTA) button objects
+        Parameters
+        ----------
+        recipient_id
+            The ID of the user who should receive the direct message.
+        text
+            The text of your Direct Message. Max length of 10,000 characters.
+        quick_reply_options
+            Array of Options objects (20 max).
+        attachment_type
+            The attachment type. Can be media or location.
+        attachment_media_id
+            A media id to associate with the message. A Direct Message may only
+            reference a single media_id.
+        ctas
+            Array of 1-3 call-to-action (CTA) button objects
 
-        :rtype: :class:`DirectMessage` object
+        Returns
+        -------
+        :class:`~tweepy.models.DirectMessage`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/sending-and-receiving/api-reference/new-event
         """
         json_payload = {
             'event': {'type': 'message_create',
