@@ -3894,9 +3894,14 @@ class API:
         It is recommended applications request this endpoint when they are
         loaded, but no more than once a day.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
         """
         return self.request('GET', 'help/configuration', **kwargs)
 
