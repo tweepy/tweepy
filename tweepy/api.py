@@ -2915,13 +2915,22 @@ class API:
         Returns an array of user objects that the authenticating user is
         blocking.
 
-        :param include_entities: |include_entities|
-        :param skip_status: |skip_status|
-        :param cursor: |cursor|
+        Parameters
+        ----------
+        include_entities
+            |include_entities|
+        skip_status
+            |skip_status|
+        cursor
+            |cursor|
 
-        :rtype: list of :class:`User` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.User`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-blocks-list
         """
         return self.request(
             'GET', 'blocks/list', endpoint_parameters=(
