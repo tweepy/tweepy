@@ -3098,12 +3098,18 @@ class API:
         Un-mutes the user specified in the ID parameter for the authenticating
         user.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-destroy
         """
         return self.request(
             'POST', 'mutes/users/destroy', endpoint_parameters=(
