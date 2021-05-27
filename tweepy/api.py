@@ -3450,9 +3450,10 @@ class API:
     def chunked_upload(self, filename, *, file=None, file_type=None,
                        wait_for_async_finalize=True, media_category=None,
                        additional_owners=None, **kwargs):
-        """chunked_upload(filename, *, file, file_type, \
-                          wait_for_async_finalize, media_category, \
-                          additional_owners)
+        """chunked_upload( \
+            filename, *, file, file_type, wait_for_async_finalize, \
+            media_category, additional_owners \
+        )
 
         Use this to upload media to Twitter. This uses the chunked upload
         endpoints and calls :func:`API.chunked_upload_init`,
@@ -3460,17 +3461,29 @@ class API:
         :func:`API.chunked_upload_finalize`. If ``wait_for_async_finalize`` is
         set, this calls :func:`API.get_media_upload_status` as well.
 
-        :param filename: |filename|
-        :param file: |file|
-        :param file_type: The MIME type of the media being uploaded.
-        :param wait_for_async_finalize: Whether to wait for Twitter's API to
-            finish processing the media. Defaults to ``True``.
-        :param media_category: |media_category|
-        :param additional_owners: |additional_owners|
+        Parameters
+        ----------
+        filename
+            |filename|
+        file
+            |file|
+        file_type
+            The MIME type of the media being uploaded.
+        wait_for_async_finalize
+            Whether to wait for Twitter's API to finish processing the media.
+            Defaults to ``True``.
+        media_category
+            |media_category|
+        additional_owners
+            |additional_owners|
 
-        :rtype: :class:`Media` object
+        Returns
+        -------
+        :class:`~tweepy.models.Media`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/chunked-media-upload
         """
         fp = file or open(filename, 'rb')
 
