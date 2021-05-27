@@ -2945,12 +2945,20 @@ class API:
 
         Returns an array of numeric user IDs the authenticating user has muted.
 
-        :param stringify_ids: |stringify_ids|
-        :param cursor: |cursor|
+        Parameters
+        ----------
+        stringify_ids
+            |stringify_ids|
+        cursor
+            |cursor|
 
-        :rtype: list of :class:`int`
+        Returns
+        -------
+        :py:class:`List`\ [:class:`int`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/get-mutes-users-ids
         """
         return self.request(
             'GET', 'mutes/users/ids', endpoint_parameters=(
