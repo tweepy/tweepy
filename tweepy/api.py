@@ -3833,35 +3833,47 @@ class API:
         of other parameters. For instance, ``lat`` is required if ``long`` is
         provided, and vice-versa.
 
-        :param lat: The latitude to search around. This parameter will be
-            ignored unless it is inside the range -90.0 to +90.0 (North is
-            positive) inclusive. It will also be ignored if there isn't a
-            corresponding ``long`` parameter.
-        :param long: The longitude to search around. The valid ranges for
-            longitude are -180.0 to +180.0 (East is positive) inclusive. This
-            parameter will be ignored if outside that range, if it is not a
-            number, if ``geo_enabled`` is turned off, or if there not a
-            corresponding ``lat`` parameter.
-        :param query: Free-form text to match against while executing a
-            geo-based query, best suited for finding nearby locations by name.
-        :param ip: An IP address. Used when attempting to fix geolocation based
-                   off of the user's IP address.
-        :param granularity: This is the minimal granularity of place types to
-            return and must be one of: ``neighborhood``, ``city``, ``admin`` or
-            ``country``. If no granularity is provided for the request
-            ``neighborhood`` is assumed.
+        Parameters
+        ----------
+        lat
+            The latitude to search around. This parameter will be ignored
+            unless it is inside the range -90.0 to +90.0 (North is positive)
+            inclusive. It will also be ignored if there isn't a corresponding
+            ``long`` parameter.
+        long
+            The longitude to search around. The valid ranges for longitude are
+            -180.0 to +180.0 (East is positive) inclusive. This parameter will
+            be ignored if outside that range, if it is not a number, if
+            ``geo_enabled`` is turned off, or if there not a corresponding
+            ``lat`` parameter.
+        query
+            Free-form text to match against while executing a geo-based query,
+            best suited for finding nearby locations by name.
+        ip
+            An IP address. Used when attempting to fix geolocation based off of
+            the user's IP address.
+        granularity
+            This is the minimal granularity of place types to return and must
+            be one of: ``neighborhood``, ``city``, ``admin`` or ``country``.
+            If no granularity is provided for the request ``neighborhood`` is
+            assumed.
 
             Setting this to ``city``, for example, will find places which have
             a type of ``city``, ``admin`` or ``country``.
-        :param max_results: A hint as to the number of results to return. This
-            does not guarantee that the number of results returned will equal
+        max_results
+            A hint as to the number of results to return. This does not
+            guarantee that the number of results returned will equal
             ``max_results``, but instead informs how many "nearby" results to
             return. Ideally, only pass in the number of places you intend to
             display to the user here.
 
-        :rtype: list of :class:`Place` objects
+        Returns
+        -------
+        :py:class:`List`\ [:class:`~tweepy.models.Place`]
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-search
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-search
         """
         return self.request(
             'GET', 'geo/search', endpoint_parameters=(
