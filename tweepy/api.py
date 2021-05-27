@@ -3070,12 +3070,20 @@ class API:
         Mutes the user specified in the ID parameter for the authenticating
         user.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
+        Parameters
+        ----------
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-mutes-users-create
         """
         return self.request(
             'POST', 'mutes/users/create', endpoint_parameters=(
