@@ -3942,9 +3942,14 @@ class API:
         :param resources: A comma-separated list of resource families you want
                           to know the current rate limit disposition for.
 
-        :rtype: :class:`JSON` object
+        Returns
+        -------
+        :class:`dict`
+            JSON
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
         """
         return self.request(
             'GET', 'application/rate_limit_status', endpoint_parameters=(
