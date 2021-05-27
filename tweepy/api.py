@@ -3125,14 +3125,21 @@ class API:
 
         Report the specified user as a spam account to Twitter.
 
-        :param screen_name: |screen_name|
-        :param user_id: |user_id|
-        :param perform_block: A boolean indicating if the reported account
-                              should be blocked. Defaults to True.
+        screen_name
+            |screen_name|
+        user_id
+            |user_id|
+        perform_block
+            A boolean indicating if the reported account should be blocked.
+            Defaults to True.
 
-        :rtype: :class:`User` object
+        Returns
+        -------
+        :class:`~tweepy.models.User`
 
-        :reference: https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/mute-block-report-users/api-reference/post-users-report_spam
         """
         return self.request(
             'POST', 'users/report_spam', endpoint_parameters=(
