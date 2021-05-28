@@ -221,7 +221,7 @@ class List(Model):
         return self._api.unsubscribe_list(self.user.screen_name, self.slug)
 
     def subscribers(self, **kwargs):
-        return self._api.list_subscribers(
+        return self._api.get_list_subscribers(
             self.user.screen_name, self.slug, **kwargs
         )
 

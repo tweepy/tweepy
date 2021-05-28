@@ -1562,9 +1562,11 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_subscribers(self, **kwargs):
-        """list_subscribers(*, list_id, slug, owner_screen_name, owner_id, \
-                            count, cursor, include_entities, skip_status)
+    def get_list_subscribers(self, **kwargs):
+        """get_list_subscribers( \
+            *, list_id, slug, owner_screen_name, owner_id, count, cursor, \
+            include_entities, skip_status \
+        )
 
         Returns the subscribers of the specified list. Private list subscribers
         will only be shown if the authenticated user owns the specified list.

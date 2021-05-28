@@ -84,7 +84,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET lists/statuses`_                    | :meth:`API.list_timeline`           |
     +------------------------------------------+-------------------------------------+
-    | `GET lists/subscribers`_                 | :meth:`API.list_subscribers`        |
+    | `GET lists/subscribers`_                 | :meth:`API.get_list_subscribers`    |
     +------------------------------------------+-------------------------------------+
     | `GET lists/subscribers/show`_            | :meth:`API.get_list_subscriber`     |
     +------------------------------------------+-------------------------------------+
@@ -443,7 +443,7 @@ Create and manage lists
 
 .. automethod:: API.list_timeline
 
-.. automethod:: API.list_subscribers
+.. automethod:: API.get_list_subscribers
 
 .. automethod:: API.get_list_subscriber
 
