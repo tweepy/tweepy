@@ -1129,8 +1129,9 @@ class API:
         )
 
     @payload('status')
-    def update_with_media(self, status, filename, *, file=None, **kwargs):
-        """update_with_media( \
+    def update_status_with_media(self, status, filename, *, file=None,
+                                 **kwargs):
+        """update_status_with_media( \
             status, filename, *, file, possibly_sensitive, \
             in_reply_to_status_id, lat, long, place_id, display_coordinates \
         )
