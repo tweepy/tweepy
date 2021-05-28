@@ -2569,8 +2569,8 @@ class API:
         )
 
     @payload('saved_search', list=True)
-    def saved_searches(self, **kwargs):
-        """saved_searches()
+    def get_saved_searches(self, **kwargs):
+        """get_saved_searches()
 
         Returns the authenticated user's saved search queries.
 

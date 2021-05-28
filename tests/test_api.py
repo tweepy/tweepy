@@ -351,7 +351,7 @@ class TweepyAPITests(TweepyTestCase):
     @tape.use_cassette('testsavedsearches.json')
     def testsavedsearches(self):
         s = self.api.create_saved_search('test')
-        self.api.saved_searches()
+        self.api.get_saved_searches()
         self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
         self.api.destroy_saved_search(s.id)
 

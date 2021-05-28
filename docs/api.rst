@@ -146,7 +146,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET account/verify_credentials`_        | :meth:`API.verify_credentials`      |
     +------------------------------------------+-------------------------------------+
-    | `GET saved_searches/list`_               | :meth:`API.saved_searches`          |
+    | `GET saved_searches/list`_               | :meth:`API.get_saved_searches`      |
     +------------------------------------------+-------------------------------------+
     | `GET saved_searches/show/:id`_           | :meth:`API.get_saved_search`        |
     +------------------------------------------+-------------------------------------+
@@ -507,7 +507,7 @@ Manage account settings and profile
 
 .. automethod:: API.verify_credentials
 
-.. automethod:: API.saved_searches
+.. automethod:: API.get_saved_searches
 
 .. automethod:: API.get_saved_search
 
