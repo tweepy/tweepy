@@ -439,8 +439,10 @@ class User(Model, HashableID):
     def list_ownerships(self, *args, **kwargs):
         return self._api.get_list_ownerships(user_id=self.id, *args, **kwargs)
 
-    def lists_subscriptions(self, *args, **kwargs):
-        return self._api.lists_subscriptions(user_id=self.id, *args, **kwargs)
+    def list_subscriptions(self, *args, **kwargs):
+        return self._api.get_list_subscriptions(
+            user_id=self.id, *args, **kwargs
+        )
 
     def lists(self, *args, **kwargs):
         return self._api.get_lists(user_id=self.id, *args, **kwargs)

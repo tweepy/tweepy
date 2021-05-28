@@ -1655,8 +1655,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_subscriptions(self, **kwargs):
-        """lists_subscriptions(*, user_id, screen_name, count, cursor)
+    def get_list_subscriptions(self, **kwargs):
+        """get_list_subscriptions(*, user_id, screen_name, count, cursor)
 
         Obtain a collection of the lists the specified user is subscribed to,
         20 lists per page by default. Does not include the user's own lists.
