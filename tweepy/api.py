@@ -2279,9 +2279,9 @@ class API:
         )
 
     @payload('friendship')
-    def show_friendship(self, **kwargs):
-        """show_friendship(*, source_id, source_screen_name, target_id, \
-                           target_screen_name)
+    def get_friendship(self, **kwargs):
+        """get_friendship(*, source_id, source_screen_name, target_id, \
+                          target_screen_name)
 
         Returns detailed information about the relationship between two users.
 

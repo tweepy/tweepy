@@ -126,7 +126,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET friendships/outgoing`_              | :meth:`API.friendships_outgoing`    |
     +------------------------------------------+-------------------------------------+
-    | `GET friendships/show`_                  | :meth:`API.show_friendship`         |
+    | `GET friendships/show`_                  | :meth:`API.get_friendship`          |
     +------------------------------------------+-------------------------------------+
     | `GET users/lookup`_                      | :meth:`API.lookup_users`            |
     +------------------------------------------+-------------------------------------+
@@ -486,7 +486,7 @@ Follow, search, and get users
 
 .. automethod:: API.friendships_outgoing
 
-.. automethod:: API.show_friendship
+.. automethod:: API.get_friendship
 
 .. automethod:: API.lookup_users
 

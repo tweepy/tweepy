@@ -156,9 +156,9 @@ class TweepyAPITests(TweepyTestCase):
         friend = self.api.create_friendship(screen_name='Twitter')
         self.assertEqual(friend.screen_name, 'Twitter')
 
-    @tape.use_cassette('testshowfriendship.json')
-    def testshowfriendship(self):
-        source, target = self.api.show_friendship(target_screen_name='twitter')
+    @tape.use_cassette('testgetfriendship.json')
+    def testgetfriendship(self):
+        source, target = self.api.get_friendship(target_screen_name='twitter')
         self.assertTrue(isinstance(source, Friendship))
         self.assertTrue(isinstance(target, Friendship))
 
