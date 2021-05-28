@@ -323,9 +323,9 @@ class TweepyAPITests(TweepyTestCase):
         assert_list(self.api.add_list_members(**params))
         assert_list(self.api.remove_list_members(**params))
 
-    @tape.use_cassette('testlistmembers.json')
-    def testlistmembers(self):
-        self.api.list_members(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
+    @tape.use_cassette('testgetlistmembers.json')
+    def testgetlistmembers(self):
+        self.api.get_list_members(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
     @tape.use_cassette('testgetlistmember.json')
     def testgetlistmember(self):

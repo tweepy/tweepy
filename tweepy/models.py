@@ -207,7 +207,7 @@ class List(Model):
         return self._api.remove_list_member(self.slug, id)
 
     def members(self, **kwargs):
-        return self._api.list_members(
+        return self._api.get_list_members(
             self.user.screen_name, self.slug, **kwargs
         )
 

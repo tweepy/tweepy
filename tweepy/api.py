@@ -1313,9 +1313,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_members(self, **kwargs):
-        """list_members(*, list_id, slug, owner_screen_name, owner_id, count, \
-                        cursor, include_entities, skip_status)
+    def get_list_members(self, **kwargs):
+        """get_list_members(*, list_id, slug, owner_screen_name, owner_id, \
+                            count, cursor, include_entities, skip_status)
 
         Returns the members of the specified list.
 
