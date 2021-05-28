@@ -1271,8 +1271,8 @@ class API:
     # Create and manage lists
 
     @payload('list', list=True)
-    def lists_all(self, **kwargs):
-        """lists_all(*, user_id, screen_name, reverse)
+    def get_lists(self, **kwargs):
+        """get_lists(*, user_id, screen_name, reverse)
 
         Returns all lists the authenticating or specified user subscribes to,
         including their own. The user is specified using the ``user_id`` or

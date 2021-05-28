@@ -70,7 +70,7 @@
     +------------------------------------------+-------------------------------------+
     | .. centered:: |Create and manage lists|_                                       |
     +------------------------------------------+-------------------------------------+
-    | `GET lists/list`_                        | :meth:`API.lists_all`               |
+    | `GET lists/list`_                        | :meth:`API.get_lists`               |
     +------------------------------------------+-------------------------------------+
     | `GET lists/members`_                     | :meth:`API.list_members`            |
     +------------------------------------------+-------------------------------------+
@@ -429,7 +429,7 @@ Accounts and users
 Create and manage lists
 -----------------------
 
-.. automethod:: API.lists_all
+.. automethod:: API.get_lists
 
 .. automethod:: API.list_members
 

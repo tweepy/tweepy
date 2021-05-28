@@ -271,9 +271,9 @@ class TweepyAPITests(TweepyTestCase):
     #     self.assertEqual(l.description, 'updated!')
     #     self.api.destroy_list(list_id=l.id)
 
-    @tape.use_cassette('testlistsall.json')
-    def testlistsall(self):
-        self.api.lists_all()
+    @tape.use_cassette('testgetlists.json')
+    def testgetlists(self):
+        self.api.get_lists()
 
     @tape.use_cassette('testlistsmemberships.json')
     def testlistsmemberships(self):

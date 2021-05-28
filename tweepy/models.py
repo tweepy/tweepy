@@ -443,7 +443,7 @@ class User(Model, HashableID):
         return self._api.lists_subscriptions(user_id=self.id, *args, **kwargs)
 
     def lists(self, *args, **kwargs):
-        return self._api.lists_all(user_id=self.id, *args, **kwargs)
+        return self._api.get_lists(user_id=self.id, *args, **kwargs)
 
     def followers_ids(self, *args, **kwargs):
         return self._api.followers_ids(user_id=self.id, *args, **kwargs)
