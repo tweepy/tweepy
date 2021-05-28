@@ -327,8 +327,8 @@ class TweepyAPITests(TweepyTestCase):
     def testlistmembers(self):
         self.api.list_members(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
-    @tape.use_cassette('testshowlistmember.json')
-    def testshowlistmember(self):
+    @tape.use_cassette('testgetlistmember.json')
+    def testgetlistmember(self):
         self.assertTrue(self.api.get_list_member(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterAPI'))
 
     @tape.use_cassette('testsubscribeunsubscribelist.json')
