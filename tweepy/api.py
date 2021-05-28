@@ -1444,8 +1444,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_ownerships(self, **kwargs):
-        """lists_ownerships(*, user_id, screen_name, count, cursor)
+    def get_list_ownerships(self, **kwargs):
+        """get_list_ownerships(*, user_id, screen_name, count, cursor)
 
         Returns the lists owned by the specified user. Private lists will only
         be shown if the authenticated user is also the owner of the lists. If
