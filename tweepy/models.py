@@ -433,8 +433,8 @@ class User(Model, HashableID):
         self._api.destroy_friendship(user_id=self.id)
         self.following = False
 
-    def lists_memberships(self, *args, **kwargs):
-        return self._api.lists_memberships(user_id=self.id, *args, **kwargs)
+    def list_memberships(self, *args, **kwargs):
+        return self._api.get_list_memberships(user_id=self.id, *args, **kwargs)
 
     def lists_ownerships(self, *args, **kwargs):
         return self._api.lists_ownerships(user_id=self.id, *args, **kwargs)

@@ -1404,9 +1404,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def lists_memberships(self, **kwargs):
-        """lists_memberships(*, user_id, screen_name, count, cursor, \
-                             filter_to_owned_lists)
+    def get_list_memberships(self, **kwargs):
+        """get_list_memberships(*, user_id, screen_name, count, cursor, \
+                                filter_to_owned_lists)
 
         Returns the lists the specified user has been added to. If ``user_id``
         or ``screen_name`` are not provided, the memberships for the

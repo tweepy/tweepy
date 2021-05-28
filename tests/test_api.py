@@ -275,9 +275,9 @@ class TweepyAPITests(TweepyTestCase):
     def testgetlists(self):
         self.api.get_lists()
 
-    @tape.use_cassette('testlistsmemberships.json')
-    def testlistsmemberships(self):
-        self.api.lists_memberships()
+    @tape.use_cassette('testgetlistmemberships.json')
+    def testgetlistmemberships(self):
+        self.api.get_list_memberships()
 
     @tape.use_cassette('testlistsownerships.json')
     def testlistsownerships(self):

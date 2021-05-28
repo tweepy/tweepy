@@ -76,7 +76,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET lists/members/show`_                | :meth:`API.get_list_member`         |
     +------------------------------------------+-------------------------------------+
-    | `GET lists/memberships`_                 | :meth:`API.lists_memberships`       |
+    | `GET lists/memberships`_                 | :meth:`API.get_list_memberships`    |
     +------------------------------------------+-------------------------------------+
     | `GET lists/ownerships`_                  | :meth:`API.lists_ownerships`        |
     +------------------------------------------+-------------------------------------+
@@ -435,7 +435,7 @@ Create and manage lists
 
 .. automethod:: API.get_list_member
 
-.. automethod:: API.lists_memberships
+.. automethod:: API.get_list_memberships
 
 .. automethod:: API.lists_ownerships
 
