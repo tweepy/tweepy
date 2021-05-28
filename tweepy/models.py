@@ -211,9 +211,6 @@ class List(Model):
             self.user.screen_name, self.slug, **kwargs
         )
 
-    def is_member(self, id):
-        return self._api.is_list_member(self.user.screen_name, self.slug, id)
-
     def subscribe(self):
         return self._api.subscribe_list(self.user.screen_name, self.slug)
 
@@ -223,11 +220,6 @@ class List(Model):
     def subscribers(self, **kwargs):
         return self._api.get_list_subscribers(
             self.user.screen_name, self.slug, **kwargs
-        )
-
-    def is_subscribed(self, id):
-        return self._api.is_subscribed_list(
-            self.user.screen_name, self.slug, id
         )
 
 
