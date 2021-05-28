@@ -36,7 +36,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET favorites/list`_                    | :meth:`API.favorites`               |
     +------------------------------------------+-------------------------------------+
-    | `GET statuses/lookup`_                   | :meth:`API.statuses_lookup`         |
+    | `GET statuses/lookup`_                   | :meth:`API.lookup_statuses`         |
     +------------------------------------------+-------------------------------------+
     | `GET statuses/oembed`_                   | :meth:`API.get_oembed`              |
     +------------------------------------------+-------------------------------------+
@@ -392,7 +392,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.favorites
 
-.. automethod:: API.statuses_lookup
+.. automethod:: API.lookup_statuses
 
 .. automethod:: API.get_oembed
 

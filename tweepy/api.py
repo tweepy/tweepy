@@ -617,8 +617,8 @@ class API:
         )
 
     @payload('status', list=True)
-    def statuses_lookup(self, id, **kwargs):
-        """statuses_lookup(id, *, include_entities, trim_user, map, \
+    def lookup_statuses(self, id, **kwargs):
+        """lookup_statuses(id, *, include_entities, trim_user, map, \
                            include_ext_alt_text, include_card_uri)
 
         Returns full Tweet objects for up to 100 Tweets per request, specified
