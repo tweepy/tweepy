@@ -64,7 +64,7 @@
     +------------------------------------------+--------------------------------------+
     | .. centered:: |Search Tweets|_                                                  |
     +------------------------------------------+--------------------------------------+
-    | `GET search/tweets`_                     | :meth:`API.search`                   |
+    | `GET search/tweets`_                     | :meth:`API.search_tweets`            |
     +------------------------------------------+--------------------------------------+
     | .. centered:: :ref:`Accounts and users`                                         |
     +------------------------------------------+--------------------------------------+
@@ -421,7 +421,7 @@ Post, retrieve, and engage with Tweets
 Search Tweets
 -------------
 
-.. automethod:: API.search
+.. automethod:: API.search_tweets
 
 Accounts and users
 ==================

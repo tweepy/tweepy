@@ -144,5 +144,5 @@ key and secret::
 With the bearer token received, we are now ready for business::
 
    api = tweepy.API(auth)
-   for tweet in tweepy.Cursor(api.search, q='tweepy').items(10):
+   for tweet in tweepy.Cursor(api.search_tweets, q='tweepy').items(10):
        print(tweet.text)

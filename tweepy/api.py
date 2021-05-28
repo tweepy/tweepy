@@ -1190,9 +1190,9 @@ class API:
 
     @pagination(mode='id')
     @payload('search_results')
-    def search(self, q, **kwargs):
-        """search(q, *, geocode, lang, locale, result_type, count, until, \
-                  since_id, max_id, include_entities)
+    def search_tweets(self, q, **kwargs):
+        """search_tweets(q, *, geocode, lang, locale, result_type, count, \
+                         until, since_id, max_id, include_entities)
 
         Returns a collection of relevant Tweets matching a specified query.
 

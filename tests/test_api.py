@@ -355,9 +355,9 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(self.api.get_saved_search(s.id).query, 'test')
         self.api.destroy_saved_search(s.id)
 
-    @tape.use_cassette('testsearch.json')
-    def testsearch(self):
-        self.api.search('tweepy')
+    @tape.use_cassette('testsearchtweets.json')
+    def testsearchtweets(self):
+        self.api.search_tweets('tweepy')
 
     @tape.use_cassette('testgeoapis.json')
     def testgeoapis(self):

@@ -22,7 +22,8 @@ Example
     auth = tweepy.AppAuthHandler("Consumer Key here", "Consumer Secret here")
     api = tweepy.API(auth)
 
-    for status in tweepy.Cursor(api.search, "Tweepy", count=100).items(250):
+    for status in tweepy.Cursor(api.search_tweets, "Tweepy",
+                                count=100).items(250):
         print(status.id)
 
     for page in tweepy.Cursor(api.followers, screen_name="TwitterDev",
