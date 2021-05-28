@@ -27,6 +27,7 @@ sys.path.append(os.path.abspath('..'))
 extensions = [
   'myst_parser',
   'sphinx.ext.autodoc',
+  'sphinx.ext.autosectionlabel',
   'sphinx.ext.intersphinx',
   'sphinx.ext.napoleon'
 ]
