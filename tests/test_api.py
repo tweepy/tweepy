@@ -131,9 +131,9 @@ class TweepyAPITests(TweepyTestCase):
     def testsearchusers(self):
         self.api.search_users('twitter')
 
-    @tape.use_cassette('testlistdirectmessages.json')
-    def testlistdirectmessages(self):
-        self.api.list_direct_messages()
+    @tape.use_cassette('testgetdirectmessages.json')
+    def testgetdirectmessages(self):
+        self.api.get_direct_messages()
 
     @tape.use_cassette('testsendanddestroydirectmessage.json')
     def testsendanddestroydirectmessage(self):

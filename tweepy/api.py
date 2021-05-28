@@ -3179,8 +3179,8 @@ class API:
 
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
-    def list_direct_messages(self, **kwargs):
-        """list_direct_messages(*, count, cursor)
+    def get_direct_messages(self, **kwargs):
+        """get_direct_messages(*, count, cursor)
 
         Returns all Direct Message events (both sent and received) within the
         last 30 days. Sorted in reverse-chronological order.
