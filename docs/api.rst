@@ -240,7 +240,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET geo/reverse_geocode`_               | :meth:`API.reverse_geocode`         |
     +------------------------------------------+-------------------------------------+
-    | `GET geo/search`_                        | :meth:`API.geo_search`              |
+    | `GET geo/search`_                        | :meth:`API.search_geo`              |
     +------------------------------------------+-------------------------------------+
     | .. centered:: :ref:`Developer utilities`                                       |
     +------------------------------------------+-------------------------------------+
@@ -612,7 +612,7 @@ Get places near a location
 
 .. automethod:: API.reverse_geocode
 
-.. automethod:: API.geo_search
+.. automethod:: API.search_geo
 
 Developer utilities
 ===================

@@ -3810,8 +3810,8 @@ class API:
         )
 
     @payload('place', list=True)
-    def geo_search(self, **kwargs):
-        """geo_search(*, lat, long, query, ip, granularity, max_results)
+    def search_geo(self, **kwargs):
+        """search_geo(*, lat, long, query, ip, granularity, max_results)
 
         Search for places that can be attached to a Tweet via
         :func:`API.update_status`. Given a latitude and a longitude pair, an IP
