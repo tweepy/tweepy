@@ -86,7 +86,7 @@
     +------------------------------------------+-------------------------------------+
     | `GET lists/subscribers`_                 | :meth:`API.list_subscribers`        |
     +------------------------------------------+-------------------------------------+
-    | `GET lists/subscribers/show`_            | :meth:`API.show_list_subscriber`    |
+    | `GET lists/subscribers/show`_            | :meth:`API.get_list_subscriber`     |
     +------------------------------------------+-------------------------------------+
     | `GET lists/subscriptions`_               | :meth:`API.lists_subscriptions`     |
     +------------------------------------------+-------------------------------------+
@@ -445,7 +445,7 @@ Create and manage lists
 
 .. automethod:: API.list_subscribers
 
-.. automethod:: API.show_list_subscriber
+.. automethod:: API.get_list_subscriber
 
 .. automethod:: API.lists_subscriptions
 

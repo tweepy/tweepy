@@ -344,9 +344,9 @@ class TweepyAPITests(TweepyTestCase):
     def testlistsubscribers(self):
         self.api.list_subscribers(owner_screen_name='Twitter', slug='Official-Twitter-Accounts')
 
-    @tape.use_cassette('testshowlistsubscriber.json')
-    def testshowlistsubscriber(self):
-        self.assertTrue(self.api.show_list_subscriber(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterMktg'))
+    @tape.use_cassette('testgetlistsubscriber.json')
+    def testgetlistsubscriber(self):
+        self.assertTrue(self.api.get_list_subscriber(owner_screen_name='Twitter', slug='Official-Twitter-Accounts', screen_name='TwitterMktg'))
 
     @tape.use_cassette('testsavedsearches.json')
     def testsavedsearches(self):

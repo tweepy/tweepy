@@ -1604,8 +1604,8 @@ class API:
         )
 
     @payload('user')
-    def show_list_subscriber(self, **kwargs):
-        """show_list_subscriber( \
+    def get_list_subscriber(self, **kwargs):
+        """get_list_subscriber( \
             *, owner_screen_name, owner_id, list_id, slug, user_id, \
             screen_name, include_entities, skip_status \
         )
