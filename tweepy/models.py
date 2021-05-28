@@ -140,8 +140,8 @@ class DirectMessage(Model):
             results.append(cls.parse(api, obj))
         return results
 
-    def destroy(self):
-        return self._api.destroy_direct_message(self.id)
+    def delete(self):
+        return self._api.delete_direct_message(self.id)
 
 
 class Friendship(Model):

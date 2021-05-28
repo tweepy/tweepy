@@ -3153,8 +3153,8 @@ class API:
 
     # Sending and receiving events
 
-    def destroy_direct_message(self, id, **kwargs):
-        """destroy_direct_message(id)
+    def delete_direct_message(self, id, **kwargs):
+        """delete_direct_message(id)
 
         Deletes the direct message specified in the required ID parameter. The
         authenticating user must be the recipient of the specified direct

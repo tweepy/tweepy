@@ -135,8 +135,8 @@ class TweepyAPITests(TweepyTestCase):
     def testgetdirectmessages(self):
         self.api.get_direct_messages()
 
-    @tape.use_cassette('testsendanddestroydirectmessage.json')
-    def testsendanddestroydirectmessage(self):
+    @tape.use_cassette('testsendanddeletedirectmessage.json')
+    def testsendanddeletedirectmessage(self):
         me = self.api.verify_credentials()
 
         # send
@@ -146,7 +146,7 @@ class TweepyAPITests(TweepyTestCase):
         self.assertEqual(int(sent_dm.message_create['target']['recipient_id']), me.id)
 
         # destroy
-        self.api.destroy_direct_message(sent_dm.id)
+        self.api.delete_direct_message(sent_dm.id)
 
     @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):

@@ -190,7 +190,7 @@
     +------------------------------------------+-------------------------------------+
     | .. centered:: |Sending and receiving events|_                                  |
     +------------------------------------------+-------------------------------------+
-    | `DELETE direct_messages/events/destroy`_ | :meth:`API.destroy_direct_message`  |
+    | `DELETE direct_messages/events/destroy`_ | :meth:`API.delete_direct_message`   |
     +------------------------------------------+-------------------------------------+
     | `GET direct_messages/events/list`_       | :meth:`API.get_direct_messages`     |
     +------------------------------------------+-------------------------------------+
@@ -554,7 +554,7 @@ Direct Messages
 Sending and receiving events
 ----------------------------
 
-.. automethod:: API.destroy_direct_message
+.. automethod:: API.delete_direct_message
 
 .. automethod:: API.get_direct_messages
 
