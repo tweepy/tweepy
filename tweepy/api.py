@@ -1354,8 +1354,8 @@ class API:
         )
 
     @payload('user')
-    def show_list_member(self, **kwargs):
-        """show_list_member( \
+    def get_list_member(self, **kwargs):
+        """get_list_member( \
             *, list_id, slug, user_id, screen_name, owner_screen_name, \
             owner_id, include_entities, skip_status \
         )
