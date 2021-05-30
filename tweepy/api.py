@@ -3942,8 +3942,11 @@ class API:
         resource families. When using application-only auth, this method's
         response indicates the application-only auth rate limiting context.
 
-        :param resources: A comma-separated list of resource families you want
-                          to know the current rate limit disposition for.
+        Parameters
+        ----------
+        resources
+            A comma-separated list of resource families you want to know the 
+            current rate limit disposition for.
 
         Returns
         -------
