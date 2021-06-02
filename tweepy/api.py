@@ -2254,8 +2254,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friendships_outgoing(self, **kwargs):
-        """friendships_outgoing(*, cursor, stringify_ids)
+    def outgoing_friendships(self, **kwargs):
+        """outgoing_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every protected user for whom
         the authenticating user has a pending follow request.

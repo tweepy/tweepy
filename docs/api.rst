@@ -124,7 +124,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET friendships/no_retweets/ids`_       | :meth:`API.no_retweets_friendships`  |
     +------------------------------------------+--------------------------------------+
-    | `GET friendships/outgoing`_              | :meth:`API.friendships_outgoing`     |
+    | `GET friendships/outgoing`_              | :meth:`API.outgoing_friendships`     |
     +------------------------------------------+--------------------------------------+
     | `GET friendships/show`_                  | :meth:`API.get_friendship`           |
     +------------------------------------------+--------------------------------------+
@@ -484,7 +484,7 @@ Follow, search, and get users
 
 .. automethod:: API.no_retweets_friendships
 
-.. automethod:: API.friendships_outgoing
+.. automethod:: API.outgoing_friendships
 
 .. automethod:: API.get_friendship
 
