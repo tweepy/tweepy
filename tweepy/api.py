@@ -2170,8 +2170,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friendships_incoming(self, **kwargs):
-        """friendships_incoming(*, cursor, stringify_ids)
+    def incoming_friendships(self, **kwargs):
+        """incoming_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every user who has a pending
         request to follow the authenticating user.
