@@ -2097,8 +2097,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def friends_ids(self, **kwargs):
-        """friends_ids(*, user_id, screen_name, cursor, stringify_ids, count)
+    def get_friend_ids(self, **kwargs):
+        """get_friend_ids(*, user_id, screen_name, cursor, stringify_ids, \
+                          count)
 
         Returns an array containing the IDs of users being followed by the
         specified user.

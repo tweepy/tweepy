@@ -15,7 +15,7 @@ class TweepyCursorTests(TweepyTestCase):
 
     @tape.use_cassette('testcursorcursoritems.yaml', serializer='yaml')
     def testcursorcursoritems(self):
-        items = list(Cursor(self.api.friends_ids).items(2))
+        items = list(Cursor(self.api.get_friend_ids).items(2))
         self.assertEqual(len(items), 2)
 
         items = list(Cursor(self.api.get_follower_ids, screen_name=username).items(1))
@@ -23,7 +23,7 @@ class TweepyCursorTests(TweepyTestCase):
 
     @tape.use_cassette('testcursorcursorpages.yaml', serializer='yaml')
     def testcursorcursorpages(self):
-        pages = list(Cursor(self.api.friends_ids).pages(1))
+        pages = list(Cursor(self.api.get_friend_ids).pages(1))
         self.assertTrue(len(pages) == 1)
 
         pages = list(Cursor(self.api.get_follower_ids, screen_name=username).pages(1))
@@ -31,7 +31,7 @@ class TweepyCursorTests(TweepyTestCase):
 
     @tape.use_cassette('testcursorsetstartcursor.json')
     def testcursorsetstartcursor(self):
-        c = Cursor(self.api.friends_ids, cursor=123456)
+        c = Cursor(self.api.get_friend_ids, cursor=123456)
         self.assertEqual(c.iterator.next_cursor, 123456)
         self.assertFalse('cursor' in c.iterator.kwargs)
 

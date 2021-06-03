@@ -162,9 +162,9 @@ class TweepyAPITests(TweepyTestCase):
         self.assertTrue(isinstance(source, Friendship))
         self.assertTrue(isinstance(target, Friendship))
 
-    @tape.use_cassette('testfriendsids.yaml', serializer='yaml')
-    def testfriendsids(self):
-        self.api.friends_ids(screen_name=username)
+    @tape.use_cassette('testgetfriendids.yaml', serializer='yaml')
+    def testgetfriendids(self):
+        self.api.get_friend_ids(screen_name=username)
 
     @tape.use_cassette('testgetfollowerids.yaml', serializer='yaml')
     def testgetfollowerids(self):
