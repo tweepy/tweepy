@@ -112,7 +112,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET followers/ids`_                     | :meth:`API.followers_ids`            |
     +------------------------------------------+--------------------------------------+
-    | `GET followers/list`_                    | :meth:`API.followers`                |
+    | `GET followers/list`_                    | :meth:`API.get_followers`            |
     +------------------------------------------+--------------------------------------+
     | `GET friends/ids`_                       | :meth:`API.friends_ids`              |
     +------------------------------------------+--------------------------------------+
@@ -472,7 +472,7 @@ Follow, search, and get users
 
 .. automethod:: API.followers_ids
 
-.. automethod:: API.followers
+.. automethod:: API.get_followers
 
 .. automethod:: API.friends_ids
 

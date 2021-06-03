@@ -26,7 +26,7 @@ Example
                                 count=100).items(250):
         print(status.id)
 
-    for page in tweepy.Cursor(api.followers, screen_name="TwitterDev",
+    for page in tweepy.Cursor(api.get_followers, screen_name="TwitterDev",
                               count=200).pages(5):
         print(len(page))
 

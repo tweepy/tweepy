@@ -174,9 +174,9 @@ class TweepyAPITests(TweepyTestCase):
     def testfriends(self):
         self.api.friends(screen_name=username)
 
-    @tape.use_cassette('testfollowers.yaml', serializer='yaml')
-    def testfollowers(self):
-        self.api.followers(screen_name=username)
+    @tape.use_cassette('testgetfollowers.yaml', serializer='yaml')
+    def testgetfollowers(self):
+        self.api.get_followers(screen_name=username)
 
     @tape.use_cassette('testverifycredentials.json')
     def testverifycredentials(self):

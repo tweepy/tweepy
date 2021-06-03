@@ -415,7 +415,7 @@ class User(Model, HashableID):
         return self._api.friends(user_id=self.id, **kwargs)
 
     def followers(self, **kwargs):
-        return self._api.followers(user_id=self.id, **kwargs)
+        return self._api.get_followers(user_id=self.id, **kwargs)
 
     def follow(self):
         self._api.create_friendship(user_id=self.id)

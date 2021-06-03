@@ -2056,9 +2056,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def followers(self, **kwargs):
-        """followers(*, user_id, screen_name, cursor, count, skip_status, \
-                     include_user_entities)
+    def get_followers(self, **kwargs):
+        """get_followers(*, user_id, screen_name, cursor, count, skip_status, \
+                         include_user_entities)
 
         Returns a user's followers ordered in which they were added. If no user
         is specified by id/screen name, it defaults to the authenticated user.
