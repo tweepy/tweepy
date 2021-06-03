@@ -579,8 +579,8 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def favorites(self, **kwargs):
-        """favorites(*, user_id, screen_name, count, since_id, max_id, \
+    def get_favorites(self, **kwargs):
+        """get_favorites(*, user_id, screen_name, count, since_id, max_id, \
                      include_entities)
 
         Returns the favorite statuses for the authenticating user or user

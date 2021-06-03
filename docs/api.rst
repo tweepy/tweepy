@@ -34,7 +34,7 @@
     +------------------------------------------+--------------------------------------+
     | .. centered:: |Post, retrieve, and engage with Tweets|_                         |
     +------------------------------------------+--------------------------------------+
-    | `GET favorites/list`_                    | :meth:`API.favorites`                |
+    | `GET favorites/list`_                    | :meth:`API.get_favorites`            |
     +------------------------------------------+--------------------------------------+
     | `GET statuses/lookup`_                   | :meth:`API.lookup_statuses`          |
     +------------------------------------------+--------------------------------------+
@@ -390,7 +390,7 @@ Get Tweet timelines
 Post, retrieve, and engage with Tweets
 --------------------------------------
 
-.. automethod:: API.favorites
+.. automethod:: API.get_favorites
 
 .. automethod:: API.lookup_statuses
 

@@ -237,9 +237,9 @@ class TweepyAPITests(TweepyTestCase):
             if k == 'email': continue
             self.assertEqual(getattr(updated, k), v)
 
-    @tape.use_cassette('testfavorites.json')
-    def testfavorites(self):
-        self.api.favorites()
+    @tape.use_cassette('testgetfavorites.json')
+    def testgetfavorites(self):
+        self.api.get_favorites()
 
     @tape.use_cassette('testcreatedestroyfavorite.json')
     def testcreatedestroyfavorite(self):
