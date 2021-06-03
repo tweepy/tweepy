@@ -439,8 +439,8 @@ class User(Model, HashableID):
     def lists(self, *args, **kwargs):
         return self._api.get_lists(user_id=self.id, *args, **kwargs)
 
-    def followers_ids(self, *args, **kwargs):
-        return self._api.followers_ids(user_id=self.id, *args, **kwargs)
+    def follower_ids(self, *args, **kwargs):
+        return self._api.get_follower_ids(user_id=self.id, *args, **kwargs)
 
 
 class IDModel(Model):

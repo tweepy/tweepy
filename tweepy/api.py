@@ -2021,8 +2021,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def followers_ids(self, **kwargs):
-        """followers_ids(*, user_id, screen_name, cursor, stringify_ids, count)
+    def get_follower_ids(self, **kwargs):
+        """get_follower_ids(*, user_id, screen_name, cursor, stringify_ids, \
+                            count)
 
         Returns an array containing the IDs of users following the specified
         user.

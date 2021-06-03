@@ -110,7 +110,7 @@
     +------------------------------------------+--------------------------------------+
     | .. centered:: |Follow, search, and get users|_                                  |
     +------------------------------------------+--------------------------------------+
-    | `GET followers/ids`_                     | :meth:`API.followers_ids`            |
+    | `GET followers/ids`_                     | :meth:`API.get_follower_ids`         |
     +------------------------------------------+--------------------------------------+
     | `GET followers/list`_                    | :meth:`API.get_followers`            |
     +------------------------------------------+--------------------------------------+
@@ -470,7 +470,7 @@ Create and manage lists
 Follow, search, and get users
 -----------------------------
 
-.. automethod:: API.followers_ids
+.. automethod:: API.get_follower_ids
 
 .. automethod:: API.get_followers
 
