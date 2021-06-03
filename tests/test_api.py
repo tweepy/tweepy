@@ -256,9 +256,9 @@ class TweepyAPITests(TweepyTestCase):
     def testgetblocks(self):
         self.api.get_blocks()
 
-    @tape.use_cassette('testblocksids.json')
-    def testblocksids(self):
-        self.api.blocks_ids()
+    @tape.use_cassette('testgetblockedids.json')
+    def testgetblockedids(self):
+        self.api.get_blocked_ids()
 
     # TODO: Rewrite test to be less brittle. It fails way too often.
     # def testcreateupdatedestroylist(self):

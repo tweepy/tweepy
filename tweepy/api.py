@@ -2885,8 +2885,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def blocks_ids(self, **kwargs):
-        """blocks_ids(*, stringify_ids, cursor)
+    def get_blocked_ids(self, **kwargs):
+        """get_blocked_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user is
         blocking.

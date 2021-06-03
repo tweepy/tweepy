@@ -168,7 +168,7 @@
     +------------------------------------------+--------------------------------------+
     | .. centered:: |Mute, block, and report users|_                                  |
     +------------------------------------------+--------------------------------------+
-    | `GET blocks/ids`_                        | :meth:`API.blocks_ids`               |
+    | `GET blocks/ids`_                        | :meth:`API.get_blocked_ids`          |
     +------------------------------------------+--------------------------------------+
     | `GET blocks/list`_                       | :meth:`API.get_blocks`               |
     +------------------------------------------+--------------------------------------+
@@ -530,7 +530,7 @@ Manage account settings and profile
 Mute, block, and report users
 -----------------------------
 
-.. automethod:: API.blocks_ids
+.. automethod:: API.get_blocked_ids
 
 .. automethod:: API.get_blocks
 
