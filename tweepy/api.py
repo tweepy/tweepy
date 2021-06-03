@@ -2973,8 +2973,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def mutes(self, **kwargs):
-        """mutes(*, cursor, include_entities, skip_status)
+    def get_mutes(self, **kwargs):
+        """get_mutes(*, cursor, include_entities, skip_status)
 
         Returns an array of user objects the authenticating user has muted.
 
