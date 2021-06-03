@@ -2945,8 +2945,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def mutes_ids(self, **kwargs):
-        """mutes_ids(*, stringify_ids, cursor)
+    def get_muted_ids(self, **kwargs):
+        """get_muted_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user has muted.
 

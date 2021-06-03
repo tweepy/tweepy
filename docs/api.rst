@@ -172,7 +172,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET blocks/list`_                       | :meth:`API.get_blocks`               |
     +------------------------------------------+--------------------------------------+
-    | `GET mutes/users/ids`_                   | :meth:`API.mutes_ids`                |
+    | `GET mutes/users/ids`_                   | :meth:`API.get_muted_ids`            |
     +------------------------------------------+--------------------------------------+
     | `GET mutes/users/list`_                  | :meth:`API.get_mutes`                |
     +------------------------------------------+--------------------------------------+
@@ -534,7 +534,7 @@ Mute, block, and report users
 
 .. automethod:: API.get_blocks
 
-.. automethod:: API.mutes_ids
+.. automethod:: API.get_muted_ids
 
 .. automethod:: API.get_mutes
 
