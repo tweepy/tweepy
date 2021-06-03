@@ -581,7 +581,7 @@ class API:
     @payload('status', list=True)
     def get_favorites(self, **kwargs):
         """get_favorites(*, user_id, screen_name, count, since_id, max_id, \
-                     include_entities)
+                         include_entities)
 
         Returns the favorite statuses for the authenticating user or user
         specified by the ID parameter.
