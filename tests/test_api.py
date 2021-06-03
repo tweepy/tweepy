@@ -252,9 +252,9 @@ class TweepyAPITests(TweepyTestCase):
         self.api.destroy_block(screen_name='twitter')
         self.api.create_friendship(screen_name='twitter')  # restore
 
-    @tape.use_cassette('testblocks.json')
-    def testblocks(self):
-        self.api.blocks()
+    @tape.use_cassette('testgetblocks.json')
+    def testgetblocks(self):
+        self.api.get_blocks()
 
     @tape.use_cassette('testblocksids.json')
     def testblocksids(self):

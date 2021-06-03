@@ -2914,8 +2914,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def blocks(self, **kwargs):
-        """blocks(*, include_entities, skip_status, cursor)
+    def get_blocks(self, **kwargs):
+        """get_blocks(*, include_entities, skip_status, cursor)
 
         Returns an array of user objects that the authenticating user is
         blocking.
