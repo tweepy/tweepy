@@ -2132,9 +2132,9 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def friends(self, **kwargs):
-        """friends(*, user_id, screen_name, cursor, count, skip_status, \
-                   include_user_entities)
+    def get_friends(self, **kwargs):
+        """get_friends(*, user_id, screen_name, cursor, count, skip_status, \
+                       include_user_entities)
 
         Returns a user's friends ordered in which they were added 100 at a
         time. If no user is specified it defaults to the authenticated user.

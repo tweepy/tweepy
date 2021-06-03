@@ -412,7 +412,7 @@ class User(Model, HashableID):
         return self._api.user_timeline(user_id=self.id, **kwargs)
 
     def friends(self, **kwargs):
-        return self._api.friends(user_id=self.id, **kwargs)
+        return self._api.get_friends(user_id=self.id, **kwargs)
 
     def followers(self, **kwargs):
         return self._api.get_followers(user_id=self.id, **kwargs)
