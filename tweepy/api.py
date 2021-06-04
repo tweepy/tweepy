@@ -3642,8 +3642,8 @@ class API:
     # Get locations with trending topics
 
     @payload('json')
-    def trends_available(self, **kwargs):
-        """trends_available()
+    def available_trends(self, **kwargs):
+        """available_trends()
 
         Returns the locations that Twitter has trending topic information for.
         The response is an array of "locations" that encode the location's
