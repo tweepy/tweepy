@@ -228,7 +228,7 @@
     +------------------------------------------+--------------------------------------+
     | .. centered::  |Get trends near a location|_                                    |
     +------------------------------------------+--------------------------------------+
-    | `GET trends/place`_                      | :meth:`API.trends_place`             |
+    | `GET trends/place`_                      | :meth:`API.get_place_trends`         |
     +------------------------------------------+--------------------------------------+
     | .. centered:: :ref:`Geo`                                                        |
     +------------------------------------------+--------------------------------------+
@@ -597,7 +597,7 @@ Get locations with trending topics
 Get trends near a location
 --------------------------
 
-.. automethod:: API.trends_place
+.. automethod:: API.get_place_trends
 
 Geo
 ===

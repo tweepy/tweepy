@@ -3706,8 +3706,8 @@ class API:
     # Get trends near a location
 
     @payload('json')
-    def trends_place(self, id, **kwargs):
-        """trends_place(id *, exclude)
+    def get_place_trends(self, id, **kwargs):
+        """get_place_trends(id *, exclude)
 
         Returns the top 50 trending topics for a specific WOEID, if trending
         information is available for it.
