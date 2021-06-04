@@ -224,7 +224,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET trends/available`_                  | :meth:`API.available_trends`         |
     +------------------------------------------+--------------------------------------+
-    | `GET trends/closest`_                    | :meth:`API.trends_closest`           |
+    | `GET trends/closest`_                    | :meth:`API.closest_trends`           |
     +------------------------------------------+--------------------------------------+
     | .. centered::  |Get trends near a location|_                                    |
     +------------------------------------------+--------------------------------------+
@@ -592,7 +592,7 @@ Get locations with trending topics
 
 .. automethod:: API.available_trends
 
-.. automethod:: API.trends_closest
+.. automethod:: API.closest_trends
 
 Get trends near a location
 --------------------------

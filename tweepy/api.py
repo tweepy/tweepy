@@ -3663,8 +3663,8 @@ class API:
         return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
-    def trends_closest(self, lat, long, **kwargs):
-        """trends_closest(lat, long)
+    def closest_trends(self, lat, long, **kwargs):
+        """closest_trends(lat, long)
 
         Returns the locations that Twitter has trending topic information for,
         closest to a specified location.
