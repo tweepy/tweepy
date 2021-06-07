@@ -260,16 +260,16 @@ class TweepyAPITests(TweepyTestCase):
     def testgetblockedids(self):
         self.api.get_blocked_ids()
 
-    # TODO: Rewrite test to be less brittle. It fails way too often.
-    # def testcreateupdatedestroylist(self):
-    #     params = {
-    #         'owner_screen_name': username,
-    #         'slug': 'tweeps'
-    #     }
-    #     l = self.api.create_list(name=params['slug'], **params)
-    #     l = self.api.update_list(list_id=l.id, description='updated!')
-    #     self.assertEqual(l.description, 'updated!')
-    #     self.api.destroy_list(list_id=l.id)
+    @tape.use_cassette('testcreateupdatedestroylist.yaml', serializer='yaml')
+    def testcreateupdatedestroylist(self):
+        params = {
+            'owner_screen_name': username,
+            'slug': 'tweeps'
+        }
+        l = self.api.create_list(name=params['slug'], **params)
+        l = self.api.update_list(list_id=l.id, description='updated!')
+        self.assertEqual(l.description, 'updated!')
+        self.api.destroy_list(list_id=l.id)
 
     @tape.use_cassette('testgetlists.json')
     def testgetlists(self):

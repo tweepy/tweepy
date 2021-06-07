@@ -1,0 +1,238 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Python/3.9.5 Requests/2.25.1 Tweepy/4.0.0-alpha
+    method: POST
+    uri: https://api.twitter.com/1.1/lists/create.json?name=tweeps&owner_screen_name=TweepyDev&slug=tweeps
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKxVS2+bQBD+K4hrrfCyseHUSGkPidJDlUOlEK0WGOxVll26u8ROo/z3zoKN8Svt
+        IXBAO+/59pvhzWWlmwZTP0jiKPZjfz6NuneCCqKNclP3jNaduILWgEqzBmg0nlvF8Jh5D1bwegMv
+        mceZNjrzzvvrNteFYjkoUshWGDf1J24N9ZFAljZL0+acFehVgnVqDJMCxTYMb5cXa6xazsm20K+j
+        ws5bFwqogZJQTO3eS+HcUuEEiRMs0lmQhonzxccHJXPfxpacyzUTmL2iXAMioAHheusR9edhOPNn
+        URhPZ0mymCXxGNFT7R7Rvk7nAbSx0bFFLAwEOVBjG6jhsqB7KA6xuS46FB2sqnSMdAzGc3rn7rY4
+        2qyMaXSaeZlnrgqZeb9+VnQTb75tBJqAMMww0Lalzrz74PHx7b/cNw0VJcJ5bLtkZtXm6FCjX1fP
+        7mt7YLrh9HXr9KEpEyUrbHmP/iSMnt6f3o8gGOp9ekdVo6SBAu93uK/+BkHpHd+Q9JViIMpBEiAF
+        LYuxjT0nT3hyA4UT+E4Ypn6UTqMtT0I/WFie0BeJs4Hwj0K0piCyqjTgUSBJJ65hNZA/UsBOsARJ
+        QNCcjyp+AcUqNhJoQw1e8BAaScappWQfo5DC4Ii1RmKTx8GYJkZRoTlF9TkpgnjihChWjAPJafG8
+        VJjUAsOtv+t3j3vWhtV0CSMmdESgub4ya1Yv+wvubHBdmBXUwzfIvHx51XRz8FFc0vHrgGefEN7g
+        +aT1s700h8kObO0KjGbxIo6ChZ/MplE0Dxd+5t2Wdz/u7h8KIqSqKT8q46PWPj9bToXAxXs8qxcS
+        9dY20+kiQ2EczJNkOp+HowScieeBKsHNdfB9rNWshJwqkktVdvv/AqV2dnjgl60MbMxlLc7LCYWG
+        S15RHJSNgW5zbT0GZQkVbbn5l/wo5OmPopcQBb9bXMpEgx3drU5IgyPer3U9SPeDSsxrY38Dwq6K
+        ibvGDbkCjm2IfgeobmPblfcXAAD//wMAHloZs9sHAAA=
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '773'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 07 Jun 2021 18:05:45 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Mon, 07 Jun 2021 18:05:45 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_udDWRn/9wkpmZvvRJtJGHQ=="; Max-Age=63072000; Expires=Wed,
+        07 Jun 2023 18:05:45 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - lang=en; Path=/
+      - guest_id=v1%3A162308914554227427; Max-Age=63072000; Expires=Wed, 07 Jun 2023
+        18:05:45 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a0202b12c158db7988b597f6985fcf47
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-response-time:
+      - '53'
+      x-transaction:
+      - 00cdc1bd00ff6b46
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - guest_id=v1%3A162308914554227427; personalization_id="v1_udDWRn/9wkpmZvvRJtJGHQ==";
+        lang=en
+      User-Agent:
+      - Python/3.9.5 Requests/2.25.1 Tweepy/4.0.0-alpha
+    method: POST
+    uri: https://api.twitter.com/1.1/lists/update.json?list_id=1401963606074343434&description=updated%21
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKxVS3ObMBD+K5RrPeFlY8OpmUl7SCY9dHLoTMloBCy2JkKikkicZvLfuwKbYGOn
+        PQQOjPa9n75dXlxWumkw94MkjmI/9pfzqHtnqCDaKDd1T2jdmStoDag0TwCNxnOrGB4z784Knq/g
+        MfM400Zn3ml/3ea6UCwHRQrZCuOm/sytoT4SyNJmadqcswK9SrBOjWFSoLhtSmqg/GTD8XZ9ttaq
+        5ZzsCv4yKvC0daHARiUUS3BvpXCuqXCCxAlW6SJIw8T57OODkqVvY0vO5RMTmL2iXAMioQFhe+mR
+        9ZdhuPAXURjPF0myWiTxGNmp9g3Zvk7nDrSx0bFFLAwEOVBjG6jhsqA7SCYYXRYdmg5WVTpGOgbj
+        Ob1zd2scbTbGNDrNvMwzF4XMvJ8/KrqNt1+3Ak1AGGYYaNtSZ9598Pjr5b/ctw0VJcJ5bLtmZtPm
+        6FCjX1fP/mt7YLrh9Hnn9K4pEyUrbHm//FkY3b/evx5BMNR7/4qqRkkDBd7vcF/9DYLSe94h+SvF
+        QJSDJEAqWjZjG2/cnPDkCgon8J0wTP0onUc7noR+sLI8oY8SZwThH4VoTUFkVWnAo0CSzlzDaiB/
+        pIC9YA2SgKA5H1X8CIpVbCTQhhq84CE0koxTS8k+RiGFwVFrjcQmj4MxTYyiQnOK6lNSBHHihChW
+        jAPJafGwVpjUAsOtv+t3j3vShtV0DSMmdESgub4wT6xe9xfc2eDaMBuoh2+Qefn6ounm4L24pOPX
+        Ac8+ILzB86T1k700h8kObO0qjBbxKo6ClZ8s5lG0DFd+5l2XN99vbu8KIqSqKT8q473WPj5bToXA
+        BXw8q2cS9dY203SRoTAOlkkyXy7DUQLOxMNAleDqMvg21mpWQk4VyaUqu//AGUrt7fDAz1sZ2Jrz
+        WpyXCYWGS95QHJStgW5z7TwGZQkVbbn5l/wo5PRH0UuIgt8tLmWiwY7uTiekwRHv17oepG+DSsxz
+        Y38Dwq6KmfuEG3IDHNsQ/Q5Q3ca2K+8vAAAA//8DAPmh25PjBwAA
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '780'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 07 Jun 2021 18:05:45 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Mon, 07 Jun 2021 18:05:45 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 9e32910ed0352cc90c74697fbe67350ae44898c2802c7ecdfbe44181d2d5e082
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-transaction:
+      - 029872dbf8e1c621
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - guest_id=v1%3A162308914554227427; personalization_id="v1_udDWRn/9wkpmZvvRJtJGHQ==";
+        lang=en
+      User-Agent:
+      - Python/3.9.5 Requests/2.25.1 Tweepy/4.0.0-alpha
+    method: POST
+    uri: https://api.twitter.com/1.1/lists/destroy.json?list_id=1401963606074343434
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKxVS2+bQBD+K5RrrZiHwTanRkp7SJQeqhwqlQgtMNirLLt0d0icRvnvnQWb4Ffa
+        Q+CAdt7z7TfDi8tLN/Fnnr+Mw9iLvfks7N4JKTKD2k3cE1p34kpWAynxCaAxdG41p2M6vbOC5yt4
+        TKeCGzTp9LS/aXNTaJ6DzgrVSnQTb+LWUB8IVGmzNG0ueEFeJVinBrmSJG6bkiGUn2w40a7O1lq1
+        QmTbgr+MCjxtXWiwUTNGJbi3SjrXrXS8ueMvEi9KZpHz2aPHCbzAt7GVEOqJS8qOugUCwgCh9tID
+        682DIPKiMIhn0XK5iJbxGNhj7RuwfZnOHRi0walDqgtktqemLkgjVMG2iBxBdFl0YDpUVemgcpDi
+        Ob1zd2mCbNaIjUnSaTrFi0Kl058/KraJN183kkxAIkcOxrbUmXcfOv56+S/3TcNkSWge2q44rtuc
+        HGry6+rZfW0P3DSCPW+d3jXlsuSFLe+XNwnC+9f71wMIhnrvX0nVaIVQ0PW6ScWEgd0FgjY72hH3
+        K81BloPEJyZaMlMbb9Q8oskVFI5PvAgSL0xm4UATf2Fpwh4VjQjBPwrRYpGpqjJAR0kcnbjIa8j+
+        KAk7wQpUBpLlYlTxI2he8ZHAIEO64CE0kUwwy8g+RqEk0qS1qKjJw2DcZKiZNIKR+pSUQDxyIhQr
+        LiDLWfGw0pTUAiOsv+t1j3vShtdsBSMmdERgubnAJ16v+gvubGhr4Brq4eun03x10XRz8F7crOPX
+        Hs8+IDzS+aj1k700+8n2bO0mDKN4EYf+wltGszCcBwsvnV6XN99vbu+KTCpdM3FQxnutfXy2nElJ
+        +/dwVs8k6q1tpuNFRsLYny+Xs/k8GCUQXD4MVPGvLv1vY63hJeRMZ7nSZfcbOEOpnR0dxHkrhA2e
+        19K8HFFouOQ1o0HZIHSba+sxKEuoWCvwX/KDkKP/xJ4k0/C7paWcGbCju9VJhTTi/Vo3g/RtUDN8
+        buxvQNpVMXGfaEOuQVAbst8ButvYduX9BQAA//8DADZpLyviBwAA
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '780'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 07 Jun 2021 18:05:46 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Mon, 07 Jun 2021 18:05:46 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 9eecafa4acad5e7b11d9248b68f3f8e51a7f103aad6ac5a6bab8b658bd44c652
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-transaction:
+      - 7132d93d3856a69a
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
