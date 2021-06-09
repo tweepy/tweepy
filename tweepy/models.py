@@ -369,7 +369,7 @@ class Status(Model, HashableID):
         return self._api.retweet(self.id)
 
     def retweets(self):
-        return self._api.retweets(self.id)
+        return self._api.get_retweets(self.id)
 
     def favorite(self):
         return self._api.create_favorite(self.id)

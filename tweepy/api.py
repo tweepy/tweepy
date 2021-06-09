@@ -778,8 +778,8 @@ class API:
         )
 
     @payload('status', list=True)
-    def retweets(self, id, **kwargs):
-        """retweets(id, *, count, trim_user)
+    def get_retweets(self, id, **kwargs):
+        """get_retweets(id, *, count, trim_user)
 
         Returns up to 100 of the first Retweets of the given Tweet.
 

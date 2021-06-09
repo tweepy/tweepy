@@ -63,9 +63,9 @@ class TweepyAPITests(TweepyTestCase):
         self.api.retweet(test_tweet_id)
         self.api.unretweet(test_tweet_id)
 
-    @tape.use_cassette('testretweets.json')
-    def testretweets(self):
-        self.api.retweets(test_tweet_id)
+    @tape.use_cassette('testgetretweets.json')
+    def testgetretweets(self):
+        self.api.get_retweets(test_tweet_id)
 
     @tape.use_cassette('testgetretweeterids.json')
     def testgetretweeterids(self):
