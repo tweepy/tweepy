@@ -25,24 +25,23 @@ class HTTPException(TweepyException):
         except json.JSONDecodeError:
             super().__init__(f"{response.status_code} {response.reason}")
         else:
-            error_text = []
+            errors = response_json.get("errors", [])
             # Use := when support for Python 3.7 is dropped
-            if "errors" not in response_json:
-                super().__init__(f"{response.status_code} {response.reason}")
-                return
-            for error in response_json["errors"]:
+            if "error" in response_json:
+                errors.append(response_json["error"])
+            error_text = ""
+            for error in errors:
                 self.api_errors.append(error)
                 if "code" in error:
                     self.api_codes.append(error["code"])
                 if "message" in error:
                     self.api_messages.append(error["message"])
                 if "code" in error and "message" in error:
-                    error_text.append(f"{error['code']} - {error['message']}")
+                    error_text += f"\n{error['code']} - {error['message']}"
                 elif "message" in error:
-                    error_text.append(error["message"])
-            error_text = '\n'.join(error_text)
+                    error_text += '\n' + error["message"]
             super().__init__(
-                f"{response.status_code} {response.reason}\n{error_text}"
+                f"{response.status_code} {response.reason}{error_text}"
             )
 
 
