@@ -54,9 +54,9 @@ class TweepyAPITests(TweepyTestCase):
     def testmentionstimeline(self):
         self.api.mentions_timeline()
 
-    @tape.use_cassette('testretweetsofme.json')
-    def testretweetsofme(self):
-        self.api.retweets_of_me()
+    @tape.use_cassette('testgetretweetsofme.json')
+    def testgetretweetsofme(self):
+        self.api.get_retweets_of_me()
 
     @tape.use_cassette('testretweetandunretweet.json')
     def testretweetandunretweet(self):

@@ -44,7 +44,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET statuses/retweets/:id`_             | :meth:`API.get_retweets`             |
     +------------------------------------------+--------------------------------------+
-    | `GET statuses/retweets_of_me`_           | :meth:`API.retweets_of_me`           |
+    | `GET statuses/retweets_of_me`_           | :meth:`API.get_retweets_of_me`       |
     +------------------------------------------+--------------------------------------+
     | `GET statuses/show/:id`_                 | :meth:`API.get_status`               |
     +------------------------------------------+--------------------------------------+
@@ -400,7 +400,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.get_retweets
 
-.. automethod:: API.retweets_of_me
+.. automethod:: API.get_retweets_of_me
 
 .. automethod:: API.get_status
 

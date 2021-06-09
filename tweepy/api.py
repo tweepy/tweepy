@@ -808,9 +808,9 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def retweets_of_me(self, **kwargs):
-        """retweets_of_me(*, count, since_id, max_id, trim_user, \
-                          include_entities, include_user_entities)
+    def get_retweets_of_me(self, **kwargs):
+        """get_retweets_of_me(*, count, since_id, max_id, trim_user, \
+                              include_entities, include_user_entities)
 
         Returns the 20 most recent Tweets of the authenticated user that have
         been retweeted by others.
