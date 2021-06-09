@@ -746,8 +746,8 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def retweeters(self, id, **kwargs):
-        """retweeters(id, *, count, cursor, stringify_ids)
+    def get_retweeter_ids(self, id, **kwargs):
+        """get_retweeter_ids(id, *, count, cursor, stringify_ids)
 
         Returns up to 100 user IDs belonging to users who have retweeted the
         Tweet specified by the ``id`` parameter.

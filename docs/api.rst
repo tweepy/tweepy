@@ -40,7 +40,7 @@
     +------------------------------------------+--------------------------------------+
     | `GET statuses/oembed`_                   | :meth:`API.get_oembed`               |
     +------------------------------------------+--------------------------------------+
-    | `GET statuses/retweeters/ids`_           | :meth:`API.retweeters`               |
+    | `GET statuses/retweeters/ids`_           | :meth:`API.get_retweeter_ids`        |
     +------------------------------------------+--------------------------------------+
     | `GET statuses/retweets/:id`_             | :meth:`API.retweets`                 |
     +------------------------------------------+--------------------------------------+
@@ -396,7 +396,7 @@ Post, retrieve, and engage with Tweets
 
 .. automethod:: API.get_oembed
 
-.. automethod:: API.retweeters
+.. automethod:: API.get_retweeter_ids
 
 .. automethod:: API.retweets
 
