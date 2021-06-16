@@ -715,7 +715,7 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[int, str], str]
+        ids : Union[List[int, str], str]
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
