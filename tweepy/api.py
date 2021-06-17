@@ -3886,30 +3886,6 @@ class API:
             ), **kwargs
         )
 
-    # Get Twitter configuration details
-
-    @payload('json')
-    def configuration(self, **kwargs):
-        """configuration()
-
-        Returns the current configuration used by Twitter including twitter.com
-        slugs which are not usernames, maximum photo resolutions, and t.co
-        shortened URL length.
-
-        It is recommended applications request this endpoint when they are
-        loaded, but no more than once a day.
-
-        Returns
-        -------
-        :class:`dict`
-            JSON
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
-        """
-        return self.request('GET', 'help/configuration', **kwargs)
-
     # Get Twitter supported languages
 
     @payload('json')

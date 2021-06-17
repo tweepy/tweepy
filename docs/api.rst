@@ -244,10 +244,6 @@
     +------------------------------------------+--------------------------------------+
     | .. centered:: :ref:`Developer utilities`                                        |
     +------------------------------------------+--------------------------------------+
-    | .. centered:: |Get Twitter configuration details|_                              |
-    +------------------------------------------+--------------------------------------+
-    | `GET help/configuration`_                | :meth:`API.configuration`            |
-    +------------------------------------------+--------------------------------------+
     | .. centered:: |Get Twitter supported languages|_                                |
     +------------------------------------------+--------------------------------------+
     | `GET help/languages`_                    | :meth:`API.supported_languages`      |
@@ -361,8 +357,6 @@
 .. |Get places near a location| replace:: *Get places near a location*
 .. _GET geo/reverse_geocode: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-reverse_geocode
 .. _GET geo/search: https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-search
-.. |Get Twitter configuration details| replace:: *Get Twitter configuration details*
-.. _GET help/configuration: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/configuration/api-reference/get-help-configuration
 .. |Get Twitter supported languages| replace:: *Get Twitter supported languages*
 .. _GET help/languages: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
 .. |Get app rate limit status| replace:: *Get app rate limit status*
@@ -616,11 +610,6 @@ Get places near a location
 
 Developer utilities
 ===================
-
-Get Twitter configuration details
----------------------------------
-
-.. automethod:: API.configuration
 
 Get Twitter supported languages
 -------------------------------
