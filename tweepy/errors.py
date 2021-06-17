@@ -72,3 +72,4 @@ class TooManyRequests(HTTPException):
 
 class TwitterServerError(HTTPException):
     """Exception raised for a 5xx HTTP status code"""
+    pass
