@@ -38,7 +38,7 @@ class Tweet(HashableID, DataMapping):
         self.created_at = data.get("created_at")
         if self.created_at is not None:
             self.created_at = datetime.datetime.strptime(
-                self.created_at, "%Y-%m-%dT%H:%M:%S.%fZ"
+                self.created_at, "%Y-%m-%dT%H:%M:%S.%f%z"
             )
 
         self.entities = data.get("entities")
