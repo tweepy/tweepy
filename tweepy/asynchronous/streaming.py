@@ -176,7 +176,7 @@ class AsyncStream:
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
             have been detected as being written in the specified languages. For
-            example, connecting with language=en will only stream Tweets
+            example, connecting with languages=['en'] will only stream Tweets
             detected to be in the English language.
         stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
@@ -243,7 +243,7 @@ class AsyncStream:
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
             have been detected as being written in the specified languages. For
-            example, connecting with language=en will only stream Tweets
+            example, connecting with languages=['en'] will only stream Tweets
             detected to be in the English language.
         stall_warnings: Optional[bool]
             Specifies whether stall warnings should be delivered. See
