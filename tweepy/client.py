@@ -28,7 +28,13 @@ Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 
 
 class Client:
-    """Twitter API v2 Client
+    """Client( \
+        bearer_token=None, consumer_key=None, consumer_secret=None, \
+        access_token=None, access_token_secret=None, *, return_type=Response, \
+        wait_on_rate_limit=False \
+    )
+
+    Twitter API v2 Client
 
     Parameters
     ----------
@@ -42,6 +48,8 @@ class Client:
         Twitter API Access Token
     access_token_secret : Optional[str]
         Twitter API Access Token Secret
+    return_type : Type[dict, requests.Response, Response]
+        Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached
 
@@ -53,15 +61,18 @@ class Client:
         User agent used when making requests to the API
     """
 
-    def __init__(self, bearer_token=None, consumer_key=None,
-                 consumer_secret=None, access_token=None,
-                 access_token_secret=None, *, wait_on_rate_limit=False):
+    def __init__(
+        self, bearer_token=None, consumer_key=None, consumer_secret=None,
+        access_token=None, access_token_secret=None, *, return_type=Response,
+        wait_on_rate_limit=False
+    ):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.access_token_secret = access_token_secret
 
+        self.return_type = return_type
         self.wait_on_rate_limit = wait_on_rate_limit
 
         self.session = requests.Session()
@@ -121,7 +132,7 @@ class Client:
                 raise TwitterServerError(response)
             if not 200 <= response.status_code < 300:
                 raise HTTPException(response)
-            return response.json()
+            return response
 
     def _make_request(self, method, route, params={}, endpoint_parameters=None,
                       json=None, data_type=None, user_auth=False):
@@ -145,6 +156,14 @@ class Client:
 
         response = self.request(method, route, params=request_params,
                                 json=json, user_auth=user_auth)
+
+        if self.return_type is requests.Response:
+            return response
+
+        response = response.json()
+
+        if self.return_type is dict:
+            return response
 
         data = response.get("data")
         if data_type is not None:
@@ -183,8 +202,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates if the Tweet was successfully hidden.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -193,7 +211,7 @@ class Client:
         return self._make_request(
             "PUT", f"/2/tweets/{id}/hidden", json={"hidden": True},
             user_auth=True
-        )[0]["hidden"]
+        )
 
     def unhide_reply(self, id):
         """Unhides a reply to a Tweet.
@@ -206,8 +224,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates if the Tweet was successfully unhidden.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -216,7 +233,7 @@ class Client:
         return self._make_request(
             "PUT", f"/2/tweets/{id}/hidden", json={"hidden": False},
             user_auth=True
-        )[0]["hidden"]
+        )
 
     # Likes
 
@@ -233,10 +250,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates whether the user is unliking the specified Tweet as a
-            result of this request. The returned value is ``False`` for a
-            successful unlike request.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -245,7 +259,7 @@ class Client:
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes/{tweet_id}"
 
-        return self._make_request("DELETE", route, user_auth=True)[0]["liked"]
+        return self._make_request("DELETE", route, user_auth=True)
 
     def like(self, tweet_id):
         """Like a Tweet.
@@ -257,9 +271,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates whether the user likes the specified Tweet as a result of
-            this request.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -270,7 +282,7 @@ class Client:
 
         return self._make_request(
             "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
-        )[0]["liked"]
+        )
 
     # Search Tweets
 
@@ -342,7 +354,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -432,7 +444,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -536,7 +548,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -644,7 +656,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -694,7 +706,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -738,7 +750,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -768,10 +780,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates whether the user is blocking the specified user as a
-            result of this request. The returned value is ``False`` for a
-            successful unblock request.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -782,7 +791,7 @@ class Client:
 
         return self._make_request(
             "DELETE", route, user_auth=True
-        )[0]["blocking"]
+        )
 
     def block(self, target_user_id):
         """Block another user.
@@ -794,9 +803,7 @@ class Client:
 
         Returns
         -------
-        bool
-            Indicates whether the user is blocking the specified user as a
-            result of this request.
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -808,7 +815,7 @@ class Client:
         return self._make_request(
             "POST", route, json={"target_user_id": str(target_user_id)},
             user_auth=True
-        )[0]["blocking"]
+        )
 
     # Follows
 
@@ -825,7 +832,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -869,7 +876,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -917,7 +924,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -948,7 +955,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -993,7 +1000,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------
@@ -1052,7 +1059,7 @@ class Client:
 
         Returns
         -------
-        :ref:`response_reference`
+        Union[dict, requests.Response, Response]
 
         References
         ----------

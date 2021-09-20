@@ -17,14 +17,14 @@ class TweepyTestCase(unittest.TestCase):
     @tape.use_cassette("test_hide_and_unhide_reply.yaml", serializer="yaml")
     def test_hide_and_unhide_reply(self):
         reply_id = 1344794616005066752  # Test Tweet for reply hide/unhide
-        self.assertTrue(self.client.hide_reply(reply_id))
-        self.assertFalse(self.client.unhide_reply(reply_id))
+        self.client.hide_reply(reply_id)
+        self.client.unhide_reply(reply_id)
 
     @tape.use_cassette("test_like_and_unlike.yaml", serializer="yaml")
     def test_like_and_unlike(self):
         tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
-        self.assertTrue(self.client.like(tweet_id))
-        self.assertFalse(self.client.unlike(tweet_id))
+        self.client.like(tweet_id)
+        self.client.unlike(tweet_id)
 
     # TODO: test_search_all_tweets with access to Academic Research product track
 
@@ -56,8 +56,8 @@ class TweepyTestCase(unittest.TestCase):
     @tape.use_cassette("test_block_and_unblock.yaml", serializer="yaml")
     def test_block_and_unblock(self):
         user_id = 17874544  # User ID for @TwitterSupport
-        self.assertTrue(self.client.block(user_id))
-        self.assertFalse(self.client.unblock(user_id))
+        self.client.block(user_id)
+        self.client.unblock(user_id)
 
     @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")
     def test_follow_and_unfollow(self):
