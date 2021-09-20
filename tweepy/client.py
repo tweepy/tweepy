@@ -1226,7 +1226,7 @@ class Client:
         Parameters
         ----------
         target_user_id : Union[int, str]
-            The user ID of the user that you would like to follow
+            The user ID of the user that you would like to follow.
 
         Returns
         -------
