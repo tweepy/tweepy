@@ -34,6 +34,8 @@ extensions = [
 ]
 
 hoverxref_auto_ref = True
+hoverxref_domains = ['py']
+hoverxref_intersphinx = ['aiohttp', 'requests']
 
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
