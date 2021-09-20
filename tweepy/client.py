@@ -1244,6 +1244,56 @@ class Client:
             user_auth=True
         )
 
+    # Mutes
+
+    def unmute(self, target_user_id):
+        """Allows an authenticated user ID to unmute the target user.
+
+        The request succeeds with no action when the user sends a request to a
+        user they're not muting or have already unmuted.
+
+        Parameters
+        ----------
+        target_user_id : Union[int, str]
+            The user ID of the user that you would like to unmute.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting
+        """
+        source_user_id = self.access_token.partition('-')[0]
+        route = f"/2/users/{source_user_id}/muting/{target_user_id}"
+
+        return self._make_request("DELETE", route, user_auth=True)
+
+    def mute(self, target_user_id):
+        """Allows an authenticated user ID to mute the target user.
+
+        Parameters
+        ----------
+        target_user_id : Union[int, str]
+            The user ID of the user that you would like to mute.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/muting"
+
+        return self._make_request(
+            "POST", route, json={"target_user_id": str(target_user_id)},
+            user_auth=True
+        )
+
     # User lookup
 
     def get_user(self, *, id=None, username=None, user_auth=False, **params):

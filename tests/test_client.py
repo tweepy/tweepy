@@ -93,6 +93,12 @@ class TweepyTestCase(unittest.TestCase):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_following(user_id)
 
+    @tape.use_cassette("test_mute_and_unmute.yaml", serializer="yaml")
+    def test_mute_and_unmute(self):
+        user_id = 17874544  # User ID for @TwitterSupport
+        self.client.mute(user_id)
+        self.client.unmute(user_id)
+
     @tape.use_cassette("test_get_user.yaml", serializer="yaml")
     def test_get_user(self):
         self.client.get_user(username="Twitter")

@@ -80,6 +80,13 @@ Follows
 
 .. automethod:: Client.follow
 
+Mutes
+-----
+
+.. automethod:: Client.unmute
+
+.. automethod:: Client.mute
+
 User lookup
 -----------
 
