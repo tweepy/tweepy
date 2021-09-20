@@ -23,6 +23,7 @@ jobs:
         run: |
           python setup.py nosetests
       - name: Send coverage to Coveralls
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: python-${{ matrix.python-version }}
@@ -38,6 +39,7 @@ jobs:
     container: python:3-slim
     steps:
     - name: Finish sending coverage to Coveralls
+      continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
