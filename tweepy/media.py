@@ -10,7 +10,7 @@ class Media(DataMapping):
     __slots__ = (
         "data", "media_key", "type", "duration_ms", "height",
         "non_public_metrics", "organic_metrics", "preview_image_url",
-        "promoted_metrics", "public_metrics", "width"
+        "promoted_metrics", "public_metrics", "width", "alt_text"
     )
 
     def __init__(self, data):
@@ -26,6 +26,7 @@ class Media(DataMapping):
         self.promoted_metrics = data.get("promoted_metrics")
         self.public_metrics = data.get("public_metrics")
         self.width = data.get("width")
+        self.alt_text = data.get("alt_text")
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
