@@ -36,6 +36,17 @@ class TweepyTestCase(unittest.TestCase):
         user_id = 783214  # User ID for @Twitter
         self.client.get_liked_tweets(user_id)
 
+    @tape.use_cassette("test_retweet_and_unretweet.yaml", serializer="yaml")
+    def test_retweet_and_unretweet(self):
+        tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints
+        self.client.retweet(tweet_id)
+        self.client.unretweet(tweet_id)
+
+    @tape.use_cassette("test_get_retweeters.yaml", serializer="yaml")
+    def test_get_retweeters(self):
+        tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints
+        self.client.get_retweeters(tweet_id)
+
     # TODO: test_search_all_tweets with access to Academic Research product track
 
     @tape.use_cassette("test_search_recent_tweets.yaml", serializer="yaml")

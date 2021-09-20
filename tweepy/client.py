@@ -380,6 +380,95 @@ class Client:
             "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
         )
 
+    # Retweets
+
+    def unretweet(self, source_tweet_id):
+        """Allows an authenticated user ID to remove the Retweet of a Tweet.
+
+        The request succeeds with no action when the user sends a request to a
+        user they're not Retweeting the Tweet or have already removed the
+        Retweet of.
+
+        Parameters
+        ----------
+        source_tweet_id : Union[int, str]
+            The ID of the Tweet that you would like to remove the Retweet of.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/retweets/{source_tweet_id}"
+
+        return self._make_request("DELETE", route, user_auth=True)
+
+    def get_retweeters(self, id, *, user_auth=False, **params):
+        """get_retweeters(id, *, expansions, media_fields, place_fields, \
+                          poll_fields, tweet_fields, user_fields)
+
+        Allows you to get information about who has Retweeted a Tweet.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            Tweet ID of the Tweet to request Retweeting users of.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        media_fields : Union[List[str], str]
+            :ref:`media_fields_parameter`
+        place_fields : Union[List[str], str]
+            :ref:`place_fields_parameter`
+        poll_fields : Union[List[str], str]
+            :ref:`poll_fields_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}/retweeted_by", params=params,
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=user_auth
+        )
+
+    def retweet(self, tweet_id):
+        """Causes the user ID to Retweet the target Tweet.
+
+        Parameters
+        ----------
+        tweet_id : Union[int, str]
+            The ID of the Tweet that you would like to Retweet.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/retweets"
+
+        return self._make_request(
+            "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
+        )
+
     # Search Tweets
 
     def search_all_tweets(self, query, **params):

@@ -29,6 +29,15 @@ Likes
 
 .. automethod:: Client.like
 
+Retweets
+--------
+
+.. automethod:: Client.unretweet
+
+.. automethod:: Client.get_retweeters
+
+.. automethod:: Client.retweet
+
 Search Tweets
 -------------
 
