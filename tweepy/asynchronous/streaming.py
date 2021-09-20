@@ -145,7 +145,7 @@ class AsyncStream:
             await self.on_disconnect()
 
     def filter(self, *, follow=None, track=None, locations=None,
-                     filter_level=None, languages=None, stall_warnings=False):
+               filter_level=None, languages=None, stall_warnings=False):
         """Filter realtime Tweets
 
         Parameters
