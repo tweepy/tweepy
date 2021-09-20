@@ -772,6 +772,143 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
+    # Tweet counts
+
+    def get_all_tweets_count(self, query, **params):
+        """get_all_tweets_count(query, *, end_time, granularity, next_token, \
+                                since_id, start_time, until_id)
+
+        This endpoint is only available to those users who have been approved
+        for the `Academic Research product track`_.
+
+        The full-archive search endpoint returns the complete history of public
+        Tweets matching a search query; since the first Tweet was created March
+        26, 2006.
+
+        Parameters
+        ----------
+        query : str
+            One query for matching Tweets. Up to 1024 characters.
+        end_time : Union[datetime.datetime, str]
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
+            The newest, most recent UTC timestamp to which the Tweets will be
+            provided. Timestamp is in second granularity and is exclusive (for
+            example, 12:00:01 excludes the first second of the minute). If used
+            without ``start_time``, Tweets from 30 days before ``end_time``
+            will be returned by default. If not specified, ``end_time`` will
+            default to [now - 30 seconds].
+        granularity : str
+            This is the granularity that you want the timeseries count data to
+            be grouped by. You can requeset ``minute``, ``hour``, or ``day``
+            granularity. The default granularity, if not specified is ``hour``.
+        next_token : str
+            This parameter is used to get the next 'page' of results. The value
+            used with the parameter is pulled directly from the response
+            provided by the API, and should not be modified. You can learn more
+            by visiting our page on `pagination`_.
+        since_id : Union[int, str]
+            Returns results with a Tweet ID greater than (for example, more
+            recent than) the specified ID. The ID specified is exclusive and
+            responses will not include it. If included with the same request as
+            a ``start_time`` parameter, only ``since_id`` will be used.
+        start_time : Union[datetime.datetime, str]
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
+            from which the Tweets will be provided. Timestamp is in second
+            granularity and is inclusive (for example, 12:00:01 includes the
+            first second of the minute). By default, a request will return
+            Tweets from up to 30 days ago if you do not include this parameter.
+        until_id : Union[int, str]
+            Returns results with a Tweet ID less than (that is, older than) the
+            specified ID. Used with ``since_id``. The ID specified is exclusive
+            and responses will not include it.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-all
+
+        .. _Academic Research product track: https://developer.twitter.com/en/docs/projects/overview#product-track
+        .. _pagination: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/paginate
+        """
+        params["query"] = query
+        return self._make_request(
+            "GET", "/2/tweets/counts/all", params=params,
+            endpoint_parameters=(
+                "end_time", "granularity", "next_token", "query", "since_id",
+                "start_time", "until_id"
+            )
+        )
+
+    def get_recent_tweets_count(self, query, **params):
+        """get_recent_tweets_count(query, *, end_time, granularity, since_id, \
+                                   start_time, until_id)
+
+        The recent Tweet counts endpoint returns count of Tweets from the last
+        seven days that match a search query.
+
+        Parameters
+        ----------
+        query : str
+            One rule for matching Tweets. If you are using a
+            `Standard Project`_ at the Basic `access level`_, you can use the
+            basic set of `operators`_ and can make queries up to 512 characters
+            long. If you are using an `Academic Research Project`_ at the Basic
+            access level, you can use all available operators and can make
+            queries up to 1,024 characters long.
+        end_time : Union[datetime.datetime, str]
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
+            UTC timestamp to which the Tweets will be provided. Timestamp is in
+            second granularity and is exclusive (for example, 12:00:01 excludes
+            the first second of the minute). By default, a request will return
+            Tweets from as recent as 30 seconds ago if you do not include this
+            parameter.
+        granularity : str
+            This is the granularity that you want the timeseries count data to
+            be grouped by. You can requeset ``minute``, ``hour``, or ``day``
+            granularity. The default granularity, if not specified is ``hour``.
+        since_id : Union[int, str]
+            Returns results with a Tweet ID greater than (that is, more recent
+            than) the specified ID. The ID specified is exclusive and responses
+            will not include it. If included with the same request as a
+            ``start_time`` parameter, only ``since_id`` will be used.
+        start_time : Union[datetime.datetime, str]
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
+            (from most recent seven days) from which the Tweets will be
+            provided. Timestamp is in second granularity and is inclusive (for
+            example, 12:00:01 includes the first second of the minute). If
+            included with the same request as a ``since_id`` parameter, only
+            ``since_id`` will be used. By default, a request will return Tweets
+            from up to seven days ago if you do not include this parameter.
+        until_id : Union[int, str]
+            Returns results with a Tweet ID less than (that is, older than) the
+            specified ID. The ID specified is exclusive and responses will not
+            include it.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent
+
+        .. _Standard Project: https://developer.twitter.com/en/docs/projects
+        .. _access level: https://developer.twitter.com/en/products/twitter-api/early-access/guide.html#na_1
+        .. _operators: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
+        .. _Academic Research Project: https://developer.twitter.com/en/docs/projects
+        """
+        params["query"] = query
+        return self._make_request(
+            "GET", "/2/tweets/counts/recent", params=params,
+            endpoint_parameters=(
+                "end_time", "granularity", "query", "since_id", "start_time",
+                "until_id"
+            )
+        )
+
     # Tweet lookup
 
     def get_tweet(self, id, *, user_auth=False, **params):

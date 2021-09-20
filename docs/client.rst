@@ -43,6 +43,13 @@ Timelines
 
 .. automethod:: Client.get_users_tweets
 
+Tweet Counts
+------------
+
+.. automethod:: Client.get_all_tweets_count
+
+.. automethod:: Client.get_recent_tweets_count
+
 Tweet lookup
 ------------
 

@@ -52,6 +52,12 @@ class TweepyTestCase(unittest.TestCase):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_tweets(user_id)
 
+    # TODO: test_get_all_tweets_count with access to Academic Research product track
+
+    @tape.use_cassette("test_get_recent_tweets_count.yaml", serializer="yaml")
+    def test_get_recent_tweets_count(self):
+        self.client.get_recent_tweets_count("Tweepy")
+
     @tape.use_cassette("test_get_tweet.yaml", serializer="yaml")
     def test_get_tweet(self):
         tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
