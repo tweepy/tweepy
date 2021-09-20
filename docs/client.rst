@@ -52,7 +52,7 @@ Timelines
 
 .. automethod:: Client.get_users_tweets
 
-Tweet Counts
+Tweet counts
 ------------
 
 .. automethod:: Client.get_all_tweets_count
