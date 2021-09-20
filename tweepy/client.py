@@ -261,6 +261,102 @@ class Client:
 
         return self._make_request("DELETE", route, user_auth=True)
 
+    def get_liking_users(self, id, *, user_auth=False, **params):
+        """get_liking_users(id, *, expansions, media_fields, place_fields, \
+                            poll_fields, tweet_fields, user_fields)
+
+        Allows you to get information about a Tweet’s liking users.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            Tweet ID of the Tweet to request liking users of.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        media_fields : Union[List[str], str]
+            :ref:`media_fields_parameter`
+        place_fields : Union[List[str], str]
+            :ref:`place_fields_parameter`
+        poll_fields : Union[List[str], str]
+            :ref:`poll_fields_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-tweets-id-liking_users
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}/liking_users", params=params,
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=user_auth
+        )
+
+    def get_liked_tweets(self, id, *, user_auth=False, **params):
+        """get_liked_tweets( \
+            id, *, expansions, max_results, media_fields, pagination_token, \
+            place_fields, poll_fields, tweet_fields, user_fields \
+        )
+
+        Allows you to get information about a user’s liked Tweets.
+
+        The Tweets returned by this endpoint count towards the Project-level
+        `Tweet cap`_.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            User ID of the user to request liked Tweets for.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 5 and 100. By default, each page will return 100
+            results.
+        media_fields : Union[List[str], str]
+            :ref:`media_fields_parameter`
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : Union[List[str], str]
+            :ref:`place_fields_parameter`
+        poll_fields : Union[List[str], str]
+            :ref:`poll_fields_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
+
+        .. _Tweet cap: https://developer.twitter.com/en/docs/projects/overview#tweet-cap
+        """
+        return self._make_request(
+            "GET", f"/2/users/{id}/liked_tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
     def like(self, tweet_id):
         """Like a Tweet.
 
@@ -791,6 +887,48 @@ class Client:
 
         return self._make_request(
             "DELETE", route, user_auth=True
+        )
+
+    def get_blocked(self, **params):
+        """get_blocked(*, expansions, max_results, pagination_token, \
+                       tweet_fields, user_fields)
+
+        Returns a list of users who are blocked by the authenticating user.
+
+        Parameters
+        ----------
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 1000. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results.
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/blocking"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=True
         )
 
     def block(self, target_user_id):

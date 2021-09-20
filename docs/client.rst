@@ -23,6 +23,10 @@ Likes
 
 .. automethod:: Client.unlike
 
+.. automethod:: Client.get_liking_users
+
+.. automethod:: Client.get_liked_tweets
+
 .. automethod:: Client.like
 
 Search Tweets
@@ -53,6 +57,8 @@ Blocks
 ------
 
 .. automethod:: Client.unblock
+
+.. automethod:: Client.get_blocked
 
 .. automethod:: Client.block
 

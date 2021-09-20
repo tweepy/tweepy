@@ -26,6 +26,16 @@ class TweepyTestCase(unittest.TestCase):
         self.client.like(tweet_id)
         self.client.unlike(tweet_id)
 
+    @tape.use_cassette("test_get_liking_users.yaml", serializer="yaml")
+    def test_get_liking_users(self):
+        tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
+        self.client.get_liking_users(tweet_id)
+
+    @tape.use_cassette("test_get_liked_tweets.yaml", serializer="yaml")
+    def test_get_liked_tweets(self):
+        user_id = 783214  # User ID for @Twitter
+        self.client.get_liked_tweets(user_id)
+
     # TODO: test_search_all_tweets with access to Academic Research product track
 
     @tape.use_cassette("test_search_recent_tweets.yaml", serializer="yaml")
@@ -53,10 +63,12 @@ class TweepyTestCase(unittest.TestCase):
         # @TwitterDev and @TwitterAPI Tweets announcing API v2
         self.client.get_tweets(tweet_ids)
 
-    @tape.use_cassette("test_block_and_unblock.yaml", serializer="yaml")
+    @tape.use_cassette("test_block_and_get_blocked_and unblock.yaml",
+                       serializer="yaml")
     def test_block_and_unblock(self):
         user_id = 17874544  # User ID for @TwitterSupport
         self.client.block(user_id)
+        self.client.get_blocked()
         self.client.unblock(user_id)
 
     @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")

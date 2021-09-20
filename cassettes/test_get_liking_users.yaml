@@ -1,0 +1,91 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.6 Requests/2.25.1 Tweepy/4.0.0-alpha
+    method: GET
+    uri: https://api.twitter.com/2/tweets/1293593516040269825/liking_users
+  response:
+    body:
+      string: !!binary |
+        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
+        /wMAeBlOl1sOAAA=
+    headers:
+      api-version:
+      - '2.24'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '1664'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 20 Sep 2021 18:12:42 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_USExOf66w3yoSBFTJPY6dQ=="; Max-Age=63072000; Expires=Wed,
+        20 Sep 2023 18:12:42 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163216156253094235; Max-Age=63072000; Expires=Wed, 20 Sep 2023
+        18:12:42 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 64b98a6d638115a8ef50f8db4f42f1e14beb1d47b892827beb26c7879bfe0bd3
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1632162462'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
