@@ -3497,11 +3497,6 @@ class API:
         file_size = fp.tell() - start
         fp.seek(start)
 
-        media_id = self.chunked_upload_init(
-            file_size, file_type, media_category=media_category,
-            additional_owners=additional_owners, **kwargs
-        ).media_id
-
         min_chunk_size, remainder = divmod(file_size, 1000)
         min_chunk_size += bool(remainder)
 
@@ -3512,6 +3507,11 @@ class API:
 
         segments, remainder = divmod(file_size, chunk_size)
         segments += bool(remainder)
+
+        media_id = self.chunked_upload_init(
+            file_size, file_type, media_category=media_category,
+            additional_owners=additional_owners, **kwargs
+        ).media_id
 
         for segment_index in range(segments):
             # The APPEND command returns an empty response body
