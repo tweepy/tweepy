@@ -9,7 +9,7 @@ from tweepy.parsers import ModelParser, RawParser
 
 
 class Cursor:
-    """:class:`Cusor` can be used to paginate for any :class:`API` methods that
+    """:class:`Cursor` can be used to paginate for any :class:`API` methods that
     support pagination
 
     Parameters
