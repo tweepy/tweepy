@@ -1,4 +1,4 @@
-myst-parser==0.14.0
+myst-parser==0.15.2
 sphinx==3.5.4
 sphinx-hoverxref==0.7b1
 sphinx_rtd_theme==1.0.0
