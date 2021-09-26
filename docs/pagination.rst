@@ -6,49 +6,52 @@
 Pagination
 **********
 
-API v1.1
-========
+.. tabs::
 
-.. autoclass:: Cursor
-    :members:
+    .. group-tab:: API v1.1
 
-Example
--------
+        .. autoclass:: Cursor
+            :members:
 
-::
+    .. group-tab:: API v2
 
-    import tweepy
-
-    auth = tweepy.AppAuthHandler("Consumer Key here", "Consumer Secret here")
-    api = tweepy.API(auth)
-
-    for status in tweepy.Cursor(api.search_tweets, "Tweepy",
-                                count=100).items(250):
-        print(status.id)
-
-    for page in tweepy.Cursor(api.get_followers, screen_name="TwitterDev",
-                              count=200).pages(5):
-        print(len(page))
-
-API v2
-======
-
-.. autoclass:: Paginator
-    :members:
+        .. autoclass:: Paginator
+            :members:
 
 Example
 -------
 
-::
+.. tabs::
 
-    import tweepy
+    .. group-tab:: API v1.1
 
-    client = tweepy.Client("Bearer Token here")
+        ::
 
-    for response in tweepy.Paginator(client.get_users_followers, 2244994945,
-                                     max_results=1000, limit=5):
-        print(response.meta)
+            import tweepy
 
-    for tweet in tweepy.Paginator(client.search_recent_tweets, "Tweepy",
-                                  max_results=100).flatten(limit=250):
-        print(tweet.id)
+            auth = tweepy.AppAuthHandler("Consumer Key here", "Consumer Secret here")
+            api = tweepy.API(auth)
+
+            for status in tweepy.Cursor(api.search_tweets, "Tweepy",
+                                        count=100).items(250):
+                print(status.id)
+
+            for page in tweepy.Cursor(api.get_followers, screen_name="TwitterDev",
+                                      count=200).pages(5):
+                print(len(page))
+
+    .. group-tab:: API v2
+
+        ::
+
+            import tweepy
+
+            client = tweepy.Client("Bearer Token here")
+
+            for response in tweepy.Paginator(client.get_users_followers, 2244994945,
+                                             max_results=1000, limit=5):
+                print(response.meta)
+
+            for tweet in tweepy.Paginator(client.search_recent_tweets, "Tweepy",
+                                          max_results=100).flatten(limit=250):
+                print(tweet.id)

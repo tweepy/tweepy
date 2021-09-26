@@ -30,7 +30,8 @@ extensions = [
   'sphinx.ext.autodoc',
   'sphinx.ext.autosectionlabel',
   'sphinx.ext.intersphinx',
-  'sphinx.ext.napoleon'
+  'sphinx.ext.napoleon',
+  'sphinx_tabs.tabs'
 ]
 
 hoverxref_auto_ref = True
