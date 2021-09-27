@@ -262,11 +262,7 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testcreateupdatedestroylist.yaml', serializer='yaml')
     def testcreateupdatedestroylist(self):
-        params = {
-            'owner_screen_name': username,
-            'slug': 'tweeps'
-        }
-        l = self.api.create_list(name=params['slug'], **params)
+        l = self.api.create_list(name="tweeps")
         l = self.api.update_list(list_id=l.id, description='updated!')
         self.assertEqual(l.description, 'updated!')
         self.api.destroy_list(list_id=l.id)
