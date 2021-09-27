@@ -47,7 +47,9 @@ class TweepyTestCase(unittest.TestCase):
         tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints
         self.client.get_retweeters(tweet_id)
 
-    # TODO: test_search_all_tweets with access to Academic Research product track
+    @tape.use_cassette("test_search_all_tweets.yaml", serializer="yaml")
+    def test_search_all_tweets(self):
+        self.client.search_all_tweets("Tweepy")
 
     @tape.use_cassette("test_search_recent_tweets.yaml", serializer="yaml")
     def test_search_recent_tweets(self):
