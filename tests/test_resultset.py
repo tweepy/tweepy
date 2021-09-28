@@ -1,4 +1,4 @@
-from .config import TweepyTestCase
+from tests.config import TweepyTestCase
 
 from tweepy.models import ResultSet
 

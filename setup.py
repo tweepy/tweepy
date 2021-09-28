@@ -17,7 +17,6 @@ with open("README.md") as readme_file:
     long_description = readme_file.read()
 
 tests_require = [
-    "nose>=1.3.3",
     "vcrpy>=1.10.3",
 ]
 
@@ -55,7 +54,7 @@ setup(
         "socks": ["requests[socks]>=2.11.1,<3"],
         "test": tests_require,
     },
-    test_suite="nose.collector",
+    test_suite="tests",
     keywords="twitter library",
     python_requires=">=3.6",
     classifiers=[

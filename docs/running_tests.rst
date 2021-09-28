@@ -12,9 +12,10 @@ These steps outline how to run tests for Tweepy:
    ``pip install .[test]``. Optionally install the ``dev`` extra as well, for
    ``tox`` and ``coverage``, e.g. ``pip install .[dev,test]``.
 
-3. Run ``python setup.py nosetests`` or simply ``nosetests`` in the source
-   directory. With the ``dev`` extra, coverage will be shown, and ``tox`` can
-   also be run to test different Python versions.
+3. Run tests (e.g. ``python -m unittest discover tests``) in the source
+   directory. With the ``dev`` extra, coverage can be measured by using
+   ``coverage run`` (e.g. ``coverage run -m unittest discover tests``) and
+   ``tox`` can be run to test different Python versions.
 
 To record new cassettes, the following environment variables can be used:
 

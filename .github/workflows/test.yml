@@ -21,7 +21,7 @@ jobs:
           pip install .[dev,test]
       - name: Run tests
         run: |
-          python setup.py nosetests
+          coverage run -m unittest discover tests
       - name: Send coverage to Coveralls
         continue-on-error: true
         env:

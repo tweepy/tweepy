@@ -1,6 +1,6 @@
 import unittest
 
-from .config import (
+from tests.config import (
     access_token, access_token_secret, bearer_token, consumer_key,
     consumer_secret, tape, user_id
 )
