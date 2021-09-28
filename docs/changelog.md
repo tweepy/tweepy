@@ -369,7 +369,7 @@ Version 4.0.0
 - Remove dependence on string length delimitation in `Stream` ([#892](https://github.com/tweepy/tweepy/issues/892))
 - Stop reraising exceptions in `Stream._connect` ([#1072](https://github.com/tweepy/tweepy/issues/1072))
 - Change `Stream.sample` method to use GET HTTP method ([1b0e869](https://github.com/tweepy/tweepy/commit/1b0e86968db9702ca258b3df93911952fc934f86))
-- Default to `models.User` model in `models.Status.parse` more broadly for `user` attribute to handle parsers without `model_factory` attribute or model factories without `user` attribute ([41e7afa](https://github.com/tweepy/tweepy/commit/41e7afa3ad4110613e893e5ad459ef72007673a0))
+- Default to `models.User` model in `models.Status.parse` more broadly for `user` attribute to handle parsers without `model_factory` attribute or model factories without `user` attribute ([#538](https://github.com/tweepy/tweepy/issues/538))
 - Default to `models.Status` model in `models.SearchResults.parse` more broadly for results to handle parsers without `model_factory` attribute or model factories without `status` attribute ([71c031b](https://github.com/tweepy/tweepy/commit/71c031b64a397c54c8d5f64ead161df63ea1c99c))
 - Start on page 1 for `PageIterator` ([#958](https://github.com/tweepy/tweepy/issues/958))
 - Handle Twitter API issue with duplicate pages for `API.search_users` ([#958](https://github.com/tweepy/tweepy/issues/958), [#1465](https://github.com/tweepy/tweepy/issues/1465))
