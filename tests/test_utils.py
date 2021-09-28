@@ -1,14 +1,6 @@
-import random
-import string
 import unittest
 
 from tweepy.utils import *
-
-
-def mock_tweet():
-    """Generate some random tweet text."""
-    count = random.randint(70, 140)
-    return ''.join([random.choice(string.ascii_letters) for _ in range(count)])
 
 
 class TweepyUtilsTests(unittest.TestCase):
