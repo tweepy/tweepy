@@ -141,17 +141,17 @@ class Client:
             if param_name.replace('_', '.') in endpoint_parameters:
                 param_name = param_name.replace('_', '.')
 
-            if param_name in endpoint_parameters:
-                if isinstance(param_value, list):
-                    request_params[param_name] = ','.join(map(str, param_value))
-                elif param_name in ("start_time", "end_time") and isinstance(param_value, datetime.datetime):
-                    if param_value.tzinfo is not None:
-                        param_value = param_value.astimezone(datetime.timezone.utc)
-                    request_params[param_name] = param_value.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-                    # TODO: Constant datetime format string?
-                else:
-                    request_params[param_name] = param_value
+            if isinstance(param_value, list):
+                request_params[param_name] = ','.join(map(str, param_value))
+            elif param_name in ("start_time", "end_time") and isinstance(param_value, datetime.datetime):
+                if param_value.tzinfo is not None:
+                    param_value = param_value.astimezone(datetime.timezone.utc)
+                request_params[param_name] = param_value.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                # TODO: Constant datetime format string?
             else:
+                request_params[param_name] = param_value
+
+            if param_name not in endpoint_parameters:
                 log.warn(f"Unexpected parameter: {param_name}")
 
         response = self.request(method, route, params=request_params,
