@@ -2,7 +2,12 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-import json
+try:
+    # Handle https://github.com/psf/requests/issues/5794 until requests 2.27.0
+    # is released with https://github.com/psf/requests/pull/5856
+    import simplejson as json
+except ImportError:
+    import json
 
 
 class TweepyException(Exception):
