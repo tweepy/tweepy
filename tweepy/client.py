@@ -92,12 +92,14 @@ class Client:
             auth = auth.apply_auth()
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
+
         log.debug(
             f"Making API request: {method} {host + route}\n"
             f"Parameters: {params}\n"
             f"Headers: {headers}\n"
             f"Body: {json}"
         )
+
         with self.session.request(
             method, host + route, params=params, json=json, headers=headers,
             auth=auth
@@ -108,6 +110,7 @@ class Client:
                 f"Headers: {response.headers}\n"
                 f"Content: {response.content}"
             )
+
             if response.status_code == 400:
                 raise BadRequest(response)
             if response.status_code == 401:
@@ -132,6 +135,7 @@ class Client:
                 raise TwitterServerError(response)
             if not 200 <= response.status_code < 300:
                 raise HTTPException(response)
+
             return response
 
     def _make_request(self, method, route, params={}, endpoint_parameters=None,
