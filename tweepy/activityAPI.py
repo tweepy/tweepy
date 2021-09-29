@@ -100,7 +100,23 @@ class ActivityAPI(API):
             apiPath = '/account_activity/all/'+webhookID+'.json'
 
           return bind_api(api=self, path=apiPath, method='PUT', payload_type='json', require_auth=True, use_cache=False)()
-                    
+
+      def delWebID(self, *args, **kwargs):
+          """:reference: https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-premium
+              :allowed_param:'env'. 
+              :returns: an array of JSON. The Twitter documentation is out of date the current format is
+              [{"id":"9999999999999999","url":"https://api.blah-blah/webhook_id","valid":true,"created_timestamp":"2019-09-16 16:47:16 +0000"}] 
+          """
+          post_data = {}
+          env = kwargs.pop('env')
+          webhookID = kwargs.pop('webhookID')
+          if env is not None:
+            apiPath = '/account_activity/all/'+env+'/'+webhookID+'.json'
+          else:
+            apiPath = '/account_activity/all/'+webhookID+'.json'
+
+          return bind_api(api=self, path=apiPath, method='DELETE', payload_type='json', require_auth=True, use_cache=False)()
+                                        
       def getSubsUsers(self, *args, **kwargs):
           """:reference: https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-premium
               :allowed_param:'env'. 
