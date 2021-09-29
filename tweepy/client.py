@@ -138,6 +138,9 @@ class Client:
                       json=None, data_type=None, user_auth=False):
         request_params = {}
         for param_name, param_value in params.items():
+            if param_name.replace('_', '.') in endpoint_parameters:
+                param_name = param_name.replace('_', '.')
+
             if param_name in endpoint_parameters:
                 if isinstance(param_value, list):
                     request_params[param_name] = ','.join(map(str, param_value))
@@ -148,9 +151,6 @@ class Client:
                     # TODO: Constant datetime format string?
                 else:
                     request_params[param_name] = param_value
-            elif param_name.replace('_', '.') in endpoint_parameters:
-                # Use := when support for Python 3.7 is dropped
-                request_params[param_name.replace('_', '.')] = ','.join(param_value)
             else:
                 log.warn(f"Unexpected parameter: {param_name}")
 
