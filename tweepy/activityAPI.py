@@ -104,8 +104,7 @@ class ActivityAPI(API):
       def delWebID(self, *args, **kwargs):
           """:reference: https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-premium
               :allowed_param:'env'. 
-              :returns: an array of JSON. The Twitter documentation is out of date the current format is
-              [{"id":"9999999999999999","url":"https://api.blah-blah/webhook_id","valid":true,"created_timestamp":"2019-09-16 16:47:16 +0000"}] 
+              :returns HTTP 204 NO CONTENT
           """
           post_data = {}
           env = kwargs.pop('env')
