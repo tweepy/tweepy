@@ -1215,7 +1215,7 @@ class API:
             Returns tweets by users located within a given radius of the given
             latitude/longitude.  The location is preferentially taking from the
             Geotagging API, but will fall back to their Twitter profile. The
-            parameter value is specified by "latitide,longitude,radius", where
+            parameter value is specified by "latitude,longitude,radius", where
             radius units must be specified as either "mi" (miles) or "km"
             (kilometers). Note that you cannot use the near operator via the
             API to geocode arbitrary locations; however you can use this
