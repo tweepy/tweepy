@@ -49,7 +49,7 @@ setup(
         ],
         "dev": [
             "coveralls>=2.1.0",
-            "tox>=2.4.0",
+            "tox>=3.14.0",
          ],
         "socks": ["requests[socks]>=2.11.1,<3"],
         "test": tests_require,
@@ -68,6 +68,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3 :: Only",
     ],
     zip_safe=True,
