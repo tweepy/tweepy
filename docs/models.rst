@@ -70,6 +70,10 @@ Models Reference
 
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 
+      .. class:: tweepy.Space
+
+         :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
+
       .. class:: tweepy.Tweet
 
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet

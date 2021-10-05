@@ -1,0 +1,121 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.7 Requests/2.25.1 Tweepy/4.0.1
+    method: GET
+    uri: https://api.twitter.com/2/spaces?ids=1YpKkzBgBlVxj%2C1OwGWzarWnNKQ
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyiq5WykxRslIyjCzwzq5ySnfKCavIUtJRKi5JLEkFiqfmpaSmKNXq
+        wJT5l7uHVyUWhef5eQdiKoutBQAAAP//AwAJdS/qWAAAAA==
+    headers:
+      api-version:
+      - '2.27'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '91'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 04 Oct 2021 16:20:10 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_yfFprXL2G/FrJYvpbXwcUg=="; Max-Age=63072000; Expires=Wed,
+        04 Oct 2023 16:20:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163336440996144486; Max-Age=63072000; Expires=Wed, 04 Oct 2023
+        16:20:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 611a98e7bbb653d89c38826150224a0fbc2f7ea1a18ac1b80da236f8a6e271b0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '297'
+      x-rate-limit-reset:
+      - '1633364979'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A163336440996144486; personalization_id="v1_yfFprXL2G/FrJYvpbXwcUg=="
+      User-Agent:
+      - Python/3.9.7 Requests/2.25.1 Tweepy/4.0.1
+    method: GET
+    uri: https://api.twitter.com/2/spaces/by/creator_ids?user_ids=1065249714214457345%2C2328002822
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyiq5WykxRslIyLPOvKK/MCSpM9XF3UtJRKi5JLEkFihcnZ6SmlOak
+        pijVxuoo5aaC9FQrFaUWl+aUxCfnl+aVKFkZ1tYCAAAA//8DAErOjQNPAAAA
+    headers:
+      api-version:
+      - '2.27'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '102'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 04 Oct 2021 16:20:10 UTC
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 611a98e7bbb653d89c38826150224a0fbc2f7ea1a18ac1b80da236f8a6e271b0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '296'
+      x-rate-limit-reset:
+      - '1633364979'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

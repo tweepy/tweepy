@@ -22,6 +22,7 @@ from tweepy.media import Media
 from tweepy.pagination import Paginator
 from tweepy.place import Place
 from tweepy.poll import Poll
+from tweepy.space import Space
 from tweepy.streaming import Stream
 from tweepy.tweet import ReferencedTweet, Tweet
 from tweepy.user import User

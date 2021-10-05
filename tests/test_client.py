@@ -121,3 +121,26 @@ class TweepyTestCase(unittest.TestCase):
     @tape.use_cassette("test_get_users.yaml", serializer="yaml")
     def test_get_users(self):
         self.client.get_users(usernames=["Twitter", "TwitterDev"])
+
+    @tape.use_cassette("test_search_spaces.yaml", serializer="yaml")
+    def test_search_spaces(self):
+        self.client.search_spaces("Twitter", "live")
+
+    @tape.use_cassette("test_get_spaces.yaml", serializer="yaml")
+    def test_get_spaces(self):
+        space_ids = ["1YpKkzBgBlVxj", "1OwGWzarWnNKQ"]
+        # Space ID for @TwitterSpaces Twitter Spaces community gathering + Q&A
+        # https://twitter.com/TwitterSpaces/status/1436382283347283969
+        # Space ID for @NASA #NASAWebb Space Telescope 101 and Q&A
+        # https://twitter.com/NASA/status/1442961745098653701
+        user_ids = [1065249714214457345, 2328002822]
+        # User IDs for @TwitterSpaces and @TwitterWomen
+        self.client.get_spaces(ids=space_ids)
+        self.client.get_spaces(user_ids=user_ids)
+
+    @tape.use_cassette("test_get_space.yaml", serializer="yaml")
+    def test_get_space(self):
+        space_id = "1YpKkzBgBlVxj"
+        # Space ID for @TwitterSpaces Twitter Spaces community gathering + Q&A
+        # https://twitter.com/TwitterSpaces/status/1436382283347283969
+        self.client.get_space(space_id)

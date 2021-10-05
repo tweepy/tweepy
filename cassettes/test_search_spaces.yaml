@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.9.7 Requests/2.25.1 Tweepy/4.0.1
+    method: GET
+    uri: https://api.twitter.com/2/spaces/search?query=Twitter&state=live
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAHzQTwuCMBzG8ffyO3vpmDdHYzD/5Q5RRsRsY6jTdE7RxPdeHTqFXh8+8MB3BsEt
+        B/c6Qy7AhZ1qx0GXE1INQeBAZ7mVn13ng4TF+SnJaRZlBiUnel5XsfANwugQtv6GKgfaeKZqmmTE
+        66oIqZIq0JXnB+uqqokUE6sjvPU41TROMT+yF2EbKiL8wiMtBSnWlWB+qouwbQ3973VzoJLfvDMY
+        2fXa3h/Pvrbg7pflDQAA//8DAO2i+Rp6AQAA
+    headers:
+      api-version:
+      - '2.27'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '198'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 04 Oct 2021 16:23:43 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_Q5Y420A90rTxiUPNvjznYg=="; Max-Age=63072000; Expires=Wed,
+        04 Oct 2023 16:23:43 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163336462208298649; Max-Age=63072000; Expires=Wed, 04 Oct 2023
+        16:23:43 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - ba8571db95a98d39f2a2ddeac9236e3648f62c3a289efe13ccf35ea85b5de519
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '289'
+      x-rate-limit-reset:
+      - '1633364956'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

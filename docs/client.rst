@@ -103,6 +103,21 @@ User lookup
 
 .. automethod:: Client.get_users
 
+Spaces
+======
+
+Search Spaces
+-------------
+
+.. automethod:: Client.search_spaces
+
+Spaces lookup
+-------------
+
+.. automethod:: Client.get_spaces
+
+.. automethod:: Client.get_space
+
 Expansions and Fields Parameters
 ================================
 
@@ -110,15 +125,24 @@ Expansions and Fields Parameters
 
 ``expansions``
 --------------
-For methods that return Tweets, `Expansions`_ enable you to request additional
-data objects that relate to the originally returned Tweets. Submit a list of
-desired expansions in a comma-separated list without spaces. The ID that
-represents the expanded data object will be included directly in the Tweet data
-object, but the expanded object metadata will be returned within the
+`Expansions`_ enable you to request additional data objects that relate to the
+originally returned Space, Tweets, or users. Submit a list of desired
+expansions in a comma-separated list without spaces. The ID that represents the
+expanded data object will be included directly in the Space, Tweet, or user
+data object, but the expanded object metadata will be returned within the
 ``includes`` response object, and will also include the ID so that you can
-match this data object to the original Tweet object.
+match this data object to the original Space or Tweet object.
 
-The following data objects can be expanded using this parameter:
+For methods that return Spaces, the following data objects can be expanded
+using this parameter:
+
+* The Spaces creator's user object
+* The user objects of any Space co-host
+* Any mentioned users’ object
+* Any speaker's user object
+
+For methods that return Tweets, the following data objects can be expanded
+using this parameter:
 
 * The Tweet author's user object
 * The user object of the Tweet’s author that the
@@ -130,15 +154,9 @@ The following data objects can be expanded using this parameter:
 * Attached place’s object
 * Any referenced Tweets’ object
 
-For methods that return users, `Expansions`_ enable you to request additional
-data objects that relate to the originally returned users. The ID that
-represents the expanded data object will be included directly in the user data
-object, but the expanded object metadata will be returned within the
-``includes`` response object, and will also include the ID so that you can
-match this data object to the original Tweet object. At this time, the only
-expansion available to endpoints that primarily return user objects is
-``expansions=pinned_tweet_id``. You will find the expanded Tweet data object
-living in the ``includes`` response object.
+At this time, the only expansion available to endpoints that primarily return
+user objects is ``expansions=pinned_tweet_id``. You will find the expanded
+Tweet data object living in the ``includes`` response object.
 
 .. _media_fields_parameter:
 
@@ -177,6 +195,15 @@ included the ``expansions=attachments.poll_ids`` query parameter in your
 request. While the poll ID will be located in the Tweet object, you will find
 this ID and all additional poll fields in the ``includes`` data object.
 
+.. _space_fields_parameter:
+
+``space_fields``
+----------------
+
+This `fields`_ parameter enables you to select which specific `Space fields`_
+will deliver in each returned Space. Specify the desired fields in a
+comma-separated list.
+
 .. _tweet_fields_parameter:
 
 ``tweet_fields``
@@ -205,12 +232,12 @@ the ``includes`` data object.
 ``user_fields``
 ---------------
 
-For methods that return Tweets, this `fields`_ parameter enables you to select
-which specific `user fields`_ will deliver in each returned Tweet. Specify the
-desired fields in a comma-separated list without spaces between commas and
-fields. While the user ID will be located in the original Tweet object, you
-will find this ID and all additional user fields in the ``includes`` data
-object.
+For methods that return Spaces or Tweets, this `fields`_ parameter enables you
+to select which specific `user fields`_ will deliver in each returned Space or
+Tweet. Specify the desired fields in a comma-separated list without spaces
+between commas and fields. While the user ID will be located in the original
+Tweet object, you will find this ID and all additional user fields in the
+``includes`` data object.
 
 You must also pass one of the user expansions to return the desired user
 fields:
@@ -231,6 +258,7 @@ user data objects.
 .. _media fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
 .. _place fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
 .. _poll fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
+.. _Space fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 .. _Tweet fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
 

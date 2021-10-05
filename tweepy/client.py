@@ -19,6 +19,7 @@ from tweepy.errors import (
 from tweepy.media import Media
 from tweepy.place import Place
 from tweepy.poll import Poll
+from tweepy.space import Space
 from tweepy.tweet import Tweet
 from tweepy.user import User
 
@@ -1502,4 +1503,136 @@ class Client:
             endpoint_parameters=(
                 "ids", "usernames", "expansions", "tweet.fields", "user.fields"
             ), data_type=User, user_auth=user_auth
+        )
+
+    # Search Spaces
+
+    def search_spaces(self, query, state, **params):
+        """search_spaces(query, state, *, expansions, max_results, \
+                         space_fields, user_fields)
+
+        Return live or scheduled Spaces matching your specified search terms
+
+        Parameters
+        ----------
+        query : str
+            Your search term. This can be any text (including mentions and
+            Hashtags) present in the title of the Space.
+        state : str
+            Determines the type of results to return. Use ``live`` to return
+            live Spaces or ``scheduled`` to return upcoming Spaces.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to return in this request. Specify a
+            value between 1 and 100.
+        space_fields : Union[List[str], str]
+            :ref:`space_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-reference/get-spaces-search
+        """
+        params["query"] = query
+        params["state"] = state
+        return self._make_request(
+            "GET", "/2/spaces/search", params=params,
+            endpoint_parameters=(
+                "query", "state", "expansions", "max_results", "space.fields",
+                "user.fields"
+            ), data_type=Space
+        )
+
+    # Spaces lookup
+
+    def get_spaces(self, *, ids=None, user_ids=None, **params):
+        """get_spaces(*, ids, user_ids, expansions, space_fields, user_fields)
+
+        Returns details about multiple live or scheduled Spaces (created by the
+        specified user IDs if specified). Up to 100 comma-separated Space or
+        user IDs can be looked up using this endpoint.
+
+        Parameters
+        ----------
+        ids : Union[List[str], str]
+            A comma separated list of Spaces (up to 100).
+        user_ids : Union[List[int, str], str]
+            A comma separated list of user IDs (up to 100).
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        space_fields : Union[List[str], str]
+            :ref:`space_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Raises
+        ------
+        TypeError
+            If IDs and user IDs are not passed or both are passed
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-by-creator-ids
+        """
+        if ids is not None and user_ids is not None:
+            raise TypeError("Expected IDs or user IDs, not both")
+
+        route = "/2/spaces"
+
+        if ids is not None:
+            params["ids"] = ids
+        elif user_ids is not None:
+            route += "/by/creator_ids"
+            params["user_ids"] = user_ids
+        else:
+            raise TypeError("IDs or user IDs are required")
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "ids", "user_ids", "expansions", "space.fields", "user.fields"
+            ), data_type=Space
+        )
+
+    def get_space(self, id, **params):
+        """get_space(id, *, expansions, space_fields, user_fields)
+
+        Returns a variety of information about a single Space specified by the
+        requested ID.
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            Unique identifier of the Space to request.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        space_fields : Union[List[str], str]
+            :ref:`space_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id
+        """
+        return self._make_request(
+            "GET", f"/2/spaces/{id}", params=params,
+            endpoint_parameters=(
+                "expansions", "space.fields", "user.fields"
+            ), data_type=Space
         )
