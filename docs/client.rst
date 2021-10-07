@@ -94,6 +94,8 @@ Mutes
 
 .. automethod:: Client.unmute
 
+.. automethod:: Client.get_muted
+
 .. automethod:: Client.mute
 
 User lookup

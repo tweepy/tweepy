@@ -1364,6 +1364,48 @@ class Client:
 
         return self._make_request("DELETE", route, user_auth=True)
 
+    def get_muted(self, **params):
+        """get_muted(*, expansions, max_results, pagination_token, \
+                     tweet_fields, user_fields)
+
+        Returns a list of users who are muted by the authenticating user.
+
+        Parameters
+        ----------
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 1000. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results.
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/get-users-muting
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/muting"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=True
+        )
+
     def mute(self, target_user_id):
         """Allows an authenticated user ID to mute the target user.
 
