@@ -1636,3 +1636,94 @@ class Client:
                 "expansions", "space.fields", "user.fields"
             ), data_type=Space
         )
+
+    # Batch Compliance
+
+    def get_compliance_jobs(self, type, **params):
+        """get_compliance_jobs(type, *, status)
+
+        Returns a list of recent compliance jobs.
+
+        Parameters
+        ----------
+        type : str
+            Allows to filter by job type - either by tweets or user ID. Only
+            one filter (tweets or users) can be specified per request.
+        status : str
+            Allows to filter by job status. Only one filter can be specified
+            per request.
+            Default: ``all``
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/get-compliance-jobs
+        """
+        params["type"] = type
+        return self._make_request(
+            "GET", "/2/compliance/jobs", params=params,
+            endpoint_parameters=("type", "status")
+        )
+
+    def get_compliance_job(self, id):
+        """Get a single compliance job with the specified ID.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The unique identifier for the compliance job you want to retrieve.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/get-compliance-jobs-id
+        """
+        return self._make_request("GET", f"/2/compliance/jobs/{id}")
+
+    def create_compliance_job(self, type, *, name=None, resumable=None):
+        """Creates a new compliance job for Tweet IDs or user IDs.
+
+        A compliance job will contain an ID and a destination URL. The
+        destination URL represents the location that contains the list of IDs
+        consumed by your app.
+
+        You can run one batch job at a time.
+
+        Parameters
+        ----------
+        type : str
+            Specify whether you will be uploading tweet or user IDs. You can
+            either specify tweets or users.
+        name : str
+            A name for this job, useful to identify multiple jobs using a label
+            you define.
+        resumable : bool
+            Specifies whether to enable the upload URL with support for
+            resumable uploads. If true, this endpoint will return a pre-signed
+            URL with resumable uploads enabled.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/post-compliance-jobs
+        """
+        json = {"type": type}
+
+        if name is not None:
+            json["name"] = name
+
+        if resumable is not None:
+            json["resumable"] = resumable
+
+        return self._make_request(
+            "POST", "/2/compliance/jobs", json=json
+        )

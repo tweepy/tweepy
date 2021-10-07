@@ -118,6 +118,18 @@ Spaces lookup
 
 .. automethod:: Client.get_space
 
+Compliance
+==========
+
+Batch compliance
+----------------
+
+.. automethod:: Client.get_compliance_jobs
+
+.. automethod:: Client.get_compliance_job
+
+.. automethod:: Client.create_compliance_job
+
 Expansions and Fields Parameters
 ================================
 

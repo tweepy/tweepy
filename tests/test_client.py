@@ -144,3 +144,11 @@ class TweepyTestCase(unittest.TestCase):
         # Space ID for @TwitterSpaces Twitter Spaces community gathering + Q&A
         # https://twitter.com/TwitterSpaces/status/1436382283347283969
         self.client.get_space(space_id)
+
+    @tape.use_cassette("test_create_and_get_compliance_job_and_jobs.yaml",
+                       serializer="yaml")
+    def test_create_and_get_compliance_job_and_jobs(self):
+        response = self.client.create_compliance_job("tweets")
+        job_id = response.data["id"]
+        self.client.get_compliance_job(job_id)
+        self.client.get_compliance_jobs("tweets")
