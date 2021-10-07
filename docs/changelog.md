@@ -3,6 +3,19 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.1.0
+-------------
+### New Features / Improvements
+- Add support for Python 3.10 ([229b738](https://github.com/tweepy/tweepy/commit/229b73858c93bd5997385445f522816c374d41ea))
+  - Update minimum dev requirement version for tox to 3.14.0
+- Add support for Spaces ([5c68892](https://github.com/tweepy/tweepy/commit/5c688922cf0f8e89d401ea5108b06aaa8c12d71b))
+  - Add `Space` model
+  - Add `Client.search_spaces`, `Client.get_spaces`, and `Client.get_space`
+- Add support for batch compliance ([6ca75e1](https://github.com/tweepy/tweepy/commit/6ca75e1b69a1085ac43215b30fc8269b91faa790))
+  - Add `Client.get_compliance_jobs`, `Client.get_compliance_job`, and `Client.create_compliance_job`
+- Add `Client.get_muted` ([00cdab8](https://github.com/tweepy/tweepy/commit/00cdab8a86b98c6b02636fd511700fc73653e006))
+- Minor documentation corrections
+
 Version 4.0.1
 -------------
 ### Bug Fixes
