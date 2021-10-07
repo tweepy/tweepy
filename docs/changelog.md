@@ -6,12 +6,12 @@ These changelogs are also at <https://github.com/tweepy/tweepy/releases> as rele
 Version 4.0.1
 -------------
 ### Bug Fixes
-- Fix handling of strings passed as fields parameters for ``Client`` methods ([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))
-- Include unexpected parameters passed to ``Client`` methods in Twitter API request ([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))
+- Fix handling of strings passed as fields parameters for `Client` methods ([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))
+- Include unexpected parameters passed to `Client` methods in Twitter API request ([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))
   - This future-proofs for new endpoint parameters
-- Stop checking parameter names when converting parameters passed to ``Client`` methods from datetimes to strings ([1320a37](https://github.com/tweepy/tweepy/commit/1320a3709b1683cb32b69abdaa9e7e120b6ed59c))
-  - This future-proofs for new endpoint parameters besides ``start_time`` and ``end_time`` that accept datetimes
-- Handle simplejson being installed when handling ``JSONDecodeError`` in ``HTTPException`` ([586c162](https://github.com/tweepy/tweepy/commit/586c1621f71c9569c17b6bdbee99a7c238bb301d))
+- Stop checking parameter names when converting parameters passed to `Client` methods from datetimes to strings ([1320a37](https://github.com/tweepy/tweepy/commit/1320a3709b1683cb32b69abdaa9e7e120b6ed59c))
+  - This future-proofs for new endpoint parameters besides `start_time` and `end_time` that accept datetimes
+- Handle simplejson being installed when handling `JSONDecodeError` in `HTTPException` ([586c162](https://github.com/tweepy/tweepy/commit/586c1621f71c9569c17b6bdbee99a7c238bb301d))
 
 ### Misc
 - Update documentation requirements ([3fa38b6](https://github.com/tweepy/tweepy/commit/3fa38b6b949fb85c434f4aec9c54327d80027c12), [388e2f6](https://github.com/tweepy/tweepy/commit/388e2f6c5167cd9fd6669d05d2e15ea00cdea805), [4315ab0](https://github.com/tweepy/tweepy/commit/4315ab07c382c92e177cde7232085dfd4828b50e))
