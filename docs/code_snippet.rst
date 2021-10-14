@@ -40,7 +40,7 @@ This snippet will follow every follower of the authenticated user.
 Handling the rate limit using cursors
 =====================================
    
-Since cursors raise ``RateLimitError``\ s while iterating,
+Since cursors raise ``TooManyRequests``\ s while iterating,
 handling them can be done by wrapping the cursor in an iterator.
    
 Running this snippet will print all users you follow that themselves follow
@@ -56,7 +56,7 @@ will wait for 15 minutes each time it hits the rate limit.
        while True:
            try:
                yield next(cursor)
-           except tweepy.RateLimitError:
+           except tweepy.TooManyRequests:
                time.sleep(15 * 60)
    
    for follower in limit_handled(tweepy.Cursor(api.followers).items()):
