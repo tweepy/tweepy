@@ -26,6 +26,7 @@ Contents:
    streaming.rst
    running_tests.rst
    changelog.md
+   faq.rst
 
 Indices and tables
 ==================
