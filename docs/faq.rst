@@ -36,6 +36,16 @@ See `Twitter's API documentation on media best practices`_ for more information.
 
 .. _Twitter's API documentation on media best practices: https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/uploading-media/media-best-practices
 
+Why am I getting an inconsistent number of / not getting 3200 Tweets for a specific user?
+-----------------------------------------------------------------------------------------
+
+    "For very high volume and high traffic accounts, be aware that the Twitter
+    API is highly distributed and eventually consistent. We strive to provide
+    current information but like any large scale system, you may see unexpected
+    behaviours at high volumes."
+
+https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635
+
 Why am I getting no results from :meth:`API.search_tweets`?
 -----------------------------------------------------------
 
