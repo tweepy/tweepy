@@ -73,6 +73,18 @@ These parameters can be passed as keyword arguments instead.
 
 Refer to the documentation for the :class:`API` method being used.
 
+Where did ``StreamListener`` go?
+--------------------------------
+
+If you're attempting to import ``StreamListener`` with Tweepy v4, you'll get an
+:class:`AttributeError` about ``tweepy`` not having a ``StreamListener``
+attribute.
+
+This is because Tweepy v4.0.0 merged ``StreamListener`` into :class:`Stream`.
+
+To use Tweepy v4, you'll need to update your code to subclass :class:`Stream`
+instead.
+
 Twitter API v2
 ==============
 
