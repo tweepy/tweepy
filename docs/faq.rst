@@ -59,6 +59,20 @@ See Twitter's documentation on the standard search API for more information:
 https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
 https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
 
+Tweepy v4
+=========
+
+Why am I getting a :class:`TypeError` about an :class:`API` method taking 1 positional argument but given 2?
+------------------------------------------------------------------------------------------------------------
+
+This and other similar errors are due to Tweepy v4.0.0 changing
+:class:`API` methods to no longer accept arbitrary positional arguments.
+The 1 positional argument being referred to in the error is ``self``.
+
+These parameters can be passed as keyword arguments instead.
+
+Refer to the documentation for the :class:`API` method being used.
+
 Twitter API v2
 ==============
 
