@@ -65,9 +65,10 @@ Tweepy v4
 Why am I getting a :class:`TypeError` about an :class:`API` method taking 1 positional argument but given 2?
 ------------------------------------------------------------------------------------------------------------
 
-This and other similar errors are due to Tweepy v4.0.0 changing
-:class:`API` methods to no longer accept arbitrary positional arguments.
-The 1 positional argument being referred to in the error is ``self``.
+This and other similar errors are due to :ref:`Tweepy v4.0.0 <Version 4.0.0>`
+changing :class:`API` methods to no longer accept arbitrary positional
+arguments. The 1 positional argument being referred to in the error is
+``self``.
 
 These parameters can be passed as keyword arguments instead.
 
@@ -80,7 +81,8 @@ If you're attempting to import ``StreamListener`` with Tweepy v4, you'll get an
 :class:`AttributeError` about ``tweepy`` not having a ``StreamListener``
 attribute.
 
-This is because Tweepy v4.0.0 merged ``StreamListener`` into :class:`Stream`.
+This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` merged ``StreamListener``
+into :class:`Stream`.
 
 To use Tweepy v4, you'll need to update your code to subclass :class:`Stream`
 instead.
