@@ -80,3 +80,15 @@ How do I access ``includes`` data while using :class:`Paginator`?
 :meth:`Paginator.flatten` flattens the ``data`` and iterates over each object.
 
 To access ``includes``, you'll need to iterate through each response instead.
+
+Why am I getting rate-limited so quickly when using :meth:`Client.search_all_tweets` with :class:`Paginator`?
+-------------------------------------------------------------------------------------------------------------
+
+The `GET /2/tweets/search/all`_ Twitter API endpoint that
+:meth:`Client.search_all_tweets` uses has an additional 1 request per second
+rate limit that is not handled by :class:`Paginator`.
+
+You can :func:`time.sleep` 1 second while iterating through responses to handle
+this rate limit.
+
+.. _GET /2/tweets/search/all: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
