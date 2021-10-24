@@ -74,6 +74,17 @@ These parameters can be passed as keyword arguments instead.
 
 Refer to the documentation for the :class:`API` method being used.
 
+Where did ``API.me`` go?
+------------------------
+
+If you're attempting to use ``API.me`` with Tweepy v4, you'll get an
+:class:`AttributeError` about the :class:`API` object not having a ``me``
+attribute.
+
+This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` removed ``API.me``.
+
+Instead, you can use :meth:`API.verify_credentials`.
+
 Where did ``StreamListener`` go?
 --------------------------------
 
