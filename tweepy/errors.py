@@ -11,7 +11,11 @@ except ImportError:
 
 
 class TweepyException(Exception):
-    """Base exception for Tweepy"""
+    """Base exception for Tweepy
+    
+    .. versionchanged:: 4.0
+        Renamed from ``TweepError``
+    """
     pass
 
 
@@ -51,30 +55,49 @@ class HTTPException(TweepyException):
 
 
 class BadRequest(HTTPException):
-    """Exception raised for a 400 HTTP status code"""
+    """Exception raised for a 400 HTTP status code
+    
+    .. versionadded:: 4.0
+    """
     pass
 
 
 class Unauthorized(HTTPException):
-    """Exception raised for a 401 HTTP status code"""
+    """Exception raised for a 401 HTTP status code
+    
+    .. versionadded:: 4.0
+    """
     pass
 
 
 class Forbidden(HTTPException):
-    """Exception raised for a 403 HTTP status code"""
+    """Exception raised for a 403 HTTP status code
+    
+    .. versionadded:: 4.0
+    """
     pass
 
 
 class NotFound(HTTPException):
-    """Exception raised for a 404 HTTP status code"""
+    """Exception raised for a 404 HTTP status code
+    
+    .. versionadded:: 4.0
+    """
     pass
 
 
 class TooManyRequests(HTTPException):
-    """Exception raised for a 429 HTTP status code"""
+    """Exception raised for a 429 HTTP status code
+    
+    .. versionchanged:: 4.0
+        Renamed from ``RateLimitError``
+    """
     pass
 
 
 class TwitterServerError(HTTPException):
-    """Exception raised for a 5xx HTTP status code"""
+    """Exception raised for a 5xx HTTP status code
+    
+    .. versionadded:: 4.0
+    """
     pass
