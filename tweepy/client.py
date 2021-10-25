@@ -38,6 +38,8 @@ class Client:
 
     Twitter API v2 Client
 
+    .. versionadded:: 4.0
+
     Parameters
     ----------
     bearer_token : Optional[str]
@@ -1199,6 +1201,9 @@ class Client:
         The request succeeds with no action when the authenticated user sends a
         request to a user they're not following or have already unfollowed.
 
+        .. versionchanged:: 4.2
+            Renamed from :meth:`Client.unfollow`
+
         Parameters
         ----------
         target_user_id : Union[int, str]
@@ -1336,6 +1341,9 @@ class Client:
         request to a user they're already following, or if they're sending a
         follower request to a user that does not have public Tweets.
 
+        .. versionchanged:: 4.2
+            Renamed from :meth:`Client.follow`
+
         Parameters
         ----------
         target_user_id : Union[int, str]
@@ -1402,6 +1410,8 @@ class Client:
                      tweet_fields, user_fields)
 
         Returns a list of users who are muted by the authenticating user.
+
+        .. versionadded:: 4.1
 
         Parameters
         ----------
@@ -1588,6 +1598,11 @@ class Client:
 
         Return live or scheduled Spaces matching your specified search terms
 
+        .. versionadded:: 4.1
+
+        .. versionchanged:: 4.2
+            ``state`` is now an optional parameter.
+
         Parameters
         ----------
         query : str
@@ -1632,6 +1647,8 @@ class Client:
         Returns details about multiple live or scheduled Spaces (created by the
         specified user IDs if specified). Up to 100 comma-separated Space or
         user IDs can be looked up using this endpoint.
+
+        .. versionadded:: 4.1
 
         Parameters
         ----------
@@ -1686,6 +1703,8 @@ class Client:
         Returns a variety of information about a single Space specified by the
         requested ID.
 
+        .. versionadded:: 4.1
+
         Parameters
         ----------
         id : Union[List[str], str]
@@ -1717,6 +1736,8 @@ class Client:
     def delete_list(self, id):
         """Enables the authenticated user to delete a List that they own.
 
+        .. versionadded:: 4.2
+
         Parameters
         ----------
         id : Union[int, str]
@@ -1738,6 +1759,8 @@ class Client:
     def remove_list_member(self, id, user_id):
         """Enables the authenticated user to remove a member from a List they
         own.
+
+        .. versionadded:: 4.2
 
         Parameters
         ----------
@@ -1762,6 +1785,8 @@ class Client:
     def unfollow_list(self, list_id):
         """Enables the authenticated user to unfollow a List.
 
+        .. versionadded:: 4.2
+
         Parameters
         ----------
         list_id : Union[int, str]
@@ -1784,6 +1809,8 @@ class Client:
 
     def unpin_list(self, list_id):
         """Enables the authenticated user to unpin a List.
+
+        .. versionadded:: 4.2
 
         Parameters
         ----------
@@ -1808,6 +1835,8 @@ class Client:
     def update_list(self, id, *, description=None, name=None, private=None):
         """Enables the authenticated user to update the meta data of a
         specified List that they own.
+
+        .. versionadded:: 4.2
 
         Parameters
         ----------
@@ -1846,6 +1875,8 @@ class Client:
     def create_list(self, name, *, description=None, private=None):
         """Enables the authenticated user to create a List.
 
+        .. versionadded:: 4.2
+
         Parameters
         ----------
         name : str
@@ -1878,6 +1909,8 @@ class Client:
     def add_list_member(self, id, user_id):
         """Enables the authenticated user to add a member to a List they own.
 
+        .. versionadded:: 4.2
+
         Parameters
         ----------
         id : Union[int, str]
@@ -1901,6 +1934,8 @@ class Client:
     def follow_list(self, list_id):
         """Enables the authenticated user to follow a List.
 
+        .. versionadded:: 4.2
+
         Parameters
         ----------
         list_id : Union[int, str]
@@ -1923,6 +1958,8 @@ class Client:
 
     def pin_list(self, list_id):
         """Enables the authenticated user to pin a List.
+
+        .. versionadded:: 4.2
 
         Parameters
         ----------
@@ -1951,6 +1988,8 @@ class Client:
 
         Returns a list of recent compliance jobs.
 
+        .. versionadded:: 4.1
+
         Parameters
         ----------
         type : str
@@ -1978,6 +2017,8 @@ class Client:
     def get_compliance_job(self, id):
         """Get a single compliance job with the specified ID.
 
+        .. versionadded:: 4.1
+
         Parameters
         ----------
         id : Union[int, str]
@@ -2003,6 +2044,8 @@ class Client:
         consumed by your app.
 
         You can run one batch job at a time.
+
+        .. versionadded:: 4.1
 
         Parameters
         ----------
