@@ -54,6 +54,8 @@ Models Reference
 
    .. group-tab:: API v2
 
+      .. versionadded:: 4.0
+
       .. class:: tweepy.Media
 
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
@@ -71,6 +73,8 @@ Models Reference
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 
       .. class:: tweepy.Space
+
+         .. versionadded:: 4.1
 
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 
