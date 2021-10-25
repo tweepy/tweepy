@@ -1,10 +1,10 @@
 Tweepy: Twitter for Python!
 ======
 
-[![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
-[![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest)](https://tweepy.readthedocs.io/en/latest/)
 [![PyPI Version](https://img.shields.io/pypi/v/tweepy?label=PyPI)](https://pypi.org/project/tweepy/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tweepy?label=Python)](https://pypi.org/project/tweepy/)
+[![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest)](https://tweepy.readthedocs.io/en/latest/)
+[![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
 [![Discord Server](https://discord.com/api/guilds/432685901596852224/embed.png)](https://discord.gg/bJvqnhg)
 
