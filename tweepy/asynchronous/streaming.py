@@ -22,6 +22,8 @@ log = logging.getLogger(__name__)
 class AsyncStream:
     """Stream realtime Tweets asynchronously
 
+    .. versionadded:: 4.0
+
     Parameters
     ----------
     consumer_key: str
