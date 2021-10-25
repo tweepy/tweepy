@@ -7,6 +7,7 @@ import datetime
 import logging
 from platform import python_version
 import time
+import warnings
 
 import requests
 
@@ -1192,7 +1193,7 @@ class Client:
 
     # Follows
 
-    def unfollow(self, target_user_id):
+    def unfollow_user(self, target_user_id):
         """Allows a user ID to unfollow another user.
 
         The request succeeds with no action when the authenticated user sends a
@@ -1217,6 +1218,18 @@ class Client:
         return self._make_request(
             "DELETE", route, user_auth=True
         )
+
+    def unfollow(self, target_user_id):
+        """Alias for :meth:`Client.unfollow_user`
+
+        .. deprecated:: 4.2
+            Use :meth:`Client.unfollow_user` instead.
+        """
+        warnings.warn(
+            "Client.unfollow is deprecated; use Client.unfollow_user instead.",
+            DeprecationWarning
+        )
+        self.unfollow_user(target_user_id)
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
@@ -1313,7 +1326,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def follow(self, target_user_id):
+    def follow_user(self, target_user_id):
         """Allows a user ID to follow another user.
 
         If the target user does not have public Tweets, this endpoint will send
@@ -1343,6 +1356,18 @@ class Client:
             "POST", route, json={"target_user_id": str(target_user_id)},
             user_auth=True
         )
+
+    def follow(self, target_user_id):
+        """Alias for :meth:`Client.follow_user`
+
+        .. deprecated:: 4.2
+            Use :meth:`Client.follow_user` instead.
+        """
+        warnings.warn(
+            "Client.follow is deprecated; use Client.follow_user instead.",
+            DeprecationWarning
+        )
+        self.follow_user(target_user_id)
 
     # Mutes
 

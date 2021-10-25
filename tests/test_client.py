@@ -92,11 +92,11 @@ class TweepyTestCase(unittest.TestCase):
         self.client.get_blocked()
         self.client.unblock(user_id)
 
-    @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")
-    def test_follow_and_unfollow(self):
+    @tape.use_cassette("test_follow_and_unfollow_user.yaml", serializer="yaml")
+    def test_follow_and_unfollow_user(self):
         user_id = 17874544  # User ID for @TwitterSupport
-        self.client.follow(user_id)
-        self.client.unfollow(user_id)
+        self.client.follow_user(user_id)
+        self.client.unfollow_user(user_id)
 
     @tape.use_cassette("test_get_users_followers.yaml", serializer="yaml")
     def test_get_users_followers(self):

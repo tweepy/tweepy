@@ -81,11 +81,15 @@ Blocks
 Follows
 -------
 
+.. automethod:: Client.unfollow_user
+
 .. automethod:: Client.unfollow
 
 .. automethod:: Client.get_users_followers
 
 .. automethod:: Client.get_users_following
+
+.. automethod:: Client.follow_user
 
 .. automethod:: Client.follow
 
