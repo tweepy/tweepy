@@ -9,6 +9,8 @@ class Paginator:
     """:class:`Paginator` can be used to paginate for any :class:`Client`
     methods that support pagination
 
+    .. versionadded:: 4.0
+
     Parameters
     ----------
     method
