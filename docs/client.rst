@@ -120,6 +120,30 @@ Spaces lookup
 
 .. automethod:: Client.get_space
 
+Lists
+=====
+
+Manage Lists
+------------
+
+.. automethod:: Client.delete_list
+
+.. automethod:: Client.remove_list_member
+
+.. automethod:: Client.unfollow_list
+
+.. automethod:: Client.unpin_list
+
+.. automethod:: Client.update_list
+
+.. automethod:: Client.create_list
+
+.. automethod:: Client.add_list_member
+
+.. automethod:: Client.follow_list
+
+.. automethod:: Client.pin_list
+
 Compliance
 ==========
 

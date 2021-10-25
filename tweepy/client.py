@@ -1687,6 +1687,238 @@ class Client:
             ), data_type=Space
         )
 
+    # Manage Lists
+
+    def delete_list(self, id):
+        """Enables the authenticated user to delete a List that they own.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List to be deleted.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-lists-id
+        """
+
+        return self._make_request(
+            "DELETE", f"/2/lists/{id}", user_auth=True
+        )
+
+    def remove_list_member(self, id, user_id):
+        """Enables the authenticated user to remove a member from a List they
+        own.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List you are removing a member from.
+        user_id : Union[int, str]
+            The ID of the user you wish to remove as a member of the List.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-lists-id-members-user_id
+        """
+
+        return self._make_request(
+            "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=True
+        )
+
+    def unfollow_list(self, list_id):
+        """Enables the authenticated user to unfollow a List.
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to unfollow.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-followed-lists-list_id
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/followed_lists/{list_id}"
+
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
+
+    def unpin_list(self, list_id):
+        """Enables the authenticated user to unpin a List.
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to unpin.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-pinned-lists-list_id
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/pinned_lists/{list_id}"
+
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
+
+    def update_list(self, id, *, description=None, name=None, private=None):
+        """Enables the authenticated user to update the meta data of a
+        specified List that they own.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List to be updated.
+        description : str
+            Updates the description of the List.
+        name : str
+            Updates the name of the List.
+        private : str
+            Determines whether the List should be private.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/put-lists-id
+        """
+        json = {}
+
+        if description is not None:
+            json["description"] = description
+
+        if name is not None:
+            json["name"] = name
+
+        if private is not None:
+            json["private"] = private
+
+        return self._make_request(
+            "PUT", f"/2/lists/{id}", json=json, user_auth=True
+        )
+
+    def create_list(self, name, *, description=None, private=None):
+        """Enables the authenticated user to create a List.
+
+        Parameters
+        ----------
+        name : str
+            The name of the List you wish to create.
+        description : str
+            Description of the List.
+        private : bool
+            Determine whether the List should be private.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists
+        """
+        json = {"name": name}
+
+        if description is not None:
+            json["description"] = description
+
+        if private is not None:
+            json["private"] = private
+
+        return self._make_request(
+            "POST", f"/2/lists", json=json, user_auth=True
+        )
+
+    def add_list_member(self, id, user_id):
+        """Enables the authenticated user to add a member to a List they own.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List you are adding a member to.
+        user_id : Union[int, str]
+            The ID of the user you wish to add as a member of the List.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists-id-members
+        """
+        return self._make_request(
+            "POST", f"/2/lists/{id}/members", json={"user_id": str(user_id)},
+            user_auth=True
+        )
+
+    def follow_list(self, list_id):
+        """Enables the authenticated user to follow a List.
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to follow.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-followed-lists
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/followed_lists"
+
+        return self._make_request(
+            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+        )
+
+    def pin_list(self, list_id):
+        """Enables the authenticated user to pin a List.
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to pin.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-pinned-lists
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/pinned_lists"
+
+        return self._make_request(
+            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+        )
+
     # Batch Compliance
 
     def get_compliance_jobs(self, type, **params):

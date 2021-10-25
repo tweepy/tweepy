@@ -147,6 +147,25 @@ class TweepyTestCase(unittest.TestCase):
         # https://twitter.com/TwitterSpaces/status/1436382283347283969
         self.client.get_space(space_id)
 
+    @tape.use_cassette("test_follow_and_unfollow_list.yaml",
+                        serializer = "yaml")
+    def test_follow_and_unfollow_list(self):
+        list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
+        self.client.follow_list(list_id)
+        self.client.unfollow_list(list_id)
+
+    @tape.use_cassette("test_manage_list.yaml", serializer="yaml")
+    def test_manage_list(self):
+        response = self.client.create_list("Test List", private=True)
+        list_id = response.data["id"]
+        user_id = 783214  # User ID for @Twitter
+        self.client.add_list_member(list_id, user_id)
+        self.client.pin_list(list_id)
+        self.client.remove_list_member(list_id, user_id)
+        self.client.unpin_list(list_id)
+        self.client.update_list(list_id, description="Test List Description")
+        self.client.delete_list(list_id)
+
     @tape.use_cassette("test_create_and_get_compliance_job_and_jobs.yaml",
                        serializer="yaml")
     def test_create_and_get_compliance_job_and_jobs(self):
