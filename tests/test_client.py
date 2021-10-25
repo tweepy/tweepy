@@ -94,9 +94,9 @@ class TweepyTestCase(unittest.TestCase):
 
     @tape.use_cassette("test_follow_and_unfollow.yaml", serializer="yaml")
     def test_follow_and_unfollow(self):
-        user_id = 783214  # User ID for @Twitter
-        self.client.unfollow(user_id)
+        user_id = 17874544  # User ID for @TwitterSupport
         self.client.follow(user_id)
+        self.client.unfollow(user_id)
 
     @tape.use_cassette("test_get_users_followers.yaml", serializer="yaml")
     def test_get_users_followers(self):
