@@ -126,7 +126,7 @@ class TweepyTestCase(unittest.TestCase):
 
     @tape.use_cassette("test_search_spaces.yaml", serializer="yaml")
     def test_search_spaces(self):
-        self.client.search_spaces("Twitter", "live")
+        self.client.search_spaces("Twitter")
 
     @tape.use_cassette("test_get_spaces.yaml", serializer="yaml")
     def test_get_spaces(self):

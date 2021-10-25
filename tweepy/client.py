@@ -1549,9 +1549,9 @@ class Client:
 
     # Search Spaces
 
-    def search_spaces(self, query, state, **params):
-        """search_spaces(query, state, *, expansions, max_results, \
-                         space_fields, user_fields)
+    def search_spaces(self, query, **params):
+        """search_spaces(query, *, expansions, max_results, space_fields, \
+                         state, user_fields)
 
         Return live or scheduled Spaces matching your specified search terms
 
@@ -1560,9 +1560,6 @@ class Client:
         query : str
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
-        state : str
-            Determines the type of results to return. Use ``live`` to return
-            live Spaces or ``scheduled`` to return upcoming Spaces.
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -1570,6 +1567,10 @@ class Client:
             value between 1 and 100.
         space_fields : Union[List[str], str]
             :ref:`space_fields_parameter`
+        state : str
+            Determines the type of results to return. This endpoint returns all
+            Spaces by default. Use ``live`` to only return live Spaces or
+            ``scheduled`` to only return upcoming Spaces.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
 
@@ -1582,11 +1583,10 @@ class Client:
         https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-reference/get-spaces-search
         """
         params["query"] = query
-        params["state"] = state
         return self._make_request(
             "GET", "/2/spaces/search", params=params,
             endpoint_parameters=(
-                "query", "state", "expansions", "max_results", "space.fields",
+                "query", "expansions", "max_results", "space.fields", "state",
                 "user.fields"
             ), data_type=Space
         )
