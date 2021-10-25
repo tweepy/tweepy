@@ -264,7 +264,9 @@ class Client:
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes/{tweet_id}"
 
-        return self._make_request("DELETE", route, user_auth=True)
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
 
     def get_liking_users(self, id, *, user_auth=False, **params):
         """get_liking_users(id, *, expansions, media_fields, place_fields, \
@@ -410,7 +412,9 @@ class Client:
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
-        return self._make_request("DELETE", route, user_auth=True)
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
 
     def get_retweeters(self, id, *, user_auth=False, **params):
         """get_retweeters(id, *, expansions, media_fields, place_fields, \
@@ -1210,7 +1214,9 @@ class Client:
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
-        return self._make_request("DELETE", route, user_auth=True)
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
@@ -1362,7 +1368,9 @@ class Client:
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
-        return self._make_request("DELETE", route, user_auth=True)
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
 
     def get_muted(self, **params):
         """get_muted(*, expansions, max_results, pagination_token, \
@@ -1726,7 +1734,9 @@ class Client:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/get-compliance-jobs-id
         """
-        return self._make_request("GET", f"/2/compliance/jobs/{id}")
+        return self._make_request(
+            "GET", f"/2/compliance/jobs/{id}"
+        )
 
     def create_compliance_job(self, type, *, name=None, resumable=None):
         """Creates a new compliance job for Tweet IDs or user IDs.
