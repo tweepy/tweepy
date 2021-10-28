@@ -1846,7 +1846,7 @@ class Client:
             Updates the description of the List.
         name : str
             Updates the name of the List.
-        private : str
+        private : bool
             Determines whether the List should be private.
 
         Returns
