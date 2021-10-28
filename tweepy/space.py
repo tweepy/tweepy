@@ -2,9 +2,8 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-import datetime
-
 from tweepy.mixins import DataMapping, HashableID
+from tweepy.utils import parse_datetime
 
 
 class Space(HashableID, DataMapping):
@@ -22,9 +21,7 @@ class Space(HashableID, DataMapping):
 
         self.created_at = data.get("created_at")
         if self.created_at is not None:
-            self.created_at = datetime.datetime.strptime(
-                self.created_at, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
+            self.created_at = parse_datetime(self.created_at)
 
         self.host_ids = data.get("host_ids", [])
         self.lang = data.get("lang")
@@ -34,25 +31,19 @@ class Space(HashableID, DataMapping):
 
         self.scheduled_start = data.get("scheduled_start")
         if self.scheduled_start is not None:
-            self.scheduled_start = datetime.datetime.strptime(
-                self.scheduled_start, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
+            self.scheduled_start = parse_datetime(self.scheduled_start)
 
         self.speaker_ids = data.get("speaker_ids", [])
 
         self.started_at = data.get("started_at")
         if self.started_at is not None:
-            self.started_at = datetime.datetime.strptime(
-                self.started_at, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
+            self.started_at = parse_datetime(self.started_at)
 
         self.title = data.get("title")
 
         self.updated_at = data.get("updated_at")
         if self.updated_at is not None:
-            self.updated_at = datetime.datetime.strptime(
-                self.updated_at, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
+            self.updated_at = parse_datetime(self.updated_at)
 
     def __repr__(self):
         return f"<Space id={self.id} state={self.state}>"

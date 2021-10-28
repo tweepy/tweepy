@@ -2,9 +2,8 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-import datetime
-
 from tweepy.mixins import DataMapping, HashableID
+from tweepy.utils import parse_datetime
 
 
 class User(HashableID, DataMapping):
@@ -23,9 +22,7 @@ class User(HashableID, DataMapping):
 
         self.created_at = data.get("created_at")
         if self.created_at is not None:
-            self.created_at = datetime.datetime.strptime(
-                self.created_at, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
+            self.created_at = parse_datetime(self.created_at)
 
         self.description = data.get("description")
         self.entities = data.get("entities")

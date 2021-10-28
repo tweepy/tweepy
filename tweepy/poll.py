@@ -2,9 +2,8 @@
 # Copyright 2009-2021 Joshua Roesslein
 # See LICENSE for details.
 
-import datetime
-
 from tweepy.mixins import DataMapping, HashableID
+from tweepy.utils import parse_datetime
 
 
 class Poll(HashableID, DataMapping):
@@ -23,10 +22,8 @@ class Poll(HashableID, DataMapping):
 
         self.end_datetime = data.get("end_datetime")
         if self.end_datetime is not None:
-            self.end_datetime = datetime.datetime.strptime(
-                self.end_datetime, "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
-        
+            self.end_datetime = parse_datetime(self.end_datetime)
+
         self.voting_status = data.get("voting_status")
 
     def __iter__(self):
