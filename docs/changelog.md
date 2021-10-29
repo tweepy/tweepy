@@ -3,6 +3,22 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.2.0
+-------------
+### New Features / Improvements
+- Add support for managing lists with Twitter API v2 ([b1342bf](https://github.com/tweepy/tweepy/commit/b1342bfc998bee334437f2b7a8d2aef4df7c3838))
+- Rename `Client.follow` and `Client.unfollow` to `Client.follow_user` and `Client.unfollow_user`, respectively ([8f8de15](https://github.com/tweepy/tweepy/commit/8f8de15e13f11d042a521d2adae24d0c09fa2098))
+  - `Client.follow` and `Client.unfollow` are kept as deprecated aliases
+- Add FAQ section in documentation
+- Update and improve various documentation and tests
+
+#### Twitter API Changes
+- Change `state` to optional parameter for `Client.search_spaces` ([e61d5d6](https://github.com/tweepy/tweepy/commit/e61d5d6f017db7f28871331b515fcfd87666f352))
+
+### Bug Fixes
+- Fix parsing of datetime strings for API v2 models with Python 3.6 ([5bf2446](https://github.com/tweepy/tweepy/commit/5bf24464b00257a9fa5f66047a2f7815c1e4f8fb))
+- Fix models missing an `API` instance attribute when using `Cursor` with pagination by ID ([451e921](https://github.com/tweepy/tweepy/commit/451e921210677ee0a618849f189bdfeea497a00c))
+
 Version 4.1.0
 -------------
 ### New Features / Improvements
