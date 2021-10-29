@@ -166,14 +166,14 @@ class IdIterator(BaseIterator):
         if self.index >= len(self.results) - 1:
             data = self.method(max_id=self.max_id, parser=RawParser(), *self.args, **self.kwargs)
 
-            # This is a special invocation that returns the underlying
-            # APIMethod class
             model = ModelParser().parse(
-                data, payload_list=self.method.payload_list,
+                data, api = self.method.__self__,
+                payload_list=self.method.payload_list,
                 payload_type=self.method.payload_type
             )
             result = self.method.__self__.parser.parse(
-                data, payload_list=self.method.payload_list,
+                data, api = self.method.__self__,
+                payload_list=self.method.payload_list,
                 payload_type=self.method.payload_type
             )
 
