@@ -36,7 +36,7 @@ setup(
         "Source Code": "https://github.com/tweepy/tweepy",
     },
     download_url="https://pypi.org/project/tweepy/",
-    packages=find_packages(exclude=["tests", "examples"]),
+    packages=find_packages(),
     install_requires=[
         "requests>=2.11.1,<3",
         "requests_oauthlib>=1.0.0,<2",
