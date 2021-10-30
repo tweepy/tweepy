@@ -96,20 +96,20 @@ class TweepyAPITests(TweepyTestCase):
 
     @tape.use_cassette('testupdatestatuswithmedia.yaml', serializer='yaml')
     def testupdatestatuswithmedia(self):
-        update = self.api.update_status_with_media(tweet_text, 'examples/banner.png')
+        update = self.api.update_status_with_media(tweet_text, 'assets/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
     @tape.use_cassette('testmediauploadpng.yaml', serializer='yaml')
     def testmediauploadpng(self):
-        self.api.media_upload('examples/banner.png')
+        self.api.media_upload('assets/banner.png')
 
     @tape.use_cassette('testmediauploadgif.yaml', serializer='yaml')
     def testmediauploadgif(self):
-        self.api.media_upload('examples/animated.gif')
+        self.api.media_upload('assets/animated.gif')
 
     @tape.use_cassette('testmediauploadmp4.yaml', serializer='yaml')
     def testmediauploadmp4(self):
-        self.api.media_upload('examples/video.mp4')
+        self.api.media_upload('assets/video.mp4')
 
     @tape.use_cassette('testgetuser.yaml', serializer='yaml')
     def testgetuser(self):
@@ -213,10 +213,11 @@ class TweepyAPITests(TweepyTestCase):
     def testupateprofileimage(self):
         self.api.update_profile_image('examples/profile.png')
     """
+    # TODO: Use logo
 
     @tape.use_cassette('testupdateprofilebannerimage.yaml', serializer='yaml')
     def testupdateprofilebannerimage(self):
-        self.api.update_profile_banner('examples/banner.png')
+        self.api.update_profile_banner('assets/banner.png')
 
     @tape.use_cassette('testupdateprofile.json')
     def testupdateprofile(self):
