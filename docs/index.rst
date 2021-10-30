@@ -14,7 +14,6 @@ Contents:
    install.rst
    getting_started.rst
    auth_tutorial.rst
-   code_snippet.rst
    api.rst
    client.rst
    models.rst
@@ -26,6 +25,7 @@ Contents:
    streaming.rst
    running_tests.rst
    changelog.md
+   examples.rst
    faq.rst
 
 Indices and tables
