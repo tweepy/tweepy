@@ -34,6 +34,8 @@ class HTTPException(TweepyException):
         The error codes the Twitter API responded with, if any
     api_messages : List[str]
         The error messages the Twitter API responded with, if any
+
+    .. versionadded:: 4.0
     """
 
     def __init__(self, response):
