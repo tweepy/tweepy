@@ -23,8 +23,8 @@ Contents:
    extended_tweets.rst
    pagination.rst
    streaming.rst
-   running_tests.rst
    changelog.md
+   development.rst
    examples.rst
    faq.rst
 

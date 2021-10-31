@@ -1,8 +1,11 @@
-.. _running_tests:
+.. _development:
 
-*************
+***********
+Development
+***********
+
 Running Tests
-*************
+=============
 
 These steps outline how to run tests for Tweepy:
 
