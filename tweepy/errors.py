@@ -12,9 +12,8 @@ except ImportError:
 
 class TweepyException(Exception):
     """Base exception for Tweepy
-    
-    .. versionchanged:: 4.0
-        Renamed from ``TweepError``
+
+    .. versionadded:: 4.0
     """
     pass
 
@@ -115,8 +114,7 @@ class TooManyRequests(HTTPException):
 
     Exception raised for a 429 HTTP status code
 
-    .. versionchanged:: 4.0
-        Renamed from ``RateLimitError``
+    .. versionadded:: 4.0
     """
     pass
 
