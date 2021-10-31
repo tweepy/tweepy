@@ -20,7 +20,9 @@ class TweepyException(Exception):
 
 
 class HTTPException(TweepyException):
-    """Exception raised when an HTTP request fails
+    """HTTPException()
+
+    Exception raised when an HTTP request fails
 
     Attributes
     ----------
@@ -67,40 +69,50 @@ class HTTPException(TweepyException):
 
 
 class BadRequest(HTTPException):
-    """Exception raised for a 400 HTTP status code
-    
+    """BadRequest()
+
+    Exception raised for a 400 HTTP status code
+
     .. versionadded:: 4.0
     """
     pass
 
 
 class Unauthorized(HTTPException):
-    """Exception raised for a 401 HTTP status code
-    
+    """Unauthorized()
+
+    Exception raised for a 401 HTTP status code
+
     .. versionadded:: 4.0
     """
     pass
 
 
 class Forbidden(HTTPException):
-    """Exception raised for a 403 HTTP status code
-    
+    """Forbidden()
+
+    Exception raised for a 403 HTTP status code
+
     .. versionadded:: 4.0
     """
     pass
 
 
 class NotFound(HTTPException):
-    """Exception raised for a 404 HTTP status code
-    
+    """NotFound()
+
+    Exception raised for a 404 HTTP status code
+
     .. versionadded:: 4.0
     """
     pass
 
 
 class TooManyRequests(HTTPException):
-    """Exception raised for a 429 HTTP status code
-    
+    """TooManyRequests()
+
+    Exception raised for a 429 HTTP status code
+
     .. versionchanged:: 4.0
         Renamed from ``RateLimitError``
     """
@@ -108,8 +120,10 @@ class TooManyRequests(HTTPException):
 
 
 class TwitterServerError(HTTPException):
-    """Exception raised for a 5xx HTTP status code
-    
+    """TwitterServerError()
+
+    Exception raised for a 5xx HTTP status code
+
     .. versionadded:: 4.0
     """
     pass
