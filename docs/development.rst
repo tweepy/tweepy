@@ -32,3 +32,17 @@ To record new cassettes, the following environment variables can be used:
 
 Simply set ``USE_REPLAY`` to ``False`` and provide the app and account
 credentials and username.
+
+Contributors
+============
+
+Tweepy's contributors can be identified through the `GitHub repository`_'s
+`contributors graph page`_, `commit history`_, `issues`_, `pull requests`_, and
+`discussions`_.
+
+.. _GitHub repository: https://github.com/tweepy/tweepy
+.. _contributors graph page: https://github.com/tweepy/tweepy/graphs/contributors
+.. _commit history: https://github.com/tweepy/tweepy/commits/master
+.. _issues: https://github.com/tweepy/tweepy/issues?q=is%3Aissue
+.. _pull requests: https://github.com/tweepy/tweepy/pulls?q=is%3Apr
+.. _discussions: https://github.com/tweepy/tweepy/discussions
