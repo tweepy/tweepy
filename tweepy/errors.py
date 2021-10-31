@@ -20,7 +20,19 @@ class TweepyException(Exception):
 
 
 class HTTPException(TweepyException):
-    """Exception raised when an HTTP request fails"""
+    """Exception raised when an HTTP request fails
+
+    Attributes
+    ----------
+    response : requests.Response
+        Requests Response from the Twitter API
+    api_errors : List[dict[str, Union[int, str]]]
+        The errors the Twitter API responded with, if any
+    api_codes : List[int]
+        The error codes the Twitter API responded with, if any
+    api_messages : List[str]
+        The error messages the Twitter API responded with, if any
+    """
 
     def __init__(self, response):
         self.response = response
