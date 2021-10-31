@@ -23,6 +23,8 @@ class HTTPException(TweepyException):
 
     Exception raised when an HTTP request fails
 
+    .. versionadded:: 4.0
+
     Attributes
     ----------
     response : requests.Response
@@ -33,8 +35,6 @@ class HTTPException(TweepyException):
         The error codes the Twitter API responded with, if any
     api_messages : List[str]
         The error messages the Twitter API responded with, if any
-
-    .. versionadded:: 4.0
     """
 
     def __init__(self, response):
