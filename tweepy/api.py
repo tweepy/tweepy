@@ -1200,11 +1200,14 @@ class API:
         API is not meant to be an exhaustive source of Tweets. Not all Tweets
         will be indexed or made available via the search interface.
 
-        In API v1.1, the response format of the Search API has been improved to
-        return Tweet objects more similar to the objects you’ll find across the
-        REST API and platform. However, perspectival attributes (fields that
-        pertain to the perspective of the authenticating user) are not
-        currently supported on this endpoint.\ [#]_\ [#]_
+        .. note::
+
+            In API v1.1, the response format of the Search API has been
+            improved to return Tweet objects more similar to the objects you’ll
+            find across the REST API and platform. However, perspectival
+            attributes (fields that pertain to the perspective of the
+            authenticating user) are not currently supported on this endpoint.
+            [#]_\ [#]_
 
         Parameters
         ----------
