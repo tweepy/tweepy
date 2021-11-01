@@ -25,3 +25,7 @@ Examples
    .. tab:: Handle Rate Limits
 
       .. literalinclude:: ../examples/rate_limit_handling.py
+
+   .. tab:: Streaming
+
+      .. literalinclude:: ../examples/streaming.py
