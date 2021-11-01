@@ -52,7 +52,7 @@ class Client:
         Twitter API Access Token
     access_token_secret : Optional[str]
         Twitter API Access Token Secret
-    return_type : Type[dict, requests.Response, Response]
+    return_type : Type[Union[dict, requests.Response, Response]]
         Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached
