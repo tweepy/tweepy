@@ -381,7 +381,7 @@ class Client:
 
         References
         ----------
-        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-user_id-likes
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
         """
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes"
