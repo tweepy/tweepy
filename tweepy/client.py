@@ -262,7 +262,7 @@ class Client:
 
         References
         ----------
-        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-user_id-likes
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id
         """
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes/{tweet_id}"
