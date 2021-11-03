@@ -1,4 +1,4 @@
-from tests.config import tape, TweepyTestCase, username
+from config import tape, TweepyTestCase, username
 from tweepy import Cursor
 
 

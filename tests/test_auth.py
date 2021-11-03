@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from tests.config import *
+from config import *
 from tweepy import API, OAuthHandler
 
 

@@ -1,10 +1,11 @@
 import unittest
 
-from tests.config import (
+from config import (
     access_token, access_token_secret, bearer_token, consumer_key,
     consumer_secret, tape, user_id
 )
 import tweepy
+
 
 class TweepyTestCase(unittest.TestCase):
 

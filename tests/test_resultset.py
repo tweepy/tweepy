@@ -1,15 +1,18 @@
-from tests.config import TweepyTestCase
-
+from config import TweepyTestCase
 from tweepy.models import ResultSet
+
 
 class NoIdItem:
     pass
+
 
 class IdItem:
     def __init__(self, id):
         self.id = id
 
+
 ids_fixture = [1, 10, 8, 50, 2, 100, 5]
+
 
 class TweepyResultSetTests(TweepyTestCase):
     def setUp(self):
@@ -27,4 +30,3 @@ class TweepyResultSetTests(TweepyTestCase):
 
     def testsinceid(self):
         self.assertEqual(self.results.since_id, 100)
-
