@@ -3,6 +3,18 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.3.0
+-------------
+### New Features / Improvements
+- Add support for managing Tweets with Twitter API v2 ([7884e3a](https://github.com/tweepy/tweepy/commit/7884e3a7253d9a821ff46160ec0d3811f299327f))
+
+### Misc
+- Document `HTTPException` attributes ([c62c31a](https://github.com/tweepy/tweepy/commit/c62c31a0f3574e04b6e2f5996b90b5c1b5917485))
+- Add table to documentation mapping `Client` methods to Twitter API v2 endpoints ([0572b03](https://github.com/tweepy/tweepy/commit/0572b03b7fe1a2384951ebc2c0002f9d8bd6b68a))
+- Add and improve examples
+- Revamp examples page in documentation
+- Update and improve various documentation and tests
+
 Version 4.2.0
 -------------
 ### New Features / Improvements
