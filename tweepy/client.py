@@ -428,12 +428,12 @@ class Client:
             account.
         for_super_followers_only : Optional[bool]
             Allows you to Tweet exclusively for `Super Followers`_.
-        place_id : Optional[int]
+        place_id : Optional[str]
             Place ID being attached to the Tweet for geo location.
         media_ids : Optional[List[int, str]]
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
-        media_tagged_user_ids : Optional[Union[int, str]]
+        media_tagged_user_ids : Optional[List[Union[int, str]]]
             A list of User IDs being tagged in the Tweet with Media. If the
             user you're tagging doesn't have photo-tagging enabled, their names
             won't show up in the list of tagged users even though the Tweet is
@@ -449,8 +449,9 @@ class Client:
             A list of User IDs to be excluded from the reply Tweet thus
             removing a user from a thread.
         in_reply_to_tweet_id : Optional[Union[int, str]]
-            Tweet ID of the Tweet being replied to. This is only required if
-            the request includes the ``reply.exclude_reply_user_ids``.
+            Tweet ID of the Tweet being replied to. Please note that
+            ``in_reply_to_tweet_id`` needs to be in the request if
+            ``exclude_reply_user_ids`` is present.
         reply_settings : Optional[str]
             `Settings`_ to indicate who can reply to the Tweet. Limited to
             "mentionedUsers" and "following". If the field isn’t specified, it
