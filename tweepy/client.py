@@ -395,6 +395,8 @@ class Client:
     def delete_tweet(self, id):
         """Allows an authenticated user ID to delete a Tweet.
 
+        .. versionadded:: 4.3
+
         Parameters
         ----------
         id : Union[int, str]
@@ -420,6 +422,8 @@ class Client:
         reply_settings=None, text=None
     ):
         """Creates a Tweet on behalf of an authenticated user.
+
+        .. versionadded:: 4.3
 
         Parameters
         ----------
