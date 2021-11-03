@@ -390,6 +390,134 @@ class Client:
             "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
         )
 
+    # Manage Tweets
+
+    def delete_tweet(self, id):
+        """Allows an authenticated user ID to delete a Tweet.
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The Tweet ID you are deleting.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id
+        """
+        return self._make_request(
+            "DELETE", f"/2/tweets/{id}", user_auth=True
+        )
+
+    def create_tweet(
+        self, *, direct_message_deep_link=None, for_super_followers_only=None,
+        place_id=None, media_ids=None, media_tagged_user_ids=None,
+        poll_duration_minutes=None, poll_options=None, quote_tweet_id=None,
+        exclude_reply_user_ids=None, in_reply_to_tweet_id=None,
+        reply_settings=None, text=None
+    ):
+        """Creates a Tweet on behalf of an authenticated user.
+
+        Parameters
+        ----------
+        direct_message_deep_link : Optional[str]
+            `Tweets a link directly to a Direct Message conversation`_ with an
+            account.
+        for_super_followers_only : Optional[bool]
+            Allows you to Tweet exclusively for `Super Followers`_.
+        place_id : Optional[int]
+            Place ID being attached to the Tweet for geo location.
+        media_ids : Optional[List[int, str]]
+            A list of Media IDs being attached to the Tweet. This is only
+            required if the request includes the ``tagged_user_ids``.
+        media_tagged_user_ids : Optional[Union[int, str]]
+            A list of User IDs being tagged in the Tweet with Media. If the
+            user you're tagging doesn't have photo-tagging enabled, their names
+            won't show up in the list of tagged users even though the Tweet is
+            successfully created.
+        poll_duration_minutes : Optional[int]
+            Duration of the poll in minutes for a Tweet with a poll. This is
+            only required if the request includes ``poll.options``.
+        poll_options : Optional[List[str]]
+            A list of poll options for a Tweet with a poll.
+        quote_tweet_id : Optional[Union[int, str]]
+            Link to the Tweet being quoted.
+        exclude_reply_user_ids : Optional[List[Union[int, str]]]
+            A list of User IDs to be excluded from the reply Tweet thus
+            removing a user from a thread.
+        in_reply_to_tweet_id : Optional[Union[int, str]]
+            Tweet ID of the Tweet being replied to. This is only required if
+            the request includes the ``reply.exclude_reply_user_ids``.
+        reply_settings : Optional[str]
+            `Settings`_ to indicate who can reply to the Tweet. Limited to
+            "mentionedUsers" and "following". If the field isn’t specified, it
+            will default to everyone.
+        text : Optional[str]
+            Text of the Tweet being created. This field is required if
+            ``media.media_ids`` is not present.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/post-tweets
+
+        .. _Tweets a link directly to a Direct Message conversation: https://business.twitter.com/en/help/campaign-editing-and-optimization/public-to-private-conversation.html
+        .. _Super Followers: https://help.twitter.com/en/using-twitter/super-follows
+        .. _Settings: https://blog.twitter.com/en_us/topics/product/2020/new-conversation-settings-coming-to-a-tweet-near-you
+        """
+        json = {}
+
+        if direct_message_deep_link is not None:
+            json["direct_message_deep_link"] = direct_message_deep_link
+
+        if for_super_followers_only is not None:
+            json["for_super_followers_only"] = for_super_followers_only
+
+        if place_id is not None:
+            json["geo"] = {"place_id": place_id}
+
+        if media_ids is not None:
+            json["media"] = {
+                "media_ids": [str(media_id) for media_id in media_ids]
+            }
+            if media_tagged_user_ids is not None:
+                json["media"]["tagged_user_ids"] = [
+                    str(media_tagged_user_id)
+                    for media_tagged_user_id in media_tagged_user_ids
+                ]
+
+        if poll_options is not None:
+            json["poll"] = {"options": poll_options}
+            if poll_duration_minutes is not None:
+                json["poll"]["duration_minutes"] = poll_duration_minutes
+
+        if quote_tweet_id is not None:
+            json["quote_tweet_id"] = str(quote_tweet_id)
+
+        if in_reply_to_tweet_id is not None:
+            json["reply"] = {"in_reply_to_tweet_id": str(in_reply_to_tweet_id)}
+            if exclude_reply_user_ids is not None:
+                json["reply"]["exclude_reply_user_ids"] = [
+                    str(exclude_reply_user_id)
+                    for exclude_reply_user_id in exclude_reply_user_ids
+                ]
+
+        if reply_settings is not None:
+            json["reply_settings"] = reply_settings
+
+        if text is not None:
+            json["text"] = text
+
+        return self._make_request(
+            "POST", f"/2/tweets", json=json, user_auth=True
+        )
+
     # Retweets
 
     def unretweet(self, source_tweet_id):

@@ -37,6 +37,12 @@ class TweepyTestCase(unittest.TestCase):
         user_id = 783214  # User ID for @Twitter
         self.client.get_liked_tweets(user_id)
 
+    @tape.use_cassette("test_create_and_delete_tweet.yaml", serializer="yaml")
+    def test_create_and_delete_tweet(self):
+        response = self.client.create_tweet(text="Test Tweet")
+        tweet_id = response.data["id"]
+        self.client.delete_tweet(tweet_id)
+
     @tape.use_cassette("test_retweet_and_unretweet.yaml", serializer="yaml")
     def test_retweet_and_unretweet(self):
         tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints

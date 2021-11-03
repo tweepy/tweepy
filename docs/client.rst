@@ -32,6 +32,12 @@
     +--------------------------------------------------------------+----------------------------------------+
     | `POST /2/users/:id/likes`_                                   | :meth:`Client.like`                    |
     +--------------------------------------------------------------+----------------------------------------+
+    | .. centered:: |Manage Tweets|_                                                                        |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `DELETE /2/tweets/:id`_                                      | :meth:`Client.delete_tweet`            |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `POST /2/tweets`_                                            | :meth:`Client.create_tweet`            |
+    +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: |Retweets|_                                                                             |
     +--------------------------------------------------------------+----------------------------------------+
     | `DELETE /2/users/:id/retweets/:source_tweet_id`_             | :meth:`Client.unretweet`               |
@@ -156,6 +162,9 @@
 .. _GET /2/tweets/:id/liking_users: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-tweets-id-liking_users
 .. _GET /2/users/:id/liked_tweets: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-users-id-liked_tweets
 .. _POST /2/users/:id/likes: https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
+.. |Manage Tweets| replace:: *Manage Tweets*
+.. _DELETE /2/tweets/:id: https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id
+.. _POST /2/tweets: https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/post-tweets
 .. |Retweets| replace:: *Retweets*
 .. _DELETE /2/users/:id/retweets/:source_tweet_id: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
 .. _GET /2/tweets/:id/retweeted_by: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
@@ -231,6 +240,13 @@ Likes
 .. automethod:: Client.get_liked_tweets
 
 .. automethod:: Client.like
+
+Manage Tweets
+-------------
+
+.. automethod:: Client.delete_tweet
+
+.. automethod:: Client.create_tweet
 
 Retweets
 --------
