@@ -154,8 +154,7 @@ class TweepyTestCase(unittest.TestCase):
         # https://twitter.com/TwitterSpaces/status/1436382283347283969
         self.client.get_space(space_id)
 
-    @tape.use_cassette("test_follow_and_unfollow_list.yaml",
-                        serializer = "yaml")
+    @tape.use_cassette("test_follow_and_unfollow_list.yaml", serializer="yaml")
     def test_follow_and_unfollow_list(self):
         list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
         self.client.follow_list(list_id)
