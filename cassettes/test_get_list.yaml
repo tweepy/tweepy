@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.26.0 Tweepy/4.3.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlbKTFGyUrIwsTC2NDEyUtJRykvMTQWK+KelZSZnJuYohJRnlpSk
+        Fik4Jifnl+aVFCvV1gIAAAD//wMA28iK2j0AAAA=
+    headers:
+      api-version:
+      - '2.30'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '86'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 15 Nov 2021 23:40:28 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_Aw9VuVg/CLJcjVZCjX82Lw=="; Max-Age=63072000; Expires=Wed,
+        15 Nov 2023 23:40:28 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163701962808455938; Max-Age=63072000; Expires=Wed, 15 Nov 2023
+        23:40:28 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - fc9e2cdf5462c36c98e5dd040cb6988b4e2063917c37ebc235455c4fe24343f9
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1637020528'
+      x-response-time:
+      - '72'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

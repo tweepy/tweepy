@@ -1,0 +1,69 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.26.0 Tweepy/4.3.0
+    method: GET
+    uri: https://api.twitter.com/2/users/783214/owned_lists
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAGSRTWuEMBBA/4rk0JOHZEw08dZuS+lBeujeSimuzi6hGiXGLov43xtLS3T3Egbm
+        vcl8TKQuXUny94nomuSEAc0SwUEoKUAC5ZKSmJiyRZ/cnxHdEB0u0f6snUNL5vjfo0wApxkTQvpH
+        UmDBezGexcGrnblVpTeFYDTLpFQ05SoNZtG1aNwQYGA8g0xREZhH/Mam69GuMKUU+CZWvT833aFs
+        ol03Gmcv0X1VLdGVwlOeBOVt7PvOuisE2GqyAmtdboGEJRCAJ3PSBtFqc9pikMIKez0edYVDdBft
+        xsaNFrcw87sJ8MM4+JrDQhel/UK3KS65TBS/Ka798H+rXw3/EZMWl/tPxB/If/35myE5Y/P8AwAA
+        //8DABSm4kUcAgAA
+    headers:
+      api-version:
+      - '2.30'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '297'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 15 Nov 2021 23:40:30 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_hmzcZD29dnde4bZA2a6wNg=="; Max-Age=63072000; Expires=Wed,
+        15 Nov 2023 23:40:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163701963029853787; Max-Age=63072000; Expires=Wed, 15 Nov 2023
+        23:40:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 0adc0bb14e0c0ac0873d77f4cfc242e33ceefee8a9ab2d454d1d215d7630df22
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '14'
+      x-rate-limit-reset:
+      - '1637020530'
+      x-response-time:
+      - '92'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,99 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.26.0 Tweepy/4.3.0
+    method: GET
+    uri: https://api.twitter.com/2/users/783214/list_memberships
+  response:
+    body:
+      string: !!binary |
+        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
+        BpaN0gly7vnznwEAAP//AwBWDnxo9hEAAA==
+    headers:
+      api-version:
+      - '2.30'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2020'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 15 Nov 2021 23:40:29 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_i4VsZQuY+snYsjI718kvww=="; Max-Age=63072000; Expires=Wed,
+        15 Nov 2023 23:40:29 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163701962907172503; Max-Age=63072000; Expires=Wed, 15 Nov 2023
+        23:40:29 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - a382da012e4685a6634f47b053d09c98fc1b6897d4f4a2cdec6a820465cb8574
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1637020529'
+      x-response-time:
+      - '203'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

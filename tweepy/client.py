@@ -17,6 +17,7 @@ from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
     Unauthorized
 )
+from tweepy.list import List
 from tweepy.media import Media
 from tweepy.place import Place
 from tweepy.poll import Poll
@@ -1864,6 +1865,439 @@ class Client:
             ), data_type=Space
         )
 
+    # List Tweets lookup
+
+    def get_list_tweets(self, id, *, user_auth=False, **params):
+        """get_list_tweets(id, *, user_auth=False, expansions, max_results, \
+                           pagination_token, tweet_fields, user_fields)
+
+        Returns a list of Tweets from the specified List.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The ID of the List whose Tweets you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-reference/get-lists-id-tweets
+        """
+        return self._make_request(
+            "GET", f"/2/lists/{id}/tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
+    # List follows
+
+    def unfollow_list(self, list_id):
+        """Enables the authenticated user to unfollow a List.
+
+        .. versionadded:: 4.2
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to unfollow.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/followed_lists/{list_id}"
+
+        return self._make_request(
+            "DELETE", route, user_auth=True
+        )
+
+    def get_list_followers(self, id, *, user_auth=False, **params):
+        """get_list_followers( \
+            id, *, user_auth=False, expansions, max_results, \
+            pagination_token, tweet_fields, user_fields \
+        )
+
+        Returns a list of users who are followers of the specified List.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The ID of the List whose followers you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-lists-id-followers
+        """
+        return self._make_request(
+            "GET", f"/2/lists/{id}/followers", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=user_auth
+        )
+
+    def get_followed_lists(self, id, *, user_auth=False, **params):
+        """get_followed_lists( \
+            id, *, user_auth=False, expansions, list_fields, max_results, \
+            pagination_token, user_fields \
+        )
+
+        Returns all Lists a specified user follows.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The user ID whose followed Lists you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        list_fields : Union[List[str], str]
+            :ref:`list_fields_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-users-id-followed_lists
+        """
+        return self._make_request(
+            "GET", f"/2/users/{id}/followed_lists", params=params,
+            endpoint_parameters=(
+                "expansions", "list.fields", "max_results", "pagination_token",
+                "user.fields"
+            ), data_type=List, user_auth=user_auth
+        )
+
+    def follow_list(self, list_id):
+        """Enables the authenticated user to follow a List.
+
+        .. versionadded:: 4.2
+
+        Parameters
+        ----------
+        list_id : Union[int, str]
+            The ID of the List that you would like the user to follow.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/followed_lists"
+
+        return self._make_request(
+            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+        )
+
+    # List lookup
+
+    def get_list(self, id, *, user_auth=False, **params):
+        """get_list(id, *, user_auth=False, expansions, list_fields, \
+                    user_fields)
+
+        Returns the details of a specified List.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The ID of the List to lookup.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        list_fields : Union[List[str], str]
+            :ref:`list_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference/get-lists-id
+        """
+        return self._make_request(
+            "GET", f"/2/lists/{id}", params=params,
+            endpoint_parameters=(
+                "expansions", "list.fields", "user.fields"
+            ), data_type=List, user_auth=user_auth
+        )
+
+    def get_owned_lists(self, id, *, user_auth=False, **params):
+        """get_owned_lists(id, *, user_auth=False, expansions, list_fields, \
+                           max_results, pagination_token, user_fields)
+
+        Returns all Lists owned by the specified user.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The user ID whose owned Lists you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        list_fields : Union[List[str], str]
+            :ref:`list_fields_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference/get-users-id-owned_lists
+        """
+        return self._make_request(
+            "GET", f"/2/users/{id}/owned_lists", params=params,
+            endpoint_parameters=(
+                "expansions", "list.fields", "max_results", "pagination_token",
+                "user.fields"
+            ), data_type=List, user_auth=user_auth
+        )
+
+    # List members
+
+    def remove_list_member(self, id, user_id):
+        """Enables the authenticated user to remove a member from a List they
+        own.
+
+        .. versionadded:: 4.2
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List you are removing a member from.
+        user_id : Union[int, str]
+            The ID of the user you wish to remove as a member of the List.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/delete-lists-id-members-user_id
+        """
+
+        return self._make_request(
+            "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=True
+        )
+
+    def get_list_members(self, id, *, user_auth=False, **params):
+        """get_list_members(id, *, user_auth=False, expansions, max_results, \
+                            pagination_token, tweet_fields, user_fields)
+
+        Returns a list of users who are members of the specified List.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The ID of the List whose members you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-lists-id-members
+        """
+        return self._make_request(
+            "GET", f"/2/lists/{id}/members", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "pagination_token",
+                "tweet.fields", "user.fields"
+            ), data_type=User, user_auth=user_auth
+        )
+
+    def get_list_memberships(self, id, *, user_auth=False, **params):
+        """get_list_memberships( \
+            id, *, user_auth=False, expansions, list_fields, max_results, \
+            pagination_token, user_fields \
+        )
+
+        Returns all Lists a specified user is a member of.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        id : Union[List[str], str]
+            The user ID whose List memberships you would like to retrieve.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User context
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        list_fields : Union[List[str], str]
+            :ref:`list_fields_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the next_token
+            returned in your previous response. To go back one page, pass the
+            previous_token returned in your previous response.
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-users-id-list_memberships
+        """
+        return self._make_request(
+            "GET", f"/2/users/{id}/list_memberships", params=params,
+            endpoint_parameters=(
+                "expansions", "list.fields", "max_results", "pagination_token",
+                "user.fields"
+            ), data_type=List, user_auth=user_auth
+        )
+
+    def add_list_member(self, id, user_id):
+        """Enables the authenticated user to add a member to a List they own.
+
+        .. versionadded:: 4.2
+
+        Parameters
+        ----------
+        id : Union[int, str]
+            The ID of the List you are adding a member to.
+        user_id : Union[int, str]
+            The ID of the user you wish to add as a member of the List.
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/post-lists-id-members
+        """
+        return self._make_request(
+            "POST", f"/2/lists/{id}/members", json={"user_id": str(user_id)},
+            user_auth=True
+        )
+
     # Manage Lists
 
     def delete_list(self, id):
@@ -1887,82 +2321,6 @@ class Client:
 
         return self._make_request(
             "DELETE", f"/2/lists/{id}", user_auth=True
-        )
-
-    def remove_list_member(self, id, user_id):
-        """Enables the authenticated user to remove a member from a List they
-        own.
-
-        .. versionadded:: 4.2
-
-        Parameters
-        ----------
-        id : Union[int, str]
-            The ID of the List you are removing a member from.
-        user_id : Union[int, str]
-            The ID of the user you wish to remove as a member of the List.
-
-        Returns
-        -------
-        Union[dict, requests.Response, Response]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-lists-id-members-user_id
-        """
-
-        return self._make_request(
-            "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=True
-        )
-
-    def unfollow_list(self, list_id):
-        """Enables the authenticated user to unfollow a List.
-
-        .. versionadded:: 4.2
-
-        Parameters
-        ----------
-        list_id : Union[int, str]
-            The ID of the List that you would like the user to unfollow.
-
-        Returns
-        -------
-        Union[dict, requests.Response, Response]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-followed-lists-list_id
-        """
-        id = self.access_token.partition('-')[0]
-        route = f"/2/users/{id}/followed_lists/{list_id}"
-
-        return self._make_request(
-            "DELETE", route, user_auth=True
-        )
-
-    def unpin_list(self, list_id):
-        """Enables the authenticated user to unpin a List.
-
-        .. versionadded:: 4.2
-
-        Parameters
-        ----------
-        list_id : Union[int, str]
-            The ID of the List that you would like the user to unpin.
-
-        Returns
-        -------
-        Union[dict, requests.Response, Response]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-pinned-lists-list_id
-        """
-        id = self.access_token.partition('-')[0]
-        route = f"/2/users/{id}/pinned_lists/{list_id}"
-
-        return self._make_request(
-            "DELETE", route, user_auth=True
         )
 
     def update_list(self, id, *, description=None, name=None, private=None):
@@ -2039,40 +2397,17 @@ class Client:
             "POST", f"/2/lists", json=json, user_auth=True
         )
 
-    def add_list_member(self, id, user_id):
-        """Enables the authenticated user to add a member to a List they own.
+    # Pinned Lists
 
-        .. versionadded:: 4.2
-
-        Parameters
-        ----------
-        id : Union[int, str]
-            The ID of the List you are adding a member to.
-        user_id : Union[int, str]
-            The ID of the user you wish to add as a member of the List.
-
-        Returns
-        -------
-        Union[dict, requests.Response, Response]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists-id-members
-        """
-        return self._make_request(
-            "POST", f"/2/lists/{id}/members", json={"user_id": str(user_id)},
-            user_auth=True
-        )
-
-    def follow_list(self, list_id):
-        """Enables the authenticated user to follow a List.
+    def unpin_list(self, list_id):
+        """Enables the authenticated user to unpin a List.
 
         .. versionadded:: 4.2
 
         Parameters
         ----------
         list_id : Union[int, str]
-            The ID of the List that you would like the user to follow.
+            The ID of the List that you would like the user to unpin.
 
         Returns
         -------
@@ -2080,13 +2415,47 @@ class Client:
 
         References
         ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-followed-lists
+        https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
         """
         id = self.access_token.partition('-')[0]
-        route = f"/2/users/{id}/followed_lists"
+        route = f"/2/users/{id}/pinned_lists/{list_id}"
 
         return self._make_request(
-            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+            "DELETE", route, user_auth=True
+        )
+
+    def get_pinned_lists(self, **params):
+        """get_pinned_lists(*, expansions, list_fields, user_fields)
+
+        Returns the Lists pinned by a specified user.
+
+        .. versionadded:: 4.4
+
+        Parameters
+        ----------
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        list_fields : Union[List[str], str]
+            :ref:`list_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
+        """
+        id = self.access_token.partition('-')[0]
+        route = f"/2/users/{id}/pinned_lists"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "list.fields", "user.fields"
+            ), data_type=List, user_auth = True
         )
 
     def pin_list(self, list_id):
@@ -2105,7 +2474,7 @@ class Client:
 
         References
         ----------
-        https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-pinned-lists
+        https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
         """
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/pinned_lists"

@@ -1,0 +1,103 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.26.0 Tweepy/4.3.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422/members
+  response:
+    body:
+      string: !!binary |
+        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
+        MhM7t7f/BwAA//8DACGrwl2PHQAA
+    headers:
+      api-version:
+      - '2.30'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2244'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 15 Nov 2021 23:40:28 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - personalization_id="v1_HB4AISsVuRwhCUTUD14jkg=="; Max-Age=63072000; Expires=Wed,
+        15 Nov 2023 23:40:28 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A163701962871088445; Max-Age=63072000; Expires=Wed, 15 Nov 2023
+        23:40:28 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - d43a528453097434589e08eef021c1fcaf7b53343b1be8a7c2f3e259ea74d6fb
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '900'
+      x-rate-limit-remaining:
+      - '899'
+      x-rate-limit-reset:
+      - '1637020528'
+      x-response-time:
+      - '157'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -154,19 +154,56 @@ class TweepyTestCase(unittest.TestCase):
         # https://twitter.com/TwitterSpaces/status/1436382283347283969
         self.client.get_space(space_id)
 
+    @tape.use_cassette("test_get_list_tweets.yaml", serializer="yaml")
+    def test_get_list_tweets(self):
+        list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
+        self.client.get_list_tweets(list_id)
+
     @tape.use_cassette("test_follow_and_unfollow_list.yaml", serializer="yaml")
     def test_follow_and_unfollow_list(self):
         list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
         self.client.follow_list(list_id)
         self.client.unfollow_list(list_id)
 
-    @tape.use_cassette("test_manage_list.yaml", serializer="yaml")
-    def test_manage_list(self):
+    @tape.use_cassette("test_get_list_followers.yaml", serializer="yaml")
+    def test_get_list_followers(self):
+        list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
+        self.client.get_list_followers(list_id)
+
+    @tape.use_cassette("test_get_followed_lists.yaml", serializer="yaml")
+    def test_get_followed_lists(self):
+        user_id = 372575989  # User ID for @TwitterNews
+        self.client.get_followed_lists(user_id)
+
+    @tape.use_cassette("test_get_list.yaml", serializer="yaml")
+    def test_get_list(self):
+        list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
+        self.client.get_list(list_id)
+
+    @tape.use_cassette("test_get_owned_lists.yaml", serializer="yaml")
+    def test_get_owned_lists(self):
+        user_id = 783214  # User ID for @Twitter
+        self.client.get_owned_lists(user_id)
+
+    @tape.use_cassette("test_get_list_members.yaml", serializer="yaml")
+    def test_get_list_members(self):
+        list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
+        self.client.get_list_members(list_id)
+
+    @tape.use_cassette("test_get_list_memberships.yaml", serializer="yaml")
+    def test_get_list_memberships(self):
+        user_id = 783214  # User ID for @Twitter
+        self.client.get_list_memberships(user_id)
+
+    @tape.use_cassette("test_manage_and_get_pinned_lists.yaml",
+                       serializer="yaml")
+    def test_manage_and_get_pinned_lists(self):
         response = self.client.create_list("Test List", private=True)
         list_id = response.data["id"]
         user_id = 783214  # User ID for @Twitter
         self.client.add_list_member(list_id, user_id)
         self.client.pin_list(list_id)
+        self.client.get_pinned_lists()
         self.client.remove_list_member(list_id, user_id)
         self.client.unpin_list(list_id)
         self.client.update_list(list_id, description="Test List Description")

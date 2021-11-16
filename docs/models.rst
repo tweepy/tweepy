@@ -56,6 +56,12 @@ Models Reference
 
       .. versionadded:: 4.0
 
+      .. class:: tweepy.List
+
+         .. versionadded:: 4.4
+
+         :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
+
       .. class:: tweepy.Media
 
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media

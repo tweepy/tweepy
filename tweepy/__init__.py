@@ -18,6 +18,7 @@ from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TweepyException, TwitterServerError, Unauthorized
 )
+from tweepy.list import List
 from tweepy.media import Media
 from tweepy.pagination import Paginator
 from tweepy.place import Place

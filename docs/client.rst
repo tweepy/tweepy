@@ -124,23 +124,49 @@
     +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: :ref:`Lists`                                                                            |
     +-------------------------------------------------------------------------------------------------------+
-    | .. centered:: |Manage Lists|_                                                                         |
+    | .. centered:: |List Tweets lookup|_                                                                   |
     +--------------------------------------------------------------+----------------------------------------+
-    | `DELETE /2/lists/:id`_                                       | :meth:`Client.delete_list`             |
+    | `GET /2/lists/:id/tweets`_                                   | :meth:`Client.get_list_tweets`         |
     +--------------------------------------------------------------+----------------------------------------+
-    | `DELETE /2/lists/:id/members/:user_id`_                      | :meth:`Client.remove_list_member`      |
+    | .. centered:: |List follows|_                                                                         |
     +--------------------------------------------------------------+----------------------------------------+
     | `DELETE /2/users/:id/followed_lists/:list_id`_               | :meth:`Client.unfollow_list`           |
     +--------------------------------------------------------------+----------------------------------------+
-    | `DELETE /2/users/:id/pinned_lists/:list_id`_                 | :meth:`Client.unpin_list`              |
+    | `GET /2/lists/:id/followers`_                                | :meth:`Client.get_list_followers`      |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/followed_lists`_                           | :meth:`Client.get_followed_lists`      |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `POST /2/users/:id/followed_lists`_                          | :meth:`Client.follow_list`             |
+    +--------------------------------------------------------------+----------------------------------------+
+    | .. centered:: |List lookup|_                                                                          |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/lists/:id`_                                          | :meth:`Client.get_list`                |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/owned_lists`_                              | :meth:`Client.get_owned_lists`         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | .. centered:: |List members|_                                                                         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `DELETE /2/lists/:id/members/:user_id`_                      | :meth:`Client.remove_list_member`      |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/lists/:id/members`_                                  | :meth:`Client.get_list_members`        |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/list_memberships`_                         | :meth:`Client.get_list_memberships`    |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `POST /2/lists/:id/members`_                                 | :meth:`Client.add_list_member`         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | .. centered:: |Manage Lists|_                                                                         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `DELETE /2/lists/:id`_                                       | :meth:`Client.delete_list`             |
     +--------------------------------------------------------------+----------------------------------------+
     | `PUT /2/lists/:id`_                                          | :meth:`Client.update_list`             |
     +--------------------------------------------------------------+----------------------------------------+
     | `POST /2/lists`_                                             | :meth:`Client.create_list`             |
     +--------------------------------------------------------------+----------------------------------------+
-    | `POST /2/lists/:id/members`_                                 | :meth:`Client.add_list_member`         |
+    | .. centered:: |Pinned Lists|_                                                                         |
     +--------------------------------------------------------------+----------------------------------------+
-    | `POST /2/users/:id/followed_lists`_                          | :meth:`Client.follow_list`             |
+    | `DELETE /2/users/:id/pinned_lists/:list_id`_                 | :meth:`Client.unpin_list`              |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/pinned_lists`_                             | :meth:`Client.get_pinned_lists`        |
     +--------------------------------------------------------------+----------------------------------------+
     | `POST /2/users/:id/pinned_lists`_                            | :meth:`Client.pin_list`                |
     +--------------------------------------------------------------+----------------------------------------+
@@ -205,16 +231,29 @@
 .. _GET /2/spaces: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces
 .. _GET /2/spaces/by/creator_ids: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-by-creator-ids
 .. _GET /2/spaces/:id: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id
+.. |List Tweets lookup| replace:: *List Tweets lookup*
+.. _GET /2/lists/:id/tweets: https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-reference/get-lists-id-tweets
+.. |List follows| replace:: *List follows*
+.. _DELETE /2/users/:id/followed_lists/:list_id: https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
+.. _GET /2/lists/:id/followers: https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-lists-id-followers
+.. _GET /2/users/:id/followed_lists: https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/get-users-id-followed_lists
+.. _POST /2/users/:id/followed_lists: https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
+.. |List lookup| replace:: *List lookup*
+.. _GET /2/lists/:id: https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference/get-lists-id
+.. _GET /2/users/:id/owned_lists: https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-reference/get-users-id-owned_lists
+.. |List members| replace:: *List members*
+.. _DELETE /2/lists/:id/members/:user_id: https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/delete-lists-id-members-user_id
+.. _GET /2/lists/:id/members: https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-lists-id-members
+.. _GET /2/users/:id/list_memberships: https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/get-users-id-list_memberships
+.. _POST /2/lists/:id/members: https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-reference/post-lists-id-members
 .. |Manage Lists| replace:: *Manage Lists*
 .. _DELETE /2/lists/:id: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-lists-id
-.. _DELETE /2/lists/:id/members/:user_id: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-lists-id-members-user_id
-.. _DELETE /2/users/:id/followed_lists/:list_id: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-followed-lists-list_id
-.. _DELETE /2/users/:id/pinned_lists/:list_id: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/delete-users-id-pinned-lists-list_id
 .. _PUT /2/lists/:id: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/put-lists-id
 .. _POST /2/lists: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists
-.. _POST /2/lists/:id/members: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists-id-members
-.. _POST /2/users/:id/followed_lists: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-followed-lists
-.. _POST /2/users/:id/pinned_lists: https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-users-id-pinned-lists
+.. |Pinned Lists| replace:: *Pinned Lists*
+.. _DELETE /2/users/:id/pinned_lists/:list_id: https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
+.. _GET /2/users/:id/pinned_lists: https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
+.. _POST /2/users/:id/pinned_lists: https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
 .. |Batch Compliance| replace:: *Batch Compliance*
 .. _GET /2/compliance/jobs: https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/get-compliance-jobs
 .. _GET /2/compliance/jobs/:id: https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/get-compliance-jobs-id
@@ -346,24 +385,55 @@ Spaces lookup
 Lists
 =====
 
+List Tweets lookup
+------------------
+
+.. automethod:: Client.get_list_tweets
+
+List follows
+------------
+
+.. automethod:: Client.unfollow_list
+
+.. automethod:: Client.get_list_followers
+
+.. automethod:: Client.get_followed_lists
+
+.. automethod:: Client.follow_list
+
+List lookup
+-----------
+
+.. automethod:: Client.get_list
+
+.. automethod:: Client.get_owned_lists
+
+List members
+------------
+
+.. automethod:: Client.remove_list_member
+
+.. automethod:: Client.get_list_members
+
+.. automethod:: Client.get_list_memberships
+
+.. automethod:: Client.add_list_member
+
 Manage Lists
 ------------
 
 .. automethod:: Client.delete_list
 
-.. automethod:: Client.remove_list_member
-
-.. automethod:: Client.unfollow_list
-
-.. automethod:: Client.unpin_list
-
 .. automethod:: Client.update_list
 
 .. automethod:: Client.create_list
 
-.. automethod:: Client.add_list_member
+Pinned Lists
+------------
 
-.. automethod:: Client.follow_list
+.. automethod:: Client.unpin_list
+
+.. automethod:: Client.get_pinned_lists
 
 .. automethod:: Client.pin_list
 
@@ -387,12 +457,16 @@ Expansions and Fields Parameters
 ``expansions``
 --------------
 `Expansions`_ enable you to request additional data objects that relate to the
-originally returned Space, Tweets, or users. Submit a list of desired
+originally returned List, Space, Tweets, or users. Submit a list of desired
 expansions in a comma-separated list without spaces. The ID that represents the
-expanded data object will be included directly in the Space, Tweet, or user
-data object, but the expanded object metadata will be returned within the
+expanded data object will be included directly in the List, Space, Tweet, or
+user data object, but the expanded object metadata will be returned within the
 ``includes`` response object, and will also include the ID so that you can
-match this data object to the original Space or Tweet object.
+match this data object to the original Space, Tweet, or user object.
+
+At this time, the only expansion available to endpoints that primarily return
+List objects is ``expansions=owner_id``. You will find the expanded user data
+object living in the ``includes`` response object.
 
 For methods that return Spaces, the following data objects can be expanded
 using this parameter:
@@ -418,6 +492,15 @@ using this parameter:
 At this time, the only expansion available to endpoints that primarily return
 user objects is ``expansions=pinned_tweet_id``. You will find the expanded
 Tweet data object living in the ``includes`` response object.
+
+.. _list_fields_parameter:
+
+``list_fields``
+---------------
+This `fields`_ parameter enables you to select which specific `List fields`_
+will deliver with each returned List objects. Specify the desired fields in a
+comma-separated list without spaces between commas and fields. These specified
+List fields will display directly in the List data objects.
 
 .. _media_fields_parameter:
 
@@ -516,6 +599,7 @@ user data objects.
 
 .. _Expansions: https://developer.twitter.com/en/docs/twitter-api/expansions
 .. _fields: https://developer.twitter.com/en/docs/twitter-api/fields
+.. _list fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
 .. _media fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
 .. _place fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
 .. _poll fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
