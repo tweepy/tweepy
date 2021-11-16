@@ -9,7 +9,6 @@ import requests
 from requests.auth import AuthBase
 from requests_oauthlib import OAuth1, OAuth1Session
 
-from tweepy.api import API
 from tweepy.errors import TweepyException
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
