@@ -47,6 +47,3 @@ class Space(HashableID, DataMapping):
 
     def __repr__(self):
         return f"<Space id={self.id} state={self.state}>"
-
-    def __str__(self):
-        return self.full_name
