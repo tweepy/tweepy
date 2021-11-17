@@ -1873,6 +1873,8 @@ class Client:
         You must authenticate the request using the Access Token of the creator
         of the requested Space.
 
+        .. versionadded:: 4.4
+
         Parameters
         ----------
         id : str
