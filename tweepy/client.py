@@ -1865,6 +1865,48 @@ class Client:
             ), data_type=Space
         )
 
+    def get_space_buyers(self, id, **params):
+        """get_space_buyers(id, *, expansions, media_fields, place_fields, \
+                            poll_fields, tweet_fields, user_fields)
+
+        Returns a list of user who purchased a ticket to the requested Space.
+        You must authenticate the request using the Access Token of the creator
+        of the requested Space.
+
+        Parameters
+        ----------
+        id : str
+            Unique identifier of the Space for which you want to request
+            Tweets.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        media_fields : Union[List[str], str]
+            :ref:`media_fields_parameter`
+        place_fields : Union[List[str], str]
+            :ref:`place_fields_parameter`
+        poll_fields : Union[List[str], str]
+            :ref:`poll_fields_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-buyers
+        """
+        return self._make_request(
+            "GET", f"/2/spaces/{id}/buyers", params=params,
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=User
+        )
+
     # List Tweets lookup
 
     def get_list_tweets(self, id, *, user_auth=False, **params):
