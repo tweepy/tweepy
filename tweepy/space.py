@@ -9,9 +9,10 @@ from tweepy.utils import parse_datetime
 class Space(HashableID, DataMapping):
 
     __slots__ = (
-        "data", "id", "state", "created_at", "host_ids", "lang", "is_ticketed",
-        "invited_user_ids", "participant_count", "scheduled_start",
-        "speaker_ids", "started_at", "title", "updated_at"
+        "data", "id", "state", "created_at", "ended_at", "host_ids", "lang",
+        "is_ticketed", "invited_user_ids", "participant_count",
+        "scheduled_start", "speaker_ids", "started_at", "title", "topic_ids",
+        "updated_at"
     )
 
     def __init__(self, data):
@@ -22,6 +23,10 @@ class Space(HashableID, DataMapping):
         self.created_at = data.get("created_at")
         if self.created_at is not None:
             self.created_at = parse_datetime(self.created_at)
+
+        self.ended_at = data.get("ended_at")
+        if self.ended_at is not None:
+            self.ended_at = parse_datetime(self.ended_at)
 
         self.host_ids = data.get("host_ids", [])
         self.lang = data.get("lang")
@@ -40,6 +45,8 @@ class Space(HashableID, DataMapping):
             self.started_at = parse_datetime(self.started_at)
 
         self.title = data.get("title")
+
+        self.topic_ids = data.get("topic_ids", [])
 
         self.updated_at = data.get("updated_at")
         if self.updated_at is not None:
