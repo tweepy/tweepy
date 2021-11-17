@@ -3,6 +3,16 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.4.0
+-------------
+### New Features / Improvements
+- Add support for List lookup with Twitter API v2 ([0aa2366](https://github.com/tweepy/tweepy/commit/0aa2366a875464756507abf42709a3db676f4cee))
+- Add `Client.get_space_buyers` ([8bf58ca](https://github.com/tweepy/tweepy/commit/8bf58ca5754f72292d1d86367a02778af7a44f20))
+- Add `Space.ended_at` and `Space.topic_ids` ([c89a233](https://github.com/tweepy/tweepy/commit/c89a233a96142ce01ecd5e1372c3fdce45c6601f))
+
+### Bug Fixes
+- Remove erroneous Space.__str__ ([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))
+
 Version 4.3.0
 -------------
 ### New Features / Improvements
