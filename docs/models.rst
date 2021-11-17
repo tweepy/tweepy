@@ -82,6 +82,9 @@ Models Reference
 
          .. versionadded:: 4.1
 
+         .. versionchanged:: 4.4
+            Added ``ended_at`` and ``topic_ids`` fields
+
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 
       .. class:: tweepy.Tweet
