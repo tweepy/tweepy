@@ -11,7 +11,7 @@ Version 4.4.0
 - Add `Space.ended_at` and `Space.topic_ids` ([c89a233](https://github.com/tweepy/tweepy/commit/c89a233a96142ce01ecd5e1372c3fdce45c6601f))
 
 ### Bug Fixes
-- Remove erroneous Space.__str__ ([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))
+- Remove erroneous `Space.__str__` ([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))
 
 Version 4.3.0
 -------------
