@@ -98,6 +98,19 @@ This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` removed ``API.me``.
 
 Instead, you can use :meth:`API.verify_credentials`.
 
+Where did ``API.search`` go?
+----------------------------
+
+If you're attempting to use ``API.search`` or other :class:`API` methods from
+Tweepy v3, you might encounter an :class:`AttributeError` with Tweepy v4.
+
+This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` renamed many :class:`API`
+methods to be more consistent.
+
+For example, ``API.search`` was renamed to :meth:`API.search_tweets`. You can
+refer to the changelog / release notes and update your method invocations
+accordingly.
+
 Where did ``StreamListener`` go?
 --------------------------------
 
