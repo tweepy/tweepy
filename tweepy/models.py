@@ -13,12 +13,8 @@ class Model:
         self._api = api
 
     def __getstate__(self):
-        # pickle
-        pickle = dict(self.__dict__)
-        try:
-            del pickle['_api']  # do not pickle the API reference
-        except KeyError:
-            pass
+        pickle = self.__dict__.copy()
+        pickle.pop('_api', None)
         return pickle
 
     @classmethod
