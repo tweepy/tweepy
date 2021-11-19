@@ -23,6 +23,19 @@ See `Twitter's API documentation on app permissions`_ for more information.
 
 .. _Twitter's API documentation on app permissions: https://developer.twitter.com/en/docs/apps/app-permissions
 
+Why am I encountering a 403 Forbidden error?
+--------------------------------------------
+
+If you have Essential access to the Twitter API, you won't be able to access
+Twitter API v1.1. This includes all :class:`API` methods and :class:`Stream`.
+
+You can use Twitter API v2 with :class:`Client` or apply for Elevated access.
+
+See the `Twitter API access levels and versions documentation`_ for more
+information.
+
+.. _Twitter API access levels and versions documentation: https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api#Access
+
 Why am I encountering issues when attempting to upload GIFs or videos?
 ----------------------------------------------------------------------
 
