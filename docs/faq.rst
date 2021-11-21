@@ -9,8 +9,8 @@ Frequently Asked Questions
 General
 =======
 
-Why am I encountering a 401 Unauthorized error?
------------------------------------------------
+Why am I encountering a 401 Unauthorized error with :class:`API` or 403 Forbidden error with :class:`Client`?
+-------------------------------------------------------------------------------------------------------------
 
 If you're using a method that performs an action on behalf of the
 authenticating user, e.g. :meth:`API.update_status`, make sure your app has the
@@ -23,8 +23,8 @@ See `Twitter's API documentation on app permissions`_ for more information.
 
 .. _Twitter's API documentation on app permissions: https://developer.twitter.com/en/docs/apps/app-permissions
 
-Why am I encountering a 403 Forbidden error?
---------------------------------------------
+Why am I encountering a 403 Forbidden error with :class:`API`?
+--------------------------------------------------------------
 
 If you have Essential access to the Twitter API, you won't be able to access
 Twitter API v1.1. This includes all :class:`API` methods and :class:`Stream`.
