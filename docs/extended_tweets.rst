@@ -1,11 +1,15 @@
 .. _extended_tweets:
-.. _Twitter's Tweet updates documentation: https://web.archive.org/web/20200705045150/https://developer.twitter.com/en/docs/tweets/tweet-updates
+
+.. currentmodule:: tweepy
 
 ***************
 Extended Tweets
 ***************
 
-This supplements `Twitter's Tweet updates documentation`_.
+This supplements Twitter's `Tweet updates documentation`_ and `repository`_.
+
+.. _Tweet updates documentation: https://web.archive.org/web/20200705045150/https://developer.twitter.com/en/docs/tweets/tweet-updates
+.. _repository: https://twitterdev.github.io/tweet-updates/upcoming.html
 
 Introduction
 ============
@@ -88,7 +92,7 @@ the ``retweeted_status`` attribute/field) can be used.
 Examples
 ========
 
-Given an existing ``tweepy.API`` object and ``id`` for a Tweet, the following
+Given an existing :class:`API` object and ``id`` for a Tweet, the following
 can be used to print the full text of the Tweet, or if it's a Retweet, the
 full text of the Retweeted Tweet::
 
@@ -100,7 +104,7 @@ full text of the Retweeted Tweet::
 
 If ``status`` is a Retweet, ``status.full_text`` could be truncated.
 
-This Status event handler for a ``StreamListener`` prints the full text of the
+This Status event handler for a :class:`Stream` prints the full text of the
 Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::
 
    def on_status(self, status):
