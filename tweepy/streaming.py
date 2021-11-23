@@ -58,7 +58,7 @@ class Stream:
     ----------
     running : bool
         Whether there's currently a stream running
-    session : Optional[:class:`requests.Session`]
+    session : :class:`requests.Session`
         Requests Session used to connect to the stream
     thread : Optional[:class:`threading.Thread`]
         Thread used to run the stream
@@ -80,7 +80,7 @@ class Stream:
         self.verify = verify
 
         self.running = False
-        self.session = None
+        self.session = requests.Session()
         self.thread = None
         self.user_agent = (
             f"Python/{python_version()} "
@@ -103,9 +103,7 @@ class Stream:
         auth = OAuth1(self.consumer_key, self.consumer_secret,
                       self.access_token, self.access_token_secret)
 
-        if self.session is None:
-            self.session = requests.Session()
-            self.session.headers["User-Agent"] = self.user_agent
+        self.session.headers["User-Agent"] = self.user_agent
 
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
 
