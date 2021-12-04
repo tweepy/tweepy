@@ -14,9 +14,9 @@ bearer_token = ""
 access_token = ""
 access_token_secret = ""
 
-client = tweepy.Client(bearer_token=None, consumer_key=None, consumer_secret=None,
-                       access_token=None, access_token_secret=None)
+client = tweepy.Client(bearer_token, consumer_key, consumer_secret,
+                       access_token, access_token_secret)
 
-# If the authentication was successful, this should print the
-# screen name / username of the account
-print(api.verify_credentials().screen_name)
+# If the authentication was successful, this should tweet the
+# given text in the account
+client.create_tweet(text = "This Tweet was Tweeted using Tweepy!")
