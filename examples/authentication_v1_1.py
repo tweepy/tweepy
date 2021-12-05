@@ -21,4 +21,5 @@ api = tweepy.API(auth)
 
 # If the authentication was successful, this should print the
 # screen name / username of the account
+
 print(api.verify_credentials().screen_name)
