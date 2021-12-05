@@ -12,3 +12,4 @@ api = tweepy.API(auth)
 
 for tweet in api.search_tweets(q="search query here",count=50):
   print(tweet.text)
+  
