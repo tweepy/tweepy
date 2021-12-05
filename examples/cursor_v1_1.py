@@ -10,7 +10,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-# the app can only retrieve fixed number of objects per
+# The app can only retrieve fixed number of objects per
 # request, with pagination it could be solved and more than 
 # that amount can be gathered
 
