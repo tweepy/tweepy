@@ -20,4 +20,5 @@ client = tweepy.Client(bearer_token, consumer_key, consumer_secret,
 
 # If the authentication was successful, this should tweet the
 # given text in the account
+
 client.create_tweet(text = "This Tweet was Tweeted using Tweepy!")
