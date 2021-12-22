@@ -155,7 +155,9 @@ class Client:
             elif isinstance(param_value, datetime.datetime):
                 if param_value.tzinfo is not None:
                     param_value = param_value.astimezone(datetime.timezone.utc)
-                request_params[param_name] = param_value.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                request_params[param_name] = param_value.strftime(
+                    "%Y-%m-%dT%H:%M:%S.%fZ"
+                )
                 # TODO: Constant datetime format string?
             else:
                 request_params[param_name] = param_value
@@ -186,7 +188,7 @@ class Client:
             includes["media"] = [Media(media) for media in includes["media"]]
         if "places" in includes:
             includes["places"] = [Place(place) for place in includes["places"]]
-        if "poll" in includes:
+        if "polls" in includes:
             includes["polls"] = [Poll(poll) for poll in includes["polls"]]
         if "tweets" in includes:
             includes["tweets"] = [Tweet(tweet) for tweet in includes["tweets"]]
@@ -2499,7 +2501,7 @@ class Client:
             "GET", route, params=params,
             endpoint_parameters=(
                 "expansions", "list.fields", "user.fields"
-            ), data_type=List, user_auth = True
+            ), data_type=List, user_auth=True
         )
 
     def pin_list(self, list_id):
