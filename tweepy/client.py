@@ -156,7 +156,8 @@ class Client:
                 if param_value.tzinfo is not None:
                     param_value = param_value.astimezone(datetime.timezone.utc)
                 request_params[param_name] = param_value.strftime(
-                    "%Y-%m-%dT%H:%M:%S.%fZ")
+                    "%Y-%m-%dT%H:%M:%S.%fZ"
+                )
                 # TODO: Constant datetime format string?
             else:
                 request_params[param_name] = param_value
