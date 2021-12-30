@@ -18,7 +18,7 @@ through repeated requests by your client app, as might be expected from a REST
 API, a single connection is opened between your app and the API, with new
 results being sent through that connection whenever new matches occur. This
 results in a low-latency delivery mechanism that can support very high
-throughput. For futher information, see
+throughput. For further information, see
 https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
 
 Using :class:`Stream`
@@ -85,7 +85,7 @@ encountered while trying to connect to the stream. When these errors are
 encountered and ``max_retries``, which defaults to infinite, hasn't been
 exceeded yet, the :class:`Stream` instance will attempt to reconnect the stream
 after an appropriate amount of time. By default, all three of these methods log
-an error. To customize that handling, they can be overriden in a subclass::
+an error. To customize that handling, they can be overridden in a subclass::
 
     class ConnectionTester(tweepy.Stream):
 
