@@ -1665,6 +1665,30 @@ class Client:
             data_type=User, user_auth=user_auth
         )
 
+    def me(self):
+        """get_user(*, user_auth=False, expansions, \
+                    tweet_fields, user_fields)
+
+        Returns a variety of information about the authenticated user.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me
+        """
+        route = "/2/users/me"
+
+        return self._make_request(
+            "GET", route, endpoint_parameters=("expansions", "tweet.fields", "user.fields"),
+            data_type=User, user_auth=True
+        )
+
     def get_users(self, *, ids=None, usernames=None, user_auth=False,
                   **params):
         """get_users(*, ids, usernames, user_auth=False, expansions, \
