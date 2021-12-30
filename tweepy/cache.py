@@ -359,7 +359,7 @@ class RedisCache(Cache):
 
     def count(self):
         """Note: This is not very efficient,
-        since it retreives all the keys from the redis
+        since it retrieves all the keys from the redis
         server to know how many keys we have"""
         return len(self.client.smembers(self.keys_container))
 
@@ -388,7 +388,7 @@ class RedisCache(Cache):
 
 
 class MongodbCache(Cache):
-    """A simple pickle-based MongoDB cache sytem."""
+    """A simple pickle-based MongoDB cache system."""
 
     def __init__(self, db, timeout=3600, collection='tweepy_cache'):
         """Should receive a "database" cursor from pymongo."""

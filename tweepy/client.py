@@ -1036,7 +1036,7 @@ class Client:
             default to [now - 30 seconds].
         granularity : str
             This is the granularity that you want the timeseries count data to
-            be grouped by. You can requeset ``minute``, ``hour``, or ``day``
+            be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
         next_token : str
             This parameter is used to get the next 'page' of results. The value
@@ -1104,7 +1104,7 @@ class Client:
             parameter.
         granularity : str
             This is the granularity that you want the timeseries count data to
-            be grouped by. You can requeset ``minute``, ``hour``, or ``day``
+            be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
         since_id : Union[int, str]
             Returns results with a Tweet ID greater than (that is, more recent

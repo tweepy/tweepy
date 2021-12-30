@@ -13,7 +13,7 @@ api = tweepy.API(auth)
 
 # Tweet / Update Status
 
-# The app and the corresponding credentials must have the Write perission
+# The app and the corresponding credentials must have the Write permission
 
 # Check the App permissions section of the Settings tab of your app, under the
 # Twitter Developer Portal Projects & Apps page at

@@ -19,9 +19,9 @@ class TweepyAPITests(TweepyTestCase):
 
     #@tape.use_cassette('testfailure.json')
     #def testapierror(self):
-    #    from tweepy.error import TweepError
+    #    from tweepy.errors import TweepyException
     #
-    #    with self.assertRaises(TweepError) as cm:
+    #    with self.assertRaises(TweepyException) as cm:
     #        self.api.direct_messages()
     #
     #    reason, = literal_eval(cm.exception.reason)

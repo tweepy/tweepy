@@ -26,7 +26,7 @@ class TweepyRateLimitTests(unittest.TestCase):
             try:
                 self.api.user_timeline(user_id=user_id, count=1, include_rts=True)
             except HTTPException as e:
-                # continue if we're not autherized to access the user's timeline or user doesn't exist anymore
+                # continue if we're not authorized to access the user's timeline or user doesn't exist anymore
                 if e.response.status_code in (401, 404):
                     continue
                 raise e
