@@ -127,8 +127,8 @@ instead.
 Twitter API v2
 ==============
 
-Why am I not getting expansions or ``includes`` data with API v2 using :class:`Client`?
----------------------------------------------------------------------------------------
+Why am I not getting expansions or fields data with API v2 using :class:`Client`?
+---------------------------------------------------------------------------------
 
 If you are simply printing the objects and looking at that output, the string
 representations of API v2 models/objects only include the attributes that are
