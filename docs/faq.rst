@@ -131,8 +131,8 @@ Why am I not getting expansions or fields data with API v2 using :class:`Client`
 ---------------------------------------------------------------------------------
 
 If you are simply printing the objects and looking at that output, the string
-representations of API v2 models/objects only include the attributes that are
-guaranteed to exist.
+representations of API v2 models/objects only include the default attributes
+that are guaranteed to exist.
 
 The objects themselves still include the relevant data, which you can access as
 attributes or by key, like a dictionary.
