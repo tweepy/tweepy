@@ -10,7 +10,7 @@ class Media(DataMapping):
     __slots__ = (
         "data", "media_key", "type", "duration_ms", "height",
         "non_public_metrics", "organic_metrics", "preview_image_url",
-        "promoted_metrics", "public_metrics", "width", "alt_text"
+        "promoted_metrics", "public_metrics", "width", "alt_text", "url"
     )
 
     def __init__(self, data):
@@ -27,6 +27,9 @@ class Media(DataMapping):
         self.public_metrics = data.get("public_metrics")
         self.width = data.get("width")
         self.alt_text = data.get("alt_text")
+
+        # https://twittercommunity.com/t/documentation-for-media-object-missing-url-field/163062
+        self.url = data.get("url")
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
