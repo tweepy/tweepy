@@ -6,26 +6,54 @@ Examples
 
 .. tabs::
 
-   .. tab:: Authentication
+   .. tab:: API v1.1
 
-      .. literalinclude:: ../examples/authentication.py
+      .. tabs::
 
-   .. tab:: PIN-based Authorization
+         .. tab:: Authentication
 
-      .. literalinclude:: ../examples/pin-based_authorization.py
+            .. literalinclude:: ../examples/API_v1/authentication.py
 
-   .. tab:: Tweet / Update Status
+         .. tab:: PIN-based Authorization
 
-      .. literalinclude:: ../examples/update_status.py
+            .. literalinclude:: ../examples/API_v1/pin-based_authorization.py
 
-   .. tab:: Follow Followers
+         .. tab:: Tweet / Update Status
 
-      .. literalinclude:: ../examples/follow_followers.py
+            .. literalinclude:: ../examples/API_v1/update_status.py
 
-   .. tab:: Handle Rate Limits
+         .. tab:: Follow Followers
 
-      .. literalinclude:: ../examples/rate_limit_handling.py
+            .. literalinclude:: ../examples/API_v1/follow_followers.py
 
-   .. tab:: Streaming
+         .. tab:: Handle Rate Limits
 
-      .. literalinclude:: ../examples/streaming.py
+            .. literalinclude:: ../examples/API_v1/rate_limit_handling.py
+
+         .. tab:: Streaming
+
+            .. literalinclude:: ../examples/API_v1/streaming.py
+
+   .. tab:: API v2
+
+      .. tabs::
+
+         .. tab:: Authentication
+
+               .. literalinclude:: ../examples/API_v2/authentication.py
+
+         .. tab:: Search Recent Tweets
+
+               .. literalinclude:: ../examples/API_v2/search_recent_tweets.py
+
+         .. tab:: Tweet Fields
+
+               .. literalinclude:: ../examples/API_v2/tweet_fields.py
+
+         .. tab:: Expansions
+
+               .. literalinclude:: ../examples/API_v2/expansions.py
+
+         .. tab:: Create Tweet
+
+               .. literalinclude:: ../examples/API_v2/create_tweet.py
