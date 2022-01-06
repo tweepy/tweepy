@@ -2,12 +2,7 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
-try:
-    # Handle https://github.com/psf/requests/issues/5794 until requests 2.27.0
-    # is released with https://github.com/psf/requests/pull/5856
-    import simplejson as json
-except ImportError:
-    import json
+import requests
 
 
 class TweepyException(Exception):
@@ -46,7 +41,7 @@ class HTTPException(TweepyException):
 
         try:
             response_json = response.json()
-        except json.JSONDecodeError:
+        except requests.JSONDecodeError:
             super().__init__(f"{response.status_code} {response.reason}")
         else:
             errors = response_json.get("errors", [])
