@@ -163,7 +163,7 @@ class OAuth2Handler(OAuth2Session):
         )
 
 
-class OAuth2Bearer(AuthBase):
+class OAuth2BearerHandler(AuthBase):
 
     def __init__(self, bearer_token):
         self.bearer_token = bearer_token
@@ -199,6 +199,6 @@ class OAuth2AppHandler(AuthHandler):
         return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self):
-        return OAuth2Bearer(self._bearer_token)
+        return OAuth2BearerHandler(self._bearer_token)
 
 AppAuthHandler = OAuth2AppHandler
