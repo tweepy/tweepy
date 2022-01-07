@@ -7,6 +7,7 @@ from hashlib import sha256
 import logging
 from urllib.parse import parse_qs
 import secrets
+import warnings
 
 import requests
 from requests.auth import AuthBase, HTTPBasicAuth
@@ -126,7 +127,20 @@ class OAuth2AppHandler:
     def apply_auth(self):
         return OAuth2BearerHandler(self._bearer_token)
 
-AppAuthHandler = OAuth2AppHandler
+
+class AppAuthHandler(OAuth2AppHandler):
+    """Alias for :class:`OAuth2AppHandler`
+
+    .. deprecated:: 4.5
+        Use :class:`OAuth2AppHandler` instead.
+    """
+
+    def __init__(self, consumer_key, consumer_secret):
+        warnings.warn(
+            "AppAuthHandler is deprecated; use OAuth2AppHandler instead.",
+            DeprecationWarning
+        )
+        super().__init__(consumer_key, consumer_secret)
 
 
 class OAuth2BearerHandler(AuthBase):
