@@ -1,0 +1,294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../faq.rst:7
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: ../../faq.rst:10
+msgid "General"
+msgstr ""
+
+#: ../../faq.rst:13
+msgid ""
+"Why am I encountering a 401 Unauthorized error with :class:`API` or 403 "
+"Forbidden error with :class:`Client`?"
+msgstr ""
+
+#: ../../faq.rst:15
+msgid ""
+"If you're using a method that performs an action on behalf of the "
+"authenticating user, e.g. :meth:`API.update_status`, make sure your app "
+"has the write permission."
+msgstr ""
+
+#: ../../faq.rst:19
+msgid ""
+"After giving it the write permission, make sure to regenerate and use new"
+" credentials to utilize it."
+msgstr ""
+
+#: ../../faq.rst:22
+msgid ""
+"See `Twitter's API documentation on app permissions`_ for more "
+"information."
+msgstr ""
+
+#: ../../faq.rst:27
+msgid "Why am I encountering a 403 Forbidden error with :class:`API`?"
+msgstr ""
+
+#: ../../faq.rst:29
+msgid ""
+"If you have Essential access to the Twitter API, you won't be able to "
+"access Twitter API v1.1. This includes all :class:`API` methods and "
+":class:`Stream`."
+msgstr ""
+
+#: ../../faq.rst:32
+msgid ""
+"You can use Twitter API v2 with :class:`Client` or apply for Elevated "
+"access."
+msgstr ""
+
+#: ../../faq.rst:34
+msgid ""
+"See the `Twitter API access levels and versions documentation`_ for more "
+"information."
+msgstr ""
+
+#: ../../faq.rst:40
+msgid "Why am I encountering issues when attempting to upload GIFs or videos?"
+msgstr ""
+
+#: ../../faq.rst:42
+msgid ""
+"If you are encountering a 400 Bad Request error when uploading large GIFs"
+" or other errors/issues with uploading videos, make sure to pass the "
+"``media_category`` parameter, e.g. as ``tweet_gif`` or ``tweet_video``."
+msgstr ""
+
+#: ../../faq.rst:46
+msgid "Also make sure your video follows the recommended specifications."
+msgstr ""
+
+#: ../../faq.rst:48
+msgid ""
+"See `Twitter's API documentation on media best practices`_ for more "
+"information."
+msgstr ""
+
+#: ../../faq.rst:53
+msgid ""
+"Why am I getting an inconsistent number of / not getting 3200 Tweets for "
+"a specific user?"
+msgstr ""
+
+#: ../../faq.rst:55
+msgid ""
+"\"For very high volume and high traffic accounts, be aware that the "
+"Twitter API is highly distributed and eventually consistent. We strive to"
+" provide current information but like any large scale system, you may see"
+" unexpected behaviours at high volumes.\""
+msgstr ""
+
+#: ../../faq.rst:60
+msgid "https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635"
+msgstr ""
+
+#: ../../faq.rst:63
+msgid "Why am I getting no results from :meth:`API.search_tweets`?"
+msgstr ""
+
+#: ../../faq.rst:65
+msgid ""
+"Twitter's standard search API only \"searches against a sampling of "
+"recent Tweets published in the past 7 days.\""
+msgstr ""
+
+#: ../../faq.rst:68
+msgid ""
+"If you're specifying an ID range beyond the past 7 days or there are no "
+"results from the past 7 days, then no results will be returned."
+msgstr ""
+
+#: ../../faq.rst:71
+msgid ""
+"See Twitter's documentation on the standard search API for more "
+"information: https://developer.twitter.com/en/docs/twitter-"
+"api/v1/tweets/search/overview https://developer.twitter.com/en/docs"
+"/twitter-api/v1/tweets/search/api-reference/get-search-tweets"
+msgstr ""
+
+#: ../../faq.rst:76
+msgid "Tweepy v4"
+msgstr ""
+
+#: ../../faq.rst:79
+msgid ""
+"Why am I getting a :class:`TypeError` about an :class:`API` method taking"
+" 1 positional argument but given 2?"
+msgstr ""
+
+#: ../../faq.rst:81
+msgid ""
+"This and other similar errors are due to :ref:`Tweepy v4.0.0 <Version "
+"4.0.0>` changing :class:`API` methods to no longer accept arbitrary "
+"positional arguments. The 1 positional argument being referred to in the "
+"error is ``self``."
+msgstr ""
+
+#: ../../faq.rst:86
+msgid "These parameters can be passed as keyword arguments instead."
+msgstr ""
+
+#: ../../faq.rst:88
+msgid "Refer to the documentation for the :class:`API` method being used."
+msgstr ""
+
+#: ../../faq.rst:91
+msgid "Where did ``API.me`` go?"
+msgstr ""
+
+#: ../../faq.rst:93
+msgid ""
+"If you're attempting to use ``API.me`` with Tweepy v4, you'll get an "
+":class:`AttributeError` about the :class:`API` object not having a ``me``"
+" attribute."
+msgstr ""
+
+#: ../../faq.rst:97
+msgid "This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` removed ``API.me``."
+msgstr ""
+
+#: ../../faq.rst:99
+msgid "Instead, you can use :meth:`API.verify_credentials`."
+msgstr ""
+
+#: ../../faq.rst:102
+msgid "Where did ``API.search`` go?"
+msgstr ""
+
+#: ../../faq.rst:104
+msgid ""
+"If you're attempting to use ``API.search`` or other :class:`API` methods "
+"from Tweepy v3, you might encounter an :class:`AttributeError` with "
+"Tweepy v4."
+msgstr ""
+
+#: ../../faq.rst:107
+msgid ""
+"This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` renamed many "
+":class:`API` methods to be more consistent."
+msgstr ""
+
+#: ../../faq.rst:110
+msgid ""
+"For example, ``API.search`` was renamed to :meth:`API.search_tweets`. You"
+" can refer to the changelog / release notes and update your method "
+"invocations accordingly."
+msgstr ""
+
+#: ../../faq.rst:115
+msgid "Where did ``StreamListener`` go?"
+msgstr ""
+
+#: ../../faq.rst:117
+msgid ""
+"If you're attempting to import ``StreamListener`` with Tweepy v4, you'll "
+"get an :class:`AttributeError` about ``tweepy`` not having a "
+"``StreamListener`` attribute."
+msgstr ""
+
+#: ../../faq.rst:121
+msgid ""
+"This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` merged "
+"``StreamListener`` into :class:`Stream`."
+msgstr ""
+
+#: ../../faq.rst:124
+msgid ""
+"To use Tweepy v4, you'll need to update your code to subclass "
+":class:`Stream` instead."
+msgstr ""
+
+#: ../../faq.rst:128
+msgid "Twitter API v2"
+msgstr ""
+
+#: ../../faq.rst:131
+msgid ""
+"Why am I not getting expansions or fields data with API v2 using "
+":class:`Client`?"
+msgstr ""
+
+#: ../../faq.rst:133
+msgid ""
+"If you are simply printing the objects and looking at that output, the "
+"string representations of API v2 models/objects only include the default "
+"attributes that are guaranteed to exist."
+msgstr ""
+
+#: ../../faq.rst:137
+msgid ""
+"The objects themselves still include the relevant data, which you can "
+"access as attributes or by key, like a dictionary."
+msgstr ""
+
+#: ../../faq.rst:140
+msgid ""
+"There's also a ``data`` attribute/key that provides the entire data "
+"dictionary."
+msgstr ""
+
+#: ../../faq.rst:143
+msgid "How do I access ``includes`` data while using :class:`Paginator`?"
+msgstr ""
+
+#: ../../faq.rst:145
+msgid ""
+":meth:`Paginator.flatten` flattens the ``data`` and iterates over each "
+"object."
+msgstr ""
+
+#: ../../faq.rst:147
+msgid ""
+"To access ``includes``, you'll need to iterate through each response "
+"instead."
+msgstr ""
+
+#: ../../faq.rst:150
+msgid ""
+"Why am I getting rate-limited so quickly when using "
+":meth:`Client.search_all_tweets` with :class:`Paginator`?"
+msgstr ""
+
+#: ../../faq.rst:152
+msgid ""
+"The `GET /2/tweets/search/all`_ Twitter API endpoint that "
+":meth:`Client.search_all_tweets` uses has an additional 1 request per "
+"second rate limit that is not handled by :class:`Paginator`."
+msgstr ""
+
+#: ../../faq.rst:156
+msgid ""
+"You can :func:`time.sleep` 1 second while iterating through responses to "
+"handle this rate limit."
+msgstr ""
+

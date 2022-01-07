@@ -1,0 +1,2593 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../client.rst:7
+msgid ":class:`tweepy.Client` --- Twitter API v2 Reference"
+msgstr ""
+
+#: of tweepy.client.Client:1
+msgid "Twitter API v2 Client"
+msgstr ""
+
+#: of tweepy.client.Client tweepy.client.Client.add_list_member
+#: tweepy.client.Client.block tweepy.client.Client.create_compliance_job
+#: tweepy.client.Client.create_list tweepy.client.Client.create_tweet
+#: tweepy.client.Client.delete_list tweepy.client.Client.delete_tweet
+#: tweepy.client.Client.follow_list tweepy.client.Client.follow_user
+#: tweepy.client.Client.get_all_tweets_count tweepy.client.Client.get_blocked
+#: tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Parameters"
+msgstr ""
+
+#: of tweepy.client.Client:5
+msgid "Twitter API Bearer Token"
+msgstr ""
+
+#: of tweepy.client.Client:7
+msgid "Twitter API Consumer Key"
+msgstr ""
+
+#: of tweepy.client.Client:9
+msgid "Twitter API Consumer Secret"
+msgstr ""
+
+#: of tweepy.client.Client:11
+msgid "Twitter API Access Token"
+msgstr ""
+
+#: of tweepy.client.Client:13
+msgid "Twitter API Access Token Secret"
+msgstr ""
+
+#: of tweepy.client.Client:15
+msgid "Type to return from requests to the API"
+msgstr ""
+
+#: of tweepy.client.Client:17
+msgid "Whether to wait when rate limit is reached"
+msgstr ""
+
+#: of tweepy.client.Client:22
+msgid "Requests Session used to make requests to the API"
+msgstr ""
+
+#: of tweepy.client.Client
+msgid "type"
+msgstr ""
+
+#: of tweepy.client.Client:24
+msgid "requests.Session"
+msgstr ""
+
+#: of tweepy.client.Client:28
+msgid "User agent used when making requests to the API"
+msgstr ""
+
+#: of tweepy.client.Client:30
+msgid "str"
+msgstr ""
+
+#: ../../client.rst:15
+msgid "Twitter API v2 Endpoint"
+msgstr ""
+
+#: ../../client.rst:15
+msgid ":class:`Client` Method"
+msgstr ""
+
+#: ../../client.rst:21 ../../client.rst:23
+msgid "`PUT /2/tweets/:id/hidden`_"
+msgstr ""
+
+#: ../../client.rst:21
+msgid ":meth:`Client.hide_reply`"
+msgstr ""
+
+#: ../../client.rst:23
+msgid ":meth:`Client.unhide_reply`"
+msgstr ""
+
+#: ../../client.rst:27
+msgid "`DELETE /2/users/:id/likes/:tweet_id`_"
+msgstr ""
+
+#: ../../client.rst:27
+msgid ":meth:`Client.unlike`"
+msgstr ""
+
+#: ../../client.rst:29
+msgid "`GET /2/tweets/:id/liking_users`_"
+msgstr ""
+
+#: ../../client.rst:29
+msgid ":meth:`Client.get_liking_users`"
+msgstr ""
+
+#: ../../client.rst:31
+msgid "`GET /2/users/:id/liked_tweets`_"
+msgstr ""
+
+#: ../../client.rst:31
+msgid ":meth:`Client.get_liked_tweets`"
+msgstr ""
+
+#: ../../client.rst:33
+msgid "`POST /2/users/:id/likes`_"
+msgstr ""
+
+#: ../../client.rst:33
+msgid ":meth:`Client.like`"
+msgstr ""
+
+#: ../../client.rst:37
+msgid "`DELETE /2/tweets/:id`_"
+msgstr ""
+
+#: ../../client.rst:37
+msgid ":meth:`Client.delete_tweet`"
+msgstr ""
+
+#: ../../client.rst:39
+msgid "`POST /2/tweets`_"
+msgstr ""
+
+#: ../../client.rst:39
+msgid ":meth:`Client.create_tweet`"
+msgstr ""
+
+#: ../../client.rst:43
+msgid "`DELETE /2/users/:id/retweets/:source_tweet_id`_"
+msgstr ""
+
+#: ../../client.rst:43
+msgid ":meth:`Client.unretweet`"
+msgstr ""
+
+#: ../../client.rst:45
+msgid "`GET /2/tweets/:id/retweeted_by`_"
+msgstr ""
+
+#: ../../client.rst:45
+msgid ":meth:`Client.get_retweeters`"
+msgstr ""
+
+#: ../../client.rst:47
+msgid "`POST /2/users/:id/retweets`_"
+msgstr ""
+
+#: ../../client.rst:47
+msgid ":meth:`Client.retweet`"
+msgstr ""
+
+#: ../../client.rst:51
+msgid "`GET /2/tweets/search/all`_"
+msgstr ""
+
+#: ../../client.rst:51
+msgid ":meth:`Client.search_all_tweets`"
+msgstr ""
+
+#: ../../client.rst:53
+msgid "`GET /2/tweets/search/recent`_"
+msgstr ""
+
+#: ../../client.rst:53
+msgid ":meth:`Client.search_recent_tweets`"
+msgstr ""
+
+#: ../../client.rst:57
+msgid "`GET /2/users/:id/mentions`_"
+msgstr ""
+
+#: ../../client.rst:57
+msgid ":meth:`Client.get_users_mentions`"
+msgstr ""
+
+#: ../../client.rst:59
+msgid "`GET /2/users/:id/tweets`_"
+msgstr ""
+
+#: ../../client.rst:59
+msgid ":meth:`Client.get_users_tweets`"
+msgstr ""
+
+#: ../../client.rst:63
+msgid "`GET /2/tweets/counts/all`_"
+msgstr ""
+
+#: ../../client.rst:63
+msgid ":meth:`Client.get_all_tweets_count`"
+msgstr ""
+
+#: ../../client.rst:65
+msgid "`GET /2/tweets/counts/recent`_"
+msgstr ""
+
+#: ../../client.rst:65
+msgid ":meth:`Client.get_recent_tweets_count`"
+msgstr ""
+
+#: ../../client.rst:69
+msgid "`GET /2/tweets/:id`_"
+msgstr ""
+
+#: ../../client.rst:69
+msgid ":meth:`Client.get_tweet`"
+msgstr ""
+
+#: ../../client.rst:71
+msgid "`GET /2/tweets`_"
+msgstr ""
+
+#: ../../client.rst:71
+msgid ":meth:`Client.get_tweets`"
+msgstr ""
+
+#: ../../client.rst:77
+msgid "`DELETE /2/users/:source_user_id/blocking/:target_user_id`_"
+msgstr ""
+
+#: ../../client.rst:77
+msgid ":meth:`Client.unblock`"
+msgstr ""
+
+#: ../../client.rst:79
+msgid "`GET /2/users/:id/blocking`_"
+msgstr ""
+
+#: ../../client.rst:79
+msgid ":meth:`Client.get_blocked`"
+msgstr ""
+
+#: ../../client.rst:81
+msgid "`POST /2/users/:id/blocking`_"
+msgstr ""
+
+#: ../../client.rst:81
+msgid ":meth:`Client.block`"
+msgstr ""
+
+#: ../../client.rst:85
+msgid "`DELETE /2/users/:source_user_id/following/:target_user_id`_"
+msgstr ""
+
+#: ../../client.rst:85
+msgid ":meth:`Client.unfollow_user`"
+msgstr ""
+
+#: ../../client.rst:87
+msgid "`GET /2/users/:id/followers`_"
+msgstr ""
+
+#: ../../client.rst:87
+msgid ":meth:`Client.get_users_followers`"
+msgstr ""
+
+#: ../../client.rst:89
+msgid "`GET /2/users/:id/following`_"
+msgstr ""
+
+#: ../../client.rst:89
+msgid ":meth:`Client.get_users_following`"
+msgstr ""
+
+#: ../../client.rst:91
+msgid "`POST /2/users/:id/following`_"
+msgstr ""
+
+#: ../../client.rst:91
+msgid ":meth:`Client.follow_user`"
+msgstr ""
+
+#: ../../client.rst:95
+msgid "`DELETE /2/users/:source_user_id/muting/:target_user_id`_"
+msgstr ""
+
+#: ../../client.rst:95
+msgid ":meth:`Client.unmute`"
+msgstr ""
+
+#: ../../client.rst:97
+msgid "`GET /2/users/:id/muting`_"
+msgstr ""
+
+#: ../../client.rst:97
+msgid ":meth:`Client.get_muted`"
+msgstr ""
+
+#: ../../client.rst:99
+msgid "`POST /2/users/:id/muting`_"
+msgstr ""
+
+#: ../../client.rst:99
+msgid ":meth:`Client.mute`"
+msgstr ""
+
+#: ../../client.rst:103
+msgid "`GET /2/users/:id`_"
+msgstr ""
+
+#: ../../client.rst:103 ../../client.rst:105
+msgid ":meth:`Client.get_user`"
+msgstr ""
+
+#: ../../client.rst:105
+msgid "`GET /2/users/by/username/:username`_"
+msgstr ""
+
+#: ../../client.rst:107
+msgid "`GET /2/users`_"
+msgstr ""
+
+#: ../../client.rst:107 ../../client.rst:109
+msgid ":meth:`Client.get_users`"
+msgstr ""
+
+#: ../../client.rst:109
+msgid "`GET /2/users/by`_"
+msgstr ""
+
+#: ../../client.rst:111
+msgid "`GET /2/users/me`_"
+msgstr ""
+
+#: ../../client.rst:111
+msgid ":meth:`Client.get_me`"
+msgstr ""
+
+#: ../../client.rst:117
+msgid "`GET /2/spaces/search`_"
+msgstr ""
+
+#: ../../client.rst:117
+msgid ":meth:`Client.search_spaces`"
+msgstr ""
+
+#: ../../client.rst:121
+msgid "`GET /2/spaces`_"
+msgstr ""
+
+#: ../../client.rst:121 ../../client.rst:127
+msgid ":meth:`Client.get_spaces`"
+msgstr ""
+
+#: ../../client.rst:123
+msgid "`GET /2/spaces/:id`_"
+msgstr ""
+
+#: ../../client.rst:123
+msgid ":meth:`Client.get_space`"
+msgstr ""
+
+#: ../../client.rst:125
+msgid "`GET /2/spaces/:id/buyers`_"
+msgstr ""
+
+#: ../../client.rst:125
+msgid ":meth:`Client.get_space_buyers`"
+msgstr ""
+
+#: ../../client.rst:127
+msgid "`GET /2/spaces/by/creator_ids`_"
+msgstr ""
+
+#: ../../client.rst:133
+msgid "`GET /2/lists/:id/tweets`_"
+msgstr ""
+
+#: ../../client.rst:133
+msgid ":meth:`Client.get_list_tweets`"
+msgstr ""
+
+#: ../../client.rst:137
+msgid "`DELETE /2/users/:id/followed_lists/:list_id`_"
+msgstr ""
+
+#: ../../client.rst:137
+msgid ":meth:`Client.unfollow_list`"
+msgstr ""
+
+#: ../../client.rst:139
+msgid "`GET /2/lists/:id/followers`_"
+msgstr ""
+
+#: ../../client.rst:139
+msgid ":meth:`Client.get_list_followers`"
+msgstr ""
+
+#: ../../client.rst:141
+msgid "`GET /2/users/:id/followed_lists`_"
+msgstr ""
+
+#: ../../client.rst:141
+msgid ":meth:`Client.get_followed_lists`"
+msgstr ""
+
+#: ../../client.rst:143
+msgid "`POST /2/users/:id/followed_lists`_"
+msgstr ""
+
+#: ../../client.rst:143
+msgid ":meth:`Client.follow_list`"
+msgstr ""
+
+#: ../../client.rst:147
+msgid "`GET /2/lists/:id`_"
+msgstr ""
+
+#: ../../client.rst:147
+msgid ":meth:`Client.get_list`"
+msgstr ""
+
+#: ../../client.rst:149
+msgid "`GET /2/users/:id/owned_lists`_"
+msgstr ""
+
+#: ../../client.rst:149
+msgid ":meth:`Client.get_owned_lists`"
+msgstr ""
+
+#: ../../client.rst:153
+msgid "`DELETE /2/lists/:id/members/:user_id`_"
+msgstr ""
+
+#: ../../client.rst:153
+msgid ":meth:`Client.remove_list_member`"
+msgstr ""
+
+#: ../../client.rst:155
+msgid "`GET /2/lists/:id/members`_"
+msgstr ""
+
+#: ../../client.rst:155
+msgid ":meth:`Client.get_list_members`"
+msgstr ""
+
+#: ../../client.rst:157
+msgid "`GET /2/users/:id/list_memberships`_"
+msgstr ""
+
+#: ../../client.rst:157
+msgid ":meth:`Client.get_list_memberships`"
+msgstr ""
+
+#: ../../client.rst:159
+msgid "`POST /2/lists/:id/members`_"
+msgstr ""
+
+#: ../../client.rst:159
+msgid ":meth:`Client.add_list_member`"
+msgstr ""
+
+#: ../../client.rst:163
+msgid "`DELETE /2/lists/:id`_"
+msgstr ""
+
+#: ../../client.rst:163
+msgid ":meth:`Client.delete_list`"
+msgstr ""
+
+#: ../../client.rst:165
+msgid "`PUT /2/lists/:id`_"
+msgstr ""
+
+#: ../../client.rst:165
+msgid ":meth:`Client.update_list`"
+msgstr ""
+
+#: ../../client.rst:167
+msgid "`POST /2/lists`_"
+msgstr ""
+
+#: ../../client.rst:167
+msgid ":meth:`Client.create_list`"
+msgstr ""
+
+#: ../../client.rst:171
+msgid "`DELETE /2/users/:id/pinned_lists/:list_id`_"
+msgstr ""
+
+#: ../../client.rst:171
+msgid ":meth:`Client.unpin_list`"
+msgstr ""
+
+#: ../../client.rst:173
+msgid "`GET /2/users/:id/pinned_lists`_"
+msgstr ""
+
+#: ../../client.rst:173
+msgid ":meth:`Client.get_pinned_lists`"
+msgstr ""
+
+#: ../../client.rst:175
+msgid "`POST /2/users/:id/pinned_lists`_"
+msgstr ""
+
+#: ../../client.rst:175
+msgid ":meth:`Client.pin_list`"
+msgstr ""
+
+#: ../../client.rst:181
+msgid "`GET /2/compliance/jobs`_"
+msgstr ""
+
+#: ../../client.rst:181
+msgid ":meth:`Client.get_compliance_jobs`"
+msgstr ""
+
+#: ../../client.rst:183
+msgid "`GET /2/compliance/jobs/:id`_"
+msgstr ""
+
+#: ../../client.rst:183
+msgid ":meth:`Client.get_compliance_job`"
+msgstr ""
+
+#: ../../client.rst:185
+msgid "`POST /2/compliance/jobs`_"
+msgstr ""
+
+#: ../../client.rst:185
+msgid ":meth:`Client.create_compliance_job`"
+msgstr ""
+
+#: ../../client.rst:269
+msgid "Tweets"
+msgstr ""
+
+#: ../../client.rst:272
+msgid "Hide replies"
+msgstr ""
+
+#: of tweepy.client.Client.hide_reply:1
+msgid "Hides a reply to a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:5 tweepy.client.Client.block:3
+#: tweepy.client.Client.create_list:5 tweepy.client.Client.create_tweet:5
+#: tweepy.client.Client.delete_list:5 tweepy.client.Client.delete_tweet:5
+#: tweepy.client.Client.follow_list:5 tweepy.client.Client.follow_user:13
+#: tweepy.client.Client.get_blocked:3 tweepy.client.Client.get_muted:5
+#: tweepy.client.Client.get_pinned_lists:5 tweepy.client.Client.hide_reply:3
+#: tweepy.client.Client.like:3 tweepy.client.Client.mute:3
+#: tweepy.client.Client.pin_list:5 tweepy.client.Client.remove_list_member:6
+#: tweepy.client.Client.retweet:3 tweepy.client.Client.unblock:6
+#: tweepy.client.Client.unfollow_list:5 tweepy.client.Client.unfollow_user:9
+#: tweepy.client.Client.unhide_reply:3 tweepy.client.Client.unlike:6
+#: tweepy.client.Client.unmute:6 tweepy.client.Client.unpin_list:5
+#: tweepy.client.Client.unretweet:7 tweepy.client.Client.update_list:6
+msgid "Added ``user_auth`` parameter"
+msgstr ""
+
+#: of tweepy.client.Client.hide_reply:6
+msgid ""
+"Unique identifier of the Tweet to hide. The Tweet must belong to a "
+"conversation initiated by the authenticating user."
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:12 tweepy.client.Client.block:8
+#: tweepy.client.Client.create_list:14 tweepy.client.Client.create_tweet:44
+#: tweepy.client.Client.delete_list:10 tweepy.client.Client.delete_tweet:10
+#: tweepy.client.Client.follow_list:10 tweepy.client.Client.follow_user:18
+#: tweepy.client.Client.get_blocked:20
+#: tweepy.client.Client.get_followed_lists:23
+#: tweepy.client.Client.get_liked_tweets:30
+#: tweepy.client.Client.get_liking_users:17 tweepy.client.Client.get_list:13
+#: tweepy.client.Client.get_list_followers:23
+#: tweepy.client.Client.get_list_members:23
+#: tweepy.client.Client.get_list_memberships:23
+#: tweepy.client.Client.get_list_tweets:23 tweepy.client.Client.get_me:11
+#: tweepy.client.Client.get_muted:22 tweepy.client.Client.get_owned_lists:23
+#: tweepy.client.Client.get_pinned_lists:14
+#: tweepy.client.Client.get_retweeters:17 tweepy.client.Client.get_tweet:18
+#: tweepy.client.Client.get_tweets:20 tweepy.client.Client.get_user:14
+#: tweepy.client.Client.get_users:18
+#: tweepy.client.Client.get_users_followers:21
+#: tweepy.client.Client.get_users_following:21
+#: tweepy.client.Client.get_users_mentions:66
+#: tweepy.client.Client.get_users_tweets:75 tweepy.client.Client.hide_reply:9
+#: tweepy.client.Client.like:8 tweepy.client.Client.mute:8
+#: tweepy.client.Client.pin_list:10 tweepy.client.Client.remove_list_member:13
+#: tweepy.client.Client.retweet:8 tweepy.client.Client.search_recent_tweets:58
+#: tweepy.client.Client.unblock:11 tweepy.client.Client.unfollow_list:10
+#: tweepy.client.Client.unfollow_user:14 tweepy.client.Client.unhide_reply:9
+#: tweepy.client.Client.unlike:11 tweepy.client.Client.unmute:11
+#: tweepy.client.Client.unpin_list:10 tweepy.client.Client.unretweet:12
+#: tweepy.client.Client.update_list:17
+msgid "Whether or not to use OAuth 1.0a User Context to authenticate"
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member tweepy.client.Client.block
+#: tweepy.client.Client.create_compliance_job tweepy.client.Client.create_list
+#: tweepy.client.Client.create_tweet tweepy.client.Client.delete_list
+#: tweepy.client.Client.delete_tweet tweepy.client.Client.follow_list
+#: tweepy.client.Client.follow_user tweepy.client.Client.get_all_tweets_count
+#: tweepy.client.Client.get_blocked tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Returns"
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member tweepy.client.Client.block
+#: tweepy.client.Client.create_compliance_job tweepy.client.Client.create_list
+#: tweepy.client.Client.create_tweet tweepy.client.Client.delete_list
+#: tweepy.client.Client.delete_tweet tweepy.client.Client.follow_list
+#: tweepy.client.Client.follow_user tweepy.client.Client.get_all_tweets_count
+#: tweepy.client.Client.get_blocked tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Return type"
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:19 tweepy.client.Client.block:15
+#: tweepy.client.Client.create_compliance_job:26
+#: tweepy.client.Client.create_list:21 tweepy.client.Client.create_tweet:51
+#: tweepy.client.Client.delete_list:17 tweepy.client.Client.delete_tweet:17
+#: tweepy.client.Client.follow_list:17 tweepy.client.Client.follow_user:25
+#: tweepy.client.Client.get_all_tweets_count:47
+#: tweepy.client.Client.get_blocked:27
+#: tweepy.client.Client.get_compliance_job:12
+#: tweepy.client.Client.get_compliance_jobs:17
+#: tweepy.client.Client.get_followed_lists:30
+#: tweepy.client.Client.get_liked_tweets:37
+#: tweepy.client.Client.get_liking_users:24 tweepy.client.Client.get_list:20
+#: tweepy.client.Client.get_list_followers:30
+#: tweepy.client.Client.get_list_members:30
+#: tweepy.client.Client.get_list_memberships:30
+#: tweepy.client.Client.get_list_tweets:30 tweepy.client.Client.get_me:18
+#: tweepy.client.Client.get_muted:29 tweepy.client.Client.get_owned_lists:30
+#: tweepy.client.Client.get_pinned_lists:21
+#: tweepy.client.Client.get_recent_tweets_count:44
+#: tweepy.client.Client.get_retweeters:24 tweepy.client.Client.get_space:19
+#: tweepy.client.Client.get_space_buyers:27 tweepy.client.Client.get_spaces:24
+#: tweepy.client.Client.get_tweet:25 tweepy.client.Client.get_tweets:27
+#: tweepy.client.Client.get_user:23 tweepy.client.Client.get_users:27
+#: tweepy.client.Client.get_users_followers:28
+#: tweepy.client.Client.get_users_following:28
+#: tweepy.client.Client.get_users_mentions:73
+#: tweepy.client.Client.get_users_tweets:82 tweepy.client.Client.hide_reply:16
+#: tweepy.client.Client.like:15 tweepy.client.Client.mute:15
+#: tweepy.client.Client.pin_list:17 tweepy.client.Client.remove_list_member:20
+#: tweepy.client.Client.retweet:15 tweepy.client.Client.search_all_tweets:62
+#: tweepy.client.Client.search_recent_tweets:65
+#: tweepy.client.Client.search_spaces:29 tweepy.client.Client.unblock:18
+#: tweepy.client.Client.unfollow_list:17 tweepy.client.Client.unfollow_user:21
+#: tweepy.client.Client.unhide_reply:16 tweepy.client.Client.unlike:18
+#: tweepy.client.Client.unmute:18 tweepy.client.Client.unpin_list:17
+#: tweepy.client.Client.unretweet:19 tweepy.client.Client.update_list:24
+msgid "References"
+msgstr ""
+
+#: of tweepy.client.Client.hide_reply:17 tweepy.client.Client.unhide_reply:17
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies"
+"/api-reference/put-tweets-id-hidden"
+msgstr ""
+
+#: of tweepy.client.Client.unhide_reply:1
+msgid "Unhides a reply to a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.unhide_reply:6
+msgid ""
+"Unique identifier of the Tweet to unhide. The Tweet must belong to a "
+"conversation initiated by the authenticating user."
+msgstr ""
+
+#: ../../client.rst:279
+msgid "Likes"
+msgstr ""
+
+#: of tweepy.client.Client.unlike:1
+msgid "Unlike a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.unlike:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not liking the Tweet or have already unliked the Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.unlike:9
+msgid "The ID of the Tweet that you would like to unlike."
+msgstr ""
+
+#: of tweepy.client.Client.unlike:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/delete-users-id-likes-tweet_id"
+msgstr ""
+
+#: of tweepy.client.Client.get_liking_users:1
+msgid "Allows you to get information about a Tweet’s liking users."
+msgstr ""
+
+#: of tweepy.client.Client.get_liking_users:3
+msgid "Tweet ID of the Tweet to request liking users of."
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:6
+#: tweepy.client.Client.get_followed_lists:7
+#: tweepy.client.Client.get_liked_tweets:8
+#: tweepy.client.Client.get_liking_users:5 tweepy.client.Client.get_list:7
+#: tweepy.client.Client.get_list_followers:7
+#: tweepy.client.Client.get_list_members:7
+#: tweepy.client.Client.get_list_memberships:7
+#: tweepy.client.Client.get_list_tweets:7 tweepy.client.Client.get_me:5
+#: tweepy.client.Client.get_muted:8 tweepy.client.Client.get_owned_lists:7
+#: tweepy.client.Client.get_pinned_lists:8
+#: tweepy.client.Client.get_retweeters:5 tweepy.client.Client.get_space:8
+#: tweepy.client.Client.get_space_buyers:10 tweepy.client.Client.get_spaces:11
+#: tweepy.client.Client.get_tweet:6 tweepy.client.Client.get_tweets:8
+#: tweepy.client.Client.get_user:8 tweepy.client.Client.get_users:12
+#: tweepy.client.Client.get_users_followers:5
+#: tweepy.client.Client.get_users_following:5
+#: tweepy.client.Client.get_users_mentions:20
+#: tweepy.client.Client.get_users_tweets:29
+#: tweepy.client.Client.search_all_tweets:21
+#: tweepy.client.Client.search_recent_tweets:21
+#: tweepy.client.Client.search_spaces:11
+msgid ":ref:`expansions_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:14
+#: tweepy.client.Client.get_liking_users:7
+#: tweepy.client.Client.get_retweeters:7
+#: tweepy.client.Client.get_space_buyers:12 tweepy.client.Client.get_tweet:8
+#: tweepy.client.Client.get_tweets:10
+#: tweepy.client.Client.get_users_mentions:28
+#: tweepy.client.Client.get_users_tweets:37
+#: tweepy.client.Client.search_all_tweets:27
+#: tweepy.client.Client.search_recent_tweets:27
+msgid ":ref:`media_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:22
+#: tweepy.client.Client.get_liking_users:9
+#: tweepy.client.Client.get_retweeters:9
+#: tweepy.client.Client.get_space_buyers:14 tweepy.client.Client.get_tweet:10
+#: tweepy.client.Client.get_tweets:12
+#: tweepy.client.Client.get_users_mentions:36
+#: tweepy.client.Client.get_users_tweets:45
+#: tweepy.client.Client.search_all_tweets:34
+#: tweepy.client.Client.search_recent_tweets:33
+msgid ":ref:`place_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:24
+#: tweepy.client.Client.get_liking_users:11
+#: tweepy.client.Client.get_retweeters:11
+#: tweepy.client.Client.get_space_buyers:16 tweepy.client.Client.get_tweet:12
+#: tweepy.client.Client.get_tweets:14
+#: tweepy.client.Client.get_users_mentions:38
+#: tweepy.client.Client.get_users_tweets:47
+#: tweepy.client.Client.search_all_tweets:36
+#: tweepy.client.Client.search_recent_tweets:35
+msgid ":ref:`poll_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:16
+#: tweepy.client.Client.get_liked_tweets:26
+#: tweepy.client.Client.get_liking_users:13
+#: tweepy.client.Client.get_list_followers:19
+#: tweepy.client.Client.get_list_members:19
+#: tweepy.client.Client.get_list_tweets:19 tweepy.client.Client.get_me:7
+#: tweepy.client.Client.get_muted:18 tweepy.client.Client.get_retweeters:13
+#: tweepy.client.Client.get_space_buyers:18 tweepy.client.Client.get_tweet:14
+#: tweepy.client.Client.get_tweets:16 tweepy.client.Client.get_user:10
+#: tweepy.client.Client.get_users:14
+#: tweepy.client.Client.get_users_followers:17
+#: tweepy.client.Client.get_users_following:17
+#: tweepy.client.Client.get_users_mentions:55
+#: tweepy.client.Client.get_users_tweets:65
+#: tweepy.client.Client.search_all_tweets:49
+#: tweepy.client.Client.search_recent_tweets:50
+msgid ":ref:`tweet_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:18
+#: tweepy.client.Client.get_followed_lists:21
+#: tweepy.client.Client.get_liked_tweets:28
+#: tweepy.client.Client.get_liking_users:15 tweepy.client.Client.get_list:11
+#: tweepy.client.Client.get_list_followers:21
+#: tweepy.client.Client.get_list_members:21
+#: tweepy.client.Client.get_list_memberships:21
+#: tweepy.client.Client.get_list_tweets:21 tweepy.client.Client.get_me:9
+#: tweepy.client.Client.get_muted:20 tweepy.client.Client.get_owned_lists:21
+#: tweepy.client.Client.get_pinned_lists:12
+#: tweepy.client.Client.get_retweeters:15 tweepy.client.Client.get_space:12
+#: tweepy.client.Client.get_space_buyers:20 tweepy.client.Client.get_spaces:15
+#: tweepy.client.Client.get_tweet:16 tweepy.client.Client.get_tweets:18
+#: tweepy.client.Client.get_user:12 tweepy.client.Client.get_users:16
+#: tweepy.client.Client.get_users_followers:19
+#: tweepy.client.Client.get_users_following:19
+#: tweepy.client.Client.get_users_mentions:64
+#: tweepy.client.Client.get_users_tweets:73
+#: tweepy.client.Client.search_all_tweets:55
+#: tweepy.client.Client.search_recent_tweets:56
+#: tweepy.client.Client.search_spaces:22
+msgid ":ref:`user_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_liking_users:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-tweets-id-liking_users"
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:1
+msgid "Allows you to get information about a user’s liked Tweets."
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:3
+#: tweepy.client.Client.get_users_mentions:5
+#: tweepy.client.Client.get_users_tweets:6
+#: tweepy.client.Client.search_all_tweets:8
+#: tweepy.client.Client.search_recent_tweets:4
+msgid ""
+"The Tweets returned by this endpoint count towards the Project-level "
+"`Tweet cap`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:6
+msgid "User ID of the user to request liked Tweets for."
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:10
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 5 and 100. By default, each page will return 100 results."
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:16
+#: tweepy.client.Client.get_users_followers:11
+#: tweepy.client.Client.get_users_following:11
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results. "
+"To return the next page, pass the ``next_token`` returned in your "
+"previous response. To go back one page, pass the ``previous_token`` "
+"returned in your previous response."
+msgstr ""
+
+#: of tweepy.client.Client.get_liked_tweets:38
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-users-id-liked_tweets"
+msgstr ""
+
+#: of tweepy.client.Client.like:1
+msgid "Like a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.like:6
+msgid "The ID of the Tweet that you would like to Like."
+msgstr ""
+
+#: of tweepy.client.Client.like:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/post-users-id-likes"
+msgstr ""
+
+#: ../../client.rst:290
+msgid "Manage Tweets"
+msgstr ""
+
+#: of tweepy.client.Client.delete_tweet:1
+msgid "Allows an authenticated user ID to delete a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.delete_tweet:8
+msgid "The Tweet ID you are deleting."
+msgstr ""
+
+#: of tweepy.client.Client.delete_tweet:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/delete-tweets-id"
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:1
+msgid "Creates a Tweet on behalf of an authenticated user."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:8
+msgid ""
+"`Tweets a link directly to a Direct Message conversation`_ with an "
+"account."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:11
+msgid "Allows you to Tweet exclusively for `Super Followers`_."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:13
+msgid "Place ID being attached to the Tweet for geo location."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:15
+msgid ""
+"A list of Media IDs being attached to the Tweet. This is only required if"
+" the request includes the ``tagged_user_ids``."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:18
+msgid ""
+"A list of User IDs being tagged in the Tweet with Media. If the user "
+"you're tagging doesn't have photo-tagging enabled, their names won't show"
+" up in the list of tagged users even though the Tweet is successfully "
+"created."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:23
+msgid ""
+"Duration of the poll in minutes for a Tweet with a poll. This is only "
+"required if the request includes ``poll.options``."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:26
+msgid "A list of poll options for a Tweet with a poll."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:28
+msgid "Link to the Tweet being quoted."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:30
+msgid ""
+"A list of User IDs to be excluded from the reply Tweet thus removing a "
+"user from a thread."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:33
+msgid ""
+"Tweet ID of the Tweet being replied to. Please note that "
+"``in_reply_to_tweet_id`` needs to be in the request if "
+"``exclude_reply_user_ids`` is present."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:37
+msgid ""
+"`Settings`_ to indicate who can reply to the Tweet. Limited to "
+"\"mentionedUsers\" and \"following\". If the field isn’t specified, it "
+"will default to everyone."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:41
+msgid ""
+"Text of the Tweet being created. This field is required if "
+"``media.media_ids`` is not present."
+msgstr ""
+
+#: of tweepy.client.Client.create_tweet:52
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/post-tweets"
+msgstr ""
+
+#: ../../client.rst:297
+msgid "Retweets"
+msgstr ""
+
+#: of tweepy.client.Client.unretweet:1
+msgid "Allows an authenticated user ID to remove the Retweet of a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.unretweet:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not Retweeting the Tweet or have already removed the Retweet"
+" of."
+msgstr ""
+
+#: of tweepy.client.Client.unretweet:10
+msgid "The ID of the Tweet that you would like to remove the Retweet of."
+msgstr ""
+
+#: of tweepy.client.Client.unretweet:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/delete-users-id-retweets-tweet_id"
+msgstr ""
+
+#: of tweepy.client.Client.get_retweeters:1
+msgid "Allows you to get information about who has Retweeted a Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.get_retweeters:3
+msgid "Tweet ID of the Tweet to request Retweeting users of."
+msgstr ""
+
+#: of tweepy.client.Client.get_retweeters:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/get-tweets-id-retweeted_by"
+msgstr ""
+
+#: of tweepy.client.Client.retweet:1
+msgid "Causes the user ID to Retweet the target Tweet."
+msgstr ""
+
+#: of tweepy.client.Client.retweet:6
+msgid "The ID of the Tweet that you would like to Retweet."
+msgstr ""
+
+#: of tweepy.client.Client.retweet:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/post-users-id-retweets"
+msgstr ""
+
+#: ../../client.rst:306
+msgid "Search Tweets"
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:1
+#: tweepy.client.Client.search_all_tweets:1
+msgid ""
+"This endpoint is only available to those users who have been approved for"
+" the `Academic Research product track`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:4
+#: tweepy.client.Client.search_all_tweets:4
+msgid ""
+"The full-archive search endpoint returns the complete history of public "
+"Tweets matching a search query; since the first Tweet was created March "
+"26, 2006."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:8
+#: tweepy.client.Client.search_all_tweets:11
+msgid "One query for matching Tweets. Up to 1024 characters."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:10
+#: tweepy.client.Client.search_all_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``. The "
+"newest, most recent UTC timestamp to which the Tweets will be provided. "
+"Timestamp is in second granularity and is exclusive (for example, "
+"12:00:01 excludes the first second of the minute). If used without "
+"``start_time``, Tweets from 30 days before ``end_time`` will be returned "
+"by default. If not specified, ``end_time`` will default to [now - 30 "
+"seconds]."
+msgstr ""
+
+#: of tweepy.client.Client.search_all_tweets:23
+msgid ""
+"The maximum number of search results to be returned by a request. A "
+"number between 10 and the system limit (currently 500). By default, a "
+"request response will return 10 results."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:22
+#: tweepy.client.Client.search_all_tweets:29
+msgid ""
+"This parameter is used to get the next 'page' of results. The value used "
+"with the parameter is pulled directly from the response provided by the "
+"API, and should not be modified. You can learn more by visiting our page "
+"on `pagination`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:27
+#: tweepy.client.Client.search_all_tweets:38
+msgid ""
+"Returns results with a Tweet ID greater than (for example, more recent "
+"than) the specified ID. The ID specified is exclusive and responses will "
+"not include it. If included with the same request as a ``start_time`` "
+"parameter, only ``since_id`` will be used."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:32
+#: tweepy.client.Client.search_all_tweets:43
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute). By default, a request will return Tweets from up to 30 days ago "
+"if you do not include this parameter."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:38
+#: tweepy.client.Client.search_all_tweets:51
+msgid ""
+"Returns results with a Tweet ID less than (that is, older than) the "
+"specified ID. Used with ``since_id``. The ID specified is exclusive and "
+"responses will not include it."
+msgstr ""
+
+#: of tweepy.client.Client.search_all_tweets:63
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-all"
+msgstr ""
+
+#: of tweepy.client.Client.search_recent_tweets:1
+msgid ""
+"The recent search endpoint returns Tweets from the last seven days that "
+"match a search query."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:4
+#: tweepy.client.Client.search_recent_tweets:7
+msgid ""
+"One rule for matching Tweets. If you are using a `Standard Project`_ at "
+"the Basic `access level`_, you can use the basic set of `operators`_ and "
+"can make queries up to 512 characters long. If you are using an `Academic"
+" Research Project`_ at the Basic access level, you can use all available "
+"operators and can make queries up to 1,024 characters long."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:11
+#: tweepy.client.Client.search_recent_tweets:14
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent UTC "
+"timestamp to which the Tweets will be provided. Timestamp is in second "
+"granularity and is exclusive (for example, 12:00:01 excludes the first "
+"second of the minute). By default, a request will return Tweets from as "
+"recent as 30 seconds ago if you do not include this parameter."
+msgstr ""
+
+#: of tweepy.client.Client.search_recent_tweets:23
+msgid ""
+"The maximum number of search results to be returned by a request. A "
+"number between 10 and 100. By default, a request response will return 10 "
+"results."
+msgstr ""
+
+#: of tweepy.client.Client.search_recent_tweets:29
+msgid ""
+"This parameter is used to get the next 'page' of results. The value used "
+"with the parameter is pulled directly from the response provided by the "
+"API, and should not be modified."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:22
+#: tweepy.client.Client.search_recent_tweets:37
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified ID. The ID specified is exclusive and responses will not "
+"include it. If included with the same request as a ``start_time`` "
+"parameter, only ``since_id`` will be used."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:27
+#: tweepy.client.Client.search_recent_tweets:42
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp (from "
+"most recent seven days) from which the Tweets will be provided. Timestamp"
+" is in second granularity and is inclusive (for example, 12:00:01 "
+"includes the first second of the minute). If included with the same "
+"request as a ``since_id`` parameter, only ``since_id`` will be used. By "
+"default, a request will return Tweets from up to seven days ago if you do"
+" not include this parameter."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:35
+#: tweepy.client.Client.search_recent_tweets:52
+msgid ""
+"Returns results with a Tweet ID less than (that is, older than) the "
+"specified ID. The ID specified is exclusive and responses will not "
+"include it."
+msgstr ""
+
+#: of tweepy.client.Client.search_recent_tweets:66
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-recent"
+msgstr ""
+
+#: ../../client.rst:313
+msgid "Timelines"
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:1
+msgid ""
+"Returns Tweets mentioning a single user specified by the requested user "
+"ID. By default, the most recent ten Tweets are returned per request. "
+"Using pagination, up to the most recent 800 Tweets can be retrieved."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:8
+msgid ""
+"Unique identifier of the user for whom to return Tweets mentioning the "
+"user. User ID can be referenced using the `user/lookup`_ endpoint. More "
+"information on Twitter IDs is `here`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:12
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute).  Please note that this parameter does not support a millisecond "
+"value."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:12
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute)."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:17
+#: tweepy.client.Client.get_users_mentions:52
+#: tweepy.client.Client.get_users_tweets:20
+#: tweepy.client.Client.get_users_tweets:62
+msgid "Please note that this parameter does not support a millisecond value."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:22
+#: tweepy.client.Client.get_users_tweets:31
+msgid ""
+"Specifies the number of Tweets to try and retrieve, up to a maximum of "
+"100 per distinct request. By default, 10 results are returned if this "
+"parameter is not supplied. The minimum permitted value is 5. It is "
+"possible to receive less than the ``max_results`` per request throughout "
+"the pagination process."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:30
+#: tweepy.client.Client.get_users_tweets:39
+msgid ""
+"This parameter is used to move forwards or backwards through 'pages' of "
+"results, based on the value of the ``next_token`` or ``previous_token`` "
+"in the response. The value used with the parameter is pulled directly "
+"from the response provided by the API, and should not be modified."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:40
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified 'since' Tweet ID. There are limits to the number of Tweets "
+"that can be accessed through the API. If the limit of Tweets has occurred"
+" since the ``since_id``, the ``since_id`` will be forced to the oldest ID"
+" available. More information on Twitter IDs is `here`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:47
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute).  Please note that this parameter does not support a millisecond "
+"value."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:47
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute)."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:57
+msgid ""
+"Returns results with a Tweet ID less less than (that is, older than) the "
+"specified 'until' Tweet ID. There are limits to the number of Tweets that"
+" can be accessed through the API. If the limit of Tweets has occurred "
+"since the ``until_id``, the ``until_id`` will be forced to the most "
+"recent ID available. More information on Twitter IDs is `here`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_mentions:74
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-mentions"
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:1
+msgid ""
+"Returns Tweets composed by a single user, specified by the requested user"
+" ID. By default, the most recent ten Tweets are returned per request. "
+"Using pagination, the most recent 3,200 Tweets can be retrieved."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:9
+msgid ""
+"Unique identifier of the Twitter account (user ID) for whom to return "
+"results. User ID can be referenced using the `user/lookup`_ endpoint. "
+"More information on Twitter IDs is `here`_."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:01Z  Please note that"
+" this parameter does not support a millisecond value."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:01Z"
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:23
+msgid ""
+"Comma-separated list of the types of Tweets to exclude from the response."
+" When ``exclude=retweets`` is used, the maximum historical Tweets "
+"returned is still 3200. When the ``exclude=replies`` parameter is used "
+"for any value, only the most recent 800 Tweets are available."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:49
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified 'since' Tweet ID. Only the 3200 most recent Tweets are "
+"available. The result will exclude the ``since_id``. If the limit of "
+"Tweets has occurred since the ``since_id``, the ``since_id`` will be "
+"forced to the oldest ID available."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:55
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:00Z  Please note that"
+" this parameter does not support a millisecond value."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:55
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:00Z"
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:67
+msgid ""
+"Returns results with a Tweet ID less less than (that is, older than) the "
+"specified 'until' Tweet ID. Only the 3200 most recent Tweets are "
+"available. The result will exclude the ``until_id``. If the limit of "
+"Tweets has occurred since the ``until_id``, the ``until_id`` will be "
+"forced to the most recent ID available."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_tweets:83
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-tweets"
+msgstr ""
+
+#: ../../client.rst:320
+msgid "Tweet counts"
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:18
+#: tweepy.client.Client.get_recent_tweets_count:18
+msgid ""
+"This is the granularity that you want the timeseries count data to be "
+"grouped by. You can request ``minute``, ``hour``, or ``day`` granularity."
+" The default granularity, if not specified is ``hour``."
+msgstr ""
+
+#: of tweepy.client.Client.get_all_tweets_count:48
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-all"
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:1
+msgid ""
+"The recent Tweet counts endpoint returns count of Tweets from the last "
+"seven days that match a search query."
+msgstr ""
+
+#: of tweepy.client.Client.get_recent_tweets_count:45
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-recent"
+msgstr ""
+
+#: ../../client.rst:327
+msgid "Tweet lookup"
+msgstr ""
+
+#: of tweepy.client.Client.get_tweet:1
+msgid ""
+"Returns a variety of information about a single Tweet specified by the "
+"requested ID."
+msgstr ""
+
+#: of tweepy.client.Client.get_tweet:4
+msgid "Unique identifier of the Tweet to request"
+msgstr ""
+
+#: of tweepy.client.Client.get_tweet:26
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets-id"
+msgstr ""
+
+#: of tweepy.client.Client.get_tweets:1
+msgid ""
+"Returns a variety of information about the Tweet specified by the "
+"requested ID or list of IDs."
+msgstr ""
+
+#: of tweepy.client.Client.get_tweets:4
+msgid ""
+"A comma separated list of Tweet IDs. Up to 100 are allowed in a single "
+"request. Make sure to not include a space between commas and fields."
+msgstr ""
+
+#: of tweepy.client.Client.get_tweets:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets"
+msgstr ""
+
+#: ../../client.rst:334
+msgid "Users"
+msgstr ""
+
+#: ../../client.rst:337
+msgid "Blocks"
+msgstr ""
+
+#: of tweepy.client.Client.unblock:1
+msgid "Unblock another user."
+msgstr ""
+
+#: of tweepy.client.Client.unblock:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not blocking or have already unblocked."
+msgstr ""
+
+#: of tweepy.client.Client.unblock:9
+msgid "The user ID of the user that you would like to unblock."
+msgstr ""
+
+#: of tweepy.client.Client.unblock:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/delete-users-user_id-blocking"
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:1
+msgid "Returns a list of users who are blocked by the authenticating user."
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:8 tweepy.client.Client.get_muted:10
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and 1000. By default, each page will return 100 results."
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:12 tweepy.client.Client.get_muted:14
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results."
+msgstr ""
+
+#: of tweepy.client.Client.get_blocked:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/get-users-blocking"
+msgstr ""
+
+#: of tweepy.client.Client.block:1
+msgid "Block another user."
+msgstr ""
+
+#: of tweepy.client.Client.block:6
+msgid "The user ID of the user that you would like to block."
+msgstr ""
+
+#: of tweepy.client.Client.block:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/post-users-user_id-blocking"
+msgstr ""
+
+#: ../../client.rst:346
+msgid "Follows"
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_user:1
+msgid "Allows a user ID to unfollow another user."
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_user:3
+msgid ""
+"The request succeeds with no action when the authenticated user sends a "
+"request to a user they're not following or have already unfollowed."
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_user:6
+msgid "Renamed from :meth:`Client.unfollow`"
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_user:12
+msgid "The user ID of the user that you would like to unfollow."
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_user:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/delete-users-source_id-following"
+msgstr ""
+
+#: of tweepy.client.Client.unfollow:1
+msgid "Alias for :meth:`Client.unfollow_user`"
+msgstr ""
+
+#: of tweepy.client.Client.unfollow:3
+msgid "Use :meth:`Client.unfollow_user` instead."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_followers:1
+msgid "Returns a list of users who are followers of the specified user ID."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_followers:3
+msgid "The user ID whose followers you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_followers:7
+#: tweepy.client.Client.get_users_following:7
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and the 1000. By default, each page will return 100 "
+"results."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_followers:29
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-followers"
+msgstr ""
+
+#: of tweepy.client.Client.get_users_following:1
+msgid "Returns a list of users the specified user ID is following."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_following:3
+msgid "The user ID whose following you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_users_following:29
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-following"
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:1
+msgid "Allows a user ID to follow another user."
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:3
+msgid ""
+"If the target user does not have public Tweets, this endpoint will send a"
+" follow request."
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:6
+msgid ""
+"The request succeeds with no action when the authenticated user sends a "
+"request to a user they're already following, or if they're sending a "
+"follower request to a user that does not have public Tweets."
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:10
+msgid "Renamed from :meth:`Client.follow`"
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:16
+msgid "The user ID of the user that you would like to follow."
+msgstr ""
+
+#: of tweepy.client.Client.follow_user:26
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/post-users-source_user_id-following"
+msgstr ""
+
+#: of tweepy.client.Client.follow:1
+msgid "Alias for :meth:`Client.follow_user`"
+msgstr ""
+
+#: of tweepy.client.Client.follow:3
+msgid "Use :meth:`Client.follow_user` instead."
+msgstr ""
+
+#: ../../client.rst:361
+msgid "Mutes"
+msgstr ""
+
+#: of tweepy.client.Client.unmute:1
+msgid "Allows an authenticated user ID to unmute the target user."
+msgstr ""
+
+#: of tweepy.client.Client.unmute:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not muting or have already unmuted."
+msgstr ""
+
+#: of tweepy.client.Client.unmute:9
+msgid "The user ID of the user that you would like to unmute."
+msgstr ""
+
+#: of tweepy.client.Client.unmute:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/delete-users-user_id-muting"
+msgstr ""
+
+#: of tweepy.client.Client.get_muted:1
+msgid "Returns a list of users who are muted by the authenticating user."
+msgstr ""
+
+#: of tweepy.client.Client.get_muted:30
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/get-users-muting"
+msgstr ""
+
+#: of tweepy.client.Client.mute:1
+msgid "Allows an authenticated user ID to mute the target user."
+msgstr ""
+
+#: of tweepy.client.Client.mute:6
+msgid "The user ID of the user that you would like to mute."
+msgstr ""
+
+#: of tweepy.client.Client.mute:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/post-users-user_id-muting"
+msgstr ""
+
+#: ../../client.rst:370
+msgid "User lookup"
+msgstr ""
+
+#: of tweepy.client.Client.get_user:1
+msgid ""
+"Returns a variety of information about a single user specified by the "
+"requested ID or username."
+msgstr ""
+
+#: of tweepy.client.Client.get_user:4
+msgid "The ID of the user to lookup."
+msgstr ""
+
+#: of tweepy.client.Client.get_user:6
+msgid "The Twitter username (handle) of the user."
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces tweepy.client.Client.get_user
+#: tweepy.client.Client.get_users
+msgid "Raises"
+msgstr ""
+
+#: of tweepy.client.Client.get_user:17
+msgid "If ID and username are not passed or both are passed"
+msgstr ""
+
+#: of tweepy.client.Client.get_user:24
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users-id https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by-username-username"
+msgstr ""
+
+#: of tweepy.client.Client.get_users:1
+msgid ""
+"Returns a variety of information about one or more users specified by the"
+" requested IDs or usernames."
+msgstr ""
+
+#: of tweepy.client.Client.get_users:4
+msgid ""
+"A comma separated list of user IDs. Up to 100 are allowed in a single "
+"request. Make sure to not include a space between commas and fields."
+msgstr ""
+
+#: of tweepy.client.Client.get_users:8
+msgid ""
+"A comma separated list of Twitter usernames (handles). Up to 100 are "
+"allowed in a single request. Make sure to not include a space between "
+"commas and fields."
+msgstr ""
+
+#: of tweepy.client.Client.get_users:21
+msgid "If IDs and usernames are not passed or both are passed"
+msgstr ""
+
+#: of tweepy.client.Client.get_users:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by"
+msgstr ""
+
+#: of tweepy.client.Client.get_me:1
+msgid "Returns information about an authorized user."
+msgstr ""
+
+#: of tweepy.client.Client.get_me:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users-me"
+msgstr ""
+
+#: ../../client.rst:379
+msgid "Spaces"
+msgstr ""
+
+#: ../../client.rst:382
+msgid "Search Spaces"
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:1
+msgid "Return live or scheduled Spaces matching your specified search terms"
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:5
+msgid "``state`` is now an optional parameter."
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:8
+msgid ""
+"Your search term. This can be any text (including mentions and Hashtags) "
+"present in the title of the Space."
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:13
+msgid ""
+"The maximum number of results to return in this request. Specify a value "
+"between 1 and 100."
+msgstr ""
+
+#: of tweepy.client.Client.get_space:10 tweepy.client.Client.get_spaces:13
+#: tweepy.client.Client.search_spaces:16
+msgid ":ref:`space_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:18
+msgid ""
+"Determines the type of results to return. This endpoint returns all "
+"Spaces by default. Use ``live`` to only return live Spaces or "
+"``scheduled`` to only return upcoming Spaces."
+msgstr ""
+
+#: of tweepy.client.Client.search_spaces:30
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-"
+"reference/get-spaces-search"
+msgstr ""
+
+#: ../../client.rst:387
+msgid "Spaces lookup"
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces:1
+msgid ""
+"Returns details about multiple live or scheduled Spaces (created by the "
+"specified user IDs if specified). Up to 100 comma-separated Space or user"
+" IDs can be looked up using this endpoint."
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces:7
+msgid "A comma separated list of Spaces (up to 100)."
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces:9
+msgid "A comma separated list of user IDs (up to 100)."
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces:18
+msgid "If IDs and user IDs are not passed or both are passed"
+msgstr ""
+
+#: of tweepy.client.Client.get_spaces:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces https://developer.twitter.com/en/docs/twitter-"
+"api/spaces/lookup/api-reference/get-spaces-by-creator-ids"
+msgstr ""
+
+#: of tweepy.client.Client.get_space:1
+msgid ""
+"Returns a variety of information about a single Space specified by the "
+"requested ID."
+msgstr ""
+
+#: of tweepy.client.Client.get_space:6
+msgid "Unique identifier of the Space to request."
+msgstr ""
+
+#: of tweepy.client.Client.get_space:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id"
+msgstr ""
+
+#: of tweepy.client.Client.get_space_buyers:1
+msgid ""
+"Returns a list of user who purchased a ticket to the requested Space. You"
+" must authenticate the request using the Access Token of the creator of "
+"the requested Space."
+msgstr ""
+
+#: of tweepy.client.Client.get_space_buyers:7
+msgid "Unique identifier of the Space for which you want to request Tweets."
+msgstr ""
+
+#: of tweepy.client.Client.get_space_buyers:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id-buyers"
+msgstr ""
+
+#: ../../client.rst:396
+msgid "Lists"
+msgstr ""
+
+#: ../../client.rst:399
+msgid "List Tweets lookup"
+msgstr ""
+
+#: of tweepy.client.Client.get_list_tweets:1
+msgid "Returns a list of Tweets from the specified List."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_tweets:5
+msgid "The ID of the List whose Tweets you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:11
+#: tweepy.client.Client.get_list_followers:9
+#: tweepy.client.Client.get_list_members:9
+#: tweepy.client.Client.get_list_memberships:11
+#: tweepy.client.Client.get_list_tweets:9
+#: tweepy.client.Client.get_owned_lists:11
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and 100. By default, each page will return 100 results."
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:15
+#: tweepy.client.Client.get_list_followers:13
+#: tweepy.client.Client.get_list_members:13
+#: tweepy.client.Client.get_list_memberships:15
+#: tweepy.client.Client.get_list_tweets:13
+#: tweepy.client.Client.get_owned_lists:15
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results. "
+"To return the next page, pass the next_token returned in your previous "
+"response. To go back one page, pass the previous_token returned in your "
+"previous response."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_tweets:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-"
+"reference/get-lists-id-tweets"
+msgstr ""
+
+#: ../../client.rst:404
+msgid "List follows"
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_list:1
+msgid "Enables the authenticated user to unfollow a List."
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_list:8
+msgid "The ID of the List that you would like the user to unfollow."
+msgstr ""
+
+#: of tweepy.client.Client.unfollow_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/delete-users-id-followed-lists-list_id"
+msgstr ""
+
+#: of tweepy.client.Client.get_list_followers:1
+msgid "Returns a list of users who are followers of the specified List."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_followers:5
+msgid "The ID of the List whose followers you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_followers:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-lists-id-followers"
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:1
+msgid "Returns all Lists a specified user follows."
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:5
+msgid "The user ID whose followed Lists you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:9 tweepy.client.Client.get_list:9
+#: tweepy.client.Client.get_list_memberships:9
+#: tweepy.client.Client.get_owned_lists:9
+#: tweepy.client.Client.get_pinned_lists:10
+msgid ":ref:`list_fields_parameter`"
+msgstr ""
+
+#: of tweepy.client.Client.get_followed_lists:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-users-id-followed_lists"
+msgstr ""
+
+#: of tweepy.client.Client.follow_list:1
+msgid "Enables the authenticated user to follow a List."
+msgstr ""
+
+#: of tweepy.client.Client.follow_list:8
+msgid "The ID of the List that you would like the user to follow."
+msgstr ""
+
+#: of tweepy.client.Client.follow_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/post-users-id-followed-lists"
+msgstr ""
+
+#: ../../client.rst:415
+msgid "List lookup"
+msgstr ""
+
+#: of tweepy.client.Client.get_list:1
+msgid "Returns the details of a specified List."
+msgstr ""
+
+#: of tweepy.client.Client.get_list:5
+msgid "The ID of the List to lookup."
+msgstr ""
+
+#: of tweepy.client.Client.get_list:21
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-lists-id"
+msgstr ""
+
+#: of tweepy.client.Client.get_owned_lists:1
+msgid "Returns all Lists owned by the specified user."
+msgstr ""
+
+#: of tweepy.client.Client.get_owned_lists:5
+msgid "The user ID whose owned Lists you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_owned_lists:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-users-id-owned_lists"
+msgstr ""
+
+#: ../../client.rst:422
+msgid "List members"
+msgstr ""
+
+#: of tweepy.client.Client.remove_list_member:1
+msgid "Enables the authenticated user to remove a member from a List they own."
+msgstr ""
+
+#: of tweepy.client.Client.remove_list_member:9
+msgid "The ID of the List you are removing a member from."
+msgstr ""
+
+#: of tweepy.client.Client.remove_list_member:11
+msgid "The ID of the user you wish to remove as a member of the List."
+msgstr ""
+
+#: of tweepy.client.Client.remove_list_member:21
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/delete-lists-id-members-user_id"
+msgstr ""
+
+#: of tweepy.client.Client.get_list_members:1
+msgid "Returns a list of users who are members of the specified List."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_members:5
+msgid "The ID of the List whose members you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_members:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-lists-id-members"
+msgstr ""
+
+#: of tweepy.client.Client.get_list_memberships:1
+msgid "Returns all Lists a specified user is a member of."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_memberships:5
+msgid "The user ID whose List memberships you would like to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_list_memberships:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-users-id-list_memberships"
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:1
+msgid "Enables the authenticated user to add a member to a List they own."
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:8
+msgid "The ID of the List you are adding a member to."
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:10
+msgid "The ID of the user you wish to add as a member of the List."
+msgstr ""
+
+#: of tweepy.client.Client.add_list_member:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/post-lists-id-members"
+msgstr ""
+
+#: ../../client.rst:433
+msgid "Manage Lists"
+msgstr ""
+
+#: of tweepy.client.Client.delete_list:1
+msgid "Enables the authenticated user to delete a List that they own."
+msgstr ""
+
+#: of tweepy.client.Client.delete_list:8
+msgid "The ID of the List to be deleted."
+msgstr ""
+
+#: of tweepy.client.Client.delete_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/delete-lists-id"
+msgstr ""
+
+#: of tweepy.client.Client.update_list:1
+msgid ""
+"Enables the authenticated user to update the meta data of a specified "
+"List that they own."
+msgstr ""
+
+#: of tweepy.client.Client.update_list:9
+msgid "The ID of the List to be updated."
+msgstr ""
+
+#: of tweepy.client.Client.update_list:11
+msgid "Updates the description of the List."
+msgstr ""
+
+#: of tweepy.client.Client.update_list:13
+msgid "Updates the name of the List."
+msgstr ""
+
+#: of tweepy.client.Client.update_list:15
+msgid "Determines whether the List should be private."
+msgstr ""
+
+#: of tweepy.client.Client.update_list:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/put-lists-id"
+msgstr ""
+
+#: of tweepy.client.Client.create_list:1
+msgid "Enables the authenticated user to create a List."
+msgstr ""
+
+#: of tweepy.client.Client.create_list:8
+msgid "The name of the List you wish to create."
+msgstr ""
+
+#: of tweepy.client.Client.create_list:10
+msgid "Description of the List."
+msgstr ""
+
+#: of tweepy.client.Client.create_list:12
+msgid "Determine whether the List should be private."
+msgstr ""
+
+#: of tweepy.client.Client.create_list:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/post-lists"
+msgstr ""
+
+#: ../../client.rst:442
+msgid "Pinned Lists"
+msgstr ""
+
+#: of tweepy.client.Client.unpin_list:1
+msgid "Enables the authenticated user to unpin a List."
+msgstr ""
+
+#: of tweepy.client.Client.unpin_list:8
+msgid "The ID of the List that you would like the user to unpin."
+msgstr ""
+
+#: of tweepy.client.Client.unpin_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/delete-users-id-pinned-lists-list_id"
+msgstr ""
+
+#: of tweepy.client.Client.get_pinned_lists:1
+msgid "Returns the Lists pinned by a specified user."
+msgstr ""
+
+#: of tweepy.client.Client.get_pinned_lists:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/get-users-id-pinned_lists"
+msgstr ""
+
+#: of tweepy.client.Client.pin_list:1
+msgid "Enables the authenticated user to pin a List."
+msgstr ""
+
+#: of tweepy.client.Client.pin_list:8
+msgid "The ID of the List that you would like the user to pin."
+msgstr ""
+
+#: of tweepy.client.Client.pin_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/post-users-id-pinned-lists"
+msgstr ""
+
+#: ../../client.rst:451
+msgid "Compliance"
+msgstr ""
+
+#: ../../client.rst:454
+msgid "Batch compliance"
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_jobs:1
+msgid "Returns a list of recent compliance jobs."
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_jobs:5
+msgid ""
+"Allows to filter by job type - either by tweets or user ID. Only one "
+"filter (tweets or users) can be specified per request."
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_jobs:8
+msgid ""
+"Allows to filter by job status. Only one filter can be specified per "
+"request. Default: ``all``"
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_jobs:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs"
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_job:1
+msgid "Get a single compliance job with the specified ID."
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_job:5
+msgid "The unique identifier for the compliance job you want to retrieve."
+msgstr ""
+
+#: of tweepy.client.Client.get_compliance_job:13
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs-id"
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:1
+msgid "Creates a new compliance job for Tweet IDs or user IDs."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:3
+msgid ""
+"A compliance job will contain an ID and a destination URL. The "
+"destination URL represents the location that contains the list of IDs "
+"consumed by your app."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:7
+msgid "You can run one batch job at a time."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:11
+msgid ""
+"Specify whether you will be uploading tweet or user IDs. You can either "
+"specify tweets or users."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:14
+msgid ""
+"A name for this job, useful to identify multiple jobs using a label you "
+"define."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:17
+msgid ""
+"Specifies whether to enable the upload URL with support for resumable "
+"uploads. If true, this endpoint will return a pre-signed URL with "
+"resumable uploads enabled."
+msgstr ""
+
+#: of tweepy.client.Client.create_compliance_job:27
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/post-compliance-jobs"
+msgstr ""
+
+#: ../../client.rst:463
+msgid "Expansions and Fields Parameters"
+msgstr ""
+
+#: ../../client.rst:468
+msgid "``expansions``"
+msgstr ""
+
+#: ../../client.rst:469
+msgid ""
+"`Expansions`_ enable you to request additional data objects that relate "
+"to the originally returned List, Space, Tweets, or users. Submit a list "
+"of desired expansions in a comma-separated list without spaces. The ID "
+"that represents the expanded data object will be included directly in the"
+" List, Space, Tweet, or user data object, but the expanded object "
+"metadata will be returned within the ``includes`` response object, and "
+"will also include the ID so that you can match this data object to the "
+"original Space, Tweet, or user object."
+msgstr ""
+
+#: ../../client.rst:477
+msgid ""
+"At this time, the only expansion available to endpoints that primarily "
+"return List objects is ``expansions=owner_id``. You will find the "
+"expanded user data object living in the ``includes`` response object."
+msgstr ""
+
+#: ../../client.rst:481
+msgid ""
+"For methods that return Spaces, the following data objects can be "
+"expanded using this parameter:"
+msgstr ""
+
+#: ../../client.rst:484
+msgid "The Spaces creator's user object"
+msgstr ""
+
+#: ../../client.rst:485
+msgid "The user objects of any Space co-host"
+msgstr ""
+
+#: ../../client.rst:486 ../../client.rst:495
+msgid "Any mentioned users’ object"
+msgstr ""
+
+#: ../../client.rst:487
+msgid "Any speaker's user object"
+msgstr ""
+
+#: ../../client.rst:489
+msgid ""
+"For methods that return Tweets, the following data objects can be "
+"expanded using this parameter:"
+msgstr ""
+
+#: ../../client.rst:492
+msgid "The Tweet author's user object"
+msgstr ""
+
+#: ../../client.rst:493
+msgid ""
+"The user object of the Tweet’s author that the original Tweet is "
+"responding to"
+msgstr ""
+
+#: ../../client.rst:496
+msgid "Any referenced Tweets’ author’s user object"
+msgstr ""
+
+#: ../../client.rst:497
+msgid "Attached media’s object"
+msgstr ""
+
+#: ../../client.rst:498
+msgid "Attached poll’s object"
+msgstr ""
+
+#: ../../client.rst:499
+msgid "Attached place’s object"
+msgstr ""
+
+#: ../../client.rst:500
+msgid "Any referenced Tweets’ object"
+msgstr ""
+
+#: ../../client.rst:502
+msgid ""
+"At this time, the only expansion available to endpoints that primarily "
+"return user objects is ``expansions=pinned_tweet_id``. You will find the "
+"expanded Tweet data object living in the ``includes`` response object."
+msgstr ""
+
+#: ../../client.rst:509
+msgid "``list_fields``"
+msgstr ""
+
+#: ../../client.rst:510
+msgid ""
+"This `fields`_ parameter enables you to select which specific `List "
+"fields`_ will deliver with each returned List objects. Specify the "
+"desired fields in a comma-separated list without spaces between commas "
+"and fields. These specified List fields will display directly in the List"
+" data objects."
+msgstr ""
+
+#: ../../client.rst:518
+msgid "``media_fields``"
+msgstr ""
+
+#: ../../client.rst:519
+msgid ""
+"This `fields`_ parameter enables you to select which specific `media "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return media fields if the Tweet contains media and if "
+"you've also included the ``expansions=attachments.media_keys`` query "
+"parameter in your request. While the media ID will be located in the "
+"Tweet object, you will find this ID and all additional media fields in "
+"the ``includes`` data object."
+msgstr ""
+
+#: ../../client.rst:530
+msgid "``place_fields``"
+msgstr ""
+
+#: ../../client.rst:531
+msgid ""
+"This `fields`_ parameter enables you to select which specific `place "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return place fields if the Tweet contains a place and if "
+"you've also included the ``expansions=geo.place_id`` query parameter in "
+"your request. While the place ID will be located in the Tweet object, you"
+" will find this ID and all additional place fields in the ``includes`` "
+"data object."
+msgstr ""
+
+#: ../../client.rst:542
+msgid "``poll_fields``"
+msgstr ""
+
+#: ../../client.rst:544
+msgid ""
+"This `fields`_ parameter enables you to select which specific `poll "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return poll fields if the Tweet contains a poll and if "
+"you've also included the ``expansions=attachments.poll_ids`` query "
+"parameter in your request. While the poll ID will be located in the Tweet"
+" object, you will find this ID and all additional poll fields in the "
+"``includes`` data object."
+msgstr ""
+
+#: ../../client.rst:555
+msgid "``space_fields``"
+msgstr ""
+
+#: ../../client.rst:557
+msgid ""
+"This `fields`_ parameter enables you to select which specific `Space "
+"fields`_ will deliver in each returned Space. Specify the desired fields "
+"in a comma-separated list."
+msgstr ""
+
+#: ../../client.rst:564
+msgid "``tweet_fields``"
+msgstr ""
+
+#: ../../client.rst:566
+msgid ""
+"For methods that return Tweets, this `fields`_ parameter enables you to "
+"select which specific `Tweet fields`_ will deliver in each returned Tweet"
+" object. Specify the desired fields in a comma-separated list without "
+"spaces between commas and fields. You can also pass the "
+"``expansions=referenced_tweets.id`` expansion to return the specified "
+"fields for both the original Tweet and any included referenced Tweets. "
+"The requested Tweet fields will display in both the original Tweet data "
+"object, as well as in the referenced Tweet expanded data object that will"
+" be located in the ``includes`` data object."
+msgstr ""
+
+#: ../../client.rst:575
+msgid ""
+"For methods that return users, this `fields`_ parameter enables you to "
+"select which specific `Tweet fields`_ will deliver in each returned "
+"pinned Tweet. Specify the desired fields in a comma-separated list "
+"without spaces between commas and fields. The Tweet fields will only "
+"return if the user has a pinned Tweet and if you've also included the "
+"``expansions=pinned_tweet_id`` query parameter in your request. While the"
+" referenced Tweet ID will be located in the original Tweet object, you "
+"will find this ID and all additional Tweet fields in the ``includes`` "
+"data object."
+msgstr ""
+
+#: ../../client.rst:587
+msgid "``user_fields``"
+msgstr ""
+
+#: ../../client.rst:589
+msgid ""
+"For methods that return Spaces or Tweets, this `fields`_ parameter "
+"enables you to select which specific `user fields`_ will deliver in each "
+"returned Space or Tweet. Specify the desired fields in a comma-separated "
+"list without spaces between commas and fields. While the user ID will be "
+"located in the original Tweet object, you will find this ID and all "
+"additional user fields in the ``includes`` data object."
+msgstr ""
+
+#: ../../client.rst:596
+msgid ""
+"You must also pass one of the user expansions to return the desired user "
+"fields:"
+msgstr ""
+
+#: ../../client.rst:599
+msgid "``expansions=author_id``"
+msgstr ""
+
+#: ../../client.rst:600
+msgid "``expansions=entities.mentions.username``"
+msgstr ""
+
+#: ../../client.rst:601
+msgid "``expansions=in_reply_to_user_id``"
+msgstr ""
+
+#: ../../client.rst:602
+msgid "``expansions=referenced_tweets.id.author_id``"
+msgstr ""
+
+#: ../../client.rst:604
+msgid ""
+"For methods that return users, this `fields`_ parameter enables you to "
+"select which specific `user fields`_ will deliver with each returned "
+"users objects. Specify the desired fields in a comma-separated list "
+"without spaces between commas and fields. These specified user fields "
+"will display directly in the user data objects."
+msgstr ""
+
+#: ../../client.rst:621
+msgid "``Response``"
+msgstr ""
+
+#: ../../client.rst:624
+msgid ""
+"The :obj:`Response` returned by :class:`Client` methods is a "
+":class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``,"
+" and ``meta`` fields, corresponding with the fields in responses from "
+"Twitter's API."
+msgstr ""
+
