@@ -173,7 +173,7 @@ class OAuth2Bearer(AuthBase):
         return request
 
 
-class AppAuthHandler(AuthHandler):
+class OAuth2AppHandler(AuthHandler):
     """Application-only authentication handler"""
 
     OAUTH_HOST = 'api.twitter.com'
@@ -200,3 +200,5 @@ class AppAuthHandler(AuthHandler):
 
     def apply_auth(self):
         return OAuth2Bearer(self._bearer_token)
+
+AppAuthHandler = OAuth2AppHandler
