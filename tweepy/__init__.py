@@ -10,7 +10,7 @@ __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
 from tweepy.api import API
-from tweepy.auth import AppAuthHandler, OAuthHandler
+from tweepy.auth import AppAuthHandler, OAuthHandler, OAuth2Handler
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.client import Client, Response
 from tweepy.cursor import Cursor

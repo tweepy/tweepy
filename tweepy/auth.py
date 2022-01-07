@@ -2,12 +2,15 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from base64 import urlsafe_b64encode
+from hashlib import sha256
 import logging
 from urllib.parse import parse_qs
+import secrets
 
 import requests
-from requests.auth import AuthBase
-from requests_oauthlib import OAuth1, OAuth1Session
+from requests.auth import AuthBase, HTTPBasicAuth
+from requests_oauthlib import OAuth1, OAuth1Session, OAuth2Session
 
 from tweepy.errors import TweepyException
 
@@ -130,7 +133,38 @@ class OAuthHandler(AuthHandler):
             raise TweepyException(e)
 
 
+class OAuth2Handler(OAuth2Session):
+
+    def __init__(self, *, client_id, redirect_uri, scope, client_secret=None):
+        super().__init__(client_id, redirect_uri=redirect_uri, scope=scope)
+        if client_secret is not None:
+            self.auth = HTTPBasicAuth(client_id, client_secret)
+        else:
+            self.auth = None
+
+    def get_authorization_url(self):
+        self.code_verifier = secrets.token_urlsafe(128)[:128]
+        code_challenge = urlsafe_b64encode(
+            sha256(self.code_verifier.encode("ASCII")).digest()
+        ).rstrip(b'=')
+        authorization_url, state = self.authorization_url(
+            "https://twitter.com/i/oauth2/authorize",
+            code_challenge=code_challenge, code_challenge_method="s256"
+        )
+        return authorization_url
+
+    def fetch_token(self, authorization_response):
+        return super().fetch_token(
+            "https://api.twitter.com/2/oauth2/token",
+            authorization_response=authorization_response,
+            auth=self.auth,
+            include_client_id=True,
+            code_verifier=self.code_verifier
+        )
+
+
 class OAuth2Bearer(AuthBase):
+
     def __init__(self, bearer_token):
         self.bearer_token = bearer_token
 
