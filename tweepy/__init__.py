@@ -11,7 +11,8 @@ __license__ = 'MIT'
 
 from tweepy.api import API
 from tweepy.auth import (
-    AppAuthHandler, OAuthHandler, OAuth2AppHandler, OAuth2Handler
+    AppAuthHandler, OAuthHandler, OAuth2AppHandler, OAuth2BearerHandler,
+    OAuth2Handler
 )
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.client import Client, Response

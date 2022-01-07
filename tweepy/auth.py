@@ -172,6 +172,9 @@ class OAuth2BearerHandler(AuthBase):
         request.headers['Authorization'] = 'Bearer ' + self.bearer_token
         return request
 
+    def apply_auth(self):
+        return self
+
 
 class OAuth2AppHandler(AuthHandler):
     """Application-only authentication handler"""
