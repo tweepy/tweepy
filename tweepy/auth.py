@@ -137,10 +137,11 @@ class OAuth2AppHandler(AuthHandler):
         self.consumer_secret = consumer_secret
         self._bearer_token = ''
 
-        resp = requests.post('https://api.twitter.com/oauth2/token',
-                             auth=(self.consumer_key,
-                                   self.consumer_secret),
-                             data={'grant_type': 'client_credentials'})
+        resp = requests.post(
+            'https://api.twitter.com/oauth2/token',
+            auth=(self.consumer_key, self.consumer_secret),
+            data={'grant_type': 'client_credentials'}
+        )
         data = resp.json()
         if data.get('token_type') != 'bearer':
             raise TweepyException('Expected token_type to equal "bearer", '
