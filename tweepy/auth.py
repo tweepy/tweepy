@@ -5,7 +5,6 @@
 from base64 import urlsafe_b64encode
 from hashlib import sha256
 import logging
-from urllib.parse import parse_qs
 import secrets
 import warnings
 
