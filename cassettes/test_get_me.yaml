@@ -1,0 +1,69 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.4.0
+    method: GET
+    uri: https://api.twitter.com/2/users/me
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlbKTFGyUjI0MDcyMjUwNTYyMzG1tLQwtTRT0lHKS8xNBUqGlKem
+        FlQqhKQWl2TmpQPFS4tTi1DkXFLLlGprAQAAAP//AwBsn+W8VAAAAA==
+    headers:
+      api-version:
+      - '2.32'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '97'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 07 Jan 2022 08:05:56 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A164154275647329260; Max-Age=63072000; Expires=Sun,
+        07 Jan 2024 08:05:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A164154275647329260; Max-Age=63072000; Expires=Sun, 07 Jan
+        2024 08:05:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_ihenaUbNvkcvFbDMb0HZ4g=="; Max-Age=63072000; Expires=Sun,
+        07 Jan 2024 08:05:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A164154275647329260; Max-Age=63072000; Expires=Sun, 07 Jan 2024
+        08:05:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 387c0d90998be5164939411741317edc2ba8d97f40d6722aeac473c4a50c6d58
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1641543656'
+      x-response-time:
+      - '36'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

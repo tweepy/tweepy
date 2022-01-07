@@ -108,6 +108,8 @@
     +--------------------------------------------------------------+----------------------------------------+
     | `GET /2/users/by`_                                           | :meth:`Client.get_users`               |
     +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/me`_                                           | :meth:`Client.get_me`                  |
+    +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: :ref:`Spaces`                                                                           |
     +-------------------------------------------------------------------------------------------------------+
     | .. centered:: |Search Spaces|_                                                                        |
@@ -227,6 +229,7 @@
 .. _GET /2/users/by/username/:username: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by-username-username
 .. _GET /2/users: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users
 .. _GET /2/users/by: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by
+.. _GET /2/users/me: https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me
 .. |Search Spaces| replace:: *Search Spaces*
 .. _GET /2/spaces/search: https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-reference/get-spaces-search
 .. |Spaces lookup| replace:: *Spaces lookup*
@@ -369,6 +372,8 @@ User lookup
 .. automethod:: Client.get_user
 
 .. automethod:: Client.get_users
+
+.. automethod:: Client.get_me
 
 Spaces
 ======

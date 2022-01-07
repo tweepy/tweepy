@@ -131,6 +131,10 @@ class TweepyTestCase(unittest.TestCase):
     def test_get_users(self):
         self.client.get_users(usernames=["Twitter", "TwitterDev"])
 
+    @tape.use_cassette("test_get_me.yaml", serializer="yaml")
+    def test_get_me(self):
+        self.client.get_me(user_auth=True)
+
     @tape.use_cassette("test_search_spaces.yaml", serializer="yaml")
     def test_search_spaces(self):
         self.client.search_spaces("Twitter")
