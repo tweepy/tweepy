@@ -205,11 +205,16 @@ class Client:
     def hide_reply(self, id, *, user_auth=True):
         """Hides a reply to a Tweet.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             Unique identifier of the Tweet to hide. The Tweet must belong to a
             conversation initiated by the authenticating user.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -227,11 +232,16 @@ class Client:
     def unhide_reply(self, id, *, user_auth=True):
         """Unhides a reply to a Tweet.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             Unique identifier of the Tweet to unhide. The Tweet must belong to
             a conversation initiated by the authenticating user.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -254,10 +264,15 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not liking the Tweet or have already unliked the Tweet.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         tweet_id : Union[int, str]
             The ID of the Tweet that you would like to unlike.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -275,8 +290,10 @@ class Client:
         )
 
     def get_liking_users(self, id, *, user_auth=False, **params):
-        """get_liking_users(id, *, expansions, media_fields, place_fields, \
-                            poll_fields, tweet_fields, user_fields)
+        """get_liking_users( \
+            id, *, expansions, media_fields, place_fields, poll_fields, \
+            tweet_fields, user_fields, user_auth=False \
+        )
 
         Allows you to get information about a Tweet’s liking users.
 
@@ -296,6 +313,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -316,7 +335,8 @@ class Client:
     def get_liked_tweets(self, id, *, user_auth=False, **params):
         """get_liked_tweets( \
             id, *, expansions, max_results, media_fields, pagination_token, \
-            place_fields, poll_fields, tweet_fields, user_fields \
+            place_fields, poll_fields, tweet_fields, user_fields, \
+            user_auth=False \
         )
 
         Allows you to get information about a user’s liked Tweets.
@@ -350,6 +370,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -373,10 +395,15 @@ class Client:
     def like(self, tweet_id, *, user_auth=True):
         """Like a Tweet.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         tweet_id : Union[int, str]
             The ID of the Tweet that you would like to Like.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -401,10 +428,15 @@ class Client:
 
         .. versionadded:: 4.3
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             The Tweet ID you are deleting.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -428,6 +460,9 @@ class Client:
         """Creates a Tweet on behalf of an authenticated user.
 
         .. versionadded:: 4.3
+
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
 
         Parameters
         ----------
@@ -467,6 +502,8 @@ class Client:
         text : Optional[str]
             Text of the Tweet being created. This field is required if
             ``media.media_ids`` is not present.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -536,10 +573,15 @@ class Client:
         user they're not Retweeting the Tweet or have already removed the
         Retweet of.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         source_tweet_id : Union[int, str]
             The ID of the Tweet that you would like to remove the Retweet of.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -557,8 +599,10 @@ class Client:
         )
 
     def get_retweeters(self, id, *, user_auth=False, **params):
-        """get_retweeters(id, *, expansions, media_fields, place_fields, \
-                          poll_fields, tweet_fields, user_fields)
+        """get_retweeters( \
+            id, *, expansions, media_fields, place_fields, poll_fields, \
+            tweet_fields, user_fields, user_auth=False \
+        )
 
         Allows you to get information about who has Retweeted a Tweet.
 
@@ -578,6 +622,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -598,10 +644,15 @@ class Client:
     def retweet(self, tweet_id, *, user_auth=True):
         """Causes the user ID to Retweet the target Tweet.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         tweet_id : Union[int, str]
             The ID of the Tweet that you would like to Retweet.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -712,9 +763,9 @@ class Client:
 
     def search_recent_tweets(self, query, *, user_auth=False, **params):
         """search_recent_tweets( \
-            query, *, user_auth=False, end_time, expansions, max_results, \
-            media_fields, next_token, place_fields, poll_fields, since_id, \
-            start_time, tweet_fields, until_id, user_fields \
+            query, *, end_time, expansions, max_results, media_fields, \
+            next_token, place_fields, poll_fields, since_id, start_time, \
+            tweet_fields, until_id, user_fields, user_auth=False \
         )
 
         The recent search endpoint returns Tweets from the last seven days that
@@ -776,6 +827,8 @@ class Client:
             include it.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -806,9 +859,9 @@ class Client:
 
     def get_users_mentions(self, id, *, user_auth=False, **params):
         """get_users_mentions( \
-            id, *, user_auth=False, end_time, expansions, max_results, \
-            media_fields, pagination_token, place_fields, poll_fields, \
-            since_id, start_time, tweet_fields, until_id, user_fields \
+            id, *, end_time, expansions, max_results, media_fields, \
+            pagination_token, place_fields, poll_fields, since_id, \
+            start_time, tweet_fields, until_id, user_fields, user_auth=False \
         )
 
         Returns Tweets mentioning a single user specified by the requested user
@@ -824,8 +877,6 @@ class Client:
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         end_time : Union[datetime.datetime, str]
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
@@ -880,6 +931,8 @@ class Client:
             Twitter IDs is `here`_.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -904,10 +957,9 @@ class Client:
 
     def get_users_tweets(self, id, *, user_auth=False, **params):
         """get_users_tweets( \
-            id, *, user_auth=False, end_time, exclude, expansions, \
-            max_results, media_fields, pagination_token, place_fields, \
-            poll_fields, since_id, start_time, tweet_fields, until_id, \
-            user_fields \
+            id, *, end_time, exclude, expansions, max_results, media_fields, \
+            pagination_token, place_fields, poll_fields, since_id, \
+            start_time, tweet_fields, until_id, user_fields, user_auth=False \
         )
 
         Returns Tweets composed by a single user, specified by the requested
@@ -924,8 +976,6 @@ class Client:
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         end_time : Union[datetime.datetime, str]
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent
             UTC timestamp from which the Tweets will be provided. Only the 3200
@@ -988,6 +1038,8 @@ class Client:
             ``until_id`` will be forced to the most recent ID available.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1151,8 +1203,8 @@ class Client:
     # Tweet lookup
 
     def get_tweet(self, id, *, user_auth=False, **params):
-        """get_tweet(id, *, user_auth=False, expansions, media_fields, \
-                     place_fields, poll_fields, twitter_fields, user_fields)
+        """get_tweet(id, *, expansions, media_fields, place_fields, \
+                     poll_fields, twitter_fields, user_fields, user_auth=False)
 
         Returns a variety of information about a single Tweet specified by
         the requested ID.
@@ -1161,8 +1213,6 @@ class Client:
         ----------
         id : Union[int, str]
             Unique identifier of the Tweet to request
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         media_fields : Union[List[str], str]
@@ -1175,6 +1225,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1193,8 +1245,10 @@ class Client:
         )
 
     def get_tweets(self, ids, *, user_auth=False, **params):
-        """get_tweets(ids, *, user_auth=False, expansions, media_fields, \
-                      place_fields, poll_fields, twitter_fields, user_fields)
+        """get_tweets( \
+            ids, *, expansions, media_fields, place_fields, poll_fields, \
+            twitter_fields, user_fields, user_auth=False \
+        )
 
         Returns a variety of information about the Tweet specified by the
         requested ID or list of IDs.
@@ -1205,8 +1259,6 @@ class Client:
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         media_fields : Union[List[str], str]
@@ -1219,6 +1271,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1245,10 +1299,15 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not blocking or have already unblocked.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to unblock.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1267,9 +1326,12 @@ class Client:
 
     def get_blocked(self, *, user_auth=True, **params):
         """get_blocked(*, expansions, max_results, pagination_token, \
-                       tweet_fields, user_fields)
+                       tweet_fields, user_fields, user_auth=True)
 
         Returns a list of users who are blocked by the authenticating user.
+
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
 
         Parameters
         ----------
@@ -1287,6 +1349,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1310,10 +1374,15 @@ class Client:
     def block(self, target_user_id, *, user_auth=True):
         """Block another user.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to block.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1342,10 +1411,15 @@ class Client:
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.unfollow`
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to unfollow.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1376,8 +1450,8 @@ class Client:
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
-            id, *, user_auth=False, expansions, max_results, \
-            pagination_token, tweet_fields, user_fields \
+            id, *, expansions, max_results, pagination_token, tweet_fields, \
+            user_fields, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified user ID.
@@ -1386,8 +1460,6 @@ class Client:
         ----------
         id : Union[int, str]
             The user ID whose followers you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -1404,6 +1476,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1424,8 +1498,8 @@ class Client:
 
     def get_users_following(self, id, *, user_auth=False, **params):
         """get_users_following( \
-            id, *, user_auth=False, expansions, max_results, \
-            pagination_token, tweet_fields, user_fields \
+            id, *, expansions, max_results, pagination_token, tweet_fields, \
+            user_fields, user_auth=False \
         )
 
         Returns a list of users the specified user ID is following.
@@ -1434,8 +1508,6 @@ class Client:
         ----------
         id : Union[int, str]
             The user ID whose following you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -1452,6 +1524,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1482,10 +1556,15 @@ class Client:
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.follow`
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to follow.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1523,10 +1602,15 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not muting or have already unmuted.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to unmute.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1545,11 +1629,14 @@ class Client:
 
     def get_muted(self, *, user_auth=True, **params):
         """get_muted(*, expansions, max_results, pagination_token, \
-                     tweet_fields, user_fields)
+                     tweet_fields, user_fields, user_auth=True)
 
         Returns a list of users who are muted by the authenticating user.
 
         .. versionadded:: 4.1
+
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
 
         Parameters
         ----------
@@ -1567,6 +1654,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1590,10 +1679,15 @@ class Client:
     def mute(self, target_user_id, *, user_auth=True):
         """Allows an authenticated user ID to mute the target user.
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         target_user_id : Union[int, str]
             The user ID of the user that you would like to mute.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1614,8 +1708,8 @@ class Client:
     # User lookup
 
     def get_user(self, *, id=None, username=None, user_auth=False, **params):
-        """get_user(*, id, username, user_auth=False, expansions, \
-                    tweet_fields, user_fields)
+        """get_user(*, id, username, expansions, tweet_fields, user_fields, \
+                    user_auth=False)
 
         Returns a variety of information about a single user specified by the
         requested ID or username.
@@ -1626,14 +1720,14 @@ class Client:
             The ID of the user to lookup.
         username : str
             The Twitter username (handle) of the user.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         tweet_fields : Union[List[str], str]
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
@@ -1669,8 +1763,8 @@ class Client:
 
     def get_users(self, *, ids=None, usernames=None, user_auth=False,
                   **params):
-        """get_users(*, ids, usernames, user_auth=False, expansions, \
-                     tweet_fields, user_fields)
+        """get_users(*, ids, usernames, expansions, tweet_fields, \
+                     user_fields, user_auth=False)
 
         Returns a variety of information about one or more users specified by
         the requested IDs or usernames.
@@ -1685,14 +1779,14 @@ class Client:
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         tweet_fields : Union[List[str], str]
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
@@ -1729,7 +1823,7 @@ class Client:
         )
 
     def get_me(self, *, user_auth=True, **params):
-        """get_me(*, expansions, tweet_fields, user_fields)
+        """get_me(*, expansions, tweet_fields, user_fields, user_auth=True)
 
         Returns information about an authorized user.
 
@@ -1743,6 +1837,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1946,8 +2042,8 @@ class Client:
     # List Tweets lookup
 
     def get_list_tweets(self, id, *, user_auth=False, **params):
-        """get_list_tweets(id, *, user_auth=False, expansions, max_results, \
-                           pagination_token, tweet_fields, user_fields)
+        """get_list_tweets(id, *, expansions, max_results, pagination_token, \
+                           tweet_fields, user_fields, user_auth=False)
 
         Returns a list of Tweets from the specified List.
 
@@ -1957,8 +2053,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The ID of the List whose Tweets you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -1975,6 +2069,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -1999,10 +2095,15 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         list_id : Union[int, str]
             The ID of the List that you would like the user to unfollow.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2021,8 +2122,8 @@ class Client:
 
     def get_list_followers(self, id, *, user_auth=False, **params):
         """get_list_followers( \
-            id, *, user_auth=False, expansions, max_results, \
-            pagination_token, tweet_fields, user_fields \
+            id, *, expansions, max_results, pagination_token, tweet_fields, \
+            user_fields, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified List.
@@ -2033,8 +2134,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The ID of the List whose followers you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -2051,6 +2150,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2070,8 +2171,8 @@ class Client:
 
     def get_followed_lists(self, id, *, user_auth=False, **params):
         """get_followed_lists( \
-            id, *, user_auth=False, expansions, list_fields, max_results, \
-            pagination_token, user_fields \
+            id, *, expansions, list_fields, max_results, pagination_token, \
+            user_fields, user_auth=False \
         )
 
         Returns all Lists a specified user follows.
@@ -2082,8 +2183,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The user ID whose followed Lists you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         list_fields : Union[List[str], str]
@@ -2100,6 +2199,8 @@ class Client:
             previous_token returned in your previous response.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2122,10 +2223,15 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         list_id : Union[int, str]
             The ID of the List that you would like the user to follow.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2145,8 +2251,8 @@ class Client:
     # List lookup
 
     def get_list(self, id, *, user_auth=False, **params):
-        """get_list(id, *, user_auth=False, expansions, list_fields, \
-                    user_fields)
+        """get_list(id, *, expansions, list_fields, user_fields, \
+                    user_auth=False)
 
         Returns the details of a specified List.
 
@@ -2156,14 +2262,14 @@ class Client:
         ----------
         id : Union[List[str], str]
             The ID of the List to lookup.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         list_fields : Union[List[str], str]
             :ref:`list_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2181,8 +2287,8 @@ class Client:
         )
 
     def get_owned_lists(self, id, *, user_auth=False, **params):
-        """get_owned_lists(id, *, user_auth=False, expansions, list_fields, \
-                           max_results, pagination_token, user_fields)
+        """get_owned_lists(id, *, expansions, list_fields, max_results, \
+                           pagination_token, user_fields, user_auth=False)
 
         Returns all Lists owned by the specified user.
 
@@ -2192,8 +2298,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The user ID whose owned Lists you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         list_fields : Union[List[str], str]
@@ -2210,6 +2314,8 @@ class Client:
             previous_token returned in your previous response.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2235,12 +2341,17 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             The ID of the List you are removing a member from.
         user_id : Union[int, str]
             The ID of the user you wish to remove as a member of the List.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2256,8 +2367,8 @@ class Client:
         )
 
     def get_list_members(self, id, *, user_auth=False, **params):
-        """get_list_members(id, *, user_auth=False, expansions, max_results, \
-                            pagination_token, tweet_fields, user_fields)
+        """get_list_members(id, *, expansions, max_results, pagination_token, \
+                            tweet_fields, user_fields, user_auth=False)
 
         Returns a list of users who are members of the specified List.
 
@@ -2267,8 +2378,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The ID of the List whose members you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         max_results : int
@@ -2285,6 +2394,8 @@ class Client:
             :ref:`tweet_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2304,8 +2415,8 @@ class Client:
 
     def get_list_memberships(self, id, *, user_auth=False, **params):
         """get_list_memberships( \
-            id, *, user_auth=False, expansions, list_fields, max_results, \
-            pagination_token, user_fields \
+            id, *, expansions, list_fields, max_results, pagination_token, \
+            user_fields, user_auth=False \
         )
 
         Returns all Lists a specified user is a member of.
@@ -2316,8 +2427,6 @@ class Client:
         ----------
         id : Union[List[str], str]
             The user ID whose List memberships you would like to retrieve.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User context
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
         list_fields : Union[List[str], str]
@@ -2334,6 +2443,8 @@ class Client:
             previous_token returned in your previous response.
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2356,12 +2467,17 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             The ID of the List you are adding a member to.
         user_id : Union[int, str]
             The ID of the user you wish to add as a member of the List.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2383,10 +2499,15 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
             The ID of the List to be deleted.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2408,6 +2529,9 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         id : Union[int, str]
@@ -2418,6 +2542,8 @@ class Client:
             Updates the name of the List.
         private : bool
             Determines whether the List should be private.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2448,6 +2574,9 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         name : str
@@ -2456,6 +2585,8 @@ class Client:
             Description of the List.
         private : bool
             Determine whether the List should be private.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2484,10 +2615,15 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         list_id : Union[int, str]
             The ID of the List that you would like the user to unpin.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2505,11 +2641,15 @@ class Client:
         )
 
     def get_pinned_lists(self, *, user_auth=True, **params):
-        """get_pinned_lists(*, expansions, list_fields, user_fields)
+        """get_pinned_lists(*, expansions, list_fields, user_fields, \
+                            user_auth=True)
 
         Returns the Lists pinned by a specified user.
 
         .. versionadded:: 4.4
+
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
 
         Parameters
         ----------
@@ -2519,6 +2659,8 @@ class Client:
             :ref:`list_fields_parameter`
         user_fields : Union[List[str], str]
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
@@ -2543,10 +2685,15 @@ class Client:
 
         .. versionadded:: 4.2
 
+        .. versionchanged:: 4.5
+            Added ``user_auth`` parameter
+
         Parameters
         ----------
         list_id : Union[int, str]
             The ID of the List that you would like the user to pin.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
