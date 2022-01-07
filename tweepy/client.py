@@ -1726,7 +1726,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_me(self, *, user_auth=False, **params):
+    def get_me(self, *, user_auth=True, **params):
         """get_me(*, expansions, tweet_fields, user_fields)
 
         Returns information about an authorized user.

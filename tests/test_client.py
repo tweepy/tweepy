@@ -133,7 +133,7 @@ class TweepyTestCase(unittest.TestCase):
 
     @tape.use_cassette("test_get_me.yaml", serializer="yaml")
     def test_get_me(self):
-        self.client.get_me(user_auth=True)
+        self.client.get_me()
 
     @tape.use_cassette("test_search_spaces.yaml", serializer="yaml")
     def test_search_spaces(self):
