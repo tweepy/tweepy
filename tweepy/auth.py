@@ -21,14 +21,7 @@ https://dev.twitter.com/discussions/21281"""
 log = logging.getLogger(__name__)
 
 
-class AuthHandler:
-
-    def apply_auth(self, url, method, headers, parameters):
-        """Apply authentication headers to request"""
-        raise NotImplementedError
-
-
-class OAuthHandler(AuthHandler):
+class OAuthHandler:
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
         if not isinstance(consumer_key, (str, bytes)):
@@ -130,7 +123,7 @@ class OAuthHandler(AuthHandler):
             raise TweepyException(e)
 
 
-class OAuth2AppHandler(AuthHandler):
+class OAuth2AppHandler:
 
     def __init__(self, consumer_key, consumer_secret):
         self.consumer_key = consumer_key
