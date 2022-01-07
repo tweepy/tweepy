@@ -1726,6 +1726,34 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
+    def get_me(self, *, user_auth=False, **params):
+        """get_me(*, expansions, tweet_fields, user_fields)
+
+        Returns information about an authorized user.
+
+        Parameters
+        ----------
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me
+        """
+        return self._make_request(
+            "GET", f"/2/users/me", params=params,
+            endpoint_parameters=("expansions", "tweet.fields", "user.fields"),
+            data_type=User, user_auth=user_auth
+        )
+
     # Search Spaces
 
     def search_spaces(self, query, **params):
