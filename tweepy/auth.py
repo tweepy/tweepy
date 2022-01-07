@@ -44,15 +44,15 @@ class OAuth1UserHandler:
                                    client_secret=consumer_secret,
                                    callback_uri=self.callback)
 
-    def _get_oauth_url(self, endpoint):
-        return 'https://api.twitter.com/oauth/' + endpoint
-
     def apply_auth(self):
         return OAuth1(self.consumer_key,
                       client_secret=self.consumer_secret,
                       resource_owner_key=self.access_token,
                       resource_owner_secret=self.access_token_secret,
                       decoding=None)
+
+    def _get_oauth_url(self, endpoint):
+        return 'https://api.twitter.com/oauth/' + endpoint
 
     def _get_request_token(self, access_type=None):
         try:
@@ -62,10 +62,6 @@ class OAuth1UserHandler:
             return self.oauth.fetch_request_token(url)
         except Exception as e:
             raise TweepyException(e)
-
-    def set_access_token(self, key, secret):
-        self.access_token = key
-        self.access_token_secret = secret
 
     def get_authorization_url(self,
                               signin_with_twitter=False,
@@ -101,6 +97,10 @@ class OAuth1UserHandler:
             return self.access_token, self.access_token_secret
         except Exception as e:
             raise TweepyException(e)
+
+    def set_access_token(self, key, secret):
+        self.access_token = key
+        self.access_token_secret = secret
 
 
 class OAuthHandler(OAuth1UserHandler):
