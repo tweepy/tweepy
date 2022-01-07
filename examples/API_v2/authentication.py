@@ -24,11 +24,6 @@ access_token_secret = ""
 # You can authenticate as your app with just your bearer token
 client = tweepy.Client(bearer_token=bearer_token)
 
-# Alternatively, you can provide the consumer key and secret
-client = tweepy.Client(
-    consumer_key=consumer_key, consumer_secret=consumer_secret
-)
-
 # You can provide the consumer key and secret with the access token and access
 # token secret to authenticate as a user
 client = tweepy.Client(
