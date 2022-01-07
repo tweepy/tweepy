@@ -23,7 +23,8 @@ log = logging.getLogger(__name__)
 
 class OAuthHandler:
 
-    def __init__(self, consumer_key, consumer_secret, callback=None):
+    def __init__(self, consumer_key, consumer_secret, access_token=None,
+                 access_token_secret=None, callback=None):
         if not isinstance(consumer_key, (str, bytes)):
             raise TypeError("Consumer key must be string or bytes, not "
                             + type(consumer_key).__name__)
@@ -33,8 +34,8 @@ class OAuthHandler:
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
-        self.access_token = None
-        self.access_token_secret = None
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
         self.callback = callback
         self.username = None
         self.request_token = {}
