@@ -100,28 +100,6 @@ class OAuthHandler:
         except Exception as e:
             raise TweepyException(e)
 
-    def get_xauth_access_token(self, username, password):
-        """
-        Get an access token from an username and password combination.
-        In order to get this working you need to create an app at
-        http://twitter.com/apps, after that send a mail to api@twitter.com
-        and request activation of xAuth for it.
-        """
-        try:
-            url = self._get_oauth_url('access_token')
-            oauth = OAuth1(self.consumer_key,
-                           client_secret=self.consumer_secret)
-            r = requests.post(url=url,
-                              auth=oauth,
-                              headers={'x_auth_mode': 'client_auth',
-                                       'x_auth_username': username,
-                                       'x_auth_password': password})
-
-            credentials = parse_qs(r.content)
-            return credentials.get('oauth_token')[0], credentials.get('oauth_token_secret')[0]
-        except Exception as e:
-            raise TweepyException(e)
-
 
 class OAuth2AppHandler:
 
