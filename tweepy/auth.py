@@ -102,7 +102,22 @@ class OAuth1UserHandler:
         except Exception as e:
             raise TweepyException(e)
 
-OAuthHandler = OAuth1UserHandler
+
+class OAuthHandler(OAuth1UserHandler):
+    """Alias for :class:`OAuth1UserHandler`
+
+    .. deprecated:: 4.5
+        Use :class:`OAuth1UserHandler` instead.
+    """
+
+    def __init__(self, consumer_key, consumer_secret, access_token=None,
+                 access_token_secret=None, callback=None):
+        warnings.warn(
+            "OAuthHandler is deprecated; use OAuth1UserHandler instead.",
+            DeprecationWarning
+        )
+        super().__init__(consumer_key, consumer_secret, access_token, 
+                         access_token_secret, callback)
 
 
 class OAuth2AppHandler:
