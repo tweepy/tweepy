@@ -1731,6 +1731,8 @@ class Client:
 
         Returns information about an authorized user.
 
+        .. versionadded:: 4.5
+
         Parameters
         ----------
         expansions : Union[List[str], str]
