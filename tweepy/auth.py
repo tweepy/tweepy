@@ -133,7 +133,7 @@ class OAuthHandler(AuthHandler):
             raise TweepyException(e)
 
 
-class OAuth2Handler(OAuth2Session):
+class OAuth2UserHandler(OAuth2Session):
 
     def __init__(self, *, client_id, redirect_uri, scope, client_secret=None):
         super().__init__(client_id, redirect_uri=redirect_uri, scope=scope)
