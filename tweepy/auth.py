@@ -21,7 +21,7 @@ https://dev.twitter.com/discussions/21281"""
 log = logging.getLogger(__name__)
 
 
-class OAuthHandler:
+class OAuth1UserHandler:
 
     def __init__(self, consumer_key, consumer_secret, access_token=None,
                  access_token_secret=None, callback=None):
@@ -100,6 +100,8 @@ class OAuthHandler:
             return self.access_token, self.access_token_secret
         except Exception as e:
             raise TweepyException(e)
+
+OAuthHandler = OAuth1UserHandler
 
 
 class OAuth2AppHandler:
