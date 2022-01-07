@@ -29,9 +29,6 @@ class AuthHandler:
 
 
 class OAuthHandler(AuthHandler):
-    """OAuth authentication handler"""
-    OAUTH_HOST = 'api.twitter.com'
-    OAUTH_ROOT = '/oauth/'
 
     def __init__(self, consumer_key, consumer_secret, callback=None):
         if not isinstance(consumer_key, (str, bytes)):
@@ -53,7 +50,7 @@ class OAuthHandler(AuthHandler):
                                    callback_uri=self.callback)
 
     def _get_oauth_url(self, endpoint):
-        return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
+        return 'https://api.twitter.com/oauth/' + endpoint
 
     def apply_auth(self):
         return OAuth1(self.consumer_key,
