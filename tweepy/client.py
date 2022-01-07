@@ -248,7 +248,7 @@ class Client:
 
     # Likes
 
-    def unlike(self, tweet_id):
+    def unlike(self, tweet_id, *, user_auth=True):
         """Unlike a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -271,7 +271,7 @@ class Client:
         route = f"/2/users/{id}/likes/{tweet_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
     def get_liking_users(self, id, *, user_auth=False, **params):
@@ -370,7 +370,7 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def like(self, tweet_id):
+    def like(self, tweet_id, *, user_auth=True):
         """Like a Tweet.
 
         Parameters
@@ -390,7 +390,8 @@ class Client:
         route = f"/2/users/{id}/likes"
 
         return self._make_request(
-            "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
+            "POST", route, json={"tweet_id": str(tweet_id)},
+            user_auth=user_auth
         )
 
     # Manage Tweets
