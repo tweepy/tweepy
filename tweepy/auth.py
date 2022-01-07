@@ -40,16 +40,15 @@ class OAuth1UserHandler:
         self.callback = callback
         self.username = None
         self.request_token = {}
-        self.oauth = OAuth1Session(consumer_key,
-                                   client_secret=consumer_secret,
+        self.oauth = OAuth1Session(consumer_key, client_secret=consumer_secret,
                                    callback_uri=self.callback)
 
     def apply_auth(self):
-        return OAuth1(self.consumer_key,
-                      client_secret=self.consumer_secret,
-                      resource_owner_key=self.access_token,
-                      resource_owner_secret=self.access_token_secret,
-                      decoding=None)
+        return OAuth1(
+            self.consumer_key, client_secret=self.consumer_secret,
+            resource_owner_key=self.access_token,
+            resource_owner_secret=self.access_token_secret, decoding=None
+        )
 
     def _get_oauth_url(self, endpoint):
         return 'https://api.twitter.com/oauth/' + endpoint
@@ -63,8 +62,7 @@ class OAuth1UserHandler:
         except Exception as e:
             raise TweepyException(e)
 
-    def get_authorization_url(self,
-                              signin_with_twitter=False,
+    def get_authorization_url(self, signin_with_twitter=False,
                               access_type=None):
         """Get the authorization URL to redirect the user"""
         try:
@@ -74,23 +72,25 @@ class OAuth1UserHandler:
                     log.warning(WARNING_MESSAGE)
             else:
                 url = self._get_oauth_url('authorize')
-            self.request_token = self._get_request_token(access_type=access_type)
+            self.request_token = self._get_request_token(
+                access_type=access_type
+            )
             return self.oauth.authorization_url(url)
         except Exception as e:
             raise TweepyException(e)
 
     def get_access_token(self, verifier=None):
-        """
-        After user has authorized the request token, get access token
+        """After user has authorized the request token, get access token
         with user supplied verifier.
         """
         try:
             url = self._get_oauth_url('access_token')
-            self.oauth = OAuth1Session(self.consumer_key,
-                                       client_secret=self.consumer_secret,
-                                       resource_owner_key=self.request_token['oauth_token'],
-                                       resource_owner_secret=self.request_token['oauth_token_secret'],
-                                       verifier=verifier, callback_uri=self.callback)
+            self.oauth = OAuth1Session(
+                self.consumer_key, client_secret=self.consumer_secret,
+                resource_owner_key=self.request_token['oauth_token'],
+                resource_owner_secret=self.request_token['oauth_token_secret'],
+                verifier=verifier, callback_uri=self.callback
+            )
             resp = self.oauth.fetch_access_token(url)
             self.access_token = resp['oauth_token']
             self.access_token_secret = resp['oauth_token_secret']
