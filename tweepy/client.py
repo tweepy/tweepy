@@ -202,7 +202,7 @@ class Client:
 
     # Hide replies
 
-    def hide_reply(self, id):
+    def hide_reply(self, id, *, user_auth=True):
         """Hides a reply to a Tweet.
 
         Parameters
@@ -221,10 +221,10 @@ class Client:
         """
         return self._make_request(
             "PUT", f"/2/tweets/{id}/hidden", json={"hidden": True},
-            user_auth=True
+            user_auth=user_auth
         )
 
-    def unhide_reply(self, id):
+    def unhide_reply(self, id, *, user_auth=True):
         """Unhides a reply to a Tweet.
 
         Parameters
@@ -243,7 +243,7 @@ class Client:
         """
         return self._make_request(
             "PUT", f"/2/tweets/{id}/hidden", json={"hidden": False},
-            user_auth=True
+            user_auth=user_auth
         )
 
     # Likes
@@ -395,7 +395,7 @@ class Client:
 
     # Manage Tweets
 
-    def delete_tweet(self, id):
+    def delete_tweet(self, id, *, user_auth=True):
         """Allows an authenticated user ID to delete a Tweet.
 
         .. versionadded:: 4.3
@@ -414,7 +414,7 @@ class Client:
         https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id
         """
         return self._make_request(
-            "DELETE", f"/2/tweets/{id}", user_auth=True
+            "DELETE", f"/2/tweets/{id}", user_auth=user_auth
         )
 
     def create_tweet(
@@ -422,7 +422,7 @@ class Client:
         place_id=None, media_ids=None, media_tagged_user_ids=None,
         poll_duration_minutes=None, poll_options=None, quote_tweet_id=None,
         exclude_reply_user_ids=None, in_reply_to_tweet_id=None,
-        reply_settings=None, text=None
+        reply_settings=None, text=None, user_auth=True
     ):
         """Creates a Tweet on behalf of an authenticated user.
 
@@ -523,12 +523,12 @@ class Client:
             json["text"] = text
 
         return self._make_request(
-            "POST", f"/2/tweets", json=json, user_auth=True
+            "POST", f"/2/tweets", json=json, user_auth=user_auth
         )
 
     # Retweets
 
-    def unretweet(self, source_tweet_id):
+    def unretweet(self, source_tweet_id, *, user_auth=True):
         """Allows an authenticated user ID to remove the Retweet of a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -552,7 +552,7 @@ class Client:
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
     def get_retweeters(self, id, *, user_auth=False, **params):
@@ -594,7 +594,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def retweet(self, tweet_id):
+    def retweet(self, tweet_id, *, user_auth=True):
         """Causes the user ID to Retweet the target Tweet.
 
         Parameters
@@ -614,7 +614,8 @@ class Client:
         route = f"/2/users/{id}/retweets"
 
         return self._make_request(
-            "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
+            "POST", route, json={"tweet_id": str(tweet_id)},
+            user_auth=user_auth
         )
 
     # Search Tweets
@@ -1237,7 +1238,7 @@ class Client:
 
     # Blocks
 
-    def unblock(self, target_user_id):
+    def unblock(self, target_user_id, *, user_auth=True):
         """Unblock another user.
 
         The request succeeds with no action when the user sends a request to a
@@ -1260,10 +1261,10 @@ class Client:
         route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
-    def get_blocked(self, **params):
+    def get_blocked(self, *, user_auth=True, **params):
         """get_blocked(*, expansions, max_results, pagination_token, \
                        tweet_fields, user_fields)
 
@@ -1302,10 +1303,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "max_results", "pagination_token",
                 "tweet.fields", "user.fields"
-            ), data_type=User, user_auth=True
+            ), data_type=User, user_auth=user_auth
         )
 
-    def block(self, target_user_id):
+    def block(self, target_user_id, *, user_auth=True):
         """Block another user.
 
         Parameters
@@ -1326,12 +1327,12 @@ class Client:
 
         return self._make_request(
             "POST", route, json={"target_user_id": str(target_user_id)},
-            user_auth=True
+            user_auth=user_auth
         )
 
     # Follows
 
-    def unfollow_user(self, target_user_id):
+    def unfollow_user(self, target_user_id, *, user_auth=True):
         """Allows a user ID to unfollow another user.
 
         The request succeeds with no action when the authenticated user sends a
@@ -1357,10 +1358,10 @@ class Client:
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
-    def unfollow(self, target_user_id):
+    def unfollow(self, target_user_id, *, user_auth=True):
         """Alias for :meth:`Client.unfollow_user`
 
         .. deprecated:: 4.2
@@ -1370,7 +1371,7 @@ class Client:
             "Client.unfollow is deprecated; use Client.unfollow_user instead.",
             DeprecationWarning
         )
-        self.unfollow_user(target_user_id)
+        self.unfollow_user(target_user_id, user_auth=user_auth)
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
@@ -1467,7 +1468,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def follow_user(self, target_user_id):
+    def follow_user(self, target_user_id, *, user_auth=True):
         """Allows a user ID to follow another user.
 
         If the target user does not have public Tweets, this endpoint will send
@@ -1498,10 +1499,10 @@ class Client:
 
         return self._make_request(
             "POST", route, json={"target_user_id": str(target_user_id)},
-            user_auth=True
+            user_auth=user_auth
         )
 
-    def follow(self, target_user_id):
+    def follow(self, target_user_id, *, user_auth=True):
         """Alias for :meth:`Client.follow_user`
 
         .. deprecated:: 4.2
@@ -1511,11 +1512,11 @@ class Client:
             "Client.follow is deprecated; use Client.follow_user instead.",
             DeprecationWarning
         )
-        self.follow_user(target_user_id)
+        self.follow_user(target_user_id, user_auth=user_auth)
 
     # Mutes
 
-    def unmute(self, target_user_id):
+    def unmute(self, target_user_id, *, user_auth=True):
         """Allows an authenticated user ID to unmute the target user.
 
         The request succeeds with no action when the user sends a request to a
@@ -1538,10 +1539,10 @@ class Client:
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
-    def get_muted(self, **params):
+    def get_muted(self, *, user_auth=True, **params):
         """get_muted(*, expansions, max_results, pagination_token, \
                      tweet_fields, user_fields)
 
@@ -1582,10 +1583,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "max_results", "pagination_token",
                 "tweet.fields", "user.fields"
-            ), data_type=User, user_auth=True
+            ), data_type=User, user_auth=user_auth
         )
 
-    def mute(self, target_user_id):
+    def mute(self, target_user_id, *, user_auth=True):
         """Allows an authenticated user ID to mute the target user.
 
         Parameters
@@ -1606,7 +1607,7 @@ class Client:
 
         return self._make_request(
             "POST", route, json={"target_user_id": str(target_user_id)},
-            user_auth=True
+            user_auth=user_auth
         )
 
     # User lookup
@@ -1992,7 +1993,7 @@ class Client:
 
     # List follows
 
-    def unfollow_list(self, list_id):
+    def unfollow_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to unfollow a List.
 
         .. versionadded:: 4.2
@@ -2014,7 +2015,7 @@ class Client:
         route = f"/2/users/{id}/followed_lists/{list_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
     def get_list_followers(self, id, *, user_auth=False, **params):
@@ -2115,7 +2116,7 @@ class Client:
             ), data_type=List, user_auth=user_auth
         )
 
-    def follow_list(self, list_id):
+    def follow_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to follow a List.
 
         .. versionadded:: 4.2
@@ -2137,7 +2138,7 @@ class Client:
         route = f"/2/users/{id}/followed_lists"
 
         return self._make_request(
-            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+            "POST", route, json={"list_id": str(list_id)}, user_auth=user_auth
         )
 
     # List lookup
@@ -2227,7 +2228,7 @@ class Client:
 
     # List members
 
-    def remove_list_member(self, id, user_id):
+    def remove_list_member(self, id, user_id, *, user_auth=True):
         """Enables the authenticated user to remove a member from a List they
         own.
 
@@ -2250,7 +2251,7 @@ class Client:
         """
 
         return self._make_request(
-            "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=True
+            "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=user_auth
         )
 
     def get_list_members(self, id, *, user_auth=False, **params):
@@ -2349,7 +2350,7 @@ class Client:
             ), data_type=List, user_auth=user_auth
         )
 
-    def add_list_member(self, id, user_id):
+    def add_list_member(self, id, user_id, *, user_auth=True):
         """Enables the authenticated user to add a member to a List they own.
 
         .. versionadded:: 4.2
@@ -2371,12 +2372,12 @@ class Client:
         """
         return self._make_request(
             "POST", f"/2/lists/{id}/members", json={"user_id": str(user_id)},
-            user_auth=True
+            user_auth=user_auth
         )
 
     # Manage Lists
 
-    def delete_list(self, id):
+    def delete_list(self, id, *, user_auth=True):
         """Enables the authenticated user to delete a List that they own.
 
         .. versionadded:: 4.2
@@ -2396,10 +2397,11 @@ class Client:
         """
 
         return self._make_request(
-            "DELETE", f"/2/lists/{id}", user_auth=True
+            "DELETE", f"/2/lists/{id}", user_auth=user_auth
         )
 
-    def update_list(self, id, *, description=None, name=None, private=None):
+    def update_list(self, id, *, description=None, name=None, private=None,
+                    user_auth=True):
         """Enables the authenticated user to update the meta data of a
         specified List that they own.
 
@@ -2436,10 +2438,11 @@ class Client:
             json["private"] = private
 
         return self._make_request(
-            "PUT", f"/2/lists/{id}", json=json, user_auth=True
+            "PUT", f"/2/lists/{id}", json=json, user_auth=user_auth
         )
 
-    def create_list(self, name, *, description=None, private=None):
+    def create_list(self, name, *, description=None, private=None,
+                    user_auth=True):
         """Enables the authenticated user to create a List.
 
         .. versionadded:: 4.2
@@ -2470,12 +2473,12 @@ class Client:
             json["private"] = private
 
         return self._make_request(
-            "POST", f"/2/lists", json=json, user_auth=True
+            "POST", f"/2/lists", json=json, user_auth=user_auth
         )
 
     # Pinned Lists
 
-    def unpin_list(self, list_id):
+    def unpin_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to unpin a List.
 
         .. versionadded:: 4.2
@@ -2497,10 +2500,10 @@ class Client:
         route = f"/2/users/{id}/pinned_lists/{list_id}"
 
         return self._make_request(
-            "DELETE", route, user_auth=True
+            "DELETE", route, user_auth=user_auth
         )
 
-    def get_pinned_lists(self, **params):
+    def get_pinned_lists(self, *, user_auth=True, **params):
         """get_pinned_lists(*, expansions, list_fields, user_fields)
 
         Returns the Lists pinned by a specified user.
@@ -2531,10 +2534,10 @@ class Client:
             "GET", route, params=params,
             endpoint_parameters=(
                 "expansions", "list.fields", "user.fields"
-            ), data_type=List, user_auth=True
+            ), data_type=List, user_auth=user_auth
         )
 
-    def pin_list(self, list_id):
+    def pin_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to pin a List.
 
         .. versionadded:: 4.2
@@ -2556,7 +2559,7 @@ class Client:
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(
-            "POST", route, json={"list_id": str(list_id)}, user_auth=True
+            "POST", route, json={"list_id": str(list_id)}, user_auth=user_auth
         )
 
     # Batch Compliance
