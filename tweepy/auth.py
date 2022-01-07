@@ -134,17 +134,13 @@ class OAuthHandler(AuthHandler):
 
 
 class OAuth2AppHandler(AuthHandler):
-    """Application-only authentication handler"""
-
-    OAUTH_HOST = 'api.twitter.com'
-    OAUTH_ROOT = '/oauth2/'
 
     def __init__(self, consumer_key, consumer_secret):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self._bearer_token = ''
 
-        resp = requests.post(self._get_oauth_url('token'),
+        resp = requests.post('https://api.twitter.com/oauth2/token',
                              auth=(self.consumer_key,
                                    self.consumer_secret),
                              data={'grant_type': 'client_credentials'})
@@ -154,9 +150,6 @@ class OAuth2AppHandler(AuthHandler):
                                   f'but got {data.get("token_type")} instead')
 
         self._bearer_token = data['access_token']
-
-    def _get_oauth_url(self, endpoint):
-        return 'https://' + self.OAUTH_HOST + self.OAUTH_ROOT + endpoint
 
     def apply_auth(self):
         return OAuth2BearerHandler(self._bearer_token)
