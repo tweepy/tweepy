@@ -5,6 +5,8 @@
 import asyncio
 import json
 import logging
+from typing import Optional, Dict, Any, List, Union
+
 from math import inf
 from platform import python_version
 
@@ -66,8 +68,17 @@ class AsyncStream:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    async def _connect(self, method, endpoint, params={}, headers=None,
-                       body=None):
+    async def _connect(
+        self,
+        method: str,
+        endpoint: str,
+        params: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, Any]] = None,
+        body: Optional[Any] = None,
+    ):
+        if params is None:
+            params = {}
+
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         stall_timeout = 90
@@ -146,8 +157,16 @@ class AsyncStream:
             await self.session.close()
             await self.on_disconnect()
 
-    def filter(self, *, follow=None, track=None, locations=None,
-               filter_level=None, languages=None, stall_warnings=False):
+    def filter(
+        self,
+        *,
+        follow: Optional[List[Union[int, str]]] = None,
+        track: Optional[List[str]] = None,
+        locations: Optional[List[float]] = None,
+        filter_level: Optional[str] = None,
+        languages: Optional[List[str]] = None,
+        stall_warnings: bool = False,
+    ):
         """Filter realtime Tweets
 
         Parameters
@@ -235,7 +254,7 @@ class AsyncStream:
         # Use create_task when support for Python 3.6 is dropped
         return self.task
 
-    def sample(self, *, languages=None, stall_warnings=False):
+    def sample(self, *, languages: Optional[List[str]] = None, stall_warnings: bool = False):
         """Sample realtime Tweets
 
         Parameters
@@ -291,7 +310,7 @@ class AsyncStream:
         if self.task is not None:
             self.task.cancel()
 
-    async def on_closed(self, resp):
+    async def on_closed(self, resp: aiohttp.ClientResponse):
         """|coroutine|
 
         This is called when the stream has been closed by Twitter.
@@ -324,7 +343,7 @@ class AsyncStream:
         """
         log.info("Stream disconnected")
 
-    async def on_exception(self, exception):
+    async def on_exception(self, exception: Exception):
         """|coroutine|
 
         This is called when an unhandled exception occurs.
@@ -343,7 +362,7 @@ class AsyncStream:
         """
         log.debug("Received keep-alive signal")
 
-    async def on_request_error(self, status_code):
+    async def on_request_error(self, status_code: int):
         """|coroutine|
 
         This is called when a non-200 HTTP status code is encountered.
@@ -355,7 +374,7 @@ class AsyncStream:
         """
         log.error("Stream encountered HTTP Error: %d", status_code)
 
-    async def on_data(self, raw_data):
+    async def on_data(self, raw_data: Any):
         """|coroutine|
 
         This is called when raw data is received from the stream.
@@ -394,7 +413,7 @@ class AsyncStream:
 
         log.warning("Received unknown message type: %s", raw_data)
 
-    async def on_status(self, status):
+    async def on_status(self, status: Any):
         """|coroutine|
 
         This is called when a status is received.
@@ -406,7 +425,7 @@ class AsyncStream:
         """
         log.debug("Received status: %d", status.id)
 
-    async def on_delete(self, status_id, user_id):
+    async def on_delete(self, status_id: int, user_id: int):
         """|coroutine|
 
         This is called when a status deletion notice is received.
@@ -420,7 +439,7 @@ class AsyncStream:
         """
         log.debug("Received status deletion notice: %d", status_id)
 
-    async def on_disconnect_message(self, message):
+    async def on_disconnect_message(self, message: Any):
         """|coroutine|
 
         This is called when a disconnect message is received.
@@ -432,7 +451,7 @@ class AsyncStream:
         """
         log.warning("Received disconnect message: %s", message)
 
-    async def on_limit(self, track):
+    async def on_limit(self, track: int):
         """|coroutine|
 
         This is called when a limit notice is received.
@@ -445,7 +464,7 @@ class AsyncStream:
         """
         log.debug("Received limit notice: %d", track)
 
-    async def on_scrub_geo(self, notice):
+    async def on_scrub_geo(self, notice: Any):
         """|coroutine|
 
         This is called when a location deletion notice is received.
@@ -457,7 +476,7 @@ class AsyncStream:
         """
         log.debug("Received location deletion notice: %s", notice)
 
-    async def on_status_withheld(self, notice):
+    async def on_status_withheld(self, notice: Any):
         """|coroutine|
 
         This is called when a status withheld content notice is received.
@@ -469,7 +488,7 @@ class AsyncStream:
         """
         log.debug("Received status withheld content notice: %s", notice)
 
-    async def on_user_withheld(self, notice):
+    async def on_user_withheld(self, notice: Any):
         """|coroutine|
 
         This is called when a user withheld content notice is received.
@@ -481,7 +500,7 @@ class AsyncStream:
         """
         log.debug("Received user withheld content notice: %s", notice)
 
-    async def on_warning(self, notice):
+    async def on_warning(self, notice: Any):
         """|coroutine|
 
         This is called when a stall warning message is received.

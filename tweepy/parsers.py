@@ -3,6 +3,7 @@
 # See LICENSE for details.
 
 import json as json_lib
+from typing import Optional, Any
 
 from tweepy.errors import TweepyException
 from tweepy.models import ModelFactory
@@ -10,7 +11,7 @@ from tweepy.models import ModelFactory
 
 class Parser:
 
-    def parse(self, payload, *args, **kwargs):
+    def parse(self, payload: Any, *args, **kwargs):
         """
         Parse the response payload and return the result.
         Returns a tuple that contains the result data and the cursors
@@ -24,7 +25,7 @@ class RawParser(Parser):
     def __init__(self):
         pass
 
-    def parse(self, payload, *args, **kwargs):
+    def parse(self, payload: Any, *args, **kwargs):
         return payload
 
 
@@ -32,7 +33,7 @@ class JSONParser(Parser):
 
     payload_format = 'json'
 
-    def parse(self, payload, *, return_cursors=False, **kwargs):
+    def parse(self, payload: Any, *, return_cursors: bool = False, **kwargs):
         try:
             json = json_lib.loads(payload)
         except Exception as e:
@@ -52,12 +53,19 @@ class JSONParser(Parser):
 
 class ModelParser(JSONParser):
 
-    def __init__(self, model_factory=None):
+    def __init__(self, model_factory: Optional["ModelFactory"] = None):
         JSONParser.__init__(self)
         self.model_factory = model_factory or ModelFactory
 
-    def parse(self, payload, *, api=None, payload_list=False,
-              payload_type=None, return_cursors=False):
+    def parse(
+        self,
+        payload: Any,
+        *,
+        api: Optional[str] = None,
+        payload_list: bool = False,
+        payload_type: Optional[str] = None,
+        return_cursors: bool = False,
+    ):
         try:
             if payload_type is None:
                 return

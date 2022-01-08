@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Dict, Any
 
 from tweepy.mixins import DataMapping, HashableID
 
@@ -12,7 +13,7 @@ class Place(HashableID, DataMapping):
         "country_code", "geo", "name", "place_type"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.full_name = data["full_name"]
         self.id = data["id"]

@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Dict, Any
 
 from tweepy.mixins import DataMapping
 
@@ -13,7 +14,7 @@ class Media(DataMapping):
         "promoted_metrics", "public_metrics", "width", "alt_text", "url"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.media_key = data["media_key"]
         self.type = data["type"]

@@ -34,6 +34,7 @@ from tweepy.user import User
 # Global, unauthenticated instance of API
 api = API()
 
-def debug(enable=True, level=1):
+def debug(enable: bool = True, level: int = 1):
+    # TODO: enable argument is unused
     from http.client import HTTPConnection
     HTTPConnection.debuglevel = level

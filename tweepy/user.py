@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Dict, Any
 
 from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
@@ -14,7 +15,7 @@ class User(HashableID, DataMapping):
         "protected", "public_metrics", "url", "verified", "withheld"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.id = int(data["id"])
         self.name = data["name"]

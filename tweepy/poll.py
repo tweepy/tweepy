@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Dict, Any
 
 from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
@@ -13,7 +14,7 @@ class Poll(HashableID, DataMapping):
         "voting_status"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.id = data["id"]
         self.options = data["options"]

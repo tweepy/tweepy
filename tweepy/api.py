@@ -10,24 +10,28 @@ import mimetypes
 from platform import python_version
 import sys
 import time
+from typing import Optional, Set, Tuple, Dict, Any, Union, Sequence, List as ListType, Callable
 from urllib.parse import urlencode
 
 import requests
 
 import tweepy
+from tweepy.auth import OAuthHandler
+from tweepy.cache import Cache
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TweepyException, TwitterServerError, Unauthorized
 )
-from tweepy.models import Model
+from tweepy.models import Model, Status, ResultSet, Media, User, DirectMessage, Friendship, List as TwitterList, \
+    SavedSearch, SearchResults, Place
 from tweepy.parsers import ModelParser, Parser
 from tweepy.utils import list_to_csv
 
 log = logging.getLogger(__name__)
 
 
-def pagination(mode):
-    def decorator(method):
+def pagination(mode: str):
+    def decorator(method: Callable[..., Any]):
         @functools.wraps(method)
         def wrapper(*args, **kwargs):
             return method(*args, **kwargs)
@@ -36,7 +40,7 @@ def pagination(mode):
     return decorator
 
 
-def payload(payload_type, **payload_kwargs):
+def payload(payload_type: str, **payload_kwargs):
     payload_list = payload_kwargs.get('list', False)
     def decorator(method):
         @functools.wraps(method)
@@ -90,10 +94,20 @@ class API:
     """
 
     def __init__(
-        self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
-        proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
-        timeout=60, upload_host='upload.twitter.com', user_agent=None,
-        wait_on_rate_limit=False
+        self,
+        auth: Optional[OAuthHandler] = None,
+        *,
+        cache: Optional[Cache] = None,
+        host: str = 'api.twitter.com',
+        parser: Optional[Parser] = None,
+        proxy: Optional[str] = None,
+        retry_count: int = 0,
+        retry_delay: float = 0,
+        retry_errors: Optional[Set[int]] = None,
+        timeout: float = 60,
+        upload_host: str = 'upload.twitter.com',
+        user_agent: Optional[str] = None,
+        wait_on_rate_limit: bool = False
     ):
         self.auth = auth
         self.cache = cache
@@ -135,10 +149,24 @@ class API:
         self.session = requests.Session()
 
     def request(
-        self, method, endpoint, *, endpoint_parameters=(), params=None,
-        headers=None, json_payload=None, parser=None, payload_list=False,
-        payload_type=None, post_data=None, files=None, require_auth=True,
-        return_cursors=False, upload_api=False, use_cache=True, **kwargs
+        self,
+        method: str,  # HTTP method name (e.g., GET)
+        endpoint: str,  # the endpoint path
+        *,
+        endpoint_parameters: Tuple = (),  # allow list of param names for the endpoint
+        params: Optional[Dict[str, Any]] = None,  # dict to be sent in the query string
+        headers: Optional[Dict[str, Any]] = None,  # dict of HTTP header values
+        json_payload: Optional[Dict[str, Any]] = None,  # JSON data to send
+        parser: Optional[Parser] = None,  # response data parser
+        payload_list: bool = False,  # True if the API's response is a list data
+        payload_type: Optional[str] = None,  # "json" etc. (refer to ModelFactory)
+        post_data: Optional[Any] = None,  # dict, list of tuples, bytes, and file-like object
+        files: Optional[Dict[str, Any]] = None,  # dict of {filename: file-like-objects}
+        require_auth: bool = True,  # True if authentication is required
+        return_cursors: bool = False,  # True if cursor data can be returned in response
+        upload_api: bool = False,  # True if the API is for uploading files
+        use_cache: bool = True,  # True if the API caller should use cache data
+        **kwargs
     ):
         # If authentication is required and no credentials
         # are provided, throw an error.
@@ -280,12 +308,12 @@ class API:
             return result
         finally:
             self.session.close()
-    
+
     # Premium Search APIs
 
     @pagination(mode='next')
     @payload('status', list=True)
-    def search_30_day(self, label, query, **kwargs):
+    def search_30_day(self, label: str, query: str, **kwargs) -> ResultSet:
         """search_30_day(label, query, *, tag, fromDate, toDate, maxResults, \
                          next)
 
@@ -368,7 +396,7 @@ class API:
 
     @pagination(mode='next')
     @payload('status', list=True)
-    def search_full_archive(self, label, query, **kwargs):
+    def search_full_archive(self, label: str, query: str, **kwargs) -> ResultSet:
         """search_full_archive(label, query, *, tag, fromDate, toDate, \
                                maxResults, next)
 
@@ -454,7 +482,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def home_timeline(self, **kwargs):
+    def home_timeline(self, **kwargs) -> ResultSet:
         """home_timeline(*, count, since_id, max_id, trim_user, \
                          exclude_replies, include_entities)
 
@@ -494,7 +522,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def mentions_timeline(self, **kwargs):
+    def mentions_timeline(self, **kwargs) -> ResultSet:
         """mentions_timeline(*, count, since_id, max_id, trim_user, \
                              include_entities)
 
@@ -529,7 +557,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def user_timeline(self, **kwargs):
+    def user_timeline(self, **kwargs) -> ResultSet:
         """user_timeline(*, user_id, screen_name, since_id, count, max_id, \
                          trim_user, exclude_replies, include_rts)
 
@@ -579,7 +607,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def get_favorites(self, **kwargs):
+    def get_favorites(self, **kwargs) -> ResultSet:
         """get_favorites(*, user_id, screen_name, count, since_id, max_id, \
                          include_entities)
 
@@ -617,7 +645,7 @@ class API:
         )
 
     @payload('status', list=True)
-    def lookup_statuses(self, id, **kwargs):
+    def lookup_statuses(self, id: Sequence[str], **kwargs) -> ResultSet:
         """lookup_statuses(id, *, include_entities, trim_user, map, \
                            include_ext_alt_text, include_card_uri)
 
@@ -656,7 +684,7 @@ class API:
         )
 
     @payload('json')
-    def get_oembed(self, url, **kwargs):
+    def get_oembed(self, url: str, **kwargs) -> Dict[str, Any]:
         """get_oembed( \
             url, *, maxwidth, hide_media, hide_thread, omit_script, align, \
             related, lang, theme, link_color, widget_type, dnt \
@@ -746,7 +774,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def get_retweeter_ids(self, id, **kwargs):
+    def get_retweeter_ids(self, id: Union[str, int], **kwargs) -> ListType[int]:
         """get_retweeter_ids(id, *, count, cursor, stringify_ids)
 
         Returns up to 100 user IDs belonging to users who have retweeted the
@@ -778,7 +806,7 @@ class API:
         )
 
     @payload('status', list=True)
-    def get_retweets(self, id, **kwargs):
+    def get_retweets(self, id: Union[str, int], **kwargs) -> ResultSet:
         """get_retweets(id, *, count, trim_user)
 
         Returns up to 100 of the first Retweets of the given Tweet.
@@ -808,7 +836,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def get_retweets_of_me(self, **kwargs):
+    def get_retweets_of_me(self, **kwargs) -> ResultSet:
         """get_retweets_of_me(*, count, since_id, max_id, trim_user, \
                               include_entities, include_user_entities)
 
@@ -846,7 +874,7 @@ class API:
         )
 
     @payload('status')
-    def get_status(self, id, **kwargs):
+    def get_status(self, id: Union[str, int], **kwargs) -> Status:
         """get_status(id, *, trim_user, include_my_retweet, include_entities, \
                       include_ext_alt_text, include_card_uri)
 
@@ -886,7 +914,7 @@ class API:
         )
 
     @payload('status')
-    def create_favorite(self, id, **kwargs):
+    def create_favorite(self, id: Union[str, int], **kwargs) -> Status:
         """create_favorite(id, *, include_entities)
 
         Favorites the status specified in the ``id`` parameter as the
@@ -914,7 +942,7 @@ class API:
         )
 
     @payload('status')
-    def destroy_favorite(self, id, **kwargs):
+    def destroy_favorite(self, id: Union[str, int], **kwargs) -> Status:
         """destroy_favorite(id, *, include_entities)
 
         Un-favorites the status specified in the ``id`` parameter as the
@@ -942,7 +970,7 @@ class API:
         )
 
     @payload('status')
-    def destroy_status(self, id, **kwargs):
+    def destroy_status(self, id: Union[str, int], **kwargs) -> Status:
         """destroy_status(id, *, trim_user)
 
         Destroy the status specified by the ``id`` parameter. The authenticated
@@ -970,7 +998,7 @@ class API:
         )
 
     @payload('status')
-    def retweet(self, id, **kwargs):
+    def retweet(self, id: Union[str, int], **kwargs) -> Status:
         """retweet(id, *, trim_user)
 
         Retweets a Tweet. Requires the ID of the Tweet you are retweeting.
@@ -997,7 +1025,7 @@ class API:
         )
 
     @payload('status')
-    def unretweet(self, id, **kwargs):
+    def unretweet(self, id: Union[str, int], **kwargs) -> Status:
         """unretweet(id, *, trim_user)
 
         Untweets a retweeted status. Requires the ID of the retweet to
@@ -1025,7 +1053,7 @@ class API:
         )
 
     @payload('status')
-    def update_status(self, status, **kwargs):
+    def update_status(self, status: str, **kwargs) -> Status:
         """update_status( \
             status, *, in_reply_to_status_id, auto_populate_reply_metadata, \
             exclude_reply_user_ids, attachment_url, media_ids, \
@@ -1129,8 +1157,14 @@ class API:
         )
 
     @payload('status')
-    def update_status_with_media(self, status, filename, *, file=None,
-                                 **kwargs):
+    def update_status_with_media(
+        self,
+        status: str,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        **kwargs,
+    ) -> Status:
         """update_status_with_media( \
             status, filename, *, file, possibly_sensitive, \
             in_reply_to_status_id, lat, long, place_id, display_coordinates \
@@ -1138,7 +1172,7 @@ class API:
 
         .. deprecated:: 3.7.0
             Use :func:`API.media_upload` instead.
-        
+
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
 
@@ -1190,7 +1224,7 @@ class API:
 
     @pagination(mode='id')
     @payload('search_results')
-    def search_tweets(self, q, **kwargs):
+    def search_tweets(self, q: str, **kwargs) -> SearchResults:
         """search_tweets(q, *, geocode, lang, locale, result_type, count, \
                          until, since_id, max_id, include_entities)
 
@@ -1275,7 +1309,7 @@ class API:
     # Create and manage lists
 
     @payload('list', list=True)
-    def get_lists(self, **kwargs):
+    def get_lists(self, **kwargs) -> ResultSet:
         """get_lists(*, user_id, screen_name, reverse)
 
         Returns all lists the authenticating or specified user subscribes to,
@@ -1317,7 +1351,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_list_members(self, **kwargs):
+    def get_list_members(self, **kwargs) -> ResultSet:
         """get_list_members(*, list_id, slug, owner_screen_name, owner_id, \
                             count, cursor, include_entities, skip_status)
 
@@ -1358,7 +1392,7 @@ class API:
         )
 
     @payload('user')
-    def get_list_member(self, **kwargs):
+    def get_list_member(self, **kwargs) -> bool:
         """get_list_member( \
             *, list_id, slug, user_id, screen_name, owner_screen_name, \
             owner_id, include_entities, skip_status \
@@ -1408,7 +1442,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def get_list_memberships(self, **kwargs):
+    def get_list_memberships(self, **kwargs) -> ResultSet:
         """get_list_memberships(*, user_id, screen_name, count, cursor, \
                                 filter_to_owned_lists)
 
@@ -1448,7 +1482,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def get_list_ownerships(self, **kwargs):
+    def get_list_ownerships(self, **kwargs) -> ResultSet:
         """get_list_ownerships(*, user_id, screen_name, count, cursor)
 
         Returns the lists owned by the specified user. Private lists will only
@@ -1482,7 +1516,7 @@ class API:
         )
 
     @payload('list')
-    def get_list(self, **kwargs):
+    def get_list(self, **kwargs) -> TwitterList:
         """get_list(*, list_id, slug, owner_screen_name, owner_id)
 
         Returns the specified list. Private lists will only be shown if the
@@ -1515,7 +1549,7 @@ class API:
 
     @pagination(mode='id')
     @payload('status', list=True)
-    def list_timeline(self, **kwargs):
+    def list_timeline(self, **kwargs) -> ResultSet:
         """list_timeline( \
             *, list_id, slug, owner_screen_name, owner_id, since_id, max_id, \
             count, include_entities, include_rts \
@@ -1566,7 +1600,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_list_subscribers(self, **kwargs):
+    def get_list_subscribers(self, **kwargs) -> ResultSet:
         """get_list_subscribers( \
             *, list_id, slug, owner_screen_name, owner_id, count, cursor, \
             include_entities, skip_status \
@@ -1610,7 +1644,7 @@ class API:
         )
 
     @payload('user')
-    def get_list_subscriber(self, **kwargs):
+    def get_list_subscriber(self, **kwargs) -> bool:
         """get_list_subscriber( \
             *, owner_screen_name, owner_id, list_id, slug, user_id, \
             screen_name, include_entities, skip_status \
@@ -1659,7 +1693,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('list', list=True)
-    def get_list_subscriptions(self, **kwargs):
+    def get_list_subscriptions(self, **kwargs) -> ResultSet:
         """get_list_subscriptions(*, user_id, screen_name, count, cursor)
 
         Obtain a collection of the lists the specified user is subscribed to,
@@ -1691,7 +1725,7 @@ class API:
         )
 
     @payload('list')
-    def create_list(self, name, **kwargs):
+    def create_list(self, name: str, **kwargs) -> TwitterList:
         """create_list(name, *, mode, description)
 
         Creates a new list for the authenticated user.
@@ -1721,7 +1755,7 @@ class API:
         )
 
     @payload('list')
-    def destroy_list(self, **kwargs):
+    def destroy_list(self, **kwargs) -> TwitterList:
         """destroy_list(*, owner_screen_name, owner_id, list_id, slug)
 
         Deletes the specified list.
@@ -1753,7 +1787,7 @@ class API:
         )
 
     @payload('list')
-    def add_list_member(self, **kwargs):
+    def add_list_member(self, **kwargs) -> TwitterList:
         """add_list_member(*, list_id, slug, user_id, screen_name, \
                            owner_screen_name, owner_id)
 
@@ -1791,7 +1825,7 @@ class API:
         )
 
     @payload('list')
-    def add_list_members(self, **kwargs):
+    def add_list_members(self, **kwargs) -> TwitterList:
         """add_list_members(*, list_id, slug, user_id, screen_name, \
                             owner_screen_name, owner_id)
 
@@ -1836,7 +1870,7 @@ class API:
         )
 
     @payload('list')
-    def remove_list_member(self, **kwargs):
+    def remove_list_member(self, **kwargs) -> TwitterList:
         """remove_list_member(*, list_id, slug, user_id, screen_name, \
                               owner_screen_name, owner_id)
 
@@ -1874,7 +1908,7 @@ class API:
         )
 
     @payload('list')
-    def remove_list_members(self, **kwargs):
+    def remove_list_members(self, **kwargs) -> TwitterList:
         """remove_list_members(*, list_id, slug, user_id, screen_name, \
                                owner_screen_name, owner_id)
 
@@ -1919,7 +1953,7 @@ class API:
         )
 
     @payload('list')
-    def subscribe_list(self, **kwargs):
+    def subscribe_list(self, **kwargs) -> TwitterList:
         """subscribe_list(*, owner_screen_name, owner_id, list_id, slug)
 
         Subscribes the authenticated user to the specified list.
@@ -1950,7 +1984,7 @@ class API:
         )
 
     @payload('list')
-    def unsubscribe_list(self, **kwargs):
+    def unsubscribe_list(self, **kwargs) -> TwitterList:
         """unsubscribe_list(*, list_id, slug, owner_screen_name, owner_id)
 
         Unsubscribes the authenticated user from the specified list.
@@ -1981,7 +2015,7 @@ class API:
         )
 
     @payload('list')
-    def update_list(self, **kwargs):
+    def update_list(self, **kwargs) -> TwitterList:
         """update_list(*, list_id, slug, name, mode, description, \
                        owner_screen_name, owner_id)
 
@@ -2024,7 +2058,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def get_follower_ids(self, **kwargs):
+    def get_follower_ids(self, **kwargs) -> ListType[int]:
         """get_follower_ids(*, user_id, screen_name, cursor, stringify_ids, \
                             count)
 
@@ -2060,7 +2094,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_followers(self, **kwargs):
+    def get_followers(self, **kwargs) -> ResultSet:
         """get_followers(*, user_id, screen_name, cursor, count, skip_status, \
                          include_user_entities)
 
@@ -2100,7 +2134,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def get_friend_ids(self, **kwargs):
+    def get_friend_ids(self, **kwargs) -> ListType[int]:
         """get_friend_ids(*, user_id, screen_name, cursor, stringify_ids, \
                           count)
 
@@ -2136,7 +2170,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_friends(self, **kwargs):
+    def get_friends(self, **kwargs) -> ResultSet:
         """get_friends(*, user_id, screen_name, cursor, count, skip_status, \
                        include_user_entities)
 
@@ -2175,7 +2209,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def incoming_friendships(self, **kwargs):
+    def incoming_friendships(self, **kwargs) -> ListType[int]:
         """incoming_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every user who has a pending
@@ -2203,7 +2237,13 @@ class API:
         )
 
     @payload('relationship', list=True)
-    def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
+    def lookup_friendships(
+        self,
+        *,
+        screen_name: Optional[Sequence[str]] = None,
+        user_id: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> ResultSet:
         """lookup_friendships(*, screen_name, user_id)
 
         Returns the relationships of the authenticated user to the list of up
@@ -2232,7 +2272,7 @@ class API:
         )
 
     @payload('ids')
-    def no_retweets_friendships(self, **kwargs):
+    def no_retweets_friendships(self, **kwargs) -> ListType[int]:
         """no_retweets_friendships(*, stringify_ids)
 
         Returns a collection of user_ids that the currently authenticated user
@@ -2259,7 +2299,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def outgoing_friendships(self, **kwargs):
+    def outgoing_friendships(self, **kwargs) -> ListType[int]:
         """outgoing_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every protected user for whom
@@ -2287,7 +2327,7 @@ class API:
         )
 
     @payload('friendship')
-    def get_friendship(self, **kwargs):
+    def get_friendship(self, **kwargs) -> Tuple[Friendship, Friendship]:
         """get_friendship(*, source_id, source_screen_name, target_id, \
                           target_screen_name)
 
@@ -2320,7 +2360,13 @@ class API:
         )
 
     @payload('user', list=True)
-    def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
+    def lookup_users(
+        self,
+        *,
+        screen_name: Optional[Sequence[str]] = None,
+        user_id: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> ResultSet:
         """lookup_users(*, screen_name, user_id, include_entities, tweet_mode)
 
         Returns fully-hydrated user objects for up to 100 users per request.
@@ -2367,7 +2413,7 @@ class API:
 
     @pagination(mode='page')
     @payload('user', list=True)
-    def search_users(self, q, **kwargs):
+    def search_users(self, q: str, **kwargs) -> ResultSet:
         """search_users(q, *, page, count, include_entities)
 
         Run a search for users similar to Find People button on Twitter.com;
@@ -2401,7 +2447,7 @@ class API:
         )
 
     @payload('user')
-    def get_user(self, **kwargs):
+    def get_user(self, **kwargs) -> User:
         """get_user(*, user_id, screen_name, include_entities)
 
         Returns information about the specified user.
@@ -2430,7 +2476,7 @@ class API:
         )
 
     @payload('user')
-    def create_friendship(self, **kwargs):
+    def create_friendship(self, **kwargs) -> User:
         """create_friendship(*, screen_name, user_id, follow)
 
         Create a new friendship with the specified user (aka follow).
@@ -2460,7 +2506,7 @@ class API:
         )
 
     @payload('user')
-    def destroy_friendship(self, **kwargs):
+    def destroy_friendship(self, **kwargs) -> User:
         """destroy_friendship(*, screen_name, user_id)
 
         Destroy a friendship with the specified user (aka unfollow).
@@ -2487,7 +2533,7 @@ class API:
         )
 
     @payload('friendship')
-    def update_friendship(self, **kwargs):
+    def update_friendship(self, **kwargs) -> Friendship:
         """update_friendship(*, screen_name, user_id, device, retweets)
 
         Turn on/off Retweets and device notifications from the specified user.
@@ -2520,7 +2566,7 @@ class API:
     # Manage account settings and profile
 
     @payload('json')
-    def get_settings(self, **kwargs):
+    def get_settings(self, **kwargs) -> Dict[str, Any]:
         """get_settings()
 
         Returns settings (including current trend, geo and sleep time
@@ -2540,7 +2586,7 @@ class API:
         )
 
     @payload('user')
-    def verify_credentials(self, **kwargs):
+    def verify_credentials(self, **kwargs) -> User:
         """verify_credentials(*, include_entities, skip_status, include_email)
 
         Verify the supplied user credentials are valid.
@@ -2577,7 +2623,7 @@ class API:
         )
 
     @payload('saved_search', list=True)
-    def get_saved_searches(self, **kwargs):
+    def get_saved_searches(self, **kwargs) -> ResultSet:
         """get_saved_searches()
 
         Returns the authenticated user's saved search queries.
@@ -2593,7 +2639,7 @@ class API:
         return self.request('GET', 'saved_searches/list', **kwargs)
 
     @payload('saved_search')
-    def get_saved_search(self, id, **kwargs):
+    def get_saved_search(self, id: Union[str, int], **kwargs) -> SavedSearch:
         """get_saved_search(id)
 
         Retrieve the data for a saved search owned by the authenticating user
@@ -2615,7 +2661,7 @@ class API:
         return self.request('GET', f'saved_searches/show/{id}', **kwargs)
 
     @payload('json')
-    def get_profile_banner(self, **kwargs):
+    def get_profile_banner(self, **kwargs) -> Dict[str, Any]:
         """get_profile_banner(*, user_id, screen_name)
 
         Returns a map of the available size variations of the specified user's
@@ -2647,7 +2693,7 @@ class API:
             ), **kwargs
         )
 
-    def remove_profile_banner(self, **kwargs):
+    def remove_profile_banner(self, **kwargs) -> None:
         """remove_profile_banner()
 
         Removes the uploaded profile banner for the authenticating user.
@@ -2659,10 +2705,10 @@ class API:
         return self.request('POST', 'account/remove_profile_banner', **kwargs)
 
     @payload('json')
-    def set_settings(self, **kwargs):
+    def set_settings(self, **kwargs) -> Dict[str, Any]:
         """set_settings(*, sleep_time_enabled, start_sleep_time, \
                         end_sleep_time, time_zone, trend_location_woeid, lang)
-        
+
         Updates the authenticating user's settings.
 
         Parameters
@@ -2712,7 +2758,7 @@ class API:
         )
 
     @payload('user')
-    def update_profile(self, **kwargs):
+    def update_profile(self, **kwargs) -> User:
         """update_profile(*, name, url, location, description, \
                           profile_link_color, include_entities, skip_status)
 
@@ -2756,7 +2802,13 @@ class API:
             ), **kwargs
         )
 
-    def update_profile_banner(self, filename, *, file=None, **kwargs):
+    def update_profile_banner(
+        self,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        **kwargs,
+    ) -> None:
         """update_profile_banner(filename, *, file, width, height, \
                                  offset_left, offset_top)
 
@@ -2801,7 +2853,13 @@ class API:
             )
 
     @payload('user')
-    def update_profile_image(self, filename, *, file=None, **kwargs):
+    def update_profile_image(
+        self,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        **kwargs,
+    ) -> User:
         """update_profile_image(filename, *, file, include_entities, \
                                 skip_status)
 
@@ -2838,7 +2896,7 @@ class API:
         )
 
     @payload('saved_search')
-    def create_saved_search(self, query, **kwargs):
+    def create_saved_search(self, query: str, **kwargs) -> SavedSearch:
         """create_saved_search(query)
 
         Creates a saved search for the authenticated user.
@@ -2863,7 +2921,7 @@ class API:
         )
 
     @payload('saved_search')
-    def destroy_saved_search(self, id, **kwargs):
+    def destroy_saved_search(self, id: Union[str, int], **kwargs) -> SavedSearch:
         """destroy_saved_search(id)
 
         Destroys a saved search for the authenticated user. The search
@@ -2888,7 +2946,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def get_blocked_ids(self, **kwargs):
+    def get_blocked_ids(self, **kwargs) -> ListType[int]:
         """get_blocked_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user is
@@ -2917,7 +2975,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_blocks(self, **kwargs):
+    def get_blocks(self, **kwargs) -> ResultSet:
         """get_blocks(*, include_entities, skip_status, cursor)
 
         Returns an array of user objects that the authenticating user is
@@ -2948,7 +3006,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('ids')
-    def get_muted_ids(self, **kwargs):
+    def get_muted_ids(self, **kwargs) -> ListType[int]:
         """get_muted_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user has muted.
@@ -2976,7 +3034,7 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def get_mutes(self, **kwargs):
+    def get_mutes(self, **kwargs) -> ResultSet:
         """get_mutes(*, cursor, include_entities, skip_status)
 
         Returns an array of user objects the authenticating user has muted.
@@ -3005,7 +3063,7 @@ class API:
         )
 
     @payload('user')
-    def create_block(self, **kwargs):
+    def create_block(self, **kwargs) -> User:
         """create_block(*, screen_name, user_id, include_entities, skip_status)
 
         Blocks the specified user from following the authenticating user. In
@@ -3039,7 +3097,7 @@ class API:
         )
 
     @payload('user')
-    def destroy_block(self, **kwargs):
+    def destroy_block(self, **kwargs) -> User:
         """destroy_block(*, screen_name, user_id, include_entities, \
                          skip_status)
 
@@ -3072,7 +3130,7 @@ class API:
         )
 
     @payload('user')
-    def create_mute(self, **kwargs):
+    def create_mute(self, **kwargs) -> User:
         """create_mute(*, screen_name, user_id)
 
         Mutes the user specified in the ID parameter for the authenticating
@@ -3100,7 +3158,7 @@ class API:
         )
 
     @payload('user')
-    def destroy_mute(self, **kwargs):
+    def destroy_mute(self, **kwargs) -> User:
         """destroy_mute(*, screen_name, user_id)
 
         Un-mutes the user specified in the ID parameter for the authenticating
@@ -3128,7 +3186,7 @@ class API:
         )
 
     @payload('user')
-    def report_spam(self, **kwargs):
+    def report_spam(self, **kwargs) -> User:
         """report_spam(*, screen_name, user_id, perform_block)
 
         Report the specified user as a spam account to Twitter.
@@ -3159,7 +3217,7 @@ class API:
 
     # Sending and receiving events
 
-    def delete_direct_message(self, id, **kwargs):
+    def delete_direct_message(self, id: Union[str, int], **kwargs) -> None:
         """delete_direct_message(id)
 
         Deletes the direct message specified in the required ID parameter. The
@@ -3185,7 +3243,7 @@ class API:
 
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
-    def get_direct_messages(self, **kwargs):
+    def get_direct_messages(self, **kwargs) -> ResultSet:
         """get_direct_messages(*, count, cursor)
 
         Returns all Direct Message events (both sent and received) within the
@@ -3213,7 +3271,7 @@ class API:
         )
 
     @payload('direct_message')
-    def get_direct_message(self, id, **kwargs):
+    def get_direct_message(self, id: Union[str, int], **kwargs) -> DirectMessage:
         """get_direct_message(id)
 
         Returns a specific direct message.
@@ -3239,9 +3297,16 @@ class API:
 
     @payload('direct_message')
     def send_direct_message(
-        self, recipient_id, text, *, quick_reply_options=None,
-        attachment_type=None, attachment_media_id=None, ctas=None, **kwargs
-    ):
+        self,
+        recipient_id: Union[str, int],
+        text: str,
+        *,
+        quick_reply_options: Optional[Sequence[Any]] = None,
+        attachment_type: Optional[str] = None,
+        attachment_media_id: Optional[Union[str, int]] = None,
+        ctas: Optional[Sequence[Any]] = None,
+        **kwargs
+    ) -> DirectMessage:
         """send_direct_message(recipient_id, text, *, quick_reply_options, \
                                attachment_type, attachment_media_id, ctas)
 
@@ -3301,7 +3366,7 @@ class API:
     # Upload media
 
     @payload('media')
-    def get_media_upload_status(self, media_id, **kwargs):
+    def get_media_upload_status(self, media_id: Union[str, int], **kwargs) -> Media:
         """get_media_upload_status(media_id)
 
         Check on the progress of a chunked media upload. If the upload has
@@ -3326,7 +3391,7 @@ class API:
             ), command='STATUS', media_id=media_id, upload_api=True, **kwargs
         )
 
-    def create_media_metadata(self, media_id, alt_text, **kwargs):
+    def create_media_metadata(self, media_id: Union[str, int], alt_text: str, **kwargs) -> None:
         """create_media_metadata(media_id, alt_text)
 
         This endpoint can be used to provide additional information about the
@@ -3355,8 +3420,16 @@ class API:
             upload_api=True, **kwargs
         )
 
-    def media_upload(self, filename, *, file=None, chunked=False,
-                     media_category=None, additional_owners=None, **kwargs):
+    def media_upload(
+        self,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        chunked: bool = False,
+        media_category: Optional[str] = None,
+        additional_owners: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> Media:
         """media_upload(filename, *, file, chunked, media_category, \
                         additional_owners)
 
@@ -3399,7 +3472,7 @@ class API:
         else:
             file_type = mimetypes.guess_type(filename)[0]
 
-        if chunked or file_type.startswith('video/'):
+        if chunked or (file_type is not None and file_type.startswith('video/')):
             return self.chunked_upload(
                 filename, file=file, file_type=file_type,
                 media_category=media_category,
@@ -3412,8 +3485,15 @@ class API:
             )
 
     @payload('media')
-    def simple_upload(self, filename, *, file=None, media_category=None,
-                      additional_owners=None, **kwargs):
+    def simple_upload(
+        self,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        media_category: Optional[str] = None,
+        additional_owners: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> Media:
         """simple_upload(filename, *, file, media_category, additional_owners)
 
         Use this endpoint to upload media to Twitter. This does not use the
@@ -3455,9 +3535,17 @@ class API:
                 upload_api=True, **kwargs
             )
 
-    def chunked_upload(self, filename, *, file=None, file_type=None,
-                       wait_for_async_finalize=True, media_category=None,
-                       additional_owners=None, **kwargs):
+    def chunked_upload(
+        self,
+        filename: str,
+        *,
+        file: Optional[Any] = None,
+        file_type: Optional[str] = None,
+        wait_for_async_finalize: bool = True,
+        media_category: bool = None,
+        additional_owners: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> Media:
         """chunked_upload( \
             filename, *, file, file_type, wait_for_async_finalize, \
             media_category, additional_owners \
@@ -3533,7 +3621,13 @@ class API:
 
         return media
 
-    def chunked_upload_append(self, media_id, media, segment_index, **kwargs):
+    def chunked_upload_append(
+        self,
+        media_id: Union[str, int],
+        media: Any,
+        segment_index: int,
+        **kwargs,
+    ):
         """chunked_upload_append(media_id, media, segment_index)
 
         Use this endpoint to upload a chunk (consecutive byte range) of the
@@ -3566,7 +3660,7 @@ class API:
         )
 
     @payload('media')
-    def chunked_upload_finalize(self, media_id, **kwargs):
+    def chunked_upload_finalize(self, media_id: Union[str, int], **kwargs) -> Media:
         """chunked_upload_finalize(media_id)
 
         Use this endpoint after the entire media file is uploaded via
@@ -3598,9 +3692,15 @@ class API:
         )
 
     @payload('media')
-    def chunked_upload_init(self, total_bytes, media_type, *,
-                            media_category=None, additional_owners=None,
-                            **kwargs):
+    def chunked_upload_init(
+        self,
+        total_bytes: int,
+        media_type: str,
+        *,
+        media_category: Optional[str] = None,
+        additional_owners: Optional[Sequence[Union[str, int]]] = None,
+        **kwargs,
+    ) -> Media:
         """chunked_upload_init(total_bytes, media_type, *, media_category, \
                                additional_owners)
 
@@ -3645,7 +3745,7 @@ class API:
     # Get locations with trending topics
 
     @payload('json')
-    def available_trends(self, **kwargs):
+    def available_trends(self, **kwargs) -> Dict[str, Any]:
         """available_trends()
 
         Returns the locations that Twitter has trending topic information for.
@@ -3666,7 +3766,7 @@ class API:
         return self.request('GET', 'trends/available', **kwargs)
 
     @payload('json')
-    def closest_trends(self, lat, long, **kwargs):
+    def closest_trends(self, lat: str, long: str, **kwargs) -> Dict[str, Any]:
         """closest_trends(lat, long)
 
         Returns the locations that Twitter has trending topic information for,
@@ -3709,7 +3809,7 @@ class API:
     # Get trends near a location
 
     @payload('json')
-    def get_place_trends(self, id, **kwargs):
+    def get_place_trends(self, id: Union[str, int], **kwargs) -> Dict[str, Any]:
         """get_place_trends(id *, exclude)
 
         Returns the top 50 trending topics for a specific WOEID, if trending
@@ -3754,7 +3854,7 @@ class API:
     # Get information about a place
 
     @payload('place')
-    def geo_id(self, place_id, **kwargs):
+    def geo_id(self, place_id: Union[str, int], **kwargs) -> Place:
         """geo_id(place_id)
 
         Given ``place_id``, provide more details about that place.
@@ -3777,7 +3877,7 @@ class API:
     # Get places near a location
 
     @payload('place', list=True)
-    def reverse_geocode(self, lat, long, **kwargs):
+    def reverse_geocode(self, lat: str, long: str, **kwargs) -> ResultSet:
         """reverse_geocode(lat, long, *, accuracy, granularity, max_results)
 
         Given a latitude and a longitude, searches for up to 20 places that can
@@ -3818,7 +3918,7 @@ class API:
         )
 
     @payload('place', list=True)
-    def search_geo(self, **kwargs):
+    def search_geo(self, **kwargs) -> ResultSet:
         """search_geo(*, lat, long, query, ip, granularity, max_results)
 
         Search for places that can be attached to a Tweet via
@@ -3892,7 +3992,7 @@ class API:
     # Get Twitter supported languages
 
     @payload('json')
-    def supported_languages(self, **kwargs):
+    def supported_languages(self, **kwargs) -> ListType[Dict[str, Any]]:
         """supported_languages()
 
         Returns the list of languages supported by Twitter along with the
@@ -3916,7 +4016,7 @@ class API:
     # Get app rate limit status
 
     @payload('json')
-    def rate_limit_status(self, **kwargs):
+    def rate_limit_status(self, **kwargs) -> Dict[str, Any]:
         """rate_limit_status(*, resources)
 
         Returns the current rate limits for methods belonging to the specified
@@ -3926,7 +4026,7 @@ class API:
         Parameters
         ----------
         resources
-            A comma-separated list of resource families you want to know the 
+            A comma-separated list of resource families you want to know the
             current rate limit disposition for.
 
         Returns

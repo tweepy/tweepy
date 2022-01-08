@@ -2,10 +2,12 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
-# Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
+# for App Engine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
 import json
 import logging
+from typing import Optional, Any, List, Union
+
 from math import inf
 from platform import python_version
 import ssl
@@ -66,9 +68,19 @@ class Stream:
         User agent used when connecting to the stream
     """
 
-    def __init__(self, consumer_key, consumer_secret, access_token,
-                 access_token_secret, *, chunk_size=512, daemon=False,
-                 max_retries=inf, proxy=None, verify=True):
+    def __init__(
+        self,
+        consumer_key: str,
+        consumer_secret: str,
+        access_token: str,
+        access_token_secret: str,
+        *,
+        chunk_size: int = 512,
+        daemon: bool = False,
+        max_retries: int = inf,
+        proxy: Optional[str] = None,
+        verify: bool = True,
+    ):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
@@ -88,7 +100,14 @@ class Stream:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    def _connect(self, method, endpoint, params=None, headers=None, body=None):
+    def _connect(
+        self,
+        method: str,
+        endpoint: str,
+        params: Optional[Any] = None,
+        headers: Optional[Any] = None,
+        body: Optional[Any] = None,
+    ):
         self.running = True
 
         error_count = 0
@@ -187,9 +206,17 @@ class Stream:
         self.thread.start()
         return self.thread
 
-    def filter(self, *, follow=None, track=None, locations=None,
-               filter_level=None, languages=None, stall_warnings=False,
-               threaded=False):
+    def filter(
+        self,
+        *,
+        follow: Optional[List[Union[int, str]]] = None,
+        track: Optional[List[str]] = None,
+        locations: Optional[List[float]] = None,
+        filter_level: Optional[str] = None,
+        languages: Optional[List[str]] = None,
+        stall_warnings: bool = False,
+        threaded: bool = False,
+    ):
         """Filter realtime Tweets
 
         Parameters
@@ -269,7 +296,13 @@ class Stream:
         else:
             self._connect(method, endpoint, headers=headers, body=body)
 
-    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
+    def sample(
+        self,
+        *,
+        languages: Optional[List[str]] = None,
+        stall_warnings: bool = False,
+        threaded: bool = False,
+    ):
         """Sample realtime Tweets
 
         Parameters
@@ -366,7 +399,7 @@ class Stream:
         """
         log.error("Stream encountered HTTP error: %d", status_code)
 
-    def on_data(self, raw_data):
+    def on_data(self, raw_data: Any):
         """This is called when raw data is received from the stream.
         This method handles sending the data to other methods based on the
         message type.
@@ -403,7 +436,7 @@ class Stream:
 
         log.error("Received unknown message type: %s", raw_data)
 
-    def on_status(self, status):
+    def on_status(self, status: Any):
         """This is called when a status is received.
 
         Parameters
@@ -413,7 +446,7 @@ class Stream:
         """
         log.debug("Received status: %d", status.id)
 
-    def on_delete(self, status_id, user_id):
+    def on_delete(self, status_id: int, user_id: int):
         """This is called when a status deletion notice is received.
 
         Parameters
@@ -425,7 +458,7 @@ class Stream:
         """
         log.debug("Received status deletion notice: %d", status_id)
 
-    def on_disconnect_message(self, message):
+    def on_disconnect_message(self, message: Any):
         """This is called when a disconnect message is received.
 
         Parameters
@@ -435,7 +468,7 @@ class Stream:
         """
         log.warning("Received disconnect message: %s", message)
 
-    def on_limit(self, track):
+    def on_limit(self, track: int):
         """This is called when a limit notice is received.
 
         Parameters
@@ -446,7 +479,7 @@ class Stream:
         """
         log.debug("Received limit notice: %d", track)
 
-    def on_scrub_geo(self, notice):
+    def on_scrub_geo(self, notice: Any):
         """This is called when a location deletion notice is received.
 
         Parameters
@@ -456,7 +489,7 @@ class Stream:
         """
         log.debug("Received location deletion notice: %s", notice)
 
-    def on_status_withheld(self, notice):
+    def on_status_withheld(self, notice: Any):
         """This is called when a status withheld content notice is received.
 
         Parameters
@@ -466,7 +499,7 @@ class Stream:
         """
         log.debug("Received status withheld content notice: %s", notice)
 
-    def on_user_withheld(self, notice):
+    def on_user_withheld(self, notice: Any):
         """This is called when a user withheld content notice is received.
 
         Parameters
@@ -476,7 +509,7 @@ class Stream:
         """
         log.debug("Received user withheld content notice: %s", notice)
 
-    def on_warning(self, warning):
+    def on_warning(self, warning: Any):
         """This is called when a stall warning message is received.
 
         Parameters

@@ -2,13 +2,15 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+# pytype: skip-file
+
 from collections.abc import Mapping
 
 
 class EqualityComparableID:
     __slots__ = ()
 
-    def __eq__(self, other):
+    def __eq__(self, other: "EqualityComparableID"):
         if isinstance(other, self.__class__):
             return self.id == other.id
 
@@ -25,13 +27,13 @@ class HashableID(EqualityComparableID):
 class DataMapping(Mapping):
     __slots__ = ()
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self.data[name]
         except KeyError:
             raise AttributeError from None
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str):
         try:
             return getattr(self, key)
         except AttributeError:

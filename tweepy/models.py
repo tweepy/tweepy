@@ -3,13 +3,15 @@
 # See LICENSE for details.
 
 from email.utils import parsedate_to_datetime
+from typing import Dict, Any, Union, Optional
 
 from tweepy.mixins import HashableID
 
 
 class Model:
 
-    def __init__(self, api=None):
+    def __init__(self, api: Optional["tweepy.API"] = None):
+        # The type Optional["tweepy.API"] is intentional to avoid circular import errors
         self._api = api
 
     def __getstate__(self):
@@ -18,12 +20,12 @@ class Model:
         return pickle
 
     @classmethod
-    def parse(cls, api, json):
+    def parse(cls, api: str, json: Any):
         """Parse a JSON object into a model instance."""
         raise NotImplementedError
 
     @classmethod
-    def parse_list(cls, api, json_list):
+    def parse_list(cls, api: str, json_list: Union[list, Dict[str, Any]]):
         """
             Parse a list of JSON objects into
             a result set of model instances.
@@ -56,7 +58,7 @@ class Model:
 class ResultSet(list):
     """A list like object that holds results from a Twitter API query."""
 
-    def __init__(self, max_id=None, since_id=None):
+    def __init__(self, max_id: Optional[str] = None, since_id: Optional[str] = None):
         super().__init__()
         self._max_id = max_id
         self._since_id = since_id

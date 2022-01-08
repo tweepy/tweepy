@@ -9,6 +9,7 @@ import pickle
 import threading
 import time
 import os
+from typing import Any, Optional, Dict, List
 
 try:
     import fcntl
@@ -23,20 +24,20 @@ log = logging.getLogger(__name__)
 class Cache:
     """Cache interface"""
 
-    def __init__(self, timeout=60):
+    def __init__(self, timeout: float = 60):
         """Initialize the cache
             timeout: number of seconds to keep a cached entry
         """
         self.timeout = timeout
 
-    def store(self, key, value):
+    def store(self, key: str, value: Any):
         """Add new record to cache
             key: entry key
             value: data of entry
         """
         raise NotImplementedError
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] =None):
         """Get cached entry if exists and not expired
             key: which entry to get
             timeout: override timeout with this value [optional]
@@ -59,7 +60,7 @@ class Cache:
 class MemoryCache(Cache):
     """In-memory cache"""
 
-    def __init__(self, timeout=60):
+    def __init__(self, timeout: float = 60):
         Cache.__init__(self, timeout)
         self._entries = {}
         self.lock = threading.Lock()
@@ -68,21 +69,21 @@ class MemoryCache(Cache):
         # pickle
         return {'entries': self._entries, 'timeout': self.timeout}
 
-    def __setstate__(self, state):
+    def __setstate__(self, state: Dict[str, Any]):
         # unpickle
         self.lock = threading.Lock()
         self._entries = state['entries']
         self.timeout = state['timeout']
 
-    def _is_expired(self, entry, timeout):
+    def _is_expired(self, entry: List[Any], timeout: float):
         return timeout > 0 and (time.time() - entry[0]) >= timeout
 
-    def store(self, key, value):
+    def store(self, key: str, value: Any):
         self.lock.acquire()
         self._entries[key] = (time.time(), value)
         self.lock.release()
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] = None):
         self.lock.acquire()
         try:
             # check to see if we have this key
@@ -131,7 +132,7 @@ class FileCache(Cache):
     # locks used to make cache thread-safe
     cache_locks = {}
 
-    def __init__(self, cache_dir, timeout=60):
+    def __init__(self, cache_dir: str, timeout: float = 60):
         Cache.__init__(self, timeout)
         if os.path.exists(cache_dir) is False:
             os.mkdir(cache_dir)
@@ -153,18 +154,18 @@ class FileCache(Cache):
             self._lock_file = self._lock_file_dummy
             self._unlock_file = self._unlock_file_dummy
 
-    def _get_path(self, key):
+    def _get_path(self, key: str):
         md5 = hashlib.md5()
         md5.update(key.encode('utf-8'))
         return os.path.join(self.cache_dir, md5.hexdigest())
 
-    def _lock_file_dummy(self, path, exclusive=True):
+    def _lock_file_dummy(self, path: str, exclusive: bool = True):
         return None
 
     def _unlock_file_dummy(self, lock):
         return
 
-    def _lock_file_posix(self, path, exclusive=True):
+    def _lock_file_posix(self, path: str, exclusive: bool = True):
         lock_path = path + '.lock'
         if exclusive is True:
             f_lock = open(lock_path, 'w')
@@ -180,7 +181,7 @@ class FileCache(Cache):
     def _unlock_file_posix(self, lock):
         lock.close()
 
-    def _lock_file_win32(self, path, exclusive=True):
+    def _lock_file_win32(self, path: str, exclusive: bool = True):
         # TODO: implement
         return None
 
@@ -188,12 +189,12 @@ class FileCache(Cache):
         # TODO: implement
         return
 
-    def _delete_file(self, path):
+    def _delete_file(self, path: str):
         os.remove(path)
         if os.path.exists(path + '.lock'):
             os.remove(path + '.lock')
 
-    def store(self, key, value):
+    def store(self, key: str, value: Any):
         path = self._get_path(key)
         self.lock.acquire()
         try:
@@ -210,10 +211,10 @@ class FileCache(Cache):
         finally:
             self.lock.release()
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] = None):
         return self._get(self._get_path(key), timeout)
 
-    def _get(self, path, timeout):
+    def _get(self, path: str, timeout: Optional[float]):
         if os.path.exists(path) is False:
             # no record
             return None
@@ -266,7 +267,7 @@ class FileCache(Cache):
 class MemCacheCache(Cache):
     """Cache interface"""
 
-    def __init__(self, client, timeout=60):
+    def __init__(self, client, timeout: float = 60):
         """Initialize the cache
             client: The memcache client
             timeout: number of seconds to keep a cached entry
@@ -274,14 +275,14 @@ class MemCacheCache(Cache):
         self.client = client
         self.timeout = timeout
 
-    def store(self, key, value):
+    def store(self, key: str, value: Any):
         """Add new record to cache
             key: entry key
             value: data of entry
         """
         self.client.set(key, value, time=self.timeout)
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] = None):
         """Get cached entry if exists and not expired
             key: which entry to get
             timeout: override timeout with this value [optional].
@@ -305,20 +306,22 @@ class MemCacheCache(Cache):
 class RedisCache(Cache):
     """Cache running in a redis server"""
 
-    def __init__(self, client,
-                 timeout=60,
-                 keys_container='tweepy:keys',
-                 pre_identifier='tweepy:'):
+    def __init__(
+        self,
+        client,
+        timeout: float = 60,
+        keys_container: str = 'tweepy:keys',
+        pre_identifier: str = 'tweepy:'):
         Cache.__init__(self, timeout)
         self.client = client
         self.keys_container = keys_container
         self.pre_identifier = pre_identifier
 
-    def _is_expired(self, entry, timeout):
+    def _is_expired(self, entry, timeout: float):
         # Returns true if the entry has expired
         return timeout > 0 and (time.time() - entry[0]) >= timeout
 
-    def store(self, key, value):
+    def store(self, key: str, value: Any):
         """Store the key, value pair in our redis server"""
         # Prepend tweepy to our key,
         # this makes it easier to identify tweepy keys in our redis server
@@ -334,7 +337,7 @@ class RedisCache(Cache):
         # Execute the instructions in the redis server
         pipe.execute()
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] = None):
         """Given a key, returns an element from the redis table"""
         key = self.pre_identifier + key
         # Check to see if we have this key
@@ -363,7 +366,7 @@ class RedisCache(Cache):
         server to know how many keys we have"""
         return len(self.client.smembers(self.keys_container))
 
-    def delete_entry(self, key):
+    def delete_entry(self, key: str):
         """Delete an object from the redis table"""
         pipe = self.client.pipeline()
         pipe.srem(self.keys_container, key)
@@ -390,22 +393,22 @@ class RedisCache(Cache):
 class MongodbCache(Cache):
     """A simple pickle-based MongoDB cache system."""
 
-    def __init__(self, db, timeout=3600, collection='tweepy_cache'):
+    def __init__(self, db, timeout: float = 3600, collection: str = 'tweepy_cache'):
         """Should receive a "database" cursor from pymongo."""
         Cache.__init__(self, timeout)
         self.timeout = timeout
         self.col = db[collection]
         self.col.create_index('created', expireAfterSeconds=timeout)
 
-    def store(self, key, value):
-        from bson.binary import Binary
+    def store(self, key: str, value: Any):
+        from bson.binary import Binary  # type: ignore
 
         now = datetime.datetime.utcnow()
         blob = Binary(pickle.dumps(value))
 
         self.col.insert({'created': now, '_id': key, 'value': blob})
 
-    def get(self, key, timeout=None):
+    def get(self, key: str, timeout: Optional[float] = None):
         if timeout:
             raise NotImplementedError
         obj = self.col.find_one({'_id': key})
@@ -415,7 +418,7 @@ class MongodbCache(Cache):
     def count(self):
         return self.col.find({}).count()
 
-    def delete_entry(self, key):
+    def delete_entry(self, key: str):
         return self.col.remove({'_id': key})
 
     def cleanup(self):

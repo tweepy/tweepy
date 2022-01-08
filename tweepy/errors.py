@@ -1,7 +1,6 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
-
 import requests
 
 
@@ -32,7 +31,7 @@ class HTTPException(TweepyException):
         The error messages the Twitter API responded with, if any
     """
 
-    def __init__(self, response):
+    def __init__(self, response: requests.Response):
         self.response = response
 
         self.api_errors = []
@@ -41,7 +40,7 @@ class HTTPException(TweepyException):
 
         try:
             response_json = response.json()
-        except requests.JSONDecodeError:
+        except requests.JSONDecodeError:  # type: ignore
             super().__init__(f"{response.status_code} {response.reason}")
         else:
             errors = response_json.get("errors", [])

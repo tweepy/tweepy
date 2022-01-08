@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Callable, Any
 
 from math import inf
 
@@ -22,8 +23,9 @@ class Cursor:
         Keyword arguments to pass to ``method``
     """
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: Callable[..., Any], *args, **kwargs):
         if hasattr(method, 'pagination_mode'):
+            # A wrapper method can have the attribute "pagination_mode"
             if method.pagination_mode == 'cursor':
                 self.iterator = CursorIterator(method, *args, **kwargs)
             elif method.pagination_mode == 'dm_cursor':
@@ -39,7 +41,7 @@ class Cursor:
         else:
             raise TweepyException('This method does not perform pagination')
 
-    def pages(self, limit=inf):
+    def pages(self, limit: int = inf):
         """Retrieve the page for each request
 
         Parameters
@@ -56,7 +58,7 @@ class Cursor:
         self.iterator.limit = limit
         return self.iterator
 
-    def items(self, limit=inf):
+    def items(self, limit: int = inf):
         """Retrieve the items in each page/request
 
         Parameters
@@ -76,7 +78,7 @@ class Cursor:
 
 class BaseIterator:
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: str, *args, **kwargs):
         self.method = method
         self.args = args
         self.kwargs = kwargs
@@ -97,7 +99,7 @@ class BaseIterator:
 
 class CursorIterator(BaseIterator):
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: str, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
         start_cursor = self.kwargs.pop('cursor', None)
         self.next_cursor = start_cursor or -1
@@ -128,7 +130,7 @@ class CursorIterator(BaseIterator):
 
 class DMCursorIterator(BaseIterator):
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: str, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
         self.next_cursor = self.kwargs.pop('cursor', None)
         self.page_count = 0
@@ -150,7 +152,7 @@ class DMCursorIterator(BaseIterator):
 
 class IdIterator(BaseIterator):
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: str, *args, **kwargs):
         BaseIterator.__init__(self, method, *args, **kwargs)
         self.max_id = self.kwargs.pop('max_id', None)
         self.num_tweets = 0
@@ -271,7 +273,7 @@ class NextIterator(BaseIterator):
 
 class ItemIterator(BaseIterator):
 
-    def __init__(self, page_iterator):
+    def __init__(self, page_iterator: BaseIterator):
         self.page_iterator = page_iterator
         self.limit = inf
         self.current_page = None

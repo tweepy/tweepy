@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Any, Dict
 
 from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
@@ -17,7 +18,7 @@ class Tweet(HashableID, DataMapping):
         "withheld"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.id = int(data["id"])
         self.text = data["text"]
@@ -77,7 +78,7 @@ class ReferencedTweet(HashableID, DataMapping):
 
     __slots__ = ("data", "id", "type")
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.id = int(data["id"])
         self.type = data["type"]

@@ -2,6 +2,8 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from typing import Optional, Union
+
 from math import inf
 
 
@@ -21,7 +23,7 @@ class Paginator:
         Keyword arguments to pass to ``method``
     """
 
-    def __init__(self, method, *args, **kwargs):
+    def __init__(self, method: str, *args, **kwargs):
         self.method = method
         self.args = args
         self.kwargs = kwargs
@@ -57,8 +59,15 @@ class Paginator:
 
 class PaginationIterator:
 
-    def __init__(self, method, *args, limit=inf, pagination_token=None,
-                 reverse=False, **kwargs):
+    def __init__(
+        self,
+        method: str,
+        *args,
+        limit: Union[int, float] = inf,
+        pagination_token: Optional[str] = None,
+        reverse: bool = False,
+        **kwargs,
+    ):
         self.method = method
         self.args = args
         self.limit = limit
@@ -93,7 +102,7 @@ class PaginationIterator:
         else:
             self.kwargs["pagination_token"] = pagination_token
 
-        response = self.method(*self.args, **self.kwargs)
+        response = self.method(*self.args, **self.kwargs)  # type: ignore
 
         self.previous_token = response.meta.get("previous_token")
         self.next_token = response.meta.get("next_token")

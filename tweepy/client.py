@@ -8,6 +8,7 @@ import logging
 from platform import python_version
 import time
 import warnings
+from typing import Optional, Dict, Any, Tuple, Union, List
 
 import requests
 
@@ -17,7 +18,7 @@ from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
     Unauthorized
 )
-from tweepy.list import List
+from tweepy.list import List as TwitterList
 from tweepy.media import Media
 from tweepy.place import Place
 from tweepy.poll import Poll
@@ -67,9 +68,15 @@ class Client:
     """
 
     def __init__(
-        self, bearer_token=None, consumer_key=None, consumer_secret=None,
-        access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
+        self,
+        bearer_token: Optional[str] = None,
+        consumer_key: Optional[str] = None,
+        consumer_secret: Optional[str] = None,
+        access_token: Optional[str] = None,
+        access_token_secret: Optional[str] = None,
+        *,
+        return_type: Response = Response,
+        wait_on_rate_limit: bool = False
     ):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
@@ -87,7 +94,14 @@ class Client:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    def request(self, method, route, params=None, json=None, user_auth=False):
+    def request(
+        self,
+        method: str,
+        route: str,
+        params: Optional[Dict[str, Any]] = None,
+        json: Optional[Dict[str, Any]] = None,
+        user_auth: bool = False,
+    ) -> Response:
         host = "https://api.twitter.com"
         headers = {"User-Agent": self.user_agent}
         auth = None
@@ -143,8 +157,18 @@ class Client:
 
             return response
 
-    def _make_request(self, method, route, params={}, endpoint_parameters=None,
-                      json=None, data_type=None, user_auth=False):
+    def _make_request(
+        self,
+        method: str,
+        route: str,
+        params: Optional[Dict[str, Any]] = None,
+        endpoint_parameters: Optional[Tuple] = None,
+        json: Optional[Dict[str, Any]] = None,
+        data_type: Optional[str] = None,
+        user_auth: bool = False,
+    ) -> Response:
+        if params is None:
+            params = {}
         request_params = {}
         for param_name, param_value in params.items():
             if param_name.replace('_', '.') in endpoint_parameters:
@@ -202,7 +226,7 @@ class Client:
 
     # Hide replies
 
-    def hide_reply(self, id, *, user_auth=True):
+    def hide_reply(self, id: Union[str, int], *, user_auth: bool = True) -> Response:
         """Hides a reply to a Tweet.
 
         .. versionchanged:: 4.5
@@ -229,7 +253,7 @@ class Client:
             user_auth=user_auth
         )
 
-    def unhide_reply(self, id, *, user_auth=True):
+    def unhide_reply(self, id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Unhides a reply to a Tweet.
 
         .. versionchanged:: 4.5
@@ -258,7 +282,7 @@ class Client:
 
     # Likes
 
-    def unlike(self, tweet_id, *, user_auth=True):
+    def unlike(self, tweet_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Unlike a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -289,7 +313,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_liking_users(self, id, *, user_auth=False, **params):
+    def get_liking_users(self, id: Union[int, str], *, user_auth=False, **params) -> Response:
         """get_liking_users( \
             id, *, expansions, media_fields, place_fields, poll_fields, \
             tweet_fields, user_fields, user_auth=False \
@@ -332,7 +356,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_liked_tweets(self, id, *, user_auth=False, **params):
+    def get_liked_tweets(self, id: Union[int, str], *, user_auth=False, **params) -> Response:
         """get_liked_tweets( \
             id, *, expansions, max_results, media_fields, pagination_token, \
             place_fields, poll_fields, tweet_fields, user_fields, \
@@ -392,7 +416,7 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def like(self, tweet_id, *, user_auth=True):
+    def like(self, tweet_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Like a Tweet.
 
         .. versionchanged:: 4.5
@@ -423,7 +447,7 @@ class Client:
 
     # Manage Tweets
 
-    def delete_tweet(self, id, *, user_auth=True):
+    def delete_tweet(self, id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows an authenticated user ID to delete a Tweet.
 
         .. versionadded:: 4.3
@@ -451,12 +475,22 @@ class Client:
         )
 
     def create_tweet(
-        self, *, direct_message_deep_link=None, for_super_followers_only=None,
-        place_id=None, media_ids=None, media_tagged_user_ids=None,
-        poll_duration_minutes=None, poll_options=None, quote_tweet_id=None,
-        exclude_reply_user_ids=None, in_reply_to_tweet_id=None,
-        reply_settings=None, text=None, user_auth=True
-    ):
+        self,
+        *,
+        direct_message_deep_link: Optional[str] = None,
+        for_super_followers_only: Optional[bool] =None,
+        place_id: Optional[str] =None,
+        media_ids: Optional[List[Union[str, int]]] = None,
+        media_tagged_user_ids: Optional[List[Union[str, int]]] = None,
+        poll_duration_minutes: Optional[int] = None,
+        poll_options: Optional[List[str]] = None,
+        quote_tweet_id: Optional[Union[int, str]] = None,
+        exclude_reply_user_ids: Optional[List[Union[str, int]]] = None,
+        in_reply_to_tweet_id: Optional[Union[int, str]] = None,
+        reply_settings: Optional[str] = None,
+        text: Optional[str] = None,
+        user_auth: bool = True,
+    ) -> Response:
         """Creates a Tweet on behalf of an authenticated user.
 
         .. versionadded:: 4.3
@@ -566,7 +600,7 @@ class Client:
 
     # Retweets
 
-    def unretweet(self, source_tweet_id, *, user_auth=True):
+    def unretweet(self, source_tweet_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows an authenticated user ID to remove the Retweet of a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -598,7 +632,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_retweeters(self, id, *, user_auth=False, **params):
+    def get_retweeters(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_retweeters( \
             id, *, expansions, media_fields, place_fields, poll_fields, \
             tweet_fields, user_fields, user_auth=False \
@@ -641,7 +675,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def retweet(self, tweet_id, *, user_auth=True):
+    def retweet(self, tweet_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Causes the user ID to Retweet the target Tweet.
 
         .. versionchanged:: 4.5
@@ -672,7 +706,7 @@ class Client:
 
     # Search Tweets
 
-    def search_all_tweets(self, query, **params):
+    def search_all_tweets(self, query: str, **params) -> Response:
         """search_all_tweets( \
             query, *, end_time, expansions, max_results, media_fields, \
             next_token, place_fields, poll_fields, since_id, start_time, \
@@ -761,7 +795,7 @@ class Client:
             ), data_type=Tweet
         )
 
-    def search_recent_tweets(self, query, *, user_auth=False, **params):
+    def search_recent_tweets(self, query: str, *, user_auth: bool = False, **params) -> Response:
         """search_recent_tweets( \
             query, *, end_time, expansions, max_results, media_fields, \
             next_token, place_fields, poll_fields, since_id, start_time, \
@@ -857,7 +891,7 @@ class Client:
 
     # Timelines
 
-    def get_users_mentions(self, id, *, user_auth=False, **params):
+    def get_users_mentions(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_users_mentions( \
             id, *, end_time, expansions, max_results, media_fields, \
             pagination_token, place_fields, poll_fields, since_id, \
@@ -955,7 +989,7 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_users_tweets(self, id, *, user_auth=False, **params):
+    def get_users_tweets(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_users_tweets( \
             id, *, end_time, exclude, expansions, max_results, media_fields, \
             pagination_token, place_fields, poll_fields, since_id, \
@@ -1065,7 +1099,7 @@ class Client:
 
     # Tweet counts
 
-    def get_all_tweets_count(self, query, **params):
+    def get_all_tweets_count(self, query: str, **params) -> Response:
         """get_all_tweets_count(query, *, end_time, granularity, next_token, \
                                 since_id, start_time, until_id)
 
@@ -1133,7 +1167,7 @@ class Client:
             )
         )
 
-    def get_recent_tweets_count(self, query, **params):
+    def get_recent_tweets_count(self, query: str, **params) -> Response:
         """get_recent_tweets_count(query, *, end_time, granularity, since_id, \
                                    start_time, until_id)
 
@@ -1202,7 +1236,7 @@ class Client:
 
     # Tweet lookup
 
-    def get_tweet(self, id, *, user_auth=False, **params):
+    def get_tweet(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_tweet(id, *, expansions, media_fields, place_fields, \
                      poll_fields, twitter_fields, user_fields, user_auth=False)
 
@@ -1244,7 +1278,7 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_tweets(self, ids, *, user_auth=False, **params):
+    def get_tweets(self, ids: Union[List[Union[int, str]], str], *, user_auth: bool = False, **params) -> Response:
         """get_tweets( \
             ids, *, expansions, media_fields, place_fields, poll_fields, \
             twitter_fields, user_fields, user_auth=False \
@@ -1293,7 +1327,7 @@ class Client:
 
     # Blocks
 
-    def unblock(self, target_user_id, *, user_auth=True):
+    def unblock(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Unblock another user.
 
         The request succeeds with no action when the user sends a request to a
@@ -1324,7 +1358,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_blocked(self, *, user_auth=True, **params):
+    def get_blocked(self, *, user_auth: bool = True, **params) -> Response:
         """get_blocked(*, expansions, max_results, pagination_token, \
                        tweet_fields, user_fields, user_auth=True)
 
@@ -1371,7 +1405,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def block(self, target_user_id, *, user_auth=True):
+    def block(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Block another user.
 
         .. versionchanged:: 4.5
@@ -1402,7 +1436,7 @@ class Client:
 
     # Follows
 
-    def unfollow_user(self, target_user_id, *, user_auth=True):
+    def unfollow_user(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows a user ID to unfollow another user.
 
         The request succeeds with no action when the authenticated user sends a
@@ -1436,7 +1470,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def unfollow(self, target_user_id, *, user_auth=True):
+    def unfollow(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Alias for :meth:`Client.unfollow_user`
 
         .. deprecated:: 4.2
@@ -1448,7 +1482,7 @@ class Client:
         )
         self.unfollow_user(target_user_id, user_auth=user_auth)
 
-    def get_users_followers(self, id, *, user_auth=False, **params):
+    def get_users_followers(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_users_followers( \
             id, *, expansions, max_results, pagination_token, tweet_fields, \
             user_fields, user_auth=False \
@@ -1496,7 +1530,7 @@ class Client:
             data_type=User, user_auth=user_auth
         )
 
-    def get_users_following(self, id, *, user_auth=False, **params):
+    def get_users_following(self, id: Union[int, str], *, user_auth: bool = False, **params) -> Response:
         """get_users_following( \
             id, *, expansions, max_results, pagination_token, tweet_fields, \
             user_fields, user_auth=False \
@@ -1543,7 +1577,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def follow_user(self, target_user_id, *, user_auth=True):
+    def follow_user(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows a user ID to follow another user.
 
         If the target user does not have public Tweets, this endpoint will send
@@ -1582,7 +1616,7 @@ class Client:
             user_auth=user_auth
         )
 
-    def follow(self, target_user_id, *, user_auth=True):
+    def follow(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Alias for :meth:`Client.follow_user`
 
         .. deprecated:: 4.2
@@ -1596,7 +1630,7 @@ class Client:
 
     # Mutes
 
-    def unmute(self, target_user_id, *, user_auth=True):
+    def unmute(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows an authenticated user ID to unmute the target user.
 
         The request succeeds with no action when the user sends a request to a
@@ -1627,7 +1661,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_muted(self, *, user_auth=True, **params):
+    def get_muted(self, *, user_auth: bool = True, **params) -> Response:
         """get_muted(*, expansions, max_results, pagination_token, \
                      tweet_fields, user_fields, user_auth=True)
 
@@ -1676,7 +1710,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def mute(self, target_user_id, *, user_auth=True):
+    def mute(self, target_user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Allows an authenticated user ID to mute the target user.
 
         .. versionchanged:: 4.5
@@ -1707,7 +1741,14 @@ class Client:
 
     # User lookup
 
-    def get_user(self, *, id=None, username=None, user_auth=False, **params):
+    def get_user(
+        self,
+        *,
+        id: Optional[Union[str, int]] = None,
+        username: Optional[str] = None,
+        user_auth: bool = False,
+        **params,
+    ) -> Response:
         """get_user(*, id, username, expansions, tweet_fields, user_fields, \
                     user_auth=False)
 
@@ -1761,8 +1802,14 @@ class Client:
             data_type=User, user_auth=user_auth
         )
 
-    def get_users(self, *, ids=None, usernames=None, user_auth=False,
-                  **params):
+    def get_users(
+        self,
+        *,
+        ids: Optional[List[Union[str, int]]] = None,
+        usernames: Optional[Union[List[str], str]] = None,
+        user_auth: bool = False,
+        **params,
+    ) -> Response:
         """get_users(*, ids, usernames, expansions, tweet_fields, \
                      user_fields, user_auth=False)
 
@@ -1822,7 +1869,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_me(self, *, user_auth=True, **params):
+    def get_me(self, *, user_auth: bool = True, **params) -> Response:
         """get_me(*, expansions, tweet_fields, user_fields, user_auth=True)
 
         Returns information about an authorized user.
@@ -1856,7 +1903,7 @@ class Client:
 
     # Search Spaces
 
-    def search_spaces(self, query, **params):
+    def search_spaces(self, query: str, **params) -> Response:
         """search_spaces(query, *, expansions, max_results, space_fields, \
                          state, user_fields)
 
@@ -1905,7 +1952,13 @@ class Client:
 
     # Spaces lookup
 
-    def get_spaces(self, *, ids=None, user_ids=None, **params):
+    def get_spaces(
+        self,
+        *,
+        ids: Optional[Union[List[str], str]] = None,
+        user_ids: Optional[Union[List[Union[int, str]], str]] = None,
+        **params,
+    ) -> Response:
         """get_spaces(*, ids, user_ids, expansions, space_fields, user_fields)
 
         Returns details about multiple live or scheduled Spaces (created by the
@@ -1961,7 +2014,7 @@ class Client:
             ), data_type=Space
         )
 
-    def get_space(self, id, **params):
+    def get_space(self, id: Union[List[str], str], **params) -> Response:
         """get_space(id, *, expansions, space_fields, user_fields)
 
         Returns a variety of information about a single Space specified by the
@@ -1995,7 +2048,7 @@ class Client:
             ), data_type=Space
         )
 
-    def get_space_buyers(self, id, **params):
+    def get_space_buyers(self, id: str, **params) -> Response:
         """get_space_buyers(id, *, expansions, media_fields, place_fields, \
                             poll_fields, tweet_fields, user_fields)
 
@@ -2041,7 +2094,7 @@ class Client:
 
     # List Tweets lookup
 
-    def get_list_tweets(self, id, *, user_auth=False, **params):
+    def get_list_tweets(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_list_tweets(id, *, expansions, max_results, pagination_token, \
                            tweet_fields, user_fields, user_auth=False)
 
@@ -2090,7 +2143,7 @@ class Client:
 
     # List follows
 
-    def unfollow_list(self, list_id, *, user_auth=True):
+    def unfollow_list(self, list_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to unfollow a List.
 
         .. versionadded:: 4.2
@@ -2120,7 +2173,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_list_followers(self, id, *, user_auth=False, **params):
+    def get_list_followers(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_list_followers( \
             id, *, expansions, max_results, pagination_token, tweet_fields, \
             user_fields, user_auth=False \
@@ -2169,7 +2222,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_followed_lists(self, id, *, user_auth=False, **params):
+    def get_followed_lists(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_followed_lists( \
             id, *, expansions, list_fields, max_results, pagination_token, \
             user_fields, user_auth=False \
@@ -2215,10 +2268,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "list.fields", "max_results", "pagination_token",
                 "user.fields"
-            ), data_type=List, user_auth=user_auth
+            ), data_type=TwitterList, user_auth=user_auth
         )
 
-    def follow_list(self, list_id, *, user_auth=True):
+    def follow_list(self, list_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to follow a List.
 
         .. versionadded:: 4.2
@@ -2250,7 +2303,7 @@ class Client:
 
     # List lookup
 
-    def get_list(self, id, *, user_auth=False, **params):
+    def get_list(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_list(id, *, expansions, list_fields, user_fields, \
                     user_auth=False)
 
@@ -2283,10 +2336,10 @@ class Client:
             "GET", f"/2/lists/{id}", params=params,
             endpoint_parameters=(
                 "expansions", "list.fields", "user.fields"
-            ), data_type=List, user_auth=user_auth
+            ), data_type=TwitterList, user_auth=user_auth
         )
 
-    def get_owned_lists(self, id, *, user_auth=False, **params):
+    def get_owned_lists(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_owned_lists(id, *, expansions, list_fields, max_results, \
                            pagination_token, user_fields, user_auth=False)
 
@@ -2330,12 +2383,12 @@ class Client:
             endpoint_parameters=(
                 "expansions", "list.fields", "max_results", "pagination_token",
                 "user.fields"
-            ), data_type=List, user_auth=user_auth
+            ), data_type=TwitterList, user_auth=user_auth
         )
 
     # List members
 
-    def remove_list_member(self, id, user_id, *, user_auth=True):
+    def remove_list_member(self, id: Union[int, str], user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to remove a member from a List they
         own.
 
@@ -2366,7 +2419,7 @@ class Client:
             "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=user_auth
         )
 
-    def get_list_members(self, id, *, user_auth=False, **params):
+    def get_list_members(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_list_members(id, *, expansions, max_results, pagination_token, \
                             tweet_fields, user_fields, user_auth=False)
 
@@ -2413,7 +2466,7 @@ class Client:
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_list_memberships(self, id, *, user_auth=False, **params):
+    def get_list_memberships(self, id: Union[List[str], str], *, user_auth: bool = False, **params) -> Response:
         """get_list_memberships( \
             id, *, expansions, list_fields, max_results, pagination_token, \
             user_fields, user_auth=False \
@@ -2459,10 +2512,10 @@ class Client:
             endpoint_parameters=(
                 "expansions", "list.fields", "max_results", "pagination_token",
                 "user.fields"
-            ), data_type=List, user_auth=user_auth
+            ), data_type=TwitterList, user_auth=user_auth
         )
 
-    def add_list_member(self, id, user_id, *, user_auth=True):
+    def add_list_member(self, id: Union[int, str], user_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to add a member to a List they own.
 
         .. versionadded:: 4.2
@@ -2494,7 +2547,7 @@ class Client:
 
     # Manage Lists
 
-    def delete_list(self, id, *, user_auth=True):
+    def delete_list(self, id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to delete a List that they own.
 
         .. versionadded:: 4.2
@@ -2522,8 +2575,15 @@ class Client:
             "DELETE", f"/2/lists/{id}", user_auth=user_auth
         )
 
-    def update_list(self, id, *, description=None, name=None, private=None,
-                    user_auth=True):
+    def update_list(
+        self,
+        id: Union[int, str],
+        *,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        private: Optional[bool] = None,
+        user_auth: bool = True,
+    ) -> Response:
         """Enables the authenticated user to update the meta data of a
         specified List that they own.
 
@@ -2568,8 +2628,14 @@ class Client:
             "PUT", f"/2/lists/{id}", json=json, user_auth=user_auth
         )
 
-    def create_list(self, name, *, description=None, private=None,
-                    user_auth=True):
+    def create_list(
+        self,
+        name: str,
+        *,
+        description: Optional[str] = None,
+        private: Optional[bool] = None,
+        user_auth: bool = True,
+    ) -> Response:
         """Enables the authenticated user to create a List.
 
         .. versionadded:: 4.2
@@ -2610,7 +2676,7 @@ class Client:
 
     # Pinned Lists
 
-    def unpin_list(self, list_id, *, user_auth=True):
+    def unpin_list(self, list_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to unpin a List.
 
         .. versionadded:: 4.2
@@ -2640,7 +2706,7 @@ class Client:
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_pinned_lists(self, *, user_auth=True, **params):
+    def get_pinned_lists(self, *, user_auth: bool = True, **params) -> Response:
         """get_pinned_lists(*, expansions, list_fields, user_fields, \
                             user_auth=True)
 
@@ -2677,10 +2743,10 @@ class Client:
             "GET", route, params=params,
             endpoint_parameters=(
                 "expansions", "list.fields", "user.fields"
-            ), data_type=List, user_auth=user_auth
+            ), data_type=TwitterList, user_auth=user_auth
         )
 
-    def pin_list(self, list_id, *, user_auth=True):
+    def pin_list(self, list_id: Union[int, str], *, user_auth: bool = True) -> Response:
         """Enables the authenticated user to pin a List.
 
         .. versionadded:: 4.2
@@ -2712,7 +2778,7 @@ class Client:
 
     # Batch Compliance
 
-    def get_compliance_jobs(self, type, **params):
+    def get_compliance_jobs(self, type: str, **params) -> Response:
         """get_compliance_jobs(type, *, status)
 
         Returns a list of recent compliance jobs.
@@ -2743,7 +2809,7 @@ class Client:
             endpoint_parameters=("type", "status")
         )
 
-    def get_compliance_job(self, id):
+    def get_compliance_job(self, id: Union[int, str]) -> Response:
         """Get a single compliance job with the specified ID.
 
         .. versionadded:: 4.1
@@ -2765,7 +2831,13 @@ class Client:
             "GET", f"/2/compliance/jobs/{id}"
         )
 
-    def create_compliance_job(self, type, *, name=None, resumable=None):
+    def create_compliance_job(
+        self,
+        type: str,
+        *,
+        name: Optional[str] = None,
+        resumable: Optional[bool] = None,
+    ) -> Response:
         """Creates a new compliance job for Tweet IDs or user IDs.
 
         A compliance job will contain an ID and a destination URL. The

@@ -1,6 +1,7 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from typing import Dict, Any
 
 from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
@@ -15,7 +16,7 @@ class Space(HashableID, DataMapping):
         "updated_at"
     )
 
-    def __init__(self, data):
+    def __init__(self, data: Dict[str, Any]):
         self.data = data
         self.id = data["id"]
         self.state = data["state"]

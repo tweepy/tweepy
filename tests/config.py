@@ -34,7 +34,7 @@ class TweepyTestCase(unittest.TestCase):
         self.api.retry_delay = 0 if use_replay else 5
 
 
-def create_auth():
+def create_auth() -> OAuthHandler:
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     return auth
