@@ -22,6 +22,11 @@ log = logging.getLogger(__name__)
 
 
 class OAuth1UserHandler:
+    """OAuth 1.0a User Context authentication handler
+
+    .. versionchanged:: 4.5
+        Renamed from :class:`OAuthHandler`
+    """
 
     def __init__(self, consumer_key, consumer_secret, access_token=None,
                  access_token_secret=None, callback=None):
@@ -63,7 +68,7 @@ class OAuth1UserHandler:
 
     def get_authorization_url(self, signin_with_twitter=False,
                               access_type=None):
-        """Get the authorization URL to redirect the user"""
+        """Get the authorization URL to redirect the user to"""
         try:
             if signin_with_twitter:
                 url = self._get_oauth_url('authenticate')
@@ -79,8 +84,8 @@ class OAuth1UserHandler:
             raise TweepyException(e)
 
     def get_access_token(self, verifier=None):
-        """After user has authorized the request token, get access token
-        with user supplied verifier.
+        """After user has authorized the app, get access token and secret with
+        verifier
         """
         try:
             url = self._get_oauth_url('access_token')
@@ -98,6 +103,10 @@ class OAuth1UserHandler:
             raise TweepyException(e)
 
     def set_access_token(self, key, secret):
+        """
+        .. deprecated:: 4.5
+            Set through initialization instead.
+        """
         self.access_token = key
         self.access_token_secret = secret
 
@@ -120,6 +129,12 @@ class OAuthHandler(OAuth1UserHandler):
 
 
 class OAuth2AppHandler:
+    """OAuth 2.0 Bearer Token (App-Only) using API / Consumer key and secret
+    authentication handler
+
+    .. versionchanged:: 4.5
+        Renamed from :class:`AppAuthHandler`
+    """
 
     def __init__(self, consumer_key, consumer_secret):
         self.consumer_key = consumer_key
@@ -158,6 +173,10 @@ class AppAuthHandler(OAuth2AppHandler):
 
 
 class OAuth2BearerHandler(AuthBase):
+    """OAuth 2.0 Bearer Token (App-Only) authentication handler
+
+    .. versionadded:: 4.5
+    """
 
     def __init__(self, bearer_token):
         self.bearer_token = bearer_token
@@ -171,6 +190,11 @@ class OAuth2BearerHandler(AuthBase):
 
 
 class OAuth2UserHandler(OAuth2Session):
+    """OAuth 2.0 Authorization Code Flow with PKCE (User Context)
+    authentication handler
+
+    .. versionadded:: 4.5
+    """
 
     def __init__(self, *, client_id, redirect_uri, scope, client_secret=None):
         super().__init__(client_id, redirect_uri=redirect_uri, scope=scope)
@@ -180,6 +204,7 @@ class OAuth2UserHandler(OAuth2Session):
             self.auth = None
 
     def get_authorization_url(self):
+        """Get the authorization URL to redirect the user to"""
         self.code_verifier = secrets.token_urlsafe(128)[:128]
         code_challenge = urlsafe_b64encode(
             sha256(self.code_verifier.encode("ASCII")).digest()
@@ -191,6 +216,9 @@ class OAuth2UserHandler(OAuth2Session):
         return authorization_url
 
     def fetch_token(self, authorization_response):
+        """After user has authorized the app, fetch access token with
+        authorization response URL
+        """
         return super().fetch_token(
             "https://api.twitter.com/2/oauth2/token",
             authorization_response=authorization_response,

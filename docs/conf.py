@@ -36,12 +36,15 @@ extensions = [
 
 hoverxref_auto_ref = True
 hoverxref_domains = ['py']
-hoverxref_intersphinx = ['aiohttp', 'requests']
+hoverxref_intersphinx = ['aiohttp', 'requests', 'requests_oauthlib']
 
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
   'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
-  'requests': ('https://docs.python-requests.org/en/stable/', None)
+  'requests': ('https://docs.python-requests.org/en/stable/', None),
+  'requests_oauthlib': (
+    'https://requests-oauthlib.readthedocs.io/en/latest/', None
+  )
 }
 
 rst_prolog = """
