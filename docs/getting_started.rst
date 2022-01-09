@@ -31,7 +31,8 @@ Hello Tweepy
 This example will download your home timeline tweets and print each
 one of their texts to the console. Twitter requires all requests to
 use OAuth for authentication.
-The :ref:`auth_tutorial` goes into more details about authentication.
+The :ref:`authentication` documentation goes into more details about
+authentication.
 
 API
 ===

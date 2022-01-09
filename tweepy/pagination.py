@@ -87,8 +87,10 @@ class PaginationIterator:
             raise StopIteration
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
-        if self.method.__name__ in ("search_all_tweets",
-                                    "search_recent_tweets"):
+        if self.method.__name__ in (
+            "search_all_tweets", "search_recent_tweets",
+            "get_all_tweets_count"
+        ):
             self.kwargs["next_token"] = pagination_token
         else:
             self.kwargs["pagination_token"] = pagination_token

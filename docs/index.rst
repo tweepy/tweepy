@@ -13,7 +13,7 @@ Contents:
 
    install.rst
    getting_started.rst
-   auth_tutorial.rst
+   authentication.rst
    api.rst
    client.rst
    models.rst
