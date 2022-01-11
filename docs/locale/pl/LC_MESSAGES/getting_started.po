@@ -2,20 +2,19 @@
 # This file is distributed under the same license as the Tweepy package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Tweepy-pl\n"
+"Project-Id-Version:  Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-15 22:51+0200\n"
+"POT-Creation-Date: 2022-01-10 20:32+0900\n"
 "PO-Revision-Date: 2021-04-21 20:51+0200\n"
 "Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
 "Language: pl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
-"X-Generator: Poedit 2.4.2\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../../getting_started.rst:6
 msgid "Getting started"
@@ -28,65 +27,67 @@ msgstr "Wprowadzenie"
 #: ../../getting_started.rst:11
 msgid ""
 "If you are new to Tweepy, this is the place to begin. The goal of this "
-"tutorial is to get you set-up and rolling with Tweepy. We won't go into too "
-"much detail here, just some important basics."
+"tutorial is to get you set-up and rolling with Tweepy. We won't go into "
+"too much detail here, just some important basics."
 msgstr ""
 "Jeżeli jesteś nowy to tutaj jest idealne miejsce do rozpoczęcia twojej "
-"przygody z Tweepy. Celem tego poradnika jest pomoc w ustawieniu i rozpoczęciu "
-"pracy z Tweepy. Nie znajdziesz tu zbyt szczegółowych opisów, głównie "
-"podstawowe informacje."
+"przygody z Tweepy. Celem tego poradnika jest pomoc w ustawieniu i "
+"rozpoczęciu pracy z Tweepy. Nie znajdziesz tu zbyt szczegółowych opisów, "
+"głównie podstawowe informacje."
 
 #: ../../getting_started.rst:16
 msgid "Hello Tweepy"
 msgstr "Hello Tweepy"
 
 #: ../../getting_started.rst:31
+#, fuzzy
 msgid ""
-"This example will download your home timeline tweets and print each one of "
-"their texts to the console. Twitter requires all requests to use OAuth for "
-"authentication. The :ref:`auth_tutorial` goes into more details about "
-"authentication."
+"This example will download your home timeline tweets and print each one "
+"of their texts to the console. Twitter requires all requests to use OAuth"
+" for authentication. The :ref:`authentication` documentation goes into "
+"more details about authentication."
 msgstr ""
-"Ten przykład pobierze tweety z twojej osi czasu i wyświetli tekst każdego z "
-"nich w konsoli. Twitter wymaga by wszystkie żądania używały OAuth do "
-"uwierzytelniania. W :ref:`auth_tutorial` znajdziesz więcej szczegółów na temat "
-"uwierzytelniania."
+"Ten przykład pobierze tweety z twojej osi czasu i wyświetli tekst każdego"
+" z nich w konsoli. Twitter wymaga by wszystkie żądania używały OAuth do "
+"uwierzytelniania. W :ref:`auth_tutorial` znajdziesz więcej szczegółów na "
+"temat uwierzytelniania."
 
-#: ../../getting_started.rst:37
+#: ../../getting_started.rst:38
 msgid "API"
 msgstr "API"
 
-#: ../../getting_started.rst:39
+#: ../../getting_started.rst:40
 msgid ""
-"The API class provides access to the entire twitter RESTful API methods. Each "
-"method can accept various parameters and return responses. For more "
+"The API class provides access to the entire twitter RESTful API methods. "
+"Each method can accept various parameters and return responses. For more "
 "information about these methods please refer to :ref:`API Reference "
 "<api_reference>`."
 msgstr ""
-"Klasa API dostarcza dostęp do całości metod twitter RESTful API. Każda metoda "
-"może zaakceptować różne parametry i zwrócić odpowiedzi. Po więcej informacji "
-"zajrzyj do :ref:`API Reference <api_reference>`."
+"Klasa API dostarcza dostęp do całości metod twitter RESTful API. Każda "
+"metoda może zaakceptować różne parametry i zwrócić odpowiedzi. Po więcej "
+"informacji zajrzyj do :ref:`API Reference <api_reference>`."
 
-#: ../../getting_started.rst:45
+#: ../../getting_started.rst:46
 msgid "Models"
 msgstr "Modele"
 
-#: ../../getting_started.rst:47
+#: ../../getting_started.rst:48
 msgid ""
-"When we invoke an API method most of the time returned back to us will be a "
-"Tweepy model class instance. This will contain the data returned from Twitter "
-"which we can then use inside our application. For example the following code "
-"returns to us a User model::"
+"When we invoke an API method most of the time returned back to us will be"
+" a Tweepy model class instance. This will contain the data returned from "
+"Twitter which we can then use inside our application. For example the "
+"following code returns to us a User model::"
 msgstr ""
-"Gdy wywołujesz metodę API, w większości przypadków zwrócony zostanie moduł "
-"klasy instancji Tweepy. Będzie on zawierał dane zwrócone przez Twitter, które "
-"możesz później użyć w swojej aplikacji. Na przykład poniższy kod zwraca User "
-"model::"
+"Gdy wywołujesz metodę API, w większości przypadków zwrócony zostanie "
+"moduł klasy instancji Tweepy. Będzie on zawierał dane zwrócone przez "
+"Twitter, które możesz później użyć w swojej aplikacji. Na przykład "
+"poniższy kod zwraca User model::"
 
-#: ../../getting_started.rst:55
+#: ../../getting_started.rst:56
 msgid "Models contain the data and some helper methods which we can then use::"
 msgstr "Modele zawierają dane i metody pomocnicze, których możesz później użyć::"
 
-#: ../../getting_started.rst:63
+#: ../../getting_started.rst:64
 msgid "For more information about models please see ModelsReference."
 msgstr "Po więcej informacji zajrzyj do ModelsReference."
+
