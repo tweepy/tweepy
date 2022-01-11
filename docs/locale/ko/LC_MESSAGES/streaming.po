@@ -30,7 +30,6 @@ msgstr ""
 "`샘플링(Sampling)`_ 을 지원합니다. "
 
 #: ../../streaming.rst:15
-#, fuzzy
 msgid ""
 "Streams utilize Streaming HTTP protocol to deliver data through an open, "
 "streaming API connection. Rather than delivering data in batches through "
@@ -113,7 +112,6 @@ msgid "Handling Errors"
 msgstr "오류(Error) 처리"
 
 #: ../../streaming.rst:80
-#, fuzzy
 msgid ""
 ":class:`Stream` has multiple methods to handle errors during streaming. "
 ":meth:`Stream.on_closed` is called when the stream is closed by Twitter. "

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tweepy 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-08 05:35+0900\n"
-"PO-Revision-Date: 2021-12-03 16:41+0900\n"
+"PO-Revision-Date: 2022-01-11 14:53+0900\n"
 "Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,11 +22,11 @@ msgid "Installation"
 msgstr "설치하기"
 
 #: ../../install.rst:4
-#, fuzzy
 msgid ""
 "The easiest way to install the latest version from PyPI is by using "
 "`pip`_::"
-msgstr "PyPI로부터 최신 버전을 설치하는 가장 쉬운 방법은, pip를 이용하는 것입니다::"
+msgstr ""
+"PyPI로부터 최신 버전을 설치하는 가장 쉬운 방법은, `pip`_ 를 이용하는 것입니다::"
 
 #: ../../install.rst:10
 msgid ""

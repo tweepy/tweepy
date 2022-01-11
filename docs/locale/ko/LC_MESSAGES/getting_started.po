@@ -39,7 +39,6 @@ msgid "Hello Tweepy"
 msgstr "Tweepy.안녕()!"
 
 #: ../../getting_started.rst:31
-#, fuzzy
 msgid ""
 "This example will download your home timeline tweets and print each one "
 "of their texts to the console. Twitter requires all requests to use OAuth"
