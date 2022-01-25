@@ -3,6 +3,39 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.5.0
+-------------
+
+### New Features / Improvements
+- Revamp authentication interface
+  - Add support for OAuth 2.0 Authorization Code Flow with PKCE
+    - Add `OAuth2UserHandler` ([2b83507](https://github.com/tweepy/tweepy/commit/2b835073cb193ca6f2849c8cb6ef4322e5b16f24), [16763e2](https://github.com/tweepy/tweepy/commit/16763e2ff6913653077512f069864ad720d44ad7))
+    - Add `user_auth` parameters to `Client` methods ([8f38429](https://github.com/tweepy/tweepy/commit/8f384294405c6d14507441a5d1a7040d927b3fc2), [e88b074](https://github.com/tweepy/tweepy/commit/e88b07465fbcf6013be89cf938eae718391cc1df), [0d6b68a](https://github.com/tweepy/tweepy/commit/0d6b68aeb3ed36e8d0e3d400b99351ed628ba1e0))
+  - Rename `OAuthHandler` to `OAuth1UserHandler` ([fb6eb7d](https://github.com/tweepy/tweepy/commit/fb6eb7d53d78bcaca997586f95270a43753a9ae6))
+    - `OAuthHandler` is kept as a deprecated alias ([cba7317](https://github.com/tweepy/tweepy/commit/cba7317a4aa298a65eda7825589eb40a01a370f6))
+  - Rename `AppAuthHandler` to `Oauth2AppHandler` ([529d793](https://github.com/tweepy/tweepy/commit/529d7936201f05f4167225be3bbcaf38eafadb8c))
+    - `AppAuthHandler` is kept as a deprecated alias ([d4ceb1a](https://github.com/tweepy/tweepy/commit/d4ceb1aedba5380d95c8efee7d21f5e478715fe6))
+  - Rename `OAuth2Bearer` to `OAuth2BearerHandler` ([0781fde](https://github.com/tweepy/tweepy/commit/0781fde83c31cef45e0d7d8b2155a2624fb93b77))
+  - Allow passing access token and secret directly to `OAuth1UserHandler.__init__` ([99f3583](https://github.com/tweepy/tweepy/commit/99f3583d99ac9a0003273318e7628235bba707f0))
+  - Allow `OAuth2BearerHandler` to be used as `auth` parameter for `API` ([5a2a3fc](https://github.com/tweepy/tweepy/commit/5a2a3fc6020b6fe91141a753a2e293976addf48e))
+  - Remove `AuthHandler` ([d600c4c](https://github.com/tweepy/tweepy/commit/d600c4cf6ad2755aa0a959ee57c12d86cddce973))
+  - Remove `OAuth1UserHandler.get_xauth_access_token` ([8e2de9f](https://github.com/tweepy/tweepy/commit/8e2de9f590031bf6d6ade8946e7371366c4caa58))
+  - Update and improve authentication documentation ([f9a722b](https://github.com/tweepy/tweepy/commit/f9a722bae8cce368b9f8fd447c418e1034c32178))
+  - Other improvements and optimizations
+- Add `Client.get_me` ([c49cbdf](https://github.com/tweepy/tweepy/commit/c49cbdfcbda48295591d731446cd03b2eb2332ae), [62b5b58](https://github.com/tweepy/tweepy/commit/62b5b586e75a850427eabdf31448d73a9e564f66), [f6895d3](https://github.com/tweepy/tweepy/commit/f6895d36eee68adc41d0951ce6b3ee1d7b179995), [bb87b26](https://github.com/tweepy/tweepy/commit/bb87b269efa2e0ba019a0e67fa1a7489838b9684))
+- Add support for `Media.url` ([#1722](https://github.com/tweepy/tweepy/issues/1722))
+- Use requests exception to handle `JSONDecodeError` ([b492b0a](https://github.com/tweepy/tweepy/commit/b492b0a9fd4a0fedbc03cc2cc1927c45e866cb4e))
+  - Update requests dependency requirement to >= 2.27.0 ([ed66e8e](https://github.com/tweepy/tweepy/commit/ed66e8e98ea489eabe0e6ef607bb0c8c715b19d6))
+
+### Bug Fixes
+- Fix `Response.includes["polls"]` not being `Poll` objects ([#1733](https://github.com/tweepy/tweepy/pull/1733))
+- Fix `Paginator` handling of `Client.get_all_tweets_count` ([#1761](https://github.com/tweepy/tweepy/pull/1761))
+
+### Misc
+- Improve and optimize `Model.__getstate__` ([#1707](https://github.com/tweepy/tweepy/issues/1707))
+- Add API v2 examples to documentation ([bbdbb7b](https://github.com/tweepy/tweepy/commit/bbdbb7bbd7f3eb0d3c46d970aa14098d37857053))
+- Update and improve various documentation
+
 Version 4.4.0
 -------------
 ### New Features / Improvements
