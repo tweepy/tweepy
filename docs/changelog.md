@@ -17,6 +17,7 @@ Version 4.5.0
     - `AppAuthHandler` is kept as a deprecated alias ([d4ceb1a](https://github.com/tweepy/tweepy/commit/d4ceb1aedba5380d95c8efee7d21f5e478715fe6))
   - Rename `OAuth2Bearer` to `OAuth2BearerHandler` ([0781fde](https://github.com/tweepy/tweepy/commit/0781fde83c31cef45e0d7d8b2155a2624fb93b77))
   - Allow passing access token and secret directly to `OAuth1UserHandler.__init__` ([99f3583](https://github.com/tweepy/tweepy/commit/99f3583d99ac9a0003273318e7628235bba707f0))
+    - Note, this changes the `callback` parameter to be the fifth argument, positionally
   - Allow `OAuth2BearerHandler` to be used as `auth` parameter for `API` ([5a2a3fc](https://github.com/tweepy/tweepy/commit/5a2a3fc6020b6fe91141a753a2e293976addf48e))
   - Remove `AuthHandler` ([d600c4c](https://github.com/tweepy/tweepy/commit/d600c4cf6ad2755aa0a959ee57c12d86cddce973))
   - Remove `OAuth1UserHandler.get_xauth_access_token` ([8e2de9f](https://github.com/tweepy/tweepy/commit/8e2de9f590031bf6d6ade8946e7371366c4caa58))
