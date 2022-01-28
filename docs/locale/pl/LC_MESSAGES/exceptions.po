@@ -2,19 +2,19 @@
 # This file is distributed under the same license as the Tweepy package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  Tweepy-pl\n"
+"Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"POT-Creation-Date: 2021-04-15 22:51+0200\n"
 "PO-Revision-Date: 2021-04-28 15:37+0200\n"
-"Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
+"Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail."
+"com>\n"
 "Language: pl\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
-"(n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../../exceptions.rst:5
 msgid "Exceptions"
@@ -24,17 +24,16 @@ msgstr "Wyjątki"
 msgid ""
 "Exceptions are available directly in the :mod:`tweepy` module, which "
 "means :mod:`tweepy.errors` itself does not need to be imported. For "
-"example, :exc:`tweepy.errors.TweepyException` is available as "
-":exc:`tweepy.TweepyException`."
+"example, :exc:`tweepy.errors.TweepyException` is available as :exc:"
+"`tweepy.TweepyException`."
 msgstr ""
-"Wyjątki są dostępne bezpośrednio w module :mod:`tweepy`, co oznacza, że "
-":mod:`tweepy.errors` nie musi być importowany. Na przykład, "
-":exc:`tweepy.errors.TweepyException` jest dostępny jako "
-":exc:`tweepy.TweepyException`."
+"Wyjątki są dostępne bezpośrednio w module :mod:`tweepy`, co oznacza, "
+"że :mod:`tweepy.errors` nie musi być importowany. Na przykład, :exc:"
+"`tweepy.errors.TweepyException` jest dostępny jako :exc:`tweepy."
+"TweepyException`."
 
 #: of tweepy.errors.TweepyException:1
-#, fuzzy
-msgid "Bases: :py:class:`Exception`"
+msgid "Bases: :class:`Exception`"
 msgstr "Postawy: :class:`Exception`"
 
 #: of tweepy.errors.TweepyException:1
@@ -42,56 +41,18 @@ msgid "Base exception for Tweepy"
 msgstr "Podstawowy wyjątek dla Tweepy"
 
 #: of tweepy.errors.HTTPException:1
-#, fuzzy
-msgid "Bases: :py:class:`tweepy.errors.TweepyException`"
+msgid "Bases: :class:`tweepy.errors.TweepyException`"
 msgstr "Podstawy: :class:`tweepy.errors.TweepyException`"
 
 #: of tweepy.errors.HTTPException:1
 msgid "Exception raised when an HTTP request fails"
 msgstr "Wywołanie wyjątku gdy żądanie HTTP nie powiedzie się"
 
-#: of tweepy.errors.HTTPException:7
-msgid "Requests Response from the Twitter API"
-msgstr ""
-
-#: of tweepy.errors.HTTPException
-msgid "type"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:9
-msgid "requests.Response"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:13
-msgid "The errors the Twitter API responded with, if any"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:15
-msgid "List[dict[str, Union[int, str]]]"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:19
-msgid "The error codes the Twitter API responded with, if any"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:21
-msgid "List[int]"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:25
-msgid "The error messages the Twitter API responded with, if any"
-msgstr ""
-
-#: of tweepy.errors.HTTPException:27
-msgid "List[str]"
-msgstr ""
-
 #: of tweepy.errors.BadRequest:1 tweepy.errors.Forbidden:1
 #: tweepy.errors.NotFound:1 tweepy.errors.TooManyRequests:1
 #: tweepy.errors.TwitterServerError:1 tweepy.errors.Unauthorized:1
-#, fuzzy
-msgid "Bases: :py:class:`tweepy.errors.HTTPException`"
-msgstr "Podstawy: :class:`tweepy.errors.TweepyException`"
+msgid "Bases: :class:`tweepy.errors.HTTPException`"
+msgstr "Podstawy: :class:`tweepy.errors.HTTPException`"
 
 #: of tweepy.errors.BadRequest:1
 msgid "Exception raised for a 400 HTTP status code"
@@ -116,7 +77,3 @@ msgstr "Wyjątek podniesiony dla kodu statusu HTTP 429"
 #: of tweepy.errors.TwitterServerError:1
 msgid "Exception raised for a 5xx HTTP status code"
 msgstr "Wyjątek podniesiony dla kodu statusu HTTP 5xx"
-
-#~ msgid "Bases: :class:`tweepy.errors.HTTPException`"
-#~ msgstr "Podstawy: :class:`tweepy.errors.HTTPException`"
-

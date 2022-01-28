@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Tweepy package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  Tweepy-pl\n"
+"Project-Id-Version: Tweepy-pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"POT-Creation-Date: 2021-04-15 22:51+0200\n"
 "PO-Revision-Date: 2021-04-28 15:37+0200\n"
 "Last-Translator: kowalczyk-krzysztof <kowalczykkrzysztof893@gmail.com>\n"
 "Language: pl\n"
@@ -12,3206 +12,719 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../../changelog.md:1
 msgid "Changelog"
 msgstr "Changelog"
 
 #: ../../changelog.md:4
-#, fuzzy
 msgid ""
-"These changelogs are also at <https://github.com/tweepy/tweepy/releases> "
-"as release notes."
+"These changelogs are also at https://github.com/tweepy/tweepy/releases as "
+"release notes."
 msgstr ""
-"Te changelogs są również dostępne na "
-"https://github.com/tweepy/tweepy/releases jako release notes."
+"Te changelogs są również dostępne na https://github.com/tweepy/tweepy/releases "
+"jako release notes."
 
 #: ../../changelog.md:6
-#, fuzzy
-msgid "Version 4.4.0"
-msgstr "Wersja 3.4.0"
-
-#: ../../changelog.md:8 ../../changelog.md:18 ../../changelog.md:30
-#: ../../changelog.md:46 ../../changelog.md:360 ../../changelog.md:453
-#: ../../changelog.md:476 ../../changelog.md:517 ../../changelog.md:548
-#: ../../changelog.md:564
-msgid "New Features / Improvements"
-msgstr "Nowe funkcje / Usprawnienia"
-
-#: ../../changelog.md:9
-msgid ""
-"Add support for List lookup with Twitter API v2 "
-"([0aa2366](https://github.com/tweepy/tweepy/commit/0aa2366a875464756507abf42709a3db676f4cee))"
-msgstr ""
-
-#: ../../changelog.md:10
-msgid ""
-"Add `Client.get_space_buyers` "
-"([8bf58ca](https://github.com/tweepy/tweepy/commit/8bf58ca5754f72292d1d86367a02778af7a44f20))"
-msgstr ""
-
-#: ../../changelog.md:11
-msgid ""
-"Add `Space.ended_at` and `Space.topic_ids` "
-"([c89a233](https://github.com/tweepy/tweepy/commit/c89a233a96142ce01ecd5e1372c3fdce45c6601f))"
-msgstr ""
-
-#: ../../changelog.md:13 ../../changelog.md:40 ../../changelog.md:59
-#: ../../changelog.md:434 ../../changelog.md:467 ../../changelog.md:510
-#: ../../changelog.md:537 ../../changelog.md:557 ../../changelog.md:573
-#: ../../changelog.md:588 ../../changelog.md:601
-msgid "Bug Fixes"
-msgstr "Naprawa błędów"
-
-#: ../../changelog.md:14
-msgid ""
-"Remove erroneous `Space.__str__` "
-"([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))"
-msgstr ""
-
-#: ../../changelog.md:16
-#, fuzzy
-msgid "Version 4.3.0"
-msgstr "Wersja 3.3.0"
-
-#: ../../changelog.md:19
-msgid ""
-"Add support for managing Tweets with Twitter API v2 "
-"([7884e3a](https://github.com/tweepy/tweepy/commit/7884e3a7253d9a821ff46160ec0d3811f299327f))"
-msgstr ""
-
-#: ../../changelog.md:21 ../../changelog.md:67 ../../changelog.md:430
-msgid "Misc"
-msgstr ""
-
-#: ../../changelog.md:22
-msgid ""
-"Document `HTTPException` attributes "
-"([c62c31a](https://github.com/tweepy/tweepy/commit/c62c31a0f3574e04b6e2f5996b90b5c1b5917485))"
-msgstr ""
-
-#: ../../changelog.md:23
-msgid ""
-"Add table to documentation mapping `Client` methods to Twitter API v2 "
-"endpoints "
-"([0572b03](https://github.com/tweepy/tweepy/commit/0572b03b7fe1a2384951ebc2c0002f9d8bd6b68a))"
-msgstr ""
-
-#: ../../changelog.md:24
-msgid "Add and improve examples"
-msgstr ""
-
-#: ../../changelog.md:25
-msgid "Revamp examples page in documentation"
-msgstr ""
-
-#: ../../changelog.md:26 ../../changelog.md:35 ../../changelog.md:71
-#: ../../changelog.md:431
-#, fuzzy
-msgid "Update and improve various documentation and tests"
-msgstr "Zaktualizowanie i poprawa dokumentacji"
-
-#: ../../changelog.md:28
-#, fuzzy
-msgid "Version 4.2.0"
-msgstr "Wersja 3.2.0"
-
-#: ../../changelog.md:31
-msgid ""
-"Add support for managing lists with Twitter API v2 "
-"([b1342bf](https://github.com/tweepy/tweepy/commit/b1342bfc998bee334437f2b7a8d2aef4df7c3838))"
-msgstr ""
-
-#: ../../changelog.md:32
-msgid ""
-"Rename `Client.follow` and `Client.unfollow` to `Client.follow_user` and "
-"`Client.unfollow_user`, respectively "
-"([8f8de15](https://github.com/tweepy/tweepy/commit/8f8de15e13f11d042a521d2adae24d0c09fa2098))"
-msgstr ""
-
-#: ../../changelog.md:33
-msgid "`Client.follow` and `Client.unfollow` are kept as deprecated aliases"
-msgstr ""
-
-#: ../../changelog.md:34
-msgid "Add FAQ section in documentation"
-msgstr ""
-
-#: ../../changelog.md:37
-msgid "Twitter API Changes"
-msgstr ""
-
-#: ../../changelog.md:38
-msgid ""
-"Change `state` to optional parameter for `Client.search_spaces` "
-"([e61d5d6](https://github.com/tweepy/tweepy/commit/e61d5d6f017db7f28871331b515fcfd87666f352))"
-msgstr ""
-
-#: ../../changelog.md:41
-msgid ""
-"Fix parsing of datetime strings for API v2 models with Python 3.6 "
-"([5bf2446](https://github.com/tweepy/tweepy/commit/5bf24464b00257a9fa5f66047a2f7815c1e4f8fb))"
-msgstr ""
-
-#: ../../changelog.md:42
-msgid ""
-"Fix models missing an `API` instance attribute when using `Cursor` with "
-"pagination by ID "
-"([451e921](https://github.com/tweepy/tweepy/commit/451e921210677ee0a618849f189bdfeea497a00c))"
-msgstr ""
-
-#: ../../changelog.md:44
-#, fuzzy
-msgid "Version 4.1.0"
-msgstr "Wersja 3.1.0"
-
-#: ../../changelog.md:47
-msgid ""
-"Add support for Python 3.10 "
-"([229b738](https://github.com/tweepy/tweepy/commit/229b73858c93bd5997385445f522816c374d41ea))"
-msgstr ""
-
-#: ../../changelog.md:48
-msgid "Update minimum dev requirement version for tox to 3.14.0"
-msgstr ""
-
-#: ../../changelog.md:49
-msgid ""
-"Add support for Spaces "
-"([5c68892](https://github.com/tweepy/tweepy/commit/5c688922cf0f8e89d401ea5108b06aaa8c12d71b))"
-msgstr ""
-
-#: ../../changelog.md:50
-msgid "Add `Space` model"
-msgstr ""
-
-#: ../../changelog.md:51
-msgid "Add `Client.search_spaces`, `Client.get_spaces`, and `Client.get_space`"
-msgstr ""
-
-#: ../../changelog.md:52
-msgid ""
-"Add support for batch compliance "
-"([6ca75e1](https://github.com/tweepy/tweepy/commit/6ca75e1b69a1085ac43215b30fc8269b91faa790))"
-msgstr ""
-
-#: ../../changelog.md:53
-msgid ""
-"Add `Client.get_compliance_jobs`, `Client.get_compliance_job`, and "
-"`Client.create_compliance_job`"
-msgstr ""
-
-#: ../../changelog.md:54
-msgid ""
-"Add `Client.get_muted` "
-"([00cdab8](https://github.com/tweepy/tweepy/commit/00cdab8a86b98c6b02636fd511700fc73653e006))"
-msgstr ""
-
-#: ../../changelog.md:55
-#, fuzzy
-msgid "Minor documentation corrections"
-msgstr "Dodanie dokumentacji dla rozszerzonych Tweetów"
-
-#: ../../changelog.md:57
-#, fuzzy
-msgid "Version 4.0.1"
-msgstr "Wersja 3.4.0"
-
-#: ../../changelog.md:60
-msgid ""
-"Fix handling of strings passed as fields parameters for `Client` methods "
-"([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))"
-msgstr ""
-
-#: ../../changelog.md:61
-msgid ""
-"Include unexpected parameters passed to `Client` methods in Twitter API "
-"request "
-"([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))"
-msgstr ""
-
-#: ../../changelog.md:62
-msgid "This future-proofs for new endpoint parameters"
-msgstr ""
-
-#: ../../changelog.md:63
-msgid ""
-"Stop checking parameter names when converting parameters passed to "
-"`Client` methods from datetimes to strings "
-"([1320a37](https://github.com/tweepy/tweepy/commit/1320a3709b1683cb32b69abdaa9e7e120b6ed59c))"
-msgstr ""
-
-#: ../../changelog.md:64
-msgid ""
-"This future-proofs for new endpoint parameters besides `start_time` and "
-"`end_time` that accept datetimes"
-msgstr ""
-
-#: ../../changelog.md:65
-msgid ""
-"Handle simplejson being installed when handling `JSONDecodeError` in "
-"`HTTPException` "
-"([586c162](https://github.com/tweepy/tweepy/commit/586c1621f71c9569c17b6bdbee99a7c238bb301d))"
-msgstr ""
-
-#: ../../changelog.md:68
-msgid ""
-"Update documentation requirements "
-"([3fa38b6](https://github.com/tweepy/tweepy/commit/3fa38b6b949fb85c434f4aec9c54327d80027c12),"
-" "
-"[388e2f6](https://github.com/tweepy/tweepy/commit/388e2f6c5167cd9fd6669d05d2e15ea00cdea805),"
-" "
-"[4315ab0](https://github.com/tweepy/tweepy/commit/4315ab07c382c92e177cde7232085dfd4828b50e))"
-msgstr ""
-
-#: ../../changelog.md:69
-msgid ""
-"Remove nose usage from tests "
-"([b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
-msgstr ""
-
-#: ../../changelog.md:70
-msgid ""
-"Remove mock and nose from tests extra and requirements "
-"([0f071fd](https://github.com/tweepy/tweepy/commit/0f071fd2dbbbb5eb7efccc16a8121eb22ebabf12),"
-" "
-"[b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
-msgstr ""
-
-#: ../../changelog.md:73
-#, fuzzy
-msgid "Version 4.0.0"
-msgstr "Wersja 3.10.0"
-
-#: ../../changelog.md:76
-#, fuzzy
-msgid "Major New Features / Improvements"
-msgstr "Nowe funkcje / Usprawnienia"
-
-#: ../../changelog.md:77
-msgid ""
-"Support Twitter API v2 "
-"([#1472](https://github.com/tweepy/tweepy/issues/1472), "
-"[#1535](https://github.com/tweepy/tweepy/pull/1535))"
-msgstr ""
-
-#: ../../changelog.md:78
-msgid "Replace API v1.1 models in package namespace"
-msgstr ""
-
-#: ../../changelog.md:80
-msgid ""
-"Rework media uploading "
-"([#640](https://github.com/tweepy/tweepy/issues/640), "
-"[#1486](https://github.com/tweepy/tweepy/pull/1486), "
-"[#1501](https://github.com/tweepy/tweepy/issues/1501))"
-msgstr ""
-
-#: ../../changelog.md:82
-msgid ""
-"Support asynchronous streaming "
-"([#732](https://github.com/tweepy/tweepy/issues/732), "
-"[#1491](https://github.com/tweepy/tweepy/pull/1491))"
-msgstr ""
-
-#: ../../changelog.md:84
-msgid "Rework `API`"
-msgstr ""
-
-#: ../../changelog.md:85
-msgid "Replace `bind_api` and `APIMethod` with `API.request`"
-msgstr ""
-
-#: ../../changelog.md:86
-msgid "Stop using property decorators for `API` methods"
-msgstr ""
-
-#: ../../changelog.md:87
-msgid "Use `pagination` decorator"
-msgstr ""
-
-#: ../../changelog.md:88
-msgid ""
-"Add `requests.Session` instance as `API.session` attribute "
-"([2f28757](https://github.com/tweepy/tweepy/commit/2f28757fc3f060d14ce4e42a8ca441cd172fd8e5))"
-msgstr ""
-
-#: ../../changelog.md:89
-msgid ""
-"Initialize a single `requests.Session` instance per `API` instance, "
-"rather than for each request"
-msgstr ""
-
-#: ../../changelog.md:90
-msgid ""
-"Log warning when API.request is passed an unexpected keyword argument "
-"that isn't an endpoint parameter "
-"([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))"
-msgstr ""
-
-#: ../../changelog.md:91
-msgid ""
-"Rename allowed parameters (`allowed_param`) to endpoint parameters "
-"(`endpoint_parameters`) "
-"([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))"
-msgstr ""
-
-#: ../../changelog.md:92
-msgid "Rename methods and method parameters (see Breaking Changes section)"
-msgstr ""
-
-#: ../../changelog.md:93
-msgid "Require parameters for methods (see Breaking Changes section)"
-msgstr ""
-
-#: ../../changelog.md:94
-msgid ""
-"Stop allowing arbitrary positional arguments for methods (see Breaking "
-"Changes section)"
-msgstr ""
-
-#: ../../changelog.md:95
-msgid ""
-"Remove unnecessary attributes and parameters (see Breaking Changes "
-"section)"
-msgstr ""
-
-#: ../../changelog.md:96
-msgid "Improve, optimize, and simplify `API.request` and other `API` methods"
-msgstr ""
-
-#: ../../changelog.md:98
-msgid "Rework streaming"
-msgstr ""
-
-#: ../../changelog.md:99
-msgid ""
-"`StreamListener` has been merged into `Stream` (see Breaking Changes "
-"section)"
-msgstr ""
-
-#: ../../changelog.md:100
-msgid ""
-"`Stream` data/event handling methods (i.e. those starting with `on_`) now"
-" log by default and disregard return values"
-msgstr ""
-
-#: ../../changelog.md:101
-msgid ""
-"Allow the stream to disconnect when any line of data is received, "
-"including keep-alive signals "
-"([#773](https://github.com/tweepy/tweepy/issues/773), "
-"[#897](https://github.com/tweepy/tweepy/issues/897))"
-msgstr ""
-
-#: ../../changelog.md:102
-msgid ""
-"Remove, rename, and replace attributes, methods, and parameters (see "
-"Breaking Changes section)"
-msgstr ""
-
-#: ../../changelog.md:103
-msgid "Improve, optimize, and simplify `Stream`"
-msgstr ""
-
-#: ../../changelog.md:105
-msgid "Rework documentation"
-msgstr ""
-
-#: ../../changelog.md:106
-msgid "Automatically use docstrings for documentation"
-msgstr ""
-
-#: ../../changelog.md:107
-msgid "Use NumPy style docstrings"
-msgstr ""
-
-#: ../../changelog.md:108
-msgid "Use Intersphinx linking"
-msgstr ""
-
-#: ../../changelog.md:109
-msgid "Add tooltips for cross references using sphinx-hoverxref"
-msgstr ""
-
-#: ../../changelog.md:110
-msgid ""
-"Document `Stream` "
-"([18a6059](https://github.com/tweepy/tweepy/commit/18a6059e7980de7759be126ffe39836494cc4f23))"
-msgstr ""
-
-#: ../../changelog.md:111
-msgid ""
-"Document models "
-"([0724060](https://github.com/tweepy/tweepy/commit/07240603b2fc64c6433d8fbe9e1e8db47a9f1cfe),"
-" "
-"[78a0c22](https://github.com/tweepy/tweepy/commit/78a0c22fb67ca3d190e9dd95baab142aa2960ff9))"
-msgstr ""
-
-#: ../../changelog.md:112
-msgid ""
-"Document pagination "
-"([695d531](https://github.com/tweepy/tweepy/commit/695d531064277978d44f78387a3edb3d29fb6f25),"
-" "
-"[652fece](https://github.com/tweepy/tweepy/commit/652fece7f78f90ea11f206b4a045a2450db42cc9))"
-msgstr ""
-
-#: ../../changelog.md:113
-msgid ""
-"Add table for `API` documentation "
-"([6db8e4c](https://github.com/tweepy/tweepy/commit/6db8e4c06d20f6ad7bdfade7b44b13ac45dd51c0))"
-msgstr ""
-
-#: ../../changelog.md:114
-msgid ""
-"Separate documentation for exceptions "
-"([8a831b1](https://github.com/tweepy/tweepy/commit/8a831b16f1bd1288781bc924fe82397decd93b3d))"
-msgstr ""
-
-#: ../../changelog.md:115
-msgid ""
-"Move changelog to documentation "
-"([fc98629](https://github.com/tweepy/tweepy/commit/fc9862963702eb02f33106ca13110b369ee86e47))"
-msgstr ""
-
-#: ../../changelog.md:116
-#, fuzzy
-msgid "Update, improve, and organize documentation"
-msgstr "Zaktualizowanie i poprawa dokumentacji"
-
-#: ../../changelog.md:118
-msgid "Rework exceptions"
-msgstr ""
-
-#: ../../changelog.md:119
-msgid ""
-"Replace `TweepError` with `TweepyException` "
-"([5c39cd1](https://github.com/tweepy/tweepy/commit/5c39cd159ef761500f3cb0292a3da40d5e250417))"
-" and `HTTPException` "
-"([#599](https://github.com/tweepy/tweepy/issues/599))"
-msgstr ""
-
-#: ../../changelog.md:120
-msgid ""
-"Replace `RateLimitError` with `TooManyRequests` "
-"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
-msgstr ""
-
-#: ../../changelog.md:121
-msgid ""
-"Remove `Parser.parse_error` "
-"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
-msgstr ""
-
-#: ../../changelog.md:122
-msgid ""
-"Add `NotFound` "
-"([2d84b27](https://github.com/tweepy/tweepy/commit/2d84b270408944e784b32199faa09fb553f6250d))"
-msgstr ""
-
-#: ../../changelog.md:123
-msgid ""
-"Add `Unauthorized` "
-"([3ffec76](https://github.com/tweepy/tweepy/commit/3ffec76039a9552b1b90a11d3774ccc90793c33d))"
-msgstr ""
-
-#: ../../changelog.md:124
-msgid ""
-"Add `Forbidden` "
-"([4a9bc58](https://github.com/tweepy/tweepy/commit/4a9bc58f1006c1b2b1310d4a6cd821e23d9c8c79))"
-msgstr ""
-
-#: ../../changelog.md:125
-msgid ""
-"Add `BadRequest` "
-"([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))"
-msgstr ""
-
-#: ../../changelog.md:126
-msgid ""
-"Add `TwitterServerError` "
-"([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))"
-msgstr ""
-
-#: ../../changelog.md:128
-msgid "Breaking Changes"
-msgstr ""
-
-#: ../../changelog.md:129
-msgid ""
-"Drop support for Python 2 "
-"([#1253](https://github.com/tweepy/tweepy/issues/1253), "
-"[#1482](https://github.com/tweepy/tweepy/pull/1482))"
-msgstr ""
-
-#: ../../changelog.md:130
-msgid ""
-"Drop support for Python 3.5 "
-"([#1487](https://github.com/tweepy/tweepy/pull/1487))"
-msgstr ""
-
-#: ../../changelog.md:132
-msgid "`API`"
-msgstr ""
-
-#: ../../changelog.md:133
-msgid "Rename `API` and `models` methods"
-msgstr ""
-
-#: ../../changelog.md:134
-msgid ""
-"`API.blocks` -> `API.get_blocks` "
-"([9541794](https://github.com/tweepy/tweepy/commit/9541794b5dd9a3617247c0cd5efdcd082b5e7275))"
-msgstr ""
-
-#: ../../changelog.md:135
-msgid ""
-"`API.blocks_ids` -> `API.get_blocked_ids` "
-"([e241ca4](https://github.com/tweepy/tweepy/commit/e241ca4bb44acc0def9db390ddf10cf7f9fc37e6))"
-msgstr ""
-
-#: ../../changelog.md:136
-msgid ""
-"`API.destroy_direct_message` -> `API.delete_direct_message` "
-"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
-msgstr ""
-
-#: ../../changelog.md:137
-msgid ""
-"`DirectMessage.destroy` -> `DirectMessage.delete` "
-"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
-msgstr ""
-
-#: ../../changelog.md:138
-msgid ""
-"`API.favorites` -> `API.get_favorites` "
-"([3c467da](https://github.com/tweepy/tweepy/commit/3c467da810f8ffdf5d7d05244d586897ed1ed547))"
-msgstr ""
-
-#: ../../changelog.md:139
-msgid ""
-"`API.followers` -> `API.get_followers` "
-"([ce768d9](https://github.com/tweepy/tweepy/commit/ce768d974ae7c4b907aeff580728b1045c2d85d2))"
-msgstr ""
-
-#: ../../changelog.md:140
-msgid ""
-"`API.followers_ids` -> `API.get_follower_ids` "
-"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
-msgstr ""
-
-#: ../../changelog.md:141
-msgid ""
-"`models.User.followers_ids` -> `models.User.follower_ids` "
-"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
-msgstr ""
-
-#: ../../changelog.md:142
-msgid ""
-"`API.friends` -> `API.get_friends` "
-"([6f3fccb](https://github.com/tweepy/tweepy/commit/6f3fccb95917535586efa660f9cf9c851e3e4e02))"
-msgstr ""
-
-#: ../../changelog.md:143
-msgid ""
-"`API.friends_ids` -> `API.get_friend_ids` "
-"([bab3e5e](https://github.com/tweepy/tweepy/commit/bab3e5e9eee57583298fe64ab1ab0e37edf12344))"
-msgstr ""
-
-#: ../../changelog.md:144
-msgid ""
-"`API.friendships_incoming` -> `API.incoming_friendships` "
-"([007bd07](https://github.com/tweepy/tweepy/commit/007bd07536d1e0dfd5a5b5967943acffb77f24f4))"
-msgstr ""
-
-#: ../../changelog.md:145
-msgid ""
-"`API.friendships_outgoing` -> `API.outgoing_friendships` "
-"([1400065](https://github.com/tweepy/tweepy/commit/1400065bb4980ec1b3934f68173e63acffc970e2))"
-msgstr ""
-
-#: ../../changelog.md:146
-msgid ""
-"`API.geo_search` -> `API.search_geo` "
-"([6f4fb39](https://github.com/tweepy/tweepy/commit/6f4fb39b1c88cc019e7e5d66f1c29b781568c622))"
-msgstr ""
-
-#: ../../changelog.md:147
-msgid ""
-"`API.list_direct_messages` -> `API.get_direct_messages` "
-"([ff1186f](https://github.com/tweepy/tweepy/commit/ff1186f80b2dbb7f5e4ed3669d90db300e8de36d))"
-msgstr ""
-
-#: ../../changelog.md:148
-msgid ""
-"`API.list_members` -> `API.get_list_members` "
-"([5845f02](https://github.com/tweepy/tweepy/commit/5845f023b74b309aa12c50844bdd586bd3e30dde))"
-msgstr ""
-
-#: ../../changelog.md:149
-msgid ""
-"`API.list_subscribers` -> `API.get_list_subscribers` "
-"([a05b630](https://github.com/tweepy/tweepy/commit/a05b630973d4ac7e642f827f03ce01bc8e5b9ef8))"
-msgstr ""
-
-#: ../../changelog.md:150
-msgid ""
-"`API.lists_all` -> `API.get_lists` "
-"([458e0e8](https://github.com/tweepy/tweepy/commit/458e0e8275693bb557f2a21e1f75be92adae0d00))"
-msgstr ""
-
-#: ../../changelog.md:151
-msgid ""
-"`API.lists_memberships` -> `API.get_list_memberships` "
-"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
-msgstr ""
-
-#: ../../changelog.md:152
-msgid ""
-"`models.User.lists_memberships` -> `models.User.list_memberships` "
-"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
-msgstr ""
-
-#: ../../changelog.md:153
-msgid ""
-"`API.lists_subscriptions` -> `API.get_list_subscriptions` "
-"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
-msgstr ""
-
-#: ../../changelog.md:154
-msgid ""
-"`models.User.lists_subscriptions` -> `models.User.list_subscriptions` "
-"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
-msgstr ""
-
-#: ../../changelog.md:155
-msgid ""
-"`API.mutes` -> `API.get_mutes` "
-"([744edc2](https://github.com/tweepy/tweepy/commit/744edc245f856e3fc69401db8185b820c0219f6f))"
-msgstr ""
-
-#: ../../changelog.md:156
-msgid ""
-"`API.mutes_ids` -> `API.get_muted_ids` "
-"([ea26a29](https://github.com/tweepy/tweepy/commit/ea26a296639e7a42d81b9f84a236a82e4915d434))"
-msgstr ""
-
-#: ../../changelog.md:157
-msgid ""
-"`API.retweeters` -> `API.get_retweeter_ids` "
-"([588c342](https://github.com/tweepy/tweepy/commit/588c34243fe2b12d72f66f0d31312c7452610ec8))"
-msgstr ""
-
-#: ../../changelog.md:158
-msgid ""
-"`API.retweets` -> `API.get_retweets` "
-"([3b3ba24](https://github.com/tweepy/tweepy/commit/3b3ba2494743b894a44539247fd7e5b7839c90aa))"
-msgstr ""
-
-#: ../../changelog.md:159
-msgid ""
-"`API.retweets_of_me` -> `API.get_retweets_of_me` "
-"([737bd0b](https://github.com/tweepy/tweepy/commit/737bd0b725e5d33009e63eb040b5cb369214d7f0))"
-msgstr ""
-
-#: ../../changelog.md:160
-msgid ""
-"`API.saved_searches` -> `API.get_saved_searches` "
-"([8b39f74](https://github.com/tweepy/tweepy/commit/8b39f748c91e3363cd35c3313563d43f1da25939))"
-msgstr ""
-
-#: ../../changelog.md:161
-msgid ""
-"`API.search` -> `API.search_tweets` "
-"([7fac253](https://github.com/tweepy/tweepy/commit/7fac25379d51174408f0a361c22d8649437a0255))"
-msgstr ""
-
-#: ../../changelog.md:162
-msgid ""
-"`API.show_friendship` -> `API.get_friendship` "
-"([ee9ea2e](https://github.com/tweepy/tweepy/commit/ee9ea2e4513db4d1d627a8815008cb8c71769949))"
-msgstr ""
-
-#: ../../changelog.md:163
-msgid ""
-"`API.show_list_member` -> `API.get_list_member` "
-"([431ab15](https://github.com/tweepy/tweepy/commit/431ab15b846706dbd30387412aa601ba9f3810ab))"
-msgstr ""
-
-#: ../../changelog.md:164
-msgid ""
-"`API.show_list_subscriber` -> `API.get_list_subscriber` "
-"([bf26301](https://github.com/tweepy/tweepy/commit/bf26301bb5fa22cc6d52ebb41ed7fe63c5a33768))"
-msgstr ""
-
-#: ../../changelog.md:165
-msgid ""
-"`API.statuses_lookup` -> `API.lookup_statuses` "
-"([#477](https://github.com/tweepy/tweepy/issues/477))"
-msgstr ""
-
-#: ../../changelog.md:166
-msgid ""
-"`API.trends_available` -> `API.available_trends` "
-"([68b33d7](https://github.com/tweepy/tweepy/commit/68b33d7ea70bb9c2f7efc384482b3eb6af0807fa))"
-msgstr ""
-
-#: ../../changelog.md:167
-msgid ""
-"`API.trends_closest` -> `API.closest_trends` "
-"([2e18162](https://github.com/tweepy/tweepy/commit/2e181628ba97ec1252039439d1daccb9df93e565))"
-msgstr ""
-
-#: ../../changelog.md:168
-msgid ""
-"`API.trends_place` -> `API.get_place_trends` "
-"([4912a7c](https://github.com/tweepy/tweepy/commit/4912a7c33420099663015325a0b758926892eb8a))"
-msgstr ""
-
-#: ../../changelog.md:169
-msgid ""
-"`API.update_with_media` -> `API.update_status_with_media` "
-"([0a5e533](https://github.com/tweepy/tweepy/commit/0a5e533a10c87163e847a0086358a6b0224da7ff))"
-msgstr ""
-
-#: ../../changelog.md:170
-msgid "Rename `API` method parameters"
-msgstr ""
-
-#: ../../changelog.md:171
-msgid ""
-"`API.geo_id`: `id` -> `place_id` "
-"([78051e8](https://github.com/tweepy/tweepy/commit/78051e8a67b50cec5cacf53e0f9b315a53e16c4c))"
-msgstr ""
-
-#: ../../changelog.md:172
-msgid ""
-"`API.lookup_friendships`: `screen_names` -> `screen_name` "
-"([4573b35](https://github.com/tweepy/tweepy/commit/4573b35611c8d8391373d579ccb0fe2eb6e3800b)),"
-" `user_ids` -> `user_id` "
-"([3bcccf8](https://github.com/tweepy/tweepy/commit/3bcccf8a1f03e7e35ed05cd4f0ef8f43b6e51b33))"
-msgstr ""
-
-#: ../../changelog.md:173
-msgid ""
-"`API.lookup_statuses`: `id_` -> `id` "
-"([f13a34b](https://github.com/tweepy/tweepy/commit/f13a34bf2309c3696fb050b8f3bac9fe1fa0b6cc))"
-msgstr ""
-
-#: ../../changelog.md:174
-msgid ""
-"`API.lookup_users`: `screen_names` -> `screen_name` "
-"([17a2e7c](https://github.com/tweepy/tweepy/commit/17a2e7cdbbea19b8630870267a92e08e9365e29d)),"
-" `user_ids` -> `user_id` "
-"([e7d9e55](https://github.com/tweepy/tweepy/commit/e7d9e557f2611065cfed50dbd2fcf529f9146d65))"
-msgstr ""
-
-#: ../../changelog.md:175
-msgid ""
-"`API.search_30_day`: `environment_name` -> `label` "
-"([6c66c60](https://github.com/tweepy/tweepy/commit/6c66c603c42c609b00f923ea2ce72c1e975c5462))"
-msgstr ""
-
-#: ../../changelog.md:176
-msgid ""
-"`API.search_full_archive`: `environment_name` -> `label` "
-"([295bfe4](https://github.com/tweepy/tweepy/commit/295bfe45ed056e94fc7055eb83aea9fcac5dddcb))"
-msgstr ""
-
-#: ../../changelog.md:177
-msgid ""
-"`API.update_profile_image`: `file_` -> `file` "
-"([69f6c1d](https://github.com/tweepy/tweepy/commit/69f6c1d1302f0d5118ce2d288f76e7d8ffdac8c0))"
-msgstr ""
-
-#: ../../changelog.md:178
-msgid "Require `API` method parameters"
-msgstr ""
-
-#: ../../changelog.md:179
-msgid ""
-"`API.closest_trends`: `lat`, `long` "
-"([75b9616](https://github.com/tweepy/tweepy/commit/75b9616d3206967b71902e491d662b6eea5d6fe2))"
-msgstr ""
-
-#: ../../changelog.md:180
-msgid ""
-"`API.create_favorite`: `id` "
-"([d3d2abe](https://github.com/tweepy/tweepy/commit/d3d2abec91f678d660f53af259fe9ebce7ff5a11))"
-msgstr ""
-
-#: ../../changelog.md:181
-msgid ""
-"`API.create_list`: `name` "
-"([5e7385a](https://github.com/tweepy/tweepy/commit/5e7385a02e67178bb62c914998d8e0b7cb40714a))"
-msgstr ""
-
-#: ../../changelog.md:182
-msgid ""
-"`API.create_saved_search`: `query` "
-"([c57a4be](https://github.com/tweepy/tweepy/commit/c57a4bef48a41165196dcbc0e2013d5718ee52a1))"
-msgstr ""
-
-#: ../../changelog.md:183
-msgid ""
-"`API.delete_direct_message`: `id` "
-"([bcb56ab](https://github.com/tweepy/tweepy/commit/bcb56abce37d4252080fca6df796b7fc3dd2ae76))"
-msgstr ""
-
-#: ../../changelog.md:184
-msgid ""
-"`API.destroy_favorite`: `id` "
-"([a9d41b6](https://github.com/tweepy/tweepy/commit/a9d41b6e499a07dfbcb4146ba98b44d77796efa8))"
-msgstr ""
-
-#: ../../changelog.md:185
-msgid ""
-"`API.get_direct_message`: `id` "
-"([f5775ee](https://github.com/tweepy/tweepy/commit/f5775ee4436e3c8ba040882803d1b3ea261313be))"
-msgstr ""
-
-#: ../../changelog.md:186
-msgid ""
-"`API.get_oembed`: `url` "
-"([af0cc51](https://github.com/tweepy/tweepy/commit/af0cc51b1f41a37d6b325596d0fa2c738a29efcf))"
-msgstr ""
-
-#: ../../changelog.md:187
-msgid ""
-"`API.get_place_trends`: `id` "
-"([c50f540](https://github.com/tweepy/tweepy/commit/c50f5405abf8161c88e13395c61b6b188540f6f9))"
-msgstr ""
-
-#: ../../changelog.md:188
-msgid ""
-"`API.get_retweeter_ids`: `id` "
-"([66f6704](https://github.com/tweepy/tweepy/commit/66f6704472eba01321fdb36d8991e3497967ad89))"
-msgstr ""
-
-#: ../../changelog.md:189
-msgid ""
-"`API.get_status`: `id` "
-"([bac73c3](https://github.com/tweepy/tweepy/commit/bac73c3f1418ad3ce15524c4a9024c57ec70d12b))"
-msgstr ""
-
-#: ../../changelog.md:190
-msgid ""
-"`API.reverse_geocode`: `lat`, `long` "
-"([87d8646](https://github.com/tweepy/tweepy/commit/87d86462b112b35e9741c9452bf956aaa16fb47c))"
-msgstr ""
-
-#: ../../changelog.md:191
-msgid ""
-"`API.search_30_day`: `query` "
-"([52874b7](https://github.com/tweepy/tweepy/commit/52874b72cd16e3984ce99710824d07608c329024))"
-msgstr ""
-
-#: ../../changelog.md:192
-msgid ""
-"`API.search_full_archive`: `query` "
-"([801f15d](https://github.com/tweepy/tweepy/commit/801f15de892771a5d1d683facb409c54459676b9))"
-msgstr ""
-
-#: ../../changelog.md:193
-msgid ""
-"`API.search_tweets`: `q` "
-"([9377e7e](https://github.com/tweepy/tweepy/commit/9377e7e844f9a87e6fc8e53eb5ca0cd4d758d548))"
-msgstr ""
-
-#: ../../changelog.md:194
-msgid ""
-"`API.search_users`: `q` "
-"([21802f9](https://github.com/tweepy/tweepy/commit/21802f9856fe8847c481f51c73d5c661b531bfc0))"
-msgstr ""
-
-#: ../../changelog.md:195
-msgid ""
-"`API.update_status`: `status` "
-"([f64c076](https://github.com/tweepy/tweepy/commit/f64c076503e13411719faa3042267f27e96126ea))"
-msgstr ""
-
-#: ../../changelog.md:196
-msgid ""
-"`API.update_status_with_media`: `status` "
-"([0726263](https://github.com/tweepy/tweepy/commit/0726263b33be8db7b675c0f970944bd8dccd81f1))"
-msgstr ""
-
-#: ../../changelog.md:197
-msgid ""
-"Stop allowing positional arguments for `API` methods (change to be "
-"keyword-only arguments):"
-msgstr ""
-
-#: ../../changelog.md:198
-msgid ""
-"`API.add_list_member` "
-"([ae18ee5](https://github.com/tweepy/tweepy/commit/ae18ee50c122d7cbe714ded3851eed3a765ff0c5))"
-msgstr ""
-
-#: ../../changelog.md:199
-msgid ""
-"`API.add_list_members ` "
-"([8eb900f](https://github.com/tweepy/tweepy/commit/8eb900f12e62a21dad9314d0caf9035471baf840))"
-msgstr ""
-
-#: ../../changelog.md:200
-msgid ""
-"`API.available_trends` "
-"([7a74863](https://github.com/tweepy/tweepy/commit/7a74863b66aeffdcd1157d8abf07df5f907cb0be))"
-msgstr ""
-
-#: ../../changelog.md:201
-msgid ""
-"`API.closest_trends`, besides `lat` and `long` "
-"([7946490](https://github.com/tweepy/tweepy/commit/794649099b915bd44954aef2844e64dc394a4f6f))"
-msgstr ""
-
-#: ../../changelog.md:202
-msgid ""
-"`API.create_block` "
-"([caa34c6](https://github.com/tweepy/tweepy/commit/caa34c6f790f5fa1820a52ed7dc3ebc3dd38e055))"
-msgstr ""
-
-#: ../../changelog.md:203
-msgid ""
-"`API.create_favorite`, besides `id` "
-"([0b83984](https://github.com/tweepy/tweepy/commit/0b839841c985e1c549a63b5306ac3ea9363ded7f))"
-msgstr ""
-
-#: ../../changelog.md:204
-msgid ""
-"`API.create_friendship` "
-"([82cd798](https://github.com/tweepy/tweepy/commit/82cd7983d70d5260c1fa9290c1552227b70af00a))"
-msgstr ""
-
-#: ../../changelog.md:205
-msgid ""
-"`API.create_list`, besides `name` "
-"([25cb01e](https://github.com/tweepy/tweepy/commit/25cb01ec734d2e6bf913be0a5d8ef76da3ebca24))"
-msgstr ""
-
-#: ../../changelog.md:206
-msgid ""
-"`API.create_mute ` "
-"([4aae710](https://github.com/tweepy/tweepy/commit/4aae710e05d0ed8906b3cb5bc2fabc8b8f253b44))"
-msgstr ""
-
-#: ../../changelog.md:207
-msgid ""
-"`API.create_saved_search`, besides `query` "
-"([76be2d9](https://github.com/tweepy/tweepy/commit/76be2d9cfb2c8437627531ea7cb30047fbfd8355))"
-msgstr ""
-
-#: ../../changelog.md:208
-msgid ""
-"`API.delete_direct_message`, besides `id` "
-"([53ca00f](https://github.com/tweepy/tweepy/commit/53ca00ffe5681deff1f80ddfe3f822d7be1ba14f))"
-msgstr ""
-
-#: ../../changelog.md:209
-msgid ""
-"`API.destroy_block` "
-"([c49cfb2](https://github.com/tweepy/tweepy/commit/c49cfb272f15ff11ef7cc0f27a6a6ed91ac6c755))"
-msgstr ""
-
-#: ../../changelog.md:210
-msgid ""
-"`API.destroy_favorite`, besides `id` "
-"([8afee87](https://github.com/tweepy/tweepy/commit/8afee87ee2e3f8e612082c693bab3fa6ce60cb69))"
-msgstr ""
-
-#: ../../changelog.md:211
-msgid ""
-"`API.destroy_friendship` "
-"([b2d44fe](https://github.com/tweepy/tweepy/commit/b2d44fed587132b866401dcd0c02cb9bc0b3a130))"
-msgstr ""
-
-#: ../../changelog.md:212
-msgid ""
-"`API.destroy_list` "
-"([4b2cfc4](https://github.com/tweepy/tweepy/commit/4b2cfc486836faa749248af1fd6dd0200202c62e))"
-msgstr ""
-
-#: ../../changelog.md:213
-msgid ""
-"`API.destroy_mute ` "
-"([009b54e](https://github.com/tweepy/tweepy/commit/009b54e43230827264eb34141d6436b935f76084))"
-msgstr ""
-
-#: ../../changelog.md:214
-msgid ""
-"`API.destroy_saved_search`, besides `id` "
-"([b7afca2](https://github.com/tweepy/tweepy/commit/b7afca2ad8f8721b267fd159bc7a2a91d012b15e))"
-msgstr ""
-
-#: ../../changelog.md:215
-msgid ""
-"`API.destroy_status`, besides `id` "
-"([876c8ca](https://github.com/tweepy/tweepy/commit/876c8cad4a9574d25ac4969e554b7a5739fb75a7))"
-msgstr ""
-
-#: ../../changelog.md:216
-msgid ""
-"`API.geo_id`, besides `place_id` "
-"([a0cff22](https://github.com/tweepy/tweepy/commit/a0cff22d0402386ffe576327b17a2a4240e51148))"
-msgstr ""
-
-#: ../../changelog.md:217
-msgid ""
-"`API.get_blocked_ids` "
-"([ff38b70](https://github.com/tweepy/tweepy/commit/ff38b7026403eb9c952e1d1ac00a1a11c6b40f61))"
-msgstr ""
-
-#: ../../changelog.md:218
-msgid ""
-"`API.get_blocks` "
-"([dc81854](https://github.com/tweepy/tweepy/commit/dc8185429815deeea51fad06995e64fb58c07009))"
-msgstr ""
-
-#: ../../changelog.md:219
-msgid ""
-"`API.get_direct_message`, besides `id` "
-"([4ae0ec8](https://github.com/tweepy/tweepy/commit/4ae0ec83daef681877d7d5f3dadf41652a66051c))"
-msgstr ""
-
-#: ../../changelog.md:220
-msgid ""
-"`API.get_direct_messages` "
-"([8e0507d](https://github.com/tweepy/tweepy/commit/8e0507dd1456a42e8c4258bed37295e1116c1bd9))"
-msgstr ""
-
-#: ../../changelog.md:221
-msgid ""
-"`API.get_favorites` "
-"([e80b49a](https://github.com/tweepy/tweepy/commit/e80b49aded75b9cf75e168760c095a6d1a5f70ac))"
-msgstr ""
-
-#: ../../changelog.md:222
-msgid ""
-"`API.get_follower_ids` "
-"([7d42597](https://github.com/tweepy/tweepy/commit/7d425979312dd71a8151c7463a2592bb2f57a2f9))"
-msgstr ""
-
-#: ../../changelog.md:223
-msgid ""
-"`API.get_followers` "
-"([c6ab5a0](https://github.com/tweepy/tweepy/commit/c6ab5a0882651802a8a2fcf8c9f8300321415455))"
-msgstr ""
-
-#: ../../changelog.md:224
-msgid ""
-"`API.get_friend_ids` "
-"([c65641b](https://github.com/tweepy/tweepy/commit/c65641b48df0320bad6046798d789e38b3cd8ec8))"
-msgstr ""
-
-#: ../../changelog.md:225
-msgid ""
-"`API.get_friends` "
-"([e6965fa](https://github.com/tweepy/tweepy/commit/e6965fa7847782ca5e4073a21cc3cd30752eeafb))"
-msgstr ""
-
-#: ../../changelog.md:226
-msgid ""
-"`API.get_friendship` "
-"([6dea7de](https://github.com/tweepy/tweepy/commit/6dea7de36bd4daefd33f25a76fc0712318f9735b))"
-msgstr ""
-
-#: ../../changelog.md:227
-msgid ""
-"`API.get_list` "
-"([92dc37f](https://github.com/tweepy/tweepy/commit/92dc37f1c45b1420c1cdcef0c16843ffffc15aa4))"
-msgstr ""
-
-#: ../../changelog.md:228
-msgid ""
-"`API.get_list_member` "
-"([0af06db](https://github.com/tweepy/tweepy/commit/0af06db70a3f41db048d2f5e866a39c48cfcdd98))"
-msgstr ""
-
-#: ../../changelog.md:229
-msgid ""
-"`API.get_list_members` "
-"([7c8be8d](https://github.com/tweepy/tweepy/commit/7c8be8de2c9c099b61ec59078a62a2aa3fba8a8e))"
-msgstr ""
-
-#: ../../changelog.md:230
-msgid ""
-"`API.get_list_memberships` "
-"([ec7601f](https://github.com/tweepy/tweepy/commit/ec7601ff86b8198d80242718cfea898c3d35b0ee))"
-msgstr ""
-
-#: ../../changelog.md:231
-msgid ""
-"`API.get_list_subscriber` "
-"([a175cdd](https://github.com/tweepy/tweepy/commit/a175cdd690f577cd56e1affb7c6d42a69a5c9427))"
-msgstr ""
-
-#: ../../changelog.md:232
-msgid ""
-"`API.get_list_subscribers` "
-"([3ee84ef](https://github.com/tweepy/tweepy/commit/3ee84ef24094eae62be706108309a5a561095be1))"
-msgstr ""
-
-#: ../../changelog.md:233
-msgid ""
-"`API.get_list_subscriptions` "
-"([178d719](https://github.com/tweepy/tweepy/commit/178d7193c08452f4218aa8a1e0b069b6b72f23e3))"
-msgstr ""
-
-#: ../../changelog.md:234
-msgid ""
-"`API.get_lists` "
-"([3cd0058](https://github.com/tweepy/tweepy/commit/3cd00587cf7a3b92fb64375e0311e03a4c410595))"
-msgstr ""
-
-#: ../../changelog.md:235
-msgid ""
-"`API.get_muted_ids` "
-"([2967104](https://github.com/tweepy/tweepy/commit/2967104c1e6f2398aaf52f19c9a7627dbcdd7651))"
-msgstr ""
-
-#: ../../changelog.md:236
-msgid ""
-"`API.get_mutes` "
-"([9e9d370](https://github.com/tweepy/tweepy/commit/9e9d370c440b0c5dd26131382a96306b681385a9))"
-msgstr ""
-
-#: ../../changelog.md:237
-msgid ""
-"`API.get_oembed`, besides `url` "
-"([d13d853](https://github.com/tweepy/tweepy/commit/d13d8535862b12f8cd0b4ca60a4f3c4be6f3122f))"
-msgstr ""
-
-#: ../../changelog.md:238
-msgid ""
-"`API.get_place_trends`, besides `id` "
-"([548810c](https://github.com/tweepy/tweepy/commit/548810c081508965972bbdfcec227ebcba3a350d))"
-msgstr ""
-
-#: ../../changelog.md:239
-msgid ""
-"`API.get_retweeter_ids`, besides `id` "
-"([9907c25](https://github.com/tweepy/tweepy/commit/9907c25c8873876ff56fd2575aaa6e1994715313))"
-msgstr ""
-
-#: ../../changelog.md:240
-msgid ""
-"`API.get_retweets`, besides `id` "
-"([0bd0292](https://github.com/tweepy/tweepy/commit/0bd0292fbe7cdd7b1b6f7a43906ac59ffb97ed72))"
-msgstr ""
-
-#: ../../changelog.md:241
-msgid ""
-"`API.get_retweets_of_me` "
-"([2b2ed0a](https://github.com/tweepy/tweepy/commit/2b2ed0a45bfe2077dd1e0b3c0e91de2557aa4a36))"
-msgstr ""
-
-#: ../../changelog.md:242
-msgid ""
-"`API.get_saved_search`, besides `id` "
-"([1d3d3ae](https://github.com/tweepy/tweepy/commit/1d3d3ae2f5600173771d51b193d5c3675c905167))"
-msgstr ""
-
-#: ../../changelog.md:243
-msgid ""
-"`API.get_saved_searches` "
-"([c5f5b4b](https://github.com/tweepy/tweepy/commit/c5f5b4b552fbdff75cd4d46585cefa97a82abee7))"
-msgstr ""
-
-#: ../../changelog.md:244
-msgid ""
-"`API.get_settings` "
-"([2c2f0ec](https://github.com/tweepy/tweepy/commit/2c2f0ecbfb4bc9b262f2320589f2ce3cf99bdc9c))"
-msgstr ""
-
-#: ../../changelog.md:245
-msgid ""
-"`API.get_status`, besides `id` "
-"([30af3ac](https://github.com/tweepy/tweepy/commit/30af3ac8dcbd385fec6cef372550e0afb43b2612))"
-msgstr ""
-
-#: ../../changelog.md:246
-msgid ""
-"`API.get_user` "
-"([6b761ce](https://github.com/tweepy/tweepy/commit/6b761ce7f42ad348e9d0dade6657e020f326f88d))"
-msgstr ""
-
-#: ../../changelog.md:247
-msgid ""
-"`API.home_timeline` "
-"([b91be22](https://github.com/tweepy/tweepy/commit/b91be220928d1cb2996a5c71ef16a13c58375d4a))"
-msgstr ""
-
-#: ../../changelog.md:248
-msgid ""
-"`API.incoming_friendships` "
-"([6d3b7f2](https://github.com/tweepy/tweepy/commit/6d3b7f259bb547eef47d6212fe4b3379b1a96586))"
-msgstr ""
-
-#: ../../changelog.md:249
-msgid ""
-"`API.list_timeline` "
-"([e3ec5c1](https://github.com/tweepy/tweepy/commit/e3ec5c11f3f7ebac43747b8a7b0d07530ec34fea))"
-msgstr ""
-
-#: ../../changelog.md:250
-msgid ""
-"`API.lookup_friendships` "
-"([0eff951](https://github.com/tweepy/tweepy/commit/0eff9515797dad95728f44b7c2b21fd88e5f6312))"
-msgstr ""
-
-#: ../../changelog.md:251
-msgid ""
-"`API.lookup_statuses`, besides `id` "
-"([cf9845d](https://github.com/tweepy/tweepy/commit/cf9845d18c42600f890e5a40b313e77079ca9a5b))"
-msgstr ""
-
-#: ../../changelog.md:252
-msgid ""
-"`API.lookup_users` "
-"([7317109](https://github.com/tweepy/tweepy/commit/731710944c07c82a7a2b52e5a73f0d20ec77b9ae))"
-msgstr ""
-
-#: ../../changelog.md:253
-msgid ""
-"`API.media_upload`, besides `filename` "
-"([ec2498f](https://github.com/tweepy/tweepy/commit/ec2498f0d2c14702b69dbdba463e07ce8709b8d5))"
-msgstr ""
-
-#: ../../changelog.md:254
-msgid ""
-"`API.mentions_timeline` "
-"([3614ce4](https://github.com/tweepy/tweepy/commit/3614ce42483711b1aea65c16a235b4ec4d0c8242))"
-msgstr ""
-
-#: ../../changelog.md:255
-msgid ""
-"`API.outgoing_friendships` "
-"([09f8504](https://github.com/tweepy/tweepy/commit/09f85045945331e9b0ace417be20df0fa1ec7a79))"
-msgstr ""
-
-#: ../../changelog.md:256
-msgid ""
-"`API.rate_limit_status` "
-"([b4b91c1](https://github.com/tweepy/tweepy/commit/b4b91c116921045eb18790330771460c28f9662a))"
-msgstr ""
-
-#: ../../changelog.md:257
-msgid ""
-"`API.remove_list_member` "
-"([e7fa800](https://github.com/tweepy/tweepy/commit/e7fa800bf0cbe699201c7f3e26ad2e27b4193b6d))"
-msgstr ""
-
-#: ../../changelog.md:258
-msgid ""
-"`API.remove_list_members` "
-"([593ef1c](https://github.com/tweepy/tweepy/commit/593ef1cf6a59656e3c7208ef6907009b2e95089b))"
-msgstr ""
-
-#: ../../changelog.md:259
-msgid ""
-"`API.report_spam` "
-"([f55efcf](https://github.com/tweepy/tweepy/commit/f55efcfc86ba10c3fd133a84290a9c50a1f64a9d))"
-msgstr ""
-
-#: ../../changelog.md:260
-msgid ""
-"`API.retweet`, besides `id` "
-"([4f7be88](https://github.com/tweepy/tweepy/commit/4f7be886e806c3f61eaaff48827c5c8d1e517fe8))"
-msgstr ""
-
-#: ../../changelog.md:261
-msgid ""
-"`API.reverse_geocode`: besides `lat` and `long` "
-"([b209c48](https://github.com/tweepy/tweepy/commit/b209c484f1dd4458d455b4faa41971c6429dae3b))"
-msgstr ""
-
-#: ../../changelog.md:262
-msgid ""
-"`API.search_30_day`, besides `label` and `query` "
-"([434fd35](https://github.com/tweepy/tweepy/commit/434fd35d76481f0281d62cd83b8da2bd47353e56))"
-msgstr ""
-
-#: ../../changelog.md:263
-msgid ""
-"`API.search_full_archive`, besides `label` and `query` "
-"([44391bc](https://github.com/tweepy/tweepy/commit/44391bcf55da7fb50cf077510ee94e849599b6cd))"
-msgstr ""
-
-#: ../../changelog.md:264
-msgid ""
-"`API.search_geo` "
-"([0a6bec9](https://github.com/tweepy/tweepy/commit/0a6bec9906b41983067315954ac533556ae85176))"
-msgstr ""
-
-#: ../../changelog.md:265
-msgid ""
-"`API.search_tweets`, besides `q` "
-"([445da4e](https://github.com/tweepy/tweepy/commit/445da4ec69cdaf1199ac025e63d7ffc80dd9f27f))"
-msgstr ""
-
-#: ../../changelog.md:266
-msgid ""
-"`API.search_users`, besides `q` "
-"([76ca416](https://github.com/tweepy/tweepy/commit/76ca4169f38759d7eb7deb5cd984ef615fe2b628))"
-msgstr ""
-
-#: ../../changelog.md:267
-msgid ""
-"`API.send_direct_message`, besides `recipient_id` and `text` "
-"([7d1a549](https://github.com/tweepy/tweepy/commit/7d1a5498325cbc93c7c177a96f5642c5c5683eac))"
-msgstr ""
-
-#: ../../changelog.md:268
-msgid ""
-"`API.set_settings` "
-"([bf1d928](https://github.com/tweepy/tweepy/commit/bf1d928cec2b9ada5d161b479f9140d80e254e81))"
-msgstr ""
-
-#: ../../changelog.md:269
-msgid ""
-"`API.supported_languages` "
-"([2034efc](https://github.com/tweepy/tweepy/commit/2034efc450d6bf29a481fc7eca35f125dd66e9d4))"
-msgstr ""
-
-#: ../../changelog.md:270
-msgid ""
-"`API.subscribe_list` "
-"([ee3b718](https://github.com/tweepy/tweepy/commit/ee3b718339e5ff8719cf8fc7ada5fc7930e41c13))"
-msgstr ""
-
-#: ../../changelog.md:271
-msgid ""
-"`API.unretweet`, besides `id` "
-"([4626c42](https://github.com/tweepy/tweepy/commit/4626c424aaca20b4fcb87bbd590cdb33abed9fb0))"
-msgstr ""
-
-#: ../../changelog.md:272
-msgid ""
-"`API.unsubscribe_list` "
-"([2df2311](https://github.com/tweepy/tweepy/commit/2df231158d08e05ccb2f08a020dea154681e2609))"
-msgstr ""
-
-#: ../../changelog.md:273
-msgid ""
-"`API.update_list` "
-"([8b3b4fb](https://github.com/tweepy/tweepy/commit/8b3b4fbab2c9150ff3ce1f15f1f4a0f8bc5edde1))"
-msgstr ""
-
-#: ../../changelog.md:274
-msgid ""
-"`API.update_profile` "
-"([99cd815](https://github.com/tweepy/tweepy/commit/99cd815b0e730a8f1bc2bd0737fcb83749a483c7))"
-msgstr ""
-
-#: ../../changelog.md:275
-msgid ""
-"`API.update_profile_banner`, besides `filename` "
-"([1ca22be](https://github.com/tweepy/tweepy/commit/1ca22be0cbb0a4f3aba00b37263ac92149eceb1c))"
-msgstr ""
-
-#: ../../changelog.md:276
-msgid ""
-"`API.update_profile_image`, besides `filename` "
-"([3539fa2](https://github.com/tweepy/tweepy/commit/3539fa2129f22af80e68adfb9d216c2176dc0181))"
-msgstr ""
-
-#: ../../changelog.md:277
-msgid ""
-"`API.update_status`, besides `status` "
-"([761cbfe](https://github.com/tweepy/tweepy/commit/761cbfe05e866e60edf7c4e58b9ecf356507c6f2))"
-msgstr ""
-
-#: ../../changelog.md:278
-msgid ""
-"`API.update_status_with_media`, besides `filename` and `status` "
-"([0ac4e83](https://github.com/tweepy/tweepy/commit/0ac4e83531993187df16c05a886654e13574f136))"
-msgstr ""
-
-#: ../../changelog.md:279
-msgid ""
-"`API.user_timeline` "
-"([0ef964f](https://github.com/tweepy/tweepy/commit/0ef964f454a0e9111c1933aca13ec55c2bcbe2c3))"
-msgstr ""
-
-#: ../../changelog.md:280
-msgid ""
-"Reorder `API.update_status_with_media` parameters "
-"([87abdcd](https://github.com/tweepy/tweepy/commit/87abdcd40c89da6be3ddc3911fadd4e31fcf5986))"
-msgstr ""
-
-#: ../../changelog.md:281
-msgid ""
-"Rename `API` initialization parameter: `auth_handler` -> `auth` "
-"([ee313bd](https://github.com/tweepy/tweepy/commit/ee313bd96e9c2ecf317792a024712e98b5c33c25))"
-msgstr ""
-
-#: ../../changelog.md:282
-msgid ""
-"Stop allowing positional arguments besides `auth` for `API` "
-"initialization "
-"([da2f276](https://github.com/tweepy/tweepy/commit/da2f2767abb1b565b6902ecf7eead3dfcf651ec1))"
-msgstr ""
-
-#: ../../changelog.md:283
-msgid ""
-"Remove `API.api_root` and `API.upload_root` "
-"([e757919](https://github.com/tweepy/tweepy/commit/e7579194edd367a5fea6e50dc1cd0d82f3ae643d))"
-msgstr ""
-
-#: ../../changelog.md:284
-msgid ""
-"Remove `API.compression` "
-"([4590c7a](https://github.com/tweepy/tweepy/commit/4590c7adebc5bb540429dd9f432f16155c4bf0b5))"
-msgstr ""
-
-#: ../../changelog.md:285
-msgid ""
-"Remove `API.me`, `AuthHandler.get_username`, and "
-"`OAuthHandler.get_username` "
-"([807f937](https://github.com/tweepy/tweepy/commit/807f9371b6f0a796fea6093497401a1d10b5e183))"
-msgstr ""
-
-#: ../../changelog.md:286
-msgid ""
-"Remove `API.search_host` and `API.search_root` "
-"([92db0cf](https://github.com/tweepy/tweepy/commit/92db0cf87666229098809973554d20d35b2971a0))"
-msgstr ""
-
-#: ../../changelog.md:287
-msgid ""
-"Remove `API.wait_on_rate_limit_notify` "
-"([f325738](https://github.com/tweepy/tweepy/commit/f3257389ed566029e7eec0598597afeef6900d35))"
-msgstr ""
-
-#: ../../changelog.md:288
-msgid "Always log warning when rate limit reached"
-msgstr ""
-
-#: ../../changelog.md:289
-msgid ""
-"Remove `map_` keyword argument aliasing for `API.lookup_statuses` "
-"([0a404c3](https://github.com/tweepy/tweepy/commit/0a404c3fc66399271b1a1d769fc18665d1a7a37a))"
-msgstr ""
-
-#: ../../changelog.md:291
-msgid "`Stream`"
-msgstr ""
-
-#: ../../changelog.md:292
-msgid ""
-"Remove and replace `StreamListener` by merging it into `Stream` "
-"([39abff4](https://github.com/tweepy/tweepy/commit/39abff4520e291180425ac2219d1d8597ac5da96))"
-msgstr ""
-
-#: ../../changelog.md:293
-msgid ""
-"`StreamListener.keep_alive` -> `Stream.on_keep_alive` "
-"([abf4d5d](https://github.com/tweepy/tweepy/commit/abf4d5d4dfa117b39bfcdc992895574df7e5ee8b))"
-msgstr ""
-
-#: ../../changelog.md:294
-msgid "`StreamListener.on_connect` -> `Stream.on_connect`"
-msgstr ""
-
-#: ../../changelog.md:295
-msgid "`StreamListener.on_data` -> `Stream.on_data`"
-msgstr ""
-
-#: ../../changelog.md:296
-msgid "`StreamListener.on_delete` -> `Stream.on_delete`"
-msgstr ""
-
-#: ../../changelog.md:297
-msgid ""
-"`StreamListener.on_disconnect` -> `Stream.on_disconnect_message` "
-"([6c3b997](https://github.com/tweepy/tweepy/commit/6c3b997df0070b6ab7ead9cd0482cb66088ef229))"
-msgstr ""
-
-#: ../../changelog.md:298
-msgid ""
-"`StreamListener.on_error` -> `Stream.on_request_error` "
-"([fe3bb8b](https://github.com/tweepy/tweepy/commit/fe3bb8bbbea880b4629206a7d542f71a96991e30))"
-msgstr ""
-
-#: ../../changelog.md:299
-msgid "`StreamListener.on_exception` -> `Stream.on_exception`"
-msgstr ""
-
-#: ../../changelog.md:300
-msgid "`StreamListener.on_limit` -> `Stream.on_limit`"
-msgstr ""
-
-#: ../../changelog.md:301
-msgid "`StreamListener.on_scrub_geo` -> `Stream.on_scrub_geo`"
-msgstr ""
-
-#: ../../changelog.md:302
-msgid "`StreamListener.on_status` -> `Stream.on_status`"
-msgstr ""
-
-#: ../../changelog.md:303
-msgid "`StreamListener.on_status_withheld` -> `Stream.on_status_withheld`"
-msgstr ""
-
-#: ../../changelog.md:304
-msgid ""
-"`StreamListener.on_timeout` -> `Stream.on_connection_error` "
-"([8f62297](https://github.com/tweepy/tweepy/commit/8f622971f2a36f49ad54b70cf4f98464487a4716))"
-msgstr ""
-
-#: ../../changelog.md:305
-msgid "`StreamListener.on_user_withheld` -> `Stream.on_user_withheld`"
-msgstr ""
-
-#: ../../changelog.md:306
-msgid "`StreamListener.on_warning` -> `Stream.on_warning`"
-msgstr ""
-
-#: ../../changelog.md:307
-msgid ""
-"Remove `Stream.api` "
-"([21a9db2](https://github.com/tweepy/tweepy/commit/21a9db282a9ee981d5d767066634a0fb551bbcde))"
-msgstr ""
-
-#: ../../changelog.md:308
-msgid ""
-"Remove `Stream.body` "
-"([3e40193](https://github.com/tweepy/tweepy/commit/3e40193ee1bcecd470e28f6e1bd90e9090694213))"
-msgstr ""
-
-#: ../../changelog.md:309
-msgid ""
-"Remove `Stream.headers` "
-"([d07af4e](https://github.com/tweepy/tweepy/commit/d07af4ec865be12fc09ebf99afe2b99041e16b45))"
-msgstr ""
-
-#: ../../changelog.md:310
-msgid ""
-"Remove `Stream.host` "
-"([9cf8518](https://github.com/tweepy/tweepy/commit/9cf8518350113c1bc89aa978d7a89ffcae2f1832))"
-msgstr ""
-
-#: ../../changelog.md:311
-msgid ""
-"Remove `Stream.new_session` "
-"([26518ab](https://github.com/tweepy/tweepy/commit/26518abe993b3cf7729e9d55be571b4cc89f50ab))"
-msgstr ""
-
-#: ../../changelog.md:312
-msgid ""
-"Remove `Stream.timeout` "
-"([a2f79f1](https://github.com/tweepy/tweepy/commit/a2f79f1b6e4406672895764b044d18b33dc527fd))"
-msgstr ""
-
-#: ../../changelog.md:313
-msgid ""
-"Remove `Stream.url` "
-"([48cbf97](https://github.com/tweepy/tweepy/commit/48cbf97fbcdb9543be3bb6729e9bc4327d8993bf))"
-msgstr ""
-
-#: ../../changelog.md:314
-msgid ""
-"Remove Stream parameters and attributes for reconnect wait times "
-"([24059d4](https://github.com/tweepy/tweepy/commit/24059d41c13084003d88a8e62de081c7869db8ca))"
-msgstr ""
-
-#: ../../changelog.md:315
-msgid ""
-"Remove `Stream.retry_time_start`, `Stream.retry_420_start`, "
-"`Stream.retry_time_cap`, `Stream.snooze_time_step`, "
-"`Stream.snooze_time_cap`, `Stream.retry_time`, and `Stream.snooze_time`"
-msgstr ""
-
-#: ../../changelog.md:316
-msgid ""
-"Rename `Stream.retry_count` to `Stream.max_retries` "
-"([3585f13](https://github.com/tweepy/tweepy/commit/3585f134ecfc5e1c25d37cb6d5bd21fd2d913aa9))"
-msgstr ""
-
-#: ../../changelog.md:317
-msgid ""
-"Replace `Stream.auth` with parameters and attributes for each credential "
-"([c9f59e6](https://github.com/tweepy/tweepy/commit/c9f59e680f17412522206d0999bf9f5ac7788f2f))"
-msgstr ""
-
-#: ../../changelog.md:318
-msgid ""
-"Replace `Stream.auth` with `Stream.consumer_key`, "
-"`Stream.consumer_secret`, `Stream.access_token`, and "
-"`Stream.access_token_secret`"
-msgstr ""
-
-#: ../../changelog.md:319
-msgid ""
-"Replace `Stream` parameter, `proxies`, with `proxy` "
-"([#1272](https://github.com/tweepy/tweepy/issues/1272))"
-msgstr ""
-
-#: ../../changelog.md:320
-msgid ""
-"Remove `Stream.filter` parameter: `encoding` "
-"([b3f2db2](https://github.com/tweepy/tweepy/commit/b3f2db2baa024ea1aae7acf53948b60e02c1ed18))"
-msgstr ""
-
-#: ../../changelog.md:321
-msgid ""
-"Rename `Stream.filter` and `Stream.sample` parameters: `is_async` -> "
-"`threaded` "
-"([6c96c15](https://github.com/tweepy/tweepy/commit/6c96c156cac4ede3855222f0c4705bc08829b308))"
-msgstr ""
-
-#: ../../changelog.md:322
-msgid ""
-"Stop allowing positional arguments for `Stream.filter` "
-"([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))"
-msgstr ""
-
-#: ../../changelog.md:323
-msgid ""
-"Stop allowing positional arguments for `Stream.sample` "
-"([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))"
-msgstr ""
-
-#: ../../changelog.md:325
-msgid "Twitter API Breaking Changes"
-msgstr ""
-
-#: ../../changelog.md:326
-msgid ""
-"Remove `API.configuration` "
-"([#1614](https://github.com/tweepy/tweepy/issues/1614))"
-msgstr ""
-
-#: ../../changelog.md:327
-msgid ""
-"Remove `API.geo_similar_places` "
-"([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))"
-msgstr ""
-
-#: ../../changelog.md:328
-msgid ""
-"Remove `API.related_results` "
-"([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))"
-msgstr ""
-
-#: ../../changelog.md:329
-msgid ""
-"Remove `Relation` model "
-"([cc4479a](https://github.com/tweepy/tweepy/commit/cc4479a4d5331cec57880d3bc82f283a8bc8bbc5))"
-msgstr ""
-
-#: ../../changelog.md:330
-msgid ""
-"Remove `id` endpoint parameter for `API.create_block` "
-"([e4eaa4b](https://github.com/tweepy/tweepy/commit/e4eaa4bd8a85f401035f1a0f56debd9eff25c610))"
-msgstr ""
-
-#: ../../changelog.md:331
-msgid ""
-"Remove `id` endpoint parameter for `API.create_friendship` "
-"([6a3c1ab](https://github.com/tweepy/tweepy/commit/6a3c1abae29e04b52ae4e881c337bb735e72a038))"
-msgstr ""
-
-#: ../../changelog.md:332
-msgid ""
-"Remove `id` endpoint parameter for `API.create_mute` "
-"([bb25d69](https://github.com/tweepy/tweepy/commit/bb25d691d2498456a6cd05f7a9f0dc8621a9ece4))"
-msgstr ""
-
-#: ../../changelog.md:333
-msgid ""
-"Remove `id` endpoint parameter for `API.destroy_block` "
-"([1a9b52d](https://github.com/tweepy/tweepy/commit/1a9b52d121d6d00cdb8a8a9863170b748b02574e))"
-msgstr ""
-
-#: ../../changelog.md:334
-msgid ""
-"Remove `id` endpoint parameter for `API.destroy_friendship` "
-"([66f1612](https://github.com/tweepy/tweepy/commit/66f16122addb06fe244f75c44ffd7adb01e57c7f))"
-msgstr ""
-
-#: ../../changelog.md:335
-msgid ""
-"Remove `id` endpoint parameter for `API.destroy_mute` "
-"([8c444c5](https://github.com/tweepy/tweepy/commit/8c444c5b9d135bf39850bbcd757c8471e16d4202))"
-msgstr ""
-
-#: ../../changelog.md:336
-msgid ""
-"Remove `id` endpoint parameter for `API.get_follower_ids` "
-"([5cddd12](https://github.com/tweepy/tweepy/commit/5cddd12d26d22f691039de3cb792da3e9e25e0e8))"
-msgstr ""
-
-#: ../../changelog.md:337
-msgid ""
-"Remove `id` endpoint parameter for `API.get_followers` "
-"([a3fb959](https://github.com/tweepy/tweepy/commit/a3fb9594b4bcc884eb29feb11028509b73328f2a))"
-msgstr ""
-
-#: ../../changelog.md:338
-msgid ""
-"Remove `id` endpoint parameter for "
-"`API.get_friend_ids`([7cbf818](https://github.com/tweepy/tweepy/commit/7cbf818e2093a5d866ab72469194df0d1d0d4696))"
-msgstr ""
-
-#: ../../changelog.md:339
-msgid ""
-"Remove `id` endpoint parameter for `API.get_friends` "
-"([6875e15](https://github.com/tweepy/tweepy/commit/6875e1517d4d81b9f5bfb5e7b5d4e076cd3a7bea))"
-msgstr ""
-
-#: ../../changelog.md:340
-msgid ""
-"Remove `id` endpoint parameter for `API.get_user` "
-"([a2681ed](https://github.com/tweepy/tweepy/commit/a2681ed376246677b48156fac66c75d05afdc3ff))"
-msgstr ""
-
-#: ../../changelog.md:341
-msgid ""
-"Remove `accuracy` and `contained_within` endpoint parameters for "
-"`API.search_geo` "
-"([d37a409](https://github.com/tweepy/tweepy/commit/d37a409e96553d86621a6caa125c5581cac0b3f7))"
-msgstr ""
-
-#: ../../changelog.md:342
-msgid ""
-"Remove `allow_contributor_request` endpoint parameter for "
-"`API.set_settings` "
-"([1cc33b2](https://github.com/tweepy/tweepy/commit/1cc33b209f181d1c729d7931c1b541947423dd4d))"
-msgstr ""
-
-#: ../../changelog.md:343
-msgid ""
-"Update `API.update_profile_banner` endpoint parameters: `offset_right` ->"
-" `offset_top` "
-"([83f9b79](https://github.com/tweepy/tweepy/commit/83f9b79f5744dc7327a8e1c7d5720742c3d370f1))"
-msgstr ""
-
-#: ../../changelog.md:344
-msgid ""
-"Remove `enable_dmcommands` and `fail_dmcommands` parameters for "
-"`API.update_status` "
-"([fe5b3ef](https://github.com/tweepy/tweepy/commit/fe5b3efd77713d00a7ca516ec20afa54903cba8c))"
-msgstr ""
-
-#: ../../changelog.md:345
-msgid ""
-"Remove `in_reply_to_status_id_str` and `auto_populate_reply_metadata` "
-"endpoint parameters for `API.update_status_with_media` "
-"([c3c9d29](https://github.com/tweepy/tweepy/commit/c3c9d29ecfffc75976b6d20b1efcfb084adfafaf))"
-msgstr ""
-
-#: ../../changelog.md:346
-msgid ""
-"Remove `id` endpoint parameter for `API.user_timeline` "
-"([#1484](https://github.com/tweepy/tweepy/pull/1484))"
-msgstr ""
-
-#: ../../changelog.md:347
-msgid ""
-"Remove `Stream.firehose` "
-"([ad50cdc](https://github.com/tweepy/tweepy/commit/ad50cdca6091c9781689634afb817f3ccd5c7e0d))"
-msgstr ""
-
-#: ../../changelog.md:348
-msgid ""
-"Remove "
-"`Stream.retweet`([6b1944b](https://github.com/tweepy/tweepy/commit/6b1944b23aeb93166964f96d71f408cd21ef64be))"
-msgstr ""
-
-#: ../../changelog.md:349
-msgid ""
-"Remove `Stream.sitestream` and `Stream.userstream` "
-"([96f7e63](https://github.com/tweepy/tweepy/commit/96f7e63e1019639496bd983fd8443e49be45524f))"
-msgstr ""
-
-#: ../../changelog.md:350
-msgid ""
-"Remove `StreamListener.on_direct_message` and `StreamListener.on_friends`"
-" "
-"([ab2479b](https://github.com/tweepy/tweepy/commit/ab2479b15da04c28144c3f4384b7aac71eaa0250))"
-msgstr ""
-
-#: ../../changelog.md:351
-msgid ""
-"Remove `StreamListener.on_event` "
-"([20b5afb](https://github.com/tweepy/tweepy/commit/20b5afba81e451f3e7a97d97f11eb423fa2b1723))"
-msgstr ""
-
-#: ../../changelog.md:353 ../../changelog.md:419
-msgid "Other"
-msgstr ""
-
-#: ../../changelog.md:354
-msgid ""
-"Datetime objects for `models.List.created_at`, "
-"`models.SavedSearch.created_at`, `models.Status.created_at`, and "
-"`models.User.created_at` are now aware "
-"([59d4d92](https://github.com/tweepy/tweepy/commit/59d4d920dd4470b52f329d850366721cb52ea0eb))"
-msgstr ""
-
-#: ../../changelog.md:355
-msgid ""
-"Change `return_cursors` parameter for `JSONParser.parse` and "
-"`ModelParser.parse` to be keyword-only argument "
-"([56b8e31](https://github.com/tweepy/tweepy/commit/56b8e319a874f6d4cfae7dc9f7c33f32ceea83f4))"
-msgstr ""
-
-#: ../../changelog.md:356
-msgid ""
-"Remove `method` parameter from `parse` method for `Parser` and its "
-"subclasses "
-"([dda2ec6](https://github.com/tweepy/tweepy/commit/dda2ec6ccd9b5df44daf7b8574d183ac0c2503fa))"
-msgstr ""
-
-#: ../../changelog.md:357
-msgid ""
-"Remove handling of 401 HTTP status code in `API.verify_credentials` "
-"([7e4d2a4](https://github.com/tweepy/tweepy/commit/7e4d2a4b3bc9b73501d833af349fc8b8986a5197))"
-msgstr ""
-
-#: ../../changelog.md:358
-msgid ""
-"Remove `models.List.is_member` and `models.List.is_subscribed` "
-"([b765aee](https://github.com/tweepy/tweepy/commit/b765aee92ed9a482983c8a7900cbb62a238abb60))"
-msgstr ""
-
-#: ../../changelog.md:362
-msgid "New Methods And Parameters / Attributes"
-msgstr ""
-
-#: ../../changelog.md:363
-msgid ""
-"Add `API.get_list_ownerships` "
-"([#1282](https://github.com/tweepy/tweepy/pull/1282), "
-"[#1498](https://github.com/tweepy/tweepy/issues/1498))"
-msgstr ""
-
-#: ../../changelog.md:364
-msgid ""
-"Add `models.User.list_ownerships` "
-"([#1282](https://github.com/tweepy/tweepy/pull/1282))"
-msgstr ""
-
-#: ../../changelog.md:365
-msgid ""
-"Add `API.get_profile_banner` "
-"([58ac8bb](https://github.com/tweepy/tweepy/commit/58ac8bb8083044f37c1999b61ecb763918d7a703))"
-msgstr ""
-
-#: ../../changelog.md:366
-msgid ""
-"Add `API.no_retweets_friendships` "
-"([496a399](https://github.com/tweepy/tweepy/commit/496a3993ae6f6048059c3e9ee2a6f08a27f654b9))"
-msgstr ""
-
-#: ../../changelog.md:367
-msgid ""
-"Add `API.remove_profile_banner` "
-"([f0e53c6](https://github.com/tweepy/tweepy/commit/f0e53c6d6a21595cefc797b66ab8bbc027a2d425))"
-msgstr ""
-
-#: ../../changelog.md:368
-msgid ""
-"Add `API.update_friendship` "
-"([ddd24a4](https://github.com/tweepy/tweepy/commit/ddd24a474305d2a9916d92e64b2821a27a6ef450))"
-msgstr ""
-
-#: ../../changelog.md:369
-msgid ""
-"Add `API.user_agent` "
-"([bbec64b](https://github.com/tweepy/tweepy/commit/bbec64bda79350e9691951f61e9663a51696d07f))"
-msgstr ""
-
-#: ../../changelog.md:370
-msgid "Add endpoint parameters for `API` methods:"
-msgstr ""
-
-#: ../../changelog.md:371
-msgid ""
-"`API.create_block`: `include_entities`, `skip_status` "
-"([5e694b2](https://github.com/tweepy/tweepy/commit/5e694b289a8543014ed5bd04f667142ededeac04))"
-msgstr ""
-
-#: ../../changelog.md:372
-msgid ""
-"`API.create_favorite`: `include_entities` "
-"([65c7ce7](https://github.com/tweepy/tweepy/commit/65c7ce71d09a570e14723b51fcef894093a21bae))"
-msgstr ""
-
-#: ../../changelog.md:373
-msgid ""
-"`API.destroy_block`: `include_entities`, `skip_status` "
-"([7299362](https://github.com/tweepy/tweepy/commit/7299362474563b7082f934c56b150d3f14366e26))"
-msgstr ""
-
-#: ../../changelog.md:374
-msgid ""
-"`API.destroy_favorite`: `include_entities` "
-"([ecd19f0](https://github.com/tweepy/tweepy/commit/ecd19f071b385cc9649a699e502cc215b441e071))"
-msgstr ""
-
-#: ../../changelog.md:375
-msgid ""
-"`API.destroy_status`: `trim_user` "
-"([ed363e6](https://github.com/tweepy/tweepy/commit/ed363e6141ba467f27a312bca92fafd8b303db4c))"
-msgstr ""
-
-#: ../../changelog.md:376
-msgid ""
-"`API.get_blocked_ids`: `stringify_ids` "
-"([316b4cc](https://github.com/tweepy/tweepy/commit/316b4cc73393e21075dd0fe1985777ba876bedcb))"
-msgstr ""
-
-#: ../../changelog.md:377
-msgid ""
-"`API.get_blocks`: `include_entities`, `skip_status` "
-"([7ef1e85](https://github.com/tweepy/tweepy/commit/7ef1e8540d38e33d3082795ebf9561e24f1e42ae))"
-msgstr ""
-
-#: ../../changelog.md:378
-msgid ""
-"`API.get_favorites`: `include_entities` "
-"([2b91edc](https://github.com/tweepy/tweepy/commit/2b91edc94c20d88467f9883fa0b16e4e35b8226f))"
-msgstr ""
-
-#: ../../changelog.md:379
-msgid ""
-"`API.get_follower_ids`: `stringify_ids ` "
-"([c490027](https://github.com/tweepy/tweepy/commit/c490027e936c3a0a1a62cfa3cb321358414b3b93))"
-msgstr ""
-
-#: ../../changelog.md:380
-msgid ""
-"`API.get_friend_ids`: `stringify_ids`, `count` "
-"([aba327e](https://github.com/tweepy/tweepy/commit/aba327e2aaec8ac5b63c84bdb2ece0bf7e84103f))"
-msgstr ""
-
-#: ../../changelog.md:381
-msgid ""
-"`API.get_list_member`: `include_entities`, `skip_status` "
-"([e959787](https://github.com/tweepy/tweepy/commit/e9597879d653fec0b999ec5e48995e7c5bad298f))"
-msgstr ""
-
-#: ../../changelog.md:382
-msgid ""
-"`API.get_list_members`: `count`, `include_entities`, `skip_status` "
-"([232fa29](https://github.com/tweepy/tweepy/commit/232fa2982fd7a92c9d8458ca63482ee8d55d06f7))"
-msgstr ""
-
-#: ../../changelog.md:383
-msgid ""
-"`API.get_list_subscriber`: `include_entities`, `skip_status` "
-"([783941a](https://github.com/tweepy/tweepy/commit/783941a28384aaa99d7998c69df2c873636f9922))"
-msgstr ""
-
-#: ../../changelog.md:384
-msgid ""
-"`API.get_muted_ids`: `stringify_ids` "
-"([8b04108](https://github.com/tweepy/tweepy/commit/8b04108163f130f6492534ea26baa7b460031a7c))"
-msgstr ""
-
-#: ../../changelog.md:385
-msgid ""
-"`API.get_retweeter_ids`: `count` "
-"([71ca488](https://github.com/tweepy/tweepy/commit/71ca488c6201552647fe73a030533de03ab0dbd4))"
-msgstr ""
-
-#: ../../changelog.md:386
-msgid ""
-"`API.get_retweets`: `trim_user` "
-"([e377188](https://github.com/tweepy/tweepy/commit/e377188c0cca0863c617f2ae7f97d51c865273e8))"
-msgstr ""
-
-#: ../../changelog.md:387
-msgid ""
-"`API.get_retweets_of_me`: `trim_user`, `include_entities`, "
-"`include_user_entities` "
-"([589d97d](https://github.com/tweepy/tweepy/commit/589d97d400ac343b84a7b4b1911c1fb87d6e0ef6))"
-msgstr ""
-
-#: ../../changelog.md:388
-msgid ""
-"`API.get_user`: `include_entities` "
-"([485691d](https://github.com/tweepy/tweepy/commit/485691d5686402af00938d672a102da57c195d1b))"
-msgstr ""
-
-#: ../../changelog.md:389
-msgid ""
-"`API.incoming_friendships`: `stringify_ids` "
-"([ffb7c0e](https://github.com/tweepy/tweepy/commit/ffb7c0eb7582b1bd568c4d0c7f1ee7b4ae893ef1))"
-msgstr ""
-
-#: ../../changelog.md:390
-msgid ""
-"`API.media_upload`: `media_category`, `additional_owners` "
-"([#1486](https://github.com/tweepy/tweepy/pull/1486))"
-msgstr ""
-
-#: ../../changelog.md:391
-msgid ""
-"`API.mentions_timeline`: `trim_user`, `include_entities` "
-"([eb7c8f6](https://github.com/tweepy/tweepy/commit/eb7c8f6e668bf4fe00cdd2f58cc8b7c3fd9c6ed4))"
-msgstr ""
-
-#: ../../changelog.md:392
-msgid ""
-"`API.outgoing_friendships`: `stringify_ids` "
-"([7ed0762](https://github.com/tweepy/tweepy/commit/7ed0762883e03c4479980b62b123baf1e854d316))"
-msgstr ""
-
-#: ../../changelog.md:393
-msgid ""
-"`API.retweet`: `trim_user` "
-"([70d9665](https://github.com/tweepy/tweepy/commit/70d96657a9e2897e59dc43f789256ea709ea3857))"
-msgstr ""
-
-#: ../../changelog.md:394
-msgid ""
-"`API.search_users`: `include_entities` "
-"([8d64b61](https://github.com/tweepy/tweepy/commit/8d64b617b974f4924df7b85e3d2ec3accb4365d1))"
-msgstr ""
-
-#: ../../changelog.md:395
-msgid ""
-"`API.unretweet`: `trim_user` "
-"([6d93f3b](https://github.com/tweepy/tweepy/commit/6d93f3b8a082aca6dc522bfabf7d284f4476e756))"
-msgstr ""
-
-#: ../../changelog.md:396
-msgid ""
-"`API.update_profile`: `include_entities`, `skip_status` "
-"([9715c4a](https://github.com/tweepy/tweepy/commit/9715c4a3fd1d367e4a163c9c61d0c8377a8c3c36))"
-msgstr ""
-
-#: ../../changelog.md:397
-#, fuzzy
-msgid ""
-"Add `Stream.on_disconnect` method "
-"([#277](https://github.com/tweepy/tweepy/issues/277))"
-msgstr ""
-"Poprawienie wywoływania kursora, przekazującego argumenty do metody "
-"bazowej. (https://github.com/tweepy/tweepy/issues/515)"
-
-#: ../../changelog.md:398
-msgid ""
-"Expose `Stream.thread` "
-"([9c2419d](https://github.com/tweepy/tweepy/commit/9c2419d09c2b5af101a730917308d89dced0861a))"
-msgstr ""
-
-#: ../../changelog.md:400
-msgid "New Functionality"
-msgstr ""
-
-#: ../../changelog.md:401
-msgid ""
-"Allow sending Quick Reply Options with Direct Messages "
-"([#1280](https://github.com/tweepy/tweepy/issues/1280))"
-msgstr ""
-
-#: ../../changelog.md:402
-msgid ""
-"Replace `API.send_direct_message` parameter, `quick_reply_type`, with "
-"`quick_reply_options`"
-msgstr ""
-
-#: ../../changelog.md:403
-msgid ""
-"Allow sending Call-To-Action buttons with Direct Messages in "
-"`API.send_direct_message` "
-"([#1311](https://github.com/tweepy/tweepy/issues/1311))"
-msgstr ""
-
-#: ../../changelog.md:405
-#, fuzzy
-msgid "Documentation For Existing Methods"
-msgstr "Dodanie dokumentacji dla rozszerzonych Tweetów"
-
-#: ../../changelog.md:406
-msgid ""
-"Document `API.get_settings` "
-"([cbac800](https://github.com/tweepy/tweepy/commit/cbac800b752c7ac063b44e120f9699fd969718de))"
-msgstr ""
-
-#: ../../changelog.md:407
-msgid ""
-"Document `API.incoming_friendships` "
-"([09dbe0e](https://github.com/tweepy/tweepy/commit/09dbe0e8d0975531b559f18caf702152353c0fff))"
-msgstr ""
-
-#: ../../changelog.md:408
-msgid ""
-"Document `API.outgoing_friendships` "
-"([8ff5f22](https://github.com/tweepy/tweepy/commit/8ff5f22c6655002ff7ec230d2200d6833af5ff0a))"
-msgstr ""
-
-#: ../../changelog.md:409
-msgid ""
-"Document `API.search_geo` "
-"([a51a097](https://github.com/tweepy/tweepy/commit/a51a097c13b31a5ce290749b280455cb93f970cb))"
-msgstr ""
-
-#: ../../changelog.md:410
-msgid ""
-"Document `API.set_settings` "
-"([4703da3](https://github.com/tweepy/tweepy/commit/4703da38090292fb48d4d6853eb67883a5c282b8))"
-msgstr ""
-
-#: ../../changelog.md:411
-msgid ""
-"Document `API.supported_languages` "
-"([9bb8446](https://github.com/tweepy/tweepy/commit/9bb8446837562424093d4c65b6c389d2f1228c62))"
-msgstr ""
-
-#: ../../changelog.md:412
-msgid ""
-"Document `API.update_profile_banner` "
-"([a5df615](https://github.com/tweepy/tweepy/commit/a5df61561f2f40be88bc0e52bb6e50ce7b6a6052))"
-msgstr ""
-
-#: ../../changelog.md:414
-msgid "Dependencies"
-msgstr ""
-
-#: ../../changelog.md:415
-msgid ""
-"Update requests_oauthlib dependency requirement to >= 1.0.0 "
-"([bf629e5](https://github.com/tweepy/tweepy/commit/bf629e53abfada2ce58496fe775d81f47a13494e))"
-msgstr ""
-
-#: ../../changelog.md:416
-msgid ""
-"Remove requests socks extra from setup.py `install_requires` "
-"([38b6de6](https://github.com/tweepy/tweepy/commit/38b6de6c464897684cc18638f1b9348f2a7584f2))"
-msgstr ""
-
-#: ../../changelog.md:417
-msgid "Add socks extra requiring requests socks extra"
-msgstr ""
-
-#: ../../changelog.md:420
-msgid ""
-"Check consumer key and secret type when initializing `OAuthHandler` "
-"([#1489](https://github.com/tweepy/tweepy/issues/1489))"
-msgstr ""
-
-#: ../../changelog.md:421
-msgid ""
-"Make `models.User` hashable "
-"([#1306](https://github.com/tweepy/tweepy/pull/1306))"
-msgstr ""
-
-#: ../../changelog.md:422
-msgid ""
-"Reduce extra sleep time for rate limit handling for `API` "
-"([#1049](https://github.com/tweepy/tweepy/issues/1049))"
-msgstr ""
-
-#: ../../changelog.md:423
-msgid ""
-"Handle keyword arguments for `API.update_profile_image` "
-"([ab96f2f](https://github.com/tweepy/tweepy/commit/ab96f2fca9ab6300b2f2be0472bb8458d94dbcac))"
-msgstr ""
-
-#: ../../changelog.md:424
-msgid ""
-"Handle keyword arguments for `API.update_profile_banner` "
-"([88c3fa1](https://github.com/tweepy/tweepy/commit/88c3fa1624af2a9eaaf0b85870ae01115ce0f952))"
-msgstr ""
-
-#: ../../changelog.md:425
-msgid ""
-"Treat all 2xx HTTP status codes as successful responses "
-"([a0f6984](https://github.com/tweepy/tweepy/commit/a0f69848540fceae68de1be2e4dbd3fc6c7794ec))"
-msgstr ""
-
-#: ../../changelog.md:426
-msgid ""
-"Support gevent for streaming "
-"([#651](https://github.com/tweepy/tweepy/issues/651))"
-msgstr ""
-
-#: ../../changelog.md:427
-msgid ""
-"Return thread when using threaded `Stream.filter` and `Stream.sample` "
-"([2e957b6](https://github.com/tweepy/tweepy/commit/2e957b654ed54f7d7c2b92166517f4d15deee240))"
-msgstr ""
-
-#: ../../changelog.md:428
-msgid ""
-"Use specific user agent for `Stream` "
-"([5994c4b](https://github.com/tweepy/tweepy/commit/5994c4b4005f5f909609ff04765b784fcbe9479c))"
-msgstr ""
-
-#: ../../changelog.md:432
-msgid "Various other optimizations and improvements"
-msgstr ""
-
-#: ../../changelog.md:435
-msgid ""
-"Handle connection errors when streaming "
-"([#237](https://github.com/tweepy/tweepy/issues/237), "
-"[#448](https://github.com/tweepy/tweepy/issues/448), "
-"[#750](https://github.com/tweepy/tweepy/issues/750), "
-"[#1024](https://github.com/tweepy/tweepy/issues/1024), "
-"[#1113](https://github.com/tweepy/tweepy/issues/1113), "
-"[#1416](https://github.com/tweepy/tweepy/issues/1416))"
-msgstr ""
-
-#: ../../changelog.md:436
-msgid ""
-"Remove dependence on string length delimitation in `Stream` "
-"([#892](https://github.com/tweepy/tweepy/issues/892))"
-msgstr ""
-
-#: ../../changelog.md:437
-msgid ""
-"Stop reraising exceptions in `Stream._connect` "
-"([#1072](https://github.com/tweepy/tweepy/issues/1072))"
-msgstr ""
-
-#: ../../changelog.md:438
-msgid ""
-"Change `Stream.sample` method to use GET HTTP method "
-"([1b0e869](https://github.com/tweepy/tweepy/commit/1b0e86968db9702ca258b3df93911952fc934f86))"
-msgstr ""
-
-#: ../../changelog.md:439
-msgid ""
-"Default to `models.User` model in `models.Status.parse` more broadly for "
-"`user` attribute to handle parsers without `model_factory` attribute or "
-"model factories without `user` attribute "
-"([#538](https://github.com/tweepy/tweepy/issues/538))"
-msgstr ""
-
-#: ../../changelog.md:440
-msgid ""
-"Default to `models.Status` model in `models.SearchResults.parse` more "
-"broadly for results to handle parsers without `model_factory` attribute "
-"or model factories without `status` attribute "
-"([71c031b](https://github.com/tweepy/tweepy/commit/71c031b64a397c54c8d5f64ead161df63ea1c99c))"
-msgstr ""
-
-#: ../../changelog.md:441
-msgid ""
-"Start on page 1 for `PageIterator` "
-"([#958](https://github.com/tweepy/tweepy/issues/958))"
-msgstr ""
-
-#: ../../changelog.md:442
-msgid ""
-"Handle Twitter API issue with duplicate pages for `API.search_users` "
-"([#958](https://github.com/tweepy/tweepy/issues/958), "
-"[#1465](https://github.com/tweepy/tweepy/issues/1465))"
-msgstr ""
-
-#: ../../changelog.md:443
-msgid ""
-"Allow integer IDs for `Stream.filter` "
-"([#829](https://github.com/tweepy/tweepy/issues/829), "
-"[#830](https://github.com/tweepy/tweepy/pull/830))"
-msgstr ""
-
-#: ../../changelog.md:444
-msgid ""
-"Handle `ChunkedEncodingError` during streaming "
-"([e8fcc4d](https://github.com/tweepy/tweepy/commit/e8fcc4da695abe15e8da371c1127f548aa8889ad))"
-msgstr ""
-
-#: ../../changelog.md:445
-msgid ""
-"Handle Twitter API errors with successful HTTP status codes "
-"([#1427](https://github.com/tweepy/tweepy/issues/1427))"
-msgstr ""
-
-#: ../../changelog.md:446
-msgid ""
-"Handle initial negative or zero limits in `Cursor` iterators "
-"([c1457b7](https://github.com/tweepy/tweepy/commit/c1457b7785764d736b0b1d60a15deb95581b783f))"
-msgstr ""
-
-#: ../../changelog.md:448
 msgid "Version 3.10.0"
 msgstr "Wersja 3.10.0"
 
-#: ../../changelog.md:450
-#, fuzzy
+#: ../../changelog.md:8
 msgid ""
-"This will be the last major and minor version to support Python 2.7 "
-"([#1253](https://github.com/tweepy/tweepy/issues/1253)) and Python 3.5."
-"   The next non-patch release should be version 4.0.0."
+"This will be the last major and minor version to support Python 2.7 (#1253) and "
+"Python 3.5.<br />The next non-patch release should be version 4.0.0."
 msgstr ""
-"Będzie to ostatnia większa i mniejsza wersja wspierająca Pythona 2.7 "
-"(#1253) i Pythona 3.5.<br />Następnym wydaniem bez poprawek powinna być "
-"wersja 4.0.0."
+"Będzie to ostatnia większa i mniejsza wersja wspierająca Pythona 2.7 (#1253) i "
+"Pythona 3.5.<br />Następnym wydaniem bez poprawek powinna być wersja 4.0.0."
 
-#: ../../changelog.md:454
-msgid ""
-"Add `API.search_30_day` and `API.search_full_archive` "
-"([#1175](https://github.com/tweepy/tweepy/issues/1175), "
-"[#1294](https://github.com/tweepy/tweepy/pull/1294))"
-msgstr ""
+#: ../../changelog.md:11 ../../changelog.md:34 ../../changelog.md:75
+#: ../../changelog.md:106 ../../changelog.md:122
+msgid "New Features / Improvements"
+msgstr "Nowe funkcje / Usprawnienia"
 
-#: ../../changelog.md:455
-msgid ""
-"Update allowed parameters for `API.home_timeline` "
-"([#1410](https://github.com/tweepy/tweepy/issues/1410), "
-"[#1458](https://github.com/tweepy/tweepy/pull/1458))"
-msgstr ""
+#: ../../changelog.md:12
+msgid "Add API.search_30_day and API.search_full_archive (#1175, #1294)"
+msgstr "Dodanie API.search_30_day and API.search_full_archive (#1175, #1294)"
 
-#: ../../changelog.md:456
-#, fuzzy
-msgid "Add `trim_user`, `exclude_replies`, `include_entities`"
+#: ../../changelog.md:13
+msgid "Update allowed parameters for API.home_timeline (#1410, #1458)"
+msgstr "Aktualizacja dozwolonych parametrów dla API.home_timeline (#1410, #1458)"
+
+#: ../../changelog.md:14
+msgid "Add trim_user, exclude_replies, include_entities"
 msgstr "Dodanie trim_user, exclude_replies, include_entities"
 
-#: ../../changelog.md:457
-#, fuzzy
-msgid "Remove `page` as erroneously documented parameter"
+#: ../../changelog.md:15
+msgid "Remove page as erroneously documented parameter"
 msgstr "Usunięcie strony jako błędnie udokumentowany parametr"
 
-#: ../../changelog.md:458
-#, fuzzy
-msgid "Reorder `count` to be the first parameter"
+#: ../../changelog.md:16
+msgid "Reorder count to be the first parameter"
 msgstr "Ustawienie count jako pierwszego parametru"
 
-#: ../../changelog.md:459
-#, fuzzy
-msgid "Update allowed parameters for `API.get_oembed`"
+#: ../../changelog.md:17
+msgid "Update allowed parameters for API.get_oembed"
 msgstr "Aktualizacja dozwolonych parametrów dla API.get_oembed"
 
-#: ../../changelog.md:460
-#, fuzzy
-msgid "Add `hide_thread`, `theme`, `link_color`, `widget_type`, `dnt`"
+#: ../../changelog.md:18
+msgid "Add hide_thread, theme, link_color, widget_type, dnt"
 msgstr "Dodanie hide_thread, theme, link_color, widget_type, dnt"
 
-#: ../../changelog.md:461
-#, fuzzy
-msgid "Remove `id`"
+#: ../../changelog.md:19
+msgid "Remove id"
 msgstr "Usunięcie id"
 
-#: ../../changelog.md:462
-#, fuzzy
-msgid ""
-"Remove `API.update_profile_background_image` "
-"([#1466](https://github.com/tweepy/tweepy/issues/1466))"
+#: ../../changelog.md:20
+msgid "Remove API.update_profile_background_image (#1466)"
 msgstr "Usunięcie API.update_profile_background_image (#1466)"
 
-#: ../../changelog.md:463
+#: ../../changelog.md:21
 msgid "Add support for Python 3.9"
 msgstr "Dodanie wsparcia dla Python 3.9"
 
-#: ../../changelog.md:464
-#, fuzzy
+#: ../../changelog.md:22
 msgid ""
-"Switch from Travis CI to GitHub Actions to run tests and deploy releases "
-"([#1402](https://github.com/tweepy/tweepy/pull/1402))"
+"Switch from Travis CI to GitHub Actions to run tests and deploy releases (#1402)"
 msgstr ""
-"Przejście z Travis CI na GitHub Actions do przeprowadzania testów i "
-"wdrażania nowych wersji (#1402)"
+"Przejście z Travis CI na GitHub Actions do przeprowadzania testów i wdrażania "
+"nowych wersji (#1402)"
 
-#: ../../changelog.md:465 ../../changelog.md:508 ../../changelog.md:535
+#: ../../changelog.md:23 ../../changelog.md:66 ../../changelog.md:93
 msgid "Update and improve various documentation"
 msgstr "Zaktualizowanie i poprawa dokumentacji"
 
-#: ../../changelog.md:468
-#, fuzzy
-msgid ""
-"Use `mimetypes.guess_type` as fallback for determining image file type "
-"([#1411](https://github.com/tweepy/tweepy/issues/1411))"
-msgstr ""
-"Użycie mimetypes.guess_type jako alternatywy dla określenia typu pliku "
-"obrazu (#1411)"
+#: ../../changelog.md:25 ../../changelog.md:68 ../../changelog.md:95
+#: ../../changelog.md:115 ../../changelog.md:131 ../../changelog.md:146
+#: ../../changelog.md:159
+msgid "Bug Fixes"
+msgstr "Naprawa błędów"
 
-#: ../../changelog.md:469
+#: ../../changelog.md:26
+msgid ""
+"Use mimetypes.guess_type as fallback for determining image file type (#1411)"
+msgstr ""
+"Użycie mimetypes.guess_type jako alternatywy dla określenia typu pliku obrazu "
+"(#1411)"
+
+#: ../../changelog.md:27
 msgid "Use proper MIME type in Content-Type header for uploaded images"
 msgstr ""
-"Użycie odpowiedniego typu MIME w nagłówku Content-Type dla przesyłanych "
-"obrazów"
+"Użycie odpowiedniego typu MIME w nagłówku Content-Type dla przesyłanych obrazów"
 
-#: ../../changelog.md:470
-msgid ""
-"Allow `file` parameter to be used again for `API.media_upload` "
-"([#1412](https://github.com/tweepy/tweepy/issues/1412), "
-"[#1413](https://github.com/tweepy/tweepy/pull/1413))"
+#: ../../changelog.md:28
+msgid "Allow file parameter to be used again for API.media_upload (#1412, #1413)"
 msgstr ""
+"Pozwolenie na ponowne użycie parametru file dla API.media_upload (#1412, #1413)"
 
-#: ../../changelog.md:471
-#, fuzzy
+#: ../../changelog.md:29
 msgid ""
-"Allow `file` parameter to be used again for `API.update_profile_banner`, "
-"`API.update_profile_image`, and `API.update_with_media` "
-"([#1475](https://github.com/tweepy/tweepy/pull/1475))"
+"Allow file parameter to be used again for API.update_profile_banner, API."
+"update_profile_image, and API.update_with_media (#1475)"
 msgstr ""
-"Pozwolenie na ponowne użycie parametru pliku dla "
-"API.update_profile_banner, API.update_profile_image, i "
-"API.update_with_media (#1475)"
+"Pozwolenie na ponowne użycie parametru pliku dla API.update_profile_banner, API."
+"update_profile_image, i API.update_with_media (#1475)"
 
-#: ../../changelog.md:472
-#, fuzzy
+#: ../../changelog.md:30
 msgid ""
-"Fix `User.lists`, `User.lists_memberships`, and "
-"`User.lists_subscriptions` to retrieve information about the user in "
-"question rather than the authenticating user "
-"([#1443](https://github.com/tweepy/tweepy/issues/1443), "
-"[#1444](https://github.com/tweepy/tweepy/pull/1444))"
+"Fix User.lists, User.lists_memberships, and User.lists_subscriptions to "
+"retrieve information about the user in question rather than the authenticating "
+"user (#1443, #1444)"
 msgstr ""
-"Naprawienie User.lists, User.lists_memberships i "
-"User.lists_subscriptions, aby pobierały informacje o użytkowniku, którego"
-" dotyczą, a nie o zuwierzytelnionym użytkowniku (#1443, #1444)"
+"Naprawienie User.lists, User.lists_memberships i User.lists_subscriptions, aby "
+"pobierały informacje o użytkowniku, którego dotyczą, a nie o zuwierzytelnionym "
+"użytkowniku (#1443, #1444)"
 
-#: ../../changelog.md:474
+#: ../../changelog.md:32
 msgid "Version 3.9.0"
 msgstr "Wersja 3.9.0"
 
-#: ../../changelog.md:477
-msgid ""
-"Add `API.create_media_metadata` "
-"([#716](https://github.com/tweepy/tweepy/issues/716))"
-msgstr ""
+#: ../../changelog.md:35
+msgid "Add API.create_media_metadata (#716)"
+msgstr "Dodanie API.create_media_metadata (#716)"
 
-#: ../../changelog.md:478
-#, fuzzy
-msgid ""
-"Update allowed parameters for `API.update_status` "
-"([#1101](https://github.com/tweepy/tweepy/issues/1101))"
+#: ../../changelog.md:36
+msgid "Update allowed parameters for API.update_status (#1101)"
 msgstr "Zaktualizowanie dozwolonych parametrów dla API.update_status (#1101)"
 
-#: ../../changelog.md:479
-#, fuzzy
+#: ../../changelog.md:37
 msgid ""
-"Add `exclude_reply_user_ids`, `attachment_url`, `possibly_sensitive`, "
-"`trim_user`, `enable_dmcommands`, `fail_dmcommands`, `card_uri`"
+"Add exclude_reply_user_ids, attachment_url, possibly_sensitive, trim_user, "
+"enable_dmcommands, fail_dmcommands, card_uri"
 msgstr ""
-"Dodanie exclude_reply_user_ids, attachment_url, possibly_sensitive, "
-"trim_user, enable_dmcommands, fail_dmcommands, card_uri"
+"Dodanie exclude_reply_user_ids, attachment_url, possibly_sensitive, trim_user, "
+"enable_dmcommands, fail_dmcommands, card_uri"
 
-#: ../../changelog.md:480
-#, fuzzy
-msgid "Remove `in_reply_to_status_id_str`, `source`"
+#: ../../changelog.md:38
+msgid "Remove in_reply_to_status_id_str, source"
 msgstr "Usunięcie in_reply_to_status_id_str, source"
 
-#: ../../changelog.md:481
-#, fuzzy
-msgid "Add allowed parameters to `API.get_status`"
+#: ../../changelog.md:39
+msgid "Add allowed parameters to API.get_status"
 msgstr "Dodanie dozwolonych parametrów dla API.get_status"
 
-#: ../../changelog.md:482
-#, fuzzy
+#: ../../changelog.md:40
 msgid ""
-"`trim_user`, `include_my_retweet`, `include_entities`, "
-"`include_ext_alt_text`, `include_card_uri`"
+"trim_user, include_my_retweet, include_entities, include_ext_alt_text, "
+"include_card_uri"
 msgstr ""
 "trim_user, include_my_retweet, include_entities, include_ext_alt_text, "
 "include_card_uri"
 
-#: ../../changelog.md:483
-#, fuzzy
-msgid "Add allowed parameters to `API.statuses_lookup`"
+#: ../../changelog.md:41
+msgid "Add allowed parameters to API.statuses_lookup"
 msgstr "Dodanie dozwolonych parametrów dla API.statuses_lookup"
 
-#: ../../changelog.md:484
-#, fuzzy
-msgid "`include_ext_alt_text`, `include_card_uri`"
+#: ../../changelog.md:42
+msgid "include_ext_alt_text, include_card_uri"
 msgstr "include_ext_alt_text, include_card_uri"
 
-#: ../../changelog.md:485
-msgid ""
-"Improve `API.lookup_users` "
-"([#706](https://github.com/tweepy/tweepy/issues/706))"
-msgstr ""
+#: ../../changelog.md:43
+msgid "Improve API.lookup_users (#706)"
+msgstr "Poprawienie API.lookup_users (#706)"
 
-#: ../../changelog.md:486
-#, fuzzy
+#: ../../changelog.md:44
 msgid ""
-"Improve and optimize `API.statuses_lookup`, `API.create_media_metadata`, "
-"`API.update_status`"
+"Improve and optimize API.statuses_lookup, API.create_media_metadata, API."
+"update_status"
 msgstr ""
-"Poprawienie i optymalizacja API.statuses_lookup, "
-"API.create_media_metadata, API.update_status"
+"Poprawienie i optymalizacja API.statuses_lookup, API.create_media_metadata, API."
+"update_status"
 
-#: ../../changelog.md:487
-#, fuzzy
-msgid "Add `reverse` as allowed parameter for `API.lists_all`"
+#: ../../changelog.md:45
+msgid "Add reverse as allowed parameter for API.lists_all"
 msgstr "Dodanie reverse jako dozwolonego parametru dla API.lists_all"
 
-#: ../../changelog.md:488
-#, fuzzy
-msgid "Add `count` as allowed parameter for `API.lists_memberships`"
+#: ../../changelog.md:46
+msgid "Add count as allowed parameter for API.lists_memberships"
 msgstr "Dodanie count jako dozwolonego parametru dla API.lists_memberships"
 
-#: ../../changelog.md:489
-#, fuzzy
-msgid "Add `count` as allowed parameter for `API.lists_subscriptions`"
+#: ../../changelog.md:47
+msgid "Add count as allowed parameter for API.lists_subscriptions"
 msgstr "Dodanie count jako dozwolonego parametru dla API.lists_subscriptions"
 
-#: ../../changelog.md:490
-#, fuzzy
-msgid "Add `include_entities` as allowed parameter for `API.list_timeline`"
+#: ../../changelog.md:48
+msgid "Add include_entities as allowed parameter for API.list_timeline"
 msgstr "Dodanie include_entities jako dozwolonego parametru dla API.list_timeline"
 
-#: ../../changelog.md:491
-#, fuzzy
-msgid "Add allowed parameters to `API.list_subscribers`"
+#: ../../changelog.md:49
+msgid "Add allowed parameters to API.list_subscribers"
 msgstr "Dodanie dozwolonych parametrów dla API.list_subscribers"
 
-#: ../../changelog.md:492
-#, fuzzy
-msgid "`count`, `include_entities`, `skip_status`"
+#: ../../changelog.md:50
+msgid "count, include_entities, skip_status"
 msgstr "count, include_entities, skip_status"
 
-#: ../../changelog.md:493
+#: ../../changelog.md:51
 msgid "Add support for Python 3.8"
 msgstr "Dodanie wsparcia dla Python 3.8"
 
-#: ../../changelog.md:494
+#: ../../changelog.md:52
 msgid "Update and improve setup.py"
 msgstr "Aktualizacja i poprawa setup.py"
 
-#: ../../changelog.md:495
+#: ../../changelog.md:53
 msgid "Use requests socks extra instead of requiring PySocks directly"
 msgstr ""
-"Od teraz używane są requests socks extra zamiast wymagania PySocks "
-"bezpośrednio"
+"Od teraz używane są requests socks extra zamiast wymagania PySocks bezpośrednio"
 
-#: ../../changelog.md:496
-#, fuzzy
+#: ../../changelog.md:54
 msgid ""
-"Allow uploading of images with file names without extensions "
-"([#1060](https://github.com/tweepy/tweepy/issues/1060), "
-"[#1086](https://github.com/tweepy/tweepy/pull/1086))"
+"Allow uploading of images with file names without extensions (#1060, #1086)"
 msgstr ""
-"Zezwalanie na wysyłanie obrazów z nazwami plików bez rozszerzeń (#1060, "
-"#1086"
+"Zezwalanie na wysyłanie obrazów z nazwami plików bez rozszerzeń (#1060, #1086"
 
-#: ../../changelog.md:497
-#, fuzzy
-msgid ""
-"Support uploading WebP images "
-"([#1298](https://github.com/tweepy/tweepy/issues/1298))"
-msgstr ""
-"Poprawienie wywoływania kursora, przekazującego argumenty do metody "
-"bazowej. (https://github.com/tweepy/tweepy/issues/515)"
+#: ../../changelog.md:55
+msgid "Support uploading WebP images (#1298)"
+msgstr "Wsparcie dla przesyłania obrazów WebP (#1298)"
 
-#: ../../changelog.md:498
-#, fuzzy
-msgid ""
-"Add missing attributes to `Relationship` model "
-"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
+#: ../../changelog.md:56
+msgid "Add missing attributes to Relationship model (#1375)"
 msgstr "Dodanie brakującego atrybutu do modelu Relationship (#1375)"
 
-#: ../../changelog.md:499
-msgid ""
-"Update max allowed size for uploaded GIFs "
-"([#1336](https://github.com/tweepy/tweepy/issues/1336), "
-"[#1338](https://github.com/tweepy/tweepy/pull/1338))"
+#: ../../changelog.md:57
+msgid "Update max allowed size for uploaded GIFs (#1336, #1338)"
 msgstr ""
+"Aktualizacja maksymalnego dozwolonego rozmiaru dla wysyłanych GIFów (#1336, "
+"#1338)"
 
-#: ../../changelog.md:500
-#, fuzzy
-msgid ""
-"Add `_json` attribute to `DirectMessage` model "
-"([#1342](https://github.com/tweepy/tweepy/pull/1342))"
+#: ../../changelog.md:58
+msgid "Add _json attribute to DirectMessage model (#1342)"
 msgstr "Dodanie atrybutu _json do modelu DirectMessage (#1342)"
 
-#: ../../changelog.md:501
-msgid ""
-"Update and improve tests "
-"([#1217](https://github.com/tweepy/tweepy/issues/1217))"
-msgstr ""
+#: ../../changelog.md:59
+msgid "Update and improve tests (#1217)"
+msgstr "Aktualizacja i poprawa testów (#1217)"
 
-#: ../../changelog.md:502
+#: ../../changelog.md:60
 msgid "Add documentation for extended Tweets"
 msgstr "Dodanie dokumentacji dla rozszerzonych Tweetów"
 
-#: ../../changelog.md:503
-msgid ""
-"Document `API.lookup_users` "
-"([#539](https://github.com/tweepy/tweepy/issues/539))"
-msgstr ""
+#: ../../changelog.md:61
+msgid "Document API.lookup_users (#539)"
+msgstr "Dodanie dokumentacji dla API.lookup_users (#539)"
 
-#: ../../changelog.md:504
-#, fuzzy
-msgid ""
-"Add documentation for running tests "
-"([#681](https://github.com/tweepy/tweepy/issues/681))"
+#: ../../changelog.md:62
+msgid "Add documentation for running tests (#681)"
 msgstr "Dodanie dokumentacji dla przeprowadzania testów (#681)"
 
-#: ../../changelog.md:505
-#, fuzzy
-msgid ""
-"Add Korean translation of documentation "
-"([#1296](https://github.com/tweepy/tweepy/pull/1296))"
+#: ../../changelog.md:63
+msgid "Add Korean translation of documentation (#1296)"
 msgstr "Dodanie koreańskiego tłumaczenia do dokumentacji (#1296)"
 
-#: ../../changelog.md:506
-#, fuzzy
-msgid ""
-"Add Polish translation of documentation "
-"([#1316](https://github.com/tweepy/tweepy/pull/1316))"
+#: ../../changelog.md:64
+msgid "Add Polish translation of documentation (#1316)"
 msgstr "Dodanie polskiego tłumaczenia do dokumentacji (#1316)"
 
-#: ../../changelog.md:507
-msgid ""
-"Document `API.lookup_friendships` "
-"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
-msgstr ""
+#: ../../changelog.md:65
+msgid "Document API.lookup_friendships (#1375)"
+msgstr "Dodanie dokumentacji dla API.lookup_friendships (#1375)"
 
-#: ../../changelog.md:511
-#, fuzzy
-msgid "Fix handling of invalid credentials for `API.verify_credentials`"
+#: ../../changelog.md:69
+msgid "Fix handling of invalid credentials for API.verify_credentials"
 msgstr "Naprawa obsługi niepoprawnych danych dostępu dla API.verify_credentials"
 
-#: ../../changelog.md:512
-#, fuzzy
+#: ../../changelog.md:70
 msgid ""
-"Handle boolean value for `API.verify_credentials` include_email parameter"
-" ([#890](https://github.com/tweepy/tweepy/issues/890))"
+"Handle boolean value for API.verify_credentials include_email parameter (#890)"
 msgstr ""
-"Obsługa wartości boolean dla parametru API.verify_credentials "
-"include_email (#890)"
+"Obsługa wartości boolean dla parametru API.verify_credentials include_email "
+"(#890)"
 
-#: ../../changelog.md:513
+#: ../../changelog.md:71
 msgid ""
-"Allow `Cursor` to be used with `API.list_direct_messages` by adding "
-"DMCursorIterator ([#1261](https://github.com/tweepy/tweepy/issues/1261), "
-"[#1262](https://github.com/tweepy/tweepy/pull/1262))"
+"Allow Cursor to be used with API.list_direct_messages by adding "
+"DMCursorIterator (#1261, #1262)"
 msgstr ""
+"Zezwolenie na użycie kursora z API.list_direct_messages przez dodanie "
+"DMCursorIterator (#1261, #1262)"
 
-#: ../../changelog.md:515
+#: ../../changelog.md:73
 msgid "Version 3.8.0"
 msgstr "Wersja 3.8.0"
 
-#: ../../changelog.md:518
-#, fuzzy
-msgid ""
-"Allow streams to use daemon threads "
-"([#1126](https://github.com/tweepy/tweepy/pull/1126))"
+#: ../../changelog.md:76
+msgid "Allow streams to use daemon threads (#1126)"
 msgstr "Zezwolenie strumieniom na używanie wątków demonów (#1126)"
 
-#: ../../changelog.md:519
-msgid ""
-"Remove `API.set_delivery_device` "
-"([#1203](https://github.com/tweepy/tweepy/issues/1203))"
-msgstr ""
+#: ../../changelog.md:77
+msgid "Remove API.set_delivery_device (#1203)"
+msgstr "Usunięcie API.set_delivery_device (#1203)"
 
-#: ../../changelog.md:520
-#, fuzzy
-msgid ""
-"Remove simplejson import and usage "
-"([#832](https://github.com/tweepy/tweepy/pull/832))"
+#: ../../changelog.md:78
+msgid "Remove simplejson import and usage (#832)"
 msgstr "Usunięcie simplejson import and usage (#832)"
 
-#: ../../changelog.md:521
-#, fuzzy
-msgid ""
-"Allow `cursor` parameter for `API.blocks_ids` and `API.mutes_ids` "
-"([#1208](https://github.com/tweepy/tweepy/pull/1208))"
+#: ../../changelog.md:79
+msgid "Allow cursor parameter for API.blocks_ids and API.mutes_ids (#1208)"
 msgstr "Dodanie parametru cursor dla API.blocks_ids and API.mutes_ids (#1208)"
 
-#: ../../changelog.md:522
+#: ../../changelog.md:80
 msgid "Drop support for Python 3.4"
 msgstr "Porzucenie wsparcia dla Python 3.4"
 
-#: ../../changelog.md:523
-#, fuzzy
-msgid ""
-"Allow `perform_block` parameter for `API.report_spam` "
-"([#1090](https://github.com/tweepy/tweepy/pull/1090))"
+#: ../../changelog.md:81
+msgid "Allow perform_block parameter for API.report_spam (#1090)"
 msgstr "Zezwolenie parametru perform_block dla API.report_spam (#1090)"
 
-#: ../../changelog.md:524
-msgid ""
-"Add `API.mutes` ([#1197](https://github.com/tweepy/tweepy/issues/1197), "
-"[#1215](https://github.com/tweepy/tweepy/pull/1215))"
+#: ../../changelog.md:82
+msgid "Add API.mutes (#1197, #1215)"
+msgstr "Dodanie API.mutes (#1197, #1215)"
+
+#: ../../changelog.md:83
+msgid "Allow count parameter for API.friends (#577)"
+msgstr "Zezwolenie parametru count dla API.friends (#577)"
+
+#: ../../changelog.md:84
+msgid "Remove since, from, to, and source as allowed parameters for API.search"
 msgstr ""
+"Usunięcie since, from, to, oraz source jako dozwolonych parametrów dla API."
+"search"
 
-#: ../../changelog.md:525
-msgid ""
-"Allow `count` parameter for `API.friends` "
-"([#577](https://github.com/tweepy/tweepy/issues/577))"
+#: ../../changelog.md:85
+msgid "Handle location deletion and withheld content notices for streams (#886)"
 msgstr ""
+"Dodanie obsługi powiadomienia o usunięciu lokalizacji i wstrzymanej zawartości "
+"dla strumieni (#886)"
 
-#: ../../changelog.md:526
-#, fuzzy
-msgid ""
-"Remove `since`, `from`, `to`, and `source` as allowed parameters for "
-"`API.search`"
+#: ../../changelog.md:86
+msgid "Allow usage of equality and difference operators with User objects (#939)"
 msgstr ""
-"Usunięcie since, from, to, oraz source jako dozwolonych parametrów dla "
-"API.search"
+"Zezwolenie na użycie operatorów równości i różnicy z obiektami User (#939)"
 
-#: ../../changelog.md:527
-#, fuzzy
-msgid ""
-"Handle location deletion and withheld content notices for streams "
-"([#886](https://github.com/tweepy/tweepy/pull/886))"
+#: ../../changelog.md:87
+msgid "Add _json attribute to Category, Friendship, and List models (#590, #1169)"
 msgstr ""
-"Dodanie obsługi powiadomienia o usunięciu lokalizacji i wstrzymanej "
-"zawartości dla strumieni (#886)"
+"Dodanie atrybutu _json do modeli Category, Friendship oraz List (#590, #1169)"
 
-#: ../../changelog.md:528
-#, fuzzy
+#: ../../changelog.md:88
 msgid ""
-"Allow usage of equality and difference operators with `User` objects "
-"([#939](https://github.com/tweepy/tweepy/pull/939))"
-msgstr "Zezwolenie na użycie operatorów równości i różnicy z obiektami User (#939)"
-
-#: ../../changelog.md:529
-msgid ""
-"Add `_json` attribute to `Category`, `Friendship`, and `List` models "
-"([#590](https://github.com/tweepy/tweepy/issues/590), "
-"[#1169](https://github.com/tweepy/tweepy/pull/1169))"
+"Remove API.suggested_categories, API.suggested_users, and API."
+"suggested_users_tweets"
 msgstr ""
+"Usunięcie API.suggested_categories, API.suggested_users oraz API."
+"suggested_users_tweets"
 
-#: ../../changelog.md:530
-#, fuzzy
-msgid ""
-"Remove `API.suggested_categories`, `API.suggested_users`, and "
-"`API.suggested_users_tweets`"
-msgstr ""
-"Usunięcie API.suggested_categories, API.suggested_users oraz "
-"API.suggested_users_tweets"
-
-#: ../../changelog.md:531
-#, fuzzy
-msgid ""
-"Update and improve tests and cassettes "
-"([#1242](https://github.com/tweepy/tweepy/pull/1242))"
+#: ../../changelog.md:89
+msgid "Update and improve tests and cassettes (#1242)"
 msgstr "Aktualizacja i poprawa testów oraz kaset (#1242)"
 
-#: ../../changelog.md:532
-msgid ""
-"Update `DirectMessage` model "
-"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
-"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
-msgstr ""
+#: ../../changelog.md:90
+msgid "Update DirectMessage model (#1081, #1228)"
+msgstr "Akutalizacja modelu DirectMessage (#1081, #1228)"
 
-#: ../../changelog.md:533
+#: ../../changelog.md:91
 msgid ""
-"Replace `API.direct_messages` and `API.sent_direct_messages` with "
-"`API.list_direct_messages` "
-"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
-"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+"Replace API.direct_messages and API.sent_direct_messages with API."
+"list_direct_messages (#1081, #1228)"
 msgstr ""
+"Zamiana API.direct_messages oraz API.sent_direct_messages na API."
+"list_direct_messages (#1081, #1228)"
 
-#: ../../changelog.md:534
+#: ../../changelog.md:92
 msgid ""
-"Update `API.get_direct_message`, `API.send_direct_message`, and "
-"`API.destroy_direct_message` "
-"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
-"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+"Update API.get_direct_message, API.send_direct_message, and API."
+"destroy_direct_message (#1081, #1228)"
 msgstr ""
+"Aktualizacja API.get_direct_message, API.send_direct_message, and API."
+"destroy_direct_message (#1081, #1228"
 
-#: ../../changelog.md:538
-msgid ""
-"Exclude examples during installation "
-"([#1141](https://github.com/tweepy/tweepy/issues/1141), "
-"[#1164](https://github.com/tweepy/tweepy/pull/1164))"
-msgstr ""
+#: ../../changelog.md:96
+msgid "Exclude examples during installation (#1141, #1164)"
+msgstr "Wykluczenie przykładów podczas instalacji (#1141, #1164)"
 
-#: ../../changelog.md:539
-#, fuzzy
-msgid ""
-"Properly initialize `OAuthHandler.request_token` "
-"([#1149](https://github.com/tweepy/tweepy/pull/1149))"
+#: ../../changelog.md:97
+msgid "Properly initialize OAuthHandler.request_token (#1149)"
 msgstr "Poprawne inicjalizowanie OAuthHandler.request_token (#1149)"
 
-#: ../../changelog.md:540
-#, fuzzy
-msgid ""
-"Properly handle `map_` parameter for `API.statuses_lookup` "
-"([#598](https://github.com/tweepy/tweepy/issues/598))"
+#: ../../changelog.md:98
+msgid "Properly handle map_ parameter for API.statuses_lookup (#598)"
 msgstr "Poprawna obsługa parametru map_ dla API.statuses_lookup (#598)"
 
-#: ../../changelog.md:541
+#: ../../changelog.md:99
 msgid ""
-"Support cursor pagination for `API.blocks_ids` and `API.mutes_ids` "
-"([#930](https://github.com/tweepy/tweepy/issues/930), "
-"[#931](https://github.com/tweepy/tweepy/pull/931))"
+"Support cursor pagination for API.blocks_ids and API.mutes_ids (#930, #931)"
 msgstr ""
+"Wsparcie indeksowania kursora dla API.blocks_ids oraz API.mutes_ids (#930, #931)"
 
-#: ../../changelog.md:542
-#, fuzzy
+#: ../../changelog.md:100
 msgid ""
-"Return values for `API.update_profile_background_image` and "
-"`API.update_profile_banner` "
-"([#904](https://github.com/tweepy/tweepy/pull/904))"
+"Return values for API.update_profile_background_image and API."
+"update_profile_banner (#904)"
 msgstr ""
-"Zwracanie wartości dla API.update_profile_background_image oraz "
-"API.update_profile_banner (#904)"
+"Zwracanie wartości dla API.update_profile_background_image oraz API."
+"update_profile_banner (#904)"
 
-#: ../../changelog.md:543
+#: ../../changelog.md:101
 msgid "Replace usage of root logger"
 msgstr "Zamiana użycie rejestratora głównego"
 
-#: ../../changelog.md:544
-msgid ""
-"Close Requests sessions "
-"([#810](https://github.com/tweepy/tweepy/issues/810), "
-"[#1093](https://github.com/tweepy/tweepy/issues/1093), "
-"[#1237](https://github.com/tweepy/tweepy/issues/1237))"
-msgstr ""
+#: ../../changelog.md:102
+msgid "Close Requests sessions (#810, #1093, #1237)"
+msgstr "Zamknięcie sesji Requests (#810, #1093, #1237)"
 
-#: ../../changelog.md:546
+#: ../../changelog.md:104
 msgid "Version 3.7.0"
 msgstr "Wersja 3.7.0"
 
-#: ../../changelog.md:549
-#, fuzzy
+#: ../../changelog.md:107
 msgid ""
-"Allow `trim_user` and `exclude_replies` as parameters for "
-"`API.user_timeline` ([#909](https://github.com/tweepy/tweepy/pull/909))"
+"Allow trim_user and exclude_replies as parameters for API.user_timeline (#909)"
 msgstr ""
-"Zezwolenie parametrów trim_user oraz exclude_replies dla "
-"API.user_timeline (#909)"
+"Zezwolenie parametrów trim_user oraz exclude_replies dla API.user_timeline "
+"(#909)"
 
-#: ../../changelog.md:550
-msgid ""
-"Allow `tweet_mode` parameter for `API.statuses_lookup` "
-"([#840](https://github.com/tweepy/tweepy/issues/840), "
-"[#926](https://github.com/tweepy/tweepy/pull/926))"
-msgstr ""
+#: ../../changelog.md:108
+msgid "Allow tweet_mode parameter for API.statuses_lookup (#840, #926)"
+msgstr "Zezwolenie parametru tweet_mode dla API.statuses_lookup (#840, #926)"
 
-#: ../../changelog.md:551
+#: ../../changelog.md:109
 msgid "Drop support for Python 2.6 and 3.3"
 msgstr "Porzucenie wsparcia dla Python 2.6 oraz 3.3"
 
-#: ../../changelog.md:552
-msgid "[Discord Server](https://discord.gg/bJvqnhg)"
-msgstr ""
+#: ../../changelog.md:110
+msgid "Discord Server"
+msgstr "Serwer Discord"
 
-#: ../../changelog.md:553
-#, fuzzy
-msgid ""
-"Add proxy support for streams "
-"([#1033](https://github.com/tweepy/tweepy/pull/1033))"
+#: ../../changelog.md:111
+msgid "Add proxy support for streams (#1033)"
 msgstr "Dodanie wsparcia proxy dla strumieni (#1033)"
 
-#: ../../changelog.md:554
-#, fuzzy
-msgid ""
-"Add `API.create_mute`, `API.destroy_mute`, and `API.mutes_ids` "
-"([#1055](https://github.com/tweepy/tweepy/pull/1055))"
+#: ../../changelog.md:112
+msgid "Add API.create_mute, API.destroy_mute, and API.mutes_ids (#1055)"
 msgstr "Dodanie API.create_mute, API.destroy_mute, and API.mutes_ids (#1055)"
 
-#: ../../changelog.md:555
-#, fuzzy
-msgid ""
-"Allow `tweet_mode` parameter for `API.lookup_users` "
-"([#1130](https://github.com/tweepy/tweepy/pull/1130))"
+#: ../../changelog.md:113
+msgid "Allow tweet_mode parameter for API.lookup_users (#1130)"
 msgstr "Zezwolenie parametru tweet_mode dla API.lookup_users (#1130)"
 
-#: ../../changelog.md:558
-msgid ""
-"Fix `AttributeError` during streaming "
-"([#1026](https://github.com/tweepy/tweepy/issues/1026), "
-"[#1027](https://github.com/tweepy/tweepy/pull/1027))"
+#: ../../changelog.md:116
+msgid "Fix AttributeError during streaming (#1026, #1027)"
 msgstr ""
+"Naprawienie AttributeError podczas przesyłania strumieniowego (#1026, #1027)"
 
-#: ../../changelog.md:559
-msgid ""
-"Update how requirements are specified "
-"([#1029](https://github.com/tweepy/tweepy/issues/1029), "
-"[#1030](https://github.com/tweepy/tweepy/pull/1030))"
-msgstr ""
+#: ../../changelog.md:117
+msgid "Update how requirements are specified (#1029, #1030)"
+msgstr "Uaktualnienie sposobu określania wymagań (#1029, #1030)"
 
-#: ../../changelog.md:560
-msgid ""
-"Fix compatibility issue with Python 3.7 "
-"([#1017](https://github.com/tweepy/tweepy/issues/1017), "
-"[#1042](https://github.com/tweepy/tweepy/pull/1042))"
-msgstr ""
+#: ../../changelog.md:118
+msgid "Fix compatibility issue with Python 3.7 (#1017, #1042)"
+msgstr "Naprawa problemu kompatybilności z Pythonem 3.7 (#1017, #1042)"
 
-#: ../../changelog.md:562
+#: ../../changelog.md:120
 msgid "Version 3.6.0"
 msgstr "Wersja 3.6.0"
 
-#: ../../changelog.md:565
-#, fuzzy
-msgid ""
-"Parse `Status.quoted_status` as a `Status` object "
-"([#633](https://github.com/tweepy/tweepy/pull/633))"
+#: ../../changelog.md:123
+msgid "Parse Status.quoted_status as a Status object (#633)"
 msgstr "Parsowanie Status.quoted_status jako obiektu Status (#633)"
 
-#: ../../changelog.md:566
-#, fuzzy
+#: ../../changelog.md:124
 msgid ""
-"Allow `in_reply_to_status_id_str` as a parameter for `API.update_status` "
-"and `API.update_with_media` "
-"([#693](https://github.com/tweepy/tweepy/pull/693))"
+"Allow in_reply_to_status_id_str as a parameter for API.update_status and API."
+"update_with_media (#693)"
 msgstr ""
-"Zezwolenie parametru in_reply_to_status_id_str dla API.update_status oraz"
-" API.update_with_media (#693)"
+"Zezwolenie parametru in_reply_to_status_id_str dla API.update_status oraz API."
+"update_with_media (#693)"
 
-#: ../../changelog.md:567
-#, fuzzy
-msgid ""
-"Add `stall_warnings` parameter to `Stream.sample` "
-"([#701](https://github.com/tweepy/tweepy/pull/701))"
+#: ../../changelog.md:125
+msgid "Add stall_warnings parameter to Stream.sample (#701)"
 msgstr "Dodanie parametru stall_warnings dla Stream.sample (#701)"
 
-#: ../../changelog.md:568
+#: ../../changelog.md:126
+msgid "Add API.unretweet (#735, #736)"
+msgstr "Dodanie API.unretweet (#735, #736)"
+
+#: ../../changelog.md:127
 msgid ""
-"Add `API.unretweet` ([#735](https://github.com/tweepy/tweepy/issues/735),"
-" [#736](https://github.com/tweepy/tweepy/pull/736))"
+"Allow auto_populate_reply_metadata as a parameter for API.update_status and API."
+"update_with_media (#761)"
 msgstr ""
+"Zezwolenie auto_populate_reply_metadata jako parametru dla API.update_status "
+"oraz API.update_with_media (#761)"
 
-#: ../../changelog.md:569
-#, fuzzy
-msgid ""
-"Allow `auto_populate_reply_metadata` as a parameter for "
-"`API.update_status` and `API.update_with_media` "
-"([#761](https://github.com/tweepy/tweepy/pull/761))"
+#: ../../changelog.md:128
+msgid "Allow profile_link_color as a parameter for API.update_profile"
 msgstr ""
-"Zezwolenie auto_populate_reply_metadata jako parametru dla "
-"API.update_status oraz API.update_with_media (#761)"
+"Zezwolenie profile_link_color jako parametru dla API.update_profile (#761)"
 
-#: ../../changelog.md:570
-#, fuzzy
-msgid "Allow `profile_link_color` as a parameter for `API.update_profile`"
-msgstr "Zezwolenie profile_link_color jako parametru dla API.update_profile (#761)"
+#: ../../changelog.md:129
+msgid "Add support for Python 3.6 (#831, #884)"
+msgstr "Dodanie wsparcia dla Python 3.6 (#831, #884)"
 
-#: ../../changelog.md:571
-msgid ""
-"Add support for Python 3.6 "
-"([#831](https://github.com/tweepy/tweepy/pull/831), "
-"[#884](https://github.com/tweepy/tweepy/pull/884))"
-msgstr ""
-
-#: ../../changelog.md:574
-#, fuzzy
-msgid ""
-"Update file size limit for `API.media_upload` "
-"([#717](https://github.com/tweepy/tweepy/pull/717))"
+#: ../../changelog.md:132
+msgid "Update file size limit for API.media_upload (#717)"
 msgstr "Aktualizacja limitu rozmiaru pliku dla API.media_upload (#717)"
 
-#: ../../changelog.md:575
-msgid ""
-"Fix `JSONParser.parse` returning `None` in certain cases "
-"([#765](https://github.com/tweepy/tweepy/issues/765), "
-"[#766](https://github.com/tweepy/tweepy/pull/766))"
+#: ../../changelog.md:133
+msgid "Fix JSONParser.parse returning None in certain cases (#765, #766)"
 msgstr ""
+"Naprawaa JSONParser.parse zwracającego None w niektórych przypadkach (#765, "
+"#766)"
 
-#: ../../changelog.md:576
-#, fuzzy
-msgid ""
-"Include URL parameters when accessing cache "
-"([#777](https://github.com/tweepy/tweepy/pull/777))"
+#: ../../changelog.md:134
+msgid "Include URL parameters when accessing cache (#777)"
 msgstr "Uwzględnienie parametrów URL podczas dostępu do pamięci podręcznej (#777)"
 
-#: ../../changelog.md:577
+#: ../../changelog.md:135
 msgid "Properly re-raise exceptions during streaming"
-msgstr "Prawidłowe ponowne podnoszenie wyjątków podczas przesyłania strumieniowego"
-
-#: ../../changelog.md:578
-#, fuzzy
-msgid ""
-"Fix `AttributeError` and `TypeError` during streaming "
-"([#698](https://github.com/tweepy/tweepy/issues/698))"
 msgstr ""
-"Naperawa AttributeError oraz TypeError podczas przesyłania strumieniowego"
-" (#698)"
+"Prawidłowe ponowne podnoszenie wyjątków podczas przesyłania strumieniowego"
 
-#: ../../changelog.md:579
-#, fuzzy
-msgid ""
-"Properly encode `filter_level` for `Stream.filter` "
-"([#782](https://github.com/tweepy/tweepy/issues/782))"
+#: ../../changelog.md:136
+msgid "Fix AttributeError and TypeError during streaming (#698)"
+msgstr ""
+"Naperawa AttributeError oraz TypeError podczas przesyłania strumieniowego (#698)"
+
+#: ../../changelog.md:137
+msgid "Properly encode filter_level for Stream.filter (#782)"
 msgstr "Poprawne kodowanie filter_level dla Stream.filter (#782)"
 
-#: ../../changelog.md:581
+#: ../../changelog.md:139
 msgid "Version 3.5.0"
 msgstr "Wersja 3.5.0"
 
-#: ../../changelog.md:583
+#: ../../changelog.md:141
 msgid "Features / Improvements"
 msgstr "Nowe funkcje / Usprawnienia"
 
-#: ../../changelog.md:584
+#: ../../changelog.md:142
 msgid "Allow 'full_text' param when getting direct messages ( #664 )"
 msgstr ""
-"Zezwolenie parametru 'full_text\" podczas otrzymania bezpośredniej "
-"wiadomości ( #664 )"
+"Zezwolenie parametru 'full_text\" podczas otrzymania bezpośredniej wiadomości "
+"( #664 )"
 
-#: ../../changelog.md:585
+#: ../../changelog.md:143
 msgid "Explicitly return api code when parsing error ( #666 )"
 msgstr "Wyraźnie zwrócenie kodu api przy błędzie parsowania ( #666 )"
 
-#: ../../changelog.md:586
+#: ../../changelog.md:144
 msgid "Remove deprecated function and clean up codes ( #583 )"
 msgstr "Usuniećie przestarzałych funkcję i czyszczenie kodu ( #583 )"
 
-#: ../../changelog.md:589
+#: ../../changelog.md:147
 msgid "update_status: first positional argument should be 'status' ( #578 )"
 msgstr "update_status: pierwszy argument pozycyjny powinien być 'status' ( #578 )"
 
-#: ../../changelog.md:590
+#: ../../changelog.md:148
 msgid ""
-"Fix \"TypeError: Can't convert 'bytes' object to str implicitly\" ( #615 "
-"#658 #635 )"
+"Fix \"TypeError: Can't convert 'bytes' object to str implicitly\" ( #615 #658 "
+"#635 )"
 msgstr ""
-"Naprawienie \"TypeError: Can't convert 'bytes' object to str implicitly\""
-" ( #615 #658 #635 )"
+"Naprawienie \"TypeError: Can't convert 'bytes' object to str implicitly"
+"\" ( #615 #658 #635 )"
 
-#: ../../changelog.md:591
+#: ../../changelog.md:149
 msgid "Fix duplicate raise in auth.py ( #667 )"
 msgstr "Naprawienie duplikatu podniesienia w auth.py ( #667 )"
 
-#: ../../changelog.md:593
+#: ../../changelog.md:151
 msgid "Version 3.4.0"
 msgstr "Wersja 3.4.0"
 
-#: ../../changelog.md:595
+#: ../../changelog.md:153
 msgid "New Features"
 msgstr "Nowe funkcje"
 
-#: ../../changelog.md:596
+#: ../../changelog.md:154
 msgid "Add API for account/settings (PR #596)"
 msgstr "Dodanie API dla konta/ustawień (PR #596)"
 
-#: ../../changelog.md:597
+#: ../../changelog.md:155
 msgid ""
-"Added RateLimitError for easily working with the rate limit. (Issue #600,"
-" PR #611) @obskyr"
+"Added RateLimitError for easily working with the rate limit. (Issue #600, PR "
+"#611) @obskyr"
 msgstr ""
-"Dodanie RateLimitError dla ułatwienia pracy z limitem przepływu. (Issue "
-"#600, PR #611) @obskyr"
+"Dodanie RateLimitError dla ułatwienia pracy z limitem przepływu. (Issue #600, "
+"PR #611) @obskyr"
 
-#: ../../changelog.md:598
+#: ../../changelog.md:156
 msgid "Allow include_email param for verify_credentials API (PR #623)"
 msgstr "Zezwolenie parametru include_email dla verify_credentials API (PR #623)"
 
-#: ../../changelog.md:599
+#: ../../changelog.md:157
 msgid ""
-"Added support for the \"filter_level\" parameter for the streaming API "
-"(PR #619)"
+"Added support for the \"filter_level\" parameter for the streaming API (PR #619)"
 msgstr ""
 "Dodanie wsparcia dla parametru \"filter_level\" podcas przesyłania "
 "strumieniowego API (PR #619)"
 
-#: ../../changelog.md:602
+#: ../../changelog.md:160
 msgid "Streaming: don't decode stream bytes until json.decode (PR #606)"
 msgstr ""
-"Przesyłanie strumieniowe: nie dekoduj bajtów strumienia przed json.decode"
-" (PR #606)"
+"Przesyłanie strumieniowe: nie dekoduj bajtów strumienia przed json.decode (PR "
+"#606)"
 
-#: ../../changelog.md:603
+#: ../../changelog.md:161
 msgid "Typo fix on _add_list_members, _remove_list_members properties. (PR #593)"
 msgstr ""
-"Poprawka literówek we właściwościach _add_list_members, "
-"_remove_list_members. (PR #593)"
+"Poprawka literówek we właściwościach _add_list_members, _remove_list_members. "
+"(PR #593)"
 
-#: ../../changelog.md:604
+#: ../../changelog.md:162
 msgid "Fixes issue #570 - add \"exception\" when raising one"
 msgstr "Poprawki do błędu #570 - dodanie \"exception\" przy podnoszeniu wyjątku"
 
-#: ../../changelog.md:605
+#: ../../changelog.md:163
 msgid "Change raise in streaming.py to raise exception (PR #621)"
 msgstr "Zmiana raise w streaming.py na raise exception (PR #621)"
 
-#: ../../changelog.md:607
+#: ../../changelog.md:165
 msgid "Version 3.3.0"
 msgstr "Wersja 3.3.0"
 
-#: ../../changelog.md:609
+#: ../../changelog.md:167
 msgid "Loosen our dependency requirements for Requests (>= 2.4.3)"
 msgstr ""
-"Rozluźnienie naszych wymagań dotyczących zależności dla Requests (>= "
-"2.4.3)"
+"Rozluźnienie naszych wymagań dotyczących zależności dla Requests (>= 2.4.3)"
 
-#: ../../changelog.md:610
+#: ../../changelog.md:168
 msgid "Fix issue with streams freezing up on Python 3 (Issue #556)"
 msgstr ""
-"Naprawienie problemu z zawieszaniem się strumieni w Pythonie 3 (Issue "
-"#556)"
+"Naprawienie problemu z zawieszaniem się strumieni w Pythonie 3 (Issue #556)"
 
-#: ../../changelog.md:611
+#: ../../changelog.md:169
 msgid ""
-"Add keep_alive() callback to StreamListener when keep alive messages "
-"arrive"
+"Add keep_alive() callback to StreamListener when keep alive messages arrive"
 msgstr ""
 "Dodanie wywołania zwrotnego keep_alive() do StreamListener, gdy nadejdą "
 "wiadomości keep alive"
 
-#: ../../changelog.md:612
+#: ../../changelog.md:170
 msgid ""
-"Fix issue with stream session headers not being used when restarting "
-"connection"
+"Fix issue with stream session headers not being used when restarting connection"
 msgstr ""
 "Naprawienie problemu z nieużywaniem nagłówków sesji strumienia podczas "
 "ponownego uruchamiania połączenia"
 
-#: ../../changelog.md:613
+#: ../../changelog.md:171
 msgid ""
-"Fix issue with streams getting stuck in a loop when connection dies. (PR "
-"#561)"
+"Fix issue with streams getting stuck in a loop when connection dies. (PR #561)"
 msgstr ""
-"Naprawienie problemu z utknięciem strumienia w pętli po utracie "
-"połączenia. (PR #561)"
+"Naprawienie problemu z utknięciem strumienia w pętli po utracie połączenia. (PR "
+"#561)"
 
-#: ../../changelog.md:615
+#: ../../changelog.md:173
 msgid "Version 3.2.0"
 msgstr "Wersja 3.2.0"
 
-#: ../../changelog.md:617
+#: ../../changelog.md:175
 msgid "Remove deprecated trends methods."
 msgstr "Usunięcie przestarzałych metod trendów."
 
-#: ../../changelog.md:618
+#: ../../changelog.md:176
 msgid "Fix tweepy.debug() to work in Python 3."
 msgstr "Naprawienie funkcji tweepy.debug(), aby działała w Pythonie 3."
 
-#: ../../changelog.md:619
+#: ../../changelog.md:177
 msgid "Fixed issue #529 - StreamListener language filter stopped working."
 msgstr "Naprawienie błędu #529 - filtr językowy StreamListener przestał działać."
 
-#: ../../changelog.md:620
+#: ../../changelog.md:178
 msgid "Add Documentation Page for streaming."
 msgstr "Dodanie dokumentacji dla przesyłania strumieniowego."
 
-#: ../../changelog.md:621
+#: ../../changelog.md:179
 msgid "Add media/upload endpoint."
 msgstr "Dodanie punktu końcowego media/upload."
 
-#: ../../changelog.md:622
+#: ../../changelog.md:180
 msgid "Add media_ids parameter to update_status()."
 msgstr "Dodanie parametru media_ids do update_status()."
 
-#: ../../changelog.md:624
+#: ../../changelog.md:182
 msgid "Version 3.1.0"
 msgstr "Wersja 3.1.0"
 
-#: ../../changelog.md:626
+#: ../../changelog.md:184
 msgid "Allow specifying your own ssl certificates for streaming client."
 msgstr ""
-"Umożliwienie określenia własnych certyfikatów ssl dla klienta "
-"strumieniowego."
+"Umożliwienie określenia własnych certyfikatów ssl dla klienta strumieniowego."
 
-#: ../../changelog.md:627
+#: ../../changelog.md:185
 msgid "Distribute Python Wheels instead of dumb binaries."
 msgstr "Dystrybucja Python Wheels zamiast dumb binaries."
 
-#: ../../changelog.md:628
+#: ../../changelog.md:186
 msgid ""
-"Fix cursor invocation, passing args to underlying method. "
-"(https://github.com/tweepy/tweepy/issues/515)"
+"Fix cursor invocation, passing args to underlying method. (https://github.com/"
+"tweepy/tweepy/issues/515)"
 msgstr ""
-"Poprawienie wywoływania kursora, przekazującego argumenty do metody "
-"bazowej. (https://github.com/tweepy/tweepy/issues/515)"
+"Poprawienie wywoływania kursora, przekazującego argumenty do metody bazowej. "
+"(https://github.com/tweepy/tweepy/issues/515)"
 
-#: ../../changelog.md:629
+#: ../../changelog.md:187
 msgid "Upgrade to Request 2.4.3"
 msgstr "Aktualizacja Request do wersji 2.4.3"
 
-#: ../../changelog.md:631
+#: ../../changelog.md:189
 msgid "Version 3.0"
 msgstr "Wersja 3.0"
 
-#: ../../changelog.md:633
+#: ../../changelog.md:191
 msgid ""
 "Added multiple list members operation api methods (add_list_members, "
 "remove_list_members)."
@@ -3219,432 +732,295 @@ msgstr ""
 "Dodanie metody multiple list members operation api (add_list_members, "
 "remove_list_members)."
 
-#: ../../changelog.md:634
+#: ../../changelog.md:192
 msgid "Added sitestream endpoint."
 msgstr "Dodanie punktu końcowego sitestream."
 
-#: ../../changelog.md:635
+#: ../../changelog.md:193
 msgid "Switch to using Requests instead of httplib."
 msgstr "Przejście na Requests z httplib."
 
-#: ../../changelog.md:636
+#: ../../changelog.md:194
 msgid "Fully removed support for non-secure HTTP."
 msgstr "Całkowite usunięcie wsparcia dla niezabezpieczonych HTTP."
 
-#: ../../changelog.md:637
+#: ../../changelog.md:195
 msgid "Proxy support."
 msgstr "Wsparcie dla proxy."
 
-#: ../../changelog.md:638
+#: ../../changelog.md:196
 msgid "Add API method for /statuses/lookup.json"
 msgstr "Dodanie metody API do /statuses/lookup.json"
 
-#: ../../changelog.md:639
+#: ../../changelog.md:197
 msgid "Add missing 'count' parameter to followers_ids"
 msgstr "Dodanie brakującego parametru 'count' do followers_ids"
 
-#: ../../changelog.md:640
+#: ../../changelog.md:198
 msgid "Added allowed_param to update_profile_image"
 msgstr "Dodanie allowed_param do update_profile_image"
 
-#: ../../changelog.md:641
+#: ../../changelog.md:199
 msgid "Comparison between Status objects"
 msgstr "Porównanie pomiędzy obiektami Status"
 
-#: ../../changelog.md:642
+#: ../../changelog.md:200
 msgid ""
-"Extend on_data method by including a conditional to process warning "
-"messages and add the definition of the method to manage those warning "
-"messages"
+"Extend on_data method by including a conditional to process warning messages "
+"and add the definition of the method to manage those warning messages"
 msgstr ""
 "Rozszerzenie metody on_data o warunek do przetwarzania komunikatów "
-"ostrzegawczych i dodanie definicji metody do zarządzania tymi "
-"komunikatami ostrzegawczymi"
+"ostrzegawczych i dodanie definicji metody do zarządzania tymi komunikatami "
+"ostrzegawczymi"
 
-#: ../../changelog.md:643
+#: ../../changelog.md:201
 msgid "Better Python 3 support."
 msgstr "Lepsze wsparcie Python 3."
 
-#: ../../changelog.md:645
+#: ../../changelog.md:203
 msgid "Version 2.2"
 msgstr "Wersja 2.2"
 
-#: ../../changelog.md:647
+#: ../../changelog.md:205
 msgid "Added update_profile_banner endpoint."
 msgstr "Dodanie punktu końcowego update_profile_banner."
 
-#: ../../changelog.md:648
+#: ../../changelog.md:206
 msgid "Don't treat HTTP status codes in 200 range as errors."
 msgstr "Wyłączenie traktowania kodów statusu HTTP z zakresu 200 jako błędów."
 
-#: ../../changelog.md:649
+#: ../../changelog.md:207
 msgid "Tests no longer packaged into egg releases."
 msgstr "Testy nie są już dołączane do egg releases."
 
-#: ../../changelog.md:650
+#: ../../changelog.md:208
 msgid "Improve test stability and enable CI testing on pull requests."
 msgstr ""
-"Poprawa stabilności testów oraz włączenie testowania Cl dla pull "
-"requestów."
+"Poprawa stabilności testów oraz włączenie testowania Cl dla pull requestów."
 
-#: ../../changelog.md:651
+#: ../../changelog.md:209
 msgid "Removed Basic Auth."
 msgstr "Usunięcie Basic Auth."
 
-#: ../../changelog.md:652
+#: ../../changelog.md:210
 msgid "Use built-in timeout feature of httplib to fix appengine."
 msgstr "Użycie wbudowanej funkcji timeout w httplib, aby naprawić appengine."
 
-#: ../../changelog.md:653
+#: ../../changelog.md:211
 msgid "Added retweeters() endpoint."
 msgstr "Dodanie punktu końcoweo retweeters()"
 
-#: ../../changelog.md:654
+#: ../../changelog.md:212
 msgid "Removed deprecated retweeted_by and retweeted_by_ids."
 msgstr "Usunięcie wycofanych retweeted_by oraz retweeted_by_ids."
 
-#: ../../changelog.md:655
+#: ../../changelog.md:213
 msgid "Improved datetime parsing. Should be more thread safe."
 msgstr ""
-"Poprawienie parsowanie datetime. Powinno być bardziej bezpieczne dla "
-"wątków."
+"Poprawienie parsowanie datetime. Powinno być bardziej bezpieczne dla wątków."
 
-#: ../../changelog.md:656
+#: ../../changelog.md:214
 msgid "Enable coverage reporting. Upload reports to Coveralls."
 msgstr "Włączenie raportowania zasięgu. Przesłanie raportów do Coveralls."
 
-#: ../../changelog.md:657
+#: ../../changelog.md:215
 msgid "https://coveralls.io/r/tweepy/tweepy"
 msgstr "https://coveralls.io/r/tweepy/tweepy"
 
-#: ../../changelog.md:658
+#: ../../changelog.md:216
 msgid "Removed deprecated test() endpoint."
 msgstr "Usunięcie przestarzałego punktu końcowego test()."
 
-#: ../../changelog.md:659
+#: ../../changelog.md:217
 msgid ""
-"New stream listeners callback on_disconnect(). Called whenever "
-"\"disconnect\" messages arrive from Twitter before connection is killed."
+"New stream listeners callback on_disconnect(). Called whenever \"disconnect\" "
+"messages arrive from Twitter before connection is killed."
 msgstr ""
-"Nowe wywołanie zwrotne on_disconnect() dla słuchaczy strumienia. "
-"Wywoływany za każdym razem, gdy przychodzi wiadomość \"disconnect\" z "
-"Twittera przed zakończeniem połączenia."
+"Nowe wywołanie zwrotne on_disconnect() dla słuchaczy strumienia. Wywoływany za "
+"każdym razem, gdy przychodzi wiadomość \"disconnect\" z Twittera przed "
+"zakończeniem połączenia."
 
-#: ../../changelog.md:661
+#: ../../changelog.md:219
 msgid ""
-"https://dev.twitter.com/docs/streaming-"
-"apis/messages#Disconnect_messages_disconnect"
+"https://dev.twitter.com/docs/streaming-apis/"
+"messages#Disconnect_messages_disconnect"
 msgstr ""
-"https://dev.twitter.com/docs/streaming-"
-"apis/messages#Disconnect_messages_disconnect"
+"https://dev.twitter.com/docs/streaming-apis/"
+"messages#Disconnect_messages_disconnect"
 
-#: ../../changelog.md:662
-msgid "[Compare View](https://github.com/tweepy/tweepy/compare/2.1...2.2)"
-msgstr ""
+#: ../../changelog.md:220 ../../changelog.md:245
+msgid "Compare View"
+msgstr "Porównanie Widoku"
 
-#: ../../changelog.md:663
+#: ../../changelog.md:221
 msgid "Use HTTPS by default."
 msgstr "Domyślne używanie protokołu HTTPS."
 
-#: ../../changelog.md:664
+#: ../../changelog.md:222
 msgid ""
-"Support setting the starting cursor postion (ex: Ex: "
-"Cursor(api.friends_ids, cursor=123456))"
+"Support setting the starting cursor postion (ex: Ex: Cursor(api.friends_ids, "
+"cursor=123456))"
 msgstr ""
-"Wsparcie ustawiania początkowej pozycji kursora (ex: Ex: "
-"Cursor(api.friends_ids, cursor=123456))"
+"Wsparcie ustawiania początkowej pozycji kursora (ex: Ex: Cursor(api."
+"friends_ids, cursor=123456))"
 
-#: ../../changelog.md:666
+#: ../../changelog.md:224
 msgid ""
-"Added API.cached_result instance flag that is \"True\" when cached result"
-" is returned."
+"Added API.cached_result instance flag that is \"True\" when cached result is "
+"returned."
 msgstr ""
-"Dodano flagę instancji API.cached_result, która przyjmuje wartość "
-"\"True\", gdy zwracany jest zbuforowany wynik."
+"Dodano flagę instancji API.cached_result, która przyjmuje wartość \"True\", gdy "
+"zwracany jest zbuforowany wynik."
 
-#: ../../changelog.md:667
+#: ../../changelog.md:225
 msgid "New Streaming client callbacks"
 msgstr "Nowe wywołania zwrotne klienta strumieniowego"
 
-#: ../../changelog.md:668
+#: ../../changelog.md:226
 msgid "on_event(status): called when new events arrive"
 msgstr "on_event(status): dodany gdy przychodzi nowy status"
 
-#: ../../changelog.md:669
+#: ../../changelog.md:227
 msgid "on_direct_message(status): called when a new direct message arrives."
 msgstr ""
 "on_direct_message(status): wywoływane gdy przychodzi nowa wiadomość "
 "bezpośrednia."
 
-#: ../../changelog.md:671
+#: ../../changelog.md:229
 msgid ""
 "Improvements to streaming client re-connection behavior / configuration. "
-"(https://github.com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+"(https://github.com/tweepy/tweepy/"
+"commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
 msgstr ""
-"Poprawienie zachowania / konfiguracji dla klienta streamowania. "
-"(https://github.com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+"Poprawienie zachowania / konfiguracji dla klienta streamowania. (https://github."
+"com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
 
-#: ../../changelog.md:675
+#: ../../changelog.md:233
 msgid "Version 2.1"
 msgstr "Wersja 2.1"
 
-#: ../../changelog.md:677
+#: ../../changelog.md:235
 msgid "Added get_oembed()."
 msgstr "Dodanie get_oembed()."
 
-#: ../../changelog.md:678
+#: ../../changelog.md:236
 msgid "friends() and followers() are back and updated to v1.1."
 msgstr "powrót friends() oraz followers() i aktualizacji ich do v1.1."
 
-#: ../../changelog.md:679
+#: ../../changelog.md:237
 msgid "Fixed report_spam() endpoint."
 msgstr "Naprawienie punktu końcowego report_spam()."
 
-#: ../../changelog.md:680
+#: ../../changelog.md:238
 msgid "Added \"languages\" parameter to streaming filter() method."
 msgstr "Dodanie parametru \"languages\" do metody streamowanie filter()."
 
-#: ../../changelog.md:681
+#: ../../changelog.md:239
 msgid "Added \"timeout\" support for API object. Ex: API(timeout=1000)."
 msgstr "Dodanie wsparcia \"timeout\" dla obiektu API. Np: API(timeout=1000)."
 
-#: ../../changelog.md:682
+#: ../../changelog.md:240
 msgid "Python 2.5 no longer supported."
 msgstr "Usunięcie wsparcia dla Python 2.5."
 
-#: ../../changelog.md:683
+#: ../../changelog.md:241
 msgid "Added compression support. Ex: API(compression=True)."
 msgstr "Dodanie wsparcia dla kompresji. Np: API(compression=True)."
 
-#: ../../changelog.md:684
+#: ../../changelog.md:242
 msgid "Added on_connect() callback to StreamListener."
 msgstr "Dodanie wywołania zwrotnego on_connect() do StreamListener."
 
-#: ../../changelog.md:685
+#: ../../changelog.md:243
 msgid "Switched API search() to v1.1 endpoint. Some breaking changes."
 msgstr "Zmiana API search() na punkt końcowy v1.1. Przełomowe zmiany."
 
-#: ../../changelog.md:686
+#: ../../changelog.md:244
 msgid "Drop \"page\" based cursors and use \"ID\" based ones instead."
 msgstr ""
-"Porzuenie kursorów opartych na \"stronie\" i użycie zamiast nich kursorów"
-" opartych na \"ID\"."
+"Porzuenie kursorów opartych na \"stronie\" i użycie zamiast nich kursorów "
+"opartych na \"ID\"."
 
-#: ../../changelog.md:687
-msgid "[Compare View](https://github.com/tweepy/tweepy/compare/2.0...2.1)"
-msgstr ""
-
-#: ../../changelog.md:689
+#: ../../changelog.md:247
 msgid "Version 2.0"
 msgstr "Wersja 2.0"
 
-#: ../../changelog.md:691
-#, fuzzy
-msgid "_Dedicated in memory of Aaron Swartz_"
+#: ../../changelog.md:249
+msgid "Dedicated in memory of Aaron Swartz"
 msgstr "Dedykowane pamięci Aarona Swartza"
 
-#: ../../changelog.md:693
+#: ../../changelog.md:251
 msgid "Twitter API 1.1 support."
 msgstr "Wsparcie dla Twitter API 1.1."
 
-#: ../../changelog.md:694
+#: ../../changelog.md:252
 msgid "Basic Authentication deprecated."
 msgstr "Uwierzytelnianie podstawowe zostało wycofane."
 
-#: ../../changelog.md:695
+#: ../../changelog.md:253
 msgid "friends_timeline() removed."
 msgstr "usunięcie friends_timeline()."
 
-#: ../../changelog.md:696
+#: ../../changelog.md:254
 msgid "mentions() removed and replaced by mentions_timeline()."
 msgstr "usunięcie mentions() i zmiana na mentions_timeline()."
 
-#: ../../changelog.md:697 ../../changelog.md:700
+#: ../../changelog.md:255 ../../changelog.md:258
 msgid "retweeted_by_user() removed."
 msgstr "usunięcie retweeted_by_user()."
 
-#: ../../changelog.md:698
+#: ../../changelog.md:256
 msgid "retweeted_by_me() removed."
 msgstr "usunięcie retweeted_by_me()."
 
-#: ../../changelog.md:699
+#: ../../changelog.md:257
 msgid "retweeted_to_me() removed."
 msgstr "usunięcie retweeted_to_me()."
 
-#: ../../changelog.md:701
+#: ../../changelog.md:259
 msgid "friends() removed."
 msgstr "usunięcie friends()."
 
-#: ../../changelog.md:702
+#: ../../changelog.md:260
 msgid "followers() removed."
 msgstr "usunięcie followers()."
 
-#: ../../changelog.md:703
+#: ../../changelog.md:261
 msgid "enable_notifications() removed."
 msgstr "usunięcie disable_notifications()."
 
-#: ../../changelog.md:704
+#: ../../changelog.md:262
 msgid "disable_notifications() removed."
 msgstr "usunięcie disable_notifications()."
 
-#: ../../changelog.md:705
+#: ../../changelog.md:263
 msgid "exists_block() removed."
 msgstr "usunięcie exists_block()."
 
-#: ../../changelog.md:706
+#: ../../changelog.md:264
 msgid "lists() removed and replaced by lists_all()."
 msgstr "usunięcie lists() i zmiana na lists_all()."
 
-#: ../../changelog.md:707
+#: ../../changelog.md:265
 msgid "is_list_member() removed."
 msgstr "usunięcie is_list_member()."
 
-#: ../../changelog.md:708
+#: ../../changelog.md:266
 msgid "show_list_member added."
 msgstr "dodanie show_list_member."
 
-#: ../../changelog.md:709
+#: ../../changelog.md:267
 msgid "is_subscribed_list() removed."
 msgstr "usunięcie is_subscribed_list()."
 
-#: ../../changelog.md:710
+#: ../../changelog.md:268
 msgid "show_list_subscriber() added."
 msgstr "dodanie show_list_subscriber()."
 
-#: ../../changelog.md:711
+#: ../../changelog.md:269
 msgid "trends_location() removed."
 msgstr "usunięcie trends_location()."
 
-#: ../../changelog.md:712
+#: ../../changelog.md:270
 msgid "nearby_places() removed."
 msgstr "usunięcie nearby_places()."
-
-#~ msgid "Add API.search_30_day and API.search_full_archive (#1175, #1294)"
-#~ msgstr "Dodanie API.search_30_day and API.search_full_archive (#1175, #1294)"
-
-#~ msgid "Update allowed parameters for API.home_timeline (#1410, #1458)"
-#~ msgstr ""
-#~ "Aktualizacja dozwolonych parametrów dla "
-#~ "API.home_timeline (#1410, #1458)"
-
-#~ msgid ""
-#~ "Allow file parameter to be used "
-#~ "again for API.media_upload (#1412, #1413)"
-#~ msgstr ""
-#~ "Pozwolenie na ponowne użycie parametru "
-#~ "file dla API.media_upload (#1412, #1413)"
-
-#~ msgid "Add API.create_media_metadata (#716)"
-#~ msgstr "Dodanie API.create_media_metadata (#716)"
-
-#~ msgid "Improve API.lookup_users (#706)"
-#~ msgstr "Poprawienie API.lookup_users (#706)"
-
-#~ msgid "Support uploading WebP images (#1298)"
-#~ msgstr "Wsparcie dla przesyłania obrazów WebP (#1298)"
-
-#~ msgid "Update max allowed size for uploaded GIFs (#1336, #1338)"
-#~ msgstr ""
-#~ "Aktualizacja maksymalnego dozwolonego rozmiaru "
-#~ "dla wysyłanych GIFów (#1336, #1338)"
-
-#~ msgid "Update and improve tests (#1217)"
-#~ msgstr "Aktualizacja i poprawa testów (#1217)"
-
-#~ msgid "Document API.lookup_users (#539)"
-#~ msgstr "Dodanie dokumentacji dla API.lookup_users (#539)"
-
-#~ msgid "Document API.lookup_friendships (#1375)"
-#~ msgstr "Dodanie dokumentacji dla API.lookup_friendships (#1375)"
-
-#~ msgid ""
-#~ "Allow Cursor to be used with "
-#~ "API.list_direct_messages by adding DMCursorIterator"
-#~ " (#1261, #1262)"
-#~ msgstr ""
-#~ "Zezwolenie na użycie kursora z "
-#~ "API.list_direct_messages przez dodanie "
-#~ "DMCursorIterator (#1261, #1262)"
-
-#~ msgid "Remove API.set_delivery_device (#1203)"
-#~ msgstr "Usunięcie API.set_delivery_device (#1203)"
-
-#~ msgid "Add API.mutes (#1197, #1215)"
-#~ msgstr "Dodanie API.mutes (#1197, #1215)"
-
-#~ msgid "Allow count parameter for API.friends (#577)"
-#~ msgstr "Zezwolenie parametru count dla API.friends (#577)"
-
-#~ msgid ""
-#~ "Add _json attribute to Category, "
-#~ "Friendship, and List models (#590, "
-#~ "#1169)"
-#~ msgstr ""
-#~ "Dodanie atrybutu _json do modeli "
-#~ "Category, Friendship oraz List (#590, "
-#~ "#1169)"
-
-#~ msgid "Update DirectMessage model (#1081, #1228)"
-#~ msgstr "Akutalizacja modelu DirectMessage (#1081, #1228)"
-
-#~ msgid ""
-#~ "Replace API.direct_messages and "
-#~ "API.sent_direct_messages with API.list_direct_messages "
-#~ "(#1081, #1228)"
-#~ msgstr ""
-#~ "Zamiana API.direct_messages oraz "
-#~ "API.sent_direct_messages na API.list_direct_messages "
-#~ "(#1081, #1228)"
-
-#~ msgid ""
-#~ "Update API.get_direct_message, API.send_direct_message,"
-#~ " and API.destroy_direct_message (#1081, #1228)"
-#~ msgstr ""
-#~ "Aktualizacja API.get_direct_message, "
-#~ "API.send_direct_message, and API.destroy_direct_message"
-#~ " (#1081, #1228"
-
-#~ msgid "Exclude examples during installation (#1141, #1164)"
-#~ msgstr "Wykluczenie przykładów podczas instalacji (#1141, #1164)"
-
-#~ msgid ""
-#~ "Support cursor pagination for API.blocks_ids"
-#~ " and API.mutes_ids (#930, #931)"
-#~ msgstr ""
-#~ "Wsparcie indeksowania kursora dla "
-#~ "API.blocks_ids oraz API.mutes_ids (#930, #931)"
-
-#~ msgid "Close Requests sessions (#810, #1093, #1237)"
-#~ msgstr "Zamknięcie sesji Requests (#810, #1093, #1237)"
-
-#~ msgid "Allow tweet_mode parameter for API.statuses_lookup (#840, #926)"
-#~ msgstr "Zezwolenie parametru tweet_mode dla API.statuses_lookup (#840, #926)"
-
-#~ msgid "Discord Server"
-#~ msgstr "Serwer Discord"
-
-#~ msgid "Fix AttributeError during streaming (#1026, #1027)"
-#~ msgstr ""
-#~ "Naprawienie AttributeError podczas przesyłania "
-#~ "strumieniowego (#1026, #1027)"
-
-#~ msgid "Update how requirements are specified (#1029, #1030)"
-#~ msgstr "Uaktualnienie sposobu określania wymagań (#1029, #1030)"
-
-#~ msgid "Fix compatibility issue with Python 3.7 (#1017, #1042)"
-#~ msgstr "Naprawa problemu kompatybilności z Pythonem 3.7 (#1017, #1042)"
-
-#~ msgid "Add API.unretweet (#735, #736)"
-#~ msgstr "Dodanie API.unretweet (#735, #736)"
-
-#~ msgid "Add support for Python 3.6 (#831, #884)"
-#~ msgstr "Dodanie wsparcia dla Python 3.6 (#831, #884)"
-
-#~ msgid "Fix JSONParser.parse returning None in certain cases (#765, #766)"
-#~ msgstr ""
-#~ "Naprawaa JSONParser.parse zwracającego None w"
-#~ " niektórych przypadkach (#765, #766)"
-
-#~ msgid "Compare View"
-#~ msgstr "Porównanie Widoku"
-
