@@ -1,4 +1,4 @@
-# extended_tweets.po - This document supplements Twitter's Tweet updates documentation.
+# extended_tweets.po - Extended Tweets
 # Copyright (C) 2009-2022, Joshua Roesslein
 # This file is distributed under the same license as the tweepy package.
 # 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.

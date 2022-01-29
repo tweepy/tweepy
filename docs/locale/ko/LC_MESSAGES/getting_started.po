@@ -1,4 +1,4 @@
-# getting_started.po - This document explains about how to use tweepy for first time
+# getting_started.po - Getting Started
 # Copyright (C) 2009-2022, Joshua Roesslein
 # This file is distributed under the same license as the tweepy package.
 # 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.

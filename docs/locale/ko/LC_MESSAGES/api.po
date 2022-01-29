@@ -1,4 +1,4 @@
-# api.po - This document explains about how to use tweepy.API (Twitter API v1.1 Reference)
+# api.po - tweepy.API (Twitter API v1.1 Reference)
 # Copyright (C) 2009-2022, Joshua Roesslein
 # This file is distributed under the same license as the tweepy package.
 # 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
