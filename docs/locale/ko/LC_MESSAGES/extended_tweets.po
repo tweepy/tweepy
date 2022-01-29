@@ -1,7 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2009-2021, Joshua Roesslein
+# extended_tweets.po - This document supplements Twitter's Tweet updates documentation.
+# Copyright (C) 2009-2022, Joshua Roesslein
 # This file is distributed under the same license as the tweepy package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
 #
 #, fuzzy
 msgid ""
