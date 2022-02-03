@@ -33,7 +33,3 @@ from tweepy.user import User
 
 # Global, unauthenticated instance of API
 api = API()
-
-def debug(enable=True, level=1):
-    from http.client import HTTPConnection
-    HTTPConnection.debuglevel = level
