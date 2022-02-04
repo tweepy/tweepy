@@ -21,6 +21,7 @@ Contents:
    asyncstream.rst
    exceptions.rst
    extended_tweets.rst
+   logging.rst
    pagination.rst
    streaming.rst
    changelog.md
