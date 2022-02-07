@@ -218,8 +218,10 @@ and secret::
         "oauth_token": "Request Token (oauth_token) here",
         "oauth_token_secret": request_secret
     }
-    access_token, access_token_secret = new_oauth1_user_handler.get_access_token(
-        "Verifier (oauth_verifier) here"
+    access_token, access_token_secret = (
+        new_oauth1_user_handler.get_access_token(
+            "Verifier (oauth_verifier) here"
+        )
     )
 
 Otherwise, you can simply use the old instance of :class:`OAuth1UserHandler`.
