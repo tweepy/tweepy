@@ -38,15 +38,13 @@ setup(
     download_url="https://pypi.org/project/tweepy/",
     packages=find_packages(),
     install_requires=[
+        "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
         "requests_oauthlib>=1.0.0,<2",
     ],
     tests_require=tests_require,
     extras_require={
-        "async": [
-            "aiohttp>=3.7.3,<4",
-            "oauthlib>=3.1.0,<4",
-        ],
+        "async": ["aiohttp>=3.7.3,<4"],
         "dev": [
             "coveralls>=2.1.0",
             "tox>=3.14.0",
