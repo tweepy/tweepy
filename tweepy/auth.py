@@ -211,7 +211,7 @@ class OAuth2UserHandler(OAuth2Session):
         ).rstrip(b'=')
         authorization_url, state = self.authorization_url(
             "https://twitter.com/i/oauth2/authorize",
-            code_challenge=code_challenge, code_challenge_method="s256"
+            code_challenge=code_challenge, code_challenge_method="S256"
         )
         return authorization_url
 
