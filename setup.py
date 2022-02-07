@@ -40,7 +40,7 @@ setup(
     install_requires=[
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
-        "requests_oauthlib>=1.0.0,<2",
+        "requests_oauthlib>=1.2.0,<2",
     ],
     tests_require=tests_require,
     extras_require={
