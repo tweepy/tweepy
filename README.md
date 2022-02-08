@@ -10,9 +10,16 @@ Tweepy: Twitter for Python!
 
 Installation
 ------------
-The easiest way to install the latest version from PyPI is by using pip:
+
+The easiest way to install the latest version from PyPI is by using
+[pip](https://pip.pypa.io/):
 
     pip install tweepy
+
+To use the `tweepy.asynchronous` subpackage, be sure to install with the
+`async` extra:
+
+    pip install tweepy[async]
 
 You can also use Git to clone the repository from GitHub to install the latest
 development version:
