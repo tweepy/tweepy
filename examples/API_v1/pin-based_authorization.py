@@ -10,7 +10,7 @@ import tweepy
 consumer_key = ""
 consumer_secret = ""
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth = tweepy.OAuth1UserHandler(consumer_key, consumer_secret)
 
 # This prints a URL that can be used to authorize your app
 # After granting access to the app, a PIN to complete the authorization process

@@ -6,8 +6,9 @@ consumer_secret = ""
 access_token = ""
 access_token_secret = ""
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuth1UserHandler(
+    consumer_key, consumer_secret, access_token, access_token_secret
+)
 
 # Setting wait_on_rate_limit to True when initializing API will initialize an
 # instance, called api here, that will automatically wait, using time.sleep,

@@ -2,7 +2,7 @@ import random
 import unittest
 
 from config import *
-from tweepy import API, OAuthHandler
+from tweepy import API, OAuth1UserHandler
 
 
 class TweepyAuthTests(unittest.TestCase):
@@ -11,7 +11,7 @@ class TweepyAuthTests(unittest.TestCase):
         if not consumer_key or not consumer_secret:
             self.skipTest("Missing consumer key and/or secret")
 
-        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth = OAuth1UserHandler(consumer_key, consumer_secret)
 
         # test getting access token
         auth_url = auth.get_authorization_url()
@@ -30,7 +30,7 @@ class TweepyAuthTests(unittest.TestCase):
         if not consumer_key or not consumer_secret:
             self.skipTest("Missing consumer key and/or secret")
 
-        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth = OAuth1UserHandler(consumer_key, consumer_secret)
         auth_url = auth.get_authorization_url(access_type='read')
         print('Please open: ' + auth_url)
         answer = input('Did Twitter only request read permissions? (y/n) ')

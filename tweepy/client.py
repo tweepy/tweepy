@@ -12,7 +12,7 @@ import warnings
 import requests
 
 import tweepy
-from tweepy.auth import OAuthHandler
+from tweepy.auth import OAuth1UserHandler
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
     Unauthorized
@@ -92,8 +92,10 @@ class Client:
         headers = {"User-Agent": self.user_agent}
         auth = None
         if user_auth:
-            auth = OAuthHandler(self.consumer_key, self.consumer_secret)
-            auth.set_access_token(self.access_token, self.access_token_secret)
+            auth = OAuth1UserHandler(
+                self.consumer_key, self.consumer_secret,
+                self.access_token, self.access_token_secret
+            )
             auth = auth.apply_auth()
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
