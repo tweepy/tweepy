@@ -19,6 +19,7 @@ import urllib3
 import tweepy
 from tweepy.errors import TweepyException
 from tweepy.models import Status
+from tweepy.auth import OAuth2AppHandler
 
 log = logging.getLogger(__name__)
 
@@ -88,7 +89,14 @@ class Stream:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    def _connect(self, method, endpoint_url, params=None, headers=None, body=None):
+    def _oauth_1(self):
+        return OAuth1(self.consumer_key, self.consumer_secret,
+                      self.access_token, self.access_token_secret)
+
+    def _oauth_2(self):
+        return OAuth2AppHandler(self.consumer_key, self.consumer_secret).apply_auth()
+
+    def _connect(self, auth, method, endpoint_url, params=None, headers=None, body=None):
         self.running = True
 
         error_count = 0
@@ -100,9 +108,6 @@ class Stream:
         http_error_wait_max = 320
         http_420_error_wait_start = 60
 
-        auth = OAuth1(self.consumer_key, self.consumer_secret,
-                      self.access_token, self.access_token_secret)
-
         if self.session is None:
             self.session = requests.Session()
             self.session.headers["User-Agent"] = self.user_agent
@@ -110,8 +115,7 @@ class Stream:
         try:
             while self.running and error_count <= self.max_retries:
                 try:
-                    with self.session.request(
-                        method, endpoint_url, params=params, headers=headers, data=body,
+                    with self.session.request(method, endpoint_url, params=params, headers=headers, data=body,
                         timeout=stall_timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
@@ -239,6 +243,7 @@ class Stream:
         if self.running:
             raise TweepyException("Stream is already connected")
 
+        auth = self._oauth_1()
         method = "POST"
         endpoint_url = "https://stream.twitter.com/1.1/statuses/filter.json"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -265,7 +270,7 @@ class Stream:
             return self._threaded_connect(method, endpoint_url, headers=headers,
                                           body=body)
         else:
-            self._connect(method, endpoint_url, headers=headers, body=body)
+            self._connect(auth, method, endpoint_url, headers=headers, body=body)
 
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         """Sample realtime Tweets
@@ -299,6 +304,7 @@ class Stream:
         if self.running:
             raise TweepyException("Stream is already connected")
 
+        auth = self._oauth_1()
         method = "GET"
         endpoint_url = "https://stream.twitter.com/1.1/statuses/sample.json"
 
@@ -311,7 +317,7 @@ class Stream:
         if threaded:
             return self._threaded_connect(method, endpoint_url, params=params)
         else:
-            self._connect(method, endpoint_url, params=params)
+            self._connect(auth, method, endpoint_url, params=params)
 
     def covid(self, partition, *, threaded=False):
         """Stream a partition (1 of 4) from Twitter COVID-19 stream
@@ -335,6 +341,7 @@ class Stream:
         if self.running:
             raise TweepyException("Stream is already connected")
 
+        auth = self._oauth_2()
         method = "GET"
         endpoint_url = "https://api.twitter.com/labs/1/tweets/stream/covid19"
 
@@ -343,7 +350,7 @@ class Stream:
         if threaded:
             return self._threaded_connect(method, endpoint_url, params=params)
         else:
-            self._connect(method, endpoint_url, params=params)
+            self._connect(auth, method, endpoint_url, params=params)
 
     def disconnect(self):
         """Disconnect the stream"""
