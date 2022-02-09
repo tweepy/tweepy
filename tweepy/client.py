@@ -91,7 +91,7 @@ class Client:
         host = "https://api.twitter.com"
         headers = {"User-Agent": self.user_agent}
         auth = None
-        if user_auth:
+        if not self.bearer_token:
             auth = OAuthHandler(self.consumer_key, self.consumer_secret)
             auth.set_access_token(self.access_token, self.access_token_secret)
             auth = auth.apply_auth()

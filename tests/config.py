@@ -10,11 +10,15 @@ from tweepy.auth import OAuthHandler
 user_id = os.environ.get('TWITTER_USER_ID', '1072250532645998596')
 username = os.environ.get('TWITTER_USERNAME', 'TweepyDev')
 bearer_token = os.environ.get('BEARER_TOKEN', '')
+client_id = os.environ.get('CLIENT_ID', '')
+client_secret = os.environ.get('CLIENT_SECRET', '')
 consumer_key = os.environ.get('CONSUMER_KEY', '')
 consumer_secret = os.environ.get('CONSUMER_SECRET', '')
 access_token = os.environ.get('ACCESS_KEY', '')
 access_token_secret = os.environ.get('ACCESS_SECRET', '')
 use_replay = os.environ.get('USE_REPLAY', True)
+# Uncomment if using non-https redirect uris [in development]
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 tape = vcr.VCR(
