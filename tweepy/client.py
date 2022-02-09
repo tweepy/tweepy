@@ -614,8 +614,18 @@ class Client:
             Tweet ID of the Tweet to request Retweeting users of.
         expansions : Union[List[str], str]
             :ref:`expansions_parameter`
+        max_results : int
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 1000. By default, each page will return 100
+            results.
         media_fields : Union[List[str], str]
             :ref:`media_fields_parameter`
+        pagination_token : str
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
         place_fields : Union[List[str], str]
             :ref:`place_fields_parameter`
         poll_fields : Union[List[str], str]
@@ -638,7 +648,8 @@ class Client:
         return self._make_request(
             "GET", f"/2/tweets/{id}/retweeted_by", params=params,
             endpoint_parameters=(
-                "expansions", "media.fields", "place.fields", "poll.fields",
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=User, user_auth=user_auth
         )
