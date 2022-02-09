@@ -29,7 +29,7 @@ Example
 
             import tweepy
 
-            auth = tweepy.AppAuthHandler("Consumer Key here", "Consumer Secret here")
+            auth = tweepy.OAuth2AppHandler("Consumer Key here", "Consumer Secret here")
             api = tweepy.API(auth)
 
             for status in tweepy.Cursor(api.search_tweets, "Tweepy",
