@@ -747,6 +747,10 @@ class Client:
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
+        sort_order : str
+            This parameter is used to specify the order in which you want the
+            Tweets returned. By default, a request will return the most recent
+            Tweets first (sorted by recency).
         start_time : Union[datetime.datetime, str]
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
@@ -780,8 +784,8 @@ class Client:
             endpoint_parameters=(
                 "end_time", "expansions", "max_results", "media.fields",
                 "next_token", "place.fields", "poll.fields", "query",
-                "since_id", "start_time", "tweet.fields", "until_id",
-                "user.fields"
+                "since_id", "sort_order", "start_time", "tweet.fields",
+                "until_id", "user.fields"
             ), data_type=Tweet
         )
 
