@@ -811,6 +811,9 @@ class Client:
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
 
+        .. versionchanged:: 4.6
+            Added ``sort_order`` parameter
+
         Parameters
         ----------
         query : str
