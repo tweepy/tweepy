@@ -300,7 +300,7 @@ class Client:
         Allows you to get information about a Tweet’s liking users.
 
         .. versionchanged:: 4.6
-            Added ``max_results `` and ``pagination_token`` parameters
+            Added ``max_results`` and ``pagination_token`` parameters
 
         Parameters
         ----------
@@ -623,7 +623,7 @@ class Client:
         Allows you to get information about who has Retweeted a Tweet.
 
         .. versionchanged:: 4.6
-            Added ``max_results `` and ``pagination_token`` parameters
+            Added ``max_results`` and ``pagination_token`` parameters
 
         Parameters
         ----------
