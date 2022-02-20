@@ -67,7 +67,7 @@ class Tweet(HashableID, DataMapping):
         return len(self.text)
 
     def __repr__(self):
-        return f"<Tweet id={self.id} text={self.text}>"
+        return f"<Tweet id={self.id} text={repr(self.text)}>"
 
     def __str__(self):
         return self.text
