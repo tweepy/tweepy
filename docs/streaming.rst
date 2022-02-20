@@ -31,8 +31,8 @@ Secret)::
     import tweepy
 
     stream = tweepy.Stream(
-      "Consumer Key here", "Consumer Secret here",
-      "Access Token here", "Access Token Secret here"
+        "Consumer Key here", "Consumer Secret here",
+        "Access Token here", "Access Token Secret here"
     )
 
 Then, :meth:`Stream.filter` or :meth:`Stream.sample` can be used to connect to
@@ -60,8 +60,8 @@ subclassed. For example, to print the IDs of every Tweet received::
 
 
     printer = IDPrinter(
-      "Consumer Key here", "Consumer Secret here",
-      "Access Token here", "Access Token Secret here"
+        "Consumer Key here", "Consumer Secret here",
+        "Access Token here", "Access Token Secret here"
     )
     printer.sample()
 
