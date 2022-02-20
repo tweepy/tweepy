@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 
 class AsyncStream:
-    """Stream realtime Tweets asynchronously
+    """Stream realtime Tweets asynchronously with Twitter API v1.1
 
     .. versionadded:: 4.0
 
