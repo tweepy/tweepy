@@ -46,9 +46,8 @@ example, if a Tweet is received from the stream, the raw data is sent to
 :meth:`Stream.on_data`, which constructs a :class:`Status` object and passes it
 to :meth:`Stream.on_status`. By default, the other methods, besides
 :meth:`Stream.on_data`, that receive the data from the stream, simply log the
-data received, with the `logging level`_ dependent on the type of the data.
-
-.. _logging level: https://docs.python.org/3/howto/logging.html#logging-levels
+data received, with the :ref:`logging level <python:levels>` dependent on the
+type of the data.
 
 To customize the processing of the stream data, :class:`Stream` needs to be
 subclassed. For example, to print the IDs of every Tweet received::
@@ -68,12 +67,11 @@ subclassed. For example, to print the IDs of every Tweet received::
 Threading
 =========
 Both :meth:`Stream.filter` and :meth:`Stream.sample` have a ``threaded``
-parameter. When set to ``True``, the stream will run in a separate `thread`_,
-which is returned by the call to either method. For example::
+parameter. When set to ``True``, the stream will run in a separate
+:ref:`thread <python:thread-objects>`, which is returned by the call to either
+method. For example::
 
     thread = stream.filter(follow=[1072250532645998596], threaded=True)
-
-.. _thread: https://docs.python.org/3/library/threading.html#thread-objects
 
 Handling Errors
 ===============
