@@ -124,6 +124,8 @@
     +--------------------------------------------------------------+----------------------------------------+
     | `GET /2/spaces/:id/buyers`_                                  | :meth:`Client.get_space_buyers`        |
     +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/spaces/:id/tweets`_                                  | :meth:`Client.get_space_tweets`        |
+    +--------------------------------------------------------------+----------------------------------------+
     | `GET /2/spaces/by/creator_ids`_                              | :meth:`Client.get_spaces`              |
     +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: :ref:`Lists`                                                                            |
@@ -236,6 +238,7 @@
 .. _GET /2/spaces: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces
 .. _GET /2/spaces/:id: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id
 .. _GET /2/spaces/:id/buyers: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-buyers
+.. _GET /2/spaces/:id/tweets: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-tweets
 .. _GET /2/spaces/by/creator_ids: https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-by-creator-ids
 .. |List Tweets lookup| replace:: *List Tweets lookup*
 .. _GET /2/lists/:id/tweets: https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-reference/get-lists-id-tweets
@@ -391,6 +394,8 @@ Spaces lookup
 .. automethod:: Client.get_space
 
 .. automethod:: Client.get_space_buyers
+
+.. automethod:: Client.get_space_tweets
 
 Lists
 =====

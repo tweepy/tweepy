@@ -2083,6 +2083,48 @@ class Client:
             ), data_type=User
         )
 
+    def get_space_tweets(self, id, **params):
+        """get_space_tweets(id, *, expansions, media_fields, place_fields, \
+                            poll_fields, tweet_fields, user_fields)
+
+        Returns Tweets shared in the requested Spaces.
+
+        .. versionadded:: 4.6
+
+        Parameters
+        ----------
+        id : str
+            Unique identifier of the Space containing the Tweets you'd like to
+            access.
+        expansions : Union[List[str], str]
+            :ref:`expansions_parameter`
+        media_fields : Union[List[str], str]
+            :ref:`media_fields_parameter`
+        place_fields : Union[List[str], str]
+            :ref:`place_fields_parameter`
+        poll_fields : Union[List[str], str]
+            :ref:`poll_fields_parameter`
+        tweet_fields : Union[List[str], str]
+            :ref:`tweet_fields_parameter`
+        user_fields : Union[List[str], str]
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        Union[dict, requests.Response, Response]
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-tweets
+        """
+        return self._make_request(
+            "GET", f"/2/spaces/{id}/tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
+        )
+
     # List Tweets lookup
 
     def get_list_tweets(self, id, *, user_auth=False, **params):

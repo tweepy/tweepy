@@ -160,6 +160,8 @@ class TweepyTestCase(unittest.TestCase):
 
     # TODO: Test Client.get_space_buyers
 
+    # TODO: Test Client.get_space_tweets
+
     @tape.use_cassette("test_get_list_tweets.yaml", serializer="yaml")
     def test_get_list_tweets(self):
         list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)
