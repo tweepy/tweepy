@@ -30,41 +30,7 @@ log = logging.getLogger(__name__)
 Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 
 
-class Client:
-    """Client( \
-        bearer_token=None, consumer_key=None, consumer_secret=None, \
-        access_token=None, access_token_secret=None, *, return_type=Response, \
-        wait_on_rate_limit=False \
-    )
-
-    Twitter API v2 Client
-
-    .. versionadded:: 4.0
-
-    Parameters
-    ----------
-    bearer_token : Optional[str]
-        Twitter API Bearer Token
-    consumer_key : Optional[str]
-        Twitter API Consumer Key
-    consumer_secret : Optional[str]
-        Twitter API Consumer Secret
-    access_token : Optional[str]
-        Twitter API Access Token
-    access_token_secret : Optional[str]
-        Twitter API Access Token Secret
-    return_type : Type[Union[dict, requests.Response, Response]]
-        Type to return from requests to the API
-    wait_on_rate_limit : bool
-        Whether to wait when rate limit is reached
-
-    Attributes
-    ----------
-    session : requests.Session
-        Requests Session used to make requests to the API
-    user_agent : str
-        User agent used when making requests to the API
-    """
+class BaseClient:
 
     def __init__(
         self, bearer_token=None, consumer_key=None, consumer_secret=None,
@@ -147,6 +113,52 @@ class Client:
 
     def _make_request(self, method, route, params={}, endpoint_parameters=None,
                       json=None, data_type=None, user_auth=False):
+        request_params = self._process_params(params, endpoint_parameters)
+
+        response = self.request(method, route, params=request_params,
+                                json=json, user_auth=user_auth)
+
+        if self.return_type is requests.Response:
+            return response
+
+        response = response.json()
+
+        if self.return_type is dict:
+            return response
+
+        data = response.get("data")
+        data = self._process_data(data, data_type=data_type)
+
+        includes = response.get("includes", {})
+        includes = self._process_includes(includes)
+
+        errors = response.get("errors", [])
+        meta = response.get("meta", {})
+
+        return Response(data, includes, errors, meta)
+
+    def _process_data(self, data, data_type=None):
+        if data_type is not None:
+            if isinstance(data, list):
+                data = [data_type(result) for result in data]
+            elif data is not None:
+                data = data_type(data)
+        return data
+
+    def _process_includes(self, includes):
+        if "media" in includes:
+            includes["media"] = [Media(media) for media in includes["media"]]
+        if "places" in includes:
+            includes["places"] = [Place(place) for place in includes["places"]]
+        if "polls" in includes:
+            includes["polls"] = [Poll(poll) for poll in includes["polls"]]
+        if "tweets" in includes:
+            includes["tweets"] = [Tweet(tweet) for tweet in includes["tweets"]]
+        if "users" in includes:
+            includes["users"] = [User(user) for user in includes["users"]]
+        return includes
+
+    def _process_params(self, params, endpoint_parameters):
         request_params = {}
         for param_name, param_value in params.items():
             if param_name.replace('_', '.') in endpoint_parameters:
@@ -166,41 +178,44 @@ class Client:
 
             if param_name not in endpoint_parameters:
                 log.warn(f"Unexpected parameter: {param_name}")
+        return request_params
 
-        response = self.request(method, route, params=request_params,
-                                json=json, user_auth=user_auth)
 
-        if self.return_type is requests.Response:
-            return response
+class Client(BaseClient):
+    """Client( \
+        bearer_token=None, consumer_key=None, consumer_secret=None, \
+        access_token=None, access_token_secret=None, *, return_type=Response, \
+        wait_on_rate_limit=False \
+    )
 
-        response = response.json()
+    Twitter API v2 Client
 
-        if self.return_type is dict:
-            return response
+    .. versionadded:: 4.0
 
-        data = response.get("data")
-        if data_type is not None:
-            if isinstance(data, list):
-                data = [data_type(result) for result in data]
-            elif data is not None:
-                data = data_type(data)
+    Parameters
+    ----------
+    bearer_token : Optional[str]
+        Twitter API Bearer Token
+    consumer_key : Optional[str]
+        Twitter API Consumer Key
+    consumer_secret : Optional[str]
+        Twitter API Consumer Secret
+    access_token : Optional[str]
+        Twitter API Access Token
+    access_token_secret : Optional[str]
+        Twitter API Access Token Secret
+    return_type : Type[Union[dict, requests.Response, Response]]
+        Type to return from requests to the API
+    wait_on_rate_limit : bool
+        Whether to wait when rate limit is reached
 
-        includes = response.get("includes", {})
-        if "media" in includes:
-            includes["media"] = [Media(media) for media in includes["media"]]
-        if "places" in includes:
-            includes["places"] = [Place(place) for place in includes["places"]]
-        if "polls" in includes:
-            includes["polls"] = [Poll(poll) for poll in includes["polls"]]
-        if "tweets" in includes:
-            includes["tweets"] = [Tweet(tweet) for tweet in includes["tweets"]]
-        if "users" in includes:
-            includes["users"] = [User(user) for user in includes["users"]]
-
-        errors = response.get("errors", [])
-        meta = response.get("meta", {})
-
-        return Response(data, includes, errors, meta)
+    Attributes
+    ----------
+    session : requests.Session
+        Requests Session used to make requests to the API
+    user_agent : str
+        User agent used when making requests to the API
+    """
 
     # Hide replies
 

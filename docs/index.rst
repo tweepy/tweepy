@@ -18,6 +18,7 @@ Contents:
    client.rst
    models.rst
    stream.rst
+   streamingclient.rst
    asyncstream.rst
    exceptions.rst
    extended_tweets.rst

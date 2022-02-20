@@ -38,6 +38,8 @@ hoverxref_auto_ref = True
 hoverxref_domains = ['py']
 hoverxref_intersphinx = ['aiohttp', 'requests', 'requests_oauthlib']
 
+autoclass_content = "both"
+
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
   'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
