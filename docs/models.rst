@@ -64,6 +64,9 @@ Models Reference
 
       .. class:: tweepy.Media
 
+         .. versionchanged:: 4.5
+            Added ``url`` field
+
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
 
       .. class:: tweepy.Place
