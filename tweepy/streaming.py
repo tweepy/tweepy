@@ -258,7 +258,7 @@ class Stream(BaseStream):
         auth = OAuth1(self.consumer_key, self.consumer_secret,
                       self.access_token, self.access_token_secret)
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
-        super()._connect(method, url, auth=auth **kwargs)
+        super()._connect(method, url, auth=auth, **kwargs)
 
     def filter(self, *, follow=None, track=None, locations=None,
                filter_level=None, languages=None, stall_warnings=False,
