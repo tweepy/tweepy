@@ -88,6 +88,9 @@ Models Reference
          .. versionchanged:: 4.4
             Added ``ended_at`` and ``topic_ids`` fields
 
+         .. versionchanged:: 4.6
+            Added ``subscriber_count`` field
+
          :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 
       .. class:: tweepy.Tweet

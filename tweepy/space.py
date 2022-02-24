@@ -11,8 +11,8 @@ class Space(HashableID, DataMapping):
     __slots__ = (
         "data", "id", "state", "created_at", "ended_at", "host_ids", "lang",
         "is_ticketed", "invited_user_ids", "participant_count",
-        "scheduled_start", "speaker_ids", "started_at", "title", "topic_ids",
-        "updated_at"
+        "scheduled_start", "speaker_ids", "started_at", "subscriber_count",
+        "title", "topic_ids", "updated_at"
     )
 
     def __init__(self, data):
@@ -43,6 +43,9 @@ class Space(HashableID, DataMapping):
         self.started_at = data.get("started_at")
         if self.started_at is not None:
             self.started_at = parse_datetime(self.started_at)
+
+        # https://twittercommunity.com/t/missing-documentation-for-new-space-object-subscriber-count-field-on-space-object-page/166943
+        self.subscriber_count = data.get("subscriber_count")
 
         self.title = data.get("title")
 
