@@ -3,6 +3,37 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.6.0
+-------------
+This will be the last minor version to support Python 3.6 ([#1788](https://github.com/tweepy/tweepy/issues/1788)).
+
+### New Features / Improvements
+- Add support for streaming with Twitter API v2 ([86244c1](https://github.com/tweepy/tweepy/commit/86244c1a82a1852d04f3695b03201363f5d5eafd))
+  - Refactor `Client` and `Stream` to inherit from new `BaseClient` and `BaseStream` classes and add `StreamingClient`, `StreamResponse`, and `StreamRule`
+- Add support for new `max_results` and `pagination_token` parameters for `Client.get_liking_users` ([bdd6b55](https://github.com/tweepy/tweepy/commit/bdd6b55d7cb075fc2e4c7cb56a061c552ca106fe))
+- Add support for new `max_results` and `pagination_token` parameters for `Client.get_retweeters` ([3479e56](https://github.com/tweepy/tweepy/commit/3479e56a0fff02594ab6e77ca8227e65b51b46f7))
+- Add support for new `sort_order` parameter for `Client.search_all_tweets` ([bd202e5](https://github.com/tweepy/tweepy/commit/bd202e5be19670116ebe98329d388b4821d5f3eb))
+- Add support for new `sort_order` parameter for `Client.search_recent_tweets` ([8b47170](https://github.com/tweepy/tweepy/commit/8b47170e7c20127add3e67190890d2a4cef92266))
+- Add `Client.get_space_tweets` ([c8d5d9a](https://github.com/tweepy/tweepy/commit/c8d5d9ad2c2b3c6b58b987286726cad467ce888f))
+- Add `Space.subscriber_count` ([1ffc8cd](https://github.com/tweepy/tweepy/commit/1ffc8cda6d2b9670b86610859f21ac05d726eaf9))
+- Use `repr` of text in `Tweet.__repr__` ([4e2997e](https://github.com/tweepy/tweepy/commit/4e2997e11a6e40b7e7ece508ef87be17cf493b04))
+  - This avoids including inconstant newlines, rather than escaped newlines, in the string representation of the Tweet object, making it more consistent
+- Override `Mapping.__contains__` in `DataMapping` ([9f10a58](https://github.com/tweepy/tweepy/commit/9f10a58e6a9fa8726fa033008f203ff577e1fc03))
+  - This allows membership tests to check for existence within data in Twitter API v2 models, rather than existence of the attribute at all
+- Initialize `Stream.session` within `Stream.__init__` ([80adf5b](https://github.com/tweepy/tweepy/commit/80adf5b2cc861ab6837ae03052378719e694bebc))
+  - Update the user agent based on `Stream.user_agent` even if `Stream.session` is already initialized
+- Use oauthlib to create code challenge and verifier for PKCE ([eb22416](https://github.com/tweepy/tweepy/commit/eb22416676ea4798340290f1a0dca1c131e8b1d5))
+  - Explicitly specify oauthlib dependency requirement as >= 3.2.0 ([fc0d967](https://github.com/tweepy/tweepy/commit/fc0d96718eb37f5ce6609e1c950fd3d11c6cae79))
+    - Update requests_oauthlib dependency requirement to >= 1.2.0 ([dd7e2c9](https://github.com/tweepy/tweepy/commit/dd7e2c9003983bb6c012a103e045b669063bc14b))
+
+### Bug Fixes
+- Fix datetime endpoint parameter formatting in `Client._make_request` ([#1793](https://github.com/tweepy/tweepy/pull/1793))
+
+### Misc
+- Remove undocumented `debug` function ([a702325](https://github.com/tweepy/tweepy/commit/a702325c3b1cac98e6ea7c5b19bbdd56f8745cc2))
+- Add logging documentation ([7701506](https://github.com/tweepy/tweepy/commit/77015065f63022747eb10f6ed081b39dbc75c4a3))
+- Update and improve various documentation
+
 Version 4.5.0
 -------------
 
