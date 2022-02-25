@@ -2,9 +2,9 @@
 
 .. currentmodule:: tweepy
 
-************************************************************
-:class:`tweepy.StreamingClient` --- Twitter API v2 Reference
-************************************************************
+************************
+:class:`StreamingClient`
+************************
 
 .. autoclass:: StreamingClient
    :members:

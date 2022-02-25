@@ -4,9 +4,9 @@
 
 .. include:: parameters.rst
 
-**************************************************
-:class:`tweepy.API` --- Twitter API v1.1 Reference
-**************************************************
+************
+:class:`API`
+************
 
 .. autoclass:: API
 

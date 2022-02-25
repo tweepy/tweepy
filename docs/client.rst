@@ -2,9 +2,9 @@
 
 .. currentmodule:: tweepy
 
-***************************************************
-:class:`tweepy.Client` --- Twitter API v2 Reference
-***************************************************
+***************
+:class:`Client`
+***************
 
 .. autoclass:: Client
 

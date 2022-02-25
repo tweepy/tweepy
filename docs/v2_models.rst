@@ -1,0 +1,52 @@
+.. _v2_models_reference:
+
+******
+Models
+******
+
+.. versionadded:: 4.0
+
+.. class:: tweepy.List
+
+   .. versionadded:: 4.4
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
+
+.. class:: tweepy.Media
+
+   .. versionchanged:: 4.5
+      Added ``url`` field
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
+
+.. class:: tweepy.Place
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
+
+.. class:: tweepy.Poll
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
+
+.. class:: tweepy.ReferencedTweet
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+
+.. class:: tweepy.Space
+
+   .. versionadded:: 4.1
+
+   .. versionchanged:: 4.4
+      Added ``ended_at`` and ``topic_ids`` fields
+
+   .. versionchanged:: 4.6
+      Added ``subscriber_count`` field
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
+
+.. class:: tweepy.Tweet
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+
+.. class:: tweepy.User
+
+   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user

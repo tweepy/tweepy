@@ -14,17 +14,37 @@ Contents:
    install.rst
    getting_started.rst
    authentication.rst
+   logging.rst
+   streaming.rst
+
+.. toctree::
+   :caption: Twitter API v1.1 Reference
+
    api.rst
-   client.rst
-   models.rst
    stream.rst
-   streamingclient.rst
    asyncstream.rst
    exceptions.rst
+   v1_models.rst
+   v1_pagination.rst
+
+.. toctree::
+   :maxdepth: 1
+
    extended_tweets.rst
-   logging.rst
-   pagination.rst
-   streaming.rst
+
+.. toctree::
+   :caption: Twitter API v2 Reference
+
+   client.rst
+   streamingclient.rst
+   exceptions.rst
+   v2_models.rst
+   v2_pagination.rst
+
+.. toctree::
+   :caption: Meta
+   :maxdepth: 2
+
    changelog.md
    development.rst
    examples.rst
