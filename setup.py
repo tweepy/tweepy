@@ -54,7 +54,7 @@ setup(
     },
     test_suite="tests",
     keywords="twitter library",
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Software Development :: Libraries",
