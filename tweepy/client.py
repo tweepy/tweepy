@@ -204,7 +204,7 @@ class Client(BaseClient):
         Twitter API Access Token
     access_token_secret : Optional[str]
         Twitter API Access Token Secret
-    return_type : Type[Union[dict, requests.Response, Response]]
+    return_type : Type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached
@@ -227,7 +227,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to hide. The Tweet must belong to a
             conversation initiated by the authenticating user.
         user_auth : bool
@@ -235,7 +235,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -254,7 +254,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to unhide. The Tweet must belong to
             a conversation initiated by the authenticating user.
         user_auth : bool
@@ -262,7 +262,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -286,14 +286,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to unlike.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -319,15 +319,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Tweet ID of the Tweet to request liking users of.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -335,20 +335,20 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -377,15 +377,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             User ID of the user to request liked Tweets for.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 5 and 100. By default, each page will return 100
             results.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -393,20 +393,20 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -431,14 +431,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to Like.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -464,14 +464,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The Tweet ID you are deleting.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -507,7 +507,7 @@ class Client(BaseClient):
         media_ids : Optional[list[int, str]]
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
-        media_tagged_user_ids : Optional[list[Union[int, str]]]
+        media_tagged_user_ids : Optional[list[int | str]]
             A list of User IDs being tagged in the Tweet with Media. If the
             user you're tagging doesn't have photo-tagging enabled, their names
             won't show up in the list of tagged users even though the Tweet is
@@ -517,12 +517,12 @@ class Client(BaseClient):
             only required if the request includes ``poll.options``.
         poll_options : Optional[list[str]]
             A list of poll options for a Tweet with a poll.
-        quote_tweet_id : Optional[Union[int, str]]
+        quote_tweet_id : Optional[int | str]
             Link to the Tweet being quoted.
-        exclude_reply_user_ids : Optional[list[Union[int, str]]]
+        exclude_reply_user_ids : Optional[list[int | str]]
             A list of User IDs to be excluded from the reply Tweet thus
             removing a user from a thread.
-        in_reply_to_tweet_id : Optional[Union[int, str]]
+        in_reply_to_tweet_id : Optional[int | str]
             Tweet ID of the Tweet being replied to. Please note that
             ``in_reply_to_tweet_id`` needs to be in the request if
             ``exclude_reply_user_ids`` is present.
@@ -538,7 +538,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -609,14 +609,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        source_tweet_id : Union[int, str]
+        source_tweet_id : int | str
             The ID of the Tweet that you would like to remove the Retweet of.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -642,15 +642,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Tweet ID of the Tweet to request Retweeting users of.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -658,20 +658,20 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -694,14 +694,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to Retweet.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -741,7 +741,7 @@ class Client(BaseClient):
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -749,24 +749,24 @@ class Client(BaseClient):
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of search results to be returned by a request. A
             number between 10 and the system limit (currently 500). By default,
             a request response will return 10 results.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         next_token : str
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
@@ -775,24 +775,24 @@ class Client(BaseClient):
             This parameter is used to specify the order in which you want the
             Tweets returned. By default, a request will return the most recent
             Tweets first (sorted by recency).
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -838,30 +838,30 @@ class Client(BaseClient):
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of search results to be returned by a request. A
             number between 10 and 100. By default, a request response will
             return 10 results.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         next_token : str
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
@@ -870,7 +870,7 @@ class Client(BaseClient):
             This parameter is used to specify the order in which you want the
             Tweets returned. By default, a request will return the most recent
             Tweets first (sorted by recency).
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -878,20 +878,20 @@ class Client(BaseClient):
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -932,11 +932,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -944,7 +944,7 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             Specifies the number of Tweets to try and retrieve, up to a maximum
@@ -952,7 +952,7 @@ class Client(BaseClient):
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         pagination_token : str
             This parameter is used to move forwards or backwards through
@@ -960,18 +960,18 @@ class Client(BaseClient):
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``since_id``, the ``since_id``
             will be forced to the oldest ID available. More information on
             Twitter IDs is `here`_.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -979,23 +979,23 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``until_id``, the ``until_id``
             will be forced to the most recent ID available. More information on
             Twitter IDs is `here`_.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1031,11 +1031,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -1045,13 +1045,13 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        exclude : Union[list[str], str]
+        exclude : list[str] | str
             Comma-separated list of the types of Tweets to exclude from the
             response. When ``exclude=retweets`` is used, the maximum historical
             Tweets returned is still 3200. When the ``exclude=replies``
             parameter is used for any value, only the most recent 800 Tweets
             are available.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             Specifies the number of Tweets to try and retrieve, up to a maximum
@@ -1059,7 +1059,7 @@ class Client(BaseClient):
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
         pagination_token : str
             This parameter is used to move forwards or backwards through
@@ -1067,17 +1067,17 @@ class Client(BaseClient):
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``since_id``. If
             the limit of Tweets has occurred since the ``since_id``, the
             ``since_id`` will be forced to the oldest ID available.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -1087,22 +1087,22 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``until_id``. If
             the limit of Tweets has occurred since the ``until_id``, the
             ``until_id`` will be forced to the most recent ID available.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1139,7 +1139,7 @@ class Client(BaseClient):
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -1156,25 +1156,25 @@ class Client(BaseClient):
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1208,7 +1208,7 @@ class Client(BaseClient):
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
@@ -1219,12 +1219,12 @@ class Client(BaseClient):
             This is the granularity that you want the timeseries count data to
             be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
-        since_id : Union[int, str]
+        since_id : int | str
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
             ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -1232,14 +1232,14 @@ class Client(BaseClient):
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        until_id : Union[int, str]
+        until_id : int | str
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1270,26 +1270,26 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to request
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1314,28 +1314,28 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[list[int, str], str]
+        ids : list[int, str] | str
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1363,14 +1363,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unblock.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1394,7 +1394,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1404,16 +1404,16 @@ class Client(BaseClient):
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1438,14 +1438,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to block.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1475,14 +1475,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unfollow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1517,9 +1517,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The user ID whose followers you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1531,16 +1531,16 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1565,9 +1565,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The user ID whose following you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1579,16 +1579,16 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1620,14 +1620,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to follow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1666,14 +1666,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unmute.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1699,7 +1699,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1709,16 +1709,16 @@ class Client(BaseClient):
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1743,14 +1743,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to mute.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1775,15 +1775,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the user to lookup.
         username : str
             The Twitter username (handle) of the user.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1795,7 +1795,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1830,19 +1830,19 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[list[int, str], str]
+        ids : list[int, str] | str
             A comma separated list of user IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        usernames : Union[list[str], str]
+        usernames : list[str] | str
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1854,7 +1854,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1890,18 +1890,18 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1931,23 +1931,23 @@ class Client(BaseClient):
         query : str
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to return in this request. Specify a
             value between 1 and 100.
-        space_fields : Union[list[str], str]
+        space_fields : list[str] | str
             :ref:`space_fields_parameter`
         state : str
             Determines the type of results to return. This endpoint returns all
             Spaces by default. Use ``live`` to only return live Spaces or
             ``scheduled`` to only return upcoming Spaces.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1975,15 +1975,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[list[str], str]
+        ids : list[str] | str
             A comma separated list of Spaces (up to 100).
-        user_ids : Union[list[int, str], str]
+        user_ids : list[int, str] | str
             A comma separated list of user IDs (up to 100).
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        space_fields : Union[list[str], str]
+        space_fields : list[str] | str
             :ref:`space_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Raises
@@ -1993,7 +1993,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2030,18 +2030,18 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             Unique identifier of the Space to request.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        space_fields : Union[list[str], str]
+        space_fields : list[str] | str
             :ref:`space_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2069,22 +2069,22 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space for which you want to request
             Tweets.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2111,22 +2111,22 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space containing the Tweets you'd like to
             access.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2152,9 +2152,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The ID of the List whose Tweets you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2166,16 +2166,16 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2201,14 +2201,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to unfollow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2233,9 +2233,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The ID of the List whose followers you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2247,16 +2247,16 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2282,11 +2282,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The user ID whose followed Lists you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        list_fields : Union[list[str], str]
+        list_fields : list[str] | str
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2298,14 +2298,14 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2329,14 +2329,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to follow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2361,20 +2361,20 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The ID of the List to lookup.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        list_fields : Union[list[str], str]
+        list_fields : list[str] | str
             :ref:`list_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2397,11 +2397,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The user ID whose owned Lists you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        list_fields : Union[list[str], str]
+        list_fields : list[str] | str
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2413,14 +2413,14 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2447,16 +2447,16 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List you are removing a member from.
-        user_id : Union[int, str]
+        user_id : int | str
             The ID of the user you wish to remove as a member of the List.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2477,9 +2477,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The ID of the List whose members you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2491,16 +2491,16 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2526,11 +2526,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[list[str], str]
+        id : list[str] | str
             The user ID whose List memberships you would like to retrieve.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        list_fields : Union[list[str], str]
+        list_fields : list[str] | str
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2542,14 +2542,14 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2573,16 +2573,16 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List you are adding a member to.
-        user_id : Union[int, str]
+        user_id : int | str
             The ID of the user you wish to add as a member of the List.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2605,14 +2605,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List to be deleted.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2635,7 +2635,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List to be updated.
         description : str
             Updates the description of the List.
@@ -2648,7 +2648,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2691,7 +2691,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2721,14 +2721,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to unpin.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2754,18 +2754,18 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        list_fields : Union[list[str], str]
+        list_fields : list[str] | str
             :ref:`list_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2791,14 +2791,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to pin.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2832,7 +2832,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2851,12 +2851,12 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The unique identifier for the compliance job you want to retrieve.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2892,7 +2892,7 @@ class Client(BaseClient):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------

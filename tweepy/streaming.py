@@ -223,7 +223,7 @@ class Stream(BaseStream):
         Max number of times to retry connecting the stream
     proxy : Optional[str]
         URL of the proxy to use when connecting to the stream
-    verify : Union[bool, str]
+    verify : bool | str
         Either a boolean, in which case it controls whether to verify the
         server’s TLS certificate, or a string, in which case it must be a path
         to a CA bundle to use.
@@ -267,7 +267,7 @@ class Stream(BaseStream):
 
         Parameters
         ----------
-        follow : Optional[list[Union[int, str]]]
+        follow : Optional[list[int | str]]
             User IDs, indicating the users to return statuses for in the stream
         track : Optional[list[str]]
             Keywords to track
@@ -518,7 +518,7 @@ class StreamingClient(BaseClient, BaseStream):
     ----------
     bearer_token : str
         Twitter API Bearer Token
-    return_type : Type[Union[dict, requests.Response, Response]]
+    return_type : Type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached
@@ -535,7 +535,7 @@ class StreamingClient(BaseClient, BaseStream):
         Max number of times to retry connecting the stream
     proxy : Optional[str]
         URL of the proxy to use when connecting to the stream
-    verify : Union[bool, str]
+    verify : bool | str
         Either a boolean, in which case it controls whether to verify the
         server’s TLS certificate, or a string, in which case it must be a path
         to a CA bundle to use.
@@ -598,7 +598,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        add : Union[list[StreamRule], StreamRule]
+        add : list[StreamRule] | StreamRule
             Specifies the operation you want to perform on the rules.
         dry_run : bool
             Set to true to test a the syntax of your rule without submitting
@@ -607,7 +607,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -634,7 +634,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        ids : Union[int, str, list[Union[int, str, StreamRule]], StreamRule]
+        ids : int | str | list[int | str | StreamRule] | StreamRule
             Array of rule IDs, each one representing a rule already active in
             your stream. IDs must be submitted as strings.
         dry_run : bool
@@ -644,7 +644,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -699,17 +699,17 @@ class StreamingClient(BaseClient, BaseStream):
 
             This feature is currently only available to the Academic Research
             product track.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         threaded : bool
             Whether or not to use a thread to run the stream
@@ -752,13 +752,13 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        ids : Union[list[str], str]
+        ids : list[str] | str
             Comma-separated list of rule IDs. If omitted, all rules are
             returned.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -801,17 +801,17 @@ class StreamingClient(BaseClient, BaseStream):
 
             This feature is currently only available to the Academic Research
             product track.
-        expansions : Union[list[str], str]
+        expansions : list[str] | str
             :ref:`expansions_parameter`
-        media_fields : Union[list[str], str]
+        media_fields : list[str] | str
             :ref:`media_fields_parameter`
-        place_fields : Union[list[str], str]
+        place_fields : list[str] | str
             :ref:`place_fields_parameter`
-        poll_fields : Union[list[str], str]
+        poll_fields : list[str] | str
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[list[str], str]
+        tweet_fields : list[str] | str
             :ref:`tweet_fields_parameter`
-        user_fields : Union[list[str], str]
+        user_fields : list[str] | str
             :ref:`user_fields_parameter`
         threaded : bool
             Whether or not to use a thread to run the stream

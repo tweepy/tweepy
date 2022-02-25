@@ -152,7 +152,7 @@ class AsyncStream:
 
         Parameters
         ----------
-        follow: Optional[list[Union[int, str]]]
+        follow: Optional[list[int | str]]
             A list of user IDs, indicating the users to return statuses for in
             the stream. See https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.

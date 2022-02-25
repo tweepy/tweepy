@@ -24,7 +24,7 @@ class HTTPException(TweepyException):
     ----------
     response : requests.Response
         Requests Response from the Twitter API
-    api_errors : list[dict[str, Union[int, str]]]
+    api_errors : list[dict[str, int | str]]
         The errors the Twitter API responded with, if any
     api_codes : list[int]
         The error codes the Twitter API responded with, if any
