@@ -34,16 +34,16 @@ class AsyncStream:
         Twitter API Access Token
     access_token_secret: str
         Twitter API Access Token Secret
-    max_retries: Optional[int]
+    max_retries: int | None
         Number of times to attempt to (re)connect the stream.
-    proxy: Optional[str]
+    proxy: str | None
         Proxy URL
 
     Attributes
     ----------
-    session : Optional[aiohttp.ClientSession]
+    session : aiohttp.ClientSession | None
         Aiohttp client session used to connect to the API
-    task : Optional[asyncio.Task]
+    task : asyncio.Task | None
         The task running the stream
     user_agent : str
         User agent used when connecting to the API
@@ -152,19 +152,19 @@ class AsyncStream:
 
         Parameters
         ----------
-        follow: Optional[list[int | str]]
+        follow: list[int | str] | None
             A list of user IDs, indicating the users to return statuses for in
             the stream. See https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        track: Optional[list[str]]
+        track: list[str] | None
             Keywords to track. Phrases of keywords are specified by a list. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        locations: Optional[list[float]]
+        locations: list[float] | None
             Specifies a set of bounding boxes to track. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        filter_level : Optional[str]
+        filter_level : str | None
             Setting this parameter to one of none, low, or medium will set the
             minimum value of the filter_level Tweet attribute required to be
             included in the stream. The default value is none, which includes
@@ -173,14 +173,14 @@ class AsyncStream:
             When displaying a stream of Tweets to end users (dashboards or live
             feeds at a presentation or conference, for example) it is suggested
             that you set this value to medium.
-        languages : Optional[list[str]]
+        languages : list[str] | None
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
             have been detected as being written in the specified languages. For
             example, connecting with language=en will only stream Tweets
             detected to be in the English language.
-        stall_warnings: Optional[bool]
+        stall_warnings: bool | None
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
@@ -240,14 +240,14 @@ class AsyncStream:
 
         Parameters
         ----------
-        languages : Optional[list[str]]
+        languages : list[str] | None
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
             have been detected as being written in the specified languages. For
             example, connecting with language=en will only stream Tweets
             detected to be in the English language.
-        stall_warnings: Optional[bool]
+        stall_warnings: bool | None
             Specifies whether stall warnings should be delivered. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.

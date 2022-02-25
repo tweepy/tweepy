@@ -194,15 +194,15 @@ class Client(BaseClient):
 
     Parameters
     ----------
-    bearer_token : Optional[str]
+    bearer_token : str | None
         Twitter API Bearer Token
-    consumer_key : Optional[str]
+    consumer_key : str | None
         Twitter API Consumer Key
-    consumer_secret : Optional[str]
+    consumer_secret : str | None
         Twitter API Consumer Secret
-    access_token : Optional[str]
+    access_token : str | None
         Twitter API Access Token
-    access_token_secret : Optional[str]
+    access_token_secret : str | None
         Twitter API Access Token Secret
     return_type : Type[dict | requests.Response | Response]
         Type to return from requests to the API
@@ -497,40 +497,40 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        direct_message_deep_link : Optional[str]
+        direct_message_deep_link : str | None
             `Tweets a link directly to a Direct Message conversation`_ with an
             account.
-        for_super_followers_only : Optional[bool]
+        for_super_followers_only : bool | None
             Allows you to Tweet exclusively for `Super Followers`_.
-        place_id : Optional[str]
+        place_id : str | None
             Place ID being attached to the Tweet for geo location.
-        media_ids : Optional[list[int | str]]
+        media_ids : list[int | str] | None
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
-        media_tagged_user_ids : Optional[list[int | str]]
+        media_tagged_user_ids : list[int | str] | None
             A list of User IDs being tagged in the Tweet with Media. If the
             user you're tagging doesn't have photo-tagging enabled, their names
             won't show up in the list of tagged users even though the Tweet is
             successfully created.
-        poll_duration_minutes : Optional[int]
+        poll_duration_minutes : int | None
             Duration of the poll in minutes for a Tweet with a poll. This is
             only required if the request includes ``poll.options``.
-        poll_options : Optional[list[str]]
+        poll_options : list[str] | None
             A list of poll options for a Tweet with a poll.
-        quote_tweet_id : Optional[int | str]
+        quote_tweet_id : int | str | None
             Link to the Tweet being quoted.
-        exclude_reply_user_ids : Optional[list[int | str]]
+        exclude_reply_user_ids : list[int | str] | None
             A list of User IDs to be excluded from the reply Tweet thus
             removing a user from a thread.
-        in_reply_to_tweet_id : Optional[int | str]
+        in_reply_to_tweet_id : int | str | None
             Tweet ID of the Tweet being replied to. Please note that
             ``in_reply_to_tweet_id`` needs to be in the request if
             ``exclude_reply_user_ids`` is present.
-        reply_settings : Optional[str]
+        reply_settings : str | None
             `Settings`_ to indicate who can reply to the Tweet. Limited to
             "mentionedUsers" and "following". If the field isn’t specified, it
             will default to everyone.
-        text : Optional[str]
+        text : str | None
             Text of the Tweet being created. This field is required if
             ``media.media_ids`` is not present.
         user_auth : bool

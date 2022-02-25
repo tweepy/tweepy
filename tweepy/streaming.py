@@ -221,7 +221,7 @@ class Stream(BaseStream):
         stream
     max_retries : int
         Max number of times to retry connecting the stream
-    proxy : Optional[str]
+    proxy : str | None
         URL of the proxy to use when connecting to the stream
     verify : bool | str
         Either a boolean, in which case it controls whether to verify the
@@ -234,7 +234,7 @@ class Stream(BaseStream):
         Whether there's currently a stream running
     session : :class:`requests.Session`
         Requests Session used to connect to the stream
-    thread : Optional[:class:`threading.Thread`]
+    thread : :class:`threading.Thread` | None
         Thread used to run the stream
     user_agent : str
         User agent used when connecting to the stream
@@ -267,13 +267,13 @@ class Stream(BaseStream):
 
         Parameters
         ----------
-        follow : Optional[list[int | str]]
+        follow : list[int | str] | None
             User IDs, indicating the users to return statuses for in the stream
-        track : Optional[list[str]]
+        track : list[str] | None
             Keywords to track
-        locations : Optional[list[float]]
+        locations : list[float] | None
             Specifies a set of bounding boxes to track
-        filter_level : Optional[str]
+        filter_level : str | None
             Setting this parameter to one of none, low, or medium will set the
             minimum value of the filter_level Tweet attribute required to be
             included in the stream. The default value is none, which includes
@@ -282,7 +282,7 @@ class Stream(BaseStream):
             When displaying a stream of Tweets to end users (dashboards or live
             feeds at a presentation or conference, for example) it is suggested
             that you set this value to medium.
-        languages : Optional[list[str]]
+        languages : list[str] | None
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
@@ -301,7 +301,7 @@ class Stream(BaseStream):
 
         Returns
         -------
-        Optional[threading.Thread]
+        threading.Thread | None
             The thread if ``threaded`` is set to ``True``, else ``None``
 
         References
@@ -347,7 +347,7 @@ class Stream(BaseStream):
 
         Parameters
         ----------
-        languages : Optional[list[str]]
+        languages : list[str] | None
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
@@ -361,7 +361,7 @@ class Stream(BaseStream):
 
         Returns
         -------
-        Optional[threading.Thread]
+        threading.Thread | None
             The thread if ``threaded`` is set to ``True``, else ``None``
 
         References
@@ -533,7 +533,7 @@ class StreamingClient(BaseClient, BaseStream):
         stream
     max_retries : int
         Max number of times to retry connecting the stream
-    proxy : Optional[str]
+    proxy : str | None
         URL of the proxy to use when connecting to the stream
     verify : bool | str
         Either a boolean, in which case it controls whether to verify the
@@ -546,7 +546,7 @@ class StreamingClient(BaseClient, BaseStream):
         Whether there's currently a stream running
     session : :class:`requests.Session`
         Requests Session used to connect to the stream
-    thread : Optional[:class:`threading.Thread`]
+    thread : :class:`threading.Thread` | None
         Thread used to run the stream
     user_agent : str
         User agent used when connecting to the stream
@@ -682,7 +682,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        backfill_minutes : Optional[int]
+        backfill_minutes : int | None
             By passing this parameter, you can request up to five (5) minutes
             worth of streaming data that you might have missed during a
             disconnection to be delivered to you upon reconnection. The
@@ -716,7 +716,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Returns
         -------
-        Optional[threading.Thread]
+        threading.Thread | None
             The thread if ``threaded`` is set to ``True``, else ``None``
 
         References
@@ -784,7 +784,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        backfill_minutes : Optional[int]
+        backfill_minutes : int | None
             By passing this parameter, you can request up to five (5) minutes
             worth of streaming data that you might have missed during a
             disconnection to be delivered to you upon reconnection. The
@@ -818,7 +818,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Returns
         -------
-        Optional[threading.Thread]
+        threading.Thread | None
             The thread if ``threaded`` is set to ``True``, else ``None``
 
         References
@@ -943,7 +943,7 @@ class StreamRule(NamedTuple):
 
     Parameters
     ----------
-    value : Optional[str]
+    value : str | None
         The rule text. If you are using a `Standard Project`_ at the Basic
         `access level`_, you can use the basic set of `operators`_, can submit
         up to 25 concurrent rules, and can submit rules up to 512 characters
@@ -951,11 +951,11 @@ class StreamRule(NamedTuple):
         access level, you can use all available operators, can submit up to
         1,000 concurrent rules, and can submit rules up to 1,024 characters
         long.
-    tag : Optional[str]
+    tag : str | None
         The tag label. This is a free-form text you can use to identify the
         rules that matched a specific Tweet in the streaming response. Tags can
         be the same across rules.
-    id : Optional[str]
+    id : str | None
         Unique identifier of this rule. This is returned as a string.
 
 
