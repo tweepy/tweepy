@@ -9,8 +9,7 @@ Pagination
 .. autoclass:: Cursor
     :members:
 
-Example
-=======
+.. rubric:: Example
 
 ::
 
