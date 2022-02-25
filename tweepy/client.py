@@ -204,7 +204,7 @@ class Client(BaseClient):
         Twitter API Access Token
     access_token_secret : str | None
         Twitter API Access Token Secret
-    return_type : Type[dict | requests.Response | Response]
+    return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached

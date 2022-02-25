@@ -518,7 +518,7 @@ class StreamingClient(BaseClient, BaseStream):
     ----------
     bearer_token : str
         Twitter API Bearer Token
-    return_type : Type[dict | requests.Response | Response]
+    return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
         Whether to wait when rate limit is reached
