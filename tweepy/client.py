@@ -504,7 +504,7 @@ class Client(BaseClient):
             Allows you to Tweet exclusively for `Super Followers`_.
         place_id : Optional[str]
             Place ID being attached to the Tweet for geo location.
-        media_ids : Optional[list[int, str]]
+        media_ids : Optional[list[int | str]]
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
         media_tagged_user_ids : Optional[list[int | str]]
@@ -1314,7 +1314,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[int, str] | str
+        ids : list[int | str] | str
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
@@ -1830,7 +1830,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[int, str] | str
+        ids : list[int | str] | str
             A comma separated list of user IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
@@ -1977,7 +1977,7 @@ class Client(BaseClient):
         ----------
         ids : list[str] | str
             A comma separated list of Spaces (up to 100).
-        user_ids : list[int, str] | str
+        user_ids : list[int | str] | str
             A comma separated list of user IDs (up to 100).
         expansions : list[str] | str
             :ref:`expansions_parameter`
