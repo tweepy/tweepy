@@ -19,7 +19,7 @@ Pagination
             :members:
 
 Example
--------
+=======
 
 .. tabs::
 
