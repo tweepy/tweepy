@@ -321,13 +321,13 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             Tweet ID of the Tweet to request liking users of.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -335,13 +335,13 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -379,13 +379,13 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             User ID of the user to request liked Tweets for.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 5 and 100. By default, each page will return 100
             results.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -393,13 +393,13 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -504,10 +504,10 @@ class Client(BaseClient):
             Allows you to Tweet exclusively for `Super Followers`_.
         place_id : Optional[str]
             Place ID being attached to the Tweet for geo location.
-        media_ids : Optional[List[int, str]]
+        media_ids : Optional[list[int, str]]
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
-        media_tagged_user_ids : Optional[List[Union[int, str]]]
+        media_tagged_user_ids : Optional[list[Union[int, str]]]
             A list of User IDs being tagged in the Tweet with Media. If the
             user you're tagging doesn't have photo-tagging enabled, their names
             won't show up in the list of tagged users even though the Tweet is
@@ -515,11 +515,11 @@ class Client(BaseClient):
         poll_duration_minutes : Optional[int]
             Duration of the poll in minutes for a Tweet with a poll. This is
             only required if the request includes ``poll.options``.
-        poll_options : Optional[List[str]]
+        poll_options : Optional[list[str]]
             A list of poll options for a Tweet with a poll.
         quote_tweet_id : Optional[Union[int, str]]
             Link to the Tweet being quoted.
-        exclude_reply_user_ids : Optional[List[Union[int, str]]]
+        exclude_reply_user_ids : Optional[list[Union[int, str]]]
             A list of User IDs to be excluded from the reply Tweet thus
             removing a user from a thread.
         in_reply_to_tweet_id : Optional[Union[int, str]]
@@ -644,13 +644,13 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             Tweet ID of the Tweet to request Retweeting users of.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         pagination_token : str
             Used to request the next page of results if all results weren't
@@ -658,13 +658,13 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -749,22 +749,22 @@ class Client(BaseClient):
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of search results to be returned by a request. A
             number between 10 and the system limit (currently 500). By default,
             a request response will return 10 results.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         next_token : str
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
         since_id : Union[int, str]
             Returns results with a Tweet ID greater than (for example, more
@@ -781,13 +781,13 @@ class Client(BaseClient):
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
         until_id : Union[int, str]
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Returns
@@ -845,21 +845,21 @@ class Client(BaseClient):
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of search results to be returned by a request. A
             number between 10 and 100. By default, a request response will
             return 10 results.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         next_token : str
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
         since_id : Union[int, str]
             Returns results with a Tweet ID greater than (that is, more recent
@@ -878,13 +878,13 @@ class Client(BaseClient):
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
         until_id : Union[int, str]
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -944,7 +944,7 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             Specifies the number of Tweets to try and retrieve, up to a maximum
@@ -952,7 +952,7 @@ class Client(BaseClient):
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         pagination_token : str
             This parameter is used to move forwards or backwards through
@@ -960,9 +960,9 @@ class Client(BaseClient):
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
         since_id : Union[int, str]
             Returns results with a Tweet ID greater than (that is, more recent
@@ -979,7 +979,7 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
         until_id : Union[int, str]
             Returns results with a Tweet ID less less than (that is, older
@@ -988,7 +988,7 @@ class Client(BaseClient):
             of Tweets has occurred since the ``until_id``, the ``until_id``
             will be forced to the most recent ID available. More information on
             Twitter IDs is `here`_.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1045,13 +1045,13 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        exclude : Union[List[str], str]
+        exclude : Union[list[str], str]
             Comma-separated list of the types of Tweets to exclude from the
             response. When ``exclude=retweets`` is used, the maximum historical
             Tweets returned is still 3200. When the ``exclude=replies``
             parameter is used for any value, only the most recent 800 Tweets
             are available.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             Specifies the number of Tweets to try and retrieve, up to a maximum
@@ -1059,7 +1059,7 @@ class Client(BaseClient):
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
         pagination_token : str
             This parameter is used to move forwards or backwards through
@@ -1067,9 +1067,9 @@ class Client(BaseClient):
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
         since_id : Union[int, str]
             Returns results with a Tweet ID greater than (that is, more recent
@@ -1087,7 +1087,7 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
         until_id : Union[int, str]
             Returns results with a Tweet ID less less than (that is, older
@@ -1095,7 +1095,7 @@ class Client(BaseClient):
             Tweets are available. The result will exclude the ``until_id``. If
             the limit of Tweets has occurred since the ``until_id``, the
             ``until_id`` will be forced to the most recent ID available.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1272,17 +1272,17 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             Unique identifier of the Tweet to request
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1314,21 +1314,21 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[List[int, str], str]
+        ids : Union[list[int, str], str]
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1394,7 +1394,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1404,9 +1404,9 @@ class Client(BaseClient):
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1519,7 +1519,7 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             The user ID whose followers you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1531,9 +1531,9 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1567,7 +1567,7 @@ class Client(BaseClient):
         ----------
         id : Union[int, str]
             The user ID whose following you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1579,9 +1579,9 @@ class Client(BaseClient):
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1699,7 +1699,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -1709,9 +1709,9 @@ class Client(BaseClient):
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1779,11 +1779,11 @@ class Client(BaseClient):
             The ID of the user to lookup.
         username : str
             The Twitter username (handle) of the user.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1830,19 +1830,19 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[List[int, str], str]
+        ids : Union[list[int, str], str]
             A comma separated list of user IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        usernames : Union[List[str], str]
+        usernames : Union[list[str], str]
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1890,11 +1890,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1931,18 +1931,18 @@ class Client(BaseClient):
         query : str
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to return in this request. Specify a
             value between 1 and 100.
-        space_fields : Union[List[str], str]
+        space_fields : Union[list[str], str]
             :ref:`space_fields_parameter`
         state : str
             Determines the type of results to return. This endpoint returns all
             Spaces by default. Use ``live`` to only return live Spaces or
             ``scheduled`` to only return upcoming Spaces.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Returns
@@ -1975,15 +1975,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : Union[List[str], str]
+        ids : Union[list[str], str]
             A comma separated list of Spaces (up to 100).
-        user_ids : Union[List[int, str], str]
+        user_ids : Union[list[int, str], str]
             A comma separated list of user IDs (up to 100).
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        space_fields : Union[List[str], str]
+        space_fields : Union[list[str], str]
             :ref:`space_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Raises
@@ -2030,13 +2030,13 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             Unique identifier of the Space to request.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        space_fields : Union[List[str], str]
+        space_fields : Union[list[str], str]
             :ref:`space_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Returns
@@ -2069,17 +2069,17 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space for which you want to request
             Tweets.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Returns
@@ -2111,17 +2111,17 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space containing the Tweets you'd like to
             access.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
 
         Returns
@@ -2152,9 +2152,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The ID of the List whose Tweets you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2166,9 +2166,9 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2233,9 +2233,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The ID of the List whose followers you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2247,9 +2247,9 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2282,11 +2282,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The user ID whose followed Lists you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : Union[list[str], str]
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2298,7 +2298,7 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2361,13 +2361,13 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The ID of the List to lookup.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : Union[list[str], str]
             :ref:`list_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2397,11 +2397,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The user ID whose owned Lists you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : Union[list[str], str]
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2413,7 +2413,7 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2477,9 +2477,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The ID of the List whose members you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2491,9 +2491,9 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2526,11 +2526,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : Union[list[str], str]
             The user ID whose List memberships you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : Union[list[str], str]
             :ref:`list_fields_parameter`
         max_results : int
             The maximum number of results to be returned per page. This can be
@@ -2542,7 +2542,7 @@ class Client(BaseClient):
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2754,11 +2754,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : Union[list[str], str]
             :ref:`list_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate

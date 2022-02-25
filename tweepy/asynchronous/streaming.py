@@ -152,15 +152,15 @@ class AsyncStream:
 
         Parameters
         ----------
-        follow: Optional[List[Union[int, str]]]
+        follow: Optional[list[Union[int, str]]]
             A list of user IDs, indicating the users to return statuses for in
             the stream. See https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        track: Optional[List[str]]
+        track: Optional[list[str]]
             Keywords to track. Phrases of keywords are specified by a list. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
-        locations: Optional[List[float]]
+        locations: Optional[list[float]]
             Specifies a set of bounding boxes to track. See
             https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
             for more information.
@@ -173,7 +173,7 @@ class AsyncStream:
             When displaying a stream of Tweets to end users (dashboards or live
             feeds at a presentation or conference, for example) it is suggested
             that you set this value to medium.
-        languages : Optional[List[str]]
+        languages : Optional[list[str]]
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
@@ -240,7 +240,7 @@ class AsyncStream:
 
         Parameters
         ----------
-        languages : Optional[List[str]]
+        languages : Optional[list[str]]
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that

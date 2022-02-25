@@ -267,11 +267,11 @@ class Stream(BaseStream):
 
         Parameters
         ----------
-        follow : Optional[List[Union[int, str]]]
+        follow : Optional[list[Union[int, str]]]
             User IDs, indicating the users to return statuses for in the stream
-        track : Optional[List[str]]
+        track : Optional[list[str]]
             Keywords to track
-        locations : Optional[List[float]]
+        locations : Optional[list[float]]
             Specifies a set of bounding boxes to track
         filter_level : Optional[str]
             Setting this parameter to one of none, low, or medium will set the
@@ -282,7 +282,7 @@ class Stream(BaseStream):
             When displaying a stream of Tweets to end users (dashboards or live
             feeds at a presentation or conference, for example) it is suggested
             that you set this value to medium.
-        languages : Optional[List[str]]
+        languages : Optional[list[str]]
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
@@ -347,7 +347,7 @@ class Stream(BaseStream):
 
         Parameters
         ----------
-        languages : Optional[List[str]]
+        languages : Optional[list[str]]
             Setting this parameter to a comma-separated list of `BCP 47`_
             language identifiers corresponding to any of the languages listed
             on Twitter’s `advanced search`_ page will only return Tweets that
@@ -598,7 +598,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        add : Union[List[StreamRule], StreamRule]
+        add : Union[list[StreamRule], StreamRule]
             Specifies the operation you want to perform on the rules.
         dry_run : bool
             Set to true to test a the syntax of your rule without submitting
@@ -634,7 +634,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        ids : Union[int, str, List[Union[int, str, StreamRule]], StreamRule]
+        ids : Union[int, str, list[Union[int, str, StreamRule]], StreamRule]
             Array of rule IDs, each one representing a rule already active in
             your stream. IDs must be submitted as strings.
         dry_run : bool
@@ -699,17 +699,17 @@ class StreamingClient(BaseClient, BaseStream):
 
             This feature is currently only available to the Academic Research
             product track.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         threaded : bool
             Whether or not to use a thread to run the stream
@@ -752,7 +752,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        ids : Union[List[str], str]
+        ids : Union[list[str], str]
             Comma-separated list of rule IDs. If omitted, all rules are
             returned.
 
@@ -801,17 +801,17 @@ class StreamingClient(BaseClient, BaseStream):
 
             This feature is currently only available to the Academic Research
             product track.
-        expansions : Union[List[str], str]
+        expansions : Union[list[str], str]
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : Union[list[str], str]
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : Union[list[str], str]
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : Union[list[str], str]
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : Union[list[str], str]
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : Union[list[str], str]
             :ref:`user_fields_parameter`
         threaded : bool
             Whether or not to use a thread to run the stream
@@ -920,7 +920,7 @@ class StreamingClient(BaseClient, BaseStream):
         
         Parameters
         ----------
-        matching_rules : List[StreamRule]
+        matching_rules : list[StreamRule]
             The matching rules received
         """
         pass
