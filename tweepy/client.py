@@ -818,8 +818,8 @@ class Client(BaseClient):
     def search_recent_tweets(self, query, *, user_auth=False, **params):
         """search_recent_tweets( \
             query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, start_time, \
-            tweet_fields, until_id, user_fields, user_auth=False \
+            next_token, place_fields, poll_fields, since_id, sort_order, \
+            start_time, tweet_fields, until_id, user_fields, user_auth=False \
         )
 
         The recent search endpoint returns Tweets from the last seven days that
