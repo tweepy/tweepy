@@ -35,6 +35,8 @@ extensions = [
   'sphinx_tabs.tabs'
 ]
 
+autodoc_typehints = 'description'
+
 hoverxref_auto_ref = True
 hoverxref_domains = ['py']
 hoverxref_intersphinx = ['aiohttp', 'requests', 'requests_oauthlib']

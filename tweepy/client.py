@@ -186,31 +186,25 @@ class BaseClient:
 
 
 class Client(BaseClient):
-    """Client( \
-        bearer_token=None, consumer_key=None, consumer_secret=None, \
-        access_token=None, access_token_secret=None, *, return_type=Response, \
-        wait_on_rate_limit=False \
-    )
-
-    Twitter API v2 Client
+    """Twitter API v2 Client
 
     .. versionadded:: 4.0
 
     Parameters
     ----------
-    bearer_token : str | None
+    bearer_token
         Twitter API Bearer Token
-    consumer_key : str | None
+    consumer_key
         Twitter API Consumer Key
-    consumer_secret : str | None
+    consumer_secret
         Twitter API Consumer Secret
-    access_token : str | None
+    access_token
         Twitter API Access Token
-    access_token_secret : str | None
+    access_token_secret
         Twitter API Access Token Secret
-    return_type : type[dict | requests.Response | Response]
+    return_type
         Type to return from requests to the API
-    wait_on_rate_limit : bool
+    wait_on_rate_limit
         Whether to wait when rate limit is reached
 
     Attributes
