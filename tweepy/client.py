@@ -722,8 +722,8 @@ class Client(BaseClient):
     def search_all_tweets(self, query, **params):
         """search_all_tweets( \
             query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, start_time, \
-            tweet_fields, until_id, user_fields \
+            next_token, place_fields, poll_fields, since_id, sort_order, \
+            start_time, tweet_fields, until_id, user_fields \
         )
 
         This endpoint is only available to those users who have been approved
