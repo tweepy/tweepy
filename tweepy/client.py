@@ -892,7 +892,7 @@ class Client(BaseClient):
             include it.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool | None
+        user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
