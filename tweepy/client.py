@@ -1769,17 +1769,17 @@ class Client(BaseClient):
     # User lookup
 
     def get_user(self, *, id=None, username=None, user_auth=False, **params):
-        """get_user(*, id, username, expansions, tweet_fields, user_fields, \
-                    user_auth=False)
+        """get_user(*, id=None, username=None, expansions, tweet_fields, \
+                    user_fields, user_auth=False)
 
         Returns a variety of information about a single user specified by the
         requested ID or username.
 
         Parameters
         ----------
-        id : int | str
+        id : int | str | None
             The ID of the user to lookup.
-        username : str
+        username : str | None
             The Twitter username (handle) of the user.
         expansions : list[str] | str
             :ref:`expansions_parameter`
