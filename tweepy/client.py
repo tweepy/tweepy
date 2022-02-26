@@ -308,8 +308,9 @@ class Client(BaseClient):
 
     def get_liking_users(self, id, *, user_auth=False, **params):
         """get_liking_users( \
-            id, *, expansions, media_fields, place_fields, poll_fields, \
-            tweet_fields, user_fields, user_auth=False \
+            id, *, expansions, max_results, media_fields, pagination_token, \
+            place_fields, poll_fields, tweet_fields, user_fields, \
+            user_auth=False \
         )
 
         Allows you to get information about a Tweet’s liking users.
