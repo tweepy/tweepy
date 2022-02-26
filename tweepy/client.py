@@ -1671,7 +1671,7 @@ class Client(BaseClient):
             "Client.follow is deprecated; use Client.follow_user instead.",
             DeprecationWarning
         )
-        self.follow_user(target_user_id, user_auth=user_auth)
+        return self.follow_user(target_user_id, user_auth=user_auth)
 
     # Mutes
 
