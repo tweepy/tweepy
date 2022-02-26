@@ -2,6 +2,8 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import annotations
+
 from collections import namedtuple
 import datetime
 import logging
@@ -33,10 +35,12 @@ Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 class BaseClient:
 
     def __init__(
-        self, bearer_token=None, consumer_key=None, consumer_secret=None,
-        access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
-    ):
+        self, bearer_token: str | None = None, consumer_key: str | None = None,
+        consumer_secret: str | None = None, access_token: str | None = None,
+        access_token_secret: str | None = None, *,
+        return_type: type[dict | requests.Response | Response] = Response,
+        wait_on_rate_limit: bool = False
+    ) -> None:
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
