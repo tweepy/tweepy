@@ -1824,7 +1824,7 @@ class Client(BaseClient):
 
     def get_users(self, *, ids=None, usernames=None, user_auth=False,
                   **params):
-        """get_users(*, ids, usernames, expansions, tweet_fields, \
+        """get_users(*, ids=None, usernames=None, expansions, tweet_fields, \
                      user_fields, user_auth=False)
 
         Returns a variety of information about one or more users specified by
@@ -1832,11 +1832,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[int | str] | str
+        ids : list[int | str] | str | None
             A comma separated list of user IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        usernames : list[str] | str
+        usernames : list[str] | str | None
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
