@@ -1967,7 +1967,8 @@ class Client(BaseClient):
     # Spaces lookup
 
     def get_spaces(self, *, ids=None, user_ids=None, **params):
-        """get_spaces(*, ids, user_ids, expansions, space_fields, user_fields)
+        """get_spaces(*, ids=None, user_ids=None, expansions, space_fields, \
+                      user_fields)
 
         Returns details about multiple live or scheduled Spaces (created by the
         specified user IDs if specified). Up to 100 comma-separated Space or
@@ -1977,9 +1978,9 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[str] | str
+        ids : list[str] | str | None
             A comma separated list of Spaces (up to 100).
-        user_ids : list[int | str] | str
+        user_ids : list[int | str] | str | None
             A comma separated list of user IDs (up to 100).
         expansions : list[str] | str
             :ref:`expansions_parameter`
