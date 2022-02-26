@@ -227,15 +227,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to hide. The Tweet must belong to a
             conversation initiated by the authenticating user.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -256,15 +252,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to unhide. The Tweet must belong to
             a conversation initiated by the authenticating user.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -290,14 +282,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to unlike.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -326,7 +314,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Tweet ID of the Tweet to request liking users of.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -350,12 +338,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -386,7 +370,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             User ID of the user to request liked Tweets for.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -410,12 +394,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -442,14 +422,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to Like.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -477,14 +453,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The Tweet ID you are deleting.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -552,12 +524,8 @@ class Client(BaseClient):
         text : str | None
             Text of the Tweet being created. This field is required if
             ``media.media_ids`` is not present.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -630,14 +598,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        source_tweet_id : int | str
+        source_tweet_id
             The ID of the Tweet that you would like to remove the Retweet of.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -666,7 +630,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Tweet ID of the Tweet to request Retweeting users of.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -690,12 +654,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -720,14 +680,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to Retweet.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -769,7 +725,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One query for matching Tweets. Up to 1024 characters.
         end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
@@ -820,10 +776,6 @@ class Client(BaseClient):
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
@@ -865,7 +817,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One rule for matching Tweets. If you are using a
             `Standard Project`_ at the Basic `access level`_, you can use the
             basic set of `operators`_ and can make queries up to 512 characters
@@ -920,12 +872,8 @@ class Client(BaseClient):
             include it.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -970,7 +918,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
@@ -1028,12 +976,8 @@ class Client(BaseClient):
             Twitter IDs is `here`_.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1073,7 +1017,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
@@ -1139,12 +1083,8 @@ class Client(BaseClient):
             ``until_id`` will be forced to the most recent ID available.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1183,7 +1123,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One query for matching Tweets. Up to 1024 characters.
         end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
@@ -1218,10 +1158,6 @@ class Client(BaseClient):
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-all
@@ -1251,7 +1187,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One rule for matching Tweets. If you are using a
             `Standard Project`_ at the Basic `access level`_, you can use the
             basic set of `operators`_ and can make queries up to 512 characters
@@ -1287,10 +1223,6 @@ class Client(BaseClient):
             specified ID. The ID specified is exclusive and responses will not
             include it.
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent
@@ -1325,7 +1257,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to request
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -1339,12 +1271,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1372,7 +1300,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[int | str] | str
+        ids
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
@@ -1388,12 +1316,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1423,14 +1347,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unblock.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1472,12 +1392,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1504,14 +1420,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to block.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1543,14 +1455,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unfollow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1589,7 +1497,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The user ID whose followers you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -1607,12 +1515,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1639,7 +1543,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The user ID whose following you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -1657,12 +1561,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1696,14 +1596,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to follow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1746,14 +1642,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unmute.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1797,12 +1689,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1829,14 +1717,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to mute.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1874,17 +1758,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If ID and username are not passed or both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1936,17 +1816,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If IDs and usernames are not passed or both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1991,12 +1867,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2025,7 +1897,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
         expansions : list[str] | str | None
@@ -2041,10 +1913,6 @@ class Client(BaseClient):
             ``scheduled`` to only return upcoming Spaces.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2092,10 +1960,6 @@ class Client(BaseClient):
         TypeError
             If IDs and user IDs are not passed or both are passed
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces
@@ -2134,7 +1998,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             Unique identifier of the Space to request.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2142,10 +2006,6 @@ class Client(BaseClient):
             :ref:`space_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2174,7 +2034,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : str
+        id
             Unique identifier of the Space for which you want to request
             Tweets.
         expansions : list[str] | str | None
@@ -2189,10 +2049,6 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2220,7 +2076,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : str
+        id
             Unique identifier of the Space containing the Tweets you'd like to
             access.
         expansions : list[str] | str | None
@@ -2235,10 +2091,6 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2268,7 +2120,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose Tweets you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2286,12 +2138,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2319,14 +2167,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to unfollow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2353,7 +2197,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose followers you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2371,12 +2215,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2404,7 +2244,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose followed Lists you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2422,12 +2262,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2453,14 +2289,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to follow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2487,7 +2319,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List to lookup.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2495,12 +2327,8 @@ class Client(BaseClient):
             :ref:`list_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2527,7 +2355,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose owned Lists you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2545,12 +2373,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2579,16 +2403,12 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List you are removing a member from.
-        user_id : int | str
+        user_id
             The ID of the user you wish to remove as a member of the List.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2613,7 +2433,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose members you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2631,12 +2451,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2664,7 +2480,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose List memberships you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2682,12 +2498,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2713,16 +2525,12 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List you are adding a member to.
-        user_id : int | str
+        user_id
             The ID of the user you wish to add as a member of the List.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2747,14 +2555,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List to be deleted.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2780,7 +2584,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List to be updated.
         description : str | None
             Updates the description of the List.
@@ -2788,12 +2592,8 @@ class Client(BaseClient):
             Updates the name of the List.
         private : bool | None
             Determines whether the List should be private.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2827,18 +2627,14 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        name : str
+        name
             The name of the List you wish to create.
         description : str | None
             Description of the List.
         private : bool | None
             Determine whether the List should be private.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2870,14 +2666,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to unpin.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2911,12 +2703,8 @@ class Client(BaseClient):
             :ref:`list_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2944,14 +2732,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to pin.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2977,17 +2761,13 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        type : str
+        type
             Allows to filter by job type - either by tweets or user ID. Only
             one filter (tweets or users) can be specified per request.
         status : str | None
             Allows to filter by job status. Only one filter can be specified
             per request.
             Default: ``all``
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3008,12 +2788,8 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The unique identifier for the compliance job you want to retrieve.
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3039,7 +2815,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        type : str
+        type
             Specify whether you will be uploading tweet or user IDs. You can
             either specify tweets or users.
         name : str | None
@@ -3049,10 +2825,6 @@ class Client(BaseClient):
             Specifies whether to enable the upload URL with support for
             resumable uploads. If true, this endpoint will return a pre-signed
             URL with resumable uploads enabled.
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
