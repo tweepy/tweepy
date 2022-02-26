@@ -308,9 +308,9 @@ class Client(BaseClient):
 
     def get_liking_users(self, id, *, user_auth=False, **params):
         """get_liking_users( \
-            id, *, expansions, max_results, media_fields, pagination_token, \
-            place_fields, poll_fields, tweet_fields, user_fields, \
-            user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about a Tweet’s liking users.
@@ -322,27 +322,27 @@ class Client(BaseClient):
         ----------
         id : int | str
             Tweet ID of the Tweet to request liking users of.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -366,9 +366,9 @@ class Client(BaseClient):
 
     def get_liked_tweets(self, id, *, user_auth=False, **params):
         """get_liked_tweets( \
-            id, *, expansions, max_results, media_fields, pagination_token, \
-            place_fields, poll_fields, tweet_fields, user_fields, \
-            user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about a user’s liked Tweets.
@@ -380,27 +380,27 @@ class Client(BaseClient):
         ----------
         id : int | str
             User ID of the user to request liked Tweets for.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 5 and 100. By default, each page will return 100
             results.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -632,9 +632,9 @@ class Client(BaseClient):
 
     def get_retweeters(self, id, *, user_auth=False, **params):
         """get_retweeters( \
-            id, *, expansions, max_results, media_fields, pagination_token, \
-            place_fields, poll_fields, tweet_fields, user_fields, \
-            user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about who has Retweeted a Tweet.
@@ -646,27 +646,27 @@ class Client(BaseClient):
         ----------
         id : int | str
             Tweet ID of the Tweet to request Retweeting users of.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -721,9 +721,11 @@ class Client(BaseClient):
 
     def search_all_tweets(self, query, **params):
         """search_all_tweets( \
-            query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, sort_order, \
-            start_time, tweet_fields, until_id, user_fields \
+            query, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, next_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, sort_order=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None \
         )
 
         This endpoint is only available to those users who have been approved
@@ -743,7 +745,7 @@ class Client(BaseClient):
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -751,45 +753,45 @@ class Client(BaseClient):
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of search results to be returned by a request. A
             number between 10 and the system limit (currently 500). By default,
             a request response will return 10 results.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
-        sort_order : str
+        sort_order : str | None
             This parameter is used to specify the order in which you want the
             Tweets returned. By default, a request will return the most recent
             Tweets first (sorted by recency).
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
@@ -817,9 +819,11 @@ class Client(BaseClient):
 
     def search_recent_tweets(self, query, *, user_auth=False, **params):
         """search_recent_tweets( \
-            query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, sort_order, \
-            start_time, tweet_fields, until_id, user_fields, user_auth=False \
+            query, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, next_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, sort_order=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=False \
         )
 
         The recent search endpoint returns Tweets from the last seven days that
@@ -840,39 +844,39 @@ class Client(BaseClient):
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of search results to be returned by a request. A
             number between 10 and 100. By default, a request response will
             return 10 results.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
             ``start_time`` parameter, only ``since_id`` will be used.
-        sort_order : str
+        sort_order : str | None
             This parameter is used to specify the order in which you want the
             Tweets returned. By default, a request will return the most recent
             Tweets first (sorted by recency).
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -880,15 +884,15 @@ class Client(BaseClient):
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth : bool | None
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
@@ -920,9 +924,11 @@ class Client(BaseClient):
 
     def get_users_mentions(self, id, *, user_auth=False, **params):
         """get_users_mentions( \
-            id, *, end_time, expansions, max_results, media_fields, \
-            pagination_token, place_fields, poll_fields, since_id, \
-            start_time, tweet_fields, until_id, user_fields, user_auth=False \
+            id, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, pagination_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, start_time=None, \
+            tweet_fields=None, until_id=None, user_fields=None, \
+            user_auth=False \
         )
 
         Returns Tweets mentioning a single user specified by the requested user
@@ -938,7 +944,7 @@ class Client(BaseClient):
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -946,34 +952,34 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             Specifies the number of Tweets to try and retrieve, up to a maximum
             of 100 per distinct request. By default, 10 results are returned if
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             This parameter is used to move forwards or backwards through
             'pages' of results, based on the value of the ``next_token`` or
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``since_id``, the ``since_id``
             will be forced to the oldest ID available. More information on
             Twitter IDs is `here`_.
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -981,16 +987,16 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``until_id``, the ``until_id``
             will be forced to the most recent ID available. More information on
             Twitter IDs is `here`_.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1018,9 +1024,11 @@ class Client(BaseClient):
 
     def get_users_tweets(self, id, *, user_auth=False, **params):
         """get_users_tweets( \
-            id, *, end_time, exclude, expansions, max_results, media_fields, \
-            pagination_token, place_fields, poll_fields, since_id, \
-            start_time, tweet_fields, until_id, user_fields, user_auth=False \
+            id, *, end_time=None, exclude=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            place_fields=None, poll_fields=None, since_id=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=False \
         )
 
         Returns Tweets composed by a single user, specified by the requested
@@ -1037,7 +1045,7 @@ class Client(BaseClient):
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -1047,39 +1055,39 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        exclude : list[str] | str
+        exclude : list[str] | str | None
             Comma-separated list of the types of Tweets to exclude from the
             response. When ``exclude=retweets`` is used, the maximum historical
             Tweets returned is still 3200. When the ``exclude=replies``
             parameter is used for any value, only the most recent 800 Tweets
             are available.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             Specifies the number of Tweets to try and retrieve, up to a maximum
             of 100 per distinct request. By default, 10 results are returned if
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             This parameter is used to move forwards or backwards through
             'pages' of results, based on the value of the ``next_token`` or
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``since_id``. If
             the limit of Tweets has occurred since the ``since_id``, the
             ``since_id`` will be forced to the oldest ID available.
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -1089,15 +1097,15 @@ class Client(BaseClient):
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``until_id``. If
             the limit of Tweets has occurred since the ``until_id``, the
             ``until_id`` will be forced to the most recent ID available.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1127,8 +1135,10 @@ class Client(BaseClient):
     # Tweet counts
 
     def get_all_tweets_count(self, query, **params):
-        """get_all_tweets_count(query, *, end_time, granularity, next_token, \
-                                since_id, start_time, until_id)
+        """get_all_tweets_count( \
+            query, *, end_time=None, granularity=None, next_token=None, \
+            since_id=None, start_time=None, until_id=None \
+        )
 
         This endpoint is only available to those users who have been approved
         for the `Academic Research product track`_.
@@ -1141,7 +1151,7 @@ class Client(BaseClient):
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -1149,27 +1159,27 @@ class Client(BaseClient):
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        granularity : str
+        granularity : str | None
             This is the granularity that you want the timeseries count data to
             be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
@@ -1195,8 +1205,10 @@ class Client(BaseClient):
         )
 
     def get_recent_tweets_count(self, query, **params):
-        """get_recent_tweets_count(query, *, end_time, granularity, since_id, \
-                                   start_time, until_id)
+        """get_recent_tweets_count( \
+            query, *, end_time=None, granularity=None, since_id=None, \
+            start_time=None, until_id=None \
+        )
 
         The recent Tweet counts endpoint returns count of Tweets from the last
         seven days that match a search query.
@@ -1210,23 +1222,23 @@ class Client(BaseClient):
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : datetime.datetime | str
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        granularity : str
+        granularity : str | None
             This is the granularity that you want the timeseries count data to
             be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
-        since_id : int | str
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
             ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : datetime.datetime | str
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -1234,7 +1246,7 @@ class Client(BaseClient):
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        until_id : int | str
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
@@ -1264,8 +1276,11 @@ class Client(BaseClient):
     # Tweet lookup
 
     def get_tweet(self, id, *, user_auth=False, **params):
-        """get_tweet(id, *, expansions, media_fields, place_fields, \
-                     poll_fields, twitter_fields, user_fields, user_auth=False)
+        """get_tweet( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, twitter_fields=None, user_fields=None, \
+            user_auth=False \
+        )
 
         Returns a variety of information about a single Tweet specified by
         the requested ID.
@@ -1274,17 +1289,17 @@ class Client(BaseClient):
         ----------
         id : int | str
             Unique identifier of the Tweet to request
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1307,8 +1322,9 @@ class Client(BaseClient):
 
     def get_tweets(self, ids, *, user_auth=False, **params):
         """get_tweets( \
-            ids, *, expansions, media_fields, place_fields, poll_fields, \
-            twitter_fields, user_fields, user_auth=False \
+            ids, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, twitter_fields=None, user_fields=None, \
+            user_auth=False \
         )
 
         Returns a variety of information about the Tweet specified by the
@@ -1320,17 +1336,17 @@ class Client(BaseClient):
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1386,8 +1402,10 @@ class Client(BaseClient):
         )
 
     def get_blocked(self, *, user_auth=True, **params):
-        """get_blocked(*, expansions, max_results, pagination_token, \
-                       tweet_fields, user_fields, user_auth=True)
+        """get_blocked( \
+            *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
 
         Returns a list of users who are blocked by the authenticating user.
 
@@ -1396,19 +1414,19 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1511,8 +1529,8 @@ class Client(BaseClient):
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified user ID.
@@ -1521,21 +1539,21 @@ class Client(BaseClient):
         ----------
         id : int | str
             The user ID whose followers you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and the 1000. By default, each page will return
             100 results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1559,8 +1577,8 @@ class Client(BaseClient):
 
     def get_users_following(self, id, *, user_auth=False, **params):
         """get_users_following( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users the specified user ID is following.
@@ -1569,21 +1587,21 @@ class Client(BaseClient):
         ----------
         id : int | str
             The user ID whose following you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and the 1000. By default, each page will return
             100 results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1689,8 +1707,10 @@ class Client(BaseClient):
         )
 
     def get_muted(self, *, user_auth=True, **params):
-        """get_muted(*, expansions, max_results, pagination_token, \
-                     tweet_fields, user_fields, user_auth=True)
+        """get_muted( \
+            *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
 
         Returns a list of users who are muted by the authenticating user.
 
@@ -1701,19 +1721,19 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1769,8 +1789,8 @@ class Client(BaseClient):
     # User lookup
 
     def get_user(self, *, id=None, username=None, user_auth=False, **params):
-        """get_user(*, id=None, username=None, expansions, tweet_fields, \
-                    user_fields, user_auth=False)
+        """get_user(*, id=None, username=None, expansions=None, \
+                    tweet_fields=None, user_fields=None, user_auth=False)
 
         Returns a variety of information about a single user specified by the
         requested ID or username.
@@ -1781,11 +1801,11 @@ class Client(BaseClient):
             The ID of the user to lookup.
         username : str | None
             The Twitter username (handle) of the user.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1824,8 +1844,8 @@ class Client(BaseClient):
 
     def get_users(self, *, ids=None, usernames=None, user_auth=False,
                   **params):
-        """get_users(*, ids=None, usernames=None, expansions, tweet_fields, \
-                     user_fields, user_auth=False)
+        """get_users(*, ids=None, usernames=None, expansions=None, \
+                     tweet_fields=None, user_fields=None, user_auth=False)
 
         Returns a variety of information about one or more users specified by
         the requested IDs or usernames.
@@ -1840,11 +1860,11 @@ class Client(BaseClient):
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1884,7 +1904,8 @@ class Client(BaseClient):
         )
 
     def get_me(self, *, user_auth=True, **params):
-        """get_me(*, expansions, tweet_fields, user_fields, user_auth=True)
+        """get_me(*, expansions=None, tweet_fields=None, user_fields=None, \
+                  user_auth=True)
 
         Returns information about an authorized user.
 
@@ -1892,11 +1913,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1918,8 +1939,8 @@ class Client(BaseClient):
     # Search Spaces
 
     def search_spaces(self, query, **params):
-        """search_spaces(query, *, expansions, max_results, space_fields, \
-                         state, user_fields)
+        """search_spaces(query, *, expansions=None, max_results=None, \
+                         space_fields=None, state=None, user_fields=None)
 
         Return live or scheduled Spaces matching your specified search terms
 
@@ -1933,18 +1954,18 @@ class Client(BaseClient):
         query : str
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to return in this request. Specify a
             value between 1 and 100.
-        space_fields : list[str] | str
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        state : str
+        state : str | None
             Determines the type of results to return. This endpoint returns all
             Spaces by default. Use ``live`` to only return live Spaces or
             ``scheduled`` to only return upcoming Spaces.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
@@ -1967,8 +1988,8 @@ class Client(BaseClient):
     # Spaces lookup
 
     def get_spaces(self, *, ids=None, user_ids=None, **params):
-        """get_spaces(*, ids=None, user_ids=None, expansions, space_fields, \
-                      user_fields)
+        """get_spaces(*, ids=None, user_ids=None, expansions=None, \
+                      space_fields=None, user_fields=None)
 
         Returns details about multiple live or scheduled Spaces (created by the
         specified user IDs if specified). Up to 100 comma-separated Space or
@@ -1982,11 +2003,11 @@ class Client(BaseClient):
             A comma separated list of Spaces (up to 100).
         user_ids : list[int | str] | str | None
             A comma separated list of user IDs (up to 100).
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        space_fields : list[str] | str
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Raises
@@ -2024,7 +2045,8 @@ class Client(BaseClient):
         )
 
     def get_space(self, id, **params):
-        """get_space(id, *, expansions, space_fields, user_fields)
+        """get_space(id, *, expansions=None, space_fields=None, \
+                     user_fields=None)
 
         Returns a variety of information about a single Space specified by the
         requested ID.
@@ -2035,11 +2057,11 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             Unique identifier of the Space to request.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        space_fields : list[str] | str
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
@@ -2058,8 +2080,10 @@ class Client(BaseClient):
         )
 
     def get_space_buyers(self, id, **params):
-        """get_space_buyers(id, *, expansions, media_fields, place_fields, \
-                            poll_fields, tweet_fields, user_fields)
+        """get_space_buyers( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None \
+        )
 
         Returns a list of user who purchased a ticket to the requested Space.
         You must authenticate the request using the Access Token of the creator
@@ -2072,17 +2096,17 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space for which you want to request
             Tweets.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
@@ -2102,8 +2126,10 @@ class Client(BaseClient):
         )
 
     def get_space_tweets(self, id, **params):
-        """get_space_tweets(id, *, expansions, media_fields, place_fields, \
-                            poll_fields, tweet_fields, user_fields)
+        """get_space_tweets( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None \
+        )
 
         Returns Tweets shared in the requested Spaces.
 
@@ -2114,17 +2140,17 @@ class Client(BaseClient):
         id : str
             Unique identifier of the Space containing the Tweets you'd like to
             access.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : list[str] | str
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : list[str] | str
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : list[str] | str
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
@@ -2146,8 +2172,10 @@ class Client(BaseClient):
     # List Tweets lookup
 
     def get_list_tweets(self, id, *, user_auth=False, **params):
-        """get_list_tweets(id, *, expansions, max_results, pagination_token, \
-                           tweet_fields, user_fields, user_auth=False)
+        """get_list_tweets( \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
 
         Returns a list of Tweets from the specified List.
 
@@ -2157,21 +2185,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The ID of the List whose Tweets you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2226,8 +2254,8 @@ class Client(BaseClient):
 
     def get_list_followers(self, id, *, user_auth=False, **params):
         """get_list_followers( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified List.
@@ -2238,21 +2266,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The ID of the List whose followers you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2275,8 +2303,8 @@ class Client(BaseClient):
 
     def get_followed_lists(self, id, *, user_auth=False, **params):
         """get_followed_lists( \
-            id, *, expansions, list_fields, max_results, pagination_token, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
         )
 
         Returns all Lists a specified user follows.
@@ -2287,21 +2315,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The user ID whose followed Lists you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : list[str] | str
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2355,8 +2383,8 @@ class Client(BaseClient):
     # List lookup
 
     def get_list(self, id, *, user_auth=False, **params):
-        """get_list(id, *, expansions, list_fields, user_fields, \
-                    user_auth=False)
+        """get_list(id, *, expansions=None, list_fields=None, \
+                    user_fields=None, user_auth=False)
 
         Returns the details of a specified List.
 
@@ -2366,11 +2394,11 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The ID of the List to lookup.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : list[str] | str
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2391,8 +2419,10 @@ class Client(BaseClient):
         )
 
     def get_owned_lists(self, id, *, user_auth=False, **params):
-        """get_owned_lists(id, *, expansions, list_fields, max_results, \
-                           pagination_token, user_fields, user_auth=False)
+        """get_owned_lists( \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
+        )
 
         Returns all Lists owned by the specified user.
 
@@ -2402,21 +2432,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The user ID whose owned Lists you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : list[str] | str
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2471,8 +2501,10 @@ class Client(BaseClient):
         )
 
     def get_list_members(self, id, *, user_auth=False, **params):
-        """get_list_members(id, *, expansions, max_results, pagination_token, \
-                            tweet_fields, user_fields, user_auth=False)
+        """get_list_members( \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
 
         Returns a list of users who are members of the specified List.
 
@@ -2482,21 +2514,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The ID of the List whose members you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : list[str] | str
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2519,8 +2551,8 @@ class Client(BaseClient):
 
     def get_list_memberships(self, id, *, user_auth=False, **params):
         """get_list_memberships( \
-            id, *, expansions, list_fields, max_results, pagination_token, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
         )
 
         Returns all Lists a specified user is a member of.
@@ -2531,21 +2563,21 @@ class Client(BaseClient):
         ----------
         id : list[str] | str
             The user ID whose List memberships you would like to retrieve.
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : list[str] | str
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2640,11 +2672,11 @@ class Client(BaseClient):
         ----------
         id : int | str
             The ID of the List to be updated.
-        description : str
+        description : str | None
             Updates the description of the List.
-        name : str
+        name : str | None
             Updates the name of the List.
-        private : bool
+        private : bool | None
             Determines whether the List should be private.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2685,9 +2717,9 @@ class Client(BaseClient):
         ----------
         name : str
             The name of the List you wish to create.
-        description : str
+        description : str | None
             Description of the List.
-        private : bool
+        private : bool | None
             Determine whether the List should be private.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2745,8 +2777,8 @@ class Client(BaseClient):
         )
 
     def get_pinned_lists(self, *, user_auth=True, **params):
-        """get_pinned_lists(*, expansions, list_fields, user_fields, \
-                            user_auth=True)
+        """get_pinned_lists(*, expansions=None, list_fields=None, \
+                            user_fields=None, user_auth=True)
 
         Returns the Lists pinned by a specified user.
 
@@ -2757,11 +2789,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        expansions : list[str] | str
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : list[str] | str
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        user_fields : list[str] | str
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -2817,7 +2849,7 @@ class Client(BaseClient):
     # Batch Compliance
 
     def get_compliance_jobs(self, type, **params):
-        """get_compliance_jobs(type, *, status)
+        """get_compliance_jobs(type, *, status=None)
 
         Returns a list of recent compliance jobs.
 
@@ -2828,7 +2860,7 @@ class Client(BaseClient):
         type : str
             Allows to filter by job type - either by tweets or user ID. Only
             one filter (tweets or users) can be specified per request.
-        status : str
+        status : str | None
             Allows to filter by job status. Only one filter can be specified
             per request.
             Default: ``all``
@@ -2885,10 +2917,10 @@ class Client(BaseClient):
         type : str
             Specify whether you will be uploading tweet or user IDs. You can
             either specify tweets or users.
-        name : str
+        name : str | None
             A name for this job, useful to identify multiple jobs using a label
             you define.
-        resumable : bool
+        resumable : bool | None
             Specifies whether to enable the upload URL with support for
             resumable uploads. If true, this endpoint will return a pre-signed
             URL with resumable uploads enabled.
