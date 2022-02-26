@@ -1525,7 +1525,7 @@ class Client(BaseClient):
             "Client.unfollow is deprecated; use Client.unfollow_user instead.",
             DeprecationWarning
         )
-        self.unfollow_user(target_user_id, user_auth=user_auth)
+        return self.unfollow_user(target_user_id, user_auth=user_auth)
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
