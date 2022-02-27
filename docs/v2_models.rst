@@ -6,8 +6,6 @@
 Models
 ******
 
-.. versionadded:: 4.0
-
 :class:`List`
 =============
 
@@ -40,6 +38,7 @@ Models
 
 .. autoclass:: ReferencedTweet()
 
-.. class:: tweepy.User
+:class:`User`
+=============
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+.. autoclass:: User()
