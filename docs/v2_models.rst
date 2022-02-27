@@ -13,12 +13,10 @@ Models
 
 .. autoclass:: List()
 
-.. class:: tweepy.Media
+:class:`Media`
+==============
 
-   .. versionchanged:: 4.5
-      Added ``url`` field
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
+.. autoclass:: Media()
 
 .. class:: tweepy.Place
 
