@@ -18,9 +18,10 @@ Models
 
 .. autoclass:: Media()
 
-.. class:: tweepy.Place
+:class:`Place`
+==============
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
+.. autoclass:: Place()
 
 .. class:: tweepy.Poll
 
