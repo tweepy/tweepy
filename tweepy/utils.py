@@ -10,7 +10,7 @@ def list_to_csv(item_list):
         return ','.join(map(str, item_list))
 
 
-def parse_datetime(datetime_string):
+def parse_datetime(datetime_string: str) -> datetime.datetime:
     return datetime.datetime.strptime(
         datetime_string, "%Y-%m-%dT%H:%M:%S.%f%z"
     ).replace(tzinfo=datetime.timezone.utc)
