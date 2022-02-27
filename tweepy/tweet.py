@@ -165,6 +165,20 @@ class Tweet(HashableID, DataMapping):
 
 
 class ReferencedTweet(HashableID, DataMapping):
+    """.. versionadded:: 4.0
+
+    Attributes
+    ----------
+    data : dict
+        The JSON data representing the referenced Tweet.
+    id : int
+        The unique identifier of the referenced Tweet.
+    type : str
+
+    References
+    ----------
+    https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+    """
 
     __slots__ = ("data", "id", "type")
 

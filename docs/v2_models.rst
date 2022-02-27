@@ -38,9 +38,7 @@ Models
 
 .. autoclass:: Tweet()
 
-.. class:: tweepy.ReferencedTweet
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+.. autoclass:: ReferencedTweet()
 
 .. class:: tweepy.User
 
