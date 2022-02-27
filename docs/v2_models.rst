@@ -1,16 +1,17 @@
 .. _v2_models_reference:
 
+.. currentmodule:: tweepy
+
 ******
 Models
 ******
 
 .. versionadded:: 4.0
 
-.. class:: tweepy.List
+:class:`List`
+=============
 
-   .. versionadded:: 4.4
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
+.. autoclass:: List()
 
 .. class:: tweepy.Media
 
