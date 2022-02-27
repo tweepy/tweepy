@@ -625,6 +625,7 @@ user data objects.
 ``Response``
 ============
 .. autoclass:: Response
+   :class-doc-from: class
 
    The :obj:`Response` returned by :class:`Client` methods is a
    :class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``,
