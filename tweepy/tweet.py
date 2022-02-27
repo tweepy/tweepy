@@ -52,11 +52,11 @@ class Tweet(HashableID, DataMapping):
         self.promoted_metrics = data.get("promoted_metrics")
         self.public_metrics = data.get("public_metrics")
 
-        self.referenced_tweets = None
-        if "referenced_tweets" in data:
+        self.referenced_tweets = data.get("referenced_tweets")
+        if self.referenced_tweets is not None:
             self.referenced_tweets = [
                 ReferencedTweet(referenced_tweet)
-                for referenced_tweet in data["referenced_tweets"]
+                for referenced_tweet in self.referenced_tweets
             ]
 
         self.reply_settings = data.get("reply_settings")
