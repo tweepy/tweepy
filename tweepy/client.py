@@ -557,7 +557,7 @@ class Client(BaseClient):
         .. _Super Followers: https://help.twitter.com/en/using-twitter/super-follows
         .. _Settings: https://blog.twitter.com/en_us/topics/product/2020/new-conversation-settings-coming-to-a-tweet-near-you
         """
-        json = {}
+        json: JSON = {}
 
         if direct_message_deep_link is not None:
             json["direct_message_deep_link"] = direct_message_deep_link
@@ -581,7 +581,9 @@ class Client(BaseClient):
         if poll_options is not None:
             json["poll"] = {"options": poll_options}
             if poll_duration_minutes is not None:
-                json["poll"]["duration_minutes"] = poll_duration_minutes
+                json["poll"]["duration_minutes"] = (  # type: ignore
+                    poll_duration_minutes
+                )
 
         if quote_tweet_id is not None:
             json["quote_tweet_id"] = str(quote_tweet_id)
@@ -589,7 +591,7 @@ class Client(BaseClient):
         if in_reply_to_tweet_id is not None:
             json["reply"] = {"in_reply_to_tweet_id": str(in_reply_to_tweet_id)}
             if exclude_reply_user_ids is not None:
-                json["reply"]["exclude_reply_user_ids"] = [
+                json["reply"]["exclude_reply_user_ids"] = [  # type: ignore
                     str(exclude_reply_user_id)
                     for exclude_reply_user_id in exclude_reply_user_ids
                 ]
@@ -2637,7 +2639,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/put-lists-id
         """
-        json = {}
+        json: JSON = {}
 
         if description is not None:
             json["description"] = description
@@ -2678,7 +2680,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists
         """
-        json = {"name": name}
+        json: JSON = {"name": name}
 
         if description is not None:
             json["description"] = description
@@ -2868,7 +2870,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/post-compliance-jobs
         """
-        json = {"type": type}
+        json: JSON = {"type": type}
 
         if name is not None:
             json["name"] = name
