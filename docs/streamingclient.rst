@@ -14,6 +14,7 @@
 ``StreamResponse``
 ==================
 .. autoclass:: StreamResponse
+   :class-doc-from: class
 
    The :obj:`StreamResponse` returned by :meth:`StreamingClient.on_response` is
    a :class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``,
