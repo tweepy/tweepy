@@ -195,15 +195,15 @@ class Client(BaseClient):
     Parameters
     ----------
     bearer_token : str | None
-        Twitter API Bearer Token
+        Twitter API OAuth 2.0 Bearer Token / Access Token
     consumer_key : str | None
-        Twitter API Consumer Key
+        Twitter API OAuth 1.0a Consumer Key
     consumer_secret : str | None
-        Twitter API Consumer Secret
+        Twitter API OAuth 1.0a Consumer Secret
     access_token : str | None
-        Twitter API Access Token
+        Twitter API OAuth 1.0a Access Token
     access_token_secret : str | None
-        Twitter API Access Token Secret
+        Twitter API OAuth 1.0a Access Token Secret
     return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
