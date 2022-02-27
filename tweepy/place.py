@@ -25,7 +25,7 @@ class Place(HashableID, DataMapping):
     id : str
         The unique identifier of the expanded place, if this is a point of
         interest tagged in the Tweet.
-    contained_within : list | None
+    contained_within : list
         Returns the identifiers of known places that contain the referenced
         place.
     country : str | None
