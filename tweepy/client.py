@@ -8,18 +8,11 @@ from collections import namedtuple
 import datetime
 import logging
 from platform import python_version
-import sys
 import time
-from typing import Any
+from typing import Any, TYPE_CHECKING
 import warnings
 
 import requests
-
-if sys.version_info >= (3, 10):
-    from typing import TypeAlias
-else:
-    from typing_extensions import TypeAlias
-# Remove when support for Python 3.9 is dropped
 
 import tweepy
 from tweepy.auth import OAuth1UserHandler
@@ -35,18 +28,29 @@ from tweepy.space import Space
 from tweepy.tweet import Tweet
 from tweepy.user import User
 
+if TYPE_CHECKING:
+    import sys
+
+    if sys.version_info >= (3, 10):
+        from typing import TypeAlias
+    else:
+        from typing_extensions import TypeAlias
+    # Remove when support for Python 3.9 is dropped
+
+    # From typeshed / types-requests:
+    _ParamsMappingValueType: TypeAlias = (
+        "str | bytes | int | float | Iterable[str | bytes | int | float] | None"
+    )
+    # Change to typed global expression when support for Python 3.9 is dropped
+
+    JSON: TypeAlias = "dict[str, Any]"
+    # Change to typed global expression when support for Python 3.8 is dropped
+    # https://github.com/python/typing/issues/182
+
 log = logging.getLogger(__name__)
 
 Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 
-# From typeshed / types-requests:
-_ParamsMappingValueType: TypeAlias = (
-    "str | bytes | int | float | Iterable[str | bytes | int | float] | None"
-)
-# Change to typed global expression when support for Python 3.9 is dropped
-
-JSON: TypeAlias = "dict[str, Any]"
-# Change to typed global expression when support for Python 3.8 is dropped
 
 class BaseClient:
 
