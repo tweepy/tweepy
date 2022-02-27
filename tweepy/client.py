@@ -8,10 +8,17 @@ from collections import namedtuple
 import datetime
 import logging
 from platform import python_version
+import sys
 import time
 import warnings
 
 import requests
+
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias
+else:
+    from typing_extensions import TypeAlias
+# Remove when support for Python 3.9 is dropped
 
 import tweepy
 from tweepy.auth import OAuth1UserHandler
@@ -31,6 +38,11 @@ log = logging.getLogger(__name__)
 
 Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 
+# From typeshed / types-requests:
+_ParamsMappingValueType: TypeAlias = (
+    "str | bytes | int | float | Iterable[str | bytes | int | float] | None"
+)
+# Change to typed global expression when support for Python 3.9 is dropped
 
 class BaseClient:
 
@@ -299,7 +311,8 @@ class Client(BaseClient):
         )
 
     def get_liking_users(
-        self, id : int | str, *, user_auth: bool = False, **params
+        self, id : int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_liking_users( \
             id, *, expansions=None, max_results=None, media_fields=None, \
@@ -355,7 +368,8 @@ class Client(BaseClient):
         )
 
     def get_liked_tweets(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_liked_tweets( \
             id, *, expansions=None, max_results=None, media_fields=None, \
@@ -615,7 +629,8 @@ class Client(BaseClient):
         )
 
     def get_retweeters(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_retweeters( \
             id, *, expansions=None, max_results=None, media_fields=None, \
@@ -700,7 +715,7 @@ class Client(BaseClient):
     # Search Tweets
 
     def search_all_tweets(
-        self, query: str, **params
+        self, query: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """search_all_tweets( \
             query, *, end_time=None, expansions=None, max_results=None, \
@@ -796,7 +811,8 @@ class Client(BaseClient):
         )
 
     def search_recent_tweets(
-        self, query: str, *, user_auth: bool = False, **params
+        self, query: str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """search_recent_tweets( \
             query, *, end_time=None, expansions=None, max_results=None, \
@@ -899,7 +915,8 @@ class Client(BaseClient):
     # Timelines
 
     def get_users_mentions(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_users_mentions( \
             id, *, end_time=None, expansions=None, max_results=None, \
@@ -997,7 +1014,8 @@ class Client(BaseClient):
         )
 
     def get_users_tweets(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_users_tweets( \
             id, *, end_time=None, exclude=None, expansions=None, \
@@ -1107,7 +1125,7 @@ class Client(BaseClient):
     # Tweet counts
 
     def get_all_tweets_count(
-        self, query: str, **params
+        self, query: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_all_tweets_count( \
             query, *, end_time=None, granularity=None, next_token=None, \
@@ -1175,7 +1193,7 @@ class Client(BaseClient):
         )
 
     def get_recent_tweets_count(
-        self, query: str, **params
+        self, query: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_recent_tweets_count( \
             query, *, end_time=None, granularity=None, since_id=None, \
@@ -1244,7 +1262,8 @@ class Client(BaseClient):
     # Tweet lookup
 
     def get_tweet(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_tweet( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
@@ -1287,7 +1306,8 @@ class Client(BaseClient):
         )
 
     def get_tweets(
-        self, ids: list[int | str] | str, *, user_auth: bool = False, **params
+        self, ids: list[int | str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_tweets( \
             ids, *, expansions=None, media_fields=None, place_fields=None, \
@@ -1364,7 +1384,7 @@ class Client(BaseClient):
         )
 
     def get_blocked(
-        self, *, user_auth: bool = True, **params
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_blocked( \
             *, expansions=None, max_results=None, pagination_token=None, \
@@ -1486,7 +1506,8 @@ class Client(BaseClient):
         return self.unfollow_user(target_user_id, user_auth=user_auth)
 
     def get_users_followers(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_users_followers( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
@@ -1532,7 +1553,8 @@ class Client(BaseClient):
         )
 
     def get_users_following(
-        self, id: int | str, *, user_auth: bool = False, **params
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_users_following( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
@@ -1659,7 +1681,7 @@ class Client(BaseClient):
         )
 
     def get_muted(
-        self, *, user_auth: bool = True, **params
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_muted( \
             *, expansions=None, max_results=None, pagination_token=None, \
@@ -1738,7 +1760,7 @@ class Client(BaseClient):
 
     def get_user(
         self, *, id: int | str | None = None, username: str | None = None,
-        user_auth: bool = False, **params
+        user_auth: bool = False, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_user(*, id=None, username=None, expansions=None, \
                     tweet_fields=None, user_fields=None, user_auth=False)
@@ -1792,7 +1814,7 @@ class Client(BaseClient):
     def get_users(
         self, *, ids: list[int | str] | str | None = None,
         usernames: list[str] | str | None = None, user_auth: bool = False,
-        **params
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_users(*, ids=None, usernames=None, expansions=None, \
                      tweet_fields=None, user_fields=None, user_auth=False)
@@ -1850,7 +1872,7 @@ class Client(BaseClient):
         )
 
     def get_me(
-        self, *, user_auth: bool = True, **params
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_me(*, expansions=None, tweet_fields=None, user_fields=None, \
                   user_auth=True)
@@ -1883,7 +1905,7 @@ class Client(BaseClient):
     # Search Spaces
 
     def search_spaces(
-        self, query: str, **params
+        self, query: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """search_spaces(query, *, expansions=None, max_results=None, \
                          space_fields=None, state=None, user_fields=None)
@@ -1931,7 +1953,8 @@ class Client(BaseClient):
 
     def get_spaces(
         self, *, ids: list[str] | str | None = None,
-        user_ids: list[int | str] | str | None = None, **params
+        user_ids: list[int | str] | str | None = None,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_spaces(*, ids=None, user_ids=None, expansions=None, \
                       space_fields=None, user_fields=None)
@@ -1986,7 +2009,7 @@ class Client(BaseClient):
         )
 
     def get_space(
-        self, id: list[str] | str, **params
+        self, id: list[str] | str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_space(id, *, expansions=None, space_fields=None, \
                      user_fields=None)
@@ -2019,7 +2042,7 @@ class Client(BaseClient):
         )
 
     def get_space_buyers(
-        self, id: str, **params
+        self, id: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_space_buyers( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
@@ -2063,7 +2086,7 @@ class Client(BaseClient):
         )
 
     def get_space_tweets(
-        self, id: str, **params
+        self, id: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_space_tweets( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
@@ -2107,7 +2130,8 @@ class Client(BaseClient):
     # List Tweets lookup
 
     def get_list_tweets(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_list_tweets( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
@@ -2184,7 +2208,8 @@ class Client(BaseClient):
         )
 
     def get_list_followers(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_list_followers( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
@@ -2231,7 +2256,8 @@ class Client(BaseClient):
         )
 
     def get_followed_lists(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_followed_lists( \
             id, *, expansions=None, list_fields=None, max_results=None, \
@@ -2308,7 +2334,8 @@ class Client(BaseClient):
     # List lookup
 
     def get_list(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_list(id, *, expansions=None, list_fields=None, \
                     user_fields=None, user_auth=False)
@@ -2342,7 +2369,8 @@ class Client(BaseClient):
         )
 
     def get_owned_lists(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_owned_lists( \
             id, *, expansions=None, list_fields=None, max_results=None, \
@@ -2420,7 +2448,8 @@ class Client(BaseClient):
         )
 
     def get_list_members(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_list_members( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
@@ -2467,7 +2496,8 @@ class Client(BaseClient):
         )
 
     def get_list_memberships(
-        self, id: list[str] | str, *, user_auth: bool = False, **params
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_list_memberships( \
             id, *, expansions=None, list_fields=None, max_results=None, \
@@ -2683,7 +2713,7 @@ class Client(BaseClient):
         )
 
     def get_pinned_lists(
-        self, *, user_auth: bool = True, **params
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_pinned_lists(*, expansions=None, list_fields=None, \
                             user_fields=None, user_auth=True)
@@ -2751,7 +2781,7 @@ class Client(BaseClient):
     # Batch Compliance
 
     def get_compliance_jobs(
-        self, type: str, **params
+        self, type: str, **params: _ParamsMappingValueType
     ) -> dict | requests.Response | Response:
         """get_compliance_jobs(type, *, status=None)
 
