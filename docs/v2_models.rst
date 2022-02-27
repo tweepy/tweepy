@@ -33,11 +33,12 @@ Models
 
 .. autoclass:: Space()
 
+:class:`Tweet`
+==============
+
+.. autoclass:: Tweet()
+
 .. class:: tweepy.ReferencedTweet
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
-
-.. class:: tweepy.Tweet
 
    :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 
