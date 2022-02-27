@@ -2,11 +2,16 @@
 # Copyright 2010-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import annotations
+
+from collections.abc import Iterable
 import datetime
 
 
-def list_to_csv(item_list):
-    if item_list:
+def list_to_csv(item_list: Iterable[int | str] | None) -> str | None:
+    if item_list is None:
+        return None
+    else:
         return ','.join(map(str, item_list))
 
 
