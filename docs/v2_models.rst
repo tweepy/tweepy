@@ -23,9 +23,10 @@ Models
 
 .. autoclass:: Place()
 
-.. class:: tweepy.Poll
+:class:`Poll`
+=============
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
+.. autoclass:: Poll()
 
 .. class:: tweepy.ReferencedTweet
 
