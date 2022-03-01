@@ -586,6 +586,9 @@ class API:
         Returns the favorite statuses for the authenticating user or user
         specified by the ID parameter.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.favorites``
+
         Parameters
         ----------
         user_id
@@ -623,6 +626,9 @@ class API:
 
         Returns full Tweet objects for up to 100 Tweets per request, specified
         by the ``id`` parameter.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.statuses_lookup``
 
         Parameters
         ----------
@@ -752,6 +758,9 @@ class API:
         Returns up to 100 user IDs belonging to users who have retweeted the
         Tweet specified by the ``id`` parameter.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.retweeters``
+
         Parameters
         ----------
         id
@@ -782,6 +791,9 @@ class API:
         """get_retweets(id, *, count, trim_user)
 
         Returns up to 100 of the first Retweets of the given Tweet.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.retweets``
 
         Parameters
         ----------
@@ -814,6 +826,9 @@ class API:
 
         Returns the 20 most recent Tweets of the authenticated user that have
         been retweeted by others.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.retweets_of_me``
 
         Parameters
         ----------
@@ -1135,12 +1150,15 @@ class API:
             status, filename, *, file, possibly_sensitive, \
             in_reply_to_status_id, lat, long, place_id, display_coordinates \
         )
-
-        .. deprecated:: 3.7.0
-            Use :func:`API.media_upload` instead.
         
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
+
+        .. deprecated:: 3.7.0
+            Use :func:`API.media_upload` instead.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.update_with_media``
 
         Parameters
         ----------
@@ -1208,6 +1226,9 @@ class API:
             attributes (fields that pertain to the perspective of the
             authenticating user) are not currently supported on this endpoint.
             [#]_\ [#]_
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.search``
 
         Parameters
         ----------
@@ -1290,6 +1311,9 @@ class API:
         lists first, so with ``reverse=true``, 20 owned lists and 80
         subscriptions would be returned.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.lists_all``
+
         Parameters
         ----------
         user_id
@@ -1322,6 +1346,9 @@ class API:
                             count, cursor, include_entities, skip_status)
 
         Returns the members of the specified list.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.list_members``
 
         Parameters
         ----------
@@ -1365,6 +1392,9 @@ class API:
         )
 
         Check if the specified user is a member of the specified list.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.show_list_member``
 
         Parameters
         ----------
@@ -1415,6 +1445,9 @@ class API:
         Returns the lists the specified user has been added to. If ``user_id``
         or ``screen_name`` are not provided, the memberships for the
         authenticating user are returned.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.lists_memberships``
 
         Parameters
         ----------
@@ -1575,6 +1608,9 @@ class API:
         Returns the subscribers of the specified list. Private list subscribers
         will only be shown if the authenticated user owns the specified list.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.list_subscribers``
+
         Parameters
         ----------
         list_id
@@ -1617,6 +1653,9 @@ class API:
         )
 
         Check if the specified user is a subscriber of the specified list.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.show_list_subscriber``
 
         Parameters
         ----------
@@ -1664,6 +1703,9 @@ class API:
 
         Obtain a collection of the lists the specified user is subscribed to,
         20 lists per page by default. Does not include the user's own lists.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.lists_subscriptions``
 
         Parameters
         ----------
@@ -2031,6 +2073,9 @@ class API:
         Returns an array containing the IDs of users following the specified
         user.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.followers_ids``
+
         Parameters
         ----------
         user_id
@@ -2067,6 +2112,8 @@ class API:
         Returns a user's followers ordered in which they were added. If no user
         is specified by id/screen name, it defaults to the authenticated user.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.followers``
 
         Parameters
         ----------
@@ -2107,6 +2154,9 @@ class API:
         Returns an array containing the IDs of users being followed by the
         specified user.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.friends_ids``
+
         Parameters
         ----------
         user_id
@@ -2142,6 +2192,9 @@ class API:
 
         Returns a user's friends ordered in which they were added 100 at a
         time. If no user is specified it defaults to the authenticated user.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.friends``
 
         Parameters
         ----------
@@ -2180,6 +2233,9 @@ class API:
 
         Returns a collection of numeric IDs for every user who has a pending
         request to follow the authenticating user.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.friendships_incoming``
 
         Parameters
         ----------
@@ -2265,6 +2321,9 @@ class API:
         Returns a collection of numeric IDs for every protected user for whom
         the authenticating user has a pending follow request.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.friendships_outgoing``
+
         Parameters
         ----------
         cursor
@@ -2292,6 +2351,9 @@ class API:
                           target_screen_name)
 
         Returns detailed information about the relationship between two users.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.show_friendship``
 
         Parameters
         ----------
@@ -2581,6 +2643,9 @@ class API:
         """get_saved_searches()
 
         Returns the authenticated user's saved search queries.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.saved_searches``
 
         Returns
         -------
@@ -2894,6 +2959,9 @@ class API:
         Returns an array of numeric user IDs the authenticating user is
         blocking.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.blocks_ids``
+
         Parameters
         ----------
         stringify_ids
@@ -2922,6 +2990,9 @@ class API:
 
         Returns an array of user objects that the authenticating user is
         blocking.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.blocks``
 
         Parameters
         ----------
@@ -2953,6 +3024,9 @@ class API:
 
         Returns an array of numeric user IDs the authenticating user has muted.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.mutes_ids``
+
         Parameters
         ----------
         stringify_ids
@@ -2980,6 +3054,9 @@ class API:
         """get_mutes(*, cursor, include_entities, skip_status)
 
         Returns an array of user objects the authenticating user has muted.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.mutes``
 
         Parameters
         ----------
@@ -3168,6 +3245,9 @@ class API:
         user context provided. Other members of the conversation can still
         access the Direct Messages.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.destroy_direct_message``
+
         Parameters
         ----------
         id
@@ -3190,6 +3270,9 @@ class API:
 
         Returns all Direct Message events (both sent and received) within the
         last 30 days. Sorted in reverse-chronological order.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.list_direct_messages``
 
         Parameters
         ----------
@@ -3654,6 +3737,9 @@ class API:
         information such as a canonical name and country the location belongs
         in.
 
+        .. versionchanged:: 4.0
+            Renamed from ``API.trends_available``
+
         Returns
         -------
         :class:`dict`
@@ -3677,6 +3763,9 @@ class API:
         name and country the location belongs in.
 
         A WOEID is a Yahoo! Where On Earth ID.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.trends_closest``
 
         Parameters
         ----------
@@ -3725,6 +3814,9 @@ class API:
 
         The tweet_volume for the last 24 hours is also returned for many trends
         if this is available.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.trends_place``
 
         Parameters
         ----------
@@ -3840,6 +3932,9 @@ class API:
         Some parameters in this method are only required based on the existence
         of other parameters. For instance, ``lat`` is required if ``long`` is
         provided, and vice-versa.
+
+        .. versionchanged:: 4.0
+            Renamed from ``API.geo_search``
 
         Parameters
         ----------
