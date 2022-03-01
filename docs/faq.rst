@@ -59,8 +59,8 @@ Why am I getting an inconsistent number of / not getting 3200 Tweets for a speci
 
 https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635
 
-Why am I getting no results from :meth:`API.search_tweets`?
------------------------------------------------------------
+Why am I getting no results or not all the results from :meth:`API.search_tweets`?
+----------------------------------------------------------------------------------
 
 Twitter's standard search API only "searches against a sampling of recent
 Tweets published in the past 7 days."
