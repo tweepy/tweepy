@@ -8,7 +8,7 @@ bearer_token = ""
 client = tweepy.Client(bearer_token)
 
 # Replace User IDs
-ids = ['2244994945']
+ids = [2244994945, 6253282]
 
 # By default the user ID, name and username are returned. user_fields can be 
 # used to specify the additional user data that you want returned for each user
