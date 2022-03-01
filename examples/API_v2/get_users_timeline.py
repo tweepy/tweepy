@@ -15,5 +15,5 @@ tweets = client.get_users_tweets(id)
 
 # Print the Tweet text
 for tweet in tweets.data:
-    print(tweet.text)
+    print(tweet.id)
     

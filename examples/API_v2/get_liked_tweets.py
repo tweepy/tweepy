@@ -16,6 +16,6 @@ tweets = client.get_liked_tweets(id, tweet_fields=["created_at"])
 
 # Print the Tweet text and the time the Tweet was created
 for tweet in tweets.data:
-    print(tweet.text)
+    print(tweet.id)
     print(tweet.created_at)
     
