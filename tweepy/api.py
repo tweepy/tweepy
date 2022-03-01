@@ -1220,6 +1220,18 @@ class API:
 
         .. note::
 
+            Twitter's standard search API only "searches against a sampling of
+            recent Tweets published in the past 7 days."
+
+            If you're specifying an ID range beyond the past 7 days or there
+            are no results from the past 7 days, then no results will be
+            returned.
+
+            See `Twitter's documentation on the standard search API`_ for more
+            information.
+
+        .. note::
+
             In API v1.1, the response format of the Search API has been
             improved to return Tweet objects more similar to the objects you’ll
             find across the REST API and platform. However, perspectival
@@ -1285,6 +1297,8 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
+
+        .. _Twitter's documentation on the standard search API: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
         """
         return self.request(
             'GET', 'search/tweets', endpoint_parameters=(

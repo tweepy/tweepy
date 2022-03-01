@@ -59,19 +59,6 @@ Why am I getting an inconsistent number of / not getting 3200 Tweets for a speci
 
 https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635
 
-Why am I getting no results or not all the results from :meth:`API.search_tweets`?
-----------------------------------------------------------------------------------
-
-Twitter's standard search API only "searches against a sampling of recent
-Tweets published in the past 7 days."
-
-If you're specifying an ID range beyond the past 7 days or there are no results
-from the past 7 days, then no results will be returned.
-
-See Twitter's documentation on the standard search API for more information:
-https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
-https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
-
 Tweepy v4
 =========
 
