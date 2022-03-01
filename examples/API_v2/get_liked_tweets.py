@@ -8,12 +8,14 @@ bearer_token = ""
 client = tweepy.Client(bearer_token)
 
 # Replace User ID
-id = '2244994945'
+id = 2244994945
 
 # By default the Tweet ID and text are returned. If you want additional fields,
 # request them using the tweet_fields parameter
-tweets = client.get_liked_tweets(id=id, tweet_fields=['context_annotations','created_at'])
+tweets = client.get_liked_tweets(id, tweet_fields=["created_at"])
 
+# Print the Tweet text and the time the Tweet was created
 for tweet in tweets.data:
-    print(tweet)
+    print(tweet.text)
+    print(tweet.created_at)
     

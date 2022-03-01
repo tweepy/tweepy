@@ -8,12 +8,12 @@ bearer_token = ""
 client = tweepy.Client(bearer_token)
 
 # Replace user ID
-id = '2244994945'
+id = 2244994945
 
-# By default the Tweet ID and Tweet text will be returned. If you want additional data,
-# specify it used fields and expansions
-tweets = client.get_users_tweets(id=id)
+# By default the Tweet ID and Tweet text will be returned.
+tweets = client.get_users_tweets(id)
 
+# Print the Tweet text
 for tweet in tweets.data:
-    print(tweet)
+    print(tweet.text)
     
