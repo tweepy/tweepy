@@ -738,6 +738,11 @@ class Client(BaseClient):
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
 
+        .. note::
+
+            By default, a request will return Tweets from up to 30 days ago if
+            the ``start_time`` parameter is not provided.
+
         .. versionchanged:: 4.6
             Added ``sort_order`` parameter
 
