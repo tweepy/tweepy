@@ -109,7 +109,7 @@ representations of API v2 models/objects only include the default attributes
 that are guaranteed to exist.
 
 The objects themselves still include the relevant data, which you can access as
-attributes or by key, like a dictionary.
+attributes or by subscription.
 
 There's also a ``data`` attribute/key that provides the entire data dictionary.
 
