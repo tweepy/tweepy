@@ -16,6 +16,6 @@ tweets = client.get_tweets(ids, tweet_fields=["created_at"])
 
 # Print the Tweet text and the time the Tweet was created
 for tweet in tweets.data:
-    print(tweet)
+    print(tweet.text)
     print(tweet.created_at)
     
