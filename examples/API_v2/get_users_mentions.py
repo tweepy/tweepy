@@ -13,7 +13,7 @@ id = 2244994945
 # By default the Tweet ID and Tweet text will be returned. 
 tweets = client.get_users_mentions(id)
 
-# Print the Tweet text
+# Print the Tweet id
 for tweet in tweets.data:
     print(tweet.id)
     
