@@ -23,7 +23,7 @@ msgstr "예시"
 
 #: ../../examples.rst:9
 msgid "API v1.1"
-msgstr "API v1.1""
+msgstr "API v1.1"
 
 #: ../../examples.rst:13 ../../examples.rst:41
 msgid "Authentication"
