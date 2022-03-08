@@ -41,7 +41,9 @@ setup(
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
-        "typing-extensions>=4.0,<5"
+        "typing-extensions>=4.0,<5",
+        "types-oauthlib 3.1.6",
+        "types-requests>=2.27.11",
     ],
     tests_require=tests_require,
     extras_require={
