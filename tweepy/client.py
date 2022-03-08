@@ -9,7 +9,7 @@ import datetime
 import logging
 from platform import python_version
 import time
-from typing import Any, TYPE_CHECKING
+from typing import Any, Iterable, TYPE_CHECKING
 import warnings
 
 import requests

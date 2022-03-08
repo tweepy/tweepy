@@ -15,7 +15,7 @@ from time import sleep
 from typing import NamedTuple
 
 import requests
-from requests_oauthlib import OAuth1
+from requests_oauthlib import OAuth1  # type: ignore[import]
 import urllib3
 
 import tweepy
