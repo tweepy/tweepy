@@ -17,6 +17,7 @@ with open("README.md") as readme_file:
     long_description = readme_file.read()
 
 tests_require = [
+    "mypy>=0.931",
     "vcrpy>=1.10.3",
 ]
 
