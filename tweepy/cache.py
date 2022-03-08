@@ -9,6 +9,7 @@ import pickle
 import threading
 import time
 import os
+from typing import Dict
 
 try:
     import fcntl
