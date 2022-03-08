@@ -307,10 +307,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes/{tweet_id}"
 
@@ -449,10 +457,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/likes"
 
@@ -627,10 +643,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
@@ -710,10 +734,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/retweets"
 
@@ -1382,10 +1414,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
 
@@ -1425,10 +1465,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/blocking"
 
@@ -1455,10 +1503,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/blocking"
 
@@ -1490,10 +1546,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
@@ -1633,10 +1697,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/following"
 
@@ -1679,10 +1751,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         source_user_id = self.access_token.partition('-')[0]
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
@@ -1724,10 +1804,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/get-users-muting
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/muting"
 
@@ -1754,10 +1842,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/muting"
 
@@ -2206,10 +2302,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/followed_lists/{list_id}"
 
@@ -2330,10 +2434,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/followed_lists"
 
@@ -2711,10 +2823,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/pinned_lists/{list_id}"
 
@@ -2746,10 +2866,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/pinned_lists"
 
@@ -2777,10 +2905,18 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If Access token is not set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
         """
+        if self.access_token is None:
+            raise TypeError("Access token is not set")
+
         id = self.access_token.partition('-')[0]
         route = f"/2/users/{id}/pinned_lists"
 

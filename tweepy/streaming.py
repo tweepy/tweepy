@@ -12,7 +12,7 @@ from platform import python_version
 import ssl
 from threading import Thread
 from time import sleep
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
 import requests
 from requests_oauthlib import OAuth1  # type: ignore[import]
@@ -964,6 +964,6 @@ class StreamRule(NamedTuple):
     .. _operators: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     .. _Academic Research Project: https://developer.twitter.com/en/docs/projects
     """
-    value: str = None
-    tag: str = None
-    id: str = None
+    value: Optional[str] = None
+    tag: Optional[str] = None
+    id: Optional[str] = None
