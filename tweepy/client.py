@@ -1283,7 +1283,7 @@ class Client(BaseClient):
     def get_tweet(self, id, *, user_auth=False, **params):
         """get_tweet( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
-            poll_fields=None, twitter_fields=None, user_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
             user_auth=False \
         )
 
