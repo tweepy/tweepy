@@ -326,7 +326,7 @@ class Client(BaseClient):
             :ref:`expansions_parameter`
         max_results : int | None
             The maximum number of results to be returned per page. This can be
-            a number between 1 and 1000. By default, each page will return 100
+            a number between 1 and 100. By default, each page will return 100
             results.
         media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
