@@ -70,11 +70,11 @@ Examples
 
                .. literalinclude:: ../examples/API_v2/get_liked_tweets.py
 
-         .. tab:: Get Retweeters
+         .. tab:: Get Tweet's Retweeters
 
                .. literalinclude:: ../examples/API_v2/get_retweeters.py
 
-         .. tab:: Get Liking Users
+         .. tab:: Get Tweet's Liking Users
 
                .. literalinclude:: ../examples/API_v2/get_liking_users.py
 

@@ -5,7 +5,7 @@ bearer_token = ""
 
 client = tweepy.Client(bearer_token)
 
-# Get Liking Users
+# Get Tweet's Liking Users
 
 # This endpoint/method allows you to get information about a Tweet’s liking
 # users

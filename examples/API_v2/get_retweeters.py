@@ -5,7 +5,7 @@ bearer_token = ""
 
 client = tweepy.Client(bearer_token)
 
-# Get Retweeters
+# Get Tweet's Retweeters
 
 # This endpoint/method allows you to get information about who has Retweeted a
 # Tweet
