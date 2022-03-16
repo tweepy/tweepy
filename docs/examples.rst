@@ -58,38 +58,38 @@ Examples
 
                .. literalinclude:: ../examples/API_v2/create_tweet.py
 
-         .. tab:: Get User's Timeline
+         .. tab:: Get User's Tweets
 
-               .. literalinclude:: ../examples/API_v2/get_users_timeline.py
+               .. literalinclude:: ../examples/API_v2/get_users_tweets.py
 
          .. tab:: Get User's Mentions
 
                .. literalinclude:: ../examples/API_v2/get_users_mentions.py
-               
-         .. tab:: Get Tweets liked by a User
+
+         .. tab:: Get User's Liked Tweets
 
                .. literalinclude:: ../examples/API_v2/get_liked_tweets.py
-               
-         .. tab:: Get Retweeters of a Tweet
+
+         .. tab:: Get Retweeters
 
                .. literalinclude:: ../examples/API_v2/get_retweeters.py
-               
-         .. tab:: Get Users liking a Tweet
+
+         .. tab:: Get Liking Users
 
                .. literalinclude:: ../examples/API_v2/get_liking_users.py
-               
-         .. tab:: Get a User's Followers
+
+         .. tab:: Get User's Followers
 
                .. literalinclude:: ../examples/API_v2/get_users_followers.py
-               
-         .. tab:: Lookup Tweets using Tweet IDs
 
-               .. literalinclude:: ../examples/API_v2/lookup_tweets_using_tweet_ids.py
-               
-         .. tab:: Lookup Users using User IDs
+         .. tab:: Get Tweets
 
-               .. literalinclude:: ../examples/API_v2/lookup_users_using_user_ids.py
-               
-         .. tab:: Recent Tweet Counts
+               .. literalinclude:: ../examples/API_v2/get_tweets.py
 
-               .. literalinclude:: ../examples/API_v2/recent_tweets_count.py
+         .. tab:: Get Users
+
+               .. literalinclude:: ../examples/API_v2/get_users.py
+
+         .. tab:: Get Recent Tweets Count
+
+               .. literalinclude:: ../examples/API_v2/get_recent_tweets_count.py

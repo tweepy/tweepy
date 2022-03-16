@@ -1,22 +1,21 @@
 import tweepy
 
 
-# Replace bearer token value with your own
 bearer_token = ""
 
-# Initializing the Tweepy client
 client = tweepy.Client(bearer_token)
 
-# Replace Tweet ID
-id = 1441054496931541004
+# Get Retweeters
 
-# By default the user ID, name and username are returned. user_fields can be 
-# used to specify the additional user data that you want returned for each user
-# e.g. profile_image_url
-users = client.get_retweeters(id, user_fields=["profile_image_url"])
+# This endpoint/method allows you to get information about who has Retweeted a
+# Tweet
 
-# Print the username and the user's profile image url
-for user in users.data:
-    print(user.username)
-    print(user.profile_image_url)
-    
+tweet_id = 1460323737035677698
+
+# By default, only the ID, name, and username fields of each user will be
+# returned
+# Additional fields can be retrieved using the user_fields parameter
+response = client.get_retweeters(tweet_id, user_fields=["profile_image_url"])
+
+for user in response.data:
+    print(user.username, user.profile_image_url)

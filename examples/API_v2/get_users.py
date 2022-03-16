@@ -5,17 +5,17 @@ bearer_token = ""
 
 client = tweepy.Client(bearer_token)
 
-# Get Liking Users
+# Get Users
 
-# This endpoint/method allows you to get information about a Tweet’s liking
-# users
+# This endpoint/method returns a variety of information about one or more users
+# specified by the requested IDs or usernames
 
-tweet_id = 1460323737035677698
+user_ids = [2244994945, 6253282]
 
 # By default, only the ID, name, and username fields of each user will be
 # returned
 # Additional fields can be retrieved using the user_fields parameter
-response = client.get_liking_users(tweet_id, user_fields=["profile_image_url"])
+response = client.get_users(ids=user_ids, user_fields=["profile_image_url"])
 
 for user in response.data:
     print(user.username, user.profile_image_url)

@@ -1,22 +1,27 @@
 import tweepy
 
 
-# Replace bearer token value with your own
 bearer_token = ""
 
-# Initializing the Tweepy client
 client = tweepy.Client(bearer_token)
 
-# Replace user ID
-id = 2244994945
+# Get User's Followers
 
-# By default the user ID, name and username are returned. user_fields can be 
-# used to specify the additional user data that you want returned for each user
-# e.g. profile_image_url
-users = client.get_users_followers(id, user_fields=["profile_image_url"])
+# This endpoint/method returns a list of users who are followers of the
+# specified user ID
 
-# Print the username and the user's profile image url
-for user in users.data:
-    print(user.username)
-    print(user.profile_image_url)
-    
+user_id = 2244994945
+
+# By default, only the ID, name, and username fields of each user will be
+# returned
+# Additional fields can be retrieved using the user_fields parameter
+response = client.get_users_followers(
+    user_id, user_fields=["profile_image_url"]
+)
+
+for user in response.data:
+    print(user.username, user.profile_image_url)
+
+# By default, this endpoint/method returns 100 results
+# You can retrieve up to 1000 users by specifying max_results
+response = client.get_users_followers(user_id, max_results=1000)
