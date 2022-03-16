@@ -154,17 +154,17 @@ Version 4.0.0
     - Initialize a single `requests.Session` instance per `API` instance, rather than for each request
   - Log warning when API.request is passed an unexpected keyword argument that isn't an endpoint parameter ([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))
   - Rename allowed parameters (`allowed_param`) to endpoint parameters (`endpoint_parameters`) ([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))
-  - Rename methods and method parameters (see Breaking Changes section)
-  - Require parameters for methods (see Breaking Changes section)
-  - Stop allowing arbitrary positional arguments for methods (see Breaking Changes section)
-  - Remove unnecessary attributes and parameters (see Breaking Changes section)
+  - Rename methods and method parameters (see Backwards-Incompatible Changes section)
+  - Require parameters for methods (see Backwards-Incompatible Changes section)
+  - Stop allowing arbitrary positional arguments for methods (see Backwards-Incompatible Changes section)
+  - Remove unnecessary attributes and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `API.request` and other `API` methods
 
 - Rework streaming
-  - `StreamListener` has been merged into `Stream` (see Breaking Changes section)
+  - `StreamListener` has been merged into `Stream` (see Backwards-Incompatible Changes section)
   - `Stream` data/event handling methods (i.e. those starting with `on_`) now log by default and disregard return values
   - Allow the stream to disconnect when any line of data is received, including keep-alive signals ([#773](https://github.com/tweepy/tweepy/issues/773), [#897](https://github.com/tweepy/tweepy/issues/897))
-  - Remove, rename, and replace attributes, methods, and parameters (see Breaking Changes section)
+  - Remove, rename, and replace attributes, methods, and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `Stream`
 
 - Rework documentation
@@ -190,7 +190,7 @@ Version 4.0.0
   - Add `BadRequest` ([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))
   - Add `TwitterServerError` ([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))
 
-### Breaking Changes
+### Backwards-Incompatible Changes
 - Drop support for Python 2 ([#1253](https://github.com/tweepy/tweepy/issues/1253), [#1482](https://github.com/tweepy/tweepy/pull/1482))
 - Drop support for Python 3.5 ([#1487](https://github.com/tweepy/tweepy/pull/1487))
 
@@ -387,7 +387,7 @@ Version 4.0.0
 - Stop allowing positional arguments for `Stream.filter` ([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))
 - Stop allowing positional arguments for `Stream.sample` ([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))
 
-#### Twitter API Breaking Changes
+#### Twitter API Backwards-Incompatible Changes
 - Remove `API.configuration` ([#1614](https://github.com/tweepy/tweepy/issues/1614))
 - Remove `API.geo_similar_places` ([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))
 - Remove `API.related_results` ([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))
