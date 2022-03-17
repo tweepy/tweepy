@@ -3,6 +3,37 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.7.0
+-------------
+
+### New Features / Improvements
+- Add support for Quote Tweets lookup with Twitter API v2 ([#1844](https://github.com/tweepy/tweepy/issues/1844))
+  - Add `Client.get_quote_tweets`
+
+### Python Backwards-Incompatible Changes
+- Drop support for Python 3.6, which has reached end-of-life status ([#1788](https://github.com/tweepy/tweepy/issues/1788))
+
+### Bug Fixes
+- Fix `Client.follow` to return response from `Client.follow_user` rather than `None` ([0742f54](https://github.com/tweepy/tweepy/commit/0742f549fae6118dd7b154ea9244077d124751a2))
+- Fix `Client.unfollow` to return response from `Client.unfollow_user` rather than `None` ([c1787f0](https://github.com/tweepy/tweepy/commit/c1787f0a3ca478d1610015ce5ffa8553873a8efc))
+
+### Misc
+- Organize documentation arrangement and improve index / table of contents categorization ([c5310d1](https://github.com/tweepy/tweepy/commit/c5310d11cd62ea2aeb69bb546d0d3682dd4bc739))
+- Add documentation for API v2 models
+  - Add documentation for `List` ([360594b](https://github.com/tweepy/tweepy/commit/360594b9044a4b75c9cb1d0e47462e155ef75c12))
+  - Add documentation for `Media` ([c2dacc8](https://github.com/tweepy/tweepy/commit/c2dacc8e53ddda3cb37cef04ba2bb629955b6938))
+  - Add documentation for `Place` ([e3fa223](https://github.com/tweepy/tweepy/commit/e3fa2238819b9678cabfc2b8068cd35a11747b0a))
+  - Add documentation for `Poll` ([61ed5d7](https://github.com/tweepy/tweepy/commit/61ed5d7be1bb023b43ed5522da345223a04f1ea4))
+  - Add documentation for `Space` ([1a7ea1f](https://github.com/tweepy/tweepy/commit/1a7ea1f5d5580133ac478cf89921454bef71d6c5))
+  - Add documentation for `Tweet` ([b9cef72](https://github.com/tweepy/tweepy/commit/b9cef72a514f64840c1583ca9fb0aaad228ef1de))
+  - Add documentation for `ReferencedTweet` ([9a995b5](https://github.com/tweepy/tweepy/commit/9a995b524eab52e49428b26aca51b51a04a84278))
+  - Add documentation for `User` ([aa3658e](https://github.com/tweepy/tweepy/commit/aa3658e41008e1e71cbf12ccff2b67314823ecac))
+- Use Read the Docs Sphinx search extension for documentation ([72c7e01](https://github.com/tweepy/tweepy/commit/72c7e01bb87fd2834a12d8a68ddbde85da7ea8d1))
+- Add and improve API v2 examples ([#1835](https://github.com/tweepy/tweepy/pull/1835), [6a6ef98](https://github.com/tweepy/tweepy/commit/6a6ef98efa58e13147220cde1b475bfc6fac3116))
+- Use dash instead of underscore for requests-oauthlib requirement ([2c94758](https://github.com/tweepy/tweepy/commit/2c947583a0e3a691de2e0e9251d99e66437291f7))
+- Optimize `Tweet.referenced_tweets` initialization ([3299881](https://github.com/tweepy/tweepy/commit/3299881b5e6766cc812181a107f50d3b65ae76b7))
+- Update and improve various documentation
+
 Version 4.6.0
 -------------
 This will be the last minor version to support Python 3.6 ([#1788](https://github.com/tweepy/tweepy/issues/1788)).
