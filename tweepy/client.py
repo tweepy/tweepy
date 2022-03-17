@@ -596,6 +596,71 @@ class Client(BaseClient):
             "POST", f"/2/tweets", json=json, user_auth=user_auth
         )
 
+    # Quote Tweets
+
+    def get_quote_tweets(self, id, *, user_auth=False, **params):
+        """get_quote_tweets( \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
+
+        Returns Quote Tweets for a Tweet specified by the requested Tweet ID.
+
+        The Tweets returned by this endpoint count towards the Project-level
+        `Tweet cap`_.
+
+        .. versionadded:: 4.7
+
+        Parameters
+        ----------
+        id : int | str
+            Unique identifier of the Tweet to request.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            Specifies the number of Tweets to try and retrieve, up to a maximum
+            of 100 per distinct request. By default, 10 results are returned if
+            this parameter is not supplied. The minimum permitted value is 10.
+            It is possible to receive less than the ``max_results`` per request
+            throughout the pagination process.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            This parameter is used to move forwards through 'pages' of results,
+            based on the value of the ``next_token``. The value used with the
+            parameter is pulled directly from the response provided by the API,
+            and should not be modified.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/quote-tweets/api-reference/get-tweets-id-quote_tweets
+
+        .. _Tweet cap: https://developer.twitter.com/en/docs/projects/overview#tweet-cap
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}/quote_tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
     # Retweets
 
     def unretweet(self, source_tweet_id, *, user_auth=True):
