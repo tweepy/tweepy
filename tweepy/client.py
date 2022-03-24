@@ -21,8 +21,8 @@ import requests
 import tweepy
 from tweepy.auth import OAuth1UserHandler
 from tweepy.errors import (
-    BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
-    Unauthorized
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TwitterServerError, Unauthorized
 )
 from tweepy.list import List
 from tweepy.media import Media
@@ -97,7 +97,8 @@ class BaseClient:
                 raise Unauthorized(response)
             if response.status_code == 403:
                 raise Forbidden(response)
-            # Handle 404?
+            if response.status_code == 404:
+                raise NotFound(response)
             if response.status_code == 429:
                 if self.wait_on_rate_limit:
                     reset_time = int(response.headers["x-rate-limit-reset"])
