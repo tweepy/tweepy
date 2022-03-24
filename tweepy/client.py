@@ -6,6 +6,13 @@ from __future__ import annotations
 
 from collections import namedtuple
 import datetime
+
+try:
+    from functools import cache
+except ImportError:  # Remove when support for Python 3.8 is dropped
+    from functools import lru_cache
+    cache = lru_cache(maxsize=None)
+
 import logging
 from platform import python_version
 import time
@@ -235,6 +242,45 @@ class Client(BaseClient):
         User agent used when making requests to the API
     """
 
+    def _get_authenticating_user_id(self, *, user_auth):
+        if user_auth:
+            if self.access_token is None:
+                raise TypeError(
+                    "Access Token must be provided for OAuth 1.0a User Context"
+                )
+            else:
+                return self._get_oauth_1_authenticating_user_id(
+                    self.access_token
+                )
+        else:
+            if self.bearer_token is None:
+                raise TypeError(
+                    "Access Token must be provided for "
+                    "OAuth 2.0 Authorization Code Flow with PKCE"
+                )
+            else:
+                return self._get_oauth_2_authenticating_user_id(
+                    self.bearer_token
+                )
+
+    @cache
+    def _get_oauth_1_authenticating_user_id(self, access_token):
+        return access_token.partition('-')[0]
+
+    @cache
+    def _get_oauth_2_authenticating_user_id(self, access_token):
+        original_access_token = self.bearer_token
+        original_return_type = self.return_type
+
+        self.bearer_token = access_token
+        self.return_type = dict
+        user_id = self.get_me(user_auth=False)["data"]["id"]
+
+        self.bearer_token = original_access_token
+        self.return_type = original_return_type
+
+        return user_id
+
     # Hide replies
 
     def hide_reply(
@@ -297,8 +343,21 @@ class Client(BaseClient):
         The request succeeds with no action when the user sends a request to a
         user they're not liking the Tweet or have already unliked the Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -307,11 +366,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/likes/{tweet_id}"
 
         return self._make_request(
@@ -341,7 +405,7 @@ class Client(BaseClient):
             :ref:`expansions_parameter`
         max_results : int | None
             The maximum number of results to be returned per page. This can be
-            a number between 1 and 1000. By default, each page will return 100
+            a number between 1 and 100. By default, each page will return 100
             results.
         media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
@@ -439,8 +503,21 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Like a Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -449,11 +526,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/likes"
 
         return self._make_request(
@@ -606,6 +688,71 @@ class Client(BaseClient):
             "POST", f"/2/tweets", json=json, user_auth=user_auth
         )
 
+    # Quote Tweets
+
+    def get_quote_tweets(self, id, *, user_auth=False, **params):
+        """get_quote_tweets( \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
+
+        Returns Quote Tweets for a Tweet specified by the requested Tweet ID.
+
+        The Tweets returned by this endpoint count towards the Project-level
+        `Tweet cap`_.
+
+        .. versionadded:: 4.7
+
+        Parameters
+        ----------
+        id : int | str
+            Unique identifier of the Tweet to request.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            Specifies the number of Tweets to try and retrieve, up to a maximum
+            of 100 per distinct request. By default, 10 results are returned if
+            this parameter is not supplied. The minimum permitted value is 10.
+            It is possible to receive less than the ``max_results`` per request
+            throughout the pagination process.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            This parameter is used to move forwards through 'pages' of results,
+            based on the value of the ``next_token``. The value used with the
+            parameter is pulled directly from the response provided by the API,
+            and should not be modified.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/quote-tweets/api-reference/get-tweets-id-quote_tweets
+
+        .. _Tweet cap: https://developer.twitter.com/en/docs/projects/overview#tweet-cap
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}/quote_tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
     # Retweets
 
     def unretweet(
@@ -617,8 +764,21 @@ class Client(BaseClient):
         user they're not Retweeting the Tweet or have already removed the
         Retweet of.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -627,11 +787,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
         return self._make_request(
@@ -661,7 +826,7 @@ class Client(BaseClient):
             :ref:`expansions_parameter`
         max_results : int | None
             The maximum number of results to be returned per page. This can be
-            a number between 1 and 1000. By default, each page will return 100
+            a number between 1 and 100. By default, each page will return 100
             results.
         media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
@@ -700,8 +865,21 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Causes the user ID to Retweet the target Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -710,11 +888,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/retweets"
 
         return self._make_request(
@@ -744,6 +927,11 @@ class Client(BaseClient):
 
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
+
+        .. note::
+
+            By default, a request will return Tweets from up to 30 days ago if
+            the ``start_time`` parameter is not provided.
 
         .. versionchanged:: 4.6
             Added ``sort_order`` parameter
@@ -1277,7 +1465,7 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """get_tweet( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
-            poll_fields=None, twitter_fields=None, user_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
             user_auth=False \
         )
 
@@ -1321,7 +1509,7 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """get_tweets( \
             ids, *, expansions=None, media_fields=None, place_fields=None, \
-            poll_fields=None, twitter_fields=None, user_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
             user_auth=False \
         )
 
@@ -1372,8 +1560,21 @@ class Client(BaseClient):
         The request succeeds with no action when the user sends a request to a
         user they're not blocking or have already unblocked.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1382,11 +1583,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
 
         return self._make_request(
@@ -1403,8 +1609,21 @@ class Client(BaseClient):
 
         Returns a list of users who are blocked by the authenticating user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1425,11 +1644,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1445,8 +1669,21 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Block another user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1455,11 +1692,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1477,11 +1719,24 @@ class Client(BaseClient):
         The request succeeds with no action when the authenticated user sends a
         request to a user they're not following or have already unfollowed.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.unfollow`
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1490,11 +1745,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
         return self._make_request(
@@ -1620,11 +1880,24 @@ class Client(BaseClient):
         request to a user they're already following, or if they're sending a
         follower request to a user that does not have public Tweets.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.follow`
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1633,11 +1906,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{source_user_id}/following"
 
         return self._make_request(
@@ -1669,8 +1947,21 @@ class Client(BaseClient):
         The request succeeds with no action when the user sends a request to a
         user they're not muting or have already unmuted.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1679,11 +1970,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
         return self._make_request(
@@ -1700,10 +1996,23 @@ class Client(BaseClient):
 
         Returns a list of users who are muted by the authenticating user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.1
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1724,11 +2033,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/get-users-muting
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -1744,8 +2058,21 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Allows an authenticated user ID to mute the target user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -1754,11 +2081,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -2194,10 +2526,23 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to unfollow a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -2206,11 +2551,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/followed_lists/{list_id}"
 
         return self._make_request(
@@ -2318,10 +2668,23 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to follow a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -2330,11 +2693,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/followed_lists"
 
         return self._make_request(
@@ -2699,10 +3067,23 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to unpin a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -2711,11 +3092,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/pinned_lists/{list_id}"
 
         return self._make_request(
@@ -2730,10 +3116,23 @@ class Client(BaseClient):
 
         Returns the Lists pinned by a specified user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.4
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -2746,11 +3145,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(
@@ -2765,10 +3169,23 @@ class Client(BaseClient):
     ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to pin a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
+
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
 
         Parameters
         ----------
@@ -2777,11 +3194,16 @@ class Client(BaseClient):
         user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(user_auth=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(

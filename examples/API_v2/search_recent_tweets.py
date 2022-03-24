@@ -18,9 +18,10 @@ print(response.meta)
 # objects
 tweets = response.data
 
-# Each Tweet object has default id and text fields
+# Each Tweet object has default ID and text fields
 for tweet in tweets:
     print(tweet.id)
+    print(tweet.text)
 
 # By default, this endpoint/method returns 10 results
 # You can retrieve up to 100 Tweets by specifying max_results

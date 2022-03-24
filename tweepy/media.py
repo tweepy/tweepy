@@ -6,6 +6,64 @@ from tweepy.mixins import DataMapping
 
 
 class Media(DataMapping):
+    """Media refers to any image, GIF, or video attached to a Tweet. The media
+    object is not a primary object on any endpoint, but can be found and
+    expanded in the Tweet object. 
+
+    The object is available for expansion with
+    ``?expansions=attachments.media_keys`` to get the condensed object with
+    only default fields. Use the expansion with the field parameter:
+    ``media.fields`` when requesting additional fields to complete the object..
+
+    .. versionadded:: 4.0
+
+    .. versionchanged:: 4.5
+        Added ``url`` field
+
+    Attributes
+    ----------
+    data : dict
+        The JSON data representing the media.
+    media_key : str
+        Unique identifier of the expanded media content.
+    type : str
+        Type of content (animated_gif, photo, video).
+    duration_ms : int | None
+        Available when type is video. Duration in milliseconds of the video.
+    height : int | None
+        Height of this content in pixels.
+    non_public_metrics : dict | None
+        Non-public engagement metrics for the media content at the time of the
+        request. 
+
+        Requires user context authentication.
+    organic_metrics: dict | None
+        Engagement metrics for the media content, tracked in an organic
+        context, at the time of the request. 
+
+        Requires user context authentication.
+    preview_image_url : str | None
+        URL to the static placeholder preview of this content.
+    promoted_metrics : dict | None
+        Engagement metrics for the media content, tracked in a promoted
+        context, at the time of the request. 
+
+        Requires user context authentication.
+    public_metrics : dict | None
+        Public engagement metrics for the media content at the time of the
+        request.
+    width : int | None
+        Width of this content in pixels.
+    alt_text : str | None
+        A description of an image to enable and support accessibility. Can be
+        up to 1000 characters long. Alt text can only be added to images at the
+        moment. 
+    url : str | None
+
+    References
+    ----------
+    https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
+    """
 
     __slots__ = (
         "data", "media_key", "type", "duration_ms", "height",

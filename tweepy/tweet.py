@@ -7,6 +7,97 @@ from tweepy.utils import parse_datetime
 
 
 class Tweet(HashableID, DataMapping):
+    """Tweets are the basic building block of all things Twitter. The Tweet
+    object has a long list of ‘root-level’ fields, such as ``id``, ``text``,
+    and ``created_at``. Tweet objects are also the ‘parent’ object to several
+    child objects including ``user``, ``media``, ``poll``, and ``place``. Use
+    the field parameter ``tweet.fields`` when requesting these root-level
+    fields on the Tweet object.
+
+    The Tweet object that can be found and expanded in the user resource.
+    Additional Tweets related to the requested Tweet can also be found and
+    expanded in the Tweet resource. The object is available for expansion with
+    ``?expansions=pinned_tweet_id`` in the user resource or
+    ``?expansions=referenced_tweets.id`` in the Tweet resource to get the
+    object with only default fields. Use the expansion with the field
+    parameter: ``tweet.fields`` when requesting additional fields to complete
+    the object.
+
+    .. versionadded:: 4.0
+
+    Attributes
+    ----------
+    data : dict
+        The JSON data representing the Tweet.
+    id : int
+        The unique identifier of the requested Tweet.
+    text : str
+        The actual UTF-8 text of the Tweet. See `twitter-text`_ for details on
+        what characters are currently considered valid.
+    attachments : dict | None
+        Specifies the type of attachments (if any) present in this Tweet.
+    author_id : int | None
+        The unique identifier of the User who posted this Tweet.
+    context_annotations : list
+        Contains context annotations for the Tweet.
+    conversation_id : int | None
+        The Tweet ID of the original Tweet of the conversation (which includes
+        direct replies, replies of replies).
+    created_at : datetime.datetime | None
+        Creation time of the Tweet.
+    entities : dict | None
+        Entities which have been parsed out of the text of the Tweet.
+        Additionally see entities in Twitter Objects.
+    geo : dict | None
+        Contains details about the location tagged by the user in this Tweet,
+        if they specified one.
+    in_reply_to_user_id : int | None
+        If the represented Tweet is a reply, this field will contain the
+        original Tweet’s author ID. This will not necessarily always be the
+        user directly mentioned in the Tweet.
+    lang : str | None
+        Language of the Tweet, if detected by Twitter. Returned as a BCP47
+        language tag.
+    non_public_metrics : dict | None
+        Non-public engagement metrics for the Tweet at the time of the request. 
+
+        Requires user context authentication.
+    organic_metrics : dict | None
+        Engagement metrics, tracked in an organic context, for the Tweet at the
+        time of the request.
+
+        Requires user context authentication.
+    possibly_sensitive : bool | None
+        This field only surfaces when a Tweet contains a link. The meaning of
+        the field doesn’t pertain to the Tweet content itself, but instead it
+        is an indicator that the URL contained in the Tweet may contain content
+        or media identified as sensitive content. 
+    promoted_metrics : dict | None
+        Engagement metrics, tracked in a promoted context, for the Tweet at the
+        time of the request.
+
+        Requires user context authentication.
+    public_metrics : dict | None
+        Public engagement metrics for the Tweet at the time of the request.
+    referenced_tweets : list[ReferencedTweet] | None
+        A list of Tweets this Tweet refers to. For example, if the parent Tweet
+        is a Retweet, a Retweet with comment (also known as Quoted Tweet) or a
+        Reply, it will include the related Tweet referenced to by its parent.
+    reply_settings : str | None
+        Shows you who can reply to a given Tweet. Fields returned are
+        "everyone", "mentioned_users", and "followers".
+    source : str | None
+        The name of the app the user Tweeted from.
+    withheld : dict | None
+        When present, contains withholding details for `withheld content`_.
+
+    References
+    ----------
+    https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+
+    .. _twitter-text: https://github.com/twitter/twitter-text/
+    .. _withheld content: https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country
+    """
 
     __slots__ = (
         "data", "id", "text", "attachments", "author_id",
@@ -52,11 +143,11 @@ class Tweet(HashableID, DataMapping):
         self.promoted_metrics = data.get("promoted_metrics")
         self.public_metrics = data.get("public_metrics")
 
-        self.referenced_tweets = None
-        if "referenced_tweets" in data:
+        self.referenced_tweets = data.get("referenced_tweets")
+        if self.referenced_tweets is not None:
             self.referenced_tweets = [
                 ReferencedTweet(referenced_tweet)
-                for referenced_tweet in data["referenced_tweets"]
+                for referenced_tweet in self.referenced_tweets
             ]
 
         self.reply_settings = data.get("reply_settings")
@@ -74,6 +165,20 @@ class Tweet(HashableID, DataMapping):
 
 
 class ReferencedTweet(HashableID, DataMapping):
+    """.. versionadded:: 4.0
+
+    Attributes
+    ----------
+    data : dict
+        The JSON data representing the referenced Tweet.
+    id : int
+        The unique identifier of the referenced Tweet.
+    type : str
+
+    References
+    ----------
+    https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+    """
 
     __slots__ = ("data", "id", "type")
 

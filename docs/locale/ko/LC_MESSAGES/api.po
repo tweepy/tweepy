@@ -2352,7 +2352,7 @@ msgid ""
 msgstr ""
 "현재 인증된 사용자가 소유 중인 리스트도 같이 반환할지의 여부. "
 "``user_id`` 또는 ``screen_name`` 으로 특정 사용자를 지정했을 경우, "
-"대상은 해당 사용자가 됩니다.""
+"대상은 해당 사용자가 됩니다."
 
 #: of tweepy.api.API.get_list_memberships:18
 msgid ""
