@@ -52,13 +52,15 @@ class TweepyTestCase(unittest.TestCase):
 
     @tape.use_cassette("test_retweet_and_unretweet.yaml", serializer="yaml")
     def test_retweet_and_unretweet(self):
-        tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints
+        tweet_id = 1415348607813832708
+        # @TwitterDev Tweet announcing API v2 Retweet endpoints
         self.client.retweet(tweet_id)
         self.client.unretweet(tweet_id)
 
     @tape.use_cassette("test_get_retweeters.yaml", serializer="yaml")
     def test_get_retweeters(self):
-        tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints
+        tweet_id = 1415348607813832708
+        # @TwitterDev Tweet announcing API v2 Retweet endpoints
         self.client.get_retweeters(tweet_id)
 
     @tape.use_cassette("test_search_all_tweets.yaml", serializer="yaml")
