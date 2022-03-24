@@ -6,48 +6,39 @@
 Models
 ******
 
-.. versionadded:: 4.0
-
 :class:`List`
 =============
 
 .. autoclass:: List()
 
-.. class:: tweepy.Media
+:class:`Media`
+==============
 
-   .. versionchanged:: 4.5
-      Added ``url`` field
+.. autoclass:: Media()
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/media
+:class:`Place`
+==============
 
-.. class:: tweepy.Place
+.. autoclass:: Place()
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/place
+:class:`Poll`
+=============
 
-.. class:: tweepy.Poll
+.. autoclass:: Poll()
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/poll
+:class:`Space`
+==============
 
-.. class:: tweepy.ReferencedTweet
+.. autoclass:: Space()
 
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
+:class:`Tweet`
+==============
 
-.. class:: tweepy.Space
+.. autoclass:: Tweet()
 
-   .. versionadded:: 4.1
+.. autoclass:: ReferencedTweet()
 
-   .. versionchanged:: 4.4
-      Added ``ended_at`` and ``topic_ids`` fields
+:class:`User`
+=============
 
-   .. versionchanged:: 4.6
-      Added ``subscriber_count`` field
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
-
-.. class:: tweepy.Tweet
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
-
-.. class:: tweepy.User
-
-   :reference: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+.. autoclass:: User()

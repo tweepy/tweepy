@@ -57,3 +57,39 @@ Examples
          .. tab:: Create Tweet
 
                .. literalinclude:: ../examples/API_v2/create_tweet.py
+
+         .. tab:: Get User's Tweets
+
+               .. literalinclude:: ../examples/API_v2/get_users_tweets.py
+
+         .. tab:: Get User's Mentions
+
+               .. literalinclude:: ../examples/API_v2/get_users_mentions.py
+
+         .. tab:: Get User's Liked Tweets
+
+               .. literalinclude:: ../examples/API_v2/get_liked_tweets.py
+
+         .. tab:: Get Tweet's Retweeters
+
+               .. literalinclude:: ../examples/API_v2/get_retweeters.py
+
+         .. tab:: Get Tweet's Liking Users
+
+               .. literalinclude:: ../examples/API_v2/get_liking_users.py
+
+         .. tab:: Get User's Followers
+
+               .. literalinclude:: ../examples/API_v2/get_users_followers.py
+
+         .. tab:: Get Tweets
+
+               .. literalinclude:: ../examples/API_v2/get_tweets.py
+
+         .. tab:: Get Users
+
+               .. literalinclude:: ../examples/API_v2/get_users.py
+
+         .. tab:: Get Recent Tweets Count
+
+               .. literalinclude:: ../examples/API_v2/get_recent_tweets_count.py

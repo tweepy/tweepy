@@ -59,19 +59,6 @@ Why am I getting an inconsistent number of / not getting 3200 Tweets for a speci
 
 https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635
 
-Why am I getting no results from :meth:`API.search_tweets`?
------------------------------------------------------------
-
-Twitter's standard search API only "searches against a sampling of recent
-Tweets published in the past 7 days."
-
-If you're specifying an ID range beyond the past 7 days or there are no results
-from the past 7 days, then no results will be returned.
-
-See Twitter's documentation on the standard search API for more information:
-https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
-https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
-
 Tweepy v4
 =========
 
@@ -98,19 +85,6 @@ This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` removed ``API.me``.
 
 Instead, you can use :meth:`API.verify_credentials`.
 
-Where did ``API.search`` go?
-----------------------------
-
-If you're attempting to use ``API.search`` or other :class:`API` methods from
-Tweepy v3, you might encounter an :class:`AttributeError` with Tweepy v4.
-
-This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` renamed many :class:`API`
-methods to be more consistent.
-
-For example, ``API.search`` was renamed to :meth:`API.search_tweets`. You can
-refer to the changelog / release notes and update your method invocations
-accordingly.
-
 Where did ``StreamListener`` go?
 --------------------------------
 
@@ -131,11 +105,11 @@ Why am I not getting expansions or fields data with API v2 using :class:`Client`
 ---------------------------------------------------------------------------------
 
 If you are simply printing the objects and looking at that output, the string
-representations of API v2 models/objects only include the default attributes
-that are guaranteed to exist.
+representations of API v2 models/objects only include the default fields that
+are guaranteed to exist.
 
 The objects themselves still include the relevant data, which you can access as
-attributes or by key, like a dictionary.
+attributes or by subscription.
 
 There's also a ``data`` attribute/key that provides the entire data dictionary.
 

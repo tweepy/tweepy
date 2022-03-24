@@ -3,6 +3,37 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.7.0
+-------------
+
+### New Features / Improvements
+- Add support for Quote Tweets lookup with Twitter API v2 ([#1844](https://github.com/tweepy/tweepy/issues/1844))
+  - Add `Client.get_quote_tweets`
+
+### Python Backwards-Incompatible Changes
+- Drop support for Python 3.6, which has reached end-of-life status ([#1788](https://github.com/tweepy/tweepy/issues/1788))
+
+### Bug Fixes
+- Fix `Client.follow` to return response from `Client.follow_user` rather than `None` ([0742f54](https://github.com/tweepy/tweepy/commit/0742f549fae6118dd7b154ea9244077d124751a2))
+- Fix `Client.unfollow` to return response from `Client.unfollow_user` rather than `None` ([c1787f0](https://github.com/tweepy/tweepy/commit/c1787f0a3ca478d1610015ce5ffa8553873a8efc))
+
+### Misc
+- Organize documentation arrangement and improve index / table of contents categorization ([c5310d1](https://github.com/tweepy/tweepy/commit/c5310d11cd62ea2aeb69bb546d0d3682dd4bc739))
+- Add documentation for API v2 models
+  - Add documentation for `List` ([360594b](https://github.com/tweepy/tweepy/commit/360594b9044a4b75c9cb1d0e47462e155ef75c12))
+  - Add documentation for `Media` ([c2dacc8](https://github.com/tweepy/tweepy/commit/c2dacc8e53ddda3cb37cef04ba2bb629955b6938))
+  - Add documentation for `Place` ([e3fa223](https://github.com/tweepy/tweepy/commit/e3fa2238819b9678cabfc2b8068cd35a11747b0a))
+  - Add documentation for `Poll` ([61ed5d7](https://github.com/tweepy/tweepy/commit/61ed5d7be1bb023b43ed5522da345223a04f1ea4))
+  - Add documentation for `Space` ([1a7ea1f](https://github.com/tweepy/tweepy/commit/1a7ea1f5d5580133ac478cf89921454bef71d6c5))
+  - Add documentation for `Tweet` ([b9cef72](https://github.com/tweepy/tweepy/commit/b9cef72a514f64840c1583ca9fb0aaad228ef1de))
+  - Add documentation for `ReferencedTweet` ([9a995b5](https://github.com/tweepy/tweepy/commit/9a995b524eab52e49428b26aca51b51a04a84278))
+  - Add documentation for `User` ([aa3658e](https://github.com/tweepy/tweepy/commit/aa3658e41008e1e71cbf12ccff2b67314823ecac))
+- Use Read the Docs Sphinx search extension for documentation ([72c7e01](https://github.com/tweepy/tweepy/commit/72c7e01bb87fd2834a12d8a68ddbde85da7ea8d1))
+- Add and improve API v2 examples ([#1835](https://github.com/tweepy/tweepy/pull/1835), [6a6ef98](https://github.com/tweepy/tweepy/commit/6a6ef98efa58e13147220cde1b475bfc6fac3116))
+- Use dash instead of underscore for requests-oauthlib requirement ([2c94758](https://github.com/tweepy/tweepy/commit/2c947583a0e3a691de2e0e9251d99e66437291f7))
+- Optimize `Tweet.referenced_tweets` initialization ([3299881](https://github.com/tweepy/tweepy/commit/3299881b5e6766cc812181a107f50d3b65ae76b7))
+- Update and improve various documentation
+
 Version 4.6.0
 -------------
 This will be the last minor version to support Python 3.6 ([#1788](https://github.com/tweepy/tweepy/issues/1788)).
@@ -154,17 +185,17 @@ Version 4.0.0
     - Initialize a single `requests.Session` instance per `API` instance, rather than for each request
   - Log warning when API.request is passed an unexpected keyword argument that isn't an endpoint parameter ([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))
   - Rename allowed parameters (`allowed_param`) to endpoint parameters (`endpoint_parameters`) ([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))
-  - Rename methods and method parameters (see Breaking Changes section)
-  - Require parameters for methods (see Breaking Changes section)
-  - Stop allowing arbitrary positional arguments for methods (see Breaking Changes section)
-  - Remove unnecessary attributes and parameters (see Breaking Changes section)
+  - Rename methods and method parameters (see Backwards-Incompatible Changes section)
+  - Require parameters for methods (see Backwards-Incompatible Changes section)
+  - Stop allowing arbitrary positional arguments for methods (see Backwards-Incompatible Changes section)
+  - Remove unnecessary attributes and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `API.request` and other `API` methods
 
 - Rework streaming
-  - `StreamListener` has been merged into `Stream` (see Breaking Changes section)
+  - `StreamListener` has been merged into `Stream` (see Backwards-Incompatible Changes section)
   - `Stream` data/event handling methods (i.e. those starting with `on_`) now log by default and disregard return values
   - Allow the stream to disconnect when any line of data is received, including keep-alive signals ([#773](https://github.com/tweepy/tweepy/issues/773), [#897](https://github.com/tweepy/tweepy/issues/897))
-  - Remove, rename, and replace attributes, methods, and parameters (see Breaking Changes section)
+  - Remove, rename, and replace attributes, methods, and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `Stream`
 
 - Rework documentation
@@ -190,7 +221,7 @@ Version 4.0.0
   - Add `BadRequest` ([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))
   - Add `TwitterServerError` ([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))
 
-### Breaking Changes
+### Backwards-Incompatible Changes
 - Drop support for Python 2 ([#1253](https://github.com/tweepy/tweepy/issues/1253), [#1482](https://github.com/tweepy/tweepy/pull/1482))
 - Drop support for Python 3.5 ([#1487](https://github.com/tweepy/tweepy/pull/1487))
 
@@ -387,7 +418,7 @@ Version 4.0.0
 - Stop allowing positional arguments for `Stream.filter` ([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))
 - Stop allowing positional arguments for `Stream.sample` ([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))
 
-#### Twitter API Breaking Changes
+#### Twitter API Backwards-Incompatible Changes
 - Remove `API.configuration` ([#1614](https://github.com/tweepy/tweepy/issues/1614))
 - Remove `API.geo_similar_places` ([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))
 - Remove `API.related_results` ([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))

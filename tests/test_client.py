@@ -43,6 +43,11 @@ class TweepyTestCase(unittest.TestCase):
         tweet_id = response.data["id"]
         self.client.delete_tweet(tweet_id)
 
+    @tape.use_cassette("test_get_quote_tweets.yaml", serializer="yaml")
+    def test_get_quote_tweets(self):
+        tweet_id = 1293593516040269825  # @TwitterDev Tweet announcing API v2
+        self.client.get_quote_tweets(tweet_id)
+
     @tape.use_cassette("test_retweet_and_unretweet.yaml", serializer="yaml")
     def test_retweet_and_unretweet(self):
         tweet_id = 1415348607813832708  # @TwitterDev Tweet announcing API v2 Retweet endpoints

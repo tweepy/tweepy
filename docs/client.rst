@@ -38,6 +38,10 @@
     +--------------------------------------------------------------+----------------------------------------+
     | `POST /2/tweets`_                                            | :meth:`Client.create_tweet`            |
     +--------------------------------------------------------------+----------------------------------------+
+    | .. centered:: |Quote Tweets|_                                                                         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/tweets/:id/quote_tweets`_                            | :meth:`Client.get_quote_tweets`        |
+    +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: |Retweets|_                                                                             |
     +--------------------------------------------------------------+----------------------------------------+
     | `DELETE /2/users/:id/retweets/:source_tweet_id`_             | :meth:`Client.unretweet`               |
@@ -197,6 +201,8 @@
 .. |Manage Tweets| replace:: *Manage Tweets*
 .. _DELETE /2/tweets/:id: https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/delete-tweets-id
 .. _POST /2/tweets: https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/post-tweets
+.. |Quote Tweets| replace:: *Quote Tweets*
+.. _GET /2/tweets/:id/quote_tweets: https://developer.twitter.com/en/docs/twitter-api/tweets/quote-tweets/api-reference/get-tweets-id-quote_tweets
 .. |Retweets| replace:: *Retweets*
 .. _DELETE /2/users/:id/retweets/:source_tweet_id: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
 .. _GET /2/tweets/:id/retweeted_by: https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
@@ -295,6 +301,11 @@ Manage Tweets
 .. automethod:: Client.delete_tweet
 
 .. automethod:: Client.create_tweet
+
+Quote Tweets
+------------
+
+.. automethod:: Client.get_quote_tweets
 
 Retweets
 --------
