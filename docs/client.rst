@@ -16,6 +16,14 @@
     +==============================================================+========================================+
     | .. centered:: :ref:`Tweets`                                                                           |
     +-------------------------------------------------------------------------------------------------------+
+    | .. centered:: |Bookmarks|_                                                                            |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `DELETE /2/users/:id/bookmarks/:tweet_id`_                   | :meth:`Client.remove_bookmark`         |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/bookmarks`_                                | :meth:`Client.get_bookmarks`           |
+    +--------------------------------------------------------------+----------------------------------------+
+    | `POST /2/users/:id/bookmarks`_                               | :meth:`Client.bookmark`                |
+    +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: |Hide replies|_                                                                         |
     +--------------------------------------------------------------+----------------------------------------+
     | `PUT /2/tweets/:id/hidden`_                                  | :meth:`Client.hide_reply`              |
@@ -191,6 +199,10 @@
     | `POST /2/compliance/jobs`_                                   | :meth:`Client.create_compliance_job`   |
     +--------------------------------------------------------------+----------------------------------------+
 
+.. |Bookmarks| replace:: *Bookmarks*
+.. _DELETE /2/users/:id/bookmarks/:tweet_id: https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/delete-users-id-bookmarks-tweet_id
+.. _GET /2/users/:id/bookmarks: https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
+.. _POST /2/users/:id/bookmarks: https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/post-users-id-bookmarks
 .. |Hide replies| replace:: *Hide replies*
 .. _PUT /2/tweets/:id/hidden: https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies/api-reference/put-tweets-id-hidden
 .. |Likes| replace:: *Likes*
@@ -276,6 +288,15 @@
 
 Tweets
 ======
+
+Bookmarks
+---------
+
+.. automethod:: Client.remove_bookmark
+
+.. automethod:: Client.get_bookmarks
+
+.. automethod:: Client.bookmark
 
 Hide replies
 ------------

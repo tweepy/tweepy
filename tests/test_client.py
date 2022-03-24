@@ -15,6 +15,8 @@ class TweepyTestCase(unittest.TestCase):
             access_token or user_id, access_token_secret
         )
 
+    # TODO: Test Client.bookmark, Client.get_bookmarks, Client.remove_bookmark
+
     @tape.use_cassette("test_hide_and_unhide_reply.yaml", serializer="yaml")
     def test_hide_and_unhide_reply(self):
         reply_id = 1344794616005066752  # Test Tweet for reply hide/unhide

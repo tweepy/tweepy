@@ -264,6 +264,152 @@ class Client(BaseClient):
 
         return user_id
 
+    # Bookmarks
+
+    def remove_bookmark(self, tweet_id):
+        """Allows a user or authenticated user ID to remove a Bookmark of a
+        Tweet.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the ``id`` to remove a
+            Bookmark of.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/delete-users-id-bookmarks-tweet_id
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks/{tweet_id}"
+
+        return self._make_request(
+            "DELETE", route
+        )
+
+    def get_bookmarks(self, **params):
+        """get_bookmarks( \
+            *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None \
+        )
+
+        Allows you to get an authenticated user's 800 most recent bookmarked
+        Tweets.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
+        )
+
+    def bookmark(self, tweet_id):
+        """Causes the authenticating user to Bookmark the target Tweet provided
+        in the request body.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the user ``id`` to
+            Bookmark.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/post-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "POST", route, json={"tweet_id": str(tweet_id)}
+        )
+
     # Hide replies
 
     def hide_reply(self, id, *, user_auth=True):
