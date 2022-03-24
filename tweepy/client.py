@@ -224,7 +224,7 @@ class Client(BaseClient):
         User agent used when making requests to the API
     """
 
-    def _get_authenticating_user_id(self, *, oauth_1):
+    def _get_authenticating_user_id(self, *, oauth_1=False):
         if oauth_1:
             if self.access_token is None:
                 raise TypeError(
