@@ -15,7 +15,13 @@ class TweepyTestCase(unittest.TestCase):
             access_token or user_id, access_token_secret
         )
 
-    # TODO: Test Client.bookmark, Client.get_bookmarks, Client.remove_bookmark
+    @tape.use_cassette("test_bookmarks.yaml", serializer="yaml")
+    def test_bookmarks(self):
+        tweet_id = 1507070437557096461
+        # @TwitterDev Tweet announcing API v2 Bookmarks endpoints
+        self.client.bookmark(tweet_id)
+        self.client.get_bookmarks()
+        self.client.remove_bookmark(tweet_id)
 
     @tape.use_cassette("test_hide_and_unhide_reply.yaml", serializer="yaml")
     def test_hide_and_unhide_reply(self):
