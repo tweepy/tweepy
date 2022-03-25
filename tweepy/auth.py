@@ -8,7 +8,6 @@ import warnings
 import requests
 from requests.auth import AuthBase, HTTPBasicAuth
 from requests_oauthlib import OAuth1, OAuth1Session, OAuth2Session
-from oauthlib.oauth2 import Client
 
 from tweepy.errors import TweepyException
 
@@ -227,13 +226,10 @@ class OAuth2UserHandler(OAuth2Session):
         """Allows a user to refresh token
         previously obtained from fetch_token
         """
-        client = Client(self.client_id)
         refresh_token_headers = {'client_id': self.client_id}
-        token_renewal = OAuth2Session(client=client)
-        new_token = token_renewal.refresh_token(
+        return super().refresh_token(
            "https://api.twitter.com/2/oauth2/token",
            refresh_token=refresh_token,
            auth=self.auth,
            **refresh_token_headers
         )
-        return new_token
