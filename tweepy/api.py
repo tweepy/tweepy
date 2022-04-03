@@ -3395,6 +3395,60 @@ class API:
             json_payload=json_payload, **kwargs
         )
 
+    # Typing indicator and read receipts
+
+    def indicate_direct_message_typing(self, recipient_id, **kwargs):
+        """indicate_direct_message_typing(recipient_id)
+
+        Displays a visual typing indicator in the recipient’s Direct Message
+        conversation view with the sender. Each request triggers a typing
+        indicator animation with a duration of ~3 seconds.
+
+        .. versionadded:: 4.9
+
+        Parameters
+        ----------
+        recipient_id
+            The user ID of the user to receive the typing indicator.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/typing-indicator-and-read-receipts/api-reference/new-typing-indicator
+        """
+        return self.request(
+            'POST', 'direct_messages/indicate_typing', endpoint_parameters=(
+                'recipient_id'
+            ), recipient_id=recipient_id, **kwargs
+        )
+
+    def mark_direct_message_read(self, last_read_event_id, recipient_id,
+                                 **kwargs):
+        """mark_direct_message_read(last_read_event_id, recipient_id)
+
+        Marks a message as read in the recipient’s Direct Message conversation
+        view with the sender.
+
+        .. versionadded:: 4.9
+
+        Parameters
+        ----------
+        last_read_event_id
+            The message ID of the most recent message to be marked read. All
+            messages before it will be marked read as well.
+        recipient_id
+            The user ID of the user the message is from.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/typing-indicator-and-read-receipts/api-reference/new-read-receipt
+        """
+        return self.request(
+            'POST', 'direct_messages/mark_read', endpoint_parameters=(
+                'last_read_event_id', 'recipient_id'
+            ), last_read_event_id=last_read_event_id,
+            recipient_id=recipient_id, **kwargs
+        )
+
     # Upload media
 
     @payload('media')

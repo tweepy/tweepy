@@ -147,6 +147,15 @@ class TweepyAPITests(TweepyTestCase):
         # destroy
         self.api.delete_direct_message(sent_dm.id)
 
+    @tape.use_cassette('testindicatedirectmessagetyping.yaml',
+                       serializer='yaml')
+    def testindicatedirectmessagetyping(self):
+        me = self.api.verify_credentials()
+
+        self.api.indicate_direct_message_typing(me.id)
+
+    # TODO: Test API.mark_direct_message_read
+
     @tape.use_cassette('testcreatedestroyfriendship.yaml', serializer='yaml')
     def testcreatedestroyfriendship(self):
         enemy = self.api.destroy_friendship(screen_name='Twitter')
