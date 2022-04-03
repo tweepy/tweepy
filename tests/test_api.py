@@ -149,8 +149,8 @@ class TweepyAPITests(TweepyTestCase):
         # destroy
         self.api.delete_direct_message(sent_dm.id)
 
-    @tape.use_cassette('testindicatedirectmessagetyping.yaml')
-    def testindicatedirectmessagetyping(self):
+    @tape.use_cassette('test_api_indicate_direct_message_typing.yaml')
+    def test_indicate_direct_message_typing(self):
         me = self.api.verify_credentials()
 
         self.api.indicate_direct_message_typing(me.id)
