@@ -20,7 +20,6 @@ use_replay = os.environ.get('USE_REPLAY', True)
 tape = vcr.VCR(
     cassette_library_dir='cassettes',
     filter_headers=['Authorization'],
-    serializer='json',
     # Either use existing cassettes, or never use recordings:
     record_mode='none' if use_replay else 'all',
 )
