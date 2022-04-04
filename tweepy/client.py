@@ -36,6 +36,7 @@ from tweepy.tweet import Tweet
 from tweepy.user import User
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
     import sys
 
     if sys.version_info >= (3, 10):
