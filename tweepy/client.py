@@ -16,7 +16,7 @@ except ImportError:  # Remove when support for Python 3.8 is dropped
 import logging
 from platform import python_version
 import time
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING
 import warnings
 
 import requests
@@ -38,6 +38,7 @@ from tweepy.user import User
 if TYPE_CHECKING:
     from collections.abc import Iterable
     import sys
+    from typing import Any
 
     if sys.version_info >= (3, 10):
         from typing import TypeAlias
