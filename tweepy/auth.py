@@ -7,7 +7,9 @@ import warnings
 
 import requests
 from requests.auth import AuthBase, HTTPBasicAuth
-from requests_oauthlib import OAuth1, OAuth1Session, OAuth2Session  # type: ignore[import]
+from requests_oauthlib import (  # type: ignore[import]
+    OAuth1, OAuth1Session, OAuth2Session
+)
 
 from tweepy.errors import TweepyException
 
