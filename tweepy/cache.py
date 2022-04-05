@@ -2,6 +2,7 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import annotations
 import datetime
 import hashlib
 import logging
@@ -9,7 +10,6 @@ import pickle
 import threading
 import time
 import os
-from typing import Dict
 
 try:
     import fcntl
@@ -130,7 +130,7 @@ class FileCache(Cache):
     """File-based cache"""
 
     # locks used to make cache thread-safe
-    cache_locks: Dict[str, threading.Lock] = {}
+    cache_locks: dict[str, threading.Lock] = {}
 
     def __init__(self, cache_dir, timeout=60):
         Cache.__init__(self, timeout)
