@@ -46,6 +46,7 @@ setup(
     extras_require={
         "async": ["aiohttp>=3.7.3,<4"],
         "dev": [
+            "coverage>=4.4.2",
             "coveralls>=2.1.0",
             "tox>=3.14.0",
          ],
