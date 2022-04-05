@@ -25,6 +25,8 @@ To use the `tweepy.asynchronous` subpackage, be sure to install with the
 
     pip install tweepy[async]
 
+For type hint dependencies, install with the `types` extra.
+
 You can also use Git to clone the repository from GitHub to install the latest
 development version:
 
