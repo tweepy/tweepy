@@ -53,9 +53,9 @@ setup(
         "socks": ["requests[socks]>=2.27.0,<3"],
         "test": tests_require,
         "types": [
-            "typing-extensions>=4.0,<5",
             "types-oauthlib>=3.1.6,<4",
             "types-requests>=2.27.11,<3",
+            "typing-extensions>=4.0,<5",
         ],
     },
     test_suite="tests",
