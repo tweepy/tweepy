@@ -17,6 +17,7 @@ with open("README.md") as readme_file:
     long_description = readme_file.read()
 
 tests_require = [
+    "mypy>=0.931",
     "vcrpy>=1.10.3",
 ]
 
@@ -51,7 +52,11 @@ setup(
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
         "test": tests_require,
-        "types": ["typing-extensions>=4.0,<5"],
+        "types": [
+            "types-oauthlib>=3.1.6,<4",
+            "types-requests>=2.27.11,<3",
+            "typing-extensions>=4.0,<5",
+        ],
     },
     test_suite="tests",
     keywords="twitter library",
