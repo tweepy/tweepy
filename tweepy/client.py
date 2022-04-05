@@ -24,8 +24,8 @@ import requests
 import tweepy
 from tweepy.auth import OAuth1UserHandler
 from tweepy.errors import (
-    BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
-    Unauthorized
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TwitterServerError, Unauthorized
 )
 from tweepy.list import List
 from tweepy.media import Media
@@ -123,7 +123,8 @@ class BaseClient:
                 raise Unauthorized(response)
             if response.status_code == 403:
                 raise Forbidden(response)
-            # Handle 404?
+            if response.status_code == 404:
+                raise NotFound(response)
             if response.status_code == 429:
                 if self.wait_on_rate_limit:
                     reset_time = int(response.headers["x-rate-limit-reset"])
@@ -244,8 +245,8 @@ class Client(BaseClient):
         User agent used when making requests to the API
     """
 
-    def _get_authenticating_user_id(self, *, user_auth):
-        if user_auth:
+    def _get_authenticating_user_id(self, *, oauth_1=False):
+        if oauth_1:
             if self.access_token is None:
                 raise TypeError(
                     "Access Token must be provided for OAuth 1.0a User Context"
@@ -282,6 +283,152 @@ class Client(BaseClient):
         self.return_type = original_return_type
 
         return user_id
+
+    # Bookmarks
+
+    def remove_bookmark(self, tweet_id):
+        """Allows a user or authenticated user ID to remove a Bookmark of a
+        Tweet.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the ``id`` to remove a
+            Bookmark of.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/delete-users-id-bookmarks-tweet_id
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks/{tweet_id}"
+
+        return self._make_request(
+            "DELETE", route
+        )
+
+    def get_bookmarks(self, **params):
+        """get_bookmarks( \
+            *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None \
+        )
+
+        Allows you to get an authenticated user's 800 most recent bookmarked
+        Tweets.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
+        )
+
+    def bookmark(self, tweet_id):
+        """Causes the authenticating user to Bookmark the target Tweet provided
+        in the request body.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the user ``id`` to
+            Bookmark.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/post-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "POST", route, json={"tweet_id": str(tweet_id)}
+        )
 
     # Hide replies
 
@@ -377,7 +524,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/likes/{tweet_id}"
 
         return self._make_request(
@@ -537,7 +684,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/likes"
 
         return self._make_request(
@@ -798,7 +945,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
         return self._make_request(
@@ -899,7 +1046,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/retweets"
 
         return self._make_request(
@@ -1594,7 +1741,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
         """
-        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
 
         return self._make_request(
@@ -1655,7 +1802,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1703,7 +1850,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1756,7 +1903,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
         """
-        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
         return self._make_request(
@@ -1917,7 +2064,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
         """
-        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/following"
 
         return self._make_request(
@@ -1981,7 +2128,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting
         """
-        source_user_id = self._get_authenticating_user_id(user_auth=user_auth)
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
         return self._make_request(
@@ -2044,7 +2191,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/get-users-muting
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -2092,7 +2239,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -2562,7 +2709,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/followed_lists/{list_id}"
 
         return self._make_request(
@@ -2704,7 +2851,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/followed_lists"
 
         return self._make_request(
@@ -3103,7 +3250,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists/{list_id}"
 
         return self._make_request(
@@ -3156,7 +3303,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(
@@ -3205,7 +3352,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
         """
-        id = self._get_authenticating_user_id(user_auth=user_auth)
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(

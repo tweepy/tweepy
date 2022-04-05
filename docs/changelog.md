@@ -3,6 +3,16 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.8.0
+-------------
+
+### New Features / Improvements
+- Add support for Bookmarks with Twitter API v2 ([#1848](https://github.com/tweepy/tweepy/issues/1848))
+  - Add `Client.remove_bookmark`, `Client.get_bookmarks`, `Client.bookmark`
+- Add support for using OAuth 2.0 Authorization Code Flow with `Client` methods that require the authenticating user's ID ([0157d0b](https://github.com/tweepy/tweepy/commit/0157d0b2abcfe40e4e5b77c3d8f733f67ebef9d9))
+  - Raise `TypeError` for those methods when the access token isn't set
+- Raise `NotFound` rather than `HTTPException` when encountering 404 response status codes in `BaseClient.request` ([b6b8219](https://github.com/tweepy/tweepy/commit/b6b82196d3f0821c184901de985e2cedb56a9db2))
+
 Version 4.7.0
 -------------
 

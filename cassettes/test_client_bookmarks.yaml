@@ -1,0 +1,260 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: GET
+    uri: https://api.twitter.com/2/users/me
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlbKTFGyUjI0MDcyMjUwNTYyMzG1tLQwtTRT0lHKS8xNBUqGlKem
+        FlQqhKQWl2TmpQPFS4tTi1DkXFLLlGprAQAAAP//AwBsn+W8VAAAAA==
+    headers:
+      api-version:
+      - '2.39'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '97'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 24 Mar 2022 21:51:06 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A164815866630450829; Max-Age=63072000; Expires=Sat,
+        23 Mar 2024 21:51:06 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A164815866630450829; Max-Age=63072000; Expires=Sat, 23 Mar
+        2024 21:51:06 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_eMArlUFr941GYm8j9l6KOA=="; Max-Age=63072000; Expires=Sat,
+        23 Mar 2024 21:51:06 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A164815866630450829; Max-Age=63072000; Expires=Sat, 23 Mar 2024
+        21:51:06 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write
+      x-connection-hash:
+      - 6c26a394a92cf147e0f531805ba05a0dd9ef308f113bd4c16b6dde4f1ab22e2d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '73'
+      x-rate-limit-reset:
+      - '1648159496'
+      x-response-time:
+      - '39'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"tweet_id": "1507070437557096461"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '35'
+      Content-Type:
+      - application/json
+      Cookie:
+      - guest_id=v1%3A164815866630450829; guest_id_ads=v1%3A164815866630450829; guest_id_marketing=v1%3A164815866630450829;
+        personalization_id="v1_eMArlUFr941GYm8j9l6KOA=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlZKys/Pzk0syk5NUbIqKSpNra0FAAAA//8DAMsUtTwcAAAA
+    headers:
+      api-version:
+      - '2.39'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '54'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 24 Mar 2022 21:51:06 UTC
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write
+      x-connection-hash:
+      - 6c26a394a92cf147e0f531805ba05a0dd9ef308f113bd4c16b6dde4f1ab22e2d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '47'
+      x-rate-limit-reset:
+      - '1648159497'
+      x-response-time:
+      - '82'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A164815866630450829; guest_id_ads=v1%3A164815866630450829; guest_id_marketing=v1%3A164815866630450829;
+        personalization_id="v1_eMArlUFr941GYm8j9l6KOA=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: GET
+    uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAESQTU4DMQyFr2KyLm2H/kE3CCiLskAIsUEMQu7EMFHTeJg4DUNViWuw4ywchZOQ
+        qVCRJW/ee/ant1EaBdX0YaOMVlOVjfqTNMPBZDSa9E/Gw3GmOkroTZKYh9nxYJb2LBvDOfNyhfUS
+        pDT+4Psrd7m7Y40NRAKsCSwGV5TGvYCj+G8npys2TnwH0FqOraHhAMKwCMbqnTti4+GZa6iIK0ut
+        GMRY855OOw0pTjUWAtFImQDI1LD4e0Aa7iKReDgEdrYBXKOxuEhX2LXeJBtJeTi7mcP6qNuCX7OA
+        Dwk6lih7lFOYy8/Hp29B089dOEGFFVTsBfZ1XAz7uStFKj/t9aRbcG99jw2/3srVpdo+dtSK2o43
+        qiYfrDwVHFzqM9tufwEAAP//AwCugDp2fwEAAA==
+    headers:
+      api-version:
+      - '2.39'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '313'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 24 Mar 2022 21:51:06 UTC
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write
+      x-connection-hash:
+      - 6c26a394a92cf147e0f531805ba05a0dd9ef308f113bd4c16b6dde4f1ab22e2d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '180'
+      x-rate-limit-remaining:
+      - '177'
+      x-rate-limit-reset:
+      - '1648159497'
+      x-response-time:
+      - '141'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - guest_id=v1%3A164815866630450829; guest_id_ads=v1%3A164815866630450829; guest_id_marketing=v1%3A164815866630450829;
+        personalization_id="v1_eMArlUFr941GYm8j9l6KOA=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks/1507070437557096461
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlZKys/Pzk0syk5NUbJKS8wpTq2tBQAAAP//AwCKvoiPHQAAAA==
+    headers:
+      api-version:
+      - '2.39'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '55'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 24 Mar 2022 21:51:06 UTC
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write
+      x-connection-hash:
+      - 6c26a394a92cf147e0f531805ba05a0dd9ef308f113bd4c16b6dde4f1ab22e2d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '47'
+      x-rate-limit-reset:
+      - '1648159498'
+      x-response-time:
+      - '53'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
