@@ -839,7 +839,10 @@ class Client(BaseClient):
 
     # Quote Tweets
 
-    def get_quote_tweets(self, id, *, user_auth=False, **params):
+    def get_quote_tweets(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_quote_tweets( \
             id, *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -855,7 +858,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to request.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -880,12 +883,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
