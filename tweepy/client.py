@@ -286,7 +286,9 @@ class Client(BaseClient):
 
     # Bookmarks
 
-    def remove_bookmark(self, tweet_id):
+    def remove_bookmark(
+        self, tweet_id: int | str
+    ) -> JSON | requests.Response | Response:
         """Allows a user or authenticated user ID to remove a Bookmark of a
         Tweet.
 
@@ -300,7 +302,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like the ``id`` to remove a
             Bookmark of.
 
@@ -308,10 +310,6 @@ class Client(BaseClient):
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -324,7 +322,9 @@ class Client(BaseClient):
             "DELETE", route
         )
 
-    def get_bookmarks(self, **params):
+    def get_bookmarks(
+        self, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_bookmarks( \
             *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -372,10 +372,6 @@ class Client(BaseClient):
         TypeError
             If the access token isn't set
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
@@ -392,7 +388,9 @@ class Client(BaseClient):
             ), data_type=Tweet
         )
 
-    def bookmark(self, tweet_id):
+    def bookmark(
+        self, tweet_id: int | str
+    ) -> JSON | requests.Response | Response:
         """Causes the authenticating user to Bookmark the target Tweet provided
         in the request body.
 
@@ -406,7 +404,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like the user ``id`` to
             Bookmark.
 
@@ -414,10 +412,6 @@ class Client(BaseClient):
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
