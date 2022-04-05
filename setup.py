@@ -41,7 +41,6 @@ setup(
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
-        "typing-extensions>=4.0,<5"
     ],
     tests_require=tests_require,
     extras_require={
@@ -52,6 +51,7 @@ setup(
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
         "test": tests_require,
+        "types": ["typing-extensions>=4.0,<5"],
     },
     test_suite="tests",
     keywords="twitter library",
