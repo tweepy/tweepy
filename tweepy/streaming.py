@@ -5,6 +5,7 @@
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
 from __future__ import annotations
+
 from collections import namedtuple
 import json
 import logging
