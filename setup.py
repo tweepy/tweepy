@@ -48,7 +48,7 @@ setup(
         "dev": [
             "coverage>=4.4.2",
             "coveralls>=2.1.0",
-            "tox>=3.14.0",
+            "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
         "test": tests_require,
