@@ -16,10 +16,6 @@ else:
 with open("README.md") as readme_file:
     long_description = readme_file.read()
 
-tests_require = [
-    "vcrpy>=1.10.3",
-]
-
 setup(
     name="tweepy",
     version=version,
@@ -42,7 +38,6 @@ setup(
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
     ],
-    tests_require=tests_require,
     extras_require={
         "async": ["aiohttp>=3.7.3,<4"],
         "dev": [
@@ -51,7 +46,7 @@ setup(
             "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
-        "test": tests_require,
+        "test": ["vcrpy>=1.10.3"],
     },
     test_suite="tests",
     keywords="twitter library",
