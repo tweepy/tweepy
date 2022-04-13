@@ -2,7 +2,12 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+from typing import Union
 from math import inf
+
+import requests
+
+from tweepy.client import Response
 
 
 class Paginator:
@@ -77,7 +82,7 @@ class PaginationIterator:
     def __iter__(self):
         return self
 
-    def __next__(self):
+    def __next__(self) -> Union[Response, dict, requests.Response]:
         if self.reverse:
             pagination_token = self.previous_token
         else:
@@ -97,8 +102,17 @@ class PaginationIterator:
 
         response = self.method(*self.args, **self.kwargs)
 
-        self.previous_token = response.meta.get("previous_token")
-        self.next_token = response.meta.get("next_token")
+        if isinstance(response, Response):
+            meta = response.meta
+        elif isinstance(response, dict):
+            meta = response.get("meta", {})
+        elif isinstance(response, requests.Response):
+            meta = response.json().get("meta", {})
+        else:
+            raise NotImplementedError("Unknown `response` type to parse `meta` field")
+
+        self.previous_token = meta.get("previous_token")
+        self.next_token = meta.get("next_token")
         self.count += 1
 
         return response
