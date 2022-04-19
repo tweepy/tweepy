@@ -28,6 +28,8 @@ class Media(DataMapping):
         Unique identifier of the expanded media content.
     type : str
         Type of content (animated_gif, photo, video).
+    url : str | None
+        A direct URL to the media file on Twitter.
     duration_ms : int | None
         Available when type is video. Duration in milliseconds of the video.
     height : int | None
@@ -57,8 +59,7 @@ class Media(DataMapping):
     alt_text : str | None
         A description of an image to enable and support accessibility. Can be
         up to 1000 characters long. Alt text can only be added to images at the
-        moment. 
-    url : str | None
+        moment.
 
     References
     ----------
@@ -66,9 +67,9 @@ class Media(DataMapping):
     """
 
     __slots__ = (
-        "data", "media_key", "type", "duration_ms", "height",
+        "data", "media_key", "url", "type", "duration_ms", "height",
         "non_public_metrics", "organic_metrics", "preview_image_url",
-        "promoted_metrics", "public_metrics", "width", "alt_text", "url"
+        "promoted_metrics", "public_metrics", "width", "alt_text",
     )
 
     def __init__(self, data):
@@ -76,6 +77,7 @@ class Media(DataMapping):
         self.media_key = data["media_key"]
         self.type = data["type"]
 
+        self.url = data.get("url")
         self.duration_ms = data.get("duration_ms")
         self.height = data.get("height")
         self.non_public_metrics = data.get("non_public_metrics")
@@ -85,9 +87,6 @@ class Media(DataMapping):
         self.public_metrics = data.get("public_metrics")
         self.width = data.get("width")
         self.alt_text = data.get("alt_text")
-
-        # https://twittercommunity.com/t/documentation-for-media-object-missing-url-field/163062
-        self.url = data.get("url")
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
