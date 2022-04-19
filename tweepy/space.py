@@ -56,6 +56,8 @@ class Space(HashableID, DataMapping):
         users in this list are invited to speak via the Invite user option.
     participant_count : int | None
         The current number of users in the Space, including Hosts and Speakers.
+    subscriber_count : int | None
+        The number of people who set a reminder to a Space.
     scheduled_start : datetime.datetime | None
         Indicates the start time of a scheduled Space, as set by the creator of
         the Space. This field is returned only if the Space has been scheduled;
@@ -67,7 +69,6 @@ class Space(HashableID, DataMapping):
         user who requested to speak and was allowed via the Add speaker option.
     started_at : datetime.datetime | None
         Indicates the actual start time of a Space.
-    subscriber_count : int | None
     title : str | None
         The title of the Space as specified by the creator.
     topic_ids : list
@@ -86,7 +87,7 @@ class Space(HashableID, DataMapping):
     __slots__ = (
         "data", "id", "state", "created_at", "ended_at", "host_ids", "lang",
         "is_ticketed", "invited_user_ids", "participant_count",
-        "scheduled_start", "speaker_ids", "started_at", "subscriber_count",
+        "subscriber_count", "scheduled_start", "speaker_ids", "started_at",
         "title", "topic_ids", "updated_at"
     )
 
@@ -108,6 +109,7 @@ class Space(HashableID, DataMapping):
         self.is_ticketed = data.get("is_ticketed")
         self.invited_user_ids = data.get("invited_user_ids", [])
         self.participant_count = data.get("participant_count")
+        self.subscriber_count = data.get("subscriber_count")
 
         self.scheduled_start = data.get("scheduled_start")
         if self.scheduled_start is not None:
@@ -118,9 +120,6 @@ class Space(HashableID, DataMapping):
         self.started_at = data.get("started_at")
         if self.started_at is not None:
             self.started_at = parse_datetime(self.started_at)
-
-        # https://twittercommunity.com/t/missing-documentation-for-new-space-object-subscriber-count-field-on-space-object-page/166943
-        self.subscriber_count = data.get("subscriber_count")
 
         self.title = data.get("title")
 
