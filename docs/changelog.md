@@ -3,6 +3,27 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.9.0
+-------------
+
+### New Features / Improvements
+- Add support for Direct Message typing indicator and read receipts ([#1856](https://github.com/tweepy/tweepy/issues/1856))
+  - Add `API.indicate_direct_message_typing` and `API.mark_direct_message_read`
+- Fallback to `"detail"` response value for `HTTPException` message ([b6b8241](https://github.com/tweepy/tweepy/commit/b6b8241d8df408a427a38d3b9a44837f07cfab32))
+- Handle `"error"` key of response being a string in `HTTPException` ([2da4452](https://github.com/tweepy/tweepy/commit/2da4452870093f930fb8808861bcec809a2d4ccf))
+
+#### Twitter API Deprecations
+- Deprecate `Stream.sample` and note deprecation of compliance messages for `Stream.filter` ([#1876](https://github.com/tweepy/tweepy/issues/1876))
+
+### Misc
+- Use setup.cfg for coverage.py configuration ([e24bb2f](https://github.com/tweepy/tweepy/commit/e24bb2f0febe6662552a95eb7fbd5da0f3314a24))
+  - Explicitly specify coverage >= 4.4.2 requirement for dev extra ([b5bd35e](https://github.com/tweepy/tweepy/commit/b5bd35eb607b07ef7268f45df2c22e4af67adf96))
+- Use setup.cfg for tox configuration ([e24bb2f](https://github.com/tweepy/tweepy/commit/e24bb2f0febe6662552a95eb7fbd5da0f3314a24))
+  - Update lower bound for dev extra tox requirement to >= 3.21.0 ([ba6e6b1](https://github.com/tweepy/tweepy/commit/ba6e6b17f4c22d05ee67c11d91c25424ec61dc57))
+- Remove `tests_require` from setup.py ([2870031](https://github.com/tweepy/tweepy/commit/2870031844dfc28919763d5c05c1d1bc6db8f4f1))
+- Stop creating universal wheels ([9d93ec8](https://github.com/tweepy/tweepy/commit/9d93ec8ddd0f202e06e0a9393b3397d4d29e85fa))
+- Update and improve various documentation and tests
+
 Version 4.8.0
 -------------
 
