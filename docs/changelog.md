@@ -12,7 +12,7 @@ Version 4.9.0
 - Fallback to `"detail"` response value for `HTTPException` message ([b6b8241](https://github.com/tweepy/tweepy/commit/b6b8241d8df408a427a38d3b9a44837f07cfab32))
 - Handle `"error"` key of response being a string in `HTTPException` ([2da4452](https://github.com/tweepy/tweepy/commit/2da4452870093f930fb8808861bcec809a2d4ccf))
 
-#### Twitter API Deprecations
+### Twitter API Deprecations
 - Deprecate `Stream.sample` and note deprecation of compliance messages for `Stream.filter` ([#1876](https://github.com/tweepy/tweepy/issues/1876))
 
 ### Misc
