@@ -495,15 +495,3 @@ Batch compliance
 .. automethod:: Client.get_compliance_job
 
 .. automethod:: Client.create_compliance_job
-
-``Response``
-============
-.. autoclass:: Response
-   :class-doc-from: class
-
-   The :obj:`Response` returned by :class:`Client` methods is a
-   :class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``,
-   and ``meta`` fields, corresponding with the fields in responses from
-   Twitter's API.
-
-   .. versionadded:: 4.0

@@ -36,6 +36,7 @@ Contents:
    :caption: Twitter API v2 Reference
 
    client.rst
+   response.rst
    streamingclient.rst
    exceptions.rst
    expansions_and_fields.rst
