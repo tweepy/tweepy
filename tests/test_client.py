@@ -107,7 +107,7 @@ class TweepyClientTests(unittest.TestCase):
         self.client.get_tweets(tweet_ids)
 
     @tape.use_cassette("test_client_block_and_get_blocked_and unblock.yaml")
-    def test_block_and_unblock(self):
+    def test_block_and_get_blocked_and_unblock(self):
         user_id = 17874544  # User ID for @TwitterSupport
         self.client.block(user_id)
         self.client.get_blocked()
