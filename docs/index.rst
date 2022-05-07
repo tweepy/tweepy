@@ -38,6 +38,7 @@ Contents:
    client.rst
    streamingclient.rst
    exceptions.rst
+   expansions_and_fields.rst
    v2_models.rst
    v2_pagination.rst
 
