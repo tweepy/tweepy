@@ -7,7 +7,7 @@ from config import (
 import tweepy
 
 
-class TweepyTestCase(unittest.TestCase):
+class TweepyClientTests(unittest.TestCase):
 
     def setUp(self):
         self.client = tweepy.Client(
