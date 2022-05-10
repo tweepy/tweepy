@@ -1,0 +1,185 @@
+interactions:
+- request:
+    body:
+      target_user_id: '17874544'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/muting
+  response:
+    body:
+      string: '{"data":{"muting":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '50'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:56 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965673856333; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965673856333; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_KG7qTFbgHFzw7AZ3/pzqdw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965673856333; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 7c86d8516e17431b9960fb51f31cb456c0a4dc499a8ec41fd6ae417a306fa8a6
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930556'
+      x-response-time:
+      - '36'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/muting
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/1072250532645998596/muting
+  response:
+    body:
+      string: '{"data":[{"id":"17874544","name":"Twitter Support","username":"TwitterSupport"}],"meta":{"result_count":1}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '111'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:56 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965693827462; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965693827462; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_HkJhfMa0A7fx5CntBa2aVA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965693827462; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - e2957ee144af1a445358aa23816bf4ab6abd72c27a797df690e629e7c7f95d4c
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '14'
+      x-rate-limit-reset:
+      - '1651930556'
+      x-response-time:
+      - '56'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/muting
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/muting/17874544
+  response:
+    body:
+      string: '{"data":{"muting":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '51'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:57 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965713821650; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965713821650; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_DcKz4N8ILiHBiRyf6aoWTA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965713821650; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 30b1698cfa84b10629bbeb3cafe829efdca4b05bbaf67d6fcc7dc47b8edf989f
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930557'
+      x-response-time:
+      - '40'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/muting/17874544
+version: 1

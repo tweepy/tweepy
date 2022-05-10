@@ -1,0 +1,66 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/783214/owned_lists
+  response:
+    body:
+      string: '{"data":[{"id":"1207354259852820480","name":"Tweets by Twitter"},{"id":"1015240715587158021","name":"Interests
+        on Twitter"},{"id":"815255107788906496","name":"Moments"},{"id":"214727905","name":"Developers"},{"id":"99925800","name":"Global
+        Country Accounts"},{"id":"99924643","name":"Support"},{"id":"99924211","name":"Media"},{"id":"99923132","name":"Engineering"},{"id":"99922622","name":"Offices
+        & Culture"},{"id":"99921778","name":"Business & Marketing"},{"id":"84839422","name":"Official
+        Twitter Accounts"}],"meta":{"result_count":11}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '297'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:26 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818678348972; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818678348972; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_myOcWCiqfNqcFbOEnSRMuw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818678348972; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 210d4292e615d000ff0833b02f9d8e324c838c5b666f1188fc7a77300314d3b9
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '14'
+      x-rate-limit-reset:
+      - '1651929086'
+      x-response-time:
+      - '64'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/783214/owned_lists
+version: 1

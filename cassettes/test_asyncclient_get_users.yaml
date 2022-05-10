@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/by?usernames=Twitter,TwitterDev
+  response:
+    body:
+      string: '{"data":[{"id":"783214","name":"Twitter","username":"Twitter"},{"id":"2244994945","name":"Twitter
+        Dev","username":"TwitterDev"}]}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '99'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:30 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192819013260786; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192819013260786; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_19updJA0Ppg7AHxqbxxRrg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192819013260786; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - bb43009521ce2245752101b8d74474db851d78c3a04a7dac4142eb8ae37f385d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929090'
+      x-response-time:
+      - '34'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/by?usernames=Twitter,TwitterDev
+version: 1

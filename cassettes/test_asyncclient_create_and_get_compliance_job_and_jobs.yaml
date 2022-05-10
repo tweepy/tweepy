@@ -1,0 +1,185 @@
+interactions:
+- request:
+    body:
+      type: tweets
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/compliance/jobs
+  response:
+    body:
+      string: '{"data":{"resumable":false,"upload_expires_at":"2022-05-07T13:35:52.000Z","download_expires_at":"2022-05-14T13:20:52.000Z","created_at":"2022-05-07T13:20:52.000Z","type":"tweets","download_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/delivery/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9fe139e270b7e08354d38f2a51d67403b9396fda6a319f09a078c9a02efe943156ee76282b04db4d4f58c32c7040822418ff26b248f09614f7afd73e75e3a8fcbf505a8a2d22fe5c62266c0a1f4787363012a5d5266c5b09fa8cfec3d07168b9742cb6e241c81e223121b055c2bfe0e52c17112b3d40624145fd0c7cb666de8f99423d4bf87c4f42c684a4936f901218125633bb746de857273a93e4378550a1090d38ba7182191ac4cb709e655b0b31c002e780a24173aa9a16c61e430fd65dbdd31a12fa30d2b9b02dbc12ea25e08d10f99e9c2006ed8420e69a9e0d5d14c22318325d91380260af1304ca734b6d41fda29cfb4b4b95d40ac082de74fad685","upload_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/submission/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=4ec29d5b214f019fbbc5b1e6fd643ef91ffe9231ee41b9f7569f0f0362d58ee5a13c168d8e190e59276708b4b491d91e0f00eb15cfaeba7db84ac92c9ac1ede66de3e278a649745cc7ad7a0eb010a96b94287a7435f73e7a2b5cfa3efddd2f6555b93a2f63ee036da4e8b58196dfe3d19c751081197296b85b1e74ecccdf82710d6b3fa4f17ba5c6c805f7903b0fd44c2ddaacc69f8c3976c5374a6bd96289239c29058ea15b8974e53ecd3ffff085deb18c650c963e7ead287e04afd8f7e3cd126ef15e068430f4124cddba16855c9c5fa4ce86e9fc233e2c36ee7eada3e451167a40be8c11b4b1ca20cc1f0a4f39aedcfca51cb6cf6a47c25dcd05bd9c01cd","status":"created","id":"1522929458495242241"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '1056'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:53 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965216993797; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965216993797; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_ew0llXRK5SY93aChtlLxfw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965216993797; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - a10a9fa46c9ce50e306bfc73dfece9d5e058bf55a02c00adfd7b4ad1832e4d55
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '150'
+      x-rate-limit-remaining:
+      - '149'
+      x-rate-limit-reset:
+      - '1651930552'
+      x-response-time:
+      - '1564'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/compliance/jobs
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/compliance/jobs/1522929458495242241
+  response:
+    body:
+      string: '{"data":{"download_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/delivery/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9fe139e270b7e08354d38f2a51d67403b9396fda6a319f09a078c9a02efe943156ee76282b04db4d4f58c32c7040822418ff26b248f09614f7afd73e75e3a8fcbf505a8a2d22fe5c62266c0a1f4787363012a5d5266c5b09fa8cfec3d07168b9742cb6e241c81e223121b055c2bfe0e52c17112b3d40624145fd0c7cb666de8f99423d4bf87c4f42c684a4936f901218125633bb746de857273a93e4378550a1090d38ba7182191ac4cb709e655b0b31c002e780a24173aa9a16c61e430fd65dbdd31a12fa30d2b9b02dbc12ea25e08d10f99e9c2006ed8420e69a9e0d5d14c22318325d91380260af1304ca734b6d41fda29cfb4b4b95d40ac082de74fad685","type":"tweets","resumable":false,"upload_expires_at":"2022-05-07T13:35:52.000Z","status":"created","download_expires_at":"2022-05-14T13:20:52.000Z","upload_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/submission/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=4ec29d5b214f019fbbc5b1e6fd643ef91ffe9231ee41b9f7569f0f0362d58ee5a13c168d8e190e59276708b4b491d91e0f00eb15cfaeba7db84ac92c9ac1ede66de3e278a649745cc7ad7a0eb010a96b94287a7435f73e7a2b5cfa3efddd2f6555b93a2f63ee036da4e8b58196dfe3d19c751081197296b85b1e74ecccdf82710d6b3fa4f17ba5c6c805f7903b0fd44c2ddaacc69f8c3976c5374a6bd96289239c29058ea15b8974e53ecd3ffff085deb18c650c963e7ead287e04afd8f7e3cd126ef15e068430f4124cddba16855c9c5fa4ce86e9fc233e2c36ee7eada3e451167a40be8c11b4b1ca20cc1f0a4f39aedcfca51cb6cf6a47c25dcd05bd9c01cd","id":"1522929458495242241","created_at":"2022-05-07T13:20:52.000Z"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '1062'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:53 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965389038441; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965389038441; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_2xauOUTXnJkcZb/LToqSLA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965389038441; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:53 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 64316018686b7b2a222d5c2a3770bcfc7a33bf74b74eece75c9aae404ae25c4e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '150'
+      x-rate-limit-remaining:
+      - '149'
+      x-rate-limit-reset:
+      - '1651930553'
+      x-response-time:
+      - '85'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/compliance/jobs/1522929458495242241
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/compliance/jobs?type=tweets
+  response:
+    body:
+      string: '{"data":[{"resumable":false,"upload_expires_at":"2022-05-07T13:35:52.000Z","download_expires_at":"2022-05-14T13:20:52.000Z","created_at":"2022-05-07T13:20:52.000Z","type":"tweets","download_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/delivery/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9fe139e270b7e08354d38f2a51d67403b9396fda6a319f09a078c9a02efe943156ee76282b04db4d4f58c32c7040822418ff26b248f09614f7afd73e75e3a8fcbf505a8a2d22fe5c62266c0a1f4787363012a5d5266c5b09fa8cfec3d07168b9742cb6e241c81e223121b055c2bfe0e52c17112b3d40624145fd0c7cb666de8f99423d4bf87c4f42c684a4936f901218125633bb746de857273a93e4378550a1090d38ba7182191ac4cb709e655b0b31c002e780a24173aa9a16c61e430fd65dbdd31a12fa30d2b9b02dbc12ea25e08d10f99e9c2006ed8420e69a9e0d5d14c22318325d91380260af1304ca734b6d41fda29cfb4b4b95d40ac082de74fad685","upload_url":"https://storage.googleapis.com/twttr-tweet-compliance/1522929458495242241/submission/1168916625673924610_1522929458495242241?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=complianceapi-public-svc-acct%40twttr-compliance-public-prod.iam.gserviceaccount.com%2F20220507%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220507T132052Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=4ec29d5b214f019fbbc5b1e6fd643ef91ffe9231ee41b9f7569f0f0362d58ee5a13c168d8e190e59276708b4b491d91e0f00eb15cfaeba7db84ac92c9ac1ede66de3e278a649745cc7ad7a0eb010a96b94287a7435f73e7a2b5cfa3efddd2f6555b93a2f63ee036da4e8b58196dfe3d19c751081197296b85b1e74ecccdf82710d6b3fa4f17ba5c6c805f7903b0fd44c2ddaacc69f8c3976c5374a6bd96289239c29058ea15b8974e53ecd3ffff085deb18c650c963e7ead287e04afd8f7e3cd126ef15e068430f4124cddba16855c9c5fa4ce86e9fc233e2c36ee7eada3e451167a40be8c11b4b1ca20cc1f0a4f39aedcfca51cb6cf6a47c25dcd05bd9c01cd","status":"created","id":"1522929458495242241"}],"meta":{"result_count":1}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '1078'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:54 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965411055006; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965411055006; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_dW4iKogl9z0j/yggDMnn8A=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965411055006; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 03d8db1b261a059931d8fc87f9d1ecca0cfb4e83e68e5db5db7e7e03a62528e6
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '150'
+      x-rate-limit-remaining:
+      - '149'
+      x-rate-limit-reset:
+      - '1651930554'
+      x-response-time:
+      - '102'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/compliance/jobs?type=tweets
+version: 1

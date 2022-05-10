@@ -18,3 +18,4 @@ except ModuleNotFoundError:
     )
 
 from tweepy.asynchronous.streaming import AsyncStream
+from tweepy.asynchronous.client import AsyncClient

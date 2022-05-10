@@ -20,9 +20,13 @@ class HTTPException(TweepyException):
 
     .. versionadded:: 4.0
 
+    .. versionchanged:: 4.10
+        ``response`` attribute can be an instance of
+        :class:`aiohttp.ClientResponse`
+
     Attributes
     ----------
-    response : requests.Response
+    response : requests.Response | aiohttp.ClientResponse
         Requests Response from the Twitter API
     api_errors : list[dict[str, int | str]]
         The errors the Twitter API responded with, if any
@@ -32,7 +36,7 @@ class HTTPException(TweepyException):
         The error messages the Twitter API responded with, if any
     """
 
-    def __init__(self, response):
+    def __init__(self, response, *, response_json=None):
         self.response = response
 
         self.api_errors = []
@@ -40,44 +44,52 @@ class HTTPException(TweepyException):
         self.api_messages = []
 
         try:
-            response_json = response.json()
-        except requests.JSONDecodeError:
-            super().__init__(f"{response.status_code} {response.reason}")
-        else:
-            errors = response_json.get("errors", [])
+            status_code = response.status_code
+        except AttributeError:
+            # response is an instance of aiohttp.ClientResponse
+            status_code = response.status
 
-            # Use := when support for Python 3.7 is dropped
-            if "error" in response_json:
-                errors.append(response_json["error"])
+        if response_json is None:
+            try:
+                response_json = response.json()
+            except requests.JSONDecodeError:
+                super().__init__(f"{status_code} {response.reason}")
+                return
 
-            error_text = ""
+        errors = response_json.get("errors", [])
 
-            for error in errors:
-                self.api_errors.append(error)
+        # Use := when support for Python 3.7 is dropped
+        if "error" in response_json:
+            errors.append(response_json["error"])
 
-                if isinstance(error, str):
-                    self.api_messages.append(error)
-                    error_text += '\n' + error
-                    continue
+        error_text = ""
 
-                if "code" in error:
-                    self.api_codes.append(error["code"])
-                if "message" in error:
-                    self.api_messages.append(error["message"])
+        for error in errors:
+            self.api_errors.append(error)
 
-                if "code" in error and "message" in error:
-                    error_text += f"\n{error['code']} - {error['message']}"
-                elif "message" in error:
-                    error_text += '\n' + error["message"]
+            if isinstance(error, str):
+                self.api_messages.append(error)
+                error_text += '\n' + error
+                continue
 
-            # Use := when support for Python 3.7 is dropped
-            if not error_text and "detail" in response_json:
-                self.api_messages.append(response_json["detail"])
-                error_text = '\n' + response_json["detail"]
+            if "code" in error:
+                self.api_codes.append(error["code"])
+            if "message" in error:
+                self.api_messages.append(error["message"])
 
-            super().__init__(
-                f"{response.status_code} {response.reason}{error_text}"
-            )
+            if "code" in error and "message" in error:
+                error_text += f"\n{error['code']} - {error['message']}"
+            elif "message" in error:
+                error_text += '\n' + error["message"]
+
+        # Use := when support for Python 3.7 is dropped
+        if not error_text and "detail" in response_json:
+            self.api_messages.append(response_json["detail"])
+            error_text = '\n' + response_json["detail"]
+
+        super().__init__(
+            f"{status_code} {response.reason}{error_text}"
+        )
 
 
 class BadRequest(HTTPException):

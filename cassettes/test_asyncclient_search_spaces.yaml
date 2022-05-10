@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/spaces/search?query=Twitter
+  response:
+    body:
+      string: '{"data":[{"id":"1mrxmanYEAdxy","state":"live"},{"id":"1BdGYwoOmYZxX","state":"live"},{"id":"1OwxWzWWVkZJQ","state":"live"},{"id":"1mrGmanRNNkGy","state":"scheduled"},{"id":"1RDxlgWODbRJL","state":"scheduled"},{"id":"1jMJgeEPBzMKL","state":"scheduled"},{"id":"1LyxBoQrPyrKN","state":"scheduled"},{"id":"1vAxRkEegOZKl","state":"scheduled"},{"id":"1zqJVBLABbXJB","state":"scheduled"},{"id":"1DXGyDYaXWgKM","state":"scheduled"},{"id":"1yNGaYXkDkdGj","state":"scheduled"},{"id":"1ZkJzbNpAzRJv","state":"scheduled"},{"id":"1YqKDqQOblLGV","state":"scheduled"},{"id":"1vOGwyVAmBMxB","state":"scheduled"},{"id":"1ypJdEYmMEYxW","state":"scheduled"},{"id":"1mrGmandXoNGy","state":"scheduled"},{"id":"1mnGedoEDvRKX","state":"scheduled"},{"id":"1OwxWzWOoOmJQ","state":"scheduled"},{"id":"1YpKkZLVeaXxj","state":"scheduled"},{"id":"1LyxBoQMZVEKN","state":"scheduled"},{"id":"1djxXPnEmPzxZ","state":"scheduled"},{"id":"1OyKADQBzVMxb","state":"scheduled"},{"id":"1RDGlgWqlkdKL","state":"scheduled"},{"id":"1mnxedoYQDQJX","state":"scheduled"},{"id":"1YqGopgkavaJv","state":"scheduled"},{"id":"1yoKMWVVYwNJQ","state":"scheduled"},{"id":"1lPKqmkklNbKb","state":"scheduled"},{"id":"1ypJdEYYWdyxW","state":"scheduled"},{"id":"1nAKEYRgeDXKL","state":"scheduled"},{"id":"1vOGwyVWWpbxB","state":"scheduled"},{"id":"1LyGBoQydnzJN","state":"scheduled"},{"id":"1vOxwyVwDjqGB","state":"scheduled"},{"id":"1djGXPnLVeyGZ","state":"scheduled"},{"id":"1BRJjneXLljJw","state":"scheduled"}],"meta":{"result_count":34}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '454'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:32 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192819217825125; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:32 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192819217825125; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:32 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_g6r1bsoFFTqoVoJPqg4qbQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:32 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192819217825125; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:32 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - b46582c764b58eaba8a2c369b69ca6cbc2c93013b4ae3520552b8075f344893d
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '298'
+      x-rate-limit-reset:
+      - '1651928741'
+      x-response-time:
+      - '399'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/spaces/search?query=Twitter
+version: 1

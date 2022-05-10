@@ -1,0 +1,127 @@
+interactions:
+- request:
+    body:
+      text: Test Tweet
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/tweets
+  response:
+    body:
+      string: '{"data":{"id":"1522929456142245888","text":"Test Tweet"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '82'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:51 UTC
+      location:
+      - https://api.twitter.com/2/tweets/1522929456142245888
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965163646159; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965163646159; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_9kXZ5SQAhBTaIgPmqBYgDQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965163646159; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - ad8258d462cb70e11b962a871c336046ac01998967fa1d3b41986b40d17e5674
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '199'
+      x-rate-limit-reset:
+      - '1651930551'
+      x-response-time:
+      - '89'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://api.twitter.com/2/tweets
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/tweets/1522929456142245888
+  response:
+    body:
+      string: '{"data":{"deleted":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '51'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:51 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965184974481; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965184974481; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_hwTY7sNphhl3RQZuVlgYPA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965184974481; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - c54d5361dcb16fe85709ffdb99c8394c81bd3e3118ae7652c8740bd8f2f397e3
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930551'
+      x-response-time:
+      - '35'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/tweets/1522929456142245888
+version: 1

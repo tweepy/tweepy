@@ -39,7 +39,10 @@ setup(
         "requests-oauthlib>=1.2.0,<2",
     ],
     extras_require={
-        "async": ["aiohttp>=3.7.3,<4"],
+        "async": [
+            "aiohttp>=3.7.3,<4",
+            "async-lru>=1.0.3,<2"
+        ],
         "dev": [
             "coverage>=4.4.2",
             "coveralls>=2.1.0",

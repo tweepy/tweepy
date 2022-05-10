@@ -1,0 +1,132 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/tweets/1415348607813832708/retweeted_by
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"861889145303515136\",\"name\":\"Slava\",\"username\"\
+        :\"Astafieff_Slava\"},{\"id\":\"1516366969590759424\",\"name\":\"Yana Gencheva\"\
+        ,\"username\":\"YanaGencheva\"},{\"id\":\"1494665199260942339\",\"name\":\"\
+        Marcelo Fonseca\",\"username\":\"MarceloF1111\"},{\"id\":\"1516808822257553416\"\
+        ,\"name\":\"Crystal Bot\",\"username\":\"CrystalBot_\"},{\"id\":\"4762610299\"\
+        ,\"name\":\"TechnoKofe\",\"username\":\"technokofe\"},{\"id\":\"1514738371654037513\"\
+        ,\"name\":\"DevStreamers\",\"username\":\"DevStreamersBOT\"},{\"id\":\"1510148015465668612\"\
+        ,\"name\":\"Polite Troll\",\"username\":\"veryPoliteTroll\"},{\"id\":\"63046977\"\
+        ,\"name\":\"Emily Waligoske \\uD83C\\uDFD5\",\"username\":\"happycamper\"\
+        },{\"id\":\"1105800825631195136\",\"name\":\"suranjan\",\"username\":\"suranja19463352\"\
+        },{\"id\":\"1489094513737953281\",\"name\":\"Tasteless Degenerate\",\"username\"\
+        :\"TastelessDegen\"},{\"id\":\"1496859152546766853\",\"name\":\"I RT TARKOV\"\
+        ,\"username\":\"TarkovRt\"},{\"id\":\"1493107956434489350\",\"name\":\"RootSystems\"\
+        ,\"username\":\"RootSystemBot\"},{\"id\":\"1415549637931327488\",\"name\"\
+        :\"Teff\",\"username\":\"TeffLLC\"},{\"id\":\"64397778\",\"name\":\"Marketing\
+        \ Forum\",\"username\":\"markettingforum\"},{\"id\":\"1482329284677193729\"\
+        ,\"name\":\"zaven yt\",\"username\":\"zaven_ltr_yt\"},{\"id\":\"2508492511\"\
+        ,\"name\":\"Kakashi Sensei\",\"username\":\"NBA_Brawler\"},{\"id\":\"1308136039651844096\"\
+        ,\"name\":\"Vamshi\",\"username\":\"vamshi17892148\"},{\"id\":\"1466190483613528064\"\
+        ,\"name\":\"Spectra Analytical Hawaii\",\"username\":\"SpectraHawaii\"},{\"\
+        id\":\"1469684914803064833\",\"name\":\"pbtTest\",\"username\":\"PbtTest\"\
+        },{\"id\":\"1332626888674537474\",\"name\":\"Jacob Caldino Cardel Professional\
+        \ & Independent \\uD83D\\uDCBC\",\"username\":\"JacobCardel\"},{\"id\":\"\
+        323581124\",\"name\":\"Audry Hsu\",\"username\":\"Audryhsu\"},{\"id\":\"1446021847800160259\"\
+        ,\"name\":\"OPENLINK\",\"username\":\"openlinkk\"},{\"id\":\"909629468758740993\"\
+        ,\"name\":\"luuty\",\"username\":\"LuuTyZao\"},{\"id\":\"1466510666609664001\"\
+        ,\"name\":\"SRS\",\"username\":\"SRS54869025\"},{\"id\":\"711921243528757248\"\
+        ,\"name\":\"addyir\",\"username\":\"AddyirKenya\"},{\"id\":\"46759779\",\"\
+        name\":\"Ian Lenny\",\"username\":\"_opensourced\"},{\"id\":\"1454113941693599747\"\
+        ,\"name\":\"Aleksandar Kocev\",\"username\":\"kocev2906\"},{\"id\":\"2360617692\"\
+        ,\"name\":\"SocialProfit\",\"username\":\"pasivincome\"},{\"id\":\"1454352311334027267\"\
+        ,\"name\":\"Data Science Tweets\",\"username\":\"JustDataScience\"},{\"id\"\
+        :\"263744389\",\"name\":\"Eugene Sherlaimov \\uD83C\\uDDFA\\uD83C\\uDDE6\"\
+        ,\"username\":\"sherlaimov\"},{\"id\":\"1167617348661997568\",\"name\":\"\
+        jeannie\",\"username\":\"blueberryjeanz\"},{\"id\":\"1438363597428572167\"\
+        ,\"name\":\"iamsurya\",\"username\":\"iamsury71020583\"},{\"id\":\"118589107\"\
+        ,\"name\":\"Debashree Pati\",\"username\":\"d_pati\"},{\"id\":\"82333252\"\
+        ,\"name\":\"Nooh Noah\",\"username\":\"thenoahnooh\"},{\"id\":\"1429492556702703617\"\
+        ,\"name\":\"Quotinder | The Tech Bot\",\"username\":\"quotinder\"},{\"id\"\
+        :\"1337051132313686016\",\"name\":\"Aditya Rawat\",\"username\":\"CsAdityaRawat\"\
+        },{\"id\":\"815169466199703552\",\"name\":\"Love Simplicity\",\"username\"\
+        :\"simplify4me123\"},{\"id\":\"1294870848197799936\",\"name\":\"Shijath Ali\"\
+        ,\"username\":\"ShijathA\"},{\"id\":\"1425663002867494915\",\"name\":\"Prafful\
+        \ Sharma\",\"username\":\"hashencoder\"},{\"id\":\"1424971375882637312\",\"\
+        name\":\"okuda_dev\",\"username\":\"okuda_dev\"},{\"id\":\"1241593057394348034\"\
+        ,\"name\":\"Katie\",\"username\":\"Katie180scripty\"},{\"id\":\"2947616673\"\
+        ,\"name\":\"Lucas\",\"username\":\"lucasoppc\"},{\"id\":\"1159627369\",\"\
+        name\":\"\u3042\u3058\u3055\u3044\",\"username\":\"Hg_hatter\"},{\"id\":\"\
+        1026694159\",\"name\":\"Joe Rice\",\"username\":\"josephlrice\"},{\"id\":\"\
+        1283319060114149376\",\"name\":\"Muhammad Faiq\",\"username\":\"MFaiqSA\"\
+        },{\"id\":\"2678783982\",\"name\":\"Roopretelcham\",\"username\":\"like_keyboard\"\
+        },{\"id\":\"4926042247\",\"name\":\"Sanho Chung \u937E\u71CA\u8C6A\",\"username\"\
+        :\"sanhochung\"},{\"id\":\"351847987\",\"name\":\"punter\",\"username\":\"\
+        esiattorney\"},{\"id\":\"308771061\",\"name\":\"Fahim Hassan\",\"username\"\
+        :\"hassanfahim\"},{\"id\":\"1746216745\",\"name\":\"mirza \\uD83C\\uDF27\"\
+        ,\"username\":\"muhdmirzamz\"},{\"id\":\"292670084\",\"name\":\"Dave Carroll\"\
+        ,\"username\":\"thedavecarroll\"},{\"id\":\"1324848235714736129\",\"name\"\
+        :\"Alan Lee\",\"username\":\"alanbenlee\"},{\"id\":\"4428305440\",\"name\"\
+        :\"Andr\xE9 Verzaal\",\"username\":\"Andre3Verzaal\"},{\"id\":\"1392430706807263238\"\
+        ,\"name\":\"Raduan\",\"username\":\"Raduan63778303\"},{\"id\":\"4689073459\"\
+        ,\"name\":\"Hyeseong Kim\",\"username\":\"KrComet\"},{\"id\":\"1090139690\"\
+        ,\"name\":\"nath\xE1lia\",\"username\":\"nathaliapls\"},{\"id\":\"130175843\"\
+        ,\"name\":\"Mohi Us Sunnat\",\"username\":\"sunnat629\"},{\"id\":\"1116743997987287045\"\
+        ,\"name\":\"beaftermath\",\"username\":\"beaftermath\"},{\"id\":\"156725468\"\
+        ,\"name\":\"Gilad\",\"username\":\"giladgershoni\"},{\"id\":\"413901074\"\
+        ,\"name\":\"Uhud\",\"username\":\"dancingislands\"},{\"id\":\"4055587647\"\
+        ,\"name\":\"Nate \\uD83E\\uDD35 \\uD83C\\uDDEC\\uD83C\\uDDE7\",\"username\"\
+        :\"nathansmith7713\"},{\"id\":\"183193079\",\"name\":\"M \\uD83D\\uDC97\\\
+        uD83D\\uDC9B\\uD83D\\uDC99 \\uD83C\\uDFF3\uFE0F\u200D\\uD83C\\uDF08 BLACK\
+        \ LIVES MATTER!!!\",\"username\":\"lmaookaysure\"}],\"meta\":{\"result_count\"\
+        :62,\"next_token\":\"7140dibdnow9c7btw4803m6o8pzwynsnjtwm1p2yirqcz\"}}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2024'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:27 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818772161287; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818772161287; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_jvrawVEidkBnMtjNzLNrKQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818772161287; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 612a40a0ce1ea4276ef6ec878858ec6e66b63bf8bc3dc68c5821ad74f406a419
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1651929087'
+      x-response-time:
+      - '181'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/tweets/1415348607813832708/retweeted_by
+version: 1
