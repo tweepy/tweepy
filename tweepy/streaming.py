@@ -907,7 +907,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        status : Tweet
+        tweet : Tweet
             The Tweet received
         """
         pass
@@ -934,7 +934,7 @@ class StreamingClient(BaseClient, BaseStream):
 
     def on_matching_rules(self, matching_rules):
         """This is called when matching rules are received.
-        
+
         Parameters
         ----------
         matching_rules : list[StreamRule]
