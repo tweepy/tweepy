@@ -82,9 +82,9 @@ class AsyncStream:
 
         if self.session is None or self.session.closed:
             self.session = aiohttp.ClientSession(
-                headers={"User-Agent": self.user_agent},
                 timeout=aiohttp.ClientTimeout(sock_read=stall_timeout)
             )
+        self.session.headers["User-Agent"] = self.user_agent
 
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
         url = str(URL(url).with_query(sorted(params.items())))
