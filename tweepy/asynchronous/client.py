@@ -75,6 +75,14 @@ class AsyncBaseClient(BaseClient):
             url, headers, body = oauth_client.sign(
                 url, method, headers=headers
             )
+            # oauthlib.oauth1.Client (OAuthClient) expects colons in query 
+            # values (e.g. in timestamps) to be percent-encoded, while
+            # aiohttp.ClientSession does not automatically encode them
+            before_query, question_mark, query = url.partition('?')
+            url = URL(
+                f"{before_query}?{query.replace(':', '%3A')}",
+                encoded = True
+            )
             params = None
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
