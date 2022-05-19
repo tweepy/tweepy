@@ -240,6 +240,14 @@ class AsyncStream(AsyncBaseStream):
                filter_level=None, languages=None, stall_warnings=False):
         """Filter realtime Tweets
 
+        .. deprecated:: 4.10
+            `The delivery of compliance messages through the Twitter API v1.1
+            endpoint this method uses has been deprecated, and they will stop
+            being delivered beginning October 29, 2022.`_ Twitter API v2 can be
+            used instead with :meth:`AsyncStreamingClient.filter` and/or
+            :class:`AsyncClient` :ref:`batch compliance <Batch compliance>`
+            methods.
+
         Parameters
         ----------
         follow: list[int | str] | None
@@ -292,6 +300,9 @@ class AsyncStream(AsyncBaseStream):
 
         .. _BCP 47: https://tools.ietf.org/html/bcp47
         .. _advanced search: https://twitter.com/search-advanced
+        .. _The delivery of compliance messages through the Twitter API v1.1
+            endpoint this method uses has been deprecated, and they will stop
+            being delivered beginning October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
