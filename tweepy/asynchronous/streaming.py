@@ -328,6 +328,11 @@ class AsyncStream(AsyncBaseStream):
     def sample(self, *, languages=None, stall_warnings=False):
         """Sample realtime Tweets
 
+        .. deprecated:: 4.10
+            `The Twitter API v1.1 endpoint this method uses is now deprecated
+            and will be retired on October 29, 2022.`_ Twitter API v2 can be
+            used instead with :meth:`AsyncStreamingClient.sample`.
+
         Parameters
         ----------
         languages : list[str] | None
@@ -358,6 +363,8 @@ class AsyncStream(AsyncBaseStream):
 
         .. _BCP 47: https://tools.ietf.org/html/bcp47
         .. _advanced search: https://twitter.com/search-advanced
+        .. _The Twitter API v1.1 endpoint this method uses is now deprecated
+            and will be retired on October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
         """
         if self.task is not None and not self.task.done():
             raise TweepyException("Stream is already connected")
