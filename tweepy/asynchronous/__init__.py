@@ -19,5 +19,5 @@ except ModuleNotFoundError:
         "installed"
     )
 
-from tweepy.asynchronous.streaming import AsyncStream
+from tweepy.asynchronous.streaming import AsyncStream, AsyncStreamingClient
 from tweepy.asynchronous.client import AsyncClient

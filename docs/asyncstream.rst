@@ -8,4 +8,5 @@
 
 .. autoclass:: AsyncStream
    :members:
+   :inherited-members:
    :member-order: bysource

@@ -38,7 +38,10 @@ Contents:
    client.rst
    response.rst
    streamingclient.rst
+   streamresponse.rst
+   streamrule.rst
    asyncclient.rst
+   asyncstreamingclient.rst
    exceptions.rst
    expansions_and_fields.rst
    v2_models.rst
