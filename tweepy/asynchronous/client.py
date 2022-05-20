@@ -127,7 +127,7 @@ class AsyncBaseClient(BaseClient):
                         f"Sleeping for {sleep_time} seconds."
                     )
                     await asyncio.sleep(sleep_time)
-                return self.request(method, route, params, json, user_auth)
+                return await self.request(method, route, params, json, user_auth)
             else:
                 raise TooManyRequests(response, response_json=response_json)
         if response.status >= 500:
