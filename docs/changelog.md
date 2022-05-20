@@ -3,6 +3,24 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.10.0
+--------------
+
+### New Features / Improvements
+- Add asynchronous interfaces for Twitter API v2
+  - Add `asynchronous.AsyncClient` ([0aadd53](https://github.com/tweepy/tweepy/commit/0aadd5327b8e14fd6921ffb10153145cc9c58061))
+    - Add `async_lru` as requirement for `async` extra
+  - Add `asynchronous.AsyncStreamingClient` ([9051ba6](https://github.com/tweepy/tweepy/commit/9051ba64bc0610c9e0027e53f6e32a72de67d1e2))
+- Add support for reverse chronological home timeline with Twitter API v2 ([#1900](https://github.com/tweepy/tweepy/issues/1900))
+  - Add `Client.get_home_timeline` and `AsyncClient.get_home_timeline`
+- Update the User-Agent header based on `AsyncStream.user_agent` even if `AsyncStream.session` is already initialized/set ([096a62c](https://github.com/tweepy/tweepy/commit/096a62c737218c4b51682c1127ab2a876547ad73))
+
+### Twitter API Deprecations
+- Deprecate `AsyncStream.sample` and note deprecation of compliance messages for `AsyncStream.filter` ([e043074](https://github.com/tweepy/tweepy/commit/e0430748b311cfc0d284897351ae589db0b85ada), [1b77007](https://github.com/tweepy/tweepy/commit/1b77007aee7b491a7878996b060a102984e84edd))
+
+### Misc
+- Update and improve various documentation and tests
+
 Version 4.9.0
 -------------
 
