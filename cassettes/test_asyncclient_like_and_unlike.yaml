@@ -1,0 +1,125 @@
+interactions:
+- request:
+    body:
+      tweet_id: '1293593516040269825'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/likes
+  response:
+    body:
+      string: '{"data":{"liked":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '49'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:56 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965623613478; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965623613478; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_WtYqk+AmDk5GSykgPrb8OA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965623613478; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - e718f4e08192982a8cafe45a2707a63b59752998fd68985a1075ecf351392c6e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930556'
+      x-response-time:
+      - '63'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/likes
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/likes/1293593516040269825
+  response:
+    body:
+      string: '{"data":{"liked":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '50'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:56 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965643125936; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965643125936; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_fMAdrJT+SvcjqQE1vP5KEA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965643125936; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:56 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a69bda724ace225c197b1844c6efbd086238ac17ca5b713c73692638a1e11398
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930556'
+      x-response-time:
+      - '32'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/likes/1293593516040269825
+version: 1

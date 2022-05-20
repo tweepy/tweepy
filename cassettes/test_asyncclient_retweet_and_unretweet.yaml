@@ -1,0 +1,125 @@
+interactions:
+- request:
+    body:
+      tweet_id: '1415348607813832708'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/retweets
+  response:
+    body:
+      string: '{"data":{"retweeted":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '53'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:57 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965735409439; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965735409439; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_JFX3PbdQgVt4tByh1LWNJQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965735409439; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a8b01f0ab3544328655dd84b38094f971f21f0aee0c26a0a66163a5a46e62970
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930557'
+      x-response-time:
+      - '93'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/retweets
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/retweets/1415348607813832708
+  response:
+    body:
+      string: '{"data":{"retweeted":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '54'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:57 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965776573083; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965776573083; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_GT6t/b0tcc/6y0UDdF5Owg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965776573083; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:57 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - f9d2c9e8004bdd0153199bebefab5dcca60e9cd88652f8829747c8d032489da0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930557'
+      x-response-time:
+      - '65'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/retweets/1415348607813832708
+version: 1

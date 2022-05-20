@@ -1,0 +1,190 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422/followers
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"69523768\",\"name\":\"Sungyeon Ellen Kim\",\"\
+        username\":\"neosiren\"},{\"id\":\"15806207\",\"name\":\"GR2550\",\"username\"\
+        :\"GR2550\"},{\"id\":\"555713608\",\"name\":\"Judee Brillante-Parnell\",\"\
+        username\":\"ilokana09\"},{\"id\":\"1520088559499329537\",\"name\":\"Chris\
+        \ Jr Williams\",\"username\":\"ChrisJrW87\"},{\"id\":\"1481525443782406147\"\
+        ,\"name\":\"Cole Hu\",\"username\":\"ColeHu8\"},{\"id\":\"1019307395816845313\"\
+        ,\"name\":\"\u0688\u0627\u06A9\u0679\u0631 \u0645\u06CC\u06A9\u06CC\u0646\u06A9\
+        \",\"username\":\"Amir19888611\"},{\"id\":\"1512114730676019228\",\"name\"\
+        :\"FFNF\",\"username\":\"FFNF17290894\"},{\"id\":\"1331482021135331330\",\"\
+        name\":\"@Claesson\",\"username\":\"CicciCenter\"},{\"id\":\"840180024183468032\"\
+        ,\"name\":\"Sukri Mohd\",\"username\":\"SukriMohd5\"},{\"id\":\"1378804937275101186\"\
+        ,\"name\":\"GK \\uD83D\\uDD34\\uD83D\\uDFE2\u26AA \u26AB\",\"username\":\"\
+        7Kilc\"},{\"id\":\"117141665\",\"name\":\"Lauren Olivia\",\"username\":\"\
+        flylaurenfly\"},{\"id\":\"70341202\",\"name\":\"Chronically Trill\",\"username\"\
+        :\"NiqFury\"},{\"id\":\"1506292480572104708\",\"name\":\"Miguel Nunes\",\"\
+        username\":\"MiguelNunesMCN\"},{\"id\":\"24402111\",\"name\":\"Sage \u2728\
+        Danielle (she/her)\",\"username\":\"SageDanielle\"},{\"id\":\"1076910089079062529\"\
+        ,\"name\":\"Matthew Brewer\",\"username\":\"TheBrewerGame\"},{\"id\":\"5387412\"\
+        ,\"name\":\"Ashnod\",\"username\":\"ashnod\"},{\"id\":\"1497866871466569731\"\
+        ,\"name\":\"Goran Kresovi\u0107\",\"username\":\"kresovicgoran1\"},{\"id\"\
+        :\"1496838257929121795\",\"name\":\"lolte88\",\"username\":\"lolte884\"},{\"\
+        id\":\"893449195272536064\",\"name\":\"\\uD83E\\uDD84\\uD835\\uDC42\\uD835\\\
+        uDC53 \\uD835\\uDC36\\uD835\\uDC5C\\uD835\\uDC62\\uD835\\uDC5F\\uD835\\uDC60\\\
+        uD835\\uDC52 \\uD835\\uDC3C \\uD835\\uDC46\\uD835\\uDC61\\uD835\\uDC56\\uD835\\\
+        uDC59\\uD835\\uDC59 \\uD835\\uDC3F\\uD835\\uDC5C\\uD835\\uDC63\\uD835\\uDC52\
+        \ \\uD835\\uDC4C\\uD835\\uDC5C\\uD835\\uDC62 \u2022 Official \uEA00 Account\\\
+        uD83C\\uDF10\u26AA\",\"username\":\"asonofthegods\"},{\"id\":\"1492733139969585157\"\
+        ,\"name\":\"Mitchell B\",\"username\":\"bmsaltz1\"},{\"id\":\"799009477\"\
+        ,\"name\":\"Subhash\\uD83C\\uDDEE\\uD83C\\uDDF3\\uD83C\\uDDFF\\uD83C\\uDDF2\"\
+        ,\"username\":\"666Jsubhash\"},{\"id\":\"1405682090926952453\",\"name\":\"\
+        \u30E2\u30F3\u30B9\u30FC\u30F3\u3000Monsoon\",\"username\":\"rjdkr4\"},{\"\
+        id\":\"56651127\",\"name\":\"Paolo Ganino\",\"username\":\"paologanino\"},{\"\
+        id\":\"805313900505755648\",\"name\":\"Madaben\",\"username\":\"Madaben2\"\
+        },{\"id\":\"18076517\",\"name\":\"chartmann \\uD83D\\uDD4A\",\"username\"\
+        :\"chartmann\"},{\"id\":\"1419246449385086981\",\"name\":\"\u6771\u90F7midori\"\
+        ,\"username\":\"KKhigashi3\"},{\"id\":\"1475793790199869443\",\"name\":\"\
+        Jpx Fred\",\"username\":\"JpxFred1\"},{\"id\":\"1424968862315933698\",\"name\"\
+        :\"RE Test\",\"username\":\"redefinetest\"},{\"id\":\"1339318566475223041\"\
+        ,\"name\":\"\u0645\u062D\u0645\u062F \u0627\u0644\u0635\u064A\u0627\u062F\"\
+        ,\"username\":\"mohamed_al_said\"},{\"id\":\"1458390146458570761\",\"name\"\
+        :\"cosimo.\",\"username\":\"cosimodebarcus\"},{\"id\":\"1351194092248715269\"\
+        ,\"name\":\"Infinite Catto\",\"username\":\"Infinite_Catto\"},{\"id\":\"58871116\"\
+        ,\"name\":\"avindra \\uD83C\\uDF3B\",\"username\":\"avindra\"},{\"id\":\"\
+        3144623732\",\"name\":\"thank you for one\",\"username\":\"thankyouforone\"\
+        },{\"id\":\"1441245171891404801\",\"name\":\"intent/tweet?screen_WilsonChong9/verif\"\
+        ,\"username\":\"wilsonchong903\"},{\"id\":\"1033656875886280705\",\"name\"\
+        :\"Iven Lichti\",\"username\":\"nichtiven\"},{\"id\":\"201935415\",\"name\"\
+        :\"Giovanni / Gjovani \\uD83D\\uDEF8\",\"username\":\"0xGio\"},{\"id\":\"\
+        1118440306397941760\",\"name\":\"Charles-Teddy-Birdy\",\"username\":\"CityTeddy235323\"\
+        },{\"id\":\"838098779404390400\",\"name\":\"Refael Cohen\",\"username\":\"\
+        RefaelCohe\"},{\"id\":\"1448440735800324097\",\"name\":\"@enjoy02059661\"\
+        ,\"username\":\"enjoy02059661\"},{\"id\":\"1067526730426998784\",\"name\"\
+        :\"NR12\",\"username\":\"natashariou\"},{\"id\":\"313384381\",\"name\":\"\
+        mik\xE6l\",\"username\":\"michaeltibay\"},{\"id\":\"491386276\",\"name\":\"\
+        \xA9\uFE0F\",\"username\":\"carstensss\"},{\"id\":\"1435655461\",\"name\"\
+        :\"Alexis Mitchell\",\"username\":\"LexisTV\"},{\"id\":\"1460679755544600579\"\
+        ,\"name\":\"\u0627\u0628\u0648 \u062A\u0631\u0643\u064A \u0627\u0644\u062E\
+        \u0648\u0644\u0627\u0646\u064A \u062E\u0648\u0644\u0627\u0646\",\"username\"\
+        :\"TrkyKhwlan\"},{\"id\":\"1324848235714736129\",\"name\":\"Alan Lee\",\"\
+        username\":\"alanbenlee\"},{\"id\":\"1328359963937259520\",\"name\":\"Xo Chong\"\
+        ,\"username\":\"xo_chong\"},{\"id\":\"1451609880113070085\",\"name\":\"Sumira\
+        \ Nazir\",\"username\":\"SumiraNazir\"},{\"id\":\"1420055293082415107\",\"\
+        name\":\"Bo\u0159ek \u0160indelka(he/him)\",\"username\":\"JustBorek\"},{\"\
+        id\":\"1409136449803325441\",\"name\":\"\u91D1\u4E95\u61B2\u53F8\",\"username\"\
+        :\"w22ZccksRpafZAx\"},{\"id\":\"1346392170933194753\",\"name\":\"Taadi KALYJAY\
+        \ \u2660\",\"username\":\"FrimpongDarko2\"},{\"id\":\"1265867302303485957\"\
+        ,\"name\":\"Lee Chak Yong\",\"username\":\"yong_chak\"},{\"id\":\"3164618335\"\
+        ,\"name\":\"\u2694MICHAEL WILLIAM KUEHN\u2694\",\"username\":\"2M4W5K1\"},{\"\
+        id\":\"199721895\",\"name\":\"mirandastweets\",\"username\":\"mirandastweets\"\
+        },{\"id\":\"1299026549094653953\",\"name\":\"Faisal Sahal Jama\",\"username\"\
+        :\"FaisalsahalJ\"},{\"id\":\"1338348975439671296\",\"name\":\"Cecilia Claesson\"\
+        ,\"username\":\"CeciliaClaesso7\"},{\"id\":\"1439982522297982981\",\"name\"\
+        :\"Inked Up\",\"username\":\"InkedupwetUp314\"},{\"id\":\"1274060515116015616\"\
+        ,\"name\":\"The EMPOWER Lab\",\"username\":\"TheEMPOWERLab\"},{\"id\":\"328785439\"\
+        ,\"name\":\"\u2122\u0623\u0628\u0648 \u0641\u0627\u0631\u0633\u2122\",\"username\"\
+        :\"llksa10ll\"},{\"id\":\"1377016002777640965\",\"name\":\"turkdevops\",\"\
+        username\":\"turkdevops\"},{\"id\":\"1425735780866031622\",\"name\":\"Wilson\
+        \ Chong\",\"username\":\"Will5Chong\"},{\"id\":\"1019540119395667968\",\"\
+        name\":\"Harry Brodo\",\"username\":\"Winnie_The_Flu\"},{\"id\":\"56071962\"\
+        ,\"name\":\"Ana Erika Lareza\",\"username\":\"aelareza\"},{\"id\":\"1430673134701711362\"\
+        ,\"name\":\"Rafael Francisco Silva\",\"username\":\"RafaelF41140154\"},{\"\
+        id\":\"61105343\",\"name\":\"Neil Varcoe\",\"username\":\"neilwrites\"},{\"\
+        id\":\"1417558312246136833\",\"name\":\"Mohd Pauzan\",\"username\":\"MohdPauzan6\"\
+        },{\"id\":\"1314368210842517506\",\"name\":\"@Flylhil\",\"username\":\"Flylhiyhl\"\
+        },{\"id\":\"1324027537874427904\",\"name\":\"cucu old account\",\"username\"\
+        :\"fincu_wincu\"},{\"id\":\"146867169\",\"name\":\"\u30CD\u30AF\u30BF\u30FC\
+        \ (\u30B9\u30C6\u30A4\u30DB\u30FC\u30E0 \u30D5\u30EB\u30EF\u30AF\u30C1\u30F3\
+        )\",\"username\":\"Bakakieldogla\"},{\"id\":\"1342483347302281217\",\"name\"\
+        :\"\u305F\u307E\u3054\u307C\u30FC\u308D\",\"username\":\"hiro3pc\"},{\"id\"\
+        :\"1397057487577108483\",\"name\":\"Flylhigh\",\"username\":\"FlyFlylhigh\"\
+        },{\"id\":\"1099276443178098689\",\"name\":\"selle\",\"username\":\"dxmnselle\"\
+        },{\"id\":\"1096522641777643521\",\"name\":\"\u5F20\u5FB7\u519B\",\"username\"\
+        :\"zhangdejunjmm\"},{\"id\":\"1416163873904865290\",\"name\":\"Alhnod\",\"\
+        username\":\"alhnodalsanan\"},{\"id\":\"64274168\",\"name\":\"Lew\",\"username\"\
+        :\"lesmith5\"},{\"id\":\"1416366830906658820\",\"name\":\"\\uD83D\\uDC80\\\
+        uD83D\\uDC80\\uD83D\\uDC80\\uD83D\\uDC80\",\"username\":\"Klickslut\"},{\"\
+        id\":\"1375584599456292868\",\"name\":\"Player\",\"username\":\"GameToonsPlayer\"\
+        },{\"id\":\"1246540463554924546\",\"name\":\"BAJ \uEA00\",\"username\":\"\
+        BAJ584\"},{\"id\":\"1401245726009610247\",\"name\":\"amogus\",\"username\"\
+        :\"amogus31816431\"},{\"id\":\"1024553310\",\"name\":\"Meze (Jenpasit P.)\"\
+        ,\"username\":\"jenpasit\"},{\"id\":\"1369633382083264515\",\"name\":\"Classy\
+        \ Valkyrie\",\"username\":\"ClassyValkyrie\"},{\"id\":\"1361861724308181004\"\
+        ,\"name\":\"Tigris\",\"username\":\"TigrisFaiyu\"},{\"id\":\"1405797023492632578\"\
+        ,\"name\":\"WILSON YouTube\",\"username\":\"wilson_youtube\"},{\"id\":\"1357423390462795779\"\
+        ,\"name\":\"Cat Trades\",\"username\":\"Cat_Trades\"},{\"id\":\"1386757299864281092\"\
+        ,\"name\":\"\\uD83C\\uDF3F Rubio \u2728\\uD83C\\uDF31\",\"username\":\"Rubio6321\"\
+        },{\"id\":\"1353693022899363840\",\"name\":\"Acaplla\",\"username\":\"Acaplla1\"\
+        },{\"id\":\"149712202\",\"name\":\"I Am Change \\uD83D\\uDD4A\uFE0F #MTFBWY\
+        \ \\uD83C\\uDDF8\\uD83C\\uDDE6 \\uD83C\\uDDE8\\uD83C\\uDDE6 \\uD83C\\uDDEC\\\
+        uD83C\\uDDE7 \\uD83C\\uDDF5\\uD83C\\uDDF0 \\uD83D\\uDE80\",\"username\":\"\
+        UnCappingAgate\"},{\"id\":\"954741494061064192\",\"name\":\"Jason Ellison\"\
+        ,\"username\":\"JasonEl57580524\"},{\"id\":\"938250076568391680\",\"name\"\
+        :\"\u0641\u062A\u062D \u0627\u0644\u0644\u0647\",\"username\":\"dehghon2701\"\
+        },{\"id\":\"457700940\",\"name\":\"Towhid\",\"username\":\"towhid_asif\"},{\"\
+        id\":\"1276148600649760769\",\"name\":\"\u0630\u0628\u062D\u0646\u064A \u063A\
+        \u062F\u0631\u0643\",\"username\":\"fpmBsF4pGHvNGd2\"},{\"id\":\"2347625577\"\
+        ,\"name\":\"JABER MAENI\",\"username\":\"jabermqm1\"},{\"id\":\"1093406187880697856\"\
+        ,\"name\":\"soyer\",\"username\":\"soyer_stone\"},{\"id\":\"16396276\",\"\
+        name\":\"Mandi Cox\",\"username\":\"mandicoxsc\"},{\"id\":\"275227815\",\"\
+        name\":\"Kimberly Ann COllins\",\"username\":\"Kimberlyanncol2\"},{\"id\"\
+        :\"1277984305721905154\",\"name\":\"WilsonChong\",\"username\":\"wilsonC32120471\"\
+        },{\"id\":\"111831298\",\"name\":\"Ghesa Setyo Hadi \\uD83D\\uDDFA\uFE0F\\\
+        uD83C\\uDF0F\\uD83C\\uDF0C\",\"username\":\"vjghesa\"},{\"id\":\"1376761860209344513\"\
+        ,\"name\":\"TrisManZR37\",\"username\":\"TrisManZR37\"},{\"id\":\"393509113\"\
+        ,\"name\":\"Olivia Naylor\",\"username\":\"oliviamnaylor\"},{\"id\":\"1340680531575500800\"\
+        ,\"name\":\"man\\uD83D\\uDDFF\",\"username\":\"MEKlausen\"},{\"id\":\"925114806251802624\"\
+        ,\"name\":\"Claire \\uD83C\\uDF0A\\uD83C\\uDDEA\\uD83C\\uDDFA\\uD83C\\uDDEB\\\
+        uD83C\\uDDF7\\uD83C\\uDF0D\",\"username\":\"ClBear31\"}],\"meta\":{\"result_count\"\
+        :100,\"next_token\":\"1695203059209389429\"}}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '3439'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:24 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818480972799; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818480972799; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_e3bpHhYUAsknPr+/WbqGvA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818480972799; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 56addc5770428f564dba31c5e53cbe52c6fa19ccfd61afd611b476d1b4ab037a
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '180'
+      x-rate-limit-remaining:
+      - '179'
+      x-rate-limit-reset:
+      - '1651929084'
+      x-response-time:
+      - '167'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/84839422/followers
+version: 1

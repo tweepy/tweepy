@@ -1,0 +1,125 @@
+interactions:
+- request:
+    body:
+      list_id: '84839422'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/followed_lists
+  response:
+    body:
+      string: '{"data":{"following":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '53'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:54 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965438101460; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965438101460; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_Z+/SOHbQSaRNRTchfkP+PA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965438101460; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 466a2dcbb242fc5f3242134d1d3ebd07c0879ddd0c689fa2af1980070c1448c4
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930554'
+      x-response-time:
+      - '61'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/followed_lists
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/followed_lists/84839422
+  response:
+    body:
+      string: '{"data":{"following":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '54'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:20:54 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192965457290629; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192965457290629; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_Q2d+R9WL3WKZtZcQuXSzHA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192965457290629; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:20:54 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 2c67e4422cda5589369e3d5d6b3742a9aca3a7ecd21a1cc2c48a62d6ddd22d00
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651930554'
+      x-response-time:
+      - '40'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/followed_lists/84839422
+version: 1

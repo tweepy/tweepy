@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/spaces/1ynKOZVRyOwxR
+  response:
+    body:
+      string: '{"data":{"id":"1ynKOZVRyOwxR","state":"ended"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '72'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 14:32:11 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165193393138988240; Max-Age=63072000; Expires=Mon,
+        06 May 2024 14:32:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165193393138988240; Max-Age=63072000; Expires=Mon, 06 May
+        2024 14:32:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_ong0ieJfSTqXkwKLt8GYuA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 14:32:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165193393138988240; Max-Age=63072000; Expires=Mon, 06 May 2024
+        14:32:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - b82ae6123b6ceb1290a00ce7d27c85a5fe0604efd57b866f7cd82e582ee75059
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '298'
+      x-rate-limit-reset:
+      - '1651934149'
+      x-response-time:
+      - '299'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/spaces/1ynKOZVRyOwxR
+version: 1

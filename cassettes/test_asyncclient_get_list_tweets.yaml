@@ -1,0 +1,377 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422/tweets
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"1522916670209146881\",\"text\":\"RT @fotogramas_es:\
+        \ \u26A1\uFE0F  Estas son las 15 series recientes m\xE1s adictivas que han\
+        \ llegado recientemente a Netflix \\uD83D\\uDC47  https://t.co/qhMORyMwkw\"\
+        },{\"id\":\"1522916648138723329\",\"text\":\"RT @elperiodico: Chanel brilla\
+        \ en su segundo ensayo \\n\\n\u27A1\uFE0FLas redes han explotado de orgullo\
+        \ ante el segundo ensayo de @ChanelTerrero con su\u2026\"},{\"id\":\"1522916629134381057\"\
+        ,\"text\":\"RT @Cosmopolitan_es: \u26A1\uFE0F \u201CEvaluna comparte las primeras\
+        \ im\xE1genes de Camilo e \xCDndigo bailando juntos\u201D de @Cosmopolitan_es\
+        \ https://t.co/BKIVx9\u2026\"},{\"id\":\"1522904538428153858\",\"text\":\"\
+        \u0623\u0639\u0644\u0646\u062A \u0648\u0633\u0627\u0626\u0644 \u0625\u0639\
+        \u0644\u0627\u0645 \u0633\u0648\u0631\u064A\u0629 \u0648\u0639\u0631\u0628\
+        \u064A\u0629 \u0639\u0646 \u063A\u0627\u0631\u0629 \u062C\u0648\u064A\u0629\
+        \ \u0627\u0633\u062A\u0647\u062F\u0641\u062A #\u062D\u0648\u064A\u062C\u0629\
+        _\u0643\u0627\u0637\u0639 \u0642\u0631\u0628 \u0627\u0644\u062C\u0633\u0631\
+        \ \u0627\u0644\u0645\u0639\u0644\u0642 \u0628\u0645\u062F\u064A\u0646\u0629\
+        \ #\u062F\u064A\u0631_\u0627\u0644\u0632\u0648\u0631. \u062A\u0627\u0628\u0639\
+        \u0648\u0627 \u0645\u0639\u0646\u0627 \u0627\u0644\u062A\u0641\u0627\u0635\
+        \u064A\u0644\\n\\n#\u0633\u0648\u0631\u064A\u0627\\n\\nhttps://t.co/lCIETODISf\"\
+        },{\"id\":\"1522894062277513216\",\"text\":\"#TwitterBlueroom LIVE Q&amp;A\
+        \ with CLASS:y\\nCLASS:y(\uD074\uB77C\uC528)\uC640 \uBE14\uB8E8\uB8F8\uC5D0\
+        \uC11C \uB9CC\uB098\uC694 \\uD83D\\uDC9E \\n\\n#CLASSy #\uD074\uB77C\uC528\
+        \ \\n#CLASSISOVER #SHUTDOWN\\n\\nhttps://t.co/vlJ28rN9un\"},{\"id\":\"1522893995147669504\"\
+        ,\"text\":\"RT @M25_CLASSy: [\\uD83D\\uDCFA]\\n\\n\u2728 CLASS:y &amp; #TwitterBlueroom\
+        \ LIVE Q&amp;A \u2728\\n\\nCLASS:y(\uD074\uB77C\uC528)\uC640 \\n\uBE14\uB8E8\
+        \uB8F8\uC5D0\uC11C \uB9CC\uB098\uC694 \\uD83D\\uDC9E \\n\\n#CLASSy #\uD074\
+        \uB77C\uC528 \\n#CLASSISOVER #SHUTDOWN https://t.c\u2026\"},{\"id\":\"1522889824407101440\"\
+        ,\"text\":\"\u0627\u0644\u0645\u0639\u0632 \u0639\u0644\u064A \u064A\u0643\
+        \u0634\u0641 \u0639\u0646 \u062A\u0634\u062C\u0639\u064A\u0647 \u0627\u0644\
+        \u0647\u0644\u0627\u0644 \u0648\u064A\u062E\u062A\u0627\u0631 \u0623\u0641\
+        \u0636\u0644 \u0627\u0644\u0644\u0627\u0639\u0628\u064A\u0646 \u0628\u0627\
+        \u0644\u062F\u0648\u0631\u064A \u0627\u0644\u0633\u0639\u0648\u062F\u064A\
+        \ - \u0639\u0628\u0631 @GoalSA\\n\\nhttps://t.co/iiCUE27bxF\"},{\"id\":\"\
+        1522885735325515776\",\"text\":\"\u0644\u0644\u062D\u0641\u0627\u0638 \u0639\
+        \u0644\u0649 \u0627\u0644\u0647\u0648\u064A\u0629 \u0648\u0635\u0648\u0646\
+        \ \u0627\u0644\u062A\u0631\u0627\u062B.. \u0645\u0647\u0631\u062C\u0627\u0646\
+        \ \u0633\u0628\u0627\u0642 \u062F\u0644\u0645\u0627 \u0627\u0644\u062A\u0627\
+        \u0631\u064A\u062E\u064A \u064A\u0646\u0637\u0644\u0642 - \u0639\u0628\u0631\
+        \ @Baynounahtv \\n\\nhttps://t.co/D8r02jniXb\"},{\"id\":\"1522884083734433792\"\
+        ,\"text\":\"Captain @mayankcricket won the toss and @PunjabKingsIPL have elected\
+        \ to bat first against @rajasthanroyals. Follow along for all the updates\
+        \ as #PBKSvRR gets underway.\\nhttps://t.co/WFk6VucCJs\"},{\"id\":\"1522884046916931586\"\
+        ,\"text\":\"Captain @mayankcricket won the toss and @PunjabKingsIPL have elected\
+        \ to bat first against @rajasthanroyals. Follow along for all the updates\
+        \ as #PBKSvRR gets underway.\\nhttps://t.co/3ZKFRDDliV\"},{\"id\":\"1522883968940400640\"\
+        ,\"text\":\"Captain @mayankcricket won the toss and @PunjabKingsIPL have elected\
+        \ to bat first against @rajasthanroyals. Follow along for all the updates\
+        \ as #PBKSvRR gets underway.\\nhttps://t.co/EV0VOO13i9\"},{\"id\":\"1522883965983539200\"\
+        ,\"text\":\"\u0628\u064A\u0646\u0647\u0627 \u0623\u0628\u0637\u0627\u0644\
+        \ \u0641\u064A \u0645\u0635\u0631 \u0648\u0625\u0646\u062C\u0644\u062A\u0631\
+        \u0627 \u0648\u0641\u0631\u0646\u0633\u0627.. \u0641\u0631\u0642 \\\"\u0639\
+        \u064E\u0644\u0650\u0642\u064E\u062A\\\" \u0641\u064A \\\"\u0642\u0627\u0639\
+        \\\" \u0627\u0644\u062F\u0648\u0631\u064A\u0627\u062A! \u2693\\uD83D\\uDE25\
+        \ - \u0639\u0628\u0631 @alittihadSport \\n\\nhttps://t.co/WehyU8d0kk\"},{\"\
+        id\":\"1522883546712522752\",\"text\":\"IPL 2022: @PunjabKingsIPL - @rajasthanroyals\
+        \ \u0B87\u0B9F\u0BC8\u0BAF\u0BC7 \u0BAE\u0BCB\u0BA4\u0BB2\u0BCD. \u0BAA\u0BCB\
+        \u0B9F\u0BCD\u0B9F\u0BBF\u0BAF\u0BBF\u0BA9\u0BCD \u0B85\u0BAA\u0BCD\u0B9F\u0BC7\
+        \u0B9F\u0BCD\u0B95\u0BB3\u0BC1\u0B95\u0BCD\u0B95\u0BC1 \u0B87\u0BA8\u0BCD\u0BA4\
+        \u0BAA\u0BCD \u0BAA\u0B95\u0BCD\u0B95\u0BA4\u0BCD\u0BA4\u0BC8\u0BAA\u0BCD\
+        \ \u0BAA\u0BBF\u0BA9\u0BCD\u0BA4\u0BCA\u0B9F\u0BB0\u0BB5\u0BC1\u0BAE\u0BCD\
+        . #PBKSvRR\\nhttps://t.co/EV0VOOiEGJ\"},{\"id\":\"1522883149323288577\",\"\
+        text\":\"\u091F\u0949\u0938 \u091C\u0940\u0924\u0915\u0930 @PunjabKingsIPL\
+        \ \u0928\u0947 @rajasthanroyals \u0915\u0947 \u0916\u093F\u0932\u093E\u092B\
+        \ \u092A\u0939\u0932\u0947 \u092C\u0932\u094D\u0932\u0947\u092C\u093E\u091C\
+        \u0940 \u0915\u0930\u0928\u0947 \u0915\u093E \u092B\u0948\u0938\u0932\u093E\
+        \ \u0915\u093F\u092F\u093E \u0939\u0948\u0964 #PBKSvRR \u092E\u0948\u091A\
+        \ \u0915\u0947 \u0938\u092D\u0940 \u0905\u092A\u0921\u0947\u091F\u094D\u0938\
+        \ \u0914\u0930 \u0939\u093E\u0907\u0932\u093E\u0907\u091F\u094D\u0938 \u092F\
+        \u0939\u093E\u0902 \u0926\u0947\u0916\u0947\u0902\u0964\\nhttps://t.co/EV0VOOiEGJ\"\
+        },{\"id\":\"1522882537319714816\",\"text\":\"\u0641\u064A \u0645\u0631\u0627\
+        \u0633\u0645 \u0628\u0633\u064A\u0637\u0629.. \u0625\u064A\u0645\u0627\u0646\
+        \u0648\u064A\u0644 \u0645\u0627\u0643\u0631\u0648\u0646 \u0631\u0626\u064A\
+        \u0633\u0627 \u0644\u0641\u0631\u0646\u0633\u0627 \u0644\u0648\u0644\u0627\
+        \u064A\u0629 \u062B\u0627\u0646\u064A\u0629 \\uD83C\\uDDEB\\uD83C\\uDDF7 -\
+        \ \u0639\u0628\u0631 @aletihadae \\n\\nhttps://t.co/JwCaKgHme0\"},{\"id\"\
+        :\"1522879014293188609\",\"text\":\"\u0645\u0646 \u0647\u0648 \u062A\u0648\
+        \u062F \u0628\u0648\u064A\u0644\u064A \u062E\u0644\u064A\u0641\u0629 \u0623\
+        \u0628\u0631\u0627\u0645\u0648\u0641\u064A\u062A\u0634 \u0641\u064A \u062A\
+        \u0634\u064A\u0644\u0633\u064A\u061F - \u0639\u0628\u0631 @ArrajolM \\n\\\
+        nhttps://t.co/8UOz7KprZP\"},{\"id\":\"1522874032089145344\",\"text\":\"RT\
+        \ @eltelevisero: \u26A1\uFE0F \\\"Lista completa de concursantes de la s\xE9\
+        ptima edici\xF3n de #MasterChefCelebrity\\uD83D\\uDC68\\uD83C\\uDFFB\u200D\
+        \\uD83C\\uDF73 \\\"\\nhttps://t.co/xgluld3cUw\"},{\"id\":\"1522874019921510400\"\
+        ,\"text\":\"RT @elperiodico: \\uD83D\\uDC60Dakota Johnson o como triunfar\
+        \ en bata en la  \\n#MetGala2022 \\n\\nhttps://t.co/UWTp24MpR5\"},{\"id\"\
+        :\"1522873505636929538\",\"text\":\"RT @CNTravelerSpain: La mejor ruta ciclista\
+        \ (y senderista) de Europa de 2022 est\xE1 en Irlanda \\uD83D\\uDEB5\u200D\
+        \u2640\uFE0F https://t.co/vZE0GYLw38\"},{\"id\":\"1522873475987349507\",\"\
+        text\":\"RT @elperiodico: \u26A1\uFE0F Marat\xF3n de Barcelona: afectaciones\
+        \ al tr\xE1fico y transporte p\xFAblico para este domingo\\n\\n https://t.co/ibzEpzBJaW\"\
+        },{\"id\":\"1522841955419447296\",\"text\":\"\u062A\u0634\u064A\u0644\u0633\
+        \u064A \u064A\u0639\u0644\u0646 \u0639\u0646 \u0627\u062A\u0641\u0627\u0642\
+        \ \u0644\u0627\u0633\u062A\u062D\u0648\u0627\u0630 \u0645\u0644\u0627\u0643\
+        \ \u062C\u062F\u062F \u0639\u0644\u0649 \u0627\u0644\u0646\u0627\u062F\u064A\
+        \ \u0645\u0642\u0627\u0628\u0644 4.25 \u0645\u0644\u064A\u0627\u0631 \u0625\
+        \u0633\u062A\u0631\u0644\u064A\u0646\u064A \\uD83D\\uDD35 - \u0639\u0628\u0631\
+        \ @akhbar\\n\\nhttps://t.co/KaBHgxO3k9\"},{\"id\":\"1522838639344078849\"\
+        ,\"text\":\"\u0645\u062D\u0645\u062F \u0639\u0628\u062F\u0647 \u0648\u0645\
+        \u0627\u062C\u062F \u0627\u0644\u0645\u0647\u0646\u062F\u0633 \u0648\u0631\
+        \u0627\u0628\u062D \u0635\u0642\u0631 \u064A\u0634\u0639\u0644\u0648\u0646\
+        \ \u062D\u0641\u0644\u0627\u062A \u0627\u0644\u0639\u064A\u062F \u0628\u0627\
+        \u0644\u0633\u0639\u0648\u062F\u064A\u0629 - \u0639\u0628\u0631 @hiamag\\\
+        n\\nhttps://t.co/kaz1802sS8\"},{\"id\":\"1522828848898854912\",\"text\":\"\
+        Tomorrow is #MothersDay and we\u2019re here for it \u2764\uFE0F\\n\\nJoin\
+        \ in the conversation! https://t.co/xxHFC46Ql1\"},{\"id\":\"1522811173946728451\"\
+        ,\"text\":\"\u5185\u95A3\u5B98\u623F\u306F\u3001\u5317\u671D\u9BAE\u304B\u3089\
+        \u5F3E\u9053\u30DF\u30B5\u30A4\u30EB\u306E\u53EF\u80FD\u6027\u304C\u3042\u308B\
+        \u3082\u306E\u304C\u767A\u5C04\u3055\u308C\u305F\u3068\u767A\u8868\u3057\u307E\
+        \u3057\u305F\\nhttps://t.co/ds2df3jtaC\"},{\"id\":\"1522776988666134529\"\
+        ,\"text\":\"\u30D0\u30E9\u30A8\u30C6\u30A3\u30FC\u756A\u7D44\u300EKing \uFF06\
+        \ Prince\u308B\u3002\u300F\u304C\u300113\u664230\u5206\u304B\u3089\u653E\u9001\
+        \u3055\u308C\u307E\u3059\\uD83D\\uDCFA\\n#KingandPrince  #\u30AD\u30F3\u30D7\
+        \u308B\\nhttps://t.co/XhUuUHpvfm\"},{\"id\":\"1522776321503338496\",\"text\"\
+        :\"RT @UNICEFinJapan: \u56FD\u9023\u306E #\u6C17\u5019\u5909\u52D5 \u5BFE\u7B56\
+        \u306B\u3001\u5B50\u3069\u3082\u305F\u3061\u306E\u58F0\u3092\uFF01\\n\u300C\
+        #\u5B50\u3069\u3082\u30D1\u30D6\u30B3\u30E12022\u300D5\u67085\u65E5\u304B\u3089\
+        \u52DF\u96C6\u958B\u59CB\\n\u27A1\uFE0Fhttps://t.co/powAomSATL\\n\\n\\uD83D\\\
+        uDCE3\u5B50\u3069\u3082\u30D1\u30D6\u30B3\u30E12022 \u7279\u8A2D\u30DA\u30FC\
+        \u30B8\u27A1\uFE0Fhttps://t.co/TKVYOPGCsn\u2026\"},{\"id\":\"1522765702071042048\"\
+        ,\"text\":\"\u7C73\u56FD\u52D9\u7701\u306E\u30DD\u30FC\u30BF\u30FC\u526F\u5831\
+        \u9053\u5B98\u306F\u3001\u5317\u671D\u9BAE\u304C\u5317\u6771\u90E8\u8C4A\u6E13\
+        \u91CC\uFF08\u30D7\u30F3\u30B2\u30EA\uFF09\u30675\u6708\u4E2D\u306B\u3082\u6838\
+        \u5B9F\u9A13\u3092\u884C\u3046\u6E96\u5099\u304C\u6574\u3046\u53EF\u80FD\u6027\
+        \u304C\u3042\u308B\u3068\u306E\u5206\u6790\u3092\u660E\u3089\u304B\u306B\u3057\
+        \u307E\u3057\u305F\\nhttps://t.co/fnmQEX2ddf\"},{\"id\":\"1522765347450851328\"\
+        ,\"text\":\"RT @AztecaNoticias: \xBFTe toc\xF3 la granizada de este viernes\
+        \ en la #CDMX? Comp\xE1rtenos tus videos o fotograf\xEDas. \\n\\nhttps://t.co/zMMRjtzV06\"\
+        },{\"id\":\"1522765337288003584\",\"text\":\"RT @politicomx: \u26A1A menos\
+        \ de un mes de que las #Elecciones2022 se lleven a cabo en Quintana Roo, conoce\
+        \ todo lo que debes saber de este proc\u2026\"},{\"id\":\"1522762324066533376\"\
+        ,\"text\":\"RT @WNBA: Watch the @minnesotalynx take on the @seattlestorm right\
+        \ here \u2B07\uFE0F https://t.co/px0MpNAyMu\"},{\"id\":\"1522761645616893953\"\
+        ,\"text\":\"The ending of Sky-Sparks https://t.co/42ew9L3rLS\"},{\"id\":\"\
+        1522758927582044161\",\"text\":\"RT @JoelEmbiid: https://t.co/X6PE3IxTQj\"\
+        },{\"id\":\"1522742571046481920\",\"text\":\"Covid-19: Brasil registra 176\
+        \ mortes e 19.447 casos em 24 horas\\n\\nhttps://t.co/me133Bjpo3\"},{\"id\"\
+        :\"1522736537246388224\",\"text\":\"RT @NBATV: Natasha Cloud put her on skates\
+        \ \u26F8 https://t.co/CB6lFgk92o\"},{\"id\":\"1522711676285759488\",\"text\"\
+        :\"Pelo menos oito pessoas morreram ap\xF3s uma explos\xE3o no hotel Saratoga,\
+        \ um edif\xEDcio hist\xF3rico em Cuba\\n\\nhttps://t.co/iGrSkhd1wf\"},{\"\
+        id\":\"1522692948244246528\",\"text\":\"we'll go first: yellowstone meets\
+        \ stranger things\"},{\"id\":\"1522692671743172609\",\"text\":\"RT @arrogantkei:\
+        \ the topic was range \\uD83C\\uDFF9 https://t.co/m9hMN8G8CE\"},{\"id\":\"\
+        1522692649114906626\",\"text\":\"describe #outerrange in four words https://t.co/poA9ux7oex\"\
+        },{\"id\":\"1522691547308900359\",\"text\":\"RT @TwitterVoices: It is #CultureCon\
+        \ eve! And #TwitterVoices are ready to take the stage and keep it all the\
+        \ way \\uD83D\\uDCAF with the convos that mat\u2026\"},{\"id\":\"1522688916213878784\"\
+        ,\"text\":\"the best protagonist\"},{\"id\":\"1522688844470300672\",\"text\"\
+        :\"O l\xEDder ind\xEDgena J\xFAnior Hekurari afirmou nesta sexta que o grupo\
+        \ de yanomamis que estava desaparecido em Roraima foi encontrado. A Pol\xED\
+        cia investiga o caso \\n\\nhttps://t.co/kBfT5icol3\"},{\"id\":\"1522681857351036929\"\
+        ,\"text\":\"RT @EW: We're heading back to the #TheWilds! To join the fun,\
+        \ be ready to press play on the season 2 premiere with us TODAY at 6pm ET/3pm\
+        \ P\u2026\"},{\"id\":\"1522681764161937408\",\"text\":\"Quer saber como sua\
+        \ marca pode se conectar com as principais paix\xF5es, eventos e tend\xEA\
+        ncias da timeline? Descubra o poder do formato Pre-roll no Twitter, com publishers\
+        \ verificados e seguros. Leia o artigo! #BrandSafety\"},{\"id\":\"1522673615505874952\"\
+        ,\"text\":\"Dos operarios que estaba desaparecidos fueron encontrados muertos\
+        \ por la explosi\xF3n en Salamanca, Madrid \\nhttps://t.co/jmmk2vvrvK\"},{\"\
+        id\":\"1522668933072969728\",\"text\":\"RT @FUCCl: Twitter is really the pinnacle\
+        \ of social media. They wouldn\u2019t know what to do without y\u2019all.\"\
+        },{\"id\":\"1522664021601697793\",\"text\":\"RT @JacobiMyles: Runway baddie\
+        \ #AdutAkech \\uD83C\\uDF39 https://t.co/blhwVHdPMd\"},{\"id\":\"1522654064286257152\"\
+        ,\"text\":\"RT @NiusDiario: \u26A1\uFE0F#Moments | Alejandra Su\xE1rez Barcala,\
+        \ el personaje del d\xEDa en seis tuits\\nhttps://t.co/ZKXvpm3B7H\"},{\"id\"\
+        :\"1522653949714644994\",\"text\":\"RT @elperiodico: \u26A1\uFE0FAs\xED afectar\xE1\
+        \ este domingo la Marat\xF3n de Barcelona\\nhttps://t.co/ibzEpzBJaW\"},{\"\
+        id\":\"1522653823617097730\",\"text\":\"RT @torreon: #MOMENTO \u26A1\uFE0F\
+        \xBFQui\xE9nes son todos los artistas que colaboraron en #UnVeranoSinTi de\
+        \ Bad Bunny?\\nhttps://t.co/0Sx63dOG3M\"},{\"id\":\"1522653425908998145\"\
+        ,\"text\":\"RT @PuckNews: Join @juliaioffe in conversation w/ legendary photojournalist\
+        \ @lynseyaddario and Pulitzer Prize-winning journalist @mschwirtz\u2026\"\
+        },{\"id\":\"1522653348100513795\",\"text\":\"RT @yotele: \u26A1\uFE0F Marta\
+        \ Riesco no volver\xE1 a trabajar como colaboradora en Telecinco tras una\
+        \ tensa reuni\xF3n con sus jefes https://t.co/bHmenuDb\u2026\"},{\"id\":\"\
+        1522653192617705477\",\"text\":\"RT @fotogramas_es: \u26A1\uFE0F Celebramos\
+        \ 20 a\xF1os de #SpiderMan , la pel\xEDcula en la que Sony y Sam Raimi revolucionaron\
+        \ el cine de superh\xE9roes con u\u2026\"},{\"id\":\"1522653131884142603\"\
+        ,\"text\":\"Honey @jackharlow Come Home The Kids Miss You https://t.co/ygdc95aSIH\"\
+        },{\"id\":\"1522653034521804800\",\"text\":\"RT @EsquireEs: \u26A1\uFE0F Desde\
+        \ luego, el trabajo de estos actores es digno de admirar...\\nhttps://t.co/UecHyeUnyn\"\
+        },{\"id\":\"1522652669759864833\",\"text\":\"RT @elle_es: Un bob corto y rizado\
+        \ que ya nos chifla \\uD83D\\uDE0D\\nhttps://t.co/3NLwwzGPbr\"},{\"id\":\"\
+        1522652469079289868\",\"text\":\"RT @menshealthESP: Tener unos abdominales\
+        \ como los de @channingtatum es posible. Si quieres un 'six pack' como el\
+        \ suyo pon atenci\xF3n a su en\u2026\"},{\"id\":\"1522652419728936960\",\"\
+        text\":\"If you\u2019re a #SmallBusiness on Twitter looking to grow, check\
+        \ out these useful tips from @mizizishop, @seescandies, and @boxebristol \u2B07\
+        \uFE0F\"},{\"id\":\"1522652291513425921\",\"text\":\"RT @Newtral: \\uD83D\\\
+        uDCF2 Las claves de las recientes denuncias de espionaje a m\xF3viles con\
+        \ el programa Pegasus.\\n\\nTe lo explicamos en este @MomentsES\u2026\"},{\"\
+        id\":\"1522651673830862849\",\"text\":\"RT @Cosmopolitan_es: \u26A1\uFE0F\
+        \ Las 5 acusaciones m\xE1s graves de Amber Heard contra Johnny Depp \\uD83D\\\
+        uDE41 \\nhttps://t.co/ygj3qL3xLT\"},{\"id\":\"1522651531601924099\",\"text\"\
+        :\"RT @elperiodico: El espectacular traje de la firma Palomo Spain que Chanel\
+        \ llevar\xE1 a Eurovisi\xF3n 2022 https://t.co/p4g3Jx76OM\"},{\"id\":\"1522645438188466176\"\
+        ,\"text\":\"RT @HuffPost: Hear from some of these abortion providers and advocates\
+        \ on Spaces at 2:30 p.m. ET \\uD83D\\uDC47 https://t.co/2cRq5YIB4C\"},{\"\
+        id\":\"1522644753074036742\",\"text\":\"Varias personas resultaron heridas\
+        \ y otras murieron tras la explosi\xF3n en el Hotel Saratoga de La Habana,\
+        \ Cuba, este viernes\\nhttps://t.co/8NGL2R5PUA\"},{\"id\":\"1522643344731615233\"\
+        ,\"text\":\"when Spaces hosts meet in real life https://t.co/0xdFKKYVM2\"\
+        },{\"id\":\"1522642806032019456\",\"text\":\"\u0BAE\u0BC7\u0B9F\u0BCD\u0B9A\
+        \u0BC8 \u0BB5\u0BC6\u0BA9\u0BCD\u0BB1\u0BA4\u0BC1 @mipaltan! \u0BB9\u0BC8\u0BB2\
+        \u0BC8\u0B9F\u0BCD\u0B9A\u0BC8 \u0B87\u0B99\u0BCD\u0B95\u0BC1 \u0BAA\u0BC6\
+        \u0BB1\u0BB5\u0BC1\u0BAE\u0BCD. #GTvMI\\nhttps://t.co/7iFVCaGCSH\"},{\"id\"\
+        :\"1522642552972795906\",\"text\":\"#ScarletWitch is too powerful\"},{\"id\"\
+        :\"1522642324781633536\",\"text\":\"If you\u2019d like to apply, or would\
+        \ like to nominate someone else for the program, please feel free to fill\
+        \ out the following form:\\n\\nhttps://t.co/LUuWj24HLu\"},{\"id\":\"1522642323535847424\"\
+        ,\"text\":\"We\u2019ve gone into more detail on each Insider in our forum\
+        \ post.\_\\n\\nJoin us in congratulating the new additions! \\uD83E\\uDD73\\\
+        n\\nhttps://t.co/0r5maYEjPJ\"},{\"id\":\"1522642322449608704\",\"text\":\"\
+        Today, we\u2019re excited to expand this group with the addition of 8 new\
+        \ developers!\\n\\nWelcome to the program, kings and queens \\uD83D\\uDC51\\\
+        n\\n@andreitr, @dara_tobi, @Harmon758Public, @RedouaneBali, @ryanjgallag,\
+        \ @fourtonfish, @v21, @VeldaKiara\"},{\"id\":\"1522642320910282753\",\"text\"\
+        :\"Last October, we announced the launch of the Twitter Developer Insider\
+        \ Program \\uD83D\\uDE80\\n\\nSince then, this group of developers has helped\
+        \ us build better, learn faster, and support the community in new and exciting\
+        \ ways.\\nhttps://t.co/nTuXs7BjDp\"},{\"id\":\"1522641609493467136\",\"text\"\
+        :\"The @mipaltan clinch their second win in a row. Catch all the reactions\
+        \ to the #GTvMI match here.\\nhttps://t.co/7iFVCaGCSH\"},{\"id\":\"1522641041198919681\"\
+        ,\"text\":\"\u092E\u0941\u0902\u092C\u0908 \u0915\u0947 \u092C\u094D\u0930\
+        \u0947\u092C\u094B\u0930\u094D\u0928 \u0938\u094D\u091F\u0947\u0921\u093F\u092F\
+        \u092E \u092E\u0947\u0902 \u0916\u0947\u0932\u0947 \u0917\u090F #GTvMI \u092E\
+        \u0948\u091A \u092E\u0947\u0902 @mipaltan \u0928\u0947 @gujarat_titans \u0915\
+        \u094B 5 \u0930\u0928\u094B\u0902 \u0938\u0947 \u0939\u0930\u093E \u0926\u093F\
+        \u092F\u093E \u0939\u0948\u0964 \u0907\u0938 \u092E\u0948\u091A \u092A\u0930\
+        \ \u0938\u092D\u0940 \u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\
+        \u092F\u093E \u0914\u0930 \u0939\u093E\u0907\u0932\u093E\u0907\u091F\u094D\
+        \u0938 \u092F\u0939\u093E\u0902 \u092B\u0949\u0932\u094B \u0915\u0930\u0947\
+        \u0902\u0964\\nhttps://t.co/7iFVCaGCSH\"},{\"id\":\"1522640520262074369\"\
+        ,\"text\":\"RT @canaltech: Quer saber tudo sobre a queda do NFT? Confira nesse\
+        \ moments que criamos: https://t.co/8oX1jJFFo9\"},{\"id\":\"1522639549519831043\"\
+        ,\"text\":\"Feliz #UnVeranoSinTi https://t.co/3EV5oC2VIX\"},{\"id\":\"1522639030315278338\"\
+        ,\"text\":\"RT @tangerinanews: Confira nove estreias da semana nos cinemas\
+        \ e streamings pra assistir no fim de semana https://t.co/XUtpidH8pl\"},{\"\
+        id\":\"1522634733867487234\",\"text\":\"The finance conversation has become\
+        \ more open (and fun!) than ever before.\\n\\nLearn how Finance Goes Social\
+        \ during our Twitter Trends chat this Thursday, 5/12 at 1pm ET/10am PT with\
+        \ @iamrrr, @Anu__Dave, @JNSilva_, and @RhysDurrellW.\\n\\nSet a reminder\\\
+        uD83D\\uDC47\\nhttps://t.co/VL8VbHsjHG\"},{\"id\":\"1522632435179171840\"\
+        ,\"text\":\"when the morning coffee finally hits &gt;\"},{\"id\":\"1522629147297787905\"\
+        ,\"text\":\"\u26A1\uFE0F \u201C\u062E\u0633\u0627\u0626\u0631 \u0628\u0627\
+        \u0644\u0645\u0644\u064A\u0627\u0631\u0627\u062A.. \u0639\u0627\u0635\u0641\
+        \u0629 \u0627\u0631\u062A\u0641\u0627\u0639 \u0627\u0644\u0641\u0627\u0626\
+        \u062F\u0629 \u062A\u0636\u0631\u0628 \u0627\u0644\u0623\u0633\u0647\u0645\
+        \ \u062D\u0648\u0644 \u0627\u0644\u0639\u0627\u0644\u0645\u201D by @Baynounahtv\
+        \ https://t.co/Tn0NzisB4o\"},{\"id\":\"1522624786983264257\",\"text\":\"RT\
+        \ @gridnews: What will May 9th mean for the war in Ukraine? \\n\\nJoin @TomNagorski\
+        \ and @joshuakeating now on @TwitterSpaces for a chat. https\u2026\"},{\"\
+        id\":\"1522624483705692162\",\"text\":\"Tenemos que confesar algo: decir que\
+        \ el ni\xF1o se siente mal, pero lo cierto es que lo dejamos quedarse en casa\
+        \ porque lo quer\xEDamos consentir. #SorryNotSorry https://t.co/Futc3dWQ1F\"\
+        },{\"id\":\"1522623574397407234\",\"text\":\"\\uD83C\\uDFB5 \\\"Eu tenho tanto\
+        \ pra lhe falar, mas com palavras n\xE3o sei dizer\u2026\\\". Quem j\xE1 cantou\
+        \ essa m\xFAsica pra m\xE3e? E que m\xE3e sabe a letra de cor? Nos Tweets\
+        \ sobre m\xE3es, m\xFAsica \xE9 um dos temas mais mencionados. Como o Dia\
+        \ das M\xE3es t\xE1 chegando, conta a\xED que #musicademae te vem \xE0 cabe\xE7\
+        a! \\uD83D\\uDC99\"},{\"id\":\"1522623247208095745\",\"text\":\"RT @Cilla_Presley:\
+        \ Here is an exclusive clip! #ElvisMovie https://t.co/s2DktfLGGh\"},{\"id\"\
+        :\"1522622842940149760\",\"text\":\"Querida gente de @TwitterParents, \xBF\
+        qu\xE9 piensan o qu\xE9 consejo tienen para esto? \\uD83D\\uDC40\\uD83D\\\
+        uDC47 #Mam\xE1SinFiltro https://t.co/NjMDsh1aSG\"},{\"id\":\"1522622469290352640\"\
+        ,\"text\":\"Pues @TwitterParents tiene una \u2728gran\u2728 biograf\xEDa:\
+        \ \\\"Menos culpa. M\xE1s flexibilidad. Cero juicios. Todo amor\\\".\\n\\\
+        nAs\xED que, \xBFpor qu\xE9 no hablar sobre lo que te hace ser una madre que\
+        \ *no* se siente culpable? \\n\\nEmpezamos nosotros: dar pizza\\uD83C\\uDF55\
+        \ en la cena. \\uD83E\\uDD2D #Mam\xE1SinFiltro https://t.co/gIxQEN8m4I\"},{\"\
+        id\":\"1522619837620572160\",\"text\":\"Se hizo historia en el tenis espa\xF1\
+        ol. Carlos Alcaraz ha derrotado por primera vez a Rafa Nadal en los cuartos\
+        \ de final del Mutua Madrid Open \\uD83C\\uDFBE\\nhttps://t.co/M1K1Z5egrV\"\
+        },{\"id\":\"1522618586342301697\",\"text\":\"this Tweet is your permission\
+        \ to stop working and start gaming\"},{\"id\":\"1522615452052205580\",\"text\"\
+        :\"What a fantastic way of highlighting how easy it can be to ignore the symptoms\
+        \ of ovarian cancer. \\n\\nMust watch \\uD83D\\uDC40\\uD83D\\uDC47 https://t.co/ftuHn7EOID\"\
+        },{\"id\":\"1522615136388743168\",\"text\":\"WNBA IS BACK https://t.co/5FXJ7jzIWm\"\
+        },{\"id\":\"1522614227692883970\",\"text\":\"La fuerza estuvo del lado de\
+        \ las marcas esta semana, \u2728 descubre c\xF3mo conectaron en nuestro moment\
+        \ semanal.\\uD83D\\uDC47\\uD83D\\uDC47 https://t.co/4n9k9TkS1H\"},{\"id\"\
+        :\"1522611450874929153\",\"text\":\"Analistas repudiam fala de Bolsonaro sobre\
+        \ papel das For\xE7as Armadas no processo eleitoral. Presidente disse que\
+        \ militares n\xE3o ser\xE3o apenas \u201Cespectadores\u201D da elei\xE7\xE3\
+        o\\nhttps://t.co/lW7Txor8ff\"},{\"id\":\"1522592048733425665\",\"text\":\"\
+        For this and more \\uD83D\\uDC47\\n\\nhttps://t.co/7kNaDm1tsu\"},{\"id\":\"\
+        1522592041666072576\",\"text\":\"We asked @adamm0rgan for his advice on starting\
+        \ a newsletter. https://t.co/OYwadDezzM\"},{\"id\":\"1522592028709769217\"\
+        ,\"text\":\"\u2018The Frontlist\u2019 is a newsletter by Adam Morgan (@adamm0rgan),\
+        \ featuring monthly book previews, reading recommendations, and exclusive\
+        \ interviews with writers, book designers, and publishers.\\n\\nhttps://t.co/ppetL3CIad\"\
+        },{\"id\":\"1522587339113050113\",\"text\":\"\\uD83D\\uDD02 Bad Bunny's #UnVeranoSinTi\
+        \ https://t.co/7veiS7hffx\"},{\"id\":\"1522586052346667009\",\"text\":\"Ter\
+        \ aten\xE7\xE3o \xE0s conversas sobre datas comemorativas e grandes eventos\
+        \ \xE9 essencial para marcas que desejam fazer parte do que est\xE1 acontecendo.\
+        \ @rafaelcamilo, l\xEDder de Twitter Next no Brasil, listou 5 estrat\xE9gias\
+        \ para alcan\xE7ar esse objetivo. Confira: https://t.co/8dcRpvM3iX\"},{\"\
+        id\":\"1522584700660895744\",\"text\":\"\u26A1\uFE0F \u201C\u0623\u0632\u0645\
+        \u0629 \u063A\u0630\u0627\u0621 \u062A\u0647\u062F\u062F \u0627\u0644\u0639\
+        \u0627\u0644\u0645.. \u0648\u0631\u0628\u0639 \u0645\u0644\u064A\u0627\u0631\
+        \ \u0637\u0646 \u062D\u0628\u0648\u0628 \\\"\u0639\u0627\u0644\u0642\u0629\
+        \\\" \u0641\u064A \u0623\u0648\u0643\u0631\u0627\u0646\u064A\u0627\\uD83C\\\
+        uDF3E\u201D by @aletihadae https://t.co/fWn9LjlMMi\"},{\"id\":\"1522584062262718467\"\
+        ,\"text\":\"\u26A1\uFE0F \u201C46 \u0639\u0627\u0645\u064B\u0627 \u0645\u0646\
+        \ \u0627\u0644\u0633\u0644\u0627\u0645 \u0648\u0627\u0644\u0623\u0645\u0646\
+        .. \u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062A \u062A\u062D\u062A\u0641\
+        \u064A \u0628\u0630\u0643\u0631\u0649 \u062A\u0648\u062D\u064A\u062F \u0627\
+        \u0644\u0642\u0648\u0627\u062A \u0627\u0644\u0645\u0633\u0644\u062D\u0629\u201D\
+        \ by @Forsan_UAE https://t.co/KWXo1TCx5C\"},{\"id\":\"1522583275063152641\"\
+        ,\"text\":\"RT @bpolitics: TUNE IN: Chief Justice Roberts called the leak\
+        \ of a draft opinion \u201Cabsolutely appalling,\u201D but it has sparked\
+        \ a conversation\u2026\"},{\"id\":\"1522582884095303680\",\"text\":\"Moms,\
+        \ *hypothetically* let's say your kids/partner are a little late in getting\
+        \ you a gift this year--what's the one thing you want for #MothersDay?\"},{\"\
+        id\":\"1522582421744631808\",\"text\":\"jaw on the floor #TheWilds https://t.co/1pgWOsO0sy\"\
+        }],\"meta\":{\"result_count\":99,\"next_token\":\"7140dibdnow9c7btw421dyyvx5wstfnjsb2wjd99prxo8\"\
+        }}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '9301'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:26 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818587096810; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818587096810; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_1zhvH3Yb+Y5pjcfiQdAZbA=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818587096810; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 38cec82348a245e54ee0a15d839280f6295cab1a91153daeeec6f1c25289c228
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '900'
+      x-rate-limit-remaining:
+      - '899'
+      x-rate-limit-reset:
+      - '1651929085'
+      x-response-time:
+      - '517'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/84839422/tweets
+version: 1

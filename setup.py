@@ -16,11 +16,6 @@ else:
 with open("README.md") as readme_file:
     long_description = readme_file.read()
 
-tests_require = [
-    "mypy>=0.931",
-    "vcrpy>=1.10.3",
-]
-
 setup(
     name="tweepy",
     version=version,
@@ -43,16 +38,21 @@ setup(
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
     ],
-    tests_require=tests_require,
     extras_require={
-        "async": ["aiohttp>=3.7.3,<4"],
+        "async": [
+            "aiohttp>=3.7.3,<4",
+            "async-lru>=1.0.3,<2"
+        ],
         "dev": [
             "coverage>=4.4.2",
             "coveralls>=2.1.0",
             "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
-        "test": tests_require,
+        "test": [
+            "mypy>=0.931",
+            "vcrpy>=1.10.3",
+        ],
         "types": [
             "types-oauthlib>=3.1.6,<4",
             "types-requests>=2.27.11,<3",

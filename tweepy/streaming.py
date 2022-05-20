@@ -202,6 +202,13 @@ class BaseStream:
 class Stream(BaseStream):
     """Filter and sample realtime Tweets with Twitter API v1.1
 
+    .. note::
+
+        New Twitter Developer Apps created on or after April 29, 2022 `will not
+        be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter`_, the Twitter API v1.1 endpoints that :class:`Stream`
+        uses. Twitter API v2 can be used instead with :class:`StreamingClient`.
+
     Parameters
     ----------
     consumer_key : str
@@ -240,6 +247,10 @@ class Stream(BaseStream):
         Thread used to run the stream
     user_agent : str
         User agent used when connecting to the stream
+
+
+    .. _will not be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
@@ -266,6 +277,13 @@ class Stream(BaseStream):
                filter_level=None, languages=None, stall_warnings=False,
                threaded=False):
         """Filter realtime Tweets
+
+        .. deprecated:: 4.9
+            `The delivery of compliance messages through the Twitter API v1.1
+            endpoint this method uses has been deprecated, and they will stop
+            being delivered beginning October 29, 2022.`_ Twitter API v2 can be
+            used instead with :meth:`StreamingClient.filter` and/or
+            :class:`Client` :ref:`batch compliance <Batch compliance>` methods.
 
         Parameters
         ----------
@@ -299,7 +317,8 @@ class Stream(BaseStream):
         Raises
         ------
         TweepyException
-            When number of location coordinates is not a multiple of 4
+            When the stream is already connected or when the number of location
+            coordinates is not a multiple of 4
 
         Returns
         -------
@@ -312,6 +331,9 @@ class Stream(BaseStream):
 
         .. _BCP 47: https://tools.ietf.org/html/bcp47
         .. _advanced search: https://twitter.com/search-advanced
+        .. _The delivery of compliance messages through the Twitter API v1.1
+            endpoint this method uses has been deprecated, and they will stop
+            being delivered beginning October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
         """
         if self.running:
             raise TweepyException("Stream is already connected")
@@ -347,6 +369,11 @@ class Stream(BaseStream):
     def sample(self, *, languages=None, stall_warnings=False, threaded=False):
         """Sample realtime Tweets
 
+        .. deprecated:: 4.9
+            `The Twitter API v1.1 endpoint this method uses is now deprecated
+            and will be retired on October 29, 2022.`_ Twitter API v2 can be
+            used instead with :meth:`StreamingClient.sample`.
+
         Parameters
         ----------
         languages : list[str] | None
@@ -361,6 +388,11 @@ class Stream(BaseStream):
         threaded : bool
             Whether or not to use a thread to run the stream
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected
+
         Returns
         -------
         threading.Thread | None
@@ -372,6 +404,8 @@ class Stream(BaseStream):
 
         .. _BCP 47: https://tools.ietf.org/html/bcp47
         .. _advanced search: https://twitter.com/search-advanced
+        .. _The Twitter API v1.1 endpoint this method uses is now deprecated
+            and will be retired on October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
         """
         if self.running:
             raise TweepyException("Stream is already connected")
@@ -716,6 +750,11 @@ class StreamingClient(BaseClient, BaseStream):
         threaded : bool
             Whether or not to use a thread to run the stream
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected
+
         Returns
         -------
         threading.Thread | None
@@ -818,6 +857,11 @@ class StreamingClient(BaseClient, BaseStream):
         threaded : bool
             Whether or not to use a thread to run the stream
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected
+
         Returns
         -------
         threading.Thread | None
@@ -892,7 +936,7 @@ class StreamingClient(BaseClient, BaseStream):
 
         Parameters
         ----------
-        status : Tweet
+        tweet : Tweet
             The Tweet received
         """
         pass
@@ -919,7 +963,7 @@ class StreamingClient(BaseClient, BaseStream):
 
     def on_matching_rules(self, matching_rules):
         """This is called when matching rules are received.
-        
+
         Parameters
         ----------
         matching_rules : list[StreamRule]

@@ -36,8 +36,14 @@ Contents:
    :caption: Twitter API v2 Reference
 
    client.rst
+   response.rst
    streamingclient.rst
+   streamresponse.rst
+   streamrule.rst
+   asyncclient.rst
+   asyncstreamingclient.rst
    exceptions.rst
+   expansions_and_fields.rst
    v2_models.rst
    v2_pagination.rst
 

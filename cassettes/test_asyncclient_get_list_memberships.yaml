@@ -1,0 +1,135 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/783214/list_memberships
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"70971664\",\"name\":\"\u63A8\u7279 \u7684\u7FFB\
+        \u8B6F\"},{\"id\":\"1522184089851203584\",\"name\":\"NEWS\"},{\"id\":\"1522777513478479872\"\
+        ,\"name\":\"Bangladesh\"},{\"id\":\"1522745259867971588\",\"name\":\"Twitter\"\
+        },{\"id\":\"1522115752559489025\",\"name\":\"TW Ciencia y Tecnolog\xEDa\"\
+        },{\"id\":\"1520491249714667521\",\"name\":\"TW galindowinda\"},{\"id\":\"\
+        1522689035180949505\",\"name\":\"Important Message Read\"},{\"id\":\"1497342910198468611\"\
+        ,\"name\":\"Biased News\"},{\"id\":\"1522604085798658059\",\"name\":\"Cindy\"\
+        },{\"id\":\"1512837725644283905\",\"name\":\"\\uD83D\\uDD14primary main\"\
+        },{\"id\":\"1522564973930631170\",\"name\":\"Tech\"},{\"id\":\"1522516685814747137\"\
+        ,\"name\":\"Interesting\"},{\"id\":\"1522369960240160768\",\"name\":\"Companies\"\
+        },{\"id\":\"1522354337065840640\",\"name\":\"Test list\"},{\"id\":\"1522139848726880256\"\
+        ,\"name\":\"\u5916\u8BED\"},{\"id\":\"1522113331313532928\",\"name\":\"madrid\
+        \ & media\"},{\"id\":\"1214902330426085377\",\"name\":\"#News\"},{\"id\":\"\
+        1492585777661988864\",\"name\":\"Media/News\"},{\"id\":\"1522044324686581761\"\
+        ,\"name\":\"Socio Eco\"},{\"id\":\"1522031993714020352\",\"name\":\"Twitter\"\
+        },{\"id\":\"1519399393434439681\",\"name\":\"\\uD83C\\uDF08lmaginative Dickhead!\\\
+        uD83E\\uDD84\"},{\"id\":\"1252750272524402688\",\"name\":\"#P\xF8\xF8l\"},{\"\
+        id\":\"1521500202930253825\",\"name\":\"\\uD83D\\uDC99\"},{\"id\":\"1513200462471827459\"\
+        ,\"name\":\"\u041D\u0435\u0442 \u0432\u043E\u0439\u043D\u0435!\"},{\"id\"\
+        :\"1521591465268420611\",\"name\":\"pages\"},{\"id\":\"1521827110775578624\"\
+        ,\"name\":\"Twitter\"},{\"id\":\"1521772474937098241\",\"name\":\"News Twitter\"\
+        },{\"id\":\"1521769049474043905\",\"name\":\"Azad\"},{\"id\":\"1520650194039181314\"\
+        ,\"name\":\"\u4E92\u8054\u7F51\u516C\u53F8\"},{\"id\":\"1521665629274591232\"\
+        ,\"name\":\"\\uD83D\\uDC23 T W I T T E R\"},{\"id\":\"1519376358299738113\"\
+        ,\"name\":\"Clients\"},{\"id\":\"1375227324896006145\",\"name\":\"Private\
+        \ list.\"},{\"id\":\"1511804952909422596\",\"name\":\"Accounts to follow\"\
+        },{\"id\":\"1521550241031458816\",\"name\":\"Social Media\"},{\"id\":\"1521446669300076546\"\
+        ,\"name\":\"Invest\"},{\"id\":\"1521426614759960577\",\"name\":\"Corporate\"\
+        },{\"id\":\"1521216508252147717\",\"name\":\"Elon Musk\"},{\"id\":\"1521180623829823488\"\
+        ,\"name\":\"\\uD83D\\uDFE2 utopian-misfits\"},{\"id\":\"1521174316150571009\"\
+        ,\"name\":\"aboutTwitters\"},{\"id\":\"1511171519891841031\",\"name\":\"Twitter\
+        \ crushes\"},{\"id\":\"1520913390948032515\",\"name\":\"Degen coins\"},{\"\
+        id\":\"1520371185426513920\",\"name\":\"Dijital Pazarlama - SEO\"},{\"id\"\
+        :\"1520883829111762951\",\"name\":\"Top 50\"},{\"id\":\"1445727542573293580\"\
+        ,\"name\":\"Latest\"},{\"id\":\"1520814225932886019\",\"name\":\"De H\xE9\
+        roes, Espadas y Magi\"},{\"id\":\"1520808563907731456\",\"name\":\"NFT I HAVE\"\
+        },{\"id\":\"1520807143464701957\",\"name\":\"ALPHA people\"},{\"id\":\"1520805698472456195\"\
+        ,\"name\":\"Invested\"},{\"id\":\"1520804858961567745\",\"name\":\"Projects\
+        \ of Interest\"},{\"id\":\"1520802589859885057\",\"name\":\"Traders\"},{\"\
+        id\":\"1520794764949573635\",\"name\":\"Gaming\"},{\"id\":\"1520792663921995777\"\
+        ,\"name\":\"!Twitter\"},{\"id\":\"1520764004909850625\",\"name\":\"Indonesian\
+        \ sahabat\"},{\"id\":\"1520754524922728449\",\"name\":\"Twitter\"},{\"id\"\
+        :\"1520726320052797440\",\"name\":\"Integrated Transport\"},{\"id\":\"1520669648387076097\"\
+        ,\"name\":\"Twitter\"},{\"id\":\"1520055648272228353\",\"name\":\"Companies\"\
+        },{\"id\":\"1520340390880100352\",\"name\":\"New Best\"},{\"id\":\"1261767416071303168\"\
+        ,\"name\":\"Tec\"},{\"id\":\"1519634998822940677\",\"name\":\"code\"},{\"\
+        id\":\"1520255974627418113\",\"name\":\"\u90E8\u95E8\u4F01\u4E1A\"},{\"id\"\
+        :\"1519076588020977664\",\"name\":\"\u53CB\u9054\"},{\"id\":\"1520211492821344257\"\
+        ,\"name\":\"Woke Companies to Avoid\"},{\"id\":\"1487908525380567040\",\"\
+        name\":\"\u516C\u5F0F\"},{\"id\":\"1520152971979468800\",\"name\":\"elon\"\
+        },{\"id\":\"1520089362066718720\",\"name\":\"ChrisJr4Eva87\"},{\"id\":\"1520072028199346176\"\
+        ,\"name\":\"Interesting men and stuff\"},{\"id\":\"1520028006546391042\",\"\
+        name\":\"Social, Internet News\"},{\"id\":\"1520016831016316930\",\"name\"\
+        :\"testnet\"},{\"id\":\"1278225618170269697\",\"name\":\"art c-j\"},{\"id\"\
+        :\"1519997741178535937\",\"name\":\"Redes Sociales\"},{\"id\":\"1519939509739270145\"\
+        ,\"name\":\"Stonks\"},{\"id\":\"1360802683012186116\",\"name\":\"Dimensione\
+        \ JI\"},{\"id\":\"1519905191042109441\",\"name\":\"Knowledge\"},{\"id\":\"\
+        223040231\",\"name\":\"\\uD83D\\uDD38\\uD83C\\uDFB5\\uD83C\\uDFAC\\uD83D\\\
+        uDC84\\uD83C\\uDFAE\\uD83D\\uDD38\"},{\"id\":\"1123334741086883840\",\"name\"\
+        :\"Tv internet\"},{\"id\":\"1519809572961239040\",\"name\":\"Most Followed\"\
+        },{\"id\":\"1394412729696464901\",\"name\":\"important\"},{\"id\":\"1515845731449417729\"\
+        ,\"name\":\"The list of shame.\"},{\"id\":\"1511773608942739457\",\"name\"\
+        :\"\\uD83D\\uDD2Cprojects\"},{\"id\":\"1519624407861317639\",\"name\":\"Digital\
+        \ Marketing\"},{\"id\":\"1433101162903900160\",\"name\":\"TwitterComunication\"\
+        },{\"id\":\"1516201946327228428\",\"name\":\"Ongoing Musk BS\"},{\"id\":\"\
+        1519518935607308290\",\"name\":\"hbjhjjhjhjhjhjhjhjhjhjhjj\"},{\"id\":\"1519484348201902080\"\
+        ,\"name\":\"Elon Musk\"},{\"id\":\"1519453588866613248\",\"name\":\"Q\"},{\"\
+        id\":\"1519452706284261378\",\"name\":\"Elon Musk\"},{\"id\":\"1519432174696636417\"\
+        ,\"name\":\"CM\"},{\"id\":\"1519374370799456256\",\"name\":\"GiveAway Marathon\"\
+        },{\"id\":\"1519357294026571776\",\"name\":\"GiveAway Marathon\"},{\"id\"\
+        :\"1519353035449077760\",\"name\":\"GiveAway Marathon\"},{\"id\":\"1519348103123456000\"\
+        ,\"name\":\"\\uD83D\\uDCF1 social media\"},{\"id\":\"1519321279660457984\"\
+        ,\"name\":\"Technology\"}],\"meta\":{\"result_count\":93,\"next_token\":\"\
+        1731271766573010389\"}}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2047'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:25 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818547920045; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818547920045; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_5QRHBZVW+HdG6bvDzoeNnQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818547920045; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - bca579e94165a7c1eccb2fe870df66f2b9dd2ebca006e1cc7b96c2d2cb925b3b
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1651929085'
+      x-response-time:
+      - '155'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/783214/list_memberships
+version: 1
