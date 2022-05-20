@@ -10,7 +10,7 @@ Asynchronous interfaces with the Twitter API
 
 try:
     import aiohttp
-    import async_lru
+    import async_lru  # type: ignore[import]
     import oauthlib
 except ModuleNotFoundError:
     from tweepy.errors import TweepyException

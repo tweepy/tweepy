@@ -14,7 +14,7 @@ from platform import python_version
 import time
 
 import aiohttp
-from async_lru import alru_cache
+from async_lru import alru_cache  # type: ignore[import]
 from oauthlib.oauth1 import Client as OAuthClient
 from yarl import URL
 
