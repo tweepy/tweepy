@@ -315,7 +315,8 @@ class Stream(BaseStream):
         Raises
         ------
         TweepyException
-            When number of location coordinates is not a multiple of 4
+            When the stream is already connected or when the number of location
+            coordinates is not a multiple of 4
 
         Returns
         -------
