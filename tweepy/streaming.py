@@ -855,6 +855,11 @@ class StreamingClient(BaseClient, BaseStream):
         threaded : bool
             Whether or not to use a thread to run the stream
 
+        Raises
+        ------
+        TweepyException
+            When the stream is already connected
+
         Returns
         -------
         threading.Thread | None
