@@ -3,7 +3,7 @@
 # See LICENSE for details.
 
 try:
-    from functools import cache
+    from functools import cache  # type: ignore[attr-defined]
 except ImportError:  # Remove when support for Python 3.8 is dropped
     from functools import lru_cache
     cache = lru_cache(maxsize=None)
