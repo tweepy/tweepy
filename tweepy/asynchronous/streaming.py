@@ -207,7 +207,7 @@ class AsyncStream(AsyncBaseStream):
     max_retries: int | None
         Number of times to attempt to (re)connect the stream.
     proxy: str | None
-        Proxy URL
+        URL of the proxy to use when connecting to the stream
 
     Attributes
     ----------
