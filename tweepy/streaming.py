@@ -200,6 +200,13 @@ class BaseStream:
 class Stream(BaseStream):
     """Filter and sample realtime Tweets with Twitter API v1.1
 
+    .. note::
+
+        New Twitter Developer Apps created on or after April 29, 2022 `will not
+        be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter`_, the Twitter API v1.1 endpoints that :class:`Stream`
+        uses. Twitter API v2 can be used instead with :class:`StreamingClient`.
+
     Parameters
     ----------
     consumer_key : str
@@ -238,6 +245,10 @@ class Stream(BaseStream):
         Thread used to run the stream
     user_agent : str
         User agent used when connecting to the stream
+
+
+    .. _will not be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
