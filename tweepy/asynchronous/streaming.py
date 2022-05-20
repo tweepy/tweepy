@@ -184,6 +184,14 @@ class AsyncBaseStream:
 class AsyncStream(AsyncBaseStream):
     """Stream realtime Tweets asynchronously with Twitter API v1.1
 
+    .. note::
+
+        New Twitter Developer Apps created on or after April 29, 2022 `will not
+        be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter`_, the Twitter API v1.1 endpoints that
+        :class:`AsyncStream` uses. Twitter API v2 can be used instead with
+        :class:`AsyncStreamingClient`.
+
     .. versionadded:: 4.0
 
     Parameters
@@ -209,6 +217,10 @@ class AsyncStream(AsyncBaseStream):
         The task running the stream
     user_agent : str
         User agent used when connecting to the API
+
+
+    .. _will not be able to gain access to v1.1 statuses/sample and v1.1
+        statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
