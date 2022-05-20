@@ -5,3 +5,4 @@
 ``StreamRule``
 ==============
 .. autoclass:: StreamRule
+   :class-doc-from: class
