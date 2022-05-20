@@ -82,6 +82,10 @@ class TweepyClientTests(unittest.TestCase):
         user_id = 783214  # User ID for @Twitter
         self.client.get_users_mentions(user_id)
 
+    @tape.use_cassette("test_client_get_home_timeline.yaml")
+    def test_get_home_timeline(self):
+        self.client.get_home_timeline()
+
     @tape.use_cassette("test_client_get_users_tweets.yaml")
     def test_get_users_tweets(self):
         user_id = 783214  # User ID for @Twitter

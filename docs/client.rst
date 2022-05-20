@@ -68,6 +68,8 @@
     +--------------------------------------------------------------+----------------------------------------+
     | `GET /2/users/:id/mentions`_                                 | :meth:`Client.get_users_mentions`      |
     +--------------------------------------------------------------+----------------------------------------+
+    | `GET /2/users/:id/timelines/reverse_chronological`_          | :meth:`Client.get_home_timeline`       |
+    +--------------------------------------------------------------+----------------------------------------+
     | `GET /2/users/:id/tweets`_                                   | :meth:`Client.get_users_tweets`        |
     +--------------------------------------------------------------+----------------------------------------+
     | .. centered:: |Tweet counts|_                                                                         |
@@ -224,6 +226,7 @@
 .. _GET /2/tweets/search/recent: https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent
 .. |Timelines| replace:: *Timelines*
 .. _GET /2/users/:id/mentions: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-mentions
+.. _GET /2/users/:id/timelines/reverse_chronological: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-reverse-chronological
 .. _GET /2/users/:id/tweets: https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-tweets
 .. |Tweet counts| replace:: *Tweet counts*
 .. _GET /2/tweets/counts/all: https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-all
@@ -348,6 +351,8 @@ Timelines
 ---------
 
 .. automethod:: Client.get_users_mentions
+
+.. automethod:: Client.get_home_timeline
 
 .. automethod:: Client.get_users_tweets
 
