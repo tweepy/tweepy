@@ -127,7 +127,7 @@ class AsyncBaseClient(BaseClient):
                         f"Sleeping for {sleep_time} seconds."
                     )
                     await asyncio.sleep(sleep_time)
-                return self.request(method, route, params, json, user_auth)
+                return await self.request(method, route, params, json, user_auth)
             else:
                 raise TooManyRequests(response, response_json=response_json)
         if response.status >= 500:
@@ -1259,6 +1259,111 @@ class AsyncClient(AsyncBaseClient):
                 "end_time", "expansions", "max_results", "media.fields",
                 "pagination_token", "place.fields", "poll.fields", "since_id",
                 "start_time", "tweet.fields", "until_id", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
+    async def get_home_timeline(self, *, user_auth=True, **params):
+        """get_home_timeline( \
+            *, end_time=None, exclude=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            place_fields=None, poll_fields=None, since_id=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=True \
+        )
+
+        Allows you to retrieve a collection of the most recent Tweets and
+        Retweets posted by you and users you follow. This endpoint returns up
+        to the last 3200 Tweets.
+
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
+        Parameters
+        ----------
+        end_time : datetime.datetime | str | None
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
+            from which the Tweets will be provided. Timestamp is in second
+            granularity and is inclusive (for example, 12:00:01 includes the
+            first second of the minute).
+
+            Please note that this parameter does not support a millisecond
+            value.
+        exclude : list[str] | str | None
+            Comma-separated list of the types of Tweets to exclude from the
+            response.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            Specifies the number of Tweets to try and retrieve, up to a maximum
+            of 100 per distinct request. By default, 100 results are returned
+            if this parameter is not supplied. The minimum permitted value is
+            1. It is possible to receive less than the ``max_results`` per
+            request throughout the pagination process.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            This parameter is used to move forwards or backwards through
+            'pages' of results, based on the value of the ``next_token`` or
+            ``previous_token`` in the response. The value used with the
+            parameter is pulled directly from the response provided by the API,
+            and should not be modified.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        since_id : int | str | None
+            Returns results with a Tweet ID greater than (that is, more recent
+            than) the specified 'since' Tweet ID. There are limits to the
+            number of Tweets that can be accessed through the API. If the
+            limit of Tweets has occurred since the ``since_id``, the
+            ``since_id`` will be forced to the oldest ID available. More
+            information on Twitter IDs is `here`_.
+        start_time : datetime.datetime | str | None
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
+            from which the Tweets will be provided. Timestamp is in second
+            granularity and is inclusive (for example, 12:00:01 includes the
+            first second of the minute).
+
+            Please note that this parameter does not support a millisecond
+            value.
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        until_id : int | str | None
+            Returns results with a Tweet ID less than (that is, older than) the
+            specified 'until' Tweet ID. There are limits to the number of
+            Tweets that can be accessed through the API. If the limit of Tweets
+            has occurred since the ``until_id``, the ``until_id`` will be
+            forced to the most recent ID available. More information on Twitter
+            IDs is `here`_.
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-reverse-chronological
+
+        .. _here: https://developer.twitter.com/en/docs/twitter-ids
+        """
+        id = await self._get_authenticating_user_id(oauth_1=user_auth)
+        route = f"/2/users/{id}/timelines/reverse_chronological"
+
+        return await self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "end_time", "exclude", "expansions", "max_results",
+                "media.fields", "pagination_token", "place.fields",
+                "poll.fields", "since_id", "start_time", "tweet.fields",
+                "until_id", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
         )
 

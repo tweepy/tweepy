@@ -86,6 +86,10 @@ class TweepyAsyncClientTests(IsolatedAsyncioTestCase):
         user_id = 783214  # User ID for @Twitter
         await self.client.get_users_mentions(user_id)
 
+    @tape.use_cassette("test_asyncclient_get_home_timeline.yaml")
+    async def test_get_home_timeline(self):
+        await self.client.get_home_timeline()
+
     @tape.use_cassette("test_asyncclient_get_users_tweets.yaml")
     async def test_get_users_tweets(self):
         user_id = 783214  # User ID for @Twitter
