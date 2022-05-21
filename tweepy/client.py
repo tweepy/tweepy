@@ -1353,7 +1353,9 @@ class Client(BaseClient):
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_home_timeline(self, *, user_auth=True, **params):
+    def get_home_timeline(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_home_timeline( \
             *, end_time=None, exclude=None, expansions=None, \
             max_results=None, media_fields=None, pagination_token=None, \
@@ -1432,12 +1434,8 @@ class Client(BaseClient):
             IDs is `here`_.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
