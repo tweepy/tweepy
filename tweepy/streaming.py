@@ -100,6 +100,13 @@ class BaseStream:
                             self.on_request_error(resp.status_code)
                             if not self.running:
                                 break
+                            # The error text is logged here instead of in
+                            # on_request_error to keep on_request_error
+                            # backwards-compatible. In a future version, the
+                            # Response should be passed to on_request_error.
+                            log.error(
+                                "HTTP error response text: %s", resp.text
+                            )
 
                             error_count += 1
 
