@@ -90,7 +90,7 @@ class AsyncBaseClient(BaseClient):
             headers["Authorization"] = f"Bearer {self.bearer_token}"
 
         if self.wait_on_rate_limit:
-            rate_limit_status = self.rate_limit_status.get((method, route))
+            rate_limit_status = self.rate_limit_status[(method, route)]
             await rate_limit_status.acquire()
 
 
