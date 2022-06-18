@@ -133,7 +133,7 @@ class AsyncBaseClient(BaseClient):
                         "Rate limit exceeded. "
                         f"Sleeping for {sleep_time} seconds."
                     )
-                    rate_limit_status.update(int(response.headers["x-rate-limit-remaining"]),reset_time)
+                    rate_limit_status.release(int(response.headers["x-rate-limit-remaining"]),reset_time)
                     await asyncio.sleep(sleep_time)
                 return await self.request(method, route, params, json, user_auth)
             else:
