@@ -12,6 +12,7 @@ import asyncio
 import logging
 from platform import python_version
 import time
+from collections import defaultdict
 
 import aiohttp
 from async_lru import alru_cache
@@ -49,6 +50,7 @@ class AsyncBaseClient(BaseClient):
 
         self.return_type = return_type
         self.wait_on_rate_limit = wait_on_rate_limit
+        self.rate_limit_status = defaultdict(TaskRateSemaphore)
 
         self.session = None
         self.user_agent = (
@@ -86,6 +88,11 @@ class AsyncBaseClient(BaseClient):
             params = None
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
+
+        if self.wait_on_rate_limit:
+            rate_limit_status = self.rate_limit_status.get((method, route))
+            await rate_limit_status.acquire()
+
 
         log.debug(
             f"Making API request: {method} {url}\n"
@@ -126,6 +133,7 @@ class AsyncBaseClient(BaseClient):
                         "Rate limit exceeded. "
                         f"Sleeping for {sleep_time} seconds."
                     )
+                    rate_limit_status.update(int(response.headers["x-rate-limit-remaining"]),reset_time)
                     await asyncio.sleep(sleep_time)
                 return await self.request(method, route, params, json, user_auth)
             else:
@@ -135,6 +143,7 @@ class AsyncBaseClient(BaseClient):
         if not 200 <= response.status < 300:
             raise HTTPException(response, response_json=response_json)
 
+        rate_limit_status.release(int(response.headers["x-rate-limit-remaining"]),int(response.headers["x-rate-limit-reset"]))
         return response
 
     async def _make_request(
@@ -3314,3 +3323,46 @@ class AsyncClient(AsyncBaseClient):
         return await self._make_request(
             "POST", "/2/compliance/jobs", json=json
         )
+
+class TaskRateSemaphore(asyncio.Semaphore):
+    def __init__(self):
+        super().__init__(10)
+        self.max_seen = 10
+        self.inprogress = 0
+        self.reset_time = None
+        self.fut = None
+        self.reset_callback = None
+        
+
+    def reset(self):
+        self.reset_time = None
+        for _ in range(self.max_seen):
+            super().release()
+
+    
+    async def acquire(self):
+            await super().acquire()
+            self.inprogress +=1
+
+    def update(self, remaining, reset_time):
+        if remaining > self.max_seen:
+            self.max_seen = remaining
+        if (reset_time and self.reset_callback and self.reset_time != reset_time) or (reset_time and not self.reset_callback):
+            if self.reset_callback:
+                self.reset_callback.cancel()
+            try:
+                loop = self._get_loop()
+            except AttributeError:
+                loop = self._loop
+
+            self.reset_callback = loop.call_later(reset_time - int(time.time()) + 1, self.reset)
+            self.reset_time = reset_time
+
+
+    def release(self, remaining, reset_time):
+        self.update(remaining, reset_time)
+        self.inprogress -= 1
+
+        while remaining and (remaining - self.inprogress-1) > self._value:
+
+            super().release()
