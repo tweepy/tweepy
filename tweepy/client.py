@@ -17,6 +17,7 @@ import time
 import warnings
 
 import requests
+from pandas import read_csv
 
 import tweepy
 from tweepy.auth import OAuth1UserHandler
@@ -3618,3 +3619,19 @@ class Client(BaseClient):
         return self._make_request(
             "POST", "/2/compliance/jobs", json=json
         )
+
+    # Entities and Domains (evergreen data updated quarterly)
+
+    def get_entities(self):
+        """
+        Get entities from https://github.com/twitterdev/twitter-context-annotations.
+
+        This data is updated quarterly.
+        """
+        # update the url when a new data file is released:
+        request_url = "https://raw.githubusercontent.com/twitterdev/twitter-context-annotations/6c349b2f3e1a3e7aca54d941225c485698a93c7a/files/evergreen-context-entities-20220601.csv"
+        # fetch the data:
+        df = read_csv(request_url)
+        # clean tab characters and other spaces from the entity names:
+        df["entity_name"] = df["entity_name"].apply(lambda txt: txt.strip())
+        return df

@@ -37,6 +37,7 @@ setup(
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
+        "pandas>=1.3.5",
     ],
     extras_require={
         "async": [
@@ -47,7 +48,6 @@ setup(
             "coverage>=4.4.2",
             "coveralls>=2.1.0",
             "tox>=3.21.0",
-            #"pandas>=1.4.3",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
         "test": ["vcrpy>=1.10.3"],
