@@ -241,3 +241,11 @@ class TweepyClientTests(unittest.TestCase):
         job_id = response.data["id"]
         self.client.get_compliance_job(job_id)
         self.client.get_compliance_jobs("tweets")
+
+
+    def test_get_entities(self):
+        # it fetches twitter evergreen data from github:
+        entities_df = self.client.get_entities()
+        #assert isinstance(entities_df, DataFrame)
+        assert entities_df.columns.tolist() == ["domains", "entity_id", "entity_name"]
+        assert len(entities_df) == 100
