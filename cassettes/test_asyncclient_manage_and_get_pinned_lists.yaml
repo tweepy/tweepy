@@ -1,0 +1,497 @@
+interactions:
+- request:
+    body:
+      name: Test List
+      private: true
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/lists
+  response:
+    body:
+      string: '{"data":{"id":"1522926890658549760","name":"Test List"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '81'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:40 UTC
+      location:
+      - https://api.twitter.com/2/lists/1522926890658549760
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192903997590235; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192903997590235; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_wGQelggKLvhGKpx71l+GLw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192903997590235; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 53865f42f71347c3fd774633286f3e8452e23961a02b88c1a9c5129d3fc45441
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929939'
+      x-response-time:
+      - '101'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://api.twitter.com/2/lists
+- request:
+    body:
+      user_id: '783214'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/lists/1522926890658549760/members
+  response:
+    body:
+      string: '{"data":{"is_member":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '53'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:40 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904020718624; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904020718624; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_FVgGDs4hscYe5v///bsxow=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904020718624; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 1d3f65cd2901f5b0a7230c2f2995f146237dfab202ebe2ebb96e5daeccf2a99c
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929940'
+      x-response-time:
+      - '150'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/1522926890658549760/members
+- request:
+    body:
+      list_id: '1522926890658549760'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: POST
+    uri: https://api.twitter.com/2/users/1072250532645998596/pinned_lists
+  response:
+    body:
+      string: '{"data":{"pinned":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '50'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:40 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904050810303; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904050810303; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_0QnGzt+/CIAC8SIFVTFOMg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904050810303; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 222f71e9909a89b92fb23801fa0db3e631fced257e27641d376ec54fc488bd71
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651929940'
+      x-response-time:
+      - '45'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/pinned_lists
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/1072250532645998596/pinned_lists
+  response:
+    body:
+      string: '{"data":[{"id":"1522926890658549760","name":"Test List"}],"meta":{"result_count":1}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '107'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:40 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904067434012; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904067434012; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_9siUsfrjgrcOrORghEukcg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904067434012; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 0a6b9bdcf24f2b3f7ee5d0986e2acc3c31a84c3825dcc2d2f58d38205f229d1f
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '14'
+      x-rate-limit-reset:
+      - '1651929940'
+      x-response-time:
+      - '38'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/pinned_lists
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/lists/1522926890658549760/members/783214
+  response:
+    body:
+      string: '{"data":{"is_member":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '54'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:40 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904085863539; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904085863539; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_4KaIQ2znfjUeF1ViaNkjPg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904085863539; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 1dac578113411b466c871dc467844c997cc65b99ab4ab74c7be6902648b7c454
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929940'
+      x-response-time:
+      - '53'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/1522926890658549760/members/783214
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/users/1072250532645998596/pinned_lists/1522926890658549760
+  response:
+    body:
+      string: '{"data":{"pinned":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '51'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:41 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904103640091; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904103640091; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_vYq+OfCqs9TxuKJ4B8ZxTg=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904103640091; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a5c50aad0fc0267172267a0d932147e89f95f3d4494e8334e195243bb552a13c
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651929941'
+      x-response-time:
+      - '41'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/pinned_lists/1522926890658549760
+- request:
+    body:
+      description: Test List Description
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: PUT
+    uri: https://api.twitter.com/2/lists/1522926890658549760
+  response:
+    body:
+      string: '{"data":{"updated":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '50'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:41 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904121292350; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904121292350; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_ea7Gw0RaDt14sj7o0kQekQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904121292350; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 195580370cb6f783bbf235e681f14e7534ad8d426f274aa4b0997eb52265e8d5
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929941'
+      x-response-time:
+      - '139'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/1522926890658549760
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: DELETE
+    uri: https://api.twitter.com/2/lists/1522926890658549760
+  response:
+    body:
+      string: '{"data":{"deleted":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '51'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:41 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192904146699471; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192904146699471; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_7PSAIgEvhgWfky6oM/5z/Q=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192904146699471; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - ff6e6177df4770204ceecf5bda01e24eec552dbf282e125e1465613193ccb59b
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1651929941'
+      x-response-time:
+      - '41'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/1522926890658549760
+version: 1

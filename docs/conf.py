@@ -31,6 +31,7 @@ extensions = [
   'sphinx.ext.autosectionlabel',
   'sphinx.ext.intersphinx',
   'sphinx.ext.napoleon',
+  'sphinx_search.extension',
   'sphinx_tabs.tabs'
 ]
 
@@ -38,10 +39,12 @@ hoverxref_auto_ref = True
 hoverxref_domains = ['py']
 hoverxref_intersphinx = ['aiohttp', 'requests', 'requests_oauthlib']
 
+autoclass_content = "both"
+
 intersphinx_mapping = {
   'python': ('https://docs.python.org/3', None),
   'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
-  'requests': ('https://docs.python-requests.org/en/stable/', None),
+  'requests': ('https://requests.readthedocs.io/en/stable/', None),
   'requests_oauthlib': (
     'https://requests-oauthlib.readthedocs.io/en/latest/', None
   )
@@ -124,7 +127,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

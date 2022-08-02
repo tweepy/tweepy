@@ -25,6 +25,9 @@ class HashableID(EqualityComparableID):
 class DataMapping(Mapping):
     __slots__ = ()
 
+    def __contains__(self, item):
+        return item in self.data
+
     def __getattr__(self, name):
         try:
             return self.data[name]

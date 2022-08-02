@@ -1,0 +1,174 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/2244994945/following
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"44196397\",\"name\":\"Elon Musk\",\"username\"\
+        :\"elonmusk\"},{\"id\":\"633050374\",\"name\":\"Aba Micah\",\"username\":\"\
+        2006legend\"},{\"id\":\"15772978\",\"name\":\"Jessica Garson\",\"username\"\
+        :\"jessicagarson\"},{\"id\":\"4839528448\",\"name\":\"Bitcoin Core Project\"\
+        ,\"username\":\"bitcoincoreorg\"},{\"id\":\"25029451\",\"name\":\"Elon Musk\
+        \ has cop energy\",\"username\":\"Punkaboo\"},{\"id\":\"1009484430250053632\"\
+        ,\"name\":\"cora\",\"username\":\"coraF256\"},{\"id\":\"108209516\",\"name\"\
+        :\"Amir Shevat\",\"username\":\"ashevat\"},{\"id\":\"1062359582\",\"name\"\
+        :\"Sheryl Klein Lavi\\uD83C\\uDFF4\\uDB40\\uDC67\\uDB40\\uDC62\\uDB40\\uDC73\\\
+        uDB40\\uDC63\\uDB40\\uDC74\\uDB40\\uDC7F\",\"username\":\"TheSherylKlein\"\
+        },{\"id\":\"243665363\",\"name\":\"Liliana Aid\xE9 Monge\",\"username\":\"\
+        mongeliliana\"},{\"id\":\"459860328\",\"name\":\"julie\u2728\",\"username\"\
+        :\"JulieMendoza206\"},{\"id\":\"273830767\",\"name\":\"\uEA00 \\uD83C\\uDD3F\\\
+        uD83C\\uDD44\\uD83C\\uDD42\\uD83C\\uDD37 \uEA00\",\"username\":\"rahul_pushkarna\"\
+        },{\"id\":\"2240152338\",\"name\":\"Max\",\"username\":\"maxfwinter\"},{\"\
+        id\":\"1191670412033196032\",\"name\":\"jason comer\",\"username\":\"jason_in_japan\"\
+        },{\"id\":\"2638518929\",\"name\":\"Jen Powers\",\"username\":\"jenkpowers\"\
+        },{\"id\":\"3007236186\",\"name\":\"Si\",\"username\":\"Si_ximujin\"},{\"\
+        id\":\"838824636158627840\",\"name\":\"mimi\",\"username\":\"FindingMeeemo\"\
+        },{\"id\":\"2997635012\",\"name\":\"Jared Podnos \\uD83D\\uDC33\",\"username\"\
+        :\"jpodnos\"},{\"id\":\"1596449330\",\"name\":\"Michael Horan\",\"username\"\
+        :\"HoranMikeS\"},{\"id\":\"22178537\",\"name\":\"Eric Martin \\uD83D\\uDC4D\\\
+        uD83C\\uDFFC\",\"username\":\"ericmartinyc\"},{\"id\":\"853388192\",\"name\"\
+        :\"Haim Vaturi\",\"username\":\"haimvat\"},{\"id\":\"13130832\",\"name\":\"\
+        Brian Kahrs\",\"username\":\"briankahrs\"},{\"id\":\"49936717\",\"name\":\"\
+        Vince K. Sam \\uD83D\\uDCBB\",\"username\":\"vincethecoder\"},{\"id\":\"1171940098687950848\"\
+        ,\"name\":\"#PartnerCup \u26F3\\uD83C\\uDFCC\uFE0F\u200D\u2640\uFE0F\\uD83C\\\
+        uDFCC\uFE0F\u200D\u2642\uFE0F\",\"username\":\"HackerScorer\"},{\"id\":\"\
+        137535997\",\"name\":\"sunscreenpapi\",\"username\":\"sunscreenpapi\"},{\"\
+        id\":\"15824980\",\"name\":\"Khalil Hammami\",\"username\":\"khammami\"},{\"\
+        id\":\"61467706\",\"name\":\"miss mixtape\",\"username\":\"miss_mixtape\"\
+        },{\"id\":\"211637915\",\"name\":\"Maria (ela, ella, she)\",\"username\":\"\
+        imaria20_\"},{\"id\":\"1484826829\",\"name\":\"Twum Jnr\",\"username\":\"\
+        twum_jnr\"},{\"id\":\"75263523\",\"name\":\"Sprinklr\",\"username\":\"Sprinklr\"\
+        },{\"id\":\"2584784815\",\"name\":\"Ryan J. Gallagher\",\"username\":\"ryanjgallag\"\
+        },{\"id\":\"2990106209\",\"name\":\"John M. Spallanzani\",\"username\":\"\
+        JohnSpall247\"},{\"id\":\"2533768586\",\"name\":\"Selynna Sun\",\"username\"\
+        :\"selynnasun\"},{\"id\":\"1637021982\",\"name\":\"Raina Merchant, MD MSHP\
+        \ FAHA\",\"username\":\"RainaMerchant\"},{\"id\":\"1280128841550311424\",\"\
+        name\":\"Syas\",\"username\":\"SyasCode\"},{\"id\":\"2425259995\",\"name\"\
+        :\"Md Nahid Islam\",\"username\":\"nahidofficialbd\"},{\"id\":\"685863\",\"\
+        name\":\"Mike Zitek\",\"username\":\"mjzitek\"},{\"id\":\"952837155818176512\"\
+        ,\"name\":\"Jaime\",\"username\":\"JaimeOtraVez\"},{\"id\":\"248869046\",\"\
+        name\":\"Antoine Danois\",\"username\":\"Antoinedroid\"},{\"id\":\"104236352\"\
+        ,\"name\":\"Matthieu V\",\"username\":\"Mistermatt007\"},{\"id\":\"1615654896\"\
+        ,\"name\":\"Penn Med CDH\",\"username\":\"PennMedCDH\"},{\"id\":\"29970507\"\
+        ,\"name\":\"Royce\",\"username\":\"roycehaynes\"},{\"id\":\"1168345391135371267\"\
+        ,\"name\":\"Donna Virga\",\"username\":\"deevirga\"},{\"id\":\"124005464\"\
+        ,\"name\":\"kelly-ayo\",\"username\":\"KellyAyo\"},{\"id\":\"3921628635\"\
+        ,\"name\":\"James Loduca (he/him/\xE9l)\",\"username\":\"JamesLoduca\"},{\"\
+        id\":\"31898295\",\"name\":\"Matt Derella\",\"username\":\"Derella\"},{\"\
+        id\":\"2397965574\",\"name\":\"Rebecca\",\"username\":\"RebeccaW\"},{\"id\"\
+        :\"760738503370084352\",\"name\":\"Chels \\uD83D\\uDC85\\uD83C\\uDFFE\",\"\
+        username\":\"ChelseaHipwood\"},{\"id\":\"41204968\",\"name\":\"Andy Antos\"\
+        ,\"username\":\"andyantos\"},{\"id\":\"2276100433\",\"name\":\"Mirela Anghel\"\
+        ,\"username\":\"_mirels_\"},{\"id\":\"495741050\",\"name\":\"Arielle Schwartz\
+        \ \\uD83C\\uDF64\",\"username\":\"arisirenita\"},{\"id\":\"340611224\",\"\
+        name\":\"Mauro Piano\",\"username\":\"mauropiano\"},{\"id\":\"16981198\",\"\
+        name\":\"A Knee\",\"username\":\"anniehanannie\"},{\"id\":\"32416361\",\"\
+        name\":\"Matt \\uD83E\\uDD95\",\"username\":\"mattjbones\"},{\"id\":\"379455191\"\
+        ,\"name\":\"albertico\u2728\",\"username\":\"artxbel\"},{\"id\":\"6453472\"\
+        ,\"name\":\"Farez \\uD83C\\uDFC4\\uD83C\\uDFFD\u200D\u2642\uFE0F\",\"username\"\
+        :\"farez\"},{\"id\":\"292670084\",\"name\":\"Dave Carroll\",\"username\":\"\
+        thedavecarroll\"},{\"id\":\"1700547000\",\"name\":\"Fl\xE1vio Santos \\uD83C\\\
+        uDDE7\\uD83C\\uDDF7\",\"username\":\"Sr__Half\"},{\"id\":\"3347115521\",\"\
+        name\":\"Elisabeth \\uD83C\\uDFB5\\uD83C\\uDFB6\\uD83C\\uDF0D\\uD83D\\uDD2D\\\
+        uD83C\\uDF0C\\uD83D\\uDCAB Instagram @betymaisvc2010\",\"username\":\"vice_elisabete\"\
+        },{\"id\":\"783677076951924739\",\"name\":\"Luis Francisco\",\"username\"\
+        :\"_luisf02\"},{\"id\":\"88262421\",\"name\":\"Gibby\",\"username\":\"GibbyBlogger\"\
+        },{\"id\":\"3349202854\",\"name\":\"Sanji\",\"username\":\"Sanji4579094169\"\
+        },{\"id\":\"14184976\",\"name\":\"Evan Holt\",\"username\":\"evanholt\"},{\"\
+        id\":\"160348679\",\"name\":\"Bene and the Gesserit\",\"username\":\"not_stin\"\
+        },{\"id\":\"154236280\",\"name\":\"Shagun Chopra\",\"username\":\"Chopra_Shagun\"\
+        },{\"id\":\"948097629409263616\",\"name\":\"Tian Z\",\"username\":\"tianz_zzz\"\
+        },{\"id\":\"2469856424\",\"name\":\"Bol\xE1\",\"username\":\"bolaboss\"},{\"\
+        id\":\"866879520359448577\",\"name\":\"Wooju oppa\\uD83D\\uDC7D He/Him\",\"\
+        username\":\"WoojuGG\"},{\"id\":\"490980933\",\"name\":\"tyler\",\"username\"\
+        :\"replylord\"},{\"id\":\"1140344288082944000\",\"name\":\"Lauren Pinnella\
+        \ Traylor\",\"username\":\"laur_tray\"},{\"id\":\"1181081146227970049\",\"\
+        name\":\"Amber Brown\",\"username\":\"AmberAlBrown\"},{\"id\":\"261034930\"\
+        ,\"name\":\"kiran paul\",\"username\":\"kdspaul\"},{\"id\":\"1565770556\"\
+        ,\"name\":\"TwitPane(\u3064\u3044\u3063\u3068\u307A\u30FC\u3093)\",\"username\"\
+        :\"twitpane\"},{\"id\":\"1438844202\",\"name\":\"Duraid Abdul\",\"username\"\
+        :\"duraidabdul\"},{\"id\":\"76540643\",\"name\":\"Ramiro\",\"username\":\"\
+        ramiro__nd\"},{\"id\":\"265104070\",\"name\":\"Amy Lee Bennett\",\"username\"\
+        :\"amyleebenn\"},{\"id\":\"2349201699\",\"name\":\"Niklas\",\"username\":\"\
+        NiklasBuelow\"},{\"id\":\"2776322588\",\"name\":\"Mohd Danish\",\"username\"\
+        :\"mddanishyusuf\"},{\"id\":\"712198542\",\"name\":\"Boris Holzer\",\"username\"\
+        :\"boris_holzer\"},{\"id\":\"49054165\",\"name\":\"Beno\xEEt\",\"username\"\
+        :\"benoitsan\"},{\"id\":\"3064903881\",\"name\":\"miguel \u7C73\u683C\u5C14\
+        \",\"username\":\"migueloiro\"},{\"id\":\"2894082393\",\"name\":\"ivanna\"\
+        ,\"username\":\"ivnnapna\"},{\"id\":\"19081905\",\"name\":\"Chris\",\"username\"\
+        :\"ChrisTeso\"},{\"id\":\"105224601\",\"name\":\"Joe Masilotti \\uD83D\\uDCD7\"\
+        ,\"username\":\"joemasilotti\"},{\"id\":\"2308474213\",\"name\":\"Josh W.\
+        \ Comeau\",\"username\":\"JoshWComeau\"},{\"id\":\"1090221700913029123\",\"\
+        name\":\"Matias \\uD83D\\uDFE0\",\"username\":\"matiNotFound\"},{\"id\":\"\
+        14089924\",\"name\":\"george shaheen\",\"username\":\"gshaheen\"},{\"id\"\
+        :\"2206101780\",\"name\":\"Ignacio Chiazzo\",\"username\":\"IgnacioChiazzo\"\
+        },{\"id\":\"1140621092006051840\",\"name\":\"Alvin\",\"username\":\"raia_alvin\"\
+        },{\"id\":\"252824570\",\"name\":\"Matthew Sunner\",\"username\":\"sunnermatt\"\
+        },{\"id\":\"326849698\",\"name\":\"Makenna Smutz\",\"username\":\"KenzSmutz\"\
+        },{\"id\":\"37522774\",\"name\":\"Ralph Brooks\",\"username\":\"ralphbrooks\"\
+        },{\"id\":\"277202420\",\"name\":\"Seun\",\"username\":\"seunoyebode\"},{\"\
+        id\":\"2359333566\",\"name\":\"\\uD83D\\uDD2CArv!nd Kumar\",\"username\":\"\
+        1amarvind\"},{\"id\":\"19489255\",\"name\":\"David Stockley\",\"username\"\
+        :\"WDUK\"},{\"id\":\"19536178\",\"name\":\"webmonkey\",\"username\":\"sebastianroming\"\
+        },{\"id\":\"761569626685833216\",\"name\":\"Jannik Schwade\",\"username\"\
+        :\"jannik_schwade\"},{\"id\":\"715071139\",\"name\":\"Hussain\",\"username\"\
+        :\"_7aso0on\"},{\"id\":\"839668676\",\"name\":\"\u30AA\u30FC\u30A6\u30A7\u30F3\
+        \",\"username\":\"DarylOwenJ\"},{\"id\":\"618029513\",\"name\":\"Hatice Edis\
+        \ \\uD83D\\uDCDF\",\"username\":\"edisdev\"},{\"id\":\"1934669329\",\"name\"\
+        :\"Ian Kirker\",\"username\":\"ikirker\"}],\"meta\":{\"result_count\":100,\"\
+        next_token\":\"KNBGDJ8PVCQ1EZZZ\"}}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2869'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 22:29:26 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165196256684642210; Max-Age=63072000; Expires=Mon,
+        06 May 2024 22:29:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165196256684642210; Max-Age=63072000; Expires=Mon, 06 May
+        2024 22:29:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_b9Wz3vKgel8g4wLdPM+IKQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 22:29:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165196256684642210; Max-Age=63072000; Expires=Mon, 06 May 2024
+        22:29:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 6067f4f380bfed3e1309a6547fa1db35a0a2810828e73aa2e037055403f783fc
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '15'
+      x-rate-limit-remaining:
+      - '14'
+      x-rate-limit-reset:
+      - '1651963466'
+      x-response-time:
+      - '133'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/2244994945/following
+version: 1

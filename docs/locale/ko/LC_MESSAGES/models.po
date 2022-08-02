@@ -1,0 +1,189 @@
+# models.po - Models Reference
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-27 16:12+0900\n"
+"PO-Revision-Date: 2021-12-03 18:30+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../models.rst:5
+msgid "Models Reference"
+msgstr "모델 레퍼런스"
+
+#: ../../models.rst:9
+msgid "API v1.1"
+msgstr "API v1.1"
+
+#: ../../models.rst
+msgid "reference"
+msgstr "레퍼런스"
+
+#: ../../models.rst:13
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/geo#bounding-box"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/geo#bounding-box"
+
+#: ../../models.rst:17
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages"
+"/sending-and-receiving/guides/message-create-object"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages"
+"/sending-and-receiving/guides/message-create-object"
+
+#: ../../models.rst:21
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/follow-search-get-users/api-reference/get-friendships-show#example-"
+"response"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/follow-search-get-users/api-reference/get-friendships-show#example-"
+"response"
+
+#: ../../models.rst:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/create-manage-lists/api-reference/get-lists-show#example-response"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/create-manage-lists/api-reference/get-lists-show#example-response"
+
+#: ../../models.rst:29
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/entities#media"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/entities#media"
+
+#: ../../models.rst:33
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/geo#place"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/geo#place"
+
+#: ../../models.rst:37
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/follow-search-get-users/api-reference/get-friendships-lookup#example-"
+"response"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/follow-search-get-users/api-reference/get-friendships-lookup#example-"
+"response"
+
+#: ../../models.rst:41
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/manage-account-settings/api-reference/get-saved_searches-show-id"
+"#example-response"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users"
+"/manage-account-settings/api-reference/get-saved_searches-show-id"
+"#example-response"
+
+#: ../../models.rst:45
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-"
+"reference/get-search-tweets#example-response"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-"
+"reference/get-search-tweets#example-response"
+
+#: ../../models.rst:49
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/tweet"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/tweet"
+
+#: ../../models.rst:53
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/user"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary"
+"/object-model/user"
+
+#: ../../models.rst:55
+msgid "API v2"
+msgstr "API v2"
+
+#: ../../models.rst:63
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/lists"
+
+#: ../../models.rst:67
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/media"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/media"
+
+#: ../../models.rst:71
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/place"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/place"
+
+#: ../../models.rst:75
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/poll"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/poll"
+
+#: ../../models.rst:79 ../../models.rst:92
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/tweet"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/tweet"
+
+#: ../../models.rst:85
+msgid "Added ``ended_at`` and ``topic_ids`` fields"
+msgstr "다음 필드가 추가됨: ``ended_at``, ``topic_ids``"
+
+#: ../../models.rst:88
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/space"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/space"
+
+#: ../../models.rst:96
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/user"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-"
+"model/user"
+

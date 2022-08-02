@@ -1,0 +1,70 @@
+# examples.po - Examples
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: 2022-01-08 05:46+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../examples.rst:5
+msgid "Examples"
+msgstr "예시"
+
+#: ../../examples.rst:9
+msgid "API v1.1"
+msgstr "API v1.1"
+
+#: ../../examples.rst:13 ../../examples.rst:41
+msgid "Authentication"
+msgstr "인증"
+
+#: ../../examples.rst:17
+msgid "PIN-based Authorization"
+msgstr "PIN 기반 인증"
+
+#: ../../examples.rst:21
+msgid "Tweet / Update Status"
+msgstr "트윗하기(Update Status)"
+
+#: ../../examples.rst:25
+msgid "Follow Followers"
+msgstr "팔로워 팔로우하기"
+
+#: ../../examples.rst:29
+msgid "Handle Rate Limits"
+msgstr "API 호출 제한(Rate Limits) 다루기"
+
+#: ../../examples.rst:33
+msgid "Streaming"
+msgstr "스트리밍"
+
+#: ../../examples.rst:37
+msgid "API v2"
+msgstr "API v2"
+
+#: ../../examples.rst:45
+msgid "Search Recent Tweets"
+msgstr "최근 트윗 검색하기"
+
+#: ../../examples.rst:49
+msgid "Tweet Fields"
+msgstr "트윗 필드"
+
+#: ../../examples.rst:53
+msgid "Expansions"
+msgstr "확장(Expansions)"
+
+#: ../../examples.rst:57
+msgid "Create Tweet"
+msgstr "트윗 생성하기"

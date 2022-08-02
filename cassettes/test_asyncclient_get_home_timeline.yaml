@@ -1,0 +1,298 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/1072250532645998596/timelines/reverse_chronological
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"1527697210250518528\",\"text\":\"One of my favorite\
+        \ launches I got to help out with! https://t.co/Qe2H75hg59\"},{\"id\":\"1527695653995827201\"\
+        ,\"text\":\"did anyone say reverse chron? \\uD83D\\uDC40\\n\\nthis is the\
+        \ \\\"latest tweets \u2728\\\" timeline, and we have generous rate limits!\
+        \ https://t.co/Kx0Km4PuAu\"},{\"id\":\"1527691528071565312\",\"text\":\"Today\
+        \ we are launching the reverse-chronological home timeline on the Twitter\
+        \ API v2. https://t.co/eLFKqdCou1\"},{\"id\":\"1527691246449225728\",\"text\"\
+        :\"The time(line) has finally come! The reverse-chronological home timeline\
+        \ is now available on the Twitter API v2, allowing you to retrieve the most\
+        \ recent Tweets and Retweets from people you follow.\\n\\nCheck out the forum\
+        \ post for more information\\uD83D\\uDC47\\nhttps://t.co/JaaguOjtvl\"},{\"\
+        id\":\"1527627349214175232\",\"text\":\"@andypiper @anne_engineer @MichaelMadcat\
+        \ OooOooo that\u2019s a new one for the \u2018want\u2019 list\"},{\"id\":\"\
+        1527624375721242624\",\"text\":\"RT @SociologyOxford: We're looking forward\
+        \ to welcoming Twitter's @suhemparack for our departmental seminar on Monday:\\\
+        n\\n \\uD83D\\uDCCD'Academic Researc\u2026\"},{\"id\":\"1527621781464313858\"\
+        ,\"text\":\"Taking a rest day to get the \\uD83E\\uDDE0 back to full strength.\
+        \ \\n\\nNo better place to do it\u2026 https://t.co/GkQAgzhZQ1\"},{\"id\"\
+        :\"1527621734878302208\",\"text\":\"@LeBraat @VeldaKiara Woohoo! Happy birthday\
+        \ @VeldaKiara \\uD83C\\uDF89\"},{\"id\":\"1527620214933757952\",\"text\":\"\
+        Happy birthday to the champion of Kenya dev communities \u2014 @VeldaKiara\
+        \ https://t.co/12Z6ZSDzjH\"},{\"id\":\"1527424172518940673\",\"text\":\"Big\
+        \ fan of how quick and easy Glitch has made it to spin up beautiful web apps.\
+        \ Congrats to the team on joining @fastly \\uD83D\\uDC4F\\uD83C\\uDFFB https://t.co/IzD8JC6QS3\"\
+        },{\"id\":\"1527366064903860233\",\"text\":\"RT @woodworker: I've got mail.\
+        \ From @solderparty. It seems they do Keyboards for microcontroller. And the\
+        \ microcontroller boards to play wi\u2026\"},{\"id\":\"1527354550394376202\"\
+        ,\"text\":\"Tweet entity extractor that makes it easy for developers to find\
+        \ entities in Tweets based on the new Tweet Annotations in the #TwitterAPI\
+        \ v2 https://t.co/pgYscamXLQ https://t.co/YUVG9MxDIX\"},{\"id\":\"1527354524142227456\"\
+        ,\"text\":\"Tweet image analyzer is a demo app for researchers that want to\
+        \ learn how to extract text from images in Tweets https://t.co/110V9VhzmL\
+        \ https://t.co/YdgcS6Nmen\"},{\"id\":\"1527354493020491779\",\"text\":\"Wordle\
+        \ stats that gives you the stats for Wordle players based on their Tweets\
+        \ https://t.co/HrfgPmohNb https://t.co/cgD2DLLjyk\"},{\"id\":\"1527354476083892240\"\
+        ,\"text\":\"Twitter bookmarks search that lets you search and organize your\
+        \ Twitter bookmarks by @i_am_daniele  https://t.co/a1GLIDb0uX https://t.co/tBm9rze3Xd\"\
+        },{\"id\":\"1527354451937284117\",\"text\":\"Bookmarks to Notion, an app that\
+        \ lets you import your bookmarks to a Notion page https://t.co/O0wnVHbYKJ\
+        \ https://t.co/X9axhd4vfd\"},{\"id\":\"1527354400842272770\",\"text\":\"We\
+        \ have many demo apps on @glitch that showcase  the various functionality\
+        \ of the #TwitterAPI v2. Below are 5 of my favorite ones, please try those\
+        \ out and let us know how you like those \\uD83E\\uDDF5\"},{\"id\":\"1527327677878657028\"\
+        ,\"text\":\"our best demos run on @glitch and we\u2019re just happy to see\
+        \ you part of something amazing. https://t.co/RdphUiXdcf\"},{\"id\":\"1527326965673254915\"\
+        ,\"text\":\"I introduced my friend to Dorfromantik today and I may have to\
+        \ fight her over the #SteamDeck\"},{\"id\":\"1527319569164926977\",\"text\"\
+        :\"Eyyyy @jamie_maguire1!!\\n\\uD83D\\uDE4C\\uD83C\\uDFFC\\uD83D\\uDE4C\\\
+        uD83C\\uDFFC\\n\\n https://t.co/eHstglloHl\"},{\"id\":\"1527318645948309505\"\
+        ,\"text\":\"RT @hackingcommsci: Very excited to have Suhem joining us from\
+        \ @Twitter for #hackica22. Can't wait to see the cool projects using the Twitt\u2026\
+        \"},{\"id\":\"1527316287810318337\",\"text\":\"This is excellent news! https://t.co/FndZ0BDzC2\"\
+        },{\"id\":\"1527297108100775936\",\"text\":\"Congrats to the @glitch team.\
+        \ I love how easy Glitch makes it for me to deploy working sample apps and\
+        \ demos. If you\u2019re a dev advocate, partner/sales engineer or solutions\
+        \ architect - definitely try it out - it saved me so much time in building\
+        \ fun sample apps with #TwitterAPI https://t.co/1vojbJ3HvM\"},{\"id\":\"1527264809330393089\"\
+        ,\"text\":\"Milan https://t.co/Q0U9D2cTR0\"},{\"id\":\"1527107692858200064\"\
+        ,\"text\":\"If you\u2019re going to #ICA22 and attending  #hackica22, I\u2019\
+        ll be doing a session on using the Twitter API v2 for research. Hope to see\
+        \ y\u2019all there https://t.co/xx8aHixfdy\"},{\"id\":\"1527097985305153543\"\
+        ,\"text\":\"RT @GravelInstitute: For the first time ever, George Bush is right:\
+        \ George Bush did in fact launch a wholly unjustified and brutal invasion\u2026\
+        \"},{\"id\":\"1527063266278576128\",\"text\":\"\\\"si lo puedes creer, lo\
+        \ puedes crear\\\" \u2014\_@CrisGuadarramaM\"},{\"id\":\"1527048920169340929\"\
+        ,\"text\":\"RT @hackaday: Network Time Protocol on the\_ESP32 https://t.co/JAZJ0Lsvrs\"\
+        },{\"id\":\"1527047952950124544\",\"text\":\"aqui estoy https://t.co/Xrhyr1afh4\"\
+        },{\"id\":\"1526987122401366017\",\"text\":\"New favorite bot alert \\uD83D\\\
+        uDEA8\\n\\nWell done, @LuisMayoV https://t.co/jOPNbHZQn8\"},{\"id\":\"1526986177483526144\"\
+        ,\"text\":\"\\uD83C\\uDDEE\\uD83C\\uDDF9\"},{\"id\":\"1526972563053654016\"\
+        ,\"text\":\"About a year ago we launched our course on getting started with\
+        \ academic research using the #TwitterAPI v2. Since then it has been used\
+        \ by professors in various courses.\\n\\nIf you\u2019re looking to use Twitter\
+        \ data in your class, check it out &amp; share with others https://t.co/IWpMNIqzUn\"\
+        },{\"id\":\"1526972060089479169\",\"text\":\"RT @YEmreTapan: People in our\
+        \ community frequently ask about how to study Twitter networks. Previously,\
+        \ we learned how to retrieve Twitter\u2026\"},{\"id\":\"1526957996747722753\"\
+        ,\"text\":\"RT @TwitterSpaces: Twitter Spaces are real live audio convos you\
+        \ can join from your couch. or the dog park. or the bathtub. wherever you\
+        \ ar\u2026\"},{\"id\":\"1526932423467999232\",\"text\":\"@i_am_daniele Cheese\u2026\
+        \ just cheese\"},{\"id\":\"1526931381921644546\",\"text\":\"This \\uD83D\\\
+        uDC47\\uD83C\\uDFFC\\nJust because people aren\u2019t actively posting doesn\u2019\
+        t mean they aren\u2019t finding value and viewing ads on Twitter. https://t.co/K4Sk6vh39F\"\
+        },{\"id\":\"1526862555309817856\",\"text\":\"The \\uD83C\\uDF2F game has officially\
+        \ changed @grimesalittle https://t.co/Vlvfk9a8eK\"},{\"id\":\"1526854021725790208\"\
+        ,\"text\":\"Next: planning my \u201Ccarry\u201D for #EMFCamp (time to fill\
+        \ out a wiki page over there), and I have a number of draft blog posts to\
+        \ actually finish, as well\u2026\"},{\"id\":\"1526853766322040833\",\"text\"\
+        :\"Although I\u2019m out for a bit\u2026 I\u2019m just gonna leave this here\
+        \ - a side project I started to collate amazing resources and uses around\
+        \ the current Twitter API. ~20 stars already. Discussions are open (on GH).\
+        \ I might not immediately deal with PRs while away. https://t.co/Rdp0Xo2qmh\"\
+        },{\"id\":\"1526837269520191488\",\"text\":\"\\uD83C\\uDDEB\\uD83C\\uDDF7\"\
+        },{\"id\":\"1526804934234189826\",\"text\":\"I can always rely on @biglesp\
+        \ to write exactly the article I\u2019m interested in! #BASIC https://t.co/BNRWbX9iTE\"\
+        },{\"id\":\"1526783143222599681\",\"text\":\"Oh wow it\u2019s early \\uD83E\\\
+        uDD71\"},{\"id\":\"1526723830361731072\",\"text\":\"@i_am_daniele Taking that\
+        \ bra off right,puttting your feet up and that ice cold glass of wine!! That\
+        \ feels good!\"},{\"id\":\"1526695419643695104\",\"text\":\"seeing a new animal\
+        \ you've never seen in real life for the first time\\n\\ndiscovering how weird\
+        \ seasonal allergies are (my allergies are terrible but I like my own attitude\
+        \ towards them)\\n\\nbeing alone without feeling lonely\\n\\nfinishing a good\
+        \ book\"},{\"id\":\"1526695418616111106\",\"text\":\"when you have zero cell\
+        \ reception and you don't care because it's your day off\\n\\nthe sweet spot:\
+        \ 72-75\xBA F / 22-23\xBA C\\n\\nfirst snow of the season\\n\\nsaying or receiving\
+        \ thank you\\n\\ngetting complimented for something you didn't know you looked\
+        \ like/could do\"},{\"id\":\"1526695417626259456\",\"text\":\"being able to\
+        \ figure out how to play your favorite songs on the piano\\n\\nbeing unsure\
+        \ if you helped someone or made them feel worse, and then they tell you or\
+        \ you realize you did a very good job\\n\\nplay your favorite album in a loop\
+        \ for a whole day\\n\\nsinging with a friend\\n\\nsunny days\"},{\"id\":\"\
+        1526695416439242752\",\"text\":\"things that feel good (in no particular order):\\\
+        n\\nfalling in love\\n\\npetting your favorite pet\\n\\neating chocolate\\\
+        n\\nrunning so fast it feels like you're flying\\n\\nreceiving a kiss\\n\\\
+        n(add yours and let's turn twitter into the the most wholesome place for a\
+        \ day \\uD83D\\uDC47)\"},{\"id\":\"1526669053863116802\",\"text\":\"Taking\
+        \ time away from work until June - I may not respond to related queries before\
+        \ then.\"},{\"id\":\"1526632421537353728\",\"text\":\"RT @charmcli: \\uD83D\\\
+        uDEA8\\uD83D\\uDC25 Calling all devs! We\u2019re excited to host an open source\
+        \ dev tool discovery session with @TwitterDev this Thursday at 9am PD\u2026\
+        \"},{\"id\":\"1526594589091667968\",\"text\":\"RT @michaelrowe01: Hey Twitterverse\
+        \ - I am looking for an macOS #shortcut to automatically upload a pdf to DropBox\
+        \ without having Dropbox i\u2026\"},{\"id\":\"1526569493392068608\",\"text\"\
+        :\"Just received my first Birdfeeder bookmark digest and I love it. @tehwey\
+        \ I like the dark theme!\\n\\nYou can try out Birdfeeder for free at https://t.co/j24mEMp1HY\
+        \ https://t.co/iiAizy0sib\"},{\"id\":\"1526558333804630019\",\"text\":\"In\
+        \ our podcast this week, we talked robots, Open Source trackballs, and LEGO,\
+        \ with a special guest! (I'll be taking a couple of weeks off, so you won't\
+        \ hear me for a few) https://t.co/LOFO5CHbuC\"},{\"id\":\"1526545643573022722\"\
+        ,\"text\":\"Into the home stretch with work, ahead of time off and travels\
+        \ until June! \\uD83D\\uDE0E https://t.co/dl5G2TNjaK\"},{\"id\":\"1526266844172140544\"\
+        ,\"text\":\"RT @newonbotwiki: New tutorial was added to Botwiki! https://t.co/Gv57Q51LYz\
+        \ Via @JessicaGarson\"},{\"id\":\"1526210732194414599\",\"text\":\"RT @circuitpyshow:\
+        \ New episode!  Liz Clark aka @BlitzCityDIY joins the show and shares her\
+        \ maker journey and we talk all things MIDI.  http\u2026\"},{\"id\":\"1526209896601030656\"\
+        ,\"text\":\"Did you know that the new Twitter API has a process for sharing\
+        \ technical proposals for changes? You can learn more via our open evolution\
+        \ project on GitHub https://t.co/0HNKhdnWyl\"},{\"id\":\"1526184823257194496\"\
+        ,\"text\":\"RT @lexaloffle: \\uD83C\\uDF93 PICO-8 Education Edition: \\uD83C\\\
+        uDF1FOUT NOW! \\uD83C\\uDF1F\\n\\nhttps://t.co/3gtO0iWS1S // you'll need a\
+        \ keyboard!\\n\\nA web-based version of #pico8\u2026\"},{\"id\":\"1526170917465903106\"\
+        ,\"text\":\"Lookin good @TwitterDublin. Actually, lookin great https://t.co/DoyDxhzHj0\"\
+        },{\"id\":\"1526170139854503936\",\"text\":\"Can confirm\u2026 pizza and beer\
+        \ with @IgorBrigadir as your Dublin guide is the play\"},{\"id\":\"1526154571474771969\"\
+        ,\"text\":\"My #SteamDeck review: great for folks who like fiddling (with\
+        \ *everything*). Eventually, you'll remember you bought it to play some games...\"\
+        },{\"id\":\"1526153184481357830\",\"text\":\"RT @GamesAtWork_Biz: check out\
+        \ e368: Chaos Agent Without Pants - with special guest @theRab &amp; stories\
+        \ @BostonDynamics Spot, drones, open so\u2026\"},{\"id\":\"1525866559910060033\"\
+        ,\"text\":\"TIL there's a standard for stickers. @juliaferraioli did *you*\
+        \ know about this? (if so, why am I just learning?) https://t.co/zTsFT9Oj2c\"\
+        },{\"id\":\"1525856157021179905\",\"text\":\"Oh, hi there! \\uD83D\\uDC26\
+        \ https://t.co/aGhUyHiSSP\"},{\"id\":\"1525623334938939392\",\"text\":\"\\\
+        uD83C\\uDDFA\\uD83C\\uDDE6 \\uD83C\\uDFB6 \\uD83C\\uDF8A\"},{\"id\":\"1525537549971759107\"\
+        ,\"text\":\"The volume of gingers in Dublin\u2026 I feel seen and accepted\
+        \ \\uD83D\\uDC68\\uD83C\\uDFFB\u200D\\uD83E\\uDDB0, even if I consider myself\
+        \ a recovering ginger\"},{\"id\":\"1525453767143038976\",\"text\":\"Love it!\
+        \ \\uD83C\\uDF08 https://t.co/9Z02Dv0zcc\"},{\"id\":\"1525402844131639296\"\
+        ,\"text\":\"Happy weekend! Off to @HRP_palaces Hampton Court today for the\
+        \ Artisan Fair. What are you up to?\"},{\"id\":\"1525395319013376000\",\"\
+        text\":\"RT @_andrewlyons: Today, we opened up @spacesdashboard - your discovery\
+        \ guide to Social Audio on @twitterspaces as guests with @i_am_daniel\u2026\
+        \"},{\"id\":\"1525252806889857024\",\"text\":\"to all recruiters: sorry\"\
+        },{\"id\":\"1525250854684700673\",\"text\":\"I actually still love working\
+        \ at twitter. why?\\n\\n\u2022 tweeps are kind and resilient\\n\u2022 I still\
+        \ get to help people on twitter\\n\u2022 people (even people without a twitter\
+        \ account) root for us and our success\\n\\nplease never take all of the above\
+        \ for granted \\uD83D\\uDC99\"},{\"id\":\"1525232366909792256\",\"text\":\"\
+        developers, how would you change the profile page?\\n\\nasking for a friend\
+        \ https://t.co/X5u3GbE5ED\"},{\"id\":\"1525202101311258626\",\"text\":\"RT\
+        \ @TwitterEng: Achieving large-scale real-time data analytics on Twitter's\
+        \ high volume of data is uniquely challenging. In our latest blog\u2026\"\
+        },{\"id\":\"1525185359805444096\",\"text\":\"This is a https://t.co/LYswtRnxfc\
+        \ appreciation Tweet! As a Developer Advocate, it has made easy for me to\
+        \ share code, tutorials and content with other developers in such an easy\
+        \ and effective manner! Thanks @ThePracticalDev\"},{\"id\":\"1525170076491579393\"\
+        ,\"text\":\"RT @TweetDeck: Have you tried the new TweetDeck Preview? We\u2019\
+        d love to hear from you!\\n\\nUse #TweetDeckFeedback to tell us what you think.\"\
+        },{\"id\":\"1525160409459609600\",\"text\":\"RT @arwaib: BREAKING: #Israeli\
+        \ forces target Palestinian journalist #ShireenAbuAqla\u2019s funeral procession,\
+        \ using batons against participants\u2026\"},{\"id\":\"1525144460702539776\"\
+        ,\"text\":\"For those that follow me for Twitter API / data related content\
+        \ or updates, which version of the #TwitterAPI version do you use and why?\"\
+        },{\"id\":\"1525143990202355712\",\"text\":\"so tired \\uD83D\\uDE10\"},{\"\
+        id\":\"1525138926176022536\",\"text\":\"Spaces leaderboard: https://t.co/hsMnfwBjnL\"\
+        },{\"id\":\"1525137455934062593\",\"text\":\"My @spacesdashboard page: https://t.co/wVf6dayv2x\"\
+        },{\"id\":\"1525135946894696450\",\"text\":\"Today @_andrewlyons launched\
+        \ @spacesdashboard. A way to discover and explore Spaces and their creators\
+        \ with a comprehensive view of the Spacesverse https://t.co/l5styAPwJ7\"},{\"\
+        id\":\"1525129446784741376\",\"text\":\"starting now! https://t.co/0KmwdrRJiE\"\
+        },{\"id\":\"1525129258607181824\",\"text\":\"https://t.co/B4u7HCXE5n\"},{\"\
+        id\":\"1525091195453681664\",\"text\":\"Happy kung-fu kenny day to those who\
+        \ celebrate \\uD83E\\uDD73\\n\\n#nowplaying \\n\\nhttps://t.co/rQtKm5HddN\"\
+        },{\"id\":\"1525079426299568128\",\"text\":\"RT @codebar: Hey all, @trans_code\
+        \ is going to @europython this summer, Tuesday 12th July 2022 \u2728\\n\\\
+        nTrans*Code is a free full-day workshop &amp; h\u2026\"},{\"id\":\"1525067978227822592\"\
+        ,\"text\":\"Well now \\uD83D\\uDE43 must be nearly time for a holiday.\"},{\"\
+        id\":\"1524934140046368768\",\"text\":\"Send me all the recommendations?\"\
+        },{\"id\":\"1524933942742163456\",\"text\":\"I\u2019ll be hanging out in the\
+        \ european time zones over the next month, starting tomorrow.\\n\\ndublin\\\
+        nlondon\\nbudapest\\nlake como\\nst moritz\\nzermatt\\navignon\\nparis\"},{\"\
+        id\":\"1524933282898399232\",\"text\":\"I think I\u2019m quite ready for another\
+        \ adventure https://t.co/JaJcgMTAOh\"},{\"id\":\"1524904820469125146\",\"\
+        text\":\"Truly enjoyed seeing @kayvz and @boo in action. They drove serious\
+        \ work, but did so in a fun way. Very sorry to see them go.\"},{\"id\":\"\
+        1524882463075491848\",\"text\":\"Right, @Xbox Cloud Gaming all set up on #SteamDeck,\
+        \ Steam back catalogue downloaded \\uD83D\\uDC7E that's all for today. Time\
+        \ for bed.\"},{\"id\":\"1524871241559072791\",\"text\":\"listening to a Space\
+        \ from @TwitterDev and testing the API... \\uD83D\\uDC4B\"},{\"id\":\"1524865904890331157\"\
+        ,\"text\":\"Happening now -&gt; https://t.co/PQvTty3tCk\"},{\"id\":\"1524862908781543434\"\
+        ,\"text\":\"RT @ZxSpectROM: Tomorrow at 18:00GMT the very last 7 Ukrainian\
+        \ Fundraiser RC2014 kits will go in sale at z80kits. \\n\\nThese are the last\
+        \ I ha\u2026\"},{\"id\":\"1524862798823669766\",\"text\":\"RT @europython:\
+        \ Hey hey! @trans_code is coming to @europython this summer! 12th July 2022!\
+        \ \u2728\\n\\nTrans*Code is a free full day workshop &amp; hack\u2026\"},{\"\
+        id\":\"1524833175024848898\",\"text\":\"RT @jamie_maguire1: A great video\
+        \ tutorial by @jessicagarson that shows you how to create a Twitter Bot\\\
+        n\\nAn accompanying blog with low leve\u2026\"},{\"id\":\"1524796546306478083\"\
+        ,\"text\":\"Today marks the launch of Devs in the Details, a technical video\
+        \ series made for developers by developers building with the Twitter API.\_\
+        \_\\uD83D\\uDE80\\n\\nIn this premiere episode, @jessicagarson walks us through\
+        \ how she built @FactualCat #WelcomeToOurTechTalk\\n\u2B07\uFE0F\\n\\nhttps://t.co/nGa8JTQVBJ\"\
+        },{\"id\":\"1524755167522000904\",\"text\":\"RT @josecastillo: Hey you! Are\
+        \ you in the New York area? Interested in hardware-oriented stuff? Drop by\
+        \ the workshop of @the_prepared in Br\u2026\"},{\"id\":\"1524746260862754816\"\
+        ,\"text\":\"I\u2019m back \\uD83C\\uDF99\\n\\nand I have a guest who\u2019\
+        ll bring a nice surprise!\\n\\ntune in tomorrow: \\n\\nhttps://t.co/B4u7HCG2GN\"\
+        },{\"id\":\"1524731295917658115\",\"text\":\"So... the #SteamDeck arrived!\
+        \ And also, excitingly, so did this (and some other goodies, from @yongxiangxu251\
+        \ \\uD83D\\uDE4F\\uD83C\\uDFFB)! Unsure which one will provide me the most\
+        \ entertainment, but I'm working now, so I shall investigate later! #esp32c3\
+        \ #micropython https://t.co/ZArQow0DTj\"},{\"id\":\"1524728475172708357\"\
+        ,\"text\":\"So, @SparkMailApp on iOS/iPadOS/macOS is pretty nice, might even\
+        \ claw me back away from using webmail as my default UI...\"}],\"meta\":{\"\
+        result_count\":100,\"newest_id\":\"1527697210250518528\",\"oldest_id\":\"\
+        1524728475172708357\",\"next_token\":\"7140dibdnow9c7btw421e38xjm4lc3brk8gkh08s1v3nb\"\
+        }}"
+    headers:
+      api-version:
+      - '2.43'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '7938'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 20 May 2022 17:08:12 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165306649094830530; Max-Age=63072000; Expires=Sun,
+        19 May 2024 17:08:12 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165306649094830530; Max-Age=63072000; Expires=Sun, 19 May
+        2024 17:08:12 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_mTIYnXBw1r4y/O580FElgQ=="; Max-Age=63072000; Expires=Sun,
+        19 May 2024 17:08:12 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165306649094830530; Max-Age=63072000; Expires=Sun, 19 May 2024
+        17:08:12 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - f8aa633bb58410d6fc6a0557cfad831f3af4d8957d67fc057b95bebf4f2d90fc
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '180'
+      x-rate-limit-remaining:
+      - '179'
+      x-rate-limit-reset:
+      - '1653067390'
+      x-response-time:
+      - '1060'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/1072250532645998596/timelines/reverse_chronological
+version: 1

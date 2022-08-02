@@ -1,0 +1,178 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422/members
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"1319036828964454402\",\"name\":\"Birdwatch\",\"\
+        username\":\"birdwatch\"},{\"id\":\"1244731491088809984\",\"name\":\"Twitter\
+        \ Thailand\",\"username\":\"TwitterThailand\"},{\"id\":\"1194267639100723200\"\
+        ,\"name\":\"Twitter Retweets\",\"username\":\"TwitterRetweets\"},{\"id\":\"\
+        1168976680867762177\",\"name\":\"Twitter Able\",\"username\":\"TwitterAble\"\
+        },{\"id\":\"1065249714214457345\",\"name\":\"Spaces\",\"username\":\"TwitterSpaces\"\
+        },{\"id\":\"1049385226424786944\",\"name\":\"Twitter Miami\",\"username\"\
+        :\"TwitterMiami\"},{\"id\":\"1004367799588880384\",\"name\":\"Twitter M\xE9\
+        xico\",\"username\":\"TwitterMexico\"},{\"id\":\"773578328498372608\",\"name\"\
+        :\"Twitter Together\",\"username\":\"TwitterTogether\"},{\"id\":\"766296039036948480\"\
+        ,\"name\":\"Moments MENA\",\"username\":\"momentsmena\"},{\"id\":\"738118487122419712\"\
+        ,\"name\":\"Twitter Asians\",\"username\":\"TwitterAsians\"},{\"id\":\"738118115595165697\"\
+        ,\"name\":\"Twitter Stripes\",\"username\":\"TwitterStripes\"},{\"id\":\"\
+        738117623737552896\",\"name\":\"Twitter Parents\",\"username\":\"TwitterParents\"\
+        },{\"id\":\"738115375477362688\",\"name\":\"Twitter Moments India\",\"username\"\
+        :\"MomentsIndia\"},{\"id\":\"717465714357972992\",\"name\":\"Twitter Video\
+        \ India\",\"username\":\"TwitterVideoIN\"},{\"id\":\"717463776170119169\"\
+        ,\"name\":\"Twitter Detroit\",\"username\":\"TwitterDetroit\"},{\"id\":\"\
+        717462990983856129\",\"name\":\"Twitter Paris\",\"username\":\"TwitterParis\"\
+        },{\"id\":\"4588114813\",\"name\":\"Twitter Moments Australia\",\"username\"\
+        :\"MomentsAU\"},{\"id\":\"4172587277\",\"name\":\"Twitter Moments Brasil\"\
+        ,\"username\":\"MomentsBrasil\"},{\"id\":\"3896350692\",\"name\":\"Twitter\
+        \ \u30E2\u30FC\u30E1\u30F3\u30C8\",\"username\":\"MomentsJapan\"},{\"id\"\
+        :\"3873984133\",\"name\":\"Twitter Moments Canada\",\"username\":\"CanadaMoments\"\
+        },{\"id\":\"3873965293\",\"name\":\"Twitter Moments en Espa\xF1ol\",\"username\"\
+        :\"MomentsES\"},{\"id\":\"3873936134\",\"name\":\"Twitter Gaming\",\"username\"\
+        :\"TwitterGaming\"},{\"id\":\"3873867072\",\"name\":\"Twitter Philippines\"\
+        ,\"username\":\"TwitterPH\"},{\"id\":\"3282898525\",\"name\":\"Twitter Marketing\
+        \ SG\",\"username\":\"TwitterMktgSG\"},{\"id\":\"3282860300\",\"name\":\"\
+        Twitter Marketing IN\",\"username\":\"TwitterMktgIN\"},{\"id\":\"3282859598\"\
+        ,\"name\":\"Twitter Creators\",\"username\":\"TwitterCreators\"},{\"id\":\"\
+        3282802674\",\"name\":\"Twitter Marketing MENA\",\"username\":\"TwitterMktgMENA\"\
+        },{\"id\":\"3260518932\",\"name\":\"Twitter Moments\",\"username\":\"TwitterMoments\"\
+        },{\"id\":\"3260517252\",\"name\":\"Twitter Marketing ID\",\"username\":\"\
+        TwitterMktgID\"},{\"id\":\"3099993704\",\"name\":\"Periscope Help\",\"username\"\
+        :\"PeriscopeHelp\"},{\"id\":\"3015734250\",\"name\":\"Twitter Marketing AU\"\
+        ,\"username\":\"TwitterMktgAU\"},{\"id\":\"3015301350\",\"name\":\"Twitter\
+        \ Stage\",\"username\":\"TwitterStage\"},{\"id\":\"3015271772\",\"name\":\"\
+        Twitter Food\",\"username\":\"TwitterFood\"},{\"id\":\"3001165942\",\"name\"\
+        :\"Revue\",\"username\":\"revue\"},{\"id\":\"2861317614\",\"name\":\"Twitter\
+        \ \u30D5\u30A1\u30C3\u30B7\u30E7\u30F3\",\"username\":\"TwitterFashnJP\"},{\"\
+        id\":\"2796700846\",\"name\":\"TwisitorLA\",\"username\":\"TwisitorLA\"},{\"\
+        id\":\"2551015628\",\"name\":\"Twitter\u30D3\u30B8\u30CD\u30B9\",\"username\"\
+        :\"TwitterBizJP\"},{\"id\":\"2551000952\",\"name\":\"Twitter Marketing DACH\"\
+        ,\"username\":\"TwitterMktgDACH\"},{\"id\":\"2551000568\",\"name\":\"Twitter\
+        \ Mktg Latam\",\"username\":\"TwitterMktLatam\"},{\"id\":\"2550997820\",\"\
+        name\":\"Twitter Indonesia\",\"username\":\"TwitterID\"},{\"id\":\"2549011969\"\
+        ,\"name\":\"Twitter NeighborNest\",\"username\":\"NeighborNest\"},{\"id\"\
+        :\"2548985366\",\"name\":\"Twitter Blackbirds\",\"username\":\"Blackbirds\"\
+        },{\"id\":\"2548979088\",\"name\":\"Twitter Alas\",\"username\":\"TwitterAlas\"\
+        },{\"id\":\"2548977510\",\"name\":\"Twitter Careers Brasil\",\"username\"\
+        :\"JoinTheFlockBR\"},{\"id\":\"2445809510\",\"name\":\"Periscope\",\"username\"\
+        :\"PeriscopeCo\",\"withheld\":{\"country_codes\":[\"TR\"]}},{\"id\":\"2328002822\"\
+        ,\"name\":\"Twitter Women\",\"username\":\"TwitterWomen\"},{\"id\":\"2296297326\"\
+        ,\"name\":\"Twitter Moments UK & Ireland\",\"username\":\"UKMoments\"},{\"\
+        id\":\"2249227634\",\"name\":\"Twitter Boulder\",\"username\":\"TwitterBoulder\"\
+        },{\"id\":\"2249227194\",\"name\":\"Twitter Sports\",\"username\":\"TwitterSportsAU\"\
+        },{\"id\":\"2244997579\",\"name\":\"Twitter Marketing BR\",\"username\":\"\
+        TwitterMktgBR\"},{\"id\":\"2244994945\",\"name\":\"Twitter Dev\",\"username\"\
+        :\"TwitterDev\"},{\"id\":\"2244983430\",\"name\":\"Twitter Singapore\",\"\
+        username\":\"TwitterSG\"},{\"id\":\"2244981348\",\"name\":\"Twitter\u30E9\u30A4\
+        \u30D5\u30E9\u30A4\u30F3\",\"username\":\"TwitterLifeline\"},{\"id\":\"2228891959\"\
+        ,\"name\":\"Twitter MENA\",\"username\":\"TwitterMENA\"},{\"id\":\"1884191208\"\
+        ,\"name\":\"Twitter For Good\",\"username\":\"TwitterForGood\"},{\"id\":\"\
+        1705676064\",\"name\":\"Twitter\u516C\u5F0F\u63A1\u7528\u30A2\u30AB\u30A6\u30F3\
+        \u30C8\",\"username\":\"JoinTheFlockJP\"},{\"id\":\"1665823832\",\"name\"\
+        :\"Twitter University\",\"username\":\"University\"},{\"id\":\"1640990204\"\
+        ,\"name\":\"Twitter Marketing ES\",\"username\":\"TwitterMktgES\"},{\"id\"\
+        :\"1639309946\",\"name\":\"Twitter Marketing FR\",\"username\":\"TwitterMktgFR\"\
+        },{\"id\":\"1636762128\",\"name\":\"Twitter Marketing Korea \uD2B8\uC704\uD130\
+        \ \uB9C8\uCF00\uD305\",\"username\":\"TwitterMktgKR\"},{\"id\":\"1631299117\"\
+        ,\"name\":\"Twitter Accessibility\",\"username\":\"TwitterA11y\"},{\"id\"\
+        :\"1603818258\",\"name\":\"Twitter Investor Relations\",\"username\":\"TwitterIR\"\
+        },{\"id\":\"1533573656\",\"name\":\"Twitter Dublin\",\"username\":\"TwitterDublin\"\
+        },{\"id\":\"1526228120\",\"name\":\"Twitter Data\",\"username\":\"TwitterData\"\
+        },{\"id\":\"1524832640\",\"name\":\"ArtHouse\",\"username\":\"ArtHouse\"},{\"\
+        id\":\"1462327554\",\"name\":\"Twitter \u30E1\u30C7\u30A3\u30A2\",\"username\"\
+        :\"TwitterMediaJP\"},{\"id\":\"1411434049\",\"name\":\"Event Parrot\",\"username\"\
+        :\"eventparrot\"},{\"id\":\"1347756012\",\"name\":\"Twitter Espa\xF1a\",\"\
+        username\":\"TwitterEspana\"},{\"id\":\"1347713256\",\"name\":\"Twitter Canada\"\
+        ,\"username\":\"TwitterCanada\"},{\"id\":\"1287248143\",\"name\":\"Twitter\
+        \ REW\",\"username\":\"TwitterREW\"},{\"id\":\"1228433617\",\"name\":\"Twitter\
+        \ Seattle\",\"username\":\"TwitterSeattle\"},{\"id\":\"1225933934\",\"name\"\
+        :\"Twitter Ads API\",\"username\":\"AdsAPI\"},{\"id\":\"1173514177\",\"name\"\
+        :\"Twitter Boston\",\"username\":\"TwitterBoston\"},{\"id\":\"1159458169\"\
+        ,\"name\":\"Twitter \u516C\u5171\u653F\u7B56\",\"username\":\"TwitterGovJP\"\
+        },{\"id\":\"1159422488\",\"name\":\"Twitter \u30CB\u30E5\u30FC\u30B9\",\"\
+        username\":\"TwitterNewsJP\"},{\"id\":\"1159274324\",\"name\":\"Twitter \u30B9\
+        \u30DD\u30FC\u30C4\",\"username\":\"TwitterSportsJP\"},{\"id\":\"1137751093\"\
+        ,\"name\":\"Twitter Security\",\"username\":\"twittersecurity\"},{\"id\":\"\
+        1117573164\",\"name\":\"Hadoop @Twitter\",\"username\":\"TwitterHadoop\"},{\"\
+        id\":\"1077914569\",\"name\":\"Twitter Marketing UK\",\"username\":\"TwitterMktgUK\"\
+        },{\"id\":\"1072232960\",\"name\":\"Twisitor\",\"username\":\"twisitor\"},{\"\
+        id\":\"905409822\",\"name\":\"Twitter SRE\",\"username\":\"TwitterSRE\"},{\"\
+        id\":\"862314223\",\"name\":\"Twitter \u30DF\u30E5\u30FC\u30B8\u30C3\u30AF\
+        \",\"username\":\"TwitterMusicJP\"},{\"id\":\"818212956\",\"name\":\"Twitter\
+        \ Australia\",\"username\":\"TwitterAU\"},{\"id\":\"791978718\",\"name\":\"\
+        Twitter Official Partner\",\"username\":\"OfficialPartner\"},{\"id\":\"726960710\"\
+        ,\"name\":\"Twitter Media\",\"username\":\"TwitterMedia\"},{\"id\":\"707249550\"\
+        ,\"name\":\"Twitter Atlanta\",\"username\":\"TwitterATL\"},{\"id\":\"632708673\"\
+        ,\"name\":\"Twitter \u30DE\u30FC\u30B1\u30C6\u30A3\u30F3\u30B0\",\"username\"\
+        :\"TwitterMktgJP\"},{\"id\":\"627222883\",\"name\":\"Join The Flock EMEA\"\
+        ,\"username\":\"JoinTheFlockEU\"},{\"id\":\"593893034\",\"name\":\"Twitter\
+        \ DC\",\"username\":\"TwitterDC\"},{\"id\":\"586198217\",\"name\":\"TwitterTV\"\
+        ,\"username\":\"TwitterTV\"},{\"id\":\"544524144\",\"name\":\"Twitter Research\"\
+        ,\"username\":\"TwitterResearch\"},{\"id\":\"495309159\",\"name\":\"Twitter\
+        \ New York City\",\"username\":\"TwitterNYC\"},{\"id\":\"484495045\",\"name\"\
+        :\"Twitter Los Angeles\",\"username\":\"TwitterLA\"},{\"id\":\"437698597\"\
+        ,\"name\":\"Twitter Women Eng\",\"username\":\"womeng\"},{\"id\":\"436266454\"\
+        ,\"name\":\"Twitter Movies\",\"username\":\"TwitterMovies\"},{\"id\":\"427475002\"\
+        ,\"name\":\"Twitter Books\",\"username\":\"TwitterBooks\"},{\"id\":\"414869890\"\
+        ,\"name\":\"Twitter Faith\",\"username\":\"TwitterFaith\"},{\"id\":\"376825877\"\
+        ,\"name\":\"Twitter Open Source\",\"username\":\"TwitterOSS\"},{\"id\":\"\
+        373471064\",\"name\":\"Twitter Music is listening to Bad Bunny\",\"username\"\
+        :\"TwitterMusic\"},{\"id\":\"372575989\",\"name\":\"Twitter News\",\"username\"\
+        :\"TwitterNews\"}],\"meta\":{\"result_count\":100,\"next_token\":\"4611686018799963893\"\
+        }}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2230'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:25 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818517027233; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818517027233; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_jMDTobLXZMynQ3kty4W62A=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818517027233; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:25 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - c87d718315833591c683ee19a131d186ccd519847214b8c044fd86b3517fff68
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '900'
+      x-rate-limit-remaining:
+      - '899'
+      x-rate-limit-reset:
+      - '1651929085'
+      x-response-time:
+      - '137'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/84839422/members
+version: 1

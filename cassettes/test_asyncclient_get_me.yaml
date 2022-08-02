@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/users/me
+  response:
+    body:
+      string: '{"data":{"id":"1072250532645998596","name":"Tweepy Testing","username":"TweepyDev"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '97'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:26 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818656734496; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818656734496; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_t8emqhYAFotFm37iC/Urxw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818656734496; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:26 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a8515bcd01b3dc34b8b8070eb1bcc5d50a15da1c7066edecd9d04e8a909c3cf1
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1651929086'
+      x-response-time:
+      - '38'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/users/me
+version: 1

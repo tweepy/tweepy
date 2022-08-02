@@ -1,0 +1,112 @@
+# pagination.po - Pagination
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-27 16:12+0900\n"
+"PO-Revision-Date: 2022-01-08 04:55+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../pagination.rst:7
+msgid "Pagination"
+msgstr "페이지화"
+
+#: ../../pagination.rst:11 ../../pagination.rst:26
+msgid "API v1.1"
+msgstr "API v1.1"
+
+#: of tweepy.cursor.Cursor:1
+msgid ""
+":class:`Cursor` can be used to paginate for any :class:`API` methods that"
+" support pagination"
+msgstr ""
+"페이지화를 지원하는 모든 :class:`API` 메서드는, 페이지 매김을 위해 :class:`Cursor` 를 사용할 수 있음. "
+
+#: of tweepy.cursor.Cursor tweepy.cursor.Cursor.items
+#: tweepy.cursor.Cursor.pages tweepy.pagination.Paginator
+#: tweepy.pagination.Paginator.flatten
+msgid "Parameters"
+msgstr "매개변수"
+
+#: of tweepy.cursor.Cursor:4
+msgid ":class:`API` method to paginate for"
+msgstr "페이지화할 :class:`API` 메서드"
+
+#: of tweepy.cursor.Cursor:5 tweepy.pagination.Paginator:7
+msgid "Positional arguments to pass to ``method``"
+msgstr "``method`` 에 전달할 위치 인수(Positional arguments)."
+
+#: of tweepy.cursor.Cursor:6 tweepy.pagination.Paginator:8
+msgid "Keyword arguments to pass to ``method``"
+msgstr "``method`` 에 전달할 키워드 인수(Keyword arguments)."
+
+#: of tweepy.cursor.Cursor.items:1
+msgid "Retrieve the items in each page/request"
+msgstr "요청 당 각 페이지에 있는 항목들을 가져옴."
+
+#: of tweepy.cursor.Cursor.items:3
+msgid "Maximum number of items to iterate over"
+msgstr "반복할 최대 항목의 수"
+
+#: of tweepy.cursor.Cursor.items tweepy.cursor.Cursor.pages
+msgid "Returns"
+msgstr "반환"
+
+#: of tweepy.cursor.Cursor.items:5
+msgid "Iterator to iterate through items"
+msgstr "각 항목마다 반복하는 반복자(Iterator)"
+
+#: of tweepy.cursor.Cursor.items tweepy.cursor.Cursor.pages
+msgid "Return type"
+msgstr "반환 형식"
+
+#: of tweepy.cursor.Cursor.pages:1
+msgid "Retrieve the page for each request"
+msgstr "각 요청 당 페이지를 가져옴."
+
+#: of tweepy.cursor.Cursor.pages:3
+msgid "Maximum number of pages to iterate over"
+msgstr "반복할 최대 페이지 수"
+
+#: of tweepy.cursor.Cursor.pages:5
+msgid "Iterator to iterate through pages"
+msgstr "각 페이지마다 반복하는 반복자(Iterator)"
+
+#: ../../pagination.rst:16 ../../pagination.rst:43
+msgid "API v2"
+msgstr "API v2"
+
+#: of tweepy.pagination.Paginator:1
+msgid ""
+":class:`Paginator` can be used to paginate for any :class:`Client` "
+"methods that support pagination"
+msgstr ""
+"페이지화를 지원하는 모든 클라이언트(:class:`Client`) 메서드에 대해 "
+"페이지 매김(:class:`Paginator`)을 사용할 수 있습니다."
+
+#: of tweepy.pagination.Paginator:6
+msgid ":class:`Client` method to paginate for"
+msgstr "페이지화할 :class:`Client` 메서드"
+
+#: of tweepy.pagination.Paginator.flatten:1
+msgid "Flatten paginated data"
+msgstr "1차원 배열화(Flatten) 페이지 매김된 데이터"
+
+#: of tweepy.pagination.Paginator.flatten:3
+msgid "Maximum number of results to yield"
+msgstr "산출할 최대 결과의 수"
+
+#: ../../pagination.rst:22
+msgid "Example"
+msgstr "예시"
+

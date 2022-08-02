@@ -3,6 +3,151 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.10.0
+--------------
+
+### New Features / Improvements
+- Add asynchronous interfaces for Twitter API v2
+  - Add `asynchronous.AsyncClient` ([0aadd53](https://github.com/tweepy/tweepy/commit/0aadd5327b8e14fd6921ffb10153145cc9c58061))
+    - Add `async_lru` as requirement for `async` extra
+  - Add `asynchronous.AsyncStreamingClient` ([9051ba6](https://github.com/tweepy/tweepy/commit/9051ba64bc0610c9e0027e53f6e32a72de67d1e2))
+- Add support for reverse chronological home timeline with Twitter API v2 ([#1900](https://github.com/tweepy/tweepy/issues/1900))
+  - Add `Client.get_home_timeline` and `AsyncClient.get_home_timeline`
+- Update the User-Agent header based on `AsyncStream.user_agent` even if `AsyncStream.session` is already initialized/set ([096a62c](https://github.com/tweepy/tweepy/commit/096a62c737218c4b51682c1127ab2a876547ad73))
+
+### Twitter API Deprecations
+- Deprecate `AsyncStream.sample` and note deprecation of compliance messages for `AsyncStream.filter` ([e043074](https://github.com/tweepy/tweepy/commit/e0430748b311cfc0d284897351ae589db0b85ada), [1b77007](https://github.com/tweepy/tweepy/commit/1b77007aee7b491a7878996b060a102984e84edd))
+
+### Misc
+- Update and improve various documentation and tests
+
+Version 4.9.0
+-------------
+
+### New Features / Improvements
+- Add support for Direct Message typing indicator and read receipts ([#1856](https://github.com/tweepy/tweepy/issues/1856))
+  - Add `API.indicate_direct_message_typing` and `API.mark_direct_message_read`
+- Fallback to `"detail"` response value for `HTTPException` message ([b6b8241](https://github.com/tweepy/tweepy/commit/b6b8241d8df408a427a38d3b9a44837f07cfab32))
+- Handle `"error"` key of response being a string in `HTTPException` ([2da4452](https://github.com/tweepy/tweepy/commit/2da4452870093f930fb8808861bcec809a2d4ccf))
+
+### Twitter API Deprecations
+- Deprecate `Stream.sample` and note deprecation of compliance messages for `Stream.filter` ([#1876](https://github.com/tweepy/tweepy/issues/1876))
+
+### Misc
+- Use setup.cfg for coverage.py configuration ([e24bb2f](https://github.com/tweepy/tweepy/commit/e24bb2f0febe6662552a95eb7fbd5da0f3314a24))
+  - Explicitly specify coverage >= 4.4.2 requirement for dev extra ([b5bd35e](https://github.com/tweepy/tweepy/commit/b5bd35eb607b07ef7268f45df2c22e4af67adf96))
+- Use setup.cfg for tox configuration ([e24bb2f](https://github.com/tweepy/tweepy/commit/e24bb2f0febe6662552a95eb7fbd5da0f3314a24))
+  - Update lower bound for dev extra tox requirement to >= 3.21.0 ([ba6e6b1](https://github.com/tweepy/tweepy/commit/ba6e6b17f4c22d05ee67c11d91c25424ec61dc57))
+- Remove `tests_require` from setup.py ([2870031](https://github.com/tweepy/tweepy/commit/2870031844dfc28919763d5c05c1d1bc6db8f4f1))
+- Stop creating universal wheels ([9d93ec8](https://github.com/tweepy/tweepy/commit/9d93ec8ddd0f202e06e0a9393b3397d4d29e85fa))
+- Update and improve various documentation and tests
+
+Version 4.8.0
+-------------
+
+### New Features / Improvements
+- Add support for Bookmarks with Twitter API v2 ([#1848](https://github.com/tweepy/tweepy/issues/1848))
+  - Add `Client.remove_bookmark`, `Client.get_bookmarks`, `Client.bookmark`
+- Add support for using OAuth 2.0 Authorization Code Flow with `Client` methods that require the authenticating user's ID ([0157d0b](https://github.com/tweepy/tweepy/commit/0157d0b2abcfe40e4e5b77c3d8f733f67ebef9d9))
+  - Raise `TypeError` for those methods when the access token isn't set
+- Raise `NotFound` rather than `HTTPException` when encountering 404 response status codes in `BaseClient.request` ([b6b8219](https://github.com/tweepy/tweepy/commit/b6b82196d3f0821c184901de985e2cedb56a9db2))
+
+Version 4.7.0
+-------------
+
+### New Features / Improvements
+- Add support for Quote Tweets lookup with Twitter API v2 ([#1844](https://github.com/tweepy/tweepy/issues/1844))
+  - Add `Client.get_quote_tweets`
+
+### Python Backwards-Incompatible Changes
+- Drop support for Python 3.6, which has reached end-of-life status ([#1788](https://github.com/tweepy/tweepy/issues/1788))
+
+### Bug Fixes
+- Fix `Client.follow` to return response from `Client.follow_user` rather than `None` ([0742f54](https://github.com/tweepy/tweepy/commit/0742f549fae6118dd7b154ea9244077d124751a2))
+- Fix `Client.unfollow` to return response from `Client.unfollow_user` rather than `None` ([c1787f0](https://github.com/tweepy/tweepy/commit/c1787f0a3ca478d1610015ce5ffa8553873a8efc))
+
+### Misc
+- Organize documentation arrangement and improve index / table of contents categorization ([c5310d1](https://github.com/tweepy/tweepy/commit/c5310d11cd62ea2aeb69bb546d0d3682dd4bc739))
+- Add documentation for API v2 models
+  - Add documentation for `List` ([360594b](https://github.com/tweepy/tweepy/commit/360594b9044a4b75c9cb1d0e47462e155ef75c12))
+  - Add documentation for `Media` ([c2dacc8](https://github.com/tweepy/tweepy/commit/c2dacc8e53ddda3cb37cef04ba2bb629955b6938))
+  - Add documentation for `Place` ([e3fa223](https://github.com/tweepy/tweepy/commit/e3fa2238819b9678cabfc2b8068cd35a11747b0a))
+  - Add documentation for `Poll` ([61ed5d7](https://github.com/tweepy/tweepy/commit/61ed5d7be1bb023b43ed5522da345223a04f1ea4))
+  - Add documentation for `Space` ([1a7ea1f](https://github.com/tweepy/tweepy/commit/1a7ea1f5d5580133ac478cf89921454bef71d6c5))
+  - Add documentation for `Tweet` ([b9cef72](https://github.com/tweepy/tweepy/commit/b9cef72a514f64840c1583ca9fb0aaad228ef1de))
+  - Add documentation for `ReferencedTweet` ([9a995b5](https://github.com/tweepy/tweepy/commit/9a995b524eab52e49428b26aca51b51a04a84278))
+  - Add documentation for `User` ([aa3658e](https://github.com/tweepy/tweepy/commit/aa3658e41008e1e71cbf12ccff2b67314823ecac))
+- Use Read the Docs Sphinx search extension for documentation ([72c7e01](https://github.com/tweepy/tweepy/commit/72c7e01bb87fd2834a12d8a68ddbde85da7ea8d1))
+- Add and improve API v2 examples ([#1835](https://github.com/tweepy/tweepy/pull/1835), [6a6ef98](https://github.com/tweepy/tweepy/commit/6a6ef98efa58e13147220cde1b475bfc6fac3116))
+- Use dash instead of underscore for requests-oauthlib requirement ([2c94758](https://github.com/tweepy/tweepy/commit/2c947583a0e3a691de2e0e9251d99e66437291f7))
+- Optimize `Tweet.referenced_tweets` initialization ([3299881](https://github.com/tweepy/tweepy/commit/3299881b5e6766cc812181a107f50d3b65ae76b7))
+- Update and improve various documentation
+
+Version 4.6.0
+-------------
+This will be the last minor version to support Python 3.6 ([#1788](https://github.com/tweepy/tweepy/issues/1788)).
+
+### New Features / Improvements
+- Add support for streaming with Twitter API v2 ([86244c1](https://github.com/tweepy/tweepy/commit/86244c1a82a1852d04f3695b03201363f5d5eafd))
+  - Refactor `Client` and `Stream` to inherit from new `BaseClient` and `BaseStream` classes and add `StreamingClient`, `StreamResponse`, and `StreamRule`
+- Add support for new `max_results` and `pagination_token` parameters for `Client.get_liking_users` ([bdd6b55](https://github.com/tweepy/tweepy/commit/bdd6b55d7cb075fc2e4c7cb56a061c552ca106fe))
+- Add support for new `max_results` and `pagination_token` parameters for `Client.get_retweeters` ([3479e56](https://github.com/tweepy/tweepy/commit/3479e56a0fff02594ab6e77ca8227e65b51b46f7))
+- Add support for new `sort_order` parameter for `Client.search_all_tweets` ([bd202e5](https://github.com/tweepy/tweepy/commit/bd202e5be19670116ebe98329d388b4821d5f3eb))
+- Add support for new `sort_order` parameter for `Client.search_recent_tweets` ([8b47170](https://github.com/tweepy/tweepy/commit/8b47170e7c20127add3e67190890d2a4cef92266))
+- Add `Client.get_space_tweets` ([c8d5d9a](https://github.com/tweepy/tweepy/commit/c8d5d9ad2c2b3c6b58b987286726cad467ce888f))
+- Add `Space.subscriber_count` ([1ffc8cd](https://github.com/tweepy/tweepy/commit/1ffc8cda6d2b9670b86610859f21ac05d726eaf9))
+- Use `repr` of text in `Tweet.__repr__` ([4e2997e](https://github.com/tweepy/tweepy/commit/4e2997e11a6e40b7e7ece508ef87be17cf493b04))
+  - This avoids including inconstant newlines, rather than escaped newlines, in the string representation of the Tweet object, making it more consistent
+- Override `Mapping.__contains__` in `DataMapping` ([9f10a58](https://github.com/tweepy/tweepy/commit/9f10a58e6a9fa8726fa033008f203ff577e1fc03))
+  - This allows membership tests to check for existence within data in Twitter API v2 models, rather than existence of the attribute at all
+- Initialize `Stream.session` within `Stream.__init__` ([80adf5b](https://github.com/tweepy/tweepy/commit/80adf5b2cc861ab6837ae03052378719e694bebc))
+  - Update the user agent based on `Stream.user_agent` even if `Stream.session` is already initialized
+- Use oauthlib to create code challenge and verifier for PKCE ([eb22416](https://github.com/tweepy/tweepy/commit/eb22416676ea4798340290f1a0dca1c131e8b1d5))
+  - Explicitly specify oauthlib dependency requirement as >= 3.2.0 ([fc0d967](https://github.com/tweepy/tweepy/commit/fc0d96718eb37f5ce6609e1c950fd3d11c6cae79))
+    - Update requests_oauthlib dependency requirement to >= 1.2.0 ([dd7e2c9](https://github.com/tweepy/tweepy/commit/dd7e2c9003983bb6c012a103e045b669063bc14b))
+
+### Bug Fixes
+- Fix datetime endpoint parameter formatting in `Client._make_request` ([#1793](https://github.com/tweepy/tweepy/pull/1793))
+
+### Misc
+- Remove undocumented `debug` function ([a702325](https://github.com/tweepy/tweepy/commit/a702325c3b1cac98e6ea7c5b19bbdd56f8745cc2))
+- Add logging documentation ([7701506](https://github.com/tweepy/tweepy/commit/77015065f63022747eb10f6ed081b39dbc75c4a3))
+- Update and improve various documentation
+
+Version 4.5.0
+-------------
+
+### New Features / Improvements
+- Revamp authentication interface
+  - Add support for OAuth 2.0 Authorization Code Flow with PKCE
+    - Add `OAuth2UserHandler` ([2b83507](https://github.com/tweepy/tweepy/commit/2b835073cb193ca6f2849c8cb6ef4322e5b16f24), [16763e2](https://github.com/tweepy/tweepy/commit/16763e2ff6913653077512f069864ad720d44ad7))
+    - Add `user_auth` parameters to `Client` methods ([8f38429](https://github.com/tweepy/tweepy/commit/8f384294405c6d14507441a5d1a7040d927b3fc2), [e88b074](https://github.com/tweepy/tweepy/commit/e88b07465fbcf6013be89cf938eae718391cc1df), [0d6b68a](https://github.com/tweepy/tweepy/commit/0d6b68aeb3ed36e8d0e3d400b99351ed628ba1e0))
+  - Rename `OAuthHandler` to `OAuth1UserHandler` ([fb6eb7d](https://github.com/tweepy/tweepy/commit/fb6eb7d53d78bcaca997586f95270a43753a9ae6))
+    - `OAuthHandler` is kept as a deprecated alias ([cba7317](https://github.com/tweepy/tweepy/commit/cba7317a4aa298a65eda7825589eb40a01a370f6))
+  - Rename `AppAuthHandler` to `Oauth2AppHandler` ([529d793](https://github.com/tweepy/tweepy/commit/529d7936201f05f4167225be3bbcaf38eafadb8c))
+    - `AppAuthHandler` is kept as a deprecated alias ([d4ceb1a](https://github.com/tweepy/tweepy/commit/d4ceb1aedba5380d95c8efee7d21f5e478715fe6))
+  - Rename `OAuth2Bearer` to `OAuth2BearerHandler` ([0781fde](https://github.com/tweepy/tweepy/commit/0781fde83c31cef45e0d7d8b2155a2624fb93b77))
+  - Allow passing access token and secret directly to `OAuth1UserHandler.__init__` ([99f3583](https://github.com/tweepy/tweepy/commit/99f3583d99ac9a0003273318e7628235bba707f0))
+    - Note, this changes the `callback` parameter to be the fifth argument, positionally
+  - Allow `OAuth2BearerHandler` to be used as `auth` parameter for `API` ([5a2a3fc](https://github.com/tweepy/tweepy/commit/5a2a3fc6020b6fe91141a753a2e293976addf48e))
+  - Remove `AuthHandler` ([d600c4c](https://github.com/tweepy/tweepy/commit/d600c4cf6ad2755aa0a959ee57c12d86cddce973))
+  - Remove `OAuth1UserHandler.get_xauth_access_token` ([8e2de9f](https://github.com/tweepy/tweepy/commit/8e2de9f590031bf6d6ade8946e7371366c4caa58))
+  - Update and improve authentication documentation ([f9a722b](https://github.com/tweepy/tweepy/commit/f9a722bae8cce368b9f8fd447c418e1034c32178))
+  - Other improvements and optimizations
+- Add `Client.get_me` ([c49cbdf](https://github.com/tweepy/tweepy/commit/c49cbdfcbda48295591d731446cd03b2eb2332ae), [62b5b58](https://github.com/tweepy/tweepy/commit/62b5b586e75a850427eabdf31448d73a9e564f66), [f6895d3](https://github.com/tweepy/tweepy/commit/f6895d36eee68adc41d0951ce6b3ee1d7b179995), [bb87b26](https://github.com/tweepy/tweepy/commit/bb87b269efa2e0ba019a0e67fa1a7489838b9684))
+- Add support for `Media.url` ([#1722](https://github.com/tweepy/tweepy/issues/1722))
+- Use requests exception to handle `JSONDecodeError` ([b492b0a](https://github.com/tweepy/tweepy/commit/b492b0a9fd4a0fedbc03cc2cc1927c45e866cb4e))
+  - Update requests dependency requirement to >= 2.27.0 ([ed66e8e](https://github.com/tweepy/tweepy/commit/ed66e8e98ea489eabe0e6ef607bb0c8c715b19d6))
+
+### Bug Fixes
+- Fix `Response.includes["polls"]` not being `Poll` objects ([#1733](https://github.com/tweepy/tweepy/pull/1733))
+- Fix `Paginator` handling of `Client.get_all_tweets_count` ([#1761](https://github.com/tweepy/tweepy/pull/1761))
+
+### Misc
+- Improve and optimize `Model.__getstate__` ([#1707](https://github.com/tweepy/tweepy/issues/1707))
+- Add API v2 examples to documentation ([bbdbb7b](https://github.com/tweepy/tweepy/commit/bbdbb7bbd7f3eb0d3c46d970aa14098d37857053))
+- Update and improve various documentation
+
 Version 4.4.0
 -------------
 ### New Features / Improvements
@@ -89,17 +234,17 @@ Version 4.0.0
     - Initialize a single `requests.Session` instance per `API` instance, rather than for each request
   - Log warning when API.request is passed an unexpected keyword argument that isn't an endpoint parameter ([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))
   - Rename allowed parameters (`allowed_param`) to endpoint parameters (`endpoint_parameters`) ([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))
-  - Rename methods and method parameters (see Breaking Changes section)
-  - Require parameters for methods (see Breaking Changes section)
-  - Stop allowing arbitrary positional arguments for methods (see Breaking Changes section)
-  - Remove unnecessary attributes and parameters (see Breaking Changes section)
+  - Rename methods and method parameters (see Backwards-Incompatible Changes section)
+  - Require parameters for methods (see Backwards-Incompatible Changes section)
+  - Stop allowing arbitrary positional arguments for methods (see Backwards-Incompatible Changes section)
+  - Remove unnecessary attributes and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `API.request` and other `API` methods
 
 - Rework streaming
-  - `StreamListener` has been merged into `Stream` (see Breaking Changes section)
+  - `StreamListener` has been merged into `Stream` (see Backwards-Incompatible Changes section)
   - `Stream` data/event handling methods (i.e. those starting with `on_`) now log by default and disregard return values
   - Allow the stream to disconnect when any line of data is received, including keep-alive signals ([#773](https://github.com/tweepy/tweepy/issues/773), [#897](https://github.com/tweepy/tweepy/issues/897))
-  - Remove, rename, and replace attributes, methods, and parameters (see Breaking Changes section)
+  - Remove, rename, and replace attributes, methods, and parameters (see Backwards-Incompatible Changes section)
   - Improve, optimize, and simplify `Stream`
 
 - Rework documentation
@@ -125,7 +270,7 @@ Version 4.0.0
   - Add `BadRequest` ([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))
   - Add `TwitterServerError` ([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))
 
-### Breaking Changes
+### Backwards-Incompatible Changes
 - Drop support for Python 2 ([#1253](https://github.com/tweepy/tweepy/issues/1253), [#1482](https://github.com/tweepy/tweepy/pull/1482))
 - Drop support for Python 3.5 ([#1487](https://github.com/tweepy/tweepy/pull/1487))
 
@@ -322,7 +467,7 @@ Version 4.0.0
 - Stop allowing positional arguments for `Stream.filter` ([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))
 - Stop allowing positional arguments for `Stream.sample` ([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))
 
-#### Twitter API Breaking Changes
+#### Twitter API Backwards-Incompatible Changes
 - Remove `API.configuration` ([#1614](https://github.com/tweepy/tweepy/issues/1614))
 - Remove `API.geo_similar_places` ([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))
 - Remove `API.related_results` ([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))

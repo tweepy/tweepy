@@ -4,7 +4,7 @@ import unittest
 import vcr
 
 from tweepy.api import API
-from tweepy.auth import OAuthHandler
+from tweepy.auth import OAuth1UserHandler
 
 
 user_id = os.environ.get('TWITTER_USER_ID', '1072250532645998596')
@@ -20,7 +20,6 @@ use_replay = os.environ.get('USE_REPLAY', True)
 tape = vcr.VCR(
     cassette_library_dir='cassettes',
     filter_headers=['Authorization'],
-    serializer='json',
     # Either use existing cassettes, or never use recordings:
     record_mode='none' if use_replay else 'all',
 )
@@ -35,6 +34,7 @@ class TweepyTestCase(unittest.TestCase):
 
 
 def create_auth():
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = OAuth1UserHandler(
+        consumer_key, consumer_secret, access_token, access_token_secret
+    )
     return auth

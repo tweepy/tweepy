@@ -1,0 +1,401 @@
+# asyncstream.po - tweepy.asynchronous.AsyncStream (Asynchronous Stream Reference)
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: 2022-01-08 06:41+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../asyncstream.rst:7
+msgid ":class:`tweepy.asynchronous.AsyncStream` --- Asynchronous Stream Reference"
+msgstr ":class:`tweepy.asynchronous.AsyncStream` --- 비동기 스트림 레퍼런스"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:1
+msgid "Stream realtime Tweets asynchronously"
+msgstr "실시간 및 비동기식으로 트윗을 스트리밍합니다."
+
+#: of tweepy.asynchronous.streaming.AsyncStream
+#: tweepy.asynchronous.streaming.AsyncStream.filter
+#: tweepy.asynchronous.streaming.AsyncStream.on_closed
+#: tweepy.asynchronous.streaming.AsyncStream.on_data
+#: tweepy.asynchronous.streaming.AsyncStream.on_delete
+#: tweepy.asynchronous.streaming.AsyncStream.on_disconnect_message
+#: tweepy.asynchronous.streaming.AsyncStream.on_exception
+#: tweepy.asynchronous.streaming.AsyncStream.on_limit
+#: tweepy.asynchronous.streaming.AsyncStream.on_request_error
+#: tweepy.asynchronous.streaming.AsyncStream.on_scrub_geo
+#: tweepy.asynchronous.streaming.AsyncStream.on_status
+#: tweepy.asynchronous.streaming.AsyncStream.on_status_withheld
+#: tweepy.asynchronous.streaming.AsyncStream.on_user_withheld
+#: tweepy.asynchronous.streaming.AsyncStream.on_warning
+#: tweepy.asynchronous.streaming.AsyncStream.sample
+msgid "Parameters"
+msgstr "매개변수"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:5
+msgid "Twitter API Consumer Key"
+msgstr "트위터 API Consumer Key값"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:7
+msgid "Twitter API Consumer Secret"
+msgstr "트위터 API Consumer Secret값"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:9
+msgid "Twitter API Access Token"
+msgstr "Twitter API 액세스 토큰"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:11
+msgid "Twitter API Access Token Secret"
+msgstr "Twitter API 액세스 토큰 Secret값"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:13
+msgid "Number of times to attempt to (re)connect the stream."
+msgstr "스트림에 (재)연결 시도할 횟수. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream:15
+msgid "Proxy URL"
+msgstr "프록시 URL"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:20
+msgid "Aiohttp client session used to connect to the API"
+msgstr "API와의 연결에 사용될 Aiohttp 클라이언트 세션. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream
+msgid "type"
+msgstr "형식"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:22
+msgid "Optional[aiohttp.ClientSession]"
+msgstr "Optional[aiohttp.ClientSession]"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:26
+#: tweepy.asynchronous.streaming.AsyncStream.filter:38
+#: tweepy.asynchronous.streaming.AsyncStream.sample:17
+msgid "The task running the stream"
+msgstr "스트림 실행 중인 작업."
+
+#: of tweepy.asynchronous.streaming.AsyncStream:28
+msgid "Optional[asyncio.Task]"
+msgstr "Optional[asyncio.Task]"
+
+#: of tweepy.asynchronous.streaming.AsyncStream:32
+msgid "User agent used when connecting to the API"
+msgstr "API 연결에 사용되는 사용자 에이전트(User agent)."
+
+#: of tweepy.asynchronous.streaming.AsyncStream:34
+msgid "str"
+msgstr "str"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:1
+msgid "Filter realtime Tweets"
+msgstr "실시간으로 트윗을 필터링합니다."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:3
+msgid ""
+"A list of user IDs, indicating the users to return statuses for in the "
+"stream. See https://developer.twitter.com/en/docs/twitter-api/v1/tweets"
+"/filter-realtime/guides/basic-stream-parameters for more information."
+msgstr ""
+"스트림에 트윗(Status)들을 포함시킬 대상 사용자의 ID값 리스트. "
+"자세한 정보는 다음 URL을 참고하시기 바랍니다. "
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets"
+"/filter-realtime/guides/basic-stream-parameters"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:7
+msgid ""
+"Keywords to track. Phrases of keywords are specified by a list. See "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters for more information."
+msgstr ""
+"검색·추적할 키워드. 키워드 구문의 리스트꼴로 지정해야 합니다."
+"자세한 정보는 다음 URL을 참고하시기 바랍니다. "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:11
+msgid ""
+"Specifies a set of bounding boxes to track. See "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters for more information."
+msgstr ""
+"검색·추적할 위치를 지정하는 경계 상자(Bounding box)의 집합."
+"자세한 정보는 다음 URL을 참고하시기 바랍니다. "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters for more information."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:15
+msgid ""
+"Setting this parameter to one of none, low, or medium will set the "
+"minimum value of the filter_level Tweet attribute required to be included"
+" in the stream. The default value is none, which includes all available "
+"Tweets.  When displaying a stream of Tweets to end users (dashboards or "
+"live feeds at a presentation or conference, for example) it is suggested "
+"that you set this value to medium."
+msgstr ""
+"이 매개변수를 none, low 또는 medium 중 하나로 설정하면 "
+"스트림에 포함해야 하는 트윗 속성 중 filter_level 속성의 최솟값을 정합니다. "
+"기본값은 none이며, 이는 모든 사용 가능한 트윗을 스트림에 포함합니다. "
+"스트림의 트윗을 엔드유저(예: 프레젠테이션, 컨퍼런스의 대시보드 또는 라이브 피드)에게 "
+"트윗 스트림을 표시해야 할 때는, 이 값을 medium으로 설정하는 것을 권장합니다. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:15
+msgid ""
+"Setting this parameter to one of none, low, or medium will set the "
+"minimum value of the filter_level Tweet attribute required to be included"
+" in the stream. The default value is none, which includes all available "
+"Tweets."
+msgstr ""
+"이 매개변수를 none, low 또는 medium 중 하나로 설정하면 "
+"스트림에 포함해야 하는 트윗 속성 중 filter_level 속성의 최솟값을 정합니다. "
+"기본값은 none이며, 이는 모든 사용 가능한 트윗을 스트림에 포함합니다. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:20
+msgid ""
+"When displaying a stream of Tweets to end users (dashboards or live feeds"
+" at a presentation or conference, for example) it is suggested that you "
+"set this value to medium."
+msgstr ""
+"스트림의 트윗을 엔드유저(예: 프레젠테이션, 컨퍼런스의 대시보드 또는 라이브 피드)에게 "
+"트윗 스트림을 표시해야 할 때는, 이 값을 medium으로 설정하는 것을 권장합니다. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:24
+#: tweepy.asynchronous.streaming.AsyncStream.sample:3
+msgid ""
+"Setting this parameter to a comma-separated list of `BCP 47`_ language "
+"identifiers corresponding to any of the languages listed on Twitter’s "
+"`advanced search`_ page will only return Tweets that have been detected "
+"as being written in the specified languages. For example, connecting with"
+" language=en will only stream Tweets detected to be in the English "
+"language."
+msgstr ""
+"이 매개변수를 `BCP 47`_ 언어 식별자꼴로 표현되는, 쉼표(,)로 구분된 리스트로 설정하면"
+"(단, 트위터의 `고급 검색`_ 페이지에 있는 언어에 한함) 지정한 언어로 작성된 트윗만 "
+"반환합니다. 예로, language=ko 로 설정하면 한국어로 작성된 트윗만 스트림에 포함됩니다. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:31
+#: tweepy.asynchronous.streaming.AsyncStream.sample:10
+msgid ""
+"Specifies whether stall warnings should be delivered. See "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters for more information."
+msgstr ""
+"지연 경고(Stall warnings)를 전달할지의 여부."
+"자세한 정보는 다음 URL을 참고하시기 바랍니다. "
+"https://developer.twitter.com/en/docs/tweets/filter-realtime/guides"
+"/basic-stream-parameters for more information."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter
+#: tweepy.asynchronous.streaming.AsyncStream.sample
+msgid "Raises"
+msgstr "예외 발생"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:36
+msgid ""
+"When the stream is already connected or when the number of location     "
+"coordinates is not a multiple of 4"
+msgstr "위치 좌표 수가 4의 배수가 아닌 경우"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter
+#: tweepy.asynchronous.streaming.AsyncStream.sample
+msgid "Returns"
+msgstr "반환"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter
+#: tweepy.asynchronous.streaming.AsyncStream.sample
+msgid "Return type"
+msgstr "반환 형식"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:42
+#: tweepy.asynchronous.streaming.AsyncStream.on_data:11
+#: tweepy.asynchronous.streaming.AsyncStream.sample:21
+msgid "References"
+msgstr "참조"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.filter:43
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-"
+"realtime/api-reference/post-statuses-filter"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-"
+"realtime/api-reference/post-statuses-filter"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.sample:1
+msgid "Sample realtime Tweets"
+msgstr "실시간으로 트윗을 샘플링합니다. "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.sample:15
+msgid "When the stream is already connected"
+msgstr "스트림이 이미 연결되어있는 경우 "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.sample:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-"
+"realtime/api-reference/get-statuses-sample"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-"
+"realtime/api-reference/get-statuses-sample"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.disconnect:1
+msgid "Disconnect the stream"
+msgstr "스트림과의 연결을 종료함"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_closed:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_connect:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_connection_error:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_data:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_delete:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_disconnect:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_disconnect_message:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_exception:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_keep_alive:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_limit:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_request_error:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_scrub_geo:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_status:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_status_withheld:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_user_withheld:1
+#: tweepy.asynchronous.streaming.AsyncStream.on_warning:1
+msgid "|coroutine|"
+msgstr "코루틴 함수임(|coroutine|)"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_closed:3
+msgid "This is called when the stream has been closed by Twitter."
+msgstr "트위터에 의해 스트림이 닫힐 경우 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_closed:5
+msgid "The response from Twitter"
+msgstr "트위터로부터의 응답"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_connect:3
+msgid "This is called after successfully connecting to the streaming API."
+msgstr "스트리밍 API에 성공적으로 연결되면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_connection_error:3
+msgid "This is called when the stream connection errors or times out."
+msgstr "스트림 연결 오류 및 시간 초과시 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_disconnect:3
+msgid "This is called when the stream has disconnected."
+msgstr "스트림 연결이 종료되면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_exception:3
+msgid "This is called when an unhandled exception occurs."
+msgstr "처리되지 않은 예외가 발생하면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_exception:5
+msgid "The unhandled exception"
+msgstr "처리되지 않은 예외"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_keep_alive:3
+msgid "This is called when a keep-alive signal is received."
+msgstr "keep-alive 신호를 받을 때 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_request_error:3
+msgid "This is called when a non-200 HTTP status code is encountered."
+msgstr "HTTP 200이 아닌 상태 코드가 반환되면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_request_error:5
+msgid "The HTTP status code encountered"
+msgstr "발생한 HTTP 상태 코드"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_data:3
+msgid ""
+"This is called when raw data is received from the stream. This method "
+"handles sending the data to other methods, depending on the message type."
+msgstr ""
+"스트림에서 원본 데이터(Raw data)가 수신되면 호출됩니다. "
+"이 메서드는 메세지 유형에 따라 다른 메서드로 데이터를 전달합니다."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_data:7
+msgid "The raw data from the stream"
+msgstr "스트림으로부터의 원본 데이터(Raw data)"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_data:12
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-"
+"realtime/guides/streaming-message-types"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-"
+"realtime/guides/streaming-message-types"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_status:3
+msgid "This is called when a status is received."
+msgstr "트윗(Status)을 받아오면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_status:5
+msgid "The Status received"
+msgstr "받아온 트윗(Status)"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_delete:3
+msgid "This is called when a status deletion notice is received."
+msgstr "트윗(Status) 삭제를 전달받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_delete:5
+msgid "The ID of the deleted Tweet"
+msgstr "삭제된 트윗의 ID."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_delete:7
+msgid "The ID of the author of the Tweet"
+msgstr "트윗 작성자의 ID."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_disconnect_message:3
+msgid "This is called when a disconnect message is received."
+msgstr "연결 종료 메세지를 받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_disconnect_message:5
+msgid "The disconnect message"
+msgstr "연결 종료 메세지"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_limit:3
+msgid "This is called when a limit notice is received."
+msgstr "API 호출 제한을 전달받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_limit:5
+msgid ""
+"Total count of the number of undelivered Tweets since the connection was "
+"opened"
+msgstr "연결 수립 후 전달되지 않은 트윗의 총 개수"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_scrub_geo:3
+msgid "This is called when a location deletion notice is received."
+msgstr "특정 위치의 삭제를 전달받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_scrub_geo:5
+msgid "The location deletion notice"
+msgstr "특정 위치 삭제 통지"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_status_withheld:3
+msgid "This is called when a status withheld content notice is received."
+msgstr "트윗(Status) 내용 보류를 전달받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_status_withheld:5
+msgid "The status withheld content notice"
+msgstr "내용 보류 통지 대상 트윗(Status) "
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_user_withheld:3
+msgid "This is called when a user withheld content notice is received."
+msgstr "사용자가 보류된 내용(의 통지)를 전달받았을때 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_user_withheld:5
+msgid "The user withheld content notice"
+msgstr "내용 보류 통지를 받은 사용자"
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_warning:3
+msgid "This is called when a stall warning message is received."
+msgstr "지연 경고(Stall warnings)를 전달받으면 호출됨."
+
+#: of tweepy.asynchronous.streaming.AsyncStream.on_warning:5
+msgid "The stall warning"
+msgstr "지연 경고(Stall warnings)"
+

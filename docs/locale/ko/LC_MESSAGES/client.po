@@ -1,0 +1,2905 @@
+# client.po - tweepy.Client (Twitter API v2 Reference)
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: 2022-01-08 04:49+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../client.rst:7
+msgid ":class:`tweepy.Client` --- Twitter API v2 Reference"
+msgstr ":class:`tweepy.Client` --- 트위터 API v2 레퍼런스"
+
+#: of tweepy.client.Client:1
+msgid "Twitter API v2 Client"
+msgstr "트위터 API v2 클라이언트(Client)"
+
+#: of tweepy.client.Client tweepy.client.Client.add_list_member
+#: tweepy.client.Client.block tweepy.client.Client.create_compliance_job
+#: tweepy.client.Client.create_list tweepy.client.Client.create_tweet
+#: tweepy.client.Client.delete_list tweepy.client.Client.delete_tweet
+#: tweepy.client.Client.follow_list tweepy.client.Client.follow_user
+#: tweepy.client.Client.get_all_tweets_count tweepy.client.Client.get_blocked
+#: tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Parameters"
+msgstr "매개변수"
+
+#: of tweepy.client.Client:5
+msgid "Twitter API Bearer Token"
+msgstr "트위터 API 베어러(Bearer) 토큰"
+
+#: of tweepy.client.Client:7
+msgid "Twitter API Consumer Key"
+msgstr "트위터 API Consumer Key"
+
+#: of tweepy.client.Client:9
+msgid "Twitter API Consumer Secret"
+msgstr "트위터 API Consumer Secret"
+
+#: of tweepy.client.Client:11
+msgid "Twitter API Access Token"
+msgstr "트위터 API Access Token"
+
+#: of tweepy.client.Client:13
+msgid "Twitter API Access Token Secret"
+msgstr "트위터 API Access Token Secret"
+
+#: of tweepy.client.Client:15
+msgid "Type to return from requests to the API"
+msgstr "API 요청으로 반환받을 값의 형태"
+
+#: of tweepy.client.Client:17
+msgid "Whether to wait when rate limit is reached"
+msgstr "API 호출 제한에 도달했을때 기다릴지의 여부"
+
+#: of tweepy.client.Client:22
+msgid "Requests Session used to make requests to the API"
+msgstr "API 요청에 사용되는 요청 세션(Requests Session)"
+
+#: of tweepy.client.Client
+msgid "type"
+msgstr "유형"
+
+#: of tweepy.client.Client:24
+msgid "requests.Session"
+msgstr "requests.Session"
+
+#: of tweepy.client.Client:28
+msgid "User agent used when making requests to the API"
+msgstr "API 요청에 사용되는 사용자 에이전트(User agent)"
+
+#: of tweepy.client.Client:30
+msgid "str"
+msgstr "str"
+
+#: ../../client.rst:15
+msgid "Twitter API v2 Endpoint"
+msgstr "트위터 API v2 엔드포인트"
+
+#: ../../client.rst:15
+msgid ":class:`Client` Method"
+msgstr ":class:`Client` 메서드"
+
+#: ../../client.rst:21 ../../client.rst:23
+msgid "`PUT /2/tweets/:id/hidden`_"
+msgstr "`부여: /2/tweets/:id/hidden`_"
+
+#: ../../client.rst:21
+msgid ":meth:`Client.hide_reply`"
+msgstr ":meth:`Client.hide_reply`"
+
+#: ../../client.rst:23
+msgid ":meth:`Client.unhide_reply`"
+msgstr ":meth:`Client.unhide_reply`"
+
+#: ../../client.rst:27
+msgid "`DELETE /2/users/:id/likes/:tweet_id`_"
+msgstr "`삭제: /2/users/:id/likes/:tweet_id`_"
+
+#: ../../client.rst:27
+msgid ":meth:`Client.unlike`"
+msgstr ":meth:`Client.unlike`"
+
+#: ../../client.rst:29
+msgid "`GET /2/tweets/:id/liking_users`_"
+msgstr "`가져오기: /2/tweets/:id/liking_users`_"
+
+#: ../../client.rst:29
+msgid ":meth:`Client.get_liking_users`"
+msgstr ":meth:`Client.get_liking_users`"
+
+#: ../../client.rst:31
+msgid "`GET /2/users/:id/liked_tweets`_"
+msgstr "`가져오기: /2/users/:id/liked_tweets`_"
+
+#: ../../client.rst:31
+msgid ":meth:`Client.get_liked_tweets`"
+msgstr ":meth:`Client.get_liked_tweets`"
+
+#: ../../client.rst:33
+msgid "`POST /2/users/:id/likes`_"
+msgstr "`게시: /2/users/:id/likes`_"
+
+#: ../../client.rst:33
+msgid ":meth:`Client.like`"
+msgstr ":meth:`Client.like`"
+
+#: ../../client.rst:37
+msgid "`DELETE /2/tweets/:id`_"
+msgstr "`삭제: /2/tweets/:id`_"
+
+#: ../../client.rst:37
+msgid ":meth:`Client.delete_tweet`"
+msgstr ":meth:`Client.delete_tweet`"
+
+#: ../../client.rst:39
+msgid "`POST /2/tweets`_"
+msgstr "`게시: /2/tweets`_"
+
+#: ../../client.rst:39
+msgid ":meth:`Client.create_tweet`"
+msgstr ":meth:`Client.create_tweet`"
+
+#: ../../client.rst:43
+msgid "`DELETE /2/users/:id/retweets/:source_tweet_id`_"
+msgstr "`삭제: /2/users/:id/retweets/:source_tweet_id`_"
+
+#: ../../client.rst:43
+msgid ":meth:`Client.unretweet`"
+msgstr ":meth:`Client.unretweet`"
+
+#: ../../client.rst:45
+msgid "`GET /2/tweets/:id/retweeted_by`_"
+msgstr "`가져오기: /2/tweets/:id/retweeted_by`_"
+
+#: ../../client.rst:45
+msgid ":meth:`Client.get_retweeters`"
+msgstr ":meth:`Client.get_retweeters`"
+
+#: ../../client.rst:47
+msgid "`POST /2/users/:id/retweets`_"
+msgstr "`게시: /2/users/:id/retweets`_"
+
+#: ../../client.rst:47
+msgid ":meth:`Client.retweet`"
+msgstr ":meth:`Client.retweet`"
+
+#: ../../client.rst:51
+msgid "`GET /2/tweets/search/all`_"
+msgstr "`가져오기: /2/tweets/search/all`_"
+
+#: ../../client.rst:51
+msgid ":meth:`Client.search_all_tweets`"
+msgstr ":meth:`Client.search_all_tweets`"
+
+#: ../../client.rst:53
+msgid "`GET /2/tweets/search/recent`_"
+msgstr "`가져오기: /2/tweets/search/recent`_"
+
+#: ../../client.rst:53
+msgid ":meth:`Client.search_recent_tweets`"
+msgstr ":meth:`Client.search_recent_tweets`"
+
+#: ../../client.rst:57
+msgid "`GET /2/users/:id/mentions`_"
+msgstr "`가져오기: /2/users/:id/mentions`_"
+
+#: ../../client.rst:57
+msgid ":meth:`Client.get_users_mentions`"
+msgstr ":meth:`Client.get_users_mentions`"
+
+#: ../../client.rst:59
+msgid "`GET /2/users/:id/tweets`_"
+msgstr "`가져오기: /2/users/:id/tweets`_"
+
+#: ../../client.rst:59
+msgid ":meth:`Client.get_users_tweets`"
+msgstr ":meth:`Client.get_users_tweets`"
+
+#: ../../client.rst:63
+msgid "`GET /2/tweets/counts/all`_"
+msgstr "`가져오기: /2/tweets/counts/all`_"
+
+#: ../../client.rst:63
+msgid ":meth:`Client.get_all_tweets_count`"
+msgstr ":meth:`Client.get_all_tweets_count`"
+
+#: ../../client.rst:65
+msgid "`GET /2/tweets/counts/recent`_"
+msgstr "`가져오기: /2/tweets/counts/recent`_"
+
+#: ../../client.rst:65
+msgid ":meth:`Client.get_recent_tweets_count`"
+msgstr ":meth:`Client.get_recent_tweets_count`"
+
+#: ../../client.rst:69
+msgid "`GET /2/tweets/:id`_"
+msgstr "`가져오기: /2/tweets/:id`_"
+
+#: ../../client.rst:69
+msgid ":meth:`Client.get_tweet`"
+msgstr ":meth:`Client.get_tweet`"
+
+#: ../../client.rst:71
+msgid "`GET /2/tweets`_"
+msgstr "`가져오기: /2/tweets`_"
+
+#: ../../client.rst:71
+msgid ":meth:`Client.get_tweets`"
+msgstr ":meth:`Client.get_tweets`"
+
+#: ../../client.rst:77
+msgid "`DELETE /2/users/:source_user_id/blocking/:target_user_id`_"
+msgstr "`삭제: /2/users/:source_user_id/blocking/:target_user_id`_"
+
+#: ../../client.rst:77
+msgid ":meth:`Client.unblock`"
+msgstr ":meth:`Client.unblock`"
+
+#: ../../client.rst:79
+msgid "`GET /2/users/:id/blocking`_"
+msgstr "`가져오기: /2/users/:id/blocking`_"
+
+#: ../../client.rst:79
+msgid ":meth:`Client.get_blocked`"
+msgstr ":meth:`Client.get_blocked`"
+
+#: ../../client.rst:81
+msgid "`POST /2/users/:id/blocking`_"
+msgstr "`게시: /2/users/:id/blocking`_"
+
+#: ../../client.rst:81
+msgid ":meth:`Client.block`"
+msgstr ":meth:`Client.block`"
+
+#: ../../client.rst:85
+msgid "`DELETE /2/users/:source_user_id/following/:target_user_id`_"
+msgstr "`삭제: /2/users/:source_user_id/following/:target_user_id`_"
+
+#: ../../client.rst:85
+msgid ":meth:`Client.unfollow_user`"
+msgstr ":meth:`Client.unfollow_user`"
+
+#: ../../client.rst:87
+msgid "`GET /2/users/:id/followers`_"
+msgstr "`가져오기: /2/users/:id/followers`_"
+
+#: ../../client.rst:87
+msgid ":meth:`Client.get_users_followers`"
+msgstr ":meth:`Client.get_users_followers`"
+
+#: ../../client.rst:89
+msgid "`GET /2/users/:id/following`_"
+msgstr "`가져오기: /2/users/:id/following`_"
+
+#: ../../client.rst:89
+msgid ":meth:`Client.get_users_following`"
+msgstr ":meth:`Client.get_users_following`"
+
+#: ../../client.rst:91
+msgid "`POST /2/users/:id/following`_"
+msgstr "`게시: /2/users/:id/following`_"
+
+#: ../../client.rst:91
+msgid ":meth:`Client.follow_user`"
+msgstr ":meth:`Client.follow_user`"
+
+#: ../../client.rst:95
+msgid "`DELETE /2/users/:source_user_id/muting/:target_user_id`_"
+msgstr "`삭제: /2/users/:source_user_id/muting/:target_user_id`_"
+
+#: ../../client.rst:95
+msgid ":meth:`Client.unmute`"
+msgstr ":meth:`Client.unmute`"
+
+#: ../../client.rst:97
+msgid "`GET /2/users/:id/muting`_"
+msgstr "`가져오기: /2/users/:id/muting`_"
+
+#: ../../client.rst:97
+msgid ":meth:`Client.get_muted`"
+msgstr ":meth:`Client.get_muted`"
+
+#: ../../client.rst:99
+msgid "`POST /2/users/:id/muting`_"
+msgstr "`게시: /2/users/:id/muting`_"
+
+#: ../../client.rst:99
+msgid ":meth:`Client.mute`"
+msgstr ":meth:`Client.mute`"
+
+#: ../../client.rst:103
+msgid "`GET /2/users/:id`_"
+msgstr "`가져오기: /2/users/:id`_"
+
+#: ../../client.rst:103 ../../client.rst:105
+msgid ":meth:`Client.get_user`"
+msgstr ":meth:`Client.get_user`"
+
+#: ../../client.rst:105
+msgid "`GET /2/users/by/username/:username`_"
+msgstr "`가져오기: /2/users/by/username/:username`_"
+
+#: ../../client.rst:107
+msgid "`GET /2/users`_"
+msgstr "`가져오기: /2/users`_"
+
+#: ../../client.rst:107 ../../client.rst:109
+msgid ":meth:`Client.get_users`"
+msgstr ":meth:`Client.get_users`"
+
+#: ../../client.rst:109
+msgid "`GET /2/users/by`_"
+msgstr "`가져오기: /2/users/by`_"
+
+#: ../../client.rst:111
+#, fuzzy
+msgid "`GET /2/users/me`_"
+msgstr "`가져오기: /2/users`_"
+
+#: ../../client.rst:111
+#, fuzzy
+msgid ":meth:`Client.get_me`"
+msgstr ":meth:`Client.get_muted`"
+
+#: ../../client.rst:117
+msgid "`GET /2/spaces/search`_"
+msgstr "`가져오기: /2/spaces/search`_"
+
+#: ../../client.rst:117
+msgid ":meth:`Client.search_spaces`"
+msgstr ":meth:`Client.search_spaces`"
+
+#: ../../client.rst:121
+msgid "`GET /2/spaces`_"
+msgstr "`가져오기: /2/spaces`_"
+
+#: ../../client.rst:121 ../../client.rst:127
+msgid ":meth:`Client.get_spaces`"
+msgstr ":meth:`Client.get_spaces`"
+
+#: ../../client.rst:123
+msgid "`GET /2/spaces/:id`_"
+msgstr "`가져오기: /2/spaces/:id`_"
+
+#: ../../client.rst:123
+msgid ":meth:`Client.get_space`"
+msgstr ":meth:`Client.get_space`"
+
+#: ../../client.rst:125
+msgid "`GET /2/spaces/:id/buyers`_"
+msgstr "`가져오기: /2/spaces/:id/buyers`_"
+
+#: ../../client.rst:125
+msgid ":meth:`Client.get_space_buyers`"
+msgstr ":meth:`Client.get_space_buyers`"
+
+#: ../../client.rst:127
+msgid "`GET /2/spaces/by/creator_ids`_"
+msgstr "`가져오기: /2/spaces/by/creator_ids`_"
+
+#: ../../client.rst:133
+msgid "`GET /2/lists/:id/tweets`_"
+msgstr "`가져오기: /2/lists/:id/tweets`_"
+
+#: ../../client.rst:133
+msgid ":meth:`Client.get_list_tweets`"
+msgstr ":meth:`Client.get_list_tweets`"
+
+#: ../../client.rst:137
+msgid "`DELETE /2/users/:id/followed_lists/:list_id`_"
+msgstr "`삭제: /2/users/:id/followed_lists/:list_id`_"
+
+#: ../../client.rst:137
+msgid ":meth:`Client.unfollow_list`"
+msgstr ":meth:`Client.unfollow_list`"
+
+#: ../../client.rst:139
+msgid "`GET /2/lists/:id/followers`_"
+msgstr "`가져오기: /2/lists/:id/followers`_"
+
+#: ../../client.rst:139
+msgid ":meth:`Client.get_list_followers`"
+msgstr ":meth:`Client.get_list_followers`"
+
+#: ../../client.rst:141
+msgid "`GET /2/users/:id/followed_lists`_"
+msgstr "`가져오기: /2/users/:id/followed_lists`_"
+
+#: ../../client.rst:141
+msgid ":meth:`Client.get_followed_lists`"
+msgstr ":meth:`Client.get_followed_lists`"
+
+#: ../../client.rst:143
+msgid "`POST /2/users/:id/followed_lists`_"
+msgstr "`게시: /2/users/:id/followed_lists`_"
+
+#: ../../client.rst:143
+msgid ":meth:`Client.follow_list`"
+msgstr ":meth:`Client.follow_list`"
+
+#: ../../client.rst:147
+msgid "`GET /2/lists/:id`_"
+msgstr "`가져오기: /2/lists/:id`_"
+
+#: ../../client.rst:147
+msgid ":meth:`Client.get_list`"
+msgstr ":meth:`Client.get_list`"
+
+#: ../../client.rst:149
+msgid "`GET /2/users/:id/owned_lists`_"
+msgstr "`가져오기: /2/users/:id/owned_lists`_"
+
+#: ../../client.rst:149
+msgid ":meth:`Client.get_owned_lists`"
+msgstr ":meth:`Client.get_owned_lists`"
+
+#: ../../client.rst:153
+msgid "`DELETE /2/lists/:id/members/:user_id`_"
+msgstr "`삭제: /2/lists/:id/members/:user_id`_"
+
+#: ../../client.rst:153
+msgid ":meth:`Client.remove_list_member`"
+msgstr ":meth:`Client.remove_list_member`"
+
+#: ../../client.rst:155
+msgid "`GET /2/lists/:id/members`_"
+msgstr "`가져오기: /2/lists/:id/members`_"
+
+#: ../../client.rst:155
+msgid ":meth:`Client.get_list_members`"
+msgstr ":meth:`Client.get_list_members`"
+
+#: ../../client.rst:157
+msgid "`GET /2/users/:id/list_memberships`_"
+msgstr "`가져오기: /2/users/:id/list_memberships`_"
+
+#: ../../client.rst:157
+msgid ":meth:`Client.get_list_memberships`"
+msgstr ":meth:`Client.get_list_memberships`"
+
+#: ../../client.rst:159
+msgid "`POST /2/lists/:id/members`_"
+msgstr "`게시: /2/lists/:id/members`_"
+
+#: ../../client.rst:159
+msgid ":meth:`Client.add_list_member`"
+msgstr ":meth:`Client.add_list_member`"
+
+#: ../../client.rst:163
+msgid "`DELETE /2/lists/:id`_"
+msgstr "`삭제: /2/lists/:id`_"
+
+#: ../../client.rst:163
+msgid ":meth:`Client.delete_list`"
+msgstr ":meth:`Client.delete_list`"
+
+#: ../../client.rst:165
+msgid "`PUT /2/lists/:id`_"
+msgstr "`게시: /2/lists/:id`_"
+
+#: ../../client.rst:165
+msgid ":meth:`Client.update_list`"
+msgstr ":meth:`Client.update_list`"
+
+#: ../../client.rst:167
+msgid "`POST /2/lists`_"
+msgstr "`게시: /2/lists`_"
+
+#: ../../client.rst:167
+msgid ":meth:`Client.create_list`"
+msgstr ":meth:`Client.create_list`"
+
+#: ../../client.rst:171
+msgid "`DELETE /2/users/:id/pinned_lists/:list_id`_"
+msgstr "`삭제: /2/users/:id/pinned_lists/:list_id`_"
+
+#: ../../client.rst:171
+msgid ":meth:`Client.unpin_list`"
+msgstr ":meth:`Client.unpin_list`"
+
+#: ../../client.rst:173
+msgid "`GET /2/users/:id/pinned_lists`_"
+msgstr "`가져오기: /2/users/:id/pinned_lists`_"
+
+#: ../../client.rst:173
+msgid ":meth:`Client.get_pinned_lists`"
+msgstr ":meth:`Client.get_pinned_lists`"
+
+#: ../../client.rst:175
+msgid "`POST /2/users/:id/pinned_lists`_"
+msgstr "`게시: /2/users/:id/pinned_lists`_"
+
+#: ../../client.rst:175
+msgid ":meth:`Client.pin_list`"
+msgstr ":meth:`Client.pin_list`"
+
+#: ../../client.rst:181
+msgid "`GET /2/compliance/jobs`_"
+msgstr "`가져오기: /2/compliance/jobs`_"
+
+#: ../../client.rst:181
+msgid ":meth:`Client.get_compliance_jobs`"
+msgstr ":meth:`Client.get_compliance_jobs`"
+
+#: ../../client.rst:183
+msgid "`GET /2/compliance/jobs/:id`_"
+msgstr "`가져오기: /2/compliance/jobs/:id`_"
+
+#: ../../client.rst:183
+msgid ":meth:`Client.get_compliance_job`"
+msgstr ":meth:`Client.get_compliance_job`"
+
+#: ../../client.rst:185
+msgid "`POST /2/compliance/jobs`_"
+msgstr "`게시: /2/compliance/jobs`_"
+
+#: ../../client.rst:185
+msgid ":meth:`Client.create_compliance_job`"
+msgstr ":meth:`Client.create_compliance_job`"
+
+#: ../../client.rst:269
+msgid "Tweets"
+msgstr "트윗"
+
+#: ../../client.rst:272
+msgid "Hide replies"
+msgstr "답글 숨기기"
+
+#: of tweepy.client.Client.hide_reply:1
+msgid "Hides a reply to a Tweet."
+msgstr "트윗의 답글을 숨깁니다."
+
+#: of tweepy.client.Client.add_list_member:5 tweepy.client.Client.block:3
+#: tweepy.client.Client.create_list:5 tweepy.client.Client.create_tweet:5
+#: tweepy.client.Client.delete_list:5 tweepy.client.Client.delete_tweet:5
+#: tweepy.client.Client.follow_list:5 tweepy.client.Client.follow_user:13
+#: tweepy.client.Client.get_blocked:3 tweepy.client.Client.get_muted:5
+#: tweepy.client.Client.get_pinned_lists:5 tweepy.client.Client.hide_reply:3
+#: tweepy.client.Client.like:3 tweepy.client.Client.mute:3
+#: tweepy.client.Client.pin_list:5 tweepy.client.Client.remove_list_member:6
+#: tweepy.client.Client.retweet:3 tweepy.client.Client.unblock:6
+#: tweepy.client.Client.unfollow_list:5 tweepy.client.Client.unfollow_user:9
+#: tweepy.client.Client.unhide_reply:3 tweepy.client.Client.unlike:6
+#: tweepy.client.Client.unmute:6 tweepy.client.Client.unpin_list:5
+#: tweepy.client.Client.unretweet:7 tweepy.client.Client.update_list:6
+msgid "Added ``user_auth`` parameter"
+msgstr ""
+
+#: of tweepy.client.Client.hide_reply:6
+msgid ""
+"Unique identifier of the Tweet to hide. The Tweet must belong to a "
+"conversation initiated by the authenticating user."
+msgstr "숨길 트윗의 고유 식별자. 대상 트윗은 현재 인증된 사용자애 의해 시작된 트윗 타래에 속해있어야 합니다."
+
+#: of tweepy.client.Client.add_list_member:12 tweepy.client.Client.block:8
+#: tweepy.client.Client.create_list:14 tweepy.client.Client.create_tweet:44
+#: tweepy.client.Client.delete_list:10 tweepy.client.Client.delete_tweet:10
+#: tweepy.client.Client.follow_list:10 tweepy.client.Client.follow_user:18
+#: tweepy.client.Client.get_blocked:20
+#: tweepy.client.Client.get_followed_lists:23
+#: tweepy.client.Client.get_liked_tweets:30
+#: tweepy.client.Client.get_liking_users:17 tweepy.client.Client.get_list:13
+#: tweepy.client.Client.get_list_followers:23
+#: tweepy.client.Client.get_list_members:23
+#: tweepy.client.Client.get_list_memberships:23
+#: tweepy.client.Client.get_list_tweets:23 tweepy.client.Client.get_me:11
+#: tweepy.client.Client.get_muted:22 tweepy.client.Client.get_owned_lists:23
+#: tweepy.client.Client.get_pinned_lists:14
+#: tweepy.client.Client.get_retweeters:17 tweepy.client.Client.get_tweet:18
+#: tweepy.client.Client.get_tweets:20 tweepy.client.Client.get_user:14
+#: tweepy.client.Client.get_users:18
+#: tweepy.client.Client.get_users_followers:21
+#: tweepy.client.Client.get_users_following:21
+#: tweepy.client.Client.get_users_mentions:66
+#: tweepy.client.Client.get_users_tweets:75 tweepy.client.Client.hide_reply:9
+#: tweepy.client.Client.like:8 tweepy.client.Client.mute:8
+#: tweepy.client.Client.pin_list:10 tweepy.client.Client.remove_list_member:13
+#: tweepy.client.Client.retweet:8 tweepy.client.Client.search_recent_tweets:58
+#: tweepy.client.Client.unblock:11 tweepy.client.Client.unfollow_list:10
+#: tweepy.client.Client.unfollow_user:14 tweepy.client.Client.unhide_reply:9
+#: tweepy.client.Client.unlike:11 tweepy.client.Client.unmute:11
+#: tweepy.client.Client.unpin_list:10 tweepy.client.Client.unretweet:12
+#: tweepy.client.Client.update_list:17
+#, fuzzy
+msgid "Whether or not to use OAuth 1.0a User Context to authenticate"
+msgstr "OAuth 1.0a 사용자 컨텍스트를 사용할지의 여부"
+
+#: of tweepy.client.Client.add_list_member tweepy.client.Client.block
+#: tweepy.client.Client.create_compliance_job tweepy.client.Client.create_list
+#: tweepy.client.Client.create_tweet tweepy.client.Client.delete_list
+#: tweepy.client.Client.delete_tweet tweepy.client.Client.follow_list
+#: tweepy.client.Client.follow_user tweepy.client.Client.get_all_tweets_count
+#: tweepy.client.Client.get_blocked tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Returns"
+msgstr "반환"
+
+#: of tweepy.client.Client.add_list_member tweepy.client.Client.block
+#: tweepy.client.Client.create_compliance_job tweepy.client.Client.create_list
+#: tweepy.client.Client.create_tweet tweepy.client.Client.delete_list
+#: tweepy.client.Client.delete_tweet tweepy.client.Client.follow_list
+#: tweepy.client.Client.follow_user tweepy.client.Client.get_all_tweets_count
+#: tweepy.client.Client.get_blocked tweepy.client.Client.get_compliance_job
+#: tweepy.client.Client.get_compliance_jobs
+#: tweepy.client.Client.get_followed_lists
+#: tweepy.client.Client.get_liked_tweets tweepy.client.Client.get_liking_users
+#: tweepy.client.Client.get_list tweepy.client.Client.get_list_followers
+#: tweepy.client.Client.get_list_members
+#: tweepy.client.Client.get_list_memberships
+#: tweepy.client.Client.get_list_tweets tweepy.client.Client.get_me
+#: tweepy.client.Client.get_muted tweepy.client.Client.get_owned_lists
+#: tweepy.client.Client.get_pinned_lists
+#: tweepy.client.Client.get_recent_tweets_count
+#: tweepy.client.Client.get_retweeters tweepy.client.Client.get_space
+#: tweepy.client.Client.get_space_buyers tweepy.client.Client.get_spaces
+#: tweepy.client.Client.get_tweet tweepy.client.Client.get_tweets
+#: tweepy.client.Client.get_user tweepy.client.Client.get_users
+#: tweepy.client.Client.get_users_followers
+#: tweepy.client.Client.get_users_following
+#: tweepy.client.Client.get_users_mentions
+#: tweepy.client.Client.get_users_tweets tweepy.client.Client.hide_reply
+#: tweepy.client.Client.like tweepy.client.Client.mute
+#: tweepy.client.Client.pin_list tweepy.client.Client.remove_list_member
+#: tweepy.client.Client.retweet tweepy.client.Client.search_all_tweets
+#: tweepy.client.Client.search_recent_tweets tweepy.client.Client.search_spaces
+#: tweepy.client.Client.unblock tweepy.client.Client.unfollow_list
+#: tweepy.client.Client.unfollow_user tweepy.client.Client.unhide_reply
+#: tweepy.client.Client.unlike tweepy.client.Client.unmute
+#: tweepy.client.Client.unpin_list tweepy.client.Client.unretweet
+#: tweepy.client.Client.update_list
+msgid "Return type"
+msgstr "반환 형식"
+
+#: of tweepy.client.Client.add_list_member:19 tweepy.client.Client.block:15
+#: tweepy.client.Client.create_compliance_job:26
+#: tweepy.client.Client.create_list:21 tweepy.client.Client.create_tweet:51
+#: tweepy.client.Client.delete_list:17 tweepy.client.Client.delete_tweet:17
+#: tweepy.client.Client.follow_list:17 tweepy.client.Client.follow_user:25
+#: tweepy.client.Client.get_all_tweets_count:47
+#: tweepy.client.Client.get_blocked:27
+#: tweepy.client.Client.get_compliance_job:12
+#: tweepy.client.Client.get_compliance_jobs:17
+#: tweepy.client.Client.get_followed_lists:30
+#: tweepy.client.Client.get_liked_tweets:37
+#: tweepy.client.Client.get_liking_users:24 tweepy.client.Client.get_list:20
+#: tweepy.client.Client.get_list_followers:30
+#: tweepy.client.Client.get_list_members:30
+#: tweepy.client.Client.get_list_memberships:30
+#: tweepy.client.Client.get_list_tweets:30 tweepy.client.Client.get_me:18
+#: tweepy.client.Client.get_muted:29 tweepy.client.Client.get_owned_lists:30
+#: tweepy.client.Client.get_pinned_lists:21
+#: tweepy.client.Client.get_recent_tweets_count:44
+#: tweepy.client.Client.get_retweeters:24 tweepy.client.Client.get_space:19
+#: tweepy.client.Client.get_space_buyers:27 tweepy.client.Client.get_spaces:24
+#: tweepy.client.Client.get_tweet:25 tweepy.client.Client.get_tweets:27
+#: tweepy.client.Client.get_user:23 tweepy.client.Client.get_users:27
+#: tweepy.client.Client.get_users_followers:28
+#: tweepy.client.Client.get_users_following:28
+#: tweepy.client.Client.get_users_mentions:73
+#: tweepy.client.Client.get_users_tweets:82 tweepy.client.Client.hide_reply:16
+#: tweepy.client.Client.like:15 tweepy.client.Client.mute:15
+#: tweepy.client.Client.pin_list:17 tweepy.client.Client.remove_list_member:20
+#: tweepy.client.Client.retweet:15 tweepy.client.Client.search_all_tweets:62
+#: tweepy.client.Client.search_recent_tweets:65
+#: tweepy.client.Client.search_spaces:29 tweepy.client.Client.unblock:18
+#: tweepy.client.Client.unfollow_list:17 tweepy.client.Client.unfollow_user:21
+#: tweepy.client.Client.unhide_reply:16 tweepy.client.Client.unlike:18
+#: tweepy.client.Client.unmute:18 tweepy.client.Client.unpin_list:17
+#: tweepy.client.Client.unretweet:19 tweepy.client.Client.update_list:24
+msgid "References"
+msgstr "참조"
+
+#: of tweepy.client.Client.hide_reply:17 tweepy.client.Client.unhide_reply:17
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies"
+"/api-reference/put-tweets-id-hidden"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/hide-replies"
+"/api-reference/put-tweets-id-hidden"
+
+#: of tweepy.client.Client.unhide_reply:1
+msgid "Unhides a reply to a Tweet."
+msgstr "트윗의 답글 숨김을 해제합니다."
+
+#: of tweepy.client.Client.unhide_reply:6
+msgid ""
+"Unique identifier of the Tweet to unhide. The Tweet must belong to a "
+"conversation initiated by the authenticating user."
+msgstr "숨김 해제할 트윗의 고유 식별자. 대상 트윗은 현재 인증된 사용자애 의해 시작된 트윗 타래에 속해있어야 합니다."
+
+#: ../../client.rst:279
+msgid "Likes"
+msgstr "마음에 들어요"
+
+#: of tweepy.client.Client.unlike:1
+msgid "Unlike a Tweet."
+msgstr "'마음에 들어요'를 취소합니다."
+
+#: of tweepy.client.Client.unlike:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not liking the Tweet or have already unliked the Tweet."
+msgstr ""
+"'마음에 들어요'를 표시하지 않은 트윗이나, 이미 '마음에 들어요'를 취소한 트윗에 이 요청을 보내면, 특별한 처리 없이도 요청이 "
+"성공합니다."
+
+#: of tweepy.client.Client.unlike:9
+msgid "The ID of the Tweet that you would like to unlike."
+msgstr "'마음에 들어요'를 취소할 트윗의 ID."
+
+#: of tweepy.client.Client.unlike:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/delete-users-id-likes-tweet_id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/delete-users-id-likes-tweet_id"
+
+#: of tweepy.client.Client.get_liking_users:1
+msgid "Allows you to get information about a Tweet’s liking users."
+msgstr "트윗에 '마음에 들어요'를 표시한 사용자에 대한 정보를 얻을 수 있습니다."
+
+#: of tweepy.client.Client.get_liking_users:3
+msgid "Tweet ID of the Tweet to request liking users of."
+msgstr "'마음에 들어요'를 표시한 사용자 목록을 받아올 트윗의 ID."
+
+#: of tweepy.client.Client.get_blocked:6
+#: tweepy.client.Client.get_followed_lists:7
+#: tweepy.client.Client.get_liked_tweets:8
+#: tweepy.client.Client.get_liking_users:5 tweepy.client.Client.get_list:7
+#: tweepy.client.Client.get_list_followers:7
+#: tweepy.client.Client.get_list_members:7
+#: tweepy.client.Client.get_list_memberships:7
+#: tweepy.client.Client.get_list_tweets:7 tweepy.client.Client.get_me:5
+#: tweepy.client.Client.get_muted:8 tweepy.client.Client.get_owned_lists:7
+#: tweepy.client.Client.get_pinned_lists:8
+#: tweepy.client.Client.get_retweeters:5 tweepy.client.Client.get_space:8
+#: tweepy.client.Client.get_space_buyers:10 tweepy.client.Client.get_spaces:11
+#: tweepy.client.Client.get_tweet:6 tweepy.client.Client.get_tweets:8
+#: tweepy.client.Client.get_user:8 tweepy.client.Client.get_users:12
+#: tweepy.client.Client.get_users_followers:5
+#: tweepy.client.Client.get_users_following:5
+#: tweepy.client.Client.get_users_mentions:20
+#: tweepy.client.Client.get_users_tweets:29
+#: tweepy.client.Client.search_all_tweets:21
+#: tweepy.client.Client.search_recent_tweets:21
+#: tweepy.client.Client.search_spaces:11
+msgid ":ref:`expansions_parameter`"
+msgstr ":ref:`expansions_parameter`"
+
+#: of tweepy.client.Client.get_liked_tweets:14
+#: tweepy.client.Client.get_liking_users:7
+#: tweepy.client.Client.get_retweeters:7
+#: tweepy.client.Client.get_space_buyers:12 tweepy.client.Client.get_tweet:8
+#: tweepy.client.Client.get_tweets:10
+#: tweepy.client.Client.get_users_mentions:28
+#: tweepy.client.Client.get_users_tweets:37
+#: tweepy.client.Client.search_all_tweets:27
+#: tweepy.client.Client.search_recent_tweets:27
+msgid ":ref:`media_fields_parameter`"
+msgstr ":ref:`media_fields_parameter`"
+
+#: of tweepy.client.Client.get_liked_tweets:22
+#: tweepy.client.Client.get_liking_users:9
+#: tweepy.client.Client.get_retweeters:9
+#: tweepy.client.Client.get_space_buyers:14 tweepy.client.Client.get_tweet:10
+#: tweepy.client.Client.get_tweets:12
+#: tweepy.client.Client.get_users_mentions:36
+#: tweepy.client.Client.get_users_tweets:45
+#: tweepy.client.Client.search_all_tweets:34
+#: tweepy.client.Client.search_recent_tweets:33
+msgid ":ref:`place_fields_parameter`"
+msgstr ":ref:`place_fields_parameter`"
+
+#: of tweepy.client.Client.get_liked_tweets:24
+#: tweepy.client.Client.get_liking_users:11
+#: tweepy.client.Client.get_retweeters:11
+#: tweepy.client.Client.get_space_buyers:16 tweepy.client.Client.get_tweet:12
+#: tweepy.client.Client.get_tweets:14
+#: tweepy.client.Client.get_users_mentions:38
+#: tweepy.client.Client.get_users_tweets:47
+#: tweepy.client.Client.search_all_tweets:36
+#: tweepy.client.Client.search_recent_tweets:35
+msgid ":ref:`poll_fields_parameter`"
+msgstr ":ref:`poll_fields_parameter`"
+
+#: of tweepy.client.Client.get_blocked:16
+#: tweepy.client.Client.get_liked_tweets:26
+#: tweepy.client.Client.get_liking_users:13
+#: tweepy.client.Client.get_list_followers:19
+#: tweepy.client.Client.get_list_members:19
+#: tweepy.client.Client.get_list_tweets:19 tweepy.client.Client.get_me:7
+#: tweepy.client.Client.get_muted:18 tweepy.client.Client.get_retweeters:13
+#: tweepy.client.Client.get_space_buyers:18 tweepy.client.Client.get_tweet:14
+#: tweepy.client.Client.get_tweets:16 tweepy.client.Client.get_user:10
+#: tweepy.client.Client.get_users:14
+#: tweepy.client.Client.get_users_followers:17
+#: tweepy.client.Client.get_users_following:17
+#: tweepy.client.Client.get_users_mentions:55
+#: tweepy.client.Client.get_users_tweets:65
+#: tweepy.client.Client.search_all_tweets:49
+#: tweepy.client.Client.search_recent_tweets:50
+msgid ":ref:`tweet_fields_parameter`"
+msgstr ":ref:`tweet_fields_parameter`"
+
+#: of tweepy.client.Client.get_blocked:18
+#: tweepy.client.Client.get_followed_lists:21
+#: tweepy.client.Client.get_liked_tweets:28
+#: tweepy.client.Client.get_liking_users:15 tweepy.client.Client.get_list:11
+#: tweepy.client.Client.get_list_followers:21
+#: tweepy.client.Client.get_list_members:21
+#: tweepy.client.Client.get_list_memberships:21
+#: tweepy.client.Client.get_list_tweets:21 tweepy.client.Client.get_me:9
+#: tweepy.client.Client.get_muted:20 tweepy.client.Client.get_owned_lists:21
+#: tweepy.client.Client.get_pinned_lists:12
+#: tweepy.client.Client.get_retweeters:15 tweepy.client.Client.get_space:12
+#: tweepy.client.Client.get_space_buyers:20 tweepy.client.Client.get_spaces:15
+#: tweepy.client.Client.get_tweet:16 tweepy.client.Client.get_tweets:18
+#: tweepy.client.Client.get_user:12 tweepy.client.Client.get_users:16
+#: tweepy.client.Client.get_users_followers:19
+#: tweepy.client.Client.get_users_following:19
+#: tweepy.client.Client.get_users_mentions:64
+#: tweepy.client.Client.get_users_tweets:73
+#: tweepy.client.Client.search_all_tweets:55
+#: tweepy.client.Client.search_recent_tweets:56
+#: tweepy.client.Client.search_spaces:22
+msgid ":ref:`user_fields_parameter`"
+msgstr ":ref:`user_fields_parameter`"
+
+#: of tweepy.client.Client.get_liking_users:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-tweets-id-liking_users"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-tweets-id-liking_users"
+
+#: of tweepy.client.Client.get_liked_tweets:1
+msgid "Allows you to get information about a user’s liked Tweets."
+msgstr "사용자가 '마음에 들어요'를 표시한 트윗에 대한 정보를 얻을 수 있습니다."
+
+#: of tweepy.client.Client.get_liked_tweets:3
+#: tweepy.client.Client.get_users_mentions:5
+#: tweepy.client.Client.get_users_tweets:6
+#: tweepy.client.Client.search_all_tweets:8
+#: tweepy.client.Client.search_recent_tweets:4
+msgid ""
+"The Tweets returned by this endpoint count towards the Project-level "
+"`Tweet cap`_."
+msgstr "이 엔드포인트를 통해 반환된 트윗은, 프로젝트 수준(Project-level)의 `트윗 한도`_ 에 계산됩니다."
+
+#: of tweepy.client.Client.get_liked_tweets:6
+msgid "User ID of the user to request liked Tweets for."
+msgstr "'마음에 들어요'를 표시한 트윗 목록을 가져올 대상 사용자의 ID."
+
+#: of tweepy.client.Client.get_liked_tweets:10
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 5 and 100. By default, each page will return 100 results."
+msgstr ""
+"페이지당 반환받을 결과 수의 최댓값. 5에서 100 사이의 자연수로 지정해야 하며, 기본값은 100입니다. (페이지당 100개의 "
+"결과 반환)"
+
+#: of tweepy.client.Client.get_liked_tweets:16
+#: tweepy.client.Client.get_users_followers:11
+#: tweepy.client.Client.get_users_following:11
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results. "
+"To return the next page, pass the ``next_token`` returned in your "
+"previous response. To go back one page, pass the ``previous_token`` "
+"returned in your previous response."
+msgstr ""
+"다음 페이지나, 이전 페이지 결과값을 조회하는 데 쓰입니다. 바로 다음 페이지를 조회하려면 이전 요청에서 반환된 "
+"``next_token`` 값을 전달하고, 바로 이전 페이지를 조회하려면 이전 요청에서 반환된 ``previous_token`` "
+"값을 전달하면 됩니다. "
+
+#: of tweepy.client.Client.get_liked_tweets:38
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-users-id-liked_tweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/get-users-id-liked_tweets"
+
+#: of tweepy.client.Client.like:1
+msgid "Like a Tweet."
+msgstr "트윗에 '마음에 들어요'를 표시합니다. "
+
+#: of tweepy.client.Client.like:6
+msgid "The ID of the Tweet that you would like to Like."
+msgstr "'마음에 들어요'를 표시할 트윗의 ID."
+
+#: of tweepy.client.Client.like:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/post-users-id-likes"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-"
+"reference/post-users-id-likes"
+
+#: ../../client.rst:290
+msgid "Manage Tweets"
+msgstr "트윗 관리"
+
+#: of tweepy.client.Client.delete_tweet:1
+msgid "Allows an authenticated user ID to delete a Tweet."
+msgstr "현재 인증된 사용자의 트윗을 삭제합니다. "
+
+#: of tweepy.client.Client.delete_tweet:8
+msgid "The Tweet ID you are deleting."
+msgstr "삭제하려는 트윗의 ID. "
+
+#: of tweepy.client.Client.delete_tweet:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/delete-tweets-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/delete-tweets-id"
+
+#: of tweepy.client.Client.create_tweet:1
+msgid "Creates a Tweet on behalf of an authenticated user."
+msgstr "현재 인증된 사용자로서 트윗을 작성합니다. "
+
+#: of tweepy.client.Client.create_tweet:8
+msgid ""
+"`Tweets a link directly to a Direct Message conversation`_ with an "
+"account."
+msgstr "계정과의 `1:1 쪽지 링크를 트윗함.`_ "
+
+#: of tweepy.client.Client.create_tweet:11
+msgid "Allows you to Tweet exclusively for `Super Followers`_."
+msgstr "`슈퍼 팔로워`_ 전용 트윗을 작성할지의 여부. "
+
+#: of tweepy.client.Client.create_tweet:13
+msgid "Place ID being attached to the Tweet for geo location."
+msgstr "트윗에 포함될 위치의 ID값."
+
+#: of tweepy.client.Client.create_tweet:15
+msgid ""
+"A list of Media IDs being attached to the Tweet. This is only required if"
+" the request includes the ``tagged_user_ids``."
+msgstr "트윗에 포함할 미디어의 ID. 요청이 ``tagged_user_ids`` 값을 포함하고 있는 경우에만 필수가 됩니다. "
+
+#: of tweepy.client.Client.create_tweet:18
+msgid ""
+"A list of User IDs being tagged in the Tweet with Media. If the user "
+"you're tagging doesn't have photo-tagging enabled, their names won't show"
+" up in the list of tagged users even though the Tweet is successfully "
+"created."
+msgstr ""
+"트윗 미디어에 태그할 사용자들의 ID 목록. 태그하려는 사용자가 사진 태그를 허용하지 않은 경우, 트윗이 성공적으로 작성되더라도 "
+"태그된 사용자 목록에 이름이 표시되지 않습니다. "
+
+#: of tweepy.client.Client.create_tweet:23
+msgid ""
+"Duration of the poll in minutes for a Tweet with a poll. This is only "
+"required if the request includes ``poll.options``."
+msgstr "투표가 포함된 트윗의 투표 기간. 요청이 ``poll.options`` 값을 포함하고 있는 경우에만 필수가 됩니다. "
+
+#: of tweepy.client.Client.create_tweet:26
+msgid "A list of poll options for a Tweet with a poll."
+msgstr "투표를 포함한 트윗의, 투표 항목 목록"
+
+#: of tweepy.client.Client.create_tweet:28
+msgid "Link to the Tweet being quoted."
+msgstr "인용 리트윗하려는 트윗의 링크. "
+
+#: of tweepy.client.Client.create_tweet:30
+msgid ""
+"A list of User IDs to be excluded from the reply Tweet thus removing a "
+"user from a thread."
+msgstr "답글에서 제외할 사용자의 ID 목록."
+
+#: of tweepy.client.Client.create_tweet:33
+msgid ""
+"Tweet ID of the Tweet being replied to. Please note that "
+"``in_reply_to_tweet_id`` needs to be in the request if "
+"``exclude_reply_user_ids`` is present."
+msgstr ""
+"답글을 작성할 대상 트윗의 ID. 요청에 ``exclude_reply_user_ids`` 값이 포함되어 있는 경우, 이 "
+"``in_reply_to_tweet_id`` 가 반드시 포함되어야 함에 유의하시기 바랍니다."
+
+#: of tweepy.client.Client.create_tweet:37
+msgid ""
+"`Settings`_ to indicate who can reply to the Tweet. Limited to "
+"\"mentionedUsers\" and \"following\". If the field isn’t specified, it "
+"will default to everyone."
+msgstr ""
+"답글을 작성할 수 있는 사용자를 `설정`_ 합니다. \"mentionedUsers\"(내가 멘션하는 사람들만), "
+"\"following\"(내가 팔로우하는 사람들) 만 입력할 수 있으며, 따로 지정하지 않으면 \"모든 사람 답글 작성 가능\"으로"
+" 설정됩니다."
+
+#: of tweepy.client.Client.create_tweet:41
+msgid ""
+"Text of the Tweet being created. This field is required if "
+"``media.media_ids`` is not present."
+msgstr "트윗의 본문 텍스트. 트윗에 ``media.media_ids`` 가 포함되어 있지 않은 경우, 이 값은 필수가 됩니다. "
+
+#: of tweepy.client.Client.create_tweet:52
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/post-tweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets"
+"/api-reference/post-tweets"
+
+#: ../../client.rst:297
+msgid "Retweets"
+msgstr "리트윗"
+
+#: of tweepy.client.Client.unretweet:1
+msgid "Allows an authenticated user ID to remove the Retweet of a Tweet."
+msgstr "현재 인증된 사용자로서 리트윗을 취소합니다. "
+
+#: of tweepy.client.Client.unretweet:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not Retweeting the Tweet or have already removed the Retweet"
+" of."
+msgstr "리트윗하지 않은 트윗이나, 이미 리트윗을 취소한 트윗에 이 요청을 보내면, 특별한 처리 없이도 요청이 성공합니다. "
+
+#: of tweepy.client.Client.unretweet:10
+msgid "The ID of the Tweet that you would like to remove the Retweet of."
+msgstr "리트윗 취소할 트윗의 ID. "
+
+#: of tweepy.client.Client.unretweet:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/delete-users-id-retweets-tweet_id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/delete-users-id-retweets-tweet_id"
+
+#: of tweepy.client.Client.get_retweeters:1
+msgid "Allows you to get information about who has Retweeted a Tweet."
+msgstr "트윗을 리트윗한 사용자들에 대한 정보를 얻을 수 있습니다."
+
+#: of tweepy.client.Client.get_retweeters:3
+msgid "Tweet ID of the Tweet to request Retweeting users of."
+msgstr "리트윗한 사용자 목록을 받아올 트윗의 ID."
+
+#: of tweepy.client.Client.get_retweeters:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/get-tweets-id-retweeted_by"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/get-tweets-id-retweeted_by"
+
+#: of tweepy.client.Client.retweet:1
+msgid "Causes the user ID to Retweet the target Tweet."
+msgstr "지정한 트윗을 현재 인증된 사용자로서 리트윗합니다. "
+
+#: of tweepy.client.Client.retweet:6
+msgid "The ID of the Tweet that you would like to Retweet."
+msgstr "리트윗하려는 트윗의 ID. "
+
+#: of tweepy.client.Client.retweet:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/post-users-id-retweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-"
+"reference/post-users-id-retweets"
+
+#: ../../client.rst:306
+msgid "Search Tweets"
+msgstr "트윗 검색"
+
+#: of tweepy.client.Client.get_all_tweets_count:1
+#: tweepy.client.Client.search_all_tweets:1
+msgid ""
+"This endpoint is only available to those users who have been approved for"
+" the `Academic Research product track`_."
+msgstr "이 엔드포인트는 `학술 연구 제품 트랙`_ 사용이 승인된 사용자만 사용할 수 있습니다."
+
+#: of tweepy.client.Client.get_all_tweets_count:4
+#: tweepy.client.Client.search_all_tweets:4
+msgid ""
+"The full-archive search endpoint returns the complete history of public "
+"Tweets matching a search query; since the first Tweet was created March "
+"26, 2006."
+msgstr ""
+"이 전체 아카이브 검색 엔드포인트는 모든 공개 트윗의 전체 기록 중 검색 쿼리와 맞는 전체 트윗을 반환합니다. 범위는 트위터의 첫 "
+"번째 트윗부터이며, 이는 2006년 3월 26일에 작성되었습니다. "
+
+#: of tweepy.client.Client.get_all_tweets_count:8
+#: tweepy.client.Client.search_all_tweets:11
+msgid "One query for matching Tweets. Up to 1024 characters."
+msgstr "트윗 검색에 사용할 쿼리. 최대 1024자."
+
+#: of tweepy.client.Client.get_all_tweets_count:10
+#: tweepy.client.Client.search_all_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``. The "
+"newest, most recent UTC timestamp to which the Tweets will be provided. "
+"Timestamp is in second granularity and is exclusive (for example, "
+"12:00:01 excludes the first second of the minute). If used without "
+"``start_time``, Tweets from 30 days before ``end_time`` will be returned "
+"by default. If not specified, ``end_time`` will default to [now - 30 "
+"seconds]."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴로 입력하는 매개변수. ``start_time`` "
+"매개변수와 같이 사용하는 것이 권장됩니다.트윗 검색 기간의 끝을 의미하며, 두 개로 세분화되었고 계산에 기준값을 포함하지 않습니다."
+" (예: 12:00:01로 설정하면 검색 기간에 12:00:00까지만 고려되고 그 다음 초는 고려되지 않음) "
+"``start_time`` 매개변수가 주어지지 않은 경우, ``end_time`` 으로부터 30일 전까지가 검색 기간이 됩니다. 이"
+" 매개변수가 지정되지 않은 경우의 기본값은 '현재 시점으로부터 30초 전'입니다."
+
+#: of tweepy.client.Client.search_all_tweets:23
+msgid ""
+"The maximum number of search results to be returned by a request. A "
+"number between 10 and the system limit (currently 500). By default, a "
+"request response will return 10 results."
+msgstr ""
+"요청당 반환받을 결과의 수. 10부터 트위터 시스템 제한 수치 (현재 500) 사이의 값이며, 기본값은 10입니다. (요청 당 "
+"10개의 결과 반환)"
+
+#: of tweepy.client.Client.get_all_tweets_count:22
+#: tweepy.client.Client.search_all_tweets:29
+msgid ""
+"This parameter is used to get the next 'page' of results. The value used "
+"with the parameter is pulled directly from the response provided by the "
+"API, and should not be modified. You can learn more by visiting our page "
+"on `pagination`_."
+msgstr ""
+"이 매개변수는 결과의 다음 'page' (페이지) 를 가져오는 데 사용됩니다. 이 매개변수의 값은 API에서 제공된 값으로만 사용 "
+"가능하며, 이는 수정할 수 없습니다. 자세한 사항은 `Pagination`_ 페이지를 참고하시기 바랍니다. "
+
+#: of tweepy.client.Client.get_all_tweets_count:27
+#: tweepy.client.Client.search_all_tweets:38
+msgid ""
+"Returns results with a Tweet ID greater than (for example, more recent "
+"than) the specified ID. The ID specified is exclusive and responses will "
+"not include it. If included with the same request as a ``start_time`` "
+"parameter, only ``since_id`` will be used."
+msgstr ""
+"지정한 ID값보다 더 큰 ID값을 가지는 (즉, 더 최근의) 트윗들만 검색 결과에 포함합니다. ID값은 비포함적으로 "
+"계산됩니다('초과'를 의미, 즉 기준값을 포함하지 않음). 같은 요청에 ``start_time`` 값을 같이 전달할 경우, "
+"``since_id`` 값만 사용됩니다. "
+
+#: of tweepy.client.Client.get_all_tweets_count:32
+#: tweepy.client.Client.search_all_tweets:43
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute). By default, a request will return Tweets from up to 30 days ago "
+"if you do not include this parameter."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 포함적으로 계산되며('이상'을 의미, 즉 기준값을 포함 - 예: 12:00:01로 지정하면 01초도 검색 범위에"
+" 포함됨), 이 매개변수에 값을 지정하지 않으면 기본적으로 30일 이전까지의 결과를 반환합니다. "
+
+#: of tweepy.client.Client.get_all_tweets_count:38
+#: tweepy.client.Client.search_all_tweets:51
+msgid ""
+"Returns results with a Tweet ID less than (that is, older than) the "
+"specified ID. Used with ``since_id``. The ID specified is exclusive and "
+"responses will not include it."
+msgstr ""
+"지정한 ID값보다 더 작은 ID값을 가지는 (즉, 더 이전의) 트윗들만 검색 결과에 포함합니다. ID값은 비포함적으로 "
+"계산됩니다('미만'을 의미, 즉 기준값을 포함하지 않음). 같은 요청에 ``since_id`` 값을 같이 전달할 경우, "
+"``since_id`` 값만 사용됩니다. "
+
+#: of tweepy.client.Client.search_all_tweets:63
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-all"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-all"
+
+#: of tweepy.client.Client.search_recent_tweets:1
+msgid ""
+"The recent search endpoint returns Tweets from the last seven days that "
+"match a search query."
+msgstr "이 '최근 검색' 엔드포인트는 검색 조건과 일치하는, 최근 7일간의 트윗을 반환합니다."
+
+#: of tweepy.client.Client.get_recent_tweets_count:4
+#: tweepy.client.Client.search_recent_tweets:7
+msgid ""
+"One rule for matching Tweets. If you are using a `Standard Project`_ at "
+"the Basic `access level`_, you can use the basic set of `operators`_ and "
+"can make queries up to 512 characters long. If you are using an `Academic"
+" Research Project`_ at the Basic access level, you can use all available "
+"operators and can make queries up to 1,024 characters long."
+msgstr ""
+"트윗 검색에 사용할 쿼리(조건). `일반(Standard) 프로젝트`_ 를 기본(Basic) `권한(Access level)`_ "
+"에서 사용 중인 경우, 기본적인 `연산자`_ 를 포함해 최대 512자까지의 쿼리를 사용할 수 있습니다. `학술 연구용 프로젝트`_ "
+"를 기본 권한(Basic access level) 에서 사용 중인 경우, 기본적인 연산자를 포함해 최대 1,024자까지의 쿼리를 "
+"사용할 수 있습니다. "
+
+#: of tweepy.client.Client.get_recent_tweets_count:11
+#: tweepy.client.Client.search_recent_tweets:14
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent UTC "
+"timestamp to which the Tweets will be provided. Timestamp is in second "
+"granularity and is exclusive (for example, 12:00:01 excludes the first "
+"second of the minute). By default, a request will return Tweets from as "
+"recent as 30 seconds ago if you do not include this parameter."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 끝점을 지정하는 UTC "
+"타임스탬프값입니다. 이분법적·비포함적으로 계산되며('미만'을 의미, 즉 기준값을 포함하지 않음 - 예: 12:00:01로 지정하면 "
+"01초는 검색 범위에서 제외됨), 이 매개변수에 값을 지정하지 않으면 기본적으로 30초 이전까지의 결과를 반환합니다. "
+
+#: of tweepy.client.Client.search_recent_tweets:23
+msgid ""
+"The maximum number of search results to be returned by a request. A "
+"number between 10 and 100. By default, a request response will return 10 "
+"results."
+msgstr ""
+"요청 당 반환받을 결과의 수. 10 이상 100 이하의 자연수로 입력해야 하며, 값을 따로 지정하지 않으면 기본적으로 요청 당 "
+"10개의 결과를 반환합니다. "
+
+#: of tweepy.client.Client.search_recent_tweets:29
+msgid ""
+"This parameter is used to get the next 'page' of results. The value used "
+"with the parameter is pulled directly from the response provided by the "
+"API, and should not be modified."
+msgstr ""
+"반환받은 결과의 다음 '페이지'를 가져올때 사용되는 매개변수. 이 매개변수의 값은 API에서 제공된 값으로만 사용 가능하며, 이는 "
+"수정할 수 없습니다. "
+
+#: of tweepy.client.Client.get_recent_tweets_count:22
+#: tweepy.client.Client.search_recent_tweets:37
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified ID. The ID specified is exclusive and responses will not "
+"include it. If included with the same request as a ``start_time`` "
+"parameter, only ``since_id`` will be used."
+msgstr ""
+"지정한 ID값보다 더 큰 ID값을 가지는 (즉, 더 최근의) 트윗들만 검색 결과에 포함합니다. ID값은 비포함적으로 "
+"계산됩니다('초과'를 의미, 즉 기준값을 포함하지 않음). 같은 요청에 ``start_time`` 값을 같이 전달할 경우, "
+"``since_id`` 값만 사용됩니다. "
+
+#: of tweepy.client.Client.get_recent_tweets_count:27
+#: tweepy.client.Client.search_recent_tweets:42
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp (from "
+"most recent seven days) from which the Tweets will be provided. Timestamp"
+" is in second granularity and is inclusive (for example, 12:00:01 "
+"includes the first second of the minute). If included with the same "
+"request as a ``since_id`` parameter, only ``since_id`` will be used. By "
+"default, a request will return Tweets from up to seven days ago if you do"
+" not include this parameter."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점(단, 최근 7일 "
+"이내)을 지정하는 UTC 타임스탬프값입니다. 이분법적·포함적으로 계산되며('이상'을 의미, 즉 기준값을 포함함 - 예: "
+"12:00:01로 지정하면 01초가 검색 범위에 포함됨), 이 매개변수에 값을 지정하지 않으면 기본적으로 현재로부터 7일 이전까지의"
+" 결과를 반환합니다. 같은 요청에 ``since_id`` 값을 같이 전달할 경우, ``since_id`` 값만 사용됩니다. "
+
+#: of tweepy.client.Client.get_recent_tweets_count:35
+#: tweepy.client.Client.search_recent_tweets:52
+msgid ""
+"Returns results with a Tweet ID less than (that is, older than) the "
+"specified ID. The ID specified is exclusive and responses will not "
+"include it."
+msgstr ""
+"지정한 ID값보다 더 작은 ID값을 가지는 (즉, 더 이전의) 트윗들만 검색 결과에 포함합니다. ID값은 비포함적으로 "
+"계산됩니다('미만'을 의미, 즉 기준값을 포함하지 않음). "
+
+#: of tweepy.client.Client.search_recent_tweets:66
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-recent"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-"
+"reference/get-tweets-search-recent"
+
+#: ../../client.rst:313
+msgid "Timelines"
+msgstr "타임라인"
+
+#: of tweepy.client.Client.get_users_mentions:1
+msgid ""
+"Returns Tweets mentioning a single user specified by the requested user "
+"ID. By default, the most recent ten Tweets are returned per request. "
+"Using pagination, up to the most recent 800 Tweets can be retrieved."
+msgstr ""
+"지정한 사용자에게 멘션하고 있는 트윗을 반환합니다. 따로 값을 지정하지 않으면, 요청당 최근 10개의 트윗을 반환합니다. "
+"페이지화(Pagination)를 이용하면, 최대 최근 800개의 결과를 가져올 수 있습니다. "
+
+#: of tweepy.client.Client.get_users_mentions:8
+msgid ""
+"Unique identifier of the user for whom to return Tweets mentioning the "
+"user. User ID can be referenced using the `user/lookup`_ endpoint. More "
+"information on Twitter IDs is `here`_."
+msgstr ""
+"지정할 사용자의 고유 ID값. 사용자의 ID값은 `user/lookup`_ 엔드포인트를 이용해 참조해올 수 있습니다. 트위터 "
+"ID값에 대한 자세한 설명은 `여기`_ 를 참고하세요. "
+
+#: of tweepy.client.Client.get_users_mentions:12
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute).  Please note that this parameter does not support a millisecond "
+"value."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 이분법적·포함적으로 계산됩니다('이상'을 의미, 즉 기준값을 포함함 - 예: 12:00:01로 지정하면 01초는"
+" 검색 범위에 포함됨). 밀리세컨드값을 지원하지 않습니다. "
+
+#: of tweepy.client.Client.get_users_mentions:12
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute)."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 이분법적·포함적으로 계산됩니다('이상'을 의미, 즉 기준값을 포함함 - 예: 12:00:01로 지정하면 01초는"
+" 검색 범위에 포함됨). "
+
+#: of tweepy.client.Client.get_users_mentions:17
+#: tweepy.client.Client.get_users_mentions:52
+#: tweepy.client.Client.get_users_tweets:20
+#: tweepy.client.Client.get_users_tweets:62
+msgid "Please note that this parameter does not support a millisecond value."
+msgstr "밀리세컨드값을 지원하지 않습니다. "
+
+#: of tweepy.client.Client.get_users_mentions:22
+#: tweepy.client.Client.get_users_tweets:31
+msgid ""
+"Specifies the number of Tweets to try and retrieve, up to a maximum of "
+"100 per distinct request. By default, 10 results are returned if this "
+"parameter is not supplied. The minimum permitted value is 5. It is "
+"possible to receive less than the ``max_results`` per request throughout "
+"the pagination process."
+msgstr ""
+"요청 당 가져올 트윗의 개수(최대 100개)를 지정할 수 있는 매개변수. 따로 설정하지 않으면 기본적으로 요청 당 최대 10개의 "
+"결과만 반환하며, 최솟값은 5입니다. 페이지화(Pagination)를 이용해 요청당 ``max_results`` 보다 적은 결과값을"
+" 받아오는 것이 가능합니다."
+
+#: of tweepy.client.Client.get_users_mentions:30
+#: tweepy.client.Client.get_users_tweets:39
+msgid ""
+"This parameter is used to move forwards or backwards through 'pages' of "
+"results, based on the value of the ``next_token`` or ``previous_token`` "
+"in the response. The value used with the parameter is pulled directly "
+"from the response provided by the API, and should not be modified."
+msgstr ""
+"이 매개변수는 ``next_token`` 이나 ``previous_token`` 값을 이용해, 결과값의 이전 혹은 다음 페이지를 "
+"조회하는 데 사용되는 매개변수입니다. 이 매개변수의 값은 API에서 제공된 값으로만 사용 가능하며, 이는 수정할 수 없습니다. "
+
+#: of tweepy.client.Client.get_users_mentions:40
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified 'since' Tweet ID. There are limits to the number of Tweets "
+"that can be accessed through the API. If the limit of Tweets has occurred"
+" since the ``since_id``, the ``since_id`` will be forced to the oldest ID"
+" available. More information on Twitter IDs is `here`_."
+msgstr ""
+"지정한 ID값보다 더 큰 ID값을 가지는 (즉, 더 최근의) 트윗들만 검색 결과에 포함합니다. 단, 트위터 API를 통해 가져올 수"
+" 있는 트윗 수에 한계가 있다는 것을 유의해야 합니다. 만약 이 값 때문에 API 호출 제한에 도달할 경우, 이 값인 "
+"``since_id`` 가 가능한 선에서 최대한 작은(즉, 최대한 예전의) ID값으로 강제 변경됩니다. 트위터 ID값에 대한 자세한"
+" 설명은 `여기`_ 를 참고하세요. "
+
+#: of tweepy.client.Client.get_users_mentions:47
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute).  Please note that this parameter does not support a millisecond "
+"value."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 이분법적·포함적으로 계산됩니다('이상'을 의미, 즉 기준값을 포함함 - 예: 12:00:01로 지정하면 01초는"
+" 검색 범위에 포함됨). 밀리세컨드값을 지원하지 않습니다. "
+
+#: of tweepy.client.Client.get_users_mentions:47
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp from "
+"which the Tweets will be provided. Timestamp is in second granularity and"
+" is inclusive (for example, 12:00:01 includes the first second of the "
+"minute)."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 이분법적·포함적으로 계산됩니다('이상'을 의미, 즉 기준값을 포함함 - 예: 12:00:01로 지정하면 01초는"
+" 검색 범위에 포함됨). "
+
+#: of tweepy.client.Client.get_users_mentions:57
+msgid ""
+"Returns results with a Tweet ID less less than (that is, older than) the "
+"specified 'until' Tweet ID. There are limits to the number of Tweets that"
+" can be accessed through the API. If the limit of Tweets has occurred "
+"since the ``until_id``, the ``until_id`` will be forced to the most "
+"recent ID available. More information on Twitter IDs is `here`_."
+msgstr ""
+"지정한 ID값보다 더 작은 ID값을 가지는 (즉, 더 오래된) 트윗들만 검색 결과에 포함합니다. 단, 트위터 API를 통해 가져올 "
+"수 있는 트윗 수에 한계가 있다는 것을 유의해야 합니다. 만약 이 값 때문에 API 호출 제한에 도달할 경우, 이 값인 "
+"``until_id`` 가 가능한 선에서 약간 더 큰(즉, 최대한 오래된) ID값으로 강제 변경됩니다. 트위터 ID값에 대한 자세한"
+" 설명은 `여기`_ 를 참고하세요. "
+
+#: of tweepy.client.Client.get_users_mentions:74
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-mentions"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-mentions"
+
+#: of tweepy.client.Client.get_users_tweets:1
+msgid ""
+"Returns Tweets composed by a single user, specified by the requested user"
+" ID. By default, the most recent ten Tweets are returned per request. "
+"Using pagination, the most recent 3,200 Tweets can be retrieved."
+msgstr ""
+"ID로 지정한 사용자가 작성 또는 리트윗한 트윗들을 반환합니다. 기본적으로, 요청 당 10개의 결과를 반환합니다. "
+"페이지화(Pagination)를 이용하면, 최대 최근 3,200개의 결과를 가져올 수 있습니다. "
+
+#: of tweepy.client.Client.get_users_tweets:9
+msgid ""
+"Unique identifier of the Twitter account (user ID) for whom to return "
+"results. User ID can be referenced using the `user/lookup`_ endpoint. "
+"More information on Twitter IDs is `here`_."
+msgstr ""
+"지정할 사용자의 고유 ID값. 사용자의 ID값은 `user/lookup`_ 엔드포인트를 이용해 참조해올 수 있습니다. 트위터 "
+"ID값에 대한 자세한 설명은 `여기`_ 를 참고하세요. "
+
+#: of tweepy.client.Client.get_users_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:01Z  Please note that"
+" this parameter does not support a millisecond value."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 끝점을 지정하는 UTC "
+"타임스탬프값입니다. 최대 최근 3200개의 결과를 받아올 수 있습니다. 이분법적·포함적으로 계산되며('이하'를 의미, 즉 기준값을 "
+"포함함 - 예: 12:00:01로 지정하면 01초는 검색 범위에 포함됨), 최솟값은 2010-11-06T00:00:01Z 입니다. "
+"밀리세컨드값을 지원하지 않습니다."
+
+#: of tweepy.client.Client.get_users_tweets:13
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:01Z"
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗 검색 범위의 끝점을 지정하는 UTC "
+"타임스탬프값입니다. 최대 최근 3200개의 결과를 받아올 수 있습니다. 이분법적·포함적으로 계산되며('이하'를 의미, 즉 기준값을 "
+"포함함 - 예: 12:00:01로 지정하면 01초는 검색 범위에 포함됨), 최솟값은 2010-11-06T00:00:01Z 입니다. "
+
+#: of tweepy.client.Client.get_users_tweets:23
+msgid ""
+"Comma-separated list of the types of Tweets to exclude from the response."
+" When ``exclude=retweets`` is used, the maximum historical Tweets "
+"returned is still 3200. When the ``exclude=replies`` parameter is used "
+"for any value, only the most recent 800 Tweets are available."
+msgstr ""
+"결과값에서 제외할 트윗 종류를 구분하는, 쉼표(,)로 구분된 리스트입니다. ``exclude=retweets`` 를 사용해도, 최대"
+" 3200개까지의 결과를 반환받을 수 있습니다. 단, ``exclude=replies`` 를 같이 사용하면, 최대 800개까지의 "
+"결과만을 반환받을 수 있습니다. "
+
+#: of tweepy.client.Client.get_users_tweets:49
+msgid ""
+"Returns results with a Tweet ID greater than (that is, more recent than) "
+"the specified 'since' Tweet ID. Only the 3200 most recent Tweets are "
+"available. The result will exclude the ``since_id``. If the limit of "
+"Tweets has occurred since the ``since_id``, the ``since_id`` will be "
+"forced to the oldest ID available."
+msgstr ""
+"지정한 ID값보다 더 큰 ID값을 가지는 (즉, 더 최근의) 트윗들만 결과에 포함합니다. ID값은 비포함적으로 계산됩니다('초과'를"
+" 의미, 즉 기준값을 포함하지 않음). 같은 요청에 ``start_time`` 값을 같이 전달할 경우, ``since_id`` 값만"
+" 사용됩니다. "
+
+#: of tweepy.client.Client.get_users_tweets:55
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:00Z  Please note that"
+" this parameter does not support a millisecond value."
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗을 가져올 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 최대 최근 3200개의 트윗만을 가져올 수 있습니다. 이분법적·포함적으로 계산되며('이상'을 의미, 즉 기준값을"
+" 포함 - 예: 12:00:01로 지정하면 01초도 검색 범위에 포함됨), 최솟값은 2010-11-06T00:00:00Z 입니다. "
+"밀리세컨드값을 지원하지 않습니다. "
+
+#: of tweepy.client.Client.get_users_tweets:55
+msgid ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest UTC "
+"timestamp from which the Tweets will be provided. Only the 3200 most "
+"recent Tweets are available. Timestamp is in second granularity and is "
+"inclusive (for example, 12:00:01 includes the first second of the "
+"minute). Minimum allowable time is 2010-11-06T00:00:00Z"
+msgstr ""
+"YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339) 꼴의 값. 트윗을 가져올 범위의 시작점을 지정하는 UTC "
+"타임스탬프값입니다. 최대 최근 3200개의 트윗만을 가져올 수 있습니다. 이분법적·포함적으로 계산되며('이상'을 의미, 즉 기준값을"
+" 포함 - 예: 12:00:01로 지정하면 01초도 검색 범위에 포함됨), 최솟값은 2010-11-06T00:00:00Z 입니다. "
+
+#: of tweepy.client.Client.get_users_tweets:67
+msgid ""
+"Returns results with a Tweet ID less less than (that is, older than) the "
+"specified 'until' Tweet ID. Only the 3200 most recent Tweets are "
+"available. The result will exclude the ``until_id``. If the limit of "
+"Tweets has occurred since the ``until_id``, the ``until_id`` will be "
+"forced to the most recent ID available."
+msgstr ""
+"지정한 ID값보다 더 작은 ID값을 가지는 (즉, 더 오래된) 트윗들만 결과에 포함합니다. 최대 최근 3200개의 트윗만을 가져올 "
+"수 있습니다. 비포함적으로 계산됩니다. ('미만'을 의미) 만약 이 값 때문에 API 호출 제한에 도달할 경우, 이 값인 "
+"``until_id`` 가 가능한 선에서 약간 더 큰(즉, 최대한 오래된) ID값으로 강제 변경됩니다. "
+
+#: of tweepy.client.Client.get_users_tweets:83
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-tweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-"
+"reference/get-users-id-tweets"
+
+#: ../../client.rst:320
+msgid "Tweet counts"
+msgstr "트윗 카운트"
+
+#: of tweepy.client.Client.get_all_tweets_count:18
+#: tweepy.client.Client.get_recent_tweets_count:18
+#, fuzzy
+msgid ""
+"This is the granularity that you want the timeseries count data to be "
+"grouped by. You can request ``minute``, ``hour``, or ``day`` granularity."
+" The default granularity, if not specified is ``hour``."
+msgstr ""
+"시계열(Timeseries) 데이터를 그룹화하는데 사용할 세분화용 매개변수. ``minute``, ``hour``, ``day`` "
+"중 하나의 값으로 입력해야 합니다. 기본값은 ``hour`` 입니다."
+
+#: of tweepy.client.Client.get_all_tweets_count:48
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-all"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-all"
+
+#: of tweepy.client.Client.get_recent_tweets_count:1
+msgid ""
+"The recent Tweet counts endpoint returns count of Tweets from the last "
+"seven days that match a search query."
+msgstr "이 엔드포인트는 지정한 조건에 맞는 최근 7일간의 트윗 관련 데이터를 반환합니다. "
+
+#: of tweepy.client.Client.get_recent_tweets_count:45
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-recent"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-"
+"reference/get-tweets-counts-recent"
+
+#: ../../client.rst:327
+msgid "Tweet lookup"
+msgstr "트윗 자세히보기"
+
+#: of tweepy.client.Client.get_tweet:1
+msgid ""
+"Returns a variety of information about a single Tweet specified by the "
+"requested ID."
+msgstr "ID로 지정한 하나의 트윗에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_tweet:4
+msgid "Unique identifier of the Tweet to request"
+msgstr "대상 트윗의 ID값. "
+
+#: of tweepy.client.Client.get_tweet:26
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets-id"
+
+#: of tweepy.client.Client.get_tweets:1
+msgid ""
+"Returns a variety of information about the Tweet specified by the "
+"requested ID or list of IDs."
+msgstr "ID값으로 지정한 하나의 트윗 또는 ID값의 목록으로 지정한 트윗들에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_tweets:4
+msgid ""
+"A comma separated list of Tweet IDs. Up to 100 are allowed in a single "
+"request. Make sure to not include a space between commas and fields."
+msgstr ""
+"쉼표(,)로 구분된 트윗 ID값의 리스트. 요청 당 최대 100개까지만 전달할 수 있습니다. 값과 쉼표(,) 사이에 공백 문자를 "
+"넣지 않도록 유의하시기 바랍니다. "
+
+#: of tweepy.client.Client.get_tweets:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-"
+"reference/get-tweets"
+
+#: ../../client.rst:334
+msgid "Users"
+msgstr "사용자"
+
+#: ../../client.rst:337
+msgid "Blocks"
+msgstr "차단"
+
+#: of tweepy.client.Client.unblock:1
+msgid "Unblock another user."
+msgstr "지정한 사용자를 차단 해제합니다."
+
+#: of tweepy.client.Client.unblock:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not blocking or have already unblocked."
+msgstr "차단 해제하려는 사용자가 이미 차단 해제되어 있거나, 차단하고 있지 않던 경우 특별한 처리 없이도 요청이 성공합니다. "
+
+#: of tweepy.client.Client.unblock:9
+msgid "The user ID of the user that you would like to unblock."
+msgstr "차단 해제하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.unblock:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/delete-users-user_id-blocking"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/delete-users-user_id-blocking"
+
+#: of tweepy.client.Client.get_blocked:1
+msgid "Returns a list of users who are blocked by the authenticating user."
+msgstr "현재 인증된 사용자가 차단한 사용자의 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_blocked:8 tweepy.client.Client.get_muted:10
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and 1000. By default, each page will return 100 results."
+msgstr ""
+"페이지당 반환받을 결과 수의 최댓값. 1에서 1000 사이의 자연수로 지정해야 하며, 기본값은 100입니다. (페이지당 100개의 "
+"결과 반환)"
+
+#: of tweepy.client.Client.get_blocked:12 tweepy.client.Client.get_muted:14
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results."
+msgstr "다음 페이지나, 이전 페이지 결과값을 조회하는 데 쓰입니다. "
+
+#: of tweepy.client.Client.get_blocked:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/get-users-blocking"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/get-users-blocking"
+
+#: of tweepy.client.Client.block:1
+msgid "Block another user."
+msgstr "지정한 사용자를 차단합니다. "
+
+#: of tweepy.client.Client.block:6
+msgid "The user ID of the user that you would like to block."
+msgstr "차단하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.block:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/post-users-user_id-blocking"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-"
+"reference/post-users-user_id-blocking"
+
+#: ../../client.rst:346
+msgid "Follows"
+msgstr "팔로우"
+
+#: of tweepy.client.Client.unfollow_user:1
+msgid "Allows a user ID to unfollow another user."
+msgstr "지정한 사용자를 팔로우 해제합니다. "
+
+#: of tweepy.client.Client.unfollow_user:3
+msgid ""
+"The request succeeds with no action when the authenticated user sends a "
+"request to a user they're not following or have already unfollowed."
+msgstr "팔로우 해제하려는 사용자가 이미 팔로우 해제되어 있거나, 팔로우하고 있지 않던 경우 특별한 처리 없이도 요청이 성공합니다. "
+
+#: of tweepy.client.Client.unfollow_user:6
+msgid "Renamed from :meth:`Client.unfollow`"
+msgstr ":meth:`Client.unfollow` 로부터 이름 변경됨 "
+
+#: of tweepy.client.Client.unfollow_user:12
+msgid "The user ID of the user that you would like to unfollow."
+msgstr "팔로우 해제하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.unfollow_user:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/delete-users-source_id-following"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/delete-users-source_id-following"
+
+#: of tweepy.client.Client.unfollow:1
+msgid "Alias for :meth:`Client.unfollow_user`"
+msgstr "다음 함수와 동일함(Alias): :meth:`Client.unfollow_user` "
+
+#: of tweepy.client.Client.unfollow:3
+msgid "Use :meth:`Client.unfollow_user` instead."
+msgstr ":meth:`Client.unfollow_user` 를 대신 사용해야 함 "
+
+#: of tweepy.client.Client.get_users_followers:1
+msgid "Returns a list of users who are followers of the specified user ID."
+msgstr "ID로 지정한 사용자의 팔로워 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_users_followers:3
+msgid "The user ID whose followers you would like to retrieve."
+msgstr "팔로워 리스트를 가져오려는 사용자의 ID값."
+
+#: of tweepy.client.Client.get_users_followers:7
+#: tweepy.client.Client.get_users_following:7
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and the 1000. By default, each page will return 100 "
+"results."
+msgstr ""
+"페이지당 반환받을 결과 수의 최댓값. 1에서 1000 사이의 자연수로 지정해야 하며, 기본값은 100입니다. (페이지당 100개의 "
+"결과 반환)"
+
+#: of tweepy.client.Client.get_users_followers:29
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-followers"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-followers"
+
+#: of tweepy.client.Client.get_users_following:1
+msgid "Returns a list of users the specified user ID is following."
+msgstr "ID로 지정한 사용자가 팔로우중인 사용자들의 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_users_following:3
+msgid "The user ID whose following you would like to retrieve."
+msgstr "팔로잉 리스트를 가져오려는 사용자의 ID값."
+
+#: of tweepy.client.Client.get_users_following:29
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-following"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/get-users-id-following"
+
+#: of tweepy.client.Client.follow_user:1
+msgid "Allows a user ID to follow another user."
+msgstr "지정한 사용자를 팔로우합니다. "
+
+#: of tweepy.client.Client.follow_user:3
+msgid ""
+"If the target user does not have public Tweets, this endpoint will send a"
+" follow request."
+msgstr "대상 사용자가 비공개 계정인 경우, 이 엔드포인트는 팔로우 요청을 대신 보냅니다. "
+
+#: of tweepy.client.Client.follow_user:6
+msgid ""
+"The request succeeds with no action when the authenticated user sends a "
+"request to a user they're already following, or if they're sending a "
+"follower request to a user that does not have public Tweets."
+msgstr ""
+"팔로우하려는 사용자가 이미 팔로우 되어 있거나, 대상 사용자가 비공개 계정이어서 팔로우 요청을 대신 보내는 경우 특별한 처리 없이도"
+" 요청이 성공합니다. "
+
+#: of tweepy.client.Client.follow_user:10
+msgid "Renamed from :meth:`Client.follow`"
+msgstr ":meth:`Client.follow` 로부터 이름 변경됨"
+
+#: of tweepy.client.Client.follow_user:16
+msgid "The user ID of the user that you would like to follow."
+msgstr "팔로우하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.follow_user:26
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/post-users-source_user_id-following"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/follows/api-"
+"reference/post-users-source_user_id-following"
+
+#: of tweepy.client.Client.follow:1
+msgid "Alias for :meth:`Client.follow_user`"
+msgstr "다음 함수와 동일함(Alias): :meth:`Client.follow_user`"
+
+#: of tweepy.client.Client.follow:3
+msgid "Use :meth:`Client.follow_user` instead."
+msgstr ":meth:`Client.follow_user` 를 대신 사용해야 함 "
+
+#: ../../client.rst:361
+msgid "Mutes"
+msgstr "뮤트"
+
+#: of tweepy.client.Client.unmute:1
+msgid "Allows an authenticated user ID to unmute the target user."
+msgstr "지정한 사용자를 뮤트 해제합니다. "
+
+#: of tweepy.client.Client.unmute:3
+msgid ""
+"The request succeeds with no action when the user sends a request to a "
+"user they're not muting or have already unmuted."
+msgstr "뮤트 해제하려는 사용자가 이미 뮤트 해제되어 있거나, 뮤트하고 있지 않던 경우 특별한 처리 없이도 요청이 성공합니다. "
+
+#: of tweepy.client.Client.unmute:9
+msgid "The user ID of the user that you would like to unmute."
+msgstr "뮤트 해제하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.unmute:19
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/delete-users-user_id-muting"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/delete-users-user_id-muting"
+
+#: of tweepy.client.Client.get_muted:1
+msgid "Returns a list of users who are muted by the authenticating user."
+msgstr "현재 인증된 사용자가 뮤트한 사용자의 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_muted:30
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/get-users-muting"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/get-users-muting"
+
+#: of tweepy.client.Client.mute:1
+msgid "Allows an authenticated user ID to mute the target user."
+msgstr "지정한 사용자를 뮤트합니다. "
+
+#: of tweepy.client.Client.mute:6
+msgid "The user ID of the user that you would like to mute."
+msgstr "뮤트하려는 사용자의 ID값. "
+
+#: of tweepy.client.Client.mute:16
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/post-users-user_id-muting"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-"
+"reference/post-users-user_id-muting"
+
+#: ../../client.rst:370
+msgid "User lookup"
+msgstr "사용자 자세히보기"
+
+#: of tweepy.client.Client.get_user:1
+msgid ""
+"Returns a variety of information about a single user specified by the "
+"requested ID or username."
+msgstr "ID 또는 사용자명(username)로 지정한 하나의 사용자에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_user:4
+msgid "The ID of the user to lookup."
+msgstr "대상 사용자의 ID값. "
+
+#: of tweepy.client.Client.get_user:6
+msgid "The Twitter username (handle) of the user."
+msgstr "대상 사용자의 사용자명(username)"
+
+#: of tweepy.client.Client.get_spaces tweepy.client.Client.get_user
+#: tweepy.client.Client.get_users
+msgid "Raises"
+msgstr "예외 발생"
+
+#: of tweepy.client.Client.get_user:17
+msgid "If ID and username are not passed or both are passed"
+msgstr "ID값과 사용자명(username)이 둘 다 전달되지 않았거나, 둘 다 전달된 경우 "
+
+#: of tweepy.client.Client.get_user:24
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users-id https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by-username-username"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users-id https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by-username-username"
+
+#: of tweepy.client.Client.get_users:1
+msgid ""
+"Returns a variety of information about one or more users specified by the"
+" requested IDs or usernames."
+msgstr ""
+"ID값 및 사용자명(username)으로 지정한 하나의 사용자 또는 ID값 및 사용자명(username)의 목록으로 지정한 "
+"사용자들에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_users:4
+msgid ""
+"A comma separated list of user IDs. Up to 100 are allowed in a single "
+"request. Make sure to not include a space between commas and fields."
+msgstr ""
+"쉼표(,)로 구분된 사용자 ID값의 리스트. 요청 당 최대 100개까지만 전달할 수 있습니다. 값과 쉼표(,) 사이에 공백 문자를 "
+"넣지 않도록 유의하시기 바랍니다. "
+
+#: of tweepy.client.Client.get_users:8
+msgid ""
+"A comma separated list of Twitter usernames (handles). Up to 100 are "
+"allowed in a single request. Make sure to not include a space between "
+"commas and fields."
+msgstr ""
+"쉼표(,)로 구분된 사용자명(username)의 리스트. 요청 당 최대 100개까지만 전달할 수 있습니다. 값과 쉼표(,) 사이에 "
+"공백 문자를 넣지 않도록 유의하시기 바랍니다. "
+
+#: of tweepy.client.Client.get_users:21
+msgid "If IDs and usernames are not passed or both are passed"
+msgstr "ID값과 사용자명(username)이 둘 다 전달되지 않았거나, 둘 다 전달된 경우 "
+
+#: of tweepy.client.Client.get_users:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users https://developer.twitter.com/en/docs/twitter-"
+"api/users/lookup/api-reference/get-users-by"
+
+#: of tweepy.client.Client.get_me:1
+msgid "Returns information about an authorized user."
+msgstr ""
+
+#: of tweepy.client.Client.get_me:19
+#, fuzzy
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-"
+"reference/get-users-me"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id"
+
+#: ../../client.rst:379
+msgid "Spaces"
+msgstr "스페이스"
+
+#: ../../client.rst:382
+msgid "Search Spaces"
+msgstr "스페이스 검색"
+
+#: of tweepy.client.Client.search_spaces:1
+msgid "Return live or scheduled Spaces matching your specified search terms"
+msgstr "지정한 조건에 맞는, 진행 중이거나 진행 예정인 스페이스들을 반환합니다. "
+
+#: of tweepy.client.Client.search_spaces:5
+msgid "``state`` is now an optional parameter."
+msgstr "이제 ``state`` 가 필수 매개변수가 아님 (Optional) "
+
+#: of tweepy.client.Client.search_spaces:8
+msgid ""
+"Your search term. This can be any text (including mentions and Hashtags) "
+"present in the title of the Space."
+msgstr "스페이스 검색 조건. 스페이스의 제목에서 찾을 문자열을 입력하면 되고, 멘션이나 해시태그도 문자열 형태로 전달할 수 있습니다. "
+
+#: of tweepy.client.Client.search_spaces:13
+msgid ""
+"The maximum number of results to return in this request. Specify a value "
+"between 1 and 100."
+msgstr "요청당 반환받을 결과 수의 최댓값. 1에서 100 사이의 자연수로 지정해야 합니다."
+
+#: of tweepy.client.Client.get_space:10 tweepy.client.Client.get_spaces:13
+#: tweepy.client.Client.search_spaces:16
+msgid ":ref:`space_fields_parameter`"
+msgstr ":ref:`space_fields_parameter`"
+
+#: of tweepy.client.Client.search_spaces:18
+msgid ""
+"Determines the type of results to return. This endpoint returns all "
+"Spaces by default. Use ``live`` to only return live Spaces or "
+"``scheduled`` to only return upcoming Spaces."
+msgstr ""
+"어떤 상태의 스페이스를 반환받을지를 정하는 매개변수. 이 엔드포인트는 기본적으로 모든 스페이스를 반환합니다. ``live`` 로 "
+"지정하면 현재 진행 중인 스페이스만 반환받을 수 있고, ``scheduled`` 로 지정하면 진행 예정인 스페이스만 반환받을 수 "
+"있습니다. "
+
+#: of tweepy.client.Client.search_spaces:30
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-"
+"reference/get-spaces-search"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-"
+"reference/get-spaces-search"
+
+#: ../../client.rst:387
+msgid "Spaces lookup"
+msgstr "스페이스 자세히보기"
+
+#: of tweepy.client.Client.get_spaces:1
+msgid ""
+"Returns details about multiple live or scheduled Spaces (created by the "
+"specified user IDs if specified). Up to 100 comma-separated Space or user"
+" IDs can be looked up using this endpoint."
+msgstr ""
+"여러 개의 진행 중이거나 진행 예정인 스페이스(특정 사용자 ID를 지정하면, 해당 사용자가 개설한 스페이스) 에 대한 다양한 정보를"
+" 반환합니다. 이 엔드포인트는 최대 100개의 쉼표(,)로 구분된 사용자 ID나 스페이스를 처리할 수 있습니다. "
+
+#: of tweepy.client.Client.get_spaces:7
+msgid "A comma separated list of Spaces (up to 100)."
+msgstr "쉼표(,)로 구분된 스페이스의 리스트 (최대 100개)"
+
+#: of tweepy.client.Client.get_spaces:9
+msgid "A comma separated list of user IDs (up to 100)."
+msgstr "쉼표(,)로 구분된 사용자 ID값의 리스트 (최대 100개)"
+
+#: of tweepy.client.Client.get_spaces:18
+msgid "If IDs and user IDs are not passed or both are passed"
+msgstr "ID값과 사용자명(username)이 둘 다 전달되지 않았거나, 둘 다 전달된 경우 "
+
+#: of tweepy.client.Client.get_spaces:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces https://developer.twitter.com/en/docs/twitter-"
+"api/spaces/lookup/api-reference/get-spaces-by-creator-ids"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces https://developer.twitter.com/en/docs/twitter-"
+"api/spaces/lookup/api-reference/get-spaces-by-creator-ids"
+
+#: of tweepy.client.Client.get_space:1
+msgid ""
+"Returns a variety of information about a single Space specified by the "
+"requested ID."
+msgstr "ID로 지정한 하나의 스페이스에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_space:6
+msgid "Unique identifier of the Space to request."
+msgstr "대상 스페이스의 ID값. "
+
+#: of tweepy.client.Client.get_space:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id"
+
+#: of tweepy.client.Client.get_space_buyers:1
+msgid ""
+"Returns a list of user who purchased a ticket to the requested Space. You"
+" must authenticate the request using the Access Token of the creator of "
+"the requested Space."
+msgstr "지정한 스페이스의 유료 티켓 구매자 리스트를 반환합니다. 현재의 액세스 토큰으로 인증된 사용자가 만든 스페이스에만 사용 가능합니다. "
+
+#: of tweepy.client.Client.get_space_buyers:7
+msgid "Unique identifier of the Space for which you want to request Tweets."
+msgstr "대상 스페이스의 ID값. "
+
+#: of tweepy.client.Client.get_space_buyers:28
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id-buyers"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-"
+"reference/get-spaces-id-buyers"
+
+#: ../../client.rst:396
+msgid "Lists"
+msgstr "리스트"
+
+#: ../../client.rst:399
+msgid "List Tweets lookup"
+msgstr "리스트 트윗 자세히보기"
+
+#: of tweepy.client.Client.get_list_tweets:1
+msgid "Returns a list of Tweets from the specified List."
+msgstr "지정한 리스트의 트윗 목록을 가져옵니다. "
+
+#: of tweepy.client.Client.get_list_tweets:5
+msgid "The ID of the List whose Tweets you would like to retrieve."
+msgstr "트윗을 가져올 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.get_followed_lists:11
+#: tweepy.client.Client.get_list_followers:9
+#: tweepy.client.Client.get_list_members:9
+#: tweepy.client.Client.get_list_memberships:11
+#: tweepy.client.Client.get_list_tweets:9
+#: tweepy.client.Client.get_owned_lists:11
+msgid ""
+"The maximum number of results to be returned per page. This can be a "
+"number between 1 and 100. By default, each page will return 100 results."
+msgstr ""
+"페이지당 반환받을 결과 수의 최댓값. 1에서 100 사이의 자연수로 지정해야 하며, 기본값은 100입니다. (페이지당 100개의 "
+"결과 반환)"
+
+#: of tweepy.client.Client.get_followed_lists:15
+#: tweepy.client.Client.get_list_followers:13
+#: tweepy.client.Client.get_list_members:13
+#: tweepy.client.Client.get_list_memberships:15
+#: tweepy.client.Client.get_list_tweets:13
+#: tweepy.client.Client.get_owned_lists:15
+msgid ""
+"Used to request the next page of results if all results weren't returned "
+"with the latest request, or to go back to the previous page of results. "
+"To return the next page, pass the next_token returned in your previous "
+"response. To go back one page, pass the previous_token returned in your "
+"previous response."
+msgstr ""
+"다음 페이지나, 이전 페이지 결과값을 조회하는 데 쓰입니다. 바로 다음 페이지를 조회하려면 이전 요청에서 반환된 "
+"``next_token`` 값을 전달하고, 바로 이전 페이지를 조회하려면 이전 요청에서 반환된 ``previous_token`` "
+"값을 전달하면 됩니다. "
+
+#: of tweepy.client.Client.get_list_tweets:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-"
+"reference/get-lists-id-tweets"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-tweets/api-"
+"reference/get-lists-id-tweets"
+
+#: ../../client.rst:404
+msgid "List follows"
+msgstr "리스트 구독(Follow)"
+
+#: of tweepy.client.Client.unfollow_list:1
+msgid "Enables the authenticated user to unfollow a List."
+msgstr "현재 인증된 사용자로서, 대상 리스트를 구독 해제합니다. "
+
+#: of tweepy.client.Client.unfollow_list:8
+msgid "The ID of the List that you would like the user to unfollow."
+msgstr "구독 해제하려는 리스트의 ID값. "
+
+#: of tweepy.client.Client.unfollow_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/delete-users-id-followed-lists-list_id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/delete-users-id-followed-lists-list_id"
+
+#: of tweepy.client.Client.get_list_followers:1
+msgid "Returns a list of users who are followers of the specified List."
+msgstr "지정한 리스트를 구독 중인 사람들의 리스트를 반환합니다."
+
+#: of tweepy.client.Client.get_list_followers:5
+msgid "The ID of the List whose followers you would like to retrieve."
+msgstr "구독 중인 사람들의 리스트를 가져올 대상 리스트의 ID값."
+
+#: of tweepy.client.Client.get_list_followers:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-lists-id-followers"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-lists-id-followers"
+
+#: of tweepy.client.Client.get_followed_lists:1
+msgid "Returns all Lists a specified user follows."
+msgstr "지정한 사용자가 구독 중인 모든 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_followed_lists:5
+msgid "The user ID whose followed Lists you would like to retrieve."
+msgstr "구독 중인 리스트를 가져올 대상 사용자의 ID값. "
+
+#: of tweepy.client.Client.get_followed_lists:9 tweepy.client.Client.get_list:9
+#: tweepy.client.Client.get_list_memberships:9
+#: tweepy.client.Client.get_owned_lists:9
+#: tweepy.client.Client.get_pinned_lists:10
+msgid ":ref:`list_fields_parameter`"
+msgstr ":ref:`list_fields_parameter`"
+
+#: of tweepy.client.Client.get_followed_lists:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-users-id-followed_lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/get-users-id-followed_lists"
+
+#: of tweepy.client.Client.follow_list:1
+msgid "Enables the authenticated user to follow a List."
+msgstr "현재 인증된 사용자로서 대상 리스트를 구독(Follow)합니다."
+
+#: of tweepy.client.Client.follow_list:8
+msgid "The ID of the List that you would like the user to follow."
+msgstr "구독하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.follow_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/post-users-id-followed-lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-"
+"reference/post-users-id-followed-lists"
+
+#: ../../client.rst:415
+msgid "List lookup"
+msgstr "리스트 자세히보기"
+
+#: of tweepy.client.Client.get_list:1
+msgid "Returns the details of a specified List."
+msgstr "지정한 하나의 리스트에 대한 다양한 정보를 반환합니다. "
+
+#: of tweepy.client.Client.get_list:5
+msgid "The ID of the List to lookup."
+msgstr "자세히 보려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.get_list:21
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-lists-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-lists-id"
+
+#: of tweepy.client.Client.get_owned_lists:1
+msgid "Returns all Lists owned by the specified user."
+msgstr "지정한 사용자가 소유 중인(만든) 모든 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_owned_lists:5
+msgid "The user ID whose owned Lists you would like to retrieve."
+msgstr "소유 중인 리스트를 가져올 대상 사용자의 ID값. "
+
+#: of tweepy.client.Client.get_owned_lists:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-users-id-owned_lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-lookup/api-"
+"reference/get-users-id-owned_lists"
+
+#: ../../client.rst:422
+msgid "List members"
+msgstr "리스트 구성원"
+
+#: of tweepy.client.Client.remove_list_member:1
+msgid "Enables the authenticated user to remove a member from a List they own."
+msgstr "현재 인증된 사용자로서, 지정한 사용자를 리스트 구성원에서 제거합니다."
+
+#: of tweepy.client.Client.remove_list_member:9
+msgid "The ID of the List you are removing a member from."
+msgstr "리스트 구성원을 제거하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.remove_list_member:11
+msgid "The ID of the user you wish to remove as a member of the List."
+msgstr "리스트 구성원에서 제거하려는 대상 사용자의 ID값. "
+
+#: of tweepy.client.Client.remove_list_member:21
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/delete-lists-id-members-user_id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/delete-lists-id-members-user_id"
+
+#: of tweepy.client.Client.get_list_members:1
+msgid "Returns a list of users who are members of the specified List."
+msgstr "지정한 리스트의 구성원 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_list_members:5
+msgid "The ID of the List whose members you would like to retrieve."
+msgstr "구성원 리스트를 가져올 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.get_list_members:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-lists-id-members"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-lists-id-members"
+
+#: of tweepy.client.Client.get_list_memberships:1
+msgid "Returns all Lists a specified user is a member of."
+msgstr "지정한 사용자가 구성원인 모든 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_list_memberships:5
+msgid "The user ID whose List memberships you would like to retrieve."
+msgstr "지정한 대상이 구성원인 모든 리스트를 가져올 대상 사용자의 ID값."
+
+#: of tweepy.client.Client.get_list_memberships:31
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-users-id-list_memberships"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/get-users-id-list_memberships"
+
+#: of tweepy.client.Client.add_list_member:1
+msgid "Enables the authenticated user to add a member to a List they own."
+msgstr "현재 인증된 사용자로서, 리스트에 구성원을 추가합니다. "
+
+#: of tweepy.client.Client.add_list_member:8
+msgid "The ID of the List you are adding a member to."
+msgstr "구성원을 추가하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.add_list_member:10
+msgid "The ID of the user you wish to add as a member of the List."
+msgstr "리스트 구성원에 추가하려는 대상 사용자의 ID값. "
+
+#: of tweepy.client.Client.add_list_member:20
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/post-lists-id-members"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/list-members/api-"
+"reference/post-lists-id-members"
+
+#: ../../client.rst:433
+msgid "Manage Lists"
+msgstr "리스트 관리"
+
+#: of tweepy.client.Client.delete_list:1
+msgid "Enables the authenticated user to delete a List that they own."
+msgstr "현재 인증된 사용자로서, 소유 중인(만든) 리스트를 삭제합니다. "
+
+#: of tweepy.client.Client.delete_list:8
+msgid "The ID of the List to be deleted."
+msgstr "삭제하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.delete_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/delete-lists-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/delete-lists-id"
+
+#: of tweepy.client.Client.update_list:1
+msgid ""
+"Enables the authenticated user to update the meta data of a specified "
+"List that they own."
+msgstr "현재 인증된 사용자로서, 소유 중인(만든) 리스트의 메타데이터를 수정합니다."
+
+#: of tweepy.client.Client.update_list:9
+msgid "The ID of the List to be updated."
+msgstr "갱신할 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.update_list:11
+msgid "Updates the description of the List."
+msgstr "리스트의 설명을 변경합니다. "
+
+#: of tweepy.client.Client.update_list:13
+msgid "Updates the name of the List."
+msgstr "리스트의 이름을 변경합니다. "
+
+#: of tweepy.client.Client.update_list:15
+msgid "Determines whether the List should be private."
+msgstr "리스트를 비공개로 설정할지의 여부. "
+
+#: of tweepy.client.Client.update_list:25
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/put-lists-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/put-lists-id"
+
+#: of tweepy.client.Client.create_list:1
+msgid "Enables the authenticated user to create a List."
+msgstr "현재 인증된 사용자로서 리스트를 만들 수 있도록 합니다. "
+
+#: of tweepy.client.Client.create_list:8
+msgid "The name of the List you wish to create."
+msgstr "만드려는 리스트의 이름. "
+
+#: of tweepy.client.Client.create_list:10
+msgid "Description of the List."
+msgstr "만드려는 리스트의 설명. "
+
+#: of tweepy.client.Client.create_list:12
+msgid "Determine whether the List should be private."
+msgstr "만드려는 리스트를 비공개로 설정할지의 여부. "
+
+#: of tweepy.client.Client.create_list:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/post-lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-"
+"reference/post-lists"
+
+#: ../../client.rst:442
+msgid "Pinned Lists"
+msgstr "리스트 고정"
+
+#: of tweepy.client.Client.unpin_list:1
+msgid "Enables the authenticated user to unpin a List."
+msgstr "현재 인증된 사용자로서 리스트를 고정 해제(Unpin)합니다."
+
+#: of tweepy.client.Client.unpin_list:8
+msgid "The ID of the List that you would like the user to unpin."
+msgstr "고정 해제하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.unpin_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/delete-users-id-pinned-lists-list_id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/delete-users-id-pinned-lists-list_id"
+
+#: of tweepy.client.Client.get_pinned_lists:1
+msgid "Returns the Lists pinned by a specified user."
+msgstr "지정한 사용자가 고정한 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_pinned_lists:22
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/get-users-id-pinned_lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/get-users-id-pinned_lists"
+
+#: of tweepy.client.Client.pin_list:1
+msgid "Enables the authenticated user to pin a List."
+msgstr "현재 인증된 사용자로서 리스트를 고정(Pin)합니다. "
+
+#: of tweepy.client.Client.pin_list:8
+msgid "The ID of the List that you would like the user to pin."
+msgstr "고정하려는 대상 리스트의 ID값. "
+
+#: of tweepy.client.Client.pin_list:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/post-users-id-pinned-lists"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-"
+"reference/post-users-id-pinned-lists"
+
+#: ../../client.rst:451
+msgid "Compliance"
+msgstr "표준 작업(Compliance)"
+
+#: ../../client.rst:454
+msgid "Batch compliance"
+msgstr "표준 준수 하 일괄 작업(Batch compliance)"
+
+#: of tweepy.client.Client.get_compliance_jobs:1
+msgid "Returns a list of recent compliance jobs."
+msgstr "최근 표준 작업의 리스트를 반환합니다. "
+
+#: of tweepy.client.Client.get_compliance_jobs:5
+msgid ""
+"Allows to filter by job type - either by tweets or user ID. Only one "
+"filter (tweets or users) can be specified per request."
+msgstr ""
+"트윗이나 사용자 ID 둘 중 하나를 통해 작업별로 구분이 가능합니다. 요청 당 하나의 필터(트윗 또는 사용자)만 지정할 수 "
+"있습니다. "
+
+#: of tweepy.client.Client.get_compliance_jobs:8
+msgid ""
+"Allows to filter by job status. Only one filter can be specified per "
+"request. Default: ``all``"
+msgstr "상태에 따라 작업을 구분합니다.요청 당 하나의 필터(트윗 또는 사용자)만 지정할 수 있습니다. 기본값은 ``all``. "
+
+#: of tweepy.client.Client.get_compliance_jobs:18
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs"
+
+#: of tweepy.client.Client.get_compliance_job:1
+msgid "Get a single compliance job with the specified ID."
+msgstr "ID값으로 지정한 하나의 표준 작업을 가져옵니다. "
+
+#: of tweepy.client.Client.get_compliance_job:5
+msgid "The unique identifier for the compliance job you want to retrieve."
+msgstr "가져오려는 대상 표준 작업의 고유 ID값. "
+
+#: of tweepy.client.Client.get_compliance_job:13
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs-id"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/get-compliance-jobs-id"
+
+#: of tweepy.client.Client.create_compliance_job:1
+msgid "Creates a new compliance job for Tweet IDs or user IDs."
+msgstr "특정 트윗 ID 또는 사용자 ID에 대해 새 표준 작업을 만듭니다. "
+
+#: of tweepy.client.Client.create_compliance_job:3
+msgid ""
+"A compliance job will contain an ID and a destination URL. The "
+"destination URL represents the location that contains the list of IDs "
+"consumed by your app."
+msgstr "표준 작업에는 고유 ID값과 경로 URL이 포함됩니다. 경로 URL은 앱에서 사용하는 ID 목록이 포함된 위치를 가리킵니다. "
+
+#: of tweepy.client.Client.create_compliance_job:7
+msgid "You can run one batch job at a time."
+msgstr "한 번에 하나의 일괄 작업만 실행할 수 있습니다. "
+
+#: of tweepy.client.Client.create_compliance_job:11
+msgid ""
+"Specify whether you will be uploading tweet or user IDs. You can either "
+"specify tweets or users."
+msgstr ""
+"트윗이나 사용자 ID값 중 어느 것을 전달하는지를 정하는 매개변수. 다음 값 중 하나로 입력해야 합니다: ``tweets``, "
+"``users``"
+
+#: of tweepy.client.Client.create_compliance_job:14
+msgid ""
+"A name for this job, useful to identify multiple jobs using a label you "
+"define."
+msgstr "이 작업에 대한 이름. 여러 작업들을 서로 식별하는데 도움이 됩니다. "
+
+#: of tweepy.client.Client.create_compliance_job:17
+msgid ""
+"Specifies whether to enable the upload URL with support for resumable "
+"uploads. If true, this endpoint will return a pre-signed URL with "
+"resumable uploads enabled."
+msgstr ""
+"재시작 가능한 업로드를 지원하는 URL을 사용할자의 여부를 지정하는 매개변수. true로 설정하면, 이 엔드포인트는 재시작 가능한 "
+"업로드를 사용하도록 사전 서명된 URL을 반환합니다. "
+
+#: of tweepy.client.Client.create_compliance_job:27
+msgid ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/post-compliance-jobs"
+msgstr ""
+"https://developer.twitter.com/en/docs/twitter-api/compliance/batch-"
+"compliance/api-reference/post-compliance-jobs"
+
+#: ../../client.rst:463
+msgid "Expansions and Fields Parameters"
+msgstr "확장 및 필드 매개변수"
+
+#: ../../client.rst:468
+msgid "``expansions``"
+msgstr "``Expansions``"
+
+#: ../../client.rst:469
+msgid ""
+"`Expansions`_ enable you to request additional data objects that relate "
+"to the originally returned List, Space, Tweets, or users. Submit a list "
+"of desired expansions in a comma-separated list without spaces. The ID "
+"that represents the expanded data object will be included directly in the"
+" List, Space, Tweet, or user data object, but the expanded object "
+"metadata will be returned within the ``includes`` response object, and "
+"will also include the ID so that you can match this data object to the "
+"original Space, Tweet, or user object."
+msgstr ""
+"`확장(Expansions)`_ 을 사용해, 반환받은 리스트, 스페이스, 트윗 및 사용자와 관련된 추가 데이터 객체를 요청할 수 "
+"있습니다. 공백 문자 없이 쉼표(,)로 구분된 목록 꼴로 사용할 확장(Expansions)을 전달하시기 바랍니다. 확장 데이터 "
+"객체를 나타내는 ID는 리스트, 스페이스, 트윗 및 사용자에 포함되지만, 해당 데이터 객체의 메타데이터는 전달받은 "
+"``includes`` 객체에 포함됩니다. 더불어 확장 데이터 객체를 받을 때, 리스트, 스페이스 트윗 및 사용자에 포함된 데이터와"
+" 비교할 수 있도록 ID값도 같이 받게 됩니다."
+
+#: ../../client.rst:477
+msgid ""
+"At this time, the only expansion available to endpoints that primarily "
+"return List objects is ``expansions=owner_id``. You will find the "
+"expanded user data object living in the ``includes`` response object."
+msgstr ""
+"이 때, 리스트 개체를 주로 반환하는 엔드포인트에서 사용할 수 있는 유일한 확장(Expansions)은 "
+"``expansions=owner_id`` 입니다. 확장 사용자 데이터 객체는 ``includes`` 객체에서 찾을 수 있습니다."
+
+#: ../../client.rst:481
+msgid ""
+"For methods that return Spaces, the following data objects can be "
+"expanded using this parameter:"
+msgstr "스페이스를 반환하는 메서드는, 다음 데이터 객체를 이 매개변수를 활용해 확장할 수 있습니다."
+
+#: ../../client.rst:484
+msgid "The Spaces creator's user object"
+msgstr "스페이스 개설자인 사용자의 객체"
+
+#: ../../client.rst:485
+msgid "The user objects of any Space co-host"
+msgstr "스페이스의 공동 개설자인 아무 사용자의 객체 "
+
+#: ../../client.rst:486 ../../client.rst:495
+msgid "Any mentioned users’ object"
+msgstr "멘션된 아무 사용자의 객체"
+
+#: ../../client.rst:487
+msgid "Any speaker's user object"
+msgstr "발언자인 아무 사용자의 객체"
+
+#: ../../client.rst:489
+msgid ""
+"For methods that return Tweets, the following data objects can be "
+"expanded using this parameter:"
+msgstr "트윗을 반환하는 메서드는, 다음 데이터 객체를 이 매개변수를 활용해 확장할 수 있습니다. "
+
+#: ../../client.rst:492
+msgid "The Tweet author's user object"
+msgstr "트윗 작성자인 사용자의 객체"
+
+#: ../../client.rst:493
+msgid ""
+"The user object of the Tweet’s author that the original Tweet is "
+"responding to"
+msgstr "해당 트윗이 답글을 보내고 있는 트윗의 작성자인 사용자의 객체"
+
+#: ../../client.rst:496
+msgid "Any referenced Tweets’ author’s user object"
+msgstr "참조하고 있는 트윗(Referenced Tweets)의 작성자인 아무 사용자의 객체"
+
+#: ../../client.rst:497
+msgid "Attached media’s object"
+msgstr "첨부된 미디어의 객체"
+
+#: ../../client.rst:498
+msgid "Attached poll’s object"
+msgstr "첨부된 투표의 객체"
+
+#: ../../client.rst:499
+msgid "Attached place’s object"
+msgstr "첨부된 장소의 객체"
+
+#: ../../client.rst:500
+msgid "Any referenced Tweets’ object"
+msgstr "아무 참조하고 있는 트윗(Referenced Tweets)의 객체"
+
+#: ../../client.rst:502
+msgid ""
+"At this time, the only expansion available to endpoints that primarily "
+"return user objects is ``expansions=pinned_tweet_id``. You will find the "
+"expanded Tweet data object living in the ``includes`` response object."
+msgstr ""
+"이 때, 사용자 개체를 주로 반환하는 엔드포인트에서 사용할 수 있는 유일한 확장(Expansions)은 "
+"``expansions=pinned_tweet_id`` 입니다. 확장 트윗 데이터 객체는 ``includes`` 객체에서 찾을 수 "
+"있습니다."
+
+#: ../../client.rst:509
+msgid "``list_fields``"
+msgstr "``list_fields``"
+
+#: ../../client.rst:510
+msgid ""
+"This `fields`_ parameter enables you to select which specific `List "
+"fields`_ will deliver with each returned List objects. Specify the "
+"desired fields in a comma-separated list without spaces between commas "
+"and fields. These specified List fields will display directly in the List"
+" data objects."
+msgstr ""
+"이 `필드(fields)`_ 매개변수를 사용하면 어떤 `리스트 필드(List fields)`_ 가 각 리스트 객체마다 같이 "
+"반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 "
+"전달하면 됩니다. 지정한 리스트 필드는 리스트 데이터 객체에 직접 표시됩니다. "
+
+#: ../../client.rst:518
+msgid "``media_fields``"
+msgstr "``media_fields``"
+
+#: ../../client.rst:519
+msgid ""
+"This `fields`_ parameter enables you to select which specific `media "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return media fields if the Tweet contains media and if "
+"you've also included the ``expansions=attachments.media_keys`` query "
+"parameter in your request. While the media ID will be located in the "
+"Tweet object, you will find this ID and all additional media fields in "
+"the ``includes`` data object."
+msgstr ""
+"이 `필드(fields)`_ 매개변수를 사용하면 어떤 `미디어 필드(Media fields)`_ 가 각 트윗마다 같이 반환될지를 "
+"지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 전달하면 됩니다."
+" 단, 트윗에 미디어가 첨부되어 있어야 하며, 동시에 ``expansions=attachments.media_keys`` 쿼리 "
+"매개변수를 요청에 같이 포함시켜야 합니다. 그래야 미디어 필드를 반환할 것입니다. 미디어 ID값은 트윗 객체에 위치하나, "
+"``includes`` 데이터 객체에는 이 ID값과 모든 추가 미디어 필드가 포함됩니다. "
+
+#: ../../client.rst:530
+msgid "``place_fields``"
+msgstr "``place_fields``"
+
+#: ../../client.rst:531
+msgid ""
+"This `fields`_ parameter enables you to select which specific `place "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return place fields if the Tweet contains a place and if "
+"you've also included the ``expansions=geo.place_id`` query parameter in "
+"your request. While the place ID will be located in the Tweet object, you"
+" will find this ID and all additional place fields in the ``includes`` "
+"data object."
+msgstr ""
+"이 `필드(fields)`_ 매개변수를 사용하면 어떤 `장소 필드(Place fields)`_ 가 각 트윗마다 같이 반환될지를 "
+"지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 전달하면 됩니다."
+" 단, 트윗에 특정 장소가 첨부되어 있어야 하며, ``expansions=geo.place_id`` 쿼리 매개변수를 요청에 같이 "
+"포함시켜야 합니다. 그래야 장소 필드를 반환할 것입니다. 장소 ID값은 트윗 객체에 위치하나, ``includes`` 데이터 "
+"객체에는 이 ID값과 모든 추가 장소 필드가 포함됩니다. "
+
+#: ../../client.rst:542
+msgid "``poll_fields``"
+msgstr "``poll_fields``"
+
+#: ../../client.rst:544
+msgid ""
+"This `fields`_ parameter enables you to select which specific `poll "
+"fields`_ will deliver in each returned Tweet. Specify the desired fields "
+"in a comma-separated list without spaces between commas and fields. The "
+"Tweet will only return poll fields if the Tweet contains a poll and if "
+"you've also included the ``expansions=attachments.poll_ids`` query "
+"parameter in your request. While the poll ID will be located in the Tweet"
+" object, you will find this ID and all additional poll fields in the "
+"``includes`` data object."
+msgstr ""
+"이 `필드(fields)`_ 매개변수를 사용하면 어떤 `투표 필드(Place fields)`_ 가 각 트윗마다 같이 반환될지를 "
+"지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 전달하면 됩니다."
+" 단, 트윗에 투표가 첨부되어 있어야 하며, ``expansions=attachments.poll_ids`` 쿼리 매개변수를 요청에"
+" 같이 포함시켜야 합니다. 그래야 투표 필드를 반환할 것입니다. 투표 ID값은 트윗 객체에 위치하나, ``includes`` 데이터"
+" 객체에는 이 ID값과 모든 추가 투표 필드가 포함됩니다. "
+
+#: ../../client.rst:555
+msgid "``space_fields``"
+msgstr "``space_fields``"
+
+#: ../../client.rst:557
+msgid ""
+"This `fields`_ parameter enables you to select which specific `Space "
+"fields`_ will deliver in each returned Space. Specify the desired fields "
+"in a comma-separated list."
+msgstr ""
+"이 `필드(fields)`_ 매개변수를 사용하면 어떤 `스페이스 필드(Space fields)`_ 가 각 스페이스마다 같이 "
+"반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 "
+"전달하면 됩니다. "
+
+#: ../../client.rst:564
+msgid "``tweet_fields``"
+msgstr "``tweet_fields``"
+
+#: ../../client.rst:566
+msgid ""
+"For methods that return Tweets, this `fields`_ parameter enables you to "
+"select which specific `Tweet fields`_ will deliver in each returned Tweet"
+" object. Specify the desired fields in a comma-separated list without "
+"spaces between commas and fields. You can also pass the "
+"``expansions=referenced_tweets.id`` expansion to return the specified "
+"fields for both the original Tweet and any included referenced Tweets. "
+"The requested Tweet fields will display in both the original Tweet data "
+"object, as well as in the referenced Tweet expanded data object that will"
+" be located in the ``includes`` data object."
+msgstr ""
+"트윗을 반환하는 메서드는, 이 `필드(fields)`_ 매개변수를 사용하면 어떤 `트윗 필드(Tweet fields)`_ 가 각 "
+"트윗 객체마다 같이 반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 "
+"형식으로 지정 및 전달하면 됩니다. ``expansions=referenced_tweets.id`` 확장(Expansion)을 "
+"전달해 지정한 필드들이 원본 트윗과 아무 참조하고 있는 트윗(Referenced Tweet) 모두에서 반환되게 할 수 있습니다. "
+"요청한 트윗의 필드는 원본 트윗 데이터 객체와, ``includes`` 데이터 객체에 위치하는 참조하고 있는 트윗 확장 데이터 "
+"객체에 직접 표시됩니다. "
+
+#: ../../client.rst:575
+msgid ""
+"For methods that return users, this `fields`_ parameter enables you to "
+"select which specific `Tweet fields`_ will deliver in each returned "
+"pinned Tweet. Specify the desired fields in a comma-separated list "
+"without spaces between commas and fields. The Tweet fields will only "
+"return if the user has a pinned Tweet and if you've also included the "
+"``expansions=pinned_tweet_id`` query parameter in your request. While the"
+" referenced Tweet ID will be located in the original Tweet object, you "
+"will find this ID and all additional Tweet fields in the ``includes`` "
+"data object."
+msgstr ""
+"사용자를 반환하는 메서드는, 이 `필드(fields)`_ 매개변수를 사용하면 어떤 `트윗 필드(Tweet fields)`_ 가 각 "
+"고정된(Pinned, '프로필 메인에 올리기'를 의미) 트윗마다 반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 "
+"구분하고 있고, 공백 문자가 없는 리스트 형식으로 지정 및 전달하면 됩니다. 트윗 필드는 사용자가 고정된 트윗을 갖고 있고, 동시에"
+" 요청에 ``expansions=pinned_tweet_id`` 쿼리 매개변수를 포함한 경우에만 반환됩니다.참조하고 있는 트윗의 "
+"ID값은 원본 트윗 객체에 위치하나, ``includes`` 데이터 객체에는 이 ID값과 모든 추가 트윗 필드가 포함됩니다. "
+
+#: ../../client.rst:587
+msgid "``user_fields``"
+msgstr "``user_fields``"
+
+#: ../../client.rst:589
+msgid ""
+"For methods that return Spaces or Tweets, this `fields`_ parameter "
+"enables you to select which specific `user fields`_ will deliver in each "
+"returned Space or Tweet. Specify the desired fields in a comma-separated "
+"list without spaces between commas and fields. While the user ID will be "
+"located in the original Tweet object, you will find this ID and all "
+"additional user fields in the ``includes`` data object."
+msgstr ""
+"스페이스나 트윗을 반환하는 메서드는, 이 `필드(fields)`_ 매개변수를 사용하면 어떤 `사용자 필드(User fields)`_"
+" 가 각 트윗 또는 스페이스마다 반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는"
+" 리스트 형식으로 지정 및 전달하면 됩니다. 사용자 ID값은 원본 트윗 객체에 위치하나, ``includes`` 데이터 객체에는 이"
+" ID값과 모든 추가 사용자 필드가 포함됩니다. "
+
+#: ../../client.rst:596
+msgid ""
+"You must also pass one of the user expansions to return the desired user "
+"fields:"
+msgstr "원하는 사용자 필드를 반환받으려면, 다음 사용자 확장(Expansions)을 같이 전달해야 합니다: "
+
+#: ../../client.rst:599
+msgid "``expansions=author_id``"
+msgstr "``expansions=author_id``"
+
+#: ../../client.rst:600
+msgid "``expansions=entities.mentions.username``"
+msgstr "``expansions=entities.mentions.username``"
+
+#: ../../client.rst:601
+msgid "``expansions=in_reply_to_user_id``"
+msgstr "``expansions=in_reply_to_user_id``"
+
+#: ../../client.rst:602
+msgid "``expansions=referenced_tweets.id.author_id``"
+msgstr "``expansions=referenced_tweets.id.author_id``"
+
+#: ../../client.rst:604
+msgid ""
+"For methods that return users, this `fields`_ parameter enables you to "
+"select which specific `user fields`_ will deliver with each returned "
+"users objects. Specify the desired fields in a comma-separated list "
+"without spaces between commas and fields. These specified user fields "
+"will display directly in the user data objects."
+msgstr ""
+"사용자를 반환하는 메서드는, 이 `필드(fields)`_ 매개변수를 사용하면 어떤 `사용자 필드(User fields)`_ 가 각 "
+"사용자 객체마다 반환될지를 지정할 수 있습니다. 같이 반환받을 필드를 쉼표(,)로 구분하고 있고, 공백 문자가 없는 리스트 형식으로"
+" 지정 및 전달하면 됩니다. 지정한 사용자 필드는 사용자 데이터 객체에 직접 표시됩니다. "
+
+#: ../../client.rst:621
+msgid "``Response``"
+msgstr "``Response``"
+
+#: ../../client.rst:624
+msgid ""
+"The :obj:`Response` returned by :class:`Client` methods is a "
+":class:`collections.namedtuple`, with ``data``, ``includes``, ``errors``,"
+" and ``meta`` fields, corresponding with the fields in responses from "
+"Twitter's API."
+msgstr ""
+":class:`Client` 메서드에 의해 반환된 :obj:`Response` 는 ``data``, ``includes``, "
+"``errors``, ``meta`` 필드를 가지는 :class:`collections.namedtuple` 이며, 이 필드들은 "
+"각각 트위터 API에서 응답한 필드와 일치합니다. "
+

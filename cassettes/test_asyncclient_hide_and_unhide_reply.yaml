@@ -1,0 +1,128 @@
+interactions:
+- request:
+    body:
+      hidden: true
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: PUT
+    uri: https://api.twitter.com/2/tweets/1344794616005066752/hidden
+  response:
+    body:
+      string: '{"data":{"hidden":true}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '50'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:39 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192903939632794; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192903939632794; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_kmnYDP87kJ6zcxCJym7GEQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192903939632794; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 9d11623f5480991b1d0d01fb0e8b7bff083558597f7b8cd6ba3059693d1f10d4
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1651929939'
+      x-response-time:
+      - '42'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/tweets/1344794616005066752/hidden
+- request:
+    body:
+      hidden: false
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: PUT
+    uri: https://api.twitter.com/2/tweets/1344794616005066752/hidden
+  response:
+    body:
+      string: '{"data":{"hidden":false}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '51'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 13:10:39 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192903963018545; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192903963018545; Max-Age=63072000; Expires=Mon, 06 May
+        2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_2m3jOSmB7lHBCNpiwrXI0g=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192903963018545; Max-Age=63072000; Expires=Mon, 06 May 2024
+        13:10:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - f8c0aa04a58993ed930856cf74d11e0a0ff680c2bf4f9c8f944480cb8e093769
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '48'
+      x-rate-limit-reset:
+      - '1651929939'
+      x-response-time:
+      - '76'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/tweets/1344794616005066752/hidden
+version: 1

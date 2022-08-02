@@ -16,10 +16,6 @@ else:
 with open("README.md") as readme_file:
     long_description = readme_file.read()
 
-tests_require = [
-    "vcrpy>=1.10.3",
-]
-
 setup(
     name="tweepy",
     version=version,
@@ -38,25 +34,26 @@ setup(
     download_url="https://pypi.org/project/tweepy/",
     packages=find_packages(),
     install_requires=[
+        "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
-        "requests_oauthlib>=1.0.0,<2",
+        "requests-oauthlib>=1.2.0,<2",
     ],
-    tests_require=tests_require,
     extras_require={
         "async": [
             "aiohttp>=3.7.3,<4",
-            "oauthlib>=3.1.0,<4",
+            "async-lru>=1.0.3,<2"
         ],
         "dev": [
+            "coverage>=4.4.2",
             "coveralls>=2.1.0",
-            "tox>=3.14.0",
+            "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
-        "test": tests_require,
+        "test": ["vcrpy>=1.10.3"],
     },
     test_suite="tests",
     keywords="twitter library",
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Software Development :: Libraries",
@@ -64,7 +61,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",

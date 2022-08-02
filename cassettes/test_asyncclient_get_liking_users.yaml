@@ -1,0 +1,160 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/tweets/1293593516040269825/liking_users
+  response:
+    body:
+      string: "{\"data\":[{\"id\":\"1266414623110189057\",\"name\":\"Ashley\",\"username\"\
+        :\"AshleyJones43\"},{\"id\":\"1238464017951309825\",\"name\":\"Lauren\",\"\
+        username\":\"Laurentrahan32\"},{\"id\":\"1000330089815392257\",\"name\":\"\
+        Meenakshi Ranjan / \\uD83D\\uDEA9\\uD83D\\uDEA9 Hindu / TTS \\uD83D\\uDEA9\\\
+        uD83D\\uDEA9\",\"username\":\"mran2608\"},{\"id\":\"1404606517580603393\"\
+        ,\"name\":\"Alex\",\"username\":\"Alex10711720\"},{\"id\":\"1316191764592521216\"\
+        ,\"name\":\"n\",\"username\":\"ever1ofus\"},{\"id\":\"1247490702931456001\"\
+        ,\"name\":\"Prasant kumar\",\"username\":\"decodeprasant\"},{\"id\":\"1452352777313787913\"\
+        ,\"name\":\"\u0644\u064A\u0644\u0649\",\"username\":\"lyly89185508\"},{\"\
+        id\":\"1445173703050817540\",\"name\":\"Somchai\",\"username\":\"Somchai80645792\"\
+        },{\"id\":\"1410586115975778313\",\"name\":\"Goran Smilevski\",\"username\"\
+        :\"GoranSmilevsk10\"},{\"id\":\"1444756838944317442\",\"name\":\"Zsolt Dudas\"\
+        ,\"username\":\"ZsoltDudas2\"},{\"id\":\"1252290569520533505\",\"name\":\"\
+        Priyanshu Ganorkar\",\"username\":\"Priyanshu02h\"},{\"id\":\"797260190441684993\"\
+        ,\"name\":\"Puneet Gupta\",\"username\":\"PuneetG88948560\"},{\"id\":\"3027643617\"\
+        ,\"name\":\"tony\",\"username\":\"cements\"},{\"id\":\"1422091449995120644\"\
+        ,\"name\":\"S\u0442yl\u03B9s\u043D S\u0442\u03B1\u044F Srinivas AADHF\",\"\
+        username\":\"SrinivasYl\"},{\"id\":\"1342483347302281217\",\"name\":\"\u305F\
+        \u307E\u3054\u307C\u30FC\u308D\",\"username\":\"hiro3pc\"},{\"id\":\"1014226329720406017\"\
+        ,\"name\":\"Movie Meter\",\"username\":\"MovieMeterOff\"},{\"id\":\"1432444950436794375\"\
+        ,\"name\":\"AnG3L-\\uD83E\\uDD20\\uD83D\\uDD25\\uD83D\\uDD25. \\uD83D\\uDD31\u264B\
+        \u2728\",\"username\":\"37h1j0d3m1am4\"},{\"id\":\"1430823251517657102\",\"\
+        name\":\"manthri sairaj\",\"username\":\"ManthriSairaj\"},{\"id\":\"1416602891356315649\"\
+        ,\"name\":\"embem\",\"username\":\"urungmati\"},{\"id\":\"1253691268351365129\"\
+        ,\"name\":\"Ganesh Arya\",\"username\":\"GaneshA76136457\"},{\"id\":\"1426591192645443591\"\
+        ,\"name\":\"god live love\",\"username\":\"MasasoK\"},{\"id\":\"2695678436\"\
+        ,\"name\":\"Jatin Poul\",\"username\":\"Jatin_Poul\"},{\"id\":\"1476145002\"\
+        ,\"name\":\"Dushyant vishwakarma\",\"username\":\"CoolDV235\"},{\"id\":\"\
+        1332876898888687616\",\"name\":\"XXXtentacles\",\"username\":\"XXXtent27404083\"\
+        },{\"id\":\"927527500959191040\",\"name\":\"Santosh Kumar Mishra\",\"username\"\
+        :\"Santosh80700635\"},{\"id\":\"876939801995464705\",\"name\":\"Kevin C\"\
+        ,\"username\":\"KClarkADSTech\"},{\"id\":\"1348294797723799552\",\"name\"\
+        :\"@luthfor57756838\",\"username\":\"luthfor57756816\"},{\"id\":\"1373555064288124935\"\
+        ,\"name\":\"Anonymous\",\"username\":\"Anonymous254581\"},{\"id\":\"1295979493719334918\"\
+        ,\"name\":\"Vivek Kumar\",\"username\":\"24VivekKumar24\"},{\"id\":\"1391474707564695552\"\
+        ,\"name\":\"\\uD83C\\uDF41\u2618\uFE0FSri\u2618\uFE0F\\uD83C\\uDF41\",\"username\"\
+        :\"Sritamilnadu\"},{\"id\":\"217853491\",\"name\":\"Diana Parra \\uD83D\\\
+        uDC9B\\uD83D\\uDC99\u2665\uFE0F 3148464665 \\uD83C\\uDDE8\\uD83C\\uDDF4\u2757\
+        \\uD83D\\uDC4D\\uD83D\\uDC4C\u270C\uFE0F\",\"username\":\"DIANA_MPAZ\"},{\"\
+        id\":\"1261651905660334081\",\"name\":\"Giasuddin Shah\",\"username\":\"Giasuddin1st\"\
+        },{\"id\":\"1376376326014205953\",\"name\":\"LIB ARTS\",\"username\":\"lib_arts10\"\
+        },{\"id\":\"59567346\",\"name\":\"\u043C\xFF\u0161\u0437\u0142f\",\"username\"\
+        :\"Henry_Casillas\"},{\"id\":\"876731188890742785\",\"name\":\"Pere Casas\"\
+        ,\"username\":\"CasasPerep\"},{\"id\":\"1378938013040844803\",\"name\":\"\
+        Whisper\",\"username\":\"4s8a15i16n23t42\"},{\"id\":\"211490924\",\"name\"\
+        :\"ayush dubey\",\"username\":\"ayushdb10\"},{\"id\":\"1314289069984276480\"\
+        ,\"name\":\"\u0627\u0644\u0635\u0639\u064A\u062F\u064A\",\"username\":\"MwQEv2pWOH0i4Af\"\
+        },{\"id\":\"98663431\",\"name\":\"Eduardo Rica\xF1o S.\",\"username\":\"eduardoricano\"\
+        },{\"id\":\"1193211611487592448\",\"name\":\"Driss Meloui\",\"username\":\"\
+        DMeloui\"},{\"id\":\"1399571635406004224\",\"name\":\"Zarka Saeed\",\"username\"\
+        :\"saeed_zarka\"},{\"id\":\"1365712383889539073\",\"name\":\"KHALEDKABDULAZ1\"\
+        ,\"username\":\"KHALEDKABDULAZ3\"},{\"id\":\"1250606831484821504\",\"name\"\
+        :\"SFI ( SECULAR FRONT OF INDIA)\",\"username\":\"SFI_NATIONAL\"},{\"id\"\
+        :\"1357428132685504512\",\"name\":\"Nadeem Ahmad\",\"username\":\"NadeemA12799685\"\
+        },{\"id\":\"1345244562374221827\",\"name\":\"Yolanda Machado\",\"username\"\
+        :\"Yolanda89247683\"},{\"id\":\"734043\",\"name\":\"Paul Jacobson\",\"username\"\
+        :\"pauljacobson\"},{\"id\":\"1073164113876930560\",\"name\":\"Mayank Taneja\"\
+        ,\"username\":\"MayankT65690131\"},{\"id\":\"923878212\",\"name\":\"Bluechip\"\
+        ,\"username\":\"Moshood__\"},{\"id\":\"1372864925136252928\",\"name\":\"Simon\
+        \ Agbey\",\"username\":\"SimonAgbey1\"},{\"id\":\"2613691657\",\"name\":\"\
+        Born Consultants\",\"username\":\"BornConsultants\"},{\"id\":\"1297851655631732737\"\
+        ,\"name\":\"Tweeter\",\"username\":\"Tweeter_th\"},{\"id\":\"473944971\",\"\
+        name\":\"Soutrik Neogi\",\"username\":\"soutrik_neogi\"},{\"id\":\"1273644164144603138\"\
+        ,\"name\":\"Ismael Antonio\",\"username\":\"ismaelixboy\"},{\"id\":\"1097927550309871616\"\
+        ,\"name\":\"Diana Helmi\",\"username\":\"DianaHelmi2\"},{\"id\":\"261141063\"\
+        ,\"name\":\"Barra hassan\",\"username\":\"barra_hassan\"},{\"id\":\"1337903212561625097\"\
+        ,\"name\":\"CyberRudy_25_2\",\"username\":\"2Cyberrudy\"},{\"id\":\"845305623591964672\"\
+        ,\"name\":\"CIS OPS\",\"username\":\"cis_ops_\"},{\"id\":\"1137018216931348480\"\
+        ,\"name\":\"Aditi Singh\",\"username\":\"AditiSi95197395\"},{\"id\":\"2457843772\"\
+        ,\"name\":\"George Carreiro\",\"username\":\"georgecarreiro\"},{\"id\":\"\
+        82348742\",\"name\":\"K \\uD83D\\uDC78\\uD83C\\uDFFC Duval\",\"username\"\
+        :\"Karen_Duval\"},{\"id\":\"3089614702\",\"name\":\"Kin Zikkygh\\uD83C\\uDDEC\\\
+        uD83C\\uDDED\",\"username\":\"kin_zikky\"},{\"id\":\"3320305690\",\"name\"\
+        :\"\u0E04fr\u0ED0 \u0E56\u0ED0y \\uD83E\\uDD13\",\"username\":\"AfroBoyUg\"\
+        },{\"id\":\"1353618346307158016\",\"name\":\"PyUG\",\"username\":\"PyUG10\"\
+        },{\"id\":\"1134486922921992192\",\"name\":\"dr.saeedo\",\"username\":\"saeedjodi\"\
+        },{\"id\":\"119252320\",\"name\":\"Ana Maria | Tech e Dev\",\"username\":\"\
+        _anamariasilva_\"},{\"id\":\"350328281\",\"name\":\"Brian Malcolm\",\"username\"\
+        :\"bmalcolmb\"},{\"id\":\"1277829953967382529\",\"name\":\"Gautam Arora \\\
+        uD83C\\uDFD3\",\"username\":\"Gautamarora24\"},{\"id\":\"808607324394885120\"\
+        ,\"name\":\"Anas Human\",\"username\":\"ianashuman\"},{\"id\":\"1350237854438461442\"\
+        ,\"name\":\"General Operations Director\",\"username\":\"GeneralOperati2\"\
+        },{\"id\":\"1261330852920745984\",\"name\":\"Ryu Legalize\",\"username\":\"\
+        GroundsEnt\"},{\"id\":\"370874908\",\"name\":\"Gabe Romero\",\"username\"\
+        :\"Babriel2011\"},{\"id\":\"7161032\",\"name\":\"\\uD83C\\uDDFA\\uD83C\\uDDE6\
+        \ V say: \\uD83D\\uDC0D + \\uD83D\\uDC18 + \\uD83D\\uDC27 = \\uD83D\\uDCBB\
+        \ moksha\",\"username\":\"vasudevram\"},{\"id\":\"1320200071695245315\",\"\
+        name\":\"Kinga \u017Buchewicz\",\"username\":\"KingaZuchewicz\"},{\"id\":\"\
+        1067040438236971010\",\"name\":\"ElectronDev\",\"username\":\"dev_electron\"\
+        },{\"id\":\"1320159258109902848\",\"name\":\"Lumid\\uD83E\\uDDCB\",\"username\"\
+        :\"lumidsan\"},{\"id\":\"1084838536208179200\",\"name\":\"who\",\"username\"\
+        :\"Itay_tmr\"},{\"id\":\"289026240\",\"name\":\"Ryan Husk\",\"username\":\"\
+        ryhu\"},{\"id\":\"941595428\",\"name\":\"Peter Rihn\",\"username\":\"PeterRihn\"\
+        },{\"id\":\"1320554856424345601\",\"name\":\"Trintler\",\"username\":\"TrintlerMint\"\
+        },{\"id\":\"1346932330758336516\",\"name\":\"v\xEDdeo_status\",\"username\"\
+        :\"Jp_costa12\"},{\"id\":\"1254285713090023424\",\"name\":\"\u30D6\u30E9\u30C3\
+        \u30AF\u30D1\u30F3\u30C0\u30FC\",\"username\":\"CHoA93uXks3Es5w\"}],\"meta\"\
+        :{\"result_count\":81,\"next_token\":\"7140dibdnow9c7btw453p5fslak0mzq7j06yu8hnt7a5w\"\
+        }}"
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '2825'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:24 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818424319950; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818424319950; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_S+bg88mSBS2UU11tHq1YIw=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818424319950; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 774320d7798f6dba6d5788c9d73bfb2f6c44d29598f7a2f5faa8f0b7bd4bd85e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1651929084'
+      x-response-time:
+      - '171'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/tweets/1293593516040269825/liking_users
+version: 1

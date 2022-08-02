@@ -4,6 +4,13 @@
 
 from collections import namedtuple
 import datetime
+
+try:
+    from functools import cache
+except ImportError:  # Remove when support for Python 3.8 is dropped
+    from functools import lru_cache
+    cache = lru_cache(maxsize=None)
+
 import logging
 from platform import python_version
 import time
@@ -12,10 +19,10 @@ import warnings
 import requests
 
 import tweepy
-from tweepy.auth import OAuthHandler
+from tweepy.auth import OAuth1UserHandler
 from tweepy.errors import (
-    BadRequest, Forbidden, HTTPException, TooManyRequests, TwitterServerError,
-    Unauthorized
+    BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
+    TwitterServerError, Unauthorized
 )
 from tweepy.list import List
 from tweepy.media import Media
@@ -30,41 +37,7 @@ log = logging.getLogger(__name__)
 Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 
 
-class Client:
-    """Client( \
-        bearer_token=None, consumer_key=None, consumer_secret=None, \
-        access_token=None, access_token_secret=None, *, return_type=Response, \
-        wait_on_rate_limit=False \
-    )
-
-    Twitter API v2 Client
-
-    .. versionadded:: 4.0
-
-    Parameters
-    ----------
-    bearer_token : Optional[str]
-        Twitter API Bearer Token
-    consumer_key : Optional[str]
-        Twitter API Consumer Key
-    consumer_secret : Optional[str]
-        Twitter API Consumer Secret
-    access_token : Optional[str]
-        Twitter API Access Token
-    access_token_secret : Optional[str]
-        Twitter API Access Token Secret
-    return_type : Type[Union[dict, requests.Response, Response]]
-        Type to return from requests to the API
-    wait_on_rate_limit : bool
-        Whether to wait when rate limit is reached
-
-    Attributes
-    ----------
-    session : requests.Session
-        Requests Session used to make requests to the API
-    user_agent : str
-        User agent used when making requests to the API
-    """
+class BaseClient:
 
     def __init__(
         self, bearer_token=None, consumer_key=None, consumer_secret=None,
@@ -92,8 +65,10 @@ class Client:
         headers = {"User-Agent": self.user_agent}
         auth = None
         if user_auth:
-            auth = OAuthHandler(self.consumer_key, self.consumer_secret)
-            auth.set_access_token(self.access_token, self.access_token_secret)
+            auth = OAuth1UserHandler(
+                self.consumer_key, self.consumer_secret,
+                self.access_token, self.access_token_secret
+            )
             auth = auth.apply_auth()
         else:
             headers["Authorization"] = f"Bearer {self.bearer_token}"
@@ -122,7 +97,8 @@ class Client:
                 raise Unauthorized(response)
             if response.status_code == 403:
                 raise Forbidden(response)
-            # Handle 404?
+            if response.status_code == 404:
+                raise NotFound(response)
             if response.status_code == 429:
                 if self.wait_on_rate_limit:
                     reset_time = int(response.headers["x-rate-limit-reset"])
@@ -145,25 +121,7 @@ class Client:
 
     def _make_request(self, method, route, params={}, endpoint_parameters=None,
                       json=None, data_type=None, user_auth=False):
-        request_params = {}
-        for param_name, param_value in params.items():
-            if param_name.replace('_', '.') in endpoint_parameters:
-                param_name = param_name.replace('_', '.')
-
-            if isinstance(param_value, list):
-                request_params[param_name] = ','.join(map(str, param_value))
-            elif isinstance(param_value, datetime.datetime):
-                if param_value.tzinfo is not None:
-                    param_value = param_value.astimezone(datetime.timezone.utc)
-                request_params[param_name] = param_value.strftime(
-                    "%Y-%m-%dT%H:%M:%S.%fZ"
-                )
-                # TODO: Constant datetime format string?
-            else:
-                request_params[param_name] = param_value
-
-            if param_name not in endpoint_parameters:
-                log.warn(f"Unexpected parameter: {param_name}")
+        request_params = self._process_params(params, endpoint_parameters)
 
         response = self.request(method, route, params=request_params,
                                 json=json, user_auth=user_auth)
@@ -177,13 +135,25 @@ class Client:
             return response
 
         data = response.get("data")
+        data = self._process_data(data, data_type=data_type)
+
+        includes = response.get("includes", {})
+        includes = self._process_includes(includes)
+
+        errors = response.get("errors", [])
+        meta = response.get("meta", {})
+
+        return Response(data, includes, errors, meta)
+
+    def _process_data(self, data, data_type=None):
         if data_type is not None:
             if isinstance(data, list):
                 data = [data_type(result) for result in data]
             elif data is not None:
                 data = data_type(data)
+        return data
 
-        includes = response.get("includes", {})
+    def _process_includes(self, includes):
         if "media" in includes:
             includes["media"] = [Media(media) for media in includes["media"]]
         if "places" in includes:
@@ -194,11 +164,251 @@ class Client:
             includes["tweets"] = [Tweet(tweet) for tweet in includes["tweets"]]
         if "users" in includes:
             includes["users"] = [User(user) for user in includes["users"]]
+        return includes
 
-        errors = response.get("errors", [])
-        meta = response.get("meta", {})
+    def _process_params(self, params, endpoint_parameters):
+        request_params = {}
+        for param_name, param_value in params.items():
+            if param_name.replace('_', '.') in endpoint_parameters:
+                param_name = param_name.replace('_', '.')
 
-        return Response(data, includes, errors, meta)
+            if isinstance(param_value, list):
+                request_params[param_name] = ','.join(map(str, param_value))
+            elif isinstance(param_value, datetime.datetime):
+                if param_value.tzinfo is not None:
+                    param_value = param_value.astimezone(datetime.timezone.utc)
+                request_params[param_name] = param_value.strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"
+                )
+                # TODO: Constant datetime format string?
+            else:
+                request_params[param_name] = param_value
+
+            if param_name not in endpoint_parameters:
+                log.warn(f"Unexpected parameter: {param_name}")
+        return request_params
+
+
+class Client(BaseClient):
+    """Client( \
+        bearer_token=None, consumer_key=None, consumer_secret=None, \
+        access_token=None, access_token_secret=None, *, return_type=Response, \
+        wait_on_rate_limit=False \
+    )
+
+    Twitter API v2 Client
+
+    .. versionadded:: 4.0
+
+    Parameters
+    ----------
+    bearer_token : str | None
+        Twitter API OAuth 2.0 Bearer Token / Access Token
+    consumer_key : str | None
+        Twitter API OAuth 1.0a Consumer Key
+    consumer_secret : str | None
+        Twitter API OAuth 1.0a Consumer Secret
+    access_token : str | None
+        Twitter API OAuth 1.0a Access Token
+    access_token_secret : str | None
+        Twitter API OAuth 1.0a Access Token Secret
+    return_type : type[dict | requests.Response | Response]
+        Type to return from requests to the API
+    wait_on_rate_limit : bool
+        Whether to wait when rate limit is reached
+
+    Attributes
+    ----------
+    session : requests.Session
+        Requests Session used to make requests to the API
+    user_agent : str
+        User agent used when making requests to the API
+    """
+
+    def _get_authenticating_user_id(self, *, oauth_1=False):
+        if oauth_1:
+            if self.access_token is None:
+                raise TypeError(
+                    "Access Token must be provided for OAuth 1.0a User Context"
+                )
+            else:
+                return self._get_oauth_1_authenticating_user_id(
+                    self.access_token
+                )
+        else:
+            if self.bearer_token is None:
+                raise TypeError(
+                    "Access Token must be provided for "
+                    "OAuth 2.0 Authorization Code Flow with PKCE"
+                )
+            else:
+                return self._get_oauth_2_authenticating_user_id(
+                    self.bearer_token
+                )
+
+    @cache
+    def _get_oauth_1_authenticating_user_id(self, access_token):
+        return access_token.partition('-')[0]
+
+    @cache
+    def _get_oauth_2_authenticating_user_id(self, access_token):
+        original_access_token = self.bearer_token
+        original_return_type = self.return_type
+
+        self.bearer_token = access_token
+        self.return_type = dict
+        user_id = self.get_me(user_auth=False)["data"]["id"]
+
+        self.bearer_token = original_access_token
+        self.return_type = original_return_type
+
+        return user_id
+
+    # Bookmarks
+
+    def remove_bookmark(self, tweet_id):
+        """Allows a user or authenticated user ID to remove a Bookmark of a
+        Tweet.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the ``id`` to remove a
+            Bookmark of.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/delete-users-id-bookmarks-tweet_id
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks/{tweet_id}"
+
+        return self._make_request(
+            "DELETE", route
+        )
+
+    def get_bookmarks(self, **params):
+        """get_bookmarks( \
+            *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None \
+        )
+
+        Allows you to get an authenticated user's 800 most recent bookmarked
+        Tweets.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
+        )
+
+    def bookmark(self, tweet_id):
+        """Causes the authenticating user to Bookmark the target Tweet provided
+        in the request body.
+
+        .. note::
+
+            A request is made beforehand to Twitter's API to determine the
+            authenticating user's ID. This is cached and only done once per
+            :class:`Client` instance for each access token used.
+
+        .. versionadded:: 4.8
+
+        Parameters
+        ----------
+        tweet_id : int | str
+            The ID of the Tweet that you would like the user ``id`` to
+            Bookmark.
+
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/post-users-id-bookmarks
+        """
+        id = self._get_authenticating_user_id()
+        route = f"/2/users/{id}/bookmarks"
+
+        return self._make_request(
+            "POST", route, json={"tweet_id": str(tweet_id)}
+        )
 
     # Hide replies
 
@@ -210,7 +420,7 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to hide. The Tweet must belong to a
             conversation initiated by the authenticating user.
         user_auth : bool
@@ -218,7 +428,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -237,7 +447,7 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to unhide. The Tweet must belong to
             a conversation initiated by the authenticating user.
         user_auth : bool
@@ -245,7 +455,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -264,25 +474,43 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not liking the Tweet or have already unliked the Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to unlike.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/delete-users-id-likes-tweet_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/likes/{tweet_id}"
 
         return self._make_request(
@@ -291,34 +519,48 @@ class Client:
 
     def get_liking_users(self, id, *, user_auth=False, **params):
         """get_liking_users( \
-            id, *, expansions, media_fields, place_fields, poll_fields, \
-            tweet_fields, user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about a Tweet’s liking users.
 
+        .. versionchanged:: 4.6
+            Added ``max_results`` and ``pagination_token`` parameters
+
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Tweet ID of the Tweet to request liking users of.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        max_results : int | None
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        pagination_token : str | None
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -327,16 +569,17 @@ class Client:
         return self._make_request(
             "GET", f"/2/tweets/{id}/liking_users", params=params,
             endpoint_parameters=(
-                "expansions", "media.fields", "place.fields", "poll.fields",
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=User, user_auth=user_auth
         )
 
     def get_liked_tweets(self, id, *, user_auth=False, **params):
         """get_liked_tweets( \
-            id, *, expansions, max_results, media_fields, pagination_token, \
-            place_fields, poll_fields, tweet_fields, user_fields, \
-            user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about a user’s liked Tweets.
@@ -346,36 +589,36 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             User ID of the user to request liked Tweets for.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 5 and 100. By default, each page will return 100
             results.
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -395,25 +638,43 @@ class Client:
     def like(self, tweet_id, *, user_auth=True):
         """Like a Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to Like.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/post-users-id-likes
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/likes"
 
         return self._make_request(
@@ -433,14 +694,14 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The Tweet ID you are deleting.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -466,40 +727,40 @@ class Client:
 
         Parameters
         ----------
-        direct_message_deep_link : Optional[str]
+        direct_message_deep_link : str | None
             `Tweets a link directly to a Direct Message conversation`_ with an
             account.
-        for_super_followers_only : Optional[bool]
+        for_super_followers_only : bool | None
             Allows you to Tweet exclusively for `Super Followers`_.
-        place_id : Optional[str]
+        place_id : str | None
             Place ID being attached to the Tweet for geo location.
-        media_ids : Optional[List[int, str]]
+        media_ids : list[int | str] | None
             A list of Media IDs being attached to the Tweet. This is only
             required if the request includes the ``tagged_user_ids``.
-        media_tagged_user_ids : Optional[List[Union[int, str]]]
+        media_tagged_user_ids : list[int | str] | None
             A list of User IDs being tagged in the Tweet with Media. If the
             user you're tagging doesn't have photo-tagging enabled, their names
             won't show up in the list of tagged users even though the Tweet is
             successfully created.
-        poll_duration_minutes : Optional[int]
+        poll_duration_minutes : int | None
             Duration of the poll in minutes for a Tweet with a poll. This is
             only required if the request includes ``poll.options``.
-        poll_options : Optional[List[str]]
+        poll_options : list[str] | None
             A list of poll options for a Tweet with a poll.
-        quote_tweet_id : Optional[Union[int, str]]
+        quote_tweet_id : int | str | None
             Link to the Tweet being quoted.
-        exclude_reply_user_ids : Optional[List[Union[int, str]]]
+        exclude_reply_user_ids : list[int | str] | None
             A list of User IDs to be excluded from the reply Tweet thus
             removing a user from a thread.
-        in_reply_to_tweet_id : Optional[Union[int, str]]
+        in_reply_to_tweet_id : int | str | None
             Tweet ID of the Tweet being replied to. Please note that
             ``in_reply_to_tweet_id`` needs to be in the request if
             ``exclude_reply_user_ids`` is present.
-        reply_settings : Optional[str]
+        reply_settings : str | None
             `Settings`_ to indicate who can reply to the Tweet. Limited to
             "mentionedUsers" and "following". If the field isn’t specified, it
             will default to everyone.
-        text : Optional[str]
+        text : str | None
             Text of the Tweet being created. This field is required if
             ``media.media_ids`` is not present.
         user_auth : bool
@@ -507,7 +768,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -564,6 +825,71 @@ class Client:
             "POST", f"/2/tweets", json=json, user_auth=user_auth
         )
 
+    # Quote Tweets
+
+    def get_quote_tweets(self, id, *, user_auth=False, **params):
+        """get_quote_tweets( \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
+
+        Returns Quote Tweets for a Tweet specified by the requested Tweet ID.
+
+        The Tweets returned by this endpoint count towards the Project-level
+        `Tweet cap`_.
+
+        .. versionadded:: 4.7
+
+        Parameters
+        ----------
+        id : int | str
+            Unique identifier of the Tweet to request.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            Specifies the number of Tweets to try and retrieve, up to a maximum
+            of 100 per distinct request. By default, 10 results are returned if
+            this parameter is not supplied. The minimum permitted value is 10.
+            It is possible to receive less than the ``max_results`` per request
+            throughout the pagination process.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            This parameter is used to move forwards through 'pages' of results,
+            based on the value of the ``next_token``. The value used with the
+            parameter is pulled directly from the response provided by the API,
+            and should not be modified.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/quote-tweets/api-reference/get-tweets-id-quote_tweets
+
+        .. _Tweet cap: https://developer.twitter.com/en/docs/projects/overview#tweet-cap
+        """
+        return self._make_request(
+            "GET", f"/2/tweets/{id}/quote_tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
     # Retweets
 
     def unretweet(self, source_tweet_id, *, user_auth=True):
@@ -573,25 +899,43 @@ class Client:
         user they're not Retweeting the Tweet or have already removed the
         Retweet of.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        source_tweet_id : Union[int, str]
+        source_tweet_id : int | str
             The ID of the Tweet that you would like to remove the Retweet of.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/delete-users-id-retweets-tweet_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/retweets/{source_tweet_id}"
 
         return self._make_request(
@@ -600,34 +944,48 @@ class Client:
 
     def get_retweeters(self, id, *, user_auth=False, **params):
         """get_retweeters( \
-            id, *, expansions, media_fields, place_fields, poll_fields, \
-            tweet_fields, user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Allows you to get information about who has Retweeted a Tweet.
 
+        .. versionchanged:: 4.6
+            Added ``max_results`` and ``pagination_token`` parameters
+
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Tweet ID of the Tweet to request Retweeting users of.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        max_results : int | None
+            The maximum number of results to be returned per page. This can be
+            a number between 1 and 100. By default, each page will return 100
+            results.
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        pagination_token : str | None
+            Used to request the next page of results if all results weren't
+            returned with the latest request, or to go back to the previous
+            page of results. To return the next page, pass the ``next_token``
+            returned in your previous response. To go back one page, pass the
+            ``previous_token`` returned in your previous response.
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -636,7 +994,8 @@ class Client:
         return self._make_request(
             "GET", f"/2/tweets/{id}/retweeted_by", params=params,
             endpoint_parameters=(
-                "expansions", "media.fields", "place.fields", "poll.fields",
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=User, user_auth=user_auth
         )
@@ -644,25 +1003,43 @@ class Client:
     def retweet(self, tweet_id, *, user_auth=True):
         """Causes the user ID to Retweet the target Tweet.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        tweet_id : Union[int, str]
+        tweet_id : int | str
             The ID of the Tweet that you would like to Retweet.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/post-users-id-retweets
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/retweets"
 
         return self._make_request(
@@ -674,9 +1051,11 @@ class Client:
 
     def search_all_tweets(self, query, **params):
         """search_all_tweets( \
-            query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, start_time, \
-            tweet_fields, until_id, user_fields \
+            query, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, next_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, sort_order=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None \
         )
 
         This endpoint is only available to those users who have been approved
@@ -689,11 +1068,19 @@ class Client:
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
 
+        .. note::
+
+            By default, a request will return Tweets from up to 30 days ago if
+            the ``start_time`` parameter is not provided.
+
+        .. versionchanged:: 4.6
+            Added ``sort_order`` parameter
+
         Parameters
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -701,46 +1088,50 @@ class Client:
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of search results to be returned by a request. A
             number between 10 and the system limit (currently 500). By default,
             a request response will return 10 results.
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        sort_order : str | None
+            This parameter is used to specify the order in which you want the
+            Tweets returned. By default, a request will return the most recent
+            Tweets first (sorted by recency).
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -756,16 +1147,18 @@ class Client:
             endpoint_parameters=(
                 "end_time", "expansions", "max_results", "media.fields",
                 "next_token", "place.fields", "poll.fields", "query",
-                "since_id", "start_time", "tweet.fields", "until_id",
-                "user.fields"
+                "since_id", "sort_order", "start_time", "tweet.fields",
+                "until_id", "user.fields"
             ), data_type=Tweet
         )
 
     def search_recent_tweets(self, query, *, user_auth=False, **params):
         """search_recent_tweets( \
-            query, *, end_time, expansions, max_results, media_fields, \
-            next_token, place_fields, poll_fields, since_id, start_time, \
-            tweet_fields, until_id, user_fields, user_auth=False \
+            query, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, next_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, sort_order=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=False \
         )
 
         The recent search endpoint returns Tweets from the last seven days that
@@ -773,6 +1166,9 @@ class Client:
 
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
+
+        .. versionchanged:: 4.6
+            Added ``sort_order`` parameter
 
         Parameters
         ----------
@@ -783,35 +1179,39 @@ class Client:
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of search results to be returned by a request. A
             number between 10 and 100. By default, a request response will
             return 10 results.
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
             ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        sort_order : str | None
+            This parameter is used to specify the order in which you want the
+            Tweets returned. By default, a request will return the most recent
+            Tweets first (sorted by recency).
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -819,20 +1219,20 @@ class Client:
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -850,8 +1250,8 @@ class Client:
             endpoint_parameters=(
                 "end_time", "expansions", "max_results", "media.fields",
                 "next_token", "place.fields", "poll.fields", "query",
-                "since_id", "start_time", "tweet.fields", "until_id",
-                "user.fields"
+                "since_id", "sort_order", "start_time", "tweet.fields",
+                "until_id", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
         )
 
@@ -859,9 +1259,11 @@ class Client:
 
     def get_users_mentions(self, id, *, user_auth=False, **params):
         """get_users_mentions( \
-            id, *, end_time, expansions, max_results, media_fields, \
-            pagination_token, place_fields, poll_fields, since_id, \
-            start_time, tweet_fields, until_id, user_fields, user_auth=False \
+            id, *, end_time=None, expansions=None, max_results=None, \
+            media_fields=None, pagination_token=None, place_fields=None, \
+            poll_fields=None, since_id=None, start_time=None, \
+            tweet_fields=None, until_id=None, user_fields=None, \
+            user_auth=False \
         )
 
         Returns Tweets mentioning a single user specified by the requested user
@@ -873,11 +1275,11 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -885,34 +1287,34 @@ class Client:
 
             Please note that this parameter does not support a millisecond
             value.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             Specifies the number of Tweets to try and retrieve, up to a maximum
             of 100 per distinct request. By default, 10 results are returned if
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             This parameter is used to move forwards or backwards through
             'pages' of results, based on the value of the ``next_token`` or
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``since_id``, the ``since_id``
             will be forced to the oldest ID available. More information on
             Twitter IDs is `here`_.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
@@ -920,23 +1322,23 @@ class Client:
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. There are limits to the
             number of Tweets that can be accessed through the API. If the limit
             of Tweets has occurred since the ``until_id``, the ``until_id``
             will be forced to the most recent ID available. More information on
             Twitter IDs is `here`_.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -955,11 +1357,118 @@ class Client:
             ), data_type=Tweet, user_auth=user_auth
         )
 
+    def get_home_timeline(self, *, user_auth=True, **params):
+        """get_home_timeline( \
+            *, end_time=None, exclude=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            place_fields=None, poll_fields=None, since_id=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=True \
+        )
+
+        Allows you to retrieve a collection of the most recent Tweets and
+        Retweets posted by you and users you follow. This endpoint returns up
+        to the last 3200 Tweets.
+
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
+        Parameters
+        ----------
+        end_time : datetime.datetime | str | None
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The new UTC timestamp
+            from which the Tweets will be provided. Timestamp is in second
+            granularity and is inclusive (for example, 12:00:01 includes the
+            first second of the minute).
+
+            Please note that this parameter does not support a millisecond
+            value.
+        exclude : list[str] | str | None
+            Comma-separated list of the types of Tweets to exclude from the
+            response.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            Specifies the number of Tweets to try and retrieve, up to a maximum
+            of 100 per distinct request. By default, 100 results are returned
+            if this parameter is not supplied. The minimum permitted value is
+            1. It is possible to receive less than the ``max_results`` per
+            request throughout the pagination process.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            This parameter is used to move forwards or backwards through
+            'pages' of results, based on the value of the ``next_token`` or
+            ``previous_token`` in the response. The value used with the
+            parameter is pulled directly from the response provided by the API,
+            and should not be modified.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        since_id : int | str | None
+            Returns results with a Tweet ID greater than (that is, more recent
+            than) the specified 'since' Tweet ID. There are limits to the
+            number of Tweets that can be accessed through the API. If the
+            limit of Tweets has occurred since the ``since_id``, the
+            ``since_id`` will be forced to the oldest ID available. More
+            information on Twitter IDs is `here`_.
+        start_time : datetime.datetime | str | None
+            YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
+            from which the Tweets will be provided. Timestamp is in second
+            granularity and is inclusive (for example, 12:00:01 includes the
+            first second of the minute).
+
+            Please note that this parameter does not support a millisecond
+            value.
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        until_id : int | str | None
+            Returns results with a Tweet ID less than (that is, older than) the
+            specified 'until' Tweet ID. There are limits to the number of
+            Tweets that can be accessed through the API. If the limit of Tweets
+            has occurred since the ``until_id``, the ``until_id`` will be
+            forced to the most recent ID available. More information on Twitter
+            IDs is `here`_.
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/timelines/api-reference/get-users-id-reverse-chronological
+
+        .. _here: https://developer.twitter.com/en/docs/twitter-ids
+        """
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
+        route = f"/2/users/{id}/timelines/reverse_chronological"
+
+        return self._make_request(
+            "GET", route, params=params,
+            endpoint_parameters=(
+                "end_time", "exclude", "expansions", "max_results",
+                "media.fields", "pagination_token", "place.fields",
+                "poll.fields", "since_id", "start_time", "tweet.fields",
+                "until_id", "user.fields"
+            ), data_type=Tweet, user_auth=user_auth
+        )
+
     def get_users_tweets(self, id, *, user_auth=False, **params):
         """get_users_tweets( \
-            id, *, end_time, exclude, expansions, max_results, media_fields, \
-            pagination_token, place_fields, poll_fields, since_id, \
-            start_time, tweet_fields, until_id, user_fields, user_auth=False \
+            id, *, end_time=None, exclude=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            place_fields=None, poll_fields=None, since_id=None, \
+            start_time=None, tweet_fields=None, until_id=None, \
+            user_fields=None, user_auth=False \
         )
 
         Returns Tweets composed by a single user, specified by the requested
@@ -972,11 +1481,11 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest or most recent
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -986,39 +1495,39 @@ class Client:
 
             Please note that this parameter does not support a millisecond
             value.
-        exclude : Union[List[str], str]
+        exclude : list[str] | str | None
             Comma-separated list of the types of Tweets to exclude from the
             response. When ``exclude=retweets`` is used, the maximum historical
             Tweets returned is still 3200. When the ``exclude=replies``
             parameter is used for any value, only the most recent 800 Tweets
             are available.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             Specifies the number of Tweets to try and retrieve, up to a maximum
             of 100 per distinct request. By default, 10 results are returned if
             this parameter is not supplied. The minimum permitted value is 5.
             It is possible to receive less than the ``max_results`` per request
             throughout the pagination process.
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        pagination_token : str
+        pagination_token : str | None
             This parameter is used to move forwards or backwards through
             'pages' of results, based on the value of the ``next_token`` or
             ``previous_token`` in the response. The value used with the
             parameter is pulled directly from the response provided by the API,
             and should not be modified.
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified 'since' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``since_id``. If
             the limit of Tweets has occurred since the ``since_id``, the
             ``since_id`` will be forced to the oldest ID available.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest or earliest
             UTC timestamp from which the Tweets will be provided. Only the 3200
             most recent Tweets are available. Timestamp is in second
@@ -1028,22 +1537,22 @@ class Client:
 
             Please note that this parameter does not support a millisecond
             value.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less less than (that is, older
             than) the specified 'until' Tweet ID. Only the 3200 most recent
             Tweets are available. The result will exclude the ``until_id``. If
             the limit of Tweets has occurred since the ``until_id``, the
             ``until_id`` will be forced to the most recent ID available.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1066,8 +1575,10 @@ class Client:
     # Tweet counts
 
     def get_all_tweets_count(self, query, **params):
-        """get_all_tweets_count(query, *, end_time, granularity, next_token, \
-                                since_id, start_time, until_id)
+        """get_all_tweets_count( \
+            query, *, end_time=None, granularity=None, next_token=None, \
+            since_id=None, start_time=None, until_id=None \
+        )
 
         This endpoint is only available to those users who have been approved
         for the `Academic Research product track`_.
@@ -1080,7 +1591,7 @@ class Client:
         ----------
         query : str
             One query for matching Tweets. Up to 1024 characters.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
             The newest, most recent UTC timestamp to which the Tweets will be
             provided. Timestamp is in second granularity and is exclusive (for
@@ -1088,34 +1599,34 @@ class Client:
             without ``start_time``, Tweets from 30 days before ``end_time``
             will be returned by default. If not specified, ``end_time`` will
             default to [now - 30 seconds].
-        granularity : str
+        granularity : str | None
             This is the granularity that you want the timeseries count data to
             be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
-        next_token : str
+        next_token : str | None
             This parameter is used to get the next 'page' of results. The value
             used with the parameter is pulled directly from the response
             provided by the API, and should not be modified. You can learn more
             by visiting our page on `pagination`_.
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (for example, more
             recent than) the specified ID. The ID specified is exclusive and
             responses will not include it. If included with the same request as
             a ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             from which the Tweets will be provided. Timestamp is in second
             granularity and is inclusive (for example, 12:00:01 includes the
             first second of the minute). By default, a request will return
             Tweets from up to 30 days ago if you do not include this parameter.
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1134,8 +1645,10 @@ class Client:
         )
 
     def get_recent_tweets_count(self, query, **params):
-        """get_recent_tweets_count(query, *, end_time, granularity, since_id, \
-                                   start_time, until_id)
+        """get_recent_tweets_count( \
+            query, *, end_time=None, granularity=None, since_id=None, \
+            start_time=None, until_id=None \
+        )
 
         The recent Tweet counts endpoint returns count of Tweets from the last
         seven days that match a search query.
@@ -1149,23 +1662,23 @@ class Client:
             long. If you are using an `Academic Research Project`_ at the Basic
             access level, you can use all available operators and can make
             queries up to 1,024 characters long.
-        end_time : Union[datetime.datetime, str]
+        end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The newest, most recent
             UTC timestamp to which the Tweets will be provided. Timestamp is in
             second granularity and is exclusive (for example, 12:00:01 excludes
             the first second of the minute). By default, a request will return
             Tweets from as recent as 30 seconds ago if you do not include this
             parameter.
-        granularity : str
+        granularity : str | None
             This is the granularity that you want the timeseries count data to
             be grouped by. You can request ``minute``, ``hour``, or ``day``
             granularity. The default granularity, if not specified is ``hour``.
-        since_id : Union[int, str]
+        since_id : int | str | None
             Returns results with a Tweet ID greater than (that is, more recent
             than) the specified ID. The ID specified is exclusive and responses
             will not include it. If included with the same request as a
             ``start_time`` parameter, only ``since_id`` will be used.
-        start_time : Union[datetime.datetime, str]
+        start_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). The oldest UTC timestamp
             (from most recent seven days) from which the Tweets will be
             provided. Timestamp is in second granularity and is inclusive (for
@@ -1173,14 +1686,14 @@ class Client:
             included with the same request as a ``since_id`` parameter, only
             ``since_id`` will be used. By default, a request will return Tweets
             from up to seven days ago if you do not include this parameter.
-        until_id : Union[int, str]
+        until_id : int | str | None
             Returns results with a Tweet ID less than (that is, older than) the
             specified ID. The ID specified is exclusive and responses will not
             include it.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1203,34 +1716,37 @@ class Client:
     # Tweet lookup
 
     def get_tweet(self, id, *, user_auth=False, **params):
-        """get_tweet(id, *, expansions, media_fields, place_fields, \
-                     poll_fields, twitter_fields, user_fields, user_auth=False)
+        """get_tweet( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
+            user_auth=False \
+        )
 
         Returns a variety of information about a single Tweet specified by
         the requested ID.
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             Unique identifier of the Tweet to request
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1246,8 +1762,9 @@ class Client:
 
     def get_tweets(self, ids, *, user_auth=False, **params):
         """get_tweets( \
-            ids, *, expansions, media_fields, place_fields, poll_fields, \
-            twitter_fields, user_fields, user_auth=False \
+            ids, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
+            user_auth=False \
         )
 
         Returns a variety of information about the Tweet specified by the
@@ -1255,28 +1772,28 @@ class Client:
 
         Parameters
         ----------
-        ids : Union[List[int, str], str]
+        ids : list[int | str] | str
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1299,25 +1816,43 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not blocking or have already unblocked.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unblock.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
 
         return self._make_request(
@@ -1325,42 +1860,62 @@ class Client:
         )
 
     def get_blocked(self, *, user_auth=True, **params):
-        """get_blocked(*, expansions, max_results, pagination_token, \
-                       tweet_fields, user_fields, user_auth=True)
+        """get_blocked( \
+            *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
 
         Returns a list of users who are blocked by the authenticating user.
+
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/get-users-blocking
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1374,25 +1929,43 @@ class Client:
     def block(self, target_user_id, *, user_auth=True):
         """Block another user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to block.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/blocking"
 
         return self._make_request(
@@ -1408,28 +1981,46 @@ class Client:
         The request succeeds with no action when the authenticated user sends a
         request to a user they're not following or have already unfollowed.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.unfollow`
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unfollow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/delete-users-source_id-following
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/following/{target_user_id}"
 
         return self._make_request(
@@ -1446,42 +2037,42 @@ class Client:
             "Client.unfollow is deprecated; use Client.unfollow_user instead.",
             DeprecationWarning
         )
-        self.unfollow_user(target_user_id, user_auth=user_auth)
+        return self.unfollow_user(target_user_id, user_auth=user_auth)
 
     def get_users_followers(self, id, *, user_auth=False, **params):
         """get_users_followers( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified user ID.
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The user ID whose followers you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and the 1000. By default, each page will return
             100 results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1498,38 +2089,38 @@ class Client:
 
     def get_users_following(self, id, *, user_auth=False, **params):
         """get_users_following( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users the specified user ID is following.
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The user ID whose following you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and the 1000. By default, each page will return
             100 results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the ``next_token``
             returned in your previous response. To go back one page, pass the
             ``previous_token`` returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1553,28 +2144,46 @@ class Client:
         request to a user they're already following, or if they're sending a
         follower request to a user that does not have public Tweets.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.2
             Renamed from :meth:`Client.follow`
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to follow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/post-users-source_user_id-following
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/following"
 
         return self._make_request(
@@ -1592,7 +2201,7 @@ class Client:
             "Client.follow is deprecated; use Client.follow_user instead.",
             DeprecationWarning
         )
-        self.follow_user(target_user_id, user_auth=user_auth)
+        return self.follow_user(target_user_id, user_auth=user_auth)
 
     # Mutes
 
@@ -1602,25 +2211,43 @@ class Client:
         The request succeeds with no action when the user sends a request to a
         user they're not muting or have already unmuted.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to unmute.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/delete-users-user_id-muting
         """
-        source_user_id = self.access_token.partition('-')[0]
+        source_user_id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{source_user_id}/muting/{target_user_id}"
 
         return self._make_request(
@@ -1628,44 +2255,64 @@ class Client:
         )
 
     def get_muted(self, *, user_auth=True, **params):
-        """get_muted(*, expansions, max_results, pagination_token, \
-                     tweet_fields, user_fields, user_auth=True)
+        """get_muted( \
+            *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
 
         Returns a list of users who are muted by the authenticating user.
+
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
 
         .. versionadded:: 4.1
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 1000. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/get-users-muting
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -1679,25 +2326,43 @@ class Client:
     def mute(self, target_user_id, *, user_auth=True):
         """Allows an authenticated user ID to mute the target user.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        target_user_id : Union[int, str]
+        target_user_id : int | str
             The user ID of the user that you would like to mute.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/users/mutes/api-reference/post-users-user_id-muting
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/muting"
 
         return self._make_request(
@@ -1708,23 +2373,23 @@ class Client:
     # User lookup
 
     def get_user(self, *, id=None, username=None, user_auth=False, **params):
-        """get_user(*, id, username, expansions, tweet_fields, user_fields, \
-                    user_auth=False)
+        """get_user(*, id=None, username=None, expansions=None, \
+                    tweet_fields=None, user_fields=None, user_auth=False)
 
         Returns a variety of information about a single user specified by the
         requested ID or username.
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str | None
             The ID of the user to lookup.
-        username : str
+        username : str | None
             The Twitter username (handle) of the user.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1736,7 +2401,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1763,27 +2428,27 @@ class Client:
 
     def get_users(self, *, ids=None, usernames=None, user_auth=False,
                   **params):
-        """get_users(*, ids, usernames, expansions, tweet_fields, \
-                     user_fields, user_auth=False)
+        """get_users(*, ids=None, usernames=None, expansions=None, \
+                     tweet_fields=None, user_fields=None, user_auth=False)
 
         Returns a variety of information about one or more users specified by
         the requested IDs or usernames.
 
         Parameters
         ----------
-        ids : Union[List[int, str], str]
+        ids : list[int | str] | str | None
             A comma separated list of user IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
-        usernames : Union[List[str], str]
+        usernames : list[str] | str | None
             A comma separated list of Twitter usernames (handles). Up to 100
             are allowed in a single request. Make sure to not include a space
             between commas and fields.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
@@ -1795,7 +2460,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1823,7 +2488,8 @@ class Client:
         )
 
     def get_me(self, *, user_auth=True, **params):
-        """get_me(*, expansions, tweet_fields, user_fields, user_auth=True)
+        """get_me(*, expansions=None, tweet_fields=None, user_fields=None, \
+                  user_auth=True)
 
         Returns information about an authorized user.
 
@@ -1831,18 +2497,18 @@ class Client:
 
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1857,8 +2523,8 @@ class Client:
     # Search Spaces
 
     def search_spaces(self, query, **params):
-        """search_spaces(query, *, expansions, max_results, space_fields, \
-                         state, user_fields)
+        """search_spaces(query, *, expansions=None, max_results=None, \
+                         space_fields=None, state=None, user_fields=None)
 
         Return live or scheduled Spaces matching your specified search terms
 
@@ -1872,23 +2538,23 @@ class Client:
         query : str
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to return in this request. Specify a
             value between 1 and 100.
-        space_fields : Union[List[str], str]
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        state : str
+        state : str | None
             Determines the type of results to return. This endpoint returns all
             Spaces by default. Use ``live`` to only return live Spaces or
             ``scheduled`` to only return upcoming Spaces.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1906,7 +2572,8 @@ class Client:
     # Spaces lookup
 
     def get_spaces(self, *, ids=None, user_ids=None, **params):
-        """get_spaces(*, ids, user_ids, expansions, space_fields, user_fields)
+        """get_spaces(*, ids=None, user_ids=None, expansions=None, \
+                      space_fields=None, user_fields=None)
 
         Returns details about multiple live or scheduled Spaces (created by the
         specified user IDs if specified). Up to 100 comma-separated Space or
@@ -1916,15 +2583,15 @@ class Client:
 
         Parameters
         ----------
-        ids : Union[List[str], str]
+        ids : list[str] | str | None
             A comma separated list of Spaces (up to 100).
-        user_ids : Union[List[int, str], str]
+        user_ids : list[int | str] | str | None
             A comma separated list of user IDs (up to 100).
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        space_fields : Union[List[str], str]
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Raises
@@ -1934,7 +2601,7 @@ class Client:
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1962,7 +2629,8 @@ class Client:
         )
 
     def get_space(self, id, **params):
-        """get_space(id, *, expansions, space_fields, user_fields)
+        """get_space(id, *, expansions=None, space_fields=None, \
+                     user_fields=None)
 
         Returns a variety of information about a single Space specified by the
         requested ID.
@@ -1971,18 +2639,18 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             Unique identifier of the Space to request.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        space_fields : Union[List[str], str]
+        space_fields : list[str] | str | None
             :ref:`space_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -1996,8 +2664,10 @@ class Client:
         )
 
     def get_space_buyers(self, id, **params):
-        """get_space_buyers(id, *, expansions, media_fields, place_fields, \
-                            poll_fields, tweet_fields, user_fields)
+        """get_space_buyers( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None \
+        )
 
         Returns a list of user who purchased a ticket to the requested Space.
         You must authenticate the request using the Access Token of the creator
@@ -2010,22 +2680,22 @@ class Client:
         id : str
             Unique identifier of the Space for which you want to request
             Tweets.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        media_fields : Union[List[str], str]
+        media_fields : list[str] | str | None
             :ref:`media_fields_parameter`
-        place_fields : Union[List[str], str]
+        place_fields : list[str] | str | None
             :ref:`place_fields_parameter`
-        poll_fields : Union[List[str], str]
+        poll_fields : list[str] | str | None
             :ref:`poll_fields_parameter`
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2039,11 +2709,57 @@ class Client:
             ), data_type=User
         )
 
+    def get_space_tweets(self, id, **params):
+        """get_space_tweets( \
+            id, *, expansions=None, media_fields=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None \
+        )
+
+        Returns Tweets shared in the requested Spaces.
+
+        .. versionadded:: 4.6
+
+        Parameters
+        ----------
+        id : str
+            Unique identifier of the Space containing the Tweets you'd like to
+            access.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-tweets
+        """
+        return self._make_request(
+            "GET", f"/2/spaces/{id}/tweets", params=params,
+            endpoint_parameters=(
+                "expansions", "media.fields", "place.fields", "poll.fields",
+                "tweet.fields", "user.fields"
+            ), data_type=Tweet
+        )
+
     # List Tweets lookup
 
     def get_list_tweets(self, id, *, user_auth=False, **params):
-        """get_list_tweets(id, *, expansions, max_results, pagination_token, \
-                           tweet_fields, user_fields, user_auth=False)
+        """get_list_tweets( \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
 
         Returns a list of Tweets from the specified List.
 
@@ -2051,30 +2767,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The ID of the List whose Tweets you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2093,27 +2809,45 @@ class Client:
     def unfollow_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to unfollow a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to unfollow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/delete-users-id-followed-lists-list_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/followed_lists/{list_id}"
 
         return self._make_request(
@@ -2122,8 +2856,8 @@ class Client:
 
     def get_list_followers(self, id, *, user_auth=False, **params):
         """get_list_followers( \
-            id, *, expansions, max_results, pagination_token, tweet_fields, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of users who are followers of the specified List.
@@ -2132,30 +2866,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The ID of the List whose followers you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2171,8 +2905,8 @@ class Client:
 
     def get_followed_lists(self, id, *, user_auth=False, **params):
         """get_followed_lists( \
-            id, *, expansions, list_fields, max_results, pagination_token, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
         )
 
         Returns all Lists a specified user follows.
@@ -2181,30 +2915,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The user ID whose followed Lists you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2221,27 +2955,45 @@ class Client:
     def follow_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to follow a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to follow.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/list-follows/api-reference/post-users-id-followed-lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/followed_lists"
 
         return self._make_request(
@@ -2251,8 +3003,8 @@ class Client:
     # List lookup
 
     def get_list(self, id, *, user_auth=False, **params):
-        """get_list(id, *, expansions, list_fields, user_fields, \
-                    user_auth=False)
+        """get_list(id, *, expansions=None, list_fields=None, \
+                    user_fields=None, user_auth=False)
 
         Returns the details of a specified List.
 
@@ -2260,20 +3012,20 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The ID of the List to lookup.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2287,8 +3039,10 @@ class Client:
         )
 
     def get_owned_lists(self, id, *, user_auth=False, **params):
-        """get_owned_lists(id, *, expansions, list_fields, max_results, \
-                           pagination_token, user_fields, user_auth=False)
+        """get_owned_lists( \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
+        )
 
         Returns all Lists owned by the specified user.
 
@@ -2296,30 +3050,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The user ID whose owned Lists you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2346,16 +3100,16 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List you are removing a member from.
-        user_id : Union[int, str]
+        user_id : int | str
             The ID of the user you wish to remove as a member of the List.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2367,8 +3121,10 @@ class Client:
         )
 
     def get_list_members(self, id, *, user_auth=False, **params):
-        """get_list_members(id, *, expansions, max_results, pagination_token, \
-                            tweet_fields, user_fields, user_auth=False)
+        """get_list_members( \
+            id, *, expansions=None, max_results=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=False \
+        )
 
         Returns a list of users who are members of the specified List.
 
@@ -2376,30 +3132,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The ID of the List whose members you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        tweet_fields : Union[List[str], str]
+        tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2415,8 +3171,8 @@ class Client:
 
     def get_list_memberships(self, id, *, user_auth=False, **params):
         """get_list_memberships( \
-            id, *, expansions, list_fields, max_results, pagination_token, \
-            user_fields, user_auth=False \
+            id, *, expansions=None, list_fields=None, max_results=None, \
+            pagination_token=None, user_fields=None, user_auth=False \
         )
 
         Returns all Lists a specified user is a member of.
@@ -2425,30 +3181,30 @@ class Client:
 
         Parameters
         ----------
-        id : Union[List[str], str]
+        id : list[str] | str
             The user ID whose List memberships you would like to retrieve.
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        max_results : int
+        max_results : int | None
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
-        pagination_token : str
+        pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2472,16 +3228,16 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List you are adding a member to.
-        user_id : Union[int, str]
+        user_id : int | str
             The ID of the user you wish to add as a member of the List.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2504,14 +3260,14 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List to be deleted.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2534,20 +3290,20 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The ID of the List to be updated.
-        description : str
+        description : str | None
             Updates the description of the List.
-        name : str
+        name : str | None
             Updates the name of the List.
-        private : bool
+        private : bool | None
             Determines whether the List should be private.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2581,16 +3337,16 @@ class Client:
         ----------
         name : str
             The name of the List you wish to create.
-        description : str
+        description : str | None
             Description of the List.
-        private : bool
+        private : bool | None
             Determine whether the List should be private.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2613,27 +3369,45 @@ class Client:
     def unpin_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to unpin a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to unpin.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/delete-users-id-pinned-lists-list_id
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists/{list_id}"
 
         return self._make_request(
@@ -2641,36 +3415,54 @@ class Client:
         )
 
     def get_pinned_lists(self, *, user_auth=True, **params):
-        """get_pinned_lists(*, expansions, list_fields, user_fields, \
-                            user_auth=True)
+        """get_pinned_lists(*, expansions=None, list_fields=None, \
+                            user_fields=None, user_auth=True)
 
         Returns the Lists pinned by a specified user.
+
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
 
         .. versionadded:: 4.4
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        expansions : Union[List[str], str]
+        expansions : list[str] | str | None
             :ref:`expansions_parameter`
-        list_fields : Union[List[str], str]
+        list_fields : list[str] | str | None
             :ref:`list_fields_parameter`
-        user_fields : Union[List[str], str]
+        user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/get-users-id-pinned_lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(
@@ -2683,27 +3475,45 @@ class Client:
     def pin_list(self, list_id, *, user_auth=True):
         """Enables the authenticated user to pin a List.
 
+        .. note::
+
+            When using OAuth 2.0 Authorization Code Flow with PKCE with
+            ``user_auth=False``, a request is made beforehand to Twitter's API
+            to determine the authenticating user's ID. This is cached and only
+            done once per :class:`Client` instance for each access token used.
+
         .. versionadded:: 4.2
 
         .. versionchanged:: 4.5
             Added ``user_auth`` parameter
 
+        .. versionchanged:: 4.8
+            Added support for using OAuth 2.0 Authorization Code Flow with PKCE
+
+        .. versionchanged:: 4.8
+            Changed to raise :class:`TypeError` when the access token isn't set
+
         Parameters
         ----------
-        list_id : Union[int, str]
+        list_id : int | str
             The ID of the List that you would like the user to pin.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
 
+        Raises
+        ------
+        TypeError
+            If the access token isn't set
+
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/pinned-lists/api-reference/post-users-id-pinned-lists
         """
-        id = self.access_token.partition('-')[0]
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/pinned_lists"
 
         return self._make_request(
@@ -2713,7 +3523,7 @@ class Client:
     # Batch Compliance
 
     def get_compliance_jobs(self, type, **params):
-        """get_compliance_jobs(type, *, status)
+        """get_compliance_jobs(type, *, status=None)
 
         Returns a list of recent compliance jobs.
 
@@ -2724,14 +3534,14 @@ class Client:
         type : str
             Allows to filter by job type - either by tweets or user ID. Only
             one filter (tweets or users) can be specified per request.
-        status : str
+        status : str | None
             Allows to filter by job status. Only one filter can be specified
             per request.
             Default: ``all``
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2750,12 +3560,12 @@ class Client:
 
         Parameters
         ----------
-        id : Union[int, str]
+        id : int | str
             The unique identifier for the compliance job you want to retrieve.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------
@@ -2781,17 +3591,17 @@ class Client:
         type : str
             Specify whether you will be uploading tweet or user IDs. You can
             either specify tweets or users.
-        name : str
+        name : str | None
             A name for this job, useful to identify multiple jobs using a label
             you define.
-        resumable : bool
+        resumable : bool | None
             Specifies whether to enable the upload URL with support for
             resumable uploads. If true, this endpoint will return a pre-signed
             URL with resumable uploads enabled.
 
         Returns
         -------
-        Union[dict, requests.Response, Response]
+        dict | requests.Response | Response
 
         References
         ----------

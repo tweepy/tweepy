@@ -12,6 +12,5 @@ def list_to_csv(item_list):
 
 def parse_datetime(datetime_string):
     return datetime.datetime.strptime(
-        datetime_string, "%Y-%m-%dT%H:%M:%S.%fZ"
+        datetime_string, "%Y-%m-%dT%H:%M:%S.%f%z"
     ).replace(tzinfo=datetime.timezone.utc)
-    # Use %z when support for Python 3.6 is dropped

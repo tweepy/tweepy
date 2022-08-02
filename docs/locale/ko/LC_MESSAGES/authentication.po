@@ -1,0 +1,429 @@
+# authentication.po - Authentication
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-10 20:32+0900\n"
+"PO-Revision-Date: 2022-01-11 14:48+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../authentication.rst:7
+msgid "Authentication"
+msgstr "인증"
+
+#: ../../authentication.rst:9
+msgid "This supplements Twitter's `Authentication documentation`_."
+msgstr "이 문단은 트위터의 `인증 참조 문서`_ 에 대한 보충입니다."
+
+#: ../../authentication.rst:14
+msgid "Introduction"
+msgstr "들어가며"
+
+#: ../../authentication.rst:16
+msgid ""
+"Tweepy supports the OAuth 1.0a User Context, OAuth 2.0 Bearer Token (App-"
+"Only), and OAuth 2.0 Authorization Code Flow with PKCE (User Context) "
+"authentication methods."
+msgstr ""
+"트위피는 OAuth 1.0a 사용자 컨텍스트와, OAuth 2.0 베어러 토큰 (앱 한정), "
+"그리고 OAuth 2.0 PKCE 인증 코드 플로우 (사용자 컨텍스트) 인증 메서드를 지원합니다. "
+
+#: ../../authentication.rst:21
+msgid "Twitter API v1.1"
+msgstr "트위터 API v1.1"
+
+#: ../../authentication.rst:24 ../../authentication.rst:78
+msgid "OAuth 2.0 Bearer Token (App-Only)"
+msgstr "OAuth 2.0 베어러 토큰 (앱 한정)"
+
+#: ../../authentication.rst:25 ../../authentication.rst:79
+msgid ""
+"The simplest way to generate a bearer token is through your app's Keys "
+"and Tokens tab under the `Twitter Developer Portal Projects & Apps "
+"page`_."
+msgstr ""
+"베어러 토큰을 생성하는 가장 간단한 방법은, "
+"`트위터 개발자 포털의 프로젝트 및 앱 페이지`_ "
+"에서 해당하는 앱의 'Keys and Tokens' 버튼을 누르는 것입니다. "
+
+#: ../../authentication.rst:30
+msgid ""
+"You can then initialize :class:`OAuth2BearerHandler` with the bearer "
+"token and initialize :class:`API` with the :class:`OAuth2BearerHandler` "
+"instance::"
+msgstr ""
+"그러면 베어러 토큰을 이용해 :class:`OAuth2BearerHandler` 를 초기화(Initialize)하고, "
+":class:`OAuth2BearerHandler` 인스턴스로 :class:`API` 를 초기화할 수 있습니다:: "
+
+#: ../../authentication.rst:38
+msgid ""
+"Alternatively, you can use the API / Consumer key and secret that can be "
+"found on the same page and initialize :class:`OAuth2AppHandler` instead::"
+msgstr ""
+"이 대신, 같은 페이지에서 얻을 수 있는 API Consumer Key값과 Secret값을 이용해 "
+"아래와 같이 :class:`OAuth2AppHandler` 를 초기화할 수도 있습니다::"
+
+#: ../../authentication.rst:49 ../../authentication.rst:90
+msgid "OAuth 1.0a User Context"
+msgstr "OAuth 1.0a 사용자 컨텍스트"
+
+#: ../../authentication.rst:50 ../../authentication.rst:91
+msgid ""
+"Similarly, the simplest way to authenticate as your developer account is "
+"to generate an access token and access token secret through your app's "
+"Keys and Tokens tab under the `Twitter Developer Portal Projects & Apps "
+"page`_."
+msgstr ""
+"아까와 비슷하게, 본인의 개발자 계정으로 인증하는 가장 간단한 방법은 "
+"`트위터 개발자 포털의 Projects & Apps 페이지`_ "
+"에서 해당하는 앱의 'Keys and Tokens' 버튼을 누르고, "
+"해당 페이지에서 액세스 토큰과 액세스 토큰 Secret값을 얻어오는 것입니다. "
+
+#: ../../authentication.rst:54 ../../authentication.rst:95
+msgid ""
+"You'll also need the app's API / consumer key and secret that can be "
+"found on that page."
+msgstr "물론, 해당 페이지에서 얻어올 수 있는 앱의 API Consumer Key값과 Secret값도 필요합니다."
+
+#: ../../authentication.rst:57
+msgid ""
+"You can then initialize :class:`OAuth1UserHandler` with all four "
+"credentials and initialize :class:`API` with the "
+":class:`OAuth1UserHandler` instance::"
+msgstr ""
+"그러면 이 4개의 인증 관련 키값 및 토큰값을 이용해 "
+":class:`OAuth1UserHandler` 를 초기화할 수 있게 되며, "
+":class:`OAuth1UserHandler` 인스턴스를 이용해 :class:`API` 를 초기화할 수 있습니다. "
+
+#: ../../authentication.rst:68 ../../authentication.rst:110
+msgid "To authenticate as a different user, see :ref:`3-legged OAuth`."
+msgstr "다른 사용자로 인증하려면, :ref:`3-legged OAuth` 를 참고하시기 바랍니다. "
+
+#: ../../authentication.rst:71
+msgid "Twitter API v2"
+msgstr "트위터 API v2"
+
+#: ../../authentication.rst:73
+msgid ""
+"Tweepy's interface for Twitter API v2, :class:`Client`, handles OAuth 2.0"
+" Bearer Token (application-only) and OAuth 1.0a User Context "
+"authentication for you."
+msgstr ""
+"트위터 API v2의 인터페이스인 :class:`Client` 는, "
+"개발자를 위해 OAuth 2.0 베어러 토큰 (앱 한정)과, "
+"OAuth 1.0a 사용자 컨텍스트 인증 방식을 둘 다 처리할 수 있게 만들어졌습니다. "
+
+#: ../../authentication.rst:82
+msgid ""
+"You can then simply pass the bearer token to :class:`Client` when "
+"initializing it::"
+msgstr ""
+"간단하게, 그냥 :class:`Client` 를 초기화할 때 "
+"아래와 같이 베어러 토큰을 전달하기만 하면 됩니다::"
+
+#: ../../authentication.rst:98
+msgid ""
+"You can then simply pass all four credentials to :class:`Client` when "
+"initializing it::"
+msgstr ""
+"간단하게, 그냥 :class:`Client` 를 초기화할 때 "
+"아래와 같이 4개의 인증 관련 키값 및 토큰값을 전달하기만 하면 됩니다::"
+
+#: ../../authentication.rst:113
+msgid "OAuth 2.0 Authorization Code Flow with PKCE (User Context)"
+msgstr "OAuth 2.0 PKCE 인증 코드 플로우 (사용자 컨텍스트)"
+
+#: ../../authentication.rst:114
+msgid ""
+"You can generate an access token to authenticate as a user using "
+":class:`OAuth2UserHandler`."
+msgstr ""
+":class:`OAuth2UserHandler` 를 이용해, 액세스 토큰을 생성하고 "
+"사용자로서 인증할 수 있습니다. "
+
+#: ../../authentication.rst:117
+msgid ""
+"You'll need to turn on OAuth 2.0 under the User authentication settings "
+"section of your app's Settings tab under the `Twitter Developer Portal "
+"Projects & Apps page`_. To do this, you'll need to provide a Callback / "
+"Redirect URI / URL."
+msgstr ""
+"우선 `트위터 개발자 포털의 Projects & Apps 페이지`_ 에서 해당 앱 정보에 들어가, "
+"하단의 User authentication settings에서 OAuth 2.0 설정을 활성화해야 합니다. "
+"이 작업을 위해서는, 콜백 및 리다이렉트 URI 또는 URL을 제공해야 합니다. "
+
+#: ../../authentication.rst:122
+msgid ""
+"Then, you'll need to note the app's Client ID, which you can find through"
+" your app's Keys and Tokens tab under the `Twitter Developer Portal "
+"Projects & Apps page`_. If you're using a confidential client, you'll "
+"also need to generate a Client Secret."
+msgstr ""
+"그런 다음, 앱의 클라이언트 ID값을 메모해야 합니다. "
+"이는 `트위터 개발자 포털의 Projects & Apps 페이지`_ 에서 해당 앱 정보에 들어가, "
+"Keys and Tokens 탭을 눌러 생성 및 확인할 수 있습니다. "
+"상용 클라이언트를 사용 중인 경우, 클라이언트 시크릿값도 생성해야 합니다. "
+
+#: ../../authentication.rst:127
+msgid ""
+"You can then initialize :class:`OAuth2UserHandler` with the scopes you "
+"need::"
+msgstr "그러면 이제 Scope로, 아래와 같이 :class:`OAuth2UserHandler` 를 초기화할 수 있습니다::"
+
+#: ../../authentication.rst:139
+msgid ""
+"For a list of scopes, see the Scopes section of Twitter's `OAuth 2.0 "
+"Authorization Code Flow with PKCE documentation`_."
+msgstr ""
+"Scope의 목록은 트위터의 "
+"`OAuth 2.0 PKCE 인증 코드 플로우 참조 문서`_ 의 Scope 문단을 참고하시기 바랍니다. "
+
+#: ../../authentication.rst:144 ../../authentication.rst:187
+msgid "Then, you can get the authorization URL::"
+msgstr "이제, 아래와 같이 인증 URL을 받아올 수 있습니다:: "
+
+#: ../../authentication.rst:148
+msgid ""
+"This can be used to have a user authenticate your app. Once they've done "
+"so, they'll be redirected to the Callback / Redirect URI / URL you "
+"provided. You'll need to pass that authorization response URL to fetch "
+"the access token::"
+msgstr ""
+"이는 사용자가 앱에서 인증하도록 하는 데 사용할 수 있습니다. 그러면 제공했던 콜백 및 리다이렉트 "
+"URI/URL로 리다이렉트되게 됩니다. 액세스 토큰을 가져오려면, 아래와 같이 인증 응답 URL을 제공해야 합니다::"
+
+#: ../../authentication.rst:156
+msgid ""
+"You can then pass the access token to :class:`Client` when initializing "
+"it::"
+msgstr "아래와 같이 :class:`Client` 를 초기화할 때 액세스 토큰을 전달할 수 있습니다:: "
+
+#: ../../authentication.rst:161
+msgid "3-legged OAuth"
+msgstr "3-legged OAuth"
+
+#: ../../authentication.rst:162
+msgid "This section supplements Twitter's `3-legged OAuth flow documentation`_."
+msgstr "이 문단은 트위터의 `3-legged OAuth 플로우 참조 문서`_ 에 대한 보충입니다."
+
+#: ../../authentication.rst:166
+msgid ""
+"To authenticate as a user other than your developer account, you'll need "
+"to obtain their access tokens through the 3-legged OAuth flow."
+msgstr ""
+"개발자 계정이 아닌 다른 사용자로서 인증하려면, "
+"3-legged OAuth 플로우를 통해 해당 사용자의 액세스 토큰을 가져와야 합니다. "
+
+#: ../../authentication.rst:169
+msgid ""
+"First, you'll need to turn on OAuth 1.0 under the User authentication "
+"settings section of your app's Settings tab under the `Twitter Developer "
+"Portal Projects & Apps page`_. To do this, you'll need to provide a "
+"Callback / Redirect URI / URL."
+msgstr ""
+"우선 `트위터 개발자 포털의 Projects & Apps 페이지`_ 에서 해당 앱 정보에 들어가, "
+"하단의 User authentication settings에서 OAuth 1.0(a) 설정을 활성화해야 합니다. "
+"이 작업을 위해서는, 콜백 및 리다이렉트 URI 또는 URL을 제공해야 합니다. "
+
+#: ../../authentication.rst:174
+msgid ""
+"Then, you'll need the app's API / consumer key and secret that can be "
+"found through your app's Keys and Tokens tab under the `Twitter Developer"
+" Portal Projects & Apps page`_."
+msgstr ""
+"그런 다음, 앱의 API Consumer 키값과 Secret값을 가져옵니다. "
+"이는 `트위터 개발자 포털의 Projects & Apps 페이지`_ 에서 해당 앱 정보에 들어가, "
+"Keys and Tokens 탭을 눌러 생성 및 확인할 수 있습니다. "
+
+#: ../../authentication.rst:178
+msgid "You can then initialize an instance of :class:`OAuth1UserHandler`::"
+msgstr "그러면 아래와 같이 :class:`OAuth1UserHandler` 인스턴스를 초기화할 수 있습니다:: "
+
+#: ../../authentication.rst:191
+msgid ""
+"To use Log in with Twitter / Sign in with Twitter, you can set the "
+"``signin_with_twitter`` parameter when getting the authorization URL::"
+msgstr ""
+"'트위터로 로그인' 및 '트위터로 회원가입'을 이용하기 위해서는, "
+"인증 URL을 받아오는 과정에서 ``signin_with_twitter`` 를 아래와 같이 설정하면 됩니다:: "
+
+#: ../../authentication.rst:196
+msgid ""
+"This can be used to have a user authenticate your app. Once they've done "
+"so, they'll be redirected to the Callback / Redirect URI / URL you "
+"provided, with ``oauth_token`` and ``oauth_verifier`` parameters."
+msgstr ""
+"이는 사용자가 앱에서 인증하는데 사용할 수 있습니다. "
+"이렇게 하면, 해당 사용자는 ``oauth_token`` 및 ``oauth_verifier`` 매개변수와 함께 "
+"제공했던 콜백 및 리다이렉트 URI/URL로 리다이렉트됩니다. "
+
+#: ../../authentication.rst:200
+msgid "You can then use the verifier to get the access token and secret::"
+msgstr "이제 Verifier를 이용해, 액세스 토큰과 Secret값을 가져올 수 있습니다:: "
+
+#: ../../authentication.rst:206
+msgid ""
+"If you need to reinitialize :class:`OAuth1UserHandler`, you can set the "
+"request token and secret afterward, before using the verifier to get the "
+"access token and secret::"
+msgstr ""
+"만약 :class:`OAuth1UserHandler` 를 다시 초기화해야 할 경우, "
+"위처럼 Verifier를 이용해 액세스 토큰과 Secret값을 가져오기 전에 "
+"요청(Request) 토큰 및 Secret값을 설정할 수 있습니다:: "
+
+#: ../../authentication.rst:225
+msgid ""
+"Otherwise, you can simply use the old instance of "
+":class:`OAuth1UserHandler`."
+msgstr "대신, 간단히 :class:`OAuth1UserHandler` 의 예전 인스턴스를 사용할수도 있습니다."
+
+#: ../../authentication.rst:227
+msgid ""
+"You can then use this instance of :class:`OAuth1UserHandler` to "
+"initialize :class:`API`::"
+msgstr ""
+"그러면 아래와 같이 :class:`OAuth1UserHandler` 의 이 인스턴스를 사용, "
+":class:`API` 를 초기화할 수 있습니다:: "
+
+#: ../../authentication.rst:232
+msgid ""
+"You can also use the ``access_token`` and ``access_token_secret`` to "
+"initialize a new instance of :class:`OAuth1UserHandler` to initialize "
+":class:`API`::"
+msgstr ""
+":class:`API` 를 초기화하기 위해, ``access_token`` 과 ``access_token_secret`` "
+"을 사용해 :class:`OAuth1UserHandler` 의 새 인스턴스를 초기화할수도 있습니다:: "
+
+#: ../../authentication.rst:241
+msgid ""
+"For initializing :class:`Client`, you can pass ``access_token`` and "
+"``access_token_secret`` directly::"
+msgstr ""
+"또한 :class:`Client` 를 초기화하기 위해, ``access_token`` 과 ``access_token_secret`` 을"
+"아래와 같이 직접 전달할 수도 있습니다:: "
+
+#: ../../authentication.rst:252
+msgid "PIN-based OAuth"
+msgstr "PIN 기반 OAuth"
+
+#: ../../authentication.rst:253
+msgid "This section supplements Twitter's `PIN-based OAuth documentation`_."
+msgstr "이 문단은 트위터의 `PIN 기반 OAuth 참조 문서`_ 에 대한 보충입니다."
+
+#: ../../authentication.rst:257
+msgid ""
+"The PIN-based OAuth flow can be used by setting the ``callback`` "
+"parameter to ``\"oob\"``::"
+msgstr ""
+"PIN 기반 OAuth 플로우는 ``callback`` 매개변수를 "
+"``\"oob\"`` 로 설정함으로써 사용할 수 있습니다::"
+
+#: ../../authentication.rst:267
+msgid "You can then get the authorization URL the same way::"
+msgstr "그러면 인증 URL을 같은 방법으로 받아올 수 있습니다:: "
+
+#: ../../authentication.rst:271
+msgid ""
+"When the user authenticates with this URL, they'll be provided a PIN. You"
+" can retrieve this PIN from the user to use as the verifier::"
+msgstr ""
+"사용자가 이 URL로 인증하면, PIN을 받게 됩니다. "
+"이 PIN을 사용자로부터 받아와, Verifier로서 사용할 수 있습니다:: "
+
+#: ../../authentication.rst:279
+msgid ""
+"You can then use the instance of :class:`OAuth1UserHandler` and/or the "
+"``access_token`` and ``access_token_secret``."
+msgstr ""
+"그러면 :class:`OAuth1UserHandler` 의 인스턴스나 "
+"``access_token`` 및 ``access_token_secret`` 를 사용할 수 있습니다. "
+
+#: ../../authentication.rst:283
+msgid "Reference"
+msgstr "참조"
+
+#: of tweepy.auth.OAuth1UserHandler:1
+msgid "OAuth 1.0a User Context authentication handler"
+msgstr "OAuth 1.0a 사용자 컨텍스트 인증 처리기(Handler)"
+
+#: of tweepy.auth.OAuth1UserHandler:3
+msgid "Renamed from :class:`OAuthHandler`"
+msgstr ":class:`OAuthHandler` 로부터 이름 변경됨 "
+
+#: of tweepy.auth.OAuth1UserHandler.get_authorization_url:1
+#: tweepy.auth.OAuth2UserHandler.get_authorization_url:1
+msgid "Get the authorization URL to redirect the user to"
+msgstr "사용자를 리다이렉트시킬 인증 URL을 가져옴"
+
+#: of tweepy.auth.OAuth1UserHandler.get_access_token:1
+msgid ""
+"After user has authorized the app, get access token and secret with "
+"verifier"
+msgstr "사용자의 앱 인증 이후, 액세스 토큰과 Secret값을 Verifier로 받아옴 "
+
+#: of tweepy.auth.OAuth1UserHandler.set_access_token:1
+msgid "Set through initialization instead."
+msgstr "초기화(Initalization)를 통해 설정할 것 "
+
+#: of tweepy.auth.OAuthHandler:1
+msgid "Alias for :class:`OAuth1UserHandler`"
+msgstr "다음 클래스와 동일함: :class:`OAuth1UserHandler` "
+
+#: of tweepy.auth.OAuthHandler:3
+msgid "Use :class:`OAuth1UserHandler` instead."
+msgstr ":class:`OAuth1UserHandler` 를 대신 사용할 것 "
+
+#: of tweepy.auth.OAuth2AppHandler:1
+msgid ""
+"OAuth 2.0 Bearer Token (App-Only) using API / Consumer key and secret "
+"authentication handler"
+msgstr ""
+"API Consumer Key값과 Secret값을 사용하는 OAuth 2.0 베어러 토큰 (앱 한정) 인증 처리기(Handler) "
+
+#: of tweepy.auth.OAuth2AppHandler:4
+msgid "Renamed from :class:`AppAuthHandler`"
+msgstr ":class:`AppAuthHandler` 로부터 이름 변경됨"
+
+#: of tweepy.auth.AppAuthHandler:1
+msgid "Alias for :class:`OAuth2AppHandler`"
+msgstr "다음 클래스와 동일함: :class:`OAuth2AppHandler` "
+
+#: of tweepy.auth.AppAuthHandler:3
+msgid "Use :class:`OAuth2AppHandler` instead."
+msgstr ":class:`OAuth2AppHandler` 를 대신 사용할 것 "
+
+#: of tweepy.auth.OAuth2BearerHandler:1
+msgid "Bases: :py:class:`requests.auth.AuthBase`"
+msgstr "기반 클래스: :py:class:`requests.auth.AuthBase` "
+
+#: of tweepy.auth.OAuth2BearerHandler:1
+msgid "OAuth 2.0 Bearer Token (App-Only) authentication handler"
+msgstr "OAuth 2.0 베어러 토큰 (앱 한정) 인증 처리기(Handler) "
+
+#: of tweepy.auth.OAuth2UserHandler:1
+msgid "Bases: :py:class:`requests_oauthlib.oauth2_session.OAuth2Session`"
+msgstr "기반 클래스: :py:class:`requests_oauthlib.oauth2_session.OAuth2Session` "
+
+#: of tweepy.auth.OAuth2UserHandler:1
+msgid ""
+"OAuth 2.0 Authorization Code Flow with PKCE (User Context) authentication"
+" handler"
+msgstr "OAuth 2.0 PKCE 인증 코드 플로우 (사용자 컨텍스트) 인증 처리기(Handler) "
+
+#: of tweepy.auth.OAuth2UserHandler.fetch_token:1
+msgid ""
+"After user has authorized the app, fetch access token with authorization "
+"response URL"
+msgstr ""
+"사용자 앱 인증 후, 인증 응답 URL을 통해 액세스 토큰을 가져옴 "
+

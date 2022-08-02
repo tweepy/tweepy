@@ -5,7 +5,7 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '4.4.0'
+__version__ = '4.10.0'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
@@ -27,13 +27,11 @@ from tweepy.pagination import Paginator
 from tweepy.place import Place
 from tweepy.poll import Poll
 from tweepy.space import Space
-from tweepy.streaming import Stream
+from tweepy.streaming import (
+    Stream, StreamingClient, StreamResponse, StreamRule
+)
 from tweepy.tweet import ReferencedTweet, Tweet
 from tweepy.user import User
 
 # Global, unauthenticated instance of API
 api = API()
-
-def debug(enable=True, level=1):
-    from http.client import HTTPConnection
-    HTTPConnection.debuglevel = level

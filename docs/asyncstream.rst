@@ -2,10 +2,11 @@
 
 .. currentmodule:: tweepy.asynchronous
 
-**************************************************************************
-:class:`tweepy.asynchronous.AsyncStream` --- Asynchronous Stream Reference
-**************************************************************************
+********************
+:class:`AsyncStream`
+********************
 
 .. autoclass:: AsyncStream
    :members:
+   :inherited-members:
    :member-order: bysource

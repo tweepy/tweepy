@@ -1,0 +1,117 @@
+# exceptions.po - Exceptions
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-27 16:12+0900\n"
+"PO-Revision-Date: 2021-12-03 17:33+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../exceptions.rst:5
+msgid "Exceptions"
+msgstr "예외"
+
+#: ../../exceptions.rst:7
+msgid ""
+"Exceptions are available directly in the :mod:`tweepy` module, which "
+"means :mod:`tweepy.errors` itself does not need to be imported. For "
+"example, :exc:`tweepy.errors.TweepyException` is available as "
+":exc:`tweepy.TweepyException`."
+msgstr ""
+":mod:`tweepy` 모듈에서 직접 예외를 사용할 수 있으므로, "
+"굳이 :mod:`tweepy.errors` 자체를 불러오거나 임포트(Import)할 필요는 없습니다. "
+"예로, :exc:`tweepy.errors.TweepyException` 는 "
+":exc:`tweepy.TweepyException`. 로도 사용이 가능합니다."
+
+#: of tweepy.errors.TweepyException:1
+msgid "Bases: :py:class:`Exception`"
+msgstr "기반: :py:class:`Exception`"
+
+#: of tweepy.errors.TweepyException:1
+msgid "Base exception for Tweepy"
+msgstr "Tweepy의 기본 예외."
+
+#: of tweepy.errors.HTTPException:1
+msgid "Bases: :py:class:`tweepy.errors.TweepyException`"
+msgstr "기반: :py:class:`tweepy.errors.TweepyException`"
+
+#: of tweepy.errors.HTTPException:1
+msgid "Exception raised when an HTTP request fails"
+msgstr "HTTP 요청 실패 시 발생하는 예외."
+
+#: of tweepy.errors.HTTPException:7
+msgid "Requests Response from the Twitter API"
+msgstr "트위터 API로의 요청에 대한 응답"
+
+#: of tweepy.errors.HTTPException
+msgid "type"
+msgstr "타입"
+
+#: of tweepy.errors.HTTPException:9
+msgid "requests.Response"
+msgstr "requests.Response"
+
+#: of tweepy.errors.HTTPException:13
+msgid "The errors the Twitter API responded with, if any"
+msgstr "트위터 API가 응답과 같이 반환한 오류 (있는 경우에만)"
+
+#: of tweepy.errors.HTTPException:15
+msgid "List[dict[str, Union[int, str]]]"
+msgstr "List[dict[str, Union[int, str]]]"
+
+#: of tweepy.errors.HTTPException:19
+msgid "The error codes the Twitter API responded with, if any"
+msgstr "트위터 API가 응답과 같이 반환한 오류 코드 (있는 경우에만)"
+
+#: of tweepy.errors.HTTPException:21
+msgid "List[int]"
+msgstr "List[int]"
+
+#: of tweepy.errors.HTTPException:25
+msgid "The error messages the Twitter API responded with, if any"
+msgstr "트위터 API가 응답과 같이 반환한 오류 메세지 (있는 경우에만)"
+
+#: of tweepy.errors.HTTPException:27
+msgid "List[str]"
+msgstr "List[str]"
+
+#: of tweepy.errors.BadRequest:1 tweepy.errors.Forbidden:1
+#: tweepy.errors.NotFound:1 tweepy.errors.TooManyRequests:1
+#: tweepy.errors.TwitterServerError:1 tweepy.errors.Unauthorized:1
+msgid "Bases: :py:class:`tweepy.errors.HTTPException`"
+msgstr "기반: :py:class:`tweepy.errors.HTTPException`"
+
+#: of tweepy.errors.BadRequest:1
+msgid "Exception raised for a 400 HTTP status code"
+msgstr "HTTP 400에 의해 발생하는 예외."
+
+#: of tweepy.errors.Unauthorized:1
+msgid "Exception raised for a 401 HTTP status code"
+msgstr "HTTP 401에 의해 발생하는 예외."
+
+#: of tweepy.errors.Forbidden:1
+msgid "Exception raised for a 403 HTTP status code"
+msgstr "HTTP 403에 의해 발생하는 예외."
+
+#: of tweepy.errors.NotFound:1
+msgid "Exception raised for a 404 HTTP status code"
+msgstr "HTTP 404에 의해 발생하는 예외."
+
+#: of tweepy.errors.TooManyRequests:1
+msgid "Exception raised for a 429 HTTP status code"
+msgstr "HTTP 429에 의해 발생하는 예외."
+
+#: of tweepy.errors.TwitterServerError:1
+msgid "Exception raised for a 5xx HTTP status code"
+msgstr "HTTP 5xx에 의해 발생하는 예외."
+

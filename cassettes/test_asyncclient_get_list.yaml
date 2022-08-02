@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+    method: GET
+    uri: https://api.twitter.com/2/lists/84839422
+  response:
+    body:
+      string: '{"data":{"id":"84839422","name":"Official Twitter Accounts"}}'
+    headers:
+      api-version:
+      - '2.42'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '86'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 07 May 2022 12:56:24 UTC
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A165192818461144431; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A165192818461144431; Max-Age=63072000; Expires=Mon, 06 May
+        2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_Mc3vJnQyR/sLdjFGzexbPQ=="; Max-Age=63072000; Expires=Mon,
+        06 May 2024 12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A165192818461144431; Max-Age=63072000; Expires=Mon, 06 May 2024
+        12:56:24 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read
+      x-connection-hash:
+      - 78ade1716d4d0ed306e90120dc4d7562b538b74c0a138d0fe5a984a4e9b5f030
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1651929084'
+      x-response-time:
+      - '31'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/lists/84839422
+version: 1

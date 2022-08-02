@@ -1,0 +1,169 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: GET
+    uri: https://api.twitter.com/1.1/account/verify_credentials.json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAOxX227jNhD9FUJ9aIsasURJtmygQFOki3a3aYOF0aJYBQIlUTYRitSSlLNukH/v
+        UJJl+ZZNN3noQ/0QhXPjzOgcDvXgsNyZe+4U49ANfTwJwtksCmeTESgSbZQzd05onZEjSElBubin
+        tNqgBdWGiSXIdaYoFcme+oquQcNlRgyTAsSwyilYsqoTXGaZrIVBtaY5MhIZiIe62N8QjSqiDJJF
+        J/paNwZ6jlbGVHoej+OxuchkPL7M/vrpUizSN/ffwh614hD70CZ/q9/+wa+qmxswocIww6h25g+t
+        efOA5YeHZ7l/qojIaZ4c2i6ZWdUpOJTg1yS9fdrama442XROT5oykbPMpvfBHWH/9vH28aB1n813
+        15Ivyzcep1ym8bgk2lAFUtv5eJxJUbDlRbX56lfP+xc1wWY1dvFkr7ZwMprObHFQXaWkoZmhgMuC
+        cE1HTiE5l/dU6aQBiTMPQaYYFXkv8TDgi0GC+VbijhxAIrESAkvnWgp0RTPkuQjjuevPAx9958IP
+        YdeLIJuCrGWtGJTXBwUEmSyRRaEpLEXN+cgxrKTJ31LQrWBJZUIFSfkg4zVVrGADgTbEALb70BhK
+        4AQI0wVp9fZt7iW9WNXomiiEA4S9uRfMg6hPGmPbQsve0J16rj+Z4JnvB5Ef4umQvcda8DP0k43/
+        foF++JmoUoppGN3UKWfZfEu7dXARXbhoBexLgdFIUU6Jpec9vFuk66qSwMlCKmRWFJyYAXigy5tf
+        0BqjH6W8K4m60wjeUiWZMBpxUots1fA7JxsU13nkZ/C3iGaxOERtDxKjwIsM4TCkLGS3MmRpMXQL
+        XdyUqeTdAtqtktIaS9HyY/9oOqh7d6S1iq650xB6h91JEODJFHs48ga9PVbuodofeRbUoy1DLXc1
+        YCyzu8S16/oZQStFi+/jARNLmTJOL0zb0IZCjm0+GAnZUiFuvem26X/SFF1WVRsyHpNW2+SSKFrx
+        TWJk0kIssUW1mDupbCs7Nmi6edq3U53z3Ot6T5ntv5mUKmcCXrDeiuAYyehOL4xiaW2k6g0UtUeJ
+        JclzaePNztImDDwQesHMn56gzVC7o81/giH43g/c6P3y9+I1WbJD67l5srfvF82Trk8wRCCpeNy2
+        8aUjxHPDETCwnZD/s+zlLGM6+VjDKO5J1gGrY18/ydrJaQfncDx3ovzQzUoArCCopNYshew1FRqg
+        uqa9bTsZAcLO40vycJ+Vx95mw0YcTXXIxCgiNCegPiUFDh05wXWmAKQlKcnulgoSszcUbv0dt/k5
+        J21YSZZ0wKoGtCTVFrHlsmVFY2NZtKJl//TgvgbXsuYu/lTcpOHCHmdfIbyB9VHpJ2up9jfbs4XN
+        PD+cRBPfi9xZGPj+FEduPH6bv/vt3fUiS4RUJeEHaTxV2uvvlhIhgJGH596ZjVpru9PxxxQIJ950
+        NgumUzzYgDNx10PFu7r03gy1muU0JSpJgdiQxllIbe1gwc9b2bl2XgtHzxGE+pcMsyUBb9pMgc6j
+        V+a0IDU3n5MfhGyPX/s5uS+B0+5jDV8f9sQwvU5IA3ft9tNydzrsiJqYTWVHgbB39pFjZ/OKcihD
+        tOeEaoZkMxhrXTV17GJTCt8Y1Qpck/ZOv/2EbQwe/wEAAP//AwCOsxgQPw8AAA==
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '1243'
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Sun, 03 Apr 2022 08:49:40 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sun, 03 Apr 2022 08:49:40 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A164897578037650380; Max-Age=63072000; Expires=Tue,
+        02 Apr 2024 08:49:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A164897578037650380; Max-Age=63072000; Expires=Tue, 02 Apr
+        2024 08:49:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_j4Z9yQ7csmtYO0dDDWt41g=="; Max-Age=63072000; Expires=Tue,
+        02 Apr 2024 08:49:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - lang=en; Path=/
+      - guest_id=v1%3A164897578037650380; Max-Age=63072000; Expires=Tue, 02 Apr 2024
+        08:49:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      status:
+      - 200 OK
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - c6e61385a8ce7bb44a1f2b70e7252d65709b1854fc4362cc882adc809e2c455b
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '75'
+      x-rate-limit-remaining:
+      - '74'
+      x-rate-limit-reset:
+      - '1648976680'
+      x-response-time:
+      - '52'
+      x-transaction:
+      - 93b9113e8c49b1cc
+      x-twitter-response-tags:
+      - BouncerExempt
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - guest_id=v1%3A164897578037650380; guest_id_ads=v1%3A164897578037650380; guest_id_marketing=v1%3A164897578037650380;
+        personalization_id="v1_j4Z9yQ7csmtYO0dDDWt41g=="; lang=en
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.8.0
+    method: POST
+    uri: https://api.twitter.com/1.1/direct_messages/indicate_typing.json?recipient_id=1072250532645998596
+  response:
+    body:
+      string: ''
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-security-policy:
+      - default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com
+        https://twitter.com https://ton.twitter.com; object-src 'none'; script-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src
+        'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri
+        https://twitter.com/i/csp_report?a=NVQWGYLXFVSG2%3D%3D%3D&ro=false;
+      content-type:
+      - text/html;charset=utf-8
+      date:
+      - Sun, 03 Apr 2022 08:49:40 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Sun, 03 Apr 2022 08:49:40 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      status:
+      - 204 No Content
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - a165c17d70f8bb53ea2bcc6d4ccae838f8e240fdc961c253bd20562ed881c742
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-response-time:
+      - '14'
+      x-transaction:
+      - bb0fa2e18c728150
+      x-twitter-response-tags:
+      - BouncerCompliant
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+version: 1

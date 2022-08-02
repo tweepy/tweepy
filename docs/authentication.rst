@@ -199,7 +199,7 @@ they'll be redirected to the Callback / Redirect URI / URL you provided, with
 
 You can then use the verifier to get the access token and secret::
 
-    access_token, access_token_secret = oauth1_user_handler.fetch_token(
+    access_token, access_token_secret = oauth1_user_handler.get_access_token(
         "Verifier (oauth_verifier) here"
     )
 
@@ -218,8 +218,10 @@ and secret::
         "oauth_token": "Request Token (oauth_token) here",
         "oauth_token_secret": request_secret
     }
-    access_token, access_token_secret = new_oauth1_user_handler.fetch_token(
-        "Verifier (oauth_verifier) here"
+    access_token, access_token_secret = (
+        new_oauth1_user_handler.get_access_token(
+            "Verifier (oauth_verifier) here"
+        )
     )
 
 Otherwise, you can simply use the old instance of :class:`OAuth1UserHandler`.
@@ -272,7 +274,7 @@ When the user authenticates with this URL, they'll be provided a PIN. You can
 retrieve this PIN from the user to use as the verifier::
 
     verifier = input("Input PIN: ")
-    access_token, access_token_secret = oauth1_user_handler.fetch_token(
+    access_token, access_token_secret = oauth1_user_handler.get_access_token(
         verifier
     )
 

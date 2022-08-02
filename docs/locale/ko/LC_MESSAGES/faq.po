@@ -1,0 +1,353 @@
+# faq.po - FAQ
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-27 16:12+0900\n"
+"PO-Revision-Date: 2022-01-08 05:28+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../faq.rst:7
+msgid "Frequently Asked Questions"
+msgstr "자주 묻는 질문(FAQ)"
+
+#: ../../faq.rst:10
+msgid "General"
+msgstr "일반"
+
+#: ../../faq.rst:13
+msgid ""
+"Why am I encountering a 401 Unauthorized error with :class:`API` or 403 "
+"Forbidden error with :class:`Client`?"
+msgstr ""
+":class:`API` 클래스에서 HTTP 401 권한 없음(Unauthorized) 오류가 발생하거나, "
+":class:`Client` 클래스에서 HTTP 403 금지됨(Forbidden) 오류가 발생하는 이유는 뭔가요? "
+
+#: ../../faq.rst:15
+msgid ""
+"If you're using a method that performs an action on behalf of the "
+"authenticating user, e.g. :meth:`API.update_status`, make sure your app "
+"has the write permission."
+msgstr ""
+"만약 본인이 현재 인증된 사용자로 해당 작업(메서드)을 실행하고 있다면"
+"(ex. :meth:`API.update_status`), 본인의 앱에 쓰기 권한이 있는지 확인하세요. "
+
+#: ../../faq.rst:19
+msgid ""
+"After giving it the write permission, make sure to regenerate and use new"
+" credentials to utilize it."
+msgstr "(쓰기 권한이 없었다면) 쓰기 권한을 부여하고, 새 자격 증명을 사용하여 해당 작업을 재생성하세요. "
+
+#: ../../faq.rst:22
+msgid ""
+"See `Twitter's API documentation on app permissions`_ for more "
+"information."
+msgstr "더 자세한 정보는 `트위터 API 문서 - 엡 권한`_ 페이지를 참고하세요."
+
+#: ../../faq.rst:27
+msgid "Why am I encountering a 403 Forbidden error with :class:`API`?"
+msgstr ":class:`API` 클래스에서 HTTP 403 금지됨(Forbidden) 오류가 발생하는 이유는 뭔가요?"
+
+#: ../../faq.rst:29
+msgid ""
+"If you have Essential access to the Twitter API, you won't be able to "
+"access Twitter API v1.1. This includes all :class:`API` methods and "
+":class:`Stream`."
+msgstr ""
+"트위터 API 액세스 권한이 Essential인 경우, 트위터 API v1.1에 액세스 할 수 없을거예요."
+"이는 :class:`API` 와 :class:`Stream` 클래스의 모든 메서드를 포함하고 있습니다. "
+
+#: ../../faq.rst:32
+msgid ""
+"You can use Twitter API v2 with :class:`Client` or apply for Elevated "
+"access."
+msgstr ""
+":class:`Client` 클래스를 이용해 트위터 API v2를 이용하거나, "
+"Elevated로의 액세스 권한 상승을 요청해야 해요. "
+
+#: ../../faq.rst:34
+msgid ""
+"See the `Twitter API access levels and versions documentation`_ for more "
+"information."
+msgstr "더 자세한 정보는 `트위터 API 문서 - 액세스 권한 및 버전`_ 페이지를 참고하세요."
+
+#: ../../faq.rst:40
+msgid "Why am I encountering issues when attempting to upload GIFs or videos?"
+msgstr "GIF나 동영상을 업로드하려고 하는데 문제가 발생해요. 이유가 뭔가요? "
+
+#: ../../faq.rst:42
+msgid ""
+"If you are encountering a 400 Bad Request error when uploading large GIFs"
+" or other errors/issues with uploading videos, make sure to pass the "
+"``media_category`` parameter, e.g. as ``tweet_gif`` or ``tweet_video``."
+msgstr ""
+"고용량의 GIF를 업로드할 때 HTTP 400 잘못된 요청(Bad Request) 오류가 발생하거나, "
+"영상 파일을 업로드할 때 다른 오류 및 문제가 발생하는 경우, "
+"``media_category`` 매개변수를 제대로 설정했는지 확인하세요. "
+"(예: ``tweet_gif`` 또는 ``tweet_video``)"
+
+#: ../../faq.rst:46
+msgid "Also make sure your video follows the recommended specifications."
+msgstr "또한 업로드하려는 영상 파일이 권장 규격에 맞는지도 확인하세요. "
+
+#: ../../faq.rst:48
+msgid ""
+"See `Twitter's API documentation on media best practices`_ for more "
+"information."
+msgstr "더 자세한 정보는 `트위터 API 문서 - 미디어 업로드`_ 페이지를 참고하세요."
+
+#: ../../faq.rst:53
+msgid ""
+"Why am I getting an inconsistent number of / not getting 3200 Tweets for "
+"a specific user?"
+msgstr "특정 사용자에 대한 3200개의 트윗이 수신되거나 그렇지 못한 이유는 무엇인가요? "
+
+#: ../../faq.rst:55
+msgid ""
+"\"For very high volume and high traffic accounts, be aware that the "
+"Twitter API is highly distributed and eventually consistent. We strive to"
+" provide current information but like any large scale system, you may see"
+" unexpected behaviours at high volumes.\""
+msgstr ""
+"\"많은 트래픽이나 고용량의 트래픽을 발생시키는 계정의 경우, "
+"트위터 API가 고도로 분산되어 있으며 일관성이 있음을 유의해야 합니다. "
+"저희는 최신 정보를 제공하기 위해 노력하나, 다른 대규모 시스템과 마찬가지로 "
+"예상 밖의 행동을 고용량 트래픽으로 간주할 수 있습니다.\""
+
+#: ../../faq.rst:60
+msgid "https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635"
+msgstr "https://twittercommunity.com/t/inconsistent-tweet-retrieval/150635"
+
+#: ../../faq.rst:63
+msgid "Why am I getting no results from :meth:`API.search_tweets`?"
+msgstr ":meth:`API.search_tweets` 로부터 아무 결과값도 받지 못하는 이유는 무엇인가요? "
+
+#: ../../faq.rst:65
+msgid ""
+"Twitter's standard search API only \"searches against a sampling of "
+"recent Tweets published in the past 7 days.\""
+msgstr "트위터의 표준 검색 API는 \"최근 7일간의 트윗에 대해서만 검색\"합니다."
+
+#: ../../faq.rst:68
+msgid ""
+"If you're specifying an ID range beyond the past 7 days or there are no "
+"results from the past 7 days, then no results will be returned."
+msgstr ""
+"최근 7일 밖과 같은 범위를 지정하거나, 지난 7일간의 트윗(또는 대상 데이터)이 없으면 "
+"결과값이 반환되지 않습니다. "
+
+#: ../../faq.rst:71
+msgid ""
+"See Twitter's documentation on the standard search API for more "
+"information: https://developer.twitter.com/en/docs/twitter-"
+"api/v1/tweets/search/overview https://developer.twitter.com/en/docs"
+"/twitter-api/v1/tweets/search/api-reference/get-search-tweets"
+msgstr ""
+"더 자세한 정보는 다음의 트위터 API 문서 - 표준 검색을 참고하세요: "
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview "
+"https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets"
+
+#: ../../faq.rst:76
+msgid "Tweepy v4"
+msgstr "tweepy v4"
+
+#: ../../faq.rst:79
+msgid ""
+"Why am I getting a :class:`TypeError` about an :class:`API` method taking"
+" 1 positional argument but given 2?"
+msgstr ""
+":class:`API` 클래스의 메서드 중 하나의 위치 인수(Positional argument)를 받는 메서드가 "
+"두 개의 위치 인수를 전달해줬을 때 :class:`TypeError` 를 반환하나요? "
+
+#: ../../faq.rst:81
+msgid ""
+"This and other similar errors are due to :ref:`Tweepy v4.0.0 <Version "
+"4.0.0>` changing :class:`API` methods to no longer accept arbitrary "
+"positional arguments. The 1 positional argument being referred to in the "
+"error is ``self``."
+msgstr ""
+"이 오류 및 다른 유사한 오류는 :ref:`Tweepy v4.0.0 <Version 4.0.0>` 에서의 변경점 중 "
+":class:`API` 클래스의 메서드가 더 이상 임의의 위치 인수를 받지 않도록 바뀌었기 때문입니다. "
+
+#: ../../faq.rst:86
+msgid "These parameters can be passed as keyword arguments instead."
+msgstr "이런 매개변수는 키워드 인수(Keyword argument)로 대신 전달될 수 있습니다. "
+
+#: ../../faq.rst:88
+msgid "Refer to the documentation for the :class:`API` method being used."
+msgstr "사용 중인 :class:`API` 클래스 메서드에 대한 tweepy 문서를 참고하세요. "
+
+#: ../../faq.rst:91
+msgid "Where did ``API.me`` go?"
+msgstr "``API.me`` 는 어디로 이동됐나요? "
+
+#: ../../faq.rst:93
+msgid ""
+"If you're attempting to use ``API.me`` with Tweepy v4, you'll get an "
+":class:`AttributeError` about the :class:`API` object not having a ``me``"
+" attribute."
+msgstr ""
+"tweepy v4에서 ``API.me`` 를 사용하려 하면, :class:`API` 가 ``me`` 속성을 "
+"가지고 있지 않다는 :class:`AttributeError` 가 반환될 겁니다."
+
+#: ../../faq.rst:97
+msgid "This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` removed ``API.me``."
+msgstr "이는 :ref:`Tweepy v4.0.0 <Version 4.0.0>` 부터 ``API.me`` 가 제거됐기 때문입니다."
+
+#: ../../faq.rst:99
+msgid "Instead, you can use :meth:`API.verify_credentials`."
+msgstr ":meth:`API.verify_credentials` 를 이 대신 사용할 수 있습니다. "
+
+#: ../../faq.rst:102
+msgid "Where did ``API.search`` go?"
+msgstr "``API.search`` 는 어디로 이동됐나요? "
+
+#: ../../faq.rst:104
+msgid ""
+"If you're attempting to use ``API.search`` or other :class:`API` methods "
+"from Tweepy v3, you might encounter an :class:`AttributeError` with "
+"Tweepy v4."
+msgstr ""
+"``API.search`` 이나 tweepy v3 에서만 지원했던 :class:`API` 메서드를 사용하려는 경우, "
+"tweepy v4에서는 :class:`AttributeError` 가 대신 반환되게 됩니다."
+
+#: ../../faq.rst:107
+msgid ""
+"This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` renamed many "
+":class:`API` methods to be more consistent."
+msgstr ""
+"이는 :ref:`Tweepy v4.0.0 <Version 4.0.0>` 부터 많은 :class:`API` 클래스 "
+"메서드의 이름을 일관적으로 보이도록 바꿨기 때문입니다."
+
+#: ../../faq.rst:110
+msgid ""
+"For example, ``API.search`` was renamed to :meth:`API.search_tweets`. You"
+" can refer to the changelog / release notes and update your method "
+"invocations accordingly."
+msgstr ""
+"예로, ``API.search`` 는 :meth:`API.search_tweets` 로 바뀌었습니다. "
+"체인지로그(Changelog)나 릴리즈 노트(Release note)를 참고해, "
+"메서드 호출법을 올바르게 수정해 주세요. "
+
+#: ../../faq.rst:115
+msgid "Where did ``StreamListener`` go?"
+msgstr "``StreamListener`` 는 어디로 이동됐나요? "
+
+#: ../../faq.rst:117
+msgid ""
+"If you're attempting to import ``StreamListener`` with Tweepy v4, you'll "
+"get an :class:`AttributeError` about ``tweepy`` not having a "
+"``StreamListener`` attribute."
+msgstr ""
+"tweepy v4에서 ``StreamListener`` 를 임포트하려 하면, "
+"``tweepy`` 가 ``StreamListener`` 속성을 가지고 있지 않다는 "
+":class:`AttributeError` 가 반환될 겁니다."
+
+#: ../../faq.rst:121
+msgid ""
+"This is because :ref:`Tweepy v4.0.0 <Version 4.0.0>` merged "
+"``StreamListener`` into :class:`Stream`."
+msgstr ""
+"이는 :ref:`tweepy v4.0.0 <Version 4.0.0>` 에서 ``StreamListener`` 가 "
+":class:`Stream` 클래스로 병합되었기 때문입니다. "
+
+#: ../../faq.rst:124
+msgid ""
+"To use Tweepy v4, you'll need to update your code to subclass "
+":class:`Stream` instead."
+msgstr ""
+"tweepy v4를 사용하려면, 본인의 코드를 :class:`Stream` 클래스를 사용하게끔 "
+"올바르게 수정해주어야 합니다."
+
+#: ../../faq.rst:128
+msgid "Twitter API v2"
+msgstr "트위터 API v2"
+
+#: ../../faq.rst:130
+msgid ""
+"Why am I not getting expansions or fields data with API v2 using "
+":class:`Client`?"
+msgstr "API v2에서 :class:`Client` 클래스를 사용해 필드 데이터를 받지 못하는 이유는 무엇인가요? "
+
+#: ../../faq.rst:133
+msgid ""
+"If you are simply printing the objects and looking at that output, the "
+"string representations of API v2 models/objects only include the default "
+"attributes that are guaranteed to exist."
+msgstr ""
+"만약 본인이 해당 객체를 출력하고 이를 확인하는 경우, API v2 모델 및 객체의 문자열형 "
+"표현에는 이 객체가 존재함을 보장하는 속성들만 포현되어 있을 것입니다. "
+
+#: ../../faq.rst:137
+msgid ""
+"The objects themselves still include the relevant data, which you can "
+"access as attributes or by key, like a dictionary."
+msgstr ""
+"개체 자체에는 여전히 (딕셔너리형 변수와 같이, 특정 속성 및 값으로 접근할 수 있는) "
+"관련 데이터가 포함되어 있습니다."
+
+#: ../../faq.rst:140
+msgid ""
+"There's also a ``data`` attribute/key that provides the entire data "
+"dictionary."
+msgstr ""
+"전체 데이터에 대한 딕셔너리꼴의 데이터를 제공하는, "
+"데이터(``data``)라는 속성 및 값도 존재합니다."
+
+#: ../../faq.rst:143
+msgid "How do I access ``includes`` data while using :class:`Paginator`?"
+msgstr ""
+":class:`Paginator` 클래스를 포함하고 있는 ``includes`` 데이터에 "
+"액세스하려면 어떻게 해야 하나요? "
+
+#: ../../faq.rst:145
+msgid ""
+":meth:`Paginator.flatten` flattens the ``data`` and iterates over each "
+"object."
+msgstr ""
+":meth:`Paginator.flatten` 메서드가 ``data`` 를 1차원꼴로 단순화해 주고, "
+"이를 각 개체에 대해 반복합니다."
+
+#: ../../faq.rst:147
+msgid ""
+"To access ``includes``, you'll need to iterate through each response "
+"instead."
+msgstr ""
+"``includes`` 에 액세스하려면, 대신 각 응답에 대해 반복해야 합니다."
+
+#: ../../faq.rst:150
+msgid ""
+"Why am I getting rate-limited so quickly when using "
+":meth:`Client.search_all_tweets` with :class:`Paginator`?"
+msgstr ""
+":meth:`Client.search_all_tweets` 과 :class:`Paginator` 를 같이 사용하는데, "
+"왜 이렇게 트위터 API 제한에 빨리 도달하나요? "
+
+#: ../../faq.rst:152
+msgid ""
+"The `GET /2/tweets/search/all`_ Twitter API endpoint that "
+":meth:`Client.search_all_tweets` uses has an additional 1 request per "
+"second rate limit that is not handled by :class:`Paginator`."
+msgstr ""
+":meth:`Client.search_all_tweets` 가 사용하는 "
+"`가져오기: /2/tweets/search/all`_ 트위터 API 엔드포인트는 초당 1번의 추가 제한을 "
+"갖고 있으며, 이는 :class:`Paginator` 에 의해 처리되지 않습니다."
+
+#: ../../faq.rst:156
+msgid ""
+"You can :func:`time.sleep` 1 second while iterating through responses to "
+"handle this rate limit."
+msgstr ""
+":func:`time.sleep` 을 이용, 반복 작업 간 지연 시간을 1초로 설정해 "
+"API 호출 제한에 도달하지 않도록 할 수 있습니다. "
+

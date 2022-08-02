@@ -2,10 +2,7 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
-from base64 import urlsafe_b64encode
-from hashlib import sha256
 import logging
-import secrets
 import warnings
 
 import requests
@@ -205,13 +202,11 @@ class OAuth2UserHandler(OAuth2Session):
 
     def get_authorization_url(self):
         """Get the authorization URL to redirect the user to"""
-        self.code_verifier = secrets.token_urlsafe(128)[:128]
-        code_challenge = urlsafe_b64encode(
-            sha256(self.code_verifier.encode("ASCII")).digest()
-        ).rstrip(b'=')
         authorization_url, state = self.authorization_url(
             "https://twitter.com/i/oauth2/authorize",
-            code_challenge=code_challenge, code_challenge_method="s256"
+            code_challenge=self._client.create_code_challenge(
+                self._client.create_code_verifier(128), "S256"
+            ), code_challenge_method="S256"
         )
         return authorization_url
 
@@ -224,5 +219,5 @@ class OAuth2UserHandler(OAuth2Session):
             authorization_response=authorization_response,
             auth=self.auth,
             include_client_id=True,
-            code_verifier=self.code_verifier
+            code_verifier=self._client.code_verifier
         )

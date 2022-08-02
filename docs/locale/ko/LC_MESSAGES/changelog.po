@@ -1,0 +1,4199 @@
+# changelog.po - Changelog
+# Copyright (C) 2009-2022, Joshua Roesslein
+# This file is distributed under the same license as the tweepy package.
+# 악동분홍토끼 <pinkrabbit412@daum.net>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tweepy 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-08 05:35+0900\n"
+"PO-Revision-Date: 2022-01-05 17:50+0900\n"
+"Last-Translator: 악동분홍토끼 <pinkrabbit412@daum.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../changelog.md:1
+msgid "Changelog"
+msgstr "체인지로그"
+
+#: ../../changelog.md:4
+msgid ""
+"These changelogs are also at <https://github.com/tweepy/tweepy/releases> "
+"as release notes."
+msgstr ""
+"이 체인지로그는 <https://github.com/tweepy/tweepy/releases> 에서 release note로도 "
+"확인이 가능합니다."
+
+#: ../../changelog.md:6
+msgid "Version 4.4.0"
+msgstr "버전 4.4.0"
+
+#: ../../changelog.md:8 ../../changelog.md:18 ../../changelog.md:30
+#: ../../changelog.md:46 ../../changelog.md:360 ../../changelog.md:453
+#: ../../changelog.md:476 ../../changelog.md:517 ../../changelog.md:548
+#: ../../changelog.md:564
+msgid "New Features / Improvements"
+msgstr "새 기능 / 개선"
+
+#: ../../changelog.md:9
+msgid ""
+"Add support for List lookup with Twitter API v2 "
+"([0aa2366](https://github.com/tweepy/tweepy/commit/0aa2366a875464756507abf42709a3db676f4cee))"
+msgstr ""
+"이제 트위터 API v2를 이용한 리스트 검색을 "
+"지원합니다.([0aa2366](https://github.com/tweepy/tweepy/commit/0aa2366a875464756507abf42709a3db676f4cee))"
+
+#: ../../changelog.md:10
+msgid ""
+"Add `Client.get_space_buyers` "
+"([8bf58ca](https://github.com/tweepy/tweepy/commit/8bf58ca5754f72292d1d86367a02778af7a44f20))"
+msgstr ""
+"다음을 추가함: `Client.get_space_buyers` "
+"([8bf58ca](https://github.com/tweepy/tweepy/commit/8bf58ca5754f72292d1d86367a02778af7a44f20))"
+
+#: ../../changelog.md:11
+msgid ""
+"Add `Space.ended_at` and `Space.topic_ids` "
+"([c89a233](https://github.com/tweepy/tweepy/commit/c89a233a96142ce01ecd5e1372c3fdce45c6601f))"
+msgstr ""
+"다음을 추가함: `Space.ended_at`, `Space.topic_ids` "
+"([c89a233](https://github.com/tweepy/tweepy/commit/c89a233a96142ce01ecd5e1372c3fdce45c6601f))"
+
+#: ../../changelog.md:13 ../../changelog.md:40 ../../changelog.md:59
+#: ../../changelog.md:434 ../../changelog.md:467 ../../changelog.md:510
+#: ../../changelog.md:537 ../../changelog.md:557 ../../changelog.md:573
+#: ../../changelog.md:588 ../../changelog.md:601
+msgid "Bug Fixes"
+msgstr "버그 수정"
+
+#: ../../changelog.md:14
+msgid ""
+"Remove erroneous `Space.__str__` "
+"([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))"
+msgstr ""
+"잘못된 `Space.__str__` "
+"제거([ebb4bfd](https://github.com/tweepy/tweepy/commit/ebb4bfdd4033e9a8ee257ab244381e1a8fdb2984))"
+
+#: ../../changelog.md:16
+msgid "Version 4.3.0"
+msgstr "버전 4.3.0"
+
+#: ../../changelog.md:19
+msgid ""
+"Add support for managing Tweets with Twitter API v2 "
+"([7884e3a](https://github.com/tweepy/tweepy/commit/7884e3a7253d9a821ff46160ec0d3811f299327f))"
+msgstr ""
+"이제 트위터 API v2를 이용한 트윗 관리를 "
+"지원합니다.([7884e3a](https://github.com/tweepy/tweepy/commit/7884e3a7253d9a821ff46160ec0d3811f299327f))"
+
+#: ../../changelog.md:21 ../../changelog.md:67 ../../changelog.md:430
+msgid "Misc"
+msgstr "기타"
+
+#: ../../changelog.md:22
+msgid ""
+"Document `HTTPException` attributes "
+"([c62c31a](https://github.com/tweepy/tweepy/commit/c62c31a0f3574e04b6e2f5996b90b5c1b5917485))"
+msgstr ""
+"문서 `HTTPException` "
+"특성(attributes)([c62c31a](https://github.com/tweepy/tweepy/commit/c62c31a0f3574e04b6e2f5996b90b5c1b5917485))"
+
+#: ../../changelog.md:23
+msgid ""
+"Add table to documentation mapping `Client` methods to Twitter API v2 "
+"endpoints "
+"([0572b03](https://github.com/tweepy/tweepy/commit/0572b03b7fe1a2384951ebc2c0002f9d8bd6b68a))"
+msgstr ""
+
+#: ../../changelog.md:24
+msgid "Add and improve examples"
+msgstr "예시의 추가·보충"
+
+#: ../../changelog.md:25
+msgid "Revamp examples page in documentation"
+msgstr "문서의 '예시' 페이지 수정"
+
+#: ../../changelog.md:26 ../../changelog.md:35 ../../changelog.md:71
+#: ../../changelog.md:431
+msgid "Update and improve various documentation and tests"
+msgstr "다양한 문서 갱신(업데이트) 및 수정"
+
+#: ../../changelog.md:28
+msgid "Version 4.2.0"
+msgstr "버전 4.2.0"
+
+#: ../../changelog.md:31
+msgid ""
+"Add support for managing lists with Twitter API v2 "
+"([b1342bf](https://github.com/tweepy/tweepy/commit/b1342bfc998bee334437f2b7a8d2aef4df7c3838))"
+msgstr ""
+"이제 트위터 API v2를 이용한 리스트 관리를 지원함 "
+"([b1342bf](https://github.com/tweepy/tweepy/commit/b1342bfc998bee334437f2b7a8d2aef4df7c3838))"
+
+#: ../../changelog.md:32
+msgid ""
+"Rename `Client.follow` and `Client.unfollow` to `Client.follow_user` and "
+"`Client.unfollow_user`, respectively "
+"([8f8de15](https://github.com/tweepy/tweepy/commit/8f8de15e13f11d042a521d2adae24d0c09fa2098))"
+msgstr ""
+"`Client.follow` 과 `Client.unfollow` 를 각각 `Client.follow_user` 과 "
+"`Client.unfollow_user` 로 바꿈 "
+"([8f8de15](https://github.com/tweepy/tweepy/commit/8f8de15e13f11d042a521d2adae24d0c09fa2098))"
+
+#: ../../changelog.md:33
+msgid "`Client.follow` and `Client.unfollow` are kept as deprecated aliases"
+msgstr "`Client.follow` 과 `Client.unfollow` 는 사용되지 않는 이름으로 남아있음"
+
+#: ../../changelog.md:34
+msgid "Add FAQ section in documentation"
+msgstr "문서에 FAQ 추가함"
+
+#: ../../changelog.md:37
+msgid "Twitter API Changes"
+msgstr "트위터 API 변경사항"
+
+#: ../../changelog.md:38
+msgid ""
+"Change `state` to optional parameter for `Client.search_spaces` "
+"([e61d5d6](https://github.com/tweepy/tweepy/commit/e61d5d6f017db7f28871331b515fcfd87666f352))"
+msgstr ""
+"`state` 를 `Client.search_spaces` 의 선택적(Optional) 매개변수로 전환함 "
+"([e61d5d6](https://github.com/tweepy/tweepy/commit/e61d5d6f017db7f28871331b515fcfd87666f352))"
+
+#: ../../changelog.md:41
+msgid ""
+"Fix parsing of datetime strings for API v2 models with Python 3.6 "
+"([5bf2446](https://github.com/tweepy/tweepy/commit/5bf24464b00257a9fa5f66047a2f7815c1e4f8fb))"
+msgstr ""
+"파이썬 3.6과 파이썬 API v2에서의 날짜/시간 파싱이 올바르게 되도록 수정 "
+"([5bf2446](https://github.com/tweepy/tweepy/commit/5bf24464b00257a9fa5f66047a2f7815c1e4f8fb))"
+
+#: ../../changelog.md:42
+msgid ""
+"Fix models missing an `API` instance attribute when using `Cursor` with "
+"pagination by ID "
+"([451e921](https://github.com/tweepy/tweepy/commit/451e921210677ee0a618849f189bdfeea497a00c))"
+msgstr ""
+"`Cursor` 와 ID값을 이용한 페이지화 작업 중 `API` 인스턴스가 누락되는 현상 수정 "
+"([451e921](https://github.com/tweepy/tweepy/commit/451e921210677ee0a618849f189bdfeea497a00c))"
+
+#: ../../changelog.md:44
+msgid "Version 4.1.0"
+msgstr "버전 4.1.0"
+
+#: ../../changelog.md:47
+msgid ""
+"Add support for Python 3.10 "
+"([229b738](https://github.com/tweepy/tweepy/commit/229b73858c93bd5997385445f522816c374d41ea))"
+msgstr ""
+"파이썬 3.10 지원 "
+"([229b738](https://github.com/tweepy/tweepy/commit/229b73858c93bd5997385445f522816c374d41ea))"
+
+#: ../../changelog.md:48
+msgid "Update minimum dev requirement version for tox to 3.14.0"
+msgstr "Tox 개발 최소 요구 버전을 3.14.0 으로 갱신함"
+
+#: ../../changelog.md:49
+msgid ""
+"Add support for Spaces "
+"([5c68892](https://github.com/tweepy/tweepy/commit/5c688922cf0f8e89d401ea5108b06aaa8c12d71b))"
+msgstr ""
+"이제 스페이스(트위터 스페이스)를 지원함 "
+"([5c68892](https://github.com/tweepy/tweepy/commit/5c688922cf0f8e89d401ea5108b06aaa8c12d71b))"
+
+#: ../../changelog.md:50
+msgid "Add `Space` model"
+msgstr "추가함: `Space` 모델"
+
+#: ../../changelog.md:51
+msgid "Add `Client.search_spaces`, `Client.get_spaces`, and `Client.get_space`"
+msgstr "추가함: `Client.search_spaces`, `Client.get_spaces`, `Client.get_space`"
+
+#: ../../changelog.md:52
+msgid ""
+"Add support for batch compliance "
+"([6ca75e1](https://github.com/tweepy/tweepy/commit/6ca75e1b69a1085ac43215b30fc8269b91faa790))"
+msgstr ""
+"이제 '표준 준수 하 일괄 처리'(Batch compliance)를 지원함 "
+"([6ca75e1](https://github.com/tweepy/tweepy/commit/6ca75e1b69a1085ac43215b30fc8269b91faa790))"
+
+#: ../../changelog.md:53
+msgid ""
+"Add `Client.get_compliance_jobs`, `Client.get_compliance_job`, and "
+"`Client.create_compliance_job`"
+msgstr ""
+"추가함: `Client.get_compliance_jobs`, `Client.get_compliance_job`, "
+"`Client.create_compliance_job`"
+
+#: ../../changelog.md:54
+msgid ""
+"Add `Client.get_muted` "
+"([00cdab8](https://github.com/tweepy/tweepy/commit/00cdab8a86b98c6b02636fd511700fc73653e006))"
+msgstr ""
+"추가함: `Client.get_muted` "
+"([00cdab8](https://github.com/tweepy/tweepy/commit/00cdab8a86b98c6b02636fd511700fc73653e006))"
+
+#: ../../changelog.md:55
+msgid "Minor documentation corrections"
+msgstr "자잘한 문서 수정"
+
+#: ../../changelog.md:57
+msgid "Version 4.0.1"
+msgstr "버전 4.0.1"
+
+#: ../../changelog.md:60
+msgid ""
+"Fix handling of strings passed as fields parameters for `Client` methods "
+"([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))"
+msgstr ""
+"`Client` 메서드에 필드값 형태로 문자열이 전달될 때 발생하던 문제를 수정함 "
+"([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))"
+
+#: ../../changelog.md:61
+msgid ""
+"Include unexpected parameters passed to `Client` methods in Twitter API "
+"request "
+"([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))"
+msgstr ""
+"이제 트위터 API 요청으로부터 `Client` 메서드에 예기치 않은 매개변수가 전달되는 경우도 고려함 "
+"([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))"
+
+#: ../../changelog.md:62
+msgid "This future-proofs for new endpoint parameters"
+msgstr "이는 새 엔드포인트 매개변수를 대비하는 미래 지향형 업데이트임"
+
+#: ../../changelog.md:63
+msgid ""
+"Stop checking parameter names when converting parameters passed to "
+"`Client` methods from datetimes to strings "
+"([1320a37](https://github.com/tweepy/tweepy/commit/1320a3709b1683cb32b69abdaa9e7e120b6ed59c))"
+msgstr ""
+"`Client` 메서드에 전달된 매개변수를 날짜/시간 형식에서 문자열로 변환할 때, 더 이상 매개변수 이름을 확인하지 않음 "
+"([1320a37](https://github.com/tweepy/tweepy/commit/1320a3709b1683cb32b69abdaa9e7e120b6ed59c))"
+
+#: ../../changelog.md:64
+msgid ""
+"This future-proofs for new endpoint parameters besides `start_time` and "
+"`end_time` that accept datetimes"
+msgstr "이는 날짜/시간 형식을 허용하는 새 엔드포인트 변수 지원에 대한 미래 지향형 업데이트임"
+
+#: ../../changelog.md:65
+msgid ""
+"Handle simplejson being installed when handling `JSONDecodeError` in "
+"`HTTPException` "
+"([586c162](https://github.com/tweepy/tweepy/commit/586c1621f71c9569c17b6bdbee99a7c238bb301d))"
+msgstr ""
+"simplejson 사용과 관련된, `HTTPException` 에서의 `JSONDecodeError` 문제를 수정함 "
+"([586c162](https://github.com/tweepy/tweepy/commit/586c1621f71c9569c17b6bdbee99a7c238bb301d))"
+
+#: ../../changelog.md:68
+msgid ""
+"Update documentation requirements "
+"([3fa38b6](https://github.com/tweepy/tweepy/commit/3fa38b6b949fb85c434f4aec9c54327d80027c12),"
+" "
+"[388e2f6](https://github.com/tweepy/tweepy/commit/388e2f6c5167cd9fd6669d05d2e15ea00cdea805),"
+" "
+"[4315ab0](https://github.com/tweepy/tweepy/commit/4315ab07c382c92e177cde7232085dfd4828b50e))"
+msgstr ""
+"문서 요구 사항 갱신 "
+"([3fa38b6](https://github.com/tweepy/tweepy/commit/3fa38b6b949fb85c434f4aec9c54327d80027c12),"
+" "
+"[388e2f6](https://github.com/tweepy/tweepy/commit/388e2f6c5167cd9fd6669d05d2e15ea00cdea805),"
+" "
+"[4315ab0](https://github.com/tweepy/tweepy/commit/4315ab07c382c92e177cde7232085dfd4828b50e))"
+
+#: ../../changelog.md:69
+msgid ""
+"Remove nose usage from tests "
+"([b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
+msgstr ""
+"테스트에서 nose를 더 이상 사용하지 않음 "
+"([b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
+
+#: ../../changelog.md:70
+msgid ""
+"Remove mock and nose from tests extra and requirements "
+"([0f071fd](https://github.com/tweepy/tweepy/commit/0f071fd2dbbbb5eb7efccc16a8121eb22ebabf12),"
+" "
+"[b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
+msgstr ""
+"더 이상 테스트시 mock와 nose를 요하지 않음 "
+"([0f071fd](https://github.com/tweepy/tweepy/commit/0f071fd2dbbbb5eb7efccc16a8121eb22ebabf12),"
+" "
+"[b4c06a4](https://github.com/tweepy/tweepy/commit/b4c06a4bb7800026809cfabf69565845dbc00923))"
+
+#: ../../changelog.md:73
+msgid "Version 4.0.0"
+msgstr "버전 4.0.0"
+
+#: ../../changelog.md:76
+msgid "Major New Features / Improvements"
+msgstr "새 주요 기능 / 개선"
+
+#: ../../changelog.md:77
+msgid ""
+"Support Twitter API v2 "
+"([#1472](https://github.com/tweepy/tweepy/issues/1472), "
+"[#1535](https://github.com/tweepy/tweepy/pull/1535))"
+msgstr ""
+"이제 트위터 API v2 를 "
+"지원함([#1472](https://github.com/tweepy/tweepy/issues/1472), "
+"[#1535](https://github.com/tweepy/tweepy/pull/1535))"
+
+#: ../../changelog.md:78
+msgid "Replace API v1.1 models in package namespace"
+msgstr "패키지 네임스페이스에서 API v1.1 모델을 대체함"
+
+#: ../../changelog.md:80
+msgid ""
+"Rework media uploading "
+"([#640](https://github.com/tweepy/tweepy/issues/640), "
+"[#1486](https://github.com/tweepy/tweepy/pull/1486), "
+"[#1501](https://github.com/tweepy/tweepy/issues/1501))"
+msgstr ""
+"미디어 업로드 재작업 ([#640](https://github.com/tweepy/tweepy/issues/640), "
+"[#1486](https://github.com/tweepy/tweepy/pull/1486), "
+"[#1501](https://github.com/tweepy/tweepy/issues/1501))"
+
+#: ../../changelog.md:82
+msgid ""
+"Support asynchronous streaming "
+"([#732](https://github.com/tweepy/tweepy/issues/732), "
+"[#1491](https://github.com/tweepy/tweepy/pull/1491))"
+msgstr ""
+"이제 비동기 스트리밍을 지원함 ([#732](https://github.com/tweepy/tweepy/issues/732), "
+"[#1491](https://github.com/tweepy/tweepy/pull/1491))"
+
+#: ../../changelog.md:84
+msgid "Rework `API`"
+msgstr "`API` 재작업"
+
+#: ../../changelog.md:85
+msgid "Replace `bind_api` and `APIMethod` with `API.request`"
+msgstr "`bind_api` 과 `APIMethod` 를 `API.request` 로 대체함 "
+
+#: ../../changelog.md:86
+msgid "Stop using property decorators for `API` methods"
+msgstr "더 이상 `API` 메서드에 데코레이터 속성(Decorator property)을 사용하지 않음"
+
+#: ../../changelog.md:87
+msgid "Use `pagination` decorator"
+msgstr "이제 `pagination` 데코레이터를 사용함"
+
+#: ../../changelog.md:88
+msgid ""
+"Add `requests.Session` instance as `API.session` attribute "
+"([2f28757](https://github.com/tweepy/tweepy/commit/2f28757fc3f060d14ce4e42a8ca441cd172fd8e5))"
+msgstr ""
+"추가함: `requests.Session` (`API.session` 의 속성으로) "
+"([2f28757](https://github.com/tweepy/tweepy/commit/2f28757fc3f060d14ce4e42a8ca441cd172fd8e5))"
+
+#: ../../changelog.md:89
+msgid ""
+"Initialize a single `requests.Session` instance per `API` instance, "
+"rather than for each request"
+msgstr ""
+"이제 하나의 `API` 인스턴스에 하나의 `requests.Session` 인스턴스를 초기화(Initialize)하며, 매 요청마다"
+" 초기화하지 않아도 됨"
+
+#: ../../changelog.md:90
+msgid ""
+"Log warning when API.request is passed an unexpected keyword argument "
+"that isn't an endpoint parameter "
+"([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))"
+msgstr ""
+"이제 API.request에 엔드포인트 매개변수가 아닌, 예기치 않은 키워드 인수가 전달되면 로그에 경고를 기록합니다. "
+"([c82d7ac](https://github.com/tweepy/tweepy/commit/c82d7ac1789ee9f3f1bdc2b0743376f518cdb0de))"
+
+#: ../../changelog.md:91
+msgid ""
+"Rename allowed parameters (`allowed_param`) to endpoint parameters "
+"(`endpoint_parameters`) "
+"([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))"
+msgstr ""
+"허용된 매개변수(`allowed_param`)를 엔드포인트 매개변수(`endpoint_parameters`)로 바꿈 "
+"([b4fc6a0](https://github.com/tweepy/tweepy/commit/b4fc6a09a1f8942f000d97a182368ba1e9b8f7f5))"
+
+#: ../../changelog.md:92
+msgid "Rename methods and method parameters (see Breaking Changes section)"
+msgstr "메서드명 및 메서드 매개변수명을 바꿈 (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:93
+msgid "Require parameters for methods (see Breaking Changes section)"
+msgstr "메서드의 필수 매개변수 (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:94
+msgid ""
+"Stop allowing arbitrary positional arguments for methods (see Breaking "
+"Changes section)"
+msgstr "메서드에 더 이상 임의의 위치 인수(Positional argument)를 전달할 수 없음 (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:95
+msgid ""
+"Remove unnecessary attributes and parameters (see Breaking Changes "
+"section)"
+msgstr "제거함: 불필요한 속성 및 매개변수 (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:96
+msgid "Improve, optimize, and simplify `API.request` and other `API` methods"
+msgstr "`API.request`와 다른 `API` 메서드를 개선·최적화·단순화함 "
+
+#: ../../changelog.md:98
+msgid "Rework streaming"
+msgstr "스트리밍 재작업"
+
+#: ../../changelog.md:99
+msgid ""
+"`StreamListener` has been merged into `Stream` (see Breaking Changes "
+"section)"
+msgstr "`StreamListener` 를 `Stream` 에 합침(Merge) (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:100
+msgid ""
+"`Stream` data/event handling methods (i.e. those starting with `on_`) now"
+" log by default and disregard return values"
+msgstr ""
+"`Stream` 의 데이터 및 이벤트 처리 메서드가 (예: `on_` 으로 시작하는 것들) 이제 기본적으로 로그에 기록되며, "
+"반환값은 무시함 "
+
+#: ../../changelog.md:101
+msgid ""
+"Allow the stream to disconnect when any line of data is received, "
+"including keep-alive signals "
+"([#773](https://github.com/tweepy/tweepy/issues/773), "
+"[#897](https://github.com/tweepy/tweepy/issues/897))"
+msgstr ""
+"kee-alive 신호를 포함한 모든 종류의 데이터를 수신했을 때, 스트림 연결을 종료할 수 있도록 허용함 "
+"([#773](https://github.com/tweepy/tweepy/issues/773), "
+"[#897](https://github.com/tweepy/tweepy/issues/897))"
+
+#: ../../changelog.md:102
+msgid ""
+"Remove, rename, and replace attributes, methods, and parameters (see "
+"Breaking Changes section)"
+msgstr "속성, 메서드, 매개변수들을 제거·이름 변경·다른 것으로 대체함 (중요한 변경사항 문단 참조) "
+
+#: ../../changelog.md:103
+msgid "Improve, optimize, and simplify `Stream`"
+msgstr "`Stream` 을 개선·최적화·단순화함 "
+
+#: ../../changelog.md:105
+msgid "Rework documentation"
+msgstr "문서 재작업"
+
+#: ../../changelog.md:106
+msgid "Automatically use docstrings for documentation"
+msgstr "이제 문서에 자동으로 docstrings를 사용함"
+
+#: ../../changelog.md:107
+msgid "Use NumPy style docstrings"
+msgstr "이제 NumPy 스타일의 docstrings를 사용함"
+
+#: ../../changelog.md:108
+msgid "Use Intersphinx linking"
+msgstr "이제 Intersphinx 링크를 사용함"
+
+#: ../../changelog.md:109
+msgid "Add tooltips for cross references using sphinx-hoverxref"
+msgstr "sphinx-hoverxref를 이용해, 교차 참조가 가능하도록 툴팁을 추가함"
+
+#: ../../changelog.md:110
+msgid ""
+"Document `Stream` "
+"([18a6059](https://github.com/tweepy/tweepy/commit/18a6059e7980de7759be126ffe39836494cc4f23))"
+msgstr ""
+"`Stream` "
+"문서([18a6059](https://github.com/tweepy/tweepy/commit/18a6059e7980de7759be126ffe39836494cc4f23))"
+
+#: ../../changelog.md:111
+msgid ""
+"Document models "
+"([0724060](https://github.com/tweepy/tweepy/commit/07240603b2fc64c6433d8fbe9e1e8db47a9f1cfe),"
+" "
+"[78a0c22](https://github.com/tweepy/tweepy/commit/78a0c22fb67ca3d190e9dd95baab142aa2960ff9))"
+msgstr ""
+"`Models` "
+"문서([0724060](https://github.com/tweepy/tweepy/commit/07240603b2fc64c6433d8fbe9e1e8db47a9f1cfe),"
+" "
+"[78a0c22](https://github.com/tweepy/tweepy/commit/78a0c22fb67ca3d190e9dd95baab142aa2960ff9))"
+
+#: ../../changelog.md:112
+msgid ""
+"Document pagination "
+"([695d531](https://github.com/tweepy/tweepy/commit/695d531064277978d44f78387a3edb3d29fb6f25),"
+" "
+"[652fece](https://github.com/tweepy/tweepy/commit/652fece7f78f90ea11f206b4a045a2450db42cc9))"
+msgstr ""
+
+#: ../../changelog.md:113
+msgid ""
+"Add table for `API` documentation "
+"([6db8e4c](https://github.com/tweepy/tweepy/commit/6db8e4c06d20f6ad7bdfade7b44b13ac45dd51c0))"
+msgstr ""
+"`API` 문서에 테이블을 추가함 "
+"([6db8e4c](https://github.com/tweepy/tweepy/commit/6db8e4c06d20f6ad7bdfade7b44b13ac45dd51c0))"
+
+#: ../../changelog.md:114
+msgid ""
+"Separate documentation for exceptions "
+"([8a831b1](https://github.com/tweepy/tweepy/commit/8a831b16f1bd1288781bc924fe82397decd93b3d))"
+msgstr ""
+"예외와 관련된 문서를 따로 분리함 "
+"([8a831b1](https://github.com/tweepy/tweepy/commit/8a831b16f1bd1288781bc924fe82397decd93b3d))"
+
+#: ../../changelog.md:115
+msgid ""
+"Move changelog to documentation "
+"([fc98629](https://github.com/tweepy/tweepy/commit/fc9862963702eb02f33106ca13110b369ee86e47))"
+msgstr ""
+"체인지로그를 문서화함 "
+"([fc98629](https://github.com/tweepy/tweepy/commit/fc9862963702eb02f33106ca13110b369ee86e47))"
+
+#: ../../changelog.md:116
+msgid "Update, improve, and organize documentation"
+msgstr "문서를 갱신·개선·조직화함 "
+
+#: ../../changelog.md:118
+msgid "Rework exceptions"
+msgstr "예외 재작업"
+
+#: ../../changelog.md:119
+msgid ""
+"Replace `TweepError` with `TweepyException` "
+"([5c39cd1](https://github.com/tweepy/tweepy/commit/5c39cd159ef761500f3cb0292a3da40d5e250417))"
+" and `HTTPException` "
+"([#599](https://github.com/tweepy/tweepy/issues/599))"
+msgstr ""
+"`TweepError` 를 `TweepyException` "
+"과([5c39cd1](https://github.com/tweepy/tweepy/commit/5c39cd159ef761500f3cb0292a3da40d5e250417))"
+" `HTTPException` 로 변경 및 세분화함 "
+"([#599](https://github.com/tweepy/tweepy/issues/599))"
+
+#: ../../changelog.md:120
+msgid ""
+"Replace `RateLimitError` with `TooManyRequests` "
+"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
+msgstr ""
+"`RateLimitError` 를 `TooManyRequests` 로 변경함 "
+"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
+
+#: ../../changelog.md:121
+msgid ""
+"Remove `Parser.parse_error` "
+"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
+msgstr ""
+"제거함: `Parser.parse_error` "
+"([cd5f696](https://github.com/tweepy/tweepy/commit/cd5f696d09530f86ac0edf1ec0fe0a02578a3920))"
+
+#: ../../changelog.md:122
+msgid ""
+"Add `NotFound` "
+"([2d84b27](https://github.com/tweepy/tweepy/commit/2d84b270408944e784b32199faa09fb553f6250d))"
+msgstr ""
+"추가함: `NotFound` "
+"([2d84b27](https://github.com/tweepy/tweepy/commit/2d84b270408944e784b32199faa09fb553f6250d))"
+
+#: ../../changelog.md:123
+msgid ""
+"Add `Unauthorized` "
+"([3ffec76](https://github.com/tweepy/tweepy/commit/3ffec76039a9552b1b90a11d3774ccc90793c33d))"
+msgstr ""
+"추가함: `Unauthorized` "
+"([3ffec76](https://github.com/tweepy/tweepy/commit/3ffec76039a9552b1b90a11d3774ccc90793c33d))"
+
+#: ../../changelog.md:124
+msgid ""
+"Add `Forbidden` "
+"([4a9bc58](https://github.com/tweepy/tweepy/commit/4a9bc58f1006c1b2b1310d4a6cd821e23d9c8c79))"
+msgstr ""
+"추가함: `Forbidden` "
+"([4a9bc58](https://github.com/tweepy/tweepy/commit/4a9bc58f1006c1b2b1310d4a6cd821e23d9c8c79))"
+
+#: ../../changelog.md:125
+msgid ""
+"Add `BadRequest` "
+"([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))"
+msgstr ""
+"추가함: `BadRequest` "
+"([3da5ede](https://github.com/tweepy/tweepy/commit/3da5edeffcab5796949c0c346b0bc187f69a6874))"
+
+#: ../../changelog.md:126
+msgid ""
+"Add `TwitterServerError` "
+"([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))"
+msgstr ""
+"추가함: `TwitterServerError` "
+"([b443557](https://github.com/tweepy/tweepy/commit/b443557e79258ab99239cc4b910bac176a0d9b60))"
+
+#: ../../changelog.md:128
+msgid "Breaking Changes"
+msgstr "중요한 변경사항"
+
+#: ../../changelog.md:129
+msgid ""
+"Drop support for Python 2 "
+"([#1253](https://github.com/tweepy/tweepy/issues/1253), "
+"[#1482](https://github.com/tweepy/tweepy/pull/1482))"
+msgstr ""
+"더 이상 Python 2를 지원하지 않음 "
+"([#1253](https://github.com/tweepy/tweepy/issues/1253), "
+"[#1482](https://github.com/tweepy/tweepy/pull/1482))"
+
+#: ../../changelog.md:130
+msgid ""
+"Drop support for Python 3.5 "
+"([#1487](https://github.com/tweepy/tweepy/pull/1487))"
+msgstr ""
+"더 이상 Python 3.5를 지원하지 "
+"않음([#1487](https://github.com/tweepy/tweepy/pull/1487))"
+
+#: ../../changelog.md:132
+msgid "`API`"
+msgstr "`API`"
+
+#: ../../changelog.md:133
+msgid "Rename `API` and `models` methods"
+msgstr "`API` 메서드와 `models` 메서드의 이름을 변경함"
+
+#: ../../changelog.md:134
+msgid ""
+"`API.blocks` -> `API.get_blocks` "
+"([9541794](https://github.com/tweepy/tweepy/commit/9541794b5dd9a3617247c0cd5efdcd082b5e7275))"
+msgstr ""
+"`API.blocks` -> `API.get_blocks` "
+"([9541794](https://github.com/tweepy/tweepy/commit/9541794b5dd9a3617247c0cd5efdcd082b5e7275))"
+
+#: ../../changelog.md:135
+msgid ""
+"`API.blocks_ids` -> `API.get_blocked_ids` "
+"([e241ca4](https://github.com/tweepy/tweepy/commit/e241ca4bb44acc0def9db390ddf10cf7f9fc37e6))"
+msgstr ""
+"`API.blocks_ids` -> `API.get_blocked_ids` "
+"([e241ca4](https://github.com/tweepy/tweepy/commit/e241ca4bb44acc0def9db390ddf10cf7f9fc37e6))"
+
+#: ../../changelog.md:136
+msgid ""
+"`API.destroy_direct_message` -> `API.delete_direct_message` "
+"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
+msgstr ""
+"`API.destroy_direct_message` -> `API.delete_direct_message` "
+"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
+
+#: ../../changelog.md:137
+msgid ""
+"`DirectMessage.destroy` -> `DirectMessage.delete` "
+"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
+msgstr ""
+"`DirectMessage.destroy` -> `DirectMessage.delete` "
+"([2731fc9](https://github.com/tweepy/tweepy/commit/2731fc98fc7298425d8208d0184a60418af02ca9))"
+
+#: ../../changelog.md:138
+msgid ""
+"`API.favorites` -> `API.get_favorites` "
+"([3c467da](https://github.com/tweepy/tweepy/commit/3c467da810f8ffdf5d7d05244d586897ed1ed547))"
+msgstr ""
+"`API.favorites` -> `API.get_favorites` "
+"([3c467da](https://github.com/tweepy/tweepy/commit/3c467da810f8ffdf5d7d05244d586897ed1ed547))"
+
+#: ../../changelog.md:139
+msgid ""
+"`API.followers` -> `API.get_followers` "
+"([ce768d9](https://github.com/tweepy/tweepy/commit/ce768d974ae7c4b907aeff580728b1045c2d85d2))"
+msgstr ""
+"`API.followers` -> `API.get_followers` "
+"([ce768d9](https://github.com/tweepy/tweepy/commit/ce768d974ae7c4b907aeff580728b1045c2d85d2))"
+
+#: ../../changelog.md:140
+msgid ""
+"`API.followers_ids` -> `API.get_follower_ids` "
+"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
+msgstr ""
+"`API.followers_ids` -> `API.get_follower_ids` "
+"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
+
+#: ../../changelog.md:141
+msgid ""
+"`models.User.followers_ids` -> `models.User.follower_ids` "
+"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
+msgstr ""
+"`models.User.followers_ids` -> `models.User.follower_ids` "
+"([fa5e7c4](https://github.com/tweepy/tweepy/commit/fa5e7c4bb08b775e21e52da4e7e65b61eb7bc038))"
+
+#: ../../changelog.md:142
+msgid ""
+"`API.friends` -> `API.get_friends` "
+"([6f3fccb](https://github.com/tweepy/tweepy/commit/6f3fccb95917535586efa660f9cf9c851e3e4e02))"
+msgstr ""
+"`API.friends` -> `API.get_friends` "
+"([6f3fccb](https://github.com/tweepy/tweepy/commit/6f3fccb95917535586efa660f9cf9c851e3e4e02))"
+
+#: ../../changelog.md:143
+msgid ""
+"`API.friends_ids` -> `API.get_friend_ids` "
+"([bab3e5e](https://github.com/tweepy/tweepy/commit/bab3e5e9eee57583298fe64ab1ab0e37edf12344))"
+msgstr ""
+"`API.friends_ids` -> `API.get_friend_ids` "
+"([bab3e5e](https://github.com/tweepy/tweepy/commit/bab3e5e9eee57583298fe64ab1ab0e37edf12344))"
+
+#: ../../changelog.md:144
+msgid ""
+"`API.friendships_incoming` -> `API.incoming_friendships` "
+"([007bd07](https://github.com/tweepy/tweepy/commit/007bd07536d1e0dfd5a5b5967943acffb77f24f4))"
+msgstr ""
+"`API.friendships_incoming` -> `API.incoming_friendships` "
+"([007bd07](https://github.com/tweepy/tweepy/commit/007bd07536d1e0dfd5a5b5967943acffb77f24f4))"
+
+#: ../../changelog.md:145
+msgid ""
+"`API.friendships_outgoing` -> `API.outgoing_friendships` "
+"([1400065](https://github.com/tweepy/tweepy/commit/1400065bb4980ec1b3934f68173e63acffc970e2))"
+msgstr ""
+"`API.friendships_outgoing` -> `API.outgoing_friendships` "
+"([1400065](https://github.com/tweepy/tweepy/commit/1400065bb4980ec1b3934f68173e63acffc970e2))"
+
+#: ../../changelog.md:146
+msgid ""
+"`API.geo_search` -> `API.search_geo` "
+"([6f4fb39](https://github.com/tweepy/tweepy/commit/6f4fb39b1c88cc019e7e5d66f1c29b781568c622))"
+msgstr ""
+"`API.geo_search` -> `API.search_geo` "
+"([6f4fb39](https://github.com/tweepy/tweepy/commit/6f4fb39b1c88cc019e7e5d66f1c29b781568c622))"
+
+#: ../../changelog.md:147
+msgid ""
+"`API.list_direct_messages` -> `API.get_direct_messages` "
+"([ff1186f](https://github.com/tweepy/tweepy/commit/ff1186f80b2dbb7f5e4ed3669d90db300e8de36d))"
+msgstr ""
+"`API.list_direct_messages` -> `API.get_direct_messages` "
+"([ff1186f](https://github.com/tweepy/tweepy/commit/ff1186f80b2dbb7f5e4ed3669d90db300e8de36d))"
+
+#: ../../changelog.md:148
+msgid ""
+"`API.list_members` -> `API.get_list_members` "
+"([5845f02](https://github.com/tweepy/tweepy/commit/5845f023b74b309aa12c50844bdd586bd3e30dde))"
+msgstr ""
+"`API.list_members` -> `API.get_list_members` "
+"([5845f02](https://github.com/tweepy/tweepy/commit/5845f023b74b309aa12c50844bdd586bd3e30dde))"
+
+#: ../../changelog.md:149
+msgid ""
+"`API.list_subscribers` -> `API.get_list_subscribers` "
+"([a05b630](https://github.com/tweepy/tweepy/commit/a05b630973d4ac7e642f827f03ce01bc8e5b9ef8))"
+msgstr ""
+"`API.list_subscribers` -> `API.get_list_subscribers` "
+"([a05b630](https://github.com/tweepy/tweepy/commit/a05b630973d4ac7e642f827f03ce01bc8e5b9ef8))"
+
+#: ../../changelog.md:150
+msgid ""
+"`API.lists_all` -> `API.get_lists` "
+"([458e0e8](https://github.com/tweepy/tweepy/commit/458e0e8275693bb557f2a21e1f75be92adae0d00))"
+msgstr ""
+"`API.lists_all` -> `API.get_lists` "
+"([458e0e8](https://github.com/tweepy/tweepy/commit/458e0e8275693bb557f2a21e1f75be92adae0d00))"
+
+#: ../../changelog.md:151
+msgid ""
+"`API.lists_memberships` -> `API.get_list_memberships` "
+"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
+msgstr ""
+"`API.lists_memberships` -> `API.get_list_memberships` "
+"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
+
+#: ../../changelog.md:152
+msgid ""
+"`models.User.lists_memberships` -> `models.User.list_memberships` "
+"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
+msgstr ""
+"`models.User.lists_memberships` -> `models.User.list_memberships` "
+"([9dddc12](https://github.com/tweepy/tweepy/commit/9dddc1262d9d043df9201ddda39002d111d035fe))"
+
+#: ../../changelog.md:153
+msgid ""
+"`API.lists_subscriptions` -> `API.get_list_subscriptions` "
+"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
+msgstr ""
+"`API.lists_subscriptions` -> `API.get_list_subscriptions` "
+"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
+
+#: ../../changelog.md:154
+msgid ""
+"`models.User.lists_subscriptions` -> `models.User.list_subscriptions` "
+"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
+msgstr ""
+"`models.User.lists_subscriptions` -> `models.User.list_subscriptions` "
+"([51945a7](https://github.com/tweepy/tweepy/commit/51945a7124e6ce68b294c97340a6ec803cd02da9))"
+
+#: ../../changelog.md:155
+msgid ""
+"`API.mutes` -> `API.get_mutes` "
+"([744edc2](https://github.com/tweepy/tweepy/commit/744edc245f856e3fc69401db8185b820c0219f6f))"
+msgstr ""
+"`API.mutes` -> `API.get_mutes` "
+"([744edc2](https://github.com/tweepy/tweepy/commit/744edc245f856e3fc69401db8185b820c0219f6f))"
+
+#: ../../changelog.md:156
+msgid ""
+"`API.mutes_ids` -> `API.get_muted_ids` "
+"([ea26a29](https://github.com/tweepy/tweepy/commit/ea26a296639e7a42d81b9f84a236a82e4915d434))"
+msgstr ""
+"`API.mutes_ids` -> `API.get_muted_ids` "
+"([ea26a29](https://github.com/tweepy/tweepy/commit/ea26a296639e7a42d81b9f84a236a82e4915d434))"
+
+#: ../../changelog.md:157
+msgid ""
+"`API.retweeters` -> `API.get_retweeter_ids` "
+"([588c342](https://github.com/tweepy/tweepy/commit/588c34243fe2b12d72f66f0d31312c7452610ec8))"
+msgstr ""
+"`API.retweeters` -> `API.get_retweeter_ids` "
+"([588c342](https://github.com/tweepy/tweepy/commit/588c34243fe2b12d72f66f0d31312c7452610ec8))"
+
+#: ../../changelog.md:158
+msgid ""
+"`API.retweets` -> `API.get_retweets` "
+"([3b3ba24](https://github.com/tweepy/tweepy/commit/3b3ba2494743b894a44539247fd7e5b7839c90aa))"
+msgstr ""
+"`API.retweets` -> `API.get_retweets` "
+"([3b3ba24](https://github.com/tweepy/tweepy/commit/3b3ba2494743b894a44539247fd7e5b7839c90aa))"
+
+#: ../../changelog.md:159
+msgid ""
+"`API.retweets_of_me` -> `API.get_retweets_of_me` "
+"([737bd0b](https://github.com/tweepy/tweepy/commit/737bd0b725e5d33009e63eb040b5cb369214d7f0))"
+msgstr ""
+"`API.retweets_of_me` -> `API.get_retweets_of_me` "
+"([737bd0b](https://github.com/tweepy/tweepy/commit/737bd0b725e5d33009e63eb040b5cb369214d7f0))"
+
+#: ../../changelog.md:160
+msgid ""
+"`API.saved_searches` -> `API.get_saved_searches` "
+"([8b39f74](https://github.com/tweepy/tweepy/commit/8b39f748c91e3363cd35c3313563d43f1da25939))"
+msgstr ""
+"`API.saved_searches` -> `API.get_saved_searches` "
+"([8b39f74](https://github.com/tweepy/tweepy/commit/8b39f748c91e3363cd35c3313563d43f1da25939))"
+
+#: ../../changelog.md:161
+msgid ""
+"`API.search` -> `API.search_tweets` "
+"([7fac253](https://github.com/tweepy/tweepy/commit/7fac25379d51174408f0a361c22d8649437a0255))"
+msgstr ""
+"`API.search` -> `API.search_tweets` "
+"([7fac253](https://github.com/tweepy/tweepy/commit/7fac25379d51174408f0a361c22d8649437a0255))"
+
+#: ../../changelog.md:162
+msgid ""
+"`API.show_friendship` -> `API.get_friendship` "
+"([ee9ea2e](https://github.com/tweepy/tweepy/commit/ee9ea2e4513db4d1d627a8815008cb8c71769949))"
+msgstr ""
+"`API.show_friendship` -> `API.get_friendship` "
+"([ee9ea2e](https://github.com/tweepy/tweepy/commit/ee9ea2e4513db4d1d627a8815008cb8c71769949))"
+
+#: ../../changelog.md:163
+msgid ""
+"`API.show_list_member` -> `API.get_list_member` "
+"([431ab15](https://github.com/tweepy/tweepy/commit/431ab15b846706dbd30387412aa601ba9f3810ab))"
+msgstr ""
+"`API.show_list_member` -> `API.get_list_member` "
+"([431ab15](https://github.com/tweepy/tweepy/commit/431ab15b846706dbd30387412aa601ba9f3810ab))"
+
+#: ../../changelog.md:164
+msgid ""
+"`API.show_list_subscriber` -> `API.get_list_subscriber` "
+"([bf26301](https://github.com/tweepy/tweepy/commit/bf26301bb5fa22cc6d52ebb41ed7fe63c5a33768))"
+msgstr ""
+"`API.show_list_subscriber` -> `API.get_list_subscriber` "
+"([bf26301](https://github.com/tweepy/tweepy/commit/bf26301bb5fa22cc6d52ebb41ed7fe63c5a33768))"
+
+#: ../../changelog.md:165
+msgid ""
+"`API.statuses_lookup` -> `API.lookup_statuses` "
+"([#477](https://github.com/tweepy/tweepy/issues/477))"
+msgstr ""
+"`API.statuses_lookup` -> `API.lookup_statuses` "
+"([#477](https://github.com/tweepy/tweepy/issues/477))"
+
+#: ../../changelog.md:166
+msgid ""
+"`API.trends_available` -> `API.available_trends` "
+"([68b33d7](https://github.com/tweepy/tweepy/commit/68b33d7ea70bb9c2f7efc384482b3eb6af0807fa))"
+msgstr ""
+"`API.trends_available` -> `API.available_trends` "
+"([68b33d7](https://github.com/tweepy/tweepy/commit/68b33d7ea70bb9c2f7efc384482b3eb6af0807fa))"
+
+#: ../../changelog.md:167
+msgid ""
+"`API.trends_closest` -> `API.closest_trends` "
+"([2e18162](https://github.com/tweepy/tweepy/commit/2e181628ba97ec1252039439d1daccb9df93e565))"
+msgstr ""
+"`API.trends_closest` -> `API.closest_trends` "
+"([2e18162](https://github.com/tweepy/tweepy/commit/2e181628ba97ec1252039439d1daccb9df93e565))"
+
+#: ../../changelog.md:168
+msgid ""
+"`API.trends_place` -> `API.get_place_trends` "
+"([4912a7c](https://github.com/tweepy/tweepy/commit/4912a7c33420099663015325a0b758926892eb8a))"
+msgstr ""
+"`API.trends_place` -> `API.get_place_trends` "
+"([4912a7c](https://github.com/tweepy/tweepy/commit/4912a7c33420099663015325a0b758926892eb8a))"
+
+#: ../../changelog.md:169
+msgid ""
+"`API.update_with_media` -> `API.update_status_with_media` "
+"([0a5e533](https://github.com/tweepy/tweepy/commit/0a5e533a10c87163e847a0086358a6b0224da7ff))"
+msgstr ""
+"`API.update_with_media` -> `API.update_status_with_media` "
+"([0a5e533](https://github.com/tweepy/tweepy/commit/0a5e533a10c87163e847a0086358a6b0224da7ff))"
+
+#: ../../changelog.md:170
+msgid "Rename `API` method parameters"
+msgstr "`API` 메서드 매개변수명을 변경함 "
+
+#: ../../changelog.md:171
+msgid ""
+"`API.geo_id`: `id` -> `place_id` "
+"([78051e8](https://github.com/tweepy/tweepy/commit/78051e8a67b50cec5cacf53e0f9b315a53e16c4c))"
+msgstr ""
+"`API.geo_id`: `id` -> `place_id` "
+"([78051e8](https://github.com/tweepy/tweepy/commit/78051e8a67b50cec5cacf53e0f9b315a53e16c4c))"
+
+#: ../../changelog.md:172
+msgid ""
+"`API.lookup_friendships`: `screen_names` -> `screen_name` "
+"([4573b35](https://github.com/tweepy/tweepy/commit/4573b35611c8d8391373d579ccb0fe2eb6e3800b)),"
+" `user_ids` -> `user_id` "
+"([3bcccf8](https://github.com/tweepy/tweepy/commit/3bcccf8a1f03e7e35ed05cd4f0ef8f43b6e51b33))"
+msgstr ""
+"`API.lookup_friendships`: `screen_names` -> `screen_name` "
+"([4573b35](https://github.com/tweepy/tweepy/commit/4573b35611c8d8391373d579ccb0fe2eb6e3800b)),"
+" `user_ids` -> `user_id` "
+"([3bcccf8](https://github.com/tweepy/tweepy/commit/3bcccf8a1f03e7e35ed05cd4f0ef8f43b6e51b33))"
+
+#: ../../changelog.md:173
+msgid ""
+"`API.lookup_statuses`: `id_` -> `id` "
+"([f13a34b](https://github.com/tweepy/tweepy/commit/f13a34bf2309c3696fb050b8f3bac9fe1fa0b6cc))"
+msgstr ""
+"`API.lookup_statuses`: `id_` -> `id` "
+"([f13a34b](https://github.com/tweepy/tweepy/commit/f13a34bf2309c3696fb050b8f3bac9fe1fa0b6cc))"
+
+#: ../../changelog.md:174
+msgid ""
+"`API.lookup_users`: `screen_names` -> `screen_name` "
+"([17a2e7c](https://github.com/tweepy/tweepy/commit/17a2e7cdbbea19b8630870267a92e08e9365e29d)),"
+" `user_ids` -> `user_id` "
+"([e7d9e55](https://github.com/tweepy/tweepy/commit/e7d9e557f2611065cfed50dbd2fcf529f9146d65))"
+msgstr ""
+"`API.lookup_users`: `screen_names` -> `screen_name` "
+"([17a2e7c](https://github.com/tweepy/tweepy/commit/17a2e7cdbbea19b8630870267a92e08e9365e29d)),"
+" `user_ids` -> `user_id` "
+"([e7d9e55](https://github.com/tweepy/tweepy/commit/e7d9e557f2611065cfed50dbd2fcf529f9146d65))"
+
+#: ../../changelog.md:175
+msgid ""
+"`API.search_30_day`: `environment_name` -> `label` "
+"([6c66c60](https://github.com/tweepy/tweepy/commit/6c66c603c42c609b00f923ea2ce72c1e975c5462))"
+msgstr ""
+"`API.search_30_day`: `environment_name` -> `label` "
+"([6c66c60](https://github.com/tweepy/tweepy/commit/6c66c603c42c609b00f923ea2ce72c1e975c5462))"
+
+#: ../../changelog.md:176
+msgid ""
+"`API.search_full_archive`: `environment_name` -> `label` "
+"([295bfe4](https://github.com/tweepy/tweepy/commit/295bfe45ed056e94fc7055eb83aea9fcac5dddcb))"
+msgstr ""
+"`API.search_full_archive`: `environment_name` -> `label` "
+"([295bfe4](https://github.com/tweepy/tweepy/commit/295bfe45ed056e94fc7055eb83aea9fcac5dddcb))"
+
+#: ../../changelog.md:177
+msgid ""
+"`API.update_profile_image`: `file_` -> `file` "
+"([69f6c1d](https://github.com/tweepy/tweepy/commit/69f6c1d1302f0d5118ce2d288f76e7d8ffdac8c0))"
+msgstr ""
+"`API.update_profile_image`: `file_` -> `file` "
+"([69f6c1d](https://github.com/tweepy/tweepy/commit/69f6c1d1302f0d5118ce2d288f76e7d8ffdac8c0))"
+
+#: ../../changelog.md:178
+msgid "Require `API` method parameters"
+msgstr "`API` 메서드의 필수 매개변수"
+
+#: ../../changelog.md:179
+msgid ""
+"`API.closest_trends`: `lat`, `long` "
+"([75b9616](https://github.com/tweepy/tweepy/commit/75b9616d3206967b71902e491d662b6eea5d6fe2))"
+msgstr ""
+"`API.closest_trends`: `lat`, `long` "
+"([75b9616](https://github.com/tweepy/tweepy/commit/75b9616d3206967b71902e491d662b6eea5d6fe2))"
+
+#: ../../changelog.md:180
+msgid ""
+"`API.create_favorite`: `id` "
+"([d3d2abe](https://github.com/tweepy/tweepy/commit/d3d2abec91f678d660f53af259fe9ebce7ff5a11))"
+msgstr ""
+"`API.create_favorite`: `id` "
+"([d3d2abe](https://github.com/tweepy/tweepy/commit/d3d2abec91f678d660f53af259fe9ebce7ff5a11))"
+
+#: ../../changelog.md:181
+msgid ""
+"`API.create_list`: `name` "
+"([5e7385a](https://github.com/tweepy/tweepy/commit/5e7385a02e67178bb62c914998d8e0b7cb40714a))"
+msgstr ""
+"`API.create_list`: `name` "
+"([5e7385a](https://github.com/tweepy/tweepy/commit/5e7385a02e67178bb62c914998d8e0b7cb40714a))"
+
+#: ../../changelog.md:182
+msgid ""
+"`API.create_saved_search`: `query` "
+"([c57a4be](https://github.com/tweepy/tweepy/commit/c57a4bef48a41165196dcbc0e2013d5718ee52a1))"
+msgstr ""
+"`API.create_saved_search`: `query` "
+"([c57a4be](https://github.com/tweepy/tweepy/commit/c57a4bef48a41165196dcbc0e2013d5718ee52a1))"
+
+#: ../../changelog.md:183
+msgid ""
+"`API.delete_direct_message`: `id` "
+"([bcb56ab](https://github.com/tweepy/tweepy/commit/bcb56abce37d4252080fca6df796b7fc3dd2ae76))"
+msgstr ""
+"`API.delete_direct_message`: `id` "
+"([bcb56ab](https://github.com/tweepy/tweepy/commit/bcb56abce37d4252080fca6df796b7fc3dd2ae76))"
+
+#: ../../changelog.md:184
+msgid ""
+"`API.destroy_favorite`: `id` "
+"([a9d41b6](https://github.com/tweepy/tweepy/commit/a9d41b6e499a07dfbcb4146ba98b44d77796efa8))"
+msgstr ""
+"`API.destroy_favorite`: `id` "
+"([a9d41b6](https://github.com/tweepy/tweepy/commit/a9d41b6e499a07dfbcb4146ba98b44d77796efa8))"
+
+#: ../../changelog.md:185
+msgid ""
+"`API.get_direct_message`: `id` "
+"([f5775ee](https://github.com/tweepy/tweepy/commit/f5775ee4436e3c8ba040882803d1b3ea261313be))"
+msgstr ""
+"`API.get_direct_message`: `id` "
+"([f5775ee](https://github.com/tweepy/tweepy/commit/f5775ee4436e3c8ba040882803d1b3ea261313be))"
+
+#: ../../changelog.md:186
+msgid ""
+"`API.get_oembed`: `url` "
+"([af0cc51](https://github.com/tweepy/tweepy/commit/af0cc51b1f41a37d6b325596d0fa2c738a29efcf))"
+msgstr ""
+"`API.get_oembed`: `url` "
+"([af0cc51](https://github.com/tweepy/tweepy/commit/af0cc51b1f41a37d6b325596d0fa2c738a29efcf))"
+
+#: ../../changelog.md:187
+msgid ""
+"`API.get_place_trends`: `id` "
+"([c50f540](https://github.com/tweepy/tweepy/commit/c50f5405abf8161c88e13395c61b6b188540f6f9))"
+msgstr ""
+"`API.get_place_trends`: `id` "
+"([c50f540](https://github.com/tweepy/tweepy/commit/c50f5405abf8161c88e13395c61b6b188540f6f9))"
+
+#: ../../changelog.md:188
+msgid ""
+"`API.get_retweeter_ids`: `id` "
+"([66f6704](https://github.com/tweepy/tweepy/commit/66f6704472eba01321fdb36d8991e3497967ad89))"
+msgstr ""
+"`API.get_retweeter_ids`: `id` "
+"([66f6704](https://github.com/tweepy/tweepy/commit/66f6704472eba01321fdb36d8991e3497967ad89))"
+
+#: ../../changelog.md:189
+msgid ""
+"`API.get_status`: `id` "
+"([bac73c3](https://github.com/tweepy/tweepy/commit/bac73c3f1418ad3ce15524c4a9024c57ec70d12b))"
+msgstr ""
+"`API.get_status`: `id` "
+"([bac73c3](https://github.com/tweepy/tweepy/commit/bac73c3f1418ad3ce15524c4a9024c57ec70d12b))"
+
+#: ../../changelog.md:190
+msgid ""
+"`API.reverse_geocode`: `lat`, `long` "
+"([87d8646](https://github.com/tweepy/tweepy/commit/87d86462b112b35e9741c9452bf956aaa16fb47c))"
+msgstr ""
+"`API.reverse_geocode`: `lat`, `long` "
+"([87d8646](https://github.com/tweepy/tweepy/commit/87d86462b112b35e9741c9452bf956aaa16fb47c))"
+
+#: ../../changelog.md:191
+msgid ""
+"`API.search_30_day`: `query` "
+"([52874b7](https://github.com/tweepy/tweepy/commit/52874b72cd16e3984ce99710824d07608c329024))"
+msgstr ""
+"`API.search_30_day`: `query` "
+"([52874b7](https://github.com/tweepy/tweepy/commit/52874b72cd16e3984ce99710824d07608c329024))"
+
+#: ../../changelog.md:192
+msgid ""
+"`API.search_full_archive`: `query` "
+"([801f15d](https://github.com/tweepy/tweepy/commit/801f15de892771a5d1d683facb409c54459676b9))"
+msgstr ""
+"`API.search_full_archive`: `query` "
+"([801f15d](https://github.com/tweepy/tweepy/commit/801f15de892771a5d1d683facb409c54459676b9))"
+
+#: ../../changelog.md:193
+msgid ""
+"`API.search_tweets`: `q` "
+"([9377e7e](https://github.com/tweepy/tweepy/commit/9377e7e844f9a87e6fc8e53eb5ca0cd4d758d548))"
+msgstr ""
+"`API.search_tweets`: `q` "
+"([9377e7e](https://github.com/tweepy/tweepy/commit/9377e7e844f9a87e6fc8e53eb5ca0cd4d758d548))"
+
+#: ../../changelog.md:194
+#, fuzzy
+msgid ""
+"`API.search_users`: `q` "
+"([21802f9](https://github.com/tweepy/tweepy/commit/21802f9856fe8847c481f51c73d5c661b531bfc0))"
+msgstr ""
+"`API.search_tweets`: `q` "
+"([9377e7e](https://github.com/tweepy/tweepy/commit/9377e7e844f9a87e6fc8e53eb5ca0cd4d758d548))"
+
+#: ../../changelog.md:195
+msgid ""
+"`API.update_status`: `status` "
+"([f64c076](https://github.com/tweepy/tweepy/commit/f64c076503e13411719faa3042267f27e96126ea))"
+msgstr ""
+"`API.update_status`: `status` "
+"([f64c076](https://github.com/tweepy/tweepy/commit/f64c076503e13411719faa3042267f27e96126ea))"
+
+#: ../../changelog.md:196
+msgid ""
+"`API.update_status_with_media`: `status` "
+"([0726263](https://github.com/tweepy/tweepy/commit/0726263b33be8db7b675c0f970944bd8dccd81f1))"
+msgstr ""
+"`API.update_status_with_media`: `status` "
+"([0726263](https://github.com/tweepy/tweepy/commit/0726263b33be8db7b675c0f970944bd8dccd81f1))"
+
+#: ../../changelog.md:197
+msgid ""
+"Stop allowing positional arguments for `API` methods (change to be "
+"keyword-only arguments):"
+msgstr "`API` 메서드가 더 이상 위치 인수(Positional argument)를 받지 않음 (키워드 인수 형식으로 전달해야 함)"
+
+#: ../../changelog.md:198
+msgid ""
+"`API.add_list_member` "
+"([ae18ee5](https://github.com/tweepy/tweepy/commit/ae18ee50c122d7cbe714ded3851eed3a765ff0c5))"
+msgstr ""
+"`API.add_list_member` "
+"([ae18ee5](https://github.com/tweepy/tweepy/commit/ae18ee50c122d7cbe714ded3851eed3a765ff0c5))"
+
+#: ../../changelog.md:199
+msgid ""
+"`API.add_list_members ` "
+"([8eb900f](https://github.com/tweepy/tweepy/commit/8eb900f12e62a21dad9314d0caf9035471baf840))"
+msgstr ""
+"`API.add_list_members ` "
+"([8eb900f](https://github.com/tweepy/tweepy/commit/8eb900f12e62a21dad9314d0caf9035471baf840))"
+
+#: ../../changelog.md:200
+msgid ""
+"`API.available_trends` "
+"([7a74863](https://github.com/tweepy/tweepy/commit/7a74863b66aeffdcd1157d8abf07df5f907cb0be))"
+msgstr ""
+"`API.available_trends` "
+"([7a74863](https://github.com/tweepy/tweepy/commit/7a74863b66aeffdcd1157d8abf07df5f907cb0be))"
+
+#: ../../changelog.md:201
+msgid ""
+"`API.closest_trends`, besides `lat` and `long` "
+"([7946490](https://github.com/tweepy/tweepy/commit/794649099b915bd44954aef2844e64dc394a4f6f))"
+msgstr ""
+"`API.closest_trends` 및 `lat`, `long` "
+"([7946490](https://github.com/tweepy/tweepy/commit/794649099b915bd44954aef2844e64dc394a4f6f))"
+
+#: ../../changelog.md:202
+msgid ""
+"`API.create_block` "
+"([caa34c6](https://github.com/tweepy/tweepy/commit/caa34c6f790f5fa1820a52ed7dc3ebc3dd38e055))"
+msgstr ""
+"`API.create_block` "
+"([caa34c6](https://github.com/tweepy/tweepy/commit/caa34c6f790f5fa1820a52ed7dc3ebc3dd38e055))"
+
+#: ../../changelog.md:203
+msgid ""
+"`API.create_favorite`, besides `id` "
+"([0b83984](https://github.com/tweepy/tweepy/commit/0b839841c985e1c549a63b5306ac3ea9363ded7f))"
+msgstr ""
+"`API.create_favorite` 및 `id` "
+"([0b83984](https://github.com/tweepy/tweepy/commit/0b839841c985e1c549a63b5306ac3ea9363ded7f))"
+
+#: ../../changelog.md:204
+msgid ""
+"`API.create_friendship` "
+"([82cd798](https://github.com/tweepy/tweepy/commit/82cd7983d70d5260c1fa9290c1552227b70af00a))"
+msgstr ""
+"`API.create_friendship` "
+"([82cd798](https://github.com/tweepy/tweepy/commit/82cd7983d70d5260c1fa9290c1552227b70af00a))"
+
+#: ../../changelog.md:205
+msgid ""
+"`API.create_list`, besides `name` "
+"([25cb01e](https://github.com/tweepy/tweepy/commit/25cb01ec734d2e6bf913be0a5d8ef76da3ebca24))"
+msgstr ""
+"`API.create_list` 및 `name` "
+"([25cb01e](https://github.com/tweepy/tweepy/commit/25cb01ec734d2e6bf913be0a5d8ef76da3ebca24))"
+
+#: ../../changelog.md:206
+msgid ""
+"`API.create_mute ` "
+"([4aae710](https://github.com/tweepy/tweepy/commit/4aae710e05d0ed8906b3cb5bc2fabc8b8f253b44))"
+msgstr ""
+"`API.create_mute ` "
+"([4aae710](https://github.com/tweepy/tweepy/commit/4aae710e05d0ed8906b3cb5bc2fabc8b8f253b44))"
+
+#: ../../changelog.md:207
+msgid ""
+"`API.create_saved_search`, besides `query` "
+"([76be2d9](https://github.com/tweepy/tweepy/commit/76be2d9cfb2c8437627531ea7cb30047fbfd8355))"
+msgstr ""
+"`API.create_saved_search` 및 `query` "
+"([76be2d9](https://github.com/tweepy/tweepy/commit/76be2d9cfb2c8437627531ea7cb30047fbfd8355))"
+
+#: ../../changelog.md:208
+msgid ""
+"`API.delete_direct_message`, besides `id` "
+"([53ca00f](https://github.com/tweepy/tweepy/commit/53ca00ffe5681deff1f80ddfe3f822d7be1ba14f))"
+msgstr ""
+"`API.delete_direct_message` 및 `id` "
+"([53ca00f](https://github.com/tweepy/tweepy/commit/53ca00ffe5681deff1f80ddfe3f822d7be1ba14f))"
+
+#: ../../changelog.md:209
+msgid ""
+"`API.destroy_block` "
+"([c49cfb2](https://github.com/tweepy/tweepy/commit/c49cfb272f15ff11ef7cc0f27a6a6ed91ac6c755))"
+msgstr ""
+"`API.destroy_block` "
+"([c49cfb2](https://github.com/tweepy/tweepy/commit/c49cfb272f15ff11ef7cc0f27a6a6ed91ac6c755))"
+
+#: ../../changelog.md:210
+msgid ""
+"`API.destroy_favorite`, besides `id` "
+"([8afee87](https://github.com/tweepy/tweepy/commit/8afee87ee2e3f8e612082c693bab3fa6ce60cb69))"
+msgstr ""
+"`API.destroy_favorite` 및 `id` "
+"([8afee87](https://github.com/tweepy/tweepy/commit/8afee87ee2e3f8e612082c693bab3fa6ce60cb69))"
+
+#: ../../changelog.md:211
+msgid ""
+"`API.destroy_friendship` "
+"([b2d44fe](https://github.com/tweepy/tweepy/commit/b2d44fed587132b866401dcd0c02cb9bc0b3a130))"
+msgstr ""
+"`API.destroy_friendship` "
+"([b2d44fe](https://github.com/tweepy/tweepy/commit/b2d44fed587132b866401dcd0c02cb9bc0b3a130))"
+
+#: ../../changelog.md:212
+msgid ""
+"`API.destroy_list` "
+"([4b2cfc4](https://github.com/tweepy/tweepy/commit/4b2cfc486836faa749248af1fd6dd0200202c62e))"
+msgstr ""
+"`API.destroy_list` "
+"([4b2cfc4](https://github.com/tweepy/tweepy/commit/4b2cfc486836faa749248af1fd6dd0200202c62e))"
+
+#: ../../changelog.md:213
+msgid ""
+"`API.destroy_mute ` "
+"([009b54e](https://github.com/tweepy/tweepy/commit/009b54e43230827264eb34141d6436b935f76084))"
+msgstr ""
+"`API.destroy_mute ` "
+"([009b54e](https://github.com/tweepy/tweepy/commit/009b54e43230827264eb34141d6436b935f76084))"
+
+#: ../../changelog.md:214
+msgid ""
+"`API.destroy_saved_search`, besides `id` "
+"([b7afca2](https://github.com/tweepy/tweepy/commit/b7afca2ad8f8721b267fd159bc7a2a91d012b15e))"
+msgstr ""
+"`API.destroy_saved_search` 및 `id` "
+"([b7afca2](https://github.com/tweepy/tweepy/commit/b7afca2ad8f8721b267fd159bc7a2a91d012b15e))"
+
+#: ../../changelog.md:215
+msgid ""
+"`API.destroy_status`, besides `id` "
+"([876c8ca](https://github.com/tweepy/tweepy/commit/876c8cad4a9574d25ac4969e554b7a5739fb75a7))"
+msgstr ""
+"`API.destroy_status` 및 `id` "
+"([876c8ca](https://github.com/tweepy/tweepy/commit/876c8cad4a9574d25ac4969e554b7a5739fb75a7))"
+
+#: ../../changelog.md:216
+msgid ""
+"`API.geo_id`, besides `place_id` "
+"([a0cff22](https://github.com/tweepy/tweepy/commit/a0cff22d0402386ffe576327b17a2a4240e51148))"
+msgstr ""
+"`API.geo_id` 및 `place_id` "
+"([a0cff22](https://github.com/tweepy/tweepy/commit/a0cff22d0402386ffe576327b17a2a4240e51148))"
+
+#: ../../changelog.md:217
+msgid ""
+"`API.get_blocked_ids` "
+"([ff38b70](https://github.com/tweepy/tweepy/commit/ff38b7026403eb9c952e1d1ac00a1a11c6b40f61))"
+msgstr ""
+"`API.get_blocked_ids` "
+"([ff38b70](https://github.com/tweepy/tweepy/commit/ff38b7026403eb9c952e1d1ac00a1a11c6b40f61))"
+
+#: ../../changelog.md:218
+msgid ""
+"`API.get_blocks` "
+"([dc81854](https://github.com/tweepy/tweepy/commit/dc8185429815deeea51fad06995e64fb58c07009))"
+msgstr ""
+"`API.get_blocks` "
+"([dc81854](https://github.com/tweepy/tweepy/commit/dc8185429815deeea51fad06995e64fb58c07009))"
+
+#: ../../changelog.md:219
+msgid ""
+"`API.get_direct_message`, besides `id` "
+"([4ae0ec8](https://github.com/tweepy/tweepy/commit/4ae0ec83daef681877d7d5f3dadf41652a66051c))"
+msgstr ""
+"`API.get_direct_message` 및 `id` "
+"([4ae0ec8](https://github.com/tweepy/tweepy/commit/4ae0ec83daef681877d7d5f3dadf41652a66051c))"
+
+#: ../../changelog.md:220
+msgid ""
+"`API.get_direct_messages` "
+"([8e0507d](https://github.com/tweepy/tweepy/commit/8e0507dd1456a42e8c4258bed37295e1116c1bd9))"
+msgstr ""
+"`API.get_direct_messages` "
+"([8e0507d](https://github.com/tweepy/tweepy/commit/8e0507dd1456a42e8c4258bed37295e1116c1bd9))"
+
+#: ../../changelog.md:221
+msgid ""
+"`API.get_favorites` "
+"([e80b49a](https://github.com/tweepy/tweepy/commit/e80b49aded75b9cf75e168760c095a6d1a5f70ac))"
+msgstr ""
+"`API.get_favorites` "
+"([e80b49a](https://github.com/tweepy/tweepy/commit/e80b49aded75b9cf75e168760c095a6d1a5f70ac))"
+
+#: ../../changelog.md:222
+msgid ""
+"`API.get_follower_ids` "
+"([7d42597](https://github.com/tweepy/tweepy/commit/7d425979312dd71a8151c7463a2592bb2f57a2f9))"
+msgstr ""
+"`API.get_follower_ids` "
+"([7d42597](https://github.com/tweepy/tweepy/commit/7d425979312dd71a8151c7463a2592bb2f57a2f9))"
+
+#: ../../changelog.md:223
+msgid ""
+"`API.get_followers` "
+"([c6ab5a0](https://github.com/tweepy/tweepy/commit/c6ab5a0882651802a8a2fcf8c9f8300321415455))"
+msgstr ""
+"`API.get_followers` "
+"([c6ab5a0](https://github.com/tweepy/tweepy/commit/c6ab5a0882651802a8a2fcf8c9f8300321415455))"
+
+#: ../../changelog.md:224
+msgid ""
+"`API.get_friend_ids` "
+"([c65641b](https://github.com/tweepy/tweepy/commit/c65641b48df0320bad6046798d789e38b3cd8ec8))"
+msgstr ""
+"`API.get_friend_ids` "
+"([c65641b](https://github.com/tweepy/tweepy/commit/c65641b48df0320bad6046798d789e38b3cd8ec8))"
+
+#: ../../changelog.md:225
+msgid ""
+"`API.get_friends` "
+"([e6965fa](https://github.com/tweepy/tweepy/commit/e6965fa7847782ca5e4073a21cc3cd30752eeafb))"
+msgstr ""
+"`API.get_friends` "
+"([e6965fa](https://github.com/tweepy/tweepy/commit/e6965fa7847782ca5e4073a21cc3cd30752eeafb))"
+
+#: ../../changelog.md:226
+msgid ""
+"`API.get_friendship` "
+"([6dea7de](https://github.com/tweepy/tweepy/commit/6dea7de36bd4daefd33f25a76fc0712318f9735b))"
+msgstr ""
+"`API.get_friendship` "
+"([6dea7de](https://github.com/tweepy/tweepy/commit/6dea7de36bd4daefd33f25a76fc0712318f9735b))"
+
+#: ../../changelog.md:227
+msgid ""
+"`API.get_list` "
+"([92dc37f](https://github.com/tweepy/tweepy/commit/92dc37f1c45b1420c1cdcef0c16843ffffc15aa4))"
+msgstr ""
+"`API.get_list` "
+"([92dc37f](https://github.com/tweepy/tweepy/commit/92dc37f1c45b1420c1cdcef0c16843ffffc15aa4))"
+
+#: ../../changelog.md:228
+msgid ""
+"`API.get_list_member` "
+"([0af06db](https://github.com/tweepy/tweepy/commit/0af06db70a3f41db048d2f5e866a39c48cfcdd98))"
+msgstr ""
+"`API.get_list_member` "
+"([0af06db](https://github.com/tweepy/tweepy/commit/0af06db70a3f41db048d2f5e866a39c48cfcdd98))"
+
+#: ../../changelog.md:229
+msgid ""
+"`API.get_list_members` "
+"([7c8be8d](https://github.com/tweepy/tweepy/commit/7c8be8de2c9c099b61ec59078a62a2aa3fba8a8e))"
+msgstr ""
+"`API.get_list_members` "
+"([7c8be8d](https://github.com/tweepy/tweepy/commit/7c8be8de2c9c099b61ec59078a62a2aa3fba8a8e))"
+
+#: ../../changelog.md:230
+msgid ""
+"`API.get_list_memberships` "
+"([ec7601f](https://github.com/tweepy/tweepy/commit/ec7601ff86b8198d80242718cfea898c3d35b0ee))"
+msgstr ""
+"`API.get_list_memberships` "
+"([ec7601f](https://github.com/tweepy/tweepy/commit/ec7601ff86b8198d80242718cfea898c3d35b0ee))"
+
+#: ../../changelog.md:231
+msgid ""
+"`API.get_list_subscriber` "
+"([a175cdd](https://github.com/tweepy/tweepy/commit/a175cdd690f577cd56e1affb7c6d42a69a5c9427))"
+msgstr ""
+"`API.get_list_subscriber` "
+"([a175cdd](https://github.com/tweepy/tweepy/commit/a175cdd690f577cd56e1affb7c6d42a69a5c9427))"
+
+#: ../../changelog.md:232
+msgid ""
+"`API.get_list_subscribers` "
+"([3ee84ef](https://github.com/tweepy/tweepy/commit/3ee84ef24094eae62be706108309a5a561095be1))"
+msgstr ""
+"`API.get_list_subscribers` "
+"([3ee84ef](https://github.com/tweepy/tweepy/commit/3ee84ef24094eae62be706108309a5a561095be1))"
+
+#: ../../changelog.md:233
+msgid ""
+"`API.get_list_subscriptions` "
+"([178d719](https://github.com/tweepy/tweepy/commit/178d7193c08452f4218aa8a1e0b069b6b72f23e3))"
+msgstr ""
+"`API.get_list_subscriptions` "
+"([178d719](https://github.com/tweepy/tweepy/commit/178d7193c08452f4218aa8a1e0b069b6b72f23e3))"
+
+#: ../../changelog.md:234
+msgid ""
+"`API.get_lists` "
+"([3cd0058](https://github.com/tweepy/tweepy/commit/3cd00587cf7a3b92fb64375e0311e03a4c410595))"
+msgstr ""
+"`API.get_lists` "
+"([3cd0058](https://github.com/tweepy/tweepy/commit/3cd00587cf7a3b92fb64375e0311e03a4c410595))"
+
+#: ../../changelog.md:235
+msgid ""
+"`API.get_muted_ids` "
+"([2967104](https://github.com/tweepy/tweepy/commit/2967104c1e6f2398aaf52f19c9a7627dbcdd7651))"
+msgstr ""
+"`API.get_muted_ids` "
+"([2967104](https://github.com/tweepy/tweepy/commit/2967104c1e6f2398aaf52f19c9a7627dbcdd7651))"
+
+#: ../../changelog.md:236
+msgid ""
+"`API.get_mutes` "
+"([9e9d370](https://github.com/tweepy/tweepy/commit/9e9d370c440b0c5dd26131382a96306b681385a9))"
+msgstr ""
+"`API.get_mutes` "
+"([9e9d370](https://github.com/tweepy/tweepy/commit/9e9d370c440b0c5dd26131382a96306b681385a9))"
+
+#: ../../changelog.md:237
+msgid ""
+"`API.get_oembed`, besides `url` "
+"([d13d853](https://github.com/tweepy/tweepy/commit/d13d8535862b12f8cd0b4ca60a4f3c4be6f3122f))"
+msgstr ""
+"`API.get_oembed` 및 `url` "
+"([d13d853](https://github.com/tweepy/tweepy/commit/d13d8535862b12f8cd0b4ca60a4f3c4be6f3122f))"
+
+#: ../../changelog.md:238
+msgid ""
+"`API.get_place_trends`, besides `id` "
+"([548810c](https://github.com/tweepy/tweepy/commit/548810c081508965972bbdfcec227ebcba3a350d))"
+msgstr ""
+"`API.get_place_trends` 및 `id` "
+"([548810c](https://github.com/tweepy/tweepy/commit/548810c081508965972bbdfcec227ebcba3a350d))"
+
+#: ../../changelog.md:239
+msgid ""
+"`API.get_retweeter_ids`, besides `id` "
+"([9907c25](https://github.com/tweepy/tweepy/commit/9907c25c8873876ff56fd2575aaa6e1994715313))"
+msgstr ""
+"`API.get_retweeter_ids` 및 `id` "
+"([9907c25](https://github.com/tweepy/tweepy/commit/9907c25c8873876ff56fd2575aaa6e1994715313))"
+
+#: ../../changelog.md:240
+msgid ""
+"`API.get_retweets`, besides `id` "
+"([0bd0292](https://github.com/tweepy/tweepy/commit/0bd0292fbe7cdd7b1b6f7a43906ac59ffb97ed72))"
+msgstr ""
+"`API.get_retweets` 및 `id` "
+"([0bd0292](https://github.com/tweepy/tweepy/commit/0bd0292fbe7cdd7b1b6f7a43906ac59ffb97ed72))"
+
+#: ../../changelog.md:241
+msgid ""
+"`API.get_retweets_of_me` "
+"([2b2ed0a](https://github.com/tweepy/tweepy/commit/2b2ed0a45bfe2077dd1e0b3c0e91de2557aa4a36))"
+msgstr ""
+"`API.get_retweets_of_me` "
+"([2b2ed0a](https://github.com/tweepy/tweepy/commit/2b2ed0a45bfe2077dd1e0b3c0e91de2557aa4a36))"
+
+#: ../../changelog.md:242
+msgid ""
+"`API.get_saved_search`, besides `id` "
+"([1d3d3ae](https://github.com/tweepy/tweepy/commit/1d3d3ae2f5600173771d51b193d5c3675c905167))"
+msgstr ""
+"`API.get_saved_search` 및 `id` "
+"([1d3d3ae](https://github.com/tweepy/tweepy/commit/1d3d3ae2f5600173771d51b193d5c3675c905167))"
+
+#: ../../changelog.md:243
+msgid ""
+"`API.get_saved_searches` "
+"([c5f5b4b](https://github.com/tweepy/tweepy/commit/c5f5b4b552fbdff75cd4d46585cefa97a82abee7))"
+msgstr ""
+"`API.get_saved_searches` "
+"([c5f5b4b](https://github.com/tweepy/tweepy/commit/c5f5b4b552fbdff75cd4d46585cefa97a82abee7))"
+
+#: ../../changelog.md:244
+msgid ""
+"`API.get_settings` "
+"([2c2f0ec](https://github.com/tweepy/tweepy/commit/2c2f0ecbfb4bc9b262f2320589f2ce3cf99bdc9c))"
+msgstr ""
+"`API.get_settings` "
+"([2c2f0ec](https://github.com/tweepy/tweepy/commit/2c2f0ecbfb4bc9b262f2320589f2ce3cf99bdc9c))"
+
+#: ../../changelog.md:245
+msgid ""
+"`API.get_status`, besides `id` "
+"([30af3ac](https://github.com/tweepy/tweepy/commit/30af3ac8dcbd385fec6cef372550e0afb43b2612))"
+msgstr ""
+"`API.get_status` 및 `id` "
+"([30af3ac](https://github.com/tweepy/tweepy/commit/30af3ac8dcbd385fec6cef372550e0afb43b2612))"
+
+#: ../../changelog.md:246
+msgid ""
+"`API.get_user` "
+"([6b761ce](https://github.com/tweepy/tweepy/commit/6b761ce7f42ad348e9d0dade6657e020f326f88d))"
+msgstr ""
+"`API.get_user` "
+"([6b761ce](https://github.com/tweepy/tweepy/commit/6b761ce7f42ad348e9d0dade6657e020f326f88d))"
+
+#: ../../changelog.md:247
+msgid ""
+"`API.home_timeline` "
+"([b91be22](https://github.com/tweepy/tweepy/commit/b91be220928d1cb2996a5c71ef16a13c58375d4a))"
+msgstr ""
+"`API.home_timeline` "
+"([b91be22](https://github.com/tweepy/tweepy/commit/b91be220928d1cb2996a5c71ef16a13c58375d4a))"
+
+#: ../../changelog.md:248
+msgid ""
+"`API.incoming_friendships` "
+"([6d3b7f2](https://github.com/tweepy/tweepy/commit/6d3b7f259bb547eef47d6212fe4b3379b1a96586))"
+msgstr ""
+"`API.incoming_friendships` "
+"([6d3b7f2](https://github.com/tweepy/tweepy/commit/6d3b7f259bb547eef47d6212fe4b3379b1a96586))"
+
+#: ../../changelog.md:249
+msgid ""
+"`API.list_timeline` "
+"([e3ec5c1](https://github.com/tweepy/tweepy/commit/e3ec5c11f3f7ebac43747b8a7b0d07530ec34fea))"
+msgstr ""
+"`API.list_timeline` "
+"([e3ec5c1](https://github.com/tweepy/tweepy/commit/e3ec5c11f3f7ebac43747b8a7b0d07530ec34fea))"
+
+#: ../../changelog.md:250
+msgid ""
+"`API.lookup_friendships` "
+"([0eff951](https://github.com/tweepy/tweepy/commit/0eff9515797dad95728f44b7c2b21fd88e5f6312))"
+msgstr ""
+"`API.lookup_friendships` "
+"([0eff951](https://github.com/tweepy/tweepy/commit/0eff9515797dad95728f44b7c2b21fd88e5f6312))"
+
+#: ../../changelog.md:251
+msgid ""
+"`API.lookup_statuses`, besides `id` "
+"([cf9845d](https://github.com/tweepy/tweepy/commit/cf9845d18c42600f890e5a40b313e77079ca9a5b))"
+msgstr ""
+"`API.lookup_statuses` 및 `id` "
+"([cf9845d](https://github.com/tweepy/tweepy/commit/cf9845d18c42600f890e5a40b313e77079ca9a5b))"
+
+#: ../../changelog.md:252
+msgid ""
+"`API.lookup_users` "
+"([7317109](https://github.com/tweepy/tweepy/commit/731710944c07c82a7a2b52e5a73f0d20ec77b9ae))"
+msgstr ""
+"`API.lookup_users` "
+"([7317109](https://github.com/tweepy/tweepy/commit/731710944c07c82a7a2b52e5a73f0d20ec77b9ae))"
+
+#: ../../changelog.md:253
+msgid ""
+"`API.media_upload`, besides `filename` "
+"([ec2498f](https://github.com/tweepy/tweepy/commit/ec2498f0d2c14702b69dbdba463e07ce8709b8d5))"
+msgstr ""
+"`API.media_upload` 및 `filename` "
+"([ec2498f](https://github.com/tweepy/tweepy/commit/ec2498f0d2c14702b69dbdba463e07ce8709b8d5))"
+
+#: ../../changelog.md:254
+msgid ""
+"`API.mentions_timeline` "
+"([3614ce4](https://github.com/tweepy/tweepy/commit/3614ce42483711b1aea65c16a235b4ec4d0c8242))"
+msgstr ""
+"`API.mentions_timeline` "
+"([3614ce4](https://github.com/tweepy/tweepy/commit/3614ce42483711b1aea65c16a235b4ec4d0c8242))"
+
+#: ../../changelog.md:255
+msgid ""
+"`API.outgoing_friendships` "
+"([09f8504](https://github.com/tweepy/tweepy/commit/09f85045945331e9b0ace417be20df0fa1ec7a79))"
+msgstr ""
+"`API.outgoing_friendships` "
+"([09f8504](https://github.com/tweepy/tweepy/commit/09f85045945331e9b0ace417be20df0fa1ec7a79))"
+
+#: ../../changelog.md:256
+msgid ""
+"`API.rate_limit_status` "
+"([b4b91c1](https://github.com/tweepy/tweepy/commit/b4b91c116921045eb18790330771460c28f9662a))"
+msgstr ""
+"`API.rate_limit_status` "
+"([b4b91c1](https://github.com/tweepy/tweepy/commit/b4b91c116921045eb18790330771460c28f9662a))"
+
+#: ../../changelog.md:257
+msgid ""
+"`API.remove_list_member` "
+"([e7fa800](https://github.com/tweepy/tweepy/commit/e7fa800bf0cbe699201c7f3e26ad2e27b4193b6d))"
+msgstr ""
+"`API.remove_list_member` "
+"([e7fa800](https://github.com/tweepy/tweepy/commit/e7fa800bf0cbe699201c7f3e26ad2e27b4193b6d))"
+
+#: ../../changelog.md:258
+msgid ""
+"`API.remove_list_members` "
+"([593ef1c](https://github.com/tweepy/tweepy/commit/593ef1cf6a59656e3c7208ef6907009b2e95089b))"
+msgstr ""
+"`API.remove_list_members` "
+"([593ef1c](https://github.com/tweepy/tweepy/commit/593ef1cf6a59656e3c7208ef6907009b2e95089b))"
+
+#: ../../changelog.md:259
+msgid ""
+"`API.report_spam` "
+"([f55efcf](https://github.com/tweepy/tweepy/commit/f55efcfc86ba10c3fd133a84290a9c50a1f64a9d))"
+msgstr ""
+"`API.report_spam` "
+"([f55efcf](https://github.com/tweepy/tweepy/commit/f55efcfc86ba10c3fd133a84290a9c50a1f64a9d))"
+
+#: ../../changelog.md:260
+msgid ""
+"`API.retweet`, besides `id` "
+"([4f7be88](https://github.com/tweepy/tweepy/commit/4f7be886e806c3f61eaaff48827c5c8d1e517fe8))"
+msgstr ""
+"`API.retweet` 및 `id` "
+"([4f7be88](https://github.com/tweepy/tweepy/commit/4f7be886e806c3f61eaaff48827c5c8d1e517fe8))"
+
+#: ../../changelog.md:261
+msgid ""
+"`API.reverse_geocode`: besides `lat` and `long` "
+"([b209c48](https://github.com/tweepy/tweepy/commit/b209c484f1dd4458d455b4faa41971c6429dae3b))"
+msgstr ""
+"`API.reverse_geocode` 및 `lat`, `long` "
+"([b209c48](https://github.com/tweepy/tweepy/commit/b209c484f1dd4458d455b4faa41971c6429dae3b))"
+
+#: ../../changelog.md:262
+msgid ""
+"`API.search_30_day`, besides `label` and `query` "
+"([434fd35](https://github.com/tweepy/tweepy/commit/434fd35d76481f0281d62cd83b8da2bd47353e56))"
+msgstr ""
+"`API.search_30_day` 및 `label`, `query` "
+"([434fd35](https://github.com/tweepy/tweepy/commit/434fd35d76481f0281d62cd83b8da2bd47353e56))"
+
+#: ../../changelog.md:263
+msgid ""
+"`API.search_full_archive`, besides `label` and `query` "
+"([44391bc](https://github.com/tweepy/tweepy/commit/44391bcf55da7fb50cf077510ee94e849599b6cd))"
+msgstr ""
+"`API.search_full_archive` 및 `label`, `query` "
+"([44391bc](https://github.com/tweepy/tweepy/commit/44391bcf55da7fb50cf077510ee94e849599b6cd))"
+
+#: ../../changelog.md:264
+msgid ""
+"`API.search_geo` "
+"([0a6bec9](https://github.com/tweepy/tweepy/commit/0a6bec9906b41983067315954ac533556ae85176))"
+msgstr ""
+"`API.search_geo` "
+"([0a6bec9](https://github.com/tweepy/tweepy/commit/0a6bec9906b41983067315954ac533556ae85176))"
+
+#: ../../changelog.md:265
+msgid ""
+"`API.search_tweets`, besides `q` "
+"([445da4e](https://github.com/tweepy/tweepy/commit/445da4ec69cdaf1199ac025e63d7ffc80dd9f27f))"
+msgstr ""
+"`API.search_tweets` 및 `q` "
+"([445da4e](https://github.com/tweepy/tweepy/commit/445da4ec69cdaf1199ac025e63d7ffc80dd9f27f))"
+
+#: ../../changelog.md:266
+#, fuzzy
+msgid ""
+"`API.search_users`, besides `q` "
+"([76ca416](https://github.com/tweepy/tweepy/commit/76ca4169f38759d7eb7deb5cd984ef615fe2b628))"
+msgstr ""
+"`API.search_tweets` 및 `q` "
+"([445da4e](https://github.com/tweepy/tweepy/commit/445da4ec69cdaf1199ac025e63d7ffc80dd9f27f))"
+
+#: ../../changelog.md:267
+msgid ""
+"`API.send_direct_message`, besides `recipient_id` and `text` "
+"([7d1a549](https://github.com/tweepy/tweepy/commit/7d1a5498325cbc93c7c177a96f5642c5c5683eac))"
+msgstr ""
+"`API.send_direct_message` 및 `recipient_id` and `text` "
+"([7d1a549](https://github.com/tweepy/tweepy/commit/7d1a5498325cbc93c7c177a96f5642c5c5683eac))"
+
+#: ../../changelog.md:268
+msgid ""
+"`API.set_settings` "
+"([bf1d928](https://github.com/tweepy/tweepy/commit/bf1d928cec2b9ada5d161b479f9140d80e254e81))"
+msgstr ""
+"`API.set_settings` "
+"([bf1d928](https://github.com/tweepy/tweepy/commit/bf1d928cec2b9ada5d161b479f9140d80e254e81))"
+
+#: ../../changelog.md:269
+msgid ""
+"`API.supported_languages` "
+"([2034efc](https://github.com/tweepy/tweepy/commit/2034efc450d6bf29a481fc7eca35f125dd66e9d4))"
+msgstr ""
+"`API.supported_languages` "
+"([2034efc](https://github.com/tweepy/tweepy/commit/2034efc450d6bf29a481fc7eca35f125dd66e9d4))"
+
+#: ../../changelog.md:270
+msgid ""
+"`API.subscribe_list` "
+"([ee3b718](https://github.com/tweepy/tweepy/commit/ee3b718339e5ff8719cf8fc7ada5fc7930e41c13))"
+msgstr ""
+"`API.subscribe_list` "
+"([ee3b718](https://github.com/tweepy/tweepy/commit/ee3b718339e5ff8719cf8fc7ada5fc7930e41c13))"
+
+#: ../../changelog.md:271
+msgid ""
+"`API.unretweet`, besides `id` "
+"([4626c42](https://github.com/tweepy/tweepy/commit/4626c424aaca20b4fcb87bbd590cdb33abed9fb0))"
+msgstr ""
+"`API.unretweet` 및 `id` "
+"([4626c42](https://github.com/tweepy/tweepy/commit/4626c424aaca20b4fcb87bbd590cdb33abed9fb0))"
+
+#: ../../changelog.md:272
+msgid ""
+"`API.unsubscribe_list` "
+"([2df2311](https://github.com/tweepy/tweepy/commit/2df231158d08e05ccb2f08a020dea154681e2609))"
+msgstr ""
+"`API.unsubscribe_list` "
+"([2df2311](https://github.com/tweepy/tweepy/commit/2df231158d08e05ccb2f08a020dea154681e2609))"
+
+#: ../../changelog.md:273
+msgid ""
+"`API.update_list` "
+"([8b3b4fb](https://github.com/tweepy/tweepy/commit/8b3b4fbab2c9150ff3ce1f15f1f4a0f8bc5edde1))"
+msgstr ""
+"`API.update_list` "
+"([8b3b4fb](https://github.com/tweepy/tweepy/commit/8b3b4fbab2c9150ff3ce1f15f1f4a0f8bc5edde1))"
+
+#: ../../changelog.md:274
+msgid ""
+"`API.update_profile` "
+"([99cd815](https://github.com/tweepy/tweepy/commit/99cd815b0e730a8f1bc2bd0737fcb83749a483c7))"
+msgstr ""
+"`API.update_profile` "
+"([99cd815](https://github.com/tweepy/tweepy/commit/99cd815b0e730a8f1bc2bd0737fcb83749a483c7))"
+
+#: ../../changelog.md:275
+msgid ""
+"`API.update_profile_banner`, besides `filename` "
+"([1ca22be](https://github.com/tweepy/tweepy/commit/1ca22be0cbb0a4f3aba00b37263ac92149eceb1c))"
+msgstr ""
+"`API.update_profile_banner` 및 `filename` "
+"([1ca22be](https://github.com/tweepy/tweepy/commit/1ca22be0cbb0a4f3aba00b37263ac92149eceb1c))"
+
+#: ../../changelog.md:276
+msgid ""
+"`API.update_profile_image`, besides `filename` "
+"([3539fa2](https://github.com/tweepy/tweepy/commit/3539fa2129f22af80e68adfb9d216c2176dc0181))"
+msgstr ""
+"`API.update_profile_image` 및 `filename` "
+"([3539fa2](https://github.com/tweepy/tweepy/commit/3539fa2129f22af80e68adfb9d216c2176dc0181))"
+
+#: ../../changelog.md:277
+msgid ""
+"`API.update_status`, besides `status` "
+"([761cbfe](https://github.com/tweepy/tweepy/commit/761cbfe05e866e60edf7c4e58b9ecf356507c6f2))"
+msgstr ""
+"`API.update_status` 및 `status` "
+"([761cbfe](https://github.com/tweepy/tweepy/commit/761cbfe05e866e60edf7c4e58b9ecf356507c6f2))"
+
+#: ../../changelog.md:278
+msgid ""
+"`API.update_status_with_media`, besides `filename` and `status` "
+"([0ac4e83](https://github.com/tweepy/tweepy/commit/0ac4e83531993187df16c05a886654e13574f136))"
+msgstr ""
+"`API.update_status_with_media` 및 `filename`, `status` "
+"([0ac4e83](https://github.com/tweepy/tweepy/commit/0ac4e83531993187df16c05a886654e13574f136))"
+
+#: ../../changelog.md:279
+msgid ""
+"`API.user_timeline` "
+"([0ef964f](https://github.com/tweepy/tweepy/commit/0ef964f454a0e9111c1933aca13ec55c2bcbe2c3))"
+msgstr ""
+"`API.user_timeline` "
+"([0ef964f](https://github.com/tweepy/tweepy/commit/0ef964f454a0e9111c1933aca13ec55c2bcbe2c3))"
+
+#: ../../changelog.md:280
+msgid ""
+"Reorder `API.update_status_with_media` parameters "
+"([87abdcd](https://github.com/tweepy/tweepy/commit/87abdcd40c89da6be3ddc3911fadd4e31fcf5986))"
+msgstr ""
+"`API.update_status_with_media` 매개변수 재정렬 "
+"([87abdcd](https://github.com/tweepy/tweepy/commit/87abdcd40c89da6be3ddc3911fadd4e31fcf5986))"
+
+#: ../../changelog.md:281
+msgid ""
+"Rename `API` initialization parameter: `auth_handler` -> `auth` "
+"([ee313bd](https://github.com/tweepy/tweepy/commit/ee313bd96e9c2ecf317792a024712e98b5c33c25))"
+msgstr ""
+"다음 `API` 초기화 파라미터 이름 변경: `auth_handler` -> `auth` "
+"([ee313bd](https://github.com/tweepy/tweepy/commit/ee313bd96e9c2ecf317792a024712e98b5c33c25))"
+
+#: ../../changelog.md:282
+msgid ""
+"Stop allowing positional arguments besides `auth` for `API` "
+"initialization "
+"([da2f276](https://github.com/tweepy/tweepy/commit/da2f2767abb1b565b6902ecf7eead3dfcf651ec1))"
+msgstr ""
+"`API` 초기화에서의 `auth` 에서 위치 인수(Positional argument)를 더 이상 허용하지 "
+"않음([da2f276](https://github.com/tweepy/tweepy/commit/da2f2767abb1b565b6902ecf7eead3dfcf651ec1))"
+
+#: ../../changelog.md:283
+msgid ""
+"Remove `API.api_root` and `API.upload_root` "
+"([e757919](https://github.com/tweepy/tweepy/commit/e7579194edd367a5fea6e50dc1cd0d82f3ae643d))"
+msgstr ""
+"제거함: `API.api_root`, `API.upload_root` "
+"([e757919](https://github.com/tweepy/tweepy/commit/e7579194edd367a5fea6e50dc1cd0d82f3ae643d))"
+
+#: ../../changelog.md:284
+msgid ""
+"Remove `API.compression` "
+"([4590c7a](https://github.com/tweepy/tweepy/commit/4590c7adebc5bb540429dd9f432f16155c4bf0b5))"
+msgstr ""
+"제거함: `API.compression` "
+"([4590c7a](https://github.com/tweepy/tweepy/commit/4590c7adebc5bb540429dd9f432f16155c4bf0b5))"
+
+#: ../../changelog.md:285
+msgid ""
+"Remove `API.me`, `AuthHandler.get_username`, and "
+"`OAuthHandler.get_username` "
+"([807f937](https://github.com/tweepy/tweepy/commit/807f9371b6f0a796fea6093497401a1d10b5e183))"
+msgstr ""
+"제거함: `API.me`, `AuthHandler.get_username`, `OAuthHandler.get_username` "
+"([807f937](https://github.com/tweepy/tweepy/commit/807f9371b6f0a796fea6093497401a1d10b5e183))"
+
+#: ../../changelog.md:286
+msgid ""
+"Remove `API.search_host` and `API.search_root` "
+"([92db0cf](https://github.com/tweepy/tweepy/commit/92db0cf87666229098809973554d20d35b2971a0))"
+msgstr ""
+"제거함: `API.search_host`, `API.search_root` "
+"([92db0cf](https://github.com/tweepy/tweepy/commit/92db0cf87666229098809973554d20d35b2971a0))"
+
+#: ../../changelog.md:287
+msgid ""
+"Remove `API.wait_on_rate_limit_notify` "
+"([f325738](https://github.com/tweepy/tweepy/commit/f3257389ed566029e7eec0598597afeef6900d35))"
+msgstr ""
+"제거함: `API.wait_on_rate_limit_notify` "
+"([f325738](https://github.com/tweepy/tweepy/commit/f3257389ed566029e7eec0598597afeef6900d35))"
+
+#: ../../changelog.md:288
+msgid "Always log warning when rate limit reached"
+msgstr "이제 트위터 API 호출에 도달할 때 경고를 로그에 항상 기록함 "
+
+#: ../../changelog.md:289
+msgid ""
+"Remove `map_` keyword argument aliasing for `API.lookup_statuses` "
+"([0a404c3](https://github.com/tweepy/tweepy/commit/0a404c3fc66399271b1a1d769fc18665d1a7a37a))"
+msgstr ""
+"제거함: `API.lookup_statuses` 키워드 "
+"인수([0a404c3](https://github.com/tweepy/tweepy/commit/0a404c3fc66399271b1a1d769fc18665d1a7a37a))"
+
+#: ../../changelog.md:291
+msgid "`Stream`"
+msgstr "`Stream`"
+
+#: ../../changelog.md:292
+msgid ""
+"Remove and replace `StreamListener` by merging it into `Stream` "
+"([39abff4](https://github.com/tweepy/tweepy/commit/39abff4520e291180425ac2219d1d8597ac5da96))"
+msgstr ""
+"`StreamListener` 를 제거하고, `Stream` 에 해당 기능들을 병합(Merge)함 "
+"([39abff4](https://github.com/tweepy/tweepy/commit/39abff4520e291180425ac2219d1d8597ac5da96))"
+
+#: ../../changelog.md:293
+msgid ""
+"`StreamListener.keep_alive` -> `Stream.on_keep_alive` "
+"([abf4d5d](https://github.com/tweepy/tweepy/commit/abf4d5d4dfa117b39bfcdc992895574df7e5ee8b))"
+msgstr ""
+"`StreamListener.keep_alive` -> `Stream.on_keep_alive` "
+"([abf4d5d](https://github.com/tweepy/tweepy/commit/abf4d5d4dfa117b39bfcdc992895574df7e5ee8b))"
+
+#: ../../changelog.md:294
+msgid "`StreamListener.on_connect` -> `Stream.on_connect`"
+msgstr "`StreamListener.on_connect` -> `Stream.on_connect`"
+
+#: ../../changelog.md:295
+msgid "`StreamListener.on_data` -> `Stream.on_data`"
+msgstr "`StreamListener.on_data` -> `Stream.on_data`"
+
+#: ../../changelog.md:296
+msgid "`StreamListener.on_delete` -> `Stream.on_delete`"
+msgstr "`StreamListener.on_delete` -> `Stream.on_delete`"
+
+#: ../../changelog.md:297
+msgid ""
+"`StreamListener.on_disconnect` -> `Stream.on_disconnect_message` "
+"([6c3b997](https://github.com/tweepy/tweepy/commit/6c3b997df0070b6ab7ead9cd0482cb66088ef229))"
+msgstr ""
+"`StreamListener.on_disconnect` -> `Stream.on_disconnect_message` "
+"([6c3b997](https://github.com/tweepy/tweepy/commit/6c3b997df0070b6ab7ead9cd0482cb66088ef229))"
+
+#: ../../changelog.md:298
+msgid ""
+"`StreamListener.on_error` -> `Stream.on_request_error` "
+"([fe3bb8b](https://github.com/tweepy/tweepy/commit/fe3bb8bbbea880b4629206a7d542f71a96991e30))"
+msgstr ""
+"`StreamListener.on_error` -> `Stream.on_request_error` "
+"([fe3bb8b](https://github.com/tweepy/tweepy/commit/fe3bb8bbbea880b4629206a7d542f71a96991e30))"
+
+#: ../../changelog.md:299
+msgid "`StreamListener.on_exception` -> `Stream.on_exception`"
+msgstr "`StreamListener.on_exception` -> `Stream.on_exception`"
+
+#: ../../changelog.md:300
+msgid "`StreamListener.on_limit` -> `Stream.on_limit`"
+msgstr "`StreamListener.on_limit` -> `Stream.on_limit`"
+
+#: ../../changelog.md:301
+msgid "`StreamListener.on_scrub_geo` -> `Stream.on_scrub_geo`"
+msgstr "`StreamListener.on_scrub_geo` -> `Stream.on_scrub_geo`"
+
+#: ../../changelog.md:302
+msgid "`StreamListener.on_status` -> `Stream.on_status`"
+msgstr "`StreamListener.on_status` -> `Stream.on_status`"
+
+#: ../../changelog.md:303
+msgid "`StreamListener.on_status_withheld` -> `Stream.on_status_withheld`"
+msgstr "`StreamListener.on_status_withheld` -> `Stream.on_status_withheld`"
+
+#: ../../changelog.md:304
+msgid ""
+"`StreamListener.on_timeout` -> `Stream.on_connection_error` "
+"([8f62297](https://github.com/tweepy/tweepy/commit/8f622971f2a36f49ad54b70cf4f98464487a4716))"
+msgstr ""
+"`StreamListener.on_timeout` -> `Stream.on_connection_error` "
+"([8f62297](https://github.com/tweepy/tweepy/commit/8f622971f2a36f49ad54b70cf4f98464487a4716))"
+
+#: ../../changelog.md:305
+msgid "`StreamListener.on_user_withheld` -> `Stream.on_user_withheld`"
+msgstr "`StreamListener.on_user_withheld` -> `Stream.on_user_withheld`"
+
+#: ../../changelog.md:306
+msgid "`StreamListener.on_warning` -> `Stream.on_warning`"
+msgstr "`StreamListener.on_warning` -> `Stream.on_warning`"
+
+#: ../../changelog.md:307
+msgid ""
+"Remove `Stream.api` "
+"([21a9db2](https://github.com/tweepy/tweepy/commit/21a9db282a9ee981d5d767066634a0fb551bbcde))"
+msgstr ""
+"제거함: `Stream.api` "
+"([21a9db2](https://github.com/tweepy/tweepy/commit/21a9db282a9ee981d5d767066634a0fb551bbcde))"
+
+#: ../../changelog.md:308
+msgid ""
+"Remove `Stream.body` "
+"([3e40193](https://github.com/tweepy/tweepy/commit/3e40193ee1bcecd470e28f6e1bd90e9090694213))"
+msgstr ""
+"제거함: `Stream.body` "
+"([3e40193](https://github.com/tweepy/tweepy/commit/3e40193ee1bcecd470e28f6e1bd90e9090694213))"
+
+#: ../../changelog.md:309
+msgid ""
+"Remove `Stream.headers` "
+"([d07af4e](https://github.com/tweepy/tweepy/commit/d07af4ec865be12fc09ebf99afe2b99041e16b45))"
+msgstr ""
+"제거함: `Stream.headers` "
+"([d07af4e](https://github.com/tweepy/tweepy/commit/d07af4ec865be12fc09ebf99afe2b99041e16b45))"
+
+#: ../../changelog.md:310
+msgid ""
+"Remove `Stream.host` "
+"([9cf8518](https://github.com/tweepy/tweepy/commit/9cf8518350113c1bc89aa978d7a89ffcae2f1832))"
+msgstr ""
+"제거함: `Stream.host` "
+"([9cf8518](https://github.com/tweepy/tweepy/commit/9cf8518350113c1bc89aa978d7a89ffcae2f1832))"
+
+#: ../../changelog.md:311
+msgid ""
+"Remove `Stream.new_session` "
+"([26518ab](https://github.com/tweepy/tweepy/commit/26518abe993b3cf7729e9d55be571b4cc89f50ab))"
+msgstr ""
+"제거함: `Stream.new_session` "
+"([26518ab](https://github.com/tweepy/tweepy/commit/26518abe993b3cf7729e9d55be571b4cc89f50ab))"
+
+#: ../../changelog.md:312
+msgid ""
+"Remove `Stream.timeout` "
+"([a2f79f1](https://github.com/tweepy/tweepy/commit/a2f79f1b6e4406672895764b044d18b33dc527fd))"
+msgstr ""
+"제거함: `Stream.timeout` "
+"([a2f79f1](https://github.com/tweepy/tweepy/commit/a2f79f1b6e4406672895764b044d18b33dc527fd))"
+
+#: ../../changelog.md:313
+msgid ""
+"Remove `Stream.url` "
+"([48cbf97](https://github.com/tweepy/tweepy/commit/48cbf97fbcdb9543be3bb6729e9bc4327d8993bf))"
+msgstr ""
+"제거함: `Stream.url` "
+"([48cbf97](https://github.com/tweepy/tweepy/commit/48cbf97fbcdb9543be3bb6729e9bc4327d8993bf))"
+
+#: ../../changelog.md:314
+msgid ""
+"Remove Stream parameters and attributes for reconnect wait times "
+"([24059d4](https://github.com/tweepy/tweepy/commit/24059d41c13084003d88a8e62de081c7869db8ca))"
+msgstr ""
+"제거함: 재연결 관련 스트림 매개변수 및 속성값 "
+"([24059d4](https://github.com/tweepy/tweepy/commit/24059d41c13084003d88a8e62de081c7869db8ca))"
+
+#: ../../changelog.md:315
+msgid ""
+"Remove `Stream.retry_time_start`, `Stream.retry_420_start`, "
+"`Stream.retry_time_cap`, `Stream.snooze_time_step`, "
+"`Stream.snooze_time_cap`, `Stream.retry_time`, and `Stream.snooze_time`"
+msgstr ""
+"제거함: `Stream.retry_time_start`, `Stream.retry_420_start`, "
+"`Stream.retry_time_cap`, `Stream.snooze_time_step`, "
+"`Stream.snooze_time_cap`, `Stream.retry_time`, `Stream.snooze_time`"
+
+#: ../../changelog.md:316
+msgid ""
+"Rename `Stream.retry_count` to `Stream.max_retries` "
+"([3585f13](https://github.com/tweepy/tweepy/commit/3585f134ecfc5e1c25d37cb6d5bd21fd2d913aa9))"
+msgstr ""
+"`Stream.retry_count` 를 `Stream.max_retries` 으로 이름 변경함 "
+"([3585f13](https://github.com/tweepy/tweepy/commit/3585f134ecfc5e1c25d37cb6d5bd21fd2d913aa9))"
+
+#: ../../changelog.md:317
+msgid ""
+"Replace `Stream.auth` with parameters and attributes for each credential "
+"([c9f59e6](https://github.com/tweepy/tweepy/commit/c9f59e680f17412522206d0999bf9f5ac7788f2f))"
+msgstr ""
+"`Stream.auth` 를 자격증명 관련 매개변수 및 속성으로 대체함 "
+"([c9f59e6](https://github.com/tweepy/tweepy/commit/c9f59e680f17412522206d0999bf9f5ac7788f2f))"
+
+#: ../../changelog.md:318
+msgid ""
+"Replace `Stream.auth` with `Stream.consumer_key`, "
+"`Stream.consumer_secret`, `Stream.access_token`, and "
+"`Stream.access_token_secret`"
+msgstr ""
+"`Stream.auth` 를 `Stream.consumer_key`, `Stream.consumer_secret`, "
+"`Stream.access_token`, `Stream.access_token_secret` 로 대체하였음 "
+
+#: ../../changelog.md:319
+msgid ""
+"Replace `Stream` parameter, `proxies`, with `proxy` "
+"([#1272](https://github.com/tweepy/tweepy/issues/1272))"
+msgstr ""
+"`Stream` 의 매개변수인 `proxies` 를 `proxy` 로 대체함 "
+"([#1272](https://github.com/tweepy/tweepy/issues/1272))"
+
+#: ../../changelog.md:320
+msgid ""
+"Remove `Stream.filter` parameter: `encoding` "
+"([b3f2db2](https://github.com/tweepy/tweepy/commit/b3f2db2baa024ea1aae7acf53948b60e02c1ed18))"
+msgstr ""
+"제거함: `Stream.filter`의 매개변수인 `encoding` "
+"([b3f2db2](https://github.com/tweepy/tweepy/commit/b3f2db2baa024ea1aae7acf53948b60e02c1ed18))"
+
+#: ../../changelog.md:321
+msgid ""
+"Rename `Stream.filter` and `Stream.sample` parameters: `is_async` -> "
+"`threaded` "
+"([6c96c15](https://github.com/tweepy/tweepy/commit/6c96c156cac4ede3855222f0c4705bc08829b308))"
+msgstr ""
+"`Stream.filter` 과 `Stream.sample` 의 매개변수인 `is_async` 를 `threaded` 로 이름 "
+"변경함 "
+"([6c96c15](https://github.com/tweepy/tweepy/commit/6c96c156cac4ede3855222f0c4705bc08829b308))"
+
+#: ../../changelog.md:322
+msgid ""
+"Stop allowing positional arguments for `Stream.filter` "
+"([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))"
+msgstr ""
+"더 이상 `Stream.filter` 가 위치 인수(Positional argument)를 허용하지 않음 "
+"([0629d5f](https://github.com/tweepy/tweepy/commit/0629d5ff17d5491d70da67b674f2e933c50f1262))"
+
+#: ../../changelog.md:323
+msgid ""
+"Stop allowing positional arguments for `Stream.sample` "
+"([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))"
+msgstr ""
+"더 이상 `Stream.sample` 이 위치 인수(Positional argument)를 허용하지 않음 "
+"([b170720](https://github.com/tweepy/tweepy/commit/b170720b9af085fc024d364980f7ecde5d19de4d))"
+
+#: ../../changelog.md:325
+msgid "Twitter API Breaking Changes"
+msgstr "트위터 API 중요 변경사항"
+
+#: ../../changelog.md:326
+msgid ""
+"Remove `API.configuration` "
+"([#1614](https://github.com/tweepy/tweepy/issues/1614))"
+msgstr ""
+"제거함: `API.configuration` "
+"([#1614](https://github.com/tweepy/tweepy/issues/1614))"
+
+#: ../../changelog.md:327
+msgid ""
+"Remove `API.geo_similar_places` "
+"([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))"
+msgstr ""
+"제거함: `API.geo_similar_places` "
+"([c6cfd97](https://github.com/tweepy/tweepy/commit/c6cfd9720b78c6261f4e7ab0f7da7802fc495d2e))"
+
+#: ../../changelog.md:328
+msgid ""
+"Remove `API.related_results` "
+"([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))"
+msgstr ""
+"제거함: `API.related_results` "
+"([068273b](https://github.com/tweepy/tweepy/commit/068273bb2b159af904a154bc4d0720711c671bbc))"
+
+#: ../../changelog.md:329
+msgid ""
+"Remove `Relation` model "
+"([cc4479a](https://github.com/tweepy/tweepy/commit/cc4479a4d5331cec57880d3bc82f283a8bc8bbc5))"
+msgstr ""
+"제거함: `Relation` model "
+"([cc4479a](https://github.com/tweepy/tweepy/commit/cc4479a4d5331cec57880d3bc82f283a8bc8bbc5))"
+
+#: ../../changelog.md:330
+msgid ""
+"Remove `id` endpoint parameter for `API.create_block` "
+"([e4eaa4b](https://github.com/tweepy/tweepy/commit/e4eaa4bd8a85f401035f1a0f56debd9eff25c610))"
+msgstr ""
+"제거함: `API.create_block` 의 엔드포인트 매개변수인 `id` "
+"([e4eaa4b](https://github.com/tweepy/tweepy/commit/e4eaa4bd8a85f401035f1a0f56debd9eff25c610))"
+
+#: ../../changelog.md:331
+msgid ""
+"Remove `id` endpoint parameter for `API.create_friendship` "
+"([6a3c1ab](https://github.com/tweepy/tweepy/commit/6a3c1abae29e04b52ae4e881c337bb735e72a038))"
+msgstr ""
+"제거함: `API.create_friendship` 의 엔드포인트 매개변수인 `id` "
+"([6a3c1ab](https://github.com/tweepy/tweepy/commit/6a3c1abae29e04b52ae4e881c337bb735e72a038))"
+
+#: ../../changelog.md:332
+msgid ""
+"Remove `id` endpoint parameter for `API.create_mute` "
+"([bb25d69](https://github.com/tweepy/tweepy/commit/bb25d691d2498456a6cd05f7a9f0dc8621a9ece4))"
+msgstr ""
+"제거함: `API.create_mute` 의 엔드포인트 매개변수인 `id` "
+"([bb25d69](https://github.com/tweepy/tweepy/commit/bb25d691d2498456a6cd05f7a9f0dc8621a9ece4))"
+
+#: ../../changelog.md:333
+msgid ""
+"Remove `id` endpoint parameter for `API.destroy_block` "
+"([1a9b52d](https://github.com/tweepy/tweepy/commit/1a9b52d121d6d00cdb8a8a9863170b748b02574e))"
+msgstr ""
+"제거함: `API.destroy_block` 의 엔드포인트 매개변수인 `id` "
+"([1a9b52d](https://github.com/tweepy/tweepy/commit/1a9b52d121d6d00cdb8a8a9863170b748b02574e))"
+
+#: ../../changelog.md:334
+msgid ""
+"Remove `id` endpoint parameter for `API.destroy_friendship` "
+"([66f1612](https://github.com/tweepy/tweepy/commit/66f16122addb06fe244f75c44ffd7adb01e57c7f))"
+msgstr ""
+"제거함: `API.destroy_friendship` 의 엔드포인트 매개변수인 `id` "
+"([66f1612](https://github.com/tweepy/tweepy/commit/66f16122addb06fe244f75c44ffd7adb01e57c7f))"
+
+#: ../../changelog.md:335
+msgid ""
+"Remove `id` endpoint parameter for `API.destroy_mute` "
+"([8c444c5](https://github.com/tweepy/tweepy/commit/8c444c5b9d135bf39850bbcd757c8471e16d4202))"
+msgstr ""
+"제거함: `API.destroy_mute` 의 엔드포인트 매개변수인 `id` "
+"([8c444c5](https://github.com/tweepy/tweepy/commit/8c444c5b9d135bf39850bbcd757c8471e16d4202))"
+
+#: ../../changelog.md:336
+msgid ""
+"Remove `id` endpoint parameter for `API.get_follower_ids` "
+"([5cddd12](https://github.com/tweepy/tweepy/commit/5cddd12d26d22f691039de3cb792da3e9e25e0e8))"
+msgstr ""
+"제거함: `API.get_follower_ids` 의 엔드포인트 매개변수인 `id` "
+"([5cddd12](https://github.com/tweepy/tweepy/commit/5cddd12d26d22f691039de3cb792da3e9e25e0e8))"
+
+#: ../../changelog.md:337
+msgid ""
+"Remove `id` endpoint parameter for `API.get_followers` "
+"([a3fb959](https://github.com/tweepy/tweepy/commit/a3fb9594b4bcc884eb29feb11028509b73328f2a))"
+msgstr ""
+"제거함: `API.get_followers` 의 엔드포인트 매개변수인 `id` "
+"([a3fb959](https://github.com/tweepy/tweepy/commit/a3fb9594b4bcc884eb29feb11028509b73328f2a))"
+
+#: ../../changelog.md:338
+msgid ""
+"Remove `id` endpoint parameter for "
+"`API.get_friend_ids`([7cbf818](https://github.com/tweepy/tweepy/commit/7cbf818e2093a5d866ab72469194df0d1d0d4696))"
+msgstr ""
+"제거함: `API.get_friend_ids` 의 엔드포인트 매개변수인 `id` "
+"([7cbf818](https://github.com/tweepy/tweepy/commit/7cbf818e2093a5d866ab72469194df0d1d0d4696))"
+
+#: ../../changelog.md:339
+msgid ""
+"Remove `id` endpoint parameter for `API.get_friends` "
+"([6875e15](https://github.com/tweepy/tweepy/commit/6875e1517d4d81b9f5bfb5e7b5d4e076cd3a7bea))"
+msgstr ""
+"제거함: `API.get_friends` 의 엔드포인트 매개변수인 `id` "
+"([6875e15](https://github.com/tweepy/tweepy/commit/6875e1517d4d81b9f5bfb5e7b5d4e076cd3a7bea))"
+
+#: ../../changelog.md:340
+msgid ""
+"Remove `id` endpoint parameter for `API.get_user` "
+"([a2681ed](https://github.com/tweepy/tweepy/commit/a2681ed376246677b48156fac66c75d05afdc3ff))"
+msgstr ""
+"제거함: `API.get_user` 의 엔드포인트 매개변수인 `id` "
+"([a2681ed](https://github.com/tweepy/tweepy/commit/a2681ed376246677b48156fac66c75d05afdc3ff))"
+
+#: ../../changelog.md:341
+msgid ""
+"Remove `accuracy` and `contained_within` endpoint parameters for "
+"`API.search_geo` "
+"([d37a409](https://github.com/tweepy/tweepy/commit/d37a409e96553d86621a6caa125c5581cac0b3f7))"
+msgstr ""
+"제거함: `API.search_geo` 의 엔드포인트 매개변수인 `accuracy`, `contained_within` "
+"([d37a409](https://github.com/tweepy/tweepy/commit/d37a409e96553d86621a6caa125c5581cac0b3f7))"
+
+#: ../../changelog.md:342
+msgid ""
+"Remove `allow_contributor_request` endpoint parameter for "
+"`API.set_settings` "
+"([1cc33b2](https://github.com/tweepy/tweepy/commit/1cc33b209f181d1c729d7931c1b541947423dd4d))"
+msgstr ""
+"제거함: `API.set_settings` 의 엔드포인트 매개변수인 `allow_contributor_request` "
+"([1cc33b2](https://github.com/tweepy/tweepy/commit/1cc33b209f181d1c729d7931c1b541947423dd4d))"
+
+#: ../../changelog.md:343
+msgid ""
+"Update `API.update_profile_banner` endpoint parameters: `offset_right` ->"
+" `offset_top` "
+"([83f9b79](https://github.com/tweepy/tweepy/commit/83f9b79f5744dc7327a8e1c7d5720742c3d370f1))"
+msgstr ""
+"`API.update_profile_banner` 의 다음 엔드포인트 매개변수를 갱신함: `offset_right` -> "
+"`offset_top` "
+"([83f9b79](https://github.com/tweepy/tweepy/commit/83f9b79f5744dc7327a8e1c7d5720742c3d370f1))"
+
+#: ../../changelog.md:344
+msgid ""
+"Remove `enable_dmcommands` and `fail_dmcommands` parameters for "
+"`API.update_status` "
+"([fe5b3ef](https://github.com/tweepy/tweepy/commit/fe5b3efd77713d00a7ca516ec20afa54903cba8c))"
+msgstr ""
+"제거함: `API.update_status` 의 매개변수인 `enable_dmcommands`, "
+"`fail_dmcommands([fe5b3ef](https://github.com/tweepy/tweepy/commit/fe5b3efd77713d00a7ca516ec20afa54903cba8c))"
+
+#: ../../changelog.md:345
+msgid ""
+"Remove `in_reply_to_status_id_str` and `auto_populate_reply_metadata` "
+"endpoint parameters for `API.update_status_with_media` "
+"([c3c9d29](https://github.com/tweepy/tweepy/commit/c3c9d29ecfffc75976b6d20b1efcfb084adfafaf))"
+msgstr ""
+"제거함: `API.update_status_with_media` 의 엔드포인트 매개변수인 "
+"`in_reply_to_status_id_str`, `auto_populate_reply_metadata` "
+"([c3c9d29](https://github.com/tweepy/tweepy/commit/c3c9d29ecfffc75976b6d20b1efcfb084adfafaf))"
+
+#: ../../changelog.md:346
+msgid ""
+"Remove `id` endpoint parameter for `API.user_timeline` "
+"([#1484](https://github.com/tweepy/tweepy/pull/1484))"
+msgstr ""
+"제거함:`API.user_timeline` 의 엔드포인트 매개변수인 `id` "
+"([#1484](https://github.com/tweepy/tweepy/pull/1484))"
+
+#: ../../changelog.md:347
+msgid ""
+"Remove `Stream.firehose` "
+"([ad50cdc](https://github.com/tweepy/tweepy/commit/ad50cdca6091c9781689634afb817f3ccd5c7e0d))"
+msgstr ""
+"제거함: `Stream.firehose` "
+"([ad50cdc](https://github.com/tweepy/tweepy/commit/ad50cdca6091c9781689634afb817f3ccd5c7e0d))"
+
+#: ../../changelog.md:348
+msgid ""
+"Remove "
+"`Stream.retweet`([6b1944b](https://github.com/tweepy/tweepy/commit/6b1944b23aeb93166964f96d71f408cd21ef64be))"
+msgstr ""
+"제거함: `Stream.retweet` "
+"([6b1944b](https://github.com/tweepy/tweepy/commit/6b1944b23aeb93166964f96d71f408cd21ef64be))"
+
+#: ../../changelog.md:349
+msgid ""
+"Remove `Stream.sitestream` and `Stream.userstream` "
+"([96f7e63](https://github.com/tweepy/tweepy/commit/96f7e63e1019639496bd983fd8443e49be45524f))"
+msgstr ""
+"제거함: `Stream.sitestream`, `Stream.userstream` "
+"([96f7e63](https://github.com/tweepy/tweepy/commit/96f7e63e1019639496bd983fd8443e49be45524f))"
+
+#: ../../changelog.md:350
+msgid ""
+"Remove `StreamListener.on_direct_message` and `StreamListener.on_friends`"
+" "
+"([ab2479b](https://github.com/tweepy/tweepy/commit/ab2479b15da04c28144c3f4384b7aac71eaa0250))"
+msgstr ""
+"제거함: `StreamListener.on_direct_message`, `StreamListener.on_friends` "
+"([ab2479b](https://github.com/tweepy/tweepy/commit/ab2479b15da04c28144c3f4384b7aac71eaa0250))"
+
+#: ../../changelog.md:351
+msgid ""
+"Remove `StreamListener.on_event` "
+"([20b5afb](https://github.com/tweepy/tweepy/commit/20b5afba81e451f3e7a97d97f11eb423fa2b1723))"
+msgstr ""
+"제거함: `StreamListener.on_event` "
+"([20b5afb](https://github.com/tweepy/tweepy/commit/20b5afba81e451f3e7a97d97f11eb423fa2b1723))"
+
+#: ../../changelog.md:353 ../../changelog.md:419
+msgid "Other"
+msgstr "기타"
+
+#: ../../changelog.md:354
+msgid ""
+"Datetime objects for `models.List.created_at`, "
+"`models.SavedSearch.created_at`, `models.Status.created_at`, and "
+"`models.User.created_at` are now aware "
+"([59d4d92](https://github.com/tweepy/tweepy/commit/59d4d920dd4470b52f329d850366721cb52ea0eb))"
+msgstr ""
+"이제 `models.List.created_at`, `models.SavedSearch.created_at`, "
+"`models.Status.created_at`, `models.User.created_at` 가 Datetime 객체를 "
+"인식함([59d4d92](https://github.com/tweepy/tweepy/commit/59d4d920dd4470b52f329d850366721cb52ea0eb))"
+
+#: ../../changelog.md:355
+msgid ""
+"Change `return_cursors` parameter for `JSONParser.parse` and "
+"`ModelParser.parse` to be keyword-only argument "
+"([56b8e31](https://github.com/tweepy/tweepy/commit/56b8e319a874f6d4cfae7dc9f7c33f32ceea83f4))"
+msgstr ""
+"`JSONParser.parse` 과 `ModelParser.parse` 의 매개변수인 `return_cursors` 를 키워드 "
+"인자로만 전달할 수 있도록 변경함 "
+"([56b8e31](https://github.com/tweepy/tweepy/commit/56b8e319a874f6d4cfae7dc9f7c33f32ceea83f4))"
+
+#: ../../changelog.md:356
+msgid ""
+"Remove `method` parameter from `parse` method for `Parser` and its "
+"subclasses "
+"([dda2ec6](https://github.com/tweepy/tweepy/commit/dda2ec6ccd9b5df44daf7b8574d183ac0c2503fa))"
+msgstr ""
+"제거함: `parse` 메서드에서, `Parser` 의 매개변수인 `method` 및 "
+"서브클래스([dda2ec6](https://github.com/tweepy/tweepy/commit/dda2ec6ccd9b5df44daf7b8574d183ac0c2503fa))"
+
+#: ../../changelog.md:357
+msgid ""
+"Remove handling of 401 HTTP status code in `API.verify_credentials` "
+"([7e4d2a4](https://github.com/tweepy/tweepy/commit/7e4d2a4b3bc9b73501d833af349fc8b8986a5197))"
+msgstr ""
+"더 이상 `API.verify_credentials` 가 HTTP 401 코드를 처리하지 못함 "
+"([7e4d2a4](https://github.com/tweepy/tweepy/commit/7e4d2a4b3bc9b73501d833af349fc8b8986a5197))"
+
+#: ../../changelog.md:358
+msgid ""
+"Remove `models.List.is_member` and `models.List.is_subscribed` "
+"([b765aee](https://github.com/tweepy/tweepy/commit/b765aee92ed9a482983c8a7900cbb62a238abb60))"
+msgstr ""
+"제거함: `models.List.is_member`, `models.List.is_subscribed` "
+"([b765aee](https://github.com/tweepy/tweepy/commit/b765aee92ed9a482983c8a7900cbb62a238abb60))"
+
+#: ../../changelog.md:362
+msgid "New Methods And Parameters / Attributes"
+msgstr "새 메서드 및 매개변수 / 속성(Attribute)"
+
+#: ../../changelog.md:363
+msgid ""
+"Add `API.get_list_ownerships` "
+"([#1282](https://github.com/tweepy/tweepy/pull/1282), "
+"[#1498](https://github.com/tweepy/tweepy/issues/1498))"
+msgstr ""
+"추가함: `API.get_list_ownerships` "
+"([#1282](https://github.com/tweepy/tweepy/pull/1282), "
+"[#1498](https://github.com/tweepy/tweepy/issues/1498))"
+
+#: ../../changelog.md:364
+msgid ""
+"Add `models.User.list_ownerships` "
+"([#1282](https://github.com/tweepy/tweepy/pull/1282))"
+msgstr ""
+"추가함: `models.User.list_ownerships` "
+"([#1282](https://github.com/tweepy/tweepy/pull/1282))"
+
+#: ../../changelog.md:365
+msgid ""
+"Add `API.get_profile_banner` "
+"([58ac8bb](https://github.com/tweepy/tweepy/commit/58ac8bb8083044f37c1999b61ecb763918d7a703))"
+msgstr ""
+"추가함: `API.get_profile_banner` "
+"([58ac8bb](https://github.com/tweepy/tweepy/commit/58ac8bb8083044f37c1999b61ecb763918d7a703))"
+
+#: ../../changelog.md:366
+msgid ""
+"Add `API.no_retweets_friendships` "
+"([496a399](https://github.com/tweepy/tweepy/commit/496a3993ae6f6048059c3e9ee2a6f08a27f654b9))"
+msgstr ""
+"추가함: `API.no_retweets_friendships` "
+"([496a399](https://github.com/tweepy/tweepy/commit/496a3993ae6f6048059c3e9ee2a6f08a27f654b9))"
+
+#: ../../changelog.md:367
+msgid ""
+"Add `API.remove_profile_banner` "
+"([f0e53c6](https://github.com/tweepy/tweepy/commit/f0e53c6d6a21595cefc797b66ab8bbc027a2d425))"
+msgstr ""
+"추가함: `API.remove_profile_banner` "
+"([f0e53c6](https://github.com/tweepy/tweepy/commit/f0e53c6d6a21595cefc797b66ab8bbc027a2d425))"
+
+#: ../../changelog.md:368
+msgid ""
+"Add `API.update_friendship` "
+"([ddd24a4](https://github.com/tweepy/tweepy/commit/ddd24a474305d2a9916d92e64b2821a27a6ef450))"
+msgstr ""
+"추가함: `API.update_friendship` "
+"([ddd24a4](https://github.com/tweepy/tweepy/commit/ddd24a474305d2a9916d92e64b2821a27a6ef450))"
+
+#: ../../changelog.md:369
+msgid ""
+"Add `API.user_agent` "
+"([bbec64b](https://github.com/tweepy/tweepy/commit/bbec64bda79350e9691951f61e9663a51696d07f))"
+msgstr ""
+"추가함: `API.user_agent` "
+"([bbec64b](https://github.com/tweepy/tweepy/commit/bbec64bda79350e9691951f61e9663a51696d07f))"
+
+#: ../../changelog.md:370
+msgid "Add endpoint parameters for `API` methods:"
+msgstr "`API` 메서드에 다음 엔드포인트 매개변수를 추가함"
+
+#: ../../changelog.md:371
+msgid ""
+"`API.create_block`: `include_entities`, `skip_status` "
+"([5e694b2](https://github.com/tweepy/tweepy/commit/5e694b289a8543014ed5bd04f667142ededeac04))"
+msgstr ""
+"`API.create_block`: `include_entities`, `skip_status` "
+"([5e694b2](https://github.com/tweepy/tweepy/commit/5e694b289a8543014ed5bd04f667142ededeac04))"
+
+#: ../../changelog.md:372
+msgid ""
+"`API.create_favorite`: `include_entities` "
+"([65c7ce7](https://github.com/tweepy/tweepy/commit/65c7ce71d09a570e14723b51fcef894093a21bae))"
+msgstr ""
+"`API.create_favorite`: `include_entities` "
+"([65c7ce7](https://github.com/tweepy/tweepy/commit/65c7ce71d09a570e14723b51fcef894093a21bae))"
+
+#: ../../changelog.md:373
+msgid ""
+"`API.destroy_block`: `include_entities`, `skip_status` "
+"([7299362](https://github.com/tweepy/tweepy/commit/7299362474563b7082f934c56b150d3f14366e26))"
+msgstr ""
+"`API.destroy_block`: `include_entities`, `skip_status` "
+"([7299362](https://github.com/tweepy/tweepy/commit/7299362474563b7082f934c56b150d3f14366e26))"
+
+#: ../../changelog.md:374
+msgid ""
+"`API.destroy_favorite`: `include_entities` "
+"([ecd19f0](https://github.com/tweepy/tweepy/commit/ecd19f071b385cc9649a699e502cc215b441e071))"
+msgstr ""
+"`API.destroy_favorite`: `include_entities` "
+"([ecd19f0](https://github.com/tweepy/tweepy/commit/ecd19f071b385cc9649a699e502cc215b441e071))"
+
+#: ../../changelog.md:375
+msgid ""
+"`API.destroy_status`: `trim_user` "
+"([ed363e6](https://github.com/tweepy/tweepy/commit/ed363e6141ba467f27a312bca92fafd8b303db4c))"
+msgstr ""
+"`API.destroy_status`: `trim_user` "
+"([ed363e6](https://github.com/tweepy/tweepy/commit/ed363e6141ba467f27a312bca92fafd8b303db4c))"
+
+#: ../../changelog.md:376
+msgid ""
+"`API.get_blocked_ids`: `stringify_ids` "
+"([316b4cc](https://github.com/tweepy/tweepy/commit/316b4cc73393e21075dd0fe1985777ba876bedcb))"
+msgstr ""
+"`API.get_blocked_ids`: `stringify_ids` "
+"([316b4cc](https://github.com/tweepy/tweepy/commit/316b4cc73393e21075dd0fe1985777ba876bedcb))"
+
+#: ../../changelog.md:377
+msgid ""
+"`API.get_blocks`: `include_entities`, `skip_status` "
+"([7ef1e85](https://github.com/tweepy/tweepy/commit/7ef1e8540d38e33d3082795ebf9561e24f1e42ae))"
+msgstr ""
+"`API.get_blocks`: `include_entities`, `skip_status` "
+"([7ef1e85](https://github.com/tweepy/tweepy/commit/7ef1e8540d38e33d3082795ebf9561e24f1e42ae))"
+
+#: ../../changelog.md:378
+msgid ""
+"`API.get_favorites`: `include_entities` "
+"([2b91edc](https://github.com/tweepy/tweepy/commit/2b91edc94c20d88467f9883fa0b16e4e35b8226f))"
+msgstr ""
+"`API.get_favorites`: `include_entities` "
+"([2b91edc](https://github.com/tweepy/tweepy/commit/2b91edc94c20d88467f9883fa0b16e4e35b8226f))"
+
+#: ../../changelog.md:379
+msgid ""
+"`API.get_follower_ids`: `stringify_ids ` "
+"([c490027](https://github.com/tweepy/tweepy/commit/c490027e936c3a0a1a62cfa3cb321358414b3b93))"
+msgstr ""
+"`API.get_follower_ids`: `stringify_ids ` "
+"([c490027](https://github.com/tweepy/tweepy/commit/c490027e936c3a0a1a62cfa3cb321358414b3b93))"
+
+#: ../../changelog.md:380
+msgid ""
+"`API.get_friend_ids`: `stringify_ids`, `count` "
+"([aba327e](https://github.com/tweepy/tweepy/commit/aba327e2aaec8ac5b63c84bdb2ece0bf7e84103f))"
+msgstr ""
+"`API.get_friend_ids`: `stringify_ids`, `count` "
+"([aba327e](https://github.com/tweepy/tweepy/commit/aba327e2aaec8ac5b63c84bdb2ece0bf7e84103f))"
+
+#: ../../changelog.md:381
+msgid ""
+"`API.get_list_member`: `include_entities`, `skip_status` "
+"([e959787](https://github.com/tweepy/tweepy/commit/e9597879d653fec0b999ec5e48995e7c5bad298f))"
+msgstr ""
+"`API.get_list_member`: `include_entities`, `skip_status` "
+"([e959787](https://github.com/tweepy/tweepy/commit/e9597879d653fec0b999ec5e48995e7c5bad298f))"
+
+#: ../../changelog.md:382
+msgid ""
+"`API.get_list_members`: `count`, `include_entities`, `skip_status` "
+"([232fa29](https://github.com/tweepy/tweepy/commit/232fa2982fd7a92c9d8458ca63482ee8d55d06f7))"
+msgstr ""
+"`API.get_list_members`: `count`, `include_entities`, `skip_status` "
+"([232fa29](https://github.com/tweepy/tweepy/commit/232fa2982fd7a92c9d8458ca63482ee8d55d06f7))"
+
+#: ../../changelog.md:383
+msgid ""
+"`API.get_list_subscriber`: `include_entities`, `skip_status` "
+"([783941a](https://github.com/tweepy/tweepy/commit/783941a28384aaa99d7998c69df2c873636f9922))"
+msgstr ""
+"`API.get_list_subscriber`: `include_entities`, `skip_status` "
+"([783941a](https://github.com/tweepy/tweepy/commit/783941a28384aaa99d7998c69df2c873636f9922))"
+
+#: ../../changelog.md:384
+msgid ""
+"`API.get_muted_ids`: `stringify_ids` "
+"([8b04108](https://github.com/tweepy/tweepy/commit/8b04108163f130f6492534ea26baa7b460031a7c))"
+msgstr ""
+"`API.get_muted_ids`: `stringify_ids` "
+"([8b04108](https://github.com/tweepy/tweepy/commit/8b04108163f130f6492534ea26baa7b460031a7c))"
+
+#: ../../changelog.md:385
+msgid ""
+"`API.get_retweeter_ids`: `count` "
+"([71ca488](https://github.com/tweepy/tweepy/commit/71ca488c6201552647fe73a030533de03ab0dbd4))"
+msgstr ""
+"`API.get_retweeter_ids`: `count` "
+"([71ca488](https://github.com/tweepy/tweepy/commit/71ca488c6201552647fe73a030533de03ab0dbd4))"
+
+#: ../../changelog.md:386
+msgid ""
+"`API.get_retweets`: `trim_user` "
+"([e377188](https://github.com/tweepy/tweepy/commit/e377188c0cca0863c617f2ae7f97d51c865273e8))"
+msgstr ""
+"`API.get_retweets`: `trim_user` "
+"([e377188](https://github.com/tweepy/tweepy/commit/e377188c0cca0863c617f2ae7f97d51c865273e8))"
+
+#: ../../changelog.md:387
+msgid ""
+"`API.get_retweets_of_me`: `trim_user`, `include_entities`, "
+"`include_user_entities` "
+"([589d97d](https://github.com/tweepy/tweepy/commit/589d97d400ac343b84a7b4b1911c1fb87d6e0ef6))"
+msgstr ""
+"`API.get_retweets_of_me`: `trim_user`, `include_entities`, "
+"`include_user_entities` "
+"([589d97d](https://github.com/tweepy/tweepy/commit/589d97d400ac343b84a7b4b1911c1fb87d6e0ef6))"
+
+#: ../../changelog.md:388
+msgid ""
+"`API.get_user`: `include_entities` "
+"([485691d](https://github.com/tweepy/tweepy/commit/485691d5686402af00938d672a102da57c195d1b))"
+msgstr ""
+"`API.get_user`: `include_entities` "
+"([485691d](https://github.com/tweepy/tweepy/commit/485691d5686402af00938d672a102da57c195d1b))"
+
+#: ../../changelog.md:389
+msgid ""
+"`API.incoming_friendships`: `stringify_ids` "
+"([ffb7c0e](https://github.com/tweepy/tweepy/commit/ffb7c0eb7582b1bd568c4d0c7f1ee7b4ae893ef1))"
+msgstr ""
+"`API.incoming_friendships`: `stringify_ids` "
+"([ffb7c0e](https://github.com/tweepy/tweepy/commit/ffb7c0eb7582b1bd568c4d0c7f1ee7b4ae893ef1))"
+
+#: ../../changelog.md:390
+msgid ""
+"`API.media_upload`: `media_category`, `additional_owners` "
+"([#1486](https://github.com/tweepy/tweepy/pull/1486))"
+msgstr ""
+"`API.media_upload`: `media_category`, `additional_owners` "
+"([#1486](https://github.com/tweepy/tweepy/pull/1486))"
+
+#: ../../changelog.md:391
+msgid ""
+"`API.mentions_timeline`: `trim_user`, `include_entities` "
+"([eb7c8f6](https://github.com/tweepy/tweepy/commit/eb7c8f6e668bf4fe00cdd2f58cc8b7c3fd9c6ed4))"
+msgstr ""
+"`API.mentions_timeline`: `trim_user`, `include_entities` "
+"([eb7c8f6](https://github.com/tweepy/tweepy/commit/eb7c8f6e668bf4fe00cdd2f58cc8b7c3fd9c6ed4))"
+
+#: ../../changelog.md:392
+msgid ""
+"`API.outgoing_friendships`: `stringify_ids` "
+"([7ed0762](https://github.com/tweepy/tweepy/commit/7ed0762883e03c4479980b62b123baf1e854d316))"
+msgstr ""
+"`API.outgoing_friendships`: `stringify_ids` "
+"([7ed0762](https://github.com/tweepy/tweepy/commit/7ed0762883e03c4479980b62b123baf1e854d316))"
+
+#: ../../changelog.md:393
+msgid ""
+"`API.retweet`: `trim_user` "
+"([70d9665](https://github.com/tweepy/tweepy/commit/70d96657a9e2897e59dc43f789256ea709ea3857))"
+msgstr ""
+"`API.retweet`: `trim_user` "
+"([70d9665](https://github.com/tweepy/tweepy/commit/70d96657a9e2897e59dc43f789256ea709ea3857))"
+
+#: ../../changelog.md:394
+msgid ""
+"`API.search_users`: `include_entities` "
+"([8d64b61](https://github.com/tweepy/tweepy/commit/8d64b617b974f4924df7b85e3d2ec3accb4365d1))"
+msgstr ""
+"`API.search_users`: `include_entities` "
+"([8d64b61](https://github.com/tweepy/tweepy/commit/8d64b617b974f4924df7b85e3d2ec3accb4365d1))"
+
+#: ../../changelog.md:395
+msgid ""
+"`API.unretweet`: `trim_user` "
+"([6d93f3b](https://github.com/tweepy/tweepy/commit/6d93f3b8a082aca6dc522bfabf7d284f4476e756))"
+msgstr ""
+"`API.unretweet`: `trim_user` "
+"([6d93f3b](https://github.com/tweepy/tweepy/commit/6d93f3b8a082aca6dc522bfabf7d284f4476e756))"
+
+#: ../../changelog.md:396
+msgid ""
+"`API.update_profile`: `include_entities`, `skip_status` "
+"([9715c4a](https://github.com/tweepy/tweepy/commit/9715c4a3fd1d367e4a163c9c61d0c8377a8c3c36))"
+msgstr ""
+"`API.update_profile`: `include_entities`, `skip_status` "
+"([9715c4a](https://github.com/tweepy/tweepy/commit/9715c4a3fd1d367e4a163c9c61d0c8377a8c3c36))"
+
+#: ../../changelog.md:397
+msgid ""
+"Add `Stream.on_disconnect` method "
+"([#277](https://github.com/tweepy/tweepy/issues/277))"
+msgstr ""
+"추가함: `Stream.on_disconnect` 메서드 "
+"([#277](https://github.com/tweepy/tweepy/issues/277))"
+
+#: ../../changelog.md:398
+msgid ""
+"Expose `Stream.thread` "
+"([9c2419d](https://github.com/tweepy/tweepy/commit/9c2419d09c2b5af101a730917308d89dced0861a))"
+msgstr ""
+"`Stream.thread` 를 "
+"드러냄(Expose)([9c2419d](https://github.com/tweepy/tweepy/commit/9c2419d09c2b5af101a730917308d89dced0861a))"
+
+#: ../../changelog.md:400
+msgid "New Functionality"
+msgstr "새 기능"
+
+#: ../../changelog.md:401
+msgid ""
+"Allow sending Quick Reply Options with Direct Messages "
+"([#1280](https://github.com/tweepy/tweepy/issues/1280))"
+msgstr ""
+"이제 쪽지에 빠른 답장 옵션을 포함해 보내는 것이 허용됨 "
+"([#1280](https://github.com/tweepy/tweepy/issues/1280))"
+
+#: ../../changelog.md:402
+msgid ""
+"Replace `API.send_direct_message` parameter, `quick_reply_type`, with "
+"`quick_reply_options`"
+msgstr ""
+"`API.send_direct_message` 의 매개변수인 `quick_reply_type` 를 "
+"`quick_reply_options` 로 대체"
+
+#: ../../changelog.md:403
+msgid ""
+"Allow sending Call-To-Action buttons with Direct Messages in "
+"`API.send_direct_message` "
+"([#1311](https://github.com/tweepy/tweepy/issues/1311))"
+msgstr ""
+"`API.send_direct_message` 를 이용한 쪽지를 전송할 때, 콜 투 액션 버튼을 포함하는 것을 허용함 "
+"([#1311](https://github.com/tweepy/tweepy/issues/1311))"
+
+#: ../../changelog.md:405
+msgid "Documentation For Existing Methods"
+msgstr "특정 메서드를 문서화함"
+
+#: ../../changelog.md:406
+msgid ""
+"Document `API.get_settings` "
+"([cbac800](https://github.com/tweepy/tweepy/commit/cbac800b752c7ac063b44e120f9699fd969718de))"
+msgstr ""
+"`API.get_settings` 문서화 "
+"([cbac800](https://github.com/tweepy/tweepy/commit/cbac800b752c7ac063b44e120f9699fd969718de))"
+
+#: ../../changelog.md:407
+msgid ""
+"Document `API.incoming_friendships` "
+"([09dbe0e](https://github.com/tweepy/tweepy/commit/09dbe0e8d0975531b559f18caf702152353c0fff))"
+msgstr ""
+"`API.incoming_friendships` 문서화 "
+"([09dbe0e](https://github.com/tweepy/tweepy/commit/09dbe0e8d0975531b559f18caf702152353c0fff))"
+
+#: ../../changelog.md:408
+msgid ""
+"Document `API.outgoing_friendships` "
+"([8ff5f22](https://github.com/tweepy/tweepy/commit/8ff5f22c6655002ff7ec230d2200d6833af5ff0a))"
+msgstr ""
+"`API.outgoing_friendships` 문서화 "
+"([8ff5f22](https://github.com/tweepy/tweepy/commit/8ff5f22c6655002ff7ec230d2200d6833af5ff0a))"
+
+#: ../../changelog.md:409
+msgid ""
+"Document `API.search_geo` "
+"([a51a097](https://github.com/tweepy/tweepy/commit/a51a097c13b31a5ce290749b280455cb93f970cb))"
+msgstr ""
+"`API.search_geo` "
+"문서화([a51a097](https://github.com/tweepy/tweepy/commit/a51a097c13b31a5ce290749b280455cb93f970cb))"
+
+#: ../../changelog.md:410
+msgid ""
+"Document `API.set_settings` "
+"([4703da3](https://github.com/tweepy/tweepy/commit/4703da38090292fb48d4d6853eb67883a5c282b8))"
+msgstr ""
+"`API.set_settings` 문서화 "
+"([4703da3](https://github.com/tweepy/tweepy/commit/4703da38090292fb48d4d6853eb67883a5c282b8))"
+
+#: ../../changelog.md:411
+msgid ""
+"Document `API.supported_languages` "
+"([9bb8446](https://github.com/tweepy/tweepy/commit/9bb8446837562424093d4c65b6c389d2f1228c62))"
+msgstr ""
+"`API.supported_languages` 문서화 "
+"([9bb8446](https://github.com/tweepy/tweepy/commit/9bb8446837562424093d4c65b6c389d2f1228c62))"
+
+#: ../../changelog.md:412
+msgid ""
+"Document `API.update_profile_banner` "
+"([a5df615](https://github.com/tweepy/tweepy/commit/a5df61561f2f40be88bc0e52bb6e50ce7b6a6052))"
+msgstr ""
+"`API.update_profile_banner` 문서화 "
+"([a5df615](https://github.com/tweepy/tweepy/commit/a5df61561f2f40be88bc0e52bb6e50ce7b6a6052))"
+
+#: ../../changelog.md:414
+msgid "Dependencies"
+msgstr "종속성(Dependencies) 관련"
+
+#: ../../changelog.md:415
+msgid ""
+"Update requests_oauthlib dependency requirement to >= 1.0.0 "
+"([bf629e5](https://github.com/tweepy/tweepy/commit/bf629e53abfada2ce58496fe775d81f47a13494e))"
+msgstr ""
+"requests_oauthlib 종속성 요구사항을 1.0.0 이상으로 조정함 "
+"([bf629e5](https://github.com/tweepy/tweepy/commit/bf629e53abfada2ce58496fe775d81f47a13494e))"
+
+#: ../../changelog.md:416
+msgid ""
+"Remove requests socks extra from setup.py `install_requires` "
+"([38b6de6](https://github.com/tweepy/tweepy/commit/38b6de6c464897684cc18638f1b9348f2a7584f2))"
+msgstr ""
+"제거함: setup.py - `install_requires` 로부터의 여분 요청 "
+"socks([38b6de6](https://github.com/tweepy/tweepy/commit/38b6de6c464897684cc18638f1b9348f2a7584f2))"
+
+#: ../../changelog.md:417
+msgid "Add socks extra requiring requests socks extra"
+msgstr "추가함: socks extra 요청"
+
+#: ../../changelog.md:420
+msgid ""
+"Check consumer key and secret type when initializing `OAuthHandler` "
+"([#1489](https://github.com/tweepy/tweepy/issues/1489))"
+msgstr ""
+"이제 `OAuthHandler` 초기화 시 Consumer Key값과 Secret 값의 자료형을 확인함 "
+"([#1489](https://github.com/tweepy/tweepy/issues/1489))"
+
+#: ../../changelog.md:421
+msgid ""
+"Make `models.User` hashable "
+"([#1306](https://github.com/tweepy/tweepy/pull/1306))"
+msgstr ""
+"`models.User` 를 해시화할 수 있게(Hashable) 함 "
+"([#1306](https://github.com/tweepy/tweepy/pull/1306))"
+
+#: ../../changelog.md:422
+msgid ""
+"Reduce extra sleep time for rate limit handling for `API` "
+"([#1049](https://github.com/tweepy/tweepy/issues/1049))"
+msgstr ""
+"`API` 요청 제한을 처리하기 위해 두었던 약간의 대기 시간을 줄임 "
+"([#1049](https://github.com/tweepy/tweepy/issues/1049))"
+
+#: ../../changelog.md:423
+msgid ""
+"Handle keyword arguments for `API.update_profile_image` "
+"([ab96f2f](https://github.com/tweepy/tweepy/commit/ab96f2fca9ab6300b2f2be0472bb8458d94dbcac))"
+msgstr ""
+"이제 `API.update_profile_image` 가 키워드 인자도 정상적으로 받을 수 있음 "
+"([ab96f2f](https://github.com/tweepy/tweepy/commit/ab96f2fca9ab6300b2f2be0472bb8458d94dbcac))"
+
+#: ../../changelog.md:424
+msgid ""
+"Handle keyword arguments for `API.update_profile_banner` "
+"([88c3fa1](https://github.com/tweepy/tweepy/commit/88c3fa1624af2a9eaaf0b85870ae01115ce0f952))"
+msgstr ""
+"이제 `API.update_profile_banner` 가 키워드 인자도 정상적으로 받을 수 있음 "
+"([88c3fa1](https://github.com/tweepy/tweepy/commit/88c3fa1624af2a9eaaf0b85870ae01115ce0f952))"
+
+#: ../../changelog.md:425
+msgid ""
+"Treat all 2xx HTTP status codes as successful responses "
+"([a0f6984](https://github.com/tweepy/tweepy/commit/a0f69848540fceae68de1be2e4dbd3fc6c7794ec))"
+msgstr ""
+"이제 모든 200번대 HTTP 상태 코드를 성공적 응답으로 취급함 "
+"([a0f6984](https://github.com/tweepy/tweepy/commit/a0f69848540fceae68de1be2e4dbd3fc6c7794ec))"
+
+#: ../../changelog.md:426
+msgid ""
+"Support gevent for streaming "
+"([#651](https://github.com/tweepy/tweepy/issues/651))"
+msgstr "이제 스트리밍이 gevent를 지원함 ([#651](https://github.com/tweepy/tweepy/issues/651))"
+
+#: ../../changelog.md:427
+msgid ""
+"Return thread when using threaded `Stream.filter` and `Stream.sample` "
+"([2e957b6](https://github.com/tweepy/tweepy/commit/2e957b654ed54f7d7c2b92166517f4d15deee240))"
+msgstr ""
+"스레드화된(Threaded) `Stream.filter` 와 `Stream.sample` 이 이제 스레드를 반환함 "
+"([2e957b6](https://github.com/tweepy/tweepy/commit/2e957b654ed54f7d7c2b92166517f4d15deee240))"
+
+#: ../../changelog.md:428
+msgid ""
+"Use specific user agent for `Stream` "
+"([5994c4b](https://github.com/tweepy/tweepy/commit/5994c4b4005f5f909609ff04765b784fcbe9479c))"
+msgstr ""
+"이제 `Stream` 이 특정 유저 에이전트를 사용함 "
+"([5994c4b](https://github.com/tweepy/tweepy/commit/5994c4b4005f5f909609ff04765b784fcbe9479c))"
+
+#: ../../changelog.md:432
+msgid "Various other optimizations and improvements"
+msgstr "기타 다양한 최적화 및 개선"
+
+#: ../../changelog.md:435
+msgid ""
+"Handle connection errors when streaming "
+"([#237](https://github.com/tweepy/tweepy/issues/237), "
+"[#448](https://github.com/tweepy/tweepy/issues/448), "
+"[#750](https://github.com/tweepy/tweepy/issues/750), "
+"[#1024](https://github.com/tweepy/tweepy/issues/1024), "
+"[#1113](https://github.com/tweepy/tweepy/issues/1113), "
+"[#1416](https://github.com/tweepy/tweepy/issues/1416))"
+msgstr ""
+"스트리밍 관련 연결 에러 처리 ([#237](https://github.com/tweepy/tweepy/issues/237), "
+"[#448](https://github.com/tweepy/tweepy/issues/448), "
+"[#750](https://github.com/tweepy/tweepy/issues/750), "
+"[#1024](https://github.com/tweepy/tweepy/issues/1024), "
+"[#1113](https://github.com/tweepy/tweepy/issues/1113), "
+"[#1416](https://github.com/tweepy/tweepy/issues/1416))"
+
+#: ../../changelog.md:436
+msgid ""
+"Remove dependence on string length delimitation in `Stream` "
+"([#892](https://github.com/tweepy/tweepy/issues/892))"
+msgstr ""
+"제거함: `Stream` 에서의 문자열 길이 한계에 대한 종속성 "
+"([#892](https://github.com/tweepy/tweepy/issues/892))"
+
+#: ../../changelog.md:437
+msgid ""
+"Stop reraising exceptions in `Stream._connect` "
+"([#1072](https://github.com/tweepy/tweepy/issues/1072))"
+msgstr ""
+"이제 `Stream._connect` 에서 예외를 또 발생시키지 않음 "
+"([#1072](https://github.com/tweepy/tweepy/issues/1072))"
+
+#: ../../changelog.md:438
+msgid ""
+"Change `Stream.sample` method to use GET HTTP method "
+"([1b0e869](https://github.com/tweepy/tweepy/commit/1b0e86968db9702ca258b3df93911952fc934f86))"
+msgstr ""
+"`Stream.sample` 메서드가 GET HTTP 메서드를 이용하도록 변경함 "
+"([1b0e869](https://github.com/tweepy/tweepy/commit/1b0e86968db9702ca258b3df93911952fc934f86))"
+
+#: ../../changelog.md:439
+msgid ""
+"Default to `models.User` model in `models.Status.parse` more broadly for "
+"`user` attribute to handle parsers without `model_factory` attribute or "
+"model factories without `user` attribute "
+"([#538](https://github.com/tweepy/tweepy/issues/538))"
+msgstr ""
+"`models.Status.parse` 의 `models.User` 모델이 `model_factory` 없이 `user` 로, 또는"
+" `user` 없이 Model factory들을 이용해 파서(Parser)를 더 광범위하게(more broadly) 처리할 수 "
+"있도록 바뀌었음 ([#538](https://github.com/tweepy/tweepy/issues/538))"
+
+#: ../../changelog.md:440
+msgid ""
+"Default to `models.Status` model in `models.SearchResults.parse` more "
+"broadly for results to handle parsers without `model_factory` attribute "
+"or model factories without `status` attribute "
+"([71c031b](https://github.com/tweepy/tweepy/commit/71c031b64a397c54c8d5f64ead161df63ea1c99c))"
+msgstr ""
+"`models.SearchResults.parse` 의 `models.Status` 모델이`model_factory` 없이, 또는 "
+"`status` 없이 Model factory들을 이용해 파서(Parser)의 결과를 더 광범위하게(more broadly) 받을 "
+"수 있도록 바뀌었음 "
+"([71c031b](https://github.com/tweepy/tweepy/commit/71c031b64a397c54c8d5f64ead161df63ea1c99c))"
+
+#: ../../changelog.md:441
+msgid ""
+"Start on page 1 for `PageIterator` "
+"([#958](https://github.com/tweepy/tweepy/issues/958))"
+msgstr ""
+"이제 `PageIterator` 가 1페이지부터 시작함(기존 0페이지에서 변경됨). "
+"([#958](https://github.com/tweepy/tweepy/issues/958))"
+
+#: ../../changelog.md:442
+msgid ""
+"Handle Twitter API issue with duplicate pages for `API.search_users` "
+"([#958](https://github.com/tweepy/tweepy/issues/958), "
+"[#1465](https://github.com/tweepy/tweepy/issues/1465))"
+msgstr ""
+"`API.search_users` 에서 페이지가 복사되던 트위터 API 관련 문제를 해결함 "
+"([#958](https://github.com/tweepy/tweepy/issues/958), "
+"[#1465](https://github.com/tweepy/tweepy/issues/1465))"
+
+#: ../../changelog.md:443
+msgid ""
+"Allow integer IDs for `Stream.filter` "
+"([#829](https://github.com/tweepy/tweepy/issues/829), "
+"[#830](https://github.com/tweepy/tweepy/pull/830))"
+msgstr ""
+"이제 `Stream.filter` 가 정수형 ID를 "
+"허용함([#829](https://github.com/tweepy/tweepy/issues/829), "
+"[#830](https://github.com/tweepy/tweepy/pull/830))"
+
+#: ../../changelog.md:444
+msgid ""
+"Handle `ChunkedEncodingError` during streaming "
+"([e8fcc4d](https://github.com/tweepy/tweepy/commit/e8fcc4da695abe15e8da371c1127f548aa8889ad))"
+msgstr ""
+"이제 스트리밍에서 `ChunkedEncodingError` 를 처리할 수 있음 "
+"([e8fcc4d](https://github.com/tweepy/tweepy/commit/e8fcc4da695abe15e8da371c1127f548aa8889ad))"
+
+#: ../../changelog.md:445
+msgid ""
+"Handle Twitter API errors with successful HTTP status codes "
+"([#1427](https://github.com/tweepy/tweepy/issues/1427))"
+msgstr ""
+"이제 HTTP 성공 상태 코드에서 발생하던 트위터 API 에러를 처리할 수 있음 "
+"([#1427](https://github.com/tweepy/tweepy/issues/1427))"
+
+#: ../../changelog.md:446
+msgid ""
+"Handle initial negative or zero limits in `Cursor` iterators "
+"([c1457b7](https://github.com/tweepy/tweepy/commit/c1457b7785764d736b0b1d60a15deb95581b783f))"
+msgstr ""
+"이제 `Cursor` 반복자가 음수나 0이 되던 문제를 처리할 수 있음 "
+"([c1457b7](https://github.com/tweepy/tweepy/commit/c1457b7785764d736b0b1d60a15deb95581b783f))"
+
+#: ../../changelog.md:448
+msgid "Version 3.10.0"
+msgstr "버전 3.10.0"
+
+#: ../../changelog.md:450
+msgid ""
+"This will be the last major and minor version to support Python 2.7 "
+"([#1253](https://github.com/tweepy/tweepy/issues/1253)) and Python 3.5."
+"   The next non-patch release should be version 4.0.0."
+msgstr ""
+"이 버전이 Python 2.7과 Python 3.5를 마지막으로 지원하는 버전임 "
+"([#1253](https://github.com/tweepy/tweepy/issues/1253))    tweepy의 다음 버전은"
+" 4.0.0이 됨"
+
+#: ../../changelog.md:454
+msgid ""
+"Add `API.search_30_day` and `API.search_full_archive` "
+"([#1175](https://github.com/tweepy/tweepy/issues/1175), "
+"[#1294](https://github.com/tweepy/tweepy/pull/1294))"
+msgstr ""
+"추가함: `API.search_30_day`, `API.search_full_archive` "
+"([#1175](https://github.com/tweepy/tweepy/issues/1175), "
+"[#1294](https://github.com/tweepy/tweepy/pull/1294))"
+
+#: ../../changelog.md:455
+msgid ""
+"Update allowed parameters for `API.home_timeline` "
+"([#1410](https://github.com/tweepy/tweepy/issues/1410), "
+"[#1458](https://github.com/tweepy/tweepy/pull/1458))"
+msgstr ""
+"`API.home_timeline` 에 허용되는 매개변수를 "
+"갱신함([#1410](https://github.com/tweepy/tweepy/issues/1410), "
+"[#1458](https://github.com/tweepy/tweepy/pull/1458))"
+
+#: ../../changelog.md:456
+msgid "Add `trim_user`, `exclude_replies`, `include_entities`"
+msgstr "추가함: `trim_user`, `exclude_replies`, `include_entities`"
+
+#: ../../changelog.md:457
+msgid "Remove `page` as erroneously documented parameter"
+msgstr "제거함: `page` (잘못 문서화된 매개변수) "
+
+#: ../../changelog.md:458
+msgid "Reorder `count` to be the first parameter"
+msgstr "`count` 가 첫 매개변수가 되도록 순서를 바꿈"
+
+#: ../../changelog.md:459
+msgid "Update allowed parameters for `API.get_oembed`"
+msgstr "`API.get_oembed` 에 허용되는 매개변수를 갱신함"
+
+#: ../../changelog.md:460
+msgid "Add `hide_thread`, `theme`, `link_color`, `widget_type`, `dnt`"
+msgstr "추가함: `hide_thread`, `theme`, `link_color`, `widget_type`, `dnt`"
+
+#: ../../changelog.md:461
+msgid "Remove `id`"
+msgstr "제거함: `id` "
+
+#: ../../changelog.md:462
+msgid ""
+"Remove `API.update_profile_background_image` "
+"([#1466](https://github.com/tweepy/tweepy/issues/1466))"
+msgstr ""
+"제거함: `API.update_profile_background_image` "
+"([#1466](https://github.com/tweepy/tweepy/issues/1466))"
+
+#: ../../changelog.md:463
+msgid "Add support for Python 3.9"
+msgstr "이제 Python 3.9를 지원함 "
+
+#: ../../changelog.md:464
+msgid ""
+"Switch from Travis CI to GitHub Actions to run tests and deploy releases "
+"([#1402](https://github.com/tweepy/tweepy/pull/1402))"
+msgstr ""
+"코드 테스트 및 릴리즈에 쓰이던 것을 Travis CI에서, GitHub Actions로 변경함 "
+"([#1402](https://github.com/tweepy/tweepy/pull/1402))"
+
+#: ../../changelog.md:465 ../../changelog.md:508 ../../changelog.md:535
+msgid "Update and improve various documentation"
+msgstr "문서를 갱신·개선함"
+
+#: ../../changelog.md:468
+msgid ""
+"Use `mimetypes.guess_type` as fallback for determining image file type "
+"([#1411](https://github.com/tweepy/tweepy/issues/1411))"
+msgstr ""
+"이제 `mimetypes.guess_type` 를 폴백 함수로서 이미지 파일 형식을 찾아내는데 사용함 "
+"([#1411](https://github.com/tweepy/tweepy/issues/1411))"
+
+#: ../../changelog.md:469
+msgid "Use proper MIME type in Content-Type header for uploaded images"
+msgstr "이제 업로드된 이미지에, 컨텐츠 종류에 적절한 적절한 MIME 타입을 사용함 "
+
+#: ../../changelog.md:470
+msgid ""
+"Allow `file` parameter to be used again for `API.media_upload` "
+"([#1412](https://github.com/tweepy/tweepy/issues/1412), "
+"[#1413](https://github.com/tweepy/tweepy/pull/1413))"
+msgstr ""
+"`API.media_upload` 에 `file` 매개변수를 재사용하도록 허용함 "
+"([#1412](https://github.com/tweepy/tweepy/issues/1412), "
+"[#1413](https://github.com/tweepy/tweepy/pull/1413))"
+
+#: ../../changelog.md:471
+msgid ""
+"Allow `file` parameter to be used again for `API.update_profile_banner`, "
+"`API.update_profile_image`, and `API.update_with_media` "
+"([#1475](https://github.com/tweepy/tweepy/pull/1475))"
+msgstr ""
+"`API.update_profile_banner`, `API.update_profile_image`, "
+"`API.update_with_media` 에 `file` 매개변수를 재사용하도록 허용함 "
+"([#1475](https://github.com/tweepy/tweepy/pull/1475))"
+
+#: ../../changelog.md:472
+msgid ""
+"Fix `User.lists`, `User.lists_memberships`, and "
+"`User.lists_subscriptions` to retrieve information about the user in "
+"question rather than the authenticating user "
+"([#1443](https://github.com/tweepy/tweepy/issues/1443), "
+"[#1444](https://github.com/tweepy/tweepy/pull/1444))"
+msgstr ""
+"이제 `User.lists`, `User.lists_memberships`, `User.lists_subscriptions` 가 "
+"현재 인증된 사용자 대신 지정한 사용자에 대한 정보를 가져옴 "
+"([#1443](https://github.com/tweepy/tweepy/issues/1443), "
+"[#1444](https://github.com/tweepy/tweepy/pull/1444))"
+
+#: ../../changelog.md:474
+msgid "Version 3.9.0"
+msgstr "버전 3.9.0 "
+
+#: ../../changelog.md:477
+msgid ""
+"Add `API.create_media_metadata` "
+"([#716](https://github.com/tweepy/tweepy/issues/716))"
+msgstr ""
+"추가함: `API.create_media_metadata` "
+"([#716](https://github.com/tweepy/tweepy/issues/716))"
+
+#: ../../changelog.md:478
+msgid ""
+"Update allowed parameters for `API.update_status` "
+"([#1101](https://github.com/tweepy/tweepy/issues/1101))"
+msgstr ""
+"`API.update_status` 에 허용되는 매개변수를 "
+"갱신함([#1101](https://github.com/tweepy/tweepy/issues/1101))"
+
+#: ../../changelog.md:479
+msgid ""
+"Add `exclude_reply_user_ids`, `attachment_url`, `possibly_sensitive`, "
+"`trim_user`, `enable_dmcommands`, `fail_dmcommands`, `card_uri`"
+msgstr ""
+"추가함: `exclude_reply_user_ids`, `attachment_url`, `possibly_sensitive`, "
+"`trim_user`, `enable_dmcommands`, `fail_dmcommands`, `card_uri`"
+
+#: ../../changelog.md:480
+msgid "Remove `in_reply_to_status_id_str`, `source`"
+msgstr "제거함: `in_reply_to_status_id_str`, `source`"
+
+#: ../../changelog.md:481
+msgid "Add allowed parameters to `API.get_status`"
+msgstr "`API.get_status` 에 다음 매개변수를 추가함 "
+
+#: ../../changelog.md:482
+msgid ""
+"`trim_user`, `include_my_retweet`, `include_entities`, "
+"`include_ext_alt_text`, `include_card_uri`"
+msgstr ""
+"`trim_user`, `include_my_retweet`, `include_entities`, "
+"`include_ext_alt_text`, `include_card_uri`"
+
+#: ../../changelog.md:483
+msgid "Add allowed parameters to `API.statuses_lookup`"
+msgstr "`API.statuses_lookup` 에 다음 매개변수를 추가함 "
+
+#: ../../changelog.md:484
+msgid "`include_ext_alt_text`, `include_card_uri`"
+msgstr "`include_ext_alt_text`, `include_card_uri`"
+
+#: ../../changelog.md:485
+msgid ""
+"Improve `API.lookup_users` "
+"([#706](https://github.com/tweepy/tweepy/issues/706))"
+msgstr ""
+"개선함: `API.lookup_users` "
+"([#706](https://github.com/tweepy/tweepy/issues/706))"
+
+#: ../../changelog.md:486
+msgid ""
+"Improve and optimize `API.statuses_lookup`, `API.create_media_metadata`, "
+"`API.update_status`"
+msgstr ""
+"`API.statuses_lookup`, `API.create_media_metadata`, `API.update_status` 를"
+" 개선 및 최적화함 "
+
+#: ../../changelog.md:487
+msgid "Add `reverse` as allowed parameter for `API.lists_all`"
+msgstr "`API.lists_all` 에 다음 매개변수를 추가함: `reverse` "
+
+#: ../../changelog.md:488
+msgid "Add `count` as allowed parameter for `API.lists_memberships`"
+msgstr "`API.lists_memberships` 에 다음 매개변수를 추가함: `count` "
+
+#: ../../changelog.md:489
+msgid "Add `count` as allowed parameter for `API.lists_subscriptions`"
+msgstr "`API.lists_subscriptions` 에 다음 매개변수를 추가함: `count` "
+
+#: ../../changelog.md:490
+msgid "Add `include_entities` as allowed parameter for `API.list_timeline`"
+msgstr "`API.list_timeline` 에 다음 매개변수를 추가함: `include_entities` "
+
+#: ../../changelog.md:491
+msgid "Add allowed parameters to `API.list_subscribers`"
+msgstr "`API.list_subscribers` 에 다음 매개변수를 추가함 "
+
+#: ../../changelog.md:492
+msgid "`count`, `include_entities`, `skip_status`"
+msgstr "`count`, `include_entities`, `skip_status`"
+
+#: ../../changelog.md:493
+msgid "Add support for Python 3.8"
+msgstr "이제 Python 3.8을 지원함"
+
+#: ../../changelog.md:494
+msgid "Update and improve setup.py"
+msgstr "setup.py를 갱신·개선함 "
+
+#: ../../changelog.md:495
+msgid "Use requests socks extra instead of requiring PySocks directly"
+msgstr "이제 PySocks을 직접 사용하는 대신, Request socks extra를 대신 사용함 "
+
+#: ../../changelog.md:496
+msgid ""
+"Allow uploading of images with file names without extensions "
+"([#1060](https://github.com/tweepy/tweepy/issues/1060), "
+"[#1086](https://github.com/tweepy/tweepy/pull/1086))"
+msgstr ""
+"이제 확장자 없이 파일명만 이용해 이미지를 업로드하는 것을 허용함 "
+"([#1060](https://github.com/tweepy/tweepy/issues/1060), "
+"[#1086](https://github.com/tweepy/tweepy/pull/1086))"
+
+#: ../../changelog.md:497
+msgid ""
+"Support uploading WebP images "
+"([#1298](https://github.com/tweepy/tweepy/issues/1298))"
+msgstr ""
+"이제 WebP 이미지 업로드를 지원함 "
+"([#1298](https://github.com/tweepy/tweepy/issues/1298))"
+
+#: ../../changelog.md:498
+msgid ""
+"Add missing attributes to `Relationship` model "
+"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
+msgstr ""
+"`Relationship` 모델에 누락됐던 속성들을 추가함 "
+"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
+
+#: ../../changelog.md:499
+msgid ""
+"Update max allowed size for uploaded GIFs "
+"([#1336](https://github.com/tweepy/tweepy/issues/1336), "
+"[#1338](https://github.com/tweepy/tweepy/pull/1338))"
+msgstr ""
+"GIF 파일 업로드 최대 제한 용량을 갱신함 "
+"([#1336](https://github.com/tweepy/tweepy/issues/1336), "
+"[#1338](https://github.com/tweepy/tweepy/pull/1338))"
+
+#: ../../changelog.md:500
+msgid ""
+"Add `_json` attribute to `DirectMessage` model "
+"([#1342](https://github.com/tweepy/tweepy/pull/1342))"
+msgstr ""
+"`DirectMessage` 모델에 `_json` 속성을 추가함 "
+"([#1342](https://github.com/tweepy/tweepy/pull/1342))"
+
+#: ../../changelog.md:501
+msgid ""
+"Update and improve tests "
+"([#1217](https://github.com/tweepy/tweepy/issues/1217))"
+msgstr "테스트(tests) 갱신·개선 ([#1217](https://github.com/tweepy/tweepy/issues/1217))"
+
+#: ../../changelog.md:502
+msgid "Add documentation for extended Tweets"
+msgstr "확장 트윗(Extended Tweets)에 대한 문서를 추가함 "
+
+#: ../../changelog.md:503
+msgid ""
+"Document `API.lookup_users` "
+"([#539](https://github.com/tweepy/tweepy/issues/539))"
+msgstr ""
+"`API.lookup_users` 문서 "
+"([#539](https://github.com/tweepy/tweepy/issues/539))"
+
+#: ../../changelog.md:504
+msgid ""
+"Add documentation for running tests "
+"([#681](https://github.com/tweepy/tweepy/issues/681))"
+msgstr ""
+"추가함: Running Tests 문서 "
+"([#681](https://github.com/tweepy/tweepy/issues/681))"
+
+#: ../../changelog.md:505
+msgid ""
+"Add Korean translation of documentation "
+"([#1296](https://github.com/tweepy/tweepy/pull/1296))"
+msgstr "추가함: 문서의 한국어 번역본 ([#1296](https://github.com/tweepy/tweepy/pull/1296))"
+
+#: ../../changelog.md:506
+msgid ""
+"Add Polish translation of documentation "
+"([#1316](https://github.com/tweepy/tweepy/pull/1316))"
+msgstr "추가함: 문서의 폴란드어 번역본 ([#1316](https://github.com/tweepy/tweepy/pull/1316))"
+
+#: ../../changelog.md:507
+msgid ""
+"Document `API.lookup_friendships` "
+"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
+msgstr ""
+"`API.lookup_friendships` 문서 "
+"([#1375](https://github.com/tweepy/tweepy/pull/1375))"
+
+#: ../../changelog.md:511
+msgid "Fix handling of invalid credentials for `API.verify_credentials`"
+msgstr "`API.verify_credentials` 에서의 올바르지 못한 자격증명 처리 관련 문제 수정 "
+
+#: ../../changelog.md:512
+msgid ""
+"Handle boolean value for `API.verify_credentials` include_email parameter"
+" ([#890](https://github.com/tweepy/tweepy/issues/890))"
+msgstr ""
+"`API.verify_credentials` 의 include_email 매개변수 관련 Boolean값 처리 관련 문제 수정 "
+"([#890](https://github.com/tweepy/tweepy/issues/890))"
+
+#: ../../changelog.md:513
+msgid ""
+"Allow `Cursor` to be used with `API.list_direct_messages` by adding "
+"DMCursorIterator ([#1261](https://github.com/tweepy/tweepy/issues/1261), "
+"[#1262](https://github.com/tweepy/tweepy/pull/1262))"
+msgstr ""
+"이제 DMCursorIterator를 추가함으로써, `API.list_direct_messages` 에 `Cursor` 를 사용할 "
+"수 있음 ([#1261](https://github.com/tweepy/tweepy/issues/1261), "
+"[#1262](https://github.com/tweepy/tweepy/pull/1262))"
+
+#: ../../changelog.md:515
+msgid "Version 3.8.0"
+msgstr "버전 3.8.0 "
+
+#: ../../changelog.md:518
+msgid ""
+"Allow streams to use daemon threads "
+"([#1126](https://github.com/tweepy/tweepy/pull/1126))"
+msgstr ""
+"이제 스트림이 데몬 스레드를 사용할 수 있음 "
+"([#1126](https://github.com/tweepy/tweepy/pull/1126))"
+
+#: ../../changelog.md:519
+msgid ""
+"Remove `API.set_delivery_device` "
+"([#1203](https://github.com/tweepy/tweepy/issues/1203))"
+msgstr ""
+"제거함: `API.set_delivery_device` "
+"([#1203](https://github.com/tweepy/tweepy/issues/1203))"
+
+#: ../../changelog.md:520
+msgid ""
+"Remove simplejson import and usage "
+"([#832](https://github.com/tweepy/tweepy/pull/832))"
+msgstr ""
+"이제 simplejson을 더 이상 사용하지 않음 (import도 제거됨) "
+"([#832](https://github.com/tweepy/tweepy/pull/832))"
+
+#: ../../changelog.md:521
+msgid ""
+"Allow `cursor` parameter for `API.blocks_ids` and `API.mutes_ids` "
+"([#1208](https://github.com/tweepy/tweepy/pull/1208))"
+msgstr ""
+"이제 `API.blocks_ids` 와 `API.mutes_ids` 가 다음 매개변수를 허용함: `cursor` "
+"([#1208](https://github.com/tweepy/tweepy/pull/1208))"
+
+#: ../../changelog.md:522
+msgid "Drop support for Python 3.4"
+msgstr "이제 더 이상 Python 3.4를 지원하지 않음 "
+
+#: ../../changelog.md:523
+msgid ""
+"Allow `perform_block` parameter for `API.report_spam` "
+"([#1090](https://github.com/tweepy/tweepy/pull/1090))"
+msgstr ""
+"이제 `API.report_spam` 이 다음 매개변수를 허용함: `perform_block` "
+"([#1090](https://github.com/tweepy/tweepy/pull/1090))"
+
+#: ../../changelog.md:524
+msgid ""
+"Add `API.mutes` ([#1197](https://github.com/tweepy/tweepy/issues/1197), "
+"[#1215](https://github.com/tweepy/tweepy/pull/1215))"
+msgstr ""
+"추가함: `API.mutes` ([#1197](https://github.com/tweepy/tweepy/issues/1197), "
+"[#1215](https://github.com/tweepy/tweepy/pull/1215))"
+
+#: ../../changelog.md:525
+msgid ""
+"Allow `count` parameter for `API.friends` "
+"([#577](https://github.com/tweepy/tweepy/issues/577))"
+msgstr ""
+"이제 `API.friends` 가 다음 매개변수를 허용함: "
+"`count`([#577](https://github.com/tweepy/tweepy/issues/577))"
+
+#: ../../changelog.md:526
+msgid ""
+"Remove `since`, `from`, `to`, and `source` as allowed parameters for "
+"`API.search`"
+msgstr "`API.search` 허용 매개변수 목록에서 다음을 제거함: `since`, `from`, `to`, `source`"
+
+#: ../../changelog.md:527
+msgid ""
+"Handle location deletion and withheld content notices for streams "
+"([#886](https://github.com/tweepy/tweepy/pull/886))"
+msgstr ""
+"이제 스트림이 위치 삭제 및 보류된 컨텐츠 통지와 관련한 처리가 가능함 "
+"([#886](https://github.com/tweepy/tweepy/pull/886))"
+
+#: ../../changelog.md:528
+msgid ""
+"Allow usage of equality and difference operators with `User` objects "
+"([#939](https://github.com/tweepy/tweepy/pull/939))"
+msgstr ""
+"이제 `User` 객체에 '같음' 과 '같지 않음' 비교 연산자를 사용할 수 있음 "
+"([#939](https://github.com/tweepy/tweepy/pull/939))"
+
+#: ../../changelog.md:529
+msgid ""
+"Add `_json` attribute to `Category`, `Friendship`, and `List` models "
+"([#590](https://github.com/tweepy/tweepy/issues/590), "
+"[#1169](https://github.com/tweepy/tweepy/pull/1169))"
+msgstr ""
+"`Category`, `Friendship`, `List` 모델에 다음 속성을 추가함: `_json` "
+"([#590](https://github.com/tweepy/tweepy/issues/590), "
+"[#1169](https://github.com/tweepy/tweepy/pull/1169))"
+
+#: ../../changelog.md:530
+msgid ""
+"Remove `API.suggested_categories`, `API.suggested_users`, and "
+"`API.suggested_users_tweets`"
+msgstr ""
+"제거함: `API.suggested_categories`, `API.suggested_users`, "
+"`API.suggested_users_tweets`"
+
+#: ../../changelog.md:531
+msgid ""
+"Update and improve tests and cassettes "
+"([#1242](https://github.com/tweepy/tweepy/pull/1242))"
+msgstr ""
+"테스트(Tests) 및 카세트(Cassettes)를 갱신·개선함 "
+"([#1242](https://github.com/tweepy/tweepy/pull/1242))"
+
+#: ../../changelog.md:532
+msgid ""
+"Update `DirectMessage` model "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+msgstr ""
+"`DirectMessage` 모델을 갱신함 "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+
+#: ../../changelog.md:533
+msgid ""
+"Replace `API.direct_messages` and `API.sent_direct_messages` with "
+"`API.list_direct_messages` "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+msgstr ""
+"`API.direct_messages` 와 `API.sent_direct_messages` 를 "
+"`API.list_direct_messages` 로 대체함 "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+
+#: ../../changelog.md:534
+msgid ""
+"Update `API.get_direct_message`, `API.send_direct_message`, and "
+"`API.destroy_direct_message` "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+msgstr ""
+"갱신함: `API.get_direct_message`, `API.send_direct_message`, "
+"`API.destroy_direct_message` "
+"([#1081](https://github.com/tweepy/tweepy/issues/1081), "
+"[#1228](https://github.com/tweepy/tweepy/pull/1228))"
+
+#: ../../changelog.md:538
+msgid ""
+"Exclude examples during installation "
+"([#1141](https://github.com/tweepy/tweepy/issues/1141), "
+"[#1164](https://github.com/tweepy/tweepy/pull/1164))"
+msgstr ""
+"더 이상 예시 파일을 설치하지 않음 "
+"([#1141](https://github.com/tweepy/tweepy/issues/1141), "
+"[#1164](https://github.com/tweepy/tweepy/pull/1164))"
+
+#: ../../changelog.md:539
+msgid ""
+"Properly initialize `OAuthHandler.request_token` "
+"([#1149](https://github.com/tweepy/tweepy/pull/1149))"
+msgstr ""
+"이제 `OAuthHandler.request_token` 가 적절하게 초기화됨 "
+"([#1149](https://github.com/tweepy/tweepy/pull/1149))"
+
+#: ../../changelog.md:540
+msgid ""
+"Properly handle `map_` parameter for `API.statuses_lookup` "
+"([#598](https://github.com/tweepy/tweepy/issues/598))"
+msgstr ""
+"이제 `API.statuses_lookup` 가 `map_` 매개변수를 적절히 처리함 "
+"([#598](https://github.com/tweepy/tweepy/issues/598))"
+
+#: ../../changelog.md:541
+msgid ""
+"Support cursor pagination for `API.blocks_ids` and `API.mutes_ids` "
+"([#930](https://github.com/tweepy/tweepy/issues/930), "
+"[#931](https://github.com/tweepy/tweepy/pull/931))"
+msgstr ""
+"이제 `API.blocks_ids` 와 `API.mutes_ids` 커서 페이지화(Pagination)를 지원함 "
+"([#930](https://github.com/tweepy/tweepy/issues/930), "
+"[#931](https://github.com/tweepy/tweepy/pull/931))"
+
+#: ../../changelog.md:542
+msgid ""
+"Return values for `API.update_profile_background_image` and "
+"`API.update_profile_banner` "
+"([#904](https://github.com/tweepy/tweepy/pull/904))"
+msgstr ""
+"`API.update_profile_background_image` 과 `API.update_profile_banner` 에 대한 "
+"반환값 ([#904](https://github.com/tweepy/tweepy/pull/904))"
+
+#: ../../changelog.md:543
+msgid "Replace usage of root logger"
+msgstr "루트 로거(Root logger) 교체 사용"
+
+#: ../../changelog.md:544
+msgid ""
+"Close Requests sessions "
+"([#810](https://github.com/tweepy/tweepy/issues/810), "
+"[#1093](https://github.com/tweepy/tweepy/issues/1093), "
+"[#1237](https://github.com/tweepy/tweepy/issues/1237))"
+msgstr ""
+"요청 세션 닫음 ([#810](https://github.com/tweepy/tweepy/issues/810), "
+"[#1093](https://github.com/tweepy/tweepy/issues/1093), "
+"[#1237](https://github.com/tweepy/tweepy/issues/1237))"
+
+#: ../../changelog.md:546
+msgid "Version 3.7.0"
+msgstr "버전 3.7.0"
+
+#: ../../changelog.md:549
+msgid ""
+"Allow `trim_user` and `exclude_replies` as parameters for "
+"`API.user_timeline` ([#909](https://github.com/tweepy/tweepy/pull/909))"
+msgstr ""
+"`API.user_timeline` 에 `trim_user` 와 `exclude_replies` 를 매개변수로서 허용함 "
+"([#909](https://github.com/tweepy/tweepy/pull/909))"
+
+#: ../../changelog.md:550
+msgid ""
+"Allow `tweet_mode` parameter for `API.statuses_lookup` "
+"([#840](https://github.com/tweepy/tweepy/issues/840), "
+"[#926](https://github.com/tweepy/tweepy/pull/926))"
+msgstr ""
+"`API.statuses_lookup` 에 `tweet_mode` 매개변수를 허용함 "
+"([#840](https://github.com/tweepy/tweepy/issues/840), "
+"[#926](https://github.com/tweepy/tweepy/pull/926))"
+
+#: ../../changelog.md:551
+msgid "Drop support for Python 2.6 and 3.3"
+msgstr "Python 2.6 과 3.3에 대한 지원 중단 "
+
+#: ../../changelog.md:552
+msgid "[Discord Server](https://discord.gg/bJvqnhg)"
+msgstr ""
+
+#: ../../changelog.md:553
+msgid ""
+"Add proxy support for streams "
+"([#1033](https://github.com/tweepy/tweepy/pull/1033))"
+msgstr "이제 스트림이 프록시를 지원함 ([#1033](https://github.com/tweepy/tweepy/pull/1033))"
+
+#: ../../changelog.md:554
+msgid ""
+"Add `API.create_mute`, `API.destroy_mute`, and `API.mutes_ids` "
+"([#1055](https://github.com/tweepy/tweepy/pull/1055))"
+msgstr ""
+"추가함: `API.create_mute`, `API.destroy_mute`, `API.mutes_ids` "
+"([#1055](https://github.com/tweepy/tweepy/pull/1055))"
+
+#: ../../changelog.md:555
+msgid ""
+"Allow `tweet_mode` parameter for `API.lookup_users` "
+"([#1130](https://github.com/tweepy/tweepy/pull/1130))"
+msgstr ""
+"`API.lookup_users` 에 `tweet_mode` 매개변수를 허용함 "
+"([#1130](https://github.com/tweepy/tweepy/pull/1130))"
+
+#: ../../changelog.md:558
+msgid ""
+"Fix `AttributeError` during streaming "
+"([#1026](https://github.com/tweepy/tweepy/issues/1026), "
+"[#1027](https://github.com/tweepy/tweepy/pull/1027))"
+msgstr ""
+"스트리밍에서 `AttributeError` 가 발생하던 문제 수정 "
+"([#1026](https://github.com/tweepy/tweepy/issues/1026), "
+"[#1027](https://github.com/tweepy/tweepy/pull/1027))"
+
+#: ../../changelog.md:559
+msgid ""
+"Update how requirements are specified "
+"([#1029](https://github.com/tweepy/tweepy/issues/1029), "
+"[#1030](https://github.com/tweepy/tweepy/pull/1030))"
+msgstr ""
+"요구사항 관련 수정 ([#1029](https://github.com/tweepy/tweepy/issues/1029), "
+"[#1030](https://github.com/tweepy/tweepy/pull/1030))"
+
+#: ../../changelog.md:560
+msgid ""
+"Fix compatibility issue with Python 3.7 "
+"([#1017](https://github.com/tweepy/tweepy/issues/1017), "
+"[#1042](https://github.com/tweepy/tweepy/pull/1042))"
+msgstr ""
+"Python 3.7과의 호환성 문제를 해결함 "
+"([#1017](https://github.com/tweepy/tweepy/issues/1017), "
+"[#1042](https://github.com/tweepy/tweepy/pull/1042))"
+
+#: ../../changelog.md:562
+msgid "Version 3.6.0"
+msgstr "버전 3.6.0"
+
+#: ../../changelog.md:565
+msgid ""
+"Parse `Status.quoted_status` as a `Status` object "
+"([#633](https://github.com/tweepy/tweepy/pull/633))"
+msgstr ""
+"`Status.quoted_status` 를 `Status` 객체로 취급·파싱함 "
+"([#633](https://github.com/tweepy/tweepy/pull/633))"
+
+#: ../../changelog.md:566
+msgid ""
+"Allow `in_reply_to_status_id_str` as a parameter for `API.update_status` "
+"and `API.update_with_media` "
+"([#693](https://github.com/tweepy/tweepy/pull/693))"
+msgstr ""
+"`in_reply_to_status_id_str` 를 `API.update_status` 와 "
+"`API.update_with_media` 의 매개변수로서 허용함 "
+"([#693](https://github.com/tweepy/tweepy/pull/693))"
+
+#: ../../changelog.md:567
+msgid ""
+"Add `stall_warnings` parameter to `Stream.sample` "
+"([#701](https://github.com/tweepy/tweepy/pull/701))"
+msgstr ""
+"`Stream.sample` 에 추가함: 매개변수 "
+"`stall_warnings`([#701](https://github.com/tweepy/tweepy/pull/701))"
+
+#: ../../changelog.md:568
+msgid ""
+"Add `API.unretweet` ([#735](https://github.com/tweepy/tweepy/issues/735),"
+" [#736](https://github.com/tweepy/tweepy/pull/736))"
+msgstr ""
+"추가함: `API.unretweet` "
+"([#735](https://github.com/tweepy/tweepy/issues/735), "
+"[#736](https://github.com/tweepy/tweepy/pull/736))"
+
+#: ../../changelog.md:569
+msgid ""
+"Allow `auto_populate_reply_metadata` as a parameter for "
+"`API.update_status` and `API.update_with_media` "
+"([#761](https://github.com/tweepy/tweepy/pull/761))"
+msgstr ""
+"`auto_populate_reply_metadata` 를 `API.update_status` 와 "
+"`API.update_with_media` 의 매개변수로서 허용함 "
+"([#761](https://github.com/tweepy/tweepy/pull/761))"
+
+#: ../../changelog.md:570
+msgid "Allow `profile_link_color` as a parameter for `API.update_profile`"
+msgstr "`profile_link_color` 를 `API.update_profile` 의 매개변수로서 허용함"
+
+#: ../../changelog.md:571
+msgid ""
+"Add support for Python 3.6 "
+"([#831](https://github.com/tweepy/tweepy/pull/831), "
+"[#884](https://github.com/tweepy/tweepy/pull/884))"
+msgstr ""
+"이제 Python 3.6을 지원함([#831](https://github.com/tweepy/tweepy/pull/831), "
+"[#884](https://github.com/tweepy/tweepy/pull/884))"
+
+#: ../../changelog.md:574
+msgid ""
+"Update file size limit for `API.media_upload` "
+"([#717](https://github.com/tweepy/tweepy/pull/717))"
+msgstr ""
+"`API.media_upload` 의 파일 크기 제한을 수정함 "
+"([#717](https://github.com/tweepy/tweepy/pull/717))"
+
+#: ../../changelog.md:575
+msgid ""
+"Fix `JSONParser.parse` returning `None` in certain cases "
+"([#765](https://github.com/tweepy/tweepy/issues/765), "
+"[#766](https://github.com/tweepy/tweepy/pull/766))"
+msgstr ""
+"`JSONParser.parse` 가 특정 상황에서 `None` 을 반환하던 문제 수정 "
+"([#765](https://github.com/tweepy/tweepy/issues/765), "
+"[#766](https://github.com/tweepy/tweepy/pull/766))"
+
+#: ../../changelog.md:576
+msgid ""
+"Include URL parameters when accessing cache "
+"([#777](https://github.com/tweepy/tweepy/pull/777))"
+msgstr "캐시에 접근할 때 URL 매개변수가 포함 ([#777](https://github.com/tweepy/tweepy/pull/777))"
+
+#: ../../changelog.md:577
+msgid "Properly re-raise exceptions during streaming"
+msgstr "스트리밍에서 예외를 적절하게 재발생시킴 "
+
+#: ../../changelog.md:578
+msgid ""
+"Fix `AttributeError` and `TypeError` during streaming "
+"([#698](https://github.com/tweepy/tweepy/issues/698))"
+msgstr ""
+"스트리밍에서 `AttributeError` 와 `TypeError` 가 발생하는 문제 수정 "
+"([#698](https://github.com/tweepy/tweepy/issues/698))"
+
+#: ../../changelog.md:579
+msgid ""
+"Properly encode `filter_level` for `Stream.filter` "
+"([#782](https://github.com/tweepy/tweepy/issues/782))"
+msgstr ""
+"`Stream.filter` 의 `filter_level` 를 올바르게 인코딩함 "
+"([#782](https://github.com/tweepy/tweepy/issues/782))"
+
+#: ../../changelog.md:581
+msgid "Version 3.5.0"
+msgstr "버전 3.5.0"
+
+#: ../../changelog.md:583
+msgid "Features / Improvements"
+msgstr "기능 / 개선"
+
+#: ../../changelog.md:584
+msgid "Allow 'full_text' param when getting direct messages ( #664 )"
+msgstr "쪽지를 받을 때 'full_text' 매개변수를 허용함 (#664)"
+
+#: ../../changelog.md:585
+msgid "Explicitly return api code when parsing error ( #666 )"
+msgstr "파싱 에러가 발생했을 경우 명시적"
+
+#: ../../changelog.md:586
+msgid "Remove deprecated function and clean up codes ( #583 )"
+msgstr "더 이상 사용되지 않는 코드를 제거하고, 코드를 정리함 (#583)"
+
+#: ../../changelog.md:589
+msgid "update_status: first positional argument should be 'status' ( #578 )"
+msgstr "update_status: 첫 위치 인수(Positional argument)는 반드시 트윗(Status)여야 함 (#578)"
+
+#: ../../changelog.md:590
+msgid ""
+"Fix \"TypeError: Can't convert 'bytes' object to str implicitly\" ( #615 "
+"#658 #635 )"
+msgstr ""
+"다음 오류를 수정함: \"TypeError: Can't convert 'bytes' object to str "
+"implicitly\"(#615, #658, #635) "
+
+#: ../../changelog.md:591
+msgid "Fix duplicate raise in auth.py ( #667 )"
+msgstr "auth.py 에서의 중복 선언(raise)를 수정함 "
+
+#: ../../changelog.md:593
+msgid "Version 3.4.0"
+msgstr "버전 3.4.0 "
+
+#: ../../changelog.md:595
+msgid "New Features"
+msgstr "새 기능"
+
+#: ../../changelog.md:596
+msgid "Add API for account/settings (PR #596)"
+msgstr "추가함: 계정 및 설정 관련 API (PR #596) "
+
+#: ../../changelog.md:597
+msgid ""
+"Added RateLimitError for easily working with the rate limit. (Issue #600,"
+" PR #611) @obskyr"
+msgstr "트위터 API 요청 제한을 쉽게 처리할 수 있게끔 RateLimitError를 추가함 (문제 #600, PR #611) "
+
+#: ../../changelog.md:598
+msgid "Allow include_email param for verify_credentials API (PR #623)"
+msgstr "verify_credentials API에 include_email 매개변수를 허용함 (PR #623)"
+
+#: ../../changelog.md:599
+msgid ""
+"Added support for the \"filter_level\" parameter for the streaming API "
+"(PR #619)"
+msgstr "추가함: 스트리밍 API에서의 \"filter_level\" 매개변수 지원 (PR #619) "
+
+#: ../../changelog.md:602
+msgid "Streaming: don't decode stream bytes until json.decode (PR #606)"
+msgstr "스트리밍: 스트림 바이트를 json.decode 이전에 디코딩하려 시도하지 않음 (PR #606) "
+
+#: ../../changelog.md:603
+msgid "Typo fix on _add_list_members, _remove_list_members properties. (PR #593)"
+msgstr "_add_list_members 와 _remove_list_members 속성에 있던 오타를 수정함 (PR #593) "
+
+#: ../../changelog.md:604
+msgid "Fixes issue #570 - add \"exception\" when raising one"
+msgstr "문제 #570 수정 - 예외 발생 시의 \"exception\" 추가함"
+
+#: ../../changelog.md:605
+msgid "Change raise in streaming.py to raise exception (PR #621)"
+msgstr "streaming.py 에서의 예외 발생 관련 수정 (PR #621)"
+
+#: ../../changelog.md:607
+msgid "Version 3.3.0"
+msgstr "버전 3.3.0 "
+
+#: ../../changelog.md:609
+msgid "Loosen our dependency requirements for Requests (>= 2.4.3)"
+msgstr "Requests 요구사항을 완화함 (버전 2.4.3 이상)"
+
+#: ../../changelog.md:610
+msgid "Fix issue with streams freezing up on Python 3 (Issue #556)"
+msgstr "Python 3에서 스트림이 프리징되던 문제 수정 (문제 #556)"
+
+#: ../../changelog.md:611
+msgid ""
+"Add keep_alive() callback to StreamListener when keep alive messages "
+"arrive"
+msgstr "StreamListener에 추가함: keep_alive 메세지가 도착할 때 호출되는 keep_alive() 콜백 함수"
+
+#: ../../changelog.md:612
+msgid ""
+"Fix issue with stream session headers not being used when restarting "
+"connection"
+msgstr "재연결 시 스트림 세션 헤더가 사용되지 않던 문제 수정 "
+
+#: ../../changelog.md:613
+msgid ""
+"Fix issue with streams getting stuck in a loop when connection dies. (PR "
+"#561)"
+msgstr "연결이 비정상적으로 종료된 경우 스트림이 무한루프에 빠지던 문제를 수정함 (PR #561) "
+
+#: ../../changelog.md:615
+msgid "Version 3.2.0"
+msgstr "버전 3.2.0 "
+
+#: ../../changelog.md:617
+msgid "Remove deprecated trends methods."
+msgstr "제거함: 더 이상 사용되지 않는 트렌드 관련 메서드"
+
+#: ../../changelog.md:618
+msgid "Fix tweepy.debug() to work in Python 3."
+msgstr "tweepy.debug() 가 Python 3에서도 동작하도록 수정함 "
+
+#: ../../changelog.md:619
+msgid "Fixed issue #529 - StreamListener language filter stopped working."
+msgstr "StreamListener 언어 필터가 작동을 중지하는 문제를 수정함 (Issue #529)"
+
+#: ../../changelog.md:620
+msgid "Add Documentation Page for streaming."
+msgstr "추가함: 스트리밍 문서"
+
+#: ../../changelog.md:621
+msgid "Add media/upload endpoint."
+msgstr "추가함: 미디어 업로드 엔드포인트 "
+
+#: ../../changelog.md:622
+msgid "Add media_ids parameter to update_status()."
+msgstr "update_status() 에 추가함: media_ids 매개변수 "
+
+#: ../../changelog.md:624
+msgid "Version 3.1.0"
+msgstr "버전 3.1.0"
+
+#: ../../changelog.md:626
+msgid "Allow specifying your own ssl certificates for streaming client."
+msgstr "이제 스트리밍 클라이언트에 대한 자체 SSL 인증서 지정을 허용함 "
+
+#: ../../changelog.md:627
+msgid "Distribute Python Wheels instead of dumb binaries."
+msgstr "이제 Python Wheels를 이용해 배포함. "
+
+#: ../../changelog.md:628
+msgid ""
+"Fix cursor invocation, passing args to underlying method. "
+"(https://github.com/tweepy/tweepy/issues/515)"
+msgstr ""
+"특정 속성값을 기본 메서드(Underlying method)에 전달하는 것과 관련된 커서 호출 수정. "
+"(https://github.com/tweepy/tweepy/issues/515)"
+
+#: ../../changelog.md:629
+msgid "Upgrade to Request 2.4.3"
+msgstr "Request를 2.4.3으로 판올림함"
+
+#: ../../changelog.md:631
+msgid "Version 3.0"
+msgstr "버전 3.0 "
+
+#: ../../changelog.md:633
+msgid ""
+"Added multiple list members operation api methods (add_list_members, "
+"remove_list_members)."
+msgstr "추가함: 다수의 리스트 멤버 관련 API 메서드 (add_list_members, remove_list_members)."
+
+#: ../../changelog.md:634
+msgid "Added sitestream endpoint."
+msgstr "추가함: sitestream 엔드포인트 "
+
+#: ../../changelog.md:635
+msgid "Switch to using Requests instead of httplib."
+msgstr "httplib 대신 Requests를 이용하도록 변경함 "
+
+#: ../../changelog.md:636
+msgid "Fully removed support for non-secure HTTP."
+msgstr "제거함: 보안 연결이 아닌 HTTP에 대한 모든 지원"
+
+#: ../../changelog.md:637
+msgid "Proxy support."
+msgstr "이제 프록시를 지원함 "
+
+#: ../../changelog.md:638
+msgid "Add API method for /statuses/lookup.json"
+msgstr "/statuses/lookup.json 에 추가함: API 메서드"
+
+#: ../../changelog.md:639
+msgid "Add missing 'count' parameter to followers_ids"
+msgstr "followers_ids 에 추가함: 'count' 매개변수 "
+
+#: ../../changelog.md:640
+msgid "Added allowed_param to update_profile_image"
+msgstr "update_profile_image 에 추가함: allowed_param"
+
+#: ../../changelog.md:641
+msgid "Comparison between Status objects"
+msgstr "트윗(Status) 간 비교"
+
+#: ../../changelog.md:642
+msgid ""
+"Extend on_data method by including a conditional to process warning "
+"messages and add the definition of the method to manage those warning "
+"messages"
+msgstr "on_data 메서드에 경고 메세지 처리 조건을 포함·확장하였으며, 경고 메세지를 관리하는 메서드를 새로 정의함 "
+
+#: ../../changelog.md:643
+msgid "Better Python 3 support."
+msgstr "파이썬 3 지원 향상"
+
+#: ../../changelog.md:645
+msgid "Version 2.2"
+msgstr "버전 2.2"
+
+#: ../../changelog.md:647
+msgid "Added update_profile_banner endpoint."
+msgstr "추가함: update_profile_banner 엔드포인트"
+
+#: ../../changelog.md:648
+msgid "Don't treat HTTP status codes in 200 range as errors."
+msgstr "200번대 HTTP 상태 코드를 더 이상 에러로 취급하지 않음"
+
+#: ../../changelog.md:649
+msgid "Tests no longer packaged into egg releases."
+msgstr "더 이상 egg 릴리즈에 테스트가 패키징되지 않음"
+
+#: ../../changelog.md:650
+msgid "Improve test stability and enable CI testing on pull requests."
+msgstr "테스트 안정성 향상, 풀 리퀘스트에서 CI 테스트가 가능하도록 함"
+
+#: ../../changelog.md:651
+msgid "Removed Basic Auth."
+msgstr "제거함: 기본 인증(Basic Auth)"
+
+#: ../../changelog.md:652
+msgid "Use built-in timeout feature of httplib to fix appengine."
+msgstr "앱엔진(Appengine)을 수정하기 위해 httplib의 내장 타임아웃 기능 사용"
+
+#: ../../changelog.md:653
+msgid "Added retweeters() endpoint."
+msgstr "추가함: retweeters() 엔드포인트"
+
+#: ../../changelog.md:654
+msgid "Removed deprecated retweeted_by and retweeted_by_ids."
+msgstr "더 이상 사용되지 않는 retweeted_by 와 retweeted_by_ids 를 제거함"
+
+#: ../../changelog.md:655
+msgid "Improved datetime parsing. Should be more thread safe."
+msgstr "날짜 및 시간 파싱 기능 향상. 스레드에서 기존보다 더 안정적임"
+
+#: ../../changelog.md:656
+msgid "Enable coverage reporting. Upload reports to Coveralls."
+msgstr "코드 커버리지 보고 활성화됨. Coveralls에 보고서를 업로드 해주세요."
+
+#: ../../changelog.md:657
+msgid "https://coveralls.io/r/tweepy/tweepy"
+msgstr "https://coveralls.io/r/tweepy/tweepy"
+
+#: ../../changelog.md:658
+msgid "Removed deprecated test() endpoint."
+msgstr "더 이상 사용되지 않는 test() 엔드포인트가 제거함"
+
+#: ../../changelog.md:659
+msgid ""
+"New stream listeners callback on_disconnect(). Called whenever "
+"\"disconnect\" messages arrive from Twitter before connection is killed."
+msgstr ""
+"on_disconnect() 에 새 스트림 리스너를 추가함. 연결 종료 전에 트위터에서 \"disconnect\" 메세지가 도착할 "
+"때마다 호출됨."
+
+#: ../../changelog.md:661
+msgid ""
+"https://dev.twitter.com/docs/streaming-"
+"apis/messages#Disconnect_messages_disconnect"
+msgstr ""
+"https://dev.twitter.com/docs/streaming-"
+"apis/messages#Disconnect_messages_disconnect"
+
+#: ../../changelog.md:662
+msgid "[Compare View](https://github.com/tweepy/tweepy/compare/2.1...2.2)"
+msgstr "[비교 보기](https://github.com/tweepy/tweepy/compare/2.1...2.2)"
+
+#: ../../changelog.md:663
+msgid "Use HTTPS by default."
+msgstr "HTTPS를 기본으로 사용하게 설정함"
+
+#: ../../changelog.md:664
+msgid ""
+"Support setting the starting cursor postion (ex: Ex: "
+"Cursor(api.friends_ids, cursor=123456))"
+msgstr "커서 시작 위치 설정 지원 (예: Cursor(api.friends_ids, cursor=123456))"
+
+#: ../../changelog.md:666
+msgid ""
+"Added API.cached_result instance flag that is \"True\" when cached result"
+" is returned."
+msgstr "캐시된 결과가 반환될 때, \"True\"인 API.cached_result 인스턴스 플래그가 추가함"
+
+#: ../../changelog.md:667
+msgid "New Streaming client callbacks"
+msgstr "새 스트리밍 클라이언트 콜백이 추가함"
+
+#: ../../changelog.md:668
+msgid "on_event(status): called when new events arrive"
+msgstr "on_event(status): 새 이벤트가 발생하면 호출됨."
+
+#: ../../changelog.md:669
+msgid "on_direct_message(status): called when a new direct message arrives."
+msgstr "on_direct_message(status): 새 쪽지가 도착하면 호출됨."
+
+#: ../../changelog.md:671
+msgid ""
+"Improvements to streaming client re-connection behavior / configuration. "
+"(https://github.com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+msgstr ""
+"스트리밍 클리아언트 재연결 동작 및 구성의 개선 "
+"(https://github.com/tweepy/tweepy/commit/447f69cd3de67b0d241b9d4f669ecc9b9c0cdb54)"
+
+#: ../../changelog.md:675
+msgid "Version 2.1"
+msgstr "버전 2.1"
+
+#: ../../changelog.md:677
+msgid "Added get_oembed()."
+msgstr "추가함: get_oembed() "
+
+#: ../../changelog.md:678
+msgid "friends() and followers() are back and updated to v1.1."
+msgstr "friends() 와 followers() 가 다시 생겼으며, v1.1로 갱신됨"
+
+#: ../../changelog.md:679
+msgid "Fixed report_spam() endpoint."
+msgstr "report_spam() 엔드포인트 수정"
+
+#: ../../changelog.md:680
+msgid "Added \"languages\" parameter to streaming filter() method."
+msgstr "스트리밍 filter() 메서드에 \"languages\" 매개변수 추가."
+
+#: ../../changelog.md:681
+msgid "Added \"timeout\" support for API object. Ex: API(timeout=1000)."
+msgstr "API에 \"timeout\" 지원 추가. 예: API(timeout=1000)"
+
+#: ../../changelog.md:682
+msgid "Python 2.5 no longer supported."
+msgstr "파이썬 2.5 지원 중단"
+
+#: ../../changelog.md:683
+msgid "Added compression support. Ex: API(compression=True)."
+msgstr "압축 지원 추가. 예: API(compression=True)"
+
+#: ../../changelog.md:684
+msgid "Added on_connect() callback to StreamListener."
+msgstr "StreamListener에 on_connect() 콜백 추가"
+
+#: ../../changelog.md:685
+msgid "Switched API search() to v1.1 endpoint. Some breaking changes."
+msgstr "API의 search() v1.1의 엔드포인트로 전환. 이 외에도 다른 변화가 있었음."
+
+#: ../../changelog.md:686
+msgid "Drop \"page\" based cursors and use \"ID\" based ones instead."
+msgstr "\"page\"(페이지) 기반 커서를 \"ID\" 기반 커서로 대체함"
+
+#: ../../changelog.md:687
+msgid "[Compare View](https://github.com/tweepy/tweepy/compare/2.0...2.1)"
+msgstr "[비교 보기](https://github.com/tweepy/tweepy/compare/2.0...2.1)"
+
+#: ../../changelog.md:689
+msgid "Version 2.0"
+msgstr "버전 2.0"
+
+#: ../../changelog.md:691
+msgid "_Dedicated in memory of Aaron Swartz_"
+msgstr "_에런 스워츠(Aaron Swartz)를 추모하며_"
+
+#: ../../changelog.md:693
+msgid "Twitter API 1.1 support."
+msgstr "트위터 API 1.1 지원"
+
+#: ../../changelog.md:694
+msgid "Basic Authentication deprecated."
+msgstr "기본 인증방식(Basic Authentication)이 더 이상 사용되지 않음."
+
+#: ../../changelog.md:695
+msgid "friends_timeline() removed."
+msgstr "제거함: friends_timeline()"
+
+#: ../../changelog.md:696
+msgid "mentions() removed and replaced by mentions_timeline()."
+msgstr "mentions() 이 제거되고, mentions_timeline() 로 변경됨"
+
+#: ../../changelog.md:697 ../../changelog.md:700
+msgid "retweeted_by_user() removed."
+msgstr "제거함: retweeted_by_user()"
+
+#: ../../changelog.md:698
+msgid "retweeted_by_me() removed."
+msgstr "제거함: retweeted_by_me() "
+
+#: ../../changelog.md:699
+msgid "retweeted_to_me() removed."
+msgstr "제거함: retweeted_to_me()"
+
+#: ../../changelog.md:701
+msgid "friends() removed."
+msgstr "제거함: friends()"
+
+#: ../../changelog.md:702
+msgid "followers() removed."
+msgstr "제거함: followers()"
+
+#: ../../changelog.md:703
+msgid "enable_notifications() removed."
+msgstr "제거함: enable_notifications()"
+
+#: ../../changelog.md:704
+msgid "disable_notifications() removed."
+msgstr "제거함: disable_notifications()"
+
+#: ../../changelog.md:705
+msgid "exists_block() removed."
+msgstr "제거함: exists_block()"
+
+#: ../../changelog.md:706
+msgid "lists() removed and replaced by lists_all()."
+msgstr "lists() 가 제거되고, lists_all() 로 변경됨"
+
+#: ../../changelog.md:707
+msgid "is_list_member() removed."
+msgstr "제거함: is_list_member()"
+
+#: ../../changelog.md:708
+msgid "show_list_member added."
+msgstr "추가함: show_list_member"
+
+#: ../../changelog.md:709
+msgid "is_subscribed_list() removed."
+msgstr "제거함: is_subscribed_list()"
+
+#: ../../changelog.md:710
+msgid "show_list_subscriber() added."
+msgstr "추가함: show_list_subscriber()"
+
+#: ../../changelog.md:711
+msgid "trends_location() removed."
+msgstr "제거함: trends_location()"
+
+#: ../../changelog.md:712
+msgid "nearby_places() removed."
+msgstr "제거함: nearby_places("
+
+#~ msgid ""
+#~ "`Pagination` 문서 "
+#~ "([695d531](https://github.com/tweepy/tweepy/commit/695d531064277978d44f78387a3edb3d29fb6f25),"
+#~ " "
+#~ "[652fece](https://github.com/tweepy/tweepy/commit/652fece7f78f90ea11f206b4a045a2450db42cc9))"
+#~ msgstr ""
+
+#~ msgid "[디스코드 서버](https://discord.gg/bJvqnhg)"
+#~ msgstr ""
+

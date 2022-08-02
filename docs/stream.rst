@@ -2,10 +2,11 @@
 
 .. currentmodule:: tweepy
 
-*******************************************
-:class:`tweepy.Stream` --- Stream Reference
-*******************************************
+***************
+:class:`Stream`
+***************
 
 .. autoclass:: Stream
    :members:
+   :inherited-members:
    :member-order: bysource
