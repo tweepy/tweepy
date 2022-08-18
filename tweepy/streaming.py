@@ -642,8 +642,8 @@ class StreamingClient(BaseClient, BaseStream):
         add : list[StreamRule] | StreamRule
             Specifies the operation you want to perform on the rules.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
@@ -679,8 +679,8 @@ class StreamingClient(BaseClient, BaseStream):
             Array of rule IDs, each one representing a rule already active in
             your stream. IDs must be submitted as strings.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
