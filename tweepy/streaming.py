@@ -696,7 +696,7 @@ class StreamingClient(BaseClient, BaseStream):
             ids = (ids,)
         for id in ids:
             if isinstance(id, StreamRule):
-                json["delete"]["ids"].append(str(StreamRule.id))
+                json["delete"]["ids"].append(str(id.id))
             else:
                 json["delete"]["ids"].append(str(id))
 
