@@ -2569,12 +2569,18 @@ class AsyncClient(AsyncBaseClient):
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
         pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
         tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
@@ -2593,7 +2599,8 @@ class AsyncClient(AsyncBaseClient):
         return await self._make_request(
             "GET", f"/2/lists/{id}/tweets", params=params,
             endpoint_parameters=(
-                "expansions", "max_results", "pagination_token",
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
         )
