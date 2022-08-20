@@ -181,7 +181,7 @@ class BaseClient:
                     "%Y-%m-%dT%H:%M:%SZ"
                 )
                 # TODO: Constant datetime format string?
-            else:
+            elif param_value is not None:
                 request_params[param_name] = param_value
 
             if param_name not in endpoint_parameters:
