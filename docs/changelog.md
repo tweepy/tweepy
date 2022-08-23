@@ -3,6 +3,20 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.10.1
+--------------
+
+### Bug Fixes
+- Fix `AsyncBaseClient` rate limit handling ([#1902](https://github.com/tweepy/tweepy/pull/1902))
+- Fix handling of `StreamRule` when passed in list to `StreamingClient.delete_rules` or `AsyncStreamingClient.delete_rules` ([#1942](https://github.com/tweepy/tweepy/issues/1942))
+- Add support for `media_fields`, `place_fields`, and `poll_fields` parameters for `Client.get_list_tweets` and `AsyncClient.get_list_tweets` ([#1931](https://github.com/tweepy/tweepy/issues/1931))
+- Ignore `AsyncClient` method parameters explicitly passed as `None` ([#1944](https://github.com/tweepy/tweepy/issues/1944))
+
+### Misc
+- Log text of HTTP response when handling request error in `BaseStream` ([598ea64](https://github.com/tweepy/tweepy/commit/598ea64d68ab3c27861e0f6dcf9bbce864dc3748))
+- Update Requests documentation URL for Intersphinx linking ([2c7213d](https://github.com/tweepy/tweepy/commit/2c7213d71c8df9bddac00985d411750f1eb62a56))
+- Correct typo in documentation for `StreamingClient` and `AsyncStreamingClient` `add_rules` and `delete_rules` methods ([#1937](https://github.com/tweepy/tweepy/issues/1937))
+
 Version 4.10.0
 --------------
 
