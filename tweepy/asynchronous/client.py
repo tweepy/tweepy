@@ -777,6 +777,9 @@ class AsyncClient(AsyncBaseClient):
         ----------
         id : int | str
             Unique identifier of the Tweet to request.
+        exclude : list[str] | str | None
+            Comma-separated list of the types of Tweets to exclude from the
+            response.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
         max_results : int | None
@@ -816,7 +819,7 @@ class AsyncClient(AsyncBaseClient):
         return await self._make_request(
             "GET", f"/2/tweets/{id}/quote_tweets", params=params,
             endpoint_parameters=(
-                "expansions", "max_results", "media.fields",
+                "exclude", "expansions", "max_results", "media.fields",
                 "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
