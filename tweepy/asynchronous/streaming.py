@@ -81,6 +81,15 @@ class AsyncBaseStream:
                             await self.on_closed(resp)
                         else:
                             await self.on_request_error(resp.status)
+                            # The error text is logged here instead of in
+                            # on_request_error to keep on_request_error
+                            # backwards-compatible. In a future version, the
+                            # ClientResponse should be passed to
+                            # on_request_error.
+                            response_text = await resp.text()
+                            log.error(
+                                "HTTP error response text: %s", response_text
+                            )
 
                             error_count += 1
 
