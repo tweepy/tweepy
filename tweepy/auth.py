@@ -221,3 +221,15 @@ class OAuth2UserHandler(OAuth2Session):
             include_client_id=True,
             code_verifier=self._client.code_verifier
         )
+    
+    def refresh_token(self, refresh_token):
+        """Allows a user to refresh token
+        previously obtained from fetch_token
+        """
+        refresh_token_headers = {'client_id': self.client_id}
+        return super().refresh_token(
+           "https://api.twitter.com/2/oauth2/token",
+           refresh_token=refresh_token,
+           auth=self.auth,
+           **refresh_token_headers
+        )
