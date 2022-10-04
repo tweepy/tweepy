@@ -3417,7 +3417,7 @@ class API:
         """
         return self.request(
             'POST', 'direct_messages/indicate_typing', endpoint_parameters=(
-                'recipient_id'
+                'recipient_id',
             ), recipient_id=recipient_id, **kwargs
         )
 
