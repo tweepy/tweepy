@@ -61,7 +61,7 @@ class AsyncBaseStream:
         try:
             while error_count <= self.max_retries:
                 try:
-                    if oauth_client:
+                    if oauth_client is not None:
                         url, headers, body = oauth_client.sign(
                             url, http_method=method, headers=headers, body=body
                         )
