@@ -9,18 +9,21 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Python/3.9.1 Requests/2.25.1 Tweepy/3.10.0
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/tweets/1293593516040269825
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAFSOwU6DQBCGX2VcrwYKtA3lRlI11YtJ1V64LOwU1iy7ZJkFSdPE1/D1fBIX4sVk
-        ModvvvzzX5jgxFl2YVKwjEXxLtn4ibar9Sre7tJ4w+4Y4Sf544F+vr57OEvNlZqgQYs3ULh9mtz7
-        vV9HcOQzVsoA+WkQNI5w+zpKIrT5yyEodKFP6GMsgsXSSSWkrhf1zwKvwRDD2Zp24bU1Tgtw3ZxZ
-        4uL0aAcE4ywIHFCZzrPKtK3TkqYAcu+TEXxa+irudNWA7MFoX3vOLLGWWvvPS6GGqOuzMKSgMmES
-        v9uxe+RPI/zjz/zhWH6c3vKUXa+/AAAA//8DAF869jI2AQAA
+        H4sIAAAAAAAAAGyOzUrDQBSFX+U6bkvSpj+k2QWqUt0IVbswEiaZ22ZkOhMmdxJDKfgavp5P4iS4
+        EYTDXZzzce45M8GJs+TMUEjKK9mQsX1OHSLlUjQseWWzaD1fes1W08U0Wq3jaMneJkwKlvybTRjh
+        B/lwS9+fXw0cpOZK9VChxSvI3Cae3/i7WcxgxwdbKQPkVSFo7OD6qZNEaNPHbZDpTO/R11gEi4WT
+        Skh9HNFfCjwGbQQHa06jf7TGaQGuHjoLHJkGbYtgnAWBLSpTe680p5PTkvoAUs+TEbwf9yrudFmB
+        bMBoP3voLPAotfafx0EVUd0kYUhBacJ59GK7+o7fd/DHf+C3u+J9/5zG7HL5AQAA//8DABjCzJ5n
+        AQAA
     headers:
+      api-version:
+      - '2.52'
       cache-control:
       - no-cache, no-store, max-age=0
       content-disposition:
@@ -28,24 +31,30 @@ interactions:
       content-encoding:
       - gzip
       content-length:
-      - '264'
+      - '288'
       content-type:
       - application/json; charset=utf-8
       date:
-      - Tue, 13 Apr 2021 03:45:04 GMT
+      - Fri, 07 Oct 2022 22:43:17 UTC
+      perf:
+      - '7626143928'
       server:
       - tsa_b
       set-cookie:
-      - personalization_id="v1_CR3Pk00ylbnJA+U0ny6uGQ=="; Max-Age=63072000; Expires=Thu,
-        13 Apr 2023 03:45:04 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A161828550441263991; Max-Age=63072000; Expires=Thu, 13 Apr 2023
-        03:45:04 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A166518259767936709; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 22:43:17 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518259767936709; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 22:43:17 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_+va9nyvYVNvyBD0tqgy2qQ=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 22:43:17 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518259767936709; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        22:43:17 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - 93589af46001ea987bd7aa7363e12bb3
+      - 92a77929006ce21d643bb271815d8d8a2f76f1a9e661d89b6662dc31481c7be4
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -53,11 +62,13 @@ interactions:
       x-rate-limit-limit:
       - '300'
       x-rate-limit-remaining:
-      - '299'
+      - '298'
       x-rate-limit-reset:
-      - '1618286404'
+      - '1665183228'
       x-response-time:
-      - '50'
+      - '49'
+      x-transaction-id:
+      - 966424516862f637
       x-xss-protection:
       - '0'
     status:

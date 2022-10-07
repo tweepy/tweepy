@@ -3,73 +3,76 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/tweets/1293593516040269825/quote_tweets
   response:
     body:
-      string: "{\"data\":[{\"id\":\"1458146351036841988\",\"text\":\"RT @TwitterAPI:\
-        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
-        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"id\"\
-        :\"1457665167639007235\",\"text\":\"Can you share some screenshots worth of\
-        \ 888885.4k+ upvotes?\\n#cheerupraja00710 \\n#100DaysOfCode #javascript  \
-        \ #Python, #flutter \\nhttps://t.co/6z0cfF1ARu\"},{\"id\":\"1456942863447588871\"\
-        ,\"text\":\"RT @TwitterAPI: Twitter API v2: Early Access released\\n\\nToday\
-        \ we announced Early Access to the first endpoints of the new Twitter API!\\\
-        n\\n#Twi\u2026\"},{\"id\":\"1453474504928280580\",\"text\":\"We ask the Twitter\
-        \ administration to support the account of Mr. Hussein Al-Ezzi, after activists\
-        \ hacked the account\\n\\n Hope for a quick reply\\n They made it clear that\
-        \ brother Hussein Al-Ezzi did not violate the human rights conditions and\
-        \ standards on Twitter\\n@hussinalezzi5 https://t.co/5X3p8MkMJM https://t.co/uxy1CNOlOG\"\
-        },{\"id\":\"1452401301044797451\",\"text\":\"RT @TwitterAPI: Twitter API v2:\
-        \ Early Access released\\n\\nToday we announced Early Access to the first\
-        \ endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"id\":\"1452329441200386056\"\
-        ,\"text\":\"RT @TwitterAPI: Twitter API v2: Early Access released\\n\\nToday\
-        \ we announced Early Access to the first endpoints of the new Twitter API!\\\
-        n\\n#Twi\u2026\"},{\"id\":\"1451925842486079488\",\"text\":\"RT @TwitterAPI:\
-        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
-        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"id\"\
-        :\"1450521278658482182\",\"text\":\"RT @TwitterAPI: Twitter API v2: Early\
+      string: "{\"data\":[{\"edit_history_tweet_ids\":[\"1458146351036841988\"],\"\
+        id\":\"1458146351036841988\",\"text\":\"RT @TwitterAPI: Twitter API v2: Early\
         \ Access released\\n\\nToday we announced Early Access to the first endpoints\
-        \ of the new Twitter API!\\n\\n#Twi\u2026\"},{\"id\":\"1449081128837603330\"\
-        ,\"text\":\"RT @TwitterAPI: Twitter API v2: Early Access released\\n\\nToday\
-        \ we announced Early Access to the first endpoints of the new Twitter API!\\\
-        n\\n#Twi\u2026\"},{\"id\":\"1447635166986375173\",\"text\":\"RT @TwitterAPI:\
+        \ of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\":[\"\
+        1456942863447588871\"],\"id\":\"1456942863447588871\",\"text\":\"RT @TwitterAPI:\
         \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
-        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"}],\"meta\"\
-        :{\"result_count\":10,\"next_token\":\"azxzu6t3auit\"}}"
+        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1453474504928280580\"],\"id\":\"1453474504928280580\",\"text\":\"We ask\
+        \ the Twitter administration to support the account of Mr. Hussein Al-Ezzi,\
+        \ after activists hacked the account\\n\\n Hope for a quick reply\\n They\
+        \ made it clear that brother Hussein Al-Ezzi did not violate the human rights\
+        \ conditions and standards on Twitter\\n@hussinalezzi5 https://t.co/5X3p8MkMJM\
+        \ https://t.co/uxy1CNOlOG\"},{\"edit_history_tweet_ids\":[\"1452401301044797451\"\
+        ],\"id\":\"1452401301044797451\",\"text\":\"RT @TwitterAPI: Twitter API v2:\
+        \ Early Access released\\n\\nToday we announced Early Access to the first\
+        \ endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1452329441200386056\"],\"id\":\"1452329441200386056\",\"text\":\"RT @TwitterAPI:\
+        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
+        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1451925842486079488\"],\"id\":\"1451925842486079488\",\"text\":\"RT @TwitterAPI:\
+        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
+        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1450521278658482182\"],\"id\":\"1450521278658482182\",\"text\":\"RT @TwitterAPI:\
+        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
+        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1447635166986375173\"],\"id\":\"1447635166986375173\",\"text\":\"RT @TwitterAPI:\
+        \ Twitter API v2: Early Access released\\n\\nToday we announced Early Access\
+        \ to the first endpoints of the new Twitter API!\\n\\n#Twi\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1447395402676793345\"],\"id\":\"1447395402676793345\",\"text\":\"Hello\
+        \ #Twitter https://t.co/1GPaAuDXKi\"}],\"meta\":{\"result_count\":9,\"next_token\"\
+        :\"ayf96h94ritk\"}}"
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
-      - '649'
-      content-type:
+      Content-Length:
+      - '612'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 12:56:27 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:07:40 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165192818703462878; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165192818703462878; Max-Age=63072000; Expires=Mon, 06 May
-        2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_eq3/aA2PFceD0Lxdsj935g=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165192818703462878; Max-Age=63072000; Expires=Mon, 06 May 2024
-        12:56:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518406042102303; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518406042102303; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:07:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_L5KgW6awY5JpqPgP2bjhKw=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518406042102303; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:07:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - 49167ff567fea5cccdb26883976813160a77cb1158867714393d89a5be2e1634
+      - aca9cb1c393a6ad8a97581e250e9edd76148c31498e2b59c089f00f01012635a
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -79,9 +82,11 @@ interactions:
       x-rate-limit-remaining:
       - '74'
       x-rate-limit-reset:
-      - '1651929087'
+      - '1665184960'
       x-response-time:
-      - '243'
+      - '212'
+      x-transaction-id:
+      - 258fdbdc0ca77297
       x-xss-protection:
       - '0'
     status:

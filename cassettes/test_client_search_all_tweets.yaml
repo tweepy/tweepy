@@ -9,30 +9,25 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Python/3.9.6 Requests/2.25.1 Tweepy/4.0.0
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/tweets/search/all?query=Tweepy
   response:
     body:
       string: !!binary |
-        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
+        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
+        //8DAFYKUGrNBQAA
     headers:
       api-version:
-      - '2.26'
+      - '2.52'
       cache-control:
       - no-cache, no-store, max-age=0
       content-disposition:
@@ -40,24 +35,30 @@ interactions:
       content-encoding:
       - gzip
       content-length:
-      - '852'
+      - '525'
       content-type:
       - application/json; charset=utf-8
       date:
-      - Mon, 27 Sep 2021 18:57:19 UTC
+      - Fri, 07 Oct 2022 22:58:40 UTC
+      perf:
+      - '7626143928'
       server:
       - tsa_b
       set-cookie:
-      - personalization_id="v1_HaYYbvDpDvrRw2jiTveNeA=="; Max-Age=63072000; Expires=Wed,
-        27 Sep 2023 18:57:19 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A163276903968066747; Max-Age=63072000; Expires=Wed, 27 Sep 2023
-        18:57:19 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A166518352022386426; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 22:58:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518352022386426; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 22:58:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_8PlILzXfhbb14qsGruJUoQ=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 22:58:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518352022386426; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        22:58:40 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - 857873a789534016c9be98135203dd85deb56a6eb9a054d49f5080583ed9bbf3
+      - 1cbada9b8f7a15fbabe3cdb34767cac165d21e4ffc42109fd348969cfd02e61a
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -65,9 +66,13 @@ interactions:
       x-rate-limit-limit:
       - '300'
       x-rate-limit-remaining:
-      - '296'
+      - '297'
       x-rate-limit-reset:
-      - '1632769337'
+      - '1665183997'
+      x-response-time:
+      - '95'
+      x-transaction-id:
+      - 9eb652581560b4bd
       x-xss-protection:
       - '0'
     status:
