@@ -34,6 +34,7 @@ class Tweet(HashableID, DataMapping):
     text : str
         The actual UTF-8 text of the Tweet. See `twitter-text`_ for details on
         what characters are currently considered valid.
+    edit_history_tweet_ids : list[int]
     attachments : dict | None
         Specifies the type of attachments (if any) present in this Tweet.
     author_id : int | None
@@ -45,6 +46,7 @@ class Tweet(HashableID, DataMapping):
         direct replies, replies of replies).
     created_at : datetime.datetime | None
         Creation time of the Tweet.
+    edit_controls : dict | None
     entities : dict | None
         Entities which have been parsed out of the text of the Tweet.
         Additionally see entities in Twitter Objects.
@@ -100,18 +102,21 @@ class Tweet(HashableID, DataMapping):
     """
 
     __slots__ = (
-        "data", "id", "text", "attachments", "author_id",
-        "context_annotations", "conversation_id", "created_at", "entities",
-        "geo", "in_reply_to_user_id", "lang", "non_public_metrics",
-        "organic_metrics", "possibly_sensitive", "promoted_metrics",
-        "public_metrics", "referenced_tweets", "reply_settings", "source",
-        "withheld"
+        "data", "id", "text", "edit_history_tweet_ids", "attachments",
+        "author_id", "context_annotations", "conversation_id", "created_at",
+        "edit_controls", "entities", "geo", "in_reply_to_user_id", "lang",
+        "non_public_metrics", "organic_metrics", "possibly_sensitive",
+        "promoted_metrics", "public_metrics", "referenced_tweets",
+        "reply_settings", "source", "withheld"
     )
 
     def __init__(self, data):
         self.data = data
         self.id = int(data["id"])
         self.text = data["text"]
+        self.edit_history_tweet_ids = list(
+            map(int, data["edit_history_tweet_ids"])
+        )
 
         self.attachments = data.get("attachments")
 
@@ -128,6 +133,15 @@ class Tweet(HashableID, DataMapping):
         self.created_at = data.get("created_at")
         if self.created_at is not None:
             self.created_at = parse_datetime(self.created_at)
+
+        self.edit_controls = data.get("edit_controls")
+        if self.edit_controls is not None:
+            self.edit_controls["edits_remaining"] = int(
+                self.edit_controls["edits_remaining"]
+            )
+            self.edit_controls["editable_until"] = parse_datetime(
+                self.edit_controls["editable_until"]
+            )
 
         self.entities = data.get("entities")
         self.geo = data.get("geo")
