@@ -2556,7 +2556,8 @@ class AsyncClient(AsyncBaseClient):
 
     async def get_list_tweets(self, id, *, user_auth=False, **params):
         """get_list_tweets( \
-            id, *, expansions=None, max_results=None, pagination_token=None, \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
         )
 
