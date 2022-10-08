@@ -213,8 +213,8 @@ Version 4.1.0 (2021-10-07)
 - Add `Client.get_muted` ([00cdab8](https://github.com/tweepy/tweepy/commit/00cdab8a86b98c6b02636fd511700fc73653e006))
 - Minor documentation corrections
 
-Version 4.0. (2021-10-01)
--------------------------
+Version 4.0.1 (2021-10-01)
+--------------------------
 ### Bug Fixes
 - Fix handling of strings passed as fields parameters for `Client` methods ([d61a5d9](https://github.com/tweepy/tweepy/commit/d61a5d9f52a9d9ee3f40d23515d6ffd1f2a02e14))
 - Include unexpected parameters passed to `Client` methods in Twitter API request ([618d1c2](https://github.com/tweepy/tweepy/commit/618d1c25c7743443686f27006f558f4d78972da3))
