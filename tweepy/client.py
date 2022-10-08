@@ -2769,6 +2769,10 @@ class Client(BaseClient):
 
         .. versionadded:: 4.4
 
+        .. versionchanged:: 4.10.1
+            Added ``media_fields``, ``place_fields``, and ``poll_fields``
+            parameters
+
         Parameters
         ----------
         id : list[str] | str

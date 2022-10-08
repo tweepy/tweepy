@@ -2563,6 +2563,10 @@ class AsyncClient(AsyncBaseClient):
 
         Returns a list of Tweets from the specified List.
 
+        .. versionchanged:: 4.10.1
+            Added ``media_fields``, ``place_fields``, and ``poll_fields``
+            parameters
+
         Parameters
         ----------
         id : list[str] | str
