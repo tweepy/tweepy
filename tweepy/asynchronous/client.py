@@ -774,6 +774,9 @@ class AsyncClient(AsyncBaseClient):
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
 
+        .. versionchanged:: 4.11
+            Added ``exclude`` parameter
+
         Parameters
         ----------
         id : int | str

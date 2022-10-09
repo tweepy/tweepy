@@ -842,6 +842,9 @@ class Client(BaseClient):
 
         .. versionadded:: 4.7
 
+        .. versionchanged:: 4.11
+            Added ``exclude`` parameter
+
         Parameters
         ----------
         id : int | str
