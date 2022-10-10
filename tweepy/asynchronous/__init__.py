@@ -21,3 +21,4 @@ except ModuleNotFoundError:
 
 from tweepy.asynchronous.streaming import AsyncStream, AsyncStreamingClient
 from tweepy.asynchronous.client import AsyncClient
+from tweepy.asynchronous.pagination import AsyncPaginator

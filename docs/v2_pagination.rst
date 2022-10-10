@@ -24,3 +24,6 @@ Pagination
     for tweet in tweepy.Paginator(client.search_recent_tweets, "Tweepy",
                                     max_results=100).flatten(limit=250):
         print(tweet.id)
+
+.. autoclass:: tweepy.asynchronous.AsyncPaginator
+    :members:
