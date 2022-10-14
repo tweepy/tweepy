@@ -97,8 +97,14 @@ class PaginationIterator:
 
         response = self.method(*self.args, **self.kwargs)
 
-        self.previous_token = response.meta.get("previous_token")
-        self.next_token = response.meta.get("next_token")
+        if isinstance(response, Response):
+            response = response.json()
+            self.previous_token = response['meta'].get("previous_token")
+            self.next_token = response['meta'].get("next_token")
+        else:
+            self.previous_token = response.meta.get("previous_token")
+            self.next_token = response.meta.get("next_token")
+
         self.count += 1
 
         return response
