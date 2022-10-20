@@ -19,6 +19,6 @@ except ModuleNotFoundError:
         "installed"
     )
 
-from tweepy.asynchronous.streaming import AsyncStream, AsyncStreamingClient
 from tweepy.asynchronous.client import AsyncClient
 from tweepy.asynchronous.pagination import AsyncPaginator
+from tweepy.asynchronous.streaming import AsyncStream, AsyncStreamingClient
