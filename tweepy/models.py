@@ -186,41 +186,31 @@ class List(Model):
         return results
 
     def update(self, **kwargs):
-        return self._api.update_list(slug=self.slug, **kwargs)
+        return self._api.update_list(list_id=self.id, **kwargs)
 
     def destroy(self):
-        return self._api.destroy_list(slug=self.slug)
+        return self._api.destroy_list(list_id=self.id)
 
     def timeline(self, **kwargs):
-        return self._api.list_timeline(
-            owner_screen_name=self.user.screen_name, slug=self.slug, **kwargs
-        )
+        return self._api.list_timeline(list_id=self.id, **kwargs)
 
     def add_member(self, id):
-        return self._api.add_list_member(slug=self.slug, user_id=id)
+        return self._api.add_list_member(list_id=self.id, user_id=id)
 
     def remove_member(self, id):
-        return self._api.remove_list_member(slug=self.slug, user_id=id)
+        return self._api.remove_list_member(list_id=self.id, user_id=id)
 
     def members(self, **kwargs):
-        return self._api.get_list_members(
-            owner_screen_name=self.user.screen_name, slug=self.slug, **kwargs
-        )
+        return self._api.get_list_members(list_id=self.id, **kwargs)
 
     def subscribe(self):
-        return self._api.subscribe_list(
-            owner_screen_name=self.user.screen_name, slug=self.slug
-        )
+        return self._api.subscribe_list(list_id=self.id)
 
     def unsubscribe(self):
-        return self._api.unsubscribe_list(
-            owner_screen_name=self.user.screen_name, slug=self.slug
-        )
+        return self._api.unsubscribe_list(list_id=self.id)
 
     def subscribers(self, **kwargs):
-        return self._api.get_list_subscribers(
-            owner_screen_name=self.user.screen_name, slug=self.slug, **kwargs
-        )
+        return self._api.get_list_subscribers(list_id=self.id, **kwargs)
 
 
 class Media(Model):
