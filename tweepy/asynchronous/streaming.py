@@ -50,7 +50,7 @@ class AsyncBaseStream:
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
-        http_420_error_wait_start = 60
+        http_429_error_wait_start = 60
 
         if self.session is None or self.session.closed:
             self.session = aiohttp.ClientSession(
@@ -98,9 +98,9 @@ class AsyncBaseStream:
 
                             error_count += 1
 
-                            if resp.status == 420:
-                                if http_error_wait < http_420_error_wait_start:
-                                    http_error_wait = http_420_error_wait_start
+                            if resp.status in (420, 429):
+                                if http_error_wait < http_429_error_wait_start:
+                                    http_error_wait = http_429_error_wait_start
 
                             await asyncio.sleep(http_error_wait)
 

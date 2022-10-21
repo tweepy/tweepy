@@ -63,7 +63,7 @@ class BaseStream:
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
-        http_420_error_wait_start = 60
+        http_429_error_wait_start = 60
 
         self.session.headers["User-Agent"] = self.user_agent
 
@@ -110,9 +110,9 @@ class BaseStream:
 
                             error_count += 1
 
-                            if resp.status_code == 420:
-                                if http_error_wait < http_420_error_wait_start:
-                                    http_error_wait = http_420_error_wait_start
+                            if resp.status_code in (420, 429):
+                                if http_error_wait < http_429_error_wait_start:
+                                    http_error_wait = http_429_error_wait_start
 
                             sleep(http_error_wait)
 
