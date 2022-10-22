@@ -39,13 +39,12 @@ class AsyncBaseStream:
 
     async def _connect(
         self, method, url, params=None, headers=None, body=None,
-        oauth_client=None
+        oauth_client=None, timeout=20
     ):
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         # https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/handling-disconnections
         # https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/integrate/handling-disconnections
-        stall_timeout = 90
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
@@ -54,7 +53,7 @@ class AsyncBaseStream:
 
         if self.session is None or self.session.closed:
             self.session = aiohttp.ClientSession(
-                timeout=aiohttp.ClientTimeout(sock_read=stall_timeout)
+                timeout=aiohttp.ClientTimeout(sock_read=timeout)
             )
         self.session.headers["User-Agent"] = self.user_agent
 
@@ -258,7 +257,8 @@ class AsyncStream(AsyncBaseStream):
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
         url = str(URL(url).with_query(sorted(params.items())))
         await super()._connect(
-            method, url, headers=headers, body=body, oauth_client=oauth_client
+            method, url, headers=headers, body=body, oauth_client=oauth_client,
+            timeout=90
         )
 
     def filter(self, *, follow=None, track=None, locations=None,

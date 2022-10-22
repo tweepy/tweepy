@@ -50,15 +50,16 @@ class BaseStream:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    def _connect(self, method, url, auth=None, params=None, headers=None,
-                 body=None):
+    def _connect(
+        self, method, url, auth=None, params=None, headers=None, body=None,
+        timeout=20
+    ):
         self.running = True
 
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         # https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/handling-disconnections
         # https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/integrate/handling-disconnections
-        stall_timeout = 90
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
@@ -72,7 +73,7 @@ class BaseStream:
                 try:
                     with self.session.request(
                         method, url, params=params, headers=headers, data=body,
-                        timeout=stall_timeout, stream=True, auth=auth,
+                        timeout=timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
                         if resp.status_code == 200:
@@ -276,7 +277,7 @@ class Stream(BaseStream):
         auth = OAuth1(self.consumer_key, self.consumer_secret,
                       self.access_token, self.access_token_secret)
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
-        super()._connect(method, url, auth=auth, **kwargs)
+        super()._connect(method, url, auth=auth, timeout=90, **kwargs)
 
     def filter(self, *, follow=None, track=None, locations=None,
                filter_level=None, languages=None, stall_warnings=False,
