@@ -563,7 +563,9 @@ class StreamingClient(BaseClient, BaseStream):
     return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
-        Whether to wait when rate limit is reached
+        Whether or not to wait before retrying when a rate limit is
+        encountered. This applies to requests besides those that connect to a
+        stream (see ``max_retries``).
     chunk_size : int
         The default socket.read size. Default to 512, less than half the size
         of a Tweet so that it reads Tweets with the minimal latency of 2 reads
