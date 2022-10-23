@@ -4,12 +4,22 @@
 
 from math import inf
 
+import requests
+
+from tweepy.client import Response
+
 
 class AsyncPaginator:
     """:class:`AsyncPaginator` can be used to paginate for any
     :class:`AsyncClient` methods that support pagination
 
     .. versionadded:: 4.11
+
+    .. note::
+
+        When passing ``return_type=requests.Response`` to :class:`Client` for
+        pagination, payload of response will be deserialized implicitly to get
+        ``meta`` attribute every requests, which may affect performance.
 
     Parameters
     ----------
@@ -58,10 +68,8 @@ class AsyncPaginator:
 
 
 class AsyncPaginationIterator:
-
     def __init__(
-        self, method, *args, limit=inf, pagination_token=None, reverse=False,
-        **kwargs
+        self, method, *args, limit=inf, pagination_token=None, reverse=False, **kwargs
     ):
         self.method = method
         self.args = args
@@ -92,8 +100,9 @@ class AsyncPaginationIterator:
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
-            "search_all_tweets", "search_recent_tweets",
-            "get_all_tweets_count"
+            "search_all_tweets",
+            "search_recent_tweets",
+            "get_all_tweets_count",
         ):
             self.kwargs["next_token"] = pagination_token
         else:
@@ -101,8 +110,19 @@ class AsyncPaginationIterator:
 
         response = await self.method(*self.args, **self.kwargs)
 
-        self.previous_token = response.meta.get("previous_token")
-        self.next_token = response.meta.get("next_token")
+        if isinstance(response, Response):
+            meta = response.meta
+        elif isinstance(response, dict):
+            meta = response.get("meta", {})
+        elif isinstance(response, requests.Response):
+            meta = response.json().get("meta", {})
+        else:
+            raise NotImplementedError(
+                f"Unknown {type(response)} return type for {self.method}"
+            )
+
+        self.previous_token = meta.get("previous_token")
+        self.next_token = meta.get("next_token")
         self.count += 1
 
         return response

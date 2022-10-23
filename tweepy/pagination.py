@@ -2,7 +2,6 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
-from typing import Union
 from math import inf
 
 import requests
@@ -15,6 +14,12 @@ class Paginator:
     methods that support pagination
 
     .. versionadded:: 4.0
+
+    .. note::
+
+        When passing ``return_type=requests.Response`` to :class:`Client` for
+        pagination, payload of response will be deserialized implicitly to get
+        ``meta`` attribute every requests, which may affect performance.
 
     Parameters
     ----------
@@ -35,8 +40,7 @@ class Paginator:
         return PaginationIterator(self.method, *self.args, **self.kwargs)
 
     def __reversed__(self):
-        return PaginationIterator(self.method, *self.args, reverse=True,
-                                  **self.kwargs)
+        return PaginationIterator(self.method, *self.args, reverse=True, **self.kwargs)
 
     def flatten(self, limit=inf):
         """Flatten paginated data
@@ -50,8 +54,7 @@ class Paginator:
             return
 
         count = 0
-        for response in PaginationIterator(self.method, *self.args,
-                                           **self.kwargs):
+        for response in PaginationIterator(self.method, *self.args, **self.kwargs):
             if response.data is not None:
                 for data in response.data:
                     yield data
@@ -61,9 +64,9 @@ class Paginator:
 
 
 class PaginationIterator:
-
-    def __init__(self, method, *args, limit=inf, pagination_token=None,
-                 reverse=False, **kwargs):
+    def __init__(
+        self, method, *args, limit=inf, pagination_token=None, reverse=False, **kwargs
+    ):
         self.method = method
         self.args = args
         self.limit = limit
@@ -82,7 +85,7 @@ class PaginationIterator:
     def __iter__(self):
         return self
 
-    def __next__(self) -> Union[Response, dict, requests.Response]:
+    def __next__(self):
         if self.reverse:
             pagination_token = self.previous_token
         else:
@@ -93,8 +96,9 @@ class PaginationIterator:
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
-            "search_all_tweets", "search_recent_tweets",
-            "get_all_tweets_count"
+            "search_all_tweets",
+            "search_recent_tweets",
+            "get_all_tweets_count",
         ):
             self.kwargs["next_token"] = pagination_token
         else:
@@ -109,7 +113,9 @@ class PaginationIterator:
         elif isinstance(response, requests.Response):
             meta = response.json().get("meta", {})
         else:
-            raise NotImplementedError("Unknown `response` type to parse `meta` field")
+            raise NotImplementedError(
+                f"Unknown {type(response)} return type for {self.method}"
+            )
 
         self.previous_token = meta.get("previous_token")
         self.next_token = meta.get("next_token")
