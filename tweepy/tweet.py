@@ -25,6 +25,9 @@ class Tweet(HashableID, DataMapping):
 
     .. versionadded:: 4.0
 
+    .. versionchanged:: 4.11
+        Added ``edit_history_tweet_ids`` and ``edit_controls`` fields
+
     Attributes
     ----------
     data : dict
