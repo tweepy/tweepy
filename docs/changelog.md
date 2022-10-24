@@ -3,6 +3,34 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.11.0 (2022-10-24)
+---------------------------
+
+### New Features / Improvements
+- Add support for retrieving edited Tweet metadata
+  - Add support for `include_ext_edit_control` parameter for `API` methods ([e122f35](https://github.com/tweepy/tweepy/commit/e122f351a0b9a0e461a5c13ba0a94a47bd8a446e), [e736770](https://github.com/tweepy/tweepy/commit/e736770b038e7c08d2ec37ac4827d5e03475bc7c))
+  - Add support for `edit_history_tweet_ids` and `edit_controls` `Tweet` fields ([#1979](https://github.com/tweepy/tweepy/issues/1979), [a1c104f](https://github.com/tweepy/tweepy/commit/a1c104f2f9fa46371ae585b3603b761b91904612))
+- Add `asynchronous.AsyncPaginator` for pagination for `AsyncClient` ([33e444a](https://github.com/tweepy/tweepy/commit/33e444a9d13d53ea024ddb3c9da30158a39ea4f6))
+- Add support for `exclude` parameter for `get_quote_tweets` ([4f28bd8](https://github.com/tweepy/tweepy/commit/4f28bd85d85adf0fb735a3e24b45e7804c534aa7), [17e02b7](https://github.com/tweepy/tweepy/commit/17e02b78b9b4c5e6bf2d94e658e9d9790cd4c9a9), [48ebdb7](https://github.com/tweepy/tweepy/commit/48ebdb7face9188a352bfa82c616b20c6de12475))
+
+### Bug Fixes
+- Handle 429 HTTP errors for streaming ([#1982](https://github.com/tweepy/tweepy/issues/1982), [#1986](https://github.com/tweepy/tweepy/issues/1986))
+- Lower API v2 streaming timeout to 20 seconds ([#1986](https://github.com/tweepy/tweepy/issues/1986))
+- Regenerate Authorization header prior to any reconnection requests for `AsyncStream` ([29bbb7b](https://github.com/tweepy/tweepy/commit/29bbb7be378fef8347858c9825f0b48e2c380c90), [a4c6325](https://github.com/tweepy/tweepy/commit/a4c632530e6783a6a899947c7ec32d78b55fc3c6), [5ade386](https://github.com/tweepy/tweepy/commit/5ade386f0c700c6ddf785bd991851acea9b848a8))
+- Use tuple for `endpoint_parameters` argument in `API.indicate_direct_message_typing` ([396ab84](https://github.com/tweepy/tweepy/commit/396ab841b73771ef6f91088fb8937a252560cf34))
+- Update `models.List` methods to pass keyword arguments to `API` methods ([#1987](https://github.com/tweepy/tweepy/issues/1987))
+- Update `models.List` methods to use list ID instead of slug ([73f6308](https://github.com/tweepy/tweepy/commit/73f630804a8e49d666e96b85c8d8f0780cb1ff91))
+
+### Misc
+- Log text of HTTP response when handling request error in `AsyncBaseStream` ([51c3762](https://github.com/tweepy/tweepy/commit/51c37626b76b40693cc033fec7c71d56090f7135))
+- Update signature for `get_list_tweets` in documentation ([86577b1](https://github.com/tweepy/tweepy/commit/86577b1b0cbc0d8f89cf1ff33112741d48071cbb))
+  - Add `media_fields`, `place_fields`, and `poll_fields` parameters
+- Add version changed directive to documentation for `get_list_tweets` ([5cb2616](https://github.com/tweepy/tweepy/commit/5cb26164473b4527eccd7e05efbf903abccc1f3b))
+- Improve documentation for `wait_on_rate_limit` parameter for streaming ([#1986](https://github.com/tweepy/tweepy/issues/1986))
+- Add release dates to changelog ([f665ce6](https://github.com/tweepy/tweepy/commit/f665ce63c3a87dfa6ee1e3008f01c765d4a0a397), [eafa665](https://github.com/tweepy/tweepy/commit/eafa66595490f95175c89ee58eaa79d86133aaf4), [3f0cc76](https://github.com/tweepy/tweepy/commit/3f0cc760ac7e9dd9125c0f9fc63b20119e6d17e4))
+- Add sections for old and previously missing versions to changelog ([6aa1b77](https://github.com/tweepy/tweepy/commit/6aa1b77a7b0adb48982979c2bc98fe98563d6696))
+- Update cassettes for testing methods that return Tweet objects ([872b33e](https://github.com/tweepy/tweepy/commit/872b33ec59127dd91db291f27c61a3860eab8fac))
+
 Version 4.10.1 (2022-08-22)
 ---------------------------
 
