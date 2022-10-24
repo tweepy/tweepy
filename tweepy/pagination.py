@@ -17,9 +17,10 @@ class Paginator:
 
     .. note::
 
-        When passing ``return_type=requests.Response`` to :class:`Client` for
-        pagination, payload of response will be deserialized implicitly to get
-        ``meta`` attribute every requests, which may affect performance.
+        When the returned response from the method being passed is of type
+        :class:`requests.Response`, it will be deserialized in order to parse
+        the pagination tokens, likely negating any potential performance
+        benefits from using a :class:`requests.Response` return type.
 
     Parameters
     ----------
@@ -40,7 +41,8 @@ class Paginator:
         return PaginationIterator(self.method, *self.args, **self.kwargs)
 
     def __reversed__(self):
-        return PaginationIterator(self.method, *self.args, reverse=True, **self.kwargs)
+        return PaginationIterator(self.method, *self.args, reverse=True,
+                                  **self.kwargs)
 
     def flatten(self, limit=inf):
         """Flatten paginated data
@@ -54,7 +56,8 @@ class Paginator:
             return
 
         count = 0
-        for response in PaginationIterator(self.method, *self.args, **self.kwargs):
+        for response in PaginationIterator(self.method, *self.args,
+                                           **self.kwargs):
             if response.data is not None:
                 for data in response.data:
                     yield data
@@ -64,9 +67,9 @@ class Paginator:
 
 
 class PaginationIterator:
-    def __init__(
-        self, method, *args, limit=inf, pagination_token=None, reverse=False, **kwargs
-    ):
+
+    def __init__(self, method, *args, limit=inf, pagination_token=None,
+                 reverse=False, **kwargs):
         self.method = method
         self.args = args
         self.limit = limit
@@ -96,9 +99,8 @@ class PaginationIterator:
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
-            "search_all_tweets",
-            "search_recent_tweets",
-            "get_all_tweets_count",
+            "search_all_tweets", "search_recent_tweets",
+            "get_all_tweets_count"
         ):
             self.kwargs["next_token"] = pagination_token
         else:

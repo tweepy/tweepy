@@ -4,7 +4,7 @@
 
 from math import inf
 
-import requests
+import aiohttp
 
 from tweepy.client import Response
 
@@ -17,9 +17,10 @@ class AsyncPaginator:
 
     .. note::
 
-        When passing ``return_type=requests.Response`` to :class:`Client` for
-        pagination, payload of response will be deserialized implicitly to get
-        ``meta`` attribute every requests, which may affect performance.
+        When the returned response from the method being passed is of type
+        :class:`aiohttp.ClientResponse`, it will be deserialized in order to parse
+        the pagination tokens, likely negating any potential performance
+        benefits from using a :class:`aiohttp.ClientResponse` return type.
 
     Parameters
     ----------
@@ -68,8 +69,10 @@ class AsyncPaginator:
 
 
 class AsyncPaginationIterator:
+
     def __init__(
-        self, method, *args, limit=inf, pagination_token=None, reverse=False, **kwargs
+        self, method, *args, limit=inf, pagination_token=None, reverse=False,
+        **kwargs
     ):
         self.method = method
         self.args = args
@@ -100,9 +103,8 @@ class AsyncPaginationIterator:
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
-            "search_all_tweets",
-            "search_recent_tweets",
-            "get_all_tweets_count",
+            "search_all_tweets", "search_recent_tweets",
+            "get_all_tweets_count"
         ):
             self.kwargs["next_token"] = pagination_token
         else:
@@ -114,8 +116,8 @@ class AsyncPaginationIterator:
             meta = response.meta
         elif isinstance(response, dict):
             meta = response.get("meta", {})
-        elif isinstance(response, requests.Response):
-            meta = response.json().get("meta", {})
+        elif isinstance(response, aiohttp.ClientResponse):
+            meta = (await response.json()).get("meta", {})
         else:
             raise NotImplementedError(
                 f"Unknown {type(response)} return type for {self.method}"
