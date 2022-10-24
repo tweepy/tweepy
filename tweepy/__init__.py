@@ -5,7 +5,7 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '4.10.1'
+__version__ = '4.11.0'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
