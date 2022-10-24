@@ -53,6 +53,10 @@ def payload(payload_type, **payload_kwargs):
 class API:
     """Twitter API v1.1 Interface
 
+    .. versionchanged:: 4.11
+        Added support for ``include_ext_edit_control`` endpoint/method
+        parameter
+
     Parameters
     ----------
     auth
