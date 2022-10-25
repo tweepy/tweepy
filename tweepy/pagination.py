@@ -4,10 +4,21 @@
 
 from math import inf
 
+import requests
+
+from tweepy.client import Response
+
 
 class Paginator:
     """:class:`Paginator` can be used to paginate for any :class:`Client`
     methods that support pagination
+
+    .. note::
+
+        When the returned response from the method being passed is of type
+        :class:`requests.Response`, it will be deserialized in order to parse
+        the pagination tokens, likely negating any potential performance
+        benefits from using a :class:`requests.Response` return type.
 
     .. versionadded:: 4.0
 
@@ -97,8 +108,19 @@ class PaginationIterator:
 
         response = self.method(*self.args, **self.kwargs)
 
-        self.previous_token = response.meta.get("previous_token")
-        self.next_token = response.meta.get("next_token")
+        if isinstance(response, Response):
+            meta = response.meta
+        elif isinstance(response, dict):
+            meta = response.get("meta", {})
+        elif isinstance(response, requests.Response):
+            meta = response.json().get("meta", {})
+        else:
+            raise NotImplementedError(
+                f"Unknown {type(response)} return type for {self.method}"
+            )
+
+        self.previous_token = meta.get("previous_token")
+        self.next_token = meta.get("next_token")
         self.count += 1
 
         return response
