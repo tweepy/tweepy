@@ -13,14 +13,14 @@ class AsyncPaginator:
     """:class:`AsyncPaginator` can be used to paginate for any
     :class:`AsyncClient` methods that support pagination
 
-    .. versionadded:: 4.11
-
     .. note::
 
         When the returned response from the method being passed is of type
         :class:`aiohttp.ClientResponse`, it will be deserialized in order to parse
         the pagination tokens, likely negating any potential performance
         benefits from using a :class:`aiohttp.ClientResponse` return type.
+
+    .. versionadded:: 4.11
 
     Parameters
     ----------

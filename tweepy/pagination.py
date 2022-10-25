@@ -13,14 +13,14 @@ class Paginator:
     """:class:`Paginator` can be used to paginate for any :class:`Client`
     methods that support pagination
 
-    .. versionadded:: 4.0
-
     .. note::
 
         When the returned response from the method being passed is of type
         :class:`requests.Response`, it will be deserialized in order to parse
         the pagination tokens, likely negating any potential performance
         benefits from using a :class:`requests.Response` return type.
+
+    .. versionadded:: 4.0
 
     Parameters
     ----------
