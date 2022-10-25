@@ -286,7 +286,7 @@ class API:
             return result
         finally:
             self.session.close()
-    
+
     # Premium Search APIs
 
     @pagination(mode='next')
@@ -1156,7 +1156,7 @@ class API:
             status, filename, *, file, possibly_sensitive, \
             in_reply_to_status_id, lat, long, place_id, display_coordinates \
         )
-        
+
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
 
@@ -2747,7 +2747,7 @@ class API:
     def set_settings(self, **kwargs):
         """set_settings(*, sleep_time_enabled, start_sleep_time, \
                         end_sleep_time, time_zone, trend_location_woeid, lang)
-        
+
         Updates the authenticating user's settings.
 
         Parameters
@@ -4095,7 +4095,7 @@ class API:
         Parameters
         ----------
         resources
-            A comma-separated list of resource families you want to know the 
+            A comma-separated list of resource families you want to know the
             current rate limit disposition for.
 
         Returns
