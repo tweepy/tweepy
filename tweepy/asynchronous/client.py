@@ -251,7 +251,7 @@ class AsyncClient(AsyncBaseClient):
 
             A request is made beforehand to Twitter's API to determine the
             authenticating user's ID. This is cached and only done once per
-            :class:`Client` instance for each access token used.
+            :class:`AsyncClient` instance for each access token used.
 
         Parameters
         ----------
@@ -293,7 +293,7 @@ class AsyncClient(AsyncBaseClient):
 
             A request is made beforehand to Twitter's API to determine the
             authenticating user's ID. This is cached and only done once per
-            :class:`Client` instance for each access token used.
+            :class:`AsyncClient` instance for each access token used.
 
         Parameters
         ----------
@@ -353,7 +353,7 @@ class AsyncClient(AsyncBaseClient):
 
             A request is made beforehand to Twitter's API to determine the
             authenticating user's ID. This is cached and only done once per
-            :class:`Client` instance for each access token used.
+            :class:`AsyncClient` instance for each access token used.
 
         Parameters
         ----------
@@ -444,7 +444,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -596,7 +597,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -843,7 +845,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -935,7 +938,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -1287,7 +1291,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -1733,7 +1738,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -1777,7 +1783,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -1830,7 +1837,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -1873,7 +1881,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2014,7 +2023,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2059,7 +2069,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2103,7 +2114,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2156,7 +2168,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2627,7 +2640,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -2758,7 +2772,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -3128,7 +3143,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -3168,7 +3184,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
@@ -3212,7 +3229,8 @@ class AsyncClient(AsyncBaseClient):
             When using OAuth 2.0 Authorization Code Flow with PKCE with
             ``user_auth=False``, a request is made beforehand to Twitter's API
             to determine the authenticating user's ID. This is cached and only
-            done once per :class:`Client` instance for each access token used.
+            done once per :class:`AsyncClient` instance for each access token
+            used.
 
         Parameters
         ----------
