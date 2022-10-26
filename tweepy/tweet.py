@@ -38,6 +38,10 @@ class Tweet(HashableID, DataMapping):
         The actual UTF-8 text of the Tweet. See `twitter-text`_ for details on
         what characters are currently considered valid.
     edit_history_tweet_ids : list[int]
+        Unique identifiers indicating all versions of a Tweet. For Tweets with
+        no edits, there will be one ID. For Tweets with an edit history, there
+        will be multiple IDs, arranged in ascending order reflecting the order
+        of edits. The most recent version is the last position of the array.
     attachments : dict | None
         Specifies the type of attachments (if any) present in this Tweet.
     author_id : int | None
@@ -50,6 +54,9 @@ class Tweet(HashableID, DataMapping):
     created_at : datetime.datetime | None
         Creation time of the Tweet.
     edit_controls : dict | None
+        When present, this indicates how much longer the Tweet can be edited
+        and the number of remaining edits. Tweets are only editable for the
+        first 30 minutes after creation and can be edited up to five times.
     entities : dict | None
         Entities which have been parsed out of the text of the Tweet.
         Additionally see entities in Twitter Objects.
