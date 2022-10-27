@@ -124,8 +124,9 @@ class PaginationIterator:
         elif isinstance(response, requests.Response):
             meta = response.json().get("meta", {})
         else:
-            raise NotImplementedError(
-                f"Unknown {type(response)} return type for {self.method}"
+            raise RuntimeError(
+                f"Unknown {type(response)} return type for "
+                f"{self.method.__qualname__}"
             )
 
         self.previous_token = meta.get("previous_token")
