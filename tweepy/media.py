@@ -20,6 +20,9 @@ class Media(DataMapping):
     .. versionchanged:: 4.5
         Added ``url`` field
 
+    .. versionchanged:: 4.12
+        Added ``variants`` field
+
     Attributes
     ----------
     data : dict
