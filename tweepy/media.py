@@ -60,7 +60,7 @@ class Media(DataMapping):
         A description of an image to enable and support accessibility. Can be
         up to 1000 characters long. Alt text can only be added to images at the
         moment.
-    variants: List[Dict] | None
+    variants: list[dict] | None
         Each media object may have multiple display or playback variants,
         with different resolutions or formats
 
