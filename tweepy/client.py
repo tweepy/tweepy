@@ -829,7 +829,7 @@ class Client(BaseClient):
 
     def get_quote_tweets(self, id, *, user_auth=False, **params):
         """get_quote_tweets( \
-            id, *, exclude=None, expansions=None, max_results=None,
+            id, *, exclude=None, expansions=None, max_results=None, \
             media_fields=None, pagination_token=None, place_fields=None, \
             poll_fields=None, tweet_fields=None, user_fields=None, \
             user_auth=False \
