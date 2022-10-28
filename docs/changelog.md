@@ -3,6 +3,28 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.12.0 (2022-10-27)
+---------------------------
+
+### New Features / Improvements
+- Add support for Direct Messages with Twitter API v2 ([#1995](https://github.com/tweepy/tweepy/issues/1995))
+  - Add `DirectMessageEvent` model
+  - Add `Client.get_direct_message_events`, `Client.create_direct_message`, and `Client.create_direct_message_conversation`
+  - Add `AsyncClient.get_direct_message_events`, `AsyncClient.create_direct_message`, and `AsyncClient.create_direct_message_conversation`
+- Add support for Python 3.11 ([a391c66](https://github.com/tweepy/tweepy/commit/a391c66daae3f217585b5da9a9556cb86abe34bd))
+- Add support for `variants` `Media` field ([#1910](https://github.com/tweepy/tweepy/pull/1910), [e31be15](https://github.com/tweepy/tweepy/commit/e31be1519269d5225e28dad8a77b58412b7fe435))
+
+### Bug Fixes
+- Handle different method return types in API v2 pagination ([#1843](https://github.com/tweepy/tweepy/issues/1843), [#1861](https://github.com/tweepy/tweepy/pull/1861), [381bf91](https://github.com/tweepy/tweepy/commit/381bf9182700fa0c51df00b5b0f3e19c3d04dac0), [3874579](https://github.com/tweepy/tweepy/commit/3874579bac22a6648e774995478cb597689d89bc))
+- Add missing angle bracket to string representation of `ReferencedTweet` ([d4df069](https://github.com/tweepy/tweepy/commit/d4df0691b4686161cc4bda0c85f29b75f207e0c2))
+
+### Misc
+- Add documentation for `edit_history_tweet_ids` and `edit_controls` `Tweet` fields ([2b1e159](https://github.com/tweepy/tweepy/commit/2b1e159f4525df74e7cf9f2c531392966f306a82))
+  - This documentation was previously missing from Twitter's API documentation
+- Fix class references in notes in documentation for `AsyncClient` methods ([f737b87](https://github.com/tweepy/tweepy/commit/f737b87fbcf15fda070898189578ca60dcb38614))
+- Fix signature of `Client.get_quote_tweets` in documentation ([6f7de39](https://github.com/tweepy/tweepy/commit/6f7de39b65d43eb5e52e9353b9830ab49a388a03))
+- Update actions/setup-python from v2 to v4 ([f16b3dc](https://github.com/tweepy/tweepy/commit/f16b3dc3afdeeba124b661734d53a3af1d504192), [0148be7](https://github.com/tweepy/tweepy/commit/0148be7edc460fcb9dae5fd1b38361cab6098da2))
+
 Version 4.11.0 (2022-10-24)
 ---------------------------
 
