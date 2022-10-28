@@ -137,6 +137,9 @@ class BaseClient:
         if self.return_type is dict:
             return response
 
+        return self._construct_response(response, data_type=data_type)
+
+    def _construct_response(self, response, data_type=None):
         data = response.get("data")
         data = self._process_data(data, data_type=data_type)
 
