@@ -41,7 +41,15 @@ setup(
     extras_require={
         "async": [
             "aiohttp>=3.7.3,<4",
-            "async-lru>=1.0.3,<2"
+            "async-lru>=1.0.3,<2",
+        ],
+        "docs": [
+            "myst-parser==0.15.2",
+            "readthedocs-sphinx-search==0.1.1",
+            "sphinx==4.2.0",
+            "sphinx-hoverxref==0.7b1",
+            "sphinx-tabs==3.2.0",
+            "sphinx_rtd_theme==1.0.0",
         ],
         "dev": [
             "coverage>=4.4.2",
