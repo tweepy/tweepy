@@ -1,0 +1,410 @@
+interactions:
+- request:
+    body:
+      text: Testing 1
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations/with/750362064426721281/messages
+  response:
+    body:
+      string: '{"data":{"dm_conversation_id":"750362064426721281-1072250532645998596","dm_event_id":"1585823814058971140"}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '116'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:35 UTC
+      Location:
+      - https://api.twitter.com/2/dm_events/"1585823814058971140"
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483505142170; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483505142170; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_s0sOrj9Aez25nmQGn2ueog=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483505142170; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - e64aa05d988c6b12f356b0b777b16e58067fd9f4f5b76e0aa03a755ded9ac882
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '196'
+      x-rate-limit-reset:
+      - '1666925626'
+      x-response-time:
+      - '99'
+      x-transaction-id:
+      - 1ba0e69dac2d14c9
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://api.twitter.com/2/dm_conversations/with/750362064426721281/messages
+- request:
+    body:
+      text: Testing 2
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/messages
+  response:
+    body:
+      string: '{"data":{"dm_conversation_id":"750362064426721281-1072250532645998596","dm_event_id":"1585823814956482567"}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '118'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:35 UTC
+      Location:
+      - https://api.twitter.com/2/dm_events/"1585823814956482567"
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483526981171; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483526981171; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_vOAhj7Rgpg4+d8XWHyuGvQ=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483526981171; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 816b3d3d7fa28b220cbf9fd64979c7aa9444e638bd19fa1521543b2607132975
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '195'
+      x-rate-limit-reset:
+      - '1666925626'
+      x-response-time:
+      - '92'
+      x-transaction-id:
+      - ab04790d9a0ad556
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/messages
+- request:
+    body:
+      conversation_type: Group
+      message:
+        text: Testing
+      participant_ids:
+      - '145336962'
+      - '750362064426721281'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations
+  response:
+    body:
+      string: '{"data":{"dm_conversation_id":"1585823815904395264","dm_event_id":"1585823815904395268"}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:35 UTC
+      Location:
+      - https://api.twitter.com/2/dm_events/"1585823815904395268"
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483548929307; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483548929307; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_/SSSm+jQ8/m+T74h092ffw=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483548929307; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:35 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 419970fa1e4f08780874d727938e832f372b494fd2b990a9d354f157420f7c2e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '194'
+      x-rate-limit-reset:
+      - '1666925626'
+      x-response-time:
+      - '111'
+      x-transaction-id:
+      - 95312ec9aed6941f
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://api.twitter.com/2/dm_conversations
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_events
+  response:
+    body:
+      string: '{"meta":{"result_count":0}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '53'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:36 UTC
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483571694274; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483571694274; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_JqIhrGbVz9y65V8gt0I0nw=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483571694274; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - c61ab77e6b2edde82e41279fe30614c360c83986f2486df3cd5379ff6ee81efc
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '295'
+      x-rate-limit-reset:
+      - '1666925575'
+      x-response-time:
+      - '450'
+      x-transaction-id:
+      - ca2238d8b3bb8180
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/dm_events
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/dm_events
+  response:
+    body:
+      string: '{"data":[{"event_type":"MessageCreate","id":"1585823814956482567","text":"Testing
+        2"},{"event_type":"MessageCreate","id":"1585823814058971140","text":"Testing
+        1"}],"meta":{"result_count":2,"next_token":"18LAA5G1V9DLILOG0G00ZZZZ","previous_token":"1BLC45G1V9DOTLG00S00ZZZZ"}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '201'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:36 UTC
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483630137659; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483630137659; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_q7EvxLEzivBP+d8d8n5iwQ=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483630137659; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 3eaad847b13a27123db04d3bc781a841f4f3a73b2da9fcdb1063276020d63e72
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '294'
+      x-rate-limit-reset:
+      - '1666925575'
+      x-response-time:
+      - '240'
+      x-transaction-id:
+      - 6f38f4836665784c
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/dm_events
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_conversations/with/750362064426721281/dm_events
+  response:
+    body:
+      string: '{"data":[{"event_type":"MessageCreate","id":"1585823814956482567","text":"Testing
+        2"},{"event_type":"MessageCreate","id":"1585823814058971140","text":"Testing
+        1"}],"meta":{"result_count":2,"next_token":"18LAA5G1V9DLILOG0G00ZZZZ","previous_token":"1BLC45G1V9DOTLG00S00ZZZZ"}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '201'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 28 Oct 2022 02:40:36 UTC
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166692483667194018; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166692483667194018; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_z5H6tv+pvYGBnAirlfFEDQ=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166692483667194018; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        02:40:36 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.55'
+      perf:
+      - '7626143928'
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - b46452f9f641533ca331b6f3fef745c7e077f6526cbca084d0042a1a9bbb9326
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '293'
+      x-rate-limit-reset:
+      - '1666925575'
+      x-response-time:
+      - '248'
+      x-transaction-id:
+      - 91411ce0949616ad
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://api.twitter.com/2/dm_conversations/with/750362064426721281/dm_events
+version: 1

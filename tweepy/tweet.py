@@ -191,13 +191,16 @@ class Tweet(HashableID, DataMapping):
 class ReferencedTweet(HashableID, DataMapping):
     """.. versionadded:: 4.0
 
+    .. versionchanged:: 4.12
+        Changed ``type`` to be optional
+
     Attributes
     ----------
     data : dict
         The JSON data representing the referenced Tweet.
     id : int
         The unique identifier of the referenced Tweet.
-    type : str
+    type : str | None
 
     References
     ----------
@@ -209,7 +212,12 @@ class ReferencedTweet(HashableID, DataMapping):
     def __init__(self, data):
         self.data = data
         self.id = int(data["id"])
-        self.type = data["type"]
+
+        self.type = data.get("type")
 
     def __repr__(self):
-        return f"<ReferencedTweet id={self.id} type={self.type}>"
+        representation = f"<ReferencedTweet id={self.id}"
+        if self.type is not None:
+            representation += f" type={self.type}"
+        representation += '>'
+        return representation

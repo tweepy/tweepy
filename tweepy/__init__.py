@@ -17,6 +17,7 @@ from tweepy.auth import (
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.client import Client, Response
 from tweepy.cursor import Cursor
+from tweepy.direct_message_event import DirectMessageEvent
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TweepyException, TwitterServerError, Unauthorized

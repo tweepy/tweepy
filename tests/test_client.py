@@ -179,6 +179,27 @@ class TweepyClientTests(unittest.TestCase):
 
     # TODO: Test Client.get_space_tweets
 
+    @tape.use_cassette("test_manage_and_lookup_direct_messages.yaml")
+    def test_manage_and_lookup_direct_messages(self):
+        user_ids = [145336962, 750362064426721281]
+        # User IDs for @Harmon758 and @Harmon758Public
+        response = self.client.create_direct_message(
+            participant_id=user_ids[1],
+            text="Testing 1"
+        )
+        dm_conversation_id = response.data["dm_conversation_id"]
+        self.client.create_direct_message(
+            dm_conversation_id=dm_conversation_id,
+            text="Testing 2"
+        )
+        self.client.create_direct_message_conversation(
+            text="Testing",
+            participant_ids=user_ids
+        )
+        self.client.get_dm_events()
+        self.client.get_dm_events(dm_conversation_id=dm_conversation_id)
+        self.client.get_dm_events(participant_id=user_ids[1])
+
     @tape.use_cassette("test_client_get_list_tweets.yaml")
     def test_get_list_tweets(self):
         list_id = 84839422  # List ID for Official Twitter Accounts (@Twitter)

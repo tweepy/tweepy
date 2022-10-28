@@ -6,6 +6,11 @@
 Models
 ******
 
+:class:`DirectMessageEvent`
+===========================
+
+.. autoclass:: DirectMessageEvent()
+
 :class:`List`
 =============
 

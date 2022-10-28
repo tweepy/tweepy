@@ -20,6 +20,7 @@ from yarl import URL
 
 import tweepy
 from tweepy.client import BaseClient, Response
+from tweepy.direct_message_event import DirectMessageEvent
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TwitterServerError, Unauthorized
@@ -138,7 +139,7 @@ class AsyncBaseClient(BaseClient):
         return response
 
     async def _make_request(
-        self, method, route, params={}, endpoint_parameters=None, json=None,
+        self, method, route, params={}, endpoint_parameters=(), json=None,
         data_type=None, user_auth=False
     ):
         request_params = self._process_params(params, endpoint_parameters)
@@ -2568,6 +2569,235 @@ class AsyncClient(AsyncBaseClient):
                 "tweet.fields", "user.fields"
             ), data_type=Tweet
         )
+
+    # Direct Messages lookup
+
+    async def get_direct_message_events(
+        self, *, dm_conversation_id=None, participant_id=None, user_auth=True,
+        **params
+    ):
+        """get_direct_message_events( \
+            *, dm_conversation_id=None, participant_id=None, \
+            dm_event_fields=None, event_types=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
+
+        If ``dm_conversation_id`` is passed, returns a list of Direct Messages
+        within the conversation specified. Messages are returned in reverse
+        chronological order.
+
+        If ``participant_id`` is passed, returns a list of Direct Messages (DM)
+        events within a 1-1 conversation with the user specified. Messages are
+        returned in reverse chronological order.
+
+        If neither is passed, returns a list of Direct Messages for the
+        authenticated user, both sent and received. Direct Message events are
+        returned in reverse chronological order. Supports retrieving events
+        from the previous 30 days.
+
+        .. note::
+        
+            There is an alias for this method named ``get_dm_events``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        dm_conversation_id : str | None
+            The ``id`` of the Direct Message conversation for which events are
+            being retrieved.
+        participant_id : int | str | None
+            The ``participant_id`` of the user that the authenicating user is
+            having a 1-1 conversation with.
+        dm_event_fields : list[str] | str | None
+            Extra fields to include in the event payload. ``id``, ``text``, and
+            ``event_type`` are returned by default.
+        event_types : str
+            The type of Direct Message event to returm. If not included, all
+            types are returned.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            The maximum number of results to be returned in a page. Must be
+            between 1 and 100. The default is 100.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            Contains either the ``next_token`` or ``previous_token`` value.
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Raises
+        ------
+        TypeError
+            If both ``dm_conversation_id`` and ``participant_id`` are passed
+
+        Returns
+        -------
+        dict | aiohttp.ClientResponse | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_events
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_conversations-with-participant_id-dm_events
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_conversations-dm_conversation_id-dm_events
+        """
+        if dm_conversation_id is not None and participant_id is not None:
+            raise TypeError(
+                "Expected DM conversation ID or participant ID, not both"
+            )
+        elif dm_conversation_id is not None:
+            path = f"/2/dm_conversations/{dm_conversation_id}/dm_events"
+        elif participant_id is not None:
+            path = f"/2/dm_conversations/with/{participant_id}/dm_events"
+        else:
+            path = "/2/dm_events"
+
+        return await self._make_request(
+            "GET", path, params=params,
+            endpoint_parameters=(
+                "dm_event.fields", "event_types", "expansions", "max_results",
+                "media.fields", "pagination_token", "tweet.fields",
+                "user.fields"
+            ), data_type=DirectMessageEvent, user_auth=user_auth
+        )
+
+    get_dm_events = get_direct_message_events
+
+    # Manage Direct Messages
+
+    async def create_direct_message(
+        self, *, dm_conversation_id=None, participant_id=None, media_id=None,
+        text=None, user_auth=True
+    ):
+        """If ``dm_conversation_id`` is passed, creates a Direct Message on
+        behalf of the authenticated user, and adds it to the specified
+        conversation.
+
+        If ``participant_id`` is passed, creates a one-to-one Direct Message
+        and adds it to the one-to-one conversation. This method either creates
+        a new one-to-one conversation or retrieves the current conversation and
+        adds the Direct Message to it.
+
+        .. note::
+        
+            There is an alias for this method named ``create_dm``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        dm_conversation_id : str | None
+            The ``dm_conversation_id`` of the conversation to add the Direct
+            Message to. Supports both 1-1 and group conversations.
+        participant_id : int | str | None
+            The User ID of the account this one-to-one Direct Message is to be
+            sent to.
+        media_id : int | str | None
+            A single Media ID being attached to the Direct Message. This field
+            is required if ``text`` is not present. For this launch, only 1
+            attachment is supported.
+        text : str | None
+            Text of the Direct Message being created. This field is required if
+            ``media_id`` is not present. Text messages support up to 10,000
+            characters.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Raises
+        ------
+        TypeError
+            If ``dm_conversation_id`` and ``participant_id`` are not passed or
+            both are passed
+
+        Returns
+        -------
+        dict | aiohttp.ClientResponse | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations-dm_conversation_id-messages
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations-with-participant_id-messages
+        """
+        if dm_conversation_id is not None and participant_id is not None:
+            raise TypeError(
+                "Expected DM conversation ID or participant ID, not both"
+            )
+        elif dm_conversation_id is not None:
+            path = f"/2/dm_conversations/{dm_conversation_id}/messages"
+        elif participant_id is not None:
+            path = f"/2/dm_conversations/with/{participant_id}/messages"
+        else:
+            raise TypeError("DM conversation ID or participant ID is required")
+
+        json = {}
+        if media_id is not None:
+            json["attachments"] = [{"media_id": str(media_id)}]
+        if text is not None:
+            json["text"] = text
+
+        return await self._make_request(
+            "POST", path, json=json, user_auth=user_auth
+        )
+
+    create_dm = create_direct_message
+
+    async def create_direct_message_conversation(
+        self, *, media_id=None, text=None, participant_ids, user_auth=True
+    ):
+        """Creates a new group conversation and adds a Direct Message to it on
+        behalf of the authenticated user.
+
+        .. note::
+        
+            There is an alias for this method named ``create_dm_conversation``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        media_id : int | str | None
+            A single Media ID being attached to the Direct Message. This field
+            is required if ``text`` is not present. For this launch, only 1
+            attachment is supported.
+        text : str | None
+            Text of the Direct Message being created. This field is required if
+            ``media_id`` is not present. Text messages support up to 10,000
+            characters.
+        participant_ids : list[int | str]
+            An array of User IDs that the conversation is created with.
+            Conversations can have up to 50 participants.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | aiohttp.ClientResponse | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations
+        """
+        json = {
+            "conversation_type": "Group",
+            "message": {},
+            "participant_ids": list(map(str, participant_ids))
+        }
+        if media_id is not None:
+            json["message"]["attachments"] = [{"media_id": str(media_id)}]
+        if text is not None:
+            json["message"]["text"] = text
+
+        return await self._make_request(
+            "POST", "/2/dm_conversations", json=json, user_auth=user_auth
+        )
+
+    create_dm_conversation = create_direct_message_conversation
 
     # List Tweets lookup
 
