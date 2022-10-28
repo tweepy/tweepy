@@ -2735,9 +2735,10 @@ class Client(BaseClient):
     # Direct Messages lookup
 
     def get_direct_message_events(
-        self, *, dm_conversation_id=None, participant_id=None, user_auth=True,
-        **params
-    ):
+        self, *, dm_conversation_id: str | None = None,
+        participant_id: int | str | None = None, user_auth: bool = True,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_direct_message_events( \
             *, dm_conversation_id=None, participant_id=None, \
             dm_event_fields=None, event_types=None, expansions=None, \
@@ -2766,10 +2767,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        dm_conversation_id : str | None
+        dm_conversation_id
             The ``id`` of the Direct Message conversation for which events are
             being retrieved.
-        participant_id : int | str | None
+        participant_id
             The ``participant_id`` of the user that the authenicating user is
             having a 1-1 conversation with.
         dm_event_fields : list[str] | str | None
@@ -2791,17 +2792,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If both ``dm_conversation_id`` and ``participant_id`` are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2834,9 +2831,11 @@ class Client(BaseClient):
     # Manage Direct Messages
 
     def create_direct_message(
-        self, *, dm_conversation_id=None, participant_id=None, media_id=None,
-        text=None, user_auth=True
-    ):
+        self, *, dm_conversation_id: str | None = None,
+        participant_id: int | str | None = None,
+        media_id: int | str | None = None, text: str | None = None,
+        user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """If ``dm_conversation_id`` is passed, creates a Direct Message on
         behalf of the authenticated user, and adds it to the specified
         conversation.
@@ -2854,21 +2853,21 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        dm_conversation_id : str | None
+        dm_conversation_id
             The ``dm_conversation_id`` of the conversation to add the Direct
             Message to. Supports both 1-1 and group conversations.
-        participant_id : int | str | None
+        participant_id
             The User ID of the account this one-to-one Direct Message is to be
             sent to.
-        media_id : int | str | None
+        media_id
             A single Media ID being attached to the Direct Message. This field
             is required if ``text`` is not present. For this launch, only 1
             attachment is supported.
-        text : str | None
+        text
             Text of the Direct Message being created. This field is required if
             ``media_id`` is not present. Text messages support up to 10,000
             characters.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
@@ -2876,10 +2875,6 @@ class Client(BaseClient):
         TypeError
             If ``dm_conversation_id`` and ``participant_id`` are not passed or
             both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2897,7 +2892,7 @@ class Client(BaseClient):
         else:
             raise TypeError("DM conversation ID or participant ID is required")
 
-        json = {}
+        json: JSON = {}
         if media_id is not None:
             json["attachments"] = [{"media_id": str(media_id)}]
         if text is not None:
@@ -2908,8 +2903,9 @@ class Client(BaseClient):
     create_dm = create_direct_message
 
     def create_direct_message_conversation(
-        self, *, media_id=None, text=None, participant_ids, user_auth=True
-    ):
+        self, *, media_id: int | str | None = None, text: str | None = None,
+        participant_ids: list[int | str], user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Creates a new group conversation and adds a Direct Message to it on
         behalf of the authenticated user.
 
@@ -2921,18 +2917,18 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        media_id : int | str | None
+        media_id
             A single Media ID being attached to the Direct Message. This field
             is required if ``text`` is not present. For this launch, only 1
             attachment is supported.
-        text : str | None
+        text
             Text of the Direct Message being created. This field is required if
             ``media_id`` is not present. Text messages support up to 10,000
             characters.
-        participant_ids : list[int | str]
+        participant_ids
             An array of User IDs that the conversation is created with.
             Conversations can have up to 50 participants.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
@@ -2943,7 +2939,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations
         """
-        json = {
+        json: JSON = {
             "conversation_type": "Group",
             "message": {},
             "participant_ids": list(map(str, participant_ids))
