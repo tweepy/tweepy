@@ -155,16 +155,7 @@ class AsyncBaseClient(BaseClient):
         if self.return_type is dict:
             return response
 
-        data = response.get("data")
-        data = self._process_data(data, data_type=data_type)
-
-        includes = response.get("includes", {})
-        includes = self._process_includes(includes)
-
-        errors = response.get("errors", [])
-        meta = response.get("meta", {})
-
-        return Response(data, includes, errors, meta)
+        return self._construct_response(response, data_type=data_type)
 
 
 class AsyncClient(AsyncBaseClient):
