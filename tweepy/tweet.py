@@ -212,4 +212,4 @@ class ReferencedTweet(HashableID, DataMapping):
         self.type = data["type"]
 
     def __repr__(self):
-        return f"<ReferencedTweet id={self.id} type={self.type}"
+        return f"<ReferencedTweet id={self.id} type={self.type}>"
