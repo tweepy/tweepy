@@ -23,6 +23,7 @@ import requests
 
 import tweepy
 from tweepy.auth import OAuth1UserHandler
+from tweepy.direct_message_event import DirectMessageEvent
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TwitterServerError, Unauthorized
@@ -145,8 +146,10 @@ class BaseClient:
 
             return response
 
-    def _make_request(self, method, route, params={}, endpoint_parameters=None,
-                      json=None, data_type=None, user_auth=False):
+    def _make_request(
+        self, method, route, params={}, endpoint_parameters=(), json=None,
+        data_type=None, user_auth=False
+    ):
         request_params = self._process_params(params, endpoint_parameters)
 
         response = self.request(method, route, params=request_params,
@@ -160,6 +163,9 @@ class BaseClient:
         if self.return_type is dict:
             return response
 
+        return self._construct_response(response, data_type=data_type)
+
+    def _construct_response(self, response, data_type=None):
         data = response.get("data")
         data = self._process_data(data, data_type=data_type)
 
@@ -193,10 +199,17 @@ class BaseClient:
         return includes
 
     def _process_params(self, params, endpoint_parameters):
+        endpoint_parameters = {
+            endpoint_parameter.replace('.', '_'): endpoint_parameter
+            for endpoint_parameter in endpoint_parameters
+        }
+
         request_params = {}
         for param_name, param_value in params.items():
-            if param_name.replace('_', '.') in endpoint_parameters:
-                param_name = param_name.replace('_', '.')
+            try:
+                param_name = endpoint_parameters[param_name]
+            except KeyError:
+                log.warn(f"Unexpected parameter: {param_name}")
 
             if isinstance(param_value, list):
                 request_params[param_name] = ','.join(map(str, param_value))
@@ -207,11 +220,9 @@ class BaseClient:
                     "%Y-%m-%dT%H:%M:%SZ"
                 )
                 # TODO: Constant datetime format string?
-            else:
+            elif param_value is not None:
                 request_params[param_name] = param_value
 
-            if param_name not in endpoint_parameters:
-                log.warn(f"Unexpected parameter: {param_name}")
         return request_params
 
 
@@ -838,9 +849,10 @@ class Client(BaseClient):
         **params: _ParamsMappingValueType
     ) -> JSON | requests.Response | Response:
         """get_quote_tweets( \
-            id, *, expansions=None, max_results=None, media_fields=None, \
-            pagination_token=None, place_fields=None, poll_fields=None, \
-            tweet_fields=None, user_fields=None, user_auth=False \
+            id, *, exclude=None, expansions=None, max_results=None, \
+            media_fields=None, pagination_token=None, place_fields=None, \
+            poll_fields=None, tweet_fields=None, user_fields=None, \
+            user_auth=False \
         )
 
         Returns Quote Tweets for a Tweet specified by the requested Tweet ID.
@@ -850,10 +862,16 @@ class Client(BaseClient):
 
         .. versionadded:: 4.7
 
+        .. versionchanged:: 4.11
+            Added ``exclude`` parameter
+
         Parameters
         ----------
         id
             Unique identifier of the Tweet to request.
+        exclude : list[str] | str | None
+            Comma-separated list of the types of Tweets to exclude from the
+            response.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
         max_results : int | None
@@ -889,7 +907,7 @@ class Client(BaseClient):
         return self._make_request(
             "GET", f"/2/tweets/{id}/quote_tweets", params=params,
             endpoint_parameters=(
-                "expansions", "max_results", "media.fields",
+                "exclude", "expansions", "max_results", "media.fields",
                 "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
@@ -2714,6 +2732,233 @@ class Client(BaseClient):
             ), data_type=Tweet
         )
 
+    # Direct Messages lookup
+
+    def get_direct_message_events(
+        self, *, dm_conversation_id=None, participant_id=None, user_auth=True,
+        **params
+    ):
+        """get_direct_message_events( \
+            *, dm_conversation_id=None, participant_id=None, \
+            dm_event_fields=None, event_types=None, expansions=None, \
+            max_results=None, media_fields=None, pagination_token=None, \
+            tweet_fields=None, user_fields=None, user_auth=True \
+        )
+
+        If ``dm_conversation_id`` is passed, returns a list of Direct Messages
+        within the conversation specified. Messages are returned in reverse
+        chronological order.
+
+        If ``participant_id`` is passed, returns a list of Direct Messages (DM)
+        events within a 1-1 conversation with the user specified. Messages are
+        returned in reverse chronological order.
+
+        If neither is passed, returns a list of Direct Messages for the
+        authenticated user, both sent and received. Direct Message events are
+        returned in reverse chronological order. Supports retrieving events
+        from the previous 30 days.
+
+        .. note::
+        
+            There is an alias for this method named ``get_dm_events``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        dm_conversation_id : str | None
+            The ``id`` of the Direct Message conversation for which events are
+            being retrieved.
+        participant_id : int | str | None
+            The ``participant_id`` of the user that the authenicating user is
+            having a 1-1 conversation with.
+        dm_event_fields : list[str] | str | None
+            Extra fields to include in the event payload. ``id``, ``text``, and
+            ``event_type`` are returned by default.
+        event_types : str
+            The type of Direct Message event to returm. If not included, all
+            types are returned.
+        expansions : list[str] | str | None
+            :ref:`expansions_parameter`
+        max_results : int | None
+            The maximum number of results to be returned in a page. Must be
+            between 1 and 100. The default is 100.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
+        pagination_token : str | None
+            Contains either the ``next_token`` or ``previous_token`` value.
+        tweet_fields : list[str] | str | None
+            :ref:`tweet_fields_parameter`
+        user_fields : list[str] | str | None
+            :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Raises
+        ------
+        TypeError
+            If both ``dm_conversation_id`` and ``participant_id`` are passed
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_events
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_conversations-with-participant_id-dm_events
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/lookup/api-reference/get-dm_conversations-dm_conversation_id-dm_events
+        """
+        if dm_conversation_id is not None and participant_id is not None:
+            raise TypeError(
+                "Expected DM conversation ID or participant ID, not both"
+            )
+        elif dm_conversation_id is not None:
+            path = f"/2/dm_conversations/{dm_conversation_id}/dm_events"
+        elif participant_id is not None:
+            path = f"/2/dm_conversations/with/{participant_id}/dm_events"
+        else:
+            path = "/2/dm_events"
+
+        return self._make_request(
+            "GET", path, params=params,
+            endpoint_parameters=(
+                "dm_event.fields", "event_types", "expansions", "max_results",
+                "media.fields", "pagination_token", "tweet.fields",
+                "user.fields"
+            ), data_type=DirectMessageEvent, user_auth=user_auth
+        )
+
+    get_dm_events = get_direct_message_events
+
+    # Manage Direct Messages
+
+    def create_direct_message(
+        self, *, dm_conversation_id=None, participant_id=None, media_id=None,
+        text=None, user_auth=True
+    ):
+        """If ``dm_conversation_id`` is passed, creates a Direct Message on
+        behalf of the authenticated user, and adds it to the specified
+        conversation.
+
+        If ``participant_id`` is passed, creates a one-to-one Direct Message
+        and adds it to the one-to-one conversation. This method either creates
+        a new one-to-one conversation or retrieves the current conversation and
+        adds the Direct Message to it.
+
+        .. note::
+        
+            There is an alias for this method named ``create_dm``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        dm_conversation_id : str | None
+            The ``dm_conversation_id`` of the conversation to add the Direct
+            Message to. Supports both 1-1 and group conversations.
+        participant_id : int | str | None
+            The User ID of the account this one-to-one Direct Message is to be
+            sent to.
+        media_id : int | str | None
+            A single Media ID being attached to the Direct Message. This field
+            is required if ``text`` is not present. For this launch, only 1
+            attachment is supported.
+        text : str | None
+            Text of the Direct Message being created. This field is required if
+            ``media_id`` is not present. Text messages support up to 10,000
+            characters.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Raises
+        ------
+        TypeError
+            If ``dm_conversation_id`` and ``participant_id`` are not passed or
+            both are passed
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations-dm_conversation_id-messages
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations-with-participant_id-messages
+        """
+        if dm_conversation_id is not None and participant_id is not None:
+            raise TypeError(
+                "Expected DM conversation ID or participant ID, not both"
+            )
+        elif dm_conversation_id is not None:
+            path = f"/2/dm_conversations/{dm_conversation_id}/messages"
+        elif participant_id is not None:
+            path = f"/2/dm_conversations/with/{participant_id}/messages"
+        else:
+            raise TypeError("DM conversation ID or participant ID is required")
+
+        json = {}
+        if media_id is not None:
+            json["attachments"] = [{"media_id": str(media_id)}]
+        if text is not None:
+            json["text"] = text
+
+        return self._make_request("POST", path, json=json, user_auth=user_auth)
+
+    create_dm = create_direct_message
+
+    def create_direct_message_conversation(
+        self, *, media_id=None, text=None, participant_ids, user_auth=True
+    ):
+        """Creates a new group conversation and adds a Direct Message to it on
+        behalf of the authenticated user.
+
+        .. note::
+        
+            There is an alias for this method named ``create_dm_conversation``.
+
+        .. versionadded:: 4.12
+
+        Parameters
+        ----------
+        media_id : int | str | None
+            A single Media ID being attached to the Direct Message. This field
+            is required if ``text`` is not present. For this launch, only 1
+            attachment is supported.
+        text : str | None
+            Text of the Direct Message being created. This field is required if
+            ``media_id`` is not present. Text messages support up to 10,000
+            characters.
+        participant_ids : list[int | str]
+            An array of User IDs that the conversation is created with.
+            Conversations can have up to 50 participants.
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
+
+        Returns
+        -------
+        dict | requests.Response | Response
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations
+        """
+        json = {
+            "conversation_type": "Group",
+            "message": {},
+            "participant_ids": list(map(str, participant_ids))
+        }
+        if media_id is not None:
+            json["message"]["attachments"] = [{"media_id": str(media_id)}]
+        if text is not None:
+            json["message"]["text"] = text
+
+        return self._make_request(
+            "POST", "/2/dm_conversations", json=json, user_auth=user_auth
+        )
+
+    create_dm_conversation = create_direct_message_conversation
+
     # List Tweets lookup
 
     def get_list_tweets(
@@ -2721,13 +2966,18 @@ class Client(BaseClient):
         **params: _ParamsMappingValueType
     ) -> JSON | requests.Response | Response:
         """get_list_tweets( \
-            id, *, expansions=None, max_results=None, pagination_token=None, \
+            id, *, expansions=None, max_results=None, media_fields=None, \
+            pagination_token=None, place_fields=None, poll_fields=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
         )
 
         Returns a list of Tweets from the specified List.
 
         .. versionadded:: 4.4
+
+        .. versionchanged:: 4.10.1
+            Added ``media_fields``, ``place_fields``, and ``poll_fields``
+            parameters
 
         Parameters
         ----------
@@ -2739,12 +2989,18 @@ class Client(BaseClient):
             The maximum number of results to be returned per page. This can be
             a number between 1 and 100. By default, each page will return 100
             results.
+        media_fields : list[str] | str | None
+            :ref:`media_fields_parameter`
         pagination_token : str | None
             Used to request the next page of results if all results weren't
             returned with the latest request, or to go back to the previous
             page of results. To return the next page, pass the next_token
             returned in your previous response. To go back one page, pass the
             previous_token returned in your previous response.
+        place_fields : list[str] | str | None
+            :ref:`place_fields_parameter`
+        poll_fields : list[str] | str | None
+            :ref:`poll_fields_parameter`
         tweet_fields : list[str] | str | None
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
@@ -2759,7 +3015,8 @@ class Client(BaseClient):
         return self._make_request(
             "GET", f"/2/lists/{id}/tweets", params=params,
             endpoint_parameters=(
-                "expansions", "max_results", "pagination_token",
+                "expansions", "max_results", "media.fields",
+                "pagination_token", "place.fields", "poll.fields",
                 "tweet.fields", "user.fields"
             ), data_type=Tweet, user_auth=user_auth
         )

@@ -4,28 +4,28 @@
 
 from math import inf
 
-import requests
+import aiohttp
 
 from tweepy.client import Response
 
 
-class Paginator:
-    """:class:`Paginator` can be used to paginate for any :class:`Client`
-    methods that support pagination
+class AsyncPaginator:
+    """:class:`AsyncPaginator` can be used to paginate for any
+    :class:`AsyncClient` methods that support pagination
 
     .. note::
 
         When the returned response from the method being passed is of type
-        :class:`requests.Response`, it will be deserialized in order to parse
-        the pagination tokens, likely negating any potential performance
-        benefits from using a :class:`requests.Response` return type.
+        :class:`aiohttp.ClientResponse`, it will be deserialized in order to
+        parse the pagination tokens, likely negating any potential performance
+        benefits from using a :class:`aiohttp.ClientResponse` return type.
 
-    .. versionadded:: 4.0
+    .. versionadded:: 4.11
 
     Parameters
     ----------
     method
-        :class:`Client` method to paginate for
+        :class:`AsyncClient` method to paginate for
     args
         Positional arguments to pass to ``method``
     kwargs
@@ -37,14 +37,15 @@ class Paginator:
         self.args = args
         self.kwargs = kwargs
 
-    def __iter__(self):
-        return PaginationIterator(self.method, *self.args, **self.kwargs)
+    def __aiter__(self):
+        return AsyncPaginationIterator(self.method, *self.args, **self.kwargs)
 
     def __reversed__(self):
-        return PaginationIterator(self.method, *self.args, reverse=True,
-                                  **self.kwargs)
+        return AsyncPaginationIterator(
+            self.method, *self.args, reverse=True, **self.kwargs
+        )
 
-    def flatten(self, limit=inf):
+    async def flatten(self, limit=inf):
         """Flatten paginated data
 
         Parameters
@@ -56,7 +57,7 @@ class Paginator:
             return
 
         count = 0
-        for response in PaginationIterator(
+        async for response in AsyncPaginationIterator(
             self.method, *self.args, **self.kwargs
         ):
             if isinstance(response, Response):
@@ -65,8 +66,9 @@ class Paginator:
                 response_data = response.get("data", [])
             else:
                 raise RuntimeError(
-                    f"Paginator.flatten does not support the {type(response)} "
-                    f"return type for {self.method.__qualname__}"
+                    "AsyncPaginator.flatten does not support the "
+                    f"{type(response)} return type for "
+                    f"{self.method.__qualname__}"
                 )
             for data in response_data:
                 yield data
@@ -75,10 +77,12 @@ class Paginator:
                     return
 
 
-class PaginationIterator:
+class AsyncPaginationIterator:
 
-    def __init__(self, method, *args, limit=inf, pagination_token=None,
-                 reverse=False, **kwargs):
+    def __init__(
+        self, method, *args, limit=inf, pagination_token=None, reverse=False,
+        **kwargs
+    ):
         self.method = method
         self.args = args
         self.limit = limit
@@ -94,17 +98,17 @@ class PaginationIterator:
 
         self.count = 0
 
-    def __iter__(self):
+    def __aiter__(self):
         return self
 
-    def __next__(self):
+    async def __anext__(self):
         if self.reverse:
             pagination_token = self.previous_token
         else:
             pagination_token = self.next_token
 
         if self.count >= self.limit or self.count and pagination_token is None:
-            raise StopIteration
+            raise StopAsyncIteration
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
@@ -115,14 +119,14 @@ class PaginationIterator:
         else:
             self.kwargs["pagination_token"] = pagination_token
 
-        response = self.method(*self.args, **self.kwargs)
+        response = await self.method(*self.args, **self.kwargs)
 
         if isinstance(response, Response):
             meta = response.meta
         elif isinstance(response, dict):
             meta = response.get("meta", {})
-        elif isinstance(response, requests.Response):
-            meta = response.json().get("meta", {})
+        elif isinstance(response, aiohttp.ClientResponse):
+            meta = (await response.json()).get("meta", {})
         else:
             raise RuntimeError(
                 f"Unknown {type(response)} return type for "

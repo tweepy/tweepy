@@ -53,6 +53,10 @@ def payload(payload_type, **payload_kwargs):
 class API:
     """Twitter API v1.1 Interface
 
+    .. versionchanged:: 4.11
+        Added support for ``include_ext_edit_control`` endpoint/method
+        parameter
+
     Parameters
     ----------
     auth
@@ -163,7 +167,9 @@ class API:
         for k, arg in kwargs.items():
             if arg is None:
                 continue
-            if k not in endpoint_parameters and k != "tweet_mode":
+            if k not in endpoint_parameters + (
+                "include_ext_edit_control", "tweet_mode"
+            ):
                 log.warning(f'Unexpected parameter: {k}')
             params[k] = str(arg)
         log.debug("PARAMS: %r", params)
@@ -280,7 +286,7 @@ class API:
             return result
         finally:
             self.session.close()
-    
+
     # Premium Search APIs
 
     @pagination(mode='next')
@@ -1150,7 +1156,7 @@ class API:
             status, filename, *, file, possibly_sensitive, \
             in_reply_to_status_id, lat, long, place_id, display_coordinates \
         )
-        
+
         Update the authenticated user's status. Statuses that are duplicates or
         too long will be silently ignored.
 
@@ -2741,7 +2747,7 @@ class API:
     def set_settings(self, **kwargs):
         """set_settings(*, sleep_time_enabled, start_sleep_time, \
                         end_sleep_time, time_zone, trend_location_woeid, lang)
-        
+
         Updates the authenticating user's settings.
 
         Parameters
@@ -3417,7 +3423,7 @@ class API:
         """
         return self.request(
             'POST', 'direct_messages/indicate_typing', endpoint_parameters=(
-                'recipient_id'
+                'recipient_id',
             ), recipient_id=recipient_id, **kwargs
         )
 
@@ -4089,7 +4095,7 @@ class API:
         Parameters
         ----------
         resources
-            A comma-separated list of resource families you want to know the 
+            A comma-separated list of resource families you want to know the
             current rate limit disposition for.
 
         Returns

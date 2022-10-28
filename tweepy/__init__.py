@@ -5,7 +5,7 @@
 """
 Tweepy Twitter API library
 """
-__version__ = '4.10.0'
+__version__ = '4.12.0'
 __author__ = 'Joshua Roesslein'
 __license__ = 'MIT'
 
@@ -17,6 +17,7 @@ from tweepy.auth import (
 from tweepy.cache import Cache, FileCache, MemoryCache
 from tweepy.client import Client, Response
 from tweepy.cursor import Cursor
+from tweepy.direct_message_event import DirectMessageEvent
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
     TweepyException, TwitterServerError, Unauthorized

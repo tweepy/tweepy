@@ -3,56 +3,53 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/users/783214/mentions
   response:
     body:
-      string: "{\"data\":[{\"id\":\"1522923263990579201\",\"text\":\"@1ruthieann @elonmusk\
-        \ Yes..! @TIME...\\noops!\\ntime will tell...\\nbut don't forget...\\njust\
-        \ a few years ago...\\nSurely @elonmusk had a reason for doing that...\\njust\
-        \ like a #reason for purchasing @Twitter... https://t.co/EI3YL89vFo\"},{\"\
-        id\":\"1522923221103820801\",\"text\":\"@dunjusol @TwitterDE @Twitter damn\
-        \ he probably dead or sum\"},{\"id\":\"1522923132910247937\",\"text\":\"Fuck\
-        \ all the way off, @Twitter @elonmusk let\u2019s us talk this way now \\uD83D\\\
-        uDE02 https://t.co/lHsF1yqq0T\"},{\"id\":\"1522923129785389056\",\"text\"\
-        :\"@Timidzn @kauisiki @elonmusk @MrBeast @Twitter I dont have friends ;-;\"\
-        },{\"id\":\"1522923125695926272\",\"text\":\"@Kiran_Kalyan_ @Twitter Thankyou\
-        \ So Much Bro\"}],\"meta\":{\"next_token\":\"7140dibdnow9c7btw421dz02trvwav4lfrb4owz7joppu\"\
-        ,\"result_count\":5,\"newest_id\":\"1522923263990579201\",\"oldest_id\":\"\
-        1522923125695926272\"}}"
+      string: "{\"data\":[{\"edit_history_tweet_ids\":[\"1578522401263919106\"],\"\
+        id\":\"1578522401263919106\",\"text\":\"@GerardDalbon @Twitter @dsa_intl_comm\
+        \ What why?\"},{\"edit_history_tweet_ids\":[\"1578522395434192896\"],\"id\"\
+        :\"1578522395434192896\",\"text\":\".@Twitter #PBS says we aren\u2019t getting\
+        \ enough #immigrants to fill #jobs, blaming poor #economy on this! @TuckerCarlson\
+        \ @FoxNews @NewsHour\"}],\"meta\":{\"next_token\":\"7140dibdnow9c7btw423i3sy5bxqs2le36uxls6whj6ly\"\
+        ,\"result_count\":2,\"newest_id\":\"1578522401263919106\",\"oldest_id\":\"\
+        1578522395434192896\"}}"
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
-      - '528'
-      content-type:
+      Content-Length:
+      - '345'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 12:56:30 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:07:41 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165192819086097862; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165192819086097862; Max-Age=63072000; Expires=Mon, 06 May
-        2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_n+OGNRpnJW6kmTKaUCoKmw=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165192819086097862; Max-Age=63072000; Expires=Mon, 06 May 2024
-        12:56:30 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518406151329208; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518406151329208; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:07:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_pZEx3WynW0mT4meimSqySA=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518406151329208; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:07:41 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - 60c3de84e9259d0057c56947127a52ca6cee51a34ba98d4a721dd00d918c71f0
+      - 89040fb65813ad32b55d8a0c8758838d442a7c931fceae95e7c7a57a2e79b05d
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -62,9 +59,11 @@ interactions:
       x-rate-limit-remaining:
       - '449'
       x-rate-limit-reset:
-      - '1651929090'
+      - '1665184961'
       x-response-time:
-      - '131'
+      - '96'
+      x-transaction-id:
+      - 2f70dabf977cb1ba
       x-xss-protection:
       - '0'
     status:

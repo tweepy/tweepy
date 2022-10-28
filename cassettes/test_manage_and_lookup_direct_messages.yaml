@@ -1,0 +1,422 @@
+interactions:
+- request:
+    body: '{"text": "Testing 1"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '21'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations/with/750362064426721281/messages
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAACTLQQqEMAwF0LtkPULy26Spl5Fiu3BhhZniRrz7IL79u6iWUWi+qO7LevSzfX9l
+        bEdftkozJeVgYIsRliBwmYQToKwBFjVn12z0eXY7Wx9vE3V1ZpMADS4AnO77DwAA//8DAK1K7bhs
+        AAAA
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '117'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:23 UTC
+      location:
+      - https://api.twitter.com/2/dm_events/"1585800613253812228"
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id_marketing=v1%3A166691930357241307; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 01:08:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166691930357241307; Max-Age=63072000; Expires=Sun, 27 Oct
+        2024 01:08:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="; Max-Age=63072000; Expires=Sun,
+        27 Oct 2024 01:08:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166691930357241307; Max-Age=63072000; Expires=Sun, 27 Oct 2024
+        01:08:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '199'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '82'
+      x-transaction-id:
+      - 8a5ee86aeacaa300
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"text": "Testing 2"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '21'
+      Content-Type:
+      - application/json
+      Cookie:
+      - guest_id=v1%3A166691930357241307; guest_id_ads=v1%3A166691930357241307; guest_id_marketing=v1%3A166691930357241307;
+        personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/messages
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAACTLQQqEMAwF0LtkPUKS9qepl5Fiu3BhhZniRrz7IL79u6iWUWi+qO7LevSzfX9l
+        bEdftkozJXAwZYtRLamoyyScVMEIahE5O7LR59ntbH28TeBwZpOQoO4iMLrvPwAAAP//AwC4jkA1
+        bAAAAA==
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '118'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:23 UTC
+      location:
+      - https://api.twitter.com/2/dm_events/"1585800613752881156"
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '198'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '71'
+      x-transaction-id:
+      - 8d2db836db90cb70
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"conversation_type": "Group", "message": {"text": "Testing"}, "participant_ids":
+      ["145336962", "750362064426721281"]}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '118'
+      Content-Type:
+      - application/json
+      Cookie:
+      - guest_id=v1%3A166691930357241307; guest_id_ads=v1%3A166691930357241307; guest_id_marketing=v1%3A166691930357241307;
+        personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: POST
+    uri: https://api.twitter.com/2/dm_conversations
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSkksSVSyqlZKyY1Pzs8rSy0qTizJzM+Lz0xRslIyNLUwtTAwMDM0MTYzNTa2
+        NDOxUNIBKU0tS80rwaHG1EipthYAAAD//wMA/NX3P1kAAAA=
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '92'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:23 UTC
+      location:
+      - https://api.twitter.com/2/dm_events/"1585800614365339652"
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '200'
+      x-rate-limit-remaining:
+      - '197'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '114'
+      x-transaction-id:
+      - bd8c8860e7589c88
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A166691930357241307; guest_id_ads=v1%3A166691930357241307; guest_id_marketing=v1%3A166691930357241307;
+        personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_events
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWyk0tSVSyqlYqSi0uzSmJT84vzStRsjKorQUAAAD//wMAMxjNjxsAAAA=
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '53'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:24 UTC
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '299'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '402'
+      x-transaction-id:
+      - 532b9bbaaab076f0
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A166691930357241307; guest_id_ads=v1%3A166691930357241307; guest_id_marketing=v1%3A166691930357241307;
+        personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_conversations/750362064426721281-1072250532645998596/dm_events
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJSOwQqCQBRFfyXe2sXM2NjgzlxIMFZUqyJE8iFSjeI8pRD/vZGgFq26y3sPhztA
+        kVMO4WkA7NFQRs8GIYQUrc1LjFvMCcGDqnAll0oqxgLuL6RQinMZuInwQW48oKXKlDMBo/efTEhf
+        cSGE+pVxGM8e3HG6OECLtrtRdqk74yDhgXF0RvUVzSRUOopkwvearXdyk7CEsaOLszYt9lXd2S+7
+        1PH8zW5TvWIfdhxfAAAA//8DAPQRV/YSAQAA
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '198'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:24 UTC
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '298'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '252'
+      x-transaction-id:
+      - 97e15c5a26d66f34
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - guest_id=v1%3A166691930357241307; guest_id_ads=v1%3A166691930357241307; guest_id_marketing=v1%3A166691930357241307;
+        personalization_id="v1_Q7bH83VtVAsTu/8rDJi07A=="
+      User-Agent:
+      - Python/3.10.0 Requests/2.27.1 Tweepy/4.11.0
+    method: GET
+    uri: https://api.twitter.com/2/dm_conversations/with/750362064426721281/dm_events
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJSOwQqCQBRFfyXe2sXM2NjgzlxIMFZUqyJE8iFSjeI8pRD/vZGgFq26y3sPhztA
+        kVMO4WkA7NFQRs8GIYQUrc1LjFvMCcGDqnAll0oqxgLuL6RQinMZuInwQW48oKXKlDMBo/efTEhf
+        cSGE+pVxGM8e3HG6OECLtrtRdqk74yDhgXF0RvUVzSRUOopkwvearXdyk7CEsaOLszYt9lXd2S+7
+        1PH8zW5TvWIfdhxfAAAA//8DAPQRV/YSAQAA
+    headers:
+      api-version:
+      - '2.55'
+      cache-control:
+      - no-cache, no-store, max-age=0
+      content-disposition:
+      - attachment; filename=json.json
+      content-encoding:
+      - gzip
+      content-length:
+      - '198'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 28 Oct 2022 01:08:24 UTC
+      perf:
+      - '7626143928'
+      server:
+      - tsa_b
+      strict-transport-security:
+      - max-age=631138519
+      x-access-level:
+      - read-write-directmessages
+      x-connection-hash:
+      - 6606c0b67f5c1549f59c56f029b51c3767fa3d7d2e303df11caf4fa499a0299e
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '297'
+      x-rate-limit-reset:
+      - '1666920203'
+      x-response-time:
+      - '249'
+      x-transaction-id:
+      - 445b49d7f86564e1
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

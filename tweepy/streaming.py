@@ -52,20 +52,21 @@ class BaseStream:
             f"Tweepy/{tweepy.__version__}"
         )
 
-    def _connect(self, method, url, auth=None, params=None, headers=None,
-                 body=None):
+    def _connect(
+        self, method, url, auth=None, params=None, headers=None, body=None,
+        timeout=20
+    ):
         self.running = True
 
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         # https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/handling-disconnections
         # https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/integrate/handling-disconnections
-        stall_timeout = 90
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
-        http_420_error_wait_start = 60
+        http_429_error_wait_start = 60
 
         self.session.headers["User-Agent"] = self.user_agent
 
@@ -74,7 +75,7 @@ class BaseStream:
                 try:
                     with self.session.request(
                         method, url, params=params, headers=headers, data=body,
-                        timeout=stall_timeout, stream=True, auth=auth,
+                        timeout=timeout, stream=True, auth=auth,
                         verify=self.verify, proxies=self.proxies
                     ) as resp:
                         if resp.status_code == 200:
@@ -102,12 +103,19 @@ class BaseStream:
                             self.on_request_error(resp.status_code)
                             if not self.running:
                                 break
+                            # The error text is logged here instead of in
+                            # on_request_error to keep on_request_error
+                            # backwards-compatible. In a future version, the
+                            # Response should be passed to on_request_error.
+                            log.error(
+                                "HTTP error response text: %s", resp.text
+                            )
 
                             error_count += 1
 
-                            if resp.status_code == 420:
-                                if http_error_wait < http_420_error_wait_start:
-                                    http_error_wait = http_420_error_wait_start
+                            if resp.status_code in (420, 429):
+                                if http_error_wait < http_429_error_wait_start:
+                                    http_error_wait = http_429_error_wait_start
 
                             sleep(http_error_wait)
 
@@ -271,7 +279,7 @@ class Stream(BaseStream):
         auth = OAuth1(self.consumer_key, self.consumer_secret,
                       self.access_token, self.access_token_secret)
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
-        super()._connect(method, url, auth=auth, **kwargs)
+        super()._connect(method, url, auth=auth, timeout=90, **kwargs)
 
     def filter(self, *, follow=None, track=None, locations=None,
                filter_level=None, languages=None, stall_warnings=False,
@@ -557,7 +565,9 @@ class StreamingClient(BaseClient, BaseStream):
     return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
-        Whether to wait when rate limit is reached
+        Whether or not to wait before retrying when a rate limit is
+        encountered. This applies to requests besides those that connect to a
+        stream (see ``max_retries``).
     chunk_size : int
         The default socket.read size. Default to 512, less than half the size
         of a Tweet so that it reads Tweets with the minimal latency of 2 reads
@@ -637,8 +647,8 @@ class StreamingClient(BaseClient, BaseStream):
         add : list[StreamRule] | StreamRule
             Specifies the operation you want to perform on the rules.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
@@ -674,8 +684,8 @@ class StreamingClient(BaseClient, BaseStream):
             Array of rule IDs, each one representing a rule already active in
             your stream. IDs must be submitted as strings.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
@@ -691,7 +701,7 @@ class StreamingClient(BaseClient, BaseStream):
             ids = (ids,)
         for id in ids:
             if isinstance(id, StreamRule):
-                json["delete"]["ids"].append(str(StreamRule.id))
+                json["delete"]["ids"].append(str(id.id))
             else:
                 json["delete"]["ids"].append(str(id))
 

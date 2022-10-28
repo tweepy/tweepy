@@ -3,194 +3,262 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/users/783214/liked_tweets
   response:
     body:
-      string: "{\"data\":[{\"id\":\"1504123888086704128\",\"text\":\"Twitter is only\
-        \ following one person, and it's me.\"},{\"id\":\"1494046213137735681\",\"\
-        text\":\"avoir son projet en banni\xE8re de Twitter \u2705 https://t.co/evnwMQdFKc\"\
-        },{\"id\":\"1494042851000344581\",\"text\":\"@Twitter \\uD83D\\uDE1D squinting-tongue\
-        \ + \\uD83D\\uDE2D in-tears = https://t.co/h9VN3YOOSj\"},{\"id\":\"1494041387880304645\"\
-        ,\"text\":\"Time to celebrate the #GoodBots on Twitter!\\n\\nWe\u2019re launching\
-        \ labels for developer-created accounts so you can identify more of the good\
-        \ bots and their helpful Tweets. https://t.co/1K9tBYEpOR https://t.co/of6zFkck4n\"\
-        },{\"id\":\"1484655996404477952\",\"text\":\"I. Am. Crying. \\uD83E\\uDD72\
-        \ https://t.co/TatAG7K3WU https://t.co/KtJ2uzkIpg\"},{\"id\":\"1484544778297511937\"\
-        ,\"text\":\"Sending \\uD83D\\uDC9C right back to you too\\n@Twitter https://t.co/HRXKIo5Sus\"\
-        },{\"id\":\"1484606047306330119\",\"text\":\"Welcome to Cool Dogs @Twitter\
-        \ \\uD83E\\uDD1D\\uD83D\\uDC36 https://t.co/sVUTP57tQQ\"},{\"id\":\"1484287427388837888\"\
+      string: "{\"data\":[{\"edit_history_tweet_ids\":[\"1345434652891373571\"],\"\
+        id\":\"1345434652891373571\",\"text\":\"RT @djarinculture: *me rereading my\
+        \ own tweet every time someone likes it* https://t.co/Q764BDICa9\"},{\"edit_history_tweet_ids\"\
+        :[\"1575546433847324672\"],\"id\":\"1575546433847324672\",\"text\":\"RT @TwitterMovies:\
+        \ he's brought kink to the timeline, Paul Rudd to the streets, and now as\
+        \ #BrosMovie hits theaters, @billyeichner is takin\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1158796820627283973\"],\"id\":\"1158796820627283973\",\"text\":\"@chromaticloud\
+        \ @thankunext327 #FreeDorothy\"},{\"edit_history_tweet_ids\":[\"1443969410440601638\"\
+        ],\"id\":\"1443969410440601638\",\"text\":\"apparently it's october\"},{\"\
+        edit_history_tweet_ids\":[\"1462843218446503940\"],\"id\":\"1462843218446503940\"\
+        ,\"text\":\"your typo makes it original\"},{\"edit_history_tweet_ids\":[\"\
+        1477395490220220419\"],\"id\":\"1477395490220220419\",\"text\":\"let's just\
+        \ see how this one goes\"},{\"edit_history_tweet_ids\":[\"1483427697556664321\"\
+        ],\"id\":\"1483427697556664321\",\"text\":\"\\uD83D\\uDCCD Chicago, IL https://t.co/nWlMYsY1S7\"\
+        },{\"edit_history_tweet_ids\":[\"1425505690634780673\"],\"id\":\"1425505690634780673\"\
+        ,\"text\":\"okay confirmed it did\"},{\"edit_history_tweet_ids\":[\"1425505236572049420\"\
+        ],\"id\":\"1425505236572049420\",\"text\":\"wait did our font change?\"},{\"\
+        edit_history_tweet_ids\":[\"1481674458586927105\"],\"id\":\"1481674458586927105\"\
+        ,\"text\":\"2 Retweets, that's a hit\"},{\"edit_history_tweet_ids\":[\"1212237037631352832\"\
+        ],\"id\":\"1212237037631352832\",\"text\":\"woooooooohooooooo!\"},{\"edit_history_tweet_ids\"\
+        :[\"1539355981854957568\"],\"id\":\"1539355981854957568\",\"text\":\"RT @pvrekhs:\
+        \ how do other people not constantly reply to their own tweets i always have\
+        \ extra info to add\"},{\"edit_history_tweet_ids\":[\"1540059169771978754\"\
+        ],\"id\":\"1540059169771978754\",\"text\":\"we would know\"},{\"edit_history_tweet_ids\"\
+        :[\"1540058653155278849\"],\"id\":\"1540058653155278849\",\"text\":\"ratios\
+        \ build character\"},{\"edit_history_tweet_ids\":[\"1509208291246805002\"\
+        ],\"id\":\"1509208291246805002\",\"text\":\"@praatyy are we friends?\"},{\"\
+        edit_history_tweet_ids\":[\"1542566710594658312\"],\"id\":\"1542566710594658312\"\
+        ,\"text\":\"if you've ever stolen a Tweet say sorry\"},{\"edit_history_tweet_ids\"\
+        :[\"1555618078481858561\"],\"id\":\"1555618078481858561\",\"text\":\"RT if\
+        \ you just closed and reopened this app\"},{\"edit_history_tweet_ids\":[\"\
+        1177008991697874945\"],\"id\":\"1177008991697874945\",\"text\":\"RT @shashashasha:\
+        \ extrovert in the tweets, introvert in the streets\"},{\"edit_history_tweet_ids\"\
+        :[\"1564598913784549376\"],\"id\":\"1564598913784549376\",\"text\":\"giving\
+        \ you all Twitter Circle because sometimes your Tweets aren\u2019t for everyone\
+        \ \\n\\nadd up to 150 people to yours and use it. please. https://t.co/D6AE4OhRX5\"\
+        },{\"edit_history_tweet_ids\":[\"1564694842311049217\"],\"id\":\"1564694842311049217\"\
+        ,\"text\":\"who is brave enough to add us to their Twitter Circle?\"},{\"\
+        edit_history_tweet_ids\":[\"1542544188310437888\"],\"id\":\"1542544188310437888\"\
+        ,\"text\":\"RT @camerobradford: When two people who are dating both like one\
+        \ of my tweets, i like to picture them both laughing at it together while\
+        \ ho\u2026\"},{\"edit_history_tweet_ids\":[\"1493027682795335680\"],\"id\"\
+        :\"1493027682795335680\",\"text\":\"this Tweet is our Super Bowl commercial\"\
+        },{\"edit_history_tweet_ids\":[\"1565318587736285184\"],\"id\":\"1565318587736285184\"\
+        ,\"text\":\"if you see an edited Tweet it's because we're testing the edit\
+        \ button\\n\\nthis is happening and you'll be okay\"},{\"edit_history_tweet_ids\"\
+        :[\"1551967807428071431\"],\"id\":\"1551967807428071431\",\"text\":\"wishing\
+        \ everyone with less than 350 followers a very nice day\"},{\"edit_history_tweet_ids\"\
+        :[\"1577730467436138524\"],\"id\":\"1577730467436138524\",\"text\":\"whoa,\
+        \ it works\\n\\nnow everyone can mix GIFs, videos, and images in one Tweet,\
+        \ available on iOS and Android https://t.co/3OQ4eGsUku https://t.co/LVVolAQPZi\"\
+        },{\"edit_history_tweet_ids\":[\"1509951255388504066\"],\"id\":\"1509951255388504066\"\
+        ,\"text\":\"we are working on an edit button\"},{\"edit_history_tweet_ids\"\
+        :[\"1557773472968892425\"],\"id\":\"1557773472968892425\",\"text\":\"UM https://t.co/DLzcVVyB5l\
+        \ https://t.co/9Thwe6Yw85\"},{\"edit_history_tweet_ids\":[\"1557769046182985728\"\
+        ],\"id\":\"1557769046182985728\",\"text\":\"GUYS https://t.co/zDWFOe2zKX\"\
+        },{\"edit_history_tweet_ids\":[\"1557770567964676096\"],\"id\":\"1557770567964676096\"\
+        ,\"text\":\"how did i manage this https://t.co/3o9weHBeVI\"},{\"edit_history_tweet_ids\"\
+        :[\"1554303084058271744\"],\"id\":\"1554303084058271744\",\"text\":\"when\
+        \ i get more than 4 likes on a tweet https://t.co/xSDGirFGFE\"},{\"edit_history_tweet_ids\"\
+        :[\"1504123888086704128\"],\"id\":\"1504123888086704128\",\"text\":\"Twitter\
+        \ is only following one person, and it's me.\"},{\"edit_history_tweet_ids\"\
+        :[\"1494046213137735681\"],\"id\":\"1494046213137735681\",\"text\":\"avoir\
+        \ son projet en banni\xE8re de Twitter \u2705 https://t.co/evnwMQdFKc\"},{\"\
+        edit_history_tweet_ids\":[\"1494042851000344581\"],\"id\":\"1494042851000344581\"\
+        ,\"text\":\"@Twitter \\uD83D\\uDE1D squinting-tongue + \\uD83D\\uDE2D in-tears\
+        \ = https://t.co/h9VN3YOOSj\"},{\"edit_history_tweet_ids\":[\"1494041387880304645\"\
+        ],\"id\":\"1494041387880304645\",\"text\":\"Time to celebrate the #GoodBots\
+        \ on Twitter!\\n\\nWe\u2019re launching labels for developer-created accounts\
+        \ so you can identify more of the good bots and their helpful Tweets. https://t.co/1K9tBYEpOR\
+        \ https://t.co/of6zFkck4n\"},{\"edit_history_tweet_ids\":[\"1484655996404477952\"\
+        ],\"id\":\"1484655996404477952\",\"text\":\"I. Am. Crying. \\uD83E\\uDD72\
+        \ https://t.co/TatAG7K3WU https://t.co/KtJ2uzkIpg\"},{\"edit_history_tweet_ids\"\
+        :[\"1484544778297511937\"],\"id\":\"1484544778297511937\",\"text\":\"Sending\
+        \ \\uD83D\\uDC9C right back to you too\\n@Twitter https://t.co/HRXKIo5Sus\"\
+        },{\"edit_history_tweet_ids\":[\"1484606047306330119\"],\"id\":\"1484606047306330119\"\
+        ,\"text\":\"Welcome to Cool Dogs @Twitter \\uD83E\\uDD1D\\uD83D\\uDC36 https://t.co/sVUTP57tQQ\"\
+        },{\"edit_history_tweet_ids\":[\"1484287427388837888\"],\"id\":\"1484287427388837888\"\
         ,\"text\":\"\\uD83D\\uDE80\\uD83C\\uDF6A \\uD83D\\uDE0D\\uD83C\\uDF6D https://t.co/NJBo8hLt13\
-        \ https://t.co/1jkJU9DDYg\"},{\"id\":\"1484255399939350529\",\"text\":\"this\
-        \ is AMAAZZZZZINNNGG!!!! https://t.co/07vIQhYdPH\"},{\"id\":\"1484256184949432331\"\
-        ,\"text\":\"HOLY HECK!!!!!!!!!!!!! https://t.co/hqTRlQPFZe\"},{\"id\":\"1483785433607598081\"\
-        ,\"text\":\"@Twitter New car. New job in a healthy working environment \\\
-        uD83D\\uDD6F\\uD83D\\uDE4F\\uD83C\\uDFFD\"},{\"id\":\"1483883947612327944\"\
-        ,\"text\":\"@Twitter I would be a doctor in 2025 and a successful artist\"\
-        },{\"id\":\"1483908864693227532\",\"text\":\"@Twitter Can\u2019t wait to have\
-        \ a world tour soon!\"},{\"id\":\"1483738975768567808\",\"text\":\"@Twitter\
-        \ I will get a ep &amp; show runner for my animated show this year and get\
-        \ it green lit \\uD83D\\uDD25 \\uD83E\\uDD1E\\uD83C\\uDFFE\"},{\"id\":\"1483797315366567937\"\
-        ,\"text\":\"@Twitter I'm going to my dream college this year\"},{\"id\":\"\
-        1483676808650186753\",\"text\":\"@Twitter I dream of developing and shipping\
-        \ two software applications that actually solves problems \\uD83D\\uDE4F\\\
-        uD83C\\uDFFD\"},{\"id\":\"1483749641904697352\",\"text\":\"@Twitter New Car\
-        \ and Apartment, also a thriving university student \u2728\\uD83D\\uDE0A\"\
-        },{\"id\":\"1483563603433295874\",\"text\":\"@Twitter im going to thrive at\
-        \ university this year\"},{\"id\":\"1483640576289427459\",\"text\":\"@Twitter\
+        \ https://t.co/1jkJU9DDYg\"},{\"edit_history_tweet_ids\":[\"1484255399939350529\"\
+        ],\"id\":\"1484255399939350529\",\"text\":\"this is AMAAZZZZZINNNGG!!!! https://t.co/07vIQhYdPH\"\
+        },{\"edit_history_tweet_ids\":[\"1484256184949432331\"],\"id\":\"1484256184949432331\"\
+        ,\"text\":\"HOLY HECK!!!!!!!!!!!!! https://t.co/hqTRlQPFZe\"},{\"edit_history_tweet_ids\"\
+        :[\"1483785433607598081\"],\"id\":\"1483785433607598081\",\"text\":\"@Twitter\
+        \ New car. New job in a healthy working environment \\uD83D\\uDD6F\\uD83D\\\
+        uDE4F\\uD83C\\uDFFD\"},{\"edit_history_tweet_ids\":[\"1483883947612327944\"\
+        ],\"id\":\"1483883947612327944\",\"text\":\"@Twitter I would be a doctor in\
+        \ 2025 and a successful artist\"},{\"edit_history_tweet_ids\":[\"1483908864693227532\"\
+        ],\"id\":\"1483908864693227532\",\"text\":\"@Twitter Can\u2019t wait to have\
+        \ a world tour soon!\"},{\"edit_history_tweet_ids\":[\"1483738975768567808\"\
+        ],\"id\":\"1483738975768567808\",\"text\":\"@Twitter I will get a ep &amp;\
+        \ show runner for my animated show this year and get it green lit \\uD83D\\\
+        uDD25 \\uD83E\\uDD1E\\uD83C\\uDFFE\"},{\"edit_history_tweet_ids\":[\"1483797315366567937\"\
+        ],\"id\":\"1483797315366567937\",\"text\":\"@Twitter I'm going to my dream\
+        \ college this year\"},{\"edit_history_tweet_ids\":[\"1483676808650186753\"\
+        ],\"id\":\"1483676808650186753\",\"text\":\"@Twitter I dream of developing\
+        \ and shipping two software applications that actually solves problems \\\
+        uD83D\\uDE4F\\uD83C\\uDFFD\"},{\"edit_history_tweet_ids\":[\"1483749641904697352\"\
+        ],\"id\":\"1483749641904697352\",\"text\":\"@Twitter New Car and Apartment,\
+        \ also a thriving university student \u2728\\uD83D\\uDE0A\"},{\"edit_history_tweet_ids\"\
+        :[\"1483563603433295874\"],\"id\":\"1483563603433295874\",\"text\":\"@Twitter\
+        \ im going to thrive at university this year\"},{\"edit_history_tweet_ids\"\
+        :[\"1483640576289427459\"],\"id\":\"1483640576289427459\",\"text\":\"@Twitter\
         \ A tv show I create gets greenlit and we start filming in 2022 \u2728\"},{\"\
-        id\":\"1483751341977931776\",\"text\":\"@Twitter I'm going to become a sought\
-        \ after change lead at my current employer in years time. I'll oversee projects\
-        \ and people confidently and competently. My salary will increase x5 shem.\"\
-        },{\"id\":\"1483721331216719873\",\"text\":\"I'm going to be a successful\
-        \ music producer. https://t.co/daREG1BChM\"},{\"id\":\"1483863013572714501\"\
-        ,\"text\":\"@Twitter i\u2019ll get harry styles tickets for london in june\
-        \ with my friends \\uD83D\\uDD6F\\uD83D\\uDD6F\"},{\"id\":\"1483685568529645568\"\
-        ,\"text\":\"@Twitter I will facilitate a round table / panel for a TV show\
-        \ or film that I love.\"},{\"id\":\"1483676039469355010\",\"text\":\"@Twitter\
+        edit_history_tweet_ids\":[\"1483751341977931776\"],\"id\":\"1483751341977931776\"\
+        ,\"text\":\"@Twitter I'm going to become a sought after change lead at my\
+        \ current employer in years time. I'll oversee projects and people confidently\
+        \ and competently. My salary will increase x5 shem.\"},{\"edit_history_tweet_ids\"\
+        :[\"1483721331216719873\"],\"id\":\"1483721331216719873\",\"text\":\"I'm going\
+        \ to be a successful music producer. https://t.co/daREG1BChM\"},{\"edit_history_tweet_ids\"\
+        :[\"1483863013572714501\"],\"id\":\"1483863013572714501\",\"text\":\"@Twitter\
+        \ i\u2019ll get harry styles tickets for london in june with my friends \\\
+        uD83D\\uDD6F\\uD83D\\uDD6F\"},{\"edit_history_tweet_ids\":[\"1483685568529645568\"\
+        ],\"id\":\"1483685568529645568\",\"text\":\"@Twitter I will facilitate a round\
+        \ table / panel for a TV show or film that I love.\"},{\"edit_history_tweet_ids\"\
+        :[\"1483676039469355010\"],\"id\":\"1483676039469355010\",\"text\":\"@Twitter\
         \ Sell a pilot, find true love, publish a novel. In no particular order,\"\
-        },{\"id\":\"1483702748751310853\",\"text\":\"@Twitter I am going to be happy\
-        \ and successful this year. Things are finally working out.\"},{\"id\":\"\
-        1483831080310480896\",\"text\":\"@Twitter By October 2023, I would be a lawyer.\"\
-        },{\"id\":\"1483859933934325768\",\"text\":\"Securing a job that will give\
-        \ me financial freedom and stability while growing my knowledge in my career.\
-        \ https://t.co/Hux2F4iGNJ\"},{\"id\":\"1483641091844976641\",\"text\":\"My\
-        \ feature \u2018Swimming in Cuba\u2019 will get made. https://t.co/bWTZxfJ9yY\"\
-        },{\"id\":\"1483771851302187012\",\"text\":\"I\u2019m getting a product marketing\
-        \ manager role in a leading SaaS/tech company in the next 6 months https://t.co/j4CT7KOVN0\"\
-        },{\"id\":\"1483796896795832334\",\"text\":\"my business will take off this\
-        \ year IJN\\uD83D\\uDE4F\\uD83C\\uDFFE\u2728 https://t.co/kIJRDbmaOs\"},{\"\
-        id\":\"1483638416386449411\",\"text\":\"ted lasso blooper reel https://t.co/8JfJWNF8rP\"\
-        },{\"id\":\"1483639606125862912\",\"text\":\"Directing TV episodes in 2022\
-        \ \\uD83C\\uDFA5\\uD83C\\uDF9E\\uD83C\\uDFAC https://t.co/kIlRQ98bnh\"},{\"\
-        id\":\"1483655876783312896\",\"text\":\"My first car and apartment will be\
-        \ bagged this year https://t.co/kkEmpklw11\"},{\"id\":\"1483709123376168960\"\
+        },{\"edit_history_tweet_ids\":[\"1483702748751310853\"],\"id\":\"1483702748751310853\"\
+        ,\"text\":\"@Twitter I am going to be happy and successful this year. Things\
+        \ are finally working out.\"},{\"edit_history_tweet_ids\":[\"1483831080310480896\"\
+        ],\"id\":\"1483831080310480896\",\"text\":\"@Twitter By October 2023, I would\
+        \ be a lawyer.\"},{\"edit_history_tweet_ids\":[\"1483859933934325768\"],\"\
+        id\":\"1483859933934325768\",\"text\":\"Securing a job that will give me financial\
+        \ freedom and stability while growing my knowledge in my career. https://t.co/Hux2F4iGNJ\"\
+        },{\"edit_history_tweet_ids\":[\"1483641091844976641\"],\"id\":\"1483641091844976641\"\
+        ,\"text\":\"My feature \u2018Swimming in Cuba\u2019 will get made. https://t.co/bWTZxfJ9yY\"\
+        },{\"edit_history_tweet_ids\":[\"1483771851302187012\"],\"id\":\"1483771851302187012\"\
+        ,\"text\":\"I\u2019m getting a product marketing manager role in a leading\
+        \ SaaS/tech company in the next 6 months https://t.co/j4CT7KOVN0\"},{\"edit_history_tweet_ids\"\
+        :[\"1483796896795832334\"],\"id\":\"1483796896795832334\",\"text\":\"my business\
+        \ will take off this year IJN\\uD83D\\uDE4F\\uD83C\\uDFFE\u2728 https://t.co/kIJRDbmaOs\"\
+        },{\"edit_history_tweet_ids\":[\"1483638416386449411\"],\"id\":\"1483638416386449411\"\
+        ,\"text\":\"ted lasso blooper reel https://t.co/8JfJWNF8rP\"},{\"edit_history_tweet_ids\"\
+        :[\"1483639606125862912\"],\"id\":\"1483639606125862912\",\"text\":\"Directing\
+        \ TV episodes in 2022 \\uD83C\\uDFA5\\uD83C\\uDF9E\\uD83C\\uDFAC https://t.co/kIlRQ98bnh\"\
+        },{\"edit_history_tweet_ids\":[\"1483655876783312896\"],\"id\":\"1483655876783312896\"\
+        ,\"text\":\"My first car and apartment will be bagged this year https://t.co/kkEmpklw11\"\
+        },{\"edit_history_tweet_ids\":[\"1483709123376168960\"],\"id\":\"1483709123376168960\"\
         ,\"text\":\"I\u2019m directing my Cinema Debut this year \\uD83D\\uDE4F\\\
-        uD83D\\uDE4F https://t.co/COLcBGezR6\"},{\"id\":\"1483683921267081218\",\"\
-        text\":\"Shooting my first feature in 2022 \u2728 https://t.co/Q2ovHBsY9N\"\
-        },{\"id\":\"1483686510557900804\",\"text\":\"I will be on a cover of a magazine.\
-        \ \\n\\nOne day. https://t.co/wU2A2xaY8D\"},{\"id\":\"1483707037947244545\"\
-        ,\"text\":\"~ A cinema film this year. Amen \\uD83D\\uDE4F https://t.co/UuYixJWnCh\"\
-        },{\"id\":\"1483763412991684614\",\"text\":\"Entering grad school or getting\
-        \ a job this year \\uD83D\\uDE4F\\uD83D\\uDE4F. https://t.co/tCOcZi2cE8\"\
-        },{\"id\":\"1483793215773884418\",\"text\":\"I'm gonna open one of the biggest\
-        \ restaurants in Lagos. The food and aesthetics is gonna be amazing and everyone\
-        \ will love it \\uD83E\\uDD70\\uD83D\\uDE4F https://t.co/cUUqg5V77d\"},{\"\
-        id\":\"1483797446065070081\",\"text\":\"My idols will become my peers and\
-        \ I won\u2019t feel out of place \u2728 https://t.co/sDeqtXafIh\"},{\"id\"\
-        :\"1483804960349429766\",\"text\":\"By October 2022, I should be a lawyer.\
-        \ https://t.co/1w7iCijEwY\"},{\"id\":\"1483844443312738313\",\"text\":\"I\
-        \ will work at @Google as a Product Manager\\uD83D\\uDE4C\\uD83C\\uDFFE https://t.co/b5dwcqNzxz\"\
-        },{\"id\":\"1483713430645260289\",\"text\":\"My books getting over a million\
-        \ sales worldwide. https://t.co/gGHdKpA20x\"},{\"id\":\"1483838320874606597\"\
-        ,\"text\":\"Finna be the most sought after Musican / Icon from Ghana, few\
-        \ years from now IJMN So help me God. \\uD83D\\uDE4F\\uD83C\\uDFFE\\uD83D\\\
-        uDCAB https://t.co/8FMie575yB\"},{\"id\":\"1480583393981181961\",\"text\"\
-        :\"Hi everyone! I need 10k likes on this tweet to get an A on an assignment\
-        \ in my social networking class! Please help \\uD83E\\uDD70\"},{\"id\":\"\
-        1441766810961866761\",\"text\":\"I love that I don't have to be so proper\
-        \ on Twitter. Slang being used. Starting sentences without capitalizing. Emojis.\
-        \ Gifs. Twitter reigns supreme!!!\"},{\"id\":\"1438162359261016081\",\"text\"\
-        :\"\\uD83E\\uDD7A\\uD83E\\uDD7A\\uD83E\\uDD7A https://t.co/UcbvgPmeBi\"},{\"\
-        id\":\"1438162015609032720\",\"text\":\"WE DID IT!!!!!!!! \\n\\nThank you\
-        \ @Twitter!!! https://t.co/F72rBN7Uio\"},{\"id\":\"1431302172298338316\",\"\
-        text\":\"How it Started       vs.        How it\u2019s going https://t.co/ZsQBx8bRzi\"\
-        },{\"id\":\"1431342104874295296\",\"text\":\"thanks @Twitter for my new favourite\
-        \ hoodie! no apology necessary. https://t.co/3hLOhGqVLC\"},{\"id\":\"1431291336787996672\"\
+        uD83D\\uDE4F https://t.co/COLcBGezR6\"},{\"edit_history_tweet_ids\":[\"1483683921267081218\"\
+        ],\"id\":\"1483683921267081218\",\"text\":\"Shooting my first feature in 2022\
+        \ \u2728 https://t.co/Q2ovHBsY9N\"},{\"edit_history_tweet_ids\":[\"1483686510557900804\"\
+        ],\"id\":\"1483686510557900804\",\"text\":\"I will be on a cover of a magazine.\
+        \ \\n\\nOne day. https://t.co/wU2A2xaY8D\"},{\"edit_history_tweet_ids\":[\"\
+        1483707037947244545\"],\"id\":\"1483707037947244545\",\"text\":\"~ A cinema\
+        \ film this year. Amen \\uD83D\\uDE4F https://t.co/UuYixJWnCh\"},{\"edit_history_tweet_ids\"\
+        :[\"1483763412991684614\"],\"id\":\"1483763412991684614\",\"text\":\"Entering\
+        \ grad school or getting a job this year \\uD83D\\uDE4F\\uD83D\\uDE4F. https://t.co/tCOcZi2cE8\"\
+        },{\"edit_history_tweet_ids\":[\"1483793215773884418\"],\"id\":\"1483793215773884418\"\
+        ,\"text\":\"I'm gonna open one of the biggest restaurants in Lagos. The food\
+        \ and aesthetics is gonna be amazing and everyone will love it \\uD83E\\uDD70\\\
+        uD83D\\uDE4F https://t.co/cUUqg5V77d\"},{\"edit_history_tweet_ids\":[\"1483797446065070081\"\
+        ],\"id\":\"1483797446065070081\",\"text\":\"My idols will become my peers\
+        \ and I won\u2019t feel out of place \u2728 https://t.co/sDeqtXafIh\"},{\"\
+        edit_history_tweet_ids\":[\"1483804960349429766\"],\"id\":\"1483804960349429766\"\
+        ,\"text\":\"By October 2022, I should be a lawyer. https://t.co/1w7iCijEwY\"\
+        },{\"edit_history_tweet_ids\":[\"1483844443312738313\"],\"id\":\"1483844443312738313\"\
+        ,\"text\":\"I will work at @Google as a Product Manager\\uD83D\\uDE4C\\uD83C\\\
+        uDFFE https://t.co/b5dwcqNzxz\"},{\"edit_history_tweet_ids\":[\"1483713430645260289\"\
+        ],\"id\":\"1483713430645260289\",\"text\":\"My books getting over a million\
+        \ sales worldwide. https://t.co/gGHdKpA20x\"},{\"edit_history_tweet_ids\"\
+        :[\"1483838320874606597\"],\"id\":\"1483838320874606597\",\"text\":\"Finna\
+        \ be the most sought after Musican / Icon from Ghana, few years from now IJMN\
+        \ So help me God. \\uD83D\\uDE4F\\uD83C\\uDFFE\\uD83D\\uDCAB https://t.co/8FMie575yB\"\
+        },{\"edit_history_tweet_ids\":[\"1480583393981181961\"],\"id\":\"1480583393981181961\"\
+        ,\"text\":\"Hi everyone! I need 10k likes on this tweet to get an A on an\
+        \ assignment in my social networking class! Please help \\uD83E\\uDD70\"},{\"\
+        edit_history_tweet_ids\":[\"1441766810961866761\"],\"id\":\"1441766810961866761\"\
+        ,\"text\":\"I love that I don't have to be so proper on Twitter. Slang being\
+        \ used. Starting sentences without capitalizing. Emojis. Gifs. Twitter reigns\
+        \ supreme!!!\"},{\"edit_history_tweet_ids\":[\"1438162359261016081\"],\"id\"\
+        :\"1438162359261016081\",\"text\":\"\\uD83E\\uDD7A\\uD83E\\uDD7A\\uD83E\\\
+        uDD7A https://t.co/UcbvgPmeBi\"},{\"edit_history_tweet_ids\":[\"1438162015609032720\"\
+        ],\"id\":\"1438162015609032720\",\"text\":\"WE DID IT!!!!!!!! \\n\\nThank\
+        \ you @Twitter!!! https://t.co/F72rBN7Uio\"},{\"edit_history_tweet_ids\":[\"\
+        1431302172298338316\"],\"id\":\"1431302172298338316\",\"text\":\"How it Started\
+        \       vs.        How it\u2019s going https://t.co/ZsQBx8bRzi\"},{\"edit_history_tweet_ids\"\
+        :[\"1431342104874295296\"],\"id\":\"1431342104874295296\",\"text\":\"thanks\
+        \ @Twitter for my new favourite hoodie! no apology necessary. https://t.co/3hLOhGqVLC\"\
+        },{\"edit_history_tweet_ids\":[\"1431291336787996672\"],\"id\":\"1431291336787996672\"\
         ,\"text\":\"She\u2019s here and she\u2019s perfect.\\n\\nI love you, @Twitter.\
-        \ \\uD83D\\uDC99 https://t.co/FkCFTbjvSz\"},{\"id\":\"1431290252547837956\"\
-        ,\"text\":\"We're sorry or you're welcome. \\uD83D\\uDD25\\uD83D\\uDD25 \\\
-        n\\nThanks @Twitter \\uD83D\\uDC99 https://t.co/gE6nHEaA7C\"},{\"id\":\"1431306142605627393\"\
-        ,\"text\":\"I love it, @Twitter. Thank you. https://t.co/DaOX48QwaZ\"},{\"\
-        id\":\"1422593029332901889\",\"text\":\"I\u2019ve really made it, friends!!\
+        \ \\uD83D\\uDC99 https://t.co/FkCFTbjvSz\"},{\"edit_history_tweet_ids\":[\"\
+        1431290252547837956\"],\"id\":\"1431290252547837956\",\"text\":\"We're sorry\
+        \ or you're welcome. \\uD83D\\uDD25\\uD83D\\uDD25 \\n\\nThanks @Twitter \\\
+        uD83D\\uDC99 https://t.co/gE6nHEaA7C\"},{\"edit_history_tweet_ids\":[\"1431306142605627393\"\
+        ],\"id\":\"1431306142605627393\",\"text\":\"I love it, @Twitter. Thank you.\
+        \ https://t.co/DaOX48QwaZ\"},{\"edit_history_tweet_ids\":[\"1422593029332901889\"\
+        ],\"id\":\"1422593029332901889\",\"text\":\"I\u2019ve really made it, friends!!\
         \ I\u2019m on the @Twitter account\u2019s header! https://t.co/KdWjfAkV8n\"\
-        },{\"id\":\"1417846280345341958\",\"text\":\"gm https://t.co/agyr81WIpJ\"\
-        },{\"id\":\"1417846802255126530\",\"text\":\"yeah https://t.co/jym3ONy5o7\"\
-        },{\"id\":\"1412927155290443777\",\"text\":\"@Twitter @Twitter thanks!! I'm\
-        \ a man of my word...stay tuned https://t.co/ywPuoH1K1q\"},{\"id\":\"1410325422609469441\"\
-        ,\"text\":\"@Twitter wow!!! holy moly\"},{\"id\":\"1400452227563622400\",\"\
-        text\":\"folders for bookmarks!\\nundo Tweet!\\nand more!\\n\\nnow available\
-        \ for @TwitterBlue subscribers\\n\\nbe one of the first to explore it in Australia\
-        \ on iOS https://t.co/DvFHovDsRp\"},{\"id\":\"1400452354042851328\",\"text\"\
-        :\"Hey \\uD83C\\uDDE8\\uD83C\\uDDE6, you\u2019re in.\\n\\nBe one of the first\
-        \ to explore @TwitterBlue, a new subscription service on iOS. https://t.co/wV2wn8lXln\"\
-        },{\"id\":\"1387067947663908868\",\"text\":\"@Twitter same\"},{\"id\":\"1379496673899085825\"\
-        ,\"text\":\"@Twitter they like dinosaurs\"},{\"id\":\"1375472671090167830\"\
-        ,\"text\":\"Many people within our community are using today as a day of healing\
-        \ and action. Please be mindful of your loved ones and colleagues who are\
-        \ participating and take action by sharing your commitment to #StopAsianHate\"\
-        },{\"id\":\"1364690287763800065\",\"text\":\"twitter in my dms \\uD83E\\uDD38\u200D\
-        \u2642\uFE0F https://t.co/rlkCo2T11K\"},{\"id\":\"1364612503796256771\",\"\
-        text\":\"OMG https://t.co/5NyWGMKi2x https://t.co/1jxfvUnl4X\"},{\"id\":\"\
-        1364612247251779588\",\"text\":\"so @twitter just followed me- https://t.co/SvApU4pTv2\"\
-        },{\"id\":\"1364610831061815297\",\"text\":\"SHUT UP TWITTER FOLLOWS ME BYE\
-        \ https://t.co/6XM17uZDdE\"},{\"id\":\"1356687762859024384\",\"text\":\"Feel\
-        \ like Twitter people can also be Instagram people, but Instagram people can\u2019\
-        t also be Twitter people.\"},{\"id\":\"1356408295234412545\",\"text\":\"https://t.co/eBPVyRL5g3\"\
-        },{\"id\":\"1350158867620122625\",\"text\":\"We're the three best friends\
-        \ that anybody could have \\uD83D\\uDC9A @Twitter https://t.co/wNTmTb8REp\"\
-        },{\"id\":\"1341797366203109377\",\"text\":\"Someone had to say it https://t.co/JZAg4ZLHia\"\
-        },{\"id\":\"1341514858475315200\",\"text\":\"guys who refused to call me their\
-        \ girlfriend in public are probably regretting that now that one of my tweets\
-        \ is on a billboard\"},{\"id\":\"1341514582821658626\",\"text\":\"aye they\
-        \ threw me onto a billboard in times square. can i hit the rt button on that?\
-        \ https://t.co/a588vyDvpU\"},{\"id\":\"1341514442635243520\",\"text\":\"HEY\
-        \ BESTIE @Twitter https://t.co/dp7JE8ibXc\"},{\"id\":\"1341514296711213056\"\
-        ,\"text\":\"silly little tweets get you serious BIG billboards https://t.co/yZ2XSEUjRZ\"\
-        },{\"id\":\"1341405876721225737\",\"text\":\"@Twitter Hey, 2020, your game\
-        \ is out of order\"},{\"id\":\"1341398978299105280\",\"text\":\"@Twitter 2020\
-        \ was like opening the fridge every five minutes to see if something new was\
-        \ in there. except there was always something new and it was bad\"},{\"id\"\
-        :\"1341164835220971522\",\"text\":\"can i get a W? \\uD83D\\uDE2D\\uD83D\\\
-        uDE2D\\uD83D\\uDE2D\\uD83D\\uDE2D\\uD83D\\uDE2D\\uD83D\\uDE2D https://t.co/QJXxDNYyPP\"\
-        },{\"id\":\"1341165523619311616\",\"text\":\"Yeah so this happened. Ty for\
-        \ the giant IRL RT @Twitter maybe I need to revise that review after all.\
-        \ https://t.co/PUiUhc65h9\"},{\"id\":\"1341159361792462848\",\"text\":\"@Twitter\
-        \ This is amazing \\uD83D\\uDE2D\u2764\"},{\"id\":\"1341160128364466176\"\
-        ,\"text\":\"Guys, my tweet is on a billboard! \\uD83D\\uDE2D\u2764\\nThank\
-        \ you @Twitter https://t.co/75xDYYrj4q\"},{\"id\":\"1341103644905775105\"\
-        ,\"text\":\"@Twitter That\u2019s awesome!  Thank you! It\u2019s still true.\"\
-        },{\"id\":\"1341107454000713729\",\"text\":\"@Twitter Haha, thank you for\
-        \ the recognition! \\uD83D\\uDE4C\\uD83C\\uDFFD\"},{\"id\":\"1341094355260612610\"\
-        ,\"text\":\"i- im on a billboard https://t.co/p9xXohuOC0\"},{\"id\":\"1341092973270982658\"\
-        ,\"text\":\"Aww \\uD83E\\uDD70 https://t.co/fzFqr5tenk\"},{\"id\":\"1341082656868507648\"\
-        ,\"text\":\"My Foolishness PSA has made it to print. Thank you, @Twitter!\
-        \ Leave it in 2020, y\u2019all. \\uD83D\\uDE4F\\uD83C\\uDFFD\u2764\uFE0F https://t.co/SUzl7VP8Un\"\
-        }],\"meta\":{\"result_count\":86,\"next_token\":\"7140dibdnow9c7btw453p178d9z2exz3w6smfcx8bml9z\"\
-        }}"
+        },{\"edit_history_tweet_ids\":[\"1417846280345341958\"],\"id\":\"1417846280345341958\"\
+        ,\"text\":\"gm https://t.co/agyr81WIpJ\"},{\"edit_history_tweet_ids\":[\"\
+        1417846802255126530\"],\"id\":\"1417846802255126530\",\"text\":\"yeah https://t.co/jym3ONy5o7\"\
+        },{\"edit_history_tweet_ids\":[\"1412927155290443777\"],\"id\":\"1412927155290443777\"\
+        ,\"text\":\"@Twitter @Twitter thanks!! I'm a man of my word...stay tuned https://t.co/ywPuoH1K1q\"\
+        },{\"edit_history_tweet_ids\":[\"1410325422609469441\"],\"id\":\"1410325422609469441\"\
+        ,\"text\":\"@Twitter wow!!! holy moly\"},{\"edit_history_tweet_ids\":[\"1400452227563622400\"\
+        ],\"id\":\"1400452227563622400\",\"text\":\"folders for bookmarks!\\nundo\
+        \ Tweet!\\nand more!\\n\\nnow available for @TwitterBlue subscribers\\n\\\
+        nbe one of the first to explore it in Australia on iOS https://t.co/DvFHovDsRp\"\
+        },{\"edit_history_tweet_ids\":[\"1400452354042851328\"],\"id\":\"1400452354042851328\"\
+        ,\"text\":\"Hey \\uD83C\\uDDE8\\uD83C\\uDDE6, you\u2019re in.\\n\\nBe one\
+        \ of the first to explore @TwitterBlue, a new subscription service on iOS.\
+        \ https://t.co/wV2wn8lXln\"},{\"edit_history_tweet_ids\":[\"1387067947663908868\"\
+        ],\"id\":\"1387067947663908868\",\"text\":\"@Twitter same\"},{\"edit_history_tweet_ids\"\
+        :[\"1379496673899085825\"],\"id\":\"1379496673899085825\",\"text\":\"@Twitter\
+        \ they like dinosaurs\"},{\"edit_history_tweet_ids\":[\"1375472671090167830\"\
+        ],\"id\":\"1375472671090167830\",\"text\":\"Many people within our community\
+        \ are using today as a day of healing and action. Please be mindful of your\
+        \ loved ones and colleagues who are participating and take action by sharing\
+        \ your commitment to #StopAsianHate\"},{\"edit_history_tweet_ids\":[\"1364690287763800065\"\
+        ],\"id\":\"1364690287763800065\",\"text\":\"twitter in my dms \\uD83E\\uDD38\u200D\
+        \u2642\uFE0F https://t.co/rlkCo2T11K\"},{\"edit_history_tweet_ids\":[\"1364613192866017283\"\
+        ],\"id\":\"1364613192866017283\",\"text\":\"twitter and me besties for life\
+        \ \\uD83D\\uDC96 https://t.co/67abwqQips\"},{\"edit_history_tweet_ids\":[\"\
+        1364612503796256771\"],\"id\":\"1364612503796256771\",\"text\":\"OMG https://t.co/5NyWGMKi2x\
+        \ https://t.co/1jxfvUnl4X\"}],\"meta\":{\"result_count\":96,\"next_token\"\
+        :\"7140dibdnow9c7btw4543y9ogasjr42z236pfnyg7hsts\"}}"
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
-      - '4769'
-      content-type:
+      Content-Length:
+      - '5647'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 12:56:23 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:07:39 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165192818358586163; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165192818358586163; Max-Age=63072000; Expires=Mon, 06 May
-        2024 12:56:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_+ekc729NZynLpXC+eT89Yg=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 12:56:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165192818358586163; Max-Age=63072000; Expires=Mon, 06 May 2024
-        12:56:23 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518405881307152; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518405881307152; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:07:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_f3JI6UYOzRwqdvPpio18uQ=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:07:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518405881307152; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:07:39 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - c11a73f7d204de13238156674a5e5dbc88adfedb4e178d3eb1e741321bb14fc7
+      - 14fbf30cf45f9749a232dfc7dbfa21f8f3732c7cf59bd67321781c36e9ce38cc
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -200,9 +268,11 @@ interactions:
       x-rate-limit-remaining:
       - '74'
       x-rate-limit-reset:
-      - '1651929083'
+      - '1665184958'
       x-response-time:
-      - '395'
+      - '487'
+      x-transaction-id:
+      - 958e18fb2407c206
       x-xss-protection:
       - '0'
     status:

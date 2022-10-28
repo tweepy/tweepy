@@ -38,28 +38,32 @@ class AsyncBaseStream:
         )
 
     async def _connect(
-        self, method, url, params=None, headers=None, body=None
+        self, method, url, params=None, headers=None, body=None,
+        oauth_client=None, timeout=20
     ):
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         # https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/handling-disconnections
         # https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/integrate/handling-disconnections
-        stall_timeout = 90
         network_error_wait = network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
-        http_420_error_wait_start = 60
+        http_429_error_wait_start = 60
 
         if self.session is None or self.session.closed:
             self.session = aiohttp.ClientSession(
-                timeout=aiohttp.ClientTimeout(sock_read=stall_timeout)
+                timeout=aiohttp.ClientTimeout(sock_read=timeout)
             )
         self.session.headers["User-Agent"] = self.user_agent
 
         try:
             while error_count <= self.max_retries:
                 try:
+                    if oauth_client is not None:
+                        url, headers, body = oauth_client.sign(
+                            url, http_method=method, headers=headers, body=body
+                        )
                     async with self.session.request(
                         method, url, params=params, headers=headers, data=body,
                         proxy=self.proxy
@@ -81,12 +85,21 @@ class AsyncBaseStream:
                             await self.on_closed(resp)
                         else:
                             await self.on_request_error(resp.status)
+                            # The error text is logged here instead of in
+                            # on_request_error to keep on_request_error
+                            # backwards-compatible. In a future version, the
+                            # ClientResponse should be passed to
+                            # on_request_error.
+                            response_text = await resp.text()
+                            log.error(
+                                "HTTP error response text: %s", response_text
+                            )
 
                             error_count += 1
 
-                            if resp.status == 420:
-                                if http_error_wait < http_420_error_wait_start:
-                                    http_error_wait = http_420_error_wait_start
+                            if resp.status in (420, 429):
+                                if http_error_wait < http_429_error_wait_start:
+                                    http_error_wait = http_429_error_wait_start
 
                             await asyncio.sleep(http_error_wait)
 
@@ -243,10 +256,10 @@ class AsyncStream(AsyncBaseStream):
                                    self.access_token, self.access_token_secret)
         url = f"https://stream.twitter.com/1.1/{endpoint}.json"
         url = str(URL(url).with_query(sorted(params.items())))
-        url, headers, body = oauth_client.sign(
-            url, http_method=method, headers=headers, body=body
+        await super()._connect(
+            method, url, headers=headers, body=body, oauth_client=oauth_client,
+            timeout=90
         )
-        await super()._connect(method, url, headers=headers, body=body)
 
     def filter(self, *, follow=None, track=None, locations=None,
                filter_level=None, languages=None, stall_warnings=False):
@@ -557,7 +570,9 @@ class AsyncStreamingClient(AsyncBaseClient, AsyncBaseStream):
     return_type : type[dict | requests.Response | Response]
         Type to return from requests to the API
     wait_on_rate_limit : bool
-        Whether to wait when rate limit is reached
+        Whether or not to wait before retrying when a rate limit is
+        encountered. This applies to requests besides those that connect to a
+        stream (see ``max_retries``).
     max_retries: int | None
         Number of times to attempt to (re)connect the stream.
     proxy : str | None
@@ -623,8 +638,8 @@ class AsyncStreamingClient(AsyncBaseClient, AsyncBaseStream):
         add : list[StreamRule] | StreamRule
             Specifies the operation you want to perform on the rules.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
@@ -662,8 +677,8 @@ class AsyncStreamingClient(AsyncBaseClient, AsyncBaseStream):
             Array of rule IDs, each one representing a rule already active in
             your stream. IDs must be submitted as strings.
         dry_run : bool
-            Set to true to test a the syntax of your rule without submitting
-            it. This is useful if you want to check the syntax of a rule before
+            Set to true to test the syntax of your rule without submitting it.
+            This is useful if you want to check the syntax of a rule before
             removing one or more of your existing rules.
 
         Returns
@@ -679,7 +694,7 @@ class AsyncStreamingClient(AsyncBaseClient, AsyncBaseStream):
             ids = (ids,)
         for id in ids:
             if isinstance(id, StreamRule):
-                json["delete"]["ids"].append(str(StreamRule.id))
+                json["delete"]["ids"].append(str(id.id))
             else:
                 json["delete"]["ids"].append(str(id))
 

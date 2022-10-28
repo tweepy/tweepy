@@ -3,44 +3,46 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/users/me
   response:
     body:
       string: '{"data":{"id":"1072250532645998596","name":"Tweepy Testing","username":"TweepyDev"}}'
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
+      Content-Length:
       - '97'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 13:49:08 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:06:00 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165193134799749857; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165193134799749857; Max-Age=63072000; Expires=Mon, 06 May
-        2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_lkX47v1/wqpzmNqaQR/JrQ=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165193134799749857; Max-Age=63072000; Expires=Mon, 06 May 2024
-        13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518396024053695; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518396024053695; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_Y4ryzneyI2zKpsyiwifQvw=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518396024053695; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read-write
       x-connection-hash:
-      - 313d4c500cc0442ad0c7b62b6e797e0eadb8dd161c09d94e9eeb1263dedf47c1
+      - 11c233b9dac7c22d2d347ec9322fa8c00c260f02fe9a79e4b0cc7c49134ba80a
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -48,11 +50,13 @@ interactions:
       x-rate-limit-limit:
       - '75'
       x-rate-limit-remaining:
-      - '74'
+      - '73'
       x-rate-limit-reset:
-      - '1651932248'
+      - '1665184653'
       x-response-time:
-      - '42'
+      - '41'
+      x-transaction-id:
+      - f5cdc22e68304ff4
       x-xss-protection:
       - '0'
     status:
@@ -66,44 +70,46 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: POST
     uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks
   response:
     body:
       string: '{"data":{"bookmarked":true}}'
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
+      Content-Length:
       - '54'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 13:49:08 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:06:00 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165193134820536706; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165193134820536706; Max-Age=63072000; Expires=Mon, 06 May
-        2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_eYLBFbzffKl18ocPpd0a5A=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165193134820536706; Max-Age=63072000; Expires=Mon, 06 May 2024
-        13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518396054444113; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518396054444113; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_w3RqLtDqoo8OLvHIZnvyeg=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518396054444113; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read-write
       x-connection-hash:
-      - 66e49ad2493f8aa414a9ce2b9a34df2495eaee86bd48b9df9d9c8288c7d53b84
+      - 05a4b3b6ef9e3e5985bbda233ee8af7c81fe60ec43c3ea4043bea681cee8a9fe
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -111,11 +117,13 @@ interactions:
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '49'
+      - '48'
       x-rate-limit-reset:
-      - '1651932248'
+      - '1665184653'
       x-response-time:
-      - '65'
+      - '82'
+      x-transaction-id:
+      - d1370eaf4521943a
       x-xss-protection:
       - '0'
     status:
@@ -126,49 +134,52 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks
   response:
     body:
-      string: "{\"data\":[{\"id\":\"1507070437557096461\",\"text\":\"\\uD83D\\uDD16\
-        \ Bookmark this!\_\\n\\nToday we are launching new Bookmark endpoints, allowing\
-        \ you to build new ways for people to utilize and interact with their bookmarked\
-        \ Tweets - only available on the Twitter API v2.\\n\\nNot sure what to build?\
-        \ It\u2019s all in the forum post \\uD83D\\uDC40\\nhttps://t.co/vYayoqRtJE\"\
-        }],\"meta\":{\"result_count\":1}}"
+      string: "{\"data\":[{\"edit_history_tweet_ids\":[\"1507070437557096461\"],\"\
+        id\":\"1507070437557096461\",\"text\":\"\\uD83D\\uDD16 Bookmark this!\_\\\
+        n\\nToday we are launching new Bookmark endpoints, allowing you to build new\
+        \ ways for people to utilize and interact with their bookmarked Tweets - only\
+        \ available on the Twitter API v2.\\n\\nNot sure what to build? It\u2019s\
+        \ all in the forum post \\uD83D\\uDC40\\nhttps://t.co/vYayoqRtJE\"}],\"meta\"\
+        :{\"result_count\":1}}"
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
-      - '313'
-      content-type:
+      Content-Length:
+      - '334'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 13:49:08 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:06:00 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165193134839868944; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165193134839868944; Max-Age=63072000; Expires=Mon, 06 May
-        2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_6i55kkMQueSA+gvwrp7ozA=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165193134839868944; Max-Age=63072000; Expires=Mon, 06 May 2024
-        13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518396074737313; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518396074737313; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_1HZy3ztg3ISe4c1M0kFVSg=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518396074737313; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:06:00 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read-write
       x-connection-hash:
-      - e4afc17615c4cf911769a7d48fd4888a2ba2a9dbebab798a94bd39712463cbcd
+      - 64dc6e3e287f68d869477b95b91291e9a78f995b6f045aa08e1e2e62e6f7bd5f
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -176,11 +187,13 @@ interactions:
       x-rate-limit-limit:
       - '180'
       x-rate-limit-remaining:
-      - '179'
+      - '178'
       x-rate-limit-reset:
-      - '1651932248'
+      - '1665184653'
       x-response-time:
-      - '87'
+      - '86'
+      x-transaction-id:
+      - c70741fc92f2de1a
       x-xss-protection:
       - '0'
     status:
@@ -191,44 +204,46 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: DELETE
     uri: https://api.twitter.com/2/users/1072250532645998596/bookmarks/1507070437557096461
   response:
     body:
       string: '{"data":{"bookmarked":false}}'
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
+      Content-Length:
       - '55'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 13:49:08 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:06:01 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165193134861958660; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165193134861958660; Max-Age=63072000; Expires=Mon, 06 May
-        2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_Om7c+X1vXWC1IABwCnjUJw=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165193134861958660; Max-Age=63072000; Expires=Mon, 06 May 2024
-        13:49:08 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518396097231741; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:01 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518396097231741; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:06:01 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_LHG3V4lXNMnUKbTl4XYqHg=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:06:01 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518396097231741; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:06:01 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read-write
       x-connection-hash:
-      - d16f69732531e18a5e61738729010d50f80a8fa6d5f94e37437cfc43fba642c4
+      - 170d33e7da60ab26827b7496d0165e8506748d9c624a9b1fb6fa11fa96744901
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -236,11 +251,13 @@ interactions:
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '49'
+      - '48'
       x-rate-limit-reset:
-      - '1651932248'
+      - '1665184653'
       x-response-time:
-      - '47'
+      - '56'
+      x-transaction-id:
+      - d84cce28eb26a62d
       x-xss-protection:
       - '0'
     status:

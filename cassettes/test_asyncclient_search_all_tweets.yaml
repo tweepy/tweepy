@@ -3,51 +3,69 @@ interactions:
     body: null
     headers:
       User-Agent:
-      - Python/3.10.0 aiohttp/3.7.4.post0 Tweepy/4.9.0
+      - Python/3.10.0 aiohttp/3.8.1 Tweepy/4.10.1
     method: GET
     uri: https://api.twitter.com/2/tweets/search/all?query=Tweepy
   response:
     body:
-      string: '{"data":[{"id":"1522929868509437952","text":"2022-05-07 13:22:29.902422
-        tweepy"},{"id":"1522929365373579264","text":"2022-05-07 13:20:29.902484 tweepy"},{"id":"1522928861910028289","text":"2022-05-07
-        13:18:29.902580 tweepy"},{"id":"1522928358576820225","text":"2022-05-07 13:16:29.902426
-        tweepy"},{"id":"1522927855256096768","text":"2022-05-07 13:14:29.902355 tweepy"},{"id":"1522927351952289799","text":"2022-05-07
-        13:12:29.902680 tweepy"},{"id":"1522926848660975618","text":"2022-05-07 13:10:29.902925
-        tweepy"},{"id":"1522926345306660864","text":"2022-05-07 13:08:29.902352 tweepy"},{"id":"1522925842040602626","text":"2022-05-07
-        13:06:29.905305 tweepy"},{"id":"1522925338669596675","text":"2022-05-07 13:04:29.902253
-        tweepy"}],"meta":{"newest_id":"1522929868509437952","oldest_id":"1522925338669596675","result_count":10,"next_token":"b26v89c19zqg8o3fpywln8q05w1r0v8k2muddlynw2rul"}}'
+      string: "{\"data\":[{\"edit_history_tweet_ids\":[\"1578523114753118208\"],\"\
+        id\":\"1578523114753118208\",\"text\":\"2022-10-07 23:10:12.638569 tweepy\"\
+        },{\"edit_history_tweet_ids\":[\"1578522611398893568\"],\"id\":\"1578522611398893568\"\
+        ,\"text\":\"2022-10-07 23:08:12.637373 tweepy\"},{\"edit_history_tweet_ids\"\
+        :[\"1578522194770296832\"],\"id\":\"1578522194770296832\",\"text\":\"RT @t6dr1ve:\
+        \ #TwitterBots go away! We don't need your help! #Tweepy #OpenAI #MEME #Python\
+        \ #Programming #DataScience #Blockchain #Cardano #A\u2026\"},{\"edit_history_tweet_ids\"\
+        :[\"1578522108187283456\"],\"id\":\"1578522108187283456\",\"text\":\"2022-10-07\
+        \ 23:06:12.640564 tweepy\"},{\"edit_history_tweet_ids\":[\"1578521604837212160\"\
+        ],\"id\":\"1578521604837212160\",\"text\":\"2022-10-07 23:04:12.641218 tweepy\"\
+        },{\"edit_history_tweet_ids\":[\"1578521101444841473\"],\"id\":\"1578521101444841473\"\
+        ,\"text\":\"2022-10-07 23:02:12.636630 tweepy\"},{\"edit_history_tweet_ids\"\
+        :[\"1578520598170386433\"],\"id\":\"1578520598170386433\",\"text\":\"2022-10-07\
+        \ 23:00:12.636983 tweepy\"},{\"edit_history_tweet_ids\":[\"1578520573914718208\"\
+        ],\"id\":\"1578520573914718208\",\"text\":\"RT @t6dr1ve: #TwitterBots go away!\
+        \ We don't need your help! #Tweepy #OpenAI #MEME #Python #Programming #DataScience\
+        \ #Blockchain #Cardano #A\u2026\"},{\"edit_history_tweet_ids\":[\"1578520094778740736\"\
+        ],\"id\":\"1578520094778740736\",\"text\":\"2022-10-07 22:58:12.637170 tweepy\"\
+        },{\"edit_history_tweet_ids\":[\"1578519902427619328\"],\"id\":\"1578519902427619328\"\
+        ,\"text\":\"RT @t6dr1ve: #TwitterBots go away! We don't need your help! #Tweepy\
+        \ #OpenAI #MEME #Python #Programming #DataScience #Blockchain #Cardano #A\u2026\
+        \"}],\"meta\":{\"newest_id\":\"1578523114753118208\",\"oldest_id\":\"1578519902427619328\"\
+        ,\"result_count\":10,\"next_token\":\"b26v89c19zqg8o3fpzbn1e0frnrh1hac71cvjb7ddu8ot\"\
+        }}"
     headers:
-      api-version:
-      - '2.42'
-      cache-control:
+      Cache-Control:
       - no-cache, no-store, max-age=0
-      content-disposition:
+      Content-Disposition:
       - attachment; filename=json.json
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-length:
-      - '325'
-      content-type:
+      Content-Length:
+      - '521'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 07 May 2022 13:23:58 UTC
-      server:
+      Date:
+      - Fri, 07 Oct 2022 23:10:47 UTC
+      Server:
       - tsa_b
-      set-cookie:
-      - guest_id_marketing=v1%3A165192983819611364; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:23:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id_ads=v1%3A165192983819611364; Max-Age=63072000; Expires=Mon, 06 May
-        2024 13:23:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - personalization_id="v1_CAD+nBJqeYigK+oQRrzVog=="; Max-Age=63072000; Expires=Mon,
-        06 May 2024 13:23:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
-      - guest_id=v1%3A165192983819611364; Max-Age=63072000; Expires=Mon, 06 May 2024
-        13:23:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Set-Cookie:
+      - guest_id_marketing=v1%3A166518424758908972; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:10:47 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A166518424758908972; Max-Age=63072000; Expires=Sun, 06 Oct
+        2024 23:10:47 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_1o9XCpnKqdPtsEVJUK2Mzg=="; Max-Age=63072000; Expires=Sun,
+        06 Oct 2024 23:10:47 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A166518424758908972; Max-Age=63072000; Expires=Sun, 06 Oct 2024
+        23:10:47 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      api-version:
+      - '2.52'
+      perf:
+      - '7626143928'
       strict-transport-security:
       - max-age=631138519
       x-access-level:
       - read
       x-connection-hash:
-      - 2035902175090892923bb3bdcd2d2ce4009f0e1f4dc1a83bdffdaa524e5e2eb8
+      - 0c86f33385d5e6c1e97c09a12cebd601963188e8cac127a57af0a11f37a899bd
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -57,9 +75,11 @@ interactions:
       x-rate-limit-remaining:
       - '299'
       x-rate-limit-reset:
-      - '1651930738'
+      - '1665185147'
       x-response-time:
-      - '76'
+      - '98'
+      x-transaction-id:
+      - 67792706e1facd9f
       x-xss-protection:
       - '0'
     status:

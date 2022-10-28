@@ -20,6 +20,9 @@ class Media(DataMapping):
     .. versionchanged:: 4.5
         Added ``url`` field
 
+    .. versionchanged:: 4.12
+        Added ``variants`` field
+
     Attributes
     ----------
     data : dict
@@ -60,6 +63,9 @@ class Media(DataMapping):
         A description of an image to enable and support accessibility. Can be
         up to 1000 characters long. Alt text can only be added to images at the
         moment.
+    variants: list[dict] | None
+        Each media object may have multiple display or playback variants,
+        with different resolutions or formats
 
     References
     ----------
@@ -70,6 +76,7 @@ class Media(DataMapping):
         "data", "media_key", "url", "type", "duration_ms", "height",
         "non_public_metrics", "organic_metrics", "preview_image_url",
         "promoted_metrics", "public_metrics", "width", "alt_text",
+        "variants"
     )
 
     def __init__(self, data):
@@ -87,6 +94,7 @@ class Media(DataMapping):
         self.public_metrics = data.get("public_metrics")
         self.width = data.get("width")
         self.alt_text = data.get("alt_text")
+        self.variants = data.get("variants")
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
