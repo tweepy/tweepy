@@ -3,6 +3,7 @@ Tweepy: Twitter for Python!
 
 [![PyPI Version](https://img.shields.io/pypi/v/tweepy?label=PyPI)](https://pypi.org/project/tweepy/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/tweepy?label=Python)](https://pypi.org/project/tweepy/)
+[![DOI](https://zenodo.org/badge/244025.svg)](https://zenodo.org/badge/latestdoi/244025)
 [![Documentation Status](https://readthedocs.org/projects/tweepy/badge/?version=latest)](https://tweepy.readthedocs.io/en/latest/)
 [![Test Status](https://github.com/tweepy/tweepy/workflows/Test/badge.svg)](https://github.com/tweepy/tweepy/actions?query=workflow%3ATest)
 [![Coverage Status](https://img.shields.io/coveralls/tweepy/tweepy/master.svg?style=flat)](https://coveralls.io/github/tweepy/tweepy?branch=master)
