@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: Tweepy
+message: "If you use Tweepy, please cite it using this metadata."
+abstract: "Tweepy is a Python library for interfacing with Twitter's API."
+authors:
+  - given-names: Harmon
+    alias: Harmon758
+    orcid: "https://orcid.org/0000-0002-2632-0921"
+  - given-names: Joshua
+    family-names: Roesslein
+  - name: "other contributors"
+doi: 10.5281/zenodo.7259945
+identifiers:
+  - description: "The concept DOI for the collection containing all versions of Tweepy"
+    type: doi
+    value: 10.5281/zenodo.7259945
+  - description: "The versioned DOI for version 4.12.0 of Tweepy"
+    type: doi
+    value: 10.5281/zenodo.7259946
+keywords:
+  - Python
+  - Twitter
+license: MIT
+repository-code: 'https://github.com/tweepy/tweepy'
+type: software
+url: 'https://www.tweepy.org/'
