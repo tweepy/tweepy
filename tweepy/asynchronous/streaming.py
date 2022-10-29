@@ -53,6 +53,7 @@ class AsyncBaseStream:
 
         if self.session is None or self.session.closed:
             self.session = aiohttp.ClientSession(
+                connector=aiohttp.TCPConnector(enable_cleanup_closed=True),
                 timeout=aiohttp.ClientTimeout(sock_read=timeout)
             )
         self.session.headers["User-Agent"] = self.user_agent
