@@ -52,7 +52,7 @@ class BaseStream:
 
     def _connect(
         self, method, url, auth=None, params=None, headers=None, body=None,
-        timeout=20
+        timeout=21
     ):
         self.running = True
 

@@ -39,7 +39,7 @@ class AsyncBaseStream:
 
     async def _connect(
         self, method, url, params=None, headers=None, body=None,
-        oauth_client=None, timeout=20
+        oauth_client=None, timeout=21
     ):
         error_count = 0
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
