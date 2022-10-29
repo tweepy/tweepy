@@ -7,6 +7,7 @@ import json
 import logging
 from math import inf
 from platform import python_version
+import traceback
 
 import aiohttp
 from oauthlib.oauth1 import Client as OAuthClient
@@ -111,6 +112,16 @@ class AsyncBaseStream:
                 except (aiohttp.ClientConnectionError,
                         aiohttp.ClientPayloadError) as e:
                     await self.on_connection_error()
+                    # The error text is logged here instead of in
+                    # on_connection_error to keep on_connection_error
+                    # backwards-compatible. In a future version, the error
+                    # should be passed to on_connection_error.
+                    log.error(
+                        "Connection error: %s",
+                        "".join(
+                            traceback.format_exception_only(type(e), e)
+                        ).rstrip()
+                    )
 
                     await asyncio.sleep(network_error_wait)
 

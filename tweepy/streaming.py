@@ -10,6 +10,7 @@ import logging
 from math import inf
 from platform import python_version
 import ssl
+import traceback
 from threading import Thread
 from time import sleep
 from typing import NamedTuple
@@ -134,6 +135,16 @@ class BaseStream:
                     self.on_connection_error()
                     if not self.running:
                         break
+                    # The error text is logged here instead of in
+                    # on_connection_error to keep on_connection_error
+                    # backwards-compatible. In a future version, the error
+                    # should be passed to on_connection_error.
+                    log.error(
+                        "Connection error: %s",
+                        "".join(
+                            traceback.format_exception_only(type(exc), exc)
+                        ).rstrip()
+                    )
 
                     sleep(network_error_wait)
 
