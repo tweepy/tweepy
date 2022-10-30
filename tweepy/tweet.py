@@ -2,6 +2,8 @@
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
 
+import warnings
+
 from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
@@ -124,9 +126,16 @@ class Tweet(HashableID, DataMapping):
         self.data = data
         self.id = int(data["id"])
         self.text = data["text"]
-        self.edit_history_tweet_ids = list(
-            map(int, data["edit_history_tweet_ids"])
-        )
+        try:
+            self.edit_history_tweet_ids = list(
+                map(int, data["edit_history_tweet_ids"])
+            )
+        except KeyError:
+            warnings.warn(
+                "Tweet data missing default edit_history_tweet_ids field",
+                RuntimeWarning,
+                stacklevel=2
+            )
 
         self.attachments = data.get("attachments")
 
