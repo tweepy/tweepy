@@ -10,7 +10,11 @@ from tweepy.client import Response
 
 
 class AsyncPaginator:
-    """:class:`AsyncPaginator` can be used to paginate for any
+    """AsyncPaginator( \
+        self, method, *args, limit=inf, pagination_token=None, **kwargs \
+    )
+
+    :class:`AsyncPaginator` can be used to paginate for any
     :class:`AsyncClient` methods that support pagination
 
     .. note::
@@ -28,6 +32,10 @@ class AsyncPaginator:
         :class:`AsyncClient` method to paginate for
     args
         Positional arguments to pass to ``method``
+    limit
+        Maximum number of requests to make to the API
+    pagination_token
+        Pagination token to start pagination with
     kwargs
         Keyword arguments to pass to ``method``
     """
