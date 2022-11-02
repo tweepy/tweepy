@@ -61,7 +61,8 @@ class BaseStream:
         # https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/connecting
         # https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/handling-disconnections
         # https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/integrate/handling-disconnections
-        network_error_wait = network_error_wait_step = 0.25
+        network_error_wait = 0
+        network_error_wait_step = 0.25
         network_error_wait_max = 16
         http_error_wait = http_error_wait_start = 5
         http_error_wait_max = 320
@@ -80,7 +81,7 @@ class BaseStream:
                         if resp.status_code == 200:
                             error_count = 0
                             http_error_wait = http_error_wait_start
-                            network_error_wait = network_error_wait_step
+                            network_error_wait = 0
 
                             self.on_connect()
                             if not self.running:
