@@ -3,6 +3,27 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.12.1 (2022-11-06)
+---------------------------
+
+### Bug Fixes
+- Add 1 second buffer to API v2 streaming timeout ([51a5d61](https://github.com/tweepy/tweepy/commit/51a5d61bfd6699ab844449698b34befd6a170857))
+  - The keep-alive is often received after marginally longer than 20 seconds, causing unnecessary timeouts and reconnects with a timeout of exactly 20 seconds
+- Default `AsyncBaseStream` to abort closed SSL transports ([#1904](https://github.com/tweepy/tweepy/issues/1904))
+- Warn when Tweet data is missing default `edit_history_tweet_ids` field ([3dea0df](https://github.com/tweepy/tweepy/commit/3dea0df2b8ee797264de67afc9f2d670e68aa634), [#1994](https://github.com/tweepy/tweepy/issues/1994))
+- Change initial `network_error_wait` to 0 for streaming ([b18c1a6](https://github.com/tweepy/tweepy/commit/b18c1a6239e81cb5744fa99d392ec539de787e5c))
+  - Attempt to reconnect immediately when established streaming connection drops
+
+### Misc
+- Document `limit` and `pagination_token` parameters for `Paginator` and `AsyncPaginator` ([e98ab02](https://github.com/tweepy/tweepy/commit/e98ab0211e488c734d1c01c0bf2a2cf4d87c4762), [bb934fc](https://github.com/tweepy/tweepy/commit/bb934fc247892d83ce69511311c07bed2b170412))
+- Use separate method to construct `Response` in `Client` and `AsyncClient` ([#1997](https://github.com/tweepy/tweepy/pull/1997), [9983735](https://github.com/tweepy/tweepy/commit/9983735313c10906479348621f835bbbc38e5619))
+- Log streaming connection error exceptions ([b7f02c6](https://github.com/tweepy/tweepy/commit/b7f02c60b252b747e16d84ccfedb275d85720439))
+- Add CITATION.cff ([2547b44](https://github.com/tweepy/tweepy/commit/2547b44ac8ea1250b5eb6747db5bce7e425bc5ba))
+- Add DOI badge to README ([72a33c9](https://github.com/tweepy/tweepy/commit/72a33c9df96cd5f537999d9a4f2a1ad2d82d8f60))
+- Replace docs/requirements.txt with docs extra ([0ccfe86](https://github.com/tweepy/tweepy/commit/0ccfe86175d83ea89b20ff00ef6f420423fde347))
+- Fix Intersphinx link to `namedtuple` in documentation for `Response` ([352c74a](https://github.com/tweepy/tweepy/commit/352c74ac1e1eb3a87a70bc707f35256d20001494))
+- Improve format of badges in README ([d41c813](https://github.com/tweepy/tweepy/commit/d41c8135f2876cb91299bb70fb4b95d06039ce05))
+
 Version 4.12.0 (2022-10-27)
 ---------------------------
 
