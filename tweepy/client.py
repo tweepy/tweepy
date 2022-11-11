@@ -315,7 +315,7 @@ class Client(BaseClient):
             "DELETE", route
         )
 
-    def get_bookmarks(self, **params):
+    def get_bookmarks(self, *, user_auth=False, **params):
         """get_bookmarks( \
             *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -357,6 +357,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
+        user_auth : bool
+            Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
@@ -371,7 +373,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
         """
-        id = self._get_authenticating_user_id()
+        id = self._get_authenticating_user_id(oauth_1=user_auth)
         route = f"/2/users/{id}/bookmarks"
 
         return self._make_request(
