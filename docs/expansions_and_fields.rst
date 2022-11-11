@@ -8,12 +8,13 @@ Expansions and Fields
 ``expansions``
 --------------
 `Expansions`_ enable you to request additional data objects that relate to the
-originally returned List, Space, Tweets, or users. Submit a list of desired
-expansions in a comma-separated list without spaces. The ID that represents the
-expanded data object will be included directly in the List, Space, Tweet, or
-user data object, but the expanded object metadata will be returned within the
-``includes`` response object, and will also include the ID so that you can
-match this data object to the original Space, Tweet, or user object.
+originally returned List, Space, Tweets, Users, or DirectMessageEvents. Submit
+a list of desired expansions in a comma-separated list without spaces. The ID
+that represents the expanded data object will be included directly in the List,
+Space, Tweet, User, or DirectMessageEvents data object, but the expanded object
+metadata will be returned within the ``includes`` response object, and will
+also include the ID so that you can match this data object to the original
+Space, Tweet, User or DirectMessageEvents object.
 
 At this time, the only expansion available to endpoints that primarily return
 List objects is ``expansions=owner_id``. You will find the expanded user data
@@ -39,6 +40,19 @@ using this parameter:
 * Attached poll’s object
 * Attached place’s object
 * Any referenced Tweets’ object
+
+For methods that returns DirectMessageEvents, the following data objects can be
+expanded using this parameter:
+
+* ``sender_id`` - The ID of the account that sent the message, or who invited
+a participant to a group conversation
+* ``partricipants_ids`` - An array of account IDs. For ParticipantsJoin and
+ParticipantsLeave events this array will contain a single ID of the account
+that created the event
+* ``attachments`` - Provides media IDs for content that has been uploaded to
+Twitter by the sender
+* ``referenced_tweets`` - If a Tweet URL is found in the text field, the ID of
+that Tweet is included in the response
 
 At this time, the only expansion available to endpoints that primarily return
 user objects is ``expansions=pinned_tweet_id``. You will find the expanded
@@ -148,6 +162,38 @@ Specify the desired fields in a comma-separated list without spaces between
 commas and fields. These specified user fields will display directly in the
 user data objects.
 
+.. _dm_event_fields_parameter:
+
+``dm_event_fields``
+---------------
+
+For methods that return DirectMessageEvents, this `fields`_ parameter enables
+you to select which specific `Direct Message event fields`_ will deliver in
+each returned DirectMessageEvent. Specify the desired fields in a comma-
+separated list without spaces between commas and fields. When requesting DM
+events, there are three default event object attributes, or fields, included:
+``id``, ``event_type``, and ``text``. To receive additional event fields, use
+the fields parameter ``dm_event_fields`` to select others. Other available
+event fields include the following: ``dm_conversation_id``, ``created_at``,
+``sender_id``, ``attachments``, ``participant_ids``, and ``referenced_tweets``.
+
+Several of these fields provide the IDs of other Twitter objects related to the
+Direct Message event:
+
+* ``sender_id`` - The ID of the account that sent the message, or who invited
+a participant to a group conversation
+* ``partricipants_ids`` - An array of account IDs. For ParticipantsJoin and
+ParticipantsLeave events this array will contain a single ID of the account
+that created the event
+* ``attachments`` - Provides media IDs for content that has been uploaded to
+Twitter by the sender
+* ``referenced_tweets`` - If a Tweet URL is found in the text field, the ID of
+that Tweet is included in the response
+
+The ``sender_id``, ``participant_ids``, ``referenced_tweets.id``, and
+``attachments.media_keys`` `expansions`_ are available to expand on these Twitter
+object IDs.
+
 .. _Expansions: https://developer.twitter.com/en/docs/twitter-api/expansions
 .. _fields: https://developer.twitter.com/en/docs/twitter-api/fields
 .. _list fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
@@ -157,3 +203,4 @@ user data objects.
 .. _Space fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 .. _Tweet fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+.. _Direct Message event fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/dm-events

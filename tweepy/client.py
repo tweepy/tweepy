@@ -2813,7 +2813,8 @@ class Client(BaseClient):
             having a 1-1 conversation with.
         dm_event_fields : list[str] | str | None
             Extra fields to include in the event payload. ``id``, ``text``, and
-            ``event_type`` are returned by default.
+            ``event_type`` are returned by default. 
+            :ref:`dm_event_fields_parameter`
         event_types : str
             The type of Direct Message event to returm. If not included, all
             types are returned.
