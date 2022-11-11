@@ -157,38 +157,6 @@ Specify the desired fields in a comma-separated list without spaces between
 commas and fields. These specified user fields will display directly in the
 user data objects.
 
-.. _dm_event_fields_parameter:
-
-``dm_event_fields``
----------------
-
-For methods that return DirectMessageEvents, this `fields`_ parameter enables
-you to select which specific `Direct Message event fields`_ will deliver in
-each returned DirectMessageEvent. Specify the desired fields in a comma-
-separated list without spaces between commas and fields. When requesting DM
-events, there are three default event object attributes, or fields, included:
-``id``, ``event_type``, and ``text``. To receive additional event fields, use
-the fields parameter ``dm_event_fields`` to select others. Other available
-event fields include the following: ``dm_conversation_id``, ``created_at``,
-``sender_id``, ``attachments``, ``participant_ids``, and ``referenced_tweets``.
-
-Several of these fields provide the IDs of other Twitter objects related to the
-Direct Message event:
-
-* ``sender_id`` - The ID of the account that sent the message, or who invited
-a participant to a group conversation
-* ``partricipants_ids`` - An array of account IDs. For ParticipantsJoin and
-ParticipantsLeave events this array will contain a single ID of the account
-that created the event
-* ``attachments`` - Provides media IDs for content that has been uploaded to
-Twitter by the sender
-* ``referenced_tweets`` - If a Tweet URL is found in the text field, the ID of
-that Tweet is included in the response
-
-The ``sender_id``, ``participant_ids``, ``referenced_tweets.id``, and
-``attachments.media_keys`` `expansions`_ are available to expand on these Twitter
-object IDs.
-
 .. _Expansions: https://developer.twitter.com/en/docs/twitter-api/expansions
 .. _fields: https://developer.twitter.com/en/docs/twitter-api/fields
 .. _list fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/lists
@@ -198,4 +166,3 @@ object IDs.
 .. _Space fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 .. _Tweet fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
-.. _Direct Message event fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/dm-events
