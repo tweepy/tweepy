@@ -8,13 +8,13 @@ Expansions and Fields
 ``expansions``
 --------------
 `Expansions`_ enable you to request additional data objects that relate to the
-originally returned List, Space, Tweets, Users, or DirectMessageEvents. Submit
-a list of desired expansions in a comma-separated list without spaces. The ID
-that represents the expanded data object will be included directly in the List,
-Space, Tweet, User, or DirectMessageEvents data object, but the expanded object
-metadata will be returned within the ``includes`` response object, and will
-also include the ID so that you can match this data object to the original
-Space, Tweet, User or DirectMessageEvents object.
+originally returned List, Space, Tweets, Users, or Direct Message conversation
+events. Submit a list of desired expansions in a comma-separated list without
+spaces. The ID(s) that represent(s) the expanded data object(s) will be
+included directly in the List, Space, Tweet, user, or event data object, but
+the expanded object metadata will be returned within the ``includes`` response
+object, and will also include the ID so that you can match this data object to
+the original Space, Tweet, User or Direct Message conversation event object.
 
 At this time, the only expansion available to endpoints that primarily return
 List objects is ``expansions=owner_id``. You will find the expanded user data
