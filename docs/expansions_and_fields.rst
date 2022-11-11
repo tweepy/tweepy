@@ -41,18 +41,13 @@ using this parameter:
 * Attached place’s object
 * Any referenced Tweets’ object
 
-For methods that returns DirectMessageEvents, the following data objects can be
-expanded using this parameter:
+For methods that returns Direct Message conversation events, the following data
+objects can be expanded using this parameter:
 
-* ``sender_id`` - The ID of the account that sent the message, or who invited
-a participant to a group conversation
-* ``partricipants_ids`` - An array of account IDs. For ParticipantsJoin and
-ParticipantsLeave events this array will contain a single ID of the account
-that created the event
-* ``attachments`` - Provides media IDs for content that has been uploaded to
-Twitter by the sender
-* ``referenced_tweets`` - If a Tweet URL is found in the text field, the ID of
-that Tweet is included in the response
+* The user object for the message sender.
+* Attached media's object.
+* Any referenced Tweet's object.
+* The user object for who is joining or leaving group conversations.
 
 At this time, the only expansion available to endpoints that primarily return
 user objects is ``expansions=pinned_tweet_id``. You will find the expanded
