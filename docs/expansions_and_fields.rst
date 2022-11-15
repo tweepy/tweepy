@@ -147,6 +147,15 @@ References
 ^^^^^^^^^^
 https://developer.twitter.com/en/docs/twitter-api/expansions
 
+.. _dm_event_fields_parameter:
+
+``dm_event_fields``
+-------------------
+
+Extra fields to include in the event payload. ``id`` and ``event_type`` are
+returned by default. The ``text`` value isn't included for ``ParticipantsJoin``
+and ``ParticipantsLeave`` events.
+
 .. _list_fields_parameter:
 
 ``list_fields``
