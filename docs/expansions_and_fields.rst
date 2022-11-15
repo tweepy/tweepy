@@ -16,17 +16,8 @@ the expanded object metadata will be returned within the ``includes`` response
 object, and will also include the ID so that you can match this data object to
 the original Space, Tweet, User or Direct Message conversation event object.
 
-At this time, the only expansion available to endpoints that primarily return
-List objects is ``expansions=owner_id``. You will find the expanded user data
-object living in the ``includes`` response object.
-
-For methods that return Spaces, the following data objects can be expanded
-using this parameter:
-
-* The Spaces creator's user object
-* The user objects of any Space co-host
-* Any mentioned users’ object
-* Any speaker's user object
+Available expansions for Tweet payloads
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For methods that return Tweets, the following data objects can be expanded
 using this parameter:
@@ -41,6 +32,50 @@ using this parameter:
 * Attached place’s object
 * Any referenced Tweets’ object
 
+.. table::
+    :align: center
+
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | Expansion                          | Description                                                                                         |
+    +====================================+=====================================================================================================+
+    | ``author_id``                      | Returns a user object representing the Tweet’s author                                               |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``referenced_tweets.id``           | Returns a Tweet object that this Tweet is referencing (either as a Retweet, Quoted Tweet, or reply) |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``edit_history_tweet_ids``         | Returns Tweet objects that are part of a Tweet's edit history                                       |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``in_reply_to_user_id``            | Returns a user object representing the Tweet author this requested Tweet is a reply of              |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``attachments.media_keys``         | Returns a media object representing the images, videos, GIFs included in the Tweet                  |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``attachments.poll_ids``           | Returns a poll object containing metadata for the poll included in the Tweet                        |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``geo.place_id``                   | Returns a place object containing metadata for the location tagged in the Tweet                     |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``entities.mentions.username``     | Returns a user object for the user mentioned in the Tweet                                           |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+    | ``referenced_tweets.id.author_id`` | Returns a user object for the author of the referenced Tweet                                        |
+    +------------------------------------+-----------------------------------------------------------------------------------------------------+
+
+Available expansion for User payloads
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+At this time, the only expansion available to endpoints that primarily return
+user objects is ``expansions=pinned_tweet_id``. You will find the expanded
+Tweet data object living in the ``includes`` response object.
+
+.. table::
+    :align: center
+
+    +---------------------+---------------------------------------------------------------------------------------+
+    | Expansion           | Description                                                                           |
+    +=====================+=======================================================================================+
+    | ``pinned_tweet_id`` | Returns a Tweet object representing the Tweet pinned to the top of the user’s profile |
+    +---------------------+---------------------------------------------------------------------------------------+
+
+Available expansions for Direct Message event payloads
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 For methods that returns Direct Message conversation events, the following data
 objects can be expanded using this parameter:
 
@@ -49,9 +84,68 @@ objects can be expanded using this parameter:
 * Any referenced Tweet's object.
 * The user object for who is joining or leaving group conversations.
 
+.. table::
+    :align: center
+
+    +----------------------------+------------------------------------------------------------------------------------------------------------------------+
+    | Expansion                  | Description                                                                                                            |
+    +============================+========================================================================================================================+
+    | ``attachments.media_keys`` | Returns a Media object that was attached to a Direct Message                                                           |
+    +----------------------------+------------------------------------------------------------------------------------------------------------------------+
+    | ``referenced_tweets.id``   | Returns a Tweet object that was referenced in a Direct Message                                                         |
+    +----------------------------+------------------------------------------------------------------------------------------------------------------------+
+    | ``sender_id``              | Returns a User object representing the author of a Direct Message and who invited a participant to join a conversation |
+    +----------------------------+------------------------------------------------------------------------------------------------------------------------+
+    | ``participant_ids``        | Returns a User object representing a participant that joined or left a conversation                                    |
+    +----------------------------+------------------------------------------------------------------------------------------------------------------------+
+
+Available expansions for Spaces payloads
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For methods that return Spaces, the following data objects can be expanded
+using this parameter:
+
+* The Spaces creator's user object
+* The user objects of any Space co-host
+* Any mentioned users’ object
+* Any speaker's user object
+
+.. table::
+    :align: center
+
+    +----------------------+----------------------------------------------------------------------+
+    | Expansion            | Description                                                          |
+    +======================+======================================================================+
+    | ``invited_user_ids`` | Returns User objects representing what accounts were invited         |
+    +----------------------+----------------------------------------------------------------------+
+    | ``speaker_ids``      | Returns User objects representing what accounts spoke during a Space |
+    +----------------------+----------------------------------------------------------------------+
+    | ``creator_id``       | Returns a User object representing what account created the Space    |
+    +----------------------+----------------------------------------------------------------------+
+    | ``host_ids``         | Returns User objects representing what accounts were set up as hosts |
+    +----------------------+----------------------------------------------------------------------+
+    | ``topics_ids``       | Returns topic descriptions that were set up by the creator           |
+    +----------------------+----------------------------------------------------------------------+
+
+Available expansion for Lists payloads
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 At this time, the only expansion available to endpoints that primarily return
-user objects is ``expansions=pinned_tweet_id``. You will find the expanded
-Tweet data object living in the ``includes`` response object.
+List objects is ``expansions=owner_id``. You will find the expanded user data
+object living in the ``includes`` response object.
+
+.. table::
+    :align: center
+
+    +--------------+--------------------------------------------------------------------------------+
+    | Expansion    | Description                                                                    |
+    +==============+================================================================================+
+    | ``owner_id`` | Returns a User object representing what account created and maintains the List |
+    +--------------+--------------------------------------------------------------------------------+
+
+References
+^^^^^^^^^^
+https://developer.twitter.com/en/docs/twitter-api/expansions
 
 .. _list_fields_parameter:
 
