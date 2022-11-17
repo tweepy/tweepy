@@ -4113,7 +4113,6 @@ class API:
             ), use_cache=False, **kwargs
         )
 
-    #@payload('json')
     def create_media_subtitles(self, media_id, subtitles_id, *, lang_code='EN', display_name='English', **kwargs):
         """create_media_subtitles(media_id, subtitles_id, *, lang_code=`EN`, display_name=`English`, **kwargs)
 
@@ -4172,5 +4171,40 @@ class API:
 
         return self.request(
             'POST', 'media/subtitles/create', json_payload=json_payload,
+            upload_api=True, **kwargs
+        )
+
+    def delete_media_subtitles(self, media_id, *, lang_code='EN', **kwargs):
+        """create_media_subtitles(media_id, *, lang_code=`EN`, **kwargs)
+
+        This endpoint can be used to dissociate subtitles from a video with id ``media_id``
+        and delete the subtitles. You can dissociate subtitles from a video before or after Tweeting.
+
+        Parameters
+        ----------
+        media_id
+            The ID of the video to delete subtitles from.
+        lang_code
+            The BCP47 language code for the subtitles to delete.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-subtitles-delete
+        """
+
+        json_payload = {
+            "media_id": media_id,
+            "media_category": "tweet_video",
+            "subtitle_info": {
+                "subtitles": [
+                    {
+                    "language_code": lang_code,
+                    }
+                ]
+            }
+        }
+
+        return self.request(
+            'POST', 'media/subtitles/delete', json_payload=json_payload,
             upload_api=True, **kwargs
         )
