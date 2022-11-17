@@ -388,12 +388,13 @@ class TweepyAPITests(TweepyTestCase):
         }
         self.assertTrue(expected_dict in languages)
     
-    #@tape.use_cassette('testcreatemediasubtitles.yaml')
-    def testcreatemediasubtitles(self):
+    #@tape.use_cassette('testmediasubtitles.yaml')
+    def testmediasubtitles(self):
         video = self.api.media_upload("assets/video.mp4", media_category="tweet_video")
         subtitles = self.api.media_upload("assets/subtitles.srt", chunked=True, media_category="subtitles")
 
         self.api.create_media_subtitles(media_id=video.media_id_string, subtitles_id=subtitles.media_id_string)
+        self.api.delete_media_subtitles(media_id=video.media_id_string)
 
     @tape.use_cassette('testcachedresult.yaml')
     def testcachedresult(self):
