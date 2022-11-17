@@ -4175,7 +4175,7 @@ class API:
         )
 
     def delete_media_subtitles(self, media_id, *, lang_code='EN', **kwargs):
-        """create_media_subtitles(media_id, *, lang_code=`EN`, **kwargs)
+        """delete_media_subtitles(media_id, *, lang_code=`EN`, **kwargs)
 
         This endpoint can be used to dissociate subtitles from a video with id ``media_id``
         and delete the subtitles. You can dissociate subtitles from a video before or after Tweeting.
