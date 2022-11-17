@@ -1,16 +1,14 @@
 1
-00:00:00,498 --> 00:00:02,827
-Here are some ice skaters
-enjoying their day.
+00:00:05,000 --> 00:00:10,000
+Hi, I’m Josh Silverberg. I’m a software 
+Engineer at University of Michigan with
 
 2
-00:00:02,827 --> 00:00:06,383
-In like central park in the early 20th century.
+00:00:10,000 --> 00:00:15,000
+Joe, a cool guy also from UofM. 
+And I’m here today as part of EECS481.
 
 3
-00:00:06,383 --> 00:00:09,427
-This video is old.
-
-4
-00:00:14,333 --> 00:00:019,779
-"Woah" - Josh.
+00:00:15,000 --> 00:00:20,000
+This is quite annoying. I hope
+this file parses correctly!

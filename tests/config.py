@@ -7,8 +7,8 @@ from tweepy.api import API
 from tweepy.auth import OAuth1UserHandler
 
 
-user_id = os.environ.get('TWITTER_USER_ID', '1072250532645998596')
-username = os.environ.get('TWITTER_USERNAME', 'TweepyDev')
+user_id = os.environ.get('TWITTER_USER_ID', '')
+username = os.environ.get('TWITTER_USERNAME', '')
 bearer_token = os.environ.get('BEARER_TOKEN', '')
 consumer_key = os.environ.get('CONSUMER_KEY', '')
 consumer_secret = os.environ.get('CONSUMER_SECRET', '')
