@@ -7,13 +7,13 @@ from tweepy.api import API
 from tweepy.auth import OAuth1UserHandler
 
 
-user_id = os.environ.get('TWITTER_USER_ID', '1072250532645998596')
-username = os.environ.get('TWITTER_USERNAME', 'TweepyDev')
-bearer_token = os.environ.get('BEARER_TOKEN', '')
-consumer_key = os.environ.get('CONSUMER_KEY', '')
-consumer_secret = os.environ.get('CONSUMER_SECRET', '')
-access_token = os.environ.get('ACCESS_KEY', '')
-access_token_secret = os.environ.get('ACCESS_SECRET', '')
+user_id = os.environ.get('TWITTER_USER_ID', '1884545785')
+username = os.environ.get('TWITTER_USERNAME', 'joseph_massa')
+bearer_token = os.environ.get('BEARER_TOKEN', 'AAAAAAAAAAAAAAAAAAAAAEFsjQEAAAAAW2URKfFp%2BBZ1pG4dJ70%2BG6mEcG8%3DHfDytmH1szOFMOK7muluVc4rtHNt5jI0mTyqffBeMtuzTM7SJP')
+consumer_key = os.environ.get('CONSUMER_KEY', 'YkrtjAjSa9S2fGYcPvwQLxHpC')
+consumer_secret = os.environ.get('CONSUMER_SECRET', 'ZVFt3YXza8PLBntNZCG2EBXoRuxNsFjAtSAr0Xeas3QesiFIah`')
+access_token = os.environ.get('ACCESS_KEY', '1884545785-JrnWV9bOZVSWxNmDNxxdcQt2imVtBacJtdV7KKZ')
+access_token_secret = os.environ.get('ACCESS_SECRET', 'ufzKiM3qJmlmSUfuVYkV8gQ2wR1RV6xOcUDplzEuhJfzG')
 use_replay = os.environ.get('USE_REPLAY', True)
 
 

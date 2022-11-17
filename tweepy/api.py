@@ -4113,6 +4113,7 @@ class API:
             ), use_cache=False, **kwargs
         )
 
+    #@payload('json')
     def create_media_subtitles(self, media_id, subtitles_id, *, lang_code='EN', display_name='English', **kwargs):
         """create_media_subtitles(media_id, subtitles_id, *, lang_code=`EN`, display_name=`English`, **kwargs)
 
@@ -4123,7 +4124,7 @@ class API:
         Request flow for associating subtitle to video before the video is Tweeted: 
             1. Upload video using api.media_upload and get the video media_id from the 
                 returned model.media object.
-            2. Upload subtitle using api.media_upload (## might be chunked upload ##) 
+            2. Upload subtitle using api.media_upload with chunked=true 
                 with media category set to “Subtitles” and get the subtitle media_id
                 from the returned model.media object.
             3. Call this function to associate the subtitle to the video.
@@ -4154,13 +4155,18 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-subtitles-create
         """
+
         json_payload = {
-            'media_id': media_id,
-            'media_category': "TweetVideo",
-            'subtitle_info': {
-                'media_id': subtitles_id,
-                'language_code': lang_code,
-                'display_name': display_name
+            "media_id": media_id,
+            "media_category": "tweet_video",
+            "subtitle_info": {
+                "subtitles": [
+                    {
+                    "media_id": subtitles_id,
+                    "language_code": lang_code,
+                    "display_name": display_name
+                    }
+                ]
             }
         }
 
