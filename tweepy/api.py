@@ -4113,6 +4113,7 @@ class API:
             ), use_cache=False, **kwargs
         )
 
+    #@payload('json')
     def create_media_subtitles(self, media_id, subtitles_id, *, lang_code='EN', display_name='English', **kwargs):
         """create_media_subtitles(media_id, subtitles_id, *, lang_code=`EN`, display_name=`English`, **kwargs)
 
