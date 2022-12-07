@@ -12,6 +12,8 @@ import sys
 import time
 from urllib.parse import urlencode
 import json
+from oauthlib.oauth1 import Client as OAuthClient
+from yarl import URL
 
 import aiohttp
 
@@ -66,9 +68,9 @@ class AsyncAPI:
             parser = ModelParser()
         self.parser = parser
 
-        self.proxy = {}
-        if proxy is not None:
-            self.proxy['https'] = proxy
+        self.proxy = proxy
+        # if proxy is not None:
+        #     self.proxy = proxy
 
         self.retry_count = retry_count
         self.retry_delay = retry_delay
@@ -152,6 +154,28 @@ class AsyncAPI:
                         cache_result._api = self
                 self.cached_result = True
                 return cache_result
+        
+        # From AsyncClient
+        if require_auth:
+            oauth_client = OAuthClient(
+                self.auth.consumer_key, self.auth.consumer_secret,
+                self.auth.access_token, self.auth.access_token_secret
+            )
+            url = str(URL(url).with_query(sorted(params.items())))
+            url, headers, body = oauth_client.sign(
+                url, method, headers=headers
+            )
+            # oauthlib.oauth1.Client (OAuthClient) expects colons in query 
+            # values (e.g. in timestamps) to be percent-encoded, while
+            # aiohttp.ClientSession does not automatically encode them
+            before_query, question_mark, query = url.partition('?')
+            url = URL(
+                f"{before_query}?{query.replace(':', '%3A')}",
+                encoded = True
+            )
+            #params = None
+        else:
+            headers["Authorization"] = f"Bearer {self.bearer_token}"
 
         # Monitoring rate limits
         remaining_calls = None
@@ -172,12 +196,12 @@ class AsyncAPI:
                     sleep_time = reset_time - int(time.time())
                     if sleep_time > 0:
                         await log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
-                        await time.sleep(sleep_time + 1)  # Sleep for extra sec
+                        time.sleep(sleep_time + 1)  # Sleep for extra sec
 
-                # Apply authentication
-                auth = None
-                if self.auth:
-                    auth = self.auth.apply_auth()
+                # Apply authentication --- removed for AsyncClient auth block
+                # auth = None
+                # if self.auth:
+                #     auth = self.auth.apply_auth()
 
                 # Compile FormData object
                 formdata = aiohttp.FormData()
@@ -190,14 +214,19 @@ class AsyncAPI:
                     for key, value in post_data.items():
                         formdata.add_field(key, value)
                 
-                print("AAAAAAAAAAAAAAAAAAAAAA",urlencode(params))
-                print("CCCC", type(urlencode(params)))
+                # print("AAAAAAAAAAAAAAAAAAAAAA",urlencode(params))
+                # print("CCCC", type(urlencode(params)))
+
+                print("###########################################")
+                print(type(self.auth))
+                print(self.auth)
+
 
                 # Execute async request
                 try:
                     async with self.session.request(
                         method, url, params=params, headers=headers,
-                        data=formdata, json=json_payload, auth=auth,
+                        data=formdata, json=json_payload,# auth=auth,
                         timeout=self.timeout, proxy=self.proxy
                     ) as resp:
                         await resp.read()
@@ -207,6 +236,7 @@ class AsyncAPI:
                         
                 if 200 <= resp.status < 300:
                     break
+                
 
                 rem_calls = resp.headers.get('x-rate-limit-remaining')
                 if rem_calls is not None:
@@ -230,39 +260,40 @@ class AsyncAPI:
                     break
 
                 # Sleep before retrying request again
-                await time.sleep(retry_delay)
+                time.sleep(retry_delay)
                 retries_performed += 1
 
                 # If an error was returned, throw an exception
                 self.last_response = resp
+                response_json = await resp.json()
                 if resp.status == 400:
-                    raise BadRequest(resp)
+                    raise BadRequest(resp, response_json=response_json)
                 if resp.status == 401:
-                    raise Unauthorized(resp)
+                    raise Unauthorized(resp, response_json=response_json)
                 if resp.status == 403:
-                    raise Forbidden(resp)
+                    raise Forbidden(resp, response_json=response_json)
                 if resp.status == 404:
-                    raise NotFound(resp)
+                    raise NotFound(resp, response_json=response_json)
                 if resp.status == 429:
-                    raise TooManyRequests(resp)
+                    raise TooManyRequests(resp, response_json=response_json)
                 if resp.status >= 500:
-                    raise TwitterServerError(resp)
+                    raise TwitterServerError(resp, response_json=response_json)
                 if resp.status and not 200 <= resp.status_code < 300:
-                    raise HTTPException(resp)
+                    raise HTTPException(resp, response_json=response_json)
 
-                # Parse the response payload
-                return_cursors = return_cursors or 'cursor' in params or 'next' in params
-                response_text = await resp.text()
-                result = parser.parse(
-                    response_text, api=self, payload_list=payload_list,
-                    payload_type=payload_type, return_cursors=return_cursors
-                )
+            # Parse the response payload
+            return_cursors = return_cursors or 'cursor' in params or 'next' in params
+            response_text = await resp.text()
+            result = parser.parse(
+                response_text, api=self, payload_list=payload_list,
+                payload_type=payload_type, return_cursors=return_cursors
+            )
 
-                # Store result into cache if one is available.
-                if use_cache and self.cache and method == 'GET' and result:
-                    self.cache.store(f'{path}?{urlencode(params)}', result)
+            # Store result into cache if one is available.
+            if use_cache and self.cache and method == 'GET' and result:
+                self.cache.store(f'{path}?{urlencode(params)}', result)
 
-                return result
+            return result
                 
         finally:
             self.session.close()
