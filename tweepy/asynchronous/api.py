@@ -54,6 +54,48 @@ def payload(payload_type, **payload_kwargs):
 
 
 class AsyncAPI:
+    """Twitter Asynchronous API v1.1 Interface
+
+    .. versionchanged:: 4.11
+        Added support for ``include_ext_edit_control`` endpoint/method
+        parameter
+
+    Parameters
+    ----------
+    auth
+        The authentication handler to be used
+    cache
+        The cache to query if a GET method is used
+    host
+        The general REST API host server URL
+    parser
+        The Parser instance to use for parsing the response from Twitter;
+        defaults to an instance of ModelParser
+    proxy
+        The full url to an HTTPS proxy to use for connecting to Twitter
+    retry_count
+        Number of retries to attempt when an error occurs
+    retry_delay
+        Number of seconds to wait between retries
+    retry_errors
+        Which HTTP status codes to retry
+    timeout
+        The maximum amount of time to wait for a response from Twitter
+    upload_host
+        The URL of the upload server
+    wait_on_rate_limit
+        Whether or not to automatically wait for rate limits to replenish
+
+    Raises
+    ------
+    TypeError
+        If the given parser is not a Parser instance
+
+    References
+    ----------
+    https://developer.twitter.com/en/docs/api-reference-index
+    """
+
     def __init__(
         self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
         proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
@@ -97,7 +139,7 @@ class AsyncAPI:
                 str(type(self.parser))
             )
 
-        self.session = aiohttp.ClientSession()
+        #self.session = None
 
     async def request(
         self, method, endpoint, *, endpoint_parameters=(), params=None,
@@ -111,6 +153,8 @@ class AsyncAPI:
             raise TweepyException('Authentication required!')
 
         self.cached_result = False
+
+        session = aiohttp.ClientSession()
 
         if headers is None:
             headers = {}
@@ -135,7 +179,6 @@ class AsyncAPI:
             params[k] = str(arg)
         #params = json.dumps(params)
         log.debug("PARAMS: %r", params)
-        print("BBBBBBB", type(params))
 
         # Query the cache if one is available
         # and this request uses a GET method.
@@ -198,11 +241,6 @@ class AsyncAPI:
                         await log.warning(f"Rate limit reached. Sleeping for: {sleep_time}")
                         time.sleep(sleep_time + 1)  # Sleep for extra sec
 
-                # Apply authentication --- removed for AsyncClient auth block
-                # auth = None
-                # if self.auth:
-                #     auth = self.auth.apply_auth()
-
                 # Compile FormData object
                 formdata = aiohttp.FormData()
                 # Add files data
@@ -214,18 +252,10 @@ class AsyncAPI:
                     for key, value in post_data.items():
                         formdata.add_field(key, value)
                 
-                # print("AAAAAAAAAAAAAAAAAAAAAA",urlencode(params))
-                # print("CCCC", type(urlencode(params)))
-
-                print("###########################################")
-                print(type(self.auth))
-                print(self.auth)
-
-
                 # Execute async request
                 try:
-                    async with self.session.request(
-                        method, url, params=params, headers=headers,
+                    async with session.request(
+                        method, url, params=None, headers=headers,
                         data=formdata, json=json_payload,# auth=auth,
                         timeout=self.timeout, proxy=self.proxy
                     ) as resp:
@@ -296,7 +326,7 @@ class AsyncAPI:
             return result
                 
         finally:
-            self.session.close()
+            await session.close()
 
         
     @payload('status')
