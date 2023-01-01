@@ -645,7 +645,7 @@ class StreamingClient(BaseClient, BaseStream):
                 else:
                     return StreamRule(value=data["value"], id=data["id"])
         else:
-            super()._process_data(data, data_type=data_type)
+            return super()._process_data(data, data_type=data_type)
 
     def add_rules(self, add, **params):
         """add_rules(add, *, dry_run)
