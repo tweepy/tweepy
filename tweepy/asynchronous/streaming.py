@@ -213,12 +213,17 @@ class AsyncStream(AsyncBaseStream):
     .. note::
 
         New Twitter Developer Apps created on or after April 29, 2022 `will not
-        be able to gain access to v1.1 statuses/sample and v1.1
-        statuses/filter`_, the Twitter API v1.1 endpoints that
-        :class:`AsyncStream` uses. Twitter API v2 can be used instead with
-        :class:`AsyncStreamingClient`.
+        be able to gain access to v1.1 statuses/filter`_, the Twitter API v1.1
+        endpoint that :class:`AsyncStream` uses. Twitter API v2 can be used
+        instead with :class:`AsyncStreamingClient`.
 
     .. versionadded:: 4.0
+
+    .. versionchanged:: 4.13
+        Removed ``sample``, ``on_delete``, ``on_scrub_geo``,
+        ``on_status_withheld``, and ``on_user_withheld`` methods, as `the
+        Twitter API v1.1 statuses/sample endpoint and compliance messages on
+        the Twitter API v1.1 statuses/filter endpoint have been retired`_
 
     Parameters
     ----------
@@ -245,8 +250,9 @@ class AsyncStream(AsyncBaseStream):
         User agent used when connecting to the API
 
 
-    .. _will not be able to gain access to v1.1 statuses/sample and v1.1
-        statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+    .. _will not be able to gain access to v1.1 statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+    .. _the Twitter API v1.1 statuses/sample endpoint and compliance messages
+        on the Twitter API v1.1 statuses/filter endpoint have been retired: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
@@ -374,64 +380,6 @@ class AsyncStream(AsyncBaseStream):
         # Use name parameter when support for Python 3.7 is dropped
         return self.task
 
-    def sample(self, *, languages=None, stall_warnings=False):
-        """Sample realtime Tweets
-
-        .. deprecated:: 4.10
-            `The Twitter API v1.1 endpoint this method uses is now deprecated
-            and will be retired on October 29, 2022.`_ Twitter API v2 can be
-            used instead with :meth:`AsyncStreamingClient.sample`.
-
-        Parameters
-        ----------
-        languages : list[str] | None
-            Setting this parameter to a comma-separated list of `BCP 47`_
-            language identifiers corresponding to any of the languages listed
-            on Twitter’s `advanced search`_ page will only return Tweets that
-            have been detected as being written in the specified languages. For
-            example, connecting with language=en will only stream Tweets
-            detected to be in the English language.
-        stall_warnings: bool | None
-            Specifies whether stall warnings should be delivered. See
-            https://developer.twitter.com/en/docs/tweets/filter-realtime/guides/basic-stream-parameters
-            for more information.
-
-        Raises
-        ------
-        TweepyException
-            When the stream is already connected
-
-        Returns
-        -------
-        asyncio.Task
-            The task running the stream
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
-
-        .. _BCP 47: https://tools.ietf.org/html/bcp47
-        .. _advanced search: https://twitter.com/search-advanced
-        .. _The Twitter API v1.1 endpoint this method uses is now deprecated
-            and will be retired on October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
-        """
-        if self.task is not None and not self.task.done():
-            raise TweepyException("Stream is already connected")
-
-        endpoint = "statuses/sample"
-
-        params = {}
-        if languages is not None:
-            params["language"] = ','.join(map(str, languages))
-        if stall_warnings:
-            params["stall_warnings"] = "true"
-
-        self.task = asyncio.create_task(
-            self._connect("GET", endpoint, params=params)
-        )
-        # Use name parameter when support for Python 3.7 is dropped
-        return self.task
-
     async def on_data(self, raw_data):
         """|coroutine|
 
@@ -453,19 +401,10 @@ class AsyncStream(AsyncBaseStream):
         if "in_reply_to_status_id" in data:
             status = Status.parse(None, data)
             return await self.on_status(status)
-        if "delete" in data:
-            delete = data["delete"]["status"]
-            return await self.on_delete(delete["id"], delete["user_id"])
         if "disconnect" in data:
             return await self.on_disconnect_message(data["disconnect"])
         if "limit" in data:
             return await self.on_limit(data["limit"]["track"])
-        if "scrub_geo" in data:
-            return await self.on_scrub_geo(data["scrub_geo"])
-        if "status_withheld" in data:
-            return await self.on_status_withheld(data["status_withheld"])
-        if "user_withheld" in data:
-            return await self.on_user_withheld(data["user_withheld"])
         if "warning" in data:
             return await self.on_warning(data["warning"])
 
@@ -482,20 +421,6 @@ class AsyncStream(AsyncBaseStream):
             The Status received
         """
         log.debug("Received status: %d", status.id)
-
-    async def on_delete(self, status_id, user_id):
-        """|coroutine|
-
-        This is called when a status deletion notice is received.
-
-        Parameters
-        ----------
-        status_id : int
-            The ID of the deleted Tweet
-        user_id : int
-            The ID of the author of the Tweet
-        """
-        log.debug("Received status deletion notice: %d", status_id)
 
     async def on_disconnect_message(self, message):
         """|coroutine|
@@ -521,42 +446,6 @@ class AsyncStream(AsyncBaseStream):
             connection was opened
         """
         log.debug("Received limit notice: %d", track)
-
-    async def on_scrub_geo(self, notice):
-        """|coroutine|
-
-        This is called when a location deletion notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The location deletion notice
-        """
-        log.debug("Received location deletion notice: %s", notice)
-
-    async def on_status_withheld(self, notice):
-        """|coroutine|
-
-        This is called when a status withheld content notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The status withheld content notice
-        """
-        log.debug("Received status withheld content notice: %s", notice)
-
-    async def on_user_withheld(self, notice):
-        """|coroutine|
-
-        This is called when a user withheld content notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The user withheld content notice
-        """
-        log.debug("Received user withheld content notice: %s", notice)
 
     async def on_warning(self, notice):
         """|coroutine|

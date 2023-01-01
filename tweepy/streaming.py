@@ -218,14 +218,20 @@ class BaseStream:
 
 
 class Stream(BaseStream):
-    """Filter and sample realtime Tweets with Twitter API v1.1
+    """Filter realtime Tweets with Twitter API v1.1
 
     .. note::
 
         New Twitter Developer Apps created on or after April 29, 2022 `will not
-        be able to gain access to v1.1 statuses/sample and v1.1
-        statuses/filter`_, the Twitter API v1.1 endpoints that :class:`Stream`
-        uses. Twitter API v2 can be used instead with :class:`StreamingClient`.
+        be able to gain access to v1.1 statuses/filter`_, the Twitter API v1.1
+        endpoint that :class:`Stream` uses. Twitter API v2 can be used instead
+        with :class:`StreamingClient`.
+
+    .. versionchanged:: 4.13
+        Removed ``sample``, ``on_delete``, ``on_scrub_geo``,
+        ``on_status_withheld``, and ``on_user_withheld`` methods, as `the
+        Twitter API v1.1 statuses/sample endpoint and compliance messages on
+        the Twitter API v1.1 statuses/filter endpoint have been retired`_
 
     Parameters
     ----------
@@ -267,8 +273,9 @@ class Stream(BaseStream):
         User agent used when connecting to the stream
 
 
-    .. _will not be able to gain access to v1.1 statuses/sample and v1.1
-        statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+    .. _will not be able to gain access to v1.1 statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+    .. _the Twitter API v1.1 statuses/sample endpoint and compliance messages
+        on the Twitter API v1.1 statuses/filter endpoint have been retired: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
@@ -384,64 +391,6 @@ class Stream(BaseStream):
         else:
             self._connect(method, endpoint, headers=headers, body=body)
 
-    def sample(self, *, languages=None, stall_warnings=False, threaded=False):
-        """Sample realtime Tweets
-
-        .. deprecated:: 4.9
-            `The Twitter API v1.1 endpoint this method uses is now deprecated
-            and will be retired on October 29, 2022.`_ Twitter API v2 can be
-            used instead with :meth:`StreamingClient.sample`.
-
-        Parameters
-        ----------
-        languages : list[str] | None
-            Setting this parameter to a comma-separated list of `BCP 47`_
-            language identifiers corresponding to any of the languages listed
-            on Twitter’s `advanced search`_ page will only return Tweets that
-            have been detected as being written in the specified languages. For
-            example, connecting with language=en will only stream Tweets
-            detected to be in the English language.
-        stall_warnings : bool
-            Specifies whether stall warnings should be delivered
-        threaded : bool
-            Whether or not to use a thread to run the stream
-
-        Raises
-        ------
-        TweepyException
-            When the stream is already connected
-
-        Returns
-        -------
-        threading.Thread | None
-            The thread if ``threaded`` is set to ``True``, else ``None``
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/v1/tweets/sample-realtime/api-reference/get-statuses-sample
-
-        .. _BCP 47: https://tools.ietf.org/html/bcp47
-        .. _advanced search: https://twitter.com/search-advanced
-        .. _The Twitter API v1.1 endpoint this method uses is now deprecated
-            and will be retired on October 29, 2022.: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
-        """
-        if self.running:
-            raise TweepyException("Stream is already connected")
-
-        method = "GET"
-        endpoint = "statuses/sample"
-
-        params = {}
-        if languages:
-            params["language"] = ','.join(map(str, languages))
-        if stall_warnings:
-            params["stall_warnings"] = "true"
-
-        if threaded:
-            return self._threaded_connect(method, endpoint, params=params)
-        else:
-            self._connect(method, endpoint, params=params)
-
     def on_data(self, raw_data):
         """This is called when raw data is received from the stream.
         This method handles sending the data to other methods based on the
@@ -461,19 +410,10 @@ class Stream(BaseStream):
         if "in_reply_to_status_id" in data:
             status = Status.parse(None, data)
             return self.on_status(status)
-        if "delete" in data:
-            delete = data["delete"]["status"]
-            return self.on_delete(delete["id"], delete["user_id"])
         if "disconnect" in data:
             return self.on_disconnect_message(data["disconnect"])
         if "limit" in data:
             return self.on_limit(data["limit"]["track"])
-        if "scrub_geo" in data:
-            return self.on_scrub_geo(data["scrub_geo"])
-        if "status_withheld" in data:
-            return self.on_status_withheld(data["status_withheld"])
-        if "user_withheld" in data:
-            return self.on_user_withheld(data["user_withheld"])
         if "warning" in data:
             return self.on_warning(data["warning"])
 
@@ -488,18 +428,6 @@ class Stream(BaseStream):
             The Status received
         """
         log.debug("Received status: %d", status.id)
-
-    def on_delete(self, status_id, user_id):
-        """This is called when a status deletion notice is received.
-
-        Parameters
-        ----------
-        status_id : int
-            The ID of the deleted Tweet
-        user_id : int
-            The ID of the author of the Tweet
-        """
-        log.debug("Received status deletion notice: %d", status_id)
 
     def on_disconnect_message(self, message):
         """This is called when a disconnect message is received.
@@ -521,36 +449,6 @@ class Stream(BaseStream):
             connection was opened
         """
         log.debug("Received limit notice: %d", track)
-
-    def on_scrub_geo(self, notice):
-        """This is called when a location deletion notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The location deletion notice
-        """
-        log.debug("Received location deletion notice: %s", notice)
-
-    def on_status_withheld(self, notice):
-        """This is called when a status withheld content notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The status withheld content notice
-        """
-        log.debug("Received status withheld content notice: %s", notice)
-
-    def on_user_withheld(self, notice):
-        """This is called when a user withheld content notice is received.
-
-        Parameters
-        ----------
-        notice : JSON
-            The user withheld content notice
-        """
-        log.debug("Received user withheld content notice: %s", notice)
 
     def on_warning(self, warning):
         """This is called when a stall warning message is received.
