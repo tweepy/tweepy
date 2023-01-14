@@ -1,9 +1,11 @@
 # Tweepy
 # Copyright 2009-2022 Joshua Roesslein
 # See LICENSE for details.
+from __future__ import annotations
 
 import logging
 import warnings
+from typing import TYPE_CHECKING
 
 import requests
 from requests.auth import AuthBase, HTTPBasicAuth
@@ -12,6 +14,11 @@ from requests_oauthlib import (  # type: ignore[import]
 )
 
 from tweepy.errors import TweepyException
+
+if TYPE_CHECKING:
+    from requests import PreparedRequest
+    from .typing import LTSType
+
 
 WARNING_MESSAGE = """Warning! Due to a Twitter API bug, signin_with_twitter
 and access_type don't always play nice together. Details
@@ -27,8 +34,8 @@ class OAuth1UserHandler:
         Renamed from :class:`OAuthHandler`
     """
 
-    def __init__(self, consumer_key, consumer_secret, access_token=None,
-                 access_token_secret=None, callback=None):
+    def __init__(self, consumer_key: str | bytes, consumer_secret: str | bytes, access_token: str | bytes | None = None,
+                 access_token_secret: str | bytes | None = None, callback: str | bytes | None = None) -> None:
         if not isinstance(consumer_key, (str, bytes)):
             raise TypeError("Consumer key must be string or bytes, not "
                             + type(consumer_key).__name__)
@@ -46,17 +53,17 @@ class OAuth1UserHandler:
         self.oauth = OAuth1Session(consumer_key, client_secret=consumer_secret,
                                    callback_uri=self.callback)
 
-    def apply_auth(self):
+    def apply_auth(self) -> OAuth1:
         return OAuth1(
             self.consumer_key, client_secret=self.consumer_secret,
             resource_owner_key=self.access_token,
             resource_owner_secret=self.access_token_secret, decoding=None
         )
 
-    def _get_oauth_url(self, endpoint):
+    def _get_oauth_url(self, endpoint) -> str:
         return 'https://api.twitter.com/oauth/' + endpoint
 
-    def _get_request_token(self, access_type=None):
+    def _get_request_token(self, access_type: str | None = None) -> dict[str, str]:
         try:
             url = self._get_oauth_url('request_token')
             if access_type:
@@ -65,8 +72,8 @@ class OAuth1UserHandler:
         except Exception as e:
             raise TweepyException(e)
 
-    def get_authorization_url(self, signin_with_twitter=False,
-                              access_type=None):
+    def get_authorization_url(self, signin_with_twitter: bool = False,
+                              access_type: str | None = None):
         """Get the authorization URL to redirect the user to"""
         try:
             if signin_with_twitter:
@@ -82,7 +89,7 @@ class OAuth1UserHandler:
         except Exception as e:
             raise TweepyException(e)
 
-    def get_access_token(self, verifier=None):
+    def get_access_token(self, verifier: str | bytes | None = None) -> tuple[str, str]:
         """After user has authorized the app, get access token and secret with
         verifier
         """
@@ -101,7 +108,7 @@ class OAuth1UserHandler:
         except Exception as e:
             raise TweepyException(e)
 
-    def set_access_token(self, key, secret):
+    def set_access_token(self, key: str | bytes, secret: str | bytes) -> None:
         """
         .. deprecated:: 4.5
             Set through initialization instead.
@@ -117,8 +124,8 @@ class OAuthHandler(OAuth1UserHandler):
         Use :class:`OAuth1UserHandler` instead.
     """
 
-    def __init__(self, consumer_key, consumer_secret, access_token=None,
-                 access_token_secret=None, callback=None):
+    def __init__(self, consumer_key: str | bytes, consumer_secret: str | bytes, access_token: str | bytes | None = None,
+                 access_token_secret: str | bytes | None = None, callback: str | bytes | None = None) -> None:
         warnings.warn(
             "OAuthHandler is deprecated; use OAuth1UserHandler instead.",
             DeprecationWarning
@@ -135,7 +142,7 @@ class OAuth2AppHandler:
         Renamed from :class:`AppAuthHandler`
     """
 
-    def __init__(self, consumer_key, consumer_secret):
+    def __init__(self, consumer_key: str, consumer_secret: str) -> None:
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self._bearer_token = ''
@@ -152,7 +159,7 @@ class OAuth2AppHandler:
 
         self._bearer_token = data['access_token']
 
-    def apply_auth(self):
+    def apply_auth(self) -> OAuth2BearerHandler:
         return OAuth2BearerHandler(self._bearer_token)
 
 
@@ -163,7 +170,7 @@ class AppAuthHandler(OAuth2AppHandler):
         Use :class:`OAuth2AppHandler` instead.
     """
 
-    def __init__(self, consumer_key, consumer_secret):
+    def __init__(self, consumer_key: str, consumer_secret: str) -> None:
         warnings.warn(
             "AppAuthHandler is deprecated; use OAuth2AppHandler instead.",
             DeprecationWarning
@@ -177,10 +184,10 @@ class OAuth2BearerHandler(AuthBase):
     .. versionadded:: 4.5
     """
 
-    def __init__(self, bearer_token):
+    def __init__(self, bearer_token: str) -> None:
         self.bearer_token = bearer_token
 
-    def __call__(self, request):
+    def __call__(self, request: PreparedRequest) -> PreparedRequest:
         request.headers['Authorization'] = 'Bearer ' + self.bearer_token
         return request
 
@@ -195,14 +202,14 @@ class OAuth2UserHandler(OAuth2Session):
     .. versionadded:: 4.5
     """
 
-    def __init__(self, *, client_id, redirect_uri, scope, client_secret=None):
+    def __init__(self, *, client_id: str, redirect_uri: str, scope: str | LTSType[str], client_secret: str | None = None) -> None:
         super().__init__(client_id, redirect_uri=redirect_uri, scope=scope)
         if client_secret is not None:
             self.auth = HTTPBasicAuth(client_id, client_secret)
         else:
             self.auth = None
 
-    def get_authorization_url(self):
+    def get_authorization_url(self) -> str:
         """Get the authorization URL to redirect the user to"""
         authorization_url, state = self.authorization_url(
             "https://twitter.com/i/oauth2/authorize",
@@ -212,7 +219,7 @@ class OAuth2UserHandler(OAuth2Session):
         )
         return authorization_url
 
-    def fetch_token(self, authorization_response):
+    def fetch_token(self, authorization_response: str) -> str:
         """After user has authorized the app, fetch access token with
         authorization response URL
         """
