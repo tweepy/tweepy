@@ -109,7 +109,9 @@ class BaseClient:
                             "Rate limit exceeded. "
                             f"Sleeping for {sleep_time} seconds."
                         )
-                        time.sleep(sleep_time)
+                        for sec in range(sleep_time):
+                            print("\r","Remaining time:{}".format(sleep_time-sec),end="sec")
+                            sleep(1)
                     return self.request(method, route, params, json, user_auth)
                 else:
                     raise TooManyRequests(response)
