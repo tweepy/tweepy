@@ -68,7 +68,9 @@ class AsyncPaginator:
         async for response in AsyncPaginationIterator(
             self.method, *self.args, **self.kwargs
         ):
-            if isinstance(response, Response):
+            if isinstance(response, aiohttp.ClientResponse):
+                response_data = (await response.json()).get("data", [])
+            elif isinstance(response, Response):
                 response_data = response.data or []
             elif isinstance(response, dict):
                 response_data = response.get("data", [])

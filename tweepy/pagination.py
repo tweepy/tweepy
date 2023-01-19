@@ -67,7 +67,9 @@ class Paginator:
         for response in PaginationIterator(
             self.method, *self.args, **self.kwargs
         ):
-            if isinstance(response, Response):
+            if isinstance(response, requests.Response):
+                response_data = response.json().get("data", [])
+            elif isinstance(response, Response):
                 response_data = response.data or []
             elif isinstance(response, dict):
                 response_data = response.get("data", [])
