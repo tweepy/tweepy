@@ -41,11 +41,12 @@ Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 class BaseClient:
 
     def __init__(
-        self, bearer_token=None, consumer_key=None, consumer_secret=None,
-        access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
+        self, bearer_token=None, session=requests.Session(), consumer_key=None,
+        consumer_secret=None, access_token=None, access_token_secret=None, *,
+        return_type=Response, wait_on_rate_limit=False
     ):
         self.bearer_token = bearer_token
+        self.session = session
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
@@ -54,7 +55,6 @@ class BaseClient:
         self.return_type = return_type
         self.wait_on_rate_limit = wait_on_rate_limit
 
-        self.session = requests.Session()
         self.user_agent = (
             f"Python/{python_version()} "
             f"Requests/{requests.__version__} "
@@ -65,14 +65,15 @@ class BaseClient:
         host = "https://api.twitter.com"
         headers = {"User-Agent": self.user_agent}
         auth = None
-        if user_auth:
-            auth = OAuth1UserHandler(
-                self.consumer_key, self.consumer_secret,
-                self.access_token, self.access_token_secret
-            )
-            auth = auth.apply_auth()
-        else:
-            headers["Authorization"] = f"Bearer {self.bearer_token}"
+        if type(self.session) == requests.Session:
+            if user_auth:
+                auth = OAuth1UserHandler(
+                    self.consumer_key, self.consumer_secret,
+                    self.access_token, self.access_token_secret
+                )
+                auth = auth.apply_auth()
+            else:
+                headers["Authorization"] = f"Bearer {self.bearer_token}"
 
         log.debug(
             f"Making API request: {method} {host + route}\n"
