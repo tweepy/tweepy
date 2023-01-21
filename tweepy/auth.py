@@ -227,11 +227,34 @@ class OAuth2UserHandler(OAuth2Session):
             code_verifier=self.code_verifier
         )
 
-    def refresh_token(self, refresh_token):
+    def refresh_token(
+        self,
+        token_url=None,
+        refresh_token=None,
+        body="",
+        auth=None,
+        timeout=None,
+        headers=None,
+        verify=True,
+        proxies=None,
+        **kwargs
+    ):
+        if not token_url:
+            token_url = "https://api.twitter.com/2/oauth2/token"
+        if auth == None:
+            auth = self.auth
+        if body == "":
+            body = "client_id="+self.client_id
+
         return super().refresh_token(
-            "https://api.twitter.com/2/oauth2/token",
-            refresh_token=refresh_token,
-            auth=self.auth,
-			body="client_id="+self.client_id
+            token_url,
+            refresh_token,
+            body,
+            auth,
+            timeout=None,
+            headers=None,
+            verify=True,
+            proxies=None,
+            **kwargs
         )
 
