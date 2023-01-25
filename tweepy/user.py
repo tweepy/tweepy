@@ -63,6 +63,8 @@ class User(HashableID, DataMapping):
         The URL specified in the user's profile, if present.
     verified : bool | None
         Indicates if this user is a verified Twitter User.
+    verified_type : "blue" | "business" | "government" | "none"
+        Indicates the type of verification for the Twitter account.
     withheld : dict | None
         Contains withholding details for `withheld content`_, if applicable.
 
@@ -77,7 +79,7 @@ class User(HashableID, DataMapping):
     __slots__ = (
         "data", "id", "name", "username", "created_at", "description",
         "entities", "location", "pinned_tweet_id", "profile_image_url",
-        "protected", "public_metrics", "url", "verified", "withheld"
+        "protected", "public_metrics", "url", "verified", "verified_type", "withheld"
     )
 
     def __init__(self, data):
@@ -103,6 +105,7 @@ class User(HashableID, DataMapping):
         self.public_metrics = data.get("public_metrics")
         self.url = data.get("url")
         self.verified = data.get("verified")
+        self.verified = data.get("verified_type")
         self.withheld = data.get("withheld")
 
     def __repr__(self):
