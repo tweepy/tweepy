@@ -3685,7 +3685,7 @@ class API:
 
         if wait_for_async_finalize and hasattr(media, 'processing_info'):
             while media.processing_info['state'] in ('pending', 'in_progress'):
-                time.sleep(media.processing_info['check_after_secs'])
+                time.sleep(media.processing_info.get('check_after_secs', 5))
                 media = self.get_media_upload_status(media.media_id, **kwargs)
 
         return media
