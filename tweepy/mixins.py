@@ -26,17 +26,21 @@ class DataMapping(Mapping):
     __slots__ = ()
 
     def __contains__(self, item):
-        return item in self.data
+        data = DataMapping.__getattribute__(self, "data")
+        return item in data
 
     def __getattr__(self, name):
+        data = DataMapping.__getattribute__(self, "data")
+        if name == "data":
+            return data
         try:
-            return self.data[name]
+            return data[name]
         except KeyError:
             raise AttributeError from None
 
     def __getitem__(self, key):
         try:
-            return getattr(self, key)
+            return DataMapping.__getattribute__(self, key)
         except AttributeError:
             raise KeyError from None
     
