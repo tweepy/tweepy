@@ -47,3 +47,8 @@ Models
 =============
 
 .. autoclass:: User()
+
+
+.. rubric:: Footnotes
+
+.. [#] https://developer.twitter.com/en/updates/changelog
