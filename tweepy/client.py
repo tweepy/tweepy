@@ -18,12 +18,18 @@ import warnings
 
 import requests
 
+from backoff import on_exception, random_jitter, expo
+from http.client import BadStatusLine
+from socket import error as SocketError
+from urllib3.exceptions import ProtocolError
+from requests.exceptions import ConnectionError, ChunkedEncodingError
+
 import tweepy
 from tweepy.auth import OAuth1UserHandler
 from tweepy.direct_message_event import DirectMessageEvent
 from tweepy.errors import (
     BadRequest, Forbidden, HTTPException, NotFound, TooManyRequests,
-    TwitterServerError, Unauthorized
+    TwitterServerError, Unauthorized, TweepyException
 )
 from tweepy.list import List
 from tweepy.media import Media
@@ -61,6 +67,15 @@ class BaseClient:
             f"Tweepy/{tweepy.__version__}"
         )
 
+    @on_exception(expo,
+                  (BadStatusLine,
+                   SocketError,
+                   ProtocolError,
+                   ConnectionError,
+                   ChunkedEncodingError,
+                   TweepyException),
+                   jitter=random_jitter,
+                   factor=2)
     def request(self, method, route, params=None, json=None, user_auth=False):
         host = "https://api.twitter.com"
         headers = {"User-Agent": self.user_agent}
