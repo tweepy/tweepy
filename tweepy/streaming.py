@@ -220,6 +220,10 @@ class BaseStream:
 class Stream(BaseStream):
     """Filter realtime Tweets with Twitter API v1.1
 
+    .. deprecated:: 4.13
+        `The Twitter API v1.1 streaming statuses/filter endpoint that`_
+        :class:`Stream` `uses has a formal deprecation date of March 9, 2023.`_
+
     .. note::
 
         New Twitter Developer Apps created on or after April 29, 2022 `will not
@@ -276,6 +280,8 @@ class Stream(BaseStream):
     .. _will not be able to gain access to v1.1 statuses/filter: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
     .. _the Twitter API v1.1 statuses/sample endpoint and compliance messages
         on the Twitter API v1.1 statuses/filter endpoint have been retired: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+    .. _The Twitter API v1.1 streaming statuses/filter endpoint that: https://twittercommunity.com/t/announcing-the-deprecation-of-v1-1-statuses-filter-endpoint/182960
+    .. _uses has a formal deprecation date of March 9, 2023.: https://twittercommunity.com/t/announcing-the-deprecation-of-v1-1-statuses-filter-endpoint/182960
     """
 
     def __init__(self, consumer_key, consumer_secret, access_token,
