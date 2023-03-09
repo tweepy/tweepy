@@ -41,7 +41,7 @@ setup(
     extras_require={
         "async": [
             "aiohttp>=3.7.3,<4",
-            "async-lru>=1.0.3,<2",
+            "async-lru>=1.0.3,<3",
         ],
         "docs": [
             "myst-parser==0.15.2",
