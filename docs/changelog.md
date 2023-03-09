@@ -3,6 +3,45 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.13.0 (2023-03-09)
+---------------------------
+
+### New Features / Improvements
+- Add `verified_type` field for `User` ([9f7afae](https://github.com/tweepy/tweepy/commit/9f7afaefa680da6a4f7864db99e12dd72a51cafa))
+
+### Twitter API Backwards-Incompatible Changes
+- Remove streaming methods using retired Twitter API v1.1 features ([0cd96b1](https://github.com/tweepy/tweepy/commit/0cd96b1918e5e920eb9f8fe4ba303ab5ec899c65))
+  - Twitter API v1.1 statuses/sample endpoint
+    - `Stream.sample`
+    - `AsyncStream.sample`
+  - Compliance messages on the Twitter API v1.1 statuses/filter endpoint
+    - `Stream.on_delete`, `Stream.on_scrub_geo`, `Stream.on_status_withheld`, `Stream.on_user_withheld`
+    - `AsyncStream.on_delete`, `AsyncStream.on_scrub_geo`, `AsyncStream.on_status_withheld`, `AsyncStream.on_user_withheld`
+
+### Twitter API Deprecations
+- Deprecate streaming with Twitter API v1.1 statuses/filter endpoint ([8b9c547](https://github.com/tweepy/tweepy/commit/8b9c547b7e443344ba78ee435ec60a407d92f902))
+  - `Stream`
+  - `AsyncStream`
+
+### Bug Fixes
+- Return base class method values in `StreamingClient._process_data` and `AsyncStreamingClient._process_data` methods ([2744073](https://github.com/tweepy/tweepy/commit/274407346aa2db1b751f5e5fe11ab0d8bbe9314c))
+- Handle empty payloads in `JSONParser.parse` ([e854138](https://github.com/tweepy/tweepy/commit/e854138dcecc223fac1038704ec0d9266037217b), [#2051](https://github.com/tweepy/tweepy/issues/2051))
+
+#### Twitter API Bug Handling
+- Handle incorrect processing state for errored chunked uploads ([a68ce86](https://github.com/tweepy/tweepy/commit/a68ce8658ab0908227dc486e73d02060e21174f8))
+
+### Misc
+
+- Support async-lru v2 ([f98b345](https://github.com/tweepy/tweepy/commit/f98b34573a50fdc870111e17052d385b0917e3c3))
+- Document specific expansions available for each type of payload ([7df6453](https://github.com/tweepy/tweepy/commit/7df645328bdf26e5c4c569392d5d2252b1527477))
+- Add documentation for Direct Message events ([c689548](https://github.com/tweepy/tweepy/commit/c689548cb1b4b9c2f69249d67534a735b931b9b5))
+- Update documentation for `dm_event_fields` parameter ([e2fb467](https://github.com/tweepy/tweepy/commit/e2fb467b52659e87de592ff80b03edb9324c0189))
+- Add section in documentation about `dm_event_fields` parameter ([4b0fa90](https://github.com/tweepy/tweepy/commit/4b0fa90e91eb2b67dfd33f0d27b148e95ea05f65))
+- Add expansions documentation for Direct Message conversation events ([#2009](https://github.com/tweepy/tweepy/pull/2009))
+- Add note in documentation about removal of `Tweet` `source` field ([5d22a01](https://github.com/tweepy/tweepy/commit/5d22a01a2f48feaed6817e0ab7c27a990735a3d8))
+- Add SECURITY.md ([b79a1db](https://github.com/tweepy/tweepy/commit/b79a1db0962d7091de17f6ad93f42699d68e76f6), [3d3d58e](https://github.com/tweepy/tweepy/commit/3d3d58e1e8627788fe88684a515ef888038f3e3c))
+- Update copyright years to include 2023 ([ccc9526](https://github.com/tweepy/tweepy/commit/ccc95269c1071f6c1f65698bf73c851472defba9))
+
 Version 4.12.1 (2022-11-06)
 ---------------------------
 
