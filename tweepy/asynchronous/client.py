@@ -3,7 +3,7 @@
 # See LICENSE for details.
 
 try:
-    from functools import cache
+    from functools import cache  # type: ignore[attr-defined]
 except ImportError:  # Remove when support for Python 3.8 is dropped
     from functools import lru_cache
     cache = lru_cache(maxsize=None)
@@ -14,7 +14,7 @@ from platform import python_version
 import time
 
 import aiohttp
-from async_lru import alru_cache
+from async_lru import alru_cache  # type: ignore[import]
 from oauthlib.oauth1 import Client as OAuthClient
 from yarl import URL
 

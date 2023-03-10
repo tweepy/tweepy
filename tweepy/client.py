@@ -2,11 +2,13 @@
 # Copyright 2009-2023 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import annotations
+
 from collections import namedtuple
 import datetime
 
 try:
-    from functools import cache
+    from functools import cache  # type: ignore[attr-defined]
 except ImportError:  # Remove when support for Python 3.8 is dropped
     from functools import lru_cache
     cache = lru_cache(maxsize=None)
@@ -14,6 +16,7 @@ except ImportError:  # Remove when support for Python 3.8 is dropped
 import logging
 from platform import python_version
 import time
+from typing import TYPE_CHECKING
 import warnings
 
 import requests
@@ -33,6 +36,27 @@ from tweepy.space import Space
 from tweepy.tweet import Tweet
 from tweepy.user import User
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+    import sys
+    from typing import Any
+
+    if sys.version_info >= (3, 10):
+        from typing import TypeAlias
+    else:
+        from typing_extensions import TypeAlias
+    # Remove when support for Python 3.9 is dropped
+
+    # From typeshed / types-requests:
+    _ParamsMappingValueType: TypeAlias = (
+        "str | bytes | int | float | Iterable[str | bytes | int | float] | None"
+    )
+    # Change to typed global expression when support for Python 3.9 is dropped
+
+    JSON: TypeAlias = "dict[str, Any]"
+    # Change to typed global expression when support for Python 3.8 is dropped
+    # https://github.com/python/typing/issues/182
+
 log = logging.getLogger(__name__)
 
 Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
@@ -41,10 +65,12 @@ Response = namedtuple("Response", ("data", "includes", "errors", "meta"))
 class BaseClient:
 
     def __init__(
-        self, bearer_token=None, consumer_key=None, consumer_secret=None,
-        access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
-    ):
+        self, bearer_token: str | None = None, consumer_key: str | None = None,
+        consumer_secret: str | None = None, access_token: str | None = None,
+        access_token_secret: str | None = None, *,
+        return_type: type[dict | requests.Response | Response] = Response,
+        wait_on_rate_limit: bool = False
+    ) -> None:
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -201,31 +227,25 @@ class BaseClient:
 
 
 class Client(BaseClient):
-    """Client( \
-        bearer_token=None, consumer_key=None, consumer_secret=None, \
-        access_token=None, access_token_secret=None, *, return_type=Response, \
-        wait_on_rate_limit=False \
-    )
-
-    Twitter API v2 Client
+    """Twitter API v2 Client
 
     .. versionadded:: 4.0
 
     Parameters
     ----------
-    bearer_token : str | None
+    bearer_token
         Twitter API OAuth 2.0 Bearer Token / Access Token
-    consumer_key : str | None
+    consumer_key
         Twitter API OAuth 1.0a Consumer Key
-    consumer_secret : str | None
+    consumer_secret
         Twitter API OAuth 1.0a Consumer Secret
-    access_token : str | None
+    access_token
         Twitter API OAuth 1.0a Access Token
-    access_token_secret : str | None
+    access_token_secret
         Twitter API OAuth 1.0a Access Token Secret
-    return_type : type[dict | requests.Response | Response]
+    return_type
         Type to return from requests to the API
-    wait_on_rate_limit : bool
+    wait_on_rate_limit
         Whether to wait when rate limit is reached
 
     Attributes
@@ -277,7 +297,9 @@ class Client(BaseClient):
 
     # Bookmarks
 
-    def remove_bookmark(self, tweet_id):
+    def remove_bookmark(
+        self, tweet_id: int | str
+    ) -> JSON | requests.Response | Response:
         """Allows a user or authenticated user ID to remove a Bookmark of a
         Tweet.
 
@@ -291,7 +313,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like the ``id`` to remove a
             Bookmark of.
 
@@ -299,10 +321,6 @@ class Client(BaseClient):
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -315,7 +333,9 @@ class Client(BaseClient):
             "DELETE", route
         )
 
-    def get_bookmarks(self, **params):
+    def get_bookmarks(
+        self, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_bookmarks( \
             *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -363,10 +383,6 @@ class Client(BaseClient):
         TypeError
             If the access token isn't set
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/bookmarks/api-reference/get-users-id-bookmarks
@@ -383,7 +399,9 @@ class Client(BaseClient):
             ), data_type=Tweet
         )
 
-    def bookmark(self, tweet_id):
+    def bookmark(
+        self, tweet_id: int | str
+    ) -> JSON | requests.Response | Response:
         """Causes the authenticating user to Bookmark the target Tweet provided
         in the request body.
 
@@ -397,7 +415,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like the user ``id`` to
             Bookmark.
 
@@ -405,10 +423,6 @@ class Client(BaseClient):
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -423,7 +437,9 @@ class Client(BaseClient):
 
     # Hide replies
 
-    def hide_reply(self, id, *, user_auth=True):
+    def hide_reply(
+        self, id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Hides a reply to a Tweet.
 
         .. versionchanged:: 4.5
@@ -431,15 +447,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to hide. The Tweet must belong to a
             conversation initiated by the authenticating user.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -450,7 +462,9 @@ class Client(BaseClient):
             user_auth=user_auth
         )
 
-    def unhide_reply(self, id, *, user_auth=True):
+    def unhide_reply(
+        self, id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Unhides a reply to a Tweet.
 
         .. versionchanged:: 4.5
@@ -458,15 +472,11 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to unhide. The Tweet must belong to
             a conversation initiated by the authenticating user.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -479,7 +489,9 @@ class Client(BaseClient):
 
     # Likes
 
-    def unlike(self, tweet_id, *, user_auth=True):
+    def unlike(
+        self, tweet_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Unlike a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -503,19 +515,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to unlike.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -528,7 +536,10 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_liking_users(self, id, *, user_auth=False, **params):
+    def get_liking_users(
+        self, id : int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_liking_users( \
             id, *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -542,7 +553,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Tweet ID of the Tweet to request liking users of.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -566,12 +577,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -586,7 +593,10 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_liked_tweets(self, id, *, user_auth=False, **params):
+    def get_liked_tweets(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_liked_tweets( \
             id, *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -600,7 +610,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             User ID of the user to request liked Tweets for.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -624,12 +634,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -646,7 +652,9 @@ class Client(BaseClient):
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def like(self, tweet_id, *, user_auth=True):
+    def like(
+        self, tweet_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Like a Tweet.
 
         .. note::
@@ -667,19 +675,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to Like.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -695,7 +699,9 @@ class Client(BaseClient):
 
     # Manage Tweets
 
-    def delete_tweet(self, id, *, user_auth=True):
+    def delete_tweet(
+        self, id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows an authenticated user ID to delete a Tweet.
 
         .. versionadded:: 4.3
@@ -705,14 +711,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The Tweet ID you are deleting.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -723,12 +725,18 @@ class Client(BaseClient):
         )
 
     def create_tweet(
-        self, *, direct_message_deep_link=None, for_super_followers_only=None,
-        place_id=None, media_ids=None, media_tagged_user_ids=None,
-        poll_duration_minutes=None, poll_options=None, quote_tweet_id=None,
-        exclude_reply_user_ids=None, in_reply_to_tweet_id=None,
-        reply_settings=None, text=None, user_auth=True
-    ):
+        self, *, direct_message_deep_link: str | None = None,
+        for_super_followers_only: bool | None = None,
+        place_id: str | None = None, media_ids: list[int | str] | None = None,
+        media_tagged_user_ids: list[int | str] | None = None,
+        poll_duration_minutes: int | None = None,
+        poll_options: list[str] | None = None,
+        quote_tweet_id: int | str | None = None,
+        exclude_reply_user_ids: list[int | str] | None = None,
+        in_reply_to_tweet_id: int | str | None = None,
+        reply_settings: str | None = None, text: str | None = None,
+        user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Creates a Tweet on behalf of an authenticated user.
 
         .. versionadded:: 4.3
@@ -774,12 +782,8 @@ class Client(BaseClient):
         text : str | None
             Text of the Tweet being created. This field is required if
             ``media.media_ids`` is not present.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -789,7 +793,7 @@ class Client(BaseClient):
         .. _Super Followers: https://help.twitter.com/en/using-twitter/super-follows
         .. _Settings: https://blog.twitter.com/en_us/topics/product/2020/new-conversation-settings-coming-to-a-tweet-near-you
         """
-        json = {}
+        json: JSON = {}
 
         if direct_message_deep_link is not None:
             json["direct_message_deep_link"] = direct_message_deep_link
@@ -813,7 +817,9 @@ class Client(BaseClient):
         if poll_options is not None:
             json["poll"] = {"options": poll_options}
             if poll_duration_minutes is not None:
-                json["poll"]["duration_minutes"] = poll_duration_minutes
+                json["poll"]["duration_minutes"] = (  # type: ignore
+                    poll_duration_minutes
+                )
 
         if quote_tweet_id is not None:
             json["quote_tweet_id"] = str(quote_tweet_id)
@@ -821,7 +827,7 @@ class Client(BaseClient):
         if in_reply_to_tweet_id is not None:
             json["reply"] = {"in_reply_to_tweet_id": str(in_reply_to_tweet_id)}
             if exclude_reply_user_ids is not None:
-                json["reply"]["exclude_reply_user_ids"] = [
+                json["reply"]["exclude_reply_user_ids"] = [  # type: ignore
                     str(exclude_reply_user_id)
                     for exclude_reply_user_id in exclude_reply_user_ids
                 ]
@@ -838,7 +844,10 @@ class Client(BaseClient):
 
     # Quote Tweets
 
-    def get_quote_tweets(self, id, *, user_auth=False, **params):
+    def get_quote_tweets(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_quote_tweets( \
             id, *, exclude=None, expansions=None, max_results=None, \
             media_fields=None, pagination_token=None, place_fields=None, \
@@ -858,7 +867,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to request.
         exclude : list[str] | str | None
             Comma-separated list of the types of Tweets to exclude from the
@@ -886,12 +895,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -910,7 +915,9 @@ class Client(BaseClient):
 
     # Retweets
 
-    def unretweet(self, source_tweet_id, *, user_auth=True):
+    def unretweet(
+        self, source_tweet_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows an authenticated user ID to remove the Retweet of a Tweet.
 
         The request succeeds with no action when the user sends a request to a
@@ -935,19 +942,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        source_tweet_id : int | str
+        source_tweet_id
             The ID of the Tweet that you would like to remove the Retweet of.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -960,7 +963,10 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_retweeters(self, id, *, user_auth=False, **params):
+    def get_retweeters(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_retweeters( \
             id, *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -974,7 +980,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Tweet ID of the Tweet to request Retweeting users of.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -998,12 +1004,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1018,7 +1020,9 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def retweet(self, tweet_id, *, user_auth=True):
+    def retweet(
+        self, tweet_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Causes the user ID to Retweet the target Tweet.
 
         .. note::
@@ -1039,19 +1043,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        tweet_id : int | str
+        tweet_id
             The ID of the Tweet that you would like to Retweet.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1067,7 +1067,9 @@ class Client(BaseClient):
 
     # Search Tweets
 
-    def search_all_tweets(self, query, **params):
+    def search_all_tweets(
+        self, query: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """search_all_tweets( \
             query, *, end_time=None, expansions=None, max_results=None, \
             media_fields=None, next_token=None, place_fields=None, \
@@ -1096,7 +1098,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One query for matching Tweets. Up to 1024 characters.
         end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
@@ -1147,10 +1149,6 @@ class Client(BaseClient):
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all
@@ -1170,7 +1168,10 @@ class Client(BaseClient):
             ), data_type=Tweet
         )
 
-    def search_recent_tweets(self, query, *, user_auth=False, **params):
+    def search_recent_tweets(
+        self, query: str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """search_recent_tweets( \
             query, *, end_time=None, expansions=None, max_results=None, \
             media_fields=None, next_token=None, place_fields=None, \
@@ -1190,7 +1191,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One rule for matching Tweets. If you are using a
             `Standard Project`_ at the Basic `access level`_, you can use the
             basic set of `operators`_ and can make queries up to 512 characters
@@ -1245,12 +1246,8 @@ class Client(BaseClient):
             include it.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1275,7 +1272,10 @@ class Client(BaseClient):
 
     # Timelines
 
-    def get_users_mentions(self, id, *, user_auth=False, **params):
+    def get_users_mentions(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_users_mentions( \
             id, *, end_time=None, expansions=None, max_results=None, \
             media_fields=None, pagination_token=None, place_fields=None, \
@@ -1293,7 +1293,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the user for whom to return Tweets mentioning
             the user. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
@@ -1351,12 +1351,8 @@ class Client(BaseClient):
             Twitter IDs is `here`_.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1375,7 +1371,9 @@ class Client(BaseClient):
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_home_timeline(self, *, user_auth=True, **params):
+    def get_home_timeline(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_home_timeline( \
             *, end_time=None, exclude=None, expansions=None, \
             max_results=None, media_fields=None, pagination_token=None, \
@@ -1454,12 +1452,8 @@ class Client(BaseClient):
             IDs is `here`_.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1480,7 +1474,10 @@ class Client(BaseClient):
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_users_tweets(self, id, *, user_auth=False, **params):
+    def get_users_tweets(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_users_tweets( \
             id, *, end_time=None, exclude=None, expansions=None, \
             max_results=None, media_fields=None, pagination_token=None, \
@@ -1499,7 +1496,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Twitter account (user ID) for whom to
             return results. User ID can be referenced using the `user/lookup`_
             endpoint. More information on Twitter IDs is `here`_.
@@ -1565,12 +1562,8 @@ class Client(BaseClient):
             ``until_id`` will be forced to the most recent ID available.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1592,7 +1585,9 @@ class Client(BaseClient):
 
     # Tweet counts
 
-    def get_all_tweets_count(self, query, **params):
+    def get_all_tweets_count(
+        self, query: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_all_tweets_count( \
             query, *, end_time=None, granularity=None, next_token=None, \
             since_id=None, start_time=None, until_id=None \
@@ -1607,7 +1602,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One query for matching Tweets. Up to 1024 characters.
         end_time : datetime.datetime | str | None
             YYYY-MM-DDTHH:mm:ssZ (ISO 8601/RFC 3339). Used with ``start_time``.
@@ -1642,10 +1637,6 @@ class Client(BaseClient):
             specified ID. Used with ``since_id``. The ID specified is exclusive
             and responses will not include it.
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-all
@@ -1662,7 +1653,9 @@ class Client(BaseClient):
             )
         )
 
-    def get_recent_tweets_count(self, query, **params):
+    def get_recent_tweets_count(
+        self, query: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_recent_tweets_count( \
             query, *, end_time=None, granularity=None, since_id=None, \
             start_time=None, until_id=None \
@@ -1673,7 +1666,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             One rule for matching Tweets. If you are using a
             `Standard Project`_ at the Basic `access level`_, you can use the
             basic set of `operators`_ and can make queries up to 512 characters
@@ -1709,10 +1702,6 @@ class Client(BaseClient):
             specified ID. The ID specified is exclusive and responses will not
             include it.
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/tweets/counts/api-reference/get-tweets-counts-recent
@@ -1733,7 +1722,10 @@ class Client(BaseClient):
 
     # Tweet lookup
 
-    def get_tweet(self, id, *, user_auth=False, **params):
+    def get_tweet(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_tweet( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
             poll_fields=None, tweet_fields=None, user_fields=None, \
@@ -1745,7 +1737,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             Unique identifier of the Tweet to request
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -1759,12 +1751,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1778,7 +1766,10 @@ class Client(BaseClient):
             ), data_type=Tweet, user_auth=user_auth
         )
 
-    def get_tweets(self, ids, *, user_auth=False, **params):
+    def get_tweets(
+        self, ids: list[int | str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_tweets( \
             ids, *, expansions=None, media_fields=None, place_fields=None, \
             poll_fields=None, tweet_fields=None, user_fields=None, \
@@ -1790,7 +1781,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        ids : list[int | str] | str
+        ids
             A comma separated list of Tweet IDs. Up to 100 are allowed in a
             single request. Make sure to not include a space between commas and
             fields.
@@ -1806,12 +1797,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1828,7 +1815,9 @@ class Client(BaseClient):
 
     # Blocks
 
-    def unblock(self, target_user_id, *, user_auth=True):
+    def unblock(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Unblock another user.
 
         The request succeeds with no action when the user sends a request to a
@@ -1852,19 +1841,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unblock.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1877,7 +1862,9 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_blocked(self, *, user_auth=True, **params):
+    def get_blocked(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_blocked( \
             *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=True \
@@ -1917,17 +1904,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1944,7 +1927,9 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def block(self, target_user_id, *, user_auth=True):
+    def block(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Block another user.
 
         .. note::
@@ -1965,19 +1950,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to block.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -1993,7 +1974,9 @@ class Client(BaseClient):
 
     # Follows
 
-    def unfollow_user(self, target_user_id, *, user_auth=True):
+    def unfollow_user(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows a user ID to unfollow another user.
 
         The request succeeds with no action when the authenticated user sends a
@@ -2020,19 +2003,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unfollow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2045,7 +2024,9 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def unfollow(self, target_user_id, *, user_auth=True):
+    def unfollow(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Alias for :meth:`Client.unfollow_user`
 
         .. deprecated:: 4.2
@@ -2057,7 +2038,10 @@ class Client(BaseClient):
         )
         return self.unfollow_user(target_user_id, user_auth=user_auth)
 
-    def get_users_followers(self, id, *, user_auth=False, **params):
+    def get_users_followers(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_users_followers( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
@@ -2067,7 +2051,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The user ID whose followers you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2085,12 +2069,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2105,7 +2085,10 @@ class Client(BaseClient):
             data_type=User, user_auth=user_auth
         )
 
-    def get_users_following(self, id, *, user_auth=False, **params):
+    def get_users_following(
+        self, id: int | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_users_following( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
@@ -2115,7 +2098,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The user ID whose following you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2133,12 +2116,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2152,7 +2131,9 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def follow_user(self, target_user_id, *, user_auth=True):
+    def follow_user(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows a user ID to follow another user.
 
         If the target user does not have public Tweets, this endpoint will send
@@ -2183,19 +2164,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to follow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2209,7 +2186,9 @@ class Client(BaseClient):
             user_auth=user_auth
         )
 
-    def follow(self, target_user_id, *, user_auth=True):
+    def follow(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Alias for :meth:`Client.follow_user`
 
         .. deprecated:: 4.2
@@ -2223,7 +2202,9 @@ class Client(BaseClient):
 
     # Mutes
 
-    def unmute(self, target_user_id, *, user_auth=True):
+    def unmute(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows an authenticated user ID to unmute the target user.
 
         The request succeeds with no action when the user sends a request to a
@@ -2247,19 +2228,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to unmute.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2272,7 +2249,9 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_muted(self, *, user_auth=True, **params):
+    def get_muted(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_muted( \
             *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=True \
@@ -2314,17 +2293,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2341,7 +2316,9 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def mute(self, target_user_id, *, user_auth=True):
+    def mute(
+        self, target_user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Allows an authenticated user ID to mute the target user.
 
         .. note::
@@ -2362,19 +2339,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        target_user_id : int | str
+        target_user_id
             The user ID of the user that you would like to mute.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2390,7 +2363,10 @@ class Client(BaseClient):
 
     # User lookup
 
-    def get_user(self, *, id=None, username=None, user_auth=False, **params):
+    def get_user(
+        self, *, id: int | str | None = None, username: str | None = None,
+        user_auth: bool = False, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_user(*, id=None, username=None, expansions=None, \
                     tweet_fields=None, user_fields=None, user_auth=False)
 
@@ -2409,17 +2385,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If ID and username are not passed or both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2444,8 +2416,11 @@ class Client(BaseClient):
             data_type=User, user_auth=user_auth
         )
 
-    def get_users(self, *, ids=None, usernames=None, user_auth=False,
-                  **params):
+    def get_users(
+        self, *, ids: list[int | str] | str | None = None,
+        usernames: list[str] | str | None = None, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_users(*, ids=None, usernames=None, expansions=None, \
                      tweet_fields=None, user_fields=None, user_auth=False)
 
@@ -2468,17 +2443,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If IDs and usernames are not passed or both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2505,7 +2476,9 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_me(self, *, user_auth=True, **params):
+    def get_me(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_me(*, expansions=None, tweet_fields=None, user_fields=None, \
                   user_auth=True)
 
@@ -2521,12 +2494,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2540,7 +2509,9 @@ class Client(BaseClient):
 
     # Search Spaces
 
-    def search_spaces(self, query, **params):
+    def search_spaces(
+        self, query: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """search_spaces(query, *, expansions=None, max_results=None, \
                          space_fields=None, state=None, user_fields=None)
 
@@ -2553,7 +2524,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        query : str
+        query
             Your search term. This can be any text (including mentions and
             Hashtags) present in the title of the Space.
         expansions : list[str] | str | None
@@ -2570,10 +2541,6 @@ class Client(BaseClient):
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-reference/get-spaces-search
@@ -2589,7 +2556,11 @@ class Client(BaseClient):
 
     # Spaces lookup
 
-    def get_spaces(self, *, ids=None, user_ids=None, **params):
+    def get_spaces(
+        self, *, ids: list[str] | str | None = None,
+        user_ids: list[int | str] | str | None = None,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_spaces(*, ids=None, user_ids=None, expansions=None, \
                       space_fields=None, user_fields=None)
 
@@ -2617,10 +2588,6 @@ class Client(BaseClient):
         TypeError
             If IDs and user IDs are not passed or both are passed
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces
@@ -2646,7 +2613,9 @@ class Client(BaseClient):
             ), data_type=Space
         )
 
-    def get_space(self, id, **params):
+    def get_space(
+        self, id: list[str] | str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_space(id, *, expansions=None, space_fields=None, \
                      user_fields=None)
 
@@ -2657,7 +2626,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             Unique identifier of the Space to request.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2665,10 +2634,6 @@ class Client(BaseClient):
             :ref:`space_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2681,7 +2646,9 @@ class Client(BaseClient):
             ), data_type=Space
         )
 
-    def get_space_buyers(self, id, **params):
+    def get_space_buyers(
+        self, id: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_space_buyers( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
             poll_fields=None, tweet_fields=None, user_fields=None \
@@ -2695,7 +2662,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : str
+        id
             Unique identifier of the Space for which you want to request
             Tweets.
         expansions : list[str] | str | None
@@ -2711,10 +2678,6 @@ class Client(BaseClient):
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/spaces/lookup/api-reference/get-spaces-id-buyers
@@ -2727,7 +2690,9 @@ class Client(BaseClient):
             ), data_type=User
         )
 
-    def get_space_tweets(self, id, **params):
+    def get_space_tweets(
+        self, id: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_space_tweets( \
             id, *, expansions=None, media_fields=None, place_fields=None, \
             poll_fields=None, tweet_fields=None, user_fields=None \
@@ -2739,7 +2704,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : str
+        id
             Unique identifier of the Space containing the Tweets you'd like to
             access.
         expansions : list[str] | str | None
@@ -2754,10 +2719,6 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2774,9 +2735,10 @@ class Client(BaseClient):
     # Direct Messages lookup
 
     def get_direct_message_events(
-        self, *, dm_conversation_id=None, participant_id=None, user_auth=True,
-        **params
-    ):
+        self, *, dm_conversation_id: str | None = None,
+        participant_id: int | str | None = None, user_auth: bool = True,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_direct_message_events( \
             *, dm_conversation_id=None, participant_id=None, \
             dm_event_fields=None, event_types=None, expansions=None, \
@@ -2805,10 +2767,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        dm_conversation_id : str | None
+        dm_conversation_id
             The ``id`` of the Direct Message conversation for which events are
             being retrieved.
-        participant_id : int | str | None
+        participant_id
             The ``participant_id`` of the user that the authenicating user is
             having a 1-1 conversation with.
         dm_event_fields : list[str] | str | None
@@ -2831,17 +2793,13 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If both ``dm_conversation_id`` and ``participant_id`` are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2874,9 +2832,11 @@ class Client(BaseClient):
     # Manage Direct Messages
 
     def create_direct_message(
-        self, *, dm_conversation_id=None, participant_id=None, media_id=None,
-        text=None, user_auth=True
-    ):
+        self, *, dm_conversation_id: str | None = None,
+        participant_id: int | str | None = None,
+        media_id: int | str | None = None, text: str | None = None,
+        user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """If ``dm_conversation_id`` is passed, creates a Direct Message on
         behalf of the authenticated user, and adds it to the specified
         conversation.
@@ -2894,21 +2854,21 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        dm_conversation_id : str | None
+        dm_conversation_id
             The ``dm_conversation_id`` of the conversation to add the Direct
             Message to. Supports both 1-1 and group conversations.
-        participant_id : int | str | None
+        participant_id
             The User ID of the account this one-to-one Direct Message is to be
             sent to.
-        media_id : int | str | None
+        media_id
             A single Media ID being attached to the Direct Message. This field
             is required if ``text`` is not present. For this launch, only 1
             attachment is supported.
-        text : str | None
+        text
             Text of the Direct Message being created. This field is required if
             ``media_id`` is not present. Text messages support up to 10,000
             characters.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
@@ -2916,10 +2876,6 @@ class Client(BaseClient):
         TypeError
             If ``dm_conversation_id`` and ``participant_id`` are not passed or
             both are passed
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -2937,7 +2893,7 @@ class Client(BaseClient):
         else:
             raise TypeError("DM conversation ID or participant ID is required")
 
-        json = {}
+        json: JSON = {}
         if media_id is not None:
             json["attachments"] = [{"media_id": str(media_id)}]
         if text is not None:
@@ -2948,8 +2904,9 @@ class Client(BaseClient):
     create_dm = create_direct_message
 
     def create_direct_message_conversation(
-        self, *, media_id=None, text=None, participant_ids, user_auth=True
-    ):
+        self, *, media_id: int | str | None = None, text: str | None = None,
+        participant_ids: list[int | str], user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Creates a new group conversation and adds a Direct Message to it on
         behalf of the authenticated user.
 
@@ -2961,18 +2918,18 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        media_id : int | str | None
+        media_id
             A single Media ID being attached to the Direct Message. This field
             is required if ``text`` is not present. For this launch, only 1
             attachment is supported.
-        text : str | None
+        text
             Text of the Direct Message being created. This field is required if
             ``media_id`` is not present. Text messages support up to 10,000
             characters.
-        participant_ids : list[int | str]
+        participant_ids
             An array of User IDs that the conversation is created with.
             Conversations can have up to 50 participants.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Returns
@@ -2983,7 +2940,7 @@ class Client(BaseClient):
         ----------
         https://developer.twitter.com/en/docs/twitter-api/direct-messages/manage/api-reference/post-dm_conversations
         """
-        json = {
+        json: JSON = {
             "conversation_type": "Group",
             "message": {},
             "participant_ids": list(map(str, participant_ids))
@@ -3001,7 +2958,10 @@ class Client(BaseClient):
 
     # List Tweets lookup
 
-    def get_list_tweets(self, id, *, user_auth=False, **params):
+    def get_list_tweets(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_list_tweets( \
             id, *, expansions=None, max_results=None, media_fields=None, \
             pagination_token=None, place_fields=None, poll_fields=None, \
@@ -3018,7 +2978,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose Tweets you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3042,12 +3002,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3064,7 +3020,9 @@ class Client(BaseClient):
 
     # List follows
 
-    def unfollow_list(self, list_id, *, user_auth=True):
+    def unfollow_list(
+        self, list_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to unfollow a List.
 
         .. note::
@@ -3087,19 +3045,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to unfollow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3112,7 +3066,10 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_list_followers(self, id, *, user_auth=False, **params):
+    def get_list_followers(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_list_followers( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
@@ -3124,7 +3081,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose followers you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3142,12 +3099,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3161,7 +3114,10 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_followed_lists(self, id, *, user_auth=False, **params):
+    def get_followed_lists(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_followed_lists( \
             id, *, expansions=None, list_fields=None, max_results=None, \
             pagination_token=None, user_fields=None, user_auth=False \
@@ -3173,7 +3129,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose followed Lists you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3191,12 +3147,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3210,7 +3162,9 @@ class Client(BaseClient):
             ), data_type=List, user_auth=user_auth
         )
 
-    def follow_list(self, list_id, *, user_auth=True):
+    def follow_list(
+        self, list_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to follow a List.
 
         .. note::
@@ -3233,19 +3187,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to follow.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3260,7 +3210,10 @@ class Client(BaseClient):
 
     # List lookup
 
-    def get_list(self, id, *, user_auth=False, **params):
+    def get_list(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_list(id, *, expansions=None, list_fields=None, \
                     user_fields=None, user_auth=False)
 
@@ -3270,7 +3223,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List to lookup.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3278,12 +3231,8 @@ class Client(BaseClient):
             :ref:`list_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3296,7 +3245,10 @@ class Client(BaseClient):
             ), data_type=List, user_auth=user_auth
         )
 
-    def get_owned_lists(self, id, *, user_auth=False, **params):
+    def get_owned_lists(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_owned_lists( \
             id, *, expansions=None, list_fields=None, max_results=None, \
             pagination_token=None, user_fields=None, user_auth=False \
@@ -3308,7 +3260,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose owned Lists you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3326,12 +3278,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3347,7 +3295,9 @@ class Client(BaseClient):
 
     # List members
 
-    def remove_list_member(self, id, user_id, *, user_auth=True):
+    def remove_list_member(
+        self, id: int | str, user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to remove a member from a List they
         own.
 
@@ -3358,16 +3308,12 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List you are removing a member from.
-        user_id : int | str
+        user_id
             The ID of the user you wish to remove as a member of the List.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3378,7 +3324,10 @@ class Client(BaseClient):
             "DELETE", f"/2/lists/{id}/members/{user_id}", user_auth=user_auth
         )
 
-    def get_list_members(self, id, *, user_auth=False, **params):
+    def get_list_members(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_list_members( \
             id, *, expansions=None, max_results=None, pagination_token=None, \
             tweet_fields=None, user_fields=None, user_auth=False \
@@ -3390,7 +3339,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The ID of the List whose members you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3408,12 +3357,8 @@ class Client(BaseClient):
             :ref:`tweet_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3427,7 +3372,10 @@ class Client(BaseClient):
             ), data_type=User, user_auth=user_auth
         )
 
-    def get_list_memberships(self, id, *, user_auth=False, **params):
+    def get_list_memberships(
+        self, id: list[str] | str, *, user_auth: bool = False,
+        **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_list_memberships( \
             id, *, expansions=None, list_fields=None, max_results=None, \
             pagination_token=None, user_fields=None, user_auth=False \
@@ -3439,7 +3387,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : list[str] | str
+        id
             The user ID whose List memberships you would like to retrieve.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -3457,12 +3405,8 @@ class Client(BaseClient):
             previous_token returned in your previous response.
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3476,7 +3420,9 @@ class Client(BaseClient):
             ), data_type=List, user_auth=user_auth
         )
 
-    def add_list_member(self, id, user_id, *, user_auth=True):
+    def add_list_member(
+        self, id: int | str, user_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to add a member to a List they own.
 
         .. versionadded:: 4.2
@@ -3486,16 +3432,12 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List you are adding a member to.
-        user_id : int | str
+        user_id
             The ID of the user you wish to add as a member of the List.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3508,7 +3450,9 @@ class Client(BaseClient):
 
     # Manage Lists
 
-    def delete_list(self, id, *, user_auth=True):
+    def delete_list(
+        self, id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to delete a List that they own.
 
         .. versionadded:: 4.2
@@ -3518,14 +3462,10 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List to be deleted.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3536,8 +3476,11 @@ class Client(BaseClient):
             "DELETE", f"/2/lists/{id}", user_auth=user_auth
         )
 
-    def update_list(self, id, *, description=None, name=None, private=None,
-                    user_auth=True):
+    def update_list(
+        self, id: int | str, *, description: str | None = None,
+        name: str | None = None, private: bool | None = None,
+        user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to update the meta data of a
         specified List that they own.
 
@@ -3548,7 +3491,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        id : int | str
+        id
             The ID of the List to be updated.
         description : str | None
             Updates the description of the List.
@@ -3556,18 +3499,14 @@ class Client(BaseClient):
             Updates the name of the List.
         private : bool | None
             Determines whether the List should be private.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/put-lists-id
         """
-        json = {}
+        json: JSON = {}
 
         if description is not None:
             json["description"] = description
@@ -3582,8 +3521,10 @@ class Client(BaseClient):
             "PUT", f"/2/lists/{id}", json=json, user_auth=user_auth
         )
 
-    def create_list(self, name, *, description=None, private=None,
-                    user_auth=True):
+    def create_list(
+        self, name: str, *, description: str | None = None,
+        private: bool | None = None, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to create a List.
 
         .. versionadded:: 4.2
@@ -3593,24 +3534,20 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        name : str
+        name
             The name of the List you wish to create.
         description : str | None
             Description of the List.
         private : bool | None
             Determine whether the List should be private.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/lists/manage-lists/api-reference/post-lists
         """
-        json = {"name": name}
+        json: JSON = {"name": name}
 
         if description is not None:
             json["description"] = description
@@ -3624,7 +3561,9 @@ class Client(BaseClient):
 
     # Pinned Lists
 
-    def unpin_list(self, list_id, *, user_auth=True):
+    def unpin_list(
+        self, list_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to unpin a List.
 
         .. note::
@@ -3647,19 +3586,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to unpin.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3672,7 +3607,9 @@ class Client(BaseClient):
             "DELETE", route, user_auth=user_auth
         )
 
-    def get_pinned_lists(self, *, user_auth=True, **params):
+    def get_pinned_lists(
+        self, *, user_auth: bool = True, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_pinned_lists(*, expansions=None, list_fields=None, \
                             user_fields=None, user_auth=True)
 
@@ -3704,17 +3641,13 @@ class Client(BaseClient):
             :ref:`list_fields_parameter`
         user_fields : list[str] | str | None
             :ref:`user_fields_parameter`
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3730,7 +3663,9 @@ class Client(BaseClient):
             ), data_type=List, user_auth=user_auth
         )
 
-    def pin_list(self, list_id, *, user_auth=True):
+    def pin_list(
+        self, list_id: int | str, *, user_auth: bool = True
+    ) -> JSON | requests.Response | Response:
         """Enables the authenticated user to pin a List.
 
         .. note::
@@ -3753,19 +3688,15 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        list_id : int | str
+        list_id
             The ID of the List that you would like the user to pin.
-        user_auth : bool
+        user_auth
             Whether or not to use OAuth 1.0a User Context to authenticate
 
         Raises
         ------
         TypeError
             If the access token isn't set
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3780,7 +3711,9 @@ class Client(BaseClient):
 
     # Batch Compliance
 
-    def get_compliance_jobs(self, type, **params):
+    def get_compliance_jobs(
+        self, type: str, **params: _ParamsMappingValueType
+    ) -> JSON | requests.Response | Response:
         """get_compliance_jobs(type, *, status=None)
 
         Returns a list of recent compliance jobs.
@@ -3789,17 +3722,13 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        type : str
+        type
             Allows to filter by job type - either by tweets or user ID. Only
             one filter (tweets or users) can be specified per request.
         status : str | None
             Allows to filter by job status. Only one filter can be specified
             per request.
             Default: ``all``
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3811,19 +3740,17 @@ class Client(BaseClient):
             endpoint_parameters=("type", "status")
         )
 
-    def get_compliance_job(self, id):
+    def get_compliance_job(
+        self, id: int | str
+    ) -> JSON | requests.Response | Response:
         """Get a single compliance job with the specified ID.
 
         .. versionadded:: 4.1
 
         Parameters
         ----------
-        id : int | str
+        id
             The unique identifier for the compliance job you want to retrieve.
-
-        Returns
-        -------
-        dict | requests.Response | Response
 
         References
         ----------
@@ -3833,7 +3760,10 @@ class Client(BaseClient):
             "GET", f"/2/compliance/jobs/{id}"
         )
 
-    def create_compliance_job(self, type, *, name=None, resumable=None):
+    def create_compliance_job(
+        self, type: str, *, name: str | None = None,
+        resumable: bool | None = None
+    ) -> JSON | requests.Response | Response:
         """Creates a new compliance job for Tweet IDs or user IDs.
 
         A compliance job will contain an ID and a destination URL. The
@@ -3846,7 +3776,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        type : str
+        type
             Specify whether you will be uploading tweet or user IDs. You can
             either specify tweets or users.
         name : str | None
@@ -3857,15 +3787,11 @@ class Client(BaseClient):
             resumable uploads. If true, this endpoint will return a pre-signed
             URL with resumable uploads enabled.
 
-        Returns
-        -------
-        dict | requests.Response | Response
-
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/compliance/batch-compliance/api-reference/post-compliance-jobs
         """
-        json = {"type": type}
+        json: JSON = {"type": type}
 
         if name is not None:
             json["name"] = name

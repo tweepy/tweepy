@@ -57,7 +57,15 @@ setup(
             "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
-        "test": ["vcrpy>=1.10.3"],
+        "test": [
+            "mypy>=0.931",
+            "vcrpy>=1.10.3",
+        ],
+        "types": [
+            "types-oauthlib>=3.1.6,<4",
+            "types-requests>=2.27.11,<3",
+            "typing-extensions>=4.0,<5",
+        ],
     },
     test_suite="tests",
     keywords="twitter library",

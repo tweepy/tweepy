@@ -2,6 +2,8 @@
 # Copyright 2009-2023 Joshua Roesslein
 # See LICENSE for details.
 
+from __future__ import annotations
+
 import datetime
 import hashlib
 import logging
@@ -129,7 +131,7 @@ class FileCache(Cache):
     """File-based cache"""
 
     # locks used to make cache thread-safe
-    cache_locks = {}
+    cache_locks: dict[str, threading.Lock] = {}
 
     def __init__(self, cache_dir, timeout=60):
         Cache.__init__(self, timeout)
@@ -398,7 +400,7 @@ class MongodbCache(Cache):
         self.col.create_index('created', expireAfterSeconds=timeout)
 
     def store(self, key, value):
-        from bson.binary import Binary
+        from bson.binary import Binary  # type: ignore[import]
 
         now = datetime.datetime.utcnow()
         blob = Binary(pickle.dumps(value))

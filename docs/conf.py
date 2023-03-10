@@ -35,6 +35,9 @@ extensions = [
   'sphinx_tabs.tabs'
 ]
 
+autodoc_typehints = 'description'
+autodoc_type_aliases = {'JSON': 'tweepy.client.JSON'}
+
 hoverxref_auto_ref = True
 hoverxref_domains = ['py']
 hoverxref_intersphinx = ['aiohttp', 'requests', 'requests_oauthlib']

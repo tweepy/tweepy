@@ -4,6 +4,8 @@
 
 # Appengine users: https://developers.google.com/appengine/docs/python/sockets/#making_httplib_use_sockets
 
+from __future__ import annotations
+
 from collections import namedtuple
 import json
 import logging
@@ -16,7 +18,7 @@ from time import sleep
 from typing import NamedTuple
 
 import requests
-from requests_oauthlib import OAuth1
+from requests_oauthlib import OAuth1  # type: ignore[import]
 import urllib3
 
 import tweepy
@@ -934,6 +936,6 @@ class StreamRule(NamedTuple):
     .. _operators: https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query
     .. _Academic Research Project: https://developer.twitter.com/en/docs/projects
     """
-    value: str = None
-    tag: str = None
-    id: str = None
+    value: str | None = None
+    tag: str | None = None
+    id: str | None = None
