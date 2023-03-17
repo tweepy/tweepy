@@ -59,20 +59,6 @@ contain all entities. Additionally, the Status object will have a
 identifying the inclusive start and exclusive end of the displayable content
 of the Tweet.
 
-Streaming
-=========
-
-By default, the Status objects from streams may contain an ``extended_tweet``
-attribute representing the equivalent field in the raw data/payload for the
-Tweet. This attribute/field will only exist for extended Tweets, containing a
-dictionary of sub-fields. The ``full_text`` sub-field/key of this dictionary
-will contain the full, untruncated text of the Tweet, and the ``entities``
-sub-field/key will contain the full set of entities. If there are extended
-entities, the ``extended_entities`` sub-field/key will contain the full set of
-those. Additionally, the ``display_text_range`` sub-field/key will contain an
-array of two Unicode code point indices, identifying the inclusive start and
-exclusive end of the displayable content of the Tweet.
-
 Handling Retweets
 =================
 
@@ -82,12 +68,6 @@ containing the full text of the Retweet. However, since the
 ``retweeted_status`` attribute (of a Status object that is a Retweet) is
 itself a Status object, the ``full_text`` attribute of the Retweeted Status
 object can be used instead.
-
-This also applies similarly to Status objects/payloads that are Retweets from
-streams. The dictionary from the ``extended_tweet`` attribute/field contains a
-``full_text`` sub-field/key that may be truncated with an ellipsis character.
-Instead, the ``extended_tweet`` attribute/field of the Retweeted Status (from
-the ``retweeted_status`` attribute/field) can be used.
 
 Examples
 ========
@@ -103,24 +83,6 @@ full text of the Retweeted Tweet::
        print(status.full_text)
 
 If ``status`` is a Retweet, ``status.full_text`` could be truncated.
-
-This Status event handler for a :class:`Stream` prints the full text of the
-Tweet, or if it's a Retweet, the full text of the Retweeted Tweet::
-
-   def on_status(self, status):
-       if hasattr(status, "retweeted_status"):  # Check if Retweet
-           try:
-               print(status.retweeted_status.extended_tweet["full_text"])
-           except AttributeError:
-               print(status.retweeted_status.text)
-       else:
-           try:
-               print(status.extended_tweet["full_text"])
-           except AttributeError:
-               print(status.text)
-
-If ``status`` is a Retweet, it will not have an ``extended_tweet`` attribute,
-and ``status.text`` could be truncated.
 
 .. rubric:: Footnotes
 

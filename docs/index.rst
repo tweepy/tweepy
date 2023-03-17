@@ -21,8 +21,6 @@ Contents:
    :caption: Twitter API v1.1 Reference
 
    api.rst
-   stream.rst
-   asyncstream.rst
    exceptions.rst
    v1_models.rst
    v1_pagination.rst

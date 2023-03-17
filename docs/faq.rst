@@ -27,7 +27,7 @@ Why am I encountering a 403 Forbidden error with :class:`API`?
 --------------------------------------------------------------
 
 If you have Essential access to the Twitter API, you won't be able to access
-Twitter API v1.1. This includes all :class:`API` methods and :class:`Stream`.
+Twitter API v1.1. This includes all :class:`API` methods.
 
 You can use Twitter API v2 with :class:`Client` or apply for Elevated access.
 
@@ -85,19 +85,6 @@ This is because :ref:`Tweepy v4.0.0 <Version 4.0.0 (2021-09-25)>` removed
 ``API.me``.
 
 Instead, you can use :meth:`API.verify_credentials`.
-
-Where did ``StreamListener`` go?
---------------------------------
-
-If you're attempting to import ``StreamListener`` with Tweepy v4, you'll get an
-:class:`AttributeError` about ``tweepy`` not having a ``StreamListener``
-attribute.
-
-This is because :ref:`Tweepy v4.0.0 <Version 4.0.0 (2021-09-25)>` merged
-``StreamListener`` into :class:`Stream`.
-
-To use Tweepy v4, you'll need to update your code to subclass :class:`Stream`
-instead.
 
 Twitter API v2
 ==============

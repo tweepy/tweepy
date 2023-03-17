@@ -30,10 +30,6 @@ Examples
 
             .. literalinclude:: ../examples/API_v1/rate_limit_handling.py
 
-         .. tab:: Streaming
-
-            .. literalinclude:: ../examples/API_v1/streaming.py
-
    .. tab:: API v2
 
       .. tabs::
