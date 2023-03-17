@@ -69,8 +69,8 @@ containing the full text of the Retweet. However, since the
 itself a Status object, the ``full_text`` attribute of the Retweeted Status
 object can be used instead.
 
-Examples
-========
+Example
+=======
 
 Given an existing :class:`API` object and ``id`` for a Tweet, the following
 can be used to print the full text of the Tweet, or if it's a Retweet, the
