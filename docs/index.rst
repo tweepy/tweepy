@@ -22,13 +22,9 @@ Contents:
 
    api.rst
    exceptions.rst
+   extended_tweets.rst
    v1_models.rst
    v1_pagination.rst
-
-.. toctree::
-   :maxdepth: 1
-
-   extended_tweets.rst
 
 .. toctree::
    :caption: Twitter API v2 Reference
