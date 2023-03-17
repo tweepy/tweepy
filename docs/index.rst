@@ -15,7 +15,6 @@ Contents:
    getting_started.rst
    authentication.rst
    logging.rst
-   streaming.rst
 
 .. toctree::
    :caption: Twitter API v1.1 Reference
@@ -40,6 +39,7 @@ Contents:
    expansions_and_fields.rst
    v2_models.rst
    v2_pagination.rst
+   streaming.rst
 
 .. toctree::
    :caption: Meta

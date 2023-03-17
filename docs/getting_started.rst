@@ -64,3 +64,33 @@ The :ref:`authentication` page goes into more detail.
 
 More examples can be found on the :ref:`examples` page.
 
+Streaming
+=========
+
+Streams utilize Streaming HTTP protocol to deliver data through
+an open, streaming API connection. Rather than delivering data in batches
+through repeated requests by your client app, as might be expected from a REST
+API, a single connection is opened between your app and the API, with new
+results being sent through that connection whenever new matches occur. This
+results in a low-latency delivery mechanism that can support very high
+throughput. For further information, see
+https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
+
+The Twitter API v1.1 streaming endpoints, `statuses/filter`_ and
+`statuses/sample`_, have been deprecated and retired.
+
+.. note::
+
+    ``Stream`` and ``AsyncStream`` were deprecated in v4.13 and removed with
+    v4.14.
+
+:class:`StreamingClient` allows `filtering <v2 filtering_>`_ and
+`sampling <v2 sampling_>`_ of realtime Tweets using Twitter API v2.
+
+.. _statuses/filter: https://twittercommunity.com/t/announcing-the-deprecation-of-v1-1-statuses-filter-endpoint/182960
+.. _statuses/sample: https://twittercommunity.com/t/deprecation-announcement-removing-compliance-messages-from-statuses-filter-and-retiring-statuses-sample-from-the-twitter-api-v1-1/170500
+.. _v2 filtering: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction
+.. _v2 sampling: https://developer.twitter.com/en/docs/twitter-api/tweets/volume-streams/introduction
+
+The :ref:`streaming_guide` page goes into more detail.
+
