@@ -1,66 +1,66 @@
 .. _getting_started:
 
+.. currentmodule:: tweepy
 
 ***************
-Getting started
+Getting Started
 ***************
 
-Introduction
-============
+Tweepy supports both Twitter API v1.1 and Twitter API v2.
 
-If you are new to Tweepy, this is the place to begin. The goal of this
-tutorial is to get you set-up and rolling with Tweepy. We won't go
-into too much detail here, just some important basics.
+Tweepy's interface for making requests to Twitter API v1.1 endpoints is
+:class:`API`.
 
-Hello Tweepy
-============
-
-.. code-block :: python
-
-   import tweepy
-
-   auth = tweepy.OAuth1UserHandler(
-      consumer_key, consumer_secret, access_token, access_token_secret
-   )
-
-   api = tweepy.API(auth)
-   
-   public_tweets = api.home_timeline()
-   for tweet in public_tweets:
-       print(tweet.text)
-
-This example will download your home timeline tweets and print each
-one of their texts to the console. Twitter requires all requests to
-use OAuth for authentication.
-The :ref:`authentication` documentation goes into more details about
-authentication.
-
-API
-===
-
-The API class provides access to the entire twitter RESTful API
-methods. Each method can accept various parameters and return
-responses. For more information about these methods please refer to
-:ref:`API Reference <api_reference>`.
+Tweepy's interface for making requests to Twitter API v2 endpoints is
+:class:`Client`.
 
 Models
 ======
 
-When we invoke an API method most of the time returned back to us will
-be a Tweepy model class instance. This will contain the data returned
-from Twitter which we can then use inside our application. For example
-the following code returns to us a User model::
+:class:`API` and :class:`Client` methods generally return instances of classes
+that are models of Twitter API objects. Each model instance / object contains
+the data provided by Twitter's API that represent that object.
 
-   # Get the User object for twitter...
-   user = api.get_user(screen_name='twitter')
+For example, the following code retrieves a User object and assigns it to the
+variable, ``user``::
 
-Models contain the data and some helper methods which we can then
-use::
+    # Get the User object that represents the user, @Twitter
+    user = api.get_user(screen_name="Twitter")
 
-   print(user.screen_name)
-   print(user.followers_count)
-   for friend in user.friends():
-      print(friend.screen_name)
+The data for each object can be accessed through its attributes/fields, and
+some models have helper methods that can be used::
 
-For more information about models please see ModelsReference.
+    print(user.screen_name)
+    print(user.followers_count)
+    for friend in user.friends():
+       print(friend.screen_name)
+
+:ref:`Twitter API v1.1 models <v1_models_reference>` and
+:ref:`Twitter API v2 models <v2_models_reference>` are documented separately.
+
+Example
+=======
+
+::
+
+    import tweepy
+
+    auth = tweepy.OAuth1UserHandler(
+        consumer_key, consumer_secret, access_token, access_token_secret
+    )
+
+    api = tweepy.API(auth)
+
+    public_tweets = api.home_timeline()
+    for tweet in public_tweets:
+        print(tweet.text)
+
+This example uses Twitter API v1.1, by using :class:`API`, to retrieve the
+Tweets in your home timeline and print the text of each one to the console.
+
+The consumer key, consumer secret, access token, and access token secret being
+passed are required to authenticate as a user, using OAuth 1.0a User Context.
+The :ref:`authentication` page goes into more detail.
+
+More examples can be found on the :ref:`examples` page.
 
