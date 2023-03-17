@@ -18,6 +18,11 @@ https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data
 The Twitter API v1.1 streaming endpoints, `statuses/filter`_ and
 `statuses/sample`_, have been deprecated and retired.
 
+.. note::
+
+    ``Stream`` and ``AsyncStream`` were deprecated in v4.13 and removed with
+    v4.14.
+
 :class:`StreamingClient` allows `filtering <v2 filtering_>`_ and
 `sampling <v2 sampling_>`_ of realtime Tweets using Twitter API v2.
 
