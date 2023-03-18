@@ -144,10 +144,6 @@ object living in the ``includes`` response object.
     | ``owner_id`` | Returns a User object representing what account created and maintains the List |
     +--------------+--------------------------------------------------------------------------------+
 
-References
-----------
-https://developer.twitter.com/en/docs/twitter-api/expansions
-
 `Fields`_ Parameters
 ====================
 
