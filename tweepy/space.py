@@ -6,6 +6,32 @@ from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
 
+#: All the potential publically-available fields for :class:`Space` objects
+PUBLIC_SPACE_FIELDS = [
+    "created_at",
+    "creator_id",
+    "ended_at",
+    "host_ids",
+    "id",
+    "invited_user_ids",
+    "is_ticketed",
+    "lang",
+    "participant_count",
+    "scheduled_start",
+    "speaker_ids",
+    "started_at",
+    "state",
+    "title",
+    "topic_ids",
+    "updated_at",
+]
+
+#: All the potential fields for :class:`Space` objects
+SPACE_FIELDS = PUBLIC_SPACE_FIELDS + [
+    "subscriber_count",
+]
+
+
 class Space(HashableID, DataMapping):
     """Spaces allow expression and interaction via live audio conversations.
     The Space data dictionary contains relevant metadata about a Space; all the

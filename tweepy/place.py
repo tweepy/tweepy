@@ -5,6 +5,19 @@
 from tweepy.mixins import DataMapping, HashableID
 
 
+#: All the potential fields for :class:`Place` objects
+PLACE_FIELDS = [
+    "contained_within",
+    "country",
+    "country_code",
+    "full_name",
+    "geo",
+    "id",
+    "name",
+    "place_type",
+]
+
+
 class Place(HashableID, DataMapping):
     """The place tagged in a Tweet is not a primary object on any endpoint, but
     can be found and expanded in the Tweet resource. 

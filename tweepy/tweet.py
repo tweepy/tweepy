@@ -8,6 +8,37 @@ from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
 
+#: All the potential publically-available fields for :class:`Tweet` objects
+PUBLIC_TWEET_FIELDS = [
+    "attachments",
+    "author_id",
+    "context_annotations",
+    "conversation_id",
+    "created_at",
+    "edit_controls",
+    "edit_history_tweet_ids",
+    "entities",
+    "geo",
+    "id",
+    "in_reply_to_user_id",
+    "lang",
+    "possibly_sensitive",
+    "public_metrics",
+    "referenced_tweets",
+    "reply_settings",
+    "source",
+    "text",
+    "withheld",
+]
+
+#: All the potential fields for :class:`Tweet` objects
+TWEET_FIELDS = PUBLIC_TWEET_FIELDS + [
+    "non_public_metrics",
+    "organic_metrics",
+    "promoted_metrics",
+]
+
+
 class Tweet(HashableID, DataMapping):
     """Tweets are the basic building block of all things Twitter. The Tweet
     object has a long list of ‘root-level’ fields, such as ``id``, ``text``,

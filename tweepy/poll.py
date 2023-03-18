@@ -6,6 +6,16 @@ from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
 
+#: All the potential fields for :class:`Poll` objects
+POLL_FIELDS = [
+    "duration_minutes",
+    "end_datetime",
+    "id",
+    "options",
+    "voting_status",
+]
+
+
 class Poll(HashableID, DataMapping):
     """A poll included in a Tweet is not a primary object on any endpoint, but
     can be found and expanded in the Tweet object. 

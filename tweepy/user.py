@@ -6,6 +6,26 @@ from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
 
+#: All the potential fields for :class:`User` objects
+USER_FIELDS = [
+    "created_at",
+    "description",
+    "entities",
+    "id",
+    "location",
+    "name",
+    "pinned_tweet_id",
+    "profile_image_url",
+    "protected",
+    "public_metrics",
+    "url",
+    "username",
+    "verified",
+    "verified_type",
+    "withheld",
+]
+
+
 class User(HashableID, DataMapping):
     """The user object contains Twitter user account metadata describing the
     referenced user. The user object is the primary object returned in the

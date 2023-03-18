@@ -5,6 +5,24 @@
 from tweepy.mixins import DataMapping
 
 
+#: All the potential fields for :class:`Media` objects
+MEDIA_FIELDS = [
+    "alt_text",
+    "duration_ms",
+    "height",
+    "media_key",
+    "non_public_metrics",
+    "organic_metrics",
+    "preview_image_url",
+    "promoted_metrics",
+    "public_metrics",
+    "type",
+    "url",
+    "variants",
+    "width",
+]
+
+
 class Media(DataMapping):
     """Media refers to any image, GIF, or video attached to a Tweet. The media
     object is not a primary object on any endpoint, but can be found and

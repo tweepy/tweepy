@@ -6,6 +6,19 @@ from tweepy.mixins import DataMapping, HashableID
 from tweepy.utils import parse_datetime
 
 
+#: All the potential fields for :class:`List` objects
+LIST_FIELDS = [
+    "created_at",
+    "description",
+    "follower_count",
+    "id",
+    "member_count",
+    "name",
+    "owner_id",
+    "private",
+]
+
+
 class List(HashableID, DataMapping):
     """The list object contains `Twitter Lists`_ metadata describing the
     referenced List. The List object is the primary object returned in the List

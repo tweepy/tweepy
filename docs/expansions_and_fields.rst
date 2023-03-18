@@ -269,3 +269,32 @@ user data objects.
 .. _Space fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/space
 .. _Tweet fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
+
+Constants
+---------
+
+These constants are available directly in the :mod:`tweepy` module, which means
+each file itself does not need to be imported. For example,
+:const:`tweepy.user.USER_FIELDS` is available as :const:`tweepy.USER_FIELDS`.
+
+.. autodata:: tweepy.direct_message_event.DIRECT_MESSAGE_EVENT_FIELDS
+
+.. autodata:: tweepy.direct_message_event.DM_EVENT_FIELDS
+
+.. autodata:: tweepy.list.LIST_FIELDS
+
+.. autodata:: tweepy.media.MEDIA_FIELDS
+
+.. autodata:: tweepy.place.PLACE_FIELDS
+
+.. autodata:: tweepy.poll.POLL_FIELDS
+
+.. autodata:: tweepy.space.PUBLIC_SPACE_FIELDS
+
+.. autodata:: tweepy.space.SPACE_FIELDS
+
+.. autodata:: tweepy.tweet.PUBLIC_TWEET_FIELDS
+
+.. autodata:: tweepy.tweet.TWEET_FIELDS
+
+.. autodata:: tweepy.user.USER_FIELDS

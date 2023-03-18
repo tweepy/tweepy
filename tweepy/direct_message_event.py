@@ -7,6 +7,22 @@ from tweepy.tweet import ReferencedTweet
 from tweepy.utils import parse_datetime
 
 
+#: All the potential fields for :class:`DirectMessageEvent` objects
+DIRECT_MESSAGE_EVENT_FIELDS = [
+    "attachments",
+    "created_at",
+    "dm_conversation_id",
+    "event_type",
+    "id",
+    "participant_ids",
+    "referenced_tweets",
+    "sender_id",
+    "text",
+]
+#: Alias for :const:`DIRECT_MESSAGE_EVENT_FIELDS`
+DM_EVENT_FIELDS = DIRECT_MESSAGE_EVENT_FIELDS
+
+
 class DirectMessageEvent(HashableID, DataMapping):
     """Direct Message (DM) conversations are made up of events. The Twitter API
     v2 currently supports three event types: MessageCreate, ParticipantsJoin,
