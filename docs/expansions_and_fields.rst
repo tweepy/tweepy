@@ -1,12 +1,13 @@
 .. _expansions_and_fields:
 
+*********************
 Expansions and Fields
-=====================
+*********************
 
 .. _expansions_parameter:
 
-``expansions``
---------------
+``expansions`` Parameter
+========================
 `Expansions`_ enable you to request additional data objects that relate to the
 originally returned List, Space, Tweets, Users, or Direct Message conversation
 events. Submit a list of desired expansions in a comma-separated list without
@@ -17,7 +18,7 @@ object, and will also include the ID so that you can match this data object to
 the original Space, Tweet, User or Direct Message conversation event object.
 
 Available expansions for Tweet payloads
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 For methods that return Tweets, the following data objects can be expanded
 using this parameter:
@@ -58,7 +59,7 @@ using this parameter:
     +------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 Available expansion for User payloads
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
 
 At this time, the only expansion available to endpoints that primarily return
 user objects is ``expansions=pinned_tweet_id``. You will find the expanded
@@ -74,7 +75,7 @@ Tweet data object living in the ``includes`` response object.
     +---------------------+---------------------------------------------------------------------------------------+
 
 Available expansions for Direct Message event payloads
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
 
 For methods that returns Direct Message conversation events, the following data
 objects can be expanded using this parameter:
@@ -100,7 +101,7 @@ objects can be expanded using this parameter:
     +----------------------------+------------------------------------------------------------------------------------------------------------------------+
 
 Available expansions for Spaces payloads
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 For methods that return Spaces, the following data objects can be expanded
 using this parameter:
@@ -128,7 +129,7 @@ using this parameter:
     +----------------------+----------------------------------------------------------------------+
 
 Available expansion for Lists payloads
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 At this time, the only expansion available to endpoints that primarily return
 List objects is ``expansions=owner_id``. You will find the expanded user data
@@ -144,8 +145,11 @@ object living in the ``includes`` response object.
     +--------------+--------------------------------------------------------------------------------+
 
 References
-^^^^^^^^^^
+----------
 https://developer.twitter.com/en/docs/twitter-api/expansions
+
+`Fields`_ Parameters
+====================
 
 .. _dm_event_fields_parameter:
 
@@ -271,7 +275,7 @@ user data objects.
 .. _user fields: https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user
 
 Constants
----------
+=========
 
 These constants are available directly in the :mod:`tweepy` module, which means
 each file itself does not need to be imported. For example,
