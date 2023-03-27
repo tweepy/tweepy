@@ -1,0 +1,35 @@
+import tweepy
+import random
+
+# Twitter API keys
+consumer_key = 'your_consumer_key'
+consumer_secret = 'your_consumer_secret'
+access_token = 'your_access_token'
+access_secret = 'your_access_secret'
+
+# Authenticate Twitter API credentials
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+
+# Create API object
+api = tweepy.API(auth)
+
+# List of funny quotes
+funny_quotes = [
+    "Why was the math book sad? Because it had too many problems.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "Why did the chicken cross the playground? To get to the other slide.",
+    "I'm reading a book on anti-gravity. It's impossible to put down!",
+    "I told my wife she was only allowed to have 12 grapes for dessert. She burst into tears. 12 grapes isn't enough for anyone.",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+]
+
+# Function to tweet a random funny quote
+def tweet_funny_quote():
+    quote = random.choice(funny_quotes)
+    api.update_status(quote)
+
+# Tweet a funny quote every hour
+while True:
+    tweet_funny_quote()
+    time.sleep(3600)  # wait for an hour before tweeting again
