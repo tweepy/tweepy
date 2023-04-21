@@ -57,6 +57,10 @@ class API:
         Added support for ``include_ext_edit_control`` endpoint/method
         parameter
 
+    .. versionchanged:: 4.14
+        Removed ``search_30_day`` and ``search_full_archive`` methods, as
+        `the Premium v1.1 API has been deprecated`_
+
     Parameters
     ----------
     auth
@@ -91,6 +95,8 @@ class API:
     References
     ----------
     https://developer.twitter.com/en/docs/api-reference-index
+
+    .. _the Premium v1.1 API has been deprecated: https://twittercommunity.com/t/deprecating-the-premium-v1-1-api/191092
     """
 
     def __init__(
@@ -286,175 +292,6 @@ class API:
             return result
         finally:
             self.session.close()
-
-    # Premium Search APIs
-
-    @pagination(mode='next')
-    @payload('status', list=True)
-    def search_30_day(self, label, query, **kwargs):
-        """search_30_day(label, query, *, tag, fromDate, toDate, maxResults, \
-                         next)
-
-        Premium search that provides Tweets posted within the last 30 days.
-
-        Parameters
-        ----------
-        label
-            The (case-sensitive) label associated with your search developer
-            environment, as displayed at
-            https://developer.twitter.com/en/account/environments.
-        query
-            The equivalent of one premium rule/filter, with up to 1,024
-            characters (256 with Sandbox dev environments).
-
-            This parameter should include ALL portions of the rule/filter,
-            including all operators, and portions of the rule should not be
-            separated into other parameters of the query.
-        tag
-            Tags can be used to segregate rules and their matching data into
-            different logical groups. If a rule tag is provided, the rule tag
-            is included in the 'matching_rules' attribute.
-
-            It is recommended to assign rule-specific UUIDs to rule tags and
-            maintain desired mappings on the client side.
-        fromDate
-            The oldest UTC timestamp (from most recent 30 days) from which the
-            Tweets will be provided. Timestamp is in minute granularity and is
-            inclusive (i.e. 12:00 includes the 00 minute).
-
-            Specified: Using only the fromDate with no toDate parameter will
-            deliver results for the query going back in time from now( ) until
-            the fromDate.
-
-            Not Specified: If a fromDate is not specified, the API will deliver
-            all of the results for 30 days prior to now( ) or the toDate (if
-            specified).
-
-            If neither the fromDate or toDate parameter is used, the API will
-            deliver all results for the most recent 30 days, starting at the
-            time of the request, going backwards.
-        toDate
-            The latest, most recent UTC timestamp to which the Tweets will be
-            provided. Timestamp is in minute granularity and is not inclusive
-            (i.e. 11:59 does not include the 59th minute of the hour).
-
-            Specified: Using only the toDate with no fromDate parameter will
-            deliver the most recent 30 days of data prior to the toDate.
-
-            Not Specified: If a toDate is not specified, the API will deliver
-            all of the results from now( ) for the query going back in time to
-            the fromDate.
-
-            If neither the fromDate or toDate parameter is used, the API will
-            deliver all results for the entire 30-day index, starting at the
-            time of the request, going backwards.
-        maxResults
-            The maximum number of search results to be returned by a request. A
-            number between 10 and the system limit (currently 500, 100 for
-            Sandbox environments). By default, a request response will return
-            100 results.
-        next
-            This parameter is used to get the next 'page' of results. The value
-            used with the parameter is pulled directly from the response
-            provided by the API, and should not be modified.
-
-        Returns
-        -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
-        """
-        return self.request(
-            'GET', f'tweets/search/30day/{label}', endpoint_parameters=(
-                'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
-            ), query=query, **kwargs
-        )
-
-    @pagination(mode='next')
-    @payload('status', list=True)
-    def search_full_archive(self, label, query, **kwargs):
-        """search_full_archive(label, query, *, tag, fromDate, toDate, \
-                               maxResults, next)
-
-        Premium search that provides Tweets from as early as 2006, starting
-        with the first Tweet posted in March 2006.
-
-        Parameters
-        ----------
-        label
-            The (case-sensitive) label associated with your search developer
-            environment, as displayed at
-            https://developer.twitter.com/en/account/environments.
-        query
-            The equivalent of one premium rule/filter, with up to 1,024
-            characters (256 with Sandbox dev environments).
-
-            This parameter should include ALL portions of the rule/filter,
-            including all operators, and portions of the rule should not be
-            separated into other parameters of the query.
-        tag
-            Tags can be used to segregate rules and their matching data into
-            different logical groups. If a rule tag is provided, the rule tag
-            is included in the 'matching_rules' attribute.
-
-            It is recommended to assign rule-specific UUIDs to rule tags and
-            maintain desired mappings on the client side.
-        fromDate
-            The oldest UTC timestamp (from most recent 30 days) from which the
-            Tweets will be provided. Timestamp is in minute granularity and is
-            inclusive (i.e. 12:00 includes the 00 minute).
-
-            Specified: Using only the fromDate with no toDate parameter will
-            deliver results for the query going back in time from now( ) until
-            the fromDate.
-
-            Not Specified: If a fromDate is not specified, the API will deliver
-            all of the results for 30 days prior to now( ) or the toDate (if
-            specified).
-
-            If neither the fromDate or toDate parameter is used, the API will
-            deliver all results for the most recent 30 days, starting at the
-            time of the request, going backwards.
-        toDate
-            The latest, most recent UTC timestamp to which the Tweets will be
-            provided. Timestamp is in minute granularity and is not inclusive
-            (i.e. 11:59 does not include the 59th minute of the hour).
-
-            Specified: Using only the toDate with no fromDate parameter will
-            deliver the most recent 30 days of data prior to the toDate.
-
-            Not Specified: If a toDate is not specified, the API will deliver
-            all of the results from now( ) for the query going back in time to
-            the fromDate.
-
-            If neither the fromDate or toDate parameter is used, the API will
-            deliver all results for the entire 30-day index, starting at the
-            time of the request, going backwards.
-        maxResults
-            The maximum number of search results to be returned by a request. A
-            number between 10 and the system limit (currently 500, 100 for
-            Sandbox environments). By default, a request response will return
-            100 results.
-        next
-            This parameter is used to get the next 'page' of results. The value
-            used with the parameter is pulled directly from the response
-            provided by the API, and should not be modified.
-
-        Returns
-        -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
-        """
-        return self.request(
-            'GET', f'tweets/search/fullarchive/{label}', endpoint_parameters=(
-                'query', 'tag', 'fromDate', 'toDate', 'maxResults', 'next'
-            ), query=query, **kwargs
-        )
 
     # Get Tweet timelines
 

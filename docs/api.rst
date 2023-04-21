@@ -16,12 +16,6 @@
     +------------------------------------------+--------------------------------------------+
     | Twitter API v1.1 Endpoint                | :class:`API` Method                        |
     +==========================================+============================================+
-    | .. centered:: :ref:`Premium Search APIs`                                              |
-    +------------------------------------------+--------------------------------------------+
-    | `GET search/30day/:label`_               | :meth:`API.search_30_day`                  |
-    +------------------------------------------+--------------------------------------------+
-    | `GET search/fullarchive/:label`_         | :meth:`API.search_full_archive`            |
-    +------------------------------------------+--------------------------------------------+
     | .. centered:: :ref:`Tweets`                                                           |
     +---------------------------------------------------------------------------------------+
     | .. centered:: |Get Tweet timelines|_                                                  |
@@ -259,8 +253,6 @@
     | `GET application/rate_limit_status`_     | :meth:`API.rate_limit_status`              |
     +------------------------------------------+--------------------------------------------+
 
-.. _GET search/30day/:label: https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
-.. _GET search/fullarchive/:label: https://developer.twitter.com/en/docs/twitter-api/premium/search-api/api-reference/premium-search
 .. |Get Tweet timelines| replace:: *Get Tweet timelines*
 .. _GET statuses/home_timeline: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
 .. _GET statuses/mentions_timeline: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-mentions_timeline
@@ -370,13 +362,6 @@
 .. _GET help/languages: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/supported-languages/api-reference/get-help-languages
 .. |Get app rate limit status| replace:: *Get app rate limit status*
 .. _GET application/rate_limit_status: https://developer.twitter.com/en/docs/twitter-api/v1/developer-utilities/rate-limit-status/api-reference/get-application-rate_limit_status
-
-Premium Search APIs
-===================
-
-.. automethod:: API.search_30_day
-
-.. automethod:: API.search_full_archive
 
 Tweets
 ======
