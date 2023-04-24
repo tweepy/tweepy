@@ -31,7 +31,6 @@ Version 4.13.0 (2023-03-09)
 - Handle incorrect processing state for errored chunked uploads ([a68ce86](https://github.com/tweepy/tweepy/commit/a68ce8658ab0908227dc486e73d02060e21174f8))
 
 ### Misc
-
 - Support async-lru v2 ([f98b345](https://github.com/tweepy/tweepy/commit/f98b34573a50fdc870111e17052d385b0917e3c3))
 - Document specific expansions available for each type of payload ([7df6453](https://github.com/tweepy/tweepy/commit/7df645328bdf26e5c4c569392d5d2252b1527477))
 - Add documentation for Direct Message events ([c689548](https://github.com/tweepy/tweepy/commit/c689548cb1b4b9c2f69249d67534a735b931b9b5))
