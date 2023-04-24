@@ -23,6 +23,9 @@ identifiers:
   - description: "The versioned DOI for version 4.13.0 of Tweepy"
     type: doi
     value: 10.5281/zenodo.7713369
+  - description: "The versioned DOI for version 4.14.0 of Tweepy"
+    type: doi
+    value: 10.5281/zenodo.7860636
 keywords:
   - Python
   - Twitter
