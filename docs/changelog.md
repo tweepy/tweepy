@@ -3,6 +3,37 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.14.0 (2023-04-24)
+---------------------------
+
+### New Features / Improvements
+- Add constants for potential model object fields ([f3f73bc](https://github.com/tweepy/tweepy/commit/f3f73bc1cf0a7f19ebfe7df0a2f6b08fb7c4cd9c))
+  - `DIRECT_MESSAGE_EVENT_FIELDS`
+  - `DM_EVENT_FIELDS`
+  - `LIST_FIELDS`
+  - `MEDIA_FIELDS`
+  - `PLACE_FIELDS`
+  - `POLL_FIELDS`
+  - `PUBLIC_SPACE_FIELDS`
+  - `SPACE_FIELDS`
+  - `PUBLIC_TWEET_FIELDS`
+  - `TWEET_FIELDS`
+  - `USER_FIELDS`
+- Add `creator_id` field for `Space` ([a13726a](https://github.com/tweepy/tweepy/commit/a13726a1c0114f72e0037bad4292b4a2a6693b65))
+
+### Twitter API Backwards-Incompatible Changes
+- Remove support for streaming with Twitter API v1.1 status/filter endpoint ([c8a02eb](https://github.com/tweepy/tweepy/commit/c8a02eb61b36ac710010b67ff0ed7b8374ef9375))
+  - `Stream`
+  - `AsyncStream`
+- Remove support for deprecated Premium v1.1 Search APIs ([a955f30](https://github.com/tweepy/tweepy/commit/a955f3000c57c134f51d55b42c0e98ff56e17311))
+  - `API.search_30_day`
+  - `API.search_full_archive`
+
+### Misc
+- Overhaul Getting Started documentation ([addb9f7](https://github.com/tweepy/tweepy/commit/addb9f7a78de70c1b1e4b6a34e5324776f55cd0f))
+- Remove no longer valid Twitter API version badges in README ([880e7bf](https://github.com/tweepy/tweepy/commit/880e7bf98075a1e1c1cd817971581d4f229ea1fb))
+- Update and improve various documentation
+
 Version 4.13.0 (2023-03-09)
 ---------------------------
 
