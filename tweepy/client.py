@@ -4,6 +4,8 @@
 
 from collections import namedtuple
 import datetime
+import time
+from tqdm import tqdm
 
 try:
     from functools import cache
@@ -107,8 +109,14 @@ class BaseClient:
                     if sleep_time > 0:
                         log.warning(
                             "Rate limit exceeded. "
-                            f"Sleeping for {sleep_time} seconds."
+                            "Sleeping for {} seconds.".format(sleep_time)
                         )
+                        # Add progress bar
+                        with tqdm(total=sleep_time) as pbar:
+                            for _ in range(sleep_time):
+                                time.sleep(1)
+                                pbar.update(1)
+
                         time.sleep(sleep_time)
                     return self.request(method, route, params, json, user_auth)
                 else:
