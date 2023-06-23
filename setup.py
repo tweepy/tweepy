@@ -57,7 +57,10 @@ setup(
             "tox>=3.21.0",
          ],
         "socks": ["requests[socks]>=2.27.0,<3"],
-        "test": ["vcrpy>=1.10.3"],
+        "test": [
+            "urllib3<2",  # https://github.com/kevin1024/vcrpy/issues/719
+            "vcrpy>=1.10.3",
+        ],
     },
     test_suite="tests",
     keywords="twitter library",
