@@ -1,0 +1,34 @@
+name: Feature Request
+description: Suggest a feature for the library.
+labels: Feature Request
+body:
+  - type: input
+    attributes:
+      label: Summary
+      description: Provide a short summary of your feature request.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: The Problem
+      description: |
+        What problem is your feature request trying to solve?
+        What becomes easier or possible if this feature is implemented?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: The Ideal Solution
+      description: |
+        What is your ideal solution to the problem?
+        What would you like this feature to do?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: The Current Solution
+      description: What is the current solution to the problem, if any?
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If you have anything else to add, please do so here.

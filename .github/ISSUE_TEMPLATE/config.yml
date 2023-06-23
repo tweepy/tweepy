@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question
+    url: https://github.com/tweepy/tweepy/discussions
+    about: Ask questions and discuss with other users of the library.
+  - name: Discord Server
+    url: https://discord.gg/bJvqnhg
+    about: Use the official Discord server to ask for help as well.

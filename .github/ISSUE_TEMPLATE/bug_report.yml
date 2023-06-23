@@ -1,0 +1,68 @@
+name: Bug Report
+description: Report broken or incorrect behavior.
+labels: "Unconfirmed Bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out a bug report.
+        Please note that this is only for reporting issues with the library.
+        If you need help using the library, start a [discussion](https://github.com/tweepy/tweepy/discussions) or join the [official Discord server](https://discord.gg/bJvqnhg) instead.
+  - type: input
+    attributes:
+      label: Summary
+      description: Provide a simple summary of your bug report.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: Explain what you did for the bug to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Minimal Reproducible Example
+      description: This should be code, in the form of a [MRE](https://en.wikipedia.org/wiki/Minimal_reproducible_example), that demonstrates the bug.
+      render: python
+  - type: textarea
+    attributes:
+      label: Expected Results
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual Results
+      description: What actually happened?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Twitter API Access Plan
+      description: |
+        What Twitter API access level / plan / tier do you have?
+        You can find this information in the Developer Portal.
+      placeholder: This is probably Free, Basic, Pro, or Enterprise.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Tweepy Version
+      description: |
+        What version of Tweepy are you using?
+        If you installed Tweepy using pip, you can use `pip show tweepy` to find this information.
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for duplicate issues.
+          required: true
+        - label: If applicable, I have shown the entire traceback.
+        - label: If applicable, I have removed any visible credentials from my code and/or screenshots.
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If you have anything else to add, please do so here.
