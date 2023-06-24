@@ -1,0 +1,44 @@
+labels: "Question"
+body:
+  - type: markdown
+    attributes:
+      value: There's also an [official Discord server](https://discord.gg/bJvqnhg) where you can ask for help with using the library.
+  - type: textarea
+    attributes:
+      label: Question
+      description: What's your question?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Relevant Code
+      description: If applicable, this should be code, preferably in the form of a [minimal reproducible example](https://en.wikipedia.org/wiki/Minimal_reproducible_example), that demonstrates your question.
+      render: python
+  - type: textarea
+    attributes:
+      label: Traceback
+      description: If applicable, this should be the full traceback for the error you're encountering.
+      render: python-traceback
+  - type: input
+    attributes:
+      label: Twitter API Access Plan
+      description: |
+        What Twitter API access level / plan / tier do you have?
+        You can find this information in the Developer Portal.
+      placeholder: This is probably Free, Basic, Pro, or Enterprise.
+  - type: input
+    attributes:
+      label: Tweepy Version
+      description: |
+        What version of Tweepy are you using?
+        If you installed Tweepy using pip, you can use `pip show tweepy` to find this information.
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for duplicate questions.
+        - label: If applicable, I have removed any visible credentials from my code and/or screenshots.
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If you have anything else to add, please do so here.
