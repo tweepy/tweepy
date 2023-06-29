@@ -110,12 +110,7 @@ class TweepyClientTests(unittest.TestCase):
         # @TwitterDev and @TwitterAPI Tweets announcing API v2
         self.client.get_tweets(tweet_ids)
 
-    @tape.use_cassette("test_client_block_and_get_blocked_and unblock.yaml")
-    def test_block_and_get_blocked_and_unblock(self):
-        user_id = 17874544  # User ID for @TwitterSupport
-        self.client.block(user_id)
-        self.client.get_blocked()
-        self.client.unblock(user_id)
+    # TODO: Test Client.get_blocked
 
     @tape.use_cassette("test_client_follow_and_unfollow_user.yaml")
     def test_follow_and_unfollow_user(self):

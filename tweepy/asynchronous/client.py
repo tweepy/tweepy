@@ -169,6 +169,10 @@ class AsyncClient(AsyncBaseClient):
 
     .. versionadded:: 4.10
 
+    .. versionchanged:: 4.15
+        Removed ``block`` and ``unblock`` methods, as the endpoints they use
+        have been removed
+
     Parameters
     ----------
     bearer_token : str | None
@@ -1719,49 +1723,6 @@ class AsyncClient(AsyncBaseClient):
 
     # Blocks
 
-    async def unblock(self, target_user_id, *, user_auth=True):
-        """Unblock another user.
-
-        The request succeeds with no action when the user sends a request to a
-        user they're not blocking or have already unblocked.
-
-        .. note::
-
-            When using OAuth 2.0 Authorization Code Flow with PKCE with
-            ``user_auth=False``, a request is made beforehand to Twitter's API
-            to determine the authenticating user's ID. This is cached and only
-            done once per :class:`AsyncClient` instance for each access token
-            used.
-
-        Parameters
-        ----------
-        target_user_id : int | str
-            The user ID of the user that you would like to unblock.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Raises
-        ------
-        TypeError
-            If the access token isn't set
-
-        Returns
-        -------
-        dict | aiohttp.ClientResponse | Response
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/delete-users-user_id-blocking
-        """
-        source_user_id = await self._get_authenticating_user_id(
-            oauth_1=user_auth
-        )
-        route = f"/2/users/{source_user_id}/blocking/{target_user_id}"
-
-        return await self._make_request(
-            "DELETE", route, user_auth=user_auth
-        )
-
     async def get_blocked(self, *, user_auth=True, **params):
         """get_blocked( \
             *, expansions=None, max_results=None, pagination_token=None, \
@@ -1819,45 +1780,6 @@ class AsyncClient(AsyncBaseClient):
                 "expansions", "max_results", "pagination_token",
                 "tweet.fields", "user.fields"
             ), data_type=User, user_auth=user_auth
-        )
-
-    async def block(self, target_user_id, *, user_auth=True):
-        """Block another user.
-
-        .. note::
-
-            When using OAuth 2.0 Authorization Code Flow with PKCE with
-            ``user_auth=False``, a request is made beforehand to Twitter's API
-            to determine the authenticating user's ID. This is cached and only
-            done once per :class:`AsyncClient` instance for each access token
-            used.
-
-        Parameters
-        ----------
-        target_user_id : int | str
-            The user ID of the user that you would like to block.
-        user_auth : bool
-            Whether or not to use OAuth 1.0a User Context to authenticate
-
-        Raises
-        ------
-        TypeError
-            If the access token isn't set
-
-        Returns
-        -------
-        dict | aiohttp.ClientResponse | Response
-
-        References
-        ----------
-        https://developer.twitter.com/en/docs/twitter-api/users/blocks/api-reference/post-users-user_id-blocking
-        """
-        id = await self._get_authenticating_user_id(oauth_1=user_auth)
-        route = f"/2/users/{id}/blocking"
-
-        return await self._make_request(
-            "POST", route, json={"target_user_id": str(target_user_id)},
-            user_auth=user_auth
         )
 
     # Follows

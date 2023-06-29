@@ -114,14 +114,7 @@ class TweepyAsyncClientTests(IsolatedAsyncioTestCase):
         # @TwitterDev and @TwitterAPI Tweets announcing API v2
         await self.client.get_tweets(tweet_ids)
 
-    @tape.use_cassette(
-        "test_asyncclient_block_and_get_blocked_and unblock.yaml"
-    )
-    async def test_block_and_get_blocked_and_unblock(self):
-        user_id = 17874544  # User ID for @TwitterSupport
-        await self.client.block(user_id)
-        await self.client.get_blocked()
-        await self.client.unblock(user_id)
+    # TODO: Test AsyncClient.get_blocked
 
     @tape.use_cassette("test_asyncclient_follow_and_unfollow_user.yaml")
     async def test_follow_and_unfollow_user(self):
