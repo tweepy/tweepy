@@ -193,12 +193,36 @@ class OAuth2UserHandler(OAuth2Session):
     .. versionadded:: 4.5
     """
 
-    def __init__(self, *, client_id, redirect_uri, scope, client_secret=None):
+    def __init__(
+        self, *, client_id, redirect_uri, scope, client_secret=None,
+        auto_refresh=True, token_updater=None
+    ):
         super().__init__(client_id, redirect_uri=redirect_uri, scope=scope)
+
         if client_secret is not None:
             self.auth = HTTPBasicAuth(client_id, client_secret)
         else:
             self.auth = None
+
+        if auto_refresh:
+            self.token_updater = token_updater
+            self.auto_refresh_url = 'https://api.twitter.com/2/oauth2/token'
+            self.auto_refresh_kwargs = {'client_id': client_id}
+
+    @classmethod
+    def from_token(
+        cls, token, *, client_id, redirect_uri, client_secret=None,
+        token_updater=None
+    ):
+        """Make an OAuth2UserHandler from a token dict returned by
+        fetch_token() or from the .token field in a previous session."""
+        h = cls(
+            client_id=client_id, redirect_uri=redirect_uri,
+            scope=token['scope'], client_secret=client_secret,
+            token_updater=token_updater
+        )
+        h.token = token
+        return h
 
     def get_authorization_url(self):
         """Get the authorization URL to redirect the user to"""

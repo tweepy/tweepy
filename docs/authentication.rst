@@ -117,7 +117,8 @@ You can generate an access token to authenticate as a user using
 You'll need to turn on OAuth 2.0 under the User authentication settings section
 of your app's Settings tab under the
 `Twitter Developer Portal Projects & Apps page`_. To do this, you'll need to
-provide a Callback / Redirect URI / URL.
+provide a Callback / Redirect URI / URL. https://no.such.host.example.com/ will
+work fine, for as long as example.com is publically controlled.
 
 Then, you'll need to note the app's Client ID, which you can find through your
 app's Keys and Tokens tab under the
@@ -149,13 +150,38 @@ This can be used to have a user authenticate your app. Once they've done so,
 they'll be redirected to the Callback / Redirect URI / URL you provided. You'll
 need to pass that authorization response URL to fetch the access token::
 
-    access_token = oauth2_user_handler.fetch_token(
+    oauth2_user_handler.fetch_token(
         "Authorization Response URL here"
     )
 
-You can then pass the access token to :class:`Client` when initializing it::
+You can then tell :class:`Client` to use the handler as its session object when
+initializing it::
 
-    client = tweepy.Client("Access Token here")
+    client = tweepy.Client(session=oauth2_user_handler)
+
+This causes :class:`Client` to rely on the handler for all authentication.
+
+To save the credentials, save the `oauth2_user_handler.token` dictionary. To
+restore a handler from this dictionary, run::
+
+    oauth2_user_handler = OAuth2UserHandler.from_token(
+        old_token,
+        client_id="Client ID here",
+        redirect_uri="Callback / Redirect URI / URL here",
+        # Client Secret is only necessary if using a confidential client
+        client_secret="Client Secret here"
+    )
+
+By default, user credentials only last two hours. For them to last longer, the
+`"offline.access"` scope must be used. Even in this mode, the token must be
+changed, or "refreshed" every two hours using a refresh token. All of this
+refreshing happens internally inside the :class:`OAuth2UserHandler`, but this
+means every two hours, `OAuth2UserHandler.token` will change. So, be sure to
+save oauth2_user_handler.token before destroying the handler. To handle the
+automatic saving of the credentials as soon as they are changed, a function can
+be passed to the `token_updater=` argument of :class:`OAuth2UserHandler` or
+`OAuth2UserHandler.from_token`. This function will be called with
+`OAuth2UserHandler.token` as its sole input.
 
 3-legged OAuth
 ==============
