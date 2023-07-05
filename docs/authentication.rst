@@ -149,9 +149,10 @@ This can be used to have a user authenticate your app. Once they've done so,
 they'll be redirected to the Callback / Redirect URI / URL you provided. You'll
 need to pass that authorization response URL to fetch the access token::
 
-    access_token = oauth2_user_handler.fetch_token(
+    response = oauth2_user_handler.fetch_token(
         "Authorization Response URL here"
     )
+    access_token = response["access_token"]
 
 You can then pass the access token to :class:`Client` when initializing it::
 
