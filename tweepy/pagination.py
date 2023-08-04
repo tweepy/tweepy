@@ -1,7 +1,7 @@
 # Tweepy
 # Copyright 2009-2023 Joshua Roesslein
 # See LICENSE for details.
-
+import time
 from math import inf
 
 import requests
@@ -106,6 +106,8 @@ class PaginationIterator:
         return self
 
     def __next__(self):
+        t0: float = time.time()
+
         if self.reverse:
             pagination_token = self.previous_token
         else:
@@ -116,8 +118,9 @@ class PaginationIterator:
 
         # https://twittercommunity.com/t/why-does-timeline-use-pagination-token-while-search-uses-next-token/150963
         if self.method.__name__ in (
-            "search_all_tweets", "search_recent_tweets",
-            "get_all_tweets_count"
+                "search_all_tweets",
+                "search_recent_tweets",
+                "get_all_tweets_count"
         ):
             self.kwargs["next_token"] = pagination_token
         else:
@@ -140,5 +143,11 @@ class PaginationIterator:
         self.previous_token = meta.get("previous_token")
         self.next_token = meta.get("next_token")
         self.count += 1
+
+        if self.method.__name__ == "search_all_tweets" and self.method.__self__.bearer_token:
+            # It is required by Twitter that one request per second is made during an archive search
+            # with OAuth 2.0 Bearer Token. cf. https://developer.twitter.com/en/docs/twitter-api/tweets/search/migrate.
+            # The minimum is 1 request per second, the maximum for optimal throughput is 300 requests per 900 seconds.
+            time.sleep(1 - ((time.time() - t0) % 1))
 
         return response
