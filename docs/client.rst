@@ -531,3 +531,8 @@ Batch compliance
 .. automethod:: Client.get_compliance_job
 
 .. automethod:: Client.create_compliance_job
+
+
+.. rubric:: Footnotes
+
+.. [#changelog] https://developer.twitter.com/en/updates/changelog

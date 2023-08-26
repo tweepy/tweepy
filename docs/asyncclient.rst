@@ -527,3 +527,8 @@ Batch compliance
 .. automethod:: AsyncClient.get_compliance_job
 
 .. automethod:: AsyncClient.create_compliance_job
+
+
+.. rubric:: Footnotes
+
+.. [#changelog] https://developer.twitter.com/en/updates/changelog

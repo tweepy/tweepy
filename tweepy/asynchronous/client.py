@@ -1835,6 +1835,11 @@ class AsyncClient(AsyncBaseClient):
 
         Returns a list of users who are followers of the specified user ID.
 
+        .. note::
+
+            The Twitter API endpoint that this method uses has been removed
+            from the Basic and Pro tiers [#changelog]_.
+
         Parameters
         ----------
         id : int | str
@@ -1882,6 +1887,11 @@ class AsyncClient(AsyncBaseClient):
         )
 
         Returns a list of users the specified user ID is following.
+
+        .. note::
+
+            The Twitter API endpoint that this method uses has been removed
+            from the Basic and Pro tiers [#changelog]_.
 
         Parameters
         ----------
@@ -2822,6 +2832,11 @@ class AsyncClient(AsyncBaseClient):
 
         Returns a list of users who are followers of the specified List.
 
+        .. note::
+
+            The Twitter API endpoint that this method uses has been removed
+            from the Basic and Pro tiers [#changelog]_.
+
         Parameters
         ----------
         id : list[str] | str
@@ -2868,6 +2883,11 @@ class AsyncClient(AsyncBaseClient):
         )
 
         Returns all Lists a specified user follows.
+
+        .. note::
+
+            The Twitter API endpoint that this method uses has been removed
+            from the Basic and Pro tiers [#changelog]_.
 
         Parameters
         ----------
