@@ -998,7 +998,7 @@ class API:
         too long will be silently ignored.
 
         .. deprecated:: 3.7.0
-            Use :func:`API.media_upload` instead.
+            Use :meth:`media_upload` instead.
 
         .. versionchanged:: 4.0
             Renamed from ``API.update_with_media``
@@ -3355,10 +3355,10 @@ class API:
                         additional_owners)
 
         Use this to upload media to Twitter. This calls either
-        :func:`API.simple_upload` or :func:`API.chunked_upload`. Chunked media
-        upload is automatically used for videos. If ``chunked`` is set or the
-        media is a video, ``wait_for_async_finalize`` can be specified as a
-        keyword argument to be passed to :func:`API.chunked_upload`.
+        :meth:`simple_upload` or :meth:`chunked_upload`. Chunked media upload
+        is automatically used for videos. If ``chunked`` is set or the media is
+        a video, ``wait_for_async_finalize`` can be specified as a keyword
+        argument to be passed to :meth:`chunked_upload`.
 
         Parameters
         ----------
@@ -3458,10 +3458,10 @@ class API:
         )
 
         Use this to upload media to Twitter. This uses the chunked upload
-        endpoints and calls :func:`API.chunked_upload_init`,
-        :func:`API.chunked_upload_append`, and
-        :func:`API.chunked_upload_finalize`. If ``wait_for_async_finalize`` is
-        set, this calls :func:`API.get_media_upload_status` as well.
+        endpoints and calls :meth:`chunked_upload_init`,
+        :meth:`chunked_upload_append`, and :meth:`chunked_upload_finalize`. If
+        ``wait_for_async_finalize`` is set, this calls
+        :meth:`get_media_upload_status` as well.
 
         Parameters
         ----------
@@ -3829,19 +3829,19 @@ class API:
         """search_geo(*, lat, long, query, ip, granularity, max_results)
 
         Search for places that can be attached to a Tweet via
-        :func:`API.update_status`. Given a latitude and a longitude pair, an IP
+        :meth:`update_status`. Given a latitude and a longitude pair, an IP
         address, or a name, this request will return a list of all the valid
         places that can be used as the ``place_id`` when updating a status.
 
         Conceptually, a query can be made from the user's location, retrieve a
         list of places, have the user validate the location they are at, and
         then send the ID of this location with a call to
-        :func:`API.update_status`.
+        :meth:`update_status`.
 
         This is the recommended method to use find places that can be attached
-        to :func:`API.update_status`. Unlike :func:`API.reverse_geocode` which
-        provides raw data access, this endpoint can potentially re-order places
-        with regards to the user who is authenticated. This approach is also
+        to :meth:`update_status`. Unlike :meth:`reverse_geocode` which provides
+        raw data access, this endpoint can potentially re-order places with
+        regards to the user who is authenticated. This approach is also
         preferred for interactive place matching with the user.
 
         Some parameters in this method are only required based on the existence
