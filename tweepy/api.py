@@ -1141,7 +1141,8 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
 
-        .. _Twitter's documentation on the standard search API: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
+        .. _Twitter's documentation on the standard search API:
+            https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
         """
         return self.request(
             'GET', 'search/tweets', endpoint_parameters=(
@@ -2624,7 +2625,8 @@ class API:
         https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/manage-account-settings/api-reference/post-account-settings
 
         .. _ISO 8601: https://en.wikipedia.org/wiki/ISO_8601
-        .. _Rails TimeZone: https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+        .. _Rails TimeZone:
+            https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
         """
         return self.request(
             'POST', 'account/settings', endpoint_parameters=(
