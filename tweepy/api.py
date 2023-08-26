@@ -470,6 +470,12 @@ class API:
         Returns full Tweet objects for up to 100 Tweets per request, specified
         by the ``id`` parameter.
 
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/lookup endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is
+            :meth:`Client.get_tweets`.
+
         .. versionchanged:: 4.0
             Renamed from ``API.statuses_lookup``
 
@@ -496,6 +502,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-lookup
+
+        .. _The Twitter API v1.1 statuses/lookup endpoint that this method uses
+            has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'GET', 'statuses/lookup', endpoint_parameters=(
@@ -710,6 +720,11 @@ class API:
 
         Returns a single status specified by the ID parameter.
 
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/show endpoint that this method uses
+            has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is :meth:`Client.get_tweet`.
+
         Parameters
         ----------
         id:
@@ -735,6 +750,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-show-id
+
+        .. _The Twitter API v1.1 statuses/show endpoint that this method uses
+            has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'GET', 'statuses/show', endpoint_parameters=(
@@ -806,6 +825,12 @@ class API:
         Destroy the status specified by the ``id`` parameter. The authenticated
         user must be the author of the status to destroy.
 
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/destroy endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is
+            :meth:`Client.delete_tweet`.
+
         Parameters
         ----------
         id
@@ -820,6 +845,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id
+
+        .. _The Twitter API v1.1 statuses/destroy endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'POST', f'statuses/destroy/{id}', endpoint_parameters=(
@@ -832,6 +861,11 @@ class API:
         """retweet(id, *, trim_user)
 
         Retweets a Tweet. Requires the ID of the Tweet you are retweeting.
+
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/retweet endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is :meth:`Client.retweet`.
 
         Parameters
         ----------
@@ -847,6 +881,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-retweet-id
+
+        .. _The Twitter API v1.1 statuses/retweet endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'POST', f'statuses/retweet/{id}', endpoint_parameters=(
@@ -860,6 +898,12 @@ class API:
 
         Untweets a retweeted status. Requires the ID of the retweet to
         unretweet.
+
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/unretweet endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is
+            :meth:`Client.unretweet`.
 
         Parameters
         ----------
@@ -875,6 +919,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-unretweet-id
+
+        .. _The Twitter API v1.1 statuses/unretweet endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'POST', f'statuses/unretweet/{id}', endpoint_parameters=(
@@ -903,6 +951,12 @@ class API:
         Tweets they can create at a time. If the number of updates posted by
         the user reaches the current allowed limit this method will return an
         HTTP 403 error.
+
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 statuses/update endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.`_ The Twitter API v2 replacement is
+            :meth:`Client.create_tweet`.
 
         Parameters
         ----------
@@ -972,6 +1026,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update
+
+        .. _The Twitter API v1.1 statuses/update endpoint that this method
+            uses has been deprecated and has a retirement date of November 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         if 'media_ids' in kwargs:
             kwargs['media_ids'] = list_to_csv(kwargs['media_ids'])
@@ -998,7 +1056,10 @@ class API:
         too long will be silently ignored.
 
         .. deprecated:: 3.7.0
-            Use :meth:`media_upload` instead.
+            `The Twitter API v1.1 statuses/update_with_media endpoint that this
+            method uses has been deprecated and has a retirement date of
+            November 20, 2023.`_ :meth:`API.media_upload` and
+            :meth:`Client.create_tweet` can be used instead.
 
         .. versionchanged:: 4.0
             Renamed from ``API.update_with_media``
@@ -1034,6 +1095,11 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update_with_media
+
+        .. _The Twitter API v1.1 statuses/update_with_media endpoint that this
+            method uses has been deprecated and has a retirement date of
+            November 20, 2023.:
+            https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         with contextlib.ExitStack() as stack:
             if file is not None:
@@ -1081,6 +1147,12 @@ class API:
             attributes (fields that pertain to the perspective of the
             authenticating user) are not currently supported on this endpoint.
             [#]_\ [#]_
+
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 search/tweets endpoint that this method uses
+            has been deprecated and has a retirement date of September 20,
+            2023.`_ The Twitter API v2 replacement is
+            :meth:`Client.search_recent_tweets`.
 
         .. versionchanged:: 4.0
             Renamed from ``API.search``
@@ -1143,6 +1215,9 @@ class API:
 
         .. _Twitter's documentation on the standard search API:
             https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
+        .. _The Twitter API v1.1 search/tweets endpoint that this method uses
+            has been deprecated and has a retirement date of September 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'GET', 'search/tweets', endpoint_parameters=(
@@ -2295,6 +2370,11 @@ class API:
         returned by using this API (about being listed in the People Search).
         It is only possible to retrieve the first 1000 matches from this API.
 
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 users/search endpoint that this method uses
+            has been deprecated and has a retirement date of September 20,
+            2023.`_
+
         Parameters
         ----------
         q
@@ -2313,6 +2393,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-search
+
+        .. _The Twitter API v1.1 users/search endpoint that this method uses
+            has been deprecated and has a retirement date of September 20,
+            2023.: https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'GET', 'users/search', endpoint_parameters=(
@@ -3850,6 +3934,10 @@ class API:
         of other parameters. For instance, ``lat`` is required if ``long`` is
         provided, and vice-versa.
 
+        .. deprecated:: 4.15.0
+            `The Twitter API v1.1 geo/search endpoint that this method uses has
+            been deprecated and has a retirement date of September 20, 2023.`_
+
         .. versionchanged:: 4.0
             Renamed from ``API.geo_search``
 
@@ -3894,6 +3982,10 @@ class API:
         References
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/geo/places-near-location/api-reference/get-geo-search
+
+        .. _The Twitter API v1.1 geo/search endpoint that this method uses has
+            been deprecated and has a retirement date of September 20, 2023.:
+            https://twittercommunity.com/t/x-api-v2-migration/203391
         """
         return self.request(
             'GET', 'geo/search', endpoint_parameters=(
