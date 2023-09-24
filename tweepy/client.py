@@ -2734,7 +2734,7 @@ class Client(BaseClient):
             ``event_type`` are returned by default. The ``text`` value isn't
             included for ``ParticipantsJoin`` and ``ParticipantsLeave`` events.
         event_types : str
-            The type of Direct Message event to returm. If not included, all
+            The type of Direct Message event to return. If not included, all
             types are returned.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
