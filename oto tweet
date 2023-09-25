@@ -1,0 +1,34 @@
+import tweepy
+import time
+from PIL import ImageGrab
+
+# Twitter API anahtarları
+consumer_key = 'Your_Consumer_Key'
+consumer_secret = 'Your_Consumer_Secret'
+access_token = 'Your_Access_Token'
+access_token_secret = 'Your_Access_Token_Secret'
+
+# Tweepy ile oturum açma
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
+# Belirli bir periyotta ekran görüntüsü alma ve tweet atma
+while True:
+    try:
+        # Ekran görüntüsü alma
+        screenshot = ImageGrab.grab()
+        screenshot.save('screenshot.png')
+        
+        # Tweet metni
+        tweet_text = "İşte ekran görüntüm!"
+
+        # Tweet gönderme
+        api.update_with_media('screenshot.png', status=tweet_text)
+
+        # Belirli bir süre beklemek için
+        time.sleep(3600)  # Örneğin, her saatte bir tweet atmak için
+
+    except Exception as e:
+        print("Hata:", e)
+        time.sleep(60)  # Hata oluştuğunda bekleme süresi
