@@ -216,7 +216,7 @@ and secret::
         callback="Callback / Redirect URI / URL here"
     )
     new_oauth1_user_handler.request_token = {
-        "oauth_token": "Request Token (oauth_token) here",
+        "oauth_token": request_token,
         "oauth_token_secret": request_secret
     }
     access_token, access_token_secret = (
