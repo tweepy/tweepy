@@ -37,6 +37,7 @@ setup(
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
         "requests-oauthlib>=1.2.0,<2",
+        "pandas>=1.3.5",
     ],
     extras_require={
         "async": [
