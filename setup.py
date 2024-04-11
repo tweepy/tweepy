@@ -36,7 +36,7 @@ setup(
     install_requires=[
         "oauthlib>=3.2.0,<4",
         "requests>=2.27.0,<3",
-        "requests-oauthlib>=1.2.0,<2",
+        "requests-oauthlib>=1.2.0,<3",
     ],
     extras_require={
         "async": [
