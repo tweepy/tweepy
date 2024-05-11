@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 import time
 import unittest
 from ast import literal_eval
@@ -100,14 +101,17 @@ class TweepyAPITests(TweepyTestCase):
         update = self.api.update_status_with_media(tweet_text, 'assets/banner.png')
         self.assertIn(tweet_text + ' https://t.co', update.text)
 
+    @unittest.skipIf(sys.version_info >= (3, 13), "imghdr was removed in Python 3.13")
     @tape.use_cassette('testmediauploadpng.yaml')
     def testmediauploadpng(self):
         self.api.media_upload('assets/banner.png')
 
+    @unittest.skipIf(sys.version_info >= (3, 13), "imghdr was removed in Python 3.13")
     @tape.use_cassette('testmediauploadgif.yaml')
     def testmediauploadgif(self):
         self.api.media_upload('assets/animated.gif')
 
+    @unittest.skipIf(sys.version_info >= (3, 13), "imghdr was removed in Python 3.13")
     @tape.use_cassette('testmediauploadmp4.yaml')
     def testmediauploadmp4(self):
         self.api.media_upload('assets/video.mp4')
