@@ -4,7 +4,6 @@
 
 import contextlib
 import functools
-import imghdr
 import logging
 import mimetypes
 from platform import python_version
@@ -3468,6 +3467,10 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
+        try:
+            import imghdr
+        except ModuleNotFoundError:
+            raise NotImplementedError("media_upload() is not implemented on Python >= 3.13")
         h = None
         if file is not None:
             location = file.tell()
