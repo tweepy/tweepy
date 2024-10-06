@@ -3467,19 +3467,22 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
+        file_type = None
         try:
             import imghdr
         except ModuleNotFoundError:
-            raise NotImplementedError("media_upload() is not implemented on Python >= 3.13")
-        h = None
-        if file is not None:
-            location = file.tell()
-            h = file.read(32)
-            file.seek(location)
-        file_type = imghdr.what(filename, h=h)
-        if file_type is not None:
-            file_type = 'image/' + file_type
+            # imghdr was removed in Python 3.13
+            pass
         else:
+            h = None
+            if file is not None:
+                location = file.tell()
+                h = file.read(32)
+                file.seek(location)
+            file_type = imghdr.what(filename, h=h)
+            if file_type is not None:
+                file_type = 'image/' + file_type
+        if file_type is None:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
