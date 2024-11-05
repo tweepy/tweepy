@@ -4,7 +4,7 @@
 
 import contextlib
 import functools
-import imghdr
+from PIL import Image
 import logging
 import mimetypes
 from platform import python_version
@@ -3468,16 +3468,14 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
-        h = None
-        if file is not None:
-            location = file.tell()
-            h = file.read(32)
-            file.seek(location)
-        file_type = imghdr.what(filename, h=h)
-        if file_type is not None:
-            file_type = 'image/' + file_type
-        else:
+       file_type = None
+        try:
+            with Image.open(filename) as img:
+                file_type = 'image/' + img.format.lower()
+        except (IOError, FileNotFoundError):
+            # If it's not an image or the file doesn't exist, fallback to mimetypes
             file_type = mimetypes.guess_type(filename)[0]
+        return file_type
 
         if chunked or file_type.startswith('video/'):
             return self.chunked_upload(
