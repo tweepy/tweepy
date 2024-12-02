@@ -322,7 +322,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -358,7 +358,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -405,7 +405,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -449,7 +449,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -497,7 +497,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -627,7 +627,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -659,7 +659,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -700,7 +700,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -1146,7 +1146,7 @@ class API:
             find across the REST API and platform. However, perspectival
             attributes (fields that pertain to the perspective of the
             authenticating user) are not currently supported on this endpoint.
-            [#]_\ [#]_
+            [#]_ [#]_
 
         .. deprecated:: 4.15.0
             `The Twitter API v1.1 search/tweets endpoint that this method uses
@@ -1260,7 +1260,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1304,7 +1304,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1399,7 +1399,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1435,7 +1435,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1517,7 +1517,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -1565,7 +1565,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1653,7 +1653,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -2024,7 +2024,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2065,7 +2065,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2105,7 +2105,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2146,7 +2146,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2179,7 +2179,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2207,7 +2207,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Relationship`]
+        :py:class:`List`[:class:`~tweepy.models.Relationship`]
 
         References
         ----------
@@ -2234,7 +2234,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2266,7 +2266,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2347,7 +2347,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2388,7 +2388,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2591,7 +2591,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.SavedSearch`]
+        :py:class:`List`[:class:`~tweepy.models.SavedSearch`]
 
         References
         ----------
@@ -2914,7 +2914,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2948,7 +2948,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2979,7 +2979,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -3012,7 +3012,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -3226,7 +3226,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.DirectMessage`]
+        :py:class:`List`[:class:`~tweepy.models.DirectMessage`]
 
         References
         ----------
@@ -3898,7 +3898,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`List`[:class:`~tweepy.models.Place`]
 
         References
         ----------
@@ -3977,7 +3977,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`List`[:class:`~tweepy.models.Place`]
 
         References
         ----------
