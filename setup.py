@@ -47,7 +47,7 @@ setup(
             "myst-parser==0.15.2",
             "readthedocs-sphinx-search==0.1.1",
             "sphinx==4.2.0",
-            "sphinx-hoverxref==1.4.2",
+            "sphinx-hoverxref==0.7b1",
             "sphinx-tabs==3.2.0",
             "sphinx_rtd_theme==1.0.0",
         ],
