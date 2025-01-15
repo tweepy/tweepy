@@ -4,7 +4,6 @@
 
 import contextlib
 import functools
-import imghdr
 import logging
 import mimetypes
 from platform import python_version
@@ -3468,15 +3467,22 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
-        h = None
-        if file is not None:
-            location = file.tell()
-            h = file.read(32)
-            file.seek(location)
-        file_type = imghdr.what(filename, h=h)
-        if file_type is not None:
-            file_type = 'image/' + file_type
+        file_type = None
+        try:
+            import imghdr
+        except ModuleNotFoundError:
+            # imghdr was removed in Python 3.13
+            pass
         else:
+            h = None
+            if file is not None:
+                location = file.tell()
+                h = file.read(32)
+                file.seek(location)
+            file_type = imghdr.what(filename, h=h)
+            if file_type is not None:
+                file_type = 'image/' + file_type
+        if file_type is None:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
