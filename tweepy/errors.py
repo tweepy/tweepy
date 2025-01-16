@@ -43,6 +43,10 @@ class HTTPException(TweepyException):
         self.api_codes = []
         self.api_messages = []
 
+        if isinstance(response, str):
+            super().__init__(response)
+            return
+
         try:
             status_code = response.status_code
         except AttributeError:
