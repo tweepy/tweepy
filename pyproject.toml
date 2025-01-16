@@ -39,6 +39,15 @@ async = [
     "aiohttp>=3.7.3,<4",
     "async-lru>=1.0.3,<3",
 ]
+dev = [
+    "coverage>=4.4.2",
+    "coveralls>=2.1.0",
+    "tox>=3.21.0",
+]
+test = [
+    "urllib3<2",
+    "vcrpy>=1.10.3",
+]
 
 [project.urls]
 Code = "https://github.com/tweepy/tweepy"
