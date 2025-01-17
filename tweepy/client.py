@@ -837,7 +837,7 @@ class Client(BaseClient):
             json["text"] = text
 
         return self._make_request(
-            "POST", f"/2/tweets", json=json, user_auth=user_auth
+            "POST", "/2/tweets", json=json, user_auth=user_auth
         )
 
     # Quote Tweets
@@ -2451,7 +2451,7 @@ class Client(BaseClient):
         https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me
         """
         return self._make_request(
-            "GET", f"/2/users/me", params=params,
+            "GET", "/2/users/me", params=params,
             endpoint_parameters=("expansions", "tweet.fields", "user.fields"),
             data_type=User, user_auth=user_auth
         )
@@ -3547,7 +3547,7 @@ class Client(BaseClient):
             json["private"] = private
 
         return self._make_request(
-            "POST", f"/2/lists", json=json, user_auth=user_auth
+            "POST", "/2/lists", json=json, user_auth=user_auth
         )
 
     # Pinned Lists

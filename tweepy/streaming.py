@@ -331,7 +331,7 @@ class StreamingClient(BaseClient, BaseStream):
                 json["add"].append({"value": rule.value})
 
         return self._make_request(
-            "POST", f"/2/tweets/search/stream/rules", params=params,
+            "POST", "/2/tweets/search/stream/rules", params=params,
             endpoint_parameters=("dry_run",), json=json, data_type=StreamRule
         )
 
@@ -368,7 +368,7 @@ class StreamingClient(BaseClient, BaseStream):
                 json["delete"]["ids"].append(str(id))
 
         return self._make_request(
-            "POST", f"/2/tweets/search/stream/rules", params=params,
+            "POST", "/2/tweets/search/stream/rules", params=params,
             endpoint_parameters=("dry_run",), json=json, data_type=StreamRule
         )
 
@@ -478,7 +478,7 @@ class StreamingClient(BaseClient, BaseStream):
         https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/get-tweets-search-stream-rules
         """
         return self._make_request(
-            "GET", f"/2/tweets/search/stream/rules", params=params,
+            "GET", "/2/tweets/search/stream/rules", params=params,
             endpoint_parameters=("ids",), data_type=StreamRule
         )
 
