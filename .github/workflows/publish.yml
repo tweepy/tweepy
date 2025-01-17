@@ -1,6 +1,9 @@
 name: Build and Publish Tweepy to PyPI
 
-on: push
+on:
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -29,26 +32,64 @@ jobs:
           name: tweepy-package-distributions
           path: dist/
 
-  publish-to-testpypi:
-    name: Publish to TestPyPI
-    needs: build
+  publish-to-pypi:
+    name: Upload distribution to PyPI
+    if: github.repository_owner == 'tweepy'
+    needs:
+      - build
     runs-on: ubuntu-latest
 
     environment:
-      name: testpypi
-      url: https://test.pypi.org/p/tweepy
+      name: pypi
+      url: https://pypi.org/p/tweepy
 
     permissions:
       id-token: write
 
     steps:
-      - name: Download distribution artifact
+      - name: Download distribution from artifact store
         uses: actions/download-artifact@v4
         with:
           name: tweepy-package-distributions
           path: dist/
-      - name: Publish distribution to TestPyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: Sign distribution and create the Github release
+    needs:
+      - publish-to-pypi
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Download distribution from artifact store
+        uses: actions/download-artifact@v4
         with:
-          repository-url: https://test.pypi.org/legacy/
+          name: tweepy-package-distributions
+          path: dist/
+      - name: Sign distribution with Sigstore
+        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        with:
+          inputs: >-
+            ./dist/*.tar.gz
+            ./dist/*.whl
+      - name: Create Github release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create
+          "$GITHUB_REF_NAME"
+          --repo "$GITHUB_REPOSITORY"
+          --notes ""
+      - name: Upload to Github release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          gh release upload
+          "$GITHUB_REF_NAME" dist/**
+          --repo "$GITHUB_REPOSITORY"
 
