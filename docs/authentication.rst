@@ -156,7 +156,7 @@ need to pass that authorization response URL to fetch the access token::
 
 You can then pass the access token to :class:`Client` when initializing it::
 
-    client = tweepy.Client("Access Token here")
+    client = tweepy.Client(access_token)
 
 3-legged OAuth
 ==============
