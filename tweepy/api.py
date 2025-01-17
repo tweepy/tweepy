@@ -297,7 +297,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def home_timeline(self, **kwargs):
-        """home_timeline(*, count, since_id, max_id, trim_user, \
+        r"""home_timeline(*, count, since_id, max_id, trim_user, \
                          exclude_replies, include_entities)
 
         Returns the 20 most recent statuses, including retweets, posted by
@@ -337,7 +337,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def mentions_timeline(self, **kwargs):
-        """mentions_timeline(*, count, since_id, max_id, trim_user, \
+        r"""mentions_timeline(*, count, since_id, max_id, trim_user, \
                              include_entities)
 
         Returns the 20 most recent mentions, including retweets.
@@ -372,7 +372,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def user_timeline(self, **kwargs):
-        """user_timeline(*, user_id, screen_name, since_id, count, max_id, \
+        r"""user_timeline(*, user_id, screen_name, since_id, count, max_id, \
                          trim_user, exclude_replies, include_rts)
 
         Returns the 20 most recent statuses posted from the authenticating user
@@ -422,7 +422,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def get_favorites(self, **kwargs):
-        """get_favorites(*, user_id, screen_name, count, since_id, max_id, \
+        r"""get_favorites(*, user_id, screen_name, count, since_id, max_id, \
                          include_entities)
 
         Returns the favorite statuses for the authenticating user or user
@@ -463,7 +463,7 @@ class API:
 
     @payload('status', list=True)
     def lookup_statuses(self, id, **kwargs):
-        """lookup_statuses(id, *, include_entities, trim_user, map, \
+        r"""lookup_statuses(id, *, include_entities, trim_user, map, \
                            include_ext_alt_text, include_card_uri)
 
         Returns full Tweet objects for up to 100 Tweets per request, specified
@@ -605,7 +605,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def get_retweeter_ids(self, id, **kwargs):
-        """get_retweeter_ids(id, *, count, cursor, stringify_ids)
+        r"""get_retweeter_ids(id, *, count, cursor, stringify_ids)
 
         Returns up to 100 user IDs belonging to users who have retweeted the
         Tweet specified by the ``id`` parameter.
@@ -640,7 +640,7 @@ class API:
 
     @payload('status', list=True)
     def get_retweets(self, id, **kwargs):
-        """get_retweets(id, *, count, trim_user)
+        r"""get_retweets(id, *, count, trim_user)
 
         Returns up to 100 of the first Retweets of the given Tweet.
 
@@ -673,7 +673,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def get_retweets_of_me(self, **kwargs):
-        """get_retweets_of_me(*, count, since_id, max_id, trim_user, \
+        r"""get_retweets_of_me(*, count, since_id, max_id, trim_user, \
                               include_entities, include_user_entities)
 
         Returns the 20 most recent Tweets of the authenticated user that have
@@ -1117,7 +1117,7 @@ class API:
     @pagination(mode='id')
     @payload('search_results')
     def search_tweets(self, q, **kwargs):
-        """search_tweets(q, *, geocode, lang, locale, result_type, count, \
+        r"""search_tweets(q, *, geocode, lang, locale, result_type, count, \
                          until, since_id, max_id, include_entities)
 
         Returns a collection of relevant Tweets matching a specified query.
@@ -1229,7 +1229,7 @@ class API:
 
     @payload('list', list=True)
     def get_lists(self, **kwargs):
-        """get_lists(*, user_id, screen_name, reverse)
+        r"""get_lists(*, user_id, screen_name, reverse)
 
         Returns all lists the authenticating or specified user subscribes to,
         including their own. The user is specified using the ``user_id`` or
@@ -1274,7 +1274,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_list_members(self, **kwargs):
-        """get_list_members(*, list_id, slug, owner_screen_name, owner_id, \
+        r"""get_list_members(*, list_id, slug, owner_screen_name, owner_id, \
                             count, cursor, include_entities, skip_status)
 
         Returns the members of the specified list.
@@ -1371,7 +1371,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def get_list_memberships(self, **kwargs):
-        """get_list_memberships(*, user_id, screen_name, count, cursor, \
+        r"""get_list_memberships(*, user_id, screen_name, count, cursor, \
                                 filter_to_owned_lists)
 
         Returns the lists the specified user has been added to. If ``user_id``
@@ -1414,7 +1414,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def get_list_ownerships(self, **kwargs):
-        """get_list_ownerships(*, user_id, screen_name, count, cursor)
+        r"""get_list_ownerships(*, user_id, screen_name, count, cursor)
 
         Returns the lists owned by the specified user. Private lists will only
         be shown if the authenticated user is also the owner of the lists. If
@@ -1481,7 +1481,7 @@ class API:
     @pagination(mode='id')
     @payload('status', list=True)
     def list_timeline(self, **kwargs):
-        """list_timeline( \
+        r"""list_timeline( \
             *, list_id, slug, owner_screen_name, owner_id, since_id, max_id, \
             count, include_entities, include_rts \
         )
@@ -1532,7 +1532,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_list_subscribers(self, **kwargs):
-        """get_list_subscribers( \
+        r"""get_list_subscribers( \
             *, list_id, slug, owner_screen_name, owner_id, count, cursor, \
             include_entities, skip_status \
         )
@@ -1631,7 +1631,7 @@ class API:
     @pagination(mode='cursor')
     @payload('list', list=True)
     def get_list_subscriptions(self, **kwargs):
-        """get_list_subscriptions(*, user_id, screen_name, count, cursor)
+        r"""get_list_subscriptions(*, user_id, screen_name, count, cursor)
 
         Obtain a collection of the lists the specified user is subscribed to,
         20 lists per page by default. Does not include the user's own lists.
@@ -1999,7 +1999,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def get_follower_ids(self, **kwargs):
-        """get_follower_ids(*, user_id, screen_name, cursor, stringify_ids, \
+        r"""get_follower_ids(*, user_id, screen_name, cursor, stringify_ids, \
                             count)
 
         Returns an array containing the IDs of users following the specified
@@ -2038,7 +2038,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_followers(self, **kwargs):
-        """get_followers(*, user_id, screen_name, cursor, count, skip_status, \
+        r"""get_followers(*, user_id, screen_name, cursor, count, skip_status, \
                          include_user_entities)
 
         Returns a user's followers ordered in which they were added. If no user
@@ -2080,7 +2080,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def get_friend_ids(self, **kwargs):
-        """get_friend_ids(*, user_id, screen_name, cursor, stringify_ids, \
+        r"""get_friend_ids(*, user_id, screen_name, cursor, stringify_ids, \
                           count)
 
         Returns an array containing the IDs of users being followed by the
@@ -2119,7 +2119,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_friends(self, **kwargs):
-        """get_friends(*, user_id, screen_name, cursor, count, skip_status, \
+        r"""get_friends(*, user_id, screen_name, cursor, count, skip_status, \
                        include_user_entities)
 
         Returns a user's friends ordered in which they were added 100 at a
@@ -2161,7 +2161,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def incoming_friendships(self, **kwargs):
-        """incoming_friendships(*, cursor, stringify_ids)
+        r"""incoming_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every user who has a pending
         request to follow the authenticating user.
@@ -2192,7 +2192,7 @@ class API:
 
     @payload('relationship', list=True)
     def lookup_friendships(self, *, screen_name=None, user_id=None, **kwargs):
-        """lookup_friendships(*, screen_name, user_id)
+        r"""lookup_friendships(*, screen_name, user_id)
 
         Returns the relationships of the authenticated user to the list of up
         to 100 screen_name or user_id provided.
@@ -2221,7 +2221,7 @@ class API:
 
     @payload('ids')
     def no_retweets_friendships(self, **kwargs):
-        """no_retweets_friendships(*, stringify_ids)
+        r"""no_retweets_friendships(*, stringify_ids)
 
         Returns a collection of user_ids that the currently authenticated user
         does not want to receive retweets from.
@@ -2248,7 +2248,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def outgoing_friendships(self, **kwargs):
-        """outgoing_friendships(*, cursor, stringify_ids)
+        r"""outgoing_friendships(*, cursor, stringify_ids)
 
         Returns a collection of numeric IDs for every protected user for whom
         the authenticating user has a pending follow request.
@@ -2315,7 +2315,7 @@ class API:
 
     @payload('user', list=True)
     def lookup_users(self, *, screen_name=None, user_id=None, **kwargs):
-        """lookup_users(*, screen_name, user_id, include_entities, tweet_mode)
+        r"""lookup_users(*, screen_name, user_id, include_entities, tweet_mode)
 
         Returns fully-hydrated user objects for up to 100 users per request.
 
@@ -2362,7 +2362,7 @@ class API:
     @pagination(mode='page')
     @payload('user', list=True)
     def search_users(self, q, **kwargs):
-        """search_users(q, *, page, count, include_entities)
+        r"""search_users(q, *, page, count, include_entities)
 
         Run a search for users similar to Find People button on Twitter.com;
         the same results returned by people search on Twitter.com will be
@@ -2581,7 +2581,7 @@ class API:
 
     @payload('saved_search', list=True)
     def get_saved_searches(self, **kwargs):
-        """get_saved_searches()
+        r"""get_saved_searches()
 
         Returns the authenticated user's saved search queries.
 
@@ -2896,7 +2896,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def get_blocked_ids(self, **kwargs):
-        """get_blocked_ids(*, stringify_ids, cursor)
+        r"""get_blocked_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user is
         blocking.
@@ -2928,7 +2928,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_blocks(self, **kwargs):
-        """get_blocks(*, include_entities, skip_status, cursor)
+        r"""get_blocks(*, include_entities, skip_status, cursor)
 
         Returns an array of user objects that the authenticating user is
         blocking.
@@ -2962,7 +2962,7 @@ class API:
     @pagination(mode='cursor')
     @payload('ids')
     def get_muted_ids(self, **kwargs):
-        """get_muted_ids(*, stringify_ids, cursor)
+        r"""get_muted_ids(*, stringify_ids, cursor)
 
         Returns an array of numeric user IDs the authenticating user has muted.
 
@@ -2993,7 +2993,7 @@ class API:
     @pagination(mode='cursor')
     @payload('user', list=True)
     def get_mutes(self, **kwargs):
-        """get_mutes(*, cursor, include_entities, skip_status)
+        r"""get_mutes(*, cursor, include_entities, skip_status)
 
         Returns an array of user objects the authenticating user has muted.
 
@@ -3208,7 +3208,7 @@ class API:
     @pagination(mode='dm_cursor')
     @payload('direct_message', list=True)
     def get_direct_messages(self, **kwargs):
-        """get_direct_messages(*, count, cursor)
+        r"""get_direct_messages(*, count, cursor)
 
         Returns all Direct Message events (both sent and received) within the
         last 30 days. Sorted in reverse-chronological order.
@@ -3877,7 +3877,7 @@ class API:
 
     @payload('place', list=True)
     def reverse_geocode(self, lat, long, **kwargs):
-        """reverse_geocode(lat, long, *, accuracy, granularity, max_results)
+        r"""reverse_geocode(lat, long, *, accuracy, granularity, max_results)
 
         Given a latitude and a longitude, searches for up to 20 places that can
         be used as a ``place_id`` when updating a status.
@@ -3918,7 +3918,7 @@ class API:
 
     @payload('place', list=True)
     def search_geo(self, **kwargs):
-        """search_geo(*, lat, long, query, ip, granularity, max_results)
+        r"""search_geo(*, lat, long, query, ip, granularity, max_results)
 
         Search for places that can be attached to a Tweet via
         :meth:`update_status`. Given a latitude and a longitude pair, an IP
