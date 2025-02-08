@@ -35,7 +35,7 @@ Alternatively, install directly from the GitHub repository:
 
     pip install git+https://github.com/tweepy/tweepy.git
 
-Python 3.7 - 3.11 are supported.
+Latest version of Python and older versions not end of life (bugfix and security) are supported.
 
 Links
 -----

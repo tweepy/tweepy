@@ -1,0 +1,61 @@
+[project]
+name = "tweepy"
+keywords = ["X.com", "API", "Twitter"]
+description = "Library for accessing the X API (Twitter)"
+readme = "README.md"
+requires-python = ">=3.9"
+license.text = "MIT"
+
+authors = [
+  {name = "Joshua Roesslein"},
+  {name = "Harmon"},
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Software Development :: Libraries",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+dependencies = [
+    "oauthlib>=3.2.0,<4",
+    "requests>=2.27.0,<3",
+    "requests-oauthlib>=1.2.0,<3",
+]
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+async = [
+    "aiohttp>=3.7.3,<4",
+    "async-lru>=1.0.3,<3",
+]
+dev = [
+    "coverage>=4.4.2",
+    "coveralls>=2.1.0",
+    "tox>=3.21.0",
+]
+test = [
+    "urllib3<2",
+    "vcrpy>=1.10.3",
+]
+
+[project.urls]
+Code = "https://github.com/tweepy/tweepy"
+Documentation = "https://docs.tweepy.org"
+"Issue tracker" = "https://github.com/tweepy/tweepy/issues"
+Homepage = "https://tweepy.org"
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+

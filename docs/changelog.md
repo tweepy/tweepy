@@ -3,6 +3,12 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Version 4.15.0 (2025-01-15)
+---------------------------
+- Fix error "No module named 'imghdr'" due to removed package in Python 3.13+
+- Bump requests-oauthlib to allow v2 
+- Drop support for Python 3.7 and 3.8
+
 Version 4.14.0 (2023-04-24)
 ---------------------------
 

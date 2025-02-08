@@ -4,7 +4,6 @@
 
 import contextlib
 import functools
-import imghdr
 import logging
 import mimetypes
 from platform import python_version
@@ -322,7 +321,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -358,7 +357,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -405,7 +404,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -449,7 +448,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -497,7 +496,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -627,7 +626,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -659,7 +658,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -700,7 +699,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -1146,7 +1145,7 @@ class API:
             find across the REST API and platform. However, perspectival
             attributes (fields that pertain to the perspective of the
             authenticating user) are not currently supported on this endpoint.
-            [#]_\ [#]_
+            [#]_ [#]_
 
         .. deprecated:: 4.15.0
             `The Twitter API v1.1 search/tweets endpoint that this method uses
@@ -1260,7 +1259,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1304,7 +1303,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1399,7 +1398,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1435,7 +1434,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -1517,7 +1516,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Status`]
+        :py:class:`List`[:class:`~tweepy.models.Status`]
 
         References
         ----------
@@ -1565,7 +1564,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -1653,7 +1652,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.List`]
+        :py:class:`List`[:class:`~tweepy.models.List`]
 
         References
         ----------
@@ -2024,7 +2023,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2065,7 +2064,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2105,7 +2104,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2146,7 +2145,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2179,7 +2178,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2207,7 +2206,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Relationship`]
+        :py:class:`List`[:class:`~tweepy.models.Relationship`]
 
         References
         ----------
@@ -2234,7 +2233,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2266,7 +2265,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2347,7 +2346,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2388,7 +2387,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2591,7 +2590,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.SavedSearch`]
+        :py:class:`List`[:class:`~tweepy.models.SavedSearch`]
 
         References
         ----------
@@ -2914,7 +2913,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -2948,7 +2947,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -2979,7 +2978,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`int`]
+        :py:class:`List`[:class:`int`]
 
         References
         ----------
@@ -3012,7 +3011,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.User`]
+        :py:class:`List`[:class:`~tweepy.models.User`]
 
         References
         ----------
@@ -3226,7 +3225,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.DirectMessage`]
+        :py:class:`List`[:class:`~tweepy.models.DirectMessage`]
 
         References
         ----------
@@ -3468,15 +3467,22 @@ class API:
         ----------
         https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/overview
         """
-        h = None
-        if file is not None:
-            location = file.tell()
-            h = file.read(32)
-            file.seek(location)
-        file_type = imghdr.what(filename, h=h)
-        if file_type is not None:
-            file_type = 'image/' + file_type
+        file_type = None
+        try:
+            import imghdr
+        except ModuleNotFoundError:
+            # imghdr was removed in Python 3.13
+            pass
         else:
+            h = None
+            if file is not None:
+                location = file.tell()
+                h = file.read(32)
+                file.seek(location)
+            file_type = imghdr.what(filename, h=h)
+            if file_type is not None:
+                file_type = 'image/' + file_type
+        if file_type is None:
             file_type = mimetypes.guess_type(filename)[0]
 
         if chunked or file_type.startswith('video/'):
@@ -3898,7 +3904,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`List`[:class:`~tweepy.models.Place`]
 
         References
         ----------
@@ -3977,7 +3983,7 @@ class API:
 
         Returns
         -------
-        :py:class:`List`\[:class:`~tweepy.models.Place`]
+        :py:class:`List`[:class:`~tweepy.models.Place`]
 
         References
         ----------
