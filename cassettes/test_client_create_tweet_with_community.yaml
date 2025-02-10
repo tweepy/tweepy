@@ -1,0 +1,61 @@
+interactions:
+    - request:
+          body: '{"text": "Test tweet in community", "community_id": "123456789"}'
+          headers:
+              Accept:
+                  - "*/*"
+              Accept-Encoding:
+                  - gzip, deflate
+              Connection:
+                  - keep-alive
+              Content-Length:
+                  - "64"
+              Content-Type:
+                  - application/json
+              User-Agent:
+                  - Python/3.13.1 Requests/2.31.0 Tweepy/4.15.0
+          method: POST
+          uri: https://api.twitter.com/2/tweets
+      response:
+          body:
+              string: '{"data":{"id":"1234567890","text":"Test tweet in community","community_id":"123456789"}}'
+          headers:
+              api-version:
+                  - "2.28"
+              cache-control:
+                  - no-cache, no-store, max-age=0
+              content-disposition:
+                  - attachment; filename=json.json
+              content-length:
+                  - "82"
+              content-type:
+                  - application/json; charset=utf-8
+              date:
+                  - Wed, 10 Feb 2024 11:38:39 UTC
+              location:
+                  - https://api.twitter.com/2/tweets/1234567890
+              server:
+                  - tsa_b
+              strict-transport-security:
+                  - max-age=631138519
+              x-access-level:
+                  - write
+              x-connection-hash:
+                  - f86af2f37d975724d196465ae7a8bb5b420f7b2bb1b541276f76c3fe0569779e
+              x-content-type-options:
+                  - nosniff
+              x-frame-options:
+                  - SAMEORIGIN
+              x-rate-limit-limit:
+                  - "200"
+              x-rate-limit-remaining:
+                  - "199"
+              x-rate-limit-reset:
+                  - "1635976418"
+              x-response-time:
+                  - "226"
+              x-xss-protection:
+                  - "0"
+          status:
+              code: 201
+              message: Created

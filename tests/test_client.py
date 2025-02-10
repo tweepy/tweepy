@@ -257,3 +257,12 @@ class TweepyClientTests(unittest.TestCase):
         job_id = response.data["id"]
         self.client.get_compliance_job(job_id)
         self.client.get_compliance_jobs("tweets")
+
+    @tape.use_cassette("test_client_create_tweet_with_community.yaml")
+    def test_create_tweet_with_community(self):
+        response = self.client.create_tweet(
+            text="Test tweet in community",
+            community_id="123456789"
+        )
+        assert response.data["text"] == "Test tweet in community"
+        assert "community_id" in response.data
