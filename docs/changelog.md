@@ -3,6 +3,11 @@ Changelog
 
 These changelogs are also at <https://github.com/tweepy/tweepy/releases> as release notes.
 
+Unreleased
+----------
+### New Features / Improvements
+- Add support for posting tweets to Communities via `community_id` parameter in `Client.create_tweet`
+
 Version 4.15.0 (2025-01-15)
 ---------------------------
 - Fix error "No module named 'imghdr'" due to removed package in Python 3.13+
@@ -1209,3 +1214,7 @@ Version 1.0.1 (2009-09-13)
 Version 1.0 (2009-08-13)
 ------------------------
 <https://github.com/tweepy/tweepy/commits/e62f8c18977fd755c9d24a0abebd3b8087c75b45>
+
+
+
+

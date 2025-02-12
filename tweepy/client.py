@@ -539,7 +539,7 @@ class Client(BaseClient):
             tweet_fields=None, user_fields=None, user_auth=False \
         )
 
-        Allows you to get information about a Tweet’s liking users.
+        Allows you to get information about a Tweet's liking users.
 
         .. versionchanged:: 4.6
             Added ``max_results`` and ``pagination_token`` parameters
@@ -597,7 +597,7 @@ class Client(BaseClient):
             tweet_fields=None, user_fields=None, user_auth=False \
         )
 
-        Allows you to get information about a user’s liked Tweets.
+        Allows you to get information about a user's liked Tweets.
 
         The Tweets returned by this endpoint count towards the Project-level
         `Tweet cap`_.
@@ -731,7 +731,7 @@ class Client(BaseClient):
         place_id=None, media_ids=None, media_tagged_user_ids=None,
         poll_duration_minutes=None, poll_options=None, quote_tweet_id=None,
         exclude_reply_user_ids=None, in_reply_to_tweet_id=None,
-        reply_settings=None, text=None, user_auth=True
+        reply_settings=None, text=None, user_auth=True, community_id=None
     ):
         """Creates a Tweet on behalf of an authenticated user.
 
@@ -780,6 +780,9 @@ class Client(BaseClient):
             ``media.media_ids`` is not present.
         user_auth : bool
             Whether or not to use OAuth 1.0a User Context to authenticate
+        community_id : int | str | None
+            The ID of the Community to tweet in. The authenticated user must be a
+            member of the Community.
 
         Returns
         -------
@@ -798,6 +801,9 @@ class Client(BaseClient):
         if direct_message_deep_link is not None:
             json["direct_message_deep_link"] = direct_message_deep_link
 
+        if community_id is not None:
+            json["community_id"] = community_id
+            
         if for_super_followers_only is not None:
             json["for_super_followers_only"] = for_super_followers_only
 
