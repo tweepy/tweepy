@@ -3,6 +3,7 @@
 # See LICENSE for details.
 
 import asyncio
+from asyncio import TimeoutError
 import json
 import logging
 from math import inf
@@ -108,7 +109,8 @@ class AsyncBaseStream:
                                 if http_error_wait > http_error_wait_max:
                                     http_error_wait = http_error_wait_max
                 except (aiohttp.ClientConnectionError,
-                        aiohttp.ClientPayloadError) as e:
+                        aiohttp.ClientPayloadError,
+                        asyncio.TimeoutError) as e:
                     await self.on_connection_error()
                     # The error text is logged here instead of in
                     # on_connection_error to keep on_connection_error
