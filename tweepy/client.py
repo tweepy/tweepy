@@ -43,7 +43,7 @@ class BaseClient:
     def __init__(
         self, bearer_token=None, consumer_key=None, consumer_secret=None,
         access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
+        wait_on_rate_limit=False, global_timeout=None
     ):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
@@ -53,6 +53,7 @@ class BaseClient:
 
         self.return_type = return_type
         self.wait_on_rate_limit = wait_on_rate_limit
+        self.global_timeout = global_timeout
 
         self.session = requests.Session()
         self.user_agent = (
@@ -83,7 +84,7 @@ class BaseClient:
 
         with self.session.request(
             method, host + route, params=params, json=json, headers=headers,
-            auth=auth
+            auth=auth, timeout=self.global_timeout
         ) as response:
             log.debug(
                 "Received API response: "
