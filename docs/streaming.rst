@@ -36,7 +36,7 @@ To learn how build rules, refer to the Twitter API
 .. _Building rules for filtered stream: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule
 
 Data received from the stream is passed to :meth:`StreamingClient.on_data`.
-This method handles sending the data to other methods. Tweets recieved are sent
+This method handles sending the data to other methods. Tweets received are sent
 to :meth:`StreamingClient.on_tweet`, ``includes`` data are sent to
 :meth:`StreamingClient.on_includes`, errors are sent to
 :meth:`StreamingClient.on_errors`, and matching rules are sent to
