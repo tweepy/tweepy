@@ -101,18 +101,22 @@ class BaseClient:
             if response.status_code == 404:
                 raise NotFound(response)
             if response.status_code == 429:
-                if self.wait_on_rate_limit:
+                reset_time = None
+                if "x-rate-limit-reset" in response.headers:
                     reset_time = int(response.headers["x-rate-limit-reset"])
-                    sleep_time = reset_time - int(time.time()) + 1
-                    if sleep_time > 0:
-                        log.warning(
-                            "Rate limit exceeded. "
-                            f"Sleeping for {sleep_time} seconds."
-                        )
-                        time.sleep(sleep_time)
+                
+                if self.wait_on_rate_limit:
+                    if reset_time is not None:
+                        sleep_time = reset_time - int(time.time()) + 1
+                        if sleep_time > 0:
+                            log.warning(
+                                "Rate limit exceeded. "
+                                f"Sleeping for {sleep_time} seconds."
+                            )
+                            time.sleep(sleep_time)
                     return self.request(method, route, params, json, user_auth)
                 else:
-                    raise TooManyRequests(response)
+                    raise TooManyRequests(response, reset_time=reset_time)
             if response.status_code >= 500:
                 raise TwitterServerError(response)
             if not 200 <= response.status_code < 300:

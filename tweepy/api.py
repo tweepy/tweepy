@@ -271,7 +271,7 @@ class API:
             if resp.status_code == 404:
                 raise NotFound(resp)
             if resp.status_code == 429:
-                raise TooManyRequests(resp)
+                raise TooManyRequests(resp, reset_time=reset_time)
             if resp.status_code >= 500:
                 raise TwitterServerError(resp)
             if resp.status_code and not 200 <= resp.status_code < 300:
