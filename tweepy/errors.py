@@ -138,8 +138,16 @@ class TooManyRequests(HTTPException):
     Exception raised for a 429 HTTP status code
 
     .. versionadded:: 4.0
+
+    Attributes
+    ----------
+    reset_time : int | None
+        Unix timestamp when the rate limit resets, if available
     """
-    pass
+
+    def __init__(self, response, *, response_json=None, reset_time=None):
+        super().__init__(response, response_json=response_json)
+        self.reset_time = reset_time
 
 
 class TwitterServerError(HTTPException):
