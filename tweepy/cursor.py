@@ -188,7 +188,7 @@ class IdIterator(BaseIterator):
 
         if len(result) == 0:
             raise StopIteration
-        # TODO: Make this not dependant on the parser making max_id and
+        # TODO: Make this not dependent on the parser making max_id and
         # since_id available
         self.max_id = model.max_id
         self.num_tweets += 1

@@ -76,7 +76,7 @@ class AsyncBaseClient(BaseClient):
             url, headers, body = oauth_client.sign(
                 url, method, headers=headers
             )
-            # oauthlib.oauth1.Client (OAuthClient) expects colons in query 
+            # oauthlib.oauth1.Client (OAuthClient) expects colons in query
             # values (e.g. in timestamps) to be percent-encoded, while
             # aiohttp.ClientSession does not automatically encode them
             before_query, question_mark, query = url.partition('?')
@@ -2524,7 +2524,7 @@ class AsyncClient(AsyncBaseClient):
         from the previous 30 days.
 
         .. note::
-        
+
             There is an alias for this method named ``get_dm_events``.
 
         .. versionadded:: 4.12
@@ -2535,14 +2535,14 @@ class AsyncClient(AsyncBaseClient):
             The ``id`` of the Direct Message conversation for which events are
             being retrieved.
         participant_id : int | str | None
-            The ``participant_id`` of the user that the authenicating user is
+            The ``participant_id`` of the user that the authenticating user is
             having a 1-1 conversation with.
         dm_event_fields : list[str] | str | None
             Extra fields to include in the event payload. ``id`` and
             ``event_type`` are returned by default. The ``text`` value isn't
             included for ``ParticipantsJoin`` and ``ParticipantsLeave`` events.
         event_types : str
-            The type of Direct Message event to returm. If not included, all
+            The type of Direct Message event to return. If not included, all
             types are returned.
         expansions : list[str] | str | None
             :ref:`expansions_parameter`
@@ -2613,7 +2613,7 @@ class AsyncClient(AsyncBaseClient):
         adds the Direct Message to it.
 
         .. note::
-        
+
             There is an alias for this method named ``create_dm``.
 
         .. versionadded:: 4.12
@@ -2682,7 +2682,7 @@ class AsyncClient(AsyncBaseClient):
         behalf of the authenticated user.
 
         .. note::
-        
+
             There is an alias for this method named ``create_dm_conversation``.
 
         .. versionadded:: 4.12

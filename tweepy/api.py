@@ -970,7 +970,7 @@ class API:
         auto_populate_reply_metadata
             If set to true and used with in_reply_to_status_id, leading
             @mentions will be looked up from the original Tweet, and added to
-            the new Tweet from there. This wil append @mentions into the
+            the new Tweet from there. This will append @mentions into the
             metadata of an extended Tweet as a reply chain grows, until the
             limit on @mentions is reached. In cases where the original Tweet
             has been deleted, the reply will fail.

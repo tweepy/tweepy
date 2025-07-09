@@ -975,7 +975,7 @@ Version 2.2 (2014-01-20)
     - https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
   - [Compare View](https://github.com/tweepy/tweepy/compare/2.1...2.2)
   - Use HTTPS by default.
-  - Support setting the starting cursor postion (ex: Ex:
+  - Support setting the starting cursor position (ex: Ex:
     Cursor(api.friends_ids, cursor=123456))
   - Added API.cached_result instance flag that is "True" when cached result is returned.
   - New Streaming client callbacks
