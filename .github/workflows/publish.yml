@@ -1,9 +1,8 @@
 name: Build and Publish Tweepy to PyPI
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -55,8 +54,8 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
-  github-release:
-    name: Sign distribution and create the Github release
+  upload-to-release:
+    name: Sign distribution and upload to Github release
     needs:
       - publish-to-pypi
     runs-on: ubuntu-latest
@@ -77,14 +76,6 @@ jobs:
           inputs: >-
             ./dist/*.tar.gz
             ./dist/*.whl
-      - name: Create Github release
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create
-          "$GITHUB_REF_NAME"
-          --repo "$GITHUB_REPOSITORY"
-          --notes ""
       - name: Upload to Github release
         env:
           GITHUB_TOKEN: ${{ github.token }}
