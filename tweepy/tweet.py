@@ -29,6 +29,7 @@ PUBLIC_TWEET_FIELDS = [
     "source",
     "text",
     "withheld",
+    "note_tweet"
 ]
 
 #: All the potential fields for :class:`Tweet` objects
