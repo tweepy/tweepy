@@ -3597,10 +3597,11 @@ class API:
         segments, remainder = divmod(file_size, chunk_size)
         segments += bool(remainder)
 
-        media_id = self.chunked_upload_init(
+        response = self.chunked_upload_init(
             file_size, file_type, media_category=media_category,
             additional_owners=additional_owners, **kwargs
-        ).media_id
+        )
+        media_id = response['media_id'] if isinstance(response, dict) else response.media_id
 
         for segment_index in range(segments):
             # The APPEND command returns an empty response body
@@ -3612,14 +3613,18 @@ class API:
         fp.close()
         media =  self.chunked_upload_finalize(media_id, **kwargs)
 
-        if wait_for_async_finalize and hasattr(media, 'processing_info'):
-            while (
-                media.processing_info['state'] in (
-                    'pending', 'in_progress'
-                ) and 'error' not in media.processing_info
-            ):
-                time.sleep(media.processing_info['check_after_secs'])
-                media = self.get_media_upload_status(media.media_id, **kwargs)
+        if wait_for_async_finalize:
+            # Handle both dict and model object responses
+            processing_info = media.get('processing_info') if isinstance(media, dict) else getattr(media, 'processing_info', None)
+            while processing_info:
+                if not (processing_info['state'] in ('pending', 'in_progress') and 'error' not in processing_info):
+                    break
+                time.sleep(processing_info['check_after_secs'])
+                media = self.get_media_upload_status(
+                    media['media_id'] if isinstance(media, dict) else media.media_id,
+                    **kwargs
+                )
+                processing_info = media.get('processing_info') if isinstance(media, dict) else getattr(media, 'processing_info', None)
 
         return media
 
