@@ -60,6 +60,8 @@ class BaseClient:
             f"Requests/{requests.__version__} "
             f"Tweepy/{tweepy.__version__}"
         )
+        self._rate_limit_retry_count = 0
+        self._max_rate_limit_retries = 3
 
     def request(self, method, route, params=None, json=None, user_auth=False):
         host = "https://api.twitter.com"
@@ -113,10 +115,20 @@ class BaseClient:
                                 "Rate limit exceeded. "
                                 f"Sleeping for {sleep_time} seconds."
                             )
+                            # If 429 is returned even after exceeding the specified number of times → Possibility of monthly cap
+                            if self._rate_limit_retry_count >= self._max_rate_limit_retries:
+                                logger.warning(
+                                    "Still receiving 429 after multiple waits. "
+                                    "You may have reached your Monthly Post cap usage."
+                                )
+                            self._rate_limit_retry_count += 1
                             time.sleep(sleep_time)
                     return self.request(method, route, params, json, user_auth)
                 else:
                     raise TooManyRequests(response, reset_time=reset_time)
+            if response.status_code != 429:
+                # error or success, reset count
+                self._rate_limit_retry_count = 0
             if response.status_code >= 500:
                 raise TwitterServerError(response)
             if not 200 <= response.status_code < 300:
