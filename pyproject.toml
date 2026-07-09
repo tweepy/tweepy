@@ -56,6 +56,6 @@ Documentation = "https://docs.tweepy.org"
 Homepage = "https://tweepy.org"
 
 [build-system]
-requires = ["flit_core<4"]
+requires = ["flit_core<5"]
 build-backend = "flit_core.buildapi"
 
