@@ -99,9 +99,9 @@ class API:
     """
 
     def __init__(
-        self, auth=None, *, cache=None, host='api.twitter.com', parser=None,
+        self, auth=None, *, cache=None, host='https://api.twitter.com', parser=None,
         proxy=None, retry_count=0, retry_delay=0, retry_errors=None,
-        timeout=60, upload_host='upload.twitter.com', user_agent=None,
+        timeout=60, upload_host='https://upload.twitter.com', user_agent=None,
         wait_on_rate_limit=False
     ):
         self.auth = auth
@@ -163,9 +163,9 @@ class API:
         # Build the request URL
         path = f'/1.1/{endpoint}.json'
         if upload_api:
-            url = 'https://' + self.upload_host + path
+            url = self.upload_host + path
         else:
-            url = 'https://' + self.host + path
+            url = self.host + path
 
         if params is None:
             params = {}
