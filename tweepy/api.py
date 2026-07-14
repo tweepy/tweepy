@@ -4053,3 +4053,100 @@ class API:
                 'resources',
             ), use_cache=False, **kwargs
         )
+
+    #@payload('json')
+    def create_media_subtitles(self, media_id, subtitles_id, *, lang_code='EN', display_name='English', **kwargs):
+        """create_media_subtitles(media_id, subtitles_id, *, lang_code=`EN`, display_name=`English`, **kwargs)
+
+        This endpoint can be used to associate uploaded subtitles with id ``subtitles_id`` to
+        an uploaded video with id ``media_id``. You can associate subtitles to video before
+        or after Tweeting. 
+
+        Request flow for associating subtitle to video before the video is Tweeted: 
+            1. Upload video using api.media_upload and get the video media_id from the 
+                returned model.media object.
+            2. Upload subtitle using api.media_upload with chunked=true 
+                with media category set to “Subtitles” and get the subtitle media_id
+                from the returned model.media object.
+            3. Call this function to associate the subtitle to the video.
+            4. Create Tweet with the video media_id.
+
+        Request flow for associating subtitle to video after the video is Tweeted:
+            1. Upload video using api.media_upload and get the video media_id from the 
+                returned model.media object.
+            2. Create Tweet with the video media_id.
+            3. Upload subtitle using api.media_upload (## might be chunked upload ##) 
+                with media category set to “Subtitles” and get the subtitle media_id
+                from the returned model.media object.
+            4. Call this function to associate the subtitle to the video.
+        
+
+        Parameters
+        ----------
+        media_id
+            The ID of the video to add subtitles to.
+        subtitles_id
+            The ID of the subtitles to be added to the video.
+        lang_code
+            The BCP47 language code for the subtitles.
+        display_name
+            Written out name for the language of the subtitles.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-subtitles-create
+        """
+
+        json_payload = {
+            "media_id": media_id,
+            "media_category": "tweet_video",
+            "subtitle_info": {
+                "subtitles": [
+                    {
+                    "media_id": subtitles_id,
+                    "language_code": lang_code,
+                    "display_name": display_name
+                    }
+                ]
+            }
+        }
+
+        return self.request(
+            'POST', 'media/subtitles/create', json_payload=json_payload,
+            upload_api=True, **kwargs
+        )
+
+    def delete_media_subtitles(self, media_id, *, lang_code='EN', **kwargs):
+        """delete_media_subtitles(media_id, *, lang_code=`EN`, **kwargs)
+
+        This endpoint can be used to dissociate subtitles from a video with id ``media_id``
+        and delete the subtitles. You can dissociate subtitles from a video before or after Tweeting.
+
+        Parameters
+        ----------
+        media_id
+            The ID of the video to delete subtitles from.
+        lang_code
+            The BCP47 language code for the subtitles to delete.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/v1/media/upload-media/api-reference/post-media-subtitles-delete
+        """
+
+        json_payload = {
+            "media_id": media_id,
+            "media_category": "tweet_video",
+            "subtitle_info": {
+                "subtitles": [
+                    {
+                    "language_code": lang_code,
+                    }
+                ]
+            }
+        }
+
+        return self.request(
+            'POST', 'media/subtitles/delete', json_payload=json_payload,
+            upload_api=True, **kwargs
+        )
