@@ -158,6 +158,13 @@ You can then pass the access token to :class:`Client` when initializing it::
 
     client = tweepy.Client(access_token)
 
+Tokens have a very short expiration date.
+If you have a refresh token, you can renew it::
+
+    new_access_token = oauth2_user_handler.refresh_token(
+        "Refresh Token here"
+    )
+
 3-legged OAuth
 ==============
 This section supplements Twitter's `3-legged OAuth flow documentation`_.
