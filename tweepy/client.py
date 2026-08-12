@@ -43,13 +43,14 @@ class BaseClient:
     def __init__(
         self, bearer_token=None, consumer_key=None, consumer_secret=None,
         access_token=None, access_token_secret=None, *, return_type=Response,
-        wait_on_rate_limit=False
+        wait_on_rate_limit=False, host="https://api.twitter.com"
     ):
         self.bearer_token = bearer_token
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.access_token_secret = access_token_secret
+        self.host = host
 
         self.return_type = return_type
         self.wait_on_rate_limit = wait_on_rate_limit
@@ -62,7 +63,7 @@ class BaseClient:
         )
 
     def request(self, method, route, params=None, json=None, user_auth=False):
-        host = "https://api.twitter.com"
+        host = self.host
         headers = {"User-Agent": self.user_agent}
         auth = None
         if user_auth:
