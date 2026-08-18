@@ -119,9 +119,10 @@ class CursorIterator(BaseIterator):
     def prev(self):
         if self.prev_cursor == 0:
             raise TweepyException('Can not page back more, at first page')
-        data, self.next_cursor, self.prev_cursor = self.method(cursor=self.prev_cursor,
-                                                               *self.args,
-                                                               **self.kwargs)
+        data, cursors = self.method(cursor=self.prev_cursor,
+                                    *self.args,
+                                    **self.kwargs)
+        self.prev_cursor, self.next_cursor = cursors
         self.num_tweets -= 1
         return data
 
