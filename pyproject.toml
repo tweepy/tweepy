@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "oauthlib>=3.2.0,<4",
+    "oauthlib>=3.2.0,<5",
     "requests>=2.27.0,<3",
     "requests-oauthlib>=1.2.0,<3",
 ]
