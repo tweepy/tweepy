@@ -19,7 +19,7 @@ class HashableID(EqualityComparableID):
     __slots__ = ()
 
     def __hash__(self):
-        return self.id
+        return hash(self.id)
 
 
 class DataMapping(Mapping):
