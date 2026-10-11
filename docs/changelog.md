@@ -7,6 +7,7 @@ Unreleased
 ----------
 ### New Features / Improvements
 - Add support for posting tweets to Communities via `community_id` parameter in `Client.create_tweet`
+- Fix hashing of `List`, `Place`, `Poll`, and `Space` objects with string IDs
 
 Version 4.15.0 (2025-01-15)
 ---------------------------
